@@ -1,0 +1,19 @@
+#cd ..
+#md build
+cd build
+cmake.exe . ..  -G "Visual Studio 16 2019" ^
+          -DOpenCV_DIR=D:/BaiduNetdiskDownload/opencv_cuda_build/build ^
+          -DUSE_OCV_BGFG=ON ^
+          -DUSE_OCV_KCF=ON  ^
+          -DUSE_OCV_UKF=ON  ^
+          -DSILENT_WORK=OFF ^
+          -DBUILD_EXAMPLES=ON ^
+          -DBUILD_ASYNC_DETECTOR=OFF ^
+          -DBUILD_CARS_COUNTING=ON ^
+          -DBUILD_YOLO_LIB=ON ^
+          -DCUDNN_INCLUDE_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.1/include" ^
+          -DCUDNN_LIBRARY="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.1/lib/x64" ^
+          -DBUILD_YOLO_TENSORRT=OFF ^
+          -DTensorRT_LIBRARY=C:/TensorRT-7.2.3.4/lib/*.lib ^
+          -DTensorRT_INCLUDE_DIR=C:/TensorRT-7.2.3.4/include
+cmake.exe --build . -j 6 --config Release
