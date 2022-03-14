@@ -1,0 +1,390 @@
+\hypertarget{go_8c}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/go.c 文件参考}
+\label{go_8c}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/go.c@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/go.c}}
+{\ttfamily \#include \char`\"{}network.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}parser.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}option\+\_\+list.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}blas.\+h\char`\"{}}\newline
+go.\+c 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{go_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structmoves}{moves}}
+\end{DoxyCompactItemize}
+\doxysubsection*{宏定义}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{go_8c_abf1cf9e3f2ec5a642d032c5242235e27}{n\+\_\+ind}}~5
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \mbox{\hyperlink{go_8c_a8e2f60c36c546d0cfff9c36ad671cd23}{fgetgo}} (FILE $\ast$fp)
+\item 
+\mbox{\hyperlink{structmoves}{moves}} \mbox{\hyperlink{go_8c_af3527c2afe543ad88276f7ab0ca580b9}{load\+\_\+go\+\_\+moves}} (char $\ast$filename)
+\item 
+void \mbox{\hyperlink{go_8c_a17432d5a451dec0ceeb8db0e17ebe207}{string\+\_\+to\+\_\+board}} (char $\ast$s, float $\ast$board)
+\item 
+void \mbox{\hyperlink{go_8c_add4047a6b13dcaa1653e9f6a953a7c18}{board\+\_\+to\+\_\+string}} (char $\ast$s, float $\ast$board)
+\item 
+void \mbox{\hyperlink{go_8c_afeea24e17c548a11f3ffe194c31b1395}{random\+\_\+go\+\_\+moves}} (\mbox{\hyperlink{structmoves}{moves}} m, float $\ast$boards, float $\ast$labels, int n)
+\item 
+void \mbox{\hyperlink{go_8c_a933f823003ea9d0b3e717163e7bf1991}{train\+\_\+go}} (char $\ast$cfgfile, char $\ast$weightfile)
+\item 
+void \mbox{\hyperlink{go_8c_a4815ef06123df68153376568ad5dad2b}{propagate\+\_\+liberty}} (float $\ast$board, int $\ast$lib, int $\ast$visited, int row, int col, int side)
+\item 
+int $\ast$ \mbox{\hyperlink{go_8c_a8f38b1d33d0ee83135848baddefcd365}{calculate\+\_\+liberties}} (float $\ast$board)
+\item 
+void \mbox{\hyperlink{go_8c_a48f448e40b63c289c9fb8a29faafe764}{print\+\_\+board}} (float $\ast$board, int \mbox{\hyperlink{gemm_8c_a1c82d0dbfe1c362b02510494287bdffa}{swap}}, int $\ast$indexes)
+\item 
+void \mbox{\hyperlink{go_8c_a58d8c150474f6f2394a764cb3a216227}{flip\+\_\+board}} (float $\ast$board)
+\item 
+void \mbox{\hyperlink{go_8c_afb8b8c2cb2d9d8a7ea35a5d6133a9657}{predict\+\_\+move}} (\mbox{\hyperlink{structnetwork}{network}} net, float $\ast$board, float $\ast$move, int multi)
+\item 
+void \mbox{\hyperlink{go_8c_a6dc1ee84d43a5f685069206988bbddcc}{remove\+\_\+connected}} (float $\ast$b, int $\ast$lib, int p, int r, int c)
+\item 
+void \mbox{\hyperlink{go_8c_a4fcf68963d283904716e37878758a5d6}{move\+\_\+go}} (float $\ast$b, int p, int r, int c)
+\item 
+int \mbox{\hyperlink{go_8c_ad09dd9290ff87d0d9143f5d97b3f440d}{makes\+\_\+safe\+\_\+go}} (float $\ast$b, int $\ast$lib, int p, int r, int c)
+\item 
+int \mbox{\hyperlink{go_8c_a7ccdbba6020a5a2bfe35524ed01d83df}{suicide\+\_\+go}} (float $\ast$b, int p, int r, int c)
+\item 
+int \mbox{\hyperlink{go_8c_a5e615416377c6eccb3f3bb611336dce7}{legal\+\_\+go}} (float $\ast$b, char $\ast$ko, int p, int r, int c)
+\item 
+int \mbox{\hyperlink{go_8c_a9307b0658d55b7b789b8386553d83336}{generate\+\_\+move}} (\mbox{\hyperlink{structnetwork}{network}} net, int player, float $\ast$board, int multi, float thresh, float temp, char $\ast$ko, int \mbox{\hyperlink{pybind11_8h_a09d68b02745a7821c256c0642fb096c9}{print}})
+\item 
+void \mbox{\hyperlink{go_8c_a67e72c6bd6f16889ac398a4ba175fda7}{valid\+\_\+go}} (char $\ast$cfgfile, char $\ast$weightfile, int multi)
+\item 
+void \mbox{\hyperlink{go_8c_a634a03028ba512387aae19012c424818}{engine\+\_\+go}} (char $\ast$filename, char $\ast$weightfile, int multi)
+\item 
+void \mbox{\hyperlink{go_8c_a88ad2f96f9ea8092406bcb8f1873e92d}{test\+\_\+go}} (char $\ast$cfg, char $\ast$weights, int multi)
+\item 
+float \mbox{\hyperlink{go_8c_ad6d52f67407a3866ab526806ee6def85}{score\+\_\+game}} (float $\ast$board)
+\item 
+void \mbox{\hyperlink{go_8c_aef3d780fb37b0f0a08f1eb90a807247a}{self\+\_\+go}} (char $\ast$filename, char $\ast$weightfile, char $\ast$f2, char $\ast$w2, int multi)
+\item 
+void \mbox{\hyperlink{go_8c_acbc5b7a174f506f13ab6d0fca1faa102}{run\+\_\+go}} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\doxysubsection*{变量}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{go_8c_a2a99b4dc38f9b4ceadb80091e2dce12c}{inverted}} = 1
+\item 
+int \mbox{\hyperlink{go_8c_afd34566fdbd8e7f8f4d5b750a3040191}{noi}} = 1
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{宏定义说明}
+\mbox{\Hypertarget{go_8c_abf1cf9e3f2ec5a642d032c5242235e27}\label{go_8c_abf1cf9e3f2ec5a642d032c5242235e27}} 
+\index{go.c@{go.c}!n\_ind@{n\_ind}}
+\index{n\_ind@{n\_ind}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{n\_ind}{n\_ind}}
+{\footnotesize\ttfamily \#define n\+\_\+ind~5}
+
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{go_8c_add4047a6b13dcaa1653e9f6a953a7c18}\label{go_8c_add4047a6b13dcaa1653e9f6a953a7c18}} 
+\index{go.c@{go.c}!board\_to\_string@{board\_to\_string}}
+\index{board\_to\_string@{board\_to\_string}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{board\_to\_string()}{board\_to\_string()}}
+{\footnotesize\ttfamily void board\+\_\+to\+\_\+string (\begin{DoxyParamCaption}\item[{char $\ast$}]{s,  }\item[{float $\ast$}]{board }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{go_8c_a8f38b1d33d0ee83135848baddefcd365}\label{go_8c_a8f38b1d33d0ee83135848baddefcd365}} 
+\index{go.c@{go.c}!calculate\_liberties@{calculate\_liberties}}
+\index{calculate\_liberties@{calculate\_liberties}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{calculate\_liberties()}{calculate\_liberties()}}
+{\footnotesize\ttfamily int $\ast$ calculate\+\_\+liberties (\begin{DoxyParamCaption}\item[{float $\ast$}]{board }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=302pt]{go_8c_a8f38b1d33d0ee83135848baddefcd365_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{go_8c_a634a03028ba512387aae19012c424818}\label{go_8c_a634a03028ba512387aae19012c424818}} 
+\index{go.c@{go.c}!engine\_go@{engine\_go}}
+\index{engine\_go@{engine\_go}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{engine\_go()}{engine\_go()}}
+{\footnotesize\ttfamily void engine\+\_\+go (\begin{DoxyParamCaption}\item[{char $\ast$}]{filename,  }\item[{char $\ast$}]{weightfile,  }\item[{int}]{multi }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{go_8c_a634a03028ba512387aae19012c424818_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{go_8c_a8e2f60c36c546d0cfff9c36ad671cd23}\label{go_8c_a8e2f60c36c546d0cfff9c36ad671cd23}} 
+\index{go.c@{go.c}!fgetgo@{fgetgo}}
+\index{fgetgo@{fgetgo}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{fgetgo()}{fgetgo()}}
+{\footnotesize\ttfamily char $\ast$ fgetgo (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{fp }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{go_8c_a58d8c150474f6f2394a764cb3a216227}\label{go_8c_a58d8c150474f6f2394a764cb3a216227}} 
+\index{go.c@{go.c}!flip\_board@{flip\_board}}
+\index{flip\_board@{flip\_board}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{flip\_board()}{flip\_board()}}
+{\footnotesize\ttfamily void flip\+\_\+board (\begin{DoxyParamCaption}\item[{float $\ast$}]{board }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{go_8c_a9307b0658d55b7b789b8386553d83336}\label{go_8c_a9307b0658d55b7b789b8386553d83336}} 
+\index{go.c@{go.c}!generate\_move@{generate\_move}}
+\index{generate\_move@{generate\_move}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{generate\_move()}{generate\_move()}}
+{\footnotesize\ttfamily int generate\+\_\+move (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net,  }\item[{int}]{player,  }\item[{float $\ast$}]{board,  }\item[{int}]{multi,  }\item[{float}]{thresh,  }\item[{float}]{temp,  }\item[{char $\ast$}]{ko,  }\item[{int}]{print }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{go_8c_a9307b0658d55b7b789b8386553d83336_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{go_8c_a5e615416377c6eccb3f3bb611336dce7}\label{go_8c_a5e615416377c6eccb3f3bb611336dce7}} 
+\index{go.c@{go.c}!legal\_go@{legal\_go}}
+\index{legal\_go@{legal\_go}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{legal\_go()}{legal\_go()}}
+{\footnotesize\ttfamily int legal\+\_\+go (\begin{DoxyParamCaption}\item[{float $\ast$}]{b,  }\item[{char $\ast$}]{ko,  }\item[{int}]{p,  }\item[{int}]{r,  }\item[{int}]{c }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{go_8c_a5e615416377c6eccb3f3bb611336dce7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{go_8c_af3527c2afe543ad88276f7ab0ca580b9}\label{go_8c_af3527c2afe543ad88276f7ab0ca580b9}} 
+\index{go.c@{go.c}!load\_go\_moves@{load\_go\_moves}}
+\index{load\_go\_moves@{load\_go\_moves}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{load\_go\_moves()}{load\_go\_moves()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmoves}{moves}} load\+\_\+go\+\_\+moves (\begin{DoxyParamCaption}\item[{char $\ast$}]{filename }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=242pt]{go_8c_af3527c2afe543ad88276f7ab0ca580b9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{go_8c_ad09dd9290ff87d0d9143f5d97b3f440d}\label{go_8c_ad09dd9290ff87d0d9143f5d97b3f440d}} 
+\index{go.c@{go.c}!makes\_safe\_go@{makes\_safe\_go}}
+\index{makes\_safe\_go@{makes\_safe\_go}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{makes\_safe\_go()}{makes\_safe\_go()}}
+{\footnotesize\ttfamily int makes\+\_\+safe\+\_\+go (\begin{DoxyParamCaption}\item[{float $\ast$}]{b,  }\item[{int $\ast$}]{lib,  }\item[{int}]{p,  }\item[{int}]{r,  }\item[{int}]{c }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=259pt]{go_8c_ad09dd9290ff87d0d9143f5d97b3f440d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{go_8c_a4fcf68963d283904716e37878758a5d6}\label{go_8c_a4fcf68963d283904716e37878758a5d6}} 
+\index{go.c@{go.c}!move\_go@{move\_go}}
+\index{move\_go@{move\_go}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{move\_go()}{move\_go()}}
+{\footnotesize\ttfamily void move\+\_\+go (\begin{DoxyParamCaption}\item[{float $\ast$}]{b,  }\item[{int}]{p,  }\item[{int}]{r,  }\item[{int}]{c }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{go_8c_a4fcf68963d283904716e37878758a5d6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{go_8c_afb8b8c2cb2d9d8a7ea35a5d6133a9657}\label{go_8c_afb8b8c2cb2d9d8a7ea35a5d6133a9657}} 
+\index{go.c@{go.c}!predict\_move@{predict\_move}}
+\index{predict\_move@{predict\_move}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{predict\_move()}{predict\_move()}}
+{\footnotesize\ttfamily void predict\+\_\+move (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net,  }\item[{float $\ast$}]{board,  }\item[{float $\ast$}]{move,  }\item[{int}]{multi }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{go_8c_afb8b8c2cb2d9d8a7ea35a5d6133a9657_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{go_8c_a48f448e40b63c289c9fb8a29faafe764}\label{go_8c_a48f448e40b63c289c9fb8a29faafe764}} 
+\index{go.c@{go.c}!print\_board@{print\_board}}
+\index{print\_board@{print\_board}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{print\_board()}{print\_board()}}
+{\footnotesize\ttfamily void print\+\_\+board (\begin{DoxyParamCaption}\item[{float $\ast$}]{board,  }\item[{int}]{swap,  }\item[{int $\ast$}]{indexes }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{go_8c_a4815ef06123df68153376568ad5dad2b}\label{go_8c_a4815ef06123df68153376568ad5dad2b}} 
+\index{go.c@{go.c}!propagate\_liberty@{propagate\_liberty}}
+\index{propagate\_liberty@{propagate\_liberty}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{propagate\_liberty()}{propagate\_liberty()}}
+{\footnotesize\ttfamily void propagate\+\_\+liberty (\begin{DoxyParamCaption}\item[{float $\ast$}]{board,  }\item[{int $\ast$}]{lib,  }\item[{int $\ast$}]{visited,  }\item[{int}]{row,  }\item[{int}]{col,  }\item[{int}]{side }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=171pt]{go_8c_a4815ef06123df68153376568ad5dad2b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{go_8c_afeea24e17c548a11f3ffe194c31b1395}\label{go_8c_afeea24e17c548a11f3ffe194c31b1395}} 
+\index{go.c@{go.c}!random\_go\_moves@{random\_go\_moves}}
+\index{random\_go\_moves@{random\_go\_moves}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{random\_go\_moves()}{random\_go\_moves()}}
+{\footnotesize\ttfamily void random\+\_\+go\+\_\+moves (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmoves}{moves}}}]{m,  }\item[{float $\ast$}]{boards,  }\item[{float $\ast$}]{labels,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{go_8c_afeea24e17c548a11f3ffe194c31b1395_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{go_8c_a6dc1ee84d43a5f685069206988bbddcc}\label{go_8c_a6dc1ee84d43a5f685069206988bbddcc}} 
+\index{go.c@{go.c}!remove\_connected@{remove\_connected}}
+\index{remove\_connected@{remove\_connected}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{remove\_connected()}{remove\_connected()}}
+{\footnotesize\ttfamily void remove\+\_\+connected (\begin{DoxyParamCaption}\item[{float $\ast$}]{b,  }\item[{int $\ast$}]{lib,  }\item[{int}]{p,  }\item[{int}]{r,  }\item[{int}]{c }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=272pt]{go_8c_a6dc1ee84d43a5f685069206988bbddcc_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{go_8c_acbc5b7a174f506f13ab6d0fca1faa102}\label{go_8c_acbc5b7a174f506f13ab6d0fca1faa102}} 
+\index{go.c@{go.c}!run\_go@{run\_go}}
+\index{run\_go@{run\_go}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{run\_go()}{run\_go()}}
+{\footnotesize\ttfamily void run\+\_\+go (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{go_8c_acbc5b7a174f506f13ab6d0fca1faa102_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{go_8c_ad6d52f67407a3866ab526806ee6def85}\label{go_8c_ad6d52f67407a3866ab526806ee6def85}} 
+\index{go.c@{go.c}!score\_game@{score\_game}}
+\index{score\_game@{score\_game}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{score\_game()}{score\_game()}}
+{\footnotesize\ttfamily float score\+\_\+game (\begin{DoxyParamCaption}\item[{float $\ast$}]{board }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=221pt]{go_8c_ad6d52f67407a3866ab526806ee6def85_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{go_8c_aef3d780fb37b0f0a08f1eb90a807247a}\label{go_8c_aef3d780fb37b0f0a08f1eb90a807247a}} 
+\index{go.c@{go.c}!self\_go@{self\_go}}
+\index{self\_go@{self\_go}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{self\_go()}{self\_go()}}
+{\footnotesize\ttfamily void self\+\_\+go (\begin{DoxyParamCaption}\item[{char $\ast$}]{filename,  }\item[{char $\ast$}]{weightfile,  }\item[{char $\ast$}]{f2,  }\item[{char $\ast$}]{w2,  }\item[{int}]{multi }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{go_8c_aef3d780fb37b0f0a08f1eb90a807247a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{go_8c_a17432d5a451dec0ceeb8db0e17ebe207}\label{go_8c_a17432d5a451dec0ceeb8db0e17ebe207}} 
+\index{go.c@{go.c}!string\_to\_board@{string\_to\_board}}
+\index{string\_to\_board@{string\_to\_board}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{string\_to\_board()}{string\_to\_board()}}
+{\footnotesize\ttfamily void string\+\_\+to\+\_\+board (\begin{DoxyParamCaption}\item[{char $\ast$}]{s,  }\item[{float $\ast$}]{board }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{go_8c_a7ccdbba6020a5a2bfe35524ed01d83df}\label{go_8c_a7ccdbba6020a5a2bfe35524ed01d83df}} 
+\index{go.c@{go.c}!suicide\_go@{suicide\_go}}
+\index{suicide\_go@{suicide\_go}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{suicide\_go()}{suicide\_go()}}
+{\footnotesize\ttfamily int suicide\+\_\+go (\begin{DoxyParamCaption}\item[{float $\ast$}]{b,  }\item[{int}]{p,  }\item[{int}]{r,  }\item[{int}]{c }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{go_8c_a7ccdbba6020a5a2bfe35524ed01d83df_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{go_8c_a88ad2f96f9ea8092406bcb8f1873e92d}\label{go_8c_a88ad2f96f9ea8092406bcb8f1873e92d}} 
+\index{go.c@{go.c}!test\_go@{test\_go}}
+\index{test\_go@{test\_go}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{test\_go()}{test\_go()}}
+{\footnotesize\ttfamily void test\+\_\+go (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfg,  }\item[{char $\ast$}]{weights,  }\item[{int}]{multi }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{go_8c_a88ad2f96f9ea8092406bcb8f1873e92d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{go_8c_a933f823003ea9d0b3e717163e7bf1991}\label{go_8c_a933f823003ea9d0b3e717163e7bf1991}} 
+\index{go.c@{go.c}!train\_go@{train\_go}}
+\index{train\_go@{train\_go}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{train\_go()}{train\_go()}}
+{\footnotesize\ttfamily void train\+\_\+go (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{go_8c_a933f823003ea9d0b3e717163e7bf1991_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{go_8c_a67e72c6bd6f16889ac398a4ba175fda7}\label{go_8c_a67e72c6bd6f16889ac398a4ba175fda7}} 
+\index{go.c@{go.c}!valid\_go@{valid\_go}}
+\index{valid\_go@{valid\_go}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{valid\_go()}{valid\_go()}}
+{\footnotesize\ttfamily void valid\+\_\+go (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{int}]{multi }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{go_8c_a67e72c6bd6f16889ac398a4ba175fda7_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{变量说明}
+\mbox{\Hypertarget{go_8c_a2a99b4dc38f9b4ceadb80091e2dce12c}\label{go_8c_a2a99b4dc38f9b4ceadb80091e2dce12c}} 
+\index{go.c@{go.c}!inverted@{inverted}}
+\index{inverted@{inverted}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{inverted}{inverted}}
+{\footnotesize\ttfamily int inverted = 1}
+
+\mbox{\Hypertarget{go_8c_afd34566fdbd8e7f8f4d5b750a3040191}\label{go_8c_afd34566fdbd8e7f8f4d5b750a3040191}} 
+\index{go.c@{go.c}!noi@{noi}}
+\index{noi@{noi}!go.c@{go.c}}
+\doxysubsubsection{\texorpdfstring{noi}{noi}}
+{\footnotesize\ttfamily int noi = 1}
+

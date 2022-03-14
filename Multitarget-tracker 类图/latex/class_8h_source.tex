@@ -1,0 +1,596 @@
+\hypertarget{class_8h_source}{}\doxysection{class.\+h}
+\label{class_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/detail/class.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/detail/class.h}}
+\mbox{\hyperlink{class_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{    pybind11/detail/class.h: Python C API implementation details for py::class\_}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{    Copyright (c) 2017 Wenzel Jakob <wenzel.jakob@epfl.ch>}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{    All rights reserved. Use of this source code is governed by a}}
+\DoxyCodeLine{7 \textcolor{comment}{    BSD-\/style license that can be found in the LICENSE file.}}
+\DoxyCodeLine{8 \textcolor{comment}{*/}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}../attr.h"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}../options.h"{}}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+\DoxyCodeLine{16 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#if PY\_VERSION\_HEX >= 0x03030000}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#  define PYBIND11\_BUILTIN\_QUALNAME}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#  define PYBIND11\_SET\_OLDPY\_QUALNAME(obj, nameobj)}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{22 \textcolor{comment}{// In pre-\/3.3 Python, we still set \_\_qualname\_\_ so that we can produce reliable function type}}
+\DoxyCodeLine{23 \textcolor{comment}{// signatures; in 3.3+ this macro expands to nothing:}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#  define PYBIND11\_SET\_OLDPY\_QUALNAME(obj, nameobj) setattr((PyObject *) obj, "{}\_\_qualname\_\_"{}}, nameobj)}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{keyword}{inline} PyTypeObject *\mbox{\hyperlink{class_8h_a28c5c1e0535f8e634cbf9f488bad6a5b}{type\_incref}}(PyTypeObject *type) \{}
+\DoxyCodeLine{28     Py\_INCREF(type);}
+\DoxyCodeLine{29     \textcolor{keywordflow}{return} type;}
+\DoxyCodeLine{30 \}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#if !defined(PYPY\_VERSION)}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{35 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \textcolor{keyword}{inline} PyObject *\mbox{\hyperlink{class_8h_af8800841a2cf036f2b8aee4eb8db9a27}{pybind11\_static\_get}}(PyObject *\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}, PyObject * \textcolor{comment}{/*ob*/}, PyObject *cls) \{}
+\DoxyCodeLine{36     \textcolor{keywordflow}{return} PyProperty\_Type.tp\_descr\_get(\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}, cls, cls);}
+\DoxyCodeLine{37 \}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{40 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_8h_a390e869f7c6120e463bd5c4db7a6c12d}{pybind11\_static\_set}}(PyObject *\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}, PyObject *obj, PyObject *value) \{}
+\DoxyCodeLine{41     PyObject *cls = PyType\_Check(obj) ? obj : (PyObject *) Py\_TYPE(obj);}
+\DoxyCodeLine{42     \textcolor{keywordflow}{return} PyProperty\_Type.tp\_descr\_set(\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}, cls, value);}
+\DoxyCodeLine{43 \}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{48 \textcolor{keyword}{inline} PyTypeObject *\mbox{\hyperlink{class_8h_a7b0038e104523235e205b13488390b72}{make\_static\_property\_type}}() \{}
+\DoxyCodeLine{49     \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} *\mbox{\hyperlink{structname}{name}} = \textcolor{stringliteral}{"{}pybind11\_static\_property"{}};}
+\DoxyCodeLine{50     \textcolor{keyword}{auto} name\_obj = reinterpret\_steal<object>(\mbox{\hyperlink{detail_2common_8h_a38198f69a81b096248132d08229921dc}{PYBIND11\_FROM\_STRING}}(\mbox{\hyperlink{structname}{name}}));}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52     \textcolor{comment}{/* Danger zone: from now (and until PyType\_Ready), make sure to}}
+\DoxyCodeLine{53 \textcolor{comment}{       issue no Python C API calls which could potentially invoke the}}
+\DoxyCodeLine{54 \textcolor{comment}{       garbage collector (the GC will call type\_traverse(), which will in}}
+\DoxyCodeLine{55 \textcolor{comment}{       turn find the newly constructed type in an invalid state) */}}
+\DoxyCodeLine{56     \textcolor{keyword}{auto} heap\_type = (PyHeapTypeObject *) PyType\_Type.tp\_alloc(\&PyType\_Type, 0);}
+\DoxyCodeLine{57     \textcolor{keywordflow}{if} (!heap\_type)}
+\DoxyCodeLine{58         \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}make\_static\_property\_type(): error allocating type!"{}});}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60     heap\_type-\/>ht\_name = name\_obj.inc\_ref().ptr();}
+\DoxyCodeLine{61 \textcolor{preprocessor}{\#ifdef PYBIND11\_BUILTIN\_QUALNAME}}
+\DoxyCodeLine{62     heap\_type-\/>ht\_qualname = name\_obj.inc\_ref().ptr();}
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65     \textcolor{keyword}{auto} type = \&heap\_type-\/>ht\_type;}
+\DoxyCodeLine{66     type-\/>tp\_name = \mbox{\hyperlink{structname}{name}};}
+\DoxyCodeLine{67     type-\/>tp\_base = \mbox{\hyperlink{class_8h_a28c5c1e0535f8e634cbf9f488bad6a5b}{type\_incref}}(\&PyProperty\_Type);}
+\DoxyCodeLine{68     type-\/>tp\_flags = Py\_TPFLAGS\_DEFAULT | Py\_TPFLAGS\_BASETYPE | Py\_TPFLAGS\_HEAPTYPE;}
+\DoxyCodeLine{69     type-\/>tp\_descr\_get = \mbox{\hyperlink{class_8h_af8800841a2cf036f2b8aee4eb8db9a27}{pybind11\_static\_get}};}
+\DoxyCodeLine{70     type-\/>tp\_descr\_set = \mbox{\hyperlink{class_8h_a390e869f7c6120e463bd5c4db7a6c12d}{pybind11\_static\_set}};}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72     \textcolor{keywordflow}{if} (PyType\_Ready(type) < 0)}
+\DoxyCodeLine{73         \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}make\_static\_property\_type(): failure in PyType\_Ready()!"{}});}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75     \mbox{\hyperlink{group__python__builtins_ga786700afa0e3e4bd67530355c4c5dec9}{setattr}}((PyObject *) type, \textcolor{stringliteral}{"{}\_\_module\_\_"{}}, \mbox{\hyperlink{classstr}{str}}(\textcolor{stringliteral}{"{}pybind11\_builtins"{}}));}
+\DoxyCodeLine{76     \mbox{\hyperlink{class_8h_a5b20a8b63df8dd0475bcd98841e78674}{PYBIND11\_SET\_OLDPY\_QUALNAME}}(type, name\_obj);}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78     \textcolor{keywordflow}{return} type;}
+\DoxyCodeLine{79 \}}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#else }\textcolor{comment}{// PYPY}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{86 \textcolor{keyword}{inline} PyTypeObject *\mbox{\hyperlink{class_8h_a7b0038e104523235e205b13488390b72}{make\_static\_property\_type}}() \{}
+\DoxyCodeLine{87     \textcolor{keyword}{auto} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}} = \mbox{\hyperlink{classdict}{dict}}();}
+\DoxyCodeLine{88     PyObject *result = PyRun\_String(R\textcolor{stringliteral}{"{}(\(\backslash\)}}
+\DoxyCodeLine{89 \textcolor{stringliteral}{        class pybind11\_static\_property(property):}}
+\DoxyCodeLine{90 \textcolor{stringliteral}{            def \_\_get\_\_(self, obj, cls):}}
+\DoxyCodeLine{91 \textcolor{stringliteral}{                return property.\_\_get\_\_(self, cls, cls)}}
+\DoxyCodeLine{92 \textcolor{stringliteral}{}}
+\DoxyCodeLine{93 \textcolor{stringliteral}{            def \_\_set\_\_(self, obj, value):}}
+\DoxyCodeLine{94 \textcolor{stringliteral}{                cls = obj if isinstance(obj, type) else type(obj)}}
+\DoxyCodeLine{95 \textcolor{stringliteral}{                property.\_\_set\_\_(self, cls, value)}}
+\DoxyCodeLine{96 \textcolor{stringliteral}{        )"{}, Py\_file\_input, \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}.ptr(), \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}.ptr()}}
+\DoxyCodeLine{97 \textcolor{stringliteral}{    );}}
+\DoxyCodeLine{98 \textcolor{stringliteral}{    }\textcolor{keywordflow}{if} (result == \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{99         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}();}
+\DoxyCodeLine{100     Py\_DECREF(result);}
+\DoxyCodeLine{101     \textcolor{keywordflow}{return} (PyTypeObject *) \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}[\textcolor{stringliteral}{"{}pybind11\_static\_property"{}}].cast<\textcolor{keywordtype}{object}>().release().ptr();}
+\DoxyCodeLine{102 \}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// PYPY}}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{110 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_8h_a7a2d1b9a42df823366b438980fadb488}{pybind11\_meta\_setattro}}(PyObject* obj, PyObject* \mbox{\hyperlink{structname}{name}}, PyObject* value) \{}
+\DoxyCodeLine{111     \textcolor{comment}{// Use `\_PyType\_Lookup()` instead of `PyObject\_GetAttr()` in order to get the raw}}
+\DoxyCodeLine{112     \textcolor{comment}{// descriptor (`property`) instead of calling `tp\_descr\_get` (`property.\_\_get\_\_()`).}}
+\DoxyCodeLine{113     PyObject *\mbox{\hyperlink{structdescr}{descr}} = \_PyType\_Lookup((PyTypeObject *) obj, \mbox{\hyperlink{structname}{name}});}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115     \textcolor{comment}{// The following assignment combinations are possible:}}
+\DoxyCodeLine{116     \textcolor{comment}{//   1. `Type.static\_prop = value`             -\/-\/> descr\_set: `Type.static\_prop.\_\_set\_\_(value)`}}
+\DoxyCodeLine{117     \textcolor{comment}{//   2. `Type.static\_prop = other\_static\_prop` -\/-\/> setattro:  replace existing `static\_prop`}}
+\DoxyCodeLine{118     \textcolor{comment}{//   3. `Type.regular\_attribute = value`       -\/-\/> setattro:  regular attribute assignment}}
+\DoxyCodeLine{119     \textcolor{keyword}{const} \textcolor{keyword}{auto} static\_prop = (PyObject *) \mbox{\hyperlink{internals_8h_a6c7959e5bcf56993e43c61758aa697ac}{get\_internals}}().\mbox{\hyperlink{structinternals_a6115d4d47cb0cf54c97b9f2b772054c8}{static\_property\_type}};}
+\DoxyCodeLine{120     \textcolor{keyword}{const} \textcolor{keyword}{auto} call\_descr\_set = \mbox{\hyperlink{structdescr}{descr}} \&\& PyObject\_IsInstance(\mbox{\hyperlink{structdescr}{descr}}, static\_prop)}
+\DoxyCodeLine{121                                 \&\& !PyObject\_IsInstance(value, static\_prop);}
+\DoxyCodeLine{122     \textcolor{keywordflow}{if} (call\_descr\_set) \{}
+\DoxyCodeLine{123         \textcolor{comment}{// Call `static\_property.\_\_set\_\_()` instead of replacing the `static\_property`.}}
+\DoxyCodeLine{124 \textcolor{preprocessor}{\#if !defined(PYPY\_VERSION)}}
+\DoxyCodeLine{125         \textcolor{keywordflow}{return} Py\_TYPE(\mbox{\hyperlink{structdescr}{descr}})-\/>tp\_descr\_set(\mbox{\hyperlink{structdescr}{descr}}, obj, value);}
+\DoxyCodeLine{126 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{127         \textcolor{keywordflow}{if} (PyObject *result = PyObject\_CallMethod(\mbox{\hyperlink{structdescr}{descr}}, \textcolor{stringliteral}{"{}\_\_set\_\_"{}}, \textcolor{stringliteral}{"{}OO"{}}, obj, value)) \{}
+\DoxyCodeLine{128             Py\_DECREF(result);}
+\DoxyCodeLine{129             \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{130         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{131             \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{132         \}}
+\DoxyCodeLine{133 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{134     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{135         \textcolor{comment}{// Replace existing attribute.}}
+\DoxyCodeLine{136         \textcolor{keywordflow}{return} PyType\_Type.tp\_setattro(obj, \mbox{\hyperlink{structname}{name}}, value);}
+\DoxyCodeLine{137     \}}
+\DoxyCodeLine{138 \}}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140 \textcolor{preprocessor}{\#if PY\_MAJOR\_VERSION >= 3}}
+\DoxyCodeLine{147 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \textcolor{keyword}{inline} PyObject *pybind11\_meta\_getattro(PyObject *obj, PyObject *\mbox{\hyperlink{structname}{name}}) \{}
+\DoxyCodeLine{148     PyObject *\mbox{\hyperlink{structdescr}{descr}} = \_PyType\_Lookup((PyTypeObject *) obj, \mbox{\hyperlink{structname}{name}});}
+\DoxyCodeLine{149     \textcolor{keywordflow}{if} (\mbox{\hyperlink{structdescr}{descr}} \&\& PyInstanceMethod\_Check(\mbox{\hyperlink{structdescr}{descr}})) \{}
+\DoxyCodeLine{150         Py\_INCREF(\mbox{\hyperlink{structdescr}{descr}});}
+\DoxyCodeLine{151         \textcolor{keywordflow}{return} \mbox{\hyperlink{structdescr}{descr}};}
+\DoxyCodeLine{152     \}}
+\DoxyCodeLine{153     \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{154         \textcolor{keywordflow}{return} PyType\_Type.tp\_getattro(obj, \mbox{\hyperlink{structname}{name}});}
+\DoxyCodeLine{155     \}}
+\DoxyCodeLine{156 \}}
+\DoxyCodeLine{157 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{162 \textcolor{keyword}{inline} PyTypeObject* \mbox{\hyperlink{class_8h_a208e43f161a9e5d055948fabe479dc04}{make\_default\_metaclass}}() \{}
+\DoxyCodeLine{163     \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} *\mbox{\hyperlink{structname}{name}} = \textcolor{stringliteral}{"{}pybind11\_type"{}};}
+\DoxyCodeLine{164     \textcolor{keyword}{auto} name\_obj = reinterpret\_steal<object>(\mbox{\hyperlink{detail_2common_8h_a38198f69a81b096248132d08229921dc}{PYBIND11\_FROM\_STRING}}(\mbox{\hyperlink{structname}{name}}));}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166     \textcolor{comment}{/* Danger zone: from now (and until PyType\_Ready), make sure to}}
+\DoxyCodeLine{167 \textcolor{comment}{       issue no Python C API calls which could potentially invoke the}}
+\DoxyCodeLine{168 \textcolor{comment}{       garbage collector (the GC will call type\_traverse(), which will in}}
+\DoxyCodeLine{169 \textcolor{comment}{       turn find the newly constructed type in an invalid state) */}}
+\DoxyCodeLine{170     \textcolor{keyword}{auto} heap\_type = (PyHeapTypeObject *) PyType\_Type.tp\_alloc(\&PyType\_Type, 0);}
+\DoxyCodeLine{171     \textcolor{keywordflow}{if} (!heap\_type)}
+\DoxyCodeLine{172         \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}make\_default\_metaclass(): error allocating metaclass!"{}});}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174     heap\_type-\/>ht\_name = name\_obj.inc\_ref().ptr();}
+\DoxyCodeLine{175 \textcolor{preprocessor}{\#ifdef PYBIND11\_BUILTIN\_QUALNAME}}
+\DoxyCodeLine{176     heap\_type-\/>ht\_qualname = name\_obj.inc\_ref().ptr();}
+\DoxyCodeLine{177 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179     \textcolor{keyword}{auto} type = \&heap\_type-\/>ht\_type;}
+\DoxyCodeLine{180     type-\/>tp\_name = \mbox{\hyperlink{structname}{name}};}
+\DoxyCodeLine{181     type-\/>tp\_base = \mbox{\hyperlink{class_8h_a28c5c1e0535f8e634cbf9f488bad6a5b}{type\_incref}}(\&PyType\_Type);}
+\DoxyCodeLine{182     type-\/>tp\_flags = Py\_TPFLAGS\_DEFAULT | Py\_TPFLAGS\_BASETYPE | Py\_TPFLAGS\_HEAPTYPE;}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184     type-\/>tp\_setattro = \mbox{\hyperlink{class_8h_a7a2d1b9a42df823366b438980fadb488}{pybind11\_meta\_setattro}};}
+\DoxyCodeLine{185 \textcolor{preprocessor}{\#if PY\_MAJOR\_VERSION >= 3}}
+\DoxyCodeLine{186     type-\/>tp\_getattro = pybind11\_meta\_getattro;}
+\DoxyCodeLine{187 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189     \textcolor{keywordflow}{if} (PyType\_Ready(type) < 0)}
+\DoxyCodeLine{190         \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}make\_default\_metaclass(): failure in PyType\_Ready()!"{}});}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192     \mbox{\hyperlink{group__python__builtins_ga786700afa0e3e4bd67530355c4c5dec9}{setattr}}((PyObject *) type, \textcolor{stringliteral}{"{}\_\_module\_\_"{}}, \mbox{\hyperlink{classstr}{str}}(\textcolor{stringliteral}{"{}pybind11\_builtins"{}}));}
+\DoxyCodeLine{193     \mbox{\hyperlink{class_8h_a5b20a8b63df8dd0475bcd98841e78674}{PYBIND11\_SET\_OLDPY\_QUALNAME}}(type, name\_obj);}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{195     \textcolor{keywordflow}{return} type;}
+\DoxyCodeLine{196 \}}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{201 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_8h_ad9b07afb9ab14dab442a1ca53387f4ad}{traverse\_offset\_bases}}(\textcolor{keywordtype}{void} *valueptr, \textcolor{keyword}{const} detail::type\_info *tinfo, \mbox{\hyperlink{structinstance}{instance}} *\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}},}
+\DoxyCodeLine{202         \textcolor{keywordtype}{bool} (*\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}})(\textcolor{keywordtype}{void} * \textcolor{comment}{/*parentptr*/}, \mbox{\hyperlink{structinstance}{instance}} * \textcolor{comment}{/*self*/})) \{}
+\DoxyCodeLine{203     \textcolor{keywordflow}{for} (\mbox{\hyperlink{classhandle}{handle}} h : reinterpret\_borrow<tuple>(tinfo-\/>type-\/>tp\_bases)) \{}
+\DoxyCodeLine{204         \textcolor{keywordflow}{if} (\textcolor{keyword}{auto} parent\_tinfo = \mbox{\hyperlink{cast_8h_a7cfdf88b5c39ce38304d9237a2006ecc}{get\_type\_info}}((PyTypeObject *) h.ptr())) \{}
+\DoxyCodeLine{205             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&c : parent\_tinfo-\/>implicit\_casts) \{}
+\DoxyCodeLine{206                 \textcolor{keywordflow}{if} (c.first == tinfo-\/>cpptype) \{}
+\DoxyCodeLine{207                     \textcolor{keyword}{auto} *parentptr = c.second(valueptr);}
+\DoxyCodeLine{208                     \textcolor{keywordflow}{if} (parentptr != valueptr)}
+\DoxyCodeLine{209                         \mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}}(parentptr, \mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}});}
+\DoxyCodeLine{210                     \mbox{\hyperlink{class_8h_ad9b07afb9ab14dab442a1ca53387f4ad}{traverse\_offset\_bases}}(parentptr, parent\_tinfo, \mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}, \mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}});}
+\DoxyCodeLine{211                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{212                 \}}
+\DoxyCodeLine{213             \}}
+\DoxyCodeLine{214         \}}
+\DoxyCodeLine{215     \}}
+\DoxyCodeLine{216 \}}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_8h_acf395803278f6801196c9605e84e8c6e}{register\_instance\_impl}}(\textcolor{keywordtype}{void} *ptr, \mbox{\hyperlink{structinstance}{instance}} *\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}) \{}
+\DoxyCodeLine{219     \mbox{\hyperlink{internals_8h_a6c7959e5bcf56993e43c61758aa697ac}{get\_internals}}().\mbox{\hyperlink{structinternals_af0f521098c149429cd68e058fae16e06}{registered\_instances}}.emplace(ptr, \mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}});}
+\DoxyCodeLine{220     \textcolor{keywordflow}{return} \textcolor{keyword}{true}; \textcolor{comment}{// unused, but gives the same signature as the deregister func}}
+\DoxyCodeLine{221 \}}
+\DoxyCodeLine{222 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_8h_ab53cc81121d4b87ebbbb3722756ebe92}{deregister\_instance\_impl}}(\textcolor{keywordtype}{void} *ptr, \mbox{\hyperlink{structinstance}{instance}} *\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}) \{}
+\DoxyCodeLine{223     \textcolor{keyword}{auto} \&registered\_instances = \mbox{\hyperlink{internals_8h_a6c7959e5bcf56993e43c61758aa697ac}{get\_internals}}().\mbox{\hyperlink{structinternals_af0f521098c149429cd68e058fae16e06}{registered\_instances}};}
+\DoxyCodeLine{224     \textcolor{keyword}{auto} range = registered\_instances.equal\_range(ptr);}
+\DoxyCodeLine{225     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} it = range.first; it != range.second; ++it) \{}
+\DoxyCodeLine{226         \textcolor{keywordflow}{if} (Py\_TYPE(\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}) == Py\_TYPE(it-\/>second)) \{}
+\DoxyCodeLine{227             registered\_instances.erase(it);}
+\DoxyCodeLine{228             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{229         \}}
+\DoxyCodeLine{230     \}}
+\DoxyCodeLine{231     \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{232 \}}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{234 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_8h_a6dd9d77b6860f791d6c520484f039da9}{register\_instance}}(\mbox{\hyperlink{structinstance}{instance}} *\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}, \textcolor{keywordtype}{void} *valptr, \textcolor{keyword}{const} \mbox{\hyperlink{structtype__info}{type\_info}} *tinfo) \{}
+\DoxyCodeLine{235     \mbox{\hyperlink{class_8h_acf395803278f6801196c9605e84e8c6e}{register\_instance\_impl}}(valptr, \mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}});}
+\DoxyCodeLine{236     \textcolor{keywordflow}{if} (!tinfo-\/>\mbox{\hyperlink{structtype__info_aaa5c825d7f12a1312174bd566e825199}{simple\_ancestors}})}
+\DoxyCodeLine{237         \mbox{\hyperlink{class_8h_ad9b07afb9ab14dab442a1ca53387f4ad}{traverse\_offset\_bases}}(valptr, tinfo, \mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}, \mbox{\hyperlink{class_8h_acf395803278f6801196c9605e84e8c6e}{register\_instance\_impl}});}
+\DoxyCodeLine{238 \}}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{240 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_8h_a50304f7593df56fd5e2def288643653f}{deregister\_instance}}(\mbox{\hyperlink{structinstance}{instance}} *\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}, \textcolor{keywordtype}{void} *valptr, \textcolor{keyword}{const} \mbox{\hyperlink{structtype__info}{type\_info}} *tinfo) \{}
+\DoxyCodeLine{241     \textcolor{keywordtype}{bool} ret = \mbox{\hyperlink{class_8h_ab53cc81121d4b87ebbbb3722756ebe92}{deregister\_instance\_impl}}(valptr, \mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}});}
+\DoxyCodeLine{242     \textcolor{keywordflow}{if} (!tinfo-\/>\mbox{\hyperlink{structtype__info_aaa5c825d7f12a1312174bd566e825199}{simple\_ancestors}})}
+\DoxyCodeLine{243         \mbox{\hyperlink{class_8h_ad9b07afb9ab14dab442a1ca53387f4ad}{traverse\_offset\_bases}}(valptr, tinfo, \mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}, \mbox{\hyperlink{class_8h_ab53cc81121d4b87ebbbb3722756ebe92}{deregister\_instance\_impl}});}
+\DoxyCodeLine{244     \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{245 \}}
+\DoxyCodeLine{246 }
+\DoxyCodeLine{250 \textcolor{keyword}{inline} PyObject *\mbox{\hyperlink{class_8h_abb2fe0279a14711984bde348fa88afba}{make\_new\_instance}}(PyTypeObject *type) \{}
+\DoxyCodeLine{251 \textcolor{preprocessor}{\#if defined(PYPY\_VERSION)}}
+\DoxyCodeLine{252     \textcolor{comment}{// PyPy gets tp\_basicsize wrong (issue 2482) under multiple inheritance when the first inherited}}
+\DoxyCodeLine{253     \textcolor{comment}{// object is a a plain Python type (i.e. not derived from an extension type).  Fix it.}}
+\DoxyCodeLine{254     \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} instance\_size = \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}\textcolor{keyword}{>}(\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structinstance}{instance}}));}
+\DoxyCodeLine{255     \textcolor{keywordflow}{if} (type-\/>tp\_basicsize < instance\_size) \{}
+\DoxyCodeLine{256         type-\/>tp\_basicsize = instance\_size;}
+\DoxyCodeLine{257     \}}
+\DoxyCodeLine{258 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{259     PyObject *\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}} = type-\/>tp\_alloc(type, 0);}
+\DoxyCodeLine{260     \textcolor{keyword}{auto} inst = \textcolor{keyword}{reinterpret\_cast<}\mbox{\hyperlink{structinstance}{instance}} *\textcolor{keyword}{>}(\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}});}
+\DoxyCodeLine{261     \textcolor{comment}{// Allocate the value/holder internals:}}
+\DoxyCodeLine{262     inst-\/>\mbox{\hyperlink{structinstance_addb02b48487bafc757c28d40d1d6a995}{allocate\_layout}}();}
+\DoxyCodeLine{263 }
+\DoxyCodeLine{264     inst-\/>owned = \textcolor{keyword}{true};}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{266     \textcolor{keywordflow}{return} \mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}};}
+\DoxyCodeLine{267 \}}
+\DoxyCodeLine{268 }
+\DoxyCodeLine{271 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \textcolor{keyword}{inline} PyObject *\mbox{\hyperlink{class_8h_a1f2a474f13d16235d905e4bf9fc9b6b7}{pybind11\_object\_new}}(PyTypeObject *type, PyObject *, PyObject *) \{}
+\DoxyCodeLine{272     \textcolor{keywordflow}{return} \mbox{\hyperlink{class_8h_abb2fe0279a14711984bde348fa88afba}{make\_new\_instance}}(type);}
+\DoxyCodeLine{273 \}}
+\DoxyCodeLine{274 }
+\DoxyCodeLine{278 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_8h_a44b3a6702982c09e74d9db412a6dd3c3}{pybind11\_object\_init}}(PyObject *\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}, PyObject *, PyObject *) \{}
+\DoxyCodeLine{279     PyTypeObject *type = Py\_TYPE(\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}});}
+\DoxyCodeLine{280     std::string msg;}
+\DoxyCodeLine{281 \textcolor{preprocessor}{\#if defined(PYPY\_VERSION)}}
+\DoxyCodeLine{282     msg += \mbox{\hyperlink{classhandle}{handle}}((PyObject *) type).attr(\textcolor{stringliteral}{"{}\_\_module\_\_"{}}).\mbox{\hyperlink{classhandle_a8158ff37b59a73d48140ab4d718316b9}{cast}}<std::string>() + \textcolor{stringliteral}{"{}."{}};}
+\DoxyCodeLine{283 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{284     msg += type-\/>tp\_name;}
+\DoxyCodeLine{285     msg += \textcolor{stringliteral}{"{}: No constructor defined!"{}};}
+\DoxyCodeLine{286     PyErr\_SetString(PyExc\_TypeError, msg.c\_str());}
+\DoxyCodeLine{287     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{288 \}}
+\DoxyCodeLine{289 }
+\DoxyCodeLine{290 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_8h_ad51f8b39fe425fd3d4cb873ad3e59999}{add\_patient}}(PyObject *nurse, PyObject *patient) \{}
+\DoxyCodeLine{291     \textcolor{keyword}{auto} \&\mbox{\hyperlink{structinternals}{internals}} = \mbox{\hyperlink{internals_8h_a6c7959e5bcf56993e43c61758aa697ac}{get\_internals}}();}
+\DoxyCodeLine{292     \textcolor{keyword}{auto} \mbox{\hyperlink{structinstance}{instance}} = \textcolor{keyword}{reinterpret\_cast<}detail::instance *\textcolor{keyword}{>}(nurse);}
+\DoxyCodeLine{293     \mbox{\hyperlink{structinstance}{instance}}-\/>\mbox{\hyperlink{structinstance_a30d2da1bf481e5628e3f20a84a4bcd1a}{has\_patients}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{294     Py\_INCREF(patient);}
+\DoxyCodeLine{295     \mbox{\hyperlink{structinternals}{internals}}.\mbox{\hyperlink{structinternals_a10f84966ff086d44cd078d139b3646d9}{patients}}[nurse].push\_back(patient);}
+\DoxyCodeLine{296 \}}
+\DoxyCodeLine{297 }
+\DoxyCodeLine{298 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_8h_a4a2af2ab16d6d444f7142b9b4485cb43}{clear\_patients}}(PyObject *\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}) \{}
+\DoxyCodeLine{299     \textcolor{keyword}{auto} \mbox{\hyperlink{structinstance}{instance}} = \textcolor{keyword}{reinterpret\_cast<}detail::instance *\textcolor{keyword}{>}(\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}});}
+\DoxyCodeLine{300     \textcolor{keyword}{auto} \&\mbox{\hyperlink{structinternals}{internals}} = \mbox{\hyperlink{internals_8h_a6c7959e5bcf56993e43c61758aa697ac}{get\_internals}}();}
+\DoxyCodeLine{301     \textcolor{keyword}{auto} pos = \mbox{\hyperlink{structinternals}{internals}}.\mbox{\hyperlink{structinternals_a10f84966ff086d44cd078d139b3646d9}{patients}}.find(\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}});}
+\DoxyCodeLine{302     assert(pos != \mbox{\hyperlink{structinternals}{internals}}.\mbox{\hyperlink{structinternals_a10f84966ff086d44cd078d139b3646d9}{patients}}.end());}
+\DoxyCodeLine{303     \textcolor{comment}{// Clearing the patients can cause more Python code to run, which}}
+\DoxyCodeLine{304     \textcolor{comment}{// can invalidate the iterator. Extract the vector of patients}}
+\DoxyCodeLine{305     \textcolor{comment}{// from the unordered\_map first.}}
+\DoxyCodeLine{306     \textcolor{keyword}{auto} patients = std::move(pos-\/>second);}
+\DoxyCodeLine{307     \mbox{\hyperlink{structinternals}{internals}}.\mbox{\hyperlink{structinternals_a10f84966ff086d44cd078d139b3646d9}{patients}}.erase(pos);}
+\DoxyCodeLine{308     \mbox{\hyperlink{structinstance}{instance}}-\/>\mbox{\hyperlink{structinstance_a30d2da1bf481e5628e3f20a84a4bcd1a}{has\_patients}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{309     \textcolor{keywordflow}{for} (PyObject *\&patient : patients)}
+\DoxyCodeLine{310         Py\_CLEAR(patient);}
+\DoxyCodeLine{311 \}}
+\DoxyCodeLine{312 }
+\DoxyCodeLine{315 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_8h_a66c13496282e829d83ba0711a10363a8}{clear\_instance}}(PyObject *\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}) \{}
+\DoxyCodeLine{316     \textcolor{keyword}{auto} \mbox{\hyperlink{structinstance}{instance}} = \textcolor{keyword}{reinterpret\_cast<}detail::instance *\textcolor{keyword}{>}(\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}});}
+\DoxyCodeLine{317 }
+\DoxyCodeLine{318     \textcolor{comment}{// Deallocate any values/holders, if present:}}
+\DoxyCodeLine{319     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&v\_h : \mbox{\hyperlink{structvalues__and__holders}{values\_and\_holders}}(\mbox{\hyperlink{structinstance}{instance}})) \{}
+\DoxyCodeLine{320         \textcolor{keywordflow}{if} (v\_h) \{}
+\DoxyCodeLine{321 }
+\DoxyCodeLine{322             \textcolor{comment}{// We have to deregister before we call dealloc because, for virtual MI types, we still}}
+\DoxyCodeLine{323             \textcolor{comment}{// need to be able to get the parent pointers.}}
+\DoxyCodeLine{324             \textcolor{keywordflow}{if} (v\_h.instance\_registered() \&\& !\mbox{\hyperlink{class_8h_a50304f7593df56fd5e2def288643653f}{deregister\_instance}}(\mbox{\hyperlink{structinstance}{instance}}, v\_h.value\_ptr(), v\_h.type))}
+\DoxyCodeLine{325                 \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}pybind11\_object\_dealloc(): Tried to deallocate unregistered instance!"{}});}
+\DoxyCodeLine{326 }
+\DoxyCodeLine{327             \textcolor{keywordflow}{if} (\mbox{\hyperlink{structinstance}{instance}}-\/>\mbox{\hyperlink{structinstance_a69b3e638c182ecbbaaa5625ce3c36e99}{owned}} || v\_h.holder\_constructed())}
+\DoxyCodeLine{328                 v\_h.type-\/>dealloc(v\_h);}
+\DoxyCodeLine{329         \}}
+\DoxyCodeLine{330     \}}
+\DoxyCodeLine{331     \textcolor{comment}{// Deallocate the value/holder layout internals:}}
+\DoxyCodeLine{332     \mbox{\hyperlink{structinstance}{instance}}-\/>\mbox{\hyperlink{structinstance_a0e6db8a0edd9f4d440a4b31fb1f59d19}{deallocate\_layout}}();}
+\DoxyCodeLine{333 }
+\DoxyCodeLine{334     \textcolor{keywordflow}{if} (\mbox{\hyperlink{structinstance}{instance}}-\/>\mbox{\hyperlink{structinstance_a23dd4c6144dbfa8ed0ba6d2a7a964998}{weakrefs}})}
+\DoxyCodeLine{335         PyObject\_ClearWeakRefs(\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}});}
+\DoxyCodeLine{336 }
+\DoxyCodeLine{337     PyObject **dict\_ptr = \_PyObject\_GetDictPtr(\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}});}
+\DoxyCodeLine{338     \textcolor{keywordflow}{if} (dict\_ptr)}
+\DoxyCodeLine{339         Py\_CLEAR(*dict\_ptr);}
+\DoxyCodeLine{340 }
+\DoxyCodeLine{341     \textcolor{keywordflow}{if} (\mbox{\hyperlink{structinstance}{instance}}-\/>\mbox{\hyperlink{structinstance_a30d2da1bf481e5628e3f20a84a4bcd1a}{has\_patients}})}
+\DoxyCodeLine{342         \mbox{\hyperlink{class_8h_a4a2af2ab16d6d444f7142b9b4485cb43}{clear\_patients}}(\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}});}
+\DoxyCodeLine{343 \}}
+\DoxyCodeLine{344 }
+\DoxyCodeLine{347 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_8h_a629cca75d875fdd8b55c5a3a7cd33cdb}{pybind11\_object\_dealloc}}(PyObject *\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}) \{}
+\DoxyCodeLine{348     \mbox{\hyperlink{class_8h_a66c13496282e829d83ba0711a10363a8}{clear\_instance}}(\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}});}
+\DoxyCodeLine{349 }
+\DoxyCodeLine{350     \textcolor{keyword}{auto} type = Py\_TYPE(\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}});}
+\DoxyCodeLine{351     type-\/>tp\_free(\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}});}
+\DoxyCodeLine{352 }
+\DoxyCodeLine{353 \textcolor{preprocessor}{\#if PY\_VERSION\_HEX < 0x03080000}}
+\DoxyCodeLine{354     \textcolor{comment}{// `type-\/>tp\_dealloc != pybind11\_object\_dealloc` means that we're being called}}
+\DoxyCodeLine{355     \textcolor{comment}{// as part of a derived type's dealloc, in which case we're not allowed to decref}}
+\DoxyCodeLine{356     \textcolor{comment}{// the type here. For cross-\/module compatibility, we shouldn't compare directly}}
+\DoxyCodeLine{357     \textcolor{comment}{// with `pybind11\_object\_dealloc`, but with the common one stashed in internals.}}
+\DoxyCodeLine{358     \textcolor{keyword}{auto} pybind11\_object\_type = (PyTypeObject *) \mbox{\hyperlink{internals_8h_a6c7959e5bcf56993e43c61758aa697ac}{get\_internals}}().\mbox{\hyperlink{structinternals_ad18c3a70ddfa0ec128e4f8013f81c6bd}{instance\_base}};}
+\DoxyCodeLine{359     \textcolor{keywordflow}{if} (type-\/>tp\_dealloc == pybind11\_object\_type-\/>tp\_dealloc)}
+\DoxyCodeLine{360         Py\_DECREF(type);}
+\DoxyCodeLine{361 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{362     \textcolor{comment}{// This was not needed before Python 3.8 (Python issue 35810)}}
+\DoxyCodeLine{363     \textcolor{comment}{// https://github.com/pybind/pybind11/issues/1946}}
+\DoxyCodeLine{364     Py\_DECREF(type);}
+\DoxyCodeLine{365 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{366 \}}
+\DoxyCodeLine{367 }
+\DoxyCodeLine{371 \textcolor{keyword}{inline} PyObject *\mbox{\hyperlink{class_8h_a22ea570ce07bc0565deaff837ebe4d7f}{make\_object\_base\_type}}(PyTypeObject *\mbox{\hyperlink{structmetaclass}{metaclass}}) \{}
+\DoxyCodeLine{372     \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} *\mbox{\hyperlink{structname}{name}} = \textcolor{stringliteral}{"{}pybind11\_object"{}};}
+\DoxyCodeLine{373     \textcolor{keyword}{auto} name\_obj = reinterpret\_steal<object>(\mbox{\hyperlink{detail_2common_8h_a38198f69a81b096248132d08229921dc}{PYBIND11\_FROM\_STRING}}(\mbox{\hyperlink{structname}{name}}));}
+\DoxyCodeLine{374 }
+\DoxyCodeLine{375     \textcolor{comment}{/* Danger zone: from now (and until PyType\_Ready), make sure to}}
+\DoxyCodeLine{376 \textcolor{comment}{       issue no Python C API calls which could potentially invoke the}}
+\DoxyCodeLine{377 \textcolor{comment}{       garbage collector (the GC will call type\_traverse(), which will in}}
+\DoxyCodeLine{378 \textcolor{comment}{       turn find the newly constructed type in an invalid state) */}}
+\DoxyCodeLine{379     \textcolor{keyword}{auto} heap\_type = (PyHeapTypeObject *) \mbox{\hyperlink{structmetaclass}{metaclass}}-\/>tp\_alloc(\mbox{\hyperlink{structmetaclass}{metaclass}}, 0);}
+\DoxyCodeLine{380     \textcolor{keywordflow}{if} (!heap\_type)}
+\DoxyCodeLine{381         \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}make\_object\_base\_type(): error allocating type!"{}});}
+\DoxyCodeLine{382 }
+\DoxyCodeLine{383     heap\_type-\/>ht\_name = name\_obj.inc\_ref().ptr();}
+\DoxyCodeLine{384 \textcolor{preprocessor}{\#ifdef PYBIND11\_BUILTIN\_QUALNAME}}
+\DoxyCodeLine{385     heap\_type-\/>ht\_qualname = name\_obj.inc\_ref().ptr();}
+\DoxyCodeLine{386 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{387 }
+\DoxyCodeLine{388     \textcolor{keyword}{auto} type = \&heap\_type-\/>ht\_type;}
+\DoxyCodeLine{389     type-\/>tp\_name = \mbox{\hyperlink{structname}{name}};}
+\DoxyCodeLine{390     type-\/>tp\_base = \mbox{\hyperlink{class_8h_a28c5c1e0535f8e634cbf9f488bad6a5b}{type\_incref}}(\&PyBaseObject\_Type);}
+\DoxyCodeLine{391     type-\/>tp\_basicsize = \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}\textcolor{keyword}{>}(\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structinstance}{instance}}));}
+\DoxyCodeLine{392     type-\/>tp\_flags = Py\_TPFLAGS\_DEFAULT | Py\_TPFLAGS\_BASETYPE | Py\_TPFLAGS\_HEAPTYPE;}
+\DoxyCodeLine{393 }
+\DoxyCodeLine{394     type-\/>tp\_new = \mbox{\hyperlink{class_8h_a1f2a474f13d16235d905e4bf9fc9b6b7}{pybind11\_object\_new}};}
+\DoxyCodeLine{395     type-\/>tp\_init = \mbox{\hyperlink{class_8h_a44b3a6702982c09e74d9db412a6dd3c3}{pybind11\_object\_init}};}
+\DoxyCodeLine{396     type-\/>tp\_dealloc = \mbox{\hyperlink{class_8h_a629cca75d875fdd8b55c5a3a7cd33cdb}{pybind11\_object\_dealloc}};}
+\DoxyCodeLine{397 }
+\DoxyCodeLine{398     \textcolor{comment}{/* Support weak references (needed for the keep\_alive feature) */}}
+\DoxyCodeLine{399     type-\/>tp\_weaklistoffset = offsetof(\mbox{\hyperlink{structinstance}{instance}}, weakrefs);}
+\DoxyCodeLine{400 }
+\DoxyCodeLine{401     \textcolor{keywordflow}{if} (PyType\_Ready(type) < 0)}
+\DoxyCodeLine{402         \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}PyType\_Ready failed in make\_object\_base\_type():"{}} + \mbox{\hyperlink{cast_8h_af50c237c1ebe85cf7e290a97197dd2c1}{error\_string}}());}
+\DoxyCodeLine{403 }
+\DoxyCodeLine{404     \mbox{\hyperlink{group__python__builtins_ga786700afa0e3e4bd67530355c4c5dec9}{setattr}}((PyObject *) type, \textcolor{stringliteral}{"{}\_\_module\_\_"{}}, \mbox{\hyperlink{classstr}{str}}(\textcolor{stringliteral}{"{}pybind11\_builtins"{}}));}
+\DoxyCodeLine{405     \mbox{\hyperlink{class_8h_a5b20a8b63df8dd0475bcd98841e78674}{PYBIND11\_SET\_OLDPY\_QUALNAME}}(type, name\_obj);}
+\DoxyCodeLine{406 }
+\DoxyCodeLine{407     assert(!PyType\_HasFeature(type, Py\_TPFLAGS\_HAVE\_GC));}
+\DoxyCodeLine{408     \textcolor{keywordflow}{return} (PyObject *) heap\_type;}
+\DoxyCodeLine{409 \}}
+\DoxyCodeLine{410 }
+\DoxyCodeLine{412 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \textcolor{keyword}{inline} PyObject *\mbox{\hyperlink{class_8h_a25bdfdcf5342d20610cba36d857930a7}{pybind11\_get\_dict}}(PyObject *\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}, \textcolor{keywordtype}{void} *) \{}
+\DoxyCodeLine{413     PyObject *\&\mbox{\hyperlink{classdict}{dict}} = *\_PyObject\_GetDictPtr(\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}});}
+\DoxyCodeLine{414     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classdict}{dict}})}
+\DoxyCodeLine{415         \mbox{\hyperlink{classdict}{dict}} = PyDict\_New();}
+\DoxyCodeLine{416     Py\_XINCREF(\mbox{\hyperlink{classdict}{dict}});}
+\DoxyCodeLine{417     \textcolor{keywordflow}{return} \mbox{\hyperlink{classdict}{dict}};}
+\DoxyCodeLine{418 \}}
+\DoxyCodeLine{419 }
+\DoxyCodeLine{421 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_8h_a76dda6430b9e8261f24329fe7cf8b49e}{pybind11\_set\_dict}}(PyObject *\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}, PyObject *new\_dict, \textcolor{keywordtype}{void} *) \{}
+\DoxyCodeLine{422     \textcolor{keywordflow}{if} (!PyDict\_Check(new\_dict)) \{}
+\DoxyCodeLine{423         PyErr\_Format(PyExc\_TypeError, \textcolor{stringliteral}{"{}\_\_dict\_\_ must be set to a dictionary, not a '\%.200s'"{}},}
+\DoxyCodeLine{424                      Py\_TYPE(new\_dict)-\/>tp\_name);}
+\DoxyCodeLine{425         \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{426     \}}
+\DoxyCodeLine{427     PyObject *\&\mbox{\hyperlink{classdict}{dict}} = *\_PyObject\_GetDictPtr(\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}});}
+\DoxyCodeLine{428     Py\_INCREF(new\_dict);}
+\DoxyCodeLine{429     Py\_CLEAR(\mbox{\hyperlink{classdict}{dict}});}
+\DoxyCodeLine{430     \mbox{\hyperlink{classdict}{dict}} = new\_dict;}
+\DoxyCodeLine{431     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{432 \}}
+\DoxyCodeLine{433 }
+\DoxyCodeLine{435 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_8h_a8015cabe7bb9709326f4d539a7788d7a}{pybind11\_traverse}}(PyObject *\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}, visitproc visit, \textcolor{keywordtype}{void} *\mbox{\hyperlink{structarg}{arg}}) \{}
+\DoxyCodeLine{436     PyObject *\&\mbox{\hyperlink{classdict}{dict}} = *\_PyObject\_GetDictPtr(\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}});}
+\DoxyCodeLine{437     Py\_VISIT(\mbox{\hyperlink{classdict}{dict}});}
+\DoxyCodeLine{438     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{439 \}}
+\DoxyCodeLine{440 }
+\DoxyCodeLine{442 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_8h_a5fa8056059587b7581c706f21022be16}{pybind11\_clear}}(PyObject *\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}) \{}
+\DoxyCodeLine{443     PyObject *\&\mbox{\hyperlink{classdict}{dict}} = *\_PyObject\_GetDictPtr(\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}});}
+\DoxyCodeLine{444     Py\_CLEAR(\mbox{\hyperlink{classdict}{dict}});}
+\DoxyCodeLine{445     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{446 \}}
+\DoxyCodeLine{447 }
+\DoxyCodeLine{449 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_8h_a77922dc479edfaafa2b14f1bc9258965}{enable\_dynamic\_attributes}}(PyHeapTypeObject *heap\_type) \{}
+\DoxyCodeLine{450     \textcolor{keyword}{auto} type = \&heap\_type-\/>ht\_type;}
+\DoxyCodeLine{451 \textcolor{preprocessor}{\#if defined(PYPY\_VERSION)}}
+\DoxyCodeLine{452     \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(std::string(type-\/>tp\_name) + \textcolor{stringliteral}{"{}: dynamic attributes are "{}}}
+\DoxyCodeLine{453                                                \textcolor{stringliteral}{"{}currently not supported in "{}}}
+\DoxyCodeLine{454                                                \textcolor{stringliteral}{"{}conjunction with PyPy!"{}});}
+\DoxyCodeLine{455 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{456     type-\/>tp\_flags |= Py\_TPFLAGS\_HAVE\_GC;}
+\DoxyCodeLine{457     type-\/>tp\_dictoffset = type-\/>tp\_basicsize; \textcolor{comment}{// place dict at the end}}
+\DoxyCodeLine{458     type-\/>tp\_basicsize += (\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}})\textcolor{keyword}{sizeof}(PyObject *); \textcolor{comment}{// and allocate enough space for it}}
+\DoxyCodeLine{459     type-\/>tp\_traverse = \mbox{\hyperlink{class_8h_a8015cabe7bb9709326f4d539a7788d7a}{pybind11\_traverse}};}
+\DoxyCodeLine{460     type-\/>tp\_clear = \mbox{\hyperlink{class_8h_a5fa8056059587b7581c706f21022be16}{pybind11\_clear}};}
+\DoxyCodeLine{461 }
+\DoxyCodeLine{462     \textcolor{keyword}{static} PyGetSetDef getset[] = \{}
+\DoxyCodeLine{463         \{\textcolor{keyword}{const\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>}(\textcolor{stringliteral}{"{}\_\_dict\_\_"{}}), \mbox{\hyperlink{class_8h_a25bdfdcf5342d20610cba36d857930a7}{pybind11\_get\_dict}}, \mbox{\hyperlink{class_8h_a76dda6430b9e8261f24329fe7cf8b49e}{pybind11\_set\_dict}}, \textcolor{keyword}{nullptr}, \textcolor{keyword}{nullptr}\},}
+\DoxyCodeLine{464         \{\textcolor{keyword}{nullptr}, \textcolor{keyword}{nullptr}, \textcolor{keyword}{nullptr}, \textcolor{keyword}{nullptr}, \textcolor{keyword}{nullptr}\}}
+\DoxyCodeLine{465     \};}
+\DoxyCodeLine{466     type-\/>tp\_getset = getset;}
+\DoxyCodeLine{467 \}}
+\DoxyCodeLine{468 }
+\DoxyCodeLine{470 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \textcolor{keyword}{inline} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_8h_ae0f8b9ed2890d4fdfe2b3d903dbb1617}{pybind11\_getbuffer}}(PyObject *obj, Py\_buffer *view, \textcolor{keywordtype}{int} flags) \{}
+\DoxyCodeLine{471     \textcolor{comment}{// Look for a `get\_buffer` implementation in this type's info or any bases (following MRO).}}
+\DoxyCodeLine{472     \mbox{\hyperlink{structtype__info}{type\_info}} *tinfo = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{473     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} type : reinterpret\_borrow<tuple>(Py\_TYPE(obj)-\/>tp\_mro)) \{}
+\DoxyCodeLine{474         tinfo = \mbox{\hyperlink{cast_8h_a7cfdf88b5c39ce38304d9237a2006ecc}{get\_type\_info}}((PyTypeObject *) type.ptr());}
+\DoxyCodeLine{475         \textcolor{keywordflow}{if} (tinfo \&\& tinfo-\/>\mbox{\hyperlink{structtype__info_a64d53006b99c211f9525c4297ff33d91}{get\_buffer}})}
+\DoxyCodeLine{476             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{477     \}}
+\DoxyCodeLine{478     \textcolor{keywordflow}{if} (view == \textcolor{keyword}{nullptr} || !tinfo || !tinfo-\/>\mbox{\hyperlink{structtype__info_a64d53006b99c211f9525c4297ff33d91}{get\_buffer}}) \{}
+\DoxyCodeLine{479         \textcolor{keywordflow}{if} (view)}
+\DoxyCodeLine{480             view-\/>obj = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{481         PyErr\_SetString(PyExc\_BufferError, \textcolor{stringliteral}{"{}pybind11\_getbuffer(): Internal error"{}});}
+\DoxyCodeLine{482         \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{483     \}}
+\DoxyCodeLine{484     std::memset(view, 0, \textcolor{keyword}{sizeof}(Py\_buffer));}
+\DoxyCodeLine{485     \mbox{\hyperlink{structbuffer__info}{buffer\_info}} *\mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}} = tinfo-\/>\mbox{\hyperlink{structtype__info_a64d53006b99c211f9525c4297ff33d91}{get\_buffer}}(obj, tinfo-\/>\mbox{\hyperlink{structtype__info_a610a9a58683d2cb70158fd084bd1f30b}{get\_buffer\_data}});}
+\DoxyCodeLine{486     view-\/>obj = obj;}
+\DoxyCodeLine{487     view-\/>\mbox{\hyperlink{structbuffer__info_a81d14cf3fc7ceae1b811f335bf35cd97}{ndim}} = 1;}
+\DoxyCodeLine{488     view-\/>internal = \mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}};}
+\DoxyCodeLine{489     view-\/>buf = \mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}-\/>ptr;}
+\DoxyCodeLine{490     view-\/>itemsize = \mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}-\/>itemsize;}
+\DoxyCodeLine{491     view-\/>len = view-\/>itemsize;}
+\DoxyCodeLine{492     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} s : \mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}-\/>shape)}
+\DoxyCodeLine{493         view-\/>len *= s;}
+\DoxyCodeLine{494     view-\/>readonly = \mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}-\/>readonly;}
+\DoxyCodeLine{495     \textcolor{keywordflow}{if} ((flags \& PyBUF\_WRITABLE) == PyBUF\_WRITABLE \&\& \mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}-\/>readonly) \{}
+\DoxyCodeLine{496         \textcolor{keywordflow}{if} (view)}
+\DoxyCodeLine{497             view-\/>obj = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{498         PyErr\_SetString(PyExc\_BufferError, \textcolor{stringliteral}{"{}Writable buffer requested for readonly storage"{}});}
+\DoxyCodeLine{499         \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{500     \}}
+\DoxyCodeLine{501     \textcolor{keywordflow}{if} ((flags \& PyBUF\_FORMAT) == PyBUF\_FORMAT)}
+\DoxyCodeLine{502         view-\/>format = \textcolor{keyword}{const\_cast<}\textcolor{keywordtype}{char} *\textcolor{keyword}{>}(\mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}-\/>format.c\_str());}
+\DoxyCodeLine{503     \textcolor{keywordflow}{if} ((flags \& PyBUF\_STRIDES) == PyBUF\_STRIDES) \{}
+\DoxyCodeLine{504         view-\/>ndim = (int) \mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}-\/>ndim;}
+\DoxyCodeLine{505         view-\/>strides = \&\mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}-\/>strides[0];}
+\DoxyCodeLine{506         view-\/>shape = \&\mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}-\/>shape[0];}
+\DoxyCodeLine{507     \}}
+\DoxyCodeLine{508     Py\_INCREF(view-\/>obj);}
+\DoxyCodeLine{509     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{510 \}}
+\DoxyCodeLine{511 }
+\DoxyCodeLine{513 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_8h_a588422e2b384d74aa115a77c906221d2}{pybind11\_releasebuffer}}(PyObject *, Py\_buffer *view) \{}
+\DoxyCodeLine{514     \textcolor{keyword}{delete} (\mbox{\hyperlink{structbuffer__info}{buffer\_info}} *) view-\/>internal;}
+\DoxyCodeLine{515 \}}
+\DoxyCodeLine{516 }
+\DoxyCodeLine{518 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_8h_a0432e7f16ca8c60833fd9a0ac3ccc1a7}{enable\_buffer\_protocol}}(PyHeapTypeObject *heap\_type) \{}
+\DoxyCodeLine{519     heap\_type-\/>ht\_type.tp\_as\_buffer = \&heap\_type-\/>as\_buffer;}
+\DoxyCodeLine{520 \textcolor{preprocessor}{\#if PY\_MAJOR\_VERSION < 3}}
+\DoxyCodeLine{521     heap\_type-\/>ht\_type.tp\_flags |= Py\_TPFLAGS\_HAVE\_NEWBUFFER;}
+\DoxyCodeLine{522 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{523 }
+\DoxyCodeLine{524     heap\_type-\/>as\_buffer.bf\_getbuffer = \mbox{\hyperlink{class_8h_ae0f8b9ed2890d4fdfe2b3d903dbb1617}{pybind11\_getbuffer}};}
+\DoxyCodeLine{525     heap\_type-\/>as\_buffer.bf\_releasebuffer = \mbox{\hyperlink{class_8h_a588422e2b384d74aa115a77c906221d2}{pybind11\_releasebuffer}};}
+\DoxyCodeLine{526 \}}
+\DoxyCodeLine{527 }
+\DoxyCodeLine{530 \textcolor{keyword}{inline} PyObject* \mbox{\hyperlink{class_8h_ac2c7eb657b9c55f6268263435c20ee41}{make\_new\_python\_type}}(\textcolor{keyword}{const} \mbox{\hyperlink{structtype__record}{type\_record}} \&rec) \{}
+\DoxyCodeLine{531     \textcolor{keyword}{auto} \mbox{\hyperlink{structname}{name}} = reinterpret\_steal<object>(\mbox{\hyperlink{detail_2common_8h_a38198f69a81b096248132d08229921dc}{PYBIND11\_FROM\_STRING}}(rec.\mbox{\hyperlink{structtype__record_aaf93cf029bb1a9686fd5e72c16ea81a8}{name}}));}
+\DoxyCodeLine{532 }
+\DoxyCodeLine{533     \textcolor{keyword}{auto} qualname = \mbox{\hyperlink{structname}{name}};}
+\DoxyCodeLine{534     \textcolor{keywordflow}{if} (rec.\mbox{\hyperlink{structtype__record_ab188820ddf461b3b49818f34885c5687}{scope}} \&\& !PyModule\_Check(rec.\mbox{\hyperlink{structtype__record_ab188820ddf461b3b49818f34885c5687}{scope}}.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()) \&\& \mbox{\hyperlink{group__python__builtins_gacc0a69f008d341c07ff939e0580c5985}{hasattr}}(rec.\mbox{\hyperlink{structtype__record_ab188820ddf461b3b49818f34885c5687}{scope}}, \textcolor{stringliteral}{"{}\_\_qualname\_\_"{}})) \{}
+\DoxyCodeLine{535 \textcolor{preprocessor}{\#if PY\_MAJOR\_VERSION >= 3}}
+\DoxyCodeLine{536         qualname = reinterpret\_steal<object>(}
+\DoxyCodeLine{537             PyUnicode\_FromFormat(\textcolor{stringliteral}{"{}\%U.\%U"{}}, rec.\mbox{\hyperlink{structtype__record_ab188820ddf461b3b49818f34885c5687}{scope}}.attr(\textcolor{stringliteral}{"{}\_\_qualname\_\_"{}}).\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), \mbox{\hyperlink{structname}{name}}.ptr()));}
+\DoxyCodeLine{538 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{539         qualname = \mbox{\hyperlink{classstr}{str}}(rec.\mbox{\hyperlink{structtype__record_ab188820ddf461b3b49818f34885c5687}{scope}}.attr(\textcolor{stringliteral}{"{}\_\_qualname\_\_"{}}).\mbox{\hyperlink{classhandle_a8158ff37b59a73d48140ab4d718316b9}{cast}}<std::string>() + \textcolor{stringliteral}{"{}."{}} + rec.\mbox{\hyperlink{structtype__record_aaf93cf029bb1a9686fd5e72c16ea81a8}{name}});}
+\DoxyCodeLine{540 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{541     \}}
+\DoxyCodeLine{542 }
+\DoxyCodeLine{543     \textcolor{keywordtype}{object} \mbox{\hyperlink{classmodule}{module}};}
+\DoxyCodeLine{544     \textcolor{keywordflow}{if} (rec.\mbox{\hyperlink{structtype__record_ab188820ddf461b3b49818f34885c5687}{scope}}) \{}
+\DoxyCodeLine{545         \textcolor{keywordflow}{if} (\mbox{\hyperlink{group__python__builtins_gacc0a69f008d341c07ff939e0580c5985}{hasattr}}(rec.\mbox{\hyperlink{structtype__record_ab188820ddf461b3b49818f34885c5687}{scope}}, \textcolor{stringliteral}{"{}\_\_module\_\_"{}}))}
+\DoxyCodeLine{546             \mbox{\hyperlink{classmodule}{module}} = rec.\mbox{\hyperlink{structtype__record_ab188820ddf461b3b49818f34885c5687}{scope}}.attr(\textcolor{stringliteral}{"{}\_\_module\_\_"{}});}
+\DoxyCodeLine{547         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\mbox{\hyperlink{group__python__builtins_gacc0a69f008d341c07ff939e0580c5985}{hasattr}}(rec.\mbox{\hyperlink{structtype__record_ab188820ddf461b3b49818f34885c5687}{scope}}, \textcolor{stringliteral}{"{}\_\_name\_\_"{}}))}
+\DoxyCodeLine{548             \mbox{\hyperlink{classmodule}{module}} = rec.\mbox{\hyperlink{structtype__record_ab188820ddf461b3b49818f34885c5687}{scope}}.attr(\textcolor{stringliteral}{"{}\_\_name\_\_"{}});}
+\DoxyCodeLine{549     \}}
+\DoxyCodeLine{550 }
+\DoxyCodeLine{551     \textcolor{keyword}{auto} full\_name = \mbox{\hyperlink{internals_8h_ae139ca7042b502d77d304c4e0c744ec6}{c\_str}}(}
+\DoxyCodeLine{552 \#\textcolor{keywordflow}{if} !defined(PYPY\_VERSION)}
+\DoxyCodeLine{553         \mbox{\hyperlink{classmodule}{module}} ? \mbox{\hyperlink{classstr}{str}}(\mbox{\hyperlink{classmodule}{module}}).cast<std::string>() + \textcolor{stringliteral}{"{}."{}} + rec.\mbox{\hyperlink{structtype__record_aaf93cf029bb1a9686fd5e72c16ea81a8}{name}} :}
+\DoxyCodeLine{554 \#endif}
+\DoxyCodeLine{555         rec.\mbox{\hyperlink{structtype__record_aaf93cf029bb1a9686fd5e72c16ea81a8}{name}});}
+\DoxyCodeLine{556 }
+\DoxyCodeLine{557     \textcolor{keywordtype}{char} *tp\_doc = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{558     \textcolor{keywordflow}{if} (rec.\mbox{\hyperlink{structtype__record_ab343e48279172cd6f8ed5a25036bd02b}{doc}} \&\& \mbox{\hyperlink{classoptions_af812a48c76ad251894b1483c131c8fe8}{options::show\_user\_defined\_docstrings}}()) \{}
+\DoxyCodeLine{559         \textcolor{comment}{/* Allocate memory for docstring (using PyObject\_MALLOC, since}}
+\DoxyCodeLine{560 \textcolor{comment}{           Python will free this later on) */}}
+\DoxyCodeLine{561         \textcolor{keywordtype}{size\_t} size = strlen(rec.\mbox{\hyperlink{structtype__record_ab343e48279172cd6f8ed5a25036bd02b}{doc}}) + 1;}
+\DoxyCodeLine{562         tp\_doc = (\textcolor{keywordtype}{char} *) PyObject\_MALLOC(size);}
+\DoxyCodeLine{563         memcpy((\textcolor{keywordtype}{void} *) tp\_doc, rec.\mbox{\hyperlink{structtype__record_ab343e48279172cd6f8ed5a25036bd02b}{doc}}, size);}
+\DoxyCodeLine{564     \}}
+\DoxyCodeLine{565 }
+\DoxyCodeLine{566     \textcolor{keyword}{auto} \&\mbox{\hyperlink{structinternals}{internals}} = \mbox{\hyperlink{internals_8h_a6c7959e5bcf56993e43c61758aa697ac}{get\_internals}}();}
+\DoxyCodeLine{567     \textcolor{keyword}{auto} bases = \mbox{\hyperlink{classtuple}{tuple}}(rec.\mbox{\hyperlink{structtype__record_ae84dc75887eb2af0bd2b3d1bcfe5496c}{bases}});}
+\DoxyCodeLine{568     \textcolor{keyword}{auto} \mbox{\hyperlink{structbase}{base}} = (bases.size() == 0) ? \mbox{\hyperlink{structinternals}{internals}}.\mbox{\hyperlink{structinternals_ad18c3a70ddfa0ec128e4f8013f81c6bd}{instance\_base}}}
+\DoxyCodeLine{569                                     : bases[0].ptr();}
+\DoxyCodeLine{570 }
+\DoxyCodeLine{571     \textcolor{comment}{/* Danger zone: from now (and until PyType\_Ready), make sure to}}
+\DoxyCodeLine{572 \textcolor{comment}{       issue no Python C API calls which could potentially invoke the}}
+\DoxyCodeLine{573 \textcolor{comment}{       garbage collector (the GC will call type\_traverse(), which will in}}
+\DoxyCodeLine{574 \textcolor{comment}{       turn find the newly constructed type in an invalid state) */}}
+\DoxyCodeLine{575     \textcolor{keyword}{auto} \mbox{\hyperlink{structmetaclass}{metaclass}} = rec.\mbox{\hyperlink{structtype__record_a07699840bb125ef8d7d17122975c4d17}{metaclass}}.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}() ? (PyTypeObject *) rec.\mbox{\hyperlink{structtype__record_a07699840bb125ef8d7d17122975c4d17}{metaclass}}.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()}
+\DoxyCodeLine{576                                          : \mbox{\hyperlink{structinternals}{internals}}.\mbox{\hyperlink{structinternals_a661c7e4987fe016874efc57ae26873df}{default\_metaclass}};}
+\DoxyCodeLine{577 }
+\DoxyCodeLine{578     \textcolor{keyword}{auto} heap\_type = (PyHeapTypeObject *) \mbox{\hyperlink{structmetaclass}{metaclass}}-\/>tp\_alloc(\mbox{\hyperlink{structmetaclass}{metaclass}}, 0);}
+\DoxyCodeLine{579     \textcolor{keywordflow}{if} (!heap\_type)}
+\DoxyCodeLine{580         \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(std::string(rec.\mbox{\hyperlink{structtype__record_aaf93cf029bb1a9686fd5e72c16ea81a8}{name}}) + \textcolor{stringliteral}{"{}: Unable to create type object!"{}});}
+\DoxyCodeLine{581 }
+\DoxyCodeLine{582     heap\_type-\/>ht\_name = \mbox{\hyperlink{structname}{name}}.release().ptr();}
+\DoxyCodeLine{583 \textcolor{preprocessor}{\#ifdef PYBIND11\_BUILTIN\_QUALNAME}}
+\DoxyCodeLine{584     heap\_type-\/>ht\_qualname = qualname.inc\_ref().ptr();}
+\DoxyCodeLine{585 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{586 }
+\DoxyCodeLine{587     \textcolor{keyword}{auto} type = \&heap\_type-\/>ht\_type;}
+\DoxyCodeLine{588     type-\/>tp\_name = full\_name;}
+\DoxyCodeLine{589     type-\/>tp\_doc = tp\_doc;}
+\DoxyCodeLine{590     type-\/>tp\_base = \mbox{\hyperlink{class_8h_a28c5c1e0535f8e634cbf9f488bad6a5b}{type\_incref}}((PyTypeObject *)\mbox{\hyperlink{structbase}{base}});}
+\DoxyCodeLine{591     type-\/>tp\_basicsize = \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}\textcolor{keyword}{>}(\textcolor{keyword}{sizeof}(\mbox{\hyperlink{structinstance}{instance}}));}
+\DoxyCodeLine{592     \textcolor{keywordflow}{if} (bases.size() > 0)}
+\DoxyCodeLine{593         type-\/>tp\_bases = bases.release().ptr();}
+\DoxyCodeLine{594 }
+\DoxyCodeLine{595     \textcolor{comment}{/* Don't inherit base \_\_init\_\_ */}}
+\DoxyCodeLine{596     type-\/>tp\_init = \mbox{\hyperlink{class_8h_a44b3a6702982c09e74d9db412a6dd3c3}{pybind11\_object\_init}};}
+\DoxyCodeLine{597 }
+\DoxyCodeLine{598     \textcolor{comment}{/* Supported protocols */}}
+\DoxyCodeLine{599     type-\/>tp\_as\_number = \&heap\_type-\/>as\_number;}
+\DoxyCodeLine{600     type-\/>tp\_as\_sequence = \&heap\_type-\/>as\_sequence;}
+\DoxyCodeLine{601     type-\/>tp\_as\_mapping = \&heap\_type-\/>as\_mapping;}
+\DoxyCodeLine{602 \textcolor{preprocessor}{\#if PY\_VERSION\_HEX >= 0x03050000}}
+\DoxyCodeLine{603     type-\/>tp\_as\_async = \&heap\_type-\/>as\_async;}
+\DoxyCodeLine{604 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{605 }
+\DoxyCodeLine{606     \textcolor{comment}{/* Flags */}}
+\DoxyCodeLine{607     type-\/>tp\_flags |= Py\_TPFLAGS\_DEFAULT | Py\_TPFLAGS\_BASETYPE | Py\_TPFLAGS\_HEAPTYPE;}
+\DoxyCodeLine{608 \textcolor{preprocessor}{\#if PY\_MAJOR\_VERSION < 3}}
+\DoxyCodeLine{609     type-\/>tp\_flags |= Py\_TPFLAGS\_CHECKTYPES;}
+\DoxyCodeLine{610 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{611 }
+\DoxyCodeLine{612     \textcolor{keywordflow}{if} (rec.\mbox{\hyperlink{structtype__record_af7b44bfceaec849cd9832043600b247b}{dynamic\_attr}})}
+\DoxyCodeLine{613         \mbox{\hyperlink{class_8h_a77922dc479edfaafa2b14f1bc9258965}{enable\_dynamic\_attributes}}(heap\_type);}
+\DoxyCodeLine{614 }
+\DoxyCodeLine{615     \textcolor{keywordflow}{if} (rec.\mbox{\hyperlink{structtype__record_ab5910eea61616c06a02acc36efc21a57}{buffer\_protocol}})}
+\DoxyCodeLine{616         \mbox{\hyperlink{class_8h_a0432e7f16ca8c60833fd9a0ac3ccc1a7}{enable\_buffer\_protocol}}(heap\_type);}
+\DoxyCodeLine{617 }
+\DoxyCodeLine{618     \textcolor{keywordflow}{if} (PyType\_Ready(type) < 0)}
+\DoxyCodeLine{619         \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(std::string(rec.\mbox{\hyperlink{structtype__record_aaf93cf029bb1a9686fd5e72c16ea81a8}{name}}) + \textcolor{stringliteral}{"{}: PyType\_Ready failed ("{}} + \mbox{\hyperlink{cast_8h_af50c237c1ebe85cf7e290a97197dd2c1}{error\_string}}() + \textcolor{stringliteral}{"{})!"{}});}
+\DoxyCodeLine{620 }
+\DoxyCodeLine{621     assert(rec.\mbox{\hyperlink{structtype__record_af7b44bfceaec849cd9832043600b247b}{dynamic\_attr}} ? PyType\_HasFeature(type, Py\_TPFLAGS\_HAVE\_GC)}
+\DoxyCodeLine{622                             : !PyType\_HasFeature(type, Py\_TPFLAGS\_HAVE\_GC));}
+\DoxyCodeLine{623 }
+\DoxyCodeLine{624     \textcolor{comment}{/* Register type with the parent scope */}}
+\DoxyCodeLine{625     \textcolor{keywordflow}{if} (rec.\mbox{\hyperlink{structtype__record_ab188820ddf461b3b49818f34885c5687}{scope}})}
+\DoxyCodeLine{626         \mbox{\hyperlink{group__python__builtins_ga786700afa0e3e4bd67530355c4c5dec9}{setattr}}(rec.\mbox{\hyperlink{structtype__record_ab188820ddf461b3b49818f34885c5687}{scope}}, rec.\mbox{\hyperlink{structtype__record_aaf93cf029bb1a9686fd5e72c16ea81a8}{name}}, (PyObject *) type);}
+\DoxyCodeLine{627     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{628         Py\_INCREF(type); \textcolor{comment}{// Keep it alive forever (reference leak)}}
+\DoxyCodeLine{629 }
+\DoxyCodeLine{630     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classmodule}{module}}) \textcolor{comment}{// Needed by pydoc}}
+\DoxyCodeLine{631         \mbox{\hyperlink{group__python__builtins_ga786700afa0e3e4bd67530355c4c5dec9}{setattr}}((PyObject *) type, \textcolor{stringliteral}{"{}\_\_module\_\_"{}}, \mbox{\hyperlink{classmodule}{module}});}
+\DoxyCodeLine{632 }
+\DoxyCodeLine{633     \mbox{\hyperlink{class_8h_a5b20a8b63df8dd0475bcd98841e78674}{PYBIND11\_SET\_OLDPY\_QUALNAME}}(type, qualname);}
+\DoxyCodeLine{634 }
+\DoxyCodeLine{635     \textcolor{keywordflow}{return} (PyObject *) type;}
+\DoxyCodeLine{636 \}}
+\DoxyCodeLine{637 }
+\DoxyCodeLine{638 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{639 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+
+\end{DoxyCode}

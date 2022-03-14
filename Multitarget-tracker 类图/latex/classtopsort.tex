@@ -1,0 +1,309 @@
+\hypertarget{classtopsort}{}\doxysection{topsort类 参考}
+\label{classtopsort}\index{topsort@{topsort}}
+
+
+Topological sorting.  
+
+
+
+
+{\ttfamily \#include $<$topsort.\+h$>$}
+
+
+
+类 topsort 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=136pt]{classtopsort__inherit__graph}
+\end{center}
+\end{figure}
+
+
+topsort 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classtopsort__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 类型}
+\begin{DoxyCompactItemize}
+\item 
+typedef nodes\+\_\+t\+::const\+\_\+iterator \mbox{\hyperlink{classtopsort_a04a42f813522640e17dddbaeb55498e4}{topsort\+\_\+iterator}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtopsort_a76a9055969b9dbf006320040be9fd5e6}{topsort}} ()
+\item 
+int \mbox{\hyperlink{classtopsort_a0f0b52c54ffa4d1056ef96f16489f30f}{top\+\_\+num}} (const \mbox{\hyperlink{structnode}{node}} \&n) const
+\item 
+bool \mbox{\hyperlink{classtopsort_a05a4cb00bbd60859f4939355b23c25f1}{is\+\_\+acyclic}} () const
+\item 
+\mbox{\hyperlink{classtopsort_a04a42f813522640e17dddbaeb55498e4}{topsort\+\_\+iterator}} \mbox{\hyperlink{classtopsort_ab220dcce845e001b0f737d0dc7751abc}{top\+\_\+order\+\_\+begin}} () const
+\item 
+\mbox{\hyperlink{classtopsort_a04a42f813522640e17dddbaeb55498e4}{topsort\+\_\+iterator}} \mbox{\hyperlink{classtopsort_ac9b784654ae0c4e9736931d63d03291b}{top\+\_\+order\+\_\+end}} () const
+\item 
+virtual int \mbox{\hyperlink{classtopsort_a95ad9350d13ed7c0e275a1ef9e6035ac}{check}} (GTL\+::graph \&G)
+\item 
+virtual void \mbox{\hyperlink{classtopsort_aa3d9ccc7c632dac6b7303e9828c14f62}{reset}} ()
+\item 
+virtual void \mbox{\hyperlink{classtopsort_a68f486d82daa99c431f3f3e739ddd19a}{init\+\_\+handler}} (GTL\+::graph \&G)
+\begin{DoxyCompactList}\small\item\em Handler called before the start of DFS. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classtopsort_aece91f8099f51e3ffe702357041a896e}{leave\+\_\+handler}} (GTL\+::graph \&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}} \&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}} \&)
+\begin{DoxyCompactList}\small\item\em Handler called after all the adjacent edges of {\itshape n} have been examined. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classtopsort_a581120c86ee18048cf2606270a701ca9}{old\+\_\+adj\+\_\+node\+\_\+handler}} (GTL\+::graph \&, GTL\+::edge \&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}} \&)
+\begin{DoxyCompactList}\small\item\em Handler called when a already marked node {\itshape n} connected to the actual node by {\itshape e} is found during the search of all adjacent edges of the actual node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected 属性}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classtopsort_ae04dea9ee7f97be6e0e9673afb601f96}{act\+\_\+top\+\_\+num}} = 0
+\item 
+\mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ int $>$ \mbox{\hyperlink{classtopsort_ae57da1aae22ed92acd0d84c737a1da2b}{top\+\_\+numbers}}
+\item 
+\mbox{\hyperlink{edge_8h_a22ac17689106ba21a84e7bc54d1199d6}{nodes\+\_\+t}} \mbox{\hyperlink{classtopsort_a8b18b1b7ce816683694d6ac567e55cb8}{top\+\_\+order}}
+\item 
+bool \mbox{\hyperlink{classtopsort_a01d94e7627a5660836cc0765ec15727a}{acyclic}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+Topological sorting. 
+
+Assigns to each node {\ttfamily n} a number {\ttfamily top\+\_\+num} such that for every edge {\ttfamily (u,v)} {\ttfamily top\+\_\+num\mbox{[}u\mbox{]}} \texorpdfstring{$<$}{<} {\ttfamily top\+\_\+num\mbox{[}v\mbox{]}}, if possible, i.\+e. iff the directed graph is acyclic. ~\newline
+
+
+Similar to the testing of biconnectivity, which extends DFS to calculate low-\/numbers, the topsort-\/algorithm extends DFS to calculate the new numbering (and thus to test whether such a numbering is possible).
+
+In order to traverse all the nodes in the order of its top-\/numbers, a new iterator, {\ttfamily topsort\+\_\+iterator} is provided. 
+
+\doxysubsection{成员类型定义说明}
+\mbox{\Hypertarget{classtopsort_a04a42f813522640e17dddbaeb55498e4}\label{classtopsort_a04a42f813522640e17dddbaeb55498e4}} 
+\index{topsort@{topsort}!topsort\_iterator@{topsort\_iterator}}
+\index{topsort\_iterator@{topsort\_iterator}!topsort@{topsort}}
+\doxysubsubsection{\texorpdfstring{topsort\_iterator}{topsort\_iterator}}
+{\footnotesize\ttfamily typedef nodes\+\_\+t\+::const\+\_\+iterator \mbox{\hyperlink{classtopsort_a04a42f813522640e17dddbaeb55498e4}{topsort\+::topsort\+\_\+iterator}}}
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classtopsort_a76a9055969b9dbf006320040be9fd5e6}\label{classtopsort_a76a9055969b9dbf006320040be9fd5e6}} 
+\index{topsort@{topsort}!topsort@{topsort}}
+\index{topsort@{topsort}!topsort@{topsort}}
+\doxysubsubsection{\texorpdfstring{topsort()}{topsort()}}
+{\footnotesize\ttfamily topsort\+::topsort (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+default constructor; enables scanning of the whole\+\_\+graph.
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classdfs_afe4e213d3f1f88a4ff57b2d72de232f4}{dfs\+::dfs}} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classtopsort_a95ad9350d13ed7c0e275a1ef9e6035ac}\label{classtopsort_a95ad9350d13ed7c0e275a1ef9e6035ac}} 
+\index{topsort@{topsort}!check@{check}}
+\index{check@{check}!topsort@{topsort}}
+\doxysubsubsection{\texorpdfstring{check()}{check()}}
+{\footnotesize\ttfamily int topsort\+::check (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{G }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Preconditions\+: 
+\begin{DoxyItemize}
+\item {\ttfamily G} is directed. 
+\item DFS may be applied 
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{参数}
+{\em $<$code$>$\+G$<$/code$>$} & graph. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+{\ttfamily \mbox{\hyperlink{classalgorithm_a7ecf5c2bab575f8f2fae9e9e5093a6eaa5114c20e4a96a76b5de9f28bf15e282b}{algorithm\+::\+GTL\+\_\+\+OK}}} if topsort may be applied to {\ttfamily G}. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classdfs_a70dfb7a0631d4561c1abc7ed6149bae8}{dfs\+::check}} 
+\end{DoxySeeAlso}
+
+
+重载 \mbox{\hyperlink{classdfs_a70dfb7a0631d4561c1abc7ed6149bae8}{dfs}} .
+
+\mbox{\Hypertarget{classtopsort_a68f486d82daa99c431f3f3e739ddd19a}\label{classtopsort_a68f486d82daa99c431f3f3e739ddd19a}} 
+\index{topsort@{topsort}!init\_handler@{init\_handler}}
+\index{init\_handler@{init\_handler}!topsort@{topsort}}
+\doxysubsubsection{\texorpdfstring{init\_handler()}{init\_handler()}}
+{\footnotesize\ttfamily void topsort\+::init\+\_\+handler (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Handler called before the start of DFS. 
+
+
+\begin{DoxyParams}{参数}
+{\em G} & graph for which DFS was invoked. \\
+\hline
+\end{DoxyParams}
+
+
+重载 \mbox{\hyperlink{classdfs_a72c9a4dd5e737b984fcc567a029cdbcb}{dfs}} .
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{classtopsort_a68f486d82daa99c431f3f3e739ddd19a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classtopsort_a05a4cb00bbd60859f4939355b23c25f1}\label{classtopsort_a05a4cb00bbd60859f4939355b23c25f1}} 
+\index{topsort@{topsort}!is\_acyclic@{is\_acyclic}}
+\index{is\_acyclic@{is\_acyclic}!topsort@{topsort}}
+\doxysubsubsection{\texorpdfstring{is\_acyclic()}{is\_acyclic()}}
+{\footnotesize\ttfamily bool topsort\+::is\+\_\+acyclic (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Tests if graph was acyclic.
+
+\begin{DoxyReturn}{返回}
+true iff graph was acyclic. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classtopsort_aece91f8099f51e3ffe702357041a896e}\label{classtopsort_aece91f8099f51e3ffe702357041a896e}} 
+\index{topsort@{topsort}!leave\_handler@{leave\_handler}}
+\index{leave\_handler@{leave\_handler}!topsort@{topsort}}
+\doxysubsubsection{\texorpdfstring{leave\_handler()}{leave\_handler()}}
+{\footnotesize\ttfamily void topsort\+::leave\+\_\+handler (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{,  }\item[{\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}} \&}]{,  }\item[{\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Handler called after all the adjacent edges of {\itshape n} have been examined. 
+
+
+\begin{DoxyParams}{参数}
+{\em G} & graph for which DFS was invoked. \\
+\hline
+{\em n} & actual node. \\
+\hline
+{\em f} & predecessor. \\
+\hline
+\end{DoxyParams}
+
+
+重载 \mbox{\hyperlink{classdfs_a9bcd9492189dac3aff8ecd4b6e2c90f6}{dfs}} .
+
+\mbox{\Hypertarget{classtopsort_a581120c86ee18048cf2606270a701ca9}\label{classtopsort_a581120c86ee18048cf2606270a701ca9}} 
+\index{topsort@{topsort}!old\_adj\_node\_handler@{old\_adj\_node\_handler}}
+\index{old\_adj\_node\_handler@{old\_adj\_node\_handler}!topsort@{topsort}}
+\doxysubsubsection{\texorpdfstring{old\_adj\_node\_handler()}{old\_adj\_node\_handler()}}
+{\footnotesize\ttfamily void topsort\+::old\+\_\+adj\+\_\+node\+\_\+handler (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{,  }\item[{GTL\+::edge \&}]{,  }\item[{\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Handler called when a already marked node {\itshape n} connected to the actual node by {\itshape e} is found during the search of all adjacent edges of the actual node. 
+
+
+\begin{DoxyParams}{参数}
+{\em G} & graph for which DFS was invoked. \\
+\hline
+{\em e} & edge connecting the actual node to the old one. \\
+\hline
+{\em n} & used node. \\
+\hline
+\end{DoxyParams}
+
+
+重载 \mbox{\hyperlink{classdfs_a4f4f2d856b8a61cbe8a42e9ff223d945}{dfs}} .
+
+\mbox{\Hypertarget{classtopsort_aa3d9ccc7c632dac6b7303e9828c14f62}\label{classtopsort_aa3d9ccc7c632dac6b7303e9828c14f62}} 
+\index{topsort@{topsort}!reset@{reset}}
+\index{reset@{reset}!topsort@{topsort}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_g_t_l_8h_a2d9f24096ac60918452dd51f32b64aa9}{\+\_\+\+\_\+\+GTL\+\_\+\+BEGIN\+\_\+\+NAMESPACE}} void topsort\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Reset \begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classdfs_affaffda8be8418d6dbf396c5b1d6b81a}{dfs\+::reset}} 
+\end{DoxySeeAlso}
+
+
+重载 \mbox{\hyperlink{classdfs_affaffda8be8418d6dbf396c5b1d6b81a}{dfs}} .
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=247pt]{classtopsort_aa3d9ccc7c632dac6b7303e9828c14f62_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classtopsort_a0f0b52c54ffa4d1056ef96f16489f30f}\label{classtopsort_a0f0b52c54ffa4d1056ef96f16489f30f}} 
+\index{topsort@{topsort}!top\_num@{top\_num}}
+\index{top\_num@{top\_num}!topsort@{topsort}}
+\doxysubsubsection{\texorpdfstring{top\_num()}{top\_num()}}
+{\footnotesize\ttfamily int topsort\+::top\+\_\+num (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structnode}{node}} \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Number in topological order.
+
+
+\begin{DoxyParams}{参数}
+{\em $<$code$>$n$<$/code$>$} & node. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+number in topological order. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classtopsort_ab220dcce845e001b0f737d0dc7751abc}\label{classtopsort_ab220dcce845e001b0f737d0dc7751abc}} 
+\index{topsort@{topsort}!top\_order\_begin@{top\_order\_begin}}
+\index{top\_order\_begin@{top\_order\_begin}!topsort@{topsort}}
+\doxysubsubsection{\texorpdfstring{top\_order\_begin()}{top\_order\_begin()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtopsort_a04a42f813522640e17dddbaeb55498e4}{topsort\+\_\+iterator}} topsort\+::top\+\_\+order\+\_\+begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Iterate through nodes in topsort-\/order.
+
+\begin{DoxyReturn}{返回}
+start-\/iterator. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classtopsort_ac9b784654ae0c4e9736931d63d03291b}\label{classtopsort_ac9b784654ae0c4e9736931d63d03291b}} 
+\index{topsort@{topsort}!top\_order\_end@{top\_order\_end}}
+\index{top\_order\_end@{top\_order\_end}!topsort@{topsort}}
+\doxysubsubsection{\texorpdfstring{top\_order\_end()}{top\_order\_end()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtopsort_a04a42f813522640e17dddbaeb55498e4}{topsort\+\_\+iterator}} topsort\+::top\+\_\+order\+\_\+end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Iterate through nodes in topsort-\/order.
+
+\begin{DoxyReturn}{返回}
+end-\/iterator. 
+\end{DoxyReturn}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classtopsort_ae04dea9ee7f97be6e0e9673afb601f96}\label{classtopsort_ae04dea9ee7f97be6e0e9673afb601f96}} 
+\index{topsort@{topsort}!act\_top\_num@{act\_top\_num}}
+\index{act\_top\_num@{act\_top\_num}!topsort@{topsort}}
+\doxysubsubsection{\texorpdfstring{act\_top\_num}{act\_top\_num}}
+{\footnotesize\ttfamily int topsort\+::act\+\_\+top\+\_\+num = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtopsort_a01d94e7627a5660836cc0765ec15727a}\label{classtopsort_a01d94e7627a5660836cc0765ec15727a}} 
+\index{topsort@{topsort}!acyclic@{acyclic}}
+\index{acyclic@{acyclic}!topsort@{topsort}}
+\doxysubsubsection{\texorpdfstring{acyclic}{acyclic}}
+{\footnotesize\ttfamily bool topsort\+::acyclic\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtopsort_ae57da1aae22ed92acd0d84c737a1da2b}\label{classtopsort_ae57da1aae22ed92acd0d84c737a1da2b}} 
+\index{topsort@{topsort}!top\_numbers@{top\_numbers}}
+\index{top\_numbers@{top\_numbers}!topsort@{topsort}}
+\doxysubsubsection{\texorpdfstring{top\_numbers}{top\_numbers}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$int$>$ topsort\+::top\+\_\+numbers\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classtopsort_a8b18b1b7ce816683694d6ac567e55cb8}\label{classtopsort_a8b18b1b7ce816683694d6ac567e55cb8}} 
+\index{topsort@{topsort}!top\_order@{top\_order}}
+\index{top\_order@{top\_order}!topsort@{topsort}}
+\doxysubsubsection{\texorpdfstring{top\_order}{top\_order}}
+{\footnotesize\ttfamily \mbox{\hyperlink{edge_8h_a22ac17689106ba21a84e7bc54d1199d6}{nodes\+\_\+t}} topsort\+::top\+\_\+order\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Tracker/graph/\+GTL/include/\+GTL/\mbox{\hyperlink{topsort_8h}{topsort.\+h}}\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Tracker/graph/\+GTL/src/\mbox{\hyperlink{topsort_8cpp}{topsort.\+cpp}}\end{DoxyCompactItemize}

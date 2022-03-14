@@ -1,0 +1,65 @@
+\hypertarget{box_8h_source}{}\doxysection{box.\+h}
+\label{box_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/box.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/box.h}}
+\mbox{\hyperlink{box_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef BOX\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define BOX\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{darknet_8h}{darknet.h}}"{}}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{comment}{//typedef struct\{}}
+\DoxyCodeLine{7 \textcolor{comment}{//    float x, y, w, h;}}
+\DoxyCodeLine{8 \textcolor{comment}{//\} box;}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}\{}
+\DoxyCodeLine{11     \textcolor{keywordtype}{float} dx, dy, dw, \mbox{\hyperlink{structdbox_a8321cbf92c464ba9c4eca5b8f0e9f48b}{dh}};}
+\DoxyCodeLine{12 \} \mbox{\hyperlink{structdbox}{dbox}};}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{comment}{//typedef struct detection \{}}
+\DoxyCodeLine{15 \textcolor{comment}{//  box bbox;}}
+\DoxyCodeLine{16 \textcolor{comment}{//  int classes;}}
+\DoxyCodeLine{17 \textcolor{comment}{//  float *prob;}}
+\DoxyCodeLine{18 \textcolor{comment}{//  float *mask;}}
+\DoxyCodeLine{19 \textcolor{comment}{//  float objectness;}}
+\DoxyCodeLine{20 \textcolor{comment}{//  int sort\_class;}}
+\DoxyCodeLine{21 \textcolor{comment}{//\} detection;}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structdetection__with__class}{detection\_with\_class}} \{}
+\DoxyCodeLine{24     \mbox{\hyperlink{structdetection}{detection}} \mbox{\hyperlink{structdetection__with__class_a44a613b74be704b3de65ee5ddb726e36}{det}};}
+\DoxyCodeLine{25     \textcolor{comment}{// The most probable class id: the best class index in this-\/>prob.}}
+\DoxyCodeLine{26     \textcolor{comment}{// Is filled temporary when processing results, otherwise not initialized}}
+\DoxyCodeLine{27     \textcolor{keywordtype}{int} \mbox{\hyperlink{structdetection__with__class_ab6ec39705acca47fce90de3663966d07}{best\_class}};}
+\DoxyCodeLine{28 \} \mbox{\hyperlink{box_8h_a8cad574c77f4161bd3357f8526e847e4}{detection\_with\_class}};}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{31 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{33 \mbox{\hyperlink{structbox}{box}} \mbox{\hyperlink{box_8h_a3d0a57328da3a723435e056b2d67131b}{float\_to\_box}}(\textcolor{keywordtype}{float} *\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}});}
+\DoxyCodeLine{34 \mbox{\hyperlink{structbox}{box}} \mbox{\hyperlink{box_8h_aa23325a1dd389bfc2285aede97ac70a0}{float\_to\_box\_stride}}(\textcolor{keywordtype}{float} *\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}}, \textcolor{keywordtype}{int} stride);}
+\DoxyCodeLine{35 \textcolor{keywordtype}{float} \mbox{\hyperlink{box_8h_ae14a614fc4d26ebb552d23615dfea313}{box\_iou}}(\mbox{\hyperlink{structbox}{box}} a, \mbox{\hyperlink{structbox}{box}} b);}
+\DoxyCodeLine{36 \textcolor{keywordtype}{float} \mbox{\hyperlink{box_8h_ae02fea0a784b684583e15c883882d32b}{box\_iou\_kind}}(\mbox{\hyperlink{structbox}{box}} a, \mbox{\hyperlink{structbox}{box}} b, \mbox{\hyperlink{darknet_8h_aab757338e5429453acc81f7bc21a3e92}{IOU\_LOSS}} iou\_kind);}
+\DoxyCodeLine{37 \textcolor{keywordtype}{float} \mbox{\hyperlink{box_8h_a6ac422ecf58a8311afa95c9bbd701ac8}{box\_rmse}}(\mbox{\hyperlink{structbox}{box}} a, \mbox{\hyperlink{structbox}{box}} b);}
+\DoxyCodeLine{38 \mbox{\hyperlink{structdxrep}{dxrep}} \mbox{\hyperlink{box_8h_afff44534c87584d82d7b27316f2ac431}{dx\_box\_iou}}(\mbox{\hyperlink{structbox}{box}} a, \mbox{\hyperlink{structbox}{box}} b, \mbox{\hyperlink{darknet_8h_aab757338e5429453acc81f7bc21a3e92}{IOU\_LOSS}} iou\_loss);}
+\DoxyCodeLine{39 \textcolor{keywordtype}{float} \mbox{\hyperlink{box_8h_ae6bc47cb90a868b12245f7ab2452b3f5}{box\_giou}}(\mbox{\hyperlink{structbox}{box}} a, \mbox{\hyperlink{structbox}{box}} b);}
+\DoxyCodeLine{40 \textcolor{keywordtype}{float} \mbox{\hyperlink{box_8h_adf6958cdee6812703d843d7620cf1aca}{box\_diou}}(\mbox{\hyperlink{structbox}{box}} a, \mbox{\hyperlink{structbox}{box}} b);}
+\DoxyCodeLine{41 \textcolor{keywordtype}{float} \mbox{\hyperlink{box_8h_a627760758eef6745da8e0b27326e0c8c}{box\_ciou}}(\mbox{\hyperlink{structbox}{box}} a, \mbox{\hyperlink{structbox}{box}} b);}
+\DoxyCodeLine{42 \mbox{\hyperlink{structdbox}{dbox}} \mbox{\hyperlink{box_8h_a15facf6a91a4b408bb26ad32d0413673}{diou}}(\mbox{\hyperlink{structbox}{box}} a, \mbox{\hyperlink{structbox}{box}} b);}
+\DoxyCodeLine{43 \mbox{\hyperlink{structboxabs}{boxabs}} \mbox{\hyperlink{box_8h_a4ae59a624a743787a143cef64839715b}{to\_tblr}}(\mbox{\hyperlink{structbox}{box}} a);}
+\DoxyCodeLine{44 \textcolor{keywordtype}{void} \mbox{\hyperlink{box_8h_a124ef9ab227c55e64b4dcf800c48d682}{do\_nms}}(\mbox{\hyperlink{structbox}{box}} *boxes, \textcolor{keywordtype}{float} **probs, \textcolor{keywordtype}{int} total, \textcolor{keywordtype}{int} classes, \textcolor{keywordtype}{float} thresh);}
+\DoxyCodeLine{45 \textcolor{keywordtype}{void} \mbox{\hyperlink{box_8h_af68393d06fa8830cd5fa3c13c61cf250}{do\_nms\_sort\_v2}}(\mbox{\hyperlink{structbox}{box}} *boxes, \textcolor{keywordtype}{float} **probs, \textcolor{keywordtype}{int} total, \textcolor{keywordtype}{int} classes, \textcolor{keywordtype}{float} thresh);}
+\DoxyCodeLine{46 \textcolor{comment}{//LIB\_API void do\_nms\_sort(detection *dets, int total, int classes, float thresh);}}
+\DoxyCodeLine{47 \textcolor{comment}{//LIB\_API void do\_nms\_obj(detection *dets, int total, int classes, float thresh);}}
+\DoxyCodeLine{48 \textcolor{comment}{//LIB\_API void diounms\_sort(detection *dets, int total, int classes, float thresh, NMS\_KIND nms\_kind, float beta1);}}
+\DoxyCodeLine{49 \mbox{\hyperlink{structbox}{box}} \mbox{\hyperlink{box_8h_a3f03cdff65f176b2f77ee92346f2a7fe}{decode\_box}}(\mbox{\hyperlink{structbox}{box}} b, \mbox{\hyperlink{structbox}{box}} anchor);}
+\DoxyCodeLine{50 \mbox{\hyperlink{structbox}{box}} \mbox{\hyperlink{box_8h_a23847cb8fe7a4a099fa65441b9b5ed59}{encode\_box}}(\mbox{\hyperlink{structbox}{box}} b, \mbox{\hyperlink{structbox}{box}} anchor);}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{comment}{// Creates array of detections with prob > thresh and fills best\_class for them}}
+\DoxyCodeLine{53 \textcolor{comment}{// Return number of selected detections in *selected\_detections\_num}}
+\DoxyCodeLine{54 \mbox{\hyperlink{structdetection__with__class}{detection\_with\_class}}* \mbox{\hyperlink{box_8h_a02a632ba7096d947019337953f087269}{get\_actual\_detections}}(\mbox{\hyperlink{structdetection}{detection}} *dets, \textcolor{keywordtype}{int} dets\_num, \textcolor{keywordtype}{float} thresh, \textcolor{keywordtype}{int}* selected\_detections\_num, \textcolor{keywordtype}{char} **names);}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{57 \}}
+\DoxyCodeLine{58 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{59 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

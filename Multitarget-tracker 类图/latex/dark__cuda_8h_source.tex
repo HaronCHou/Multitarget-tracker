@@ -1,0 +1,112 @@
+\hypertarget{dark__cuda_8h_source}{}\doxysection{dark\+\_\+cuda.\+h}
+\label{dark__cuda_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/dark\_cuda.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/dark\_cuda.h}}
+\mbox{\hyperlink{dark__cuda_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef DARKCUDA\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define DARKCUDA\_H}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{darknet_8h}{darknet.h}}"{}}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{6 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{extern} \textcolor{keywordtype}{int} \mbox{\hyperlink{dark__cuda_8h_aa8dfbb5cb0ec0720e9f57cabf2848ffe}{cuda\_debug\_sync}};}
+\DoxyCodeLine{11 \textcolor{keyword}{extern} \textcolor{keywordtype}{int} \mbox{\hyperlink{dark__cuda_8h_a4bd97081f0d76d0c9084ae88dfd68621}{gpu\_index}};}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{13 \}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// \_\_cplusplus}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#ifdef GPU}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define BLOCK 512}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#define FULL\_MASK 0xffffffff}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#define WARP\_SIZE 32}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#define BLOCK\_TRANSPOSE32 256}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include <cuda.h>}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#include <cuda\_runtime.h>}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#include <curand.h>}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#include <cublas\_v2.h>}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#include <cuda\_runtime\_api.h>}}
+\DoxyCodeLine{28 \textcolor{comment}{//\#include <driver\_types.h>}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#ifdef CUDNN}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#include <cudnn.h>}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// CUDNN}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#ifndef \_\_DATE\_\_}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#define \_\_DATE\_\_}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#ifndef \_\_TIME\_\_}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#define \_\_TIME\_\_}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#ifndef \_\_FUNCTION\_\_}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#define \_\_FUNCTION\_\_}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#ifndef \_\_LINE\_\_}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#define \_\_LINE\_\_ 0}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#ifndef \_\_FILE\_\_}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#define \_\_FILE\_\_}}
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{55 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// \_\_cplusplus}}
+\DoxyCodeLine{57     \textcolor{keywordtype}{void} check\_error(cudaError\_t status);}
+\DoxyCodeLine{58     \textcolor{keywordtype}{void} check\_error\_extended(cudaError\_t status, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *file, \textcolor{keywordtype}{int} line, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *date\_time);}
+\DoxyCodeLine{59     \textcolor{keywordtype}{void} cublas\_check\_error\_extended(cublasStatus\_t status, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *file, \textcolor{keywordtype}{int} line, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *date\_time);}
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#define CHECK\_CUDA(X) check\_error\_extended(X, \_\_FILE\_\_ "{} : "{}} \_\_FUNCTION\_\_, \_\_LINE\_\_,  \_\_DATE\_\_ "{} -\/ "{} \_\_TIME\_\_ );}
+\DoxyCodeLine{61 \textcolor{preprocessor}{\#define CHECK\_CUBLAS(X) cublas\_check\_error\_extended(X, \_\_FILE\_\_ "{} : "{}} \_\_FUNCTION\_\_, \_\_LINE\_\_,  \_\_DATE\_\_ "{} -\/ "{} \_\_TIME\_\_ );}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63     cublasHandle\_t blas\_handle();}
+\DoxyCodeLine{64     \textcolor{keywordtype}{void} free\_pinned\_memory();}
+\DoxyCodeLine{65     \textcolor{keywordtype}{void} pre\_allocate\_pinned\_memory(\textcolor{keywordtype}{size\_t} size);}
+\DoxyCodeLine{66     \textcolor{keywordtype}{float} *cuda\_make\_array\_pinned\_preallocated(\textcolor{keywordtype}{float} *\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \textcolor{keywordtype}{size\_t} n);}
+\DoxyCodeLine{67     \textcolor{keywordtype}{float} *cuda\_make\_array\_pinned(\textcolor{keywordtype}{float} *\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \textcolor{keywordtype}{size\_t} n);}
+\DoxyCodeLine{68     \textcolor{keywordtype}{float} *cuda\_make\_array(\textcolor{keywordtype}{float} *\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \textcolor{keywordtype}{size\_t} n);}
+\DoxyCodeLine{69     \textcolor{keywordtype}{void} **cuda\_make\_array\_pointers(\textcolor{keywordtype}{void} **\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \textcolor{keywordtype}{size\_t} n);}
+\DoxyCodeLine{70     \textcolor{keywordtype}{int} *cuda\_make\_int\_array(\textcolor{keywordtype}{size\_t} n);}
+\DoxyCodeLine{71     \textcolor{keywordtype}{int} *cuda\_make\_int\_array\_new\_api(\textcolor{keywordtype}{int} *\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \textcolor{keywordtype}{size\_t} n);}
+\DoxyCodeLine{72     \textcolor{keywordtype}{void} cuda\_push\_array(\textcolor{keywordtype}{float} *x\_gpu, \textcolor{keywordtype}{float} *\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \textcolor{keywordtype}{size\_t} n);}
+\DoxyCodeLine{73     \textcolor{comment}{//LIB\_API void cuda\_pull\_array(float *x\_gpu, float *x, size\_t n);}}
+\DoxyCodeLine{74     \textcolor{comment}{//LIB\_API void cuda\_set\_device(int n);}}
+\DoxyCodeLine{75     \textcolor{keywordtype}{int} cuda\_get\_device();}
+\DoxyCodeLine{76     \textcolor{keywordtype}{void} cuda\_free\_host(\textcolor{keywordtype}{float} *x\_cpu);}
+\DoxyCodeLine{77     \textcolor{keywordtype}{void} cuda\_free(\textcolor{keywordtype}{float} *x\_gpu);}
+\DoxyCodeLine{78     \textcolor{keywordtype}{void} cuda\_random(\textcolor{keywordtype}{float} *x\_gpu, \textcolor{keywordtype}{size\_t} n);}
+\DoxyCodeLine{79     \textcolor{keywordtype}{float} cuda\_compare(\textcolor{keywordtype}{float} *x\_gpu, \textcolor{keywordtype}{float} *\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \textcolor{keywordtype}{size\_t} n, \textcolor{keywordtype}{char} *s);}
+\DoxyCodeLine{80     dim3 cuda\_gridsize(\textcolor{keywordtype}{size\_t} n);}
+\DoxyCodeLine{81     cudaStream\_t get\_cuda\_stream();}
+\DoxyCodeLine{82     \textcolor{comment}{//cudaStream\_t get\_cuda\_memcpy\_stream();}}
+\DoxyCodeLine{83     \textcolor{keywordtype}{int} get\_number\_of\_blocks(\textcolor{keywordtype}{int} array\_size, \textcolor{keywordtype}{int} block\_size);}
+\DoxyCodeLine{84     \textcolor{keywordtype}{int} get\_gpu\_compute\_capability(\textcolor{keywordtype}{int} i, \textcolor{keywordtype}{char} *device\_name);}
+\DoxyCodeLine{85     \textcolor{keywordtype}{void} show\_cuda\_cudnn\_info();}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87     cudaStream\_t switch\_stream(\textcolor{keywordtype}{int} i);}
+\DoxyCodeLine{88     \textcolor{keywordtype}{void} wait\_stream(\textcolor{keywordtype}{int} i);}
+\DoxyCodeLine{89     \textcolor{keywordtype}{void} reset\_wait\_stream\_events();}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91 \textcolor{preprocessor}{\#ifdef CUDNN}}
+\DoxyCodeLine{92 cudnnHandle\_t cudnn\_handle();}
+\DoxyCodeLine{93 \textcolor{keyword}{enum} \{cudnn\_fastest, cudnn\_smallest, cudnn\_specify\};}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95 \textcolor{keywordtype}{void} cudnn\_check\_error\_extended(cudnnStatus\_t status, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *file, \textcolor{keywordtype}{int} line, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *date\_time);}
+\DoxyCodeLine{96 \textcolor{preprocessor}{\#define CHECK\_CUDNN(X) cudnn\_check\_error\_extended(X, \_\_FILE\_\_ "{} : "{}} \_\_FUNCTION\_\_, \_\_LINE\_\_,  \_\_DATE\_\_ "{} -\/ "{} \_\_TIME\_\_ );}
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{100 \}}
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// \_\_cplusplus}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103 \textcolor{preprocessor}{\#else }\textcolor{comment}{// GPU}}
+\DoxyCodeLine{104 \textcolor{comment}{//LIB\_API void cuda\_set\_device(int n);}}
+\DoxyCodeLine{105 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GPU}}
+\DoxyCodeLine{106 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// DARKCUDA\_H}}
+
+\end{DoxyCode}

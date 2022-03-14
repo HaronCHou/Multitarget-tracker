@@ -1,0 +1,488 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: D:/zhr_files/Multitarget-tracker-master/src/Detector/darknet/src/yolo_v2_class.cpp 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">My Project
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_4c3458e0ccdb4c3720723c1caa1aaa1c.html">zhr_files</a></li><li class="navelem"><a class="el" href="dir_5a8d4bff745a16410b5074d3583a347e.html">Multitarget-tracker-master</a></li><li class="navelem"><a class="el" href="dir_46a27ab0460a6f8f8d12d2f44f38bf6b.html">src</a></li><li class="navelem"><a class="el" href="dir_458a7b7bb24e4af0790226fff519699f.html">Detector</a></li><li class="navelem"><a class="el" href="dir_30d5c7ca63d0957fa3fc1828f81516c9.html">darknet</a></li><li class="navelem"><a class="el" href="dir_87c8877901facfda8fbda37bca313156.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">类</a> &#124;
+<a href="#define-members">宏定义</a> &#124;
+<a href="#func-members">函数</a> &#124;
+<a href="#var-members">变量</a>  </div>
+  <div class="headertitle"><div class="title">yolo_v2_class.cpp 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="darknet_8h_source.html">darknet.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="yolo__v2__class_8hpp_source.html">yolo_v2_class.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="network_8h_source.html">network.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="detection__layer_8h_source.html">detection_layer.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="region__layer_8h_source.html">region_layer.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="cost__layer_8h_source.html">cost_layer.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="utils_8h_source.html">utils.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="parser_8h_source.html">parser.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="box_8h_source.html">box.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="image_8h_source.html">image.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="demo_8h_source.html">demo.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="option__list_8h_source.html">option_list.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="stb__image_8h_source.html">stb_image.h</a>&quot;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+yolo_v2_class.cpp 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="yolo__v2__class_8cpp__incl.png" border="0" usemap="#a_d_1_2zhr__files_2_multitarget-tracker-master_2src_2_detector_2darknet_2src_2yolo__v2__class_8cpp" alt=""/></div>
+<map name="a_d_1_2zhr__files_2_multitarget-tracker-master_2src_2_detector_2darknet_2src_2yolo__v2__class_8cpp" id="a_d_1_2zhr__files_2_multitarget-tracker-master_2src_2_detector_2darknet_2src_2yolo__v2__class_8cpp">
+<area shape="rect" title=" " alt="" coords="714,5,915,61"/>
+<area shape="rect" href="darknet_8h.html" title=" " alt="" coords="767,557,843,584"/>
+<area shape="rect" href="yolo__v2__class_8hpp.html" title=" " alt="" coords="61,109,189,136"/>
+<area shape="rect" href="network_8h.html" title=" " alt="" coords="689,184,767,211"/>
+<area shape="rect" href="utils_8h.html" title=" " alt="" coords="117,483,174,509"/>
+<area shape="rect" href="image_8h.html" title=" " alt="" coords="995,333,1063,360"/>
+<area shape="rect" href="box_8h.html" title=" " alt="" coords="1163,408,1218,435"/>
+<area shape="rect" href="detection__layer_8h.html" title=" " alt="" coords="655,109,777,136"/>
+<area shape="rect" href="region__layer_8h.html" title=" " alt="" coords="410,109,513,136"/>
+<area shape="rect" href="cost__layer_8h.html" title=" " alt="" coords="537,109,631,136"/>
+<area shape="rect" href="parser_8h.html" title=" " alt="" coords="852,109,921,136"/>
+<area shape="rect" href="demo_8h.html" title=" " alt="" coords="997,184,1062,211"/>
+<area shape="rect" href="option__list_8h.html" title=" " alt="" coords="198,483,290,509"/>
+<area shape="rect" href="stb__image_8h.html" title=" " alt="" coords="5,184,99,211"/>
+<area shape="rect" title=" " alt="" coords="1097,109,1153,136"/>
+<area shape="rect" title=" " alt="" coords="1177,109,1249,136"/>
+<area shape="rect" title=" " alt="" coords="1273,109,1348,136"/>
+<area shape="rect" title=" " alt="" coords="1372,109,1431,136"/>
+<area shape="rect" title=" " alt="" coords="1179,632,1243,659"/>
+<area shape="rect" title=" " alt="" coords="201,632,263,659"/>
+<area shape="rect" title=" " alt="" coords="1014,632,1079,659"/>
+<area shape="rect" title=" " alt="" coords="1305,632,1370,659"/>
+<area shape="rect" title=" " alt="" coords="771,632,840,659"/>
+<area shape="rect" href="pthread_8h.html" title=" " alt="" coords="391,632,467,659"/>
+<area shape="rect" title=" " alt="" coords="131,707,189,733"/>
+<area shape="rect" title=" " alt="" coords="488,707,552,733"/>
+<area shape="rect" title=" " alt="" coords="362,781,425,808"/>
+<area shape="rect" href="sched_8h.html" title=" " alt="" coords="395,707,463,733"/>
+<area shape="rect" href="layer_8h.html" title=" " alt="" coords="540,259,601,285"/>
+<area shape="rect" href="tree_8h.html" title=" " alt="" coords="543,333,598,360"/>
+<area shape="rect" href="data_8h.html" title=" " alt="" coords="699,259,757,285"/>
+<area shape="rect" href="activations_8h.html" title=" " alt="" coords="518,408,613,435"/>
+<area shape="rect" title=" " alt="" coords="399,333,467,360"/>
+<area shape="rect" href="dark__cuda_8h.html" title=" " alt="" coords="517,483,611,509"/>
+<area shape="rect" title=" " alt="" coords="686,483,749,509"/>
+<area shape="rect" href="list_8h.html" title=" " alt="" coords="273,557,324,584"/>
+<area shape="rect" title=" " alt="" coords="175,557,249,584"/>
+<area shape="rect" title=" " alt="" coords="891,408,949,435"/>
+<area shape="rect" href="image__opencv_8h.html" title=" " alt="" coords="973,408,1088,435"/>
+<area shape="rect" href="matrix_8h.html" title=" " alt="" coords="925,483,995,509"/>
+</map>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structdetector__gpu__t.html">detector_gpu_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+宏定义</h2></td></tr>
+<tr class="memitem:a0487542dffb3cfb21f4504552bbfedf9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="yolo__v2__class_8cpp.html#a0487542dffb3cfb21f4504552bbfedf9">NFRAMES</a>&#160;&#160;&#160;3</td></tr>
+<tr class="separator:a0487542dffb3cfb21f4504552bbfedf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:adcf7f587fe7c5bfdcbe67ffa797763be"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="yolo__v2__class_8cpp.html#adcf7f587fe7c5bfdcbe67ffa797763be">init</a> (const char *configurationFilename, const char *weightsFilename, int gpu, int batch_size)</td></tr>
+<tr class="separator:adcf7f587fe7c5bfdcbe67ffa797763be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae40001b35e673e901849750a0605a662"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="yolo__v2__class_8cpp.html#ae40001b35e673e901849750a0605a662">detect_image</a> (const char *filename, <a class="el" href="structbbox__t__container.html">bbox_t_container</a> &amp;container)</td></tr>
+<tr class="separator:ae40001b35e673e901849750a0605a662"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39804117f003d36f82ae4c01810c2525"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="yolo__v2__class_8cpp.html#a39804117f003d36f82ae4c01810c2525">detect_mat</a> (const uint8_t *<a class="el" href="structdata.html">data</a>, const <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> data_length, <a class="el" href="structbbox__t__container.html">bbox_t_container</a> &amp;container)</td></tr>
+<tr class="separator:a39804117f003d36f82ae4c01810c2525"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab95f447523f87d02262e9d3e21c07fa6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="yolo__v2__class_8cpp.html#ab95f447523f87d02262e9d3e21c07fa6">dispose</a> ()</td></tr>
+<tr class="separator:ab95f447523f87d02262e9d3e21c07fa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefd69d912f2ee324e479371517bf5a28"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="yolo__v2__class_8cpp.html#aefd69d912f2ee324e479371517bf5a28">get_device_count</a> ()</td></tr>
+<tr class="separator:aefd69d912f2ee324e479371517bf5a28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a906988c7d0f38488cf55d5d8e4c8b6c5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="yolo__v2__class_8cpp.html#a906988c7d0f38488cf55d5d8e4c8b6c5">built_with_cuda</a> ()</td></tr>
+<tr class="separator:a906988c7d0f38488cf55d5d8e4c8b6c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12448fe36091f554ac5bd6709bff8cd7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="yolo__v2__class_8cpp.html#a12448fe36091f554ac5bd6709bff8cd7">built_with_cudnn</a> ()</td></tr>
+<tr class="separator:a12448fe36091f554ac5bd6709bff8cd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af149cee322dfe693e3664899cb45bedb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="yolo__v2__class_8cpp.html#af149cee322dfe693e3664899cb45bedb">built_with_opencv</a> ()</td></tr>
+<tr class="separator:af149cee322dfe693e3664899cb45bedb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79996b203dcc83f426104b0b4391e433"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="yolo__v2__class_8cpp.html#a79996b203dcc83f426104b0b4391e433">get_device_name</a> (int gpu, char *deviceName)</td></tr>
+<tr class="separator:a79996b203dcc83f426104b0b4391e433"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7695c70a008932b492fac3ff0cd3bcd9"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structimage.html">image</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="yolo__v2__class_8cpp.html#a7695c70a008932b492fac3ff0cd3bcd9">load_image_stb</a> (char *filename, int channels)</td></tr>
+<tr class="separator:a7695c70a008932b492fac3ff0cd3bcd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+变量</h2></td></tr>
+<tr class="memitem:a432e43b8a212dccde2de1c936e36bde4"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; Detector &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="yolo__v2__class_8cpp.html#a432e43b8a212dccde2de1c936e36bde4">detector</a></td></tr>
+<tr class="separator:a432e43b8a212dccde2de1c936e36bde4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">宏定义说明</h2>
+<a id="a0487542dffb3cfb21f4504552bbfedf9" name="a0487542dffb3cfb21f4504552bbfedf9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0487542dffb3cfb21f4504552bbfedf9">&#9670;&nbsp;</a></span>NFRAMES</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NFRAMES&#160;&#160;&#160;3</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">函数说明</h2>
+<a id="a906988c7d0f38488cf55d5d8e4c8b6c5" name="a906988c7d0f38488cf55d5d8e4c8b6c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a906988c7d0f38488cf55d5d8e4c8b6c5">&#9670;&nbsp;</a></span>built_with_cuda()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool built_with_cuda </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a12448fe36091f554ac5bd6709bff8cd7" name="a12448fe36091f554ac5bd6709bff8cd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12448fe36091f554ac5bd6709bff8cd7">&#9670;&nbsp;</a></span>built_with_cudnn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool built_with_cudnn </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af149cee322dfe693e3664899cb45bedb" name="af149cee322dfe693e3664899cb45bedb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af149cee322dfe693e3664899cb45bedb">&#9670;&nbsp;</a></span>built_with_opencv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool built_with_opencv </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae40001b35e673e901849750a0605a662" name="ae40001b35e673e901849750a0605a662"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae40001b35e673e901849750a0605a662">&#9670;&nbsp;</a></span>detect_image()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int detect_image </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structbbox__t__container.html">bbox_t_container</a> &amp;&#160;</td>
+          <td class="paramname"><em>container</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a39804117f003d36f82ae4c01810c2525" name="a39804117f003d36f82ae4c01810c2525"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39804117f003d36f82ae4c01810c2525">&#9670;&nbsp;</a></span>detect_mat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int detect_mat </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td>
+          <td class="paramname"><em>data_length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structbbox__t__container.html">bbox_t_container</a> &amp;&#160;</td>
+          <td class="paramname"><em>container</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab95f447523f87d02262e9d3e21c07fa6" name="ab95f447523f87d02262e9d3e21c07fa6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab95f447523f87d02262e9d3e21c07fa6">&#9670;&nbsp;</a></span>dispose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int dispose </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aefd69d912f2ee324e479371517bf5a28" name="aefd69d912f2ee324e479371517bf5a28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefd69d912f2ee324e479371517bf5a28">&#9670;&nbsp;</a></span>get_device_count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int get_device_count </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a79996b203dcc83f426104b0b4391e433" name="a79996b203dcc83f426104b0b4391e433"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79996b203dcc83f426104b0b4391e433">&#9670;&nbsp;</a></span>get_device_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int get_device_name </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>gpu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>deviceName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adcf7f587fe7c5bfdcbe67ffa797763be" name="adcf7f587fe7c5bfdcbe67ffa797763be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adcf7f587fe7c5bfdcbe67ffa797763be">&#9670;&nbsp;</a></span>init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int init </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>configurationFilename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>weightsFilename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>gpu</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>batch_size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7695c70a008932b492fac3ff0cd3bcd9" name="a7695c70a008932b492fac3ff0cd3bcd9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7695c70a008932b492fac3ff0cd3bcd9">&#9670;&nbsp;</a></span>load_image_stb()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="structimage.html">image</a> load_image_stb </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>channels</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="yolo__v2__class_8cpp_a7695c70a008932b492fac3ff0cd3bcd9_cgraph.png" border="0" usemap="#ayolo__v2__class_8cpp_a7695c70a008932b492fac3ff0cd3bcd9_cgraph" alt=""/></div>
+<map name="ayolo__v2__class_8cpp_a7695c70a008932b492fac3ff0cd3bcd9_cgraph" id="ayolo__v2__class_8cpp_a7695c70a008932b492fac3ff0cd3bcd9_cgraph">
+<area shape="rect" title=" " alt="" coords="5,107,119,133"/>
+<area shape="rect" href="image_8c.html#a726c30d7f0779c46f9ba5b8a3c2f94a1" title=" " alt="" coords="167,56,263,83"/>
+<area shape="rect" href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867" title=" " alt="" coords="497,56,580,83"/>
+<area shape="rect" href="stb__image_8h.html#ad3fc296ba0778df0a8094e20da82deab" title=" " alt="" coords="177,157,252,184"/>
+<area shape="rect" href="image_8c.html#a28bb9f835989b2f7e908386421c52837" title=" " alt="" coords="311,5,449,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">变量说明</h2>
+<a id="a432e43b8a212dccde2de1c936e36bde4" name="a432e43b8a212dccde2de1c936e36bde4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a432e43b8a212dccde2de1c936e36bde4">&#9670;&nbsp;</a></span>detector</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;Detector&gt; detector</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>

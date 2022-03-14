@@ -1,0 +1,326 @@
+\hypertarget{http__stream_8cpp}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/http\+\_\+stream.cpp 文件参考}
+\label{http__stream_8cpp}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/http\_stream.cpp@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/http\_stream.cpp}}
+{\ttfamily \#include \char`\"{}image.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}http\+\_\+stream.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$cstdio$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$atomic$>$}\newline
+{\ttfamily \#include $<$ctime$>$}\newline
+{\ttfamily \#include \char`\"{}darkunistd.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$sys/time.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/socket.\+h$>$}\newline
+{\ttfamily \#include $<$netdb.\+h$>$}\newline
+{\ttfamily \#include $<$netinet/in.\+h$>$}\newline
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$deque$>$}\newline
+{\ttfamily \#include \char`\"{}blas.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+http\+\_\+stream.\+cpp 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{http__stream_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct___i_g_n_o_r_e___p_i_p_e___s_i_g_n_a_l}{\+\_\+\+IGNORE\+\_\+\+PIPE\+\_\+\+SIGNAL}}
+\item 
+class \mbox{\hyperlink{class_j_s_o_n__sender}{JSON\+\_\+sender}}
+\item 
+struct \mbox{\hyperlink{structsimilarity__detections__t}{similarity\+\_\+detections\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structdetection__t}{detection\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsection*{宏定义}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{http__stream_8cpp_a78c99ffd76a7bb3c8c74db76207e9ab4}{\+\_\+\+XOPEN\+\_\+\+SOURCE}}
+\item 
+\#define \mbox{\hyperlink{http__stream_8cpp_a614217d263be1fb1a5f76e2ff7be19a2}{PORT}}~unsigned short
+\item 
+\#define \mbox{\hyperlink{http__stream_8cpp_aff55fe551a9992a54ec54621c524d0a4}{SOCKET}}~int
+\item 
+\#define \mbox{\hyperlink{http__stream_8cpp_a57d3354ee3dfb9bb53365e85a2322db0}{HOSTENT}}~struct hostent
+\item 
+\#define \mbox{\hyperlink{http__stream_8cpp_a964e73b2a42e87b1e20c8ffa730952a2}{SOCKADDR}}~struct sockaddr
+\item 
+\#define \mbox{\hyperlink{http__stream_8cpp_a91d11a5e66bd1e10b0e62aadb7775c9d}{SOCKADDR\+\_\+\+IN}}~struct sockaddr\+\_\+in
+\item 
+\#define \mbox{\hyperlink{http__stream_8cpp_a46bf22b51da27e3732ffce87ee5bf75b}{ADDRPOINTER}}~unsigned int$\ast$
+\item 
+\#define \mbox{\hyperlink{http__stream_8cpp_a26769957ec1a2beaf223f33b66ee64ab}{INVALID\+\_\+\+SOCKET}}~-\/1
+\item 
+\#define \mbox{\hyperlink{http__stream_8cpp_a633b0396ff93d336a088412a190a5072}{SOCKET\+\_\+\+ERROR}}~-\/1
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{http__stream_8cpp_a39a3603e5e2769521b3b8a6105bcb63e}{close\+\_\+socket}} (\mbox{\hyperlink{http__stream_8cpp_aff55fe551a9992a54ec54621c524d0a4}{SOCKET}} s)
+\item 
+void \mbox{\hyperlink{http__stream_8cpp_aaa33d67c0b74f1cb2568b6a949cd4caa}{delete\+\_\+json\+\_\+sender}} ()
+\item 
+void \mbox{\hyperlink{http__stream_8cpp_ab19e8e80b0985fdcd04c51fa57ae7c22}{send\+\_\+json\+\_\+custom}} (char const $\ast$send\+\_\+buf, int port, int timeout)
+\item 
+void \mbox{\hyperlink{http__stream_8cpp_a7d9590557a3281661686c58e808b421b}{send\+\_\+json}} (\mbox{\hyperlink{structdetection}{detection}} $\ast$dets, int nboxes, int classes, char $\ast$$\ast$names, long long int frame\+\_\+id, int port, int timeout)
+\item 
+double \mbox{\hyperlink{http__stream_8cpp_ac153241f54cc35e5cd528922c96f8256}{get\+\_\+time\+\_\+point}} ()
+\item 
+void \mbox{\hyperlink{http__stream_8cpp_aaedac22c55880495505bf375e0e132c1}{start\+\_\+timer}} ()
+\item 
+void \mbox{\hyperlink{http__stream_8cpp_a58997b988646976eadf522f6b26c9f46}{stop\+\_\+timer}} ()
+\item 
+double \mbox{\hyperlink{http__stream_8cpp_af7ab092ab10d65db3b9051a12420fa52}{get\+\_\+time}} ()
+\item 
+void \mbox{\hyperlink{http__stream_8cpp_a3d2c318bb3c522e22d3656b16e7be0a2}{stop\+\_\+timer\+\_\+and\+\_\+show}} ()
+\item 
+void \mbox{\hyperlink{http__stream_8cpp_a4d58074f921d7b0b2fc827789a131c97}{stop\+\_\+timer\+\_\+and\+\_\+show\+\_\+name}} (char $\ast$\mbox{\hyperlink{structname}{name}})
+\item 
+void \mbox{\hyperlink{http__stream_8cpp_a823340f0425e190f6931ca5c4f2b05ae}{total\+\_\+time}} ()
+\item 
+int \mbox{\hyperlink{http__stream_8cpp_a175afeebdbc7b9f55209e439cb91fba0}{check\+\_\+prob}} (\mbox{\hyperlink{structdetection}{detection}} det, float thresh)
+\item 
+int \mbox{\hyperlink{http__stream_8cpp_a957748ebb5ee206b54c3d82d8c9b1a4f}{check\+\_\+classes\+\_\+id}} (\mbox{\hyperlink{structdetection}{detection}} det1, \mbox{\hyperlink{structdetection}{detection}} det2, float thresh)
+\item 
+int \mbox{\hyperlink{http__stream_8cpp_a5f7801137c2e6c6c03b20ad9cb3d3006}{fill\+\_\+remaining\+\_\+id}} (\mbox{\hyperlink{structdetection}{detection}} $\ast$new\+\_\+dets, int new\+\_\+dets\+\_\+num, int new\+\_\+track\+\_\+id, float thresh, int detection\+\_\+count)
+\item 
+float $\ast$ \mbox{\hyperlink{http__stream_8cpp_a2def90ef5e1a9bfa23b3403bc03cbe83}{make\+\_\+float\+\_\+array}} (float $\ast$src, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} size)
+\item 
+void \mbox{\hyperlink{http__stream_8cpp_a7293fb62bd165d15dc25098f0133fb53}{set\+\_\+track\+\_\+id}} (\mbox{\hyperlink{structdetection}{detection}} $\ast$new\+\_\+dets, int new\+\_\+dets\+\_\+num, float thresh, float sim\+\_\+thresh, float track\+\_\+ciou\+\_\+norm, int deque\+\_\+size, int dets\+\_\+for\+\_\+track, int dets\+\_\+for\+\_\+show)
+\end{DoxyCompactItemize}
+\doxysubsection*{变量}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct___i_g_n_o_r_e___p_i_p_e___s_i_g_n_a_l}{\+\_\+\+IGNORE\+\_\+\+PIPE\+\_\+\+SIGNAL}} \mbox{\hyperlink{http__stream_8cpp_a65e270c49cc44c3f188395c677b1a458}{\+\_\+init\+\_\+once}}
+\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_j_s_o_n__sender}{JSON\+\_\+sender}} $>$ \mbox{\hyperlink{http__stream_8cpp_a45dd2f3cbd7faa4816b1b796612ba04c}{js\+\_\+ptr}}
+\item 
+static \mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{std\+::mutex}} \mbox{\hyperlink{http__stream_8cpp_ad5e0dbd36f0d71fce9b00b7f991b2f38}{mtx}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{宏定义说明}
+\mbox{\Hypertarget{http__stream_8cpp_a78c99ffd76a7bb3c8c74db76207e9ab4}\label{http__stream_8cpp_a78c99ffd76a7bb3c8c74db76207e9ab4}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!\_XOPEN\_SOURCE@{\_XOPEN\_SOURCE}}
+\index{\_XOPEN\_SOURCE@{\_XOPEN\_SOURCE}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{\_XOPEN\_SOURCE}{\_XOPEN\_SOURCE}}
+{\footnotesize\ttfamily \#define \+\_\+\+XOPEN\+\_\+\+SOURCE}
+
+\mbox{\Hypertarget{http__stream_8cpp_a46bf22b51da27e3732ffce87ee5bf75b}\label{http__stream_8cpp_a46bf22b51da27e3732ffce87ee5bf75b}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!ADDRPOINTER@{ADDRPOINTER}}
+\index{ADDRPOINTER@{ADDRPOINTER}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{ADDRPOINTER}{ADDRPOINTER}}
+{\footnotesize\ttfamily \#define ADDRPOINTER~unsigned int$\ast$}
+
+\mbox{\Hypertarget{http__stream_8cpp_a57d3354ee3dfb9bb53365e85a2322db0}\label{http__stream_8cpp_a57d3354ee3dfb9bb53365e85a2322db0}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!HOSTENT@{HOSTENT}}
+\index{HOSTENT@{HOSTENT}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{HOSTENT}{HOSTENT}}
+{\footnotesize\ttfamily \#define HOSTENT~struct hostent}
+
+\mbox{\Hypertarget{http__stream_8cpp_a26769957ec1a2beaf223f33b66ee64ab}\label{http__stream_8cpp_a26769957ec1a2beaf223f33b66ee64ab}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!INVALID\_SOCKET@{INVALID\_SOCKET}}
+\index{INVALID\_SOCKET@{INVALID\_SOCKET}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{INVALID\_SOCKET}{INVALID\_SOCKET}}
+{\footnotesize\ttfamily \#define INVALID\+\_\+\+SOCKET~-\/1}
+
+\mbox{\Hypertarget{http__stream_8cpp_a614217d263be1fb1a5f76e2ff7be19a2}\label{http__stream_8cpp_a614217d263be1fb1a5f76e2ff7be19a2}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!PORT@{PORT}}
+\index{PORT@{PORT}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{PORT}{PORT}}
+{\footnotesize\ttfamily \#define PORT~unsigned short}
+
+\mbox{\Hypertarget{http__stream_8cpp_a964e73b2a42e87b1e20c8ffa730952a2}\label{http__stream_8cpp_a964e73b2a42e87b1e20c8ffa730952a2}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!SOCKADDR@{SOCKADDR}}
+\index{SOCKADDR@{SOCKADDR}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{SOCKADDR}{SOCKADDR}}
+{\footnotesize\ttfamily \#define SOCKADDR~struct sockaddr}
+
+\mbox{\Hypertarget{http__stream_8cpp_a91d11a5e66bd1e10b0e62aadb7775c9d}\label{http__stream_8cpp_a91d11a5e66bd1e10b0e62aadb7775c9d}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!SOCKADDR\_IN@{SOCKADDR\_IN}}
+\index{SOCKADDR\_IN@{SOCKADDR\_IN}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{SOCKADDR\_IN}{SOCKADDR\_IN}}
+{\footnotesize\ttfamily \#define SOCKADDR\+\_\+\+IN~struct sockaddr\+\_\+in}
+
+\mbox{\Hypertarget{http__stream_8cpp_aff55fe551a9992a54ec54621c524d0a4}\label{http__stream_8cpp_aff55fe551a9992a54ec54621c524d0a4}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!SOCKET@{SOCKET}}
+\index{SOCKET@{SOCKET}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{SOCKET}{SOCKET}}
+{\footnotesize\ttfamily \#define SOCKET~int}
+
+\mbox{\Hypertarget{http__stream_8cpp_a633b0396ff93d336a088412a190a5072}\label{http__stream_8cpp_a633b0396ff93d336a088412a190a5072}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!SOCKET\_ERROR@{SOCKET\_ERROR}}
+\index{SOCKET\_ERROR@{SOCKET\_ERROR}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{SOCKET\_ERROR}{SOCKET\_ERROR}}
+{\footnotesize\ttfamily \#define SOCKET\+\_\+\+ERROR~-\/1}
+
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{http__stream_8cpp_a957748ebb5ee206b54c3d82d8c9b1a4f}\label{http__stream_8cpp_a957748ebb5ee206b54c3d82d8c9b1a4f}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!check\_classes\_id@{check\_classes\_id}}
+\index{check\_classes\_id@{check\_classes\_id}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{check\_classes\_id()}{check\_classes\_id()}}
+{\footnotesize\ttfamily int check\+\_\+classes\+\_\+id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structdetection}{detection}}}]{det1,  }\item[{\mbox{\hyperlink{structdetection}{detection}}}]{det2,  }\item[{float}]{thresh }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{http__stream_8cpp_a175afeebdbc7b9f55209e439cb91fba0}\label{http__stream_8cpp_a175afeebdbc7b9f55209e439cb91fba0}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!check\_prob@{check\_prob}}
+\index{check\_prob@{check\_prob}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{check\_prob()}{check\_prob()}}
+{\footnotesize\ttfamily int check\+\_\+prob (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structdetection}{detection}}}]{det,  }\item[{float}]{thresh }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{http__stream_8cpp_a39a3603e5e2769521b3b8a6105bcb63e}\label{http__stream_8cpp_a39a3603e5e2769521b3b8a6105bcb63e}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!close\_socket@{close\_socket}}
+\index{close\_socket@{close\_socket}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{close\_socket()}{close\_socket()}}
+{\footnotesize\ttfamily static int close\+\_\+socket (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{http__stream_8cpp_aff55fe551a9992a54ec54621c524d0a4}{SOCKET}}}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{http__stream_8cpp_aaa33d67c0b74f1cb2568b6a949cd4caa}\label{http__stream_8cpp_aaa33d67c0b74f1cb2568b6a949cd4caa}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!delete\_json\_sender@{delete\_json\_sender}}
+\index{delete\_json\_sender@{delete\_json\_sender}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{delete\_json\_sender()}{delete\_json\_sender()}}
+{\footnotesize\ttfamily void delete\+\_\+json\+\_\+sender (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{http__stream_8cpp_a5f7801137c2e6c6c03b20ad9cb3d3006}\label{http__stream_8cpp_a5f7801137c2e6c6c03b20ad9cb3d3006}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!fill\_remaining\_id@{fill\_remaining\_id}}
+\index{fill\_remaining\_id@{fill\_remaining\_id}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{fill\_remaining\_id()}{fill\_remaining\_id()}}
+{\footnotesize\ttfamily int fill\+\_\+remaining\+\_\+id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{new\+\_\+dets,  }\item[{int}]{new\+\_\+dets\+\_\+num,  }\item[{int}]{new\+\_\+track\+\_\+id,  }\item[{float}]{thresh,  }\item[{int}]{detection\+\_\+count }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=269pt]{http__stream_8cpp_a5f7801137c2e6c6c03b20ad9cb3d3006_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{http__stream_8cpp_af7ab092ab10d65db3b9051a12420fa52}\label{http__stream_8cpp_af7ab092ab10d65db3b9051a12420fa52}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!get\_time@{get\_time}}
+\index{get\_time@{get\_time}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{get\_time()}{get\_time()}}
+{\footnotesize\ttfamily double get\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{http__stream_8cpp_ac153241f54cc35e5cd528922c96f8256}\label{http__stream_8cpp_ac153241f54cc35e5cd528922c96f8256}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!get\_time\_point@{get\_time\_point}}
+\index{get\_time\_point@{get\_time\_point}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{get\_time\_point()}{get\_time\_point()}}
+{\footnotesize\ttfamily double get\+\_\+time\+\_\+point (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{http__stream_8cpp_a2def90ef5e1a9bfa23b3403bc03cbe83}\label{http__stream_8cpp_a2def90ef5e1a9bfa23b3403bc03cbe83}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!make\_float\_array@{make\_float\_array}}
+\index{make\_float\_array@{make\_float\_array}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{make\_float\_array()}{make\_float\_array()}}
+{\footnotesize\ttfamily float $\ast$ make\+\_\+float\+\_\+array (\begin{DoxyParamCaption}\item[{float $\ast$}]{src,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{http__stream_8cpp_a7d9590557a3281661686c58e808b421b}\label{http__stream_8cpp_a7d9590557a3281661686c58e808b421b}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!send\_json@{send\_json}}
+\index{send\_json@{send\_json}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{send\_json()}{send\_json()}}
+{\footnotesize\ttfamily void send\+\_\+json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{dets,  }\item[{int}]{nboxes,  }\item[{int}]{classes,  }\item[{char $\ast$$\ast$}]{names,  }\item[{long long int}]{frame\+\_\+id,  }\item[{int}]{port,  }\item[{int}]{timeout }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{http__stream_8cpp_a7d9590557a3281661686c58e808b421b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{http__stream_8cpp_ab19e8e80b0985fdcd04c51fa57ae7c22}\label{http__stream_8cpp_ab19e8e80b0985fdcd04c51fa57ae7c22}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!send\_json\_custom@{send\_json\_custom}}
+\index{send\_json\_custom@{send\_json\_custom}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{send\_json\_custom()}{send\_json\_custom()}}
+{\footnotesize\ttfamily void send\+\_\+json\+\_\+custom (\begin{DoxyParamCaption}\item[{char const $\ast$}]{send\+\_\+buf,  }\item[{int}]{port,  }\item[{int}]{timeout }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{http__stream_8cpp_ab19e8e80b0985fdcd04c51fa57ae7c22_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{http__stream_8cpp_a7293fb62bd165d15dc25098f0133fb53}\label{http__stream_8cpp_a7293fb62bd165d15dc25098f0133fb53}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!set\_track\_id@{set\_track\_id}}
+\index{set\_track\_id@{set\_track\_id}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{set\_track\_id()}{set\_track\_id()}}
+{\footnotesize\ttfamily void set\+\_\+track\+\_\+id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{new\+\_\+dets,  }\item[{int}]{new\+\_\+dets\+\_\+num,  }\item[{float}]{thresh,  }\item[{float}]{sim\+\_\+thresh,  }\item[{float}]{track\+\_\+ciou\+\_\+norm,  }\item[{int}]{deque\+\_\+size,  }\item[{int}]{dets\+\_\+for\+\_\+track,  }\item[{int}]{dets\+\_\+for\+\_\+show }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{http__stream_8cpp_a7293fb62bd165d15dc25098f0133fb53_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{http__stream_8cpp_aaedac22c55880495505bf375e0e132c1}\label{http__stream_8cpp_aaedac22c55880495505bf375e0e132c1}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!start\_timer@{start\_timer}}
+\index{start\_timer@{start\_timer}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{start\_timer()}{start\_timer()}}
+{\footnotesize\ttfamily void start\+\_\+timer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{http__stream_8cpp_a58997b988646976eadf522f6b26c9f46}\label{http__stream_8cpp_a58997b988646976eadf522f6b26c9f46}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!stop\_timer@{stop\_timer}}
+\index{stop\_timer@{stop\_timer}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{stop\_timer()}{stop\_timer()}}
+{\footnotesize\ttfamily void stop\+\_\+timer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{http__stream_8cpp_a3d2c318bb3c522e22d3656b16e7be0a2}\label{http__stream_8cpp_a3d2c318bb3c522e22d3656b16e7be0a2}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!stop\_timer\_and\_show@{stop\_timer\_and\_show}}
+\index{stop\_timer\_and\_show@{stop\_timer\_and\_show}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{stop\_timer\_and\_show()}{stop\_timer\_and\_show()}}
+{\footnotesize\ttfamily void stop\+\_\+timer\+\_\+and\+\_\+show (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{http__stream_8cpp_a4d58074f921d7b0b2fc827789a131c97}\label{http__stream_8cpp_a4d58074f921d7b0b2fc827789a131c97}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!stop\_timer\_and\_show\_name@{stop\_timer\_and\_show\_name}}
+\index{stop\_timer\_and\_show\_name@{stop\_timer\_and\_show\_name}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{stop\_timer\_and\_show\_name()}{stop\_timer\_and\_show\_name()}}
+{\footnotesize\ttfamily void stop\+\_\+timer\+\_\+and\+\_\+show\+\_\+name (\begin{DoxyParamCaption}\item[{char $\ast$}]{name }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{http__stream_8cpp_a4d58074f921d7b0b2fc827789a131c97_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{http__stream_8cpp_a823340f0425e190f6931ca5c4f2b05ae}\label{http__stream_8cpp_a823340f0425e190f6931ca5c4f2b05ae}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!total\_time@{total\_time}}
+\index{total\_time@{total\_time}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{total\_time()}{total\_time()}}
+{\footnotesize\ttfamily void total\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{变量说明}
+\mbox{\Hypertarget{http__stream_8cpp_a65e270c49cc44c3f188395c677b1a458}\label{http__stream_8cpp_a65e270c49cc44c3f188395c677b1a458}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!\_init\_once@{\_init\_once}}
+\index{\_init\_once@{\_init\_once}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{\_init\_once}{\_init\_once}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct___i_g_n_o_r_e___p_i_p_e___s_i_g_n_a_l}{\+\_\+\+IGNORE\+\_\+\+PIPE\+\_\+\+SIGNAL}} \+\_\+init\+\_\+once}
+
+\mbox{\Hypertarget{http__stream_8cpp_a45dd2f3cbd7faa4816b1b796612ba04c}\label{http__stream_8cpp_a45dd2f3cbd7faa4816b1b796612ba04c}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!js\_ptr@{js\_ptr}}
+\index{js\_ptr@{js\_ptr}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{js\_ptr}{js\_ptr}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{class_j_s_o_n__sender}{JSON\+\_\+sender}}$>$ js\+\_\+ptr\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{http__stream_8cpp_ad5e0dbd36f0d71fce9b00b7f991b2f38}\label{http__stream_8cpp_ad5e0dbd36f0d71fce9b00b7f991b2f38}} 
+\index{http\_stream.cpp@{http\_stream.cpp}!mtx@{mtx}}
+\index{mtx@{mtx}!http\_stream.cpp@{http\_stream.cpp}}
+\doxysubsubsection{\texorpdfstring{mtx}{mtx}}
+{\footnotesize\ttfamily \mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{std\+::mutex}} mtx\hspace{0.3cm}{\ttfamily [static]}}
+

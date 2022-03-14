@@ -1,0 +1,60 @@
+\hypertarget{typeid_8h_source}{}\doxysection{typeid.\+h}
+\label{typeid_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/detail/typeid.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/detail/typeid.h}}
+\mbox{\hyperlink{typeid_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{    pybind11/detail/typeid.h: Compiler-\/independent access to type identifiers}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{    Copyright (c) 2016 Wenzel Jakob <wenzel.jakob@epfl.ch>}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{    All rights reserved. Use of this source code is governed by a}}
+\DoxyCodeLine{7 \textcolor{comment}{    BSD-\/style license that can be found in the LICENSE file.}}
+\DoxyCodeLine{8 \textcolor{comment}{*/}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <cstdio>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <cstdlib>}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#if defined(\_\_GNUG\_\_)}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <cxxabi.h>}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{detail_2common_8h}{common.h}}"{}}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+\DoxyCodeLine{22 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{24 inline \textcolor{keywordtype}{void} \mbox{\hyperlink{typeid_8h_a76e1bc9e118f26c76e2324d44183fdea}{erase\_all}}(\mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string} \&\textcolor{keywordtype}{string}, const \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string} \&search) \{}
+\DoxyCodeLine{25     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} pos = 0;;) \{}
+\DoxyCodeLine{26         pos = \textcolor{keywordtype}{string}.find(search, pos);}
+\DoxyCodeLine{27         \textcolor{keywordflow}{if} (pos == std::string::npos) \textcolor{keywordflow}{break};}
+\DoxyCodeLine{28         \textcolor{keywordtype}{string}.erase(pos, search.length());}
+\DoxyCodeLine{29     \}}
+\DoxyCodeLine{30 \}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\_NOINLINE}} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{typeid_8h_aab52845991c2e3ddb370e7723a6b0a75}{clean\_type\_id}}(std::string \&\mbox{\hyperlink{structname}{name}}) \{}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#if defined(\_\_GNUG\_\_)}}
+\DoxyCodeLine{34     \textcolor{keywordtype}{int} status = 0;}
+\DoxyCodeLine{35     std::unique\_ptr<char, void (*)(\textcolor{keywordtype}{void} *)> res \{}
+\DoxyCodeLine{36         abi::\_\_cxa\_demangle(\mbox{\hyperlink{structname}{name}}.c\_str(), \textcolor{keyword}{nullptr}, \textcolor{keyword}{nullptr}, \&status), std::free \};}
+\DoxyCodeLine{37     \textcolor{keywordflow}{if} (status == 0)}
+\DoxyCodeLine{38         \mbox{\hyperlink{structname}{name}} = res.get();}
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{40     \mbox{\hyperlink{typeid_8h_a76e1bc9e118f26c76e2324d44183fdea}{detail::erase\_all}}(\mbox{\hyperlink{structname}{name}}, \textcolor{stringliteral}{"{}class "{}});}
+\DoxyCodeLine{41     \mbox{\hyperlink{typeid_8h_a76e1bc9e118f26c76e2324d44183fdea}{detail::erase\_all}}(\mbox{\hyperlink{structname}{name}}, \textcolor{stringliteral}{"{}struct "{}});}
+\DoxyCodeLine{42     \mbox{\hyperlink{typeid_8h_a76e1bc9e118f26c76e2324d44183fdea}{detail::erase\_all}}(\mbox{\hyperlink{structname}{name}}, \textcolor{stringliteral}{"{}enum "{}});}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{44     \mbox{\hyperlink{typeid_8h_a76e1bc9e118f26c76e2324d44183fdea}{detail::erase\_all}}(\mbox{\hyperlink{structname}{name}}, \textcolor{stringliteral}{"{}pybind11::"{}});}
+\DoxyCodeLine{45 \}}
+\DoxyCodeLine{46 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 template <typename T> static \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string} \mbox{\hyperlink{typeid_8h_a8e5a4f7e41d9bff89c9efdeefb4ad6a9}{type\_id}}() \{}
+\DoxyCodeLine{50     std::string \mbox{\hyperlink{structname}{name}}(\textcolor{keyword}{typeid}(T).\mbox{\hyperlink{structname}{name}}());}
+\DoxyCodeLine{51     \mbox{\hyperlink{typeid_8h_aab52845991c2e3ddb370e7723a6b0a75}{detail::clean\_type\_id}}(\mbox{\hyperlink{structname}{name}});}
+\DoxyCodeLine{52     \textcolor{keywordflow}{return} \mbox{\hyperlink{structname}{name}};}
+\DoxyCodeLine{53 \}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+
+\end{DoxyCode}

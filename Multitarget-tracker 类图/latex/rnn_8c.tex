@@ -1,0 +1,218 @@
+\hypertarget{rnn_8c}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/rnn.c 文件参考}
+\label{rnn_8c}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/rnn.c@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/rnn.c}}
+{\ttfamily \#include \char`\"{}network.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cost\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}blas.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}parser.\+h\char`\"{}}\newline
+rnn.\+c 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{rnn_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structfloat__pair}{float\+\_\+pair}}
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+int $\ast$ \mbox{\hyperlink{rnn_8c_ae9418e5d724872d4a5a687263753ae85}{read\+\_\+tokenized\+\_\+data}} (char $\ast$filename, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} $\ast$read)
+\item 
+char $\ast$$\ast$ \mbox{\hyperlink{rnn_8c_a7c0f4c58a72a8f5833bc0f578572578b}{read\+\_\+tokens}} (char $\ast$filename, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} $\ast$read)
+\item 
+\mbox{\hyperlink{structfloat__pair}{float\+\_\+pair}} \mbox{\hyperlink{rnn_8c_a82ac78648cd83a1938581521fb26133f}{get\+\_\+rnn\+\_\+token\+\_\+data}} (int $\ast$tokens, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} $\ast$offsets, int characters, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{group__python__builtins_gaeff368081ac50b8fe2cc0230d96e3acb}{len}}, int batch, int steps)
+\item 
+\mbox{\hyperlink{structfloat__pair}{float\+\_\+pair}} \mbox{\hyperlink{rnn_8c_a6f434339093ab6ba43154b8b85624a8b}{get\+\_\+rnn\+\_\+data}} (unsigned char $\ast$text, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} $\ast$offsets, int characters, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{group__python__builtins_gaeff368081ac50b8fe2cc0230d96e3acb}{len}}, int batch, int steps)
+\item 
+void \mbox{\hyperlink{rnn_8c_aaca16904310f5eba8bd23bf8648e7e31}{reset\+\_\+rnn\+\_\+state}} (\mbox{\hyperlink{structnetwork}{network}} net, int b)
+\item 
+void \mbox{\hyperlink{rnn_8c_a29452f6bf562d39cbf38df330b7d036e}{train\+\_\+char\+\_\+rnn}} (char $\ast$cfgfile, char $\ast$weightfile, char $\ast$filename, int clear, int tokenized)
+\item 
+void \mbox{\hyperlink{rnn_8c_ae28d5d5d624423fddf8dfa518e487814}{print\+\_\+symbol}} (int n, char $\ast$$\ast$tokens)
+\item 
+void \mbox{\hyperlink{rnn_8c_a83c8cf9106e2cf81b55677f13f480a68}{test\+\_\+char\+\_\+rnn}} (char $\ast$cfgfile, char $\ast$weightfile, int num, char $\ast$seed, float temp, int rseed, char $\ast$token\+\_\+file)
+\item 
+void \mbox{\hyperlink{rnn_8c_a073f6bb832965a03274a7c44921d19af}{test\+\_\+tactic\+\_\+rnn}} (char $\ast$cfgfile, char $\ast$weightfile, int num, float temp, int rseed, char $\ast$token\+\_\+file)
+\item 
+void \mbox{\hyperlink{rnn_8c_a1d05f9a2f2ee793d0ce58ace171b9efa}{valid\+\_\+tactic\+\_\+rnn}} (char $\ast$cfgfile, char $\ast$weightfile, char $\ast$seed)
+\item 
+void \mbox{\hyperlink{rnn_8c_a8245b631d7f334904524890d518391a8}{valid\+\_\+char\+\_\+rnn}} (char $\ast$cfgfile, char $\ast$weightfile, char $\ast$seed)
+\item 
+void \mbox{\hyperlink{rnn_8c_ab6d6d01830e9a7ea70a2bb524f61998d}{vec\+\_\+char\+\_\+rnn}} (char $\ast$cfgfile, char $\ast$weightfile, char $\ast$seed)
+\item 
+void \mbox{\hyperlink{rnn_8c_a7fd5ff39b30355662b36d8f1c3efae78}{run\+\_\+char\+\_\+rnn}} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{rnn_8c_a6f434339093ab6ba43154b8b85624a8b}\label{rnn_8c_a6f434339093ab6ba43154b8b85624a8b}} 
+\index{rnn.c@{rnn.c}!get\_rnn\_data@{get\_rnn\_data}}
+\index{get\_rnn\_data@{get\_rnn\_data}!rnn.c@{rnn.c}}
+\doxysubsubsection{\texorpdfstring{get\_rnn\_data()}{get\_rnn\_data()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structfloat__pair}{float\+\_\+pair}} get\+\_\+rnn\+\_\+data (\begin{DoxyParamCaption}\item[{unsigned char $\ast$}]{text,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} $\ast$}]{offsets,  }\item[{int}]{characters,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{len,  }\item[{int}]{batch,  }\item[{int}]{steps }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=334pt]{rnn_8c_a6f434339093ab6ba43154b8b85624a8b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{rnn_8c_a82ac78648cd83a1938581521fb26133f}\label{rnn_8c_a82ac78648cd83a1938581521fb26133f}} 
+\index{rnn.c@{rnn.c}!get\_rnn\_token\_data@{get\_rnn\_token\_data}}
+\index{get\_rnn\_token\_data@{get\_rnn\_token\_data}!rnn.c@{rnn.c}}
+\doxysubsubsection{\texorpdfstring{get\_rnn\_token\_data()}{get\_rnn\_token\_data()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structfloat__pair}{float\+\_\+pair}} get\+\_\+rnn\+\_\+token\+\_\+data (\begin{DoxyParamCaption}\item[{int $\ast$}]{tokens,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} $\ast$}]{offsets,  }\item[{int}]{characters,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{len,  }\item[{int}]{batch,  }\item[{int}]{steps }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{rnn_8c_a82ac78648cd83a1938581521fb26133f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{rnn_8c_ae28d5d5d624423fddf8dfa518e487814}\label{rnn_8c_ae28d5d5d624423fddf8dfa518e487814}} 
+\index{rnn.c@{rnn.c}!print\_symbol@{print\_symbol}}
+\index{print\_symbol@{print\_symbol}!rnn.c@{rnn.c}}
+\doxysubsubsection{\texorpdfstring{print\_symbol()}{print\_symbol()}}
+{\footnotesize\ttfamily void print\+\_\+symbol (\begin{DoxyParamCaption}\item[{int}]{n,  }\item[{char $\ast$$\ast$}]{tokens }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{rnn_8c_ae9418e5d724872d4a5a687263753ae85}\label{rnn_8c_ae9418e5d724872d4a5a687263753ae85}} 
+\index{rnn.c@{rnn.c}!read\_tokenized\_data@{read\_tokenized\_data}}
+\index{read\_tokenized\_data@{read\_tokenized\_data}!rnn.c@{rnn.c}}
+\doxysubsubsection{\texorpdfstring{read\_tokenized\_data()}{read\_tokenized\_data()}}
+{\footnotesize\ttfamily int $\ast$ read\+\_\+tokenized\+\_\+data (\begin{DoxyParamCaption}\item[{char $\ast$}]{filename,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} $\ast$}]{read }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=297pt]{rnn_8c_ae9418e5d724872d4a5a687263753ae85_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{rnn_8c_a7c0f4c58a72a8f5833bc0f578572578b}\label{rnn_8c_a7c0f4c58a72a8f5833bc0f578572578b}} 
+\index{rnn.c@{rnn.c}!read\_tokens@{read\_tokens}}
+\index{read\_tokens@{read\_tokens}!rnn.c@{rnn.c}}
+\doxysubsubsection{\texorpdfstring{read\_tokens()}{read\_tokens()}}
+{\footnotesize\ttfamily char $\ast$$\ast$ read\+\_\+tokens (\begin{DoxyParamCaption}\item[{char $\ast$}]{filename,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} $\ast$}]{read }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=260pt]{rnn_8c_a7c0f4c58a72a8f5833bc0f578572578b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{rnn_8c_aaca16904310f5eba8bd23bf8648e7e31}\label{rnn_8c_aaca16904310f5eba8bd23bf8648e7e31}} 
+\index{rnn.c@{rnn.c}!reset\_rnn\_state@{reset\_rnn\_state}}
+\index{reset\_rnn\_state@{reset\_rnn\_state}!rnn.c@{rnn.c}}
+\doxysubsubsection{\texorpdfstring{reset\_rnn\_state()}{reset\_rnn\_state()}}
+{\footnotesize\ttfamily void reset\+\_\+rnn\+\_\+state (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net,  }\item[{int}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{rnn_8c_a7fd5ff39b30355662b36d8f1c3efae78}\label{rnn_8c_a7fd5ff39b30355662b36d8f1c3efae78}} 
+\index{rnn.c@{rnn.c}!run\_char\_rnn@{run\_char\_rnn}}
+\index{run\_char\_rnn@{run\_char\_rnn}!rnn.c@{rnn.c}}
+\doxysubsubsection{\texorpdfstring{run\_char\_rnn()}{run\_char\_rnn()}}
+{\footnotesize\ttfamily void run\+\_\+char\+\_\+rnn (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{rnn_8c_a7fd5ff39b30355662b36d8f1c3efae78_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{rnn_8c_a83c8cf9106e2cf81b55677f13f480a68}\label{rnn_8c_a83c8cf9106e2cf81b55677f13f480a68}} 
+\index{rnn.c@{rnn.c}!test\_char\_rnn@{test\_char\_rnn}}
+\index{test\_char\_rnn@{test\_char\_rnn}!rnn.c@{rnn.c}}
+\doxysubsubsection{\texorpdfstring{test\_char\_rnn()}{test\_char\_rnn()}}
+{\footnotesize\ttfamily void test\+\_\+char\+\_\+rnn (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{int}]{num,  }\item[{char $\ast$}]{seed,  }\item[{float}]{temp,  }\item[{int}]{rseed,  }\item[{char $\ast$}]{token\+\_\+file }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{rnn_8c_a83c8cf9106e2cf81b55677f13f480a68_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{rnn_8c_a073f6bb832965a03274a7c44921d19af}\label{rnn_8c_a073f6bb832965a03274a7c44921d19af}} 
+\index{rnn.c@{rnn.c}!test\_tactic\_rnn@{test\_tactic\_rnn}}
+\index{test\_tactic\_rnn@{test\_tactic\_rnn}!rnn.c@{rnn.c}}
+\doxysubsubsection{\texorpdfstring{test\_tactic\_rnn()}{test\_tactic\_rnn()}}
+{\footnotesize\ttfamily void test\+\_\+tactic\+\_\+rnn (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{int}]{num,  }\item[{float}]{temp,  }\item[{int}]{rseed,  }\item[{char $\ast$}]{token\+\_\+file }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{rnn_8c_a073f6bb832965a03274a7c44921d19af_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{rnn_8c_a29452f6bf562d39cbf38df330b7d036e}\label{rnn_8c_a29452f6bf562d39cbf38df330b7d036e}} 
+\index{rnn.c@{rnn.c}!train\_char\_rnn@{train\_char\_rnn}}
+\index{train\_char\_rnn@{train\_char\_rnn}!rnn.c@{rnn.c}}
+\doxysubsubsection{\texorpdfstring{train\_char\_rnn()}{train\_char\_rnn()}}
+{\footnotesize\ttfamily void train\+\_\+char\+\_\+rnn (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{char $\ast$}]{filename,  }\item[{int}]{clear,  }\item[{int}]{tokenized }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{rnn_8c_a29452f6bf562d39cbf38df330b7d036e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{rnn_8c_a8245b631d7f334904524890d518391a8}\label{rnn_8c_a8245b631d7f334904524890d518391a8}} 
+\index{rnn.c@{rnn.c}!valid\_char\_rnn@{valid\_char\_rnn}}
+\index{valid\_char\_rnn@{valid\_char\_rnn}!rnn.c@{rnn.c}}
+\doxysubsubsection{\texorpdfstring{valid\_char\_rnn()}{valid\_char\_rnn()}}
+{\footnotesize\ttfamily void valid\+\_\+char\+\_\+rnn (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{char $\ast$}]{seed }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{rnn_8c_a8245b631d7f334904524890d518391a8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{rnn_8c_a1d05f9a2f2ee793d0ce58ace171b9efa}\label{rnn_8c_a1d05f9a2f2ee793d0ce58ace171b9efa}} 
+\index{rnn.c@{rnn.c}!valid\_tactic\_rnn@{valid\_tactic\_rnn}}
+\index{valid\_tactic\_rnn@{valid\_tactic\_rnn}!rnn.c@{rnn.c}}
+\doxysubsubsection{\texorpdfstring{valid\_tactic\_rnn()}{valid\_tactic\_rnn()}}
+{\footnotesize\ttfamily void valid\+\_\+tactic\+\_\+rnn (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{char $\ast$}]{seed }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{rnn_8c_a1d05f9a2f2ee793d0ce58ace171b9efa_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{rnn_8c_ab6d6d01830e9a7ea70a2bb524f61998d}\label{rnn_8c_ab6d6d01830e9a7ea70a2bb524f61998d}} 
+\index{rnn.c@{rnn.c}!vec\_char\_rnn@{vec\_char\_rnn}}
+\index{vec\_char\_rnn@{vec\_char\_rnn}!rnn.c@{rnn.c}}
+\doxysubsubsection{\texorpdfstring{vec\_char\_rnn()}{vec\_char\_rnn()}}
+{\footnotesize\ttfamily void vec\+\_\+char\+\_\+rnn (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{char $\ast$}]{seed }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{rnn_8c_ab6d6d01830e9a7ea70a2bb524f61998d_cgraph}
+\end{center}
+\end{figure}

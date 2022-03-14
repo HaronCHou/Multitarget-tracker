@@ -1,0 +1,295 @@
+\hypertarget{classbin__heap}{}\doxysection{bin\+\_\+heap\texorpdfstring{$<$}{<} T, Pred \texorpdfstring{$>$}{>} 模板类 参考}
+\label{classbin__heap}\index{bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}}
+
+
+Binary heap.  
+
+
+
+
+{\ttfamily \#include $<$bin\+\_\+heap.\+h$>$}
+
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbin__heap_a9de42b60fac4b0d38aa738522eb7c4cd}{bin\+\_\+heap}} (const Pred \&\mbox{\hyperlink{classbin__heap_a5ecc420dfd03a6a0b4c9328cac1fae14}{prd}})
+\begin{DoxyCompactList}\small\item\em Creates empty binary heap. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbin__heap_ab911dd559d9d9fd665b9fdf2d8202bb8}{bin\+\_\+heap}} (const Pred \&\mbox{\hyperlink{classbin__heap_a5ecc420dfd03a6a0b4c9328cac1fae14}{prd}}, const int est\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Creates empty binary heap. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbin__heap_a19bd4241e097852ffda83b72557ffbdc}{bin\+\_\+heap}} (const \mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$ \&bh)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$ \& \mbox{\hyperlink{classbin__heap_ad31b6806316a272686015fcbf5f633cd}{operator=}} (const \mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$ \&bh)
+\begin{DoxyCompactList}\small\item\em Assigns {\ttfamily bh} to this binary heap. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbin__heap_a5283db56783a84ee28dea9d393acf905}{$\sim$bin\+\_\+heap}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbin__heap_a6d658d61533e66cf83dce2f8e35bed17}{push}} (const T \&ins)
+\begin{DoxyCompactList}\small\item\em Inserts {\ttfamily ins} in heap. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbin__heap_ab463bc655b2f46cd5ff021cab28b1210}{pop}} ()
+\begin{DoxyCompactList}\small\item\em Removes the element on top of the heap. \end{DoxyCompactList}\item 
+const T \& \mbox{\hyperlink{classbin__heap_acd711ddeafe82630f153906da7e8fa1c}{top}} () const
+\begin{DoxyCompactList}\small\item\em Returns a reference to the element at the top of the heap. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbin__heap_ab1353fe40c5cfc1205314a4db6334f1b}{change\+Key}} (const T \&cha)
+\begin{DoxyCompactList}\small\item\em Reconstructs heap condition after changing key value of {\ttfamily cha} externally. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classbin__heap_a2bbb9cf5cc5cda265c8603c561b796a5}{is\+\_\+empty}} () const
+\begin{DoxyCompactList}\small\item\em Checks if heap is empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbin__heap_abf7a6189fcb48e435fc156f764e38f1d}{clear}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classbin__heap_aefc41dde4f1decfe523d23eb3d5e885f}{bubble\+\_\+up}} (\mbox{\hyperlink{classheap__node}{heap\+\_\+node}}$<$ T $>$ $\ast$const n)
+\item 
+void \mbox{\hyperlink{classbin__heap_a6c16b71925f4df063778aadc527a6fc6}{bubble\+\_\+down}} (\mbox{\hyperlink{classheap__node}{heap\+\_\+node}}$<$ T $>$ $\ast$const n)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+const Pred \& \mbox{\hyperlink{classbin__heap_a5ecc420dfd03a6a0b4c9328cac1fae14}{prd}}
+\item 
+int \mbox{\hyperlink{classbin__heap_a8dde1008dcc24d734dbdb2c7ca50435b}{size}}
+\item 
+int \mbox{\hyperlink{classbin__heap_ac5aa6948898bfc047cae2fe99ba28f57}{capacity}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classheap__node}{heap\+\_\+node}}$<$ T $>$ $\ast$ $>$ \mbox{\hyperlink{classbin__heap_a413200f4c6e24090c5e9a32184fc8857}{container}}
+\item 
+std\+::map$<$ T, \mbox{\hyperlink{classheap__node}{heap\+\_\+node}}$<$ T $>$ $\ast$ $>$ \mbox{\hyperlink{classbin__heap_ab646175f97b352ca26587d23bf57c79f}{heap\+\_\+node\+\_\+map}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+\subsubsection*{template$<$class T, class Pred$>$\newline
+class bin\+\_\+heap$<$ T, Pred $>$}
+Binary heap. 
+
+\begin{DoxyAuthor}{作者}
+Christian Bachmaier \href{mailto:chris@infosun.fmi.uni-passau.de}{\texttt{ chris@infosun.\+fmi.\+uni-\/passau.\+de}} 
+\end{DoxyAuthor}
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classbin__heap_a9de42b60fac4b0d38aa738522eb7c4cd}\label{classbin__heap_a9de42b60fac4b0d38aa738522eb7c4cd}} 
+\index{bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}!bin\_heap@{bin\_heap}}
+\index{bin\_heap@{bin\_heap}!bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}}
+\doxysubsubsection{\texorpdfstring{bin\_heap()}{bin\_heap()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class T , class Pred $>$ \\
+\mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$\mbox{\hyperlink{classbin__heap}{\+::bin\+\_\+heap}} (\begin{DoxyParamCaption}\item[{const Pred \&}]{prd }\end{DoxyParamCaption})}
+
+
+
+Creates empty binary heap. 
+
+
+\begin{DoxyParams}{参数}
+{\em prd} & binary predicate to compare two {\ttfamily T}s \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbin__heap_ab911dd559d9d9fd665b9fdf2d8202bb8}\label{classbin__heap_ab911dd559d9d9fd665b9fdf2d8202bb8}} 
+\index{bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}!bin\_heap@{bin\_heap}}
+\index{bin\_heap@{bin\_heap}!bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}}
+\doxysubsubsection{\texorpdfstring{bin\_heap()}{bin\_heap()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class T , class Pred $>$ \\
+\mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$\mbox{\hyperlink{classbin__heap}{\+::bin\+\_\+heap}} (\begin{DoxyParamCaption}\item[{const Pred \&}]{prd,  }\item[{const int}]{est\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+Creates empty binary heap. 
+
+
+\begin{DoxyParams}{参数}
+{\em prd} & binary predicate to compare two {\ttfamily Ts} \\
+\hline
+{\em est\+\_\+size} & estimated maximal size of heap \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbin__heap_a19bd4241e097852ffda83b72557ffbdc}\label{classbin__heap_a19bd4241e097852ffda83b72557ffbdc}} 
+\index{bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}!bin\_heap@{bin\_heap}}
+\index{bin\_heap@{bin\_heap}!bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}}
+\doxysubsubsection{\texorpdfstring{bin\_heap()}{bin\_heap()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class T , class Pred $>$ \\
+\mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$\mbox{\hyperlink{classbin__heap}{\+::bin\+\_\+heap}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$ \&}]{bh }\end{DoxyParamCaption})}
+
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{参数}
+{\em bh} & binary heap to copy \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbin__heap_a5283db56783a84ee28dea9d393acf905}\label{classbin__heap_a5283db56783a84ee28dea9d393acf905}} 
+\index{bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}!````~bin\_heap@{$\sim$bin\_heap}}
+\index{````~bin\_heap@{$\sim$bin\_heap}!bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$bin\_heap()}{~bin\_heap()}}
+{\footnotesize\ttfamily template$<$class T , class Pred $>$ \\
+\mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$\+::$\sim$\mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}}
+
+
+
+Destructor. 
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classbin__heap_a6c16b71925f4df063778aadc527a6fc6}\label{classbin__heap_a6c16b71925f4df063778aadc527a6fc6}} 
+\index{bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}!bubble\_down@{bubble\_down}}
+\index{bubble\_down@{bubble\_down}!bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}}
+\doxysubsubsection{\texorpdfstring{bubble\_down()}{bubble\_down()}}
+{\footnotesize\ttfamily template$<$class T , class Pred $>$ \\
+void \mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$\+::bubble\+\_\+down (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classheap__node}{heap\+\_\+node}}$<$ T $>$ $\ast$const}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classbin__heap_aefc41dde4f1decfe523d23eb3d5e885f}\label{classbin__heap_aefc41dde4f1decfe523d23eb3d5e885f}} 
+\index{bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}!bubble\_up@{bubble\_up}}
+\index{bubble\_up@{bubble\_up}!bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}}
+\doxysubsubsection{\texorpdfstring{bubble\_up()}{bubble\_up()}}
+{\footnotesize\ttfamily template$<$class T , class Pred $>$ \\
+void \mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$\+::bubble\+\_\+up (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classheap__node}{heap\+\_\+node}}$<$ T $>$ $\ast$const}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classbin__heap_ab1353fe40c5cfc1205314a4db6334f1b}\label{classbin__heap_ab1353fe40c5cfc1205314a4db6334f1b}} 
+\index{bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}!changeKey@{changeKey}}
+\index{changeKey@{changeKey}!bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}}
+\doxysubsubsection{\texorpdfstring{changeKey()}{changeKey()}}
+{\footnotesize\ttfamily template$<$class T , class Pred $>$ \\
+void \mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$\+::change\+Key (\begin{DoxyParamCaption}\item[{const T \&}]{cha }\end{DoxyParamCaption})}
+
+
+
+Reconstructs heap condition after changing key value of {\ttfamily cha} externally. 
+
+
+\begin{DoxyParams}{参数}
+{\em cha} & element with changed key value\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{注解}
+{\ttfamily change\+Key} doesn\textquotesingle{}t operate if {\ttfamily cha} is a primitive data structure, because it represents its key value itself, or if one object is stored more than once in the data structure.
+\end{DoxyNote}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classdijkstra}{dijkstra}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbin__heap_abf7a6189fcb48e435fc156f764e38f1d}\label{classbin__heap_abf7a6189fcb48e435fc156f764e38f1d}} 
+\index{bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}!clear@{clear}}
+\index{clear@{clear}!bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily template$<$class T , class Pred $>$ \\
+void \mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$\+::clear}
+
+\mbox{\Hypertarget{classbin__heap_a2bbb9cf5cc5cda265c8603c561b796a5}\label{classbin__heap_a2bbb9cf5cc5cda265c8603c561b796a5}} 
+\index{bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}!is\_empty@{is\_empty}}
+\index{is\_empty@{is\_empty}!bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}}
+\doxysubsubsection{\texorpdfstring{is\_empty()}{is\_empty()}}
+{\footnotesize\ttfamily template$<$class T , class Pred $>$ \\
+bool \mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$\+::is\+\_\+empty}
+
+
+
+Checks if heap is empty. 
+
+\begin{DoxyReturn}{返回}
+{\ttfamily true} iff empty 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbin__heap_ad31b6806316a272686015fcbf5f633cd}\label{classbin__heap_ad31b6806316a272686015fcbf5f633cd}} 
+\index{bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$class T , class Pred $>$ \\
+\mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$ \& \mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$ \&}]{bh }\end{DoxyParamCaption})}
+
+
+
+Assigns {\ttfamily bh} to this binary heap. 
+
+All elements in this heap will be deleted. The predicate of this heap must be physically the same as the one of {\ttfamily bh}.
+
+
+\begin{DoxyParams}{参数}
+{\em bh} & binary heap\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+this heap 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbin__heap_ab463bc655b2f46cd5ff021cab28b1210}\label{classbin__heap_ab463bc655b2f46cd5ff021cab28b1210}} 
+\index{bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}!pop@{pop}}
+\index{pop@{pop}!bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}}
+\doxysubsubsection{\texorpdfstring{pop()}{pop()}}
+{\footnotesize\ttfamily template$<$class T , class Pred $>$ \\
+void \mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$\+::pop}
+
+
+
+Removes the element on top of the heap. 
+
+\mbox{\Hypertarget{classbin__heap_a6d658d61533e66cf83dce2f8e35bed17}\label{classbin__heap_a6d658d61533e66cf83dce2f8e35bed17}} 
+\index{bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}!push@{push}}
+\index{push@{push}!bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}}
+\doxysubsubsection{\texorpdfstring{push()}{push()}}
+{\footnotesize\ttfamily template$<$class T , class Pred $>$ \\
+void \mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$\+::push (\begin{DoxyParamCaption}\item[{const T \&}]{ins }\end{DoxyParamCaption})}
+
+
+
+Inserts {\ttfamily ins} in heap. 
+
+
+\begin{DoxyParams}{参数}
+{\em ins} & data element to be inserted \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbin__heap_acd711ddeafe82630f153906da7e8fa1c}\label{classbin__heap_acd711ddeafe82630f153906da7e8fa1c}} 
+\index{bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}!top@{top}}
+\index{top@{top}!bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}}
+\doxysubsubsection{\texorpdfstring{top()}{top()}}
+{\footnotesize\ttfamily template$<$class T , class Pred $>$ \\
+const T \& \mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$\+::top}
+
+
+
+Returns a reference to the element at the top of the heap. 
+
+\begin{DoxyReturn}{返回}
+top element of the heap 
+\end{DoxyReturn}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classbin__heap_ac5aa6948898bfc047cae2fe99ba28f57}\label{classbin__heap_ac5aa6948898bfc047cae2fe99ba28f57}} 
+\index{bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}!capacity@{capacity}}
+\index{capacity@{capacity}!bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}}
+\doxysubsubsection{\texorpdfstring{capacity}{capacity}}
+{\footnotesize\ttfamily template$<$class T , class Pred $>$ \\
+int \mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$\+::capacity\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classbin__heap_a413200f4c6e24090c5e9a32184fc8857}\label{classbin__heap_a413200f4c6e24090c5e9a32184fc8857}} 
+\index{bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}!container@{container}}
+\index{container@{container}!bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}}
+\doxysubsubsection{\texorpdfstring{container}{container}}
+{\footnotesize\ttfamily template$<$class T , class Pred $>$ \\
+std\+::vector$<$\mbox{\hyperlink{classheap__node}{heap\+\_\+node}}$<$T$>$$\ast$ $>$ \mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$\+::container\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classbin__heap_ab646175f97b352ca26587d23bf57c79f}\label{classbin__heap_ab646175f97b352ca26587d23bf57c79f}} 
+\index{bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}!heap\_node\_map@{heap\_node\_map}}
+\index{heap\_node\_map@{heap\_node\_map}!bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}}
+\doxysubsubsection{\texorpdfstring{heap\_node\_map}{heap\_node\_map}}
+{\footnotesize\ttfamily template$<$class T , class Pred $>$ \\
+std\+::map$<$T, \mbox{\hyperlink{classheap__node}{heap\+\_\+node}}$<$T$>$$\ast$ $>$ \mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$\+::heap\+\_\+node\+\_\+map\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classbin__heap_a5ecc420dfd03a6a0b4c9328cac1fae14}\label{classbin__heap_a5ecc420dfd03a6a0b4c9328cac1fae14}} 
+\index{bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}!prd@{prd}}
+\index{prd@{prd}!bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}}
+\doxysubsubsection{\texorpdfstring{prd}{prd}}
+{\footnotesize\ttfamily template$<$class T , class Pred $>$ \\
+const Pred\& \mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$\+::prd\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classbin__heap_a8dde1008dcc24d734dbdb2c7ca50435b}\label{classbin__heap_a8dde1008dcc24d734dbdb2c7ca50435b}} 
+\index{bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}!size@{size}}
+\index{size@{size}!bin\_heap$<$ T, Pred $>$@{bin\_heap$<$ T, Pred $>$}}
+\doxysubsubsection{\texorpdfstring{size}{size}}
+{\footnotesize\ttfamily template$<$class T , class Pred $>$ \\
+int \mbox{\hyperlink{classbin__heap}{bin\+\_\+heap}}$<$ T, Pred $>$\+::size\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Tracker/graph/\+GTL/include/\+GTL/\mbox{\hyperlink{bin__heap_8h}{bin\+\_\+heap.\+h}}\end{DoxyCompactItemize}

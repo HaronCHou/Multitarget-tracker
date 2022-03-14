@@ -1,0 +1,474 @@
+\hypertarget{box_8c}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/box.c 文件参考}
+\label{box_8c}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/box.c@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/box.c}}
+{\ttfamily \#include \char`\"{}box.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+box.\+c 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{box_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structsortable__bbox}{sortable\+\_\+bbox}}
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structbox}{box}} \mbox{\hyperlink{box_8c_a3d0a57328da3a723435e056b2d67131b}{float\+\_\+to\+\_\+box}} (float $\ast$\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}})
+\item 
+\mbox{\hyperlink{structbox}{box}} \mbox{\hyperlink{box_8c_aa23325a1dd389bfc2285aede97ac70a0}{float\+\_\+to\+\_\+box\+\_\+stride}} (float $\ast$\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}}, int stride)
+\item 
+\mbox{\hyperlink{structdbox}{dbox}} \mbox{\hyperlink{box_8c_a0a70286448dcb4dfca4ead3539e48a87}{derivative}} (\mbox{\hyperlink{structbox}{box}} a, \mbox{\hyperlink{structbox}{box}} b)
+\item 
+\mbox{\hyperlink{structboxabs}{boxabs}} \mbox{\hyperlink{box_8c_a0ce31589f0a7013a55deb5a43ebc4d9f}{box\+\_\+c}} (\mbox{\hyperlink{structbox}{box}} a, \mbox{\hyperlink{structbox}{box}} b)
+\item 
+\mbox{\hyperlink{structboxabs}{boxabs}} \mbox{\hyperlink{box_8c_a4ae59a624a743787a143cef64839715b}{to\+\_\+tblr}} (\mbox{\hyperlink{structbox}{box}} a)
+\item 
+float \mbox{\hyperlink{box_8c_a49bbaf2c74dad0f7bbca22c9e41286ca}{overlap}} (float x1, float w1, float x2, float w2)
+\item 
+float \mbox{\hyperlink{box_8c_a306e7943e82df234b6f9d9c70def621c}{box\+\_\+intersection}} (\mbox{\hyperlink{structbox}{box}} a, \mbox{\hyperlink{structbox}{box}} b)
+\item 
+float \mbox{\hyperlink{box_8c_a6f5e94eb9c925d29647fd649799b8066}{box\+\_\+union}} (\mbox{\hyperlink{structbox}{box}} a, \mbox{\hyperlink{structbox}{box}} b)
+\item 
+float \mbox{\hyperlink{box_8c_ae02fea0a784b684583e15c883882d32b}{box\+\_\+iou\+\_\+kind}} (\mbox{\hyperlink{structbox}{box}} a, \mbox{\hyperlink{structbox}{box}} b, \mbox{\hyperlink{darknet_8h_aab757338e5429453acc81f7bc21a3e92}{IOU\+\_\+\+LOSS}} iou\+\_\+kind)
+\item 
+float \mbox{\hyperlink{box_8c_ae14a614fc4d26ebb552d23615dfea313}{box\+\_\+iou}} (\mbox{\hyperlink{structbox}{box}} a, \mbox{\hyperlink{structbox}{box}} b)
+\item 
+float \mbox{\hyperlink{box_8c_ae6bc47cb90a868b12245f7ab2452b3f5}{box\+\_\+giou}} (\mbox{\hyperlink{structbox}{box}} a, \mbox{\hyperlink{structbox}{box}} b)
+\item 
+float \mbox{\hyperlink{box_8c_adf6958cdee6812703d843d7620cf1aca}{box\+\_\+diou}} (\mbox{\hyperlink{structbox}{box}} a, \mbox{\hyperlink{structbox}{box}} b)
+\item 
+float \mbox{\hyperlink{box_8c_a525df9ccb0132fe8ea175163a77122e7}{box\+\_\+diounms}} (\mbox{\hyperlink{structbox}{box}} a, \mbox{\hyperlink{structbox}{box}} b, float beta1)
+\item 
+float \mbox{\hyperlink{box_8c_a627760758eef6745da8e0b27326e0c8c}{box\+\_\+ciou}} (\mbox{\hyperlink{structbox}{box}} a, \mbox{\hyperlink{structbox}{box}} b)
+\item 
+\mbox{\hyperlink{structdxrep}{dxrep}} \mbox{\hyperlink{box_8c_a85829b5adbe3b100d0fe0ab20d62c77e}{dx\+\_\+box\+\_\+iou}} (\mbox{\hyperlink{structbox}{box}} pred, \mbox{\hyperlink{structbox}{box}} truth, \mbox{\hyperlink{darknet_8h_aab757338e5429453acc81f7bc21a3e92}{IOU\+\_\+\+LOSS}} iou\+\_\+loss)
+\item 
+float \mbox{\hyperlink{box_8c_a6ac422ecf58a8311afa95c9bbd701ac8}{box\+\_\+rmse}} (\mbox{\hyperlink{structbox}{box}} a, \mbox{\hyperlink{structbox}{box}} b)
+\item 
+\mbox{\hyperlink{structdbox}{dbox}} \mbox{\hyperlink{box_8c_ad94a4ec073b2f6ee903fb0b5ab454cb9}{dintersect}} (\mbox{\hyperlink{structbox}{box}} a, \mbox{\hyperlink{structbox}{box}} b)
+\item 
+\mbox{\hyperlink{structdbox}{dbox}} \mbox{\hyperlink{box_8c_ac771494b82a6acf3d931e2036f78f1a1}{dunion}} (\mbox{\hyperlink{structbox}{box}} a, \mbox{\hyperlink{structbox}{box}} b)
+\item 
+void \mbox{\hyperlink{box_8c_ad9de7c64851fda7bea43a7aabc1e0c96}{test\+\_\+dunion}} ()
+\item 
+void \mbox{\hyperlink{box_8c_a1ddd84257551f7fd38df886550e67359}{test\+\_\+dintersect}} ()
+\item 
+void \mbox{\hyperlink{box_8c_a61a6530aed2c56cc5917c66260b306bd}{test\+\_\+box}} ()
+\item 
+\mbox{\hyperlink{structdbox}{dbox}} \mbox{\hyperlink{box_8c_a15facf6a91a4b408bb26ad32d0413673}{diou}} (\mbox{\hyperlink{structbox}{box}} a, \mbox{\hyperlink{structbox}{box}} b)
+\item 
+int \mbox{\hyperlink{box_8c_a67617304f07b28a123702a7f7b133e28}{nms\+\_\+comparator}} (const void $\ast$pa, const void $\ast$pb)
+\item 
+void \mbox{\hyperlink{box_8c_af68393d06fa8830cd5fa3c13c61cf250}{do\+\_\+nms\+\_\+sort\+\_\+v2}} (\mbox{\hyperlink{structbox}{box}} $\ast$boxes, float $\ast$$\ast$probs, int total, int classes, float thresh)
+\item 
+int \mbox{\hyperlink{box_8c_af7202ddf0b21ffe0de2d9d4b58784f16}{nms\+\_\+comparator\+\_\+v3}} (const void $\ast$pa, const void $\ast$pb)
+\item 
+void \mbox{\hyperlink{box_8c_aa1c727578e0af593a13e9fc0e3c22106}{do\+\_\+nms\+\_\+obj}} (\mbox{\hyperlink{structdetection}{detection}} $\ast$dets, int total, int classes, float thresh)
+\item 
+void \mbox{\hyperlink{box_8c_a55d16ea36b7bfdbaaaf63fe74b27e222}{do\+\_\+nms\+\_\+sort}} (\mbox{\hyperlink{structdetection}{detection}} $\ast$dets, int total, int classes, float thresh)
+\item 
+void \mbox{\hyperlink{box_8c_a124ef9ab227c55e64b4dcf800c48d682}{do\+\_\+nms}} (\mbox{\hyperlink{structbox}{box}} $\ast$boxes, float $\ast$$\ast$probs, int total, int classes, float thresh)
+\item 
+void \mbox{\hyperlink{box_8c_ab060a1b3851fd1c1aa2506f3f274ef4f}{diounms\+\_\+sort}} (\mbox{\hyperlink{structdetection}{detection}} $\ast$dets, int total, int classes, float thresh, \mbox{\hyperlink{darknet_8h_a1f05008bd71fc89cca27954e4d42312d}{NMS\+\_\+\+KIND}} nms\+\_\+kind, float beta1)
+\item 
+\mbox{\hyperlink{structbox}{box}} \mbox{\hyperlink{box_8c_a23847cb8fe7a4a099fa65441b9b5ed59}{encode\+\_\+box}} (\mbox{\hyperlink{structbox}{box}} b, \mbox{\hyperlink{structbox}{box}} anchor)
+\item 
+\mbox{\hyperlink{structbox}{box}} \mbox{\hyperlink{box_8c_a3f03cdff65f176b2f77ee92346f2a7fe}{decode\+\_\+box}} (\mbox{\hyperlink{structbox}{box}} b, \mbox{\hyperlink{structbox}{box}} anchor)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{box_8c_a0ce31589f0a7013a55deb5a43ebc4d9f}\label{box_8c_a0ce31589f0a7013a55deb5a43ebc4d9f}} 
+\index{box.c@{box.c}!box\_c@{box\_c}}
+\index{box\_c@{box\_c}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{box\_c()}{box\_c()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structboxabs}{boxabs}} box\+\_\+c (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbox}{box}}}]{a,  }\item[{\mbox{\hyperlink{structbox}{box}}}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{box_8c_a627760758eef6745da8e0b27326e0c8c}\label{box_8c_a627760758eef6745da8e0b27326e0c8c}} 
+\index{box.c@{box.c}!box\_ciou@{box\_ciou}}
+\index{box\_ciou@{box\_ciou}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{box\_ciou()}{box\_ciou()}}
+{\footnotesize\ttfamily float box\+\_\+ciou (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbox}{box}}}]{a,  }\item[{\mbox{\hyperlink{structbox}{box}}}]{b }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{box_8c_a627760758eef6745da8e0b27326e0c8c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_adf6958cdee6812703d843d7620cf1aca}\label{box_8c_adf6958cdee6812703d843d7620cf1aca}} 
+\index{box.c@{box.c}!box\_diou@{box\_diou}}
+\index{box\_diou@{box\_diou}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{box\_diou()}{box\_diou()}}
+{\footnotesize\ttfamily float box\+\_\+diou (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbox}{box}}}]{a,  }\item[{\mbox{\hyperlink{structbox}{box}}}]{b }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{box_8c_adf6958cdee6812703d843d7620cf1aca_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_a525df9ccb0132fe8ea175163a77122e7}\label{box_8c_a525df9ccb0132fe8ea175163a77122e7}} 
+\index{box.c@{box.c}!box\_diounms@{box\_diounms}}
+\index{box\_diounms@{box\_diounms}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{box\_diounms()}{box\_diounms()}}
+{\footnotesize\ttfamily float box\+\_\+diounms (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbox}{box}}}]{a,  }\item[{\mbox{\hyperlink{structbox}{box}}}]{b,  }\item[{float}]{beta1 }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{box_8c_a525df9ccb0132fe8ea175163a77122e7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_ae6bc47cb90a868b12245f7ab2452b3f5}\label{box_8c_ae6bc47cb90a868b12245f7ab2452b3f5}} 
+\index{box.c@{box.c}!box\_giou@{box\_giou}}
+\index{box\_giou@{box\_giou}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{box\_giou()}{box\_giou()}}
+{\footnotesize\ttfamily float box\+\_\+giou (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbox}{box}}}]{a,  }\item[{\mbox{\hyperlink{structbox}{box}}}]{b }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{box_8c_ae6bc47cb90a868b12245f7ab2452b3f5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_a306e7943e82df234b6f9d9c70def621c}\label{box_8c_a306e7943e82df234b6f9d9c70def621c}} 
+\index{box.c@{box.c}!box\_intersection@{box\_intersection}}
+\index{box\_intersection@{box\_intersection}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{box\_intersection()}{box\_intersection()}}
+{\footnotesize\ttfamily float box\+\_\+intersection (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbox}{box}}}]{a,  }\item[{\mbox{\hyperlink{structbox}{box}}}]{b }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=266pt]{box_8c_a306e7943e82df234b6f9d9c70def621c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_ae14a614fc4d26ebb552d23615dfea313}\label{box_8c_ae14a614fc4d26ebb552d23615dfea313}} 
+\index{box.c@{box.c}!box\_iou@{box\_iou}}
+\index{box\_iou@{box\_iou}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{box\_iou()}{box\_iou()}}
+{\footnotesize\ttfamily float box\+\_\+iou (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbox}{box}}}]{a,  }\item[{\mbox{\hyperlink{structbox}{box}}}]{b }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{box_8c_ae14a614fc4d26ebb552d23615dfea313_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_ae02fea0a784b684583e15c883882d32b}\label{box_8c_ae02fea0a784b684583e15c883882d32b}} 
+\index{box.c@{box.c}!box\_iou\_kind@{box\_iou\_kind}}
+\index{box\_iou\_kind@{box\_iou\_kind}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{box\_iou\_kind()}{box\_iou\_kind()}}
+{\footnotesize\ttfamily float box\+\_\+iou\+\_\+kind (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbox}{box}}}]{a,  }\item[{\mbox{\hyperlink{structbox}{box}}}]{b,  }\item[{\mbox{\hyperlink{darknet_8h_aab757338e5429453acc81f7bc21a3e92}{IOU\+\_\+\+LOSS}}}]{iou\+\_\+kind }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{box_8c_ae02fea0a784b684583e15c883882d32b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_a6ac422ecf58a8311afa95c9bbd701ac8}\label{box_8c_a6ac422ecf58a8311afa95c9bbd701ac8}} 
+\index{box.c@{box.c}!box\_rmse@{box\_rmse}}
+\index{box\_rmse@{box\_rmse}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{box\_rmse()}{box\_rmse()}}
+{\footnotesize\ttfamily float box\+\_\+rmse (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbox}{box}}}]{a,  }\item[{\mbox{\hyperlink{structbox}{box}}}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{box_8c_a6f5e94eb9c925d29647fd649799b8066}\label{box_8c_a6f5e94eb9c925d29647fd649799b8066}} 
+\index{box.c@{box.c}!box\_union@{box\_union}}
+\index{box\_union@{box\_union}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{box\_union()}{box\_union()}}
+{\footnotesize\ttfamily float box\+\_\+union (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbox}{box}}}]{a,  }\item[{\mbox{\hyperlink{structbox}{box}}}]{b }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{box_8c_a6f5e94eb9c925d29647fd649799b8066_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_a3f03cdff65f176b2f77ee92346f2a7fe}\label{box_8c_a3f03cdff65f176b2f77ee92346f2a7fe}} 
+\index{box.c@{box.c}!decode\_box@{decode\_box}}
+\index{decode\_box@{decode\_box}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{decode\_box()}{decode\_box()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structbox}{box}} decode\+\_\+box (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbox}{box}}}]{b,  }\item[{\mbox{\hyperlink{structbox}{box}}}]{anchor }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{box_8c_a0a70286448dcb4dfca4ead3539e48a87}\label{box_8c_a0a70286448dcb4dfca4ead3539e48a87}} 
+\index{box.c@{box.c}!derivative@{derivative}}
+\index{derivative@{derivative}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{derivative()}{derivative()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structdbox}{dbox}} derivative (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbox}{box}}}]{a,  }\item[{\mbox{\hyperlink{structbox}{box}}}]{b }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{box_8c_a0a70286448dcb4dfca4ead3539e48a87_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_ad94a4ec073b2f6ee903fb0b5ab454cb9}\label{box_8c_ad94a4ec073b2f6ee903fb0b5ab454cb9}} 
+\index{box.c@{box.c}!dintersect@{dintersect}}
+\index{dintersect@{dintersect}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{dintersect()}{dintersect()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structdbox}{dbox}} dintersect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbox}{box}}}]{a,  }\item[{\mbox{\hyperlink{structbox}{box}}}]{b }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=327pt]{box_8c_ad94a4ec073b2f6ee903fb0b5ab454cb9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_a15facf6a91a4b408bb26ad32d0413673}\label{box_8c_a15facf6a91a4b408bb26ad32d0413673}} 
+\index{box.c@{box.c}!diou@{diou}}
+\index{diou@{diou}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{diou()}{diou()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structdbox}{dbox}} diou (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbox}{box}}}]{a,  }\item[{\mbox{\hyperlink{structbox}{box}}}]{b }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{box_8c_a15facf6a91a4b408bb26ad32d0413673_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_ab060a1b3851fd1c1aa2506f3f274ef4f}\label{box_8c_ab060a1b3851fd1c1aa2506f3f274ef4f}} 
+\index{box.c@{box.c}!diounms\_sort@{diounms\_sort}}
+\index{diounms\_sort@{diounms\_sort}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{diounms\_sort()}{diounms\_sort()}}
+{\footnotesize\ttfamily void diounms\+\_\+sort (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{dets,  }\item[{int}]{total,  }\item[{int}]{classes,  }\item[{float}]{thresh,  }\item[{\mbox{\hyperlink{darknet_8h_a1f05008bd71fc89cca27954e4d42312d}{NMS\+\_\+\+KIND}}}]{nms\+\_\+kind,  }\item[{float}]{beta1 }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{box_8c_ab060a1b3851fd1c1aa2506f3f274ef4f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_a124ef9ab227c55e64b4dcf800c48d682}\label{box_8c_a124ef9ab227c55e64b4dcf800c48d682}} 
+\index{box.c@{box.c}!do\_nms@{do\_nms}}
+\index{do\_nms@{do\_nms}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{do\_nms()}{do\_nms()}}
+{\footnotesize\ttfamily void do\+\_\+nms (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbox}{box}} $\ast$}]{boxes,  }\item[{float $\ast$$\ast$}]{probs,  }\item[{int}]{total,  }\item[{int}]{classes,  }\item[{float}]{thresh }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{box_8c_a124ef9ab227c55e64b4dcf800c48d682_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_aa1c727578e0af593a13e9fc0e3c22106}\label{box_8c_aa1c727578e0af593a13e9fc0e3c22106}} 
+\index{box.c@{box.c}!do\_nms\_obj@{do\_nms\_obj}}
+\index{do\_nms\_obj@{do\_nms\_obj}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{do\_nms\_obj()}{do\_nms\_obj()}}
+{\footnotesize\ttfamily void do\+\_\+nms\+\_\+obj (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{dets,  }\item[{int}]{total,  }\item[{int}]{classes,  }\item[{float}]{thresh }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{box_8c_aa1c727578e0af593a13e9fc0e3c22106_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_a55d16ea36b7bfdbaaaf63fe74b27e222}\label{box_8c_a55d16ea36b7bfdbaaaf63fe74b27e222}} 
+\index{box.c@{box.c}!do\_nms\_sort@{do\_nms\_sort}}
+\index{do\_nms\_sort@{do\_nms\_sort}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{do\_nms\_sort()}{do\_nms\_sort()}}
+{\footnotesize\ttfamily void do\+\_\+nms\+\_\+sort (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{dets,  }\item[{int}]{total,  }\item[{int}]{classes,  }\item[{float}]{thresh }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{box_8c_a55d16ea36b7bfdbaaaf63fe74b27e222_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_af68393d06fa8830cd5fa3c13c61cf250}\label{box_8c_af68393d06fa8830cd5fa3c13c61cf250}} 
+\index{box.c@{box.c}!do\_nms\_sort\_v2@{do\_nms\_sort\_v2}}
+\index{do\_nms\_sort\_v2@{do\_nms\_sort\_v2}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{do\_nms\_sort\_v2()}{do\_nms\_sort\_v2()}}
+{\footnotesize\ttfamily void do\+\_\+nms\+\_\+sort\+\_\+v2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbox}{box}} $\ast$}]{boxes,  }\item[{float $\ast$$\ast$}]{probs,  }\item[{int}]{total,  }\item[{int}]{classes,  }\item[{float}]{thresh }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{box_8c_af68393d06fa8830cd5fa3c13c61cf250_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_ac771494b82a6acf3d931e2036f78f1a1}\label{box_8c_ac771494b82a6acf3d931e2036f78f1a1}} 
+\index{box.c@{box.c}!dunion@{dunion}}
+\index{dunion@{dunion}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{dunion()}{dunion()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structdbox}{dbox}} dunion (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbox}{box}}}]{a,  }\item[{\mbox{\hyperlink{structbox}{box}}}]{b }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{box_8c_ac771494b82a6acf3d931e2036f78f1a1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_a85829b5adbe3b100d0fe0ab20d62c77e}\label{box_8c_a85829b5adbe3b100d0fe0ab20d62c77e}} 
+\index{box.c@{box.c}!dx\_box\_iou@{dx\_box\_iou}}
+\index{dx\_box\_iou@{dx\_box\_iou}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{dx\_box\_iou()}{dx\_box\_iou()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structdxrep}{dxrep}} dx\+\_\+box\+\_\+iou (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbox}{box}}}]{pred,  }\item[{\mbox{\hyperlink{structbox}{box}}}]{truth,  }\item[{\mbox{\hyperlink{darknet_8h_aab757338e5429453acc81f7bc21a3e92}{IOU\+\_\+\+LOSS}}}]{iou\+\_\+loss }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{box_8c_a85829b5adbe3b100d0fe0ab20d62c77e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_a23847cb8fe7a4a099fa65441b9b5ed59}\label{box_8c_a23847cb8fe7a4a099fa65441b9b5ed59}} 
+\index{box.c@{box.c}!encode\_box@{encode\_box}}
+\index{encode\_box@{encode\_box}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{encode\_box()}{encode\_box()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structbox}{box}} encode\+\_\+box (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbox}{box}}}]{b,  }\item[{\mbox{\hyperlink{structbox}{box}}}]{anchor }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{box_8c_a23847cb8fe7a4a099fa65441b9b5ed59_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_a3d0a57328da3a723435e056b2d67131b}\label{box_8c_a3d0a57328da3a723435e056b2d67131b}} 
+\index{box.c@{box.c}!float\_to\_box@{float\_to\_box}}
+\index{float\_to\_box@{float\_to\_box}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{float\_to\_box()}{float\_to\_box()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structbox}{box}} float\+\_\+to\+\_\+box (\begin{DoxyParamCaption}\item[{float $\ast$}]{f }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{box_8c_a3d0a57328da3a723435e056b2d67131b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_aa23325a1dd389bfc2285aede97ac70a0}\label{box_8c_aa23325a1dd389bfc2285aede97ac70a0}} 
+\index{box.c@{box.c}!float\_to\_box\_stride@{float\_to\_box\_stride}}
+\index{float\_to\_box\_stride@{float\_to\_box\_stride}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{float\_to\_box\_stride()}{float\_to\_box\_stride()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structbox}{box}} float\+\_\+to\+\_\+box\+\_\+stride (\begin{DoxyParamCaption}\item[{float $\ast$}]{f,  }\item[{int}]{stride }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{box_8c_aa23325a1dd389bfc2285aede97ac70a0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_a67617304f07b28a123702a7f7b133e28}\label{box_8c_a67617304f07b28a123702a7f7b133e28}} 
+\index{box.c@{box.c}!nms\_comparator@{nms\_comparator}}
+\index{nms\_comparator@{nms\_comparator}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{nms\_comparator()}{nms\_comparator()}}
+{\footnotesize\ttfamily int nms\+\_\+comparator (\begin{DoxyParamCaption}\item[{const void $\ast$}]{pa,  }\item[{const void $\ast$}]{pb }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{box_8c_af7202ddf0b21ffe0de2d9d4b58784f16}\label{box_8c_af7202ddf0b21ffe0de2d9d4b58784f16}} 
+\index{box.c@{box.c}!nms\_comparator\_v3@{nms\_comparator\_v3}}
+\index{nms\_comparator\_v3@{nms\_comparator\_v3}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{nms\_comparator\_v3()}{nms\_comparator\_v3()}}
+{\footnotesize\ttfamily int nms\+\_\+comparator\+\_\+v3 (\begin{DoxyParamCaption}\item[{const void $\ast$}]{pa,  }\item[{const void $\ast$}]{pb }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{box_8c_a49bbaf2c74dad0f7bbca22c9e41286ca}\label{box_8c_a49bbaf2c74dad0f7bbca22c9e41286ca}} 
+\index{box.c@{box.c}!overlap@{overlap}}
+\index{overlap@{overlap}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{overlap()}{overlap()}}
+{\footnotesize\ttfamily float overlap (\begin{DoxyParamCaption}\item[{float}]{x1,  }\item[{float}]{w1,  }\item[{float}]{x2,  }\item[{float}]{w2 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{box_8c_a61a6530aed2c56cc5917c66260b306bd}\label{box_8c_a61a6530aed2c56cc5917c66260b306bd}} 
+\index{box.c@{box.c}!test\_box@{test\_box}}
+\index{test\_box@{test\_box}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{test\_box()}{test\_box()}}
+{\footnotesize\ttfamily void test\+\_\+box (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{box_8c_a61a6530aed2c56cc5917c66260b306bd_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_a1ddd84257551f7fd38df886550e67359}\label{box_8c_a1ddd84257551f7fd38df886550e67359}} 
+\index{box.c@{box.c}!test\_dintersect@{test\_dintersect}}
+\index{test\_dintersect@{test\_dintersect}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{test\_dintersect()}{test\_dintersect()}}
+{\footnotesize\ttfamily void test\+\_\+dintersect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{box_8c_a1ddd84257551f7fd38df886550e67359_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_ad9de7c64851fda7bea43a7aabc1e0c96}\label{box_8c_ad9de7c64851fda7bea43a7aabc1e0c96}} 
+\index{box.c@{box.c}!test\_dunion@{test\_dunion}}
+\index{test\_dunion@{test\_dunion}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{test\_dunion()}{test\_dunion()}}
+{\footnotesize\ttfamily void test\+\_\+dunion (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{box_8c_ad9de7c64851fda7bea43a7aabc1e0c96_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{box_8c_a4ae59a624a743787a143cef64839715b}\label{box_8c_a4ae59a624a743787a143cef64839715b}} 
+\index{box.c@{box.c}!to\_tblr@{to\_tblr}}
+\index{to\_tblr@{to\_tblr}!box.c@{box.c}}
+\doxysubsubsection{\texorpdfstring{to\_tblr()}{to\_tblr()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structboxabs}{boxabs}} to\+\_\+tblr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbox}{box}}}]{a }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=218pt]{box_8c_a4ae59a624a743787a143cef64839715b_cgraph}
+\end{center}
+\end{figure}

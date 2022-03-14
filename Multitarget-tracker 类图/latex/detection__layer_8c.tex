@@ -1,0 +1,107 @@
+\hypertarget{detection__layer_8c}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/detection\+\_\+layer.c 文件参考}
+\label{detection__layer_8c}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/detection\_layer.c@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/detection\_layer.c}}
+{\ttfamily \#include \char`\"{}detection\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}activations.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}softmax\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}blas.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}box.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dark\+\_\+cuda.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+detection\+\_\+layer.\+c 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{detection__layer_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{detection__layer_8h_a3a5018a4d1685b278fc2586711a3a976}{detection\+\_\+layer}} \mbox{\hyperlink{detection__layer_8c_a7e20e8df14e9db1f8dd7f3c0b9aa1bc9}{make\+\_\+detection\+\_\+layer}} (int batch, int inputs, int n, int side, int classes, int coords, int rescore)
+\item 
+void \mbox{\hyperlink{detection__layer_8c_ab36987fafe8b9749d762c87935b83447}{forward\+\_\+detection\+\_\+layer}} (const \mbox{\hyperlink{detection__layer_8h_a3a5018a4d1685b278fc2586711a3a976}{detection\+\_\+layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{detection__layer_8c_aee7bef84d8cb0961ed798d24f1bb7b82}{backward\+\_\+detection\+\_\+layer}} (const \mbox{\hyperlink{detection__layer_8h_a3a5018a4d1685b278fc2586711a3a976}{detection\+\_\+layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{detection__layer_8c_aa2d2b9d1d0ab7d8e8d69ebb468fbc475}{get\+\_\+detection\+\_\+boxes}} (\mbox{\hyperlink{structlayer}{layer}} l, int w, int h, float thresh, float $\ast$$\ast$probs, \mbox{\hyperlink{structbox}{box}} $\ast$boxes, int only\+\_\+objectness)
+\item 
+void \mbox{\hyperlink{detection__layer_8c_aef102f931c89aeca3989eb934b7f1764}{get\+\_\+detection\+\_\+detections}} (\mbox{\hyperlink{structlayer}{layer}} l, int w, int h, float thresh, \mbox{\hyperlink{structdetection}{detection}} $\ast$dets)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{detection__layer_8c_aee7bef84d8cb0961ed798d24f1bb7b82}\label{detection__layer_8c_aee7bef84d8cb0961ed798d24f1bb7b82}} 
+\index{detection\_layer.c@{detection\_layer.c}!backward\_detection\_layer@{backward\_detection\_layer}}
+\index{backward\_detection\_layer@{backward\_detection\_layer}!detection\_layer.c@{detection\_layer.c}}
+\doxysubsubsection{\texorpdfstring{backward\_detection\_layer()}{backward\_detection\_layer()}}
+{\footnotesize\ttfamily void backward\+\_\+detection\+\_\+layer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{detection__layer_8h_a3a5018a4d1685b278fc2586711a3a976}{detection\+\_\+layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{detection__layer_8c_aee7bef84d8cb0961ed798d24f1bb7b82_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{detection__layer_8c_ab36987fafe8b9749d762c87935b83447}\label{detection__layer_8c_ab36987fafe8b9749d762c87935b83447}} 
+\index{detection\_layer.c@{detection\_layer.c}!forward\_detection\_layer@{forward\_detection\_layer}}
+\index{forward\_detection\_layer@{forward\_detection\_layer}!detection\_layer.c@{detection\_layer.c}}
+\doxysubsubsection{\texorpdfstring{forward\_detection\_layer()}{forward\_detection\_layer()}}
+{\footnotesize\ttfamily void forward\+\_\+detection\+\_\+layer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{detection__layer_8h_a3a5018a4d1685b278fc2586711a3a976}{detection\+\_\+layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{detection__layer_8c_ab36987fafe8b9749d762c87935b83447_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{detection__layer_8c_aa2d2b9d1d0ab7d8e8d69ebb468fbc475}\label{detection__layer_8c_aa2d2b9d1d0ab7d8e8d69ebb468fbc475}} 
+\index{detection\_layer.c@{detection\_layer.c}!get\_detection\_boxes@{get\_detection\_boxes}}
+\index{get\_detection\_boxes@{get\_detection\_boxes}!detection\_layer.c@{detection\_layer.c}}
+\doxysubsubsection{\texorpdfstring{get\_detection\_boxes()}{get\_detection\_boxes()}}
+{\footnotesize\ttfamily void get\+\_\+detection\+\_\+boxes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{float}]{thresh,  }\item[{float $\ast$$\ast$}]{probs,  }\item[{\mbox{\hyperlink{structbox}{box}} $\ast$}]{boxes,  }\item[{int}]{only\+\_\+objectness }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=285pt]{detection__layer_8c_aa2d2b9d1d0ab7d8e8d69ebb468fbc475_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{detection__layer_8c_aef102f931c89aeca3989eb934b7f1764}\label{detection__layer_8c_aef102f931c89aeca3989eb934b7f1764}} 
+\index{detection\_layer.c@{detection\_layer.c}!get\_detection\_detections@{get\_detection\_detections}}
+\index{get\_detection\_detections@{get\_detection\_detections}!detection\_layer.c@{detection\_layer.c}}
+\doxysubsubsection{\texorpdfstring{get\_detection\_detections()}{get\_detection\_detections()}}
+{\footnotesize\ttfamily void get\+\_\+detection\+\_\+detections (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{float}]{thresh,  }\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{dets }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=303pt]{detection__layer_8c_aef102f931c89aeca3989eb934b7f1764_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{detection__layer_8c_a7e20e8df14e9db1f8dd7f3c0b9aa1bc9}\label{detection__layer_8c_a7e20e8df14e9db1f8dd7f3c0b9aa1bc9}} 
+\index{detection\_layer.c@{detection\_layer.c}!make\_detection\_layer@{make\_detection\_layer}}
+\index{make\_detection\_layer@{make\_detection\_layer}!detection\_layer.c@{detection\_layer.c}}
+\doxysubsubsection{\texorpdfstring{make\_detection\_layer()}{make\_detection\_layer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detection__layer_8h_a3a5018a4d1685b278fc2586711a3a976}{detection\+\_\+layer}} make\+\_\+detection\+\_\+layer (\begin{DoxyParamCaption}\item[{int}]{batch,  }\item[{int}]{inputs,  }\item[{int}]{n,  }\item[{int}]{side,  }\item[{int}]{classes,  }\item[{int}]{coords,  }\item[{int}]{rescore }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{detection__layer_8c_a7e20e8df14e9db1f8dd7f3c0b9aa1bc9_cgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,1685 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: D:/zhr_files/Multitarget-tracker-master/src/Detector/darknet/src/detector.c 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">My Project
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_4c3458e0ccdb4c3720723c1caa1aaa1c.html">zhr_files</a></li><li class="navelem"><a class="el" href="dir_5a8d4bff745a16410b5074d3583a347e.html">Multitarget-tracker-master</a></li><li class="navelem"><a class="el" href="dir_46a27ab0460a6f8f8d12d2f44f38bf6b.html">src</a></li><li class="navelem"><a class="el" href="dir_458a7b7bb24e4af0790226fff519699f.html">Detector</a></li><li class="navelem"><a class="el" href="dir_30d5c7ca63d0957fa3fc1828f81516c9.html">darknet</a></li><li class="navelem"><a class="el" href="dir_87c8877901facfda8fbda37bca313156.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">类</a> &#124;
+<a href="#define-members">宏定义</a> &#124;
+<a href="#typedef-members">类型定义</a> &#124;
+<a href="#func-members">函数</a> &#124;
+<a href="#var-members">变量</a>  </div>
+  <div class="headertitle"><div class="title">detector.c 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="darknet_8h_source.html">darknet.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="network_8h_source.html">network.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="region__layer_8h_source.html">region_layer.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="cost__layer_8h_source.html">cost_layer.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="utils_8h_source.html">utils.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="parser_8h_source.html">parser.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="box_8h_source.html">box.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="demo_8h_source.html">demo.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="option__list_8h_source.html">option_list.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="http__stream_8h_source.html">http_stream.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+detector.c 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="detector_8c__incl.png" border="0" usemap="#a_d_1_2zhr__files_2_multitarget-tracker-master_2src_2_detector_2darknet_2src_2detector_8c" alt=""/></div>
+<map name="a_d_1_2zhr__files_2_multitarget-tracker-master_2src_2_detector_2darknet_2src_2detector_8c" id="a_d_1_2zhr__files_2_multitarget-tracker-master_2src_2_detector_2darknet_2src_2detector_8c">
+<area shape="rect" title=" " alt="" coords="627,5,813,61"/>
+<area shape="rect" title=" " alt="" coords="81,632,145,659"/>
+<area shape="rect" href="darknet_8h.html" title=" " alt="" coords="606,557,682,584"/>
+<area shape="rect" href="network_8h.html" title=" " alt="" coords="769,184,847,211"/>
+<area shape="rect" href="utils_8h.html" title=" " alt="" coords="275,483,333,509"/>
+<area shape="rect" href="box_8h.html" title=" " alt="" coords="961,408,1015,435"/>
+<area shape="rect" href="region__layer_8h.html" title=" " alt="" coords="669,109,771,136"/>
+<area shape="rect" href="cost__layer_8h.html" title=" " alt="" coords="551,109,644,136"/>
+<area shape="rect" href="parser_8h.html" title=" " alt="" coords="847,109,916,136"/>
+<area shape="rect" href="demo_8h.html" title=" " alt="" coords="471,184,537,211"/>
+<area shape="rect" href="option__list_8h.html" title=" " alt="" coords="1062,483,1154,509"/>
+<area shape="rect" href="http__stream_8h.html" title=" " alt="" coords="317,259,419,285"/>
+<area shape="rect" title=" " alt="" coords="169,632,231,659"/>
+<area shape="rect" title=" " alt="" coords="255,632,321,659"/>
+<area shape="rect" title=" " alt="" coords="519,632,585,659"/>
+<area shape="rect" title=" " alt="" coords="609,632,679,659"/>
+<area shape="rect" href="pthread_8h.html" title=" " alt="" coords="703,632,779,659"/>
+<area shape="rect" title=" " alt="" coords="444,707,503,733"/>
+<area shape="rect" title=" " alt="" coords="640,707,704,733"/>
+<area shape="rect" title=" " alt="" coords="746,781,809,808"/>
+<area shape="rect" href="sched_8h.html" title=" " alt="" coords="779,707,847,733"/>
+<area shape="rect" href="layer_8h.html" title=" " alt="" coords="689,259,751,285"/>
+<area shape="rect" href="tree_8h.html" title=" " alt="" coords="779,333,834,360"/>
+<area shape="rect" href="image_8h.html" title=" " alt="" coords="463,333,531,360"/>
+<area shape="rect" href="data_8h.html" title=" " alt="" coords="844,259,903,285"/>
+<area shape="rect" href="activations_8h.html" title=" " alt="" coords="550,408,645,435"/>
+<area shape="rect" title=" " alt="" coords="686,333,754,360"/>
+<area shape="rect" href="dark__cuda_8h.html" title=" " alt="" coords="597,483,691,509"/>
+<area shape="rect" title=" " alt="" coords="459,483,522,509"/>
+<area shape="rect" href="list_8h.html" title=" " alt="" coords="1083,557,1133,584"/>
+<area shape="rect" title=" " alt="" coords="427,557,501,584"/>
+<area shape="rect" title=" " alt="" coords="469,408,526,435"/>
+<area shape="rect" href="image__opencv_8h.html" title=" " alt="" coords="669,408,784,435"/>
+<area shape="rect" href="matrix_8h.html" title=" " alt="" coords="715,483,784,509"/>
+</map>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbox__prob.html">box_prob</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structanchors__t.html">anchors_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+宏定义</h2></td></tr>
+<tr class="memitem:a5b01b59ed3d085062320df3589722d37"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="detector_8c.html#a5b01b59ed3d085062320df3589722d37">__COMPAR_FN_T</a></td></tr>
+<tr class="separator:a5b01b59ed3d085062320df3589722d37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+类型定义</h2></td></tr>
+<tr class="memitem:a35e28bfcc8d641e0eebd66f4dc559a3f"><td class="memItemLeft" align="right" valign="top">typedef int(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="detector_8c.html#a35e28bfcc8d641e0eebd66f4dc559a3f">__compar_fn_t</a>) (const void *, const void *)</td></tr>
+<tr class="separator:a35e28bfcc8d641e0eebd66f4dc559a3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:a81e3fff67fbe4c4f7fd51f568e53e097"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="detector_8c.html#a81e3fff67fbe4c4f7fd51f568e53e097">train_detector</a> (char *datacfg, char *cfgfile, char *weightfile, int *gpus, int ngpus, int clear, int dont_show, int calc_map, float thresh, float iou_thresh, int mjpeg_port, int show_imgs, int benchmark_layers, char *chart_path)</td></tr>
+<tr class="separator:a81e3fff67fbe4c4f7fd51f568e53e097"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3803bc907114e6d6e72146bc75507ed"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="detector_8c.html#af3803bc907114e6d6e72146bc75507ed">get_coco_image_id</a> (char *filename)</td></tr>
+<tr class="separator:af3803bc907114e6d6e72146bc75507ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a639d14174229e9b54573e683b7ead7d3"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="detector_8c.html#a639d14174229e9b54573e683b7ead7d3">print_cocos</a> (FILE *fp, char *image_path, <a class="el" href="structdetection.html">detection</a> *dets, int num_boxes, int classes, int w, int h)</td></tr>
+<tr class="separator:a639d14174229e9b54573e683b7ead7d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81513990339b88be3c0627e62c786283"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="detector_8c.html#a81513990339b88be3c0627e62c786283">print_detector_detections</a> (FILE **fps, char *id, <a class="el" href="structdetection.html">detection</a> *dets, int total, int classes, int w, int h)</td></tr>
+<tr class="separator:a81513990339b88be3c0627e62c786283"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd8578ce1a519a0da8686cc23de14589"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="detector_8c.html#afd8578ce1a519a0da8686cc23de14589">print_imagenet_detections</a> (FILE *fp, int id, <a class="el" href="structdetection.html">detection</a> *dets, int total, int classes, int w, int h)</td></tr>
+<tr class="separator:afd8578ce1a519a0da8686cc23de14589"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0d3d74524262aefd7cea0c547b2fd71"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="detector_8c.html#ad0d3d74524262aefd7cea0c547b2fd71">print_kitti_detections</a> (FILE **fps, char *id, <a class="el" href="structdetection.html">detection</a> *dets, int total, int classes, int w, int h, char *outfile, char *prefix)</td></tr>
+<tr class="separator:ad0d3d74524262aefd7cea0c547b2fd71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b666dbb110a807e010f94bc1002720d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="detector_8c.html#a1b666dbb110a807e010f94bc1002720d">eliminate_bdd</a> (char *buf, char *a)</td></tr>
+<tr class="separator:a1b666dbb110a807e010f94bc1002720d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa334e7be4d652ae69a26c7f68b858aa"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="detector_8c.html#afa334e7be4d652ae69a26c7f68b858aa">get_bdd_image_id</a> (char *filename)</td></tr>
+<tr class="separator:afa334e7be4d652ae69a26c7f68b858aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a0f6687d44b05e5ccfe5209df1d1c17"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="detector_8c.html#a4a0f6687d44b05e5ccfe5209df1d1c17">print_bdd_detections</a> (FILE *fp, char *image_path, <a class="el" href="structdetection.html">detection</a> *dets, int num_boxes, int classes, int w, int h)</td></tr>
+<tr class="separator:a4a0f6687d44b05e5ccfe5209df1d1c17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea37ad211a83b40620a2df0eb6623a66"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="detector_8c.html#aea37ad211a83b40620a2df0eb6623a66">validate_detector</a> (char *datacfg, char *cfgfile, char *weightfile, char *outfile)</td></tr>
+<tr class="separator:aea37ad211a83b40620a2df0eb6623a66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9212fc77853f03203e5e4493e31c4c55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="detector_8c.html#a9212fc77853f03203e5e4493e31c4c55">validate_detector_recall</a> (char *datacfg, char *cfgfile, char *weightfile)</td></tr>
+<tr class="separator:a9212fc77853f03203e5e4493e31c4c55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63f9fd6677e619bd902ae20bedc6af24"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="detector_8c.html#a63f9fd6677e619bd902ae20bedc6af24">detections_comparator</a> (const void *pa, const void *pb)</td></tr>
+<tr class="separator:a63f9fd6677e619bd902ae20bedc6af24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c87aa309dbdcd49e3723545aa95a311"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="detector_8c.html#a6c87aa309dbdcd49e3723545aa95a311">validate_detector_map</a> (char *datacfg, char *cfgfile, char *weightfile, float thresh_calc_avg_iou, const float iou_thresh, const int map_points, int letter_box, <a class="el" href="structnetwork.html">network</a> *existing_net)</td></tr>
+<tr class="separator:a6c87aa309dbdcd49e3723545aa95a311"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a417b5242533ce00ba85963933c8cab6f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="detector_8c.html#a417b5242533ce00ba85963933c8cab6f">anchors_comparator</a> (const void *pa, const void *pb)</td></tr>
+<tr class="separator:a417b5242533ce00ba85963933c8cab6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab22ea6a72ee26ab76b9ee8c772020493"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="detector_8c.html#ab22ea6a72ee26ab76b9ee8c772020493">anchors_data_comparator</a> (const float **pa, const float **pb)</td></tr>
+<tr class="separator:ab22ea6a72ee26ab76b9ee8c772020493"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a615d4f8ade0d08710b89da00c80b0ae2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="detector_8c.html#a615d4f8ade0d08710b89da00c80b0ae2">calc_anchors</a> (char *datacfg, int num_of_clusters, int width, int height, int show)</td></tr>
+<tr class="separator:a615d4f8ade0d08710b89da00c80b0ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44156bdb8ed52c80760c724b266f4ee9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="detector_8c.html#a44156bdb8ed52c80760c724b266f4ee9">test_detector</a> (char *datacfg, char *cfgfile, char *weightfile, char *filename, float thresh, float hier_thresh, int dont_show, int ext_output, int save_labels, char *outfile, int letter_box, int benchmark_layers)</td></tr>
+<tr class="separator:a44156bdb8ed52c80760c724b266f4ee9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05d5ce6aa5e8a15351a0b592fbd3d7e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="detector_8c.html#a05d5ce6aa5e8a15351a0b592fbd3d7e9">draw_object</a> (char *datacfg, char *cfgfile, char *weightfile, char *filename, float thresh, int dont_show, int it_num, int letter_box, int benchmark_layers)</td></tr>
+<tr class="separator:a05d5ce6aa5e8a15351a0b592fbd3d7e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a677c1747fd7a58c7f7da3314af5d6120"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="detector_8c.html#a677c1747fd7a58c7f7da3314af5d6120">run_detector</a> (int argc, char **argv)</td></tr>
+<tr class="separator:a677c1747fd7a58c7f7da3314af5d6120"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+变量</h2></td></tr>
+<tr class="memitem:a5522024919a839fff7d996d9641d2a68"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="detector_8c.html#a5522024919a839fff7d996d9641d2a68">check_mistakes</a> = 0</td></tr>
+<tr class="separator:a5522024919a839fff7d996d9641d2a68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a510b483a1df4daf892d602b2deedd78d"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="detector_8c.html#a510b483a1df4daf892d602b2deedd78d">coco_ids</a> [] = { 1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,20,21,22,23,24,25,27,28,31,32,33,34,35,36,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,67,70,72,73,74,75,76,77,78,79,80,81,82,84,85,86,87,88,89,90 }</td></tr>
+<tr class="separator:a510b483a1df4daf892d602b2deedd78d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">宏定义说明</h2>
+<a id="a5b01b59ed3d085062320df3589722d37" name="a5b01b59ed3d085062320df3589722d37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b01b59ed3d085062320df3589722d37">&#9670;&nbsp;</a></span>__COMPAR_FN_T</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define __COMPAR_FN_T</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">类型定义说明</h2>
+<a id="a35e28bfcc8d641e0eebd66f4dc559a3f" name="a35e28bfcc8d641e0eebd66f4dc559a3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35e28bfcc8d641e0eebd66f4dc559a3f">&#9670;&nbsp;</a></span>__compar_fn_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef int(* __compar_fn_t) (const void *, const void *)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">函数说明</h2>
+<a id="a417b5242533ce00ba85963933c8cab6f" name="a417b5242533ce00ba85963933c8cab6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a417b5242533ce00ba85963933c8cab6f">&#9670;&nbsp;</a></span>anchors_comparator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int anchors_comparator </td>
+          <td>(</td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>pa</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>pb</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab22ea6a72ee26ab76b9ee8c772020493" name="ab22ea6a72ee26ab76b9ee8c772020493"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab22ea6a72ee26ab76b9ee8c772020493">&#9670;&nbsp;</a></span>anchors_data_comparator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int anchors_data_comparator </td>
+          <td>(</td>
+          <td class="paramtype">const float **&#160;</td>
+          <td class="paramname"><em>pa</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float **&#160;</td>
+          <td class="paramname"><em>pb</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a615d4f8ade0d08710b89da00c80b0ae2" name="a615d4f8ade0d08710b89da00c80b0ae2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a615d4f8ade0d08710b89da00c80b0ae2">&#9670;&nbsp;</a></span>calc_anchors()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void calc_anchors </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>datacfg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num_of_clusters</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>show</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="detector_8c_a615d4f8ade0d08710b89da00c80b0ae2_cgraph.png" border="0" usemap="#adetector_8c_a615d4f8ade0d08710b89da00c80b0ae2_cgraph" alt=""/></div>
+<map name="adetector_8c_a615d4f8ade0d08710b89da00c80b0ae2_cgraph" id="adetector_8c_a615d4f8ade0d08710b89da00c80b0ae2_cgraph">
+<area shape="rect" title=" " alt="" coords="5,512,104,539"/>
+<area shape="rect" href="detector_8c.html#ab22ea6a72ee26ab76b9ee8c772020493" title=" " alt="" coords="152,5,324,32"/>
+<area shape="rect" href="box_8c.html#a6f5e94eb9c925d29647fd649799b8066" title=" " alt="" coords="197,56,279,83"/>
+<area shape="rect" href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867" title=" " alt="" coords="587,107,669,133"/>
+<area shape="rect" href="matrix_8c.html#aaaf01b2778388ca6e38aaa084ee2807d" title=" " alt="" coords="193,639,283,665"/>
+<area shape="rect" href="matrix_8c.html#a47438b60c4cf871ff2523161d8a26eef" title=" " alt="" coords="579,613,677,640"/>
+<area shape="rect" href="data_8c.html#a62bbddf9091f61895ee1d41e9b99ac1c" title=" " alt="" coords="199,461,277,488"/>
+<area shape="rect" href="list_8c.html#a383ae42233718449bd550f4cbfe53123" title=" " alt="" coords="191,689,285,716"/>
+<area shape="rect" href="option__list_8c.html#a2bf4d4bc440d6923583324672e99d075" title=" " alt="" coords="185,752,291,779"/>
+<area shape="rect" href="option__list_8c.html#a91cf08d107de4707b9afa480cc797f53" title=" " alt="" coords="185,809,291,836"/>
+<area shape="rect" href="data_8c.html#a9cbd4f49ec02f60d24314f279ac165d6" title=" " alt="" coords="193,208,283,235"/>
+<area shape="rect" href="option__list_8c.html#ac0d48b20f8779187c4fdcd1c58c648c9" title=" " alt="" coords="187,385,289,412"/>
+<area shape="rect" href="utils_8c.html#adcb0ea13878d05b567742fe07fc55194" title=" " alt="" coords="159,892,317,919"/>
+<area shape="rect" href="box_8c.html#a306e7943e82df234b6f9d9c70def621c" title=" " alt="" coords="391,56,508,83"/>
+<area shape="rect" href="box_8c.html#a49bbaf2c74dad0f7bbca22c9e41286ca" title=" " alt="" coords="597,56,659,83"/>
+<area shape="rect" href="matrix_8c.html#ae2f40f1453e7596a9a4a2f9c97c37594" title=" " alt="" coords="378,765,521,792"/>
+<area shape="rect" href="matrix_8c.html#a17d8aa5a28596ebbc90d557821543227" title=" " alt="" coords="373,664,525,691"/>
+<area shape="rect" href="matrix_8c.html#a0442ec4e28d99c85c0a06be7c2fb6e62" title=" " alt="" coords="392,715,507,741"/>
+<area shape="rect" href="matrix_8c.html#a3a91499f18d0a2ead70f9d2e83d7291b" title=" " alt="" coords="575,816,681,843"/>
+<area shape="rect" href="matrix_8c.html#afd6b64cdf07c11e9670ac4ff6196216d" title=" " alt="" coords="757,816,799,843"/>
+<area shape="rect" href="matrix_8c.html#ab8962ce6e94daf63d29a9ba6decf6e1e" title=" " alt="" coords="585,664,671,691"/>
+<area shape="rect" href="matrix_8c.html#a3e4d6f00c3d5fcdc71b96bef42cbcf5e" title=" " alt="" coords="603,765,653,792"/>
+<area shape="rect" href="matrix_8c.html#a8018b58f0158817edac20f8326086e8c" title=" " alt="" coords="596,715,660,741"/>
+<area shape="rect" href="utils_8c.html#a68966c4281f1bcbd7e30c94db429b0b9" title=" " alt="" coords="426,360,473,387"/>
+<area shape="rect" href="utils_8c.html#a841e9c07b05bfb9765ccb1b40c265b99" title=" " alt="" coords="414,411,485,437"/>
+<area shape="rect" href="list_8c.html#a4b177e1b5244311b3b9f5276c7f39946" title=" " alt="" coords="739,449,817,476"/>
+<area shape="rect" href="list_8c.html#af11d92bfb01b1a2df143722c751ec379" title=" " alt="" coords="410,461,489,488"/>
+<area shape="rect" href="option__list_8c.html#aecd8ecc2185bfb15d886100f159dd7da" title=" " alt="" coords="407,816,491,843"/>
+<area shape="rect" href="utils_8c.html#a70692d0d67ff6b964b5a1e7eb3d0dad5" title=" " alt="" coords="399,208,499,235"/>
+<area shape="rect" href="group__python__builtins.html#ga117a7eab72791313448c40a2f25f3582" title=" " alt="" coords="603,208,653,235"/>
+<area shape="rect" href="classhandle.html#aa58c40063166c7cedefdc4db2d6fa608" title="Return the underlying PyObject * pointer" alt="" coords="737,208,819,235"/>
+<area shape="rect" href="option__list_8c.html#a0717b524c7a68ab7cab32bbf7c797113" title=" " alt="" coords="405,309,494,336"/>
+<area shape="rect" href="utils_8c.html#a76299b86e144434260dcab80323ec9da" title=" " alt="" coords="426,259,473,285"/>
+<area shape="rect" href="group__python__builtins.html#gaeff368081ac50b8fe2cc0230d96e3acb" title=" " alt="" coords="609,259,647,285"/>
+<area shape="rect" href="option__list_8c.html#a367ce07b74b57426e8665d91c8fbc735" title=" " alt="" coords="580,385,676,412"/>
+<area shape="rect" href="detail_2common_8h.html#aeea9746c2787bab3a5a0c983ef965520" title="Used internally" alt="" coords="729,259,827,285"/>
+<area shape="rect" href="utils_8c.html#aa31d78a922513f37c4ceffb5ba8cd0fc" title=" " alt="" coords="404,867,495,893"/>
+<area shape="rect" href="utils_8c.html#a589efc216c97ecee6c6a8291db8aa581" title=" " alt="" coords="372,917,527,944"/>
+<area shape="rect" href="utils_8c.html#a60ea663401e86ca2a60a29e76c716679" title=" " alt="" coords="427,968,471,995"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a63f9fd6677e619bd902ae20bedc6af24" name="a63f9fd6677e619bd902ae20bedc6af24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63f9fd6677e619bd902ae20bedc6af24">&#9670;&nbsp;</a></span>detections_comparator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int detections_comparator </td>
+          <td>(</td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>pa</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>pb</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a05d5ce6aa5e8a15351a0b592fbd3d7e9" name="a05d5ce6aa5e8a15351a0b592fbd3d7e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05d5ce6aa5e8a15351a0b592fbd3d7e9">&#9670;&nbsp;</a></span>draw_object()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void draw_object </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>datacfg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>cfgfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>weightfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>thresh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>dont_show</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>it_num</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>letter_box</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>benchmark_layers</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1b666dbb110a807e010f94bc1002720d" name="a1b666dbb110a807e010f94bc1002720d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b666dbb110a807e010f94bc1002720d">&#9670;&nbsp;</a></span>eliminate_bdd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void eliminate_bdd </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>a</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afa334e7be4d652ae69a26c7f68b858aa" name="afa334e7be4d652ae69a26c7f68b858aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa334e7be4d652ae69a26c7f68b858aa">&#9670;&nbsp;</a></span>get_bdd_image_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void get_bdd_image_id </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="detector_8c_afa334e7be4d652ae69a26c7f68b858aa_cgraph.png" border="0" usemap="#adetector_8c_afa334e7be4d652ae69a26c7f68b858aa_cgraph" alt=""/></div>
+<map name="adetector_8c_afa334e7be4d652ae69a26c7f68b858aa_cgraph" id="adetector_8c_afa334e7be4d652ae69a26c7f68b858aa_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,132,32"/>
+<area shape="rect" href="detector_8c.html#a1b666dbb110a807e010f94bc1002720d" title=" " alt="" coords="180,5,283,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="af3803bc907114e6d6e72146bc75507ed" name="af3803bc907114e6d6e72146bc75507ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3803bc907114e6d6e72146bc75507ed">&#9670;&nbsp;</a></span>get_coco_image_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int get_coco_image_id </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4a0f6687d44b05e5ccfe5209df1d1c17" name="a4a0f6687d44b05e5ccfe5209df1d1c17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a0f6687d44b05e5ccfe5209df1d1c17">&#9670;&nbsp;</a></span>print_bdd_detections()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void print_bdd_detections </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>fp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>image_path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdetection.html">detection</a> *&#160;</td>
+          <td class="paramname"><em>dets</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num_boxes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>classes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>h</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="detector_8c_a4a0f6687d44b05e5ccfe5209df1d1c17_cgraph.png" border="0" usemap="#adetector_8c_a4a0f6687d44b05e5ccfe5209df1d1c17_cgraph" alt=""/></div>
+<map name="adetector_8c_a4a0f6687d44b05e5ccfe5209df1d1c17_cgraph" id="adetector_8c_a4a0f6687d44b05e5ccfe5209df1d1c17_cgraph">
+<area shape="rect" title=" " alt="" coords="5,31,148,57"/>
+<area shape="rect" href="detector_8c.html#afa334e7be4d652ae69a26c7f68b858aa" title=" " alt="" coords="196,5,323,32"/>
+<area shape="rect" href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867" title=" " alt="" coords="218,56,301,83"/>
+<area shape="rect" href="detector_8c.html#a1b666dbb110a807e010f94bc1002720d" title=" " alt="" coords="371,5,473,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a639d14174229e9b54573e683b7ead7d3" name="a639d14174229e9b54573e683b7ead7d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a639d14174229e9b54573e683b7ead7d3">&#9670;&nbsp;</a></span>print_cocos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void print_cocos </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>fp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>image_path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdetection.html">detection</a> *&#160;</td>
+          <td class="paramname"><em>dets</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num_boxes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>classes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>h</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="detector_8c_a639d14174229e9b54573e683b7ead7d3_cgraph.png" border="0" usemap="#adetector_8c_a639d14174229e9b54573e683b7ead7d3_cgraph" alt=""/></div>
+<map name="adetector_8c_a639d14174229e9b54573e683b7ead7d3_cgraph" id="adetector_8c_a639d14174229e9b54573e683b7ead7d3_cgraph">
+<area shape="rect" title=" " alt="" coords="5,31,95,57"/>
+<area shape="rect" href="utils_8c.html#a3f6136050e31d6f54440cc1045b8e165" title=" " alt="" coords="151,5,217,32"/>
+<area shape="rect" href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867" title=" " alt="" coords="143,56,225,83"/>
+<area shape="rect" href="utils_8c.html#a4cdbae9d1d9c0632c8b949c224dc52b5" title=" " alt="" coords="273,5,363,32"/>
+<area shape="rect" href="matrix_8c.html#a3e4d6f00c3d5fcdc71b96bef42cbcf5e" title=" " alt="" coords="411,5,461,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a81513990339b88be3c0627e62c786283" name="a81513990339b88be3c0627e62c786283"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81513990339b88be3c0627e62c786283">&#9670;&nbsp;</a></span>print_detector_detections()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_detector_detections </td>
+          <td>(</td>
+          <td class="paramtype">FILE **&#160;</td>
+          <td class="paramname"><em>fps</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdetection.html">detection</a> *&#160;</td>
+          <td class="paramname"><em>dets</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>total</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>classes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>h</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="detector_8c_a81513990339b88be3c0627e62c786283_cgraph.png" border="0" usemap="#adetector_8c_a81513990339b88be3c0627e62c786283_cgraph" alt=""/></div>
+<map name="adetector_8c_a81513990339b88be3c0627e62c786283_cgraph" id="adetector_8c_a81513990339b88be3c0627e62c786283_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,173,32"/>
+<area shape="rect" href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867" title=" " alt="" coords="221,5,304,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="afd8578ce1a519a0da8686cc23de14589" name="afd8578ce1a519a0da8686cc23de14589"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd8578ce1a519a0da8686cc23de14589">&#9670;&nbsp;</a></span>print_imagenet_detections()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void print_imagenet_detections </td>
+          <td>(</td>
+          <td class="paramtype">FILE *&#160;</td>
+          <td class="paramname"><em>fp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdetection.html">detection</a> *&#160;</td>
+          <td class="paramname"><em>dets</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>total</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>classes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>h</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="detector_8c_afd8578ce1a519a0da8686cc23de14589_cgraph.png" border="0" usemap="#adetector_8c_afd8578ce1a519a0da8686cc23de14589_cgraph" alt=""/></div>
+<map name="adetector_8c_afd8578ce1a519a0da8686cc23de14589_cgraph" id="adetector_8c_afd8578ce1a519a0da8686cc23de14589_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,180,32"/>
+<area shape="rect" href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867" title=" " alt="" coords="228,5,311,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ad0d3d74524262aefd7cea0c547b2fd71" name="ad0d3d74524262aefd7cea0c547b2fd71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0d3d74524262aefd7cea0c547b2fd71">&#9670;&nbsp;</a></span>print_kitti_detections()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void print_kitti_detections </td>
+          <td>(</td>
+          <td class="paramtype">FILE **&#160;</td>
+          <td class="paramname"><em>fps</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdetection.html">detection</a> *&#160;</td>
+          <td class="paramname"><em>dets</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>total</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>classes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>prefix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="detector_8c_ad0d3d74524262aefd7cea0c547b2fd71_cgraph.png" border="0" usemap="#adetector_8c_ad0d3d74524262aefd7cea0c547b2fd71_cgraph" alt=""/></div>
+<map name="adetector_8c_ad0d3d74524262aefd7cea0c547b2fd71_cgraph" id="adetector_8c_ad0d3d74524262aefd7cea0c547b2fd71_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,148,32"/>
+<area shape="rect" href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867" title=" " alt="" coords="196,5,279,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a677c1747fd7a58c7f7da3314af5d6120" name="a677c1747fd7a58c7f7da3314af5d6120"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a677c1747fd7a58c7f7da3314af5d6120">&#9670;&nbsp;</a></span>run_detector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void run_detector </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="detector_8c_a677c1747fd7a58c7f7da3314af5d6120_cgraph.png" border="0" usemap="#adetector_8c_a677c1747fd7a58c7f7da3314af5d6120_cgraph" alt=""/></div>
+<map name="adetector_8c_a677c1747fd7a58c7f7da3314af5d6120_cgraph" id="adetector_8c_a677c1747fd7a58c7f7da3314af5d6120_cgraph">
+<area shape="rect" title=" " alt="" coords="5,1499,100,1526"/>
+<area shape="rect" href="detector_8c.html#a615d4f8ade0d08710b89da00c80b0ae2" title=" " alt="" coords="344,347,443,374"/>
+<area shape="rect" href="option__list_8c.html#a2bf4d4bc440d6923583324672e99d075" title=" " alt="" coords="553,94,659,120"/>
+<area shape="rect" href="option__list_8c.html#a91cf08d107de4707b9afa480cc797f53" title=" " alt="" coords="553,499,659,526"/>
+<area shape="rect" href="option__list_8c.html#ac0d48b20f8779187c4fdcd1c58c648c9" title=" " alt="" coords="555,651,657,678"/>
+<area shape="rect" href="group__python__builtins.html#gaeff368081ac50b8fe2cc0230d96e3acb" title=" " alt="" coords="905,575,944,602"/>
+<area shape="rect" href="demo_8c.html#acaa2fad873c799f8dae1ec7a23a9f029" title=" " alt="" coords="180,1778,235,1804"/>
+<area shape="rect" href="detector_8c.html#a05d5ce6aa5e8a15351a0b592fbd3d7e9" title=" " alt="" coords="162,1828,253,1855"/>
+<area shape="rect" href="utils_8c.html#a845f7b956fcb9711346b8189e18d3846" title=" " alt="" coords="174,1930,241,1956"/>
+<area shape="rect" href="utils_8c.html#ae4bb6e9d11a49c51cf77d820fd91eb07" title=" " alt="" coords="158,1980,257,2007"/>
+<area shape="rect" href="utils_8c.html#af7e57f4e7e4fda1770fbeee64d9443b0" title=" " alt="" coords="158,2031,257,2058"/>
+<area shape="rect" href="utils_8c.html#a6c1259f0b709a2411c0375db749440a2" title=" " alt="" coords="163,1879,251,1906"/>
+<area shape="rect" href="list_8c.html#a919f01c7184ba8e6645264cc06516780" title=" " alt="" coords="755,1816,822,1843"/>
+<area shape="rect" href="list_8c.html#a40df052f2edf96ae8855d177f2ce040d" title=" " alt="" coords="531,1968,681,1995"/>
+<area shape="rect" href="data_8c.html#a95ed1111da983feb31de85aa0cc5a32b" title=" " alt="" coords="353,854,434,880"/>
+<area shape="rect" href="detector_8c.html#a44156bdb8ed52c80760c724b266f4ee9" title=" " alt="" coords="344,1614,443,1640"/>
+<area shape="rect" href="detector_8c.html#a81e3fff67fbe4c4f7fd51f568e53e097" title=" " alt="" coords="157,1499,258,1526"/>
+<area shape="rect" href="detector_8c.html#a6c87aa309dbdcd49e3723545aa95a311" title=" " alt="" coords="318,1208,469,1235"/>
+<area shape="rect" href="detector_8c.html#aea37ad211a83b40620a2df0eb6623a66" title=" " alt="" coords="148,1215,267,1242"/>
+<area shape="rect" href="detector_8c.html#a9212fc77853f03203e5e4493e31c4c55" title=" " alt="" coords="315,803,472,830"/>
+<area shape="rect" href="detector_8c.html#ab22ea6a72ee26ab76b9ee8c772020493" title=" " alt="" coords="520,195,692,222"/>
+<area shape="rect" href="box_8c.html#a6f5e94eb9c925d29647fd649799b8066" title=" " alt="" coords="565,246,647,272"/>
+<area shape="rect" href="matrix_8c.html#aaaf01b2778388ca6e38aaa084ee2807d" title=" " alt="" coords="561,144,651,171"/>
+<area shape="rect" href="matrix_8c.html#a47438b60c4cf871ff2523161d8a26eef" title=" " alt="" coords="740,94,837,120"/>
+<area shape="rect" href="data_8c.html#a62bbddf9091f61895ee1d41e9b99ac1c" title=" " alt="" coords="749,828,828,855"/>
+<area shape="rect" href="list_8c.html#a383ae42233718449bd550f4cbfe53123" title=" " alt="" coords="742,1082,835,1108"/>
+<area shape="rect" href="data_8c.html#a9cbd4f49ec02f60d24314f279ac165d6" title=" " alt="" coords="561,550,651,576"/>
+<area shape="rect" href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867" title=" " alt="" coords="747,499,830,526"/>
+<area shape="rect" href="utils_8c.html#adcb0ea13878d05b567742fe07fc55194" title=" " alt="" coords="527,955,685,982"/>
+<area shape="rect" href="utils_8c.html#a68966c4281f1bcbd7e30c94db429b0b9" title=" " alt="" coords="901,822,948,848"/>
+<area shape="rect" href="utils_8c.html#a841e9c07b05bfb9765ccb1b40c265b99" title=" " alt="" coords="889,683,960,710"/>
+<area shape="rect" href="list_8c.html#af11d92bfb01b1a2df143722c751ec379" title=" " alt="" coords="885,759,964,786"/>
+<area shape="rect" href="option__list_8c.html#aecd8ecc2185bfb15d886100f159dd7da" title=" " alt="" coords="747,271,831,298"/>
+<area shape="rect" href="option__list_8c.html#a0717b524c7a68ab7cab32bbf7c797113" title=" " alt="" coords="744,626,833,652"/>
+<area shape="rect" href="utils_8c.html#a76299b86e144434260dcab80323ec9da" title=" " alt="" coords="765,575,812,602"/>
+<area shape="rect" href="classhandle.html#aa58c40063166c7cedefdc4db2d6fa608" title="Return the underlying PyObject * pointer" alt="" coords="1019,550,1102,576"/>
+<area shape="rect" href="detail_2common_8h.html#aeea9746c2787bab3a5a0c983ef965520" title="Used internally" alt="" coords="1012,600,1109,627"/>
+<area shape="rect" href="utils_8c.html#ae8f911d0e43e2013b752049d7fd8aa48" title=" " alt="" coords="361,1968,425,1995"/>
+<area shape="rect" href="list_8c.html#a12d054d5f2dfa6c0d777e2ceb7e4f89d" title=" " alt="" coords="885,1816,964,1843"/>
+<area shape="rect" href="data_8c.html#a08f9b19418dc79320f93a20b483960e9" title=" " alt="" coords="541,1158,671,1184"/>
+<area shape="rect" href="network_8c.html#ac51d5efb164b69282b7aa46ba1a02c62" title=" " alt="" coords="523,1310,689,1336"/>
+<area shape="rect" href="image__opencv_8cpp.html#a3d8d5c1934f3af09d38f2b9404b0e7f7" title=" " alt="" coords="526,1918,686,1944"/>
+<area shape="rect" href="network_8c.html#a1bb5ba0b05c25a1c2cc912b3a19cbb42" title=" " alt="" coords="544,1766,668,1792"/>
+<area shape="rect" href="box_8c.html#ab060a1b3851fd1c1aa2506f3f274ef4f" title=" " alt="" coords="556,1360,656,1387"/>
+<area shape="rect" href="box_8c.html#a55d16ea36b7bfdbaaaf63fe74b27e222" title=" " alt="" coords="557,1411,655,1438"/>
+<area shape="rect" href="image_8c.html#a50337647c128b681388740ba359d2a6b" title=" " alt="" coords="539,1664,673,1691"/>
+<area shape="rect" href="image_8c.html#a1b35e408b961d58f7e29ec146be91160" title=" " alt="" coords="746,1512,831,1539"/>
+<area shape="rect" href="utils_8c.html#a18c9530c3574f2eadefc8d6cddf4ccb6" title=" " alt="" coords="582,1715,630,1742"/>
+<area shape="rect" href="network_8c.html#a7ecacd03177d009c8f43c76c53f6b363" title=" " alt="" coords="551,1462,661,1488"/>
+<area shape="rect" href="network_8c.html#a0ea16ce7d9aefb606cc9dac3e322b447" title=" " alt="" coords="559,1867,653,1894"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a44156bdb8ed52c80760c724b266f4ee9" name="a44156bdb8ed52c80760c724b266f4ee9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44156bdb8ed52c80760c724b266f4ee9">&#9670;&nbsp;</a></span>test_detector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void test_detector </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>datacfg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>cfgfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>weightfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>thresh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>hier_thresh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>dont_show</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ext_output</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>save_labels</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>outfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>letter_box</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>benchmark_layers</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="detector_8c_a44156bdb8ed52c80760c724b266f4ee9_cgraph.png" border="0" usemap="#adetector_8c_a44156bdb8ed52c80760c724b266f4ee9_cgraph" alt=""/></div>
+<map name="adetector_8c_a44156bdb8ed52c80760c724b266f4ee9_cgraph" id="adetector_8c_a44156bdb8ed52c80760c724b266f4ee9_cgraph">
+<area shape="rect" title=" " alt="" coords="5,993,104,1020"/>
+<area shape="rect" href="network_8c.html#ac51d5efb164b69282b7aa46ba1a02c62" title=" " alt="" coords="159,56,325,83"/>
+<area shape="rect" href="image__opencv_8cpp.html#a3d8d5c1934f3af09d38f2b9404b0e7f7" title=" " alt="" coords="162,157,322,184"/>
+<area shape="rect" href="network_8c.html#a1bb5ba0b05c25a1c2cc912b3a19cbb42" title=" " alt="" coords="180,208,304,235"/>
+<area shape="rect" href="box_8c.html#ab060a1b3851fd1c1aa2506f3f274ef4f" title=" " alt="" coords="192,259,292,285"/>
+<area shape="rect" href="box_8c.html#a55d16ea36b7bfdbaaaf63fe74b27e222" title=" " alt="" coords="193,309,291,336"/>
+<area shape="rect" href="image_8c.html#a50337647c128b681388740ba359d2a6b" title=" " alt="" coords="175,689,309,716"/>
+<area shape="rect" href="image_8c.html#a1b35e408b961d58f7e29ec146be91160" title=" " alt="" coords="577,487,663,513"/>
+<area shape="rect" href="image_8c.html#a583d43a007a97bb92fcbac12b8394c72" title=" " alt="" coords="405,461,504,488"/>
+<area shape="rect" href="utils_8c.html#a18c9530c3574f2eadefc8d6cddf4ccb6" title=" " alt="" coords="431,1171,479,1197"/>
+<area shape="rect" href="network_8c.html#a7ecacd03177d009c8f43c76c53f6b363" title=" " alt="" coords="187,841,297,868"/>
+<area shape="rect" href="list_8c.html#a919f01c7184ba8e6645264cc06516780" title=" " alt="" coords="421,1221,488,1248"/>
+<area shape="rect" href="list_8c.html#a40df052f2edf96ae8855d177f2ce040d" title=" " alt="" coords="167,993,317,1020"/>
+<area shape="rect" href="network_8c.html#a0ea16ce7d9aefb606cc9dac3e322b447" title=" " alt="" coords="195,1044,289,1071"/>
+<area shape="rect" href="utils_8c.html#a8d316e671a183c19ac7631287b29050a" title=" " alt="" coords="206,1095,278,1121"/>
+<area shape="rect" href="network_8c.html#a55892f9e3920b129a302ed7184cc8563" title=" " alt="" coords="169,1145,315,1172"/>
+<area shape="rect" href="data_8c.html#a08f9b19418dc79320f93a20b483960e9" title=" " alt="" coords="177,943,307,969"/>
+<area shape="rect" href="network_8c.html#a8b112853cbeb8ea2486bf0ab60926bf3" title=" " alt="" coords="175,1196,309,1223"/>
+<area shape="rect" href="http__stream_8cpp.html#ac153241f54cc35e5cd528922c96f8256" title=" " alt="" coords="189,1247,295,1273"/>
+<area shape="rect" href="image_8c.html#a24b1468a82ce3e5fe9f912bda5507d87" title=" " alt="" coords="185,563,299,589"/>
+<area shape="rect" href="image_8c.html#a69d6651257fc9fe46b6658339d64a374" title=" " alt="" coords="191,1297,293,1324"/>
+<area shape="rect" href="image_8c.html#a4eec265642aa18081a3e8795c5a78afb" title=" " alt="" coords="198,461,286,488"/>
+<area shape="rect" href="parser_8c.html#a60957f4d236ea8e417999b1778ec3d55" title=" " alt="" coords="193,1348,291,1375"/>
+<area shape="rect" href="network_8c.html#ac90adcb059cb26e2d30b7add256f266e" title=" " alt="" coords="185,1399,299,1425"/>
+<area shape="rect" href="nms_8h.html#a172e28c9d820b35a79650a1337c6f80c" title="nms Non maximum suppression" alt="" coords="219,1449,265,1476"/>
+<area shape="rect" href="option__list_8c.html#a91cf08d107de4707b9afa480cc797f53" title=" " alt="" coords="189,1500,295,1527"/>
+<area shape="rect" href="parser_8c.html#a16cc1d65d904fc7b54b029e5b3b2e3cd" title=" " alt="" coords="152,791,332,817"/>
+<area shape="rect" href="option__list_8c.html#ac0d48b20f8779187c4fdcd1c58c648c9" title=" " alt="" coords="191,1551,293,1577"/>
+<area shape="rect" href="utils_8c.html#adcb0ea13878d05b567742fe07fc55194" title=" " alt="" coords="163,1601,321,1628"/>
+<area shape="rect" href="image_8c.html#a0c7a63330d7929a012da0a95694eb363" title=" " alt="" coords="409,1677,500,1704"/>
+<area shape="rect" href="image_8c.html#a5807da5b9392f853749db3e7c727bd70" title=" " alt="" coords="195,1703,289,1729"/>
+<area shape="rect" href="image__opencv_8cpp.html#ae1fc8a50817cb8f8c2c288b125ea4702" title=" " alt="" coords="161,1753,323,1780"/>
+<area shape="rect" href="convolutional__layer_8c.html#a23c3775162193b4c18deba6c9c3b742b" title=" " alt="" coords="383,5,526,32"/>
+<area shape="rect" href="network_8c.html#ab1ff3449af04e06b4aee9283175d30d2" title=" " alt="" coords="387,56,523,83"/>
+<area shape="rect" href="box_8c.html#adf6958cdee6812703d843d7620cf1aca" title=" " alt="" coords="417,157,492,184"/>
+<area shape="rect" href="box_8c.html#ae14a614fc4d26ebb552d23615dfea313" title=" " alt="" coords="587,183,653,209"/>
+<area shape="rect" href="box_8c.html#a525df9ccb0132fe8ea175163a77122e7" title=" " alt="" coords="405,208,504,235"/>
+<area shape="rect" href="box_8c.html#af7202ddf0b21ffe0de2d9d4b58784f16" title=" " alt="" coords="385,259,524,285"/>
+<area shape="rect" href="image_8c.html#a4fb1e83776ba33722342bd34bc1ae32c" title=" " alt="" coords="393,1069,517,1096"/>
+<area shape="rect" href="image_8c.html#a37a7a785794b69d6a227e54cd6965842" title=" " alt="" coords="389,664,521,691"/>
+<area shape="rect" href="image_8c.html#ae86ace40d43e73d20cfd06730abd7252" title=" " alt="" coords="397,715,512,741"/>
+<area shape="rect" href="image_8c.html#aeea2717bcde3ec523a5bca84b50021b0" title=" " alt="" coords="386,765,523,792"/>
+<area shape="rect" href="image_8c.html#a7782e510d9d5dfec51ed508201c83c06" title=" " alt="" coords="384,816,525,843"/>
+<area shape="rect" href="image_8c.html#a0320f25f8508fb74f62f151f2ffb0e73" title=" " alt="" coords="403,563,506,589"/>
+<area shape="rect" href="image_8c.html#a30912fff1b55bfe3f46db0dcf74f6024" title=" " alt="" coords="401,867,508,893"/>
+<area shape="rect" href="image_8c.html#a02a632ba7096d947019337953f087269" title=" " alt="" coords="380,917,529,944"/>
+<area shape="rect" href="image_8c.html#a2813bd82c2d03e2ad15fb37d7614392b" title=" " alt="" coords="417,968,492,995"/>
+<area shape="rect" href="image_8c.html#a0fcd8efcbee058a6c02a400828ff6193" title=" " alt="" coords="408,613,501,640"/>
+<area shape="rect" href="image_8c.html#a7b1e4d7dd87ca8092f693dd9381a1be7" title=" " alt="" coords="396,1019,513,1045"/>
+<area shape="rect" href="list_8c.html#a12d054d5f2dfa6c0d777e2ceb7e4f89d" title=" " alt="" coords="581,1221,659,1248"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a81e3fff67fbe4c4f7fd51f568e53e097" name="a81e3fff67fbe4c4f7fd51f568e53e097"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81e3fff67fbe4c4f7fd51f568e53e097">&#9670;&nbsp;</a></span>train_detector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void train_detector </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>datacfg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>cfgfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>weightfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>gpus</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ngpus</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>clear</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>dont_show</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>calc_map</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>thresh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>iou_thresh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>mjpeg_port</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>show_imgs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>benchmark_layers</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>chart_path</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="detector_8c_a81e3fff67fbe4c4f7fd51f568e53e097_cgraph.png" border="0" usemap="#adetector_8c_a81e3fff67fbe4c4f7fd51f568e53e097_cgraph" alt=""/></div>
+<map name="adetector_8c_a81e3fff67fbe4c4f7fd51f568e53e097_cgraph" id="adetector_8c_a81e3fff67fbe4c4f7fd51f568e53e097_cgraph">
+<area shape="rect" title=" " alt="" coords="5,892,107,919"/>
+<area shape="rect" href="utils_8c.html#a3f6136050e31d6f54440cc1045b8e165" title=" " alt="" coords="451,461,518,488"/>
+<area shape="rect" href="network_8c.html#ab7f32dd9f51963f1754ebfdc0db69f5d" title=" " alt="" coords="187,5,314,32"/>
+<area shape="rect" href="dark__cuda_8c.html#aa4214bec4ec8eda4c37f5e1487efa2e9" title=" " alt="" coords="633,1677,752,1704"/>
+<area shape="rect" href="image__opencv_8cpp.html#a3d8d5c1934f3af09d38f2b9404b0e7f7" title=" " alt="" coords="171,157,331,184"/>
+<area shape="rect" href="data_8c.html#a4b0ce36f011ddb4b2ba58f58114d3219" title=" " alt="" coords="213,1272,288,1299"/>
+<area shape="rect" href="layer_8c.html#ae46b8b7a9e7d80d7457af3ee00f2a5aa" title=" " alt="" coords="187,56,315,83"/>
+<area shape="rect" href="list_8c.html#a919f01c7184ba8e6645264cc06516780" title=" " alt="" coords="659,664,726,691"/>
+<area shape="rect" href="list_8c.html#a02b7489888a301031a0c8aa3d37a77b5" title=" " alt="" coords="189,360,313,387"/>
+<area shape="rect" href="list_8c.html#a40df052f2edf96ae8855d177f2ce040d" title=" " alt="" coords="409,563,560,589"/>
+<area shape="rect" href="data_8c.html#a1e5a8919fcba293532573e89a89f8351" title=" " alt="" coords="189,107,313,133"/>
+<area shape="rect" href="pthread_8h.html#a49f1914675a9a21671cb0871281a3276" title=" " alt="" coords="439,208,531,235"/>
+<area shape="rect" href="network_8c.html#a0ea16ce7d9aefb606cc9dac3e322b447" title=" " alt="" coords="437,411,532,437"/>
+<area shape="rect" href="utils_8c.html#a8d316e671a183c19ac7631287b29050a" title=" " alt="" coords="449,917,521,944"/>
+<area shape="rect" href="network_8c.html#a947571d2d8ca60387d1d827118241393" title=" " alt="" coords="623,1525,763,1552"/>
+<area shape="rect" href="network_8c.html#ac997daf700149608de15d93a083c33dc" title=" " alt="" coords="193,309,309,336"/>
+<area shape="rect" href="network_8c.html#a38133fd1fde9f03b10ad34fb88545ab2" title=" " alt="" coords="155,259,347,285"/>
+<area shape="rect" href="data_8c.html#a08f9b19418dc79320f93a20b483960e9" title=" " alt="" coords="419,664,550,691"/>
+<area shape="rect" href="data_8c.html#a62bbddf9091f61895ee1d41e9b99ac1c" title=" " alt="" coords="653,892,732,919"/>
+<area shape="rect" href="list_8c.html#a383ae42233718449bd550f4cbfe53123" title=" " alt="" coords="646,613,739,640"/>
+<area shape="rect" href="network_8c.html#a972a0ca9abacb6a2b48f38c015d86c9b" title=" " alt="" coords="181,968,320,995"/>
+<area shape="rect" href="network_8c.html#a0643a1e5b2bba9db81453c92d4966ff9" title=" " alt="" coords="630,1424,755,1451"/>
+<area shape="rect" href="data_8c.html#a1ebf184d64b6d068463176b30445e90f" title=" " alt="" coords="211,1069,290,1096"/>
+<area shape="rect" href="data_8c.html#af84c008396cc37d51dd1d3a0b4bf90a2" title=" " alt="" coords="206,1120,295,1147"/>
+<area shape="rect" href="parser_8c.html#a60957f4d236ea8e417999b1778ec3d55" title=" " alt="" coords="436,968,533,995"/>
+<area shape="rect" href="option__list_8c.html#a91cf08d107de4707b9afa480cc797f53" title=" " alt="" coords="431,1019,538,1045"/>
+<area shape="rect" href="parser_8c.html#abb6f2aa1c5d5bf340faae09be6538c56" title=" " alt="" coords="185,1221,316,1248"/>
+<area shape="rect" href="parser_8c.html#a16cc1d65d904fc7b54b029e5b3b2e3cd" title=" " alt="" coords="395,1171,575,1197"/>
+<area shape="rect" href="utils_8c.html#ae5e2a8baa8169333fae635a56852f4a8" title=" " alt="" coords="208,1373,293,1400"/>
+<area shape="rect" href="option__list_8c.html#ac0d48b20f8779187c4fdcd1c58c648c9" title=" " alt="" coords="641,968,744,995"/>
+<area shape="rect" href="network_8c.html#a6ae710d2d9ad32cfdec1f925f48c2b50" title=" " alt="" coords="430,1677,539,1704"/>
+<area shape="rect" href="parser_8c.html#a4efdf053d8e310ad956ce80519201a10" title=" " alt="" coords="201,1627,300,1653"/>
+<area shape="rect" href="parser_8c.html#ad233cf7704ff4bedfc73725b70cf23b0" title=" " alt="" coords="419,1576,550,1603"/>
+<area shape="rect" href="network_8c.html#aeb752f771f5cfe8c401fc8dee8f3e439" title=" " alt="" coords="201,1323,300,1349"/>
+<area shape="rect" href="network_8c.html#a04614f46839fba458294a79cfef40382" title=" " alt="" coords="409,1399,560,1425"/>
+<area shape="rect" href="detector_8c.html#a6c87aa309dbdcd49e3723545aa95a311" title=" " alt="" coords="175,715,326,741"/>
+<area shape="rect" href="utils_8c.html#af89a5b997626c967e4716fd022aca7bb" title=" " alt="" coords="179,1779,322,1805"/>
+<area shape="rect" href="utils_8c.html#a4cdbae9d1d9c0632c8b949c224dc52b5" title=" " alt="" coords="648,461,737,488"/>
+<area shape="rect" href="network_8c.html#a9dff9dfd8f58f014b3f69b9026627076" title=" " alt="" coords="403,5,566,32"/>
+<area shape="rect" href="namespacemkdoc.html#a85ae95dfe8536ee978dcacf1f5dcfe00" title=" " alt="" coords="657,1297,729,1324"/>
+<area shape="rect" href="matrix_8c.html#ab8962ce6e94daf63d29a9ba6decf6e1e" title=" " alt="" coords="441,1221,528,1248"/>
+<area shape="rect" href="layer_8c.html#a32090befc79c3c0f500f0afc527cf021" title=" " alt="" coords="435,56,534,83"/>
+<area shape="rect" href="layer_8c.html#a1a431043edf52f6b6f9f1cf22dd77543" title=" " alt="" coords="653,107,732,133"/>
+<area shape="rect" href="list_8c.html#a12d054d5f2dfa6c0d777e2ceb7e4f89d" title=" " alt="" coords="811,664,889,691"/>
+<area shape="rect" href="http__stream_8h.html#ae7642f7859470cd3ada0d214d191b5fe" title=" " alt="" coords="401,157,569,184"/>
+<area shape="rect" href="network_8c.html#a95734b6e69a080abf33395707ab56b59" title=" " alt="" coords="421,259,548,285"/>
+<area shape="rect" href="utils_8c.html#a5492196e16ed2d16bae1df8483ef79ed" title=" " alt="" coords="437,309,533,336"/>
+<area shape="rect" href="utils_8c.html#a68966c4281f1bcbd7e30c94db429b0b9" title=" " alt="" coords="827,943,873,969"/>
+<area shape="rect" href="utils_8c.html#a841e9c07b05bfb9765ccb1b40c265b99" title=" " alt="" coords="815,993,885,1020"/>
+<area shape="rect" href="list_8c.html#a4b177e1b5244311b3b9f5276c7f39946" title=" " alt="" coords="811,892,889,919"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aea37ad211a83b40620a2df0eb6623a66" name="aea37ad211a83b40620a2df0eb6623a66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea37ad211a83b40620a2df0eb6623a66">&#9670;&nbsp;</a></span>validate_detector()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void validate_detector </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>datacfg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>cfgfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>weightfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>outfile</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="detector_8c_aea37ad211a83b40620a2df0eb6623a66_cgraph.png" border="0" usemap="#adetector_8c_aea37ad211a83b40620a2df0eb6623a66_cgraph" alt=""/></div>
+<map name="adetector_8c_aea37ad211a83b40620a2df0eb6623a66_cgraph" id="adetector_8c_aea37ad211a83b40620a2df0eb6623a66_cgraph">
+<area shape="rect" title=" " alt="" coords="5,1035,124,1061"/>
+<area shape="rect" href="utils_8c.html#a3f6136050e31d6f54440cc1045b8e165" title=" " alt="" coords="451,5,517,32"/>
+<area shape="rect" href="network_8c.html#ac51d5efb164b69282b7aa46ba1a02c62" title=" " alt="" coords="179,933,345,960"/>
+<area shape="rect" href="box_8c.html#ab060a1b3851fd1c1aa2506f3f274ef4f" title=" " alt="" coords="212,259,312,285"/>
+<area shape="rect" href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867" title=" " alt="" coords="639,629,722,656"/>
+<area shape="rect" href="box_8c.html#a55d16ea36b7bfdbaaaf63fe74b27e222" title=" " alt="" coords="213,157,311,184"/>
+<area shape="rect" href="network_8c.html#a7ecacd03177d009c8f43c76c53f6b363" title=" " alt="" coords="207,984,317,1011"/>
+<area shape="rect" href="image_8c.html#a1b35e408b961d58f7e29ec146be91160" title=" " alt="" coords="219,1035,305,1061"/>
+<area shape="rect" href="network_8c.html#a55892f9e3920b129a302ed7184cc8563" title=" " alt="" coords="189,528,335,555"/>
+<area shape="rect" href="data_8c.html#a95ed1111da983feb31de85aa0cc5a32b" title=" " alt="" coords="221,1136,303,1163"/>
+<area shape="rect" href="data_8c.html#a62bbddf9091f61895ee1d41e9b99ac1c" title=" " alt="" coords="641,1136,720,1163"/>
+<area shape="rect" href="list_8c.html#a383ae42233718449bd550f4cbfe53123" title=" " alt="" coords="634,1187,727,1213"/>
+<area shape="rect" href="network_8c.html#a8b112853cbeb8ea2486bf0ab60926bf3" title=" " alt="" coords="195,781,329,808"/>
+<area shape="rect" href="data_8c.html#a887edef560c1d5fe3f395f02c0a00612" title=" " alt="" coords="193,1440,331,1467"/>
+<area shape="rect" href="parser_8c.html#a60957f4d236ea8e417999b1778ec3d55" title=" " alt="" coords="435,1339,533,1365"/>
+<area shape="rect" href="utils_8c.html#aa946fc74bc6c238b636db6788e14c25d" title=" " alt="" coords="207,1491,317,1517"/>
+<area shape="rect" href="network_8c.html#ac90adcb059cb26e2d30b7add256f266e" title=" " alt="" coords="205,1541,319,1568"/>
+<area shape="rect" href="nms_8h.html#a172e28c9d820b35a79650a1337c6f80c" title="nms Non maximum suppression" alt="" coords="239,1592,285,1619"/>
+<area shape="rect" href="option__list_8c.html#a91cf08d107de4707b9afa480cc797f53" title=" " alt="" coords="209,1643,315,1669"/>
+<area shape="rect" href="parser_8c.html#a16cc1d65d904fc7b54b029e5b3b2e3cd" title=" " alt="" coords="172,1389,352,1416"/>
+<area shape="rect" href="detector_8c.html#a4a0f6687d44b05e5ccfe5209df1d1c17" title=" " alt="" coords="413,360,555,387"/>
+<area shape="rect" href="detector_8c.html#a639d14174229e9b54573e683b7ead7d3" title=" " alt="" coords="217,107,307,133"/>
+<area shape="rect" href="detector_8c.html#a81513990339b88be3c0627e62c786283" title=" " alt="" coords="400,680,568,707"/>
+<area shape="rect" href="detector_8c.html#afd8578ce1a519a0da8686cc23de14589" title=" " alt="" coords="175,832,349,859"/>
+<area shape="rect" href="detector_8c.html#ad0d3d74524262aefd7cea0c547b2fd71" title=" " alt="" coords="191,883,333,909"/>
+<area shape="rect" href="pthread_8h.html#a49f1914675a9a21671cb0871281a3276" title=" " alt="" coords="216,1693,308,1720"/>
+<area shape="rect" href="option__list_8c.html#ac0d48b20f8779187c4fdcd1c58c648c9" title=" " alt="" coords="629,1237,732,1264"/>
+<area shape="rect" href="utils_8c.html#a63b04160ff54880e7c809f629f458f7a" title=" " alt="" coords="641,1288,720,1315"/>
+<area shape="rect" href="utils_8c.html#a4cdbae9d1d9c0632c8b949c224dc52b5" title=" " alt="" coords="636,5,725,32"/>
+<area shape="rect" href="convolutional__layer_8c.html#a23c3775162193b4c18deba6c9c3b742b" title=" " alt="" coords="413,1035,555,1061"/>
+<area shape="rect" href="network_8c.html#ab1ff3449af04e06b4aee9283175d30d2" title=" " alt="" coords="416,984,552,1011"/>
+<area shape="rect" href="box_8c.html#adf6958cdee6812703d843d7620cf1aca" title=" " alt="" coords="447,309,521,336"/>
+<area shape="rect" href="box_8c.html#ae14a614fc4d26ebb552d23615dfea313" title=" " alt="" coords="647,233,714,260"/>
+<area shape="rect" href="box_8c.html#a525df9ccb0132fe8ea175163a77122e7" title=" " alt="" coords="435,259,533,285"/>
+<area shape="rect" href="box_8c.html#af7202ddf0b21ffe0de2d9d4b58784f16" title=" " alt="" coords="415,157,553,184"/>
+<area shape="rect" href="rings_8cpp.html#a77369fc4d5326a16d2c603e032023528" title=" " alt="" coords="465,528,503,555"/>
+<area shape="rect" href="convolutional__layer_8c.html#acca9262212caf9bda8a86e39954d929b" title=" " alt="" coords="422,411,546,453"/>
+<area shape="rect" href="network_8c.html#ae6ace48f77d38e97dff8fe86848320a6" title=" " alt="" coords="461,477,507,504"/>
+<area shape="rect" href="data_8c.html#a08f9b19418dc79320f93a20b483960e9" title=" " alt="" coords="419,1136,549,1163"/>
+<area shape="rect" href="utils_8c.html#a68966c4281f1bcbd7e30c94db429b0b9" title=" " alt="" coords="809,1237,856,1264"/>
+<area shape="rect" href="utils_8c.html#a841e9c07b05bfb9765ccb1b40c265b99" title=" " alt="" coords="797,1288,868,1315"/>
+<area shape="rect" href="list_8c.html#a4b177e1b5244311b3b9f5276c7f39946" title=" " alt="" coords="793,1136,872,1163"/>
+<area shape="rect" href="list_8c.html#af11d92bfb01b1a2df143722c751ec379" title=" " alt="" coords="793,1187,872,1213"/>
+<area shape="rect" href="network_8c.html#a7eab6157b3e3092dc95ce02d8d85664f" title=" " alt="" coords="420,731,548,757"/>
+<area shape="rect" href="network_8c.html#ad25743407e072b2c124f4a01a9927df9" title=" " alt="" coords="410,781,558,808"/>
+<area shape="rect" href="utils_8c.html#a18c9530c3574f2eadefc8d6cddf4ccb6" title=" " alt="" coords="460,1389,508,1416"/>
+<area shape="rect" href="data_8c.html#af84c008396cc37d51dd1d3a0b4bf90a2" title=" " alt="" coords="439,1491,529,1517"/>
+<area shape="rect" href="pthread_8h.html#a263f28dc2825a4e62b2126294d839ac2" title=" " alt="" coords="430,1440,538,1467"/>
+<area shape="rect" href="parser_8c.html#a44f852b4df699d0ccbaf8e3532bd9380" title=" " alt="" coords="616,1339,745,1365"/>
+<area shape="rect" href="network_8c.html#a3d37980bfc1ac87112a8cb750a863086" title=" " alt="" coords="427,1541,541,1568"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6c87aa309dbdcd49e3723545aa95a311" name="a6c87aa309dbdcd49e3723545aa95a311"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c87aa309dbdcd49e3723545aa95a311">&#9670;&nbsp;</a></span>validate_detector_map()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float validate_detector_map </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>datacfg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>cfgfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>weightfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>thresh_calc_avg_iou</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>iou_thresh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>map_points</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>letter_box</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structnetwork.html">network</a> *&#160;</td>
+          <td class="paramname"><em>existing_net</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="detector_8c_a6c87aa309dbdcd49e3723545aa95a311_cgraph.png" border="0" usemap="#adetector_8c_a6c87aa309dbdcd49e3723545aa95a311_cgraph" alt=""/></div>
+<map name="adetector_8c_a6c87aa309dbdcd49e3723545aa95a311_cgraph" id="adetector_8c_a6c87aa309dbdcd49e3723545aa95a311_cgraph">
+<area shape="rect" title=" " alt="" coords="5,1009,156,1036"/>
+<area shape="rect" href="utils_8c.html#a3f6136050e31d6f54440cc1045b8e165" title=" " alt="" coords="266,5,333,32"/>
+<area shape="rect" href="box_8c.html#ae14a614fc4d26ebb552d23615dfea313" title=" " alt="" coords="641,309,707,336"/>
+<area shape="rect" href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867" title=" " alt="" coords="1140,284,1223,311"/>
+<area shape="rect" href="network_8c.html#ac51d5efb164b69282b7aa46ba1a02c62" title=" " alt="" coords="216,680,383,707"/>
+<area shape="rect" href="namespacemkdoc.html#a85ae95dfe8536ee978dcacf1f5dcfe00" title=" " alt="" coords="638,157,710,184"/>
+<area shape="rect" href="detector_8c.html#a63f9fd6677e619bd902ae20bedc6af24" title=" " alt="" coords="222,731,377,757"/>
+<area shape="rect" href="box_8c.html#ab060a1b3851fd1c1aa2506f3f274ef4f" title=" " alt="" coords="249,309,349,336"/>
+<area shape="rect" href="box_8c.html#a55d16ea36b7bfdbaaaf63fe74b27e222" title=" " alt="" coords="251,411,348,437"/>
+<area shape="rect" href="network_8c.html#a7ecacd03177d009c8f43c76c53f6b363" title=" " alt="" coords="244,781,355,808"/>
+<area shape="rect" href="image_8c.html#a1b35e408b961d58f7e29ec146be91160" title=" " alt="" coords="257,832,342,859"/>
+<area shape="rect" href="list_8c.html#a919f01c7184ba8e6645264cc06516780" title=" " alt="" coords="481,889,548,916"/>
+<area shape="rect" href="list_8c.html#a40df052f2edf96ae8855d177f2ce040d" title=" " alt="" coords="224,1085,375,1112"/>
+<area shape="rect" href="network_8c.html#a0ea16ce7d9aefb606cc9dac3e322b447" title=" " alt="" coords="252,1136,347,1163"/>
+<area shape="rect" href="network_8c.html#a395325b5be7921434d47965f9b3aabc3" title=" " alt="" coords="223,1187,376,1229"/>
+<area shape="rect" href="utils_8c.html#a8d316e671a183c19ac7631287b29050a" title=" " alt="" coords="263,1319,335,1345"/>
+<area shape="rect" href="network_8c.html#a55892f9e3920b129a302ed7184cc8563" title=" " alt="" coords="226,579,373,605"/>
+<area shape="rect" href="data_8c.html#a08f9b19418dc79320f93a20b483960e9" title=" " alt="" coords="234,933,365,960"/>
+<area shape="rect" href="data_8c.html#a62bbddf9091f61895ee1d41e9b99ac1c" title=" " alt="" coords="475,952,554,979"/>
+<area shape="rect" href="list_8c.html#a383ae42233718449bd550f4cbfe53123" title=" " alt="" coords="468,1028,561,1055"/>
+<area shape="rect" href="network_8c.html#a8b112853cbeb8ea2486bf0ab60926bf3" title=" " alt="" coords="761,743,896,769"/>
+<area shape="rect" href="data_8c.html#a887edef560c1d5fe3f395f02c0a00612" title=" " alt="" coords="230,1369,369,1396"/>
+<area shape="rect" href="parser_8c.html#a60957f4d236ea8e417999b1778ec3d55" title=" " alt="" coords="251,1420,348,1447"/>
+<area shape="rect" href="network_8c.html#ac90adcb059cb26e2d30b7add256f266e" title=" " alt="" coords="243,1471,356,1497"/>
+<area shape="rect" href="nms_8h.html#a172e28c9d820b35a79650a1337c6f80c" title="nms Non maximum suppression" alt="" coords="276,1521,323,1548"/>
+<area shape="rect" href="option__list_8c.html#a91cf08d107de4707b9afa480cc797f53" title=" " alt="" coords="246,1572,353,1599"/>
+<area shape="rect" href="parser_8c.html#a16cc1d65d904fc7b54b029e5b3b2e3cd" title=" " alt="" coords="209,1623,389,1649"/>
+<area shape="rect" href="pthread_8h.html#a49f1914675a9a21671cb0871281a3276" title=" " alt="" coords="253,1673,345,1700"/>
+<area shape="rect" href="data_8c.html#a9cbd4f49ec02f60d24314f279ac165d6" title=" " alt="" coords="784,56,873,83"/>
+<area shape="rect" href="option__list_8c.html#ac0d48b20f8779187c4fdcd1c58c648c9" title=" " alt="" coords="248,1724,351,1751"/>
+<area shape="rect" href="network_8c.html#aab21fd7e8728622b883fe4c4d691eb06" title=" " alt="" coords="204,1775,395,1817"/>
+<area shape="rect" href="utils_8c.html#adcb0ea13878d05b567742fe07fc55194" title=" " alt="" coords="220,1841,379,1868"/>
+<area shape="rect" href="network_8c.html#ad2e19f76773ce95b9795f8796b5523bd" title=" " alt="" coords="213,1253,385,1294"/>
+<area shape="rect" href="utils_8c.html#a4cdbae9d1d9c0632c8b949c224dc52b5" title=" " alt="" coords="470,5,559,32"/>
+<area shape="rect" href="box_8c.html#a306e7943e82df234b6f9d9c70def621c" title=" " alt="" coords="959,309,1077,336"/>
+<area shape="rect" href="box_8c.html#a6f5e94eb9c925d29647fd649799b8066" title=" " alt="" coords="788,360,869,387"/>
+<area shape="rect" href="convolutional__layer_8c.html#a23c3775162193b4c18deba6c9c3b742b" title=" " alt="" coords="443,832,586,859"/>
+<area shape="rect" href="network_8c.html#ab1ff3449af04e06b4aee9283175d30d2" title=" " alt="" coords="447,781,583,808"/>
+<area shape="rect" href="box_8c.html#adf6958cdee6812703d843d7620cf1aca" title=" " alt="" coords="477,259,552,285"/>
+<area shape="rect" href="box_8c.html#a525df9ccb0132fe8ea175163a77122e7" title=" " alt="" coords="465,208,564,235"/>
+<area shape="rect" href="box_8c.html#af7202ddf0b21ffe0de2d9d4b58784f16" title=" " alt="" coords="445,360,584,387"/>
+<area shape="rect" href="list_8c.html#a12d054d5f2dfa6c0d777e2ceb7e4f89d" title=" " alt="" coords="635,889,713,916"/>
+<area shape="rect" href="layer_8c.html#a1a431043edf52f6b6f9f1cf22dd77543" title=" " alt="" coords="475,1136,554,1163"/>
+<area shape="rect" href="conv__lstm__layer_8c.html#a0bfb14cdadf563d31482a026cec92a7b" title=" " alt="" coords="443,1195,587,1221"/>
+<area shape="rect" href="crnn__layer_8c.html#a6d2644d39e58719f9dd1ebba77164deb" title=" " alt="" coords="459,1252,570,1279"/>
+<area shape="rect" href="rings_8cpp.html#a77369fc4d5326a16d2c603e032023528" title=" " alt="" coords="495,629,534,656"/>
+<area shape="rect" href="convolutional__layer_8c.html#acca9262212caf9bda8a86e39954d929b" title=" " alt="" coords="453,513,577,554"/>
+<area shape="rect" href="network_8c.html#ae6ace48f77d38e97dff8fe86848320a6" title=" " alt="" coords="491,579,538,605"/>
+<area shape="rect" href="network_8c.html#a7eab6157b3e3092dc95ce02d8d85664f" title=" " alt="" coords="954,699,1082,725"/>
+<area shape="rect" href="network_8c.html#ad25743407e072b2c124f4a01a9927df9" title=" " alt="" coords="944,749,1092,776"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a9212fc77853f03203e5e4493e31c4c55" name="a9212fc77853f03203e5e4493e31c4c55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9212fc77853f03203e5e4493e31c4c55">&#9670;&nbsp;</a></span>validate_detector_recall()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void validate_detector_recall </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>datacfg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>cfgfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>weightfile</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="detector_8c_a9212fc77853f03203e5e4493e31c4c55_cgraph.png" border="0" usemap="#adetector_8c_a9212fc77853f03203e5e4493e31c4c55_cgraph" alt=""/></div>
+<map name="adetector_8c_a9212fc77853f03203e5e4493e31c4c55_cgraph" id="adetector_8c_a9212fc77853f03203e5e4493e31c4c55_cgraph">
+<area shape="rect" title=" " alt="" coords="5,680,163,707"/>
+<area shape="rect" href="utils_8c.html#a3f6136050e31d6f54440cc1045b8e165" title=" " alt="" coords="267,5,334,32"/>
+<area shape="rect" href="box_8c.html#ae14a614fc4d26ebb552d23615dfea313" title=" " alt="" coords="475,157,541,184"/>
+<area shape="rect" href="box_8c.html#aa1c727578e0af593a13e9fc0e3c22106" title=" " alt="" coords="255,157,347,184"/>
+<area shape="rect" href="image_8c.html#a1b35e408b961d58f7e29ec146be91160" title=" " alt="" coords="658,309,743,336"/>
+<area shape="rect" href="network_8c.html#a55892f9e3920b129a302ed7184cc8563" title=" " alt="" coords="227,629,374,656"/>
+<area shape="rect" href="network_8c.html#a8b112853cbeb8ea2486bf0ab60926bf3" title=" " alt="" coords="633,461,768,488"/>
+<area shape="rect" href="data_8c.html#a62bbddf9091f61895ee1d41e9b99ac1c" title=" " alt="" coords="261,1440,340,1467"/>
+<area shape="rect" href="list_8c.html#a383ae42233718449bd550f4cbfe53123" title=" " alt="" coords="254,1592,347,1619"/>
+<area shape="rect" href="image_8c.html#a4eec265642aa18081a3e8795c5a78afb" title=" " alt="" coords="257,309,345,336"/>
+<area shape="rect" href="image_8c.html#a583d43a007a97bb92fcbac12b8394c72" title=" " alt="" coords="459,360,557,387"/>
+<area shape="rect" href="parser_8c.html#a60957f4d236ea8e417999b1778ec3d55" title=" " alt="" coords="252,1541,349,1568"/>
+<area shape="rect" href="network_8c.html#ac90adcb059cb26e2d30b7add256f266e" title=" " alt="" coords="244,1668,357,1695"/>
+<area shape="rect" href="nms_8h.html#a172e28c9d820b35a79650a1337c6f80c" title="nms Non maximum suppression" alt="" coords="875,69,921,96"/>
+<area shape="rect" href="option__list_8c.html#a91cf08d107de4707b9afa480cc797f53" title=" " alt="" coords="647,1237,754,1264"/>
+<area shape="rect" href="parser_8c.html#a16cc1d65d904fc7b54b029e5b3b2e3cd" title=" " alt="" coords="211,1009,391,1036"/>
+<area shape="rect" href="data_8c.html#a9cbd4f49ec02f60d24314f279ac165d6" title=" " alt="" coords="853,731,943,757"/>
+<area shape="rect" href="option__list_8c.html#ac0d48b20f8779187c4fdcd1c58c648c9" title=" " alt="" coords="249,1491,352,1517"/>
+<area shape="rect" href="utils_8c.html#adcb0ea13878d05b567742fe07fc55194" title=" " alt="" coords="221,1719,380,1745"/>
+<area shape="rect" href="utils_8c.html#a4cdbae9d1d9c0632c8b949c224dc52b5" title=" " alt="" coords="463,5,553,32"/>
+<area shape="rect" href="box_8c.html#a306e7943e82df234b6f9d9c70def621c" title=" " alt="" coords="839,132,957,159"/>
+<area shape="rect" href="box_8c.html#a6f5e94eb9c925d29647fd649799b8066" title=" " alt="" coords="660,107,741,133"/>
+<area shape="rect" href="box_8c.html#a49bbaf2c74dad0f7bbca22c9e41286ca" title=" " alt="" coords="1030,101,1093,128"/>
+<area shape="rect" href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867" title=" " alt="" coords="1020,461,1103,488"/>
+<area shape="rect" href="box_8c.html#af7202ddf0b21ffe0de2d9d4b58784f16" title=" " alt="" coords="439,107,577,133"/>
+<area shape="rect" href="rings_8cpp.html#a77369fc4d5326a16d2c603e032023528" title=" " alt="" coords="489,629,527,656"/>
+<area shape="rect" href="convolutional__layer_8c.html#acca9262212caf9bda8a86e39954d929b" title=" " alt="" coords="446,513,570,554"/>
+<area shape="rect" href="network_8c.html#ae6ace48f77d38e97dff8fe86848320a6" title=" " alt="" coords="485,579,531,605"/>
+<area shape="rect" href="network_8c.html#a7eab6157b3e3092dc95ce02d8d85664f" title=" " alt="" coords="834,461,962,488"/>
+<area shape="rect" href="network_8c.html#ad25743407e072b2c124f4a01a9927df9" title=" " alt="" coords="824,411,972,437"/>
+<area shape="rect" href="utils_8c.html#a68966c4281f1bcbd7e30c94db429b0b9" title=" " alt="" coords="485,1491,531,1517"/>
+<area shape="rect" href="utils_8c.html#a841e9c07b05bfb9765ccb1b40c265b99" title=" " alt="" coords="665,1592,736,1619"/>
+<area shape="rect" href="list_8c.html#a4b177e1b5244311b3b9f5276c7f39946" title=" " alt="" coords="469,1389,547,1416"/>
+<area shape="rect" href="list_8c.html#af11d92bfb01b1a2df143722c751ec379" title=" " alt="" coords="469,1541,547,1568"/>
+<area shape="rect" href="image_8c.html#ad261f655bdf097a0c59699757cdcfd0d" title=" " alt="" coords="841,284,955,311"/>
+<area shape="rect" href="parser_8c.html#a44f852b4df699d0ccbaf8e3532bd9380" title=" " alt="" coords="443,1643,573,1669"/>
+<area shape="rect" href="network_8c.html#a3d37980bfc1ac87112a8cb750a863086" title=" " alt="" coords="451,1693,565,1720"/>
+<area shape="rect" href="network_8c.html#a80be2d9576b5e94e38f2e5337159c2a0" title=" " alt="" coords="441,1744,575,1771"/>
+<area shape="rect" href="option__list_8c.html#aecd8ecc2185bfb15d886100f159dd7da" title=" " alt="" coords="856,1085,940,1112"/>
+<area shape="rect" href="parser_8c.html#ad60222e5d4d28460b7c39cea754afbf5" title=" " alt="" coords="463,1288,553,1315"/>
+<area shape="rect" href="utils_8c.html#a18c9530c3574f2eadefc8d6cddf4ccb6" title=" " alt="" coords="677,933,725,960"/>
+<area shape="rect" href="parser_8c.html#a97c3da45ea6b7b689493efb262b35de8" title=" " alt="" coords="462,781,554,808"/>
+<area shape="rect" href="parser_8c.html#ad1828ac8171ebfd2b0810efb68a892d8" title=" " alt="" coords="466,832,550,859"/>
+<area shape="rect" href="network_8c.html#ad2dcde69603d71857d11484ae99bd8fe" title=" " alt="" coords="455,933,561,960"/>
+<area shape="rect" href="option__list_8c.html#a9288689d608093160368113dbdd8ba34" title=" " alt="" coords="625,1085,776,1112"/>
+<area shape="rect" href="option__list_8c.html#a8d1e0e1e5d373284b9fccf658239ee35" title=" " alt="" coords="631,1035,771,1061"/>
+<area shape="rect" href="option__list_8c.html#abbe6c95ecd6cf53e02d0e49c2cc6adac" title=" " alt="" coords="455,1136,561,1163"/>
+<area shape="rect" href="parser_8c.html#aa6d3ed6372d755d53624f85c06da7dbe" title=" " alt="" coords="451,1237,565,1264"/>
+<area shape="rect" href="parser_8c.html#ad30661bf80ffee22a45132dbcd53043d" title=" " alt="" coords="456,883,560,909"/>
+<area shape="rect" href="parser_8c.html#a912380cd9e2ee925a2e0af57cbde0511" title=" " alt="" coords="447,1187,569,1213"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">变量说明</h2>
+<a id="a5522024919a839fff7d996d9641d2a68" name="a5522024919a839fff7d996d9641d2a68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5522024919a839fff7d996d9641d2a68">&#9670;&nbsp;</a></span>check_mistakes</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int check_mistakes = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a510b483a1df4daf892d602b2deedd78d" name="a510b483a1df4daf892d602b2deedd78d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a510b483a1df4daf892d602b2deedd78d">&#9670;&nbsp;</a></span>coco_ids</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int coco_ids[] = { 1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,20,21,22,23,24,25,27,28,31,32,33,34,35,36,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,67,70,72,73,74,75,76,77,78,79,80,81,82,84,85,86,87,88,89,90 }</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>

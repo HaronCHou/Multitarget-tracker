@@ -1,0 +1,159 @@
+\hypertarget{rings_8cpp}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Tracker/graph/rings.cpp 文件参考}
+\label{rings_8cpp}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/rings.cpp@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/rings.cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$queue$>$}\newline
+{\ttfamily \#include $<$GTL/\+GTL.\+h$>$}\newline
+{\ttfamily \#include $<$GTL/bfs.\+h$>$}\newline
+{\ttfamily \#include $<$GTL/dfs.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}gport.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mygraph.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mytree.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+rings.\+cpp 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{rings_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_compare_nodes}{Compare\+Nodes}}
+\item 
+class \mbox{\hyperlink{classmydfs}{mydfs}}
+\item 
+class \mbox{\hyperlink{classmybfs}{mybfs}}
+\end{DoxyCompactItemize}
+\doxysubsection*{宏定义}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{rings_8cpp_ae71449b1cc6e6250b91f539153a7a0d3}{M\+\_\+\+PI}}~3.\+14159265358979323846
+\item 
+\#define \mbox{\hyperlink{rings_8cpp_a2eb03319e5ccdc1a14b73a7d8b1724de}{SQR}}(X)~((X) $\ast$ (X))
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{rings_8cpp_a0d0f6c38125e5c0fcec470518e4a4c45}{Show\+Time\+Used}} (clock\+\_\+t \&\mbox{\hyperlink{rings_8cpp_af5fee1efab2775b22e237b85d856d7f8}{t0}}, clock\+\_\+t \&\mbox{\hyperlink{rings_8cpp_a214bd1a0500f5739ce581a8bcffb518a}{t1}})
+\item 
+double \mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}} (double \&\mbox{\hyperlink{rings_8cpp_aad2cc6a2ec44dae25504cc8f1c2cff5c}{R1}}, double \&R2, int n)
+\item 
+int \mbox{\hyperlink{rings_8cpp_ac0f2228420376f4db7e1274f2b41667c}{main}} (int argc, const char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\doxysubsection*{变量}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_g_postscript_port}{GPostscript\+Port}} \mbox{\hyperlink{rings_8cpp_aa9df5aa3976a89a96a5f1c7611d42938}{g}}
+\item 
+clock\+\_\+t \mbox{\hyperlink{rings_8cpp_af5fee1efab2775b22e237b85d856d7f8}{t0}}
+\item 
+clock\+\_\+t \mbox{\hyperlink{rings_8cpp_a214bd1a0500f5739ce581a8bcffb518a}{t1}}
+\item 
+\mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ int $>$ \mbox{\hyperlink{rings_8cpp_a021486f59a5a82e4020e5f4ce19b57a9}{num\+\_\+children}}
+\item 
+\mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ int $>$ \mbox{\hyperlink{rings_8cpp_ae20dca00c1e05052649489eb4ffe212f}{num\+\_\+grandchildren}}
+\item 
+\mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ double $>$ \mbox{\hyperlink{rings_8cpp_aad2cc6a2ec44dae25504cc8f1c2cff5c}{R1}}
+\item 
+\mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ \mbox{\hyperlink{class_g_point}{GPoint}} $>$ \mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}
+\item 
+\mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ bool $>$ \mbox{\hyperlink{rings_8cpp_a2813a60dd1c26fe13eb1970f25012d8c}{outer\+\_\+ring}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{宏定义说明}
+\mbox{\Hypertarget{rings_8cpp_ae71449b1cc6e6250b91f539153a7a0d3}\label{rings_8cpp_ae71449b1cc6e6250b91f539153a7a0d3}} 
+\index{rings.cpp@{rings.cpp}!M\_PI@{M\_PI}}
+\index{M\_PI@{M\_PI}!rings.cpp@{rings.cpp}}
+\doxysubsubsection{\texorpdfstring{M\_PI}{M\_PI}}
+{\footnotesize\ttfamily \#define M\+\_\+\+PI~3.\+14159265358979323846}
+
+\mbox{\Hypertarget{rings_8cpp_a2eb03319e5ccdc1a14b73a7d8b1724de}\label{rings_8cpp_a2eb03319e5ccdc1a14b73a7d8b1724de}} 
+\index{rings.cpp@{rings.cpp}!SQR@{SQR}}
+\index{SQR@{SQR}!rings.cpp@{rings.cpp}}
+\doxysubsubsection{\texorpdfstring{SQR}{SQR}}
+{\footnotesize\ttfamily \#define SQR(\begin{DoxyParamCaption}\item[{}]{X }\end{DoxyParamCaption})~((X) $\ast$ (X))}
+
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{rings_8cpp_a77369fc4d5326a16d2c603e032023528}\label{rings_8cpp_a77369fc4d5326a16d2c603e032023528}} 
+\index{rings.cpp@{rings.cpp}!f@{f}}
+\index{f@{f}!rings.cpp@{rings.cpp}}
+\doxysubsubsection{\texorpdfstring{f()}{f()}}
+{\footnotesize\ttfamily double f (\begin{DoxyParamCaption}\item[{double \&}]{R1,  }\item[{double \&}]{R2,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{rings_8cpp_ac0f2228420376f4db7e1274f2b41667c}\label{rings_8cpp_ac0f2228420376f4db7e1274f2b41667c}} 
+\index{rings.cpp@{rings.cpp}!main@{main}}
+\index{main@{main}!rings.cpp@{rings.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{const char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{rings_8cpp_ac0f2228420376f4db7e1274f2b41667c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{rings_8cpp_a0d0f6c38125e5c0fcec470518e4a4c45}\label{rings_8cpp_a0d0f6c38125e5c0fcec470518e4a4c45}} 
+\index{rings.cpp@{rings.cpp}!ShowTimeUsed@{ShowTimeUsed}}
+\index{ShowTimeUsed@{ShowTimeUsed}!rings.cpp@{rings.cpp}}
+\doxysubsubsection{\texorpdfstring{ShowTimeUsed()}{ShowTimeUsed()}}
+{\footnotesize\ttfamily void Show\+Time\+Used (\begin{DoxyParamCaption}\item[{clock\+\_\+t \&}]{t0,  }\item[{clock\+\_\+t \&}]{t1 }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{变量说明}
+\mbox{\Hypertarget{rings_8cpp_aa9df5aa3976a89a96a5f1c7611d42938}\label{rings_8cpp_aa9df5aa3976a89a96a5f1c7611d42938}} 
+\index{rings.cpp@{rings.cpp}!g@{g}}
+\index{g@{g}!rings.cpp@{rings.cpp}}
+\doxysubsubsection{\texorpdfstring{g}{g}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_g_postscript_port}{GPostscript\+Port}} g}
+
+\mbox{\Hypertarget{rings_8cpp_a021486f59a5a82e4020e5f4ce19b57a9}\label{rings_8cpp_a021486f59a5a82e4020e5f4ce19b57a9}} 
+\index{rings.cpp@{rings.cpp}!num\_children@{num\_children}}
+\index{num\_children@{num\_children}!rings.cpp@{rings.cpp}}
+\doxysubsubsection{\texorpdfstring{num\_children}{num\_children}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$int$>$ num\+\_\+children}
+
+\mbox{\Hypertarget{rings_8cpp_ae20dca00c1e05052649489eb4ffe212f}\label{rings_8cpp_ae20dca00c1e05052649489eb4ffe212f}} 
+\index{rings.cpp@{rings.cpp}!num\_grandchildren@{num\_grandchildren}}
+\index{num\_grandchildren@{num\_grandchildren}!rings.cpp@{rings.cpp}}
+\doxysubsubsection{\texorpdfstring{num\_grandchildren}{num\_grandchildren}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$int$>$ num\+\_\+grandchildren}
+
+\mbox{\Hypertarget{rings_8cpp_a2813a60dd1c26fe13eb1970f25012d8c}\label{rings_8cpp_a2813a60dd1c26fe13eb1970f25012d8c}} 
+\index{rings.cpp@{rings.cpp}!outer\_ring@{outer\_ring}}
+\index{outer\_ring@{outer\_ring}!rings.cpp@{rings.cpp}}
+\doxysubsubsection{\texorpdfstring{outer\_ring}{outer\_ring}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$bool$>$ outer\+\_\+ring}
+
+\mbox{\Hypertarget{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}\label{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}} 
+\index{rings.cpp@{rings.cpp}!pt@{pt}}
+\index{pt@{pt}!rings.cpp@{rings.cpp}}
+\doxysubsubsection{\texorpdfstring{pt}{pt}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$\mbox{\hyperlink{class_g_point}{GPoint}}$>$ pt}
+
+\mbox{\Hypertarget{rings_8cpp_aad2cc6a2ec44dae25504cc8f1c2cff5c}\label{rings_8cpp_aad2cc6a2ec44dae25504cc8f1c2cff5c}} 
+\index{rings.cpp@{rings.cpp}!R1@{R1}}
+\index{R1@{R1}!rings.cpp@{rings.cpp}}
+\doxysubsubsection{\texorpdfstring{R1}{R1}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$double$>$ R1}
+
+\mbox{\Hypertarget{rings_8cpp_af5fee1efab2775b22e237b85d856d7f8}\label{rings_8cpp_af5fee1efab2775b22e237b85d856d7f8}} 
+\index{rings.cpp@{rings.cpp}!t0@{t0}}
+\index{t0@{t0}!rings.cpp@{rings.cpp}}
+\doxysubsubsection{\texorpdfstring{t0}{t0}}
+{\footnotesize\ttfamily clock\+\_\+t t0}
+
+\mbox{\Hypertarget{rings_8cpp_a214bd1a0500f5739ce581a8bcffb518a}\label{rings_8cpp_a214bd1a0500f5739ce581a8bcffb518a}} 
+\index{rings.cpp@{rings.cpp}!t1@{t1}}
+\index{t1@{t1}!rings.cpp@{rings.cpp}}
+\doxysubsubsection{\texorpdfstring{t1}{t1}}
+{\footnotesize\ttfamily clock\+\_\+t t1}
+

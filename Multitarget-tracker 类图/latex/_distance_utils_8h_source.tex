@@ -1,0 +1,290 @@
+\hypertarget{_distance_utils_8h_source}{}\doxysection{Distance\+Utils.\+h}
+\label{_distance_utils_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/Subsense/DistanceUtils.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/Subsense/DistanceUtils.h}}
+\mbox{\hyperlink{_distance_utils_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <opencv2/core/types\_c.h>}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{6 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keyword}{typename} std::enable\_if<std::is\_integral<T>::value,\textcolor{keywordtype}{size\_t}>::type \mbox{\hyperlink{_distance_utils_8h_a491d1856f312aea816a8248331326523}{L1dist}}(T a, T b) \{}
+\DoxyCodeLine{7     \textcolor{keywordflow}{return} (\textcolor{keywordtype}{size\_t})abs((\textcolor{keywordtype}{int})a-\/b);}
+\DoxyCodeLine{8 \}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{11 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keyword}{typename} std::enable\_if<std::is\_floating\_point<T>::value,\textcolor{keywordtype}{float}>::type \mbox{\hyperlink{_distance_utils_8h_a491d1856f312aea816a8248331326523}{L1dist}}(T a, T b) \{}
+\DoxyCodeLine{12     \textcolor{keywordflow}{return} fabs((\textcolor{keywordtype}{float})a-\/(\textcolor{keywordtype}{float})b);}
+\DoxyCodeLine{13 \}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{16 \textcolor{keyword}{template}<\textcolor{keywordtype}{size\_t} nChannels, \textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keyword}{auto} \mbox{\hyperlink{_distance_utils_8h_a491d1856f312aea816a8248331326523}{L1dist}}(\textcolor{keyword}{const} T* a, \textcolor{keyword}{const} T* b) -\/> \textcolor{keyword}{decltype}(\mbox{\hyperlink{_distance_utils_8h_a491d1856f312aea816a8248331326523}{L1dist}}(*a,*b)) \{}
+\DoxyCodeLine{17     \textcolor{keyword}{decltype}(\mbox{\hyperlink{_distance_utils_8h_a491d1856f312aea816a8248331326523}{L1dist}}(*a,*b)) oResult = 0;}
+\DoxyCodeLine{18     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} c=0; c<nChannels; ++c)}
+\DoxyCodeLine{19         oResult += \mbox{\hyperlink{_distance_utils_8h_a491d1856f312aea816a8248331326523}{L1dist}}(a[c],b[c]);}
+\DoxyCodeLine{20     \textcolor{keywordflow}{return} oResult;}
+\DoxyCodeLine{21 \}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{24 \textcolor{keyword}{template}<\textcolor{keywordtype}{size\_t} nChannels, \textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keyword}{auto} \mbox{\hyperlink{_distance_utils_8h_a491d1856f312aea816a8248331326523}{L1dist}}(\textcolor{keyword}{const} T* a, \textcolor{keyword}{const} T* b, \textcolor{keywordtype}{size\_t} nElements, \textcolor{keyword}{const} uchar* m=NULL) -\/> \textcolor{keyword}{decltype}(L1dist<nChannels>(a,b)) \{}
+\DoxyCodeLine{25     \textcolor{keyword}{decltype}(L1dist<nChannels>(a,b)) oResult = 0;}
+\DoxyCodeLine{26     \textcolor{keywordtype}{size\_t} nTotElements = nElements*nChannels;}
+\DoxyCodeLine{27     \textcolor{keywordflow}{if}(m) \{}
+\DoxyCodeLine{28         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} n=0,i=0; n<nTotElements; n+=nChannels,++i)}
+\DoxyCodeLine{29             \textcolor{keywordflow}{if}(m[i])}
+\DoxyCodeLine{30                 oResult += L1dist<nChannels>(a+n,b+n);}
+\DoxyCodeLine{31     \}}
+\DoxyCodeLine{32     \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{33         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} n=0; n<nTotElements; n+=nChannels)}
+\DoxyCodeLine{34             oResult += L1dist<nChannels>(a+n,b+n);}
+\DoxyCodeLine{35     \}}
+\DoxyCodeLine{36     \textcolor{keywordflow}{return} oResult;}
+\DoxyCodeLine{37 \}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{40 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keyword}{auto} \mbox{\hyperlink{_distance_utils_8h_a491d1856f312aea816a8248331326523}{L1dist}}(\textcolor{keyword}{const} T* a, \textcolor{keyword}{const} T* b, \textcolor{keywordtype}{size\_t} nElements, \textcolor{keywordtype}{size\_t} nChannels, \textcolor{keyword}{const} uchar* m=NULL) -\/> \textcolor{keyword}{decltype}(L1dist<3>(a,b,nElements,m)) \{}
+\DoxyCodeLine{41     CV\_Assert(nChannels>0 \&\& nChannels<=4);}
+\DoxyCodeLine{42     \textcolor{keywordflow}{switch}(nChannels) \{}
+\DoxyCodeLine{43         \textcolor{keywordflow}{case} 1: \textcolor{keywordflow}{return} L1dist<1>(a,b,nElements,m);}
+\DoxyCodeLine{44         \textcolor{keywordflow}{case} 2: \textcolor{keywordflow}{return} L1dist<2>(a,b,nElements,m);}
+\DoxyCodeLine{45         \textcolor{keywordflow}{case} 3: \textcolor{keywordflow}{return} L1dist<3>(a,b,nElements,m);}
+\DoxyCodeLine{46         \textcolor{keywordflow}{case} 4: \textcolor{keywordflow}{return} L1dist<4>(a,b,nElements,m);}
+\DoxyCodeLine{47         \textcolor{keywordflow}{default}: \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{48     \}}
+\DoxyCodeLine{49 \}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{52 \textcolor{keyword}{template}<\textcolor{keywordtype}{size\_t} nChannels, \textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keyword}{auto} \mbox{\hyperlink{_distance_utils_8h_a6f78ab3fadb020f26b58a38443f116fc}{L1dist\_}}(\textcolor{keyword}{const} cv::Vec<T,nChannels>\& a, \textcolor{keyword}{const} cv::Vec<T,nChannels>\& b) -\/> \textcolor{keyword}{decltype}(L1dist<nChannels,T>((T*)(0),(T*)(0))) \{}
+\DoxyCodeLine{53     T a\_array[nChannels], b\_array[nChannels];}
+\DoxyCodeLine{54     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} c=0; c<nChannels; ++c) \{}
+\DoxyCodeLine{55         a\_array[c] = a[(int)c];}
+\DoxyCodeLine{56         b\_array[c] = b[(int)c];}
+\DoxyCodeLine{57     \}}
+\DoxyCodeLine{58     \textcolor{keywordflow}{return} L1dist<nChannels>(a\_array,b\_array);}
+\DoxyCodeLine{59 \}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{62 }
+\DoxyCodeLine{64 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keyword}{auto} \mbox{\hyperlink{_distance_utils_8h_a07d56fc246495b7670f9d1dceb9cda28}{L2sqrdist}}(T a, T b) -\/> \textcolor{keyword}{decltype}(\mbox{\hyperlink{_distance_utils_8h_a491d1856f312aea816a8248331326523}{L1dist}}(a,b)) \{}
+\DoxyCodeLine{65     \textcolor{keyword}{auto} oResult = \mbox{\hyperlink{_distance_utils_8h_a491d1856f312aea816a8248331326523}{L1dist}}(a,b);}
+\DoxyCodeLine{66     \textcolor{keywordflow}{return} oResult*oResult;}
+\DoxyCodeLine{67 \}}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{70 \textcolor{keyword}{template}<\textcolor{keywordtype}{size\_t} nChannels, \textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keyword}{auto} \mbox{\hyperlink{_distance_utils_8h_a07d56fc246495b7670f9d1dceb9cda28}{L2sqrdist}}(\textcolor{keyword}{const} T* a, \textcolor{keyword}{const} T* b) -\/> \textcolor{keyword}{decltype}(\mbox{\hyperlink{_distance_utils_8h_a07d56fc246495b7670f9d1dceb9cda28}{L2sqrdist}}(*a,*b)) \{}
+\DoxyCodeLine{71     \textcolor{keyword}{decltype}(\mbox{\hyperlink{_distance_utils_8h_a07d56fc246495b7670f9d1dceb9cda28}{L2sqrdist}}(*a,*b)) oResult = 0;}
+\DoxyCodeLine{72     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} c=0; c<nChannels; ++c)}
+\DoxyCodeLine{73         oResult += \mbox{\hyperlink{_distance_utils_8h_a07d56fc246495b7670f9d1dceb9cda28}{L2sqrdist}}(a[c],b[c]);}
+\DoxyCodeLine{74     \textcolor{keywordflow}{return} oResult;}
+\DoxyCodeLine{75 \}}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{78 \textcolor{keyword}{template}<\textcolor{keywordtype}{size\_t} nChannels, \textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keyword}{auto} \mbox{\hyperlink{_distance_utils_8h_a07d56fc246495b7670f9d1dceb9cda28}{L2sqrdist}}(\textcolor{keyword}{const} T* a, \textcolor{keyword}{const} T* b, \textcolor{keywordtype}{size\_t} nElements, \textcolor{keyword}{const} uchar* m=NULL) -\/> \textcolor{keyword}{decltype}(L2sqrdist<nChannels>(a,b)) \{}
+\DoxyCodeLine{79     \textcolor{keyword}{decltype}(L2sqrdist<nChannels>(a,b)) oResult = 0;}
+\DoxyCodeLine{80     \textcolor{keywordtype}{size\_t} nTotElements = nElements*nChannels;}
+\DoxyCodeLine{81     \textcolor{keywordflow}{if}(m) \{}
+\DoxyCodeLine{82         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} n=0,i=0; n<nTotElements; n+=nChannels,++i)}
+\DoxyCodeLine{83             \textcolor{keywordflow}{if}(m[i])}
+\DoxyCodeLine{84                 oResult += L2sqrdist<nChannels>(a+n,b+n);}
+\DoxyCodeLine{85     \}}
+\DoxyCodeLine{86     \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{87         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} n=0; n<nTotElements; n+=nChannels)}
+\DoxyCodeLine{88             oResult += L2sqrdist<nChannels>(a+n,b+n);}
+\DoxyCodeLine{89     \}}
+\DoxyCodeLine{90     \textcolor{keywordflow}{return} oResult;}
+\DoxyCodeLine{91 \}}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{94 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keyword}{auto} \mbox{\hyperlink{_distance_utils_8h_a07d56fc246495b7670f9d1dceb9cda28}{L2sqrdist}}(\textcolor{keyword}{const} T* a, \textcolor{keyword}{const} T* b, \textcolor{keywordtype}{size\_t} nElements, \textcolor{keywordtype}{size\_t} nChannels, \textcolor{keyword}{const} uchar* m=NULL) -\/> \textcolor{keyword}{decltype}(L2sqrdist<3>(a,b,nElements,m)) \{}
+\DoxyCodeLine{95     CV\_Assert(nChannels>0 \&\& nChannels<=4);}
+\DoxyCodeLine{96     \textcolor{keywordflow}{switch}(nChannels) \{}
+\DoxyCodeLine{97         \textcolor{keywordflow}{case} 1: \textcolor{keywordflow}{return} L2sqrdist<1>(a,b,nElements,m);}
+\DoxyCodeLine{98         \textcolor{keywordflow}{case} 2: \textcolor{keywordflow}{return} L2sqrdist<2>(a,b,nElements,m);}
+\DoxyCodeLine{99         \textcolor{keywordflow}{case} 3: \textcolor{keywordflow}{return} L2sqrdist<3>(a,b,nElements,m);}
+\DoxyCodeLine{100         \textcolor{keywordflow}{case} 4: \textcolor{keywordflow}{return} L2sqrdist<4>(a,b,nElements,m);}
+\DoxyCodeLine{101         \textcolor{keywordflow}{default}: \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{102     \}}
+\DoxyCodeLine{103 \}}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{106 \textcolor{keyword}{template}<\textcolor{keywordtype}{size\_t} nChannels, \textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keyword}{auto} \mbox{\hyperlink{_distance_utils_8h_a9076f7ac1b6e7b73267d375e16b4bacc}{L2sqrdist\_}}(\textcolor{keyword}{const} cv::Vec<T,nChannels>\& a, \textcolor{keyword}{const} cv::Vec<T,nChannels>\& b) -\/> \textcolor{keyword}{decltype}(L2sqrdist<nChannels,T>((T*)(0),(T*)(0))) \{}
+\DoxyCodeLine{107     T a\_array[nChannels], b\_array[nChannels];}
+\DoxyCodeLine{108     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} c=0; c<nChannels; ++c) \{}
+\DoxyCodeLine{109         a\_array[c] = a[(int)c];}
+\DoxyCodeLine{110         b\_array[c] = b[(int)c];}
+\DoxyCodeLine{111     \}}
+\DoxyCodeLine{112     \textcolor{keywordflow}{return} L2sqrdist<nChannels>(a\_array,b\_array);}
+\DoxyCodeLine{113 \}}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{116 \textcolor{keyword}{template}<\textcolor{keywordtype}{size\_t} nChannels, \textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{float} \mbox{\hyperlink{_distance_utils_8h_a2d0d83af4f531dd9efd02c49f933e3c1}{L2dist}}(\textcolor{keyword}{const} T* a, \textcolor{keyword}{const} T* b) \{}
+\DoxyCodeLine{117     \textcolor{keyword}{decltype}(\mbox{\hyperlink{_distance_utils_8h_a07d56fc246495b7670f9d1dceb9cda28}{L2sqrdist}}(*a,*b)) oResult = 0;}
+\DoxyCodeLine{118     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} c=0; c<nChannels; ++c)}
+\DoxyCodeLine{119         oResult += \mbox{\hyperlink{_distance_utils_8h_a07d56fc246495b7670f9d1dceb9cda28}{L2sqrdist}}(a[c],b[c]);}
+\DoxyCodeLine{120     \textcolor{keywordflow}{return} sqrt((\textcolor{keywordtype}{float})oResult);}
+\DoxyCodeLine{121 \}}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{124 \textcolor{keyword}{template}<\textcolor{keywordtype}{size\_t} nChannels, \textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{float} \mbox{\hyperlink{_distance_utils_8h_a2d0d83af4f531dd9efd02c49f933e3c1}{L2dist}}(\textcolor{keyword}{const} T* a, \textcolor{keyword}{const} T* b, \textcolor{keywordtype}{size\_t} nElements, \textcolor{keyword}{const} uchar* m=NULL) \{}
+\DoxyCodeLine{125     \textcolor{keyword}{decltype}(L2sqrdist<nChannels>(a,b)) oResult = 0;}
+\DoxyCodeLine{126     \textcolor{keywordtype}{size\_t} nTotElements = nElements*nChannels;}
+\DoxyCodeLine{127     \textcolor{keywordflow}{if}(m) \{}
+\DoxyCodeLine{128         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} n=0,i=0; n<nTotElements; n+=nChannels,++i)}
+\DoxyCodeLine{129             \textcolor{keywordflow}{if}(m[i])}
+\DoxyCodeLine{130                 oResult += L2sqrdist<nChannels>(a+n,b+n);}
+\DoxyCodeLine{131     \}}
+\DoxyCodeLine{132     \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{133         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} n=0; n<nTotElements; n+=nChannels)}
+\DoxyCodeLine{134             oResult += L2sqrdist<nChannels>(a+n,b+n);}
+\DoxyCodeLine{135     \}}
+\DoxyCodeLine{136     \textcolor{keywordflow}{return} sqrt((\textcolor{keywordtype}{float})oResult);}
+\DoxyCodeLine{137 \}}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{140 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{float} \mbox{\hyperlink{_distance_utils_8h_a2d0d83af4f531dd9efd02c49f933e3c1}{L2dist}}(\textcolor{keyword}{const} T* a, \textcolor{keyword}{const} T* b, \textcolor{keywordtype}{size\_t} nElements, \textcolor{keywordtype}{size\_t} nChannels, \textcolor{keyword}{const} uchar* m=NULL) \{}
+\DoxyCodeLine{141     CV\_Assert(nChannels>0 \&\& nChannels<=4);}
+\DoxyCodeLine{142     \textcolor{keywordflow}{switch}(nChannels) \{}
+\DoxyCodeLine{143         \textcolor{keywordflow}{case} 1: \textcolor{keywordflow}{return} L2dist<1>(a,b,nElements,m);}
+\DoxyCodeLine{144         \textcolor{keywordflow}{case} 2: \textcolor{keywordflow}{return} L2dist<2>(a,b,nElements,m);}
+\DoxyCodeLine{145         \textcolor{keywordflow}{case} 3: \textcolor{keywordflow}{return} L2dist<3>(a,b,nElements,m);}
+\DoxyCodeLine{146         \textcolor{keywordflow}{case} 4: \textcolor{keywordflow}{return} L2dist<4>(a,b,nElements,m);}
+\DoxyCodeLine{147         \textcolor{keywordflow}{default}: \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{148     \}}
+\DoxyCodeLine{149 \}}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{152 \textcolor{keyword}{template}<\textcolor{keywordtype}{size\_t} nChannels, \textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{float} \mbox{\hyperlink{_distance_utils_8h_a68040991132b7843d1cdf4d8a51bb653}{L2dist\_}}(\textcolor{keyword}{const} cv::Vec<T,nChannels>\& a, \textcolor{keyword}{const} cv::Vec<T,nChannels>\& b) \{}
+\DoxyCodeLine{153     T a\_array[nChannels], b\_array[nChannels];}
+\DoxyCodeLine{154     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} c=0; c<nChannels; ++c) \{}
+\DoxyCodeLine{155         a\_array[c] = a[(int)c];}
+\DoxyCodeLine{156         b\_array[c] = b[(int)c];}
+\DoxyCodeLine{157     \}}
+\DoxyCodeLine{158     \textcolor{keywordflow}{return} L2dist<nChannels>(a\_array,b\_array);}
+\DoxyCodeLine{159 \}}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{162 }
+\DoxyCodeLine{164 \textcolor{keyword}{template}<\textcolor{keywordtype}{size\_t} nChannels, \textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keyword}{typename} std::enable\_if<std::is\_integral<T>::value,\textcolor{keywordtype}{size\_t}>::type \mbox{\hyperlink{_distance_utils_8h_a624ca9051d431e30a9057069cd4ac2dd}{cdist}}(\textcolor{keyword}{const} T* curr, \textcolor{keyword}{const} T* bg) \{}
+\DoxyCodeLine{165     \textcolor{keyword}{static\_assert}(nChannels>1,\textcolor{stringliteral}{"{}cdist: requires more than one channel"{}});}
+\DoxyCodeLine{166     \textcolor{keywordtype}{size\_t} curr\_sqr = 0;}
+\DoxyCodeLine{167     \textcolor{keywordtype}{bool} bSkip = \textcolor{keyword}{true};}
+\DoxyCodeLine{168     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} c=0; c<nChannels; ++c) \{}
+\DoxyCodeLine{169         curr\_sqr += curr[c]*curr[c];}
+\DoxyCodeLine{170         bSkip = bSkip\&(bg[c]<=0);}
+\DoxyCodeLine{171     \}}
+\DoxyCodeLine{172     \textcolor{keywordflow}{if}(bSkip)}
+\DoxyCodeLine{173         \textcolor{keywordflow}{return} (\textcolor{keywordtype}{size\_t})sqrt((\textcolor{keywordtype}{float})curr\_sqr);}
+\DoxyCodeLine{174     \textcolor{keywordtype}{size\_t} bg\_sqr = 0;}
+\DoxyCodeLine{175     \textcolor{keywordtype}{size\_t} mix = 0;}
+\DoxyCodeLine{176     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} c=0; c<nChannels; ++c) \{}
+\DoxyCodeLine{177         bg\_sqr += bg[c]*bg[c];}
+\DoxyCodeLine{178         mix += curr[c]*bg[c];}
+\DoxyCodeLine{179     \}}
+\DoxyCodeLine{180     \textcolor{keywordflow}{return} (\textcolor{keywordtype}{size\_t})sqrt(curr\_sqr-\/((\textcolor{keywordtype}{float})(mix*mix)/bg\_sqr));}
+\DoxyCodeLine{181 \}}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{184 \textcolor{keyword}{template}<\textcolor{keywordtype}{size\_t} nChannels, \textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keyword}{typename} std::enable\_if<std::is\_floating\_point<T>::value,\textcolor{keywordtype}{float}>::type \mbox{\hyperlink{_distance_utils_8h_a624ca9051d431e30a9057069cd4ac2dd}{cdist}}(\textcolor{keyword}{const} T* curr, \textcolor{keyword}{const} T* bg) \{}
+\DoxyCodeLine{185     \textcolor{keyword}{static\_assert}(nChannels>1,\textcolor{stringliteral}{"{}cdist: requires more than one channel"{}});}
+\DoxyCodeLine{186     \textcolor{keywordtype}{float} curr\_sqr = 0;}
+\DoxyCodeLine{187     \textcolor{keywordtype}{bool} bSkip = \textcolor{keyword}{true};}
+\DoxyCodeLine{188     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} c=0; c<nChannels; ++c) \{}
+\DoxyCodeLine{189         curr\_sqr += (float)curr[c]*curr[c];}
+\DoxyCodeLine{190         bSkip = bSkip\&(bg[c]<=0);}
+\DoxyCodeLine{191     \}}
+\DoxyCodeLine{192     \textcolor{keywordflow}{if}(bSkip)}
+\DoxyCodeLine{193         \textcolor{keywordflow}{return} sqrt(curr\_sqr);}
+\DoxyCodeLine{194     \textcolor{keywordtype}{float} bg\_sqr = 0;}
+\DoxyCodeLine{195     \textcolor{keywordtype}{float} mix = 0;}
+\DoxyCodeLine{196     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} c=0; c<nChannels; ++c) \{}
+\DoxyCodeLine{197         bg\_sqr += (float)bg[c]*bg[c];}
+\DoxyCodeLine{198         mix += (float)curr[c]*bg[c];}
+\DoxyCodeLine{199     \}}
+\DoxyCodeLine{200     \textcolor{keywordflow}{return} sqrt(curr\_sqr-\/((mix*mix)/bg\_sqr));}
+\DoxyCodeLine{201 \}}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{204 \textcolor{keyword}{template}<\textcolor{keywordtype}{size\_t} nChannels, \textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keyword}{auto} \mbox{\hyperlink{_distance_utils_8h_a624ca9051d431e30a9057069cd4ac2dd}{cdist}}(\textcolor{keyword}{const} T* a, \textcolor{keyword}{const} T* b, \textcolor{keywordtype}{size\_t} nElements, \textcolor{keyword}{const} uchar* m=NULL) -\/> \textcolor{keyword}{decltype}(cdist<nChannels>(a,b)) \{}
+\DoxyCodeLine{205     \textcolor{keyword}{decltype}(cdist<nChannels>(a,b)) oResult = 0;}
+\DoxyCodeLine{206     \textcolor{keywordtype}{size\_t} nTotElements = nElements*nChannels;}
+\DoxyCodeLine{207     \textcolor{keywordflow}{if}(m) \{}
+\DoxyCodeLine{208         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} n=0,i=0; n<nTotElements; n+=nChannels,++i)}
+\DoxyCodeLine{209             \textcolor{keywordflow}{if}(m[i])}
+\DoxyCodeLine{210                 oResult += cdist<nChannels>(a+n,b+n);}
+\DoxyCodeLine{211     \}}
+\DoxyCodeLine{212     \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{213         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} n=0; n<nTotElements; n+=nChannels)}
+\DoxyCodeLine{214             oResult += cdist<nChannels>(a+n,b+n);}
+\DoxyCodeLine{215     \}}
+\DoxyCodeLine{216     \textcolor{keywordflow}{return} oResult;}
+\DoxyCodeLine{217 \}}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{220 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keyword}{auto} \mbox{\hyperlink{_distance_utils_8h_a624ca9051d431e30a9057069cd4ac2dd}{cdist}}(\textcolor{keyword}{const} T* a, \textcolor{keyword}{const} T* b, \textcolor{keywordtype}{size\_t} nElements, \textcolor{keywordtype}{size\_t} nChannels, \textcolor{keyword}{const} uchar* m=NULL) -\/> \textcolor{keyword}{decltype}(cdist<3>(a,b,nElements,m)) \{}
+\DoxyCodeLine{221     CV\_Assert(nChannels>1 \&\& nChannels<=4);}
+\DoxyCodeLine{222     \textcolor{keywordflow}{switch}(nChannels) \{}
+\DoxyCodeLine{223         \textcolor{keywordflow}{case} 2: \textcolor{keywordflow}{return} cdist<2>(a,b,nElements,m);}
+\DoxyCodeLine{224         \textcolor{keywordflow}{case} 3: \textcolor{keywordflow}{return} cdist<3>(a,b,nElements,m);}
+\DoxyCodeLine{225         \textcolor{keywordflow}{case} 4: \textcolor{keywordflow}{return} cdist<4>(a,b,nElements,m);}
+\DoxyCodeLine{226         \textcolor{keywordflow}{default}: \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{227     \}}
+\DoxyCodeLine{228 \}}
+\DoxyCodeLine{229 }
+\DoxyCodeLine{231 \textcolor{keyword}{template}<\textcolor{keywordtype}{size\_t} nChannels, \textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keyword}{auto} \mbox{\hyperlink{_distance_utils_8h_ac65ad7a36f2a1f9f11948b76e1181460}{cdist\_}}(\textcolor{keyword}{const} cv::Vec<T,nChannels>\& a, \textcolor{keyword}{const} cv::Vec<T,nChannels>\& b) -\/> \textcolor{keyword}{decltype}(cdist<nChannels,T>((T*)(0),(T*)(0))) \{}
+\DoxyCodeLine{232     T a\_array[nChannels], b\_array[nChannels];}
+\DoxyCodeLine{233     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} c=0; c<nChannels; ++c) \{}
+\DoxyCodeLine{234         a\_array[c] = a[(int)c];}
+\DoxyCodeLine{235         b\_array[c] = b[(int)c];}
+\DoxyCodeLine{236     \}}
+\DoxyCodeLine{237     \textcolor{keywordflow}{return} cdist<nChannels>(a\_array,b\_array);}
+\DoxyCodeLine{238 \}}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{241 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} T \mbox{\hyperlink{_distance_utils_8h_a64c0e3ac17d6870887d9fabbee7209e9}{cmixdist}}(T oL1Distance, T oCDistortion) \{}
+\DoxyCodeLine{242     \textcolor{keywordflow}{return} (oL1Distance/2+oCDistortion*4);}
+\DoxyCodeLine{243 \}}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{246 \textcolor{keyword}{template}<\textcolor{keywordtype}{size\_t} nChannels, \textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keyword}{typename} std::enable\_if<std::is\_integral<T>::value,\textcolor{keywordtype}{size\_t}>::type \mbox{\hyperlink{_distance_utils_8h_a64c0e3ac17d6870887d9fabbee7209e9}{cmixdist}}(\textcolor{keyword}{const} T* curr, \textcolor{keyword}{const} T* bg) \{}
+\DoxyCodeLine{247     \textcolor{keywordflow}{return} \mbox{\hyperlink{_distance_utils_8h_a64c0e3ac17d6870887d9fabbee7209e9}{cmixdist}}(L1dist<nChannels>(curr,bg),cdist<nChannels>(curr,bg));}
+\DoxyCodeLine{248 \}}
+\DoxyCodeLine{249 }
+\DoxyCodeLine{250 \textcolor{keyword}{template}<\textcolor{keywordtype}{size\_t} nChannels, \textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keyword}{typename} std::enable\_if<std::is\_floating\_point<T>::value,\textcolor{keywordtype}{float}>::type \mbox{\hyperlink{_distance_utils_8h_a64c0e3ac17d6870887d9fabbee7209e9}{cmixdist}}(\textcolor{keyword}{const} T* curr, \textcolor{keyword}{const} T* bg) \{}
+\DoxyCodeLine{251     \textcolor{keywordflow}{return} \mbox{\hyperlink{_distance_utils_8h_a64c0e3ac17d6870887d9fabbee7209e9}{cmixdist}}(L1dist<nChannels>(curr,bg),cdist<nChannels>(curr,bg));}
+\DoxyCodeLine{252 \}}
+\DoxyCodeLine{253 }
+\DoxyCodeLine{255 }
+\DoxyCodeLine{257 \textcolor{keyword}{static} \textcolor{keyword}{const} uchar \mbox{\hyperlink{_distance_utils_8h_a989c6705049f6e12d6cf6314ec471732}{popcount\_LUT8}}[256] = \{}
+\DoxyCodeLine{258     0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4,}
+\DoxyCodeLine{259     1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,}
+\DoxyCodeLine{260     1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,}
+\DoxyCodeLine{261     2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,}
+\DoxyCodeLine{262     1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,}
+\DoxyCodeLine{263     2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,}
+\DoxyCodeLine{264     2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,}
+\DoxyCodeLine{265     3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,}
+\DoxyCodeLine{266     1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5,}
+\DoxyCodeLine{267     2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,}
+\DoxyCodeLine{268     2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,}
+\DoxyCodeLine{269     3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,}
+\DoxyCodeLine{270     2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6,}
+\DoxyCodeLine{271     3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,}
+\DoxyCodeLine{272     3, 4, 4, 5, 4, 5, 5, 6, 4, 5, 5, 6, 5, 6, 6, 7,}
+\DoxyCodeLine{273     4, 5, 5, 6, 5, 6, 6, 7, 5, 6, 6, 7, 6, 7, 7, 8,}
+\DoxyCodeLine{274 \};}
+\DoxyCodeLine{275 }
+\DoxyCodeLine{277 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{_distance_utils_8h_a4a3115575087346e42d27f3a95c753d8}{popcount}}(T \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}) \{}
+\DoxyCodeLine{278     \textcolor{keywordtype}{size\_t} nBytes = \textcolor{keyword}{sizeof}(T);}
+\DoxyCodeLine{279     \textcolor{keywordtype}{size\_t} nResult = 0;}
+\DoxyCodeLine{280     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} l=0; l<nBytes; ++l)}
+\DoxyCodeLine{281         nResult += \mbox{\hyperlink{_distance_utils_8h_a989c6705049f6e12d6cf6314ec471732}{popcount\_LUT8}}[(uchar)(\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}>>l*8)];}
+\DoxyCodeLine{282     \textcolor{keywordflow}{return} nResult;}
+\DoxyCodeLine{283 \}}
+\DoxyCodeLine{284 }
+\DoxyCodeLine{286 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{_distance_utils_8h_ab13812ef6e21af771d6c0a856cd941b0}{hdist}}(T a, T b) \{}
+\DoxyCodeLine{287     \textcolor{keywordflow}{return} \mbox{\hyperlink{_distance_utils_8h_a4a3115575087346e42d27f3a95c753d8}{popcount}}(a\string^b);}
+\DoxyCodeLine{288 \}}
+\DoxyCodeLine{289 }
+\DoxyCodeLine{291 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{_distance_utils_8h_aac2e775a57cc0c0630a2f25f278df10b}{gdist}}(T a, T b) \{}
+\DoxyCodeLine{292     \textcolor{keywordflow}{return} \mbox{\hyperlink{_distance_utils_8h_a491d1856f312aea816a8248331326523}{L1dist}}(\mbox{\hyperlink{_distance_utils_8h_a4a3115575087346e42d27f3a95c753d8}{popcount}}(a),\mbox{\hyperlink{_distance_utils_8h_a4a3115575087346e42d27f3a95c753d8}{popcount}}(b));}
+\DoxyCodeLine{293 \}}
+\DoxyCodeLine{294 }
+\DoxyCodeLine{296 \textcolor{keyword}{template}<\textcolor{keywordtype}{size\_t} nChannels, \textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{_distance_utils_8h_a4a3115575087346e42d27f3a95c753d8}{popcount}}(\textcolor{keyword}{const} T* \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}) \{}
+\DoxyCodeLine{297     \textcolor{keywordtype}{size\_t} nBytes = \textcolor{keyword}{sizeof}(T);}
+\DoxyCodeLine{298     \textcolor{keywordtype}{size\_t} nResult = 0;}
+\DoxyCodeLine{299     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} c=0; c<nChannels; ++c)}
+\DoxyCodeLine{300         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} l=0; l<nBytes; ++l)}
+\DoxyCodeLine{301             nResult += \mbox{\hyperlink{_distance_utils_8h_a989c6705049f6e12d6cf6314ec471732}{popcount\_LUT8}}[(uchar)(*(\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}+c)>>l*8)];}
+\DoxyCodeLine{302     \textcolor{keywordflow}{return} nResult;}
+\DoxyCodeLine{303 \}}
+\DoxyCodeLine{304 }
+\DoxyCodeLine{306 \textcolor{keyword}{template}<\textcolor{keywordtype}{size\_t} nChannels, \textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{_distance_utils_8h_ab13812ef6e21af771d6c0a856cd941b0}{hdist}}(\textcolor{keyword}{const} T* a, \textcolor{keyword}{const} T* b) \{}
+\DoxyCodeLine{307     T xor\_array[nChannels];}
+\DoxyCodeLine{308     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} c=0; c<nChannels; ++c)}
+\DoxyCodeLine{309         xor\_array[c] = a[c]\string^b[c];}
+\DoxyCodeLine{310     \textcolor{keywordflow}{return} popcount<nChannels>(xor\_array);}
+\DoxyCodeLine{311 \}}
+\DoxyCodeLine{312 }
+\DoxyCodeLine{314 \textcolor{keyword}{template}<\textcolor{keywordtype}{size\_t} nChannels, \textcolor{keyword}{typename} T> \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{_distance_utils_8h_aac2e775a57cc0c0630a2f25f278df10b}{gdist}}(\textcolor{keyword}{const} T* a, \textcolor{keyword}{const} T* b) \{}
+\DoxyCodeLine{315     \textcolor{keywordflow}{return} \mbox{\hyperlink{_distance_utils_8h_a491d1856f312aea816a8248331326523}{L1dist}}(popcount<nChannels>(a),popcount<nChannels>(b));}
+\DoxyCodeLine{316 \}}
+
+\end{DoxyCode}

@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: D:/zhr_files/Multitarget-tracker-master/async_detector/Queue.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">My Project
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_4c3458e0ccdb4c3720723c1caa1aaa1c.html">zhr_files</a></li><li class="navelem"><a class="el" href="dir_5a8d4bff745a16410b5074d3583a347e.html">Multitarget-tracker-master</a></li><li class="navelem"><a class="el" href="dir_9bda36a5537d9b6311c18e0077839de8.html">async_detector</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">Queue.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_queue_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;queue&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;deque&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;list&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;mutex&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;condition_variable&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;atomic&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="_queue_8h.html#a6042fbb81b7d9fb06897c3f247eb00ba">   12</a></span><span class="preprocessor">#define SHOW_QUE_LOG 0</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#if SHOW_QUE_LOG</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">inline</span> std::string CurrTime_()</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>{</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keyword">auto</span> t = std::time(<span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keyword">auto</span> tm = *std::localtime(&amp;t);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    std::ostringstream oss;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    oss &lt;&lt; std::put_time(&amp;tm, <span class="stringliteral">&quot;%d.%m.%Y %H:%M:%S:&quot;</span>);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordflow">return</span> oss.str();</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>}</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#define QUE_LOG std::cout &lt;&lt; CurrTime_()</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#define QUE_ERR_LOG (std::cerr &lt;&lt; CurrTime_())</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">struct </span><a class="code hl_struct" href="struct_frame_info.html">FrameInfo</a>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="_queue_8h.html#a957665fdf28d8e1af49404b2d37b9c54">   33</a></span><span class="keyword">typedef</span> std::shared_ptr&lt;FrameInfo&gt; <a class="code hl_typedef" href="_queue_8h.html#a957665fdf28d8e1af49404b2d37b9c54">frame_ptr</a>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="class_frames_queue.html">   37</a></span><span class="keyword">class </span><a class="code hl_class" href="class_frames_queue.html">FramesQueue</a></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>{</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="class_frames_queue.html#a8da89ec2c65ebc099ff306df62f8f072">   40</a></span>    <span class="keyword">typedef</span> std::list&lt;frame_ptr&gt; <a class="code hl_typedef" href="class_frames_queue.html#a8da89ec2c65ebc099ff306df62f8f072">queue_t</a>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="class_frames_queue.html#accc3ace9fc535172b92a799c765390a7">   46</a></span>    <a class="code hl_function" href="class_frames_queue.html#accc3ace9fc535172b92a799c765390a7">FramesQueue</a>()</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>          : <a class="code hl_variable" href="class_frames_queue.html#ac5b7e35136924b0b130228f1d1fe92f3">m_que</a>(),</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>          <a class="code hl_variable" href="class_frames_queue.html#adc37bdc79736b407492814067eba8676">m_mutex</a>(),</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>          <a class="code hl_variable" href="class_frames_queue.html#a7b0bf30a7ff2767bbee8cdaf32dd3ccc">m_cond</a>(),</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>          <a class="code hl_variable" href="class_frames_queue.html#a581e23eb4e3b91492b386963d1a268ed">m_break</a>(false)</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    {}</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="class_frames_queue.html#ac3f3594b6d93994e2284623bd6cee6ef">   53</a></span>    <a class="code hl_function" href="class_frames_queue.html#ac3f3594b6d93994e2284623bd6cee6ef">FramesQueue</a>(<span class="keyword">const</span> <a class="code hl_class" href="class_frames_queue.html">FramesQueue</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="class_frames_queue.html#a24ae5ffd3520c4150224d7090c44ec6b">   54</a></span>    <a class="code hl_function" href="class_frames_queue.html#a24ae5ffd3520c4150224d7090c44ec6b">FramesQueue</a>(<a class="code hl_class" href="class_frames_queue.html">FramesQueue</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="class_frames_queue.html#a71bd6a36d52025e37f1da4757355f979">   55</a></span>    <a class="code hl_class" href="class_frames_queue.html">FramesQueue</a>&amp; <a class="code hl_function" href="class_frames_queue.html#a71bd6a36d52025e37f1da4757355f979">operator=</a>(<span class="keyword">const</span> <a class="code hl_class" href="class_frames_queue.html">FramesQueue</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="class_frames_queue.html#a691b6036a84b3bbde45f8928ceb9740b">   56</a></span>    <a class="code hl_class" href="class_frames_queue.html">FramesQueue</a>&amp; <a class="code hl_function" href="class_frames_queue.html#a691b6036a84b3bbde45f8928ceb9740b">operator=</a>(<a class="code hl_class" href="class_frames_queue.html">FramesQueue</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="class_frames_queue.html#a966e2daf73b2d816c8a59dd0520f5a14">   59</a></span>    <a class="code hl_function" href="class_frames_queue.html#a966e2daf73b2d816c8a59dd0520f5a14">~FramesQueue</a>(<span class="keywordtype">void</span>) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="class_frames_queue.html#a2ddb306c7b7baf9f00c01124b00acaf5">   65</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_frames_queue.html#a2ddb306c7b7baf9f00c01124b00acaf5">AddNewFrame</a>(<a class="code hl_typedef" href="_queue_8h.html#a957665fdf28d8e1af49404b2d37b9c54">frame_ptr</a> frameInfo, <span class="keywordtype">size_t</span> maxQueueSize)</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    {</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="preprocessor">#if SHOW_QUE_LOG</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        QUE_LOG &lt;&lt; <span class="stringliteral">&quot;AddNewFrame start: &quot;</span> &lt;&lt; frameInfo-&gt;m_dt &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        std::lock_guard&lt;std::mutex&gt; lock(<a class="code hl_variable" href="class_frames_queue.html#adc37bdc79736b407492814067eba8676">m_mutex</a>);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <span class="keywordflow">if</span> (!maxQueueSize || (maxQueueSize &gt; 0 &amp;&amp; <a class="code hl_variable" href="class_frames_queue.html#ac5b7e35136924b0b130228f1d1fe92f3">m_que</a>.size() &lt; maxQueueSize))</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            <a class="code hl_variable" href="class_frames_queue.html#ac5b7e35136924b0b130228f1d1fe92f3">m_que</a>.push_back(frameInfo);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="preprocessor">#if SHOW_QUE_LOG</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        QUE_LOG &lt;&lt; <span class="stringliteral">&quot;AddNewFrame end: &quot;</span> &lt;&lt; frameInfo-&gt;m_dt &lt;&lt; <span class="stringliteral">&quot;, frameInd &quot;</span> &lt;&lt; frameInfo-&gt;m_frameInd &lt;&lt; <span class="stringliteral">&quot;, queue size &quot;</span> &lt;&lt; <a class="code hl_variable" href="class_frames_queue.html#ac5b7e35136924b0b130228f1d1fe92f3">m_que</a>.size() &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <a class="code hl_variable" href="class_frames_queue.html#a7b0bf30a7ff2767bbee8cdaf32dd3ccc">m_cond</a>.notify_all();</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    }</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="preprocessor">#if SHOW_QUE_LOG</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keywordtype">void</span> PrintQue()</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    {</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        QUE_LOG &lt;&lt; <span class="stringliteral">&quot;m_que (&quot;</span> &lt;&lt; <a class="code hl_variable" href="class_frames_queue.html#ac5b7e35136924b0b130228f1d1fe92f3">m_que</a>.size() &lt;&lt; <span class="stringliteral">&quot;): &quot;</span>;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keywordtype">size_t</span> i = 0;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it : <a class="code hl_variable" href="class_frames_queue.html#ac5b7e35136924b0b130228f1d1fe92f3">m_que</a>)</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>            <span class="keywordflow">if</span> (it-&gt;m_inDetector.load() != <a class="code hl_variable" href="struct_frame_info.html#aeee132de46f4ce7f2f4a397d185bd1af">FrameInfo::StateNotProcessed</a> &amp;&amp; it-&gt;m_inTracker.load() != <a class="code hl_variable" href="struct_frame_info.html#aeee132de46f4ce7f2f4a397d185bd1af">FrameInfo::StateNotProcessed</a>)</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                std::cout &lt;&lt; i &lt;&lt; <span class="stringliteral">&quot; d&quot;</span> &lt;&lt; it-&gt;m_inDetector.load() &lt;&lt; <span class="stringliteral">&quot; t&quot;</span> &lt;&lt; it-&gt;m_inTracker.load() &lt;&lt; <span class="stringliteral">&quot;; &quot;</span>;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (it-&gt;m_inDetector.load() != <a class="code hl_variable" href="struct_frame_info.html#aeee132de46f4ce7f2f4a397d185bd1af">FrameInfo::StateNotProcessed</a>)</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                std::cout &lt;&lt; i &lt;&lt; <span class="stringliteral">&quot; d&quot;</span> &lt;&lt; it-&gt;m_inDetector.load() &lt;&lt; <span class="stringliteral">&quot;; &quot;</span>;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (it-&gt;m_inTracker.load() != <a class="code hl_variable" href="struct_frame_info.html#aeee132de46f4ce7f2f4a397d185bd1af">FrameInfo::StateNotProcessed</a>)</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                std::cout &lt;&lt; i &lt;&lt; <span class="stringliteral">&quot; t&quot;</span> &lt;&lt; it-&gt;m_inTracker.load() &lt;&lt; <span class="stringliteral">&quot;; &quot;</span>;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                std::cout &lt;&lt; i &lt;&lt; <span class="stringliteral">&quot;; &quot;</span>;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            ++i;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        }</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        std::cout &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    }</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="class_frames_queue.html#a83ef5dce774de1fbec38dbd239312d30">  110</a></span>    <a class="code hl_typedef" href="_queue_8h.html#a957665fdf28d8e1af49404b2d37b9c54">frame_ptr</a> <a class="code hl_function" href="class_frames_queue.html#a83ef5dce774de1fbec38dbd239312d30">GetLastUndetectedFrame</a>()</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    {</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="preprocessor">#if SHOW_QUE_LOG</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        QUE_LOG &lt;&lt; <span class="stringliteral">&quot;GetLastUndetectedFrame start&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        std::unique_lock&lt;std::mutex&gt; lock(<a class="code hl_variable" href="class_frames_queue.html#adc37bdc79736b407492814067eba8676">m_mutex</a>);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <span class="keywordflow">while</span> (<a class="code hl_variable" href="class_frames_queue.html#ac5b7e35136924b0b130228f1d1fe92f3">m_que</a>.empty() || <a class="code hl_variable" href="class_frames_queue.html#ac5b7e35136924b0b130228f1d1fe92f3">m_que</a>.back()-&gt;m_inDetector.load() != <a class="code hl_variable" href="struct_frame_info.html#aeee132de46f4ce7f2f4a397d185bd1af">FrameInfo::StateNotProcessed</a>)</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        {</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="class_frames_queue.html#a581e23eb4e3b91492b386963d1a268ed">m_break</a>.load())</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            <a class="code hl_variable" href="class_frames_queue.html#a7b0bf30a7ff2767bbee8cdaf32dd3ccc">m_cond</a>.wait(lock);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>            <span class="comment">//PrintQue();</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        }</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <span class="keywordflow">if</span> (!<a class="code hl_variable" href="class_frames_queue.html#a581e23eb4e3b91492b386963d1a268ed">m_break</a>.load())</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        {</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            <a class="code hl_typedef" href="_queue_8h.html#a957665fdf28d8e1af49404b2d37b9c54">frame_ptr</a> frameInfo = <a class="code hl_variable" href="class_frames_queue.html#ac5b7e35136924b0b130228f1d1fe92f3">m_que</a>.back();</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            assert(frameInfo-&gt;m_inDetector.load() == <a class="code hl_variable" href="struct_frame_info.html#aeee132de46f4ce7f2f4a397d185bd1af">FrameInfo::StateNotProcessed</a>);</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            assert(frameInfo-&gt;m_inTracker.load() == <a class="code hl_variable" href="struct_frame_info.html#aeee132de46f4ce7f2f4a397d185bd1af">FrameInfo::StateNotProcessed</a>);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            frameInfo-&gt;m_inDetector.store(<a class="code hl_variable" href="struct_frame_info.html#a164639445b356d66c94c73e863912efb">FrameInfo::StateInProcess</a>);</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>            queue_t::reverse_iterator it = <a class="code hl_variable" href="class_frames_queue.html#ac5b7e35136924b0b130228f1d1fe92f3">m_que</a>.rbegin();</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            <span class="keywordflow">for</span> (++it; it != <a class="code hl_variable" href="class_frames_queue.html#ac5b7e35136924b0b130228f1d1fe92f3">m_que</a>.rend(); ++it)</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            {</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>                <span class="keywordflow">if</span> ((*it)-&gt;m_inDetector.load() == <a class="code hl_variable" href="struct_frame_info.html#aeee132de46f4ce7f2f4a397d185bd1af">FrameInfo::StateNotProcessed</a>)</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>                    (*it)-&gt;m_inDetector.store(<a class="code hl_variable" href="struct_frame_info.html#a5637606d12611256d8036445da2ed0cd">FrameInfo::StateSkipped</a>);</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>                <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>            }</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="preprocessor">#if SHOW_QUE_LOG</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>            PrintQue();</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            QUE_LOG &lt;&lt; <span class="stringliteral">&quot;GetLastUndetectedFrame end: &quot;</span> &lt;&lt; frameInfo-&gt;m_dt &lt;&lt; <span class="stringliteral">&quot;, frameInd &quot;</span> &lt;&lt; frameInfo-&gt;m_frameInd &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>            <span class="keywordflow">return</span> frameInfo;</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        }</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    }</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="class_frames_queue.html#a38efb0b2d1d449b3d9b218cbc867f012">  152</a></span>    queue_t::iterator <a class="code hl_function" href="class_frames_queue.html#a38efb0b2d1d449b3d9b218cbc867f012">SearchUntracked</a>()</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    {</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        queue_t::iterator res_it = <a class="code hl_variable" href="class_frames_queue.html#ac5b7e35136924b0b130228f1d1fe92f3">m_que</a>.end();</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        <span class="keywordflow">for</span> (queue_t::iterator it = <a class="code hl_variable" href="class_frames_queue.html#ac5b7e35136924b0b130228f1d1fe92f3">m_que</a>.begin(); it != <a class="code hl_variable" href="class_frames_queue.html#ac5b7e35136924b0b130228f1d1fe92f3">m_que</a>.end(); ++it)</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        {</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>            <span class="keywordflow">if</span> ((*it)-&gt;m_inDetector.load() == <a class="code hl_variable" href="struct_frame_info.html#a164639445b356d66c94c73e863912efb">FrameInfo::StateInProcess</a> || (*it)-&gt;m_inDetector.load() == <a class="code hl_variable" href="struct_frame_info.html#aeee132de46f4ce7f2f4a397d185bd1af">FrameInfo::StateNotProcessed</a>)</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>            {</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>            }</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> ((*it)-&gt;m_inTracker.load() == <a class="code hl_variable" href="struct_frame_info.html#aeee132de46f4ce7f2f4a397d185bd1af">FrameInfo::StateNotProcessed</a>)</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>            {</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                res_it = it;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>            }</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        }</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        <span class="keywordflow">return</span> res_it;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    }</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno"><a class="line" href="class_frames_queue.html#a2de55ae38a8ea298035b41efc8910f95">  174</a></span>    <a class="code hl_typedef" href="_queue_8h.html#a957665fdf28d8e1af49404b2d37b9c54">frame_ptr</a> <a class="code hl_function" href="class_frames_queue.html#a2de55ae38a8ea298035b41efc8910f95">GetFirstDetectedFrame</a>()</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    {</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="preprocessor">#if SHOW_QUE_LOG</span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        QUE_LOG &lt;&lt; <span class="stringliteral">&quot;GetFirstDetectedFrame start&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        std::unique_lock&lt;std::mutex&gt; lock(<a class="code hl_variable" href="class_frames_queue.html#adc37bdc79736b407492814067eba8676">m_mutex</a>);</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        queue_t::iterator it = <a class="code hl_function" href="class_frames_queue.html#a38efb0b2d1d449b3d9b218cbc867f012">SearchUntracked</a>();</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        <span class="keywordflow">while</span> (it == <a class="code hl_variable" href="class_frames_queue.html#ac5b7e35136924b0b130228f1d1fe92f3">m_que</a>.end())</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        {</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="class_frames_queue.html#a581e23eb4e3b91492b386963d1a268ed">m_break</a>.load())</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>            <a class="code hl_variable" href="class_frames_queue.html#a7b0bf30a7ff2767bbee8cdaf32dd3ccc">m_cond</a>.wait(lock);</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>            it = <a class="code hl_function" href="class_frames_queue.html#a38efb0b2d1d449b3d9b218cbc867f012">SearchUntracked</a>();</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            <span class="comment">//PrintQue();</span></div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        }</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        <span class="keywordflow">if</span> (!<a class="code hl_variable" href="class_frames_queue.html#a581e23eb4e3b91492b386963d1a268ed">m_break</a>.load())</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        {</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>            <a class="code hl_typedef" href="_queue_8h.html#a957665fdf28d8e1af49404b2d37b9c54">frame_ptr</a> frameInfo = *it;</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            assert(frameInfo-&gt;m_inTracker.load() == <a class="code hl_variable" href="struct_frame_info.html#aeee132de46f4ce7f2f4a397d185bd1af">FrameInfo::StateNotProcessed</a>);</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>            assert(frameInfo-&gt;m_inDetector.load() != <a class="code hl_variable" href="struct_frame_info.html#a164639445b356d66c94c73e863912efb">FrameInfo::StateInProcess</a> &amp;&amp; frameInfo-&gt;m_inDetector.load() != <a class="code hl_variable" href="struct_frame_info.html#aeee132de46f4ce7f2f4a397d185bd1af">FrameInfo::StateNotProcessed</a>);</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>            frameInfo-&gt;m_inTracker.store(<a class="code hl_variable" href="struct_frame_info.html#a164639445b356d66c94c73e863912efb">FrameInfo::StateInProcess</a>);</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="preprocessor">#if SHOW_QUE_LOG</span></div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            QUE_LOG &lt;&lt; <span class="stringliteral">&quot;GetFirstDetectedFrame end: &quot;</span> &lt;&lt; frameInfo-&gt;m_dt &lt;&lt; <span class="stringliteral">&quot;, frameInd &quot;</span> &lt;&lt; frameInfo-&gt;m_frameInd &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>            <span class="keywordflow">return</span> frameInfo;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        }</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    }</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno"><a class="line" href="class_frames_queue.html#a64f40482da7f0a7fe27c7e607726c84c">  208</a></span>    <a class="code hl_typedef" href="_queue_8h.html#a957665fdf28d8e1af49404b2d37b9c54">frame_ptr</a> <a class="code hl_function" href="class_frames_queue.html#a64f40482da7f0a7fe27c7e607726c84c">GetFirstProcessedFrame</a>()</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    {</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="preprocessor">#if SHOW_QUE_LOG</span></div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        QUE_LOG &lt;&lt; <span class="stringliteral">&quot;GetFirstProcessedFrame start&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        std::unique_lock&lt;std::mutex&gt; lock(<a class="code hl_variable" href="class_frames_queue.html#adc37bdc79736b407492814067eba8676">m_mutex</a>);</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        <span class="keywordflow">while</span> (<a class="code hl_variable" href="class_frames_queue.html#ac5b7e35136924b0b130228f1d1fe92f3">m_que</a>.empty() || <a class="code hl_variable" href="class_frames_queue.html#ac5b7e35136924b0b130228f1d1fe92f3">m_que</a>.front()-&gt;m_inTracker.load() != <a class="code hl_variable" href="struct_frame_info.html#a48f403c1bb31b43ac90e2bae570b1376">FrameInfo::StateCompleted</a>)</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        {</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="class_frames_queue.html#a581e23eb4e3b91492b386963d1a268ed">m_break</a>.load())</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>            <a class="code hl_variable" href="class_frames_queue.html#a7b0bf30a7ff2767bbee8cdaf32dd3ccc">m_cond</a>.wait(lock);</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>            <span class="comment">//PrintQue();</span></div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>        }</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        <span class="keywordflow">if</span> (!<a class="code hl_variable" href="class_frames_queue.html#a581e23eb4e3b91492b386963d1a268ed">m_break</a>.load())</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>        {</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>            <a class="code hl_typedef" href="_queue_8h.html#a957665fdf28d8e1af49404b2d37b9c54">frame_ptr</a> frameInfo = std::move(<a class="code hl_variable" href="class_frames_queue.html#ac5b7e35136924b0b130228f1d1fe92f3">m_que</a>.front());</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>            <a class="code hl_variable" href="class_frames_queue.html#ac5b7e35136924b0b130228f1d1fe92f3">m_que</a>.pop_front();</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span><span class="preprocessor">#if SHOW_QUE_LOG</span></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>            QUE_LOG &lt;&lt; <span class="stringliteral">&quot;GetFirstProcessedFrame end: &quot;</span> &lt;&lt; frameInfo-&gt;m_dt &lt;&lt; <span class="stringliteral">&quot;, frameInd &quot;</span> &lt;&lt; frameInfo-&gt;m_frameInd &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>            <span class="keywordflow">return</span> frameInfo;</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        }</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    }</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span> </div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno"><a class="line" href="class_frames_queue.html#a0220c0d42957749073f1621b89ff3dd3">  237</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_frames_queue.html#a0220c0d42957749073f1621b89ff3dd3">Signal</a>(</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>#<span class="keywordflow">if</span> <a class="code hl_define" href="_queue_8h.html#a6042fbb81b7d9fb06897c3f247eb00ba">SHOW_QUE_LOG</a></div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        int64 ts</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>#<span class="keywordflow">else</span></div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        int64 <span class="comment">/*ts*/</span></div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>#endif</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    )</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    {</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span><span class="preprocessor">#if SHOW_QUE_LOG</span></div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        QUE_LOG &lt;&lt; <span class="stringliteral">&quot;Signal start:&quot;</span> &lt;&lt; ts &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>        <a class="code hl_variable" href="class_frames_queue.html#a7b0bf30a7ff2767bbee8cdaf32dd3ccc">m_cond</a>.notify_all();</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span><span class="preprocessor">#if SHOW_QUE_LOG</span></div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>        QUE_LOG &lt;&lt; <span class="stringliteral">&quot;Signal end: &quot;</span> &lt;&lt; ts &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    }</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span> </div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno"><a class="line" href="class_frames_queue.html#a606b27e4858add0246bc281af7350a9d">  254</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_frames_queue.html#a606b27e4858add0246bc281af7350a9d">SetBreak</a>(<span class="keywordtype">bool</span> val)</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    {</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span><span class="preprocessor">#if SHOW_QUE_LOG</span></div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        QUE_LOG &lt;&lt; <span class="stringliteral">&quot;SetBreak start:&quot;</span> &lt;&lt; val &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>        <a class="code hl_variable" href="class_frames_queue.html#a581e23eb4e3b91492b386963d1a268ed">m_break</a> = val;</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        <a class="code hl_function" href="class_frames_queue.html#a0220c0d42957749073f1621b89ff3dd3">Signal</a>(0);</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="preprocessor">#if SHOW_QUE_LOG</span></div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>        QUE_LOG &lt;&lt; <span class="stringliteral">&quot;SetBreak end:&quot;</span> &lt;&lt; val &lt;&lt; std::endl;</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    }</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span> </div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno"><a class="line" href="class_frames_queue.html#ac5b7e35136924b0b130228f1d1fe92f3">  267</a></span>    <a class="code hl_typedef" href="class_frames_queue.html#a8da89ec2c65ebc099ff306df62f8f072">queue_t</a> <a class="code hl_variable" href="class_frames_queue.html#ac5b7e35136924b0b130228f1d1fe92f3">m_que</a>;</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno"><a class="line" href="class_frames_queue.html#adc37bdc79736b407492814067eba8676">  268</a></span>    <span class="keyword">mutable</span> <a class="code hl_variable" href="data_8c.html#a4acff8232e4aec9cd5c6dc200ac55ef3">std::mutex</a> <a class="code hl_variable" href="class_frames_queue.html#adc37bdc79736b407492814067eba8676">m_mutex</a>;</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno"><a class="line" href="class_frames_queue.html#a7b0bf30a7ff2767bbee8cdaf32dd3ccc">  269</a></span>    std::condition_variable <a class="code hl_variable" href="class_frames_queue.html#a7b0bf30a7ff2767bbee8cdaf32dd3ccc">m_cond</a>;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno"><a class="line" href="class_frames_queue.html#a581e23eb4e3b91492b386963d1a268ed">  270</a></span>    std::atomic&lt;bool&gt; <a class="code hl_variable" href="class_frames_queue.html#a581e23eb4e3b91492b386963d1a268ed">m_break</a>;</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>};</div>
+<div class="ttc" id="a_queue_8h_html_a6042fbb81b7d9fb06897c3f247eb00ba"><div class="ttname"><a href="_queue_8h.html#a6042fbb81b7d9fb06897c3f247eb00ba">SHOW_QUE_LOG</a></div><div class="ttdeci">#define SHOW_QUE_LOG</div><div class="ttdef"><b>Definition:</b> Queue.h:12</div></div>
+<div class="ttc" id="a_queue_8h_html_a957665fdf28d8e1af49404b2d37b9c54"><div class="ttname"><a href="_queue_8h.html#a957665fdf28d8e1af49404b2d37b9c54">frame_ptr</a></div><div class="ttdeci">std::shared_ptr&lt; FrameInfo &gt; frame_ptr</div><div class="ttdef"><b>Definition:</b> Queue.h:32</div></div>
+<div class="ttc" id="aclass_frames_queue_html"><div class="ttname"><a href="class_frames_queue.html">FramesQueue</a></div><div class="ttdef"><b>Definition:</b> Queue.h:38</div></div>
+<div class="ttc" id="aclass_frames_queue_html_a0220c0d42957749073f1621b89ff3dd3"><div class="ttname"><a href="class_frames_queue.html#a0220c0d42957749073f1621b89ff3dd3">FramesQueue::Signal</a></div><div class="ttdeci">void Signal(int64)</div><div class="ttdoc">Signal</div><div class="ttdef"><b>Definition:</b> Queue.h:237</div></div>
+<div class="ttc" id="aclass_frames_queue_html_a24ae5ffd3520c4150224d7090c44ec6b"><div class="ttname"><a href="class_frames_queue.html#a24ae5ffd3520c4150224d7090c44ec6b">FramesQueue::FramesQueue</a></div><div class="ttdeci">FramesQueue(FramesQueue &amp;&amp;)=delete</div></div>
+<div class="ttc" id="aclass_frames_queue_html_a2ddb306c7b7baf9f00c01124b00acaf5"><div class="ttname"><a href="class_frames_queue.html#a2ddb306c7b7baf9f00c01124b00acaf5">FramesQueue::AddNewFrame</a></div><div class="ttdeci">void AddNewFrame(frame_ptr frameInfo, size_t maxQueueSize)</div><div class="ttdoc">AddNewFrame</div><div class="ttdef"><b>Definition:</b> Queue.h:65</div></div>
+<div class="ttc" id="aclass_frames_queue_html_a2de55ae38a8ea298035b41efc8910f95"><div class="ttname"><a href="class_frames_queue.html#a2de55ae38a8ea298035b41efc8910f95">FramesQueue::GetFirstDetectedFrame</a></div><div class="ttdeci">frame_ptr GetFirstDetectedFrame()</div><div class="ttdoc">GetFirstDetectedFrame</div><div class="ttdef"><b>Definition:</b> Queue.h:174</div></div>
+<div class="ttc" id="aclass_frames_queue_html_a38efb0b2d1d449b3d9b218cbc867f012"><div class="ttname"><a href="class_frames_queue.html#a38efb0b2d1d449b3d9b218cbc867f012">FramesQueue::SearchUntracked</a></div><div class="ttdeci">queue_t::iterator SearchUntracked()</div><div class="ttdoc">SearchUntracked</div><div class="ttdef"><b>Definition:</b> Queue.h:152</div></div>
+<div class="ttc" id="aclass_frames_queue_html_a581e23eb4e3b91492b386963d1a268ed"><div class="ttname"><a href="class_frames_queue.html#a581e23eb4e3b91492b386963d1a268ed">FramesQueue::m_break</a></div><div class="ttdeci">std::atomic&lt; bool &gt; m_break</div><div class="ttdef"><b>Definition:</b> Queue.h:270</div></div>
+<div class="ttc" id="aclass_frames_queue_html_a606b27e4858add0246bc281af7350a9d"><div class="ttname"><a href="class_frames_queue.html#a606b27e4858add0246bc281af7350a9d">FramesQueue::SetBreak</a></div><div class="ttdeci">void SetBreak(bool val)</div><div class="ttdef"><b>Definition:</b> Queue.h:254</div></div>
+<div class="ttc" id="aclass_frames_queue_html_a64f40482da7f0a7fe27c7e607726c84c"><div class="ttname"><a href="class_frames_queue.html#a64f40482da7f0a7fe27c7e607726c84c">FramesQueue::GetFirstProcessedFrame</a></div><div class="ttdeci">frame_ptr GetFirstProcessedFrame()</div><div class="ttdoc">GetFirstProcessedFrame</div><div class="ttdef"><b>Definition:</b> Queue.h:208</div></div>
+<div class="ttc" id="aclass_frames_queue_html_a691b6036a84b3bbde45f8928ceb9740b"><div class="ttname"><a href="class_frames_queue.html#a691b6036a84b3bbde45f8928ceb9740b">FramesQueue::operator=</a></div><div class="ttdeci">FramesQueue &amp; operator=(FramesQueue &amp;&amp;)=delete</div></div>
+<div class="ttc" id="aclass_frames_queue_html_a71bd6a36d52025e37f1da4757355f979"><div class="ttname"><a href="class_frames_queue.html#a71bd6a36d52025e37f1da4757355f979">FramesQueue::operator=</a></div><div class="ttdeci">FramesQueue &amp; operator=(const FramesQueue &amp;)=delete</div></div>
+<div class="ttc" id="aclass_frames_queue_html_a7b0bf30a7ff2767bbee8cdaf32dd3ccc"><div class="ttname"><a href="class_frames_queue.html#a7b0bf30a7ff2767bbee8cdaf32dd3ccc">FramesQueue::m_cond</a></div><div class="ttdeci">std::condition_variable m_cond</div><div class="ttdef"><b>Definition:</b> Queue.h:269</div></div>
+<div class="ttc" id="aclass_frames_queue_html_a83ef5dce774de1fbec38dbd239312d30"><div class="ttname"><a href="class_frames_queue.html#a83ef5dce774de1fbec38dbd239312d30">FramesQueue::GetLastUndetectedFrame</a></div><div class="ttdeci">frame_ptr GetLastUndetectedFrame()</div><div class="ttdoc">GetLastUndetectedFrame</div><div class="ttdef"><b>Definition:</b> Queue.h:110</div></div>
+<div class="ttc" id="aclass_frames_queue_html_a8da89ec2c65ebc099ff306df62f8f072"><div class="ttname"><a href="class_frames_queue.html#a8da89ec2c65ebc099ff306df62f8f072">FramesQueue::queue_t</a></div><div class="ttdeci">std::list&lt; frame_ptr &gt; queue_t</div><div class="ttdef"><b>Definition:</b> Queue.h:40</div></div>
+<div class="ttc" id="aclass_frames_queue_html_a966e2daf73b2d816c8a59dd0520f5a14"><div class="ttname"><a href="class_frames_queue.html#a966e2daf73b2d816c8a59dd0520f5a14">FramesQueue::~FramesQueue</a></div><div class="ttdeci">~FramesQueue(void)=default</div></div>
+<div class="ttc" id="aclass_frames_queue_html_ac3f3594b6d93994e2284623bd6cee6ef"><div class="ttname"><a href="class_frames_queue.html#ac3f3594b6d93994e2284623bd6cee6ef">FramesQueue::FramesQueue</a></div><div class="ttdeci">FramesQueue(const FramesQueue &amp;)=delete</div></div>
+<div class="ttc" id="aclass_frames_queue_html_ac5b7e35136924b0b130228f1d1fe92f3"><div class="ttname"><a href="class_frames_queue.html#ac5b7e35136924b0b130228f1d1fe92f3">FramesQueue::m_que</a></div><div class="ttdeci">queue_t m_que</div><div class="ttdef"><b>Definition:</b> Queue.h:267</div></div>
+<div class="ttc" id="aclass_frames_queue_html_accc3ace9fc535172b92a799c765390a7"><div class="ttname"><a href="class_frames_queue.html#accc3ace9fc535172b92a799c765390a7">FramesQueue::FramesQueue</a></div><div class="ttdeci">FramesQueue()</div><div class="ttdoc">FramesQueue</div><div class="ttdef"><b>Definition:</b> Queue.h:46</div></div>
+<div class="ttc" id="aclass_frames_queue_html_adc37bdc79736b407492814067eba8676"><div class="ttname"><a href="class_frames_queue.html#adc37bdc79736b407492814067eba8676">FramesQueue::m_mutex</a></div><div class="ttdeci">std::mutex m_mutex</div><div class="ttdef"><b>Definition:</b> Queue.h:268</div></div>
+<div class="ttc" id="adata_8c_html_a4acff8232e4aec9cd5c6dc200ac55ef3"><div class="ttname"><a href="data_8c.html#a4acff8232e4aec9cd5c6dc200ac55ef3">mutex</a></div><div class="ttdeci">pthread_mutex_t mutex</div><div class="ttdef"><b>Definition:</b> data.c:16</div></div>
+<div class="ttc" id="astruct_frame_info_html"><div class="ttname"><a href="struct_frame_info.html">FrameInfo</a></div><div class="ttdoc">The FrameInfo class</div><div class="ttdef"><b>Definition:</b> AsyncDetector.h:21</div></div>
+<div class="ttc" id="astruct_frame_info_html_a164639445b356d66c94c73e863912efb"><div class="ttname"><a href="struct_frame_info.html#a164639445b356d66c94c73e863912efb">FrameInfo::StateInProcess</a></div><div class="ttdeci">static constexpr int StateInProcess</div><div class="ttdef"><b>Definition:</b> AsyncDetector.h:31</div></div>
+<div class="ttc" id="astruct_frame_info_html_a48f403c1bb31b43ac90e2bae570b1376"><div class="ttname"><a href="struct_frame_info.html#a48f403c1bb31b43ac90e2bae570b1376">FrameInfo::StateCompleted</a></div><div class="ttdeci">static constexpr int StateCompleted</div><div class="ttdef"><b>Definition:</b> AsyncDetector.h:32</div></div>
+<div class="ttc" id="astruct_frame_info_html_a5637606d12611256d8036445da2ed0cd"><div class="ttname"><a href="struct_frame_info.html#a5637606d12611256d8036445da2ed0cd">FrameInfo::StateSkipped</a></div><div class="ttdeci">static constexpr int StateSkipped</div><div class="ttdef"><b>Definition:</b> AsyncDetector.h:33</div></div>
+<div class="ttc" id="astruct_frame_info_html_aeee132de46f4ce7f2f4a397d185bd1af"><div class="ttname"><a href="struct_frame_info.html#aeee132de46f4ce7f2f4a397d185bd1af">FrameInfo::StateNotProcessed</a></div><div class="ttdeci">static constexpr int StateNotProcessed</div><div class="ttdef"><b>Definition:</b> AsyncDetector.h:30</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>

@@ -1,0 +1,79 @@
+\hypertarget{_i_n_i_reader_8h_source}{}\doxysection{INIReader.\+h}
+\label{_i_n_i_reader_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/inih/INIReader.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/inih/INIReader.h}}
+\mbox{\hyperlink{_i_n_i_reader_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// Read an INI file into easy-\/to-\/access name/value pairs.}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{comment}{// SPDX-\/License-\/Identifier: BSD-\/3-\/Clause}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{comment}{// Copyright (C) 2009-\/2020, Ben Hoyt}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{comment}{// inih and INIReader are released under the New BSD license (see LICENSE.txt).}}
+\DoxyCodeLine{8 \textcolor{comment}{// Go to the project home page for more info:}}
+\DoxyCodeLine{9 \textcolor{comment}{//}}
+\DoxyCodeLine{10 \textcolor{comment}{// https://github.com/benhoyt/inih}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#ifndef INIREADER\_H}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#define INIREADER\_H}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{comment}{// Read an INI file into easy-\/to-\/access name/value pairs. (Note that I've gone}}
+\DoxyCodeLine{19 \textcolor{comment}{// for simplicity here rather than speed, but it should be pretty decent.)}}
+\DoxyCodeLine{20 \textcolor{keyword}{class }\mbox{\hyperlink{class_i_n_i_reader}{INIReader}}}
+\DoxyCodeLine{21 \{}
+\DoxyCodeLine{22 \textcolor{keyword}{public}:}
+\DoxyCodeLine{23     \textcolor{comment}{// Construct INIReader and parse given filename. See ini.h for more info}}
+\DoxyCodeLine{24     \textcolor{comment}{// about the parsing.}}
+\DoxyCodeLine{25     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_i_n_i_reader_a303dc5352470dba2af23719d40f4298d}{INIReader}}(\textcolor{keyword}{const} std::string\& filename);}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27     \textcolor{comment}{// Construct INIReader and parse given buffer. See ini.h for more info}}
+\DoxyCodeLine{28     \textcolor{comment}{// about the parsing.}}
+\DoxyCodeLine{29     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_i_n_i_reader_a303dc5352470dba2af23719d40f4298d}{INIReader}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{classbuffer}{buffer}}, \textcolor{keywordtype}{size\_t} buffer\_size);}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31     \textcolor{comment}{// Return the result of ini\_parse(), i.e., 0 on success, line number of}}
+\DoxyCodeLine{32     \textcolor{comment}{// first error on parse error, or -\/1 on file open error.}}
+\DoxyCodeLine{33     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_i_n_i_reader_a7527150689e2dbdc7388306c00d5e039}{ParseError}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35     \textcolor{comment}{// Get a string value from INI file, returning default\_value if not found.}}
+\DoxyCodeLine{36     std::string \mbox{\hyperlink{class_i_n_i_reader_a444ab67be741a41dcd26759d744b20db}{Get}}(\textcolor{keyword}{const} std::string\& \mbox{\hyperlink{structsection}{section}}, \textcolor{keyword}{const} std::string\& \mbox{\hyperlink{structname}{name}},}
+\DoxyCodeLine{37                     \textcolor{keyword}{const} std::string\& default\_value) \textcolor{keyword}{const};}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39     \textcolor{comment}{// Get a string value from INI file, returning default\_value if not found,}}
+\DoxyCodeLine{40     \textcolor{comment}{// empty, or contains only whitespace.}}
+\DoxyCodeLine{41     std::string \mbox{\hyperlink{class_i_n_i_reader_a37db13b6a4db6c095a515e77ee5b932b}{GetString}}(\textcolor{keyword}{const} std::string\& \mbox{\hyperlink{structsection}{section}}, \textcolor{keyword}{const} std::string\& \mbox{\hyperlink{structname}{name}},}
+\DoxyCodeLine{42                     \textcolor{keyword}{const} std::string\& default\_value) \textcolor{keyword}{const};}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44     \textcolor{comment}{// Get an integer (long) value from INI file, returning default\_value if}}
+\DoxyCodeLine{45     \textcolor{comment}{// not found or not a valid integer (decimal "{}1234"{}, "{}-\/1234"{}, or hex "{}0x4d2"{}).}}
+\DoxyCodeLine{46     \textcolor{keywordtype}{long} \mbox{\hyperlink{class_i_n_i_reader_a37ef1f422f1a5cb43bf63d82f4ea112f}{GetInteger}}(\textcolor{keyword}{const} std::string\& \mbox{\hyperlink{structsection}{section}}, \textcolor{keyword}{const} std::string\& \mbox{\hyperlink{structname}{name}}, \textcolor{keywordtype}{long} default\_value) \textcolor{keyword}{const};}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48     \textcolor{comment}{// Get a real (floating point double) value from INI file, returning}}
+\DoxyCodeLine{49     \textcolor{comment}{// default\_value if not found or not a valid floating point value}}
+\DoxyCodeLine{50     \textcolor{comment}{// according to strtod().}}
+\DoxyCodeLine{51     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_i_n_i_reader_a0a41e06f215552e5d7217a0abc5c214f}{GetReal}}(\textcolor{keyword}{const} std::string\& \mbox{\hyperlink{structsection}{section}}, \textcolor{keyword}{const} std::string\& \mbox{\hyperlink{structname}{name}}, \textcolor{keywordtype}{double} default\_value) \textcolor{keyword}{const};}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53     \textcolor{comment}{// Get a boolean value from INI file, returning default\_value if not found or if}}
+\DoxyCodeLine{54     \textcolor{comment}{// not a valid true/false value. Valid true values are "{}true"{}, "{}yes"{}, "{}on"{}, "{}1"{},}}
+\DoxyCodeLine{55     \textcolor{comment}{// and valid false values are "{}false"{}, "{}no"{}, "{}off"{}, "{}0"{} (not case sensitive).}}
+\DoxyCodeLine{56     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_i_n_i_reader_a6fcbb2ebdfad098e34a14f2144f711f7}{GetBoolean}}(\textcolor{keyword}{const} std::string\& \mbox{\hyperlink{structsection}{section}}, \textcolor{keyword}{const} std::string\& \mbox{\hyperlink{structname}{name}}, \textcolor{keywordtype}{bool} default\_value) \textcolor{keyword}{const};}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58     \textcolor{comment}{// Return true if the given section exists (section must contain at least}}
+\DoxyCodeLine{59     \textcolor{comment}{// one name=value pair).}}
+\DoxyCodeLine{60     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_i_n_i_reader_adc5d42287a7be0f441762c14016db98f}{HasSection}}(\textcolor{keyword}{const} std::string\& \mbox{\hyperlink{structsection}{section}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62     \textcolor{comment}{// Return true if a value exists with the given section and field names.}}
+\DoxyCodeLine{63     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_i_n_i_reader_aea82a4895f899ed71826653b30568b89}{HasValue}}(\textcolor{keyword}{const} std::string\& \mbox{\hyperlink{structsection}{section}}, \textcolor{keyword}{const} std::string\& \mbox{\hyperlink{structname}{name}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65 \textcolor{keyword}{private}:}
+\DoxyCodeLine{66     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_i_n_i_reader_a964b63d6d630cde92a998cfb4986b223}{\_error}};}
+\DoxyCodeLine{67     std::map<std::string, std::string> \mbox{\hyperlink{class_i_n_i_reader_ae48a98ecb0d35c2ea3066dac63a731bd}{\_values}};}
+\DoxyCodeLine{68     \textcolor{keyword}{static} std::string \mbox{\hyperlink{class_i_n_i_reader_a29eb47ac6f75322fb729926cd058fef3}{MakeKey}}(\textcolor{keyword}{const} std::string\& \mbox{\hyperlink{structsection}{section}}, \textcolor{keyword}{const} std::string\& \mbox{\hyperlink{structname}{name}});}
+\DoxyCodeLine{69     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_i_n_i_reader_a38e5a02b9eab882f23401a4b5a0c42a3}{ValueHandler}}(\textcolor{keywordtype}{void}* user, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{structsection}{section}}, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{structname}{name}},}
+\DoxyCodeLine{70                             \textcolor{keyword}{const} \textcolor{keywordtype}{char}* value);}
+\DoxyCodeLine{71 \};}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// INIREADER\_H}}
+
+\end{DoxyCode}

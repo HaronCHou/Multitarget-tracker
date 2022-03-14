@@ -1,0 +1,206 @@
+\hypertarget{defines_8h_source}{}\doxysection{defines.\+h}
+\label{defines_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/common/defines.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/common/defines.h}}
+\mbox{\hyperlink{defines_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <opencv2/opencv.hpp>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{object__types_8h}{object\_types.h}}"{}}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{10 \textcolor{comment}{//}}
+\DoxyCodeLine{11 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{12 \textcolor{keyword}{typedef} \textcolor{keywordtype}{float} \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}};}
+\DoxyCodeLine{13 \textcolor{keyword}{typedef} cv::Point\_<track\_t> \mbox{\hyperlink{defines_8h_a8c42696da8f098b91374a8e8bb84b430}{Point\_t}};}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#define El\_t CV\_32F}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#define Mat\_t CV\_32FC}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{keyword}{typedef} std::vector<int> \mbox{\hyperlink{defines_8h_ad7b9f569a9adbd958c668a36b6884ffd}{assignments\_t}};}
+\DoxyCodeLine{18 \textcolor{keyword}{typedef} std::vector<track\_t> \mbox{\hyperlink{defines_8h_af6ab0ee8259a51215f62e8f96416d5bb}{distMatrix\_t}};}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{21 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{22 \textcolor{keyword}{class }\mbox{\hyperlink{class_track_i_d}{TrackID}}}
+\DoxyCodeLine{23 \{}
+\DoxyCodeLine{24 \textcolor{keyword}{public}:}
+\DoxyCodeLine{25     \textcolor{keyword}{typedef} T \mbox{\hyperlink{class_track_i_d_af93c22fc10d076f26789ed968361be84}{value\_type}};}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27     \mbox{\hyperlink{class_track_i_d_ace1e682ddb0359eb2e96ec50d72a49bc}{TrackID}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{28     \mbox{\hyperlink{class_track_i_d_a1dd7535314ddb3606846ebf058d7b9f5}{TrackID}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_track_i_d}{TrackID}}\& \textcolor{keywordtype}{id}) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{29     \mbox{\hyperlink{class_track_i_d_a0a26a2465d7e9b161f7c1164c9591701}{TrackID}}(\mbox{\hyperlink{class_track_i_d}{TrackID}}\&\& \textcolor{keywordtype}{id}) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{30     \mbox{\hyperlink{class_track_i_d}{TrackID}}\& \mbox{\hyperlink{class_track_i_d_a31a7e363a345f8af622a5195153bfe2f}{operator=}}(\mbox{\hyperlink{class_track_i_d}{TrackID}}\&\& \textcolor{keywordtype}{id}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{31     \{}
+\DoxyCodeLine{32         \mbox{\hyperlink{class_track_i_d_a770a16c0b8d49064eb124422d1b054c8}{m\_val}} = std::move(\textcolor{keywordtype}{id}.\mbox{\hyperlink{class_track_i_d_a770a16c0b8d49064eb124422d1b054c8}{m\_val}});}
+\DoxyCodeLine{33         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{34     \}}
+\DoxyCodeLine{35     \mbox{\hyperlink{class_track_i_d}{TrackID}}\& \mbox{\hyperlink{class_track_i_d_ae6666635f560bed7913c7190cecaa319}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_track_i_d}{TrackID}}\& \textcolor{keywordtype}{id}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{36     \{}
+\DoxyCodeLine{37         \mbox{\hyperlink{class_track_i_d_a770a16c0b8d49064eb124422d1b054c8}{m\_val}} = \textcolor{keywordtype}{id}.m\_val;}
+\DoxyCodeLine{38         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{39     \}}
+\DoxyCodeLine{40     \mbox{\hyperlink{class_track_i_d_a965ad66ed381fd0085231cb3ff6354f0}{TrackID}}(\mbox{\hyperlink{class_track_i_d_af93c22fc10d076f26789ed968361be84}{value\_type}} val)}
+\DoxyCodeLine{41         : \mbox{\hyperlink{class_track_i_d_a770a16c0b8d49064eb124422d1b054c8}{m\_val}}(val)}
+\DoxyCodeLine{42     \{}
+\DoxyCodeLine{43     \}}
+\DoxyCodeLine{44     \textcolor{keyword}{const} \mbox{\hyperlink{class_track_i_d}{TrackID}}\& \mbox{\hyperlink{class_track_i_d_aee54a9171890c0d9298bde1c0fe5ce4c}{operator=}}(\mbox{\hyperlink{class_track_i_d_af93c22fc10d076f26789ed968361be84}{value\_type}} val)}
+\DoxyCodeLine{45     \{}
+\DoxyCodeLine{46         \mbox{\hyperlink{class_track_i_d_a770a16c0b8d49064eb124422d1b054c8}{m\_val}} = val;}
+\DoxyCodeLine{47     \}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_track_i_d_aaca92ede0709b13a599238f768139f6a}{operator==}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_track_i_d}{TrackID}}\& \textcolor{keywordtype}{id})\textcolor{keyword}{ const}}
+\DoxyCodeLine{50 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{51         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_track_i_d_a770a16c0b8d49064eb124422d1b054c8}{m\_val}} == \textcolor{keywordtype}{id}.m\_val;}
+\DoxyCodeLine{52     \}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54     std::string \mbox{\hyperlink{class_track_i_d_a0c652cca215fbea92fe66abfadcfcc0e}{ID2Str}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{55 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{56         \textcolor{keywordflow}{return} std::to\_string(\mbox{\hyperlink{class_track_i_d_a770a16c0b8d49064eb124422d1b054c8}{m\_val}});}
+\DoxyCodeLine{57     \}}
+\DoxyCodeLine{58     \textcolor{keyword}{static} \mbox{\hyperlink{class_track_i_d}{TrackID}} \mbox{\hyperlink{class_track_i_d_a13002d606262070a81ece29a2d482a99}{Str2ID}}(\textcolor{keyword}{const} std::string\& \textcolor{keywordtype}{id})}
+\DoxyCodeLine{59     \{}
+\DoxyCodeLine{60         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_track_i_d_ace1e682ddb0359eb2e96ec50d72a49bc}{TrackID}}(std::stoi(\textcolor{keywordtype}{id}));}
+\DoxyCodeLine{61     \}}
+\DoxyCodeLine{62     \mbox{\hyperlink{class_track_i_d}{TrackID}} \mbox{\hyperlink{class_track_i_d_afd0f9b60c4c3efffb821f07d2b2ca367}{NextID}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{63 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{64         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_track_i_d_ace1e682ddb0359eb2e96ec50d72a49bc}{TrackID}}(\mbox{\hyperlink{class_track_i_d_a770a16c0b8d49064eb124422d1b054c8}{m\_val}} + 1);}
+\DoxyCodeLine{65     \}}
+\DoxyCodeLine{66     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_track_i_d_a572a44d8f00d7788ea515d049529359e}{ID2Module}}(\textcolor{keywordtype}{size\_t} \mbox{\hyperlink{classmodule}{module}})\textcolor{keyword}{ const}}
+\DoxyCodeLine{67 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{68         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_track_i_d_a770a16c0b8d49064eb124422d1b054c8}{m\_val}} \% \mbox{\hyperlink{classmodule}{module}};}
+\DoxyCodeLine{69     \}}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71     \mbox{\hyperlink{class_track_i_d_af93c22fc10d076f26789ed968361be84}{value\_type}} \mbox{\hyperlink{class_track_i_d_a770a16c0b8d49064eb124422d1b054c8}{m\_val}}\{ 0 \};}
+\DoxyCodeLine{72 \};}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74 \textcolor{keyword}{typedef} \mbox{\hyperlink{class_track_i_d}{TrackID<size\_t>}} \mbox{\hyperlink{defines_8h_a8184785bb78ee56f789b33fcd0134858}{track\_id\_t}};}
+\DoxyCodeLine{75 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacestd}{std}}}
+\DoxyCodeLine{76 \{}
+\DoxyCodeLine{77   \textcolor{keyword}{template} <>}
+\DoxyCodeLine{78   \textcolor{keyword}{struct }\mbox{\hyperlink{group__python__builtins_ga117a7eab72791313448c40a2f25f3582}{hash}}<\mbox{\hyperlink{class_track_i_d}{track\_id\_t}}>}
+\DoxyCodeLine{79   \{}
+\DoxyCodeLine{80     \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{std::size\_t}} \mbox{\hyperlink{structstd_1_1hash_3_01track__id__t_01_4_aada1bec64052f6e0a4df82ab068f1680}{operator()}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_track_i_d}{track\_id\_t}}\& k)\textcolor{keyword}{ const}}
+\DoxyCodeLine{81 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{82       \textcolor{keywordflow}{return} std::hash<track\_id\_t::value\_type>()(k.\mbox{\hyperlink{class_track_i_d_a770a16c0b8d49064eb124422d1b054c8}{m\_val}});}
+\DoxyCodeLine{83     \}}
+\DoxyCodeLine{84   \};}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86 \}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{91 \textcolor{keyword}{typedef} std::multimap<std::string, std::string> \mbox{\hyperlink{defines_8h_a9fcffa231cb8ff6a5fc4e2e2e71f3ead}{config\_t}};}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{96 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_region}{CRegion}}}
+\DoxyCodeLine{97 \{}
+\DoxyCodeLine{98 \textcolor{keyword}{public}:}
+\DoxyCodeLine{99     \mbox{\hyperlink{class_c_region_ae2050e4f64e3c80c1f7df1b1b996398a}{CRegion}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101     \mbox{\hyperlink{class_c_region_a2d84542a264bed2151d83e5eb760044c}{CRegion}}(\textcolor{keyword}{const} cv::Rect\& rect) noexcept}
+\DoxyCodeLine{102         : \mbox{\hyperlink{class_c_region_a3e798a97d5c660ec48a504dbd816e498}{m\_brect}}(rect)}
+\DoxyCodeLine{103     \{}
+\DoxyCodeLine{104         \mbox{\hyperlink{class_c_region_a5cdd1f92ab3b4366c04c3e61ca991232}{B2RRect}}();}
+\DoxyCodeLine{105     \}}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107     \mbox{\hyperlink{class_c_region_a5057b5c375ccdde432ce29772801dac2}{CRegion}}(\textcolor{keyword}{const} cv::RotatedRect\& rrect) noexcept}
+\DoxyCodeLine{108         : \mbox{\hyperlink{class_c_region_a34fdb34b6c2d3551d2f9885f524199d2}{m\_rrect}}(rrect)}
+\DoxyCodeLine{109     \{}
+\DoxyCodeLine{110         \mbox{\hyperlink{class_c_region_aacba7bbfa6851cda9e182003fec34298}{R2BRect}}();}
+\DoxyCodeLine{111     \}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113     \mbox{\hyperlink{class_c_region_a4b4bb9e2418c07d7de9ee55c7bd32e82}{CRegion}}(\textcolor{keyword}{const} cv::Rect\& rect, \mbox{\hyperlink{object__types_8h_aef073148585075f745f149202b5ccc90}{objtype\_t}} type, \textcolor{keywordtype}{float} confidence) noexcept}
+\DoxyCodeLine{114         : \mbox{\hyperlink{class_c_region_af5c0eeca25106a8b168195b140f98c46}{m\_type}}(type), \mbox{\hyperlink{class_c_region_a3e798a97d5c660ec48a504dbd816e498}{m\_brect}}(rect), \mbox{\hyperlink{class_c_region_a349d846f135edc49a4c8f2db994b84b8}{m\_confidence}}(confidence)}
+\DoxyCodeLine{115     \{}
+\DoxyCodeLine{116         \mbox{\hyperlink{class_c_region_a5cdd1f92ab3b4366c04c3e61ca991232}{B2RRect}}();}
+\DoxyCodeLine{117     \}}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119     \mbox{\hyperlink{object__types_8h_aef073148585075f745f149202b5ccc90}{objtype\_t}} \mbox{\hyperlink{class_c_region_af5c0eeca25106a8b168195b140f98c46}{m\_type}} = \mbox{\hyperlink{object__types_8h_ac568810e98b5f032d6b916e7878ebe53}{bad\_type}};}
+\DoxyCodeLine{120     cv::RotatedRect \mbox{\hyperlink{class_c_region_a34fdb34b6c2d3551d2f9885f524199d2}{m\_rrect}};}
+\DoxyCodeLine{121     cv::Rect \mbox{\hyperlink{class_c_region_a3e798a97d5c660ec48a504dbd816e498}{m\_brect}};}
+\DoxyCodeLine{122     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_c_region_a349d846f135edc49a4c8f2db994b84b8}{m\_confidence}} = -\/1;}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124 \textcolor{keyword}{private}:}
+\DoxyCodeLine{129     cv::Rect \mbox{\hyperlink{class_c_region_aacba7bbfa6851cda9e182003fec34298}{R2BRect}}() noexcept}
+\DoxyCodeLine{130     \{}
+\DoxyCodeLine{131         \mbox{\hyperlink{class_c_region_a3e798a97d5c660ec48a504dbd816e498}{m\_brect}} = \mbox{\hyperlink{class_c_region_a34fdb34b6c2d3551d2f9885f524199d2}{m\_rrect}}.boundingRect();}
+\DoxyCodeLine{132         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_c_region_a3e798a97d5c660ec48a504dbd816e498}{m\_brect}};}
+\DoxyCodeLine{133     \}}
+\DoxyCodeLine{138     cv::RotatedRect \mbox{\hyperlink{class_c_region_a5cdd1f92ab3b4366c04c3e61ca991232}{B2RRect}}() noexcept}
+\DoxyCodeLine{139     \{}
+\DoxyCodeLine{140         \mbox{\hyperlink{class_c_region_a34fdb34b6c2d3551d2f9885f524199d2}{m\_rrect}} = cv::RotatedRect(\mbox{\hyperlink{class_c_region_a3e798a97d5c660ec48a504dbd816e498}{m\_brect}}.tl(), cv::Point2f(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\mbox{\hyperlink{class_c_region_a3e798a97d5c660ec48a504dbd816e498}{m\_brect}}.x + \mbox{\hyperlink{class_c_region_a3e798a97d5c660ec48a504dbd816e498}{m\_brect}}.width), \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\mbox{\hyperlink{class_c_region_a3e798a97d5c660ec48a504dbd816e498}{m\_brect}}.y)), \mbox{\hyperlink{class_c_region_a3e798a97d5c660ec48a504dbd816e498}{m\_brect}}.br());}
+\DoxyCodeLine{141         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_c_region_a34fdb34b6c2d3551d2f9885f524199d2}{m\_rrect}};}
+\DoxyCodeLine{142     \}}
+\DoxyCodeLine{143 \};}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145 \textcolor{keyword}{typedef} std::vector<CRegion> \mbox{\hyperlink{defines_8h_a01db0de56a20f4342820a093c5154536}{regions\_t}};}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{150 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacetracking}{tracking}}}
+\DoxyCodeLine{151 \{}
+\DoxyCodeLine{155 \textcolor{keyword}{enum} \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760}{Detectors}}}
+\DoxyCodeLine{156 \{}
+\DoxyCodeLine{157     \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a87b70978153a0274b03015d9390db7ae}{Motion\_VIBE}} = 0,}
+\DoxyCodeLine{158     \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a924d297b40e8c4518aa2e0553f6f8f61}{Motion\_MOG}} = 1,}
+\DoxyCodeLine{159     \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760aff944e05b5f591282b599c4d97ab8ab0}{Motion\_GMG}} = 2,}
+\DoxyCodeLine{160     \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760af40f12386e08503dd5d82774d5e36617}{Motion\_CNT}} = 3,}
+\DoxyCodeLine{161     \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760ad699aae73e9117bdd3aee641a3a6e7fe}{Motion\_SuBSENSE}} = 4,}
+\DoxyCodeLine{162     \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a9d3afb434e136e0b4e413cca1d893484}{Motion\_LOBSTER}} = 5,}
+\DoxyCodeLine{163     \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a44ff25b64c66d3d3700ffbfa5b8b9330}{Motion\_MOG2}} = 6,}
+\DoxyCodeLine{164     \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a4988e24edd891887cab51c40c8766469}{Face\_HAAR}} = 7,}
+\DoxyCodeLine{165     \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a115099e7e10e6d96d1d98c2b49846deb}{Pedestrian\_HOG}} = 8,}
+\DoxyCodeLine{166     \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a9ac24174fd8e83cd08a363fdac49d0d4}{Pedestrian\_C4}} = 9,}
+\DoxyCodeLine{167     \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a92cb97c8c0003db338921cb8433c3855}{Yolo\_Darknet}} = 10,}
+\DoxyCodeLine{168     \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760ae4a5051b95e76d3619192fc72b1f076f}{Yolo\_TensorRT}} = 11,}
+\DoxyCodeLine{169     \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760abdea7a6f6616904879fd0eb85f951dbb}{DNN\_OCV}} = 12,}
+\DoxyCodeLine{170     \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760aef1186dd1961a61bdfc4f1f7df3ceb12}{DetectorsCount}}}
+\DoxyCodeLine{171 \};}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{176 \textcolor{keyword}{enum} \mbox{\hyperlink{namespacetracking_a55743c5e18b9b228c4ba2587260b2502}{DistType}}}
+\DoxyCodeLine{177 \{}
+\DoxyCodeLine{178     \mbox{\hyperlink{namespacetracking_a55743c5e18b9b228c4ba2587260b2502a30176bdc0b4f965c6812767a2fa52e1e}{DistCenters}},     \textcolor{comment}{// Euclidean distance between centers, [0, 1]}}
+\DoxyCodeLine{179     \mbox{\hyperlink{namespacetracking_a55743c5e18b9b228c4ba2587260b2502a43af27628a9ee8e94a23c079eab5d448}{DistRects}},       \textcolor{comment}{// Euclidean distance between bounding rectangles, [0, 1]}}
+\DoxyCodeLine{180     \mbox{\hyperlink{namespacetracking_a55743c5e18b9b228c4ba2587260b2502a731b827afcbde6eb19624ad6130b1798}{DistJaccard}},     \textcolor{comment}{// Intersection over Union, IoU, [0, 1]}}
+\DoxyCodeLine{181     \mbox{\hyperlink{namespacetracking_a55743c5e18b9b228c4ba2587260b2502afff03766300052463dcfeef33b8cd749}{DistHist}},        \textcolor{comment}{// Bhatacharia distance between histograms, [0, 1]}}
+\DoxyCodeLine{182     \mbox{\hyperlink{namespacetracking_a55743c5e18b9b228c4ba2587260b2502aaa9d25020a3df3847e5b57e7994cfd25}{DistFeatureCos}},  \textcolor{comment}{// Cosine distance between embeddings, [0, 1]}}
+\DoxyCodeLine{183     \mbox{\hyperlink{namespacetracking_a55743c5e18b9b228c4ba2587260b2502a321cb3e0a4e76350b7f83fd181dbc6ba}{DistMahalanobis}}, \textcolor{comment}{// Mahalanobis: https://ww2.mathworks.cn/help/vision/ug/motion-\/based-\/multiple-\/object-\/tracking.html}}
+\DoxyCodeLine{184     \mbox{\hyperlink{namespacetracking_a55743c5e18b9b228c4ba2587260b2502ab02fa20dc54c6870b718d06c18a9714c}{DistsCount}}}
+\DoxyCodeLine{185 \};}
+\DoxyCodeLine{186 }
+\DoxyCodeLine{190 \textcolor{keyword}{enum} \mbox{\hyperlink{namespacetracking_a9b3e7d16c86cd8b781ab214e396b0ebf}{FilterGoal}}}
+\DoxyCodeLine{191 \{}
+\DoxyCodeLine{192     \mbox{\hyperlink{namespacetracking_a9b3e7d16c86cd8b781ab214e396b0ebfafac394783c1196957768400bc53ba491}{FilterCenter}},}
+\DoxyCodeLine{193     \mbox{\hyperlink{namespacetracking_a9b3e7d16c86cd8b781ab214e396b0ebfabb259eae9513c55b313c553ce6249aea}{FilterRect}},}
+\DoxyCodeLine{194     \mbox{\hyperlink{namespacetracking_a9b3e7d16c86cd8b781ab214e396b0ebfa048d55ca8f8032632cdd950eee75ce37}{FiltersCount}}}
+\DoxyCodeLine{195 \};}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{200 \textcolor{keyword}{enum} \mbox{\hyperlink{namespacetracking_a83f2c4d58ea2737f7d6296dce3eb722a}{KalmanType}}}
+\DoxyCodeLine{201 \{}
+\DoxyCodeLine{202     \mbox{\hyperlink{namespacetracking_a83f2c4d58ea2737f7d6296dce3eb722aa889eca583e371386c92e05814797a885}{KalmanLinear}},}
+\DoxyCodeLine{203     \mbox{\hyperlink{namespacetracking_a83f2c4d58ea2737f7d6296dce3eb722aa39d914d61ae37e52ad325f55d199dabc}{KalmanUnscented}},}
+\DoxyCodeLine{204     \mbox{\hyperlink{namespacetracking_a83f2c4d58ea2737f7d6296dce3eb722aa442bc8be9c68f72f1bc7952153cbf4c7}{KalmanAugmentedUnscented}},}
+\DoxyCodeLine{205     \mbox{\hyperlink{namespacetracking_a83f2c4d58ea2737f7d6296dce3eb722aa00e9527bb45cbc0b60d4c28b00e62242}{KalmanCount}}}
+\DoxyCodeLine{206 \};}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{211 \textcolor{keyword}{enum} \mbox{\hyperlink{namespacetracking_a491e50c9261ab820965d871a217d4f13}{MatchType}}}
+\DoxyCodeLine{212 \{}
+\DoxyCodeLine{213     \mbox{\hyperlink{namespacetracking_a491e50c9261ab820965d871a217d4f13a8c97315e46df8c0716a9538655fc967d}{MatchHungrian}},}
+\DoxyCodeLine{214     \mbox{\hyperlink{namespacetracking_a491e50c9261ab820965d871a217d4f13a41d2324dafb3393ff2cb54671c8b06ef}{MatchBipart}},}
+\DoxyCodeLine{215     \mbox{\hyperlink{namespacetracking_a491e50c9261ab820965d871a217d4f13af6abe9722bd3a17131468f177731026b}{MatchCount}}}
+\DoxyCodeLine{216 \};}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{221 \textcolor{keyword}{enum} \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3}{LostTrackType}}}
+\DoxyCodeLine{222 \{}
+\DoxyCodeLine{223     \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a3bd92892a83828375b9fce502732c491}{TrackNone}},}
+\DoxyCodeLine{224     \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a9bba8e4377e562caa976576d47c5eb2e}{TrackKCF}},}
+\DoxyCodeLine{225     \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a98b9586c66bb9e4b1e0fed027700a197}{TrackMIL}},}
+\DoxyCodeLine{226     \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a637634260348d3b28ff4e28661bb417a}{TrackMedianFlow}},}
+\DoxyCodeLine{227     \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a674ec8effe560545c87b0c14bd40f7f3}{TrackGOTURN}},}
+\DoxyCodeLine{228     \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3aa3948447c2ea9d8e9efef9b9433c70e2}{TrackMOSSE}},}
+\DoxyCodeLine{229     \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a78f8ce9e03e5e13064aa3d0358654650}{TrackCSRT}},}
+\DoxyCodeLine{230     \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a99099b5754baf71c0dbe2814c1d1ea9c}{TrackDAT}},}
+\DoxyCodeLine{231     \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a085b9d83f2d86b316f11fc0e65ed5c4e}{TrackSTAPLE}},}
+\DoxyCodeLine{232     \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a74f6af365b6cf4ec1616d73cd9f31fb1}{TrackLDES}},}
+\DoxyCodeLine{233     \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3ab790e079885796e79f093ec8e7f2a7e5}{TrackDaSiamRPN}},}
+\DoxyCodeLine{234     \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a26ed39401ad4d5c3f37fee6c07cebfbe}{SingleTracksCount}}}
+\DoxyCodeLine{235 \};}
+\DoxyCodeLine{236 \}}
+
+\end{DoxyCode}

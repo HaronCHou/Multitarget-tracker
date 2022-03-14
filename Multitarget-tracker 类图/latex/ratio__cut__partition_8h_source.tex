@@ -1,0 +1,268 @@
+\hypertarget{ratio__cut__partition_8h_source}{}\doxysection{ratio\+\_\+cut\+\_\+partition.\+h}
+\label{ratio__cut__partition_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/ratio\_cut\_partition.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/ratio\_cut\_partition.h}}
+\mbox{\hyperlink{ratio__cut__partition_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* This software is distributed under the GNU Lesser General Public License */}}
+\DoxyCodeLine{2 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{//  ratio\_cut\_partition.h}}
+\DoxyCodeLine{5 \textcolor{comment}{//}}
+\DoxyCodeLine{6 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{// \$Id: ratio\_cut\_partition.h,v 1.8 2003/01/31 08:15:04 chris Exp \$}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#ifndef GTL\_RATIO\_CUT\_PARTITION\_H}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define GTL\_RATIO\_CUT\_PARTITION\_H}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{_g_t_l_8h}{GTL/GTL.h}}>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{graph_8h}{GTL/graph.h}}>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{node__map_8h}{GTL/node\_map.h}}>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{edge__map_8h}{GTL/edge\_map.h}}>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{algorithm_8h}{GTL/algorithm.h}}>}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \mbox{\hyperlink{_g_t_l_8h_a2d9f24096ac60918452dd51f32b64aa9}{\_\_GTL\_BEGIN\_NAMESPACE}}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 }
+\DoxyCodeLine{32 \textcolor{keyword}{class }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{classratio__cut__partition}{ratio\_cut\_partition}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classalgorithm}{algorithm}}}
+\DoxyCodeLine{33 \{}
+\DoxyCodeLine{34 \textcolor{keyword}{public}:}
+\DoxyCodeLine{41     \textcolor{keyword}{typedef} \textcolor{keywordtype}{int} \mbox{\hyperlink{classratio__cut__partition_ace53442bd0c1e21fbf00858ec6f6b456}{side\_type}};}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{48     \textcolor{keyword}{const} \textcolor{keyword}{static} \mbox{\hyperlink{classratio__cut__partition_ace53442bd0c1e21fbf00858ec6f6b456}{side\_type}} A = 0;}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{55     \textcolor{keyword}{const} \textcolor{keyword}{static} \mbox{\hyperlink{classratio__cut__partition_ace53442bd0c1e21fbf00858ec6f6b456}{side\_type}} B = 1;}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{65     \textcolor{keyword}{typedef} \textcolor{keywordtype}{short} \textcolor{keywordtype}{int} \mbox{\hyperlink{classratio__cut__partition_a558dda40abda8ab03edb4605dbb81e36}{fix\_type}};}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{72     \textcolor{keyword}{const} \textcolor{keyword}{static} \mbox{\hyperlink{classratio__cut__partition_a558dda40abda8ab03edb4605dbb81e36}{fix\_type}} FIXA = 0;}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{79     \textcolor{keyword}{const} \textcolor{keyword}{static} \mbox{\hyperlink{classratio__cut__partition_a558dda40abda8ab03edb4605dbb81e36}{fix\_type}} FIXB = 1;}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{86     \textcolor{keyword}{const} \textcolor{keyword}{static} \mbox{\hyperlink{classratio__cut__partition_a558dda40abda8ab03edb4605dbb81e36}{fix\_type}} UNFIXED = 2;}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{93     \mbox{\hyperlink{classratio__cut__partition_a6a8a57710886c1bd889688fcc515240a}{ratio\_cut\_partition}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{100     \textcolor{keyword}{virtual} \mbox{\hyperlink{classratio__cut__partition_a7794420846f262f57f557596d30fd168}{\string~ratio\_cut\_partition}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{113     \textcolor{keywordtype}{void} set\_vars(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G, \textcolor{keyword}{const} \mbox{\hyperlink{classnode__map}{node\_map<int>}}\& node\_weight,}
+\DoxyCodeLine{114     \textcolor{keyword}{const} \mbox{\hyperlink{classedge__map}{edge\_map<int>}}\& edge\_weight);}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{129     \textcolor{keywordtype}{void} set\_vars(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G, \textcolor{keyword}{const} \mbox{\hyperlink{classnode__map}{node\_map<int>}}\& node\_weight,}
+\DoxyCodeLine{130     \textcolor{keyword}{const} \mbox{\hyperlink{classedge__map}{edge\_map<int>}}\& edge\_weight, \textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}} source\_node,}
+\DoxyCodeLine{131     \textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}} target\_node);}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{151     \textcolor{keywordtype}{void} set\_vars(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G, \textcolor{keyword}{const} \mbox{\hyperlink{classnode__map}{node\_map<int>}}\& node\_weight,}
+\DoxyCodeLine{152     \textcolor{keyword}{const} \mbox{\hyperlink{classedge__map}{edge\_map<int>}}\& edge\_weight, \textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}} source\_node,}
+\DoxyCodeLine{153     \textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}} target\_node, \textcolor{keyword}{const} \mbox{\hyperlink{classnode__map}{node\_map<side\_type>}}\& init\_side);}
+\DoxyCodeLine{154             }
+\DoxyCodeLine{173     \textcolor{keywordtype}{void} set\_vars(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G, \textcolor{keyword}{const} \mbox{\hyperlink{classnode__map}{node\_map<int>}}\& node\_weight,}
+\DoxyCodeLine{174     \textcolor{keyword}{const} \mbox{\hyperlink{classedge__map}{edge\_map<int>}}\& edge\_weight, \textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}} source\_node,}
+\DoxyCodeLine{175     \textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}} target\_node, \textcolor{keyword}{const} \mbox{\hyperlink{classnode__map}{node\_map<fix\_type>}}\& fixed);}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{200     \textcolor{keywordtype}{void} set\_vars(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G, \textcolor{keyword}{const} \mbox{\hyperlink{classnode__map}{node\_map<int>}}\& node\_weight,}
+\DoxyCodeLine{201     \textcolor{keyword}{const} \mbox{\hyperlink{classedge__map}{edge\_map<int>}}\& edge\_weight, \textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}} source\_node,}
+\DoxyCodeLine{202     \textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}} target\_node, \textcolor{keyword}{const} \mbox{\hyperlink{classnode__map}{node\_map<side\_type>}}\& init\_side,}
+\DoxyCodeLine{203     \textcolor{keyword}{const} \mbox{\hyperlink{classnode__map}{node\_map<fix\_type>}}\& fixed);}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{214     \textcolor{keywordtype}{void} store\_cut\_edges(\textcolor{keyword}{const} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classset}{set}});}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{227     \textcolor{keywordtype}{void} store\_nodesAB(\textcolor{keyword}{const} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classset}{set}});}
+\DoxyCodeLine{228 }
+\DoxyCodeLine{253     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{classalgorithm_a528100c0e54d446fab1e329a53935364}{check}}(GTL::graph\& G);}
+\DoxyCodeLine{254 }
+\DoxyCodeLine{265     \textcolor{keywordtype}{int} \mbox{\hyperlink{classalgorithm_a4baee48c513c5802975743152c33f34c}{run}}(GTL::graph\& G);}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{272     \textcolor{keywordtype}{int} get\_cutsize();}
+\DoxyCodeLine{273         }
+\DoxyCodeLine{280     \textcolor{keywordtype}{double} get\_cutratio();}
+\DoxyCodeLine{281         }
+\DoxyCodeLine{290     \mbox{\hyperlink{classratio__cut__partition_ace53442bd0c1e21fbf00858ec6f6b456}{side\_type}} get\_side\_of\_node(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n) \textcolor{keyword}{const};}
+\DoxyCodeLine{291 }
+\DoxyCodeLine{301     \mbox{\hyperlink{classratio__cut__partition_ace53442bd0c1e21fbf00858ec6f6b456}{side\_type}} operator [](\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n) \textcolor{keyword}{const};}
+\DoxyCodeLine{302                 }
+\DoxyCodeLine{310     \textcolor{keywordtype}{int} get\_weight\_on\_sideA(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G) \textcolor{keyword}{const};}
+\DoxyCodeLine{311 }
+\DoxyCodeLine{319     \textcolor{keywordtype}{int} get\_weight\_on\_sideB(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G) \textcolor{keyword}{const};}
+\DoxyCodeLine{320 }
+\DoxyCodeLine{324     \textcolor{keyword}{typedef} edges\_t::const\_iterator \mbox{\hyperlink{classratio__cut__partition_a910bb0e5c927ffd26a3805787e179194}{cut\_edges\_iterator}};}
+\DoxyCodeLine{325 }
+\DoxyCodeLine{334     \mbox{\hyperlink{classratio__cut__partition_a910bb0e5c927ffd26a3805787e179194}{cut\_edges\_iterator}} cut\_edges\_begin() \textcolor{keyword}{const};}
+\DoxyCodeLine{335 }
+\DoxyCodeLine{344     \mbox{\hyperlink{classratio__cut__partition_a910bb0e5c927ffd26a3805787e179194}{cut\_edges\_iterator}} cut\_edges\_end() \textcolor{keyword}{const};}
+\DoxyCodeLine{345         }
+\DoxyCodeLine{349     \textcolor{keyword}{typedef} nodes\_t::const\_iterator \mbox{\hyperlink{classratio__cut__partition_af438a591f6559b479bf40e9ac9cfcf0e}{nodes\_of\_one\_side\_iterator}};}
+\DoxyCodeLine{350 }
+\DoxyCodeLine{358     \mbox{\hyperlink{classratio__cut__partition_af438a591f6559b479bf40e9ac9cfcf0e}{nodes\_of\_one\_side\_iterator}} nodes\_of\_sideA\_begin() \textcolor{keyword}{const};}
+\DoxyCodeLine{359 }
+\DoxyCodeLine{368     \mbox{\hyperlink{classratio__cut__partition_af438a591f6559b479bf40e9ac9cfcf0e}{nodes\_of\_one\_side\_iterator}} nodes\_of\_sideA\_end() \textcolor{keyword}{const};}
+\DoxyCodeLine{369 }
+\DoxyCodeLine{377     \mbox{\hyperlink{classratio__cut__partition_af438a591f6559b479bf40e9ac9cfcf0e}{nodes\_of\_one\_side\_iterator}} nodes\_of\_sideB\_begin() \textcolor{keyword}{const};}
+\DoxyCodeLine{378 }
+\DoxyCodeLine{387     \mbox{\hyperlink{classratio__cut__partition_af438a591f6559b479bf40e9ac9cfcf0e}{nodes\_of\_one\_side\_iterator}} nodes\_of\_sideB\_end() \textcolor{keyword}{const};}
+\DoxyCodeLine{388 }
+\DoxyCodeLine{395     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classalgorithm_a21aba63d066ae7897de6ca7d8425c408}{reset}}();}
+\DoxyCodeLine{396 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{400     \textcolor{keyword}{enum} \mbox{\hyperlink{classratio__cut__partition_a8e2de20fc9f5cbe941aefa1c21c9b5ca}{direction\_type}} \{LEFT\_SHIFT = 2, RIGHT\_SHIFT = 3\};}
+\DoxyCodeLine{401 }
+\DoxyCodeLine{407     \textcolor{keywordtype}{bool} enable\_cut\_edges\_storing = \textcolor{keyword}{false};}
+\DoxyCodeLine{408         }
+\DoxyCodeLine{413     \mbox{\hyperlink{edge_8h_a8f9587479bda6cf612c103494b3858e3}{edges\_t}} \mbox{\hyperlink{classratio__cut__partition_a5ab55eef04a72c0be731d848cb9a5d50}{cut\_edges}};}
+\DoxyCodeLine{414 }
+\DoxyCodeLine{420     \textcolor{keywordtype}{bool} enable\_nodesAB\_storing = \textcolor{keyword}{false};}
+\DoxyCodeLine{421         }
+\DoxyCodeLine{426     \mbox{\hyperlink{edge_8h_a22ac17689106ba21a84e7bc54d1199d6}{nodes\_t}} \mbox{\hyperlink{classratio__cut__partition_a871cc6bf77000205fec8ab6d3a28fc28}{nodesA}};}
+\DoxyCodeLine{427 }
+\DoxyCodeLine{432     \mbox{\hyperlink{edge_8h_a22ac17689106ba21a84e7bc54d1199d6}{nodes\_t}} \mbox{\hyperlink{classratio__cut__partition_af207198b35e52e4055487f8ae8c23d8d}{nodesB}};}
+\DoxyCodeLine{433 }
+\DoxyCodeLine{438     \mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classratio__cut__partition_abb18c3acafc590e258453d7a8d86bb49}{source\_node}};}
+\DoxyCodeLine{439 }
+\DoxyCodeLine{444     \mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classratio__cut__partition_a343ba76869e64141fb795010e388744b}{target\_node}};}
+\DoxyCodeLine{445 }
+\DoxyCodeLine{452     \textcolor{keywordtype}{bool} set\_vars\_executed = \textcolor{keyword}{false};}
+\DoxyCodeLine{453 }
+\DoxyCodeLine{459     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classratio__cut__partition_a248512624766f0b21d154b4841c95a1d}{provided\_st}};}
+\DoxyCodeLine{460 }
+\DoxyCodeLine{467     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classratio__cut__partition_a963258b950f7142e3cac714353b1b21e}{provided\_initial\_part}};}
+\DoxyCodeLine{468 }
+\DoxyCodeLine{474     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classratio__cut__partition_a5f1f85feae589f7d39da48a412c90376}{provided\_fix}};}
+\DoxyCodeLine{475         }
+\DoxyCodeLine{480     \mbox{\hyperlink{classnode__map}{node\_map<fix\_type>}} \mbox{\hyperlink{classratio__cut__partition_ad77023b9f60e88274bf54f2019404768}{fixed}};}
+\DoxyCodeLine{481 }
+\DoxyCodeLine{487     \mbox{\hyperlink{classratio__cut__partition_a8e2de20fc9f5cbe941aefa1c21c9b5ca}{direction\_type}} \mbox{\hyperlink{classratio__cut__partition_a11141cdf8705dbb4331315591a3759d6}{direction}};}
+\DoxyCodeLine{488 }
+\DoxyCodeLine{494     \mbox{\hyperlink{classnode__map}{node\_map<int>}} \mbox{\hyperlink{classratio__cut__partition_a4d9d2a9317a062f839ea7155c37b173f}{node\_weight}};}
+\DoxyCodeLine{495 }
+\DoxyCodeLine{501     \mbox{\hyperlink{classedge__map}{edge\_map<int>}} \mbox{\hyperlink{classratio__cut__partition_a48a85c82fb09b83c9d494d6d1232fab2}{edge\_weight}};}
+\DoxyCodeLine{502 }
+\DoxyCodeLine{508     \textcolor{keywordtype}{int} \mbox{\hyperlink{classratio__cut__partition_a74193c82e8dc7d997780613378919106}{max\_edge\_weight}};}
+\DoxyCodeLine{509 }
+\DoxyCodeLine{515     \textcolor{keywordtype}{int} \mbox{\hyperlink{classratio__cut__partition_af1b839e48e498cf8ca93c8ec5df8a686}{node\_weight\_on\_sideA}};}
+\DoxyCodeLine{516 }
+\DoxyCodeLine{522     \textcolor{keywordtype}{int} \mbox{\hyperlink{classratio__cut__partition_aa16d1b508db86eb0ba4824642394999a}{node\_weight\_on\_sideB}};}
+\DoxyCodeLine{523         }
+\DoxyCodeLine{528     \textcolor{keywordtype}{int} \mbox{\hyperlink{classratio__cut__partition_a7de51193b63e241afe263345479580ee}{nodes\_on\_sideA}};}
+\DoxyCodeLine{529         }
+\DoxyCodeLine{534     \textcolor{keywordtype}{int} \mbox{\hyperlink{classratio__cut__partition_a6b797912a7653537473e0e583a3f245a}{nodes\_on\_sideB}};}
+\DoxyCodeLine{535         }
+\DoxyCodeLine{540     \mbox{\hyperlink{classnode__map}{node\_map<side\_type>}} \mbox{\hyperlink{classratio__cut__partition_a2bf913d1d8607747885177a3b585e611}{side}};}
+\DoxyCodeLine{541         }
+\DoxyCodeLine{546     \mbox{\hyperlink{classnode__map}{node\_map<nodes\_t::iterator>}} \mbox{\hyperlink{classratio__cut__partition_a871af9a7ed4cb1c101e6620ff99cb8d7}{position\_in\_bucket}};}
+\DoxyCodeLine{547         }
+\DoxyCodeLine{552     \textcolor{keywordtype}{int} \mbox{\hyperlink{classratio__cut__partition_ab07041983ab24ac059e8c98192c146e4}{max\_vertex\_degree}};}
+\DoxyCodeLine{553 }
+\DoxyCodeLine{558     \mbox{\hyperlink{classedge__map}{edge\_map<int>}} \mbox{\hyperlink{classratio__cut__partition_a112bfcfb9d05d5bbdeb29576a61399e1}{aside}};}
+\DoxyCodeLine{559 }
+\DoxyCodeLine{564     \mbox{\hyperlink{classedge__map}{edge\_map<int>}} \mbox{\hyperlink{classratio__cut__partition_ab9c1166efb1cbb65ff6c55bb6e3c9e6d}{bside}};}
+\DoxyCodeLine{565 }
+\DoxyCodeLine{571     \mbox{\hyperlink{classedge__map}{edge\_map<nodes\_t>}} \mbox{\hyperlink{classratio__cut__partition_a9e4d0ba86475bd0faa98e01c6be4dde0}{unlockedA}};}
+\DoxyCodeLine{572 }
+\DoxyCodeLine{578     \mbox{\hyperlink{classedge__map}{edge\_map<nodes\_t>}} \mbox{\hyperlink{classratio__cut__partition_af7c877d8c6e9b533ab34cde1c6690b25}{unlockedB}};}
+\DoxyCodeLine{579 }
+\DoxyCodeLine{584     \mbox{\hyperlink{classnode__map}{node\_map<int>}} \mbox{\hyperlink{classratio__cut__partition_af24ff191abbb0578f0bfc54fef5f6d45}{gain\_value}};}
+\DoxyCodeLine{585 }
+\DoxyCodeLine{590     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classratio__cut__partition_a2e3f25066f798f28e9e5646f866ffc1c}{bucketA\_empty}};}
+\DoxyCodeLine{591 }
+\DoxyCodeLine{596     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classratio__cut__partition_af4bbd571d19340f92519240b96b52702}{bucketB\_empty}};}
+\DoxyCodeLine{597 }
+\DoxyCodeLine{603     \textcolor{keywordtype}{int} \mbox{\hyperlink{classratio__cut__partition_ae69ef6876be68d5752d247564a524c6a}{max\_gainA}};}
+\DoxyCodeLine{604 }
+\DoxyCodeLine{610     \textcolor{keywordtype}{int} \mbox{\hyperlink{classratio__cut__partition_af184ffdb46e49b1fc95faa1e6a91cc8e}{max\_gainB}};}
+\DoxyCodeLine{611         }
+\DoxyCodeLine{618     std::vector<nodes\_t> \mbox{\hyperlink{classratio__cut__partition_ac9c2f4f99e1042d69f44c1a1f79d4a2f}{bucketA}};}
+\DoxyCodeLine{619 }
+\DoxyCodeLine{626     std::vector<nodes\_t> \mbox{\hyperlink{classratio__cut__partition_a68f6fa1360b848a0a046e1adf3827f05}{bucketB}};}
+\DoxyCodeLine{627 }
+\DoxyCodeLine{633     \textcolor{keywordtype}{int} \mbox{\hyperlink{classratio__cut__partition_aa01f2d6257fff28739e2431fe826ef71}{cur\_cutsize}};}
+\DoxyCodeLine{634 }
+\DoxyCodeLine{639     \textcolor{keywordtype}{double} \mbox{\hyperlink{classratio__cut__partition_a9dad324884cef5bcdd50122fc98e0860}{cur\_cutratio}};}
+\DoxyCodeLine{640 }
+\DoxyCodeLine{646     \textcolor{keywordtype}{void} divide\_up(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G);}
+\DoxyCodeLine{647 }
+\DoxyCodeLine{654     \textcolor{keywordtype}{void} make\_connected(GTL::graph\& G, \mbox{\hyperlink{edge_8h_a8f9587479bda6cf612c103494b3858e3}{edges\_t}}\& artificial\_edges);}
+\DoxyCodeLine{655         }
+\DoxyCodeLine{661     \textcolor{keywordtype}{void} restore(GTL::graph\& G, \mbox{\hyperlink{edge_8h_a8f9587479bda6cf612c103494b3858e3}{edges\_t}}\& artificial\_edges);}
+\DoxyCodeLine{662         }
+\DoxyCodeLine{667     \textcolor{keywordtype}{void} initialization(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G);}
+\DoxyCodeLine{668 }
+\DoxyCodeLine{673     \textcolor{keywordtype}{void} init\_data\_structure(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G);}
+\DoxyCodeLine{674 }
+\DoxyCodeLine{680     \textcolor{keywordtype}{void} init\_filling\_buckets(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G);}
+\DoxyCodeLine{681 }
+\DoxyCodeLine{687     \textcolor{keywordtype}{int} inital\_gain\_of\_node\_on\_sideA(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}} cur\_node);}
+\DoxyCodeLine{688 }
+\DoxyCodeLine{694     \textcolor{keywordtype}{int} inital\_gain\_of\_node\_on\_sideB(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}} cur\_node);}
+\DoxyCodeLine{695 }
+\DoxyCodeLine{700     \textcolor{keywordtype}{void} init\_variables(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G);}
+\DoxyCodeLine{701         }
+\DoxyCodeLine{706     \textcolor{keywordtype}{void} compute\_max\_vertex\_degree(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G);}
+\DoxyCodeLine{707 }
+\DoxyCodeLine{712     \textcolor{keywordtype}{void} determine\_source\_node(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G);}
+\DoxyCodeLine{713 }
+\DoxyCodeLine{718     \textcolor{keywordtype}{void} compute\_target\_node(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G);}
+\DoxyCodeLine{719 }
+\DoxyCodeLine{725     \textcolor{keywordtype}{void} right\_shift\_op(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G);}
+\DoxyCodeLine{726 }
+\DoxyCodeLine{732     \textcolor{keywordtype}{void} left\_shift\_op(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G);}
+\DoxyCodeLine{733 }
+\DoxyCodeLine{741     \textcolor{keywordtype}{bool} move\_vertex\_A2B(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\& moved\_node);}
+\DoxyCodeLine{742 }
+\DoxyCodeLine{749     \textcolor{keywordtype}{bool} move\_vertex\_B2A(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\& moved\_node);}
+\DoxyCodeLine{750 }
+\DoxyCodeLine{755     \mbox{\hyperlink{structnode}{node}} compute\_highest\_ratio\_node(\mbox{\hyperlink{edge_8h_a22ac17689106ba21a84e7bc54d1199d6}{nodes\_t}} node\_list);}
+\DoxyCodeLine{756 }
+\DoxyCodeLine{764     \textcolor{keywordtype}{double} cutratio();}
+\DoxyCodeLine{765                 }
+\DoxyCodeLine{772     \textcolor{keywordtype}{double} ratio\_of\_node\_A2B(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}} cur\_node);}
+\DoxyCodeLine{773 }
+\DoxyCodeLine{780     \textcolor{keywordtype}{double} ratio\_of\_node\_B2A(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}} cur\_node);}
+\DoxyCodeLine{781         }
+\DoxyCodeLine{787     \textcolor{keyword}{inline} \textcolor{keywordtype}{int} range\_up(\textcolor{keyword}{const} \textcolor{keywordtype}{int} gain\_value) \textcolor{keyword}{const};}
+\DoxyCodeLine{788 }
+\DoxyCodeLine{794     \textcolor{keyword}{inline} \textcolor{keywordtype}{int} range\_down(\textcolor{keyword}{const} \textcolor{keywordtype}{int} index) \textcolor{keyword}{const};}
+\DoxyCodeLine{795 }
+\DoxyCodeLine{801     \textcolor{keywordtype}{void} update\_data\_structure\_A2B(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}} cur\_node,}
+\DoxyCodeLine{802     \textcolor{keyword}{const} \textcolor{keywordtype}{bool} init\_mode);}
+\DoxyCodeLine{803         }
+\DoxyCodeLine{809     \textcolor{keywordtype}{void} update\_data\_structure\_B2A(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}} cur\_node,}
+\DoxyCodeLine{810     \textcolor{keyword}{const} \textcolor{keywordtype}{bool} init\_mode);}
+\DoxyCodeLine{811         }
+\DoxyCodeLine{817     \textcolor{keywordtype}{void} update\_bucketA(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}} cur\_node, \textcolor{keyword}{const} \textcolor{keywordtype}{int} old\_gain,}
+\DoxyCodeLine{818     \textcolor{keyword}{const} \textcolor{keywordtype}{int} new\_gain, \textcolor{keyword}{const} \textcolor{keywordtype}{bool} init\_mode);}
+\DoxyCodeLine{819 }
+\DoxyCodeLine{825     \textcolor{keywordtype}{void} update\_bucketB(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}} cur\_node, \textcolor{keyword}{const} \textcolor{keywordtype}{int} old\_gain,}
+\DoxyCodeLine{826     \textcolor{keyword}{const} \textcolor{keywordtype}{int} new\_gain, \textcolor{keyword}{const} \textcolor{keywordtype}{bool} init\_mode);}
+\DoxyCodeLine{827         }
+\DoxyCodeLine{833     \textcolor{keywordtype}{void} update\_max\_gain(\textcolor{keyword}{const} \mbox{\hyperlink{classratio__cut__partition_ace53442bd0c1e21fbf00858ec6f6b456}{side\_type}} side);}
+\DoxyCodeLine{834 }
+\DoxyCodeLine{839     \textcolor{keywordtype}{void} clean\_step(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G);}
+\DoxyCodeLine{840 }
+\DoxyCodeLine{845     \textcolor{keywordtype}{void} copy\_side\_node\_map(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G, GTL::node\_map<side\_type>\& dest,}
+\DoxyCodeLine{846     \textcolor{keyword}{const} \mbox{\hyperlink{classnode__map}{node\_map<side\_type>}} source) \textcolor{keyword}{const};}
+\DoxyCodeLine{847             }
+\DoxyCodeLine{852     \textcolor{keywordtype}{void} iterative\_shifting(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G);}
+\DoxyCodeLine{853 }
+\DoxyCodeLine{858     \textcolor{keywordtype}{void} group\_swapping(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G);}
+\DoxyCodeLine{859 }
+\DoxyCodeLine{866     \textcolor{keywordtype}{bool} move\_manager(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G);}
+\DoxyCodeLine{867 }
+\DoxyCodeLine{874     \textcolor{keywordtype}{bool} move\_vertex(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\& moved\_node);}
+\DoxyCodeLine{875 }
+\DoxyCodeLine{880     \textcolor{keywordtype}{void} compute\_cut\_edges(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G);}
+\DoxyCodeLine{881 }
+\DoxyCodeLine{886     \textcolor{keywordtype}{void} compute\_nodesAB(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G);}
+\DoxyCodeLine{887 \textcolor{keyword}{private}:}
+\DoxyCodeLine{888 \textcolor{preprocessor}{\#ifdef \_DEBUG}}
+\DoxyCodeLine{893     \textcolor{keywordtype}{void} print\_bucketA();}
+\DoxyCodeLine{894 }
+\DoxyCodeLine{899     \textcolor{keywordtype}{void} print\_bucketB();}
+\DoxyCodeLine{900 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// \_DEBUG}}
+\DoxyCodeLine{901 \};}
+\DoxyCodeLine{902 }
+\DoxyCodeLine{903 \mbox{\hyperlink{_g_t_l_8h_a46af2b3ec266ac2f9d36fa7222358017}{\_\_GTL\_END\_NAMESPACE}}}
+\DoxyCodeLine{904 }
+\DoxyCodeLine{905 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GTL\_RATIO\_CUT\_PARTITION\_H}}
+\DoxyCodeLine{906 }
+\DoxyCodeLine{907 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{908 \textcolor{comment}{//   end of file}}
+\DoxyCodeLine{909 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+
+\end{DoxyCode}

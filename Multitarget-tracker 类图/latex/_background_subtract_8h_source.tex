@@ -1,0 +1,52 @@
+\hypertarget{_background_subtract_8h_source}{}\doxysection{Background\+Subtract.\+h}
+\label{_background_subtract_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/BackgroundSubtract.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/BackgroundSubtract.h}}
+\mbox{\hyperlink{_background_subtract_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{defines_8h}{defines.h}}"{}}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{vibe_8hpp}{vibe\_src/vibe.hpp}}"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8h}{Subsense/BackgroundSubtractorSuBSENSE.h}}"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h}{Subsense/BackgroundSubtractorLOBSTER.h}}"{}}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#ifdef USE\_OCV\_BGFG}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <opencv2/bgsegm.hpp>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{15 \textcolor{keyword}{class }\mbox{\hyperlink{class_background_subtract}{BackgroundSubtract}}}
+\DoxyCodeLine{16 \{}
+\DoxyCodeLine{17 \textcolor{keyword}{public}:}
+\DoxyCodeLine{18     \textcolor{keyword}{enum} \mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949f}{BGFG\_ALGS}}}
+\DoxyCodeLine{19     \{}
+\DoxyCodeLine{20         \mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949fa1905f812773a0029b59688e57990f172}{ALG\_VIBE}},}
+\DoxyCodeLine{21         \mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949fa6ce3f5db7dc79642df7c113be3a28d14}{ALG\_MOG}},}
+\DoxyCodeLine{22         \mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949fa3d46f57cfb0a9b1b5b037b387a35f652}{ALG\_GMG}},}
+\DoxyCodeLine{23         \mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949fa4e734ae21b8add9022427f8da9469cfb}{ALG\_CNT}},}
+\DoxyCodeLine{24         \mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949fa0a4e184ec94bca58e58dd4226f1b1f7f}{ALG\_SuBSENSE}},}
+\DoxyCodeLine{25         \mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949fae4cc76d1ae01949bc7e6be6ed046ddaf}{ALG\_LOBSTER}},}
+\DoxyCodeLine{26         \mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949fa35994e745da8eb824d3808ee50ad3ebf}{ALG\_MOG2}}}
+\DoxyCodeLine{27     \};}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29     \mbox{\hyperlink{class_background_subtract_a0b5096a3823c7af66b6d22cdd36e8fda}{BackgroundSubtract}}(\mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949f}{BGFG\_ALGS}} algType, \textcolor{keywordtype}{int} channels);}
+\DoxyCodeLine{30     \mbox{\hyperlink{class_background_subtract_a09aacb2923748c49f7cc94e3550a0c8a}{\string~BackgroundSubtract}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_background_subtract_a9dacb4cc5cf41c4a37cc776a8142aecc}{Init}}(\textcolor{keyword}{const} \mbox{\hyperlink{defines_8h_a9fcffa231cb8ff6a5fc4e2e2e71f3ead}{config\_t}}\& config);}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_background_subtract_a1cd989730164da1c2523975d2ed32147}{Subtract}}(\textcolor{keyword}{const} cv::UMat\& \mbox{\hyperlink{structimage}{image}}, cv::UMat\& foreground);}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_background_subtract_a63b5092a3d3cf257b1ded87aa5c74fa2}{ResetModel}}(\textcolor{keyword}{const} cv::UMat\& img, \textcolor{keyword}{const} cv::Rect\& roiRect);}
+\DoxyCodeLine{37     }
+\DoxyCodeLine{38     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_background_subtract_a676897a571788e0fee84d568bc68caf0}{m\_channels}} = 1;}
+\DoxyCodeLine{39     \mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949f}{BGFG\_ALGS}} \mbox{\hyperlink{class_background_subtract_a3d569052b6954fa87f04a0aa8a970f97}{m\_algType}} = BGFG\_ALGS::ALG\_MOG2;}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{keyword}{private}:}
+\DoxyCodeLine{42     std::unique\_ptr<vibe::VIBE> \mbox{\hyperlink{class_background_subtract_a57c251abeed9a2c73a3c97d0f7f8b527}{m\_modelVibe}};}
+\DoxyCodeLine{43     cv::Ptr<cv::BackgroundSubtractor> \mbox{\hyperlink{class_background_subtract_a80782a38138a430437095f625603e599}{m\_modelOCV}};}
+\DoxyCodeLine{44     std::unique\_ptr<BackgroundSubtractorLBSP> \mbox{\hyperlink{class_background_subtract_a56275963c8cacca97b97d0cde884f4c1}{m\_modelSuBSENSE}};}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     cv::UMat \mbox{\hyperlink{class_background_subtract_a5d49feceec4ef7def459300ebcc00f1e}{m\_rawForeground}};}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48     cv::UMat \mbox{\hyperlink{class_background_subtract_a0451799e7c935951538af6a80321deaf}{GetImg}}(\textcolor{keyword}{const} cv::UMat\& \mbox{\hyperlink{structimage}{image}});}
+\DoxyCodeLine{49 \};}
+
+\end{DoxyCode}

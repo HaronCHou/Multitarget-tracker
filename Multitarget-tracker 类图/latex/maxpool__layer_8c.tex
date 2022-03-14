@@ -1,0 +1,174 @@
+\hypertarget{maxpool__layer_8c}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/maxpool\+\_\+layer.c 文件参考}
+\label{maxpool__layer_8c}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/maxpool\_layer.c@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/maxpool\_layer.c}}
+{\ttfamily \#include \char`\"{}maxpool\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}convolutional\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dark\+\_\+cuda.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gemm.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+maxpool\+\_\+layer.\+c 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{maxpool__layer_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structimage}{image}} \mbox{\hyperlink{maxpool__layer_8c_a356b5d417d8a6e8c566a720c7c844d93}{get\+\_\+maxpool\+\_\+image}} (\mbox{\hyperlink{maxpool__layer_8h_af2680c241702216bb2104740f7f631d0}{maxpool\+\_\+layer}} l)
+\item 
+\mbox{\hyperlink{structimage}{image}} \mbox{\hyperlink{maxpool__layer_8c_a74bc00b4e5ebeacc0664e4dc48edc469}{get\+\_\+maxpool\+\_\+delta}} (\mbox{\hyperlink{maxpool__layer_8h_af2680c241702216bb2104740f7f631d0}{maxpool\+\_\+layer}} l)
+\item 
+void \mbox{\hyperlink{maxpool__layer_8c_aa26210ccfe5891de71d606076a7ed1c8}{create\+\_\+maxpool\+\_\+cudnn\+\_\+tensors}} (\mbox{\hyperlink{structlayer}{layer}} $\ast$l)
+\item 
+void \mbox{\hyperlink{maxpool__layer_8c_a8ad424779c832de457357ac53ffaab9f}{cudnn\+\_\+maxpool\+\_\+setup}} (\mbox{\hyperlink{structlayer}{layer}} $\ast$l)
+\item 
+void \mbox{\hyperlink{maxpool__layer_8c_acf1fff7611ea3670335b6fc3b0160f73}{cudnn\+\_\+local\+\_\+avgpool\+\_\+setup}} (\mbox{\hyperlink{structlayer}{layer}} $\ast$l)
+\item 
+\mbox{\hyperlink{maxpool__layer_8h_af2680c241702216bb2104740f7f631d0}{maxpool\+\_\+layer}} \mbox{\hyperlink{maxpool__layer_8c_aecf9c04c76a85587048c0e261074ed3a}{make\+\_\+maxpool\+\_\+layer}} (int batch, int h, int w, int c, int size, int stride\+\_\+x, int stride\+\_\+y, int padding, int maxpool\+\_\+depth, int out\+\_\+channels, int antialiasing, int avgpool, int train)
+\item 
+void \mbox{\hyperlink{maxpool__layer_8c_a46551094c5c40c7e88aec13f5dbd80e8}{resize\+\_\+maxpool\+\_\+layer}} (\mbox{\hyperlink{maxpool__layer_8h_af2680c241702216bb2104740f7f631d0}{maxpool\+\_\+layer}} $\ast$l, int w, int h)
+\item 
+void \mbox{\hyperlink{maxpool__layer_8c_a9d628b7b6a043d2f323dac530b3272a4}{forward\+\_\+maxpool\+\_\+layer}} (const \mbox{\hyperlink{maxpool__layer_8h_af2680c241702216bb2104740f7f631d0}{maxpool\+\_\+layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{maxpool__layer_8c_a76d554e5b8b927ca3ae3c5438a5e9534}{backward\+\_\+maxpool\+\_\+layer}} (const \mbox{\hyperlink{maxpool__layer_8h_af2680c241702216bb2104740f7f631d0}{maxpool\+\_\+layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{maxpool__layer_8c_a36b6a80aed34c815549fd16737a67c3c}{forward\+\_\+local\+\_\+avgpool\+\_\+layer}} (const \mbox{\hyperlink{maxpool__layer_8h_af2680c241702216bb2104740f7f631d0}{maxpool\+\_\+layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{maxpool__layer_8c_a5bd771d465c576760dfbf9871e2b20ab}{backward\+\_\+local\+\_\+avgpool\+\_\+layer}} (const \mbox{\hyperlink{maxpool__layer_8h_af2680c241702216bb2104740f7f631d0}{maxpool\+\_\+layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{maxpool__layer_8c_a5bd771d465c576760dfbf9871e2b20ab}\label{maxpool__layer_8c_a5bd771d465c576760dfbf9871e2b20ab}} 
+\index{maxpool\_layer.c@{maxpool\_layer.c}!backward\_local\_avgpool\_layer@{backward\_local\_avgpool\_layer}}
+\index{backward\_local\_avgpool\_layer@{backward\_local\_avgpool\_layer}!maxpool\_layer.c@{maxpool\_layer.c}}
+\doxysubsubsection{\texorpdfstring{backward\_local\_avgpool\_layer()}{backward\_local\_avgpool\_layer()}}
+{\footnotesize\ttfamily void backward\+\_\+local\+\_\+avgpool\+\_\+layer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{maxpool__layer_8h_af2680c241702216bb2104740f7f631d0}{maxpool\+\_\+layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=299pt]{maxpool__layer_8c_a5bd771d465c576760dfbf9871e2b20ab_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{maxpool__layer_8c_a76d554e5b8b927ca3ae3c5438a5e9534}\label{maxpool__layer_8c_a76d554e5b8b927ca3ae3c5438a5e9534}} 
+\index{maxpool\_layer.c@{maxpool\_layer.c}!backward\_maxpool\_layer@{backward\_maxpool\_layer}}
+\index{backward\_maxpool\_layer@{backward\_maxpool\_layer}!maxpool\_layer.c@{maxpool\_layer.c}}
+\doxysubsubsection{\texorpdfstring{backward\_maxpool\_layer()}{backward\_maxpool\_layer()}}
+{\footnotesize\ttfamily void backward\+\_\+maxpool\+\_\+layer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{maxpool__layer_8h_af2680c241702216bb2104740f7f631d0}{maxpool\+\_\+layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{maxpool__layer_8c_a76d554e5b8b927ca3ae3c5438a5e9534_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{maxpool__layer_8c_aa26210ccfe5891de71d606076a7ed1c8}\label{maxpool__layer_8c_aa26210ccfe5891de71d606076a7ed1c8}} 
+\index{maxpool\_layer.c@{maxpool\_layer.c}!create\_maxpool\_cudnn\_tensors@{create\_maxpool\_cudnn\_tensors}}
+\index{create\_maxpool\_cudnn\_tensors@{create\_maxpool\_cudnn\_tensors}!maxpool\_layer.c@{maxpool\_layer.c}}
+\doxysubsubsection{\texorpdfstring{create\_maxpool\_cudnn\_tensors()}{create\_maxpool\_cudnn\_tensors()}}
+{\footnotesize\ttfamily void create\+\_\+maxpool\+\_\+cudnn\+\_\+tensors (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}} $\ast$}]{l }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maxpool__layer_8c_acf1fff7611ea3670335b6fc3b0160f73}\label{maxpool__layer_8c_acf1fff7611ea3670335b6fc3b0160f73}} 
+\index{maxpool\_layer.c@{maxpool\_layer.c}!cudnn\_local\_avgpool\_setup@{cudnn\_local\_avgpool\_setup}}
+\index{cudnn\_local\_avgpool\_setup@{cudnn\_local\_avgpool\_setup}!maxpool\_layer.c@{maxpool\_layer.c}}
+\doxysubsubsection{\texorpdfstring{cudnn\_local\_avgpool\_setup()}{cudnn\_local\_avgpool\_setup()}}
+{\footnotesize\ttfamily void cudnn\+\_\+local\+\_\+avgpool\+\_\+setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}} $\ast$}]{l }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maxpool__layer_8c_a8ad424779c832de457357ac53ffaab9f}\label{maxpool__layer_8c_a8ad424779c832de457357ac53ffaab9f}} 
+\index{maxpool\_layer.c@{maxpool\_layer.c}!cudnn\_maxpool\_setup@{cudnn\_maxpool\_setup}}
+\index{cudnn\_maxpool\_setup@{cudnn\_maxpool\_setup}!maxpool\_layer.c@{maxpool\_layer.c}}
+\doxysubsubsection{\texorpdfstring{cudnn\_maxpool\_setup()}{cudnn\_maxpool\_setup()}}
+{\footnotesize\ttfamily void cudnn\+\_\+maxpool\+\_\+setup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}} $\ast$}]{l }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maxpool__layer_8c_a36b6a80aed34c815549fd16737a67c3c}\label{maxpool__layer_8c_a36b6a80aed34c815549fd16737a67c3c}} 
+\index{maxpool\_layer.c@{maxpool\_layer.c}!forward\_local\_avgpool\_layer@{forward\_local\_avgpool\_layer}}
+\index{forward\_local\_avgpool\_layer@{forward\_local\_avgpool\_layer}!maxpool\_layer.c@{maxpool\_layer.c}}
+\doxysubsubsection{\texorpdfstring{forward\_local\_avgpool\_layer()}{forward\_local\_avgpool\_layer()}}
+{\footnotesize\ttfamily void forward\+\_\+local\+\_\+avgpool\+\_\+layer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{maxpool__layer_8h_af2680c241702216bb2104740f7f631d0}{maxpool\+\_\+layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{maxpool__layer_8c_a36b6a80aed34c815549fd16737a67c3c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{maxpool__layer_8c_a9d628b7b6a043d2f323dac530b3272a4}\label{maxpool__layer_8c_a9d628b7b6a043d2f323dac530b3272a4}} 
+\index{maxpool\_layer.c@{maxpool\_layer.c}!forward\_maxpool\_layer@{forward\_maxpool\_layer}}
+\index{forward\_maxpool\_layer@{forward\_maxpool\_layer}!maxpool\_layer.c@{maxpool\_layer.c}}
+\doxysubsubsection{\texorpdfstring{forward\_maxpool\_layer()}{forward\_maxpool\_layer()}}
+{\footnotesize\ttfamily void forward\+\_\+maxpool\+\_\+layer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{maxpool__layer_8h_af2680c241702216bb2104740f7f631d0}{maxpool\+\_\+layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{maxpool__layer_8c_a9d628b7b6a043d2f323dac530b3272a4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{maxpool__layer_8c_a74bc00b4e5ebeacc0664e4dc48edc469}\label{maxpool__layer_8c_a74bc00b4e5ebeacc0664e4dc48edc469}} 
+\index{maxpool\_layer.c@{maxpool\_layer.c}!get\_maxpool\_delta@{get\_maxpool\_delta}}
+\index{get\_maxpool\_delta@{get\_maxpool\_delta}!maxpool\_layer.c@{maxpool\_layer.c}}
+\doxysubsubsection{\texorpdfstring{get\_maxpool\_delta()}{get\_maxpool\_delta()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structimage}{image}} get\+\_\+maxpool\+\_\+delta (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{maxpool__layer_8h_af2680c241702216bb2104740f7f631d0}{maxpool\+\_\+layer}}}]{l }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{maxpool__layer_8c_a74bc00b4e5ebeacc0664e4dc48edc469_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{maxpool__layer_8c_a356b5d417d8a6e8c566a720c7c844d93}\label{maxpool__layer_8c_a356b5d417d8a6e8c566a720c7c844d93}} 
+\index{maxpool\_layer.c@{maxpool\_layer.c}!get\_maxpool\_image@{get\_maxpool\_image}}
+\index{get\_maxpool\_image@{get\_maxpool\_image}!maxpool\_layer.c@{maxpool\_layer.c}}
+\doxysubsubsection{\texorpdfstring{get\_maxpool\_image()}{get\_maxpool\_image()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structimage}{image}} get\+\_\+maxpool\+\_\+image (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{maxpool__layer_8h_af2680c241702216bb2104740f7f631d0}{maxpool\+\_\+layer}}}]{l }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{maxpool__layer_8c_a356b5d417d8a6e8c566a720c7c844d93_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{maxpool__layer_8c_aecf9c04c76a85587048c0e261074ed3a}\label{maxpool__layer_8c_aecf9c04c76a85587048c0e261074ed3a}} 
+\index{maxpool\_layer.c@{maxpool\_layer.c}!make\_maxpool\_layer@{make\_maxpool\_layer}}
+\index{make\_maxpool\_layer@{make\_maxpool\_layer}!maxpool\_layer.c@{maxpool\_layer.c}}
+\doxysubsubsection{\texorpdfstring{make\_maxpool\_layer()}{make\_maxpool\_layer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{maxpool__layer_8h_af2680c241702216bb2104740f7f631d0}{maxpool\+\_\+layer}} make\+\_\+maxpool\+\_\+layer (\begin{DoxyParamCaption}\item[{int}]{batch,  }\item[{int}]{h,  }\item[{int}]{w,  }\item[{int}]{c,  }\item[{int}]{size,  }\item[{int}]{stride\+\_\+x,  }\item[{int}]{stride\+\_\+y,  }\item[{int}]{padding,  }\item[{int}]{maxpool\+\_\+depth,  }\item[{int}]{out\+\_\+channels,  }\item[{int}]{antialiasing,  }\item[{int}]{avgpool,  }\item[{int}]{train }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{maxpool__layer_8c_aecf9c04c76a85587048c0e261074ed3a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{maxpool__layer_8c_a46551094c5c40c7e88aec13f5dbd80e8}\label{maxpool__layer_8c_a46551094c5c40c7e88aec13f5dbd80e8}} 
+\index{maxpool\_layer.c@{maxpool\_layer.c}!resize\_maxpool\_layer@{resize\_maxpool\_layer}}
+\index{resize\_maxpool\_layer@{resize\_maxpool\_layer}!maxpool\_layer.c@{maxpool\_layer.c}}
+\doxysubsubsection{\texorpdfstring{resize\_maxpool\_layer()}{resize\_maxpool\_layer()}}
+{\footnotesize\ttfamily void resize\+\_\+maxpool\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{maxpool__layer_8h_af2680c241702216bb2104740f7f631d0}{maxpool\+\_\+layer}} $\ast$}]{l,  }\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=341pt]{maxpool__layer_8c_a46551094c5c40c7e88aec13f5dbd80e8_cgraph}
+\end{center}
+\end{figure}

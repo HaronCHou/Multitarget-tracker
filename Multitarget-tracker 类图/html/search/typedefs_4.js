@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['data_0',['data',['../darknet_8h.html#a493583f6fc164cf849745e01e4c04ab5',1,'darknet.h']]],
+  ['datasink_1',['DataSink',['../namespacehttplib.html#a6bfddf16d54a7ce2a574a9d4d3b60b39',1,'httplib']]],
+  ['days_2',['days',['../classduration__caster.html#a04fee4c68761f22d238c731c4a89e150',1,'duration_caster']]],
+  ['deconvolutional_5flayer_3',['deconvolutional_layer',['../deconvolutional__layer_8h.html#a3104e42e8f435b8f02bcdb0de9bcf5db',1,'deconvolutional_layer.h']]],
+  ['deferred_5ft_4',['deferred_t',['../detail_2common_8h.html#a0a48a85e1319daba85b2a061aeef6f8c',1,'common.h']]],
+  ['det_5fnum_5fpair_5',['det_num_pair',['../darknet_8h.html#aa045d203e26e44c14f261604fa235fc9',1,'darknet.h']]],
+  ['detection_6',['detection',['../darknet_8h.html#a133407954ec8ecfeb85373ea6c50bf34',1,'darknet.h']]],
+  ['detection_5flayer_7',['detection_layer',['../detection__layer_8h.html#a3a5018a4d1685b278fc2586711a3a976',1,'detection_layer.h']]],
+  ['detection_5fwith_5fclass_8',['detection_with_class',['../box_8h.html#a8cad574c77f4161bd3357f8526e847e4',1,'box.h']]],
+  ['dfs_5fiterator_9',['dfs_iterator',['../classdfs.html#a15fe023a5a1f7ddda00f3d87110d9a32',1,'dfs']]],
+  ['dict_5fiterator_10',['dict_iterator',['../pytypes_8h.html#a3c02b3eee4eaa3b690bcdb0405242079',1,'pytypes.h']]],
+  ['difference_5ftype_11',['difference_type',['../classgeneric__iterator.html#a307cd6eddc16127eb873d76bcfc07233',1,'generic_iterator::difference_type()'],['../classiterator.html#a573d7d10c131e60e9dbc7f691a3c03b1',1,'iterator::difference_type()']]],
+  ['distmatrix_5ft_12',['distMatrix_t',['../defines_8h.html#af6ab0ee8259a51215f62e8f96416d5bb',1,'defines.h']]],
+  ['done_13',['Done',['../namespacehttplib.html#a8d10683b0d01cae237d30c058a9c1d27',1,'httplib']]],
+  ['dropout_5flayer_14',['dropout_layer',['../dropout__layer_8h.html#afc94286c466894f320ed746d584f7585',1,'dropout_layer.h']]],
+  ['dxrep_15',['dxrep',['../darknet_8h.html#ac7dc960d05f3e6df9803f5d72635f618',1,'darknet.h']]]
+];

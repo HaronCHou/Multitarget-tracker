@@ -1,0 +1,67 @@
+\hypertarget{iostream_8h}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/iostream.h 文件参考}
+\label{iostream_8h}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/iostream.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/iostream.h}}
+{\ttfamily \#include \char`\"{}pybind11.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$streambuf$>$}\newline
+{\ttfamily \#include $<$ostream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+iostream.\+h 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{iostream_8h__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classpythonbuf}{pythonbuf}}
+\item 
+class \mbox{\hyperlink{classscoped__ostream__redirect}{scoped\+\_\+ostream\+\_\+redirect}}
+\item 
+class \mbox{\hyperlink{classscoped__estream__redirect}{scoped\+\_\+estream\+\_\+redirect}}
+\item 
+class \mbox{\hyperlink{class_ostream_redirect}{Ostream\+Redirect}}
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classclass__}{class\+\_\+}}$<$ detail\+::\+Ostream\+Redirect $>$ \mbox{\hyperlink{iostream_8h_ad693871ec3d2fe6886035a24e87b56fe}{add\+\_\+ostream\+\_\+redirect}} (\mbox{\hyperlink{classmodule}{module}} m, std\+::string \mbox{\hyperlink{structname}{name}}=\char`\"{}ostream\+\_\+redirect\char`\"{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{iostream_8h_ad693871ec3d2fe6886035a24e87b56fe}\label{iostream_8h_ad693871ec3d2fe6886035a24e87b56fe}} 
+\index{iostream.h@{iostream.h}!add\_ostream\_redirect@{add\_ostream\_redirect}}
+\index{add\_ostream\_redirect@{add\_ostream\_redirect}!iostream.h@{iostream.h}}
+\doxysubsubsection{\texorpdfstring{add\_ostream\_redirect()}{add\_ostream\_redirect()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classclass__}{class\+\_\+}}$<$ detail\+::\+Ostream\+Redirect $>$ add\+\_\+ostream\+\_\+redirect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classmodule}{module}}}]{m,  }\item[{std\+::string}]{name = {\ttfamily \char`\"{}ostream\+\_\+redirect\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\textbackslash{}rst This is a helper function to add a C++ redirect context manager to Python instead of using a C++ guard. To use it, add the following to your binding code\+:
+
+.. code-\/block\+:: cpp \begin{DoxyVerb}#include <pybind11/iostream.h>
+
+...
+
+py::add_ostream_redirect(m, "ostream_redirect");
+\end{DoxyVerb}
+ You now have a Python context manager that redirects your output\+:
+
+.. code-\/block\+:: python \begin{DoxyVerb}with m.ostream_redirect():
+    m.print_to_cout_function()
+\end{DoxyVerb}
+ This manager can optionally be told which streams to operate on\+:
+
+.. code-\/block\+:: python \begin{DoxyVerb}with m.ostream_redirect(stdout=true, stderr=true):
+    m.noisy_function_with_error_printing()
+\end{DoxyVerb}
+ \textbackslash{}endrst 函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{iostream_8h_ad693871ec3d2fe6886035a24e87b56fe_cgraph}
+\end{center}
+\end{figure}

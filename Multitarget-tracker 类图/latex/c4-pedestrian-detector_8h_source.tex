@@ -1,0 +1,567 @@
+\hypertarget{c4-pedestrian-detector_8h_source}{}\doxysection{c4-\/pedestrian-\/detector.h}
+\label{c4-pedestrian-detector_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/pedestrians/c4-\/pedestrian-\/detector.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/pedestrians/c4-\/pedestrian-\/detector.h}}
+\mbox{\hyperlink{c4-pedestrian-detector_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <numeric>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <cassert>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <cmath>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <opencv2/opencv.hpp>}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#define USE\_DOUBLE}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#ifdef USE\_DOUBLE}}
+\DoxyCodeLine{17 \textcolor{keyword}{typedef} \textcolor{keywordtype}{double} \mbox{\hyperlink{c4-pedestrian-detector_8h_a5821460e95a0800cf9f24c38915cbbde}{REAL}};}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{19 \textcolor{keyword}{typedef} \textcolor{keywordtype}{float} \mbox{\hyperlink{c4-pedestrian-detector_8h_a5821460e95a0800cf9f24c38915cbbde}{REAL}};}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{keyword}{template}<\textcolor{keyword}{class} T> \textcolor{keyword}{class }\mbox{\hyperlink{class_array2d_c}{Array2dC}};}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{25 \textcolor{keyword}{class }\mbox{\hyperlink{class_array2d}{Array2d}}}
+\DoxyCodeLine{26 \{}
+\DoxyCodeLine{27 \textcolor{keyword}{public}:}
+\DoxyCodeLine{28     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_array2d_a373dd63664bee40ef720d183d03e5bdb}{nrow}};}
+\DoxyCodeLine{29     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_array2d_afe48cd05774cae5b6872324ae49e089b}{ncol}};}
+\DoxyCodeLine{30     T** \mbox{\hyperlink{class_array2d_ac7b70bc423364c43c7c174cdde515380}{p}};}
+\DoxyCodeLine{31 \textcolor{keyword}{public}:}
+\DoxyCodeLine{32     \mbox{\hyperlink{class_array2d_a8c4b92d7f309ef043458835cc3fd2e14}{Array2d}}():\mbox{\hyperlink{class_array2d_a373dd63664bee40ef720d183d03e5bdb}{nrow}}(0),\mbox{\hyperlink{class_array2d_afe48cd05774cae5b6872324ae49e089b}{ncol}}(0),\mbox{\hyperlink{class_array2d_ac7b70bc423364c43c7c174cdde515380}{p}}(NULL) \{ \}}
+\DoxyCodeLine{33     \mbox{\hyperlink{class_array2d_ac7c55fd62aeda8ffb83e6c4ae39a2488}{Array2d}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_array2d_a373dd63664bee40ef720d183d03e5bdb}{nrow}},\textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_array2d_afe48cd05774cae5b6872324ae49e089b}{ncol}}):\mbox{\hyperlink{class_array2d_a373dd63664bee40ef720d183d03e5bdb}{nrow}}(0),\mbox{\hyperlink{class_array2d_afe48cd05774cae5b6872324ae49e089b}{ncol}}(0),\mbox{\hyperlink{class_array2d_ac7b70bc423364c43c7c174cdde515380}{p}}(NULL)}
+\DoxyCodeLine{34     \{}
+\DoxyCodeLine{35         \mbox{\hyperlink{class_array2d_af1d2cec0973cedfe74ae5b967532922f}{Create}}(\mbox{\hyperlink{class_array2d_a373dd63664bee40ef720d183d03e5bdb}{nrow}},\mbox{\hyperlink{class_array2d_afe48cd05774cae5b6872324ae49e089b}{ncol}});}
+\DoxyCodeLine{36     \}}
+\DoxyCodeLine{37     \mbox{\hyperlink{class_array2d_a8c4b92d7f309ef043458835cc3fd2e14}{Array2d}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_array2d}{Array2d<T>}}\& source);}
+\DoxyCodeLine{38     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_array2d_afe31cffbc2b8bc84153ec3ad7e40a0e2}{\string~Array2d}}()}
+\DoxyCodeLine{39     \{}
+\DoxyCodeLine{40         \mbox{\hyperlink{class_array2d_a9902a80867777fbf3ba64a6d8c10606e}{Clear}}();}
+\DoxyCodeLine{41     \}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43     \mbox{\hyperlink{class_array2d}{Array2d<T>}}\& \mbox{\hyperlink{class_array2d_aa1c400a330cf1a31bd473bc3742ae51d}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_array2d}{Array2d<T>}}\& source);}
+\DoxyCodeLine{44     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array2d_af1d2cec0973cedfe74ae5b967532922f}{Create}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int} \_nrow,\textcolor{keyword}{const} \textcolor{keywordtype}{int} \_ncol);}
+\DoxyCodeLine{45     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array2d_a24e1766701c30e14fa39bfcb1024bd1a}{Swap}}(\mbox{\hyperlink{class_array2d}{Array2d<T>}}\& array2);}
+\DoxyCodeLine{46     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array2d_a9902a80867777fbf3ba64a6d8c10606e}{Clear}}();}
+\DoxyCodeLine{47     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array2d_a84070672548d19a9e77b4321527637e0}{Zero}}(\textcolor{keyword}{const} T t = 0);}
+\DoxyCodeLine{48 \};}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{51 \textcolor{keyword}{class }\mbox{\hyperlink{class_array2d_c}{Array2dC}}}
+\DoxyCodeLine{52 \{}
+\DoxyCodeLine{53 \textcolor{keyword}{public}:}
+\DoxyCodeLine{54     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_array2d_c_a12f690f7195f7674a86a7e1eedbc473c}{nrow}};}
+\DoxyCodeLine{55     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_array2d_c_a27e0f8f40f644831cd7c750db59dc28a}{ncol}};}
+\DoxyCodeLine{56     T** \mbox{\hyperlink{class_array2d_c_a727eae5d663d463635cc150e6f771f0d}{p}};}
+\DoxyCodeLine{57     T* \mbox{\hyperlink{class_array2d_c_a25d8fa5049d4c7ded126e0acdd18f37a}{buf}};}
+\DoxyCodeLine{58 \textcolor{keyword}{public}:}
+\DoxyCodeLine{59     \mbox{\hyperlink{class_array2d_c_a740d2592aa5563d59ff429311c51a04e}{Array2dC}}():\mbox{\hyperlink{class_array2d_c_a12f690f7195f7674a86a7e1eedbc473c}{nrow}}(0),\mbox{\hyperlink{class_array2d_c_a27e0f8f40f644831cd7c750db59dc28a}{ncol}}(0),\mbox{\hyperlink{class_array2d_c_a727eae5d663d463635cc150e6f771f0d}{p}}(NULL),\mbox{\hyperlink{class_array2d_c_a25d8fa5049d4c7ded126e0acdd18f37a}{buf}}(NULL) \{\}}
+\DoxyCodeLine{60     \mbox{\hyperlink{class_array2d_c_a626db69cb139292c8249114172c10528}{Array2dC}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_array2d_c_a12f690f7195f7674a86a7e1eedbc473c}{nrow}},\textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_array2d_c_a27e0f8f40f644831cd7c750db59dc28a}{ncol}}):\mbox{\hyperlink{class_array2d_c_a12f690f7195f7674a86a7e1eedbc473c}{nrow}}(0),\mbox{\hyperlink{class_array2d_c_a27e0f8f40f644831cd7c750db59dc28a}{ncol}}(0),\mbox{\hyperlink{class_array2d_c_a727eae5d663d463635cc150e6f771f0d}{p}}(NULL),\mbox{\hyperlink{class_array2d_c_a25d8fa5049d4c7ded126e0acdd18f37a}{buf}}(NULL)}
+\DoxyCodeLine{61     \{}
+\DoxyCodeLine{62         \mbox{\hyperlink{class_array2d_c_abfe87be7641dfc586b9e7bffebcca9ec}{Create}}(\mbox{\hyperlink{class_array2d_c_a12f690f7195f7674a86a7e1eedbc473c}{nrow}},\mbox{\hyperlink{class_array2d_c_a27e0f8f40f644831cd7c750db59dc28a}{ncol}});}
+\DoxyCodeLine{63     \}}
+\DoxyCodeLine{64     \mbox{\hyperlink{class_array2d_c_aeeeddbaec65066f750615a130ef0f9da}{Array2dC}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_array2d_c}{Array2dC<T>}}\& source);}
+\DoxyCodeLine{65     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_array2d_c_a96e68b849ec674616b79dc9d0c9233ab}{\string~Array2dC}}()}
+\DoxyCodeLine{66     \{}
+\DoxyCodeLine{67         \mbox{\hyperlink{class_array2d_c_a76a406cfeb9a9f75a1586e0a7b22f63e}{Clear}}();}
+\DoxyCodeLine{68     \}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     \mbox{\hyperlink{class_array2d_c}{Array2dC<T>}}\& \mbox{\hyperlink{class_array2d_c_a241cc9224f991e0496dad95bc396e84e}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_array2d_c}{Array2dC<T>}}\& source);}
+\DoxyCodeLine{71     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array2d_c_abfe87be7641dfc586b9e7bffebcca9ec}{Create}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int} \_nrow,\textcolor{keyword}{const} \textcolor{keywordtype}{int} \_ncol);}
+\DoxyCodeLine{72     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array2d_c_ae8cbeb3e4fdc3a45cc188ecc1b317919}{Swap}}(\mbox{\hyperlink{class_array2d_c}{Array2dC<T>}}\& array2);}
+\DoxyCodeLine{73     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array2d_c_a5e1d7837fd208699694fc3fc97151df0}{Zero}}(\textcolor{keyword}{const} T t = 0);}
+\DoxyCodeLine{74     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array2d_c_a76a406cfeb9a9f75a1586e0a7b22f63e}{Clear}}();}
+\DoxyCodeLine{75 \};}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{78 \mbox{\hyperlink{class_array2d_a8c4b92d7f309ef043458835cc3fd2e14}{Array2d<T>::Array2d}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_array2d}{Array2d<T>}}\& source):nrow(0),ncol(0),p(NULL)}
+\DoxyCodeLine{79 \{}
+\DoxyCodeLine{80     \textcolor{keywordflow}{if}(source.\mbox{\hyperlink{class_array2d_ac7b70bc423364c43c7c174cdde515380}{p}}!=NULL)}
+\DoxyCodeLine{81     \{}
+\DoxyCodeLine{82         \mbox{\hyperlink{class_array2d_af1d2cec0973cedfe74ae5b967532922f}{Create}}(source.\mbox{\hyperlink{class_array2d_a373dd63664bee40ef720d183d03e5bdb}{nrow}},source.\mbox{\hyperlink{class_array2d_afe48cd05774cae5b6872324ae49e089b}{ncol}});}
+\DoxyCodeLine{83         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<\mbox{\hyperlink{class_array2d_a373dd63664bee40ef720d183d03e5bdb}{nrow}}; i++) std::copy(source.\mbox{\hyperlink{class_array2d_ac7b70bc423364c43c7c174cdde515380}{p}}[i],source.\mbox{\hyperlink{class_array2d_ac7b70bc423364c43c7c174cdde515380}{p}}[i]+\mbox{\hyperlink{class_array2d_afe48cd05774cae5b6872324ae49e089b}{ncol}},\mbox{\hyperlink{class_array2d_ac7b70bc423364c43c7c174cdde515380}{p}}[i]);}
+\DoxyCodeLine{84     \}}
+\DoxyCodeLine{85 \}}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{88 \mbox{\hyperlink{class_array2d}{Array2d<T>}}\& \mbox{\hyperlink{class_array2d_aa1c400a330cf1a31bd473bc3742ae51d}{Array2d<T>::operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_array2d}{Array2d<T>}}\& source)}
+\DoxyCodeLine{89 \{}
+\DoxyCodeLine{90     \textcolor{keywordflow}{if}(source.\mbox{\hyperlink{class_array2d_ac7b70bc423364c43c7c174cdde515380}{p}}!=NULL)}
+\DoxyCodeLine{91     \{}
+\DoxyCodeLine{92         Create(source.\mbox{\hyperlink{class_array2d_a373dd63664bee40ef720d183d03e5bdb}{nrow}},source.\mbox{\hyperlink{class_array2d_afe48cd05774cae5b6872324ae49e089b}{ncol}});}
+\DoxyCodeLine{93         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<nrow; i++) std::copy(source.\mbox{\hyperlink{class_array2d_ac7b70bc423364c43c7c174cdde515380}{p}}[i],source.\mbox{\hyperlink{class_array2d_ac7b70bc423364c43c7c174cdde515380}{p}}[i]+ncol,p[i]);}
+\DoxyCodeLine{94     \}}
+\DoxyCodeLine{95     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{96         Clear();}
+\DoxyCodeLine{97     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{98 \}}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{101 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array2d_af1d2cec0973cedfe74ae5b967532922f}{Array2d<T>::Create}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int} \_nrow,\textcolor{keyword}{const} \textcolor{keywordtype}{int} \_ncol)}
+\DoxyCodeLine{102 \{}
+\DoxyCodeLine{103     assert(\_nrow>0 \&\& \_ncol>0);}
+\DoxyCodeLine{104     Clear();}
+\DoxyCodeLine{105     nrow = \_nrow;}
+\DoxyCodeLine{106     ncol = \_ncol;}
+\DoxyCodeLine{107     p = \textcolor{keyword}{new} T*[nrow];}
+\DoxyCodeLine{108     assert(p!=NULL);}
+\DoxyCodeLine{109     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<nrow; i++)}
+\DoxyCodeLine{110     \{}
+\DoxyCodeLine{111         p[i] = \textcolor{keyword}{new} T[ncol];}
+\DoxyCodeLine{112         assert(p[i]!=NULL);}
+\DoxyCodeLine{113     \}}
+\DoxyCodeLine{114 \}}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{117 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array2d_a24e1766701c30e14fa39bfcb1024bd1a}{Array2d<T>::Swap}}(\mbox{\hyperlink{class_array2d}{Array2d<T>}}\& array2)}
+\DoxyCodeLine{118 \{}
+\DoxyCodeLine{119     \mbox{\hyperlink{gemm_8c_a1c82d0dbfe1c362b02510494287bdffa}{std::swap}}(nrow,array2.\mbox{\hyperlink{class_array2d_a373dd63664bee40ef720d183d03e5bdb}{nrow}});}
+\DoxyCodeLine{120     \mbox{\hyperlink{gemm_8c_a1c82d0dbfe1c362b02510494287bdffa}{std::swap}}(ncol,array2.\mbox{\hyperlink{class_array2d_afe48cd05774cae5b6872324ae49e089b}{ncol}});}
+\DoxyCodeLine{121     \mbox{\hyperlink{gemm_8c_a1c82d0dbfe1c362b02510494287bdffa}{std::swap}}(p,array2.\mbox{\hyperlink{class_array2d_ac7b70bc423364c43c7c174cdde515380}{p}});}
+\DoxyCodeLine{122 \}}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{125 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array2d_a84070672548d19a9e77b4321527637e0}{Array2d<T>::Zero}}(\textcolor{keyword}{const} T t)}
+\DoxyCodeLine{126 \{}
+\DoxyCodeLine{127     \textcolor{keywordflow}{if}(nrow>0)}
+\DoxyCodeLine{128     \{}
+\DoxyCodeLine{129         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<nrow; i++) std::fill(p[i],p[i]+ncol,t);}
+\DoxyCodeLine{130     \}}
+\DoxyCodeLine{131 \}}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{134 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array2d_a9902a80867777fbf3ba64a6d8c10606e}{Array2d<T>::Clear}}()}
+\DoxyCodeLine{135 \{}
+\DoxyCodeLine{136     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<nrow; i++)}
+\DoxyCodeLine{137     \{}
+\DoxyCodeLine{138         \textcolor{keyword}{delete}[] p[i];}
+\DoxyCodeLine{139         p[i] = NULL;}
+\DoxyCodeLine{140     \}}
+\DoxyCodeLine{141     \textcolor{keyword}{delete}[] p;}
+\DoxyCodeLine{142     p = NULL;}
+\DoxyCodeLine{143     nrow = ncol = 0;}
+\DoxyCodeLine{144 \}}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{147 \mbox{\hyperlink{class_array2d_c_a740d2592aa5563d59ff429311c51a04e}{Array2dC<T>::Array2dC}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_array2d_c}{Array2dC<T>}}\& source):nrow(0),ncol(0),p(NULL),buf(NULL)}
+\DoxyCodeLine{148 \{}
+\DoxyCodeLine{149     \textcolor{keywordflow}{if}(source.\mbox{\hyperlink{class_array2d_c_a25d8fa5049d4c7ded126e0acdd18f37a}{buf}}!=NULL)}
+\DoxyCodeLine{150     \{}
+\DoxyCodeLine{151         \mbox{\hyperlink{class_array2d_c_abfe87be7641dfc586b9e7bffebcca9ec}{Create}}(source.\mbox{\hyperlink{class_array2d_c_a12f690f7195f7674a86a7e1eedbc473c}{nrow}},source.\mbox{\hyperlink{class_array2d_c_a27e0f8f40f644831cd7c750db59dc28a}{ncol}});}
+\DoxyCodeLine{152         std::copy(source.\mbox{\hyperlink{class_array2d_c_a25d8fa5049d4c7ded126e0acdd18f37a}{buf}},source.\mbox{\hyperlink{class_array2d_c_a25d8fa5049d4c7ded126e0acdd18f37a}{buf}}+\mbox{\hyperlink{class_array2d_c_a12f690f7195f7674a86a7e1eedbc473c}{nrow}}*\mbox{\hyperlink{class_array2d_c_a27e0f8f40f644831cd7c750db59dc28a}{ncol}},\mbox{\hyperlink{class_array2d_c_a25d8fa5049d4c7ded126e0acdd18f37a}{buf}});}
+\DoxyCodeLine{153     \}}
+\DoxyCodeLine{154 \}}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{157 \mbox{\hyperlink{class_array2d_c}{Array2dC<T>}}\& \mbox{\hyperlink{class_array2d_c_a241cc9224f991e0496dad95bc396e84e}{Array2dC<T>::operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_array2d_c}{Array2dC<T>}}\& source)}
+\DoxyCodeLine{158 \{}
+\DoxyCodeLine{159     \textcolor{keywordflow}{if}(source.\mbox{\hyperlink{class_array2d_c_a25d8fa5049d4c7ded126e0acdd18f37a}{buf}}!=NULL)}
+\DoxyCodeLine{160     \{}
+\DoxyCodeLine{161         Create(source.\mbox{\hyperlink{class_array2d_c_a12f690f7195f7674a86a7e1eedbc473c}{nrow}},source.\mbox{\hyperlink{class_array2d_c_a27e0f8f40f644831cd7c750db59dc28a}{ncol}});}
+\DoxyCodeLine{162         std::copy(source.\mbox{\hyperlink{class_array2d_c_a25d8fa5049d4c7ded126e0acdd18f37a}{buf}},source.\mbox{\hyperlink{class_array2d_c_a25d8fa5049d4c7ded126e0acdd18f37a}{buf}}+nrow*ncol,buf);}
+\DoxyCodeLine{163     \}}
+\DoxyCodeLine{164     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{165         Clear();}
+\DoxyCodeLine{166     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{167 \}}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{169 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{170 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array2d_c_abfe87be7641dfc586b9e7bffebcca9ec}{Array2dC<T>::Create}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int} \_nrow,\textcolor{keyword}{const} \textcolor{keywordtype}{int} \_ncol)}
+\DoxyCodeLine{171 \{}
+\DoxyCodeLine{172     assert(\_nrow>0 \&\& \_ncol>0);}
+\DoxyCodeLine{173     \textcolor{keywordflow}{if}(nrow==\_nrow \&\& ncol==\_ncol) \textcolor{keywordflow}{return};}
+\DoxyCodeLine{174     Clear();}
+\DoxyCodeLine{175     nrow = \_nrow;}
+\DoxyCodeLine{176     ncol = \_ncol;}
+\DoxyCodeLine{177     buf = \textcolor{keyword}{new} T[nrow*ncol];}
+\DoxyCodeLine{178     assert(buf!=NULL);}
+\DoxyCodeLine{179     p = \textcolor{keyword}{new} T*[nrow];}
+\DoxyCodeLine{180     assert(p!=NULL);}
+\DoxyCodeLine{181     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<nrow; i++) p[i] = buf + i * ncol;}
+\DoxyCodeLine{182 \}}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{185 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array2d_c_ae8cbeb3e4fdc3a45cc188ecc1b317919}{Array2dC<T>::Swap}}(\mbox{\hyperlink{class_array2d_c}{Array2dC<T>}}\& array2)}
+\DoxyCodeLine{186 \{}
+\DoxyCodeLine{187     \mbox{\hyperlink{gemm_8c_a1c82d0dbfe1c362b02510494287bdffa}{std::swap}}(nrow,array2.\mbox{\hyperlink{class_array2d_c_a12f690f7195f7674a86a7e1eedbc473c}{nrow}});}
+\DoxyCodeLine{188     \mbox{\hyperlink{gemm_8c_a1c82d0dbfe1c362b02510494287bdffa}{std::swap}}(ncol,array2.\mbox{\hyperlink{class_array2d_c_a27e0f8f40f644831cd7c750db59dc28a}{ncol}});}
+\DoxyCodeLine{189     \mbox{\hyperlink{gemm_8c_a1c82d0dbfe1c362b02510494287bdffa}{std::swap}}(p,array2.\mbox{\hyperlink{class_array2d_c_a727eae5d663d463635cc150e6f771f0d}{p}});}
+\DoxyCodeLine{190     \mbox{\hyperlink{gemm_8c_a1c82d0dbfe1c362b02510494287bdffa}{std::swap}}(buf,array2.\mbox{\hyperlink{class_array2d_c_a25d8fa5049d4c7ded126e0acdd18f37a}{buf}});}
+\DoxyCodeLine{191 \}}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{194 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array2d_c_a5e1d7837fd208699694fc3fc97151df0}{Array2dC<T>::Zero}}(\textcolor{keyword}{const} T t)}
+\DoxyCodeLine{195 \{}
+\DoxyCodeLine{196     \textcolor{keywordflow}{if}(nrow>0) std::fill(buf,buf+nrow*ncol,t);}
+\DoxyCodeLine{197 \}}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{200 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_array2d_c_a76a406cfeb9a9f75a1586e0a7b22f63e}{Array2dC<T>::Clear}}()}
+\DoxyCodeLine{201 \{}
+\DoxyCodeLine{202     \textcolor{keyword}{delete}[] buf;}
+\DoxyCodeLine{203     buf = NULL;}
+\DoxyCodeLine{204     \textcolor{keyword}{delete}[] p;}
+\DoxyCodeLine{205     p = NULL;}
+\DoxyCodeLine{206     nrow = ncol = 0;}
+\DoxyCodeLine{207 \}}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210 \textcolor{comment}{/*****************************************/}}
+\DoxyCodeLine{211 \textcolor{comment}{// IntImage.h}}
+\DoxyCodeLine{212 \textcolor{comment}{/*****************************************/}}
+\DoxyCodeLine{213 }
+\DoxyCodeLine{214 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{215 \textcolor{keyword}{class }\mbox{\hyperlink{class_int_image}{IntImage}}:\textcolor{keyword}{public} \mbox{\hyperlink{class_array2d_c}{Array2dC}}<T>}
+\DoxyCodeLine{216 \{}
+\DoxyCodeLine{217 \textcolor{keyword}{private}:}
+\DoxyCodeLine{218     \mbox{\hyperlink{class_int_image_ad5d40c163fb0768b5e73a8efc4a6084c}{IntImage}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_int_image}{IntImage<T>}} \&source) \{ \} \textcolor{comment}{// prohibit copy constructor}}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{220 \textcolor{keyword}{public}:}
+\DoxyCodeLine{221     \mbox{\hyperlink{class_int_image_ad5fa7989718f9d3b64f81f2895ffc07f}{IntImage}}():\mbox{\hyperlink{class_int_image_a2da0267dc732e9e4149e70a05f744fb6}{variance}}(0.0),\mbox{\hyperlink{class_int_image_aeeeaa5da82f21cdc95ab3f941aa405e7}{label}}(-\/1) \{ \}}
+\DoxyCodeLine{222     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_int_image_a5b0fb4fe568e219d01c3b882972e3c77}{\string~IntImage}}()}
+\DoxyCodeLine{223     \{}
+\DoxyCodeLine{224         \mbox{\hyperlink{class_int_image_a183a2bb5b576ab7a03010c0fff8f47cb}{Clear}}();}
+\DoxyCodeLine{225     \}}
+\DoxyCodeLine{226 }
+\DoxyCodeLine{227     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_int_image_a183a2bb5b576ab7a03010c0fff8f47cb}{Clear}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{228     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_int_image_a89eb8fac3fde8d3ce392e5f28c14f8b0}{SetSize}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int} h, \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}});}
+\DoxyCodeLine{229     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_int_image_a9e74890b8f45d03e0c4aa335a96849d1}{Load}}(cv::Mat img);}
+\DoxyCodeLine{230     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_int_image_a6afc3c902400a1c287206b0f25604bab}{Save}}(\textcolor{keyword}{const} std::string\& filename) \textcolor{keyword}{const};}
+\DoxyCodeLine{231     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_int_image_adc366f59865cefd440c01996fd42d59a}{Swap}}(\mbox{\hyperlink{class_int_image}{IntImage<T>}}\& image2);}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{233     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_int_image_a4b955bc5382ee4745a5ab92fc48b4a6a}{CalcIntegralImageInPlace}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{234     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_int_image_a6eb852d06d8365476dba0760d9319e59}{Resize}}(\mbox{\hyperlink{class_int_image}{IntImage<T>}} \&result,\textcolor{keyword}{const} \mbox{\hyperlink{c4-pedestrian-detector_8h_a5821460e95a0800cf9f24c38915cbbde}{REAL}} ratio) \textcolor{keyword}{const};}
+\DoxyCodeLine{235     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_int_image_a280423236cc08aca573725950e913467}{Resize}}(\mbox{\hyperlink{class_int_image}{IntImage<T>}}\& result,\textcolor{keyword}{const} \textcolor{keywordtype}{int} height,\textcolor{keyword}{const} \textcolor{keywordtype}{int} width) \textcolor{keyword}{const};}
+\DoxyCodeLine{236 }
+\DoxyCodeLine{237     \mbox{\hyperlink{class_int_image}{IntImage<T>}}\& \mbox{\hyperlink{class_int_image_a03a3f6df469a4c8569612cd0df0ff345}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_int_image}{IntImage<T>}}\& source);}
+\DoxyCodeLine{238 }
+\DoxyCodeLine{239     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_int_image_a35b8a5c2e64fa3ab50d6b14973f368b8}{Sobel}}(\mbox{\hyperlink{class_int_image}{IntImage<REAL>}}\& result,\textcolor{keyword}{const} \textcolor{keywordtype}{bool} useSqrt,\textcolor{keyword}{const} \textcolor{keywordtype}{bool} normalize);}
+\DoxyCodeLine{240 \textcolor{keyword}{public}:}
+\DoxyCodeLine{241     \textcolor{keyword}{using} \mbox{\hyperlink{class_array2d_c}{Array2dC<T>::nrow}};}
+\DoxyCodeLine{242     \textcolor{keyword}{using} \mbox{\hyperlink{class_array2d_c}{Array2dC<T>::ncol}};}
+\DoxyCodeLine{243     \textcolor{keyword}{using} \mbox{\hyperlink{class_array2d_c}{Array2dC<T>::buf}};}
+\DoxyCodeLine{244     \textcolor{keyword}{using} \mbox{\hyperlink{class_array2d_c}{Array2dC<T>::p}};}
+\DoxyCodeLine{245     \mbox{\hyperlink{c4-pedestrian-detector_8h_a5821460e95a0800cf9f24c38915cbbde}{REAL}} \mbox{\hyperlink{class_int_image_a2da0267dc732e9e4149e70a05f744fb6}{variance}};}
+\DoxyCodeLine{246     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_int_image_aeeeaa5da82f21cdc95ab3f941aa405e7}{label}};}
+\DoxyCodeLine{247 \};}
+\DoxyCodeLine{248 }
+\DoxyCodeLine{249 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{250 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_int_image_a183a2bb5b576ab7a03010c0fff8f47cb}{IntImage<T>::Clear}}(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{251 \{}
+\DoxyCodeLine{252     \mbox{\hyperlink{class_array2d_c_a76a406cfeb9a9f75a1586e0a7b22f63e}{Array2dC<T>::Clear}}();}
+\DoxyCodeLine{253     variance = 0.0;}
+\DoxyCodeLine{254     label = -\/1;}
+\DoxyCodeLine{255 \}}
+\DoxyCodeLine{256 }
+\DoxyCodeLine{257 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{258 \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_int_image_a9e74890b8f45d03e0c4aa335a96849d1}{IntImage<T>::Load}}(cv::Mat img)}
+\DoxyCodeLine{259 \{}
+\DoxyCodeLine{260     \textcolor{keywordflow}{if} (img.empty()) \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{261 }
+\DoxyCodeLine{262     SetSize(img.rows, img.cols);}
+\DoxyCodeLine{263     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0,ih=img.rows,iw=img.cols; i<ih; i++)}
+\DoxyCodeLine{264     \{}
+\DoxyCodeLine{265         T* pdata = p[i];}
+\DoxyCodeLine{266         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}* pimg = \textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}*\textcolor{keyword}{>}(img.data+img.step*i);}
+\DoxyCodeLine{267         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<iw; j++) pdata[j] = pimg[j];}
+\DoxyCodeLine{268     \}}
+\DoxyCodeLine{269 }
+\DoxyCodeLine{270     \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{271 \}}
+\DoxyCodeLine{272 }
+\DoxyCodeLine{273 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{274 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_int_image_a6afc3c902400a1c287206b0f25604bab}{IntImage<T>::Save}}(\textcolor{keyword}{const} std::string\& filename)\textcolor{keyword}{ const}}
+\DoxyCodeLine{275 \textcolor{keyword}{}\{}
+\DoxyCodeLine{276 \textcolor{preprocessor}{\#if (CV\_VERSION\_MAJOR < 4)}}
+\DoxyCodeLine{277     IplImage* img;}
+\DoxyCodeLine{278 }
+\DoxyCodeLine{279     img = cvCreateImage(cvSize(ncol,nrow),IPL\_DEPTH\_8U,1);}
+\DoxyCodeLine{280     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0,ih=img-\/>height,iw=img-\/>width; i<ih; i++)}
+\DoxyCodeLine{281     \{}
+\DoxyCodeLine{282         T* pdata = p[i];}
+\DoxyCodeLine{283         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}* pimg = \textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}*\textcolor{keyword}{>}(img-\/>imageData+img-\/>widthStep*i);}
+\DoxyCodeLine{284         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<iw; j++) pimg[j] = (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char})pdata[j];}
+\DoxyCodeLine{285     \}}
+\DoxyCodeLine{286     cvSaveImage(filename.c\_str(),img);}
+\DoxyCodeLine{287     cvReleaseImage(\&img);}
+\DoxyCodeLine{288 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{289     assert(0);}
+\DoxyCodeLine{290 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{291 \}}
+\DoxyCodeLine{292 }
+\DoxyCodeLine{293 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{294 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_int_image_a89eb8fac3fde8d3ce392e5f28c14f8b0}{IntImage<T>::SetSize}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int} h,\textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}})}
+\DoxyCodeLine{295 \{}
+\DoxyCodeLine{296     \textcolor{keywordflow}{if}((h == nrow) \&\& (\mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}} == ncol)) \textcolor{keywordflow}{return};}
+\DoxyCodeLine{297     Clear();}
+\DoxyCodeLine{298     \mbox{\hyperlink{class_array2d_c_abfe87be7641dfc586b9e7bffebcca9ec}{Array2dC<T>::Create}}(h,\mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}});}
+\DoxyCodeLine{299 \}}
+\DoxyCodeLine{300 }
+\DoxyCodeLine{301 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{302 \mbox{\hyperlink{class_int_image}{IntImage<T>}}\& \mbox{\hyperlink{class_int_image_a03a3f6df469a4c8569612cd0df0ff345}{IntImage<T>::operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_int_image}{IntImage<T>}}\& source)}
+\DoxyCodeLine{303 \{}
+\DoxyCodeLine{304     \textcolor{keywordflow}{if}(\&source==\textcolor{keyword}{this}) \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{305     SetSize(source.\mbox{\hyperlink{class_array2d_c_a12f690f7195f7674a86a7e1eedbc473c}{nrow}},source.\mbox{\hyperlink{class_array2d_c_a27e0f8f40f644831cd7c750db59dc28a}{ncol}});}
+\DoxyCodeLine{306     std::copy(source.\mbox{\hyperlink{class_array2d_c_a25d8fa5049d4c7ded126e0acdd18f37a}{buf}},source.\mbox{\hyperlink{class_array2d_c_a25d8fa5049d4c7ded126e0acdd18f37a}{buf}}+nrow*ncol,buf);}
+\DoxyCodeLine{307     label = source.\mbox{\hyperlink{class_int_image_aeeeaa5da82f21cdc95ab3f941aa405e7}{label}};}
+\DoxyCodeLine{308     variance = source.\mbox{\hyperlink{class_int_image_a2da0267dc732e9e4149e70a05f744fb6}{variance}};}
+\DoxyCodeLine{309     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{310 \}}
+\DoxyCodeLine{311 }
+\DoxyCodeLine{312 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{313 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_int_image_a6eb852d06d8365476dba0760d9319e59}{IntImage<T>::Resize}}(\mbox{\hyperlink{class_int_image}{IntImage<T>}} \&result,\textcolor{keyword}{const} \mbox{\hyperlink{c4-pedestrian-detector_8h_a5821460e95a0800cf9f24c38915cbbde}{REAL}} ratio)\textcolor{keyword}{ const}}
+\DoxyCodeLine{314 \textcolor{keyword}{}\{}
+\DoxyCodeLine{315     Resize(result,\textcolor{keywordtype}{int}(nrow*ratio),\textcolor{keywordtype}{int}(ncol*ratio));}
+\DoxyCodeLine{316 \}}
+\DoxyCodeLine{317 }
+\DoxyCodeLine{318 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{319 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_int_image_a6eb852d06d8365476dba0760d9319e59}{IntImage<T>::Resize}}(\mbox{\hyperlink{class_int_image}{IntImage<T>}}\& result,\textcolor{keyword}{const} \textcolor{keywordtype}{int} height,\textcolor{keyword}{const} \textcolor{keywordtype}{int} width)\textcolor{keyword}{ const}}
+\DoxyCodeLine{320 \textcolor{keyword}{}\{}
+\DoxyCodeLine{321     assert(height>0 \&\& width>0);}
+\DoxyCodeLine{322     result.\mbox{\hyperlink{class_int_image_a89eb8fac3fde8d3ce392e5f28c14f8b0}{SetSize}}(height,width);}
+\DoxyCodeLine{323     \mbox{\hyperlink{c4-pedestrian-detector_8h_a5821460e95a0800cf9f24c38915cbbde}{REAL}} ixratio = nrow*1.0/height, iyratio = ncol*1.0/width;}
+\DoxyCodeLine{324 }
+\DoxyCodeLine{325     \mbox{\hyperlink{c4-pedestrian-detector_8h_a5821460e95a0800cf9f24c38915cbbde}{REAL}}* p\_y = \textcolor{keyword}{new} \mbox{\hyperlink{c4-pedestrian-detector_8h_a5821460e95a0800cf9f24c38915cbbde}{REAL}}[result.\mbox{\hyperlink{class_array2d_c_a27e0f8f40f644831cd7c750db59dc28a}{ncol}}];}
+\DoxyCodeLine{326     assert(p\_y!=NULL);}
+\DoxyCodeLine{327     \textcolor{keywordtype}{int}* p\_y0 = \textcolor{keyword}{new} \textcolor{keywordtype}{int}[result.\mbox{\hyperlink{class_array2d_c_a27e0f8f40f644831cd7c750db59dc28a}{ncol}}];}
+\DoxyCodeLine{328     assert(p\_y0!=NULL);}
+\DoxyCodeLine{329     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<width; i++)}
+\DoxyCodeLine{330     \{}
+\DoxyCodeLine{331         p\_y[i] = i*iyratio;}
+\DoxyCodeLine{332         p\_y0[i] = (int)p\_y[i];}
+\DoxyCodeLine{333         \textcolor{keywordflow}{if}(p\_y0[i]==ncol-\/1) p\_y0[i]-\/-\/;}
+\DoxyCodeLine{334         p\_y[i] -\/= p\_y0[i];}
+\DoxyCodeLine{335     \}}
+\DoxyCodeLine{336 }
+\DoxyCodeLine{337     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<height; i++)}
+\DoxyCodeLine{338     \{}
+\DoxyCodeLine{339         \textcolor{keywordtype}{int} x0;}
+\DoxyCodeLine{340         \mbox{\hyperlink{c4-pedestrian-detector_8h_a5821460e95a0800cf9f24c38915cbbde}{REAL}} \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}};}
+\DoxyCodeLine{341         \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}} = i*ixratio;}
+\DoxyCodeLine{342         x0 = (int)\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}};}
+\DoxyCodeLine{343         \textcolor{keywordflow}{if}(x0==nrow-\/1) x0-\/-\/;}
+\DoxyCodeLine{344         \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}} -\/= x0;}
+\DoxyCodeLine{345         T* rp = result.\mbox{\hyperlink{class_array2d_c_a727eae5d663d463635cc150e6f771f0d}{p}}[i];}
+\DoxyCodeLine{346         \textcolor{keyword}{const} T* px0 = p[x0];}
+\DoxyCodeLine{347         \textcolor{keyword}{const} T* px1 = p[x0+1];}
+\DoxyCodeLine{348         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<width; j++)}
+\DoxyCodeLine{349         \{}
+\DoxyCodeLine{350             \textcolor{keywordtype}{int} y0=p\_y0[j];}
+\DoxyCodeLine{351             \mbox{\hyperlink{c4-pedestrian-detector_8h_a5821460e95a0800cf9f24c38915cbbde}{REAL}} \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}=p\_y[j],fx0,fx1;}
+\DoxyCodeLine{352 }
+\DoxyCodeLine{353             fx0 = \mbox{\hyperlink{c4-pedestrian-detector_8h_a5821460e95a0800cf9f24c38915cbbde}{REAL}}(px0[y0] + \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}*(px0[y0+1]-\/px0[y0]));}
+\DoxyCodeLine{354             fx1 = \mbox{\hyperlink{c4-pedestrian-detector_8h_a5821460e95a0800cf9f24c38915cbbde}{REAL}}(px1[y0] + \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}*(px1[y0+1]-\/px1[y0]));}
+\DoxyCodeLine{355 }
+\DoxyCodeLine{356             rp[j] = T(fx0 + \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}*(fx1-\/fx0));}
+\DoxyCodeLine{357         \}}
+\DoxyCodeLine{358     \}}
+\DoxyCodeLine{359 }
+\DoxyCodeLine{360     \textcolor{keyword}{delete}[] p\_y;}
+\DoxyCodeLine{361     p\_y=NULL;}
+\DoxyCodeLine{362     \textcolor{keyword}{delete}[] p\_y0;}
+\DoxyCodeLine{363     p\_y0=NULL;}
+\DoxyCodeLine{364 \}}
+\DoxyCodeLine{365 }
+\DoxyCodeLine{366 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{367 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_int_image_a4b955bc5382ee4745a5ab92fc48b4a6a}{IntImage<T>::CalcIntegralImageInPlace}}(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{368 \textcolor{comment}{// We pad a zero column and a zero row, so 24*24 image will be 25*25 in size}}
+\DoxyCodeLine{369 \textcolor{comment}{// if the input image is not padded, the results on 1st row will be problematic}}
+\DoxyCodeLine{370 \{}
+\DoxyCodeLine{371     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=1; i<ncol; i++)   \textcolor{comment}{// process the first line}}
+\DoxyCodeLine{372     \{}
+\DoxyCodeLine{373         buf[i] += buf[i-\/1];}
+\DoxyCodeLine{374     \}}
+\DoxyCodeLine{375     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=1; i<nrow; i++)}
+\DoxyCodeLine{376     \{}
+\DoxyCodeLine{377         \mbox{\hyperlink{c4-pedestrian-detector_8h_a5821460e95a0800cf9f24c38915cbbde}{REAL}} partialsum = 0;}
+\DoxyCodeLine{378         T* curp = p[i];}
+\DoxyCodeLine{379         T* prep = p[i-\/1];}
+\DoxyCodeLine{380         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=0; j<ncol; j++)}
+\DoxyCodeLine{381         \{}
+\DoxyCodeLine{382             partialsum += \mbox{\hyperlink{c4-pedestrian-detector_8h_a5821460e95a0800cf9f24c38915cbbde}{REAL}}(curp[j]);}
+\DoxyCodeLine{383             curp[j] = prep[j] + partialsum;}
+\DoxyCodeLine{384         \}}
+\DoxyCodeLine{385     \}}
+\DoxyCodeLine{386 \}}
+\DoxyCodeLine{387 }
+\DoxyCodeLine{388 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{389 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_int_image_adc366f59865cefd440c01996fd42d59a}{IntImage<T>::Swap}}(\mbox{\hyperlink{class_int_image}{IntImage<T>}}\& image2)}
+\DoxyCodeLine{390 \{}
+\DoxyCodeLine{391     \mbox{\hyperlink{class_array2d_c_ae8cbeb3e4fdc3a45cc188ecc1b317919}{Array2dC<T>::Swap}}(image2);}
+\DoxyCodeLine{392     \mbox{\hyperlink{gemm_8c_a1c82d0dbfe1c362b02510494287bdffa}{std::swap}}(variance,image2.\mbox{\hyperlink{class_int_image_a2da0267dc732e9e4149e70a05f744fb6}{variance}});}
+\DoxyCodeLine{393     \mbox{\hyperlink{gemm_8c_a1c82d0dbfe1c362b02510494287bdffa}{std::swap}}(label,image2.\mbox{\hyperlink{class_int_image_aeeeaa5da82f21cdc95ab3f941aa405e7}{label}});}
+\DoxyCodeLine{394 \}}
+\DoxyCodeLine{395 }
+\DoxyCodeLine{396 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{397 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_int_image_a35b8a5c2e64fa3ab50d6b14973f368b8}{IntImage<T>::Sobel}}(\mbox{\hyperlink{class_int_image}{IntImage<REAL>}}\& result,\textcolor{keyword}{const} \textcolor{keywordtype}{bool} useSqrt,\textcolor{keyword}{const} \textcolor{keywordtype}{bool} normalize)}
+\DoxyCodeLine{398 \{}
+\DoxyCodeLine{399     \textcolor{comment}{// compute the Sobel gradient. For now, we just use the very inefficient way. Optimization can be done later}}
+\DoxyCodeLine{400 \textcolor{comment}{// if useSqrt = true, we compute the real Sobel gradient; otherwise, the square of it}}
+\DoxyCodeLine{401 \textcolor{comment}{// if normalize = true, the numbers are normalized to be in 0..255}}
+\DoxyCodeLine{402     result.\mbox{\hyperlink{class_array2d_c_abfe87be7641dfc586b9e7bffebcca9ec}{Create}}(nrow,ncol);}
+\DoxyCodeLine{403     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<nrow; i++) result.\mbox{\hyperlink{class_array2d_c_a727eae5d663d463635cc150e6f771f0d}{p}}[i][0] = result.\mbox{\hyperlink{class_array2d_c_a727eae5d663d463635cc150e6f771f0d}{p}}[i][ncol-\/1] = 0;}
+\DoxyCodeLine{404     std::fill(result.\mbox{\hyperlink{class_array2d_c_a727eae5d663d463635cc150e6f771f0d}{p}}[0],result.\mbox{\hyperlink{class_array2d_c_a727eae5d663d463635cc150e6f771f0d}{p}}[0]+ncol,0.0);}
+\DoxyCodeLine{405     std::fill(result.\mbox{\hyperlink{class_array2d_c_a727eae5d663d463635cc150e6f771f0d}{p}}[nrow-\/1],result.\mbox{\hyperlink{class_array2d_c_a727eae5d663d463635cc150e6f771f0d}{p}}[nrow-\/1]+ncol,0.0);}
+\DoxyCodeLine{406     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=1; i<nrow-\/1; i++)}
+\DoxyCodeLine{407     \{}
+\DoxyCodeLine{408         T* p1 = p[i-\/1];}
+\DoxyCodeLine{409         T* p2 = p[i];}
+\DoxyCodeLine{410         T* p3 = p[i+1];}
+\DoxyCodeLine{411         \mbox{\hyperlink{c4-pedestrian-detector_8h_a5821460e95a0800cf9f24c38915cbbde}{REAL}}* pr = result.\mbox{\hyperlink{class_array2d_c_a727eae5d663d463635cc150e6f771f0d}{p}}[i];}
+\DoxyCodeLine{412         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=1; j<ncol-\/1; j++)}
+\DoxyCodeLine{413         \{}
+\DoxyCodeLine{414             \mbox{\hyperlink{c4-pedestrian-detector_8h_a5821460e95a0800cf9f24c38915cbbde}{REAL}} gx =     p1[j-\/1] -\/ p1[j+1]}
+\DoxyCodeLine{415                           + 2*(p2[j-\/1]   -\/ p2[j+1])}
+\DoxyCodeLine{416                           +    p3[j-\/1] -\/ p3[j+1];}
+\DoxyCodeLine{417             \mbox{\hyperlink{c4-pedestrian-detector_8h_a5821460e95a0800cf9f24c38915cbbde}{REAL}} gy =     p1[j-\/1] -\/ p3[j-\/1]}
+\DoxyCodeLine{418                           + 2*(p1[j]   -\/ p3[j])}
+\DoxyCodeLine{419                           +    p1[j+1] -\/ p3[j+1];}
+\DoxyCodeLine{420             pr[j] = gx*gx+gy*gy;}
+\DoxyCodeLine{421         \}}
+\DoxyCodeLine{422     \}}
+\DoxyCodeLine{423     \textcolor{keywordflow}{if}(useSqrt || normalize ) \textcolor{comment}{// if we want to normalize the result image, we'd better use the true Sobel gradient}}
+\DoxyCodeLine{424         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=1; i<nrow-\/1; i++)}
+\DoxyCodeLine{425             \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=1; j<ncol-\/1; j++)}
+\DoxyCodeLine{426                 result.\mbox{\hyperlink{class_array2d_c_a727eae5d663d463635cc150e6f771f0d}{p}}[i][j] = sqrt(result.\mbox{\hyperlink{class_array2d_c_a727eae5d663d463635cc150e6f771f0d}{p}}[i][j]);}
+\DoxyCodeLine{427 }
+\DoxyCodeLine{428     \textcolor{keywordflow}{if}(normalize)}
+\DoxyCodeLine{429     \{}
+\DoxyCodeLine{430         \mbox{\hyperlink{c4-pedestrian-detector_8h_a5821460e95a0800cf9f24c38915cbbde}{REAL}} minv = 1e20, maxv = -\/minv;}
+\DoxyCodeLine{431         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=1; i<nrow-\/1; i++)}
+\DoxyCodeLine{432         \{}
+\DoxyCodeLine{433             \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j=1; j<ncol-\/1; j++)}
+\DoxyCodeLine{434             \{}
+\DoxyCodeLine{435                 \textcolor{keywordflow}{if}(result.\mbox{\hyperlink{class_array2d_c_a727eae5d663d463635cc150e6f771f0d}{p}}[i][j]<minv)}
+\DoxyCodeLine{436                     minv = result.\mbox{\hyperlink{class_array2d_c_a727eae5d663d463635cc150e6f771f0d}{p}}[i][j];}
+\DoxyCodeLine{437                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(result.\mbox{\hyperlink{class_array2d_c_a727eae5d663d463635cc150e6f771f0d}{p}}[i][j]>maxv)}
+\DoxyCodeLine{438                     maxv = result.\mbox{\hyperlink{class_array2d_c_a727eae5d663d463635cc150e6f771f0d}{p}}[i][j];}
+\DoxyCodeLine{439             \}}
+\DoxyCodeLine{440         \}}
+\DoxyCodeLine{441         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<nrow; i++) result.\mbox{\hyperlink{class_array2d_c_a727eae5d663d463635cc150e6f771f0d}{p}}[i][0] = result.\mbox{\hyperlink{class_array2d_c_a727eae5d663d463635cc150e6f771f0d}{p}}[i][ncol-\/1] = minv;}
+\DoxyCodeLine{442         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<ncol; i++) result.\mbox{\hyperlink{class_array2d_c_a727eae5d663d463635cc150e6f771f0d}{p}}[0][i] = result.\mbox{\hyperlink{class_array2d_c_a727eae5d663d463635cc150e6f771f0d}{p}}[nrow-\/1][i] = minv;}
+\DoxyCodeLine{443         \mbox{\hyperlink{c4-pedestrian-detector_8h_a5821460e95a0800cf9f24c38915cbbde}{REAL}} s = 255.0/(maxv-\/minv);}
+\DoxyCodeLine{444         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<nrow*ncol; i++) result.\mbox{\hyperlink{class_array2d_c_a25d8fa5049d4c7ded126e0acdd18f37a}{buf}}[i] = (result.\mbox{\hyperlink{class_array2d_c_a25d8fa5049d4c7ded126e0acdd18f37a}{buf}}[i]-\/minv)*s;}
+\DoxyCodeLine{445     \}}
+\DoxyCodeLine{446 \}}
+\DoxyCodeLine{447 }
+\DoxyCodeLine{448 }
+\DoxyCodeLine{449 \textcolor{comment}{/*****************************************/}}
+\DoxyCodeLine{450 \textcolor{comment}{// Pedestrian.h}}
+\DoxyCodeLine{451 \textcolor{comment}{/*****************************************/}}
+\DoxyCodeLine{452 }
+\DoxyCodeLine{453 \textcolor{keyword}{class }\mbox{\hyperlink{class_node_detector}{NodeDetector}}}
+\DoxyCodeLine{454 \{}
+\DoxyCodeLine{455 \textcolor{keyword}{public}:}
+\DoxyCodeLine{456     \textcolor{keyword}{enum} \mbox{\hyperlink{class_node_detector_a7188c48dfe6b88b3b7f47c599c4832bd}{NodeType}} \{ \mbox{\hyperlink{class_node_detector_a7188c48dfe6b88b3b7f47c599c4832bda0fae40660f7fc68812bec11a7de3413e}{CD\_LIN}}, \mbox{\hyperlink{class_node_detector_a7188c48dfe6b88b3b7f47c599c4832bda65deee8e79173b207da52debff561c83}{CD\_HIK}}, \mbox{\hyperlink{class_node_detector_a7188c48dfe6b88b3b7f47c599c4832bda92a38601f0cada88be925ffd8824effc}{LINEAR}}, \mbox{\hyperlink{class_node_detector_a7188c48dfe6b88b3b7f47c599c4832bda4aa354e1c9fdf0c2fa2036b5922ccdf6}{HISTOGRAM}} \};}
+\DoxyCodeLine{457 \textcolor{keyword}{public}:}
+\DoxyCodeLine{458     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_node_detector_a96a5ab514f7996e4e64fff8d37199f64}{type}}; \textcolor{comment}{// linear or histogram?}}
+\DoxyCodeLine{459     \mbox{\hyperlink{class_array2d_c}{Array2dC<double>}} \mbox{\hyperlink{class_node_detector_a5eb3c12d3aa5250116334d6b4897ae47}{classifier}};}
+\DoxyCodeLine{460     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_node_detector_a2fd8792e80f3f31d2d07831a5169935f}{thresh}};}
+\DoxyCodeLine{461     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_node_detector_a3ebce10718457e7875c01dbe1eb77fa9}{featurelength}};}
+\DoxyCodeLine{462     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_node_detector_a904a3a37a99f506752794a979314548a}{upper\_bound}};}
+\DoxyCodeLine{463     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_node_detector_a6a5fa5a89be5d2fd96b983f6afdab214}{index}};}
+\DoxyCodeLine{464     std::string \mbox{\hyperlink{class_node_detector_ab4412f3aad986ffcc56289f95934ace1}{filename}};}
+\DoxyCodeLine{465 \textcolor{keyword}{public}:}
+\DoxyCodeLine{466     \mbox{\hyperlink{class_node_detector_af6107c5f4f78e4d60a720733e6fbcb5e}{NodeDetector}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_node_detector_a7188c48dfe6b88b3b7f47c599c4832bd}{NodeType}} \_type,\textcolor{keyword}{const} \textcolor{keywordtype}{int} \_featurelength,\textcolor{keyword}{const} \textcolor{keywordtype}{int} \_upper\_bound,\textcolor{keyword}{const} \textcolor{keywordtype}{int} \_index,\textcolor{keyword}{const} \textcolor{keywordtype}{char}* \_filename)}
+\DoxyCodeLine{467     \{}
+\DoxyCodeLine{468         \mbox{\hyperlink{class_node_detector_a8f28d4e33d23c0391511f795615b45d2}{Load}}(\_type,\_featurelength,\_upper\_bound,\_index,\_filename);}
+\DoxyCodeLine{469         \mbox{\hyperlink{class_node_detector_ab069f95bc20f00754a15c62c932b7e77}{minvalue}} = DBL\_MAX;}
+\DoxyCodeLine{470         \mbox{\hyperlink{class_node_detector_adb33cb202a422de76467e72f1b146610}{maxvalue}} = -\/\mbox{\hyperlink{class_node_detector_ab069f95bc20f00754a15c62c932b7e77}{minvalue}};}
+\DoxyCodeLine{471     \}}
+\DoxyCodeLine{472     \mbox{\hyperlink{class_node_detector_a26899d7effd9240ab0d589cc43053eea}{\string~NodeDetector}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{473 }
+\DoxyCodeLine{474     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_node_detector_a8f28d4e33d23c0391511f795615b45d2}{Load}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_node_detector_a7188c48dfe6b88b3b7f47c599c4832bd}{NodeType}} \_type,\textcolor{keyword}{const} \textcolor{keywordtype}{int} \_featurelength,\textcolor{keyword}{const} \textcolor{keywordtype}{int} \_upper\_bound,\textcolor{keyword}{const} \textcolor{keywordtype}{int} \_index,\textcolor{keyword}{const} \textcolor{keywordtype}{char}* \_filename);}
+\DoxyCodeLine{475     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_node_detector_aa0fb033c9d770dda75236562784e9b88}{Classify}}(\textcolor{keywordtype}{int}* \mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}});}
+\DoxyCodeLine{476 \textcolor{keyword}{private}:}
+\DoxyCodeLine{477     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_node_detector_ab069f95bc20f00754a15c62c932b7e77}{minvalue}};}
+\DoxyCodeLine{478     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_node_detector_adb33cb202a422de76467e72f1b146610}{maxvalue}};}
+\DoxyCodeLine{479 \textcolor{keyword}{public}:}
+\DoxyCodeLine{480     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_node_detector_a23a218ae9b613009bafcda85527a7dd7}{SetValues}}(\textcolor{keyword}{const} \textcolor{keywordtype}{double} v)}
+\DoxyCodeLine{481     \{}
+\DoxyCodeLine{482         \textcolor{keywordflow}{if}(v>\mbox{\hyperlink{class_node_detector_adb33cb202a422de76467e72f1b146610}{maxvalue}}) \mbox{\hyperlink{class_node_detector_adb33cb202a422de76467e72f1b146610}{maxvalue}} = v;}
+\DoxyCodeLine{483         \textcolor{keywordflow}{if}(v<\mbox{\hyperlink{class_node_detector_ab069f95bc20f00754a15c62c932b7e77}{minvalue}}) \mbox{\hyperlink{class_node_detector_ab069f95bc20f00754a15c62c932b7e77}{minvalue}} = v;}
+\DoxyCodeLine{484     \}}
+\DoxyCodeLine{485 \};}
+\DoxyCodeLine{486 }
+\DoxyCodeLine{487 \textcolor{keyword}{class }\mbox{\hyperlink{class_cascade_detector}{CascadeDetector}}}
+\DoxyCodeLine{488 \{}
+\DoxyCodeLine{489 \textcolor{keyword}{public}:}
+\DoxyCodeLine{490     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_cascade_detector_a4a1280062076bdea7b404e9fca3a53a4}{size}};}
+\DoxyCodeLine{491     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_cascade_detector_a2ce4d234703b3332cf7e17624b3b30a5}{length}};}
+\DoxyCodeLine{492     \mbox{\hyperlink{class_node_detector}{NodeDetector}}** \mbox{\hyperlink{class_cascade_detector_a7977422f255cf4d753665c0c6a0b0f07}{nodes}};}
+\DoxyCodeLine{493 \textcolor{keyword}{public}:}
+\DoxyCodeLine{494 }
+\DoxyCodeLine{495 \textcolor{keyword}{public}:}
+\DoxyCodeLine{496     \mbox{\hyperlink{class_cascade_detector_a687a7c3ed39991cd3209d65283c0149b}{CascadeDetector}}()}
+\DoxyCodeLine{497         : \mbox{\hyperlink{class_cascade_detector_a4a1280062076bdea7b404e9fca3a53a4}{size}}(20), \mbox{\hyperlink{class_cascade_detector_a2ce4d234703b3332cf7e17624b3b30a5}{length}}(0)}
+\DoxyCodeLine{498     \{}
+\DoxyCodeLine{499         \mbox{\hyperlink{class_cascade_detector_a7977422f255cf4d753665c0c6a0b0f07}{nodes}} = \textcolor{keyword}{new} \mbox{\hyperlink{class_node_detector}{NodeDetector}}*[\mbox{\hyperlink{class_cascade_detector_a4a1280062076bdea7b404e9fca3a53a4}{size}}];}
+\DoxyCodeLine{500     \}}
+\DoxyCodeLine{501     \mbox{\hyperlink{class_cascade_detector_acd01c8d06da3ea93446d71f3d35f4e1e}{\string~CascadeDetector}}()}
+\DoxyCodeLine{502     \{}
+\DoxyCodeLine{503         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i=0; i<\mbox{\hyperlink{class_cascade_detector_a2ce4d234703b3332cf7e17624b3b30a5}{length}}; i++) \textcolor{keyword}{delete} \mbox{\hyperlink{class_cascade_detector_a7977422f255cf4d753665c0c6a0b0f07}{nodes}}[i];}
+\DoxyCodeLine{504         \textcolor{keyword}{delete}[] \mbox{\hyperlink{class_cascade_detector_a7977422f255cf4d753665c0c6a0b0f07}{nodes}};}
+\DoxyCodeLine{505     \}}
+\DoxyCodeLine{506 }
+\DoxyCodeLine{507     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_cascade_detector_aa8759d8bdb90d648046aa72f0cf0fab3}{AddNode}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_node_detector_a7188c48dfe6b88b3b7f47c599c4832bd}{NodeDetector::NodeType}} \_type,\textcolor{keyword}{const} \textcolor{keywordtype}{int} \_featurelength,\textcolor{keyword}{const} \textcolor{keywordtype}{int} \_upper\_bound,\textcolor{keyword}{const} \textcolor{keywordtype}{char}* \_filename);}
+\DoxyCodeLine{508 \};}
+\DoxyCodeLine{509 }
+\DoxyCodeLine{510 \textcolor{keyword}{class }\mbox{\hyperlink{class_detection_scanner}{DetectionScanner}} \textcolor{comment}{// who does the dirty jobs}}
+\DoxyCodeLine{511 \{}
+\DoxyCodeLine{512 \textcolor{keyword}{public}:}
+\DoxyCodeLine{513     \mbox{\hyperlink{class_detection_scanner_a535d5a56ab512b384b3888bab85ea5eb}{DetectionScanner}}()}
+\DoxyCodeLine{514         : \mbox{\hyperlink{class_detection_scanner_a0526f032d5e7efd9fced2592ad5c8d03}{height}}(0), \mbox{\hyperlink{class_detection_scanner_a37d12c13060640ad0321f089cd565476}{width}}(0), \mbox{\hyperlink{class_detection_scanner_ab7083b6ed15a71fa96d623a8f6500613}{xdiv}}(0), \mbox{\hyperlink{class_detection_scanner_a78f38bf8d0990ad9ea8cea03ffe4a189}{ydiv}}(0), \mbox{\hyperlink{class_detection_scanner_aee5791fae7267a2f4a56e429d8842e6e}{baseflength}}(0), \mbox{\hyperlink{class_detection_scanner_a2ac93d1b6aca1959d57133c08b0eaa1c}{ratio}}(0.0), \mbox{\hyperlink{class_detection_scanner_a5fd4ac1b6a6c56a95543eca549c26634}{cascade}}(NULL), \mbox{\hyperlink{class_detection_scanner_a0f64092660cd084b8a1d3b6e8e30cabb}{integrals}}(NULL)}
+\DoxyCodeLine{515     \{}
+\DoxyCodeLine{516     \}}
+\DoxyCodeLine{517     \mbox{\hyperlink{class_detection_scanner_a3c06bb2a16b65a6f592536a93d2c2f9e}{DetectionScanner}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int} \_height,\textcolor{keyword}{const} \textcolor{keywordtype}{int} \_width,\textcolor{keyword}{const} \textcolor{keywordtype}{int} \_xdiv,\textcolor{keyword}{const} \textcolor{keywordtype}{int} \_ydiv,}
+\DoxyCodeLine{518                      \textcolor{keyword}{const} \textcolor{keywordtype}{int} \_baseflength,\textcolor{keyword}{const} \textcolor{keywordtype}{double} \_ratio)}
+\DoxyCodeLine{519         :\mbox{\hyperlink{class_detection_scanner_a0526f032d5e7efd9fced2592ad5c8d03}{height}}(\_height),\mbox{\hyperlink{class_detection_scanner_a37d12c13060640ad0321f089cd565476}{width}}(\_width),\mbox{\hyperlink{class_detection_scanner_ab7083b6ed15a71fa96d623a8f6500613}{xdiv}}(\_xdiv),\mbox{\hyperlink{class_detection_scanner_a78f38bf8d0990ad9ea8cea03ffe4a189}{ydiv}}(\_ydiv),}
+\DoxyCodeLine{520          \mbox{\hyperlink{class_detection_scanner_aee5791fae7267a2f4a56e429d8842e6e}{baseflength}}(\_baseflength),\mbox{\hyperlink{class_detection_scanner_a2ac93d1b6aca1959d57133c08b0eaa1c}{ratio}}(\_ratio),\mbox{\hyperlink{class_detection_scanner_a5fd4ac1b6a6c56a95543eca549c26634}{cascade}}(NULL),\mbox{\hyperlink{class_detection_scanner_a0f64092660cd084b8a1d3b6e8e30cabb}{integrals}}(NULL)}
+\DoxyCodeLine{521     \{}
+\DoxyCodeLine{522     \}}
+\DoxyCodeLine{523     \mbox{\hyperlink{class_detection_scanner_a45748bbcdf66b62a0122729076a67e17}{\string~DetectionScanner}}()}
+\DoxyCodeLine{524     \{}
+\DoxyCodeLine{525         \textcolor{keyword}{delete} \mbox{\hyperlink{class_detection_scanner_a5fd4ac1b6a6c56a95543eca549c26634}{cascade}};}
+\DoxyCodeLine{526         \textcolor{keyword}{delete}[] \mbox{\hyperlink{class_detection_scanner_a0f64092660cd084b8a1d3b6e8e30cabb}{integrals}};}
+\DoxyCodeLine{527     \}}
+\DoxyCodeLine{528 }
+\DoxyCodeLine{529     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_detection_scanner_a36c4db431f28648b82bd6e55afb67008}{LoadDetector}}(std::vector<NodeDetector::NodeType>\& types,std::vector<int>\& upper\_bounds,std::vector<std::string>\& filenames);}
+\DoxyCodeLine{530 }
+\DoxyCodeLine{531     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_detection_scanner_afc70267c30bdbef7a128b8e6d05d3d9a}{Scan}}(\mbox{\hyperlink{class_int_image}{IntImage<double>}}\& original,std::vector<cv::Rect>\& results,\textcolor{keyword}{const} \textcolor{keywordtype}{int} stepsize,\textcolor{keyword}{const} \textcolor{keywordtype}{int} round,std::ofstream* out,\textcolor{keyword}{const} \textcolor{keywordtype}{int} upper\_bound);}
+\DoxyCodeLine{532     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_detection_scanner_aa27d494b253975922d853070aab7ce4d}{FastScan}}(\mbox{\hyperlink{class_int_image}{IntImage<double>}}\& original,std::vector<cv::Rect>\& results,\textcolor{keyword}{const} \textcolor{keywordtype}{int} stepsize);}
+\DoxyCodeLine{533     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_detection_scanner_a1e36d8da847810fc36860ea87a8eae6f}{FeatureLength}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{534 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{535         \textcolor{keywordflow}{return} (\mbox{\hyperlink{class_detection_scanner_ab7083b6ed15a71fa96d623a8f6500613}{xdiv}}-\/1)*(\mbox{\hyperlink{class_detection_scanner_a78f38bf8d0990ad9ea8cea03ffe4a189}{ydiv}}-\/1)*\mbox{\hyperlink{class_detection_scanner_aee5791fae7267a2f4a56e429d8842e6e}{baseflength}};}
+\DoxyCodeLine{536     \}}
+\DoxyCodeLine{537 }
+\DoxyCodeLine{538 }
+\DoxyCodeLine{539     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_detection_scanner_a0526f032d5e7efd9fced2592ad5c8d03}{height}};}
+\DoxyCodeLine{540     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_detection_scanner_a37d12c13060640ad0321f089cd565476}{width}};}
+\DoxyCodeLine{541     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_detection_scanner_ab7083b6ed15a71fa96d623a8f6500613}{xdiv}};}
+\DoxyCodeLine{542     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_detection_scanner_a78f38bf8d0990ad9ea8cea03ffe4a189}{ydiv}};}
+\DoxyCodeLine{543     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_detection_scanner_aee5791fae7267a2f4a56e429d8842e6e}{baseflength}};}
+\DoxyCodeLine{544     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_detection_scanner_a2ac93d1b6aca1959d57133c08b0eaa1c}{ratio}};}
+\DoxyCodeLine{545     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_detection_scanner_a39359ef3b899cbb728cc31f17b7cb583}{EXT}} = 1;}
+\DoxyCodeLine{546 }
+\DoxyCodeLine{547     \mbox{\hyperlink{class_cascade_detector}{CascadeDetector}}* \mbox{\hyperlink{class_detection_scanner_a5fd4ac1b6a6c56a95543eca549c26634}{cascade}};}
+\DoxyCodeLine{548 }
+\DoxyCodeLine{549 \textcolor{keyword}{private}:}
+\DoxyCodeLine{550     \mbox{\hyperlink{class_int_image}{IntImage<double>}}* \mbox{\hyperlink{class_detection_scanner_a0f64092660cd084b8a1d3b6e8e30cabb}{integrals}};}
+\DoxyCodeLine{551     \mbox{\hyperlink{class_int_image}{IntImage<double>}} \mbox{\hyperlink{class_detection_scanner_aa4e4cfa6cc0a2ffd044c6cd9721a6b59}{image}},\mbox{\hyperlink{class_detection_scanner_a03bc015aac34a51133881b760b929a6b}{sobel}};}
+\DoxyCodeLine{552     \mbox{\hyperlink{class_int_image}{IntImage<int>}} \mbox{\hyperlink{class_detection_scanner_a885861d4c08a9f9ae4da36f68866419b}{ct}};}
+\DoxyCodeLine{553     \mbox{\hyperlink{class_array2d_c}{Array2dC<int>}} \mbox{\hyperlink{class_detection_scanner_a3e46cb7413cad57d65fe4c35f959ea11}{hist}};}
+\DoxyCodeLine{554     \mbox{\hyperlink{class_int_image}{IntImage<double>}} \mbox{\hyperlink{class_detection_scanner_a7358ec22675336179d3cad0809c7b883}{scores}};}
+\DoxyCodeLine{555 }
+\DoxyCodeLine{556     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_detection_scanner_af275e1362a1bc351f9a92323e0860d27}{InitImage}}(\mbox{\hyperlink{class_int_image}{IntImage<double>}}\& original);}
+\DoxyCodeLine{557     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_detection_scanner_a3fda62eb396e2bff3e2cd2b8ec5079a1}{InitIntegralImages}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int} stepsize);}
+\DoxyCodeLine{558     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_detection_scanner_a01790349ec7aef4ff03335d5e76f183a}{ResizeImage}}();}
+\DoxyCodeLine{559 \};}
+\DoxyCodeLine{560 }
+\DoxyCodeLine{561 \textcolor{keywordtype}{void} \mbox{\hyperlink{c4-pedestrian-detector_8h_a1c2c730891bb9a5800d3761e8cfaa160}{LoadCascade}}(std::string cascade1, std::string cascade2, \mbox{\hyperlink{class_detection_scanner}{DetectionScanner}}\& ds);}
+
+\end{DoxyCode}

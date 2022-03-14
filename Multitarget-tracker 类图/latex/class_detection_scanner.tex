@@ -1,0 +1,278 @@
+\hypertarget{class_detection_scanner}{}\doxysection{Detection\+Scanner类 参考}
+\label{class_detection_scanner}\index{DetectionScanner@{DetectionScanner}}
+
+
+{\ttfamily \#include $<$c4-\/pedestrian-\/detector.\+h$>$}
+
+
+
+Detection\+Scanner 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detection_scanner__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_detection_scanner_a535d5a56ab512b384b3888bab85ea5eb}{Detection\+Scanner}} ()
+\item 
+\mbox{\hyperlink{class_detection_scanner_a3c06bb2a16b65a6f592536a93d2c2f9e}{Detection\+Scanner}} (const int \+\_\+height, const int \+\_\+width, const int \+\_\+xdiv, const int \+\_\+ydiv, const int \+\_\+baseflength, const double \+\_\+ratio)
+\item 
+\mbox{\hyperlink{class_detection_scanner_a45748bbcdf66b62a0122729076a67e17}{$\sim$\+Detection\+Scanner}} ()
+\item 
+void \mbox{\hyperlink{class_detection_scanner_a36c4db431f28648b82bd6e55afb67008}{Load\+Detector}} (std\+::vector$<$ \mbox{\hyperlink{class_node_detector_a7188c48dfe6b88b3b7f47c599c4832bd}{Node\+Detector\+::\+Node\+Type}} $>$ \&types, std\+::vector$<$ int $>$ \&upper\+\_\+bounds, std\+::vector$<$ std\+::string $>$ \&filenames)
+\item 
+int \mbox{\hyperlink{class_detection_scanner_afc70267c30bdbef7a128b8e6d05d3d9a}{Scan}} (\mbox{\hyperlink{class_int_image}{Int\+Image}}$<$ double $>$ \&original, std\+::vector$<$ cv\+::\+Rect $>$ \&results, const int stepsize, const int round, std\+::ofstream $\ast$out, const int upper\+\_\+bound)
+\item 
+int \mbox{\hyperlink{class_detection_scanner_aa27d494b253975922d853070aab7ce4d}{Fast\+Scan}} (\mbox{\hyperlink{class_int_image}{Int\+Image}}$<$ double $>$ \&original, std\+::vector$<$ cv\+::\+Rect $>$ \&results, const int stepsize)
+\item 
+int \mbox{\hyperlink{class_detection_scanner_a1e36d8da847810fc36860ea87a8eae6f}{Feature\+Length}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 属性}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_detection_scanner_a0526f032d5e7efd9fced2592ad5c8d03}{height}}
+\item 
+int \mbox{\hyperlink{class_detection_scanner_a37d12c13060640ad0321f089cd565476}{width}}
+\item 
+int \mbox{\hyperlink{class_detection_scanner_ab7083b6ed15a71fa96d623a8f6500613}{xdiv}}
+\item 
+int \mbox{\hyperlink{class_detection_scanner_a78f38bf8d0990ad9ea8cea03ffe4a189}{ydiv}}
+\item 
+int \mbox{\hyperlink{class_detection_scanner_aee5791fae7267a2f4a56e429d8842e6e}{baseflength}}
+\item 
+double \mbox{\hyperlink{class_detection_scanner_a2ac93d1b6aca1959d57133c08b0eaa1c}{ratio}}
+\item 
+\mbox{\hyperlink{class_cascade_detector}{Cascade\+Detector}} $\ast$ \mbox{\hyperlink{class_detection_scanner_a5fd4ac1b6a6c56a95543eca549c26634}{cascade}}
+\end{DoxyCompactItemize}
+\doxysubsection*{静态 Public 属性}
+\begin{DoxyCompactItemize}
+\item 
+static const int \mbox{\hyperlink{class_detection_scanner_a39359ef3b899cbb728cc31f17b7cb583}{EXT}} = 1
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_detection_scanner_af275e1362a1bc351f9a92323e0860d27}{Init\+Image}} (\mbox{\hyperlink{class_int_image}{Int\+Image}}$<$ double $>$ \&original)
+\item 
+void \mbox{\hyperlink{class_detection_scanner_a3fda62eb396e2bff3e2cd2b8ec5079a1}{Init\+Integral\+Images}} (const int stepsize)
+\item 
+void \mbox{\hyperlink{class_detection_scanner_a01790349ec7aef4ff03335d5e76f183a}{Resize\+Image}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_int_image}{Int\+Image}}$<$ double $>$ $\ast$ \mbox{\hyperlink{class_detection_scanner_a0f64092660cd084b8a1d3b6e8e30cabb}{integrals}}
+\item 
+\mbox{\hyperlink{class_int_image}{Int\+Image}}$<$ double $>$ \mbox{\hyperlink{class_detection_scanner_aa4e4cfa6cc0a2ffd044c6cd9721a6b59}{image}}
+\item 
+\mbox{\hyperlink{class_int_image}{Int\+Image}}$<$ double $>$ \mbox{\hyperlink{class_detection_scanner_a03bc015aac34a51133881b760b929a6b}{sobel}}
+\item 
+\mbox{\hyperlink{class_int_image}{Int\+Image}}$<$ int $>$ \mbox{\hyperlink{class_detection_scanner_a885861d4c08a9f9ae4da36f68866419b}{ct}}
+\item 
+\mbox{\hyperlink{class_array2d_c}{Array2dC}}$<$ int $>$ \mbox{\hyperlink{class_detection_scanner_a3e46cb7413cad57d65fe4c35f959ea11}{hist}}
+\item 
+\mbox{\hyperlink{class_int_image}{Int\+Image}}$<$ double $>$ \mbox{\hyperlink{class_detection_scanner_a7358ec22675336179d3cad0809c7b883}{scores}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{class_detection_scanner_a535d5a56ab512b384b3888bab85ea5eb}\label{class_detection_scanner_a535d5a56ab512b384b3888bab85ea5eb}} 
+\index{DetectionScanner@{DetectionScanner}!DetectionScanner@{DetectionScanner}}
+\index{DetectionScanner@{DetectionScanner}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{DetectionScanner()}{DetectionScanner()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Detection\+Scanner\+::\+Detection\+Scanner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_detection_scanner_a3c06bb2a16b65a6f592536a93d2c2f9e}\label{class_detection_scanner_a3c06bb2a16b65a6f592536a93d2c2f9e}} 
+\index{DetectionScanner@{DetectionScanner}!DetectionScanner@{DetectionScanner}}
+\index{DetectionScanner@{DetectionScanner}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{DetectionScanner()}{DetectionScanner()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Detection\+Scanner\+::\+Detection\+Scanner (\begin{DoxyParamCaption}\item[{const int}]{\+\_\+height,  }\item[{const int}]{\+\_\+width,  }\item[{const int}]{\+\_\+xdiv,  }\item[{const int}]{\+\_\+ydiv,  }\item[{const int}]{\+\_\+baseflength,  }\item[{const double}]{\+\_\+ratio }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_detection_scanner_a45748bbcdf66b62a0122729076a67e17}\label{class_detection_scanner_a45748bbcdf66b62a0122729076a67e17}} 
+\index{DetectionScanner@{DetectionScanner}!````~DetectionScanner@{$\sim$DetectionScanner}}
+\index{````~DetectionScanner@{$\sim$DetectionScanner}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{$\sim$DetectionScanner()}{~DetectionScanner()}}
+{\footnotesize\ttfamily Detection\+Scanner\+::$\sim$\+Detection\+Scanner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{class_detection_scanner_aa27d494b253975922d853070aab7ce4d}\label{class_detection_scanner_aa27d494b253975922d853070aab7ce4d}} 
+\index{DetectionScanner@{DetectionScanner}!FastScan@{FastScan}}
+\index{FastScan@{FastScan}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{FastScan()}{FastScan()}}
+{\footnotesize\ttfamily int Detection\+Scanner\+::\+Fast\+Scan (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_int_image}{Int\+Image}}$<$ double $>$ \&}]{original,  }\item[{std\+::vector$<$ cv\+::\+Rect $>$ \&}]{results,  }\item[{const int}]{stepsize }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detection_scanner_aa27d494b253975922d853070aab7ce4d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_detection_scanner_a1e36d8da847810fc36860ea87a8eae6f}\label{class_detection_scanner_a1e36d8da847810fc36860ea87a8eae6f}} 
+\index{DetectionScanner@{DetectionScanner}!FeatureLength@{FeatureLength}}
+\index{FeatureLength@{FeatureLength}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{FeatureLength()}{FeatureLength()}}
+{\footnotesize\ttfamily int Detection\+Scanner\+::\+Feature\+Length (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_detection_scanner_af275e1362a1bc351f9a92323e0860d27}\label{class_detection_scanner_af275e1362a1bc351f9a92323e0860d27}} 
+\index{DetectionScanner@{DetectionScanner}!InitImage@{InitImage}}
+\index{InitImage@{InitImage}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{InitImage()}{InitImage()}}
+{\footnotesize\ttfamily void Detection\+Scanner\+::\+Init\+Image (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_int_image}{Int\+Image}}$<$ double $>$ \&}]{original }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detection_scanner_af275e1362a1bc351f9a92323e0860d27_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_detection_scanner_a3fda62eb396e2bff3e2cd2b8ec5079a1}\label{class_detection_scanner_a3fda62eb396e2bff3e2cd2b8ec5079a1}} 
+\index{DetectionScanner@{DetectionScanner}!InitIntegralImages@{InitIntegralImages}}
+\index{InitIntegralImages@{InitIntegralImages}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{InitIntegralImages()}{InitIntegralImages()}}
+{\footnotesize\ttfamily void Detection\+Scanner\+::\+Init\+Integral\+Images (\begin{DoxyParamCaption}\item[{const int}]{stepsize }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detection_scanner_a3fda62eb396e2bff3e2cd2b8ec5079a1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_detection_scanner_a36c4db431f28648b82bd6e55afb67008}\label{class_detection_scanner_a36c4db431f28648b82bd6e55afb67008}} 
+\index{DetectionScanner@{DetectionScanner}!LoadDetector@{LoadDetector}}
+\index{LoadDetector@{LoadDetector}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{LoadDetector()}{LoadDetector()}}
+{\footnotesize\ttfamily void Detection\+Scanner\+::\+Load\+Detector (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_node_detector_a7188c48dfe6b88b3b7f47c599c4832bd}{Node\+Detector\+::\+Node\+Type}} $>$ \&}]{types,  }\item[{std\+::vector$<$ int $>$ \&}]{upper\+\_\+bounds,  }\item[{std\+::vector$<$ std\+::string $>$ \&}]{filenames }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detection_scanner_a36c4db431f28648b82bd6e55afb67008_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_detection_scanner_a01790349ec7aef4ff03335d5e76f183a}\label{class_detection_scanner_a01790349ec7aef4ff03335d5e76f183a}} 
+\index{DetectionScanner@{DetectionScanner}!ResizeImage@{ResizeImage}}
+\index{ResizeImage@{ResizeImage}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{ResizeImage()}{ResizeImage()}}
+{\footnotesize\ttfamily void Detection\+Scanner\+::\+Resize\+Image (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_detection_scanner_a01790349ec7aef4ff03335d5e76f183a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_detection_scanner_afc70267c30bdbef7a128b8e6d05d3d9a}\label{class_detection_scanner_afc70267c30bdbef7a128b8e6d05d3d9a}} 
+\index{DetectionScanner@{DetectionScanner}!Scan@{Scan}}
+\index{Scan@{Scan}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{Scan()}{Scan()}}
+{\footnotesize\ttfamily int Detection\+Scanner\+::\+Scan (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_int_image}{Int\+Image}}$<$ double $>$ \&}]{original,  }\item[{std\+::vector$<$ cv\+::\+Rect $>$ \&}]{results,  }\item[{const int}]{stepsize,  }\item[{const int}]{round,  }\item[{std\+::ofstream $\ast$}]{out,  }\item[{const int}]{upper\+\_\+bound }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{class_detection_scanner_aee5791fae7267a2f4a56e429d8842e6e}\label{class_detection_scanner_aee5791fae7267a2f4a56e429d8842e6e}} 
+\index{DetectionScanner@{DetectionScanner}!baseflength@{baseflength}}
+\index{baseflength@{baseflength}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{baseflength}{baseflength}}
+{\footnotesize\ttfamily int Detection\+Scanner\+::baseflength}
+
+\mbox{\Hypertarget{class_detection_scanner_a5fd4ac1b6a6c56a95543eca549c26634}\label{class_detection_scanner_a5fd4ac1b6a6c56a95543eca549c26634}} 
+\index{DetectionScanner@{DetectionScanner}!cascade@{cascade}}
+\index{cascade@{cascade}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{cascade}{cascade}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_cascade_detector}{Cascade\+Detector}}$\ast$ Detection\+Scanner\+::cascade}
+
+\mbox{\Hypertarget{class_detection_scanner_a885861d4c08a9f9ae4da36f68866419b}\label{class_detection_scanner_a885861d4c08a9f9ae4da36f68866419b}} 
+\index{DetectionScanner@{DetectionScanner}!ct@{ct}}
+\index{ct@{ct}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{ct}{ct}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_int_image}{Int\+Image}}$<$int$>$ Detection\+Scanner\+::ct\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_detection_scanner_a39359ef3b899cbb728cc31f17b7cb583}\label{class_detection_scanner_a39359ef3b899cbb728cc31f17b7cb583}} 
+\index{DetectionScanner@{DetectionScanner}!EXT@{EXT}}
+\index{EXT@{EXT}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{EXT}{EXT}}
+{\footnotesize\ttfamily const int Detection\+Scanner\+::\+EXT = 1\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{class_detection_scanner_a0526f032d5e7efd9fced2592ad5c8d03}\label{class_detection_scanner_a0526f032d5e7efd9fced2592ad5c8d03}} 
+\index{DetectionScanner@{DetectionScanner}!height@{height}}
+\index{height@{height}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{height}{height}}
+{\footnotesize\ttfamily int Detection\+Scanner\+::height}
+
+\mbox{\Hypertarget{class_detection_scanner_a3e46cb7413cad57d65fe4c35f959ea11}\label{class_detection_scanner_a3e46cb7413cad57d65fe4c35f959ea11}} 
+\index{DetectionScanner@{DetectionScanner}!hist@{hist}}
+\index{hist@{hist}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{hist}{hist}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_array2d_c}{Array2dC}}$<$int$>$ Detection\+Scanner\+::hist\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_detection_scanner_aa4e4cfa6cc0a2ffd044c6cd9721a6b59}\label{class_detection_scanner_aa4e4cfa6cc0a2ffd044c6cd9721a6b59}} 
+\index{DetectionScanner@{DetectionScanner}!image@{image}}
+\index{image@{image}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{image}{image}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_int_image}{Int\+Image}}$<$double$>$ Detection\+Scanner\+::image\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_detection_scanner_a0f64092660cd084b8a1d3b6e8e30cabb}\label{class_detection_scanner_a0f64092660cd084b8a1d3b6e8e30cabb}} 
+\index{DetectionScanner@{DetectionScanner}!integrals@{integrals}}
+\index{integrals@{integrals}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{integrals}{integrals}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_int_image}{Int\+Image}}$<$double$>$$\ast$ Detection\+Scanner\+::integrals\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_detection_scanner_a2ac93d1b6aca1959d57133c08b0eaa1c}\label{class_detection_scanner_a2ac93d1b6aca1959d57133c08b0eaa1c}} 
+\index{DetectionScanner@{DetectionScanner}!ratio@{ratio}}
+\index{ratio@{ratio}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{ratio}{ratio}}
+{\footnotesize\ttfamily double Detection\+Scanner\+::ratio}
+
+\mbox{\Hypertarget{class_detection_scanner_a7358ec22675336179d3cad0809c7b883}\label{class_detection_scanner_a7358ec22675336179d3cad0809c7b883}} 
+\index{DetectionScanner@{DetectionScanner}!scores@{scores}}
+\index{scores@{scores}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{scores}{scores}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_int_image}{Int\+Image}}$<$double$>$ Detection\+Scanner\+::scores\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_detection_scanner_a03bc015aac34a51133881b760b929a6b}\label{class_detection_scanner_a03bc015aac34a51133881b760b929a6b}} 
+\index{DetectionScanner@{DetectionScanner}!sobel@{sobel}}
+\index{sobel@{sobel}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{sobel}{sobel}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_int_image}{Int\+Image}}$<$double$>$ Detection\+Scanner\+::sobel\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_detection_scanner_a37d12c13060640ad0321f089cd565476}\label{class_detection_scanner_a37d12c13060640ad0321f089cd565476}} 
+\index{DetectionScanner@{DetectionScanner}!width@{width}}
+\index{width@{width}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{width}{width}}
+{\footnotesize\ttfamily int Detection\+Scanner\+::width}
+
+\mbox{\Hypertarget{class_detection_scanner_ab7083b6ed15a71fa96d623a8f6500613}\label{class_detection_scanner_ab7083b6ed15a71fa96d623a8f6500613}} 
+\index{DetectionScanner@{DetectionScanner}!xdiv@{xdiv}}
+\index{xdiv@{xdiv}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{xdiv}{xdiv}}
+{\footnotesize\ttfamily int Detection\+Scanner\+::xdiv}
+
+\mbox{\Hypertarget{class_detection_scanner_a78f38bf8d0990ad9ea8cea03ffe4a189}\label{class_detection_scanner_a78f38bf8d0990ad9ea8cea03ffe4a189}} 
+\index{DetectionScanner@{DetectionScanner}!ydiv@{ydiv}}
+\index{ydiv@{ydiv}!DetectionScanner@{DetectionScanner}}
+\doxysubsubsection{\texorpdfstring{ydiv}{ydiv}}
+{\footnotesize\ttfamily int Detection\+Scanner\+::ydiv}
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/pedestrians/\mbox{\hyperlink{c4-pedestrian-detector_8h}{c4-\/pedestrian-\/detector.\+h}}\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/pedestrians/\mbox{\hyperlink{c4-pedestrian-detector_8cpp}{c4-\/pedestrian-\/detector.\+cpp}}\end{DoxyCompactItemize}

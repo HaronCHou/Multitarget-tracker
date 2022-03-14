@@ -1,0 +1,232 @@
+\hypertarget{gaussian__yolo__layer_8c}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/gaussian\+\_\+yolo\+\_\+layer.c 文件参考}
+\label{gaussian__yolo__layer_8c}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/gaussian\_yolo\_layer.c@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/gaussian\_yolo\_layer.c}}
+{\ttfamily \#include \char`\"{}gaussian\+\_\+yolo\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}activations.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}blas.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}box.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dark\+\_\+cuda.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+gaussian\+\_\+yolo\+\_\+layer.\+c 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gaussian__yolo__layer_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structlayer}{layer}} \mbox{\hyperlink{gaussian__yolo__layer_8c_a59eeece316302712ca7601dc13123d4b}{make\+\_\+gaussian\+\_\+yolo\+\_\+layer}} (int batch, int w, int h, int n, int total, int $\ast$mask, int classes, int max\+\_\+boxes)
+\item 
+void \mbox{\hyperlink{gaussian__yolo__layer_8c_a6ac9348bf06c8519f7b35e33231053b5}{resize\+\_\+gaussian\+\_\+yolo\+\_\+layer}} (\mbox{\hyperlink{structlayer}{layer}} $\ast$l, int w, int h)
+\item 
+\mbox{\hyperlink{structbox}{box}} \mbox{\hyperlink{gaussian__yolo__layer_8c_a136c717cb9b1a39a2209f2e2d97366b6}{get\+\_\+gaussian\+\_\+yolo\+\_\+box}} (float $\ast$\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, float $\ast$biases, int n, int index, int i, int j, int lw, int lh, int w, int h, int stride, \mbox{\hyperlink{darknet_8h_a9b53d206083cc713c7f793227d1beef1}{YOLO\+\_\+\+POINT}} yolo\+\_\+point)
+\item 
+static float \mbox{\hyperlink{gaussian__yolo__layer_8c_a70ce2d14763e94b87557c0c9193cc0be}{fix\+\_\+nan\+\_\+inf}} (float val)
+\item 
+static float \mbox{\hyperlink{gaussian__yolo__layer_8c_ab87f45e4f9f97a74104f3382b00c4156}{clip\+\_\+value}} (float val, const float max\+\_\+val)
+\item 
+float \mbox{\hyperlink{gaussian__yolo__layer_8c_a13a300da6e050747434fd55d94ab5135}{delta\+\_\+gaussian\+\_\+yolo\+\_\+box}} (\mbox{\hyperlink{structbox}{box}} truth, float $\ast$\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, float $\ast$biases, int n, int index, int i, int j, int lw, int lh, int w, int h, float $\ast$delta, float scale, int stride, float iou\+\_\+normalizer, \mbox{\hyperlink{darknet_8h_aab757338e5429453acc81f7bc21a3e92}{IOU\+\_\+\+LOSS}} iou\+\_\+loss, float uc\+\_\+normalizer, int accumulate, \mbox{\hyperlink{darknet_8h_a9b53d206083cc713c7f793227d1beef1}{YOLO\+\_\+\+POINT}} yolo\+\_\+point, float max\+\_\+delta)
+\item 
+void \mbox{\hyperlink{gaussian__yolo__layer_8c_a8add2706c2b228f38158a04a539cdf1a}{averages\+\_\+gaussian\+\_\+yolo\+\_\+deltas}} (int class\+\_\+index, int box\+\_\+index, int stride, int classes, float $\ast$delta)
+\item 
+void \mbox{\hyperlink{gaussian__yolo__layer_8c_ae642ac1fdfbc27a0a90556eea2e4f6e1}{delta\+\_\+gaussian\+\_\+yolo\+\_\+class}} (float $\ast$output, float $\ast$delta, int index, int class\+\_\+id, int classes, int stride, float $\ast$avg\+\_\+cat, float label\+\_\+smooth\+\_\+eps, float $\ast$classes\+\_\+multipliers, float cls\+\_\+normalizer)
+\item 
+int \mbox{\hyperlink{gaussian__yolo__layer_8c_aac5da2cddad0acb3ecf96ec35252bb61}{compare\+\_\+gaussian\+\_\+yolo\+\_\+class}} (float $\ast$output, int classes, int class\+\_\+index, int stride, float objectness, int class\+\_\+id, float conf\+\_\+thresh)
+\item 
+static int \mbox{\hyperlink{gaussian__yolo__layer_8c_ae4676cd2d2a94b98e2abbf9f7f0813ec}{entry\+\_\+gaussian\+\_\+index}} (\mbox{\hyperlink{structlayer}{layer}} l, int batch, int location, int entry)
+\item 
+void \mbox{\hyperlink{gaussian__yolo__layer_8c_a3768a137e5b75ddb468d533a5e76b123}{forward\+\_\+gaussian\+\_\+yolo\+\_\+layer}} (const \mbox{\hyperlink{structlayer}{layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{gaussian__yolo__layer_8c_a59ce449be9752634c262208c2ae4f901}{backward\+\_\+gaussian\+\_\+yolo\+\_\+layer}} (const \mbox{\hyperlink{structlayer}{layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{gaussian__yolo__layer_8c_a568a28231dda8c3badc3a95676fd911d}{correct\+\_\+gaussian\+\_\+yolo\+\_\+boxes}} (\mbox{\hyperlink{structdetection}{detection}} $\ast$dets, int n, int w, int h, int netw, int neth, int relative, int letter)
+\item 
+int \mbox{\hyperlink{gaussian__yolo__layer_8c_a5ff0a3baf4b660f86f4964ac3491d148}{gaussian\+\_\+yolo\+\_\+num\+\_\+detections}} (\mbox{\hyperlink{structlayer}{layer}} l, float thresh)
+\item 
+int \mbox{\hyperlink{gaussian__yolo__layer_8c_a3b75d0dd38dc09f861605d86a65fea3a}{get\+\_\+gaussian\+\_\+yolo\+\_\+detections}} (\mbox{\hyperlink{structlayer}{layer}} l, int w, int h, int netw, int neth, float thresh, int $\ast$map, int relative, \mbox{\hyperlink{structdetection}{detection}} $\ast$dets, int letter)
+\end{DoxyCompactItemize}
+\doxysubsection*{变量}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{gaussian__yolo__layer_8c_a5522024919a839fff7d996d9641d2a68}{check\+\_\+mistakes}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{gaussian__yolo__layer_8c_a8add2706c2b228f38158a04a539cdf1a}\label{gaussian__yolo__layer_8c_a8add2706c2b228f38158a04a539cdf1a}} 
+\index{gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}!averages\_gaussian\_yolo\_deltas@{averages\_gaussian\_yolo\_deltas}}
+\index{averages\_gaussian\_yolo\_deltas@{averages\_gaussian\_yolo\_deltas}!gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{averages\_gaussian\_yolo\_deltas()}{averages\_gaussian\_yolo\_deltas()}}
+{\footnotesize\ttfamily void averages\+\_\+gaussian\+\_\+yolo\+\_\+deltas (\begin{DoxyParamCaption}\item[{int}]{class\+\_\+index,  }\item[{int}]{box\+\_\+index,  }\item[{int}]{stride,  }\item[{int}]{classes,  }\item[{float $\ast$}]{delta }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gaussian__yolo__layer_8c_a59ce449be9752634c262208c2ae4f901}\label{gaussian__yolo__layer_8c_a59ce449be9752634c262208c2ae4f901}} 
+\index{gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}!backward\_gaussian\_yolo\_layer@{backward\_gaussian\_yolo\_layer}}
+\index{backward\_gaussian\_yolo\_layer@{backward\_gaussian\_yolo\_layer}!gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{backward\_gaussian\_yolo\_layer()}{backward\_gaussian\_yolo\_layer()}}
+{\footnotesize\ttfamily void backward\+\_\+gaussian\+\_\+yolo\+\_\+layer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=300pt]{gaussian__yolo__layer_8c_a59ce449be9752634c262208c2ae4f901_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{gaussian__yolo__layer_8c_ab87f45e4f9f97a74104f3382b00c4156}\label{gaussian__yolo__layer_8c_ab87f45e4f9f97a74104f3382b00c4156}} 
+\index{gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}!clip\_value@{clip\_value}}
+\index{clip\_value@{clip\_value}!gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{clip\_value()}{clip\_value()}}
+{\footnotesize\ttfamily static float clip\+\_\+value (\begin{DoxyParamCaption}\item[{float}]{val,  }\item[{const float}]{max\+\_\+val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\Hypertarget{gaussian__yolo__layer_8c_aac5da2cddad0acb3ecf96ec35252bb61}\label{gaussian__yolo__layer_8c_aac5da2cddad0acb3ecf96ec35252bb61}} 
+\index{gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}!compare\_gaussian\_yolo\_class@{compare\_gaussian\_yolo\_class}}
+\index{compare\_gaussian\_yolo\_class@{compare\_gaussian\_yolo\_class}!gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{compare\_gaussian\_yolo\_class()}{compare\_gaussian\_yolo\_class()}}
+{\footnotesize\ttfamily int compare\+\_\+gaussian\+\_\+yolo\+\_\+class (\begin{DoxyParamCaption}\item[{float $\ast$}]{output,  }\item[{int}]{classes,  }\item[{int}]{class\+\_\+index,  }\item[{int}]{stride,  }\item[{float}]{objectness,  }\item[{int}]{class\+\_\+id,  }\item[{float}]{conf\+\_\+thresh }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gaussian__yolo__layer_8c_a568a28231dda8c3badc3a95676fd911d}\label{gaussian__yolo__layer_8c_a568a28231dda8c3badc3a95676fd911d}} 
+\index{gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}!correct\_gaussian\_yolo\_boxes@{correct\_gaussian\_yolo\_boxes}}
+\index{correct\_gaussian\_yolo\_boxes@{correct\_gaussian\_yolo\_boxes}!gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{correct\_gaussian\_yolo\_boxes()}{correct\_gaussian\_yolo\_boxes()}}
+{\footnotesize\ttfamily void correct\+\_\+gaussian\+\_\+yolo\+\_\+boxes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{dets,  }\item[{int}]{n,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{int}]{netw,  }\item[{int}]{neth,  }\item[{int}]{relative,  }\item[{int}]{letter }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=292pt]{gaussian__yolo__layer_8c_a568a28231dda8c3badc3a95676fd911d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{gaussian__yolo__layer_8c_a13a300da6e050747434fd55d94ab5135}\label{gaussian__yolo__layer_8c_a13a300da6e050747434fd55d94ab5135}} 
+\index{gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}!delta\_gaussian\_yolo\_box@{delta\_gaussian\_yolo\_box}}
+\index{delta\_gaussian\_yolo\_box@{delta\_gaussian\_yolo\_box}!gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{delta\_gaussian\_yolo\_box()}{delta\_gaussian\_yolo\_box()}}
+{\footnotesize\ttfamily float delta\+\_\+gaussian\+\_\+yolo\+\_\+box (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbox}{box}}}]{truth,  }\item[{float $\ast$}]{x,  }\item[{float $\ast$}]{biases,  }\item[{int}]{n,  }\item[{int}]{index,  }\item[{int}]{i,  }\item[{int}]{j,  }\item[{int}]{lw,  }\item[{int}]{lh,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{float $\ast$}]{delta,  }\item[{float}]{scale,  }\item[{int}]{stride,  }\item[{float}]{iou\+\_\+normalizer,  }\item[{\mbox{\hyperlink{darknet_8h_aab757338e5429453acc81f7bc21a3e92}{IOU\+\_\+\+LOSS}}}]{iou\+\_\+loss,  }\item[{float}]{uc\+\_\+normalizer,  }\item[{int}]{accumulate,  }\item[{\mbox{\hyperlink{darknet_8h_a9b53d206083cc713c7f793227d1beef1}{YOLO\+\_\+\+POINT}}}]{yolo\+\_\+point,  }\item[{float}]{max\+\_\+delta }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gaussian__yolo__layer_8c_a13a300da6e050747434fd55d94ab5135_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{gaussian__yolo__layer_8c_ae642ac1fdfbc27a0a90556eea2e4f6e1}\label{gaussian__yolo__layer_8c_ae642ac1fdfbc27a0a90556eea2e4f6e1}} 
+\index{gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}!delta\_gaussian\_yolo\_class@{delta\_gaussian\_yolo\_class}}
+\index{delta\_gaussian\_yolo\_class@{delta\_gaussian\_yolo\_class}!gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{delta\_gaussian\_yolo\_class()}{delta\_gaussian\_yolo\_class()}}
+{\footnotesize\ttfamily void delta\+\_\+gaussian\+\_\+yolo\+\_\+class (\begin{DoxyParamCaption}\item[{float $\ast$}]{output,  }\item[{float $\ast$}]{delta,  }\item[{int}]{index,  }\item[{int}]{class\+\_\+id,  }\item[{int}]{classes,  }\item[{int}]{stride,  }\item[{float $\ast$}]{avg\+\_\+cat,  }\item[{float}]{label\+\_\+smooth\+\_\+eps,  }\item[{float $\ast$}]{classes\+\_\+multipliers,  }\item[{float}]{cls\+\_\+normalizer }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gaussian__yolo__layer_8c_ae4676cd2d2a94b98e2abbf9f7f0813ec}\label{gaussian__yolo__layer_8c_ae4676cd2d2a94b98e2abbf9f7f0813ec}} 
+\index{gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}!entry\_gaussian\_index@{entry\_gaussian\_index}}
+\index{entry\_gaussian\_index@{entry\_gaussian\_index}!gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{entry\_gaussian\_index()}{entry\_gaussian\_index()}}
+{\footnotesize\ttfamily static int entry\+\_\+gaussian\+\_\+index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{int}]{batch,  }\item[{int}]{location,  }\item[{int}]{entry }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{gaussian__yolo__layer_8c_a70ce2d14763e94b87557c0c9193cc0be}\label{gaussian__yolo__layer_8c_a70ce2d14763e94b87557c0c9193cc0be}} 
+\index{gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}!fix\_nan\_inf@{fix\_nan\_inf}}
+\index{fix\_nan\_inf@{fix\_nan\_inf}!gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{fix\_nan\_inf()}{fix\_nan\_inf()}}
+{\footnotesize\ttfamily static float fix\+\_\+nan\+\_\+inf (\begin{DoxyParamCaption}\item[{float}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\Hypertarget{gaussian__yolo__layer_8c_a3768a137e5b75ddb468d533a5e76b123}\label{gaussian__yolo__layer_8c_a3768a137e5b75ddb468d533a5e76b123}} 
+\index{gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}!forward\_gaussian\_yolo\_layer@{forward\_gaussian\_yolo\_layer}}
+\index{forward\_gaussian\_yolo\_layer@{forward\_gaussian\_yolo\_layer}!gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{forward\_gaussian\_yolo\_layer()}{forward\_gaussian\_yolo\_layer()}}
+{\footnotesize\ttfamily void forward\+\_\+gaussian\+\_\+yolo\+\_\+layer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gaussian__yolo__layer_8c_a3768a137e5b75ddb468d533a5e76b123_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{gaussian__yolo__layer_8c_a5ff0a3baf4b660f86f4964ac3491d148}\label{gaussian__yolo__layer_8c_a5ff0a3baf4b660f86f4964ac3491d148}} 
+\index{gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}!gaussian\_yolo\_num\_detections@{gaussian\_yolo\_num\_detections}}
+\index{gaussian\_yolo\_num\_detections@{gaussian\_yolo\_num\_detections}!gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{gaussian\_yolo\_num\_detections()}{gaussian\_yolo\_num\_detections()}}
+{\footnotesize\ttfamily int gaussian\+\_\+yolo\+\_\+num\+\_\+detections (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{float}]{thresh }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gaussian__yolo__layer_8c_a5ff0a3baf4b660f86f4964ac3491d148_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{gaussian__yolo__layer_8c_a136c717cb9b1a39a2209f2e2d97366b6}\label{gaussian__yolo__layer_8c_a136c717cb9b1a39a2209f2e2d97366b6}} 
+\index{gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}!get\_gaussian\_yolo\_box@{get\_gaussian\_yolo\_box}}
+\index{get\_gaussian\_yolo\_box@{get\_gaussian\_yolo\_box}!gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{get\_gaussian\_yolo\_box()}{get\_gaussian\_yolo\_box()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structbox}{box}} get\+\_\+gaussian\+\_\+yolo\+\_\+box (\begin{DoxyParamCaption}\item[{float $\ast$}]{x,  }\item[{float $\ast$}]{biases,  }\item[{int}]{n,  }\item[{int}]{index,  }\item[{int}]{i,  }\item[{int}]{j,  }\item[{int}]{lw,  }\item[{int}]{lh,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{int}]{stride,  }\item[{\mbox{\hyperlink{darknet_8h_a9b53d206083cc713c7f793227d1beef1}{YOLO\+\_\+\+POINT}}}]{yolo\+\_\+point }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=297pt]{gaussian__yolo__layer_8c_a136c717cb9b1a39a2209f2e2d97366b6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{gaussian__yolo__layer_8c_a3b75d0dd38dc09f861605d86a65fea3a}\label{gaussian__yolo__layer_8c_a3b75d0dd38dc09f861605d86a65fea3a}} 
+\index{gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}!get\_gaussian\_yolo\_detections@{get\_gaussian\_yolo\_detections}}
+\index{get\_gaussian\_yolo\_detections@{get\_gaussian\_yolo\_detections}!gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{get\_gaussian\_yolo\_detections()}{get\_gaussian\_yolo\_detections()}}
+{\footnotesize\ttfamily int get\+\_\+gaussian\+\_\+yolo\+\_\+detections (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{int}]{netw,  }\item[{int}]{neth,  }\item[{float}]{thresh,  }\item[{int $\ast$}]{map,  }\item[{int}]{relative,  }\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{dets,  }\item[{int}]{letter }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gaussian__yolo__layer_8c_a3b75d0dd38dc09f861605d86a65fea3a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{gaussian__yolo__layer_8c_a59eeece316302712ca7601dc13123d4b}\label{gaussian__yolo__layer_8c_a59eeece316302712ca7601dc13123d4b}} 
+\index{gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}!make\_gaussian\_yolo\_layer@{make\_gaussian\_yolo\_layer}}
+\index{make\_gaussian\_yolo\_layer@{make\_gaussian\_yolo\_layer}!gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{make\_gaussian\_yolo\_layer()}{make\_gaussian\_yolo\_layer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlayer}{layer}} make\+\_\+gaussian\+\_\+yolo\+\_\+layer (\begin{DoxyParamCaption}\item[{int}]{batch,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{int}]{n,  }\item[{int}]{total,  }\item[{int $\ast$}]{mask,  }\item[{int}]{classes,  }\item[{int}]{max\+\_\+boxes }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gaussian__yolo__layer_8c_a59eeece316302712ca7601dc13123d4b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{gaussian__yolo__layer_8c_a6ac9348bf06c8519f7b35e33231053b5}\label{gaussian__yolo__layer_8c_a6ac9348bf06c8519f7b35e33231053b5}} 
+\index{gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}!resize\_gaussian\_yolo\_layer@{resize\_gaussian\_yolo\_layer}}
+\index{resize\_gaussian\_yolo\_layer@{resize\_gaussian\_yolo\_layer}!gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{resize\_gaussian\_yolo\_layer()}{resize\_gaussian\_yolo\_layer()}}
+{\footnotesize\ttfamily void resize\+\_\+gaussian\+\_\+yolo\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}} $\ast$}]{l,  }\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{gaussian__yolo__layer_8c_a6ac9348bf06c8519f7b35e33231053b5_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{变量说明}
+\mbox{\Hypertarget{gaussian__yolo__layer_8c_a5522024919a839fff7d996d9641d2a68}\label{gaussian__yolo__layer_8c_a5522024919a839fff7d996d9641d2a68}} 
+\index{gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}!check\_mistakes@{check\_mistakes}}
+\index{check\_mistakes@{check\_mistakes}!gaussian\_yolo\_layer.c@{gaussian\_yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{check\_mistakes}{check\_mistakes}}
+{\footnotesize\ttfamily int check\+\_\+mistakes\hspace{0.3cm}{\ttfamily [extern]}}
+

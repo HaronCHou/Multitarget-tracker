@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['x_0',['x',['../structptw32__handle__t.html#a156e4e4394eb30aa3f977794496db34b',1,'ptw32_handle_t::x()'],['../structlayer.html#a78b279684acc59b1b891f63225e5715e',1,'layer::x()'],['../structbox.html#a26adb5cfaf492245aba926b2f212b712',1,'box::x()'],['../structbox__label.html#a50bbc824640977cfbd11b7d129c488d3',1,'box_label::x()'],['../structbbox__t.html#afe740d8071d60bfb147b55e0c36a2832',1,'bbox_t::x()'],['../structfloat__pair.html#ae6eee479583279eca5354fcb97c655fc',1,'float_pair::x()']]],
+  ['x_1',['X',['../structdata.html#a1f37ae26b26b12ef5c70a12957826e87',1,'data::X()'],['../class_g_point.html#a0a26572e08c37a5e7e6854ae8c7fee66',1,'GPoint::X()']]],
+  ['x_2',['x',['../utils_8c.html#a676e0da0ef83bbbdf42538e54b97506b',1,'utils.c']]],
+  ['x1_3',['x1',['../struct_b_box.html#ab063d1cc01f221b4992410e92ff51d60',1,'BBox']]],
+  ['x2_4',['x2',['../struct_b_box.html#a4e5594907d923d49bc884cef23ebdf89',1,'BBox']]],
+  ['x_5f3d_5',['x_3d',['../structbbox__t.html#a5d71452307cda2143b909a506f534918',1,'bbox_t']]],
+  ['x_5fgpu_6',['x_gpu',['../structlayer.html#a1bf29b11ec1eff241462ba46108fafb7',1,'layer']]],
+  ['x_5fnorm_7',['x_norm',['../structlayer.html#a080a015b7c11489ecca087ece911a6b6',1,'layer']]],
+  ['x_5fnorm_5fgpu_8',['x_norm_gpu',['../structlayer.html#aeb8710e1f5f0a7f83c15546a37de0b27',1,'layer']]],
+  ['xcalloc_9',['xcalloc',['../utils_8h.html#a44a583d5843f556573407cbda6d7ec47',1,'utils.h']]],
+  ['xcalloc_5flocation_10',['xcalloc_location',['../utils_8c.html#a9d1ad9325c67b2a4bfd6101a3b7de22a',1,'xcalloc_location(const size_t nmemb, const size_t size, const char *const filename, const char *const funcname, const int line):&#160;utils.c'],['../utils_8h.html#a9d1ad9325c67b2a4bfd6101a3b7de22a',1,'xcalloc_location(const size_t nmemb, const size_t size, const char *const filename, const char *const funcname, const int line):&#160;utils.c']]],
+  ['xdiv_11',['xdiv',['../class_detection_scanner.html#ab7083b6ed15a71fa96d623a8f6500613',1,'DetectionScanner']]],
+  ['xmalloc_12',['xmalloc',['../utils_8h.html#a9aef5aecf8bd5577b0e833245ea8b5b5',1,'utils.h']]],
+  ['xmalloc_5flocation_13',['xmalloc_location',['../utils_8c.html#a50dbd2e2a1de1a21c21acc92629e93b8',1,'xmalloc_location(const size_t size, const char *const filename, const char *const funcname, const int line):&#160;utils.c'],['../utils_8h.html#a50dbd2e2a1de1a21c21acc92629e93b8',1,'xmalloc_location(const size_t size, const char *const filename, const char *const funcname, const int line):&#160;utils.c']]],
+  ['xnor_14',['xnor',['../structlayer.html#abd05a6404f54ecf89e6ddc0c23d431ab',1,'layer']]],
+  ['xnor_15',['XNOR',['../darknet_8h.html#a5f7e99058765b058df158c099200b154a840b1dd1731de56a162991c0ecef890f',1,'darknet.h']]],
+  ['xnor_16',['xnor',['../gemm_8c.html#abeaa8b11b9d81279309458f72eb74034',1,'gemm.c']]],
+  ['xnor_5fint32_17',['xnor_int32',['../gemm_8c.html#a896be9234090e9f1735fee9af7a8b234',1,'gemm.c']]],
+  ['xnor_5fint64_18',['xnor_int64',['../gemm_8c.html#a452212cd4d732e06954bedd7ef61a4e2',1,'gemm.c']]],
+  ['xor_19',['XOR',['../namespacesse.html#af72aafdcdf839089e55ecbfe48c521ce',1,'sse']]],
+  ['xrealloc_20',['xrealloc',['../utils_8h.html#a76c42fd9e53990ee4d6f8888f6c01ac7',1,'utils.h']]],
+  ['xrealloc_5flocation_21',['xrealloc_location',['../utils_8c.html#a072bab1d0c031407b0906796e4479cf7',1,'xrealloc_location(void *ptr, const size_t size, const char *const filename, const char *const funcname, const int line):&#160;utils.c'],['../utils_8h.html#a072bab1d0c031407b0906796e4479cf7',1,'xrealloc_location(void *ptr, const size_t size, const char *const filename, const char *const funcname, const int line):&#160;utils.c']]]
+];

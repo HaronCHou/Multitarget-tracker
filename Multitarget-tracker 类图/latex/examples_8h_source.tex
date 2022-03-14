@@ -1,0 +1,906 @@
+\hypertarget{examples_8h_source}{}\doxysection{examples.\+h}
+\label{examples_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/example/examples.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/example/examples.h}}
+\mbox{\hyperlink{examples_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_video_example_8h}{VideoExample.h}}"{}}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{12 \textcolor{keywordtype}{void} \mbox{\hyperlink{examples_8h_accca05b42ef44c98d56e76957bd53a94}{DrawFilledRect}}(cv::Mat\& frame, \textcolor{keyword}{const} cv::Rect\& rect, cv::Scalar cl, \textcolor{keywordtype}{int} alpha)}
+\DoxyCodeLine{13 \{}
+\DoxyCodeLine{14     \textcolor{keywordflow}{if} (alpha)}
+\DoxyCodeLine{15     \{}
+\DoxyCodeLine{16         \textcolor{keyword}{const} \textcolor{keywordtype}{int} alpha\_1 = 255 -\/ alpha;}
+\DoxyCodeLine{17         \textcolor{keyword}{const} \textcolor{keywordtype}{int} nchans = frame.channels();}
+\DoxyCodeLine{18         \textcolor{keywordtype}{int} color[3] = \{ cv::saturate\_cast<int>(cl[0]), cv::saturate\_cast<int>(cl[1]), cv::saturate\_cast<int>(cl[2]) \};}
+\DoxyCodeLine{19         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}} = rect.y; \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}} < rect.y + rect.height; ++\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}})}
+\DoxyCodeLine{20         \{}
+\DoxyCodeLine{21             uchar* ptr = frame.ptr(\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}) + nchans * rect.x;}
+\DoxyCodeLine{22             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}} = rect.x; \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}} < rect.x + rect.width; ++\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}})}
+\DoxyCodeLine{23             \{}
+\DoxyCodeLine{24                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < nchans; ++i)}
+\DoxyCodeLine{25                 \{}
+\DoxyCodeLine{26                     ptr[i] = cv::saturate\_cast<uchar>((alpha\_1 * ptr[i] + alpha * color[i]) / 255);}
+\DoxyCodeLine{27                 \}}
+\DoxyCodeLine{28                 ptr += nchans;}
+\DoxyCodeLine{29             \}}
+\DoxyCodeLine{30         \}}
+\DoxyCodeLine{31     \}}
+\DoxyCodeLine{32     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{33     \{}
+\DoxyCodeLine{34         cv::rectangle(frame, rect, cl, cv::FILLED);}
+\DoxyCodeLine{35     \}}
+\DoxyCodeLine{36 \}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{41 \textcolor{keyword}{class }\mbox{\hyperlink{class_motion_detector_example}{MotionDetectorExample}} final : \textcolor{keyword}{public} \mbox{\hyperlink{class_video_example}{VideoExample}}}
+\DoxyCodeLine{42 \{}
+\DoxyCodeLine{43 \textcolor{keyword}{public}:}
+\DoxyCodeLine{44     \mbox{\hyperlink{class_motion_detector_example_a45f6928de240a6ac41a9b94027972d80}{MotionDetectorExample}}(\textcolor{keyword}{const} cv::CommandLineParser\& parser)}
+\DoxyCodeLine{45         : \mbox{\hyperlink{class_video_example}{VideoExample}}(parser), \mbox{\hyperlink{class_motion_detector_example_a1ea131c2071f3a7dd87b6c47cdaf997e}{m\_minObjWidth}}(10)}
+\DoxyCodeLine{46     \{}
+\DoxyCodeLine{47     \}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{55     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_motion_detector_example_aad3dc4febaa185a5889e51f85be6b2e6}{InitDetector}}(cv::UMat frame)}
+\DoxyCodeLine{56     \{}
+\DoxyCodeLine{57         \mbox{\hyperlink{class_motion_detector_example_a1ea131c2071f3a7dd87b6c47cdaf997e}{m\_minObjWidth}} = frame.cols / 20;}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59         \mbox{\hyperlink{defines_8h_a9fcffa231cb8ff6a5fc4e2e2e71f3ead}{config\_t}} config;}
+\DoxyCodeLine{60         config.emplace(\textcolor{stringliteral}{"{}useRotatedRect"{}}, \textcolor{stringliteral}{"{}0"{}});}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62         \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760}{tracking::Detectors}} detectorType = \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a87b70978153a0274b03015d9390db7ae}{tracking::Detectors::Motion\_VIBE}};}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64         \textcolor{keywordflow}{switch} (detectorType)}
+\DoxyCodeLine{65         \{}
+\DoxyCodeLine{66         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a87b70978153a0274b03015d9390db7ae}{tracking::Detectors::Motion\_VIBE}}:}
+\DoxyCodeLine{67             config.emplace(\textcolor{stringliteral}{"{}samples"{}}, \textcolor{stringliteral}{"{}20"{}});}
+\DoxyCodeLine{68             config.emplace(\textcolor{stringliteral}{"{}pixelNeighbor"{}}, \textcolor{stringliteral}{"{}1"{}});}
+\DoxyCodeLine{69             config.emplace(\textcolor{stringliteral}{"{}distanceThreshold"{}}, \textcolor{stringliteral}{"{}20"{}});}
+\DoxyCodeLine{70             config.emplace(\textcolor{stringliteral}{"{}matchingThreshold"{}}, \textcolor{stringliteral}{"{}3"{}});}
+\DoxyCodeLine{71             config.emplace(\textcolor{stringliteral}{"{}updateFactor"{}}, \textcolor{stringliteral}{"{}16"{}});}
+\DoxyCodeLine{72             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{73         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a924d297b40e8c4518aa2e0553f6f8f61}{tracking::Detectors::Motion\_MOG}}:}
+\DoxyCodeLine{74             config.emplace(\textcolor{stringliteral}{"{}history"{}}, std::to\_string(cvRound(50 * \mbox{\hyperlink{class_motion_detector_example_ae668550169385f27989568aac967b601}{m\_minStaticTime}} * \mbox{\hyperlink{class_video_example_ae8110012f8d57f39d6355377cf20fb27}{m\_fps}})));}
+\DoxyCodeLine{75             config.emplace(\textcolor{stringliteral}{"{}nmixtures"{}}, \textcolor{stringliteral}{"{}3"{}});}
+\DoxyCodeLine{76             config.emplace(\textcolor{stringliteral}{"{}backgroundRatio"{}}, \textcolor{stringliteral}{"{}0.7"{}});}
+\DoxyCodeLine{77             config.emplace(\textcolor{stringliteral}{"{}noiseSigma"{}}, \textcolor{stringliteral}{"{}0"{}});}
+\DoxyCodeLine{78             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{79         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760aff944e05b5f591282b599c4d97ab8ab0}{tracking::Detectors::Motion\_GMG}}:}
+\DoxyCodeLine{80             config.emplace(\textcolor{stringliteral}{"{}initializationFrames"{}}, \textcolor{stringliteral}{"{}50"{}});}
+\DoxyCodeLine{81             config.emplace(\textcolor{stringliteral}{"{}decisionThreshold"{}}, \textcolor{stringliteral}{"{}0.7"{}});}
+\DoxyCodeLine{82             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{83         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760af40f12386e08503dd5d82774d5e36617}{tracking::Detectors::Motion\_CNT}}:}
+\DoxyCodeLine{84             config.emplace(\textcolor{stringliteral}{"{}minPixelStability"{}}, \textcolor{stringliteral}{"{}15"{}});}
+\DoxyCodeLine{85             config.emplace(\textcolor{stringliteral}{"{}maxPixelStability"{}}, std::to\_string(cvRound(20 * \mbox{\hyperlink{class_motion_detector_example_ae668550169385f27989568aac967b601}{m\_minStaticTime}} * \mbox{\hyperlink{class_video_example_ae8110012f8d57f39d6355377cf20fb27}{m\_fps}})));}
+\DoxyCodeLine{86             config.emplace(\textcolor{stringliteral}{"{}useHistory"{}}, \textcolor{stringliteral}{"{}1"{}});}
+\DoxyCodeLine{87             config.emplace(\textcolor{stringliteral}{"{}isParallel"{}}, \textcolor{stringliteral}{"{}1"{}});}
+\DoxyCodeLine{88             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{89         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760ad699aae73e9117bdd3aee641a3a6e7fe}{tracking::Detectors::Motion\_SuBSENSE}}:}
+\DoxyCodeLine{90             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{91         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a9d3afb434e136e0b4e413cca1d893484}{tracking::Detectors::Motion\_LOBSTER}}:}
+\DoxyCodeLine{92             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{93         \textcolor{keywordflow}{case} \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a44ff25b64c66d3d3700ffbfa5b8b9330}{tracking::Detectors::Motion\_MOG2}}:}
+\DoxyCodeLine{94             config.emplace(\textcolor{stringliteral}{"{}history"{}}, std::to\_string(cvRound(20 * \mbox{\hyperlink{class_motion_detector_example_ae668550169385f27989568aac967b601}{m\_minStaticTime}} * \mbox{\hyperlink{class_video_example_ae8110012f8d57f39d6355377cf20fb27}{m\_fps}})));}
+\DoxyCodeLine{95             config.emplace(\textcolor{stringliteral}{"{}varThreshold"{}}, \textcolor{stringliteral}{"{}10"{}});}
+\DoxyCodeLine{96             config.emplace(\textcolor{stringliteral}{"{}detectShadows"{}}, \textcolor{stringliteral}{"{}1"{}});}
+\DoxyCodeLine{97             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{98         \}}
+\DoxyCodeLine{99         \mbox{\hyperlink{class_video_example_a00fee4b18b68d605b87051f3bdaa1c92}{m\_detector}} = \mbox{\hyperlink{class_base_detector_ace4947f819fe58544ac2f005f4f35ca0}{BaseDetector::CreateDetector}}(detectorType, config, frame);}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_video_example_a00fee4b18b68d605b87051f3bdaa1c92}{m\_detector}}.get())}
+\DoxyCodeLine{102         \{}
+\DoxyCodeLine{103             \mbox{\hyperlink{class_video_example_a00fee4b18b68d605b87051f3bdaa1c92}{m\_detector}}-\/>SetMinObjectSize(cv::Size(\mbox{\hyperlink{class_motion_detector_example_a1ea131c2071f3a7dd87b6c47cdaf997e}{m\_minObjWidth}}, \mbox{\hyperlink{class_motion_detector_example_a1ea131c2071f3a7dd87b6c47cdaf997e}{m\_minObjWidth}}));}
+\DoxyCodeLine{104             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{105         \}}
+\DoxyCodeLine{106         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{107     \}}
+\DoxyCodeLine{113     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_motion_detector_example_ae814c565a7d6a9dbab9e8a99c790a77f}{InitTracker}}(cv::UMat frame)}
+\DoxyCodeLine{114     \{}
+\DoxyCodeLine{115         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{class_video_example_a71d27647505468a77659beb64def6b6e}{m\_trackerSettingsLoaded}})}
+\DoxyCodeLine{116         \{}
+\DoxyCodeLine{117             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a55398bbe62fbb0efa36479e58aa11a9c}{SetDistance}}(\mbox{\hyperlink{namespacetracking_a55743c5e18b9b228c4ba2587260b2502a43af27628a9ee8e94a23c079eab5d448}{tracking::DistRects}});}
+\DoxyCodeLine{118             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a3856a809067135c1c3f2d3c61fc4d6b7}{m\_kalmanType}} = \mbox{\hyperlink{namespacetracking_a83f2c4d58ea2737f7d6296dce3eb722aa889eca583e371386c92e05814797a885}{tracking::KalmanLinear}};}
+\DoxyCodeLine{119             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_afd6c83aa8b0eaa4f131f45852a0b89e4}{m\_filterGoal}} = \mbox{\hyperlink{namespacetracking_a9b3e7d16c86cd8b781ab214e396b0ebfafac394783c1196957768400bc53ba491}{tracking::FilterCenter}};}
+\DoxyCodeLine{120             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a61a59f1c5bcc2ee76cef1b174d4bb8a4}{m\_lostTrackType}} = \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a78f8ce9e03e5e13064aa3d0358654650}{tracking::TrackCSRT}}; \textcolor{comment}{// Use visual objects tracker for collisions resolving. Used if m\_filterGoal == tracking::FilterRect}}
+\DoxyCodeLine{121             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a94a05cbda5eeeac7fa1b64baf9c703f5}{m\_matchType}} = \mbox{\hyperlink{namespacetracking_a491e50c9261ab820965d871a217d4f13a8c97315e46df8c0716a9538655fc967d}{tracking::MatchHungrian}};}
+\DoxyCodeLine{122             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_aeb3d6871cca324005ece2964a09ad7cd}{m\_useAcceleration}} = \textcolor{keyword}{false};             \textcolor{comment}{// Use constant acceleration motion model}}
+\DoxyCodeLine{123             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_ae876ad4f3599a782cddb37e318430aaa}{m\_dt}} = \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_aeb3d6871cca324005ece2964a09ad7cd}{m\_useAcceleration}} ? 0.05f : 0.2f; \textcolor{comment}{// Delta time for Kalman filter}}
+\DoxyCodeLine{124             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a9d4bcf1b68d5a13de8f9fea89f3b694f}{m\_accelNoiseMag}} = 0.2f;                \textcolor{comment}{// Accel noise magnitude for Kalman filter}}
+\DoxyCodeLine{125             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a10e76ae03bd840f6c9180ce67faaa83c}{m\_distThres}} = 0.95f;                   \textcolor{comment}{// Distance threshold between region and object on two frames}}
+\DoxyCodeLine{126 \textcolor{preprocessor}{\#if 0}}
+\DoxyCodeLine{127             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_af6378fc73a53a7f68c1af6041ca36d6f}{m\_minAreaRadiusPix}} = frame.rows / 20.f;}
+\DoxyCodeLine{128 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{129             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_af6378fc73a53a7f68c1af6041ca36d6f}{m\_minAreaRadiusPix}} = -\/1.f;}
+\DoxyCodeLine{130 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{131             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a493048207098cee57208f32858b49ece}{m\_minAreaRadiusK}} = 0.8f;}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_ad38082863e30ac990ff8d5b49a02ee70}{m\_useAbandonedDetection}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{134             \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_ad38082863e30ac990ff8d5b49a02ee70}{m\_useAbandonedDetection}})}
+\DoxyCodeLine{135             \{}
+\DoxyCodeLine{136                 \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_aee7628ff95fa54ad4422e01d45690a6d}{m\_minStaticTime}} = \mbox{\hyperlink{class_motion_detector_example_ae668550169385f27989568aac967b601}{m\_minStaticTime}};}
+\DoxyCodeLine{137                 \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a810f1687289a964756cd700a22d219d2}{m\_maxStaticTime}} = 10;}
+\DoxyCodeLine{138                 \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a7825c3e88ee979fba2844c238fc51139}{m\_maximumAllowedSkippedFrames}} = cvRound(\mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_aee7628ff95fa54ad4422e01d45690a6d}{m\_minStaticTime}} * \mbox{\hyperlink{class_video_example_ae8110012f8d57f39d6355377cf20fb27}{m\_fps}}); \textcolor{comment}{// Maximum allowed skipped frames}}
+\DoxyCodeLine{139                 \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_abc7ce62dfe8de5ae33506aac41fddcac}{m\_maxTraceLength}} = 2 * \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a7825c3e88ee979fba2844c238fc51139}{m\_maximumAllowedSkippedFrames}};        \textcolor{comment}{// Maximum trace length}}
+\DoxyCodeLine{140             \}}
+\DoxyCodeLine{141             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{142             \{}
+\DoxyCodeLine{143                 \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a7825c3e88ee979fba2844c238fc51139}{m\_maximumAllowedSkippedFrames}} = cvRound(2 * \mbox{\hyperlink{class_video_example_ae8110012f8d57f39d6355377cf20fb27}{m\_fps}}); \textcolor{comment}{// Maximum allowed skipped frames}}
+\DoxyCodeLine{144                 \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_abc7ce62dfe8de5ae33506aac41fddcac}{m\_maxTraceLength}} = cvRound(4 * \mbox{\hyperlink{class_video_example_ae8110012f8d57f39d6355377cf20fb27}{m\_fps}});              \textcolor{comment}{// Maximum trace length}}
+\DoxyCodeLine{145             \}}
+\DoxyCodeLine{146         \}}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148         \mbox{\hyperlink{class_video_example_a00d78d9bed36599aa94ecd05ab12779a}{m\_tracker}} = \mbox{\hyperlink{class_base_tracker_aaa8767ac3b994419a481e0fabd408a8b}{BaseTracker::CreateTracker}}(\mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}});}
+\DoxyCodeLine{149         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{150     \}}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{159     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_motion_detector_example_a6b5763081308f99fb53320fbacfed6bc}{DrawData}}(cv::Mat frame, \textcolor{keyword}{const} std::vector<TrackingObject>\& tracks, \textcolor{keywordtype}{int} framesCounter, \textcolor{keywordtype}{int} currTime)}
+\DoxyCodeLine{160     \{}
+\DoxyCodeLine{161         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_video_example_af3bfe51e3e1452bb084016602c668463}{m\_showLogs}})}
+\DoxyCodeLine{162             std::cout << \textcolor{stringliteral}{"{}Frame "{}} << framesCounter << \textcolor{stringliteral}{"{}: tracks = "{}} << tracks.size() << \textcolor{stringliteral}{"{}, time = "{}} << currTime << std::endl;}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164         \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& track : tracks)}
+\DoxyCodeLine{165         \{}
+\DoxyCodeLine{166             \textcolor{keywordflow}{if} (track.m\_isStatic)}
+\DoxyCodeLine{167             \{}
+\DoxyCodeLine{168                 \mbox{\hyperlink{class_video_example_a137f6e99dc6dc3b60dc82aee2e69aa16}{DrawTrack}}(frame, track, \textcolor{keyword}{false}, framesCounter);}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170                 std::string label = \textcolor{stringliteral}{"{}abandoned "{}} + track.m\_ID.ID2Str();}
+\DoxyCodeLine{171                 \textcolor{keywordtype}{int} baseLine = 0;}
+\DoxyCodeLine{172                 cv::Size labelSize = cv::getTextSize(label, cv::FONT\_HERSHEY\_SIMPLEX, 0.5, 1, \&baseLine);}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174                 cv::Rect brect = track.m\_rrect.boundingRect();}
+\DoxyCodeLine{175                 \textcolor{keywordflow}{if} (brect.x < 0)}
+\DoxyCodeLine{176                 \{}
+\DoxyCodeLine{177                     brect.width = \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{std::min}}(brect.width, frame.cols -\/ 1);}
+\DoxyCodeLine{178                     brect.x = 0;}
+\DoxyCodeLine{179                 \}}
+\DoxyCodeLine{180                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (brect.x + brect.width >= frame.cols)}
+\DoxyCodeLine{181                 \{}
+\DoxyCodeLine{182                     brect.x = \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{std::max}}(0, frame.cols -\/ brect.width -\/ 1);}
+\DoxyCodeLine{183                     brect.width = \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{std::min}}(brect.width, frame.cols -\/ 1);}
+\DoxyCodeLine{184                 \}}
+\DoxyCodeLine{185                 \textcolor{keywordflow}{if} (brect.y -\/ labelSize.height < 0)}
+\DoxyCodeLine{186                 \{}
+\DoxyCodeLine{187                     brect.height = \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{std::min}}(brect.height, frame.rows -\/ 1);}
+\DoxyCodeLine{188                     brect.y = labelSize.height;}
+\DoxyCodeLine{189                 \}}
+\DoxyCodeLine{190                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (brect.y + brect.height >= frame.rows)}
+\DoxyCodeLine{191                 \{}
+\DoxyCodeLine{192                     brect.y = \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{std::max}}(0, frame.rows -\/ brect.height -\/ 1);}
+\DoxyCodeLine{193                     brect.height = \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{std::min}}(brect.height, frame.rows -\/ 1);}
+\DoxyCodeLine{194                 \}}
+\DoxyCodeLine{195                 \mbox{\hyperlink{examples_8h_accca05b42ef44c98d56e76957bd53a94}{DrawFilledRect}}(frame, cv::Rect(cv::Point(brect.x, brect.y -\/ labelSize.height), cv::Size(labelSize.width, labelSize.height + baseLine)), cv::Scalar(255, 0, 255), 150);}
+\DoxyCodeLine{196                 cv::putText(frame, label, brect.tl(), cv::FONT\_HERSHEY\_SIMPLEX, 0.5, cv::Scalar(0, 0, 0));}
+\DoxyCodeLine{197             \}}
+\DoxyCodeLine{198             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{199             \{}
+\DoxyCodeLine{200                 \textcolor{keywordflow}{if} (track.IsRobust(cvRound(\mbox{\hyperlink{class_video_example_ae8110012f8d57f39d6355377cf20fb27}{m\_fps}} / 4),          \textcolor{comment}{// Minimal trajectory size}}
+\DoxyCodeLine{201                                     0.7f,                        \textcolor{comment}{// Minimal ratio raw\_trajectory\_points / trajectory\_lenght}}
+\DoxyCodeLine{202                                     cv::Size2f(0.1f, 8.0f)))      \textcolor{comment}{// Min and max ratio: width / height}}
+\DoxyCodeLine{203                     \mbox{\hyperlink{class_video_example_a137f6e99dc6dc3b60dc82aee2e69aa16}{DrawTrack}}(frame, track, \textcolor{keyword}{true}, framesCounter);}
+\DoxyCodeLine{204             \}}
+\DoxyCodeLine{205         \}}
+\DoxyCodeLine{206         \mbox{\hyperlink{class_video_example_a00fee4b18b68d605b87051f3bdaa1c92}{m\_detector}}-\/>CalcMotionMap(frame);}
+\DoxyCodeLine{207     \}}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{209 \textcolor{keyword}{private}:}
+\DoxyCodeLine{210     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_motion_detector_example_a1ea131c2071f3a7dd87b6c47cdaf997e}{m\_minObjWidth}} = 8;}
+\DoxyCodeLine{211     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_motion_detector_example_ae668550169385f27989568aac967b601}{m\_minStaticTime}} = 5;}
+\DoxyCodeLine{212 \};}
+\DoxyCodeLine{213 }
+\DoxyCodeLine{214 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{219 \textcolor{keyword}{class }\mbox{\hyperlink{class_face_detector_example}{FaceDetectorExample}} final : \textcolor{keyword}{public} \mbox{\hyperlink{class_video_example}{VideoExample}}}
+\DoxyCodeLine{220 \{}
+\DoxyCodeLine{221 \textcolor{keyword}{public}:}
+\DoxyCodeLine{222     \mbox{\hyperlink{class_face_detector_example_a3e651a54779ec22dbb9c619c0ce65550}{FaceDetectorExample}}(\textcolor{keyword}{const} cv::CommandLineParser\& parser)}
+\DoxyCodeLine{223         : \mbox{\hyperlink{class_video_example}{VideoExample}}(parser)}
+\DoxyCodeLine{224     \{}
+\DoxyCodeLine{225     \}}
+\DoxyCodeLine{226 }
+\DoxyCodeLine{227 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{233     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_face_detector_example_a8113121c99d702b74ee511fabdeda08a}{InitDetector}}(cv::UMat frame)}
+\DoxyCodeLine{234     \{}
+\DoxyCodeLine{235 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{236         std::string pathToModel = \textcolor{stringliteral}{"{}../../data/"{}};}
+\DoxyCodeLine{237 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{238         std::string pathToModel = \textcolor{stringliteral}{"{}../data/"{}};}
+\DoxyCodeLine{239 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{241         \mbox{\hyperlink{defines_8h_a9fcffa231cb8ff6a5fc4e2e2e71f3ead}{config\_t}} config;}
+\DoxyCodeLine{242         config.emplace(\textcolor{stringliteral}{"{}cascadeFileName"{}}, pathToModel + \textcolor{stringliteral}{"{}haarcascade\_frontalface\_alt2.xml"{}});}
+\DoxyCodeLine{243         \mbox{\hyperlink{class_video_example_a00fee4b18b68d605b87051f3bdaa1c92}{m\_detector}} = \mbox{\hyperlink{class_base_detector_ace4947f819fe58544ac2f005f4f35ca0}{BaseDetector::CreateDetector}}(\mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a4988e24edd891887cab51c40c8766469}{tracking::Detectors::Face\_HAAR}}, config, frame);}
+\DoxyCodeLine{244         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_video_example_a00fee4b18b68d605b87051f3bdaa1c92}{m\_detector}}.get())}
+\DoxyCodeLine{245         \{}
+\DoxyCodeLine{246             \mbox{\hyperlink{class_video_example_a00fee4b18b68d605b87051f3bdaa1c92}{m\_detector}}-\/>SetMinObjectSize(cv::Size(frame.cols / 20, frame.rows / 20));}
+\DoxyCodeLine{247             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{248         \}}
+\DoxyCodeLine{249         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{250     \}}
+\DoxyCodeLine{256     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_face_detector_example_a605d06dff8405d78a99ef3c383e88ad5}{InitTracker}}(cv::UMat frame)}
+\DoxyCodeLine{257     \{}
+\DoxyCodeLine{258         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{class_video_example_a71d27647505468a77659beb64def6b6e}{m\_trackerSettingsLoaded}})}
+\DoxyCodeLine{259         \{}
+\DoxyCodeLine{260             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a55398bbe62fbb0efa36479e58aa11a9c}{SetDistance}}(\mbox{\hyperlink{namespacetracking_a55743c5e18b9b228c4ba2587260b2502a731b827afcbde6eb19624ad6130b1798}{tracking::DistJaccard}});}
+\DoxyCodeLine{261             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a3856a809067135c1c3f2d3c61fc4d6b7}{m\_kalmanType}} = \mbox{\hyperlink{namespacetracking_a83f2c4d58ea2737f7d6296dce3eb722aa39d914d61ae37e52ad325f55d199dabc}{tracking::KalmanUnscented}};}
+\DoxyCodeLine{262             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_afd6c83aa8b0eaa4f131f45852a0b89e4}{m\_filterGoal}} = \mbox{\hyperlink{namespacetracking_a9b3e7d16c86cd8b781ab214e396b0ebfabb259eae9513c55b313c553ce6249aea}{tracking::FilterRect}};}
+\DoxyCodeLine{263             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a61a59f1c5bcc2ee76cef1b174d4bb8a4}{m\_lostTrackType}} = \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a78f8ce9e03e5e13064aa3d0358654650}{tracking::TrackCSRT}};      \textcolor{comment}{// Use visual objects tracker for collisions resolving. Used if m\_filterGoal == tracking::FilterRect}}
+\DoxyCodeLine{264             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a94a05cbda5eeeac7fa1b64baf9c703f5}{m\_matchType}} = \mbox{\hyperlink{namespacetracking_a491e50c9261ab820965d871a217d4f13a8c97315e46df8c0716a9538655fc967d}{tracking::MatchHungrian}};}
+\DoxyCodeLine{265             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_ae876ad4f3599a782cddb37e318430aaa}{m\_dt}} = 0.3f;                                \textcolor{comment}{// Delta time for Kalman filter}}
+\DoxyCodeLine{266             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a9d4bcf1b68d5a13de8f9fea89f3b694f}{m\_accelNoiseMag}} = 0.1f;                     \textcolor{comment}{// Accel noise magnitude for Kalman filter}}
+\DoxyCodeLine{267             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a10e76ae03bd840f6c9180ce67faaa83c}{m\_distThres}} = 0.8f;                         \textcolor{comment}{// Distance threshold between region and object on two frames}}
+\DoxyCodeLine{268             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_af6378fc73a53a7f68c1af6041ca36d6f}{m\_minAreaRadiusPix}} = frame.rows / 20.f;}
+\DoxyCodeLine{269             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a7825c3e88ee979fba2844c238fc51139}{m\_maximumAllowedSkippedFrames}} = cvRound(\mbox{\hyperlink{class_video_example_ae8110012f8d57f39d6355377cf20fb27}{m\_fps}} / 2);   \textcolor{comment}{// Maximum allowed skipped frames}}
+\DoxyCodeLine{270             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_abc7ce62dfe8de5ae33506aac41fddcac}{m\_maxTraceLength}} = cvRound(5 * \mbox{\hyperlink{class_video_example_ae8110012f8d57f39d6355377cf20fb27}{m\_fps}});            \textcolor{comment}{// Maximum trace length}}
+\DoxyCodeLine{271         \}}
+\DoxyCodeLine{272         \mbox{\hyperlink{class_video_example_a00d78d9bed36599aa94ecd05ab12779a}{m\_tracker}} = \mbox{\hyperlink{class_base_tracker_aaa8767ac3b994419a481e0fabd408a8b}{BaseTracker::CreateTracker}}(\mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}});}
+\DoxyCodeLine{273 }
+\DoxyCodeLine{274         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{275     \}}
+\DoxyCodeLine{276 }
+\DoxyCodeLine{284     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_face_detector_example_afbf85446587b1cadc2f97ea651b86cab}{DrawData}}(cv::Mat frame, \textcolor{keyword}{const} std::vector<TrackingObject>\& tracks, \textcolor{keywordtype}{int} framesCounter, \textcolor{keywordtype}{int} currTime)}
+\DoxyCodeLine{285     \{}
+\DoxyCodeLine{286         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_video_example_af3bfe51e3e1452bb084016602c668463}{m\_showLogs}})}
+\DoxyCodeLine{287             std::cout << \textcolor{stringliteral}{"{}Frame "{}} << framesCounter << \textcolor{stringliteral}{"{}: tracks = "{}} << tracks.size() << \textcolor{stringliteral}{"{}, time = "{}} << currTime << std::endl;}
+\DoxyCodeLine{288 }
+\DoxyCodeLine{289         \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& track : tracks)}
+\DoxyCodeLine{290         \{}
+\DoxyCodeLine{291             \textcolor{keywordflow}{if} (track.IsRobust(8,                           \textcolor{comment}{// Minimal trajectory size}}
+\DoxyCodeLine{292                                 0.4f,                        \textcolor{comment}{// Minimal ratio raw\_trajectory\_points / trajectory\_lenght}}
+\DoxyCodeLine{293                                 cv::Size2f(0.1f, 8.0f)))      \textcolor{comment}{// Min and max ratio: width / height}}
+\DoxyCodeLine{294                 \mbox{\hyperlink{class_video_example_a137f6e99dc6dc3b60dc82aee2e69aa16}{DrawTrack}}(frame, track, \textcolor{keyword}{true}, framesCounter);}
+\DoxyCodeLine{295         \}}
+\DoxyCodeLine{296         \mbox{\hyperlink{class_video_example_a00fee4b18b68d605b87051f3bdaa1c92}{m\_detector}}-\/>CalcMotionMap(frame);}
+\DoxyCodeLine{297     \}}
+\DoxyCodeLine{298 \};}
+\DoxyCodeLine{299 }
+\DoxyCodeLine{300 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{301 }
+\DoxyCodeLine{305 \textcolor{keyword}{class }\mbox{\hyperlink{class_pedestrian_detector_example}{PedestrianDetectorExample}} final : \textcolor{keyword}{public} \mbox{\hyperlink{class_video_example}{VideoExample}}}
+\DoxyCodeLine{306 \{}
+\DoxyCodeLine{307 \textcolor{keyword}{public}:}
+\DoxyCodeLine{308     \mbox{\hyperlink{class_pedestrian_detector_example_a6a63d0f856d557792f844e38507323f3}{PedestrianDetectorExample}}(\textcolor{keyword}{const} cv::CommandLineParser\& parser)}
+\DoxyCodeLine{309         : \mbox{\hyperlink{class_video_example}{VideoExample}}(parser)}
+\DoxyCodeLine{310     \{}
+\DoxyCodeLine{311     \}}
+\DoxyCodeLine{312 }
+\DoxyCodeLine{313 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{319     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_pedestrian_detector_example_a558075a0db90f44c44245a112391669f}{InitDetector}}(cv::UMat frame)}
+\DoxyCodeLine{320     \{}
+\DoxyCodeLine{321         \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760}{tracking::Detectors}} detectorType = \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a9ac24174fd8e83cd08a363fdac49d0d4}{tracking::Detectors::Pedestrian\_C4}}; \textcolor{comment}{// tracking::Detectors::Pedestrian\_HOG;}}
+\DoxyCodeLine{322 }
+\DoxyCodeLine{323 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{324         std::string pathToModel = \textcolor{stringliteral}{"{}../../data/"{}};}
+\DoxyCodeLine{325 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{326         std::string pathToModel = \textcolor{stringliteral}{"{}../data/"{}};}
+\DoxyCodeLine{327 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{328 }
+\DoxyCodeLine{329         \mbox{\hyperlink{defines_8h_a9fcffa231cb8ff6a5fc4e2e2e71f3ead}{config\_t}} config;}
+\DoxyCodeLine{330         config.emplace(\textcolor{stringliteral}{"{}detectorType"{}}, (detectorType == \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a115099e7e10e6d96d1d98c2b49846deb}{tracking::Pedestrian\_HOG}}) ? \textcolor{stringliteral}{"{}HOG"{}} : \textcolor{stringliteral}{"{}C4"{}});}
+\DoxyCodeLine{331         config.emplace(\textcolor{stringliteral}{"{}cascadeFileName1"{}}, pathToModel + \textcolor{stringliteral}{"{}combined.txt.model"{}});}
+\DoxyCodeLine{332         config.emplace(\textcolor{stringliteral}{"{}cascadeFileName2"{}}, pathToModel + \textcolor{stringliteral}{"{}combined.txt.model\_"{}});}
+\DoxyCodeLine{333         \mbox{\hyperlink{class_video_example_a00fee4b18b68d605b87051f3bdaa1c92}{m\_detector}} = \mbox{\hyperlink{class_base_detector_ace4947f819fe58544ac2f005f4f35ca0}{BaseDetector::CreateDetector}}(detectorType, config, frame);}
+\DoxyCodeLine{334         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_video_example_a00fee4b18b68d605b87051f3bdaa1c92}{m\_detector}}.get())}
+\DoxyCodeLine{335         \{}
+\DoxyCodeLine{336             \mbox{\hyperlink{class_video_example_a00fee4b18b68d605b87051f3bdaa1c92}{m\_detector}}-\/>SetMinObjectSize(cv::Size(frame.cols / 20, frame.rows / 20));}
+\DoxyCodeLine{337             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{338         \}}
+\DoxyCodeLine{339         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{340     \}}
+\DoxyCodeLine{346     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_pedestrian_detector_example_aae97de4cc14d29aa81b446ea66fa9abc}{InitTracker}}(cv::UMat frame)}
+\DoxyCodeLine{347     \{}
+\DoxyCodeLine{348         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{class_video_example_a71d27647505468a77659beb64def6b6e}{m\_trackerSettingsLoaded}})}
+\DoxyCodeLine{349         \{}
+\DoxyCodeLine{350             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a55398bbe62fbb0efa36479e58aa11a9c}{SetDistance}}(\mbox{\hyperlink{namespacetracking_a55743c5e18b9b228c4ba2587260b2502a43af27628a9ee8e94a23c079eab5d448}{tracking::DistRects}});}
+\DoxyCodeLine{351             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a3856a809067135c1c3f2d3c61fc4d6b7}{m\_kalmanType}} = \mbox{\hyperlink{namespacetracking_a83f2c4d58ea2737f7d6296dce3eb722aa889eca583e371386c92e05814797a885}{tracking::KalmanLinear}};}
+\DoxyCodeLine{352             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_afd6c83aa8b0eaa4f131f45852a0b89e4}{m\_filterGoal}} = \mbox{\hyperlink{namespacetracking_a9b3e7d16c86cd8b781ab214e396b0ebfabb259eae9513c55b313c553ce6249aea}{tracking::FilterRect}};}
+\DoxyCodeLine{353             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a61a59f1c5bcc2ee76cef1b174d4bb8a4}{m\_lostTrackType}} = \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a78f8ce9e03e5e13064aa3d0358654650}{tracking::TrackCSRT}};   \textcolor{comment}{// Use visual objects tracker for collisions resolving. Used if m\_filterGoal == tracking::FilterRect}}
+\DoxyCodeLine{354             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a94a05cbda5eeeac7fa1b64baf9c703f5}{m\_matchType}} = \mbox{\hyperlink{namespacetracking_a491e50c9261ab820965d871a217d4f13a8c97315e46df8c0716a9538655fc967d}{tracking::MatchHungrian}};}
+\DoxyCodeLine{355             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_ae876ad4f3599a782cddb37e318430aaa}{m\_dt}} = 0.3f;                             \textcolor{comment}{// Delta time for Kalman filter}}
+\DoxyCodeLine{356             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a9d4bcf1b68d5a13de8f9fea89f3b694f}{m\_accelNoiseMag}} = 0.1f;                  \textcolor{comment}{// Accel noise magnitude for Kalman filter}}
+\DoxyCodeLine{357             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a10e76ae03bd840f6c9180ce67faaa83c}{m\_distThres}} = 0.8f;                      \textcolor{comment}{// Distance threshold between region and object on two frames}}
+\DoxyCodeLine{358             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_af6378fc73a53a7f68c1af6041ca36d6f}{m\_minAreaRadiusPix}} = frame.rows / 20.f;}
+\DoxyCodeLine{359             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a7825c3e88ee979fba2844c238fc51139}{m\_maximumAllowedSkippedFrames}} = cvRound(\mbox{\hyperlink{class_video_example_ae8110012f8d57f39d6355377cf20fb27}{m\_fps}});   \textcolor{comment}{// Maximum allowed skipped frames}}
+\DoxyCodeLine{360             \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_abc7ce62dfe8de5ae33506aac41fddcac}{m\_maxTraceLength}} = cvRound(5 * \mbox{\hyperlink{class_video_example_ae8110012f8d57f39d6355377cf20fb27}{m\_fps}});   \textcolor{comment}{// Maximum trace length}}
+\DoxyCodeLine{361         \}}
+\DoxyCodeLine{362         \mbox{\hyperlink{class_video_example_a00d78d9bed36599aa94ecd05ab12779a}{m\_tracker}} = \mbox{\hyperlink{class_base_tracker_aaa8767ac3b994419a481e0fabd408a8b}{BaseTracker::CreateTracker}}(\mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}});}
+\DoxyCodeLine{363 }
+\DoxyCodeLine{364         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{365     \}}
+\DoxyCodeLine{366 }
+\DoxyCodeLine{374     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_pedestrian_detector_example_a3c0b09ceb1b41522d5b3c88d76b1eef0}{DrawData}}(cv::Mat frame, \textcolor{keyword}{const} std::vector<TrackingObject>\& tracks, \textcolor{keywordtype}{int} framesCounter, \textcolor{keywordtype}{int} currTime)}
+\DoxyCodeLine{375     \{}
+\DoxyCodeLine{376         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_video_example_af3bfe51e3e1452bb084016602c668463}{m\_showLogs}})}
+\DoxyCodeLine{377             std::cout << \textcolor{stringliteral}{"{}Frame "{}} << framesCounter << \textcolor{stringliteral}{"{}: tracks = "{}} << tracks.size() << \textcolor{stringliteral}{"{}, time = "{}} << currTime << std::endl;}
+\DoxyCodeLine{378 }
+\DoxyCodeLine{379         \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& track : tracks)}
+\DoxyCodeLine{380         \{}
+\DoxyCodeLine{381             \textcolor{keywordflow}{if} (track.IsRobust(cvRound(\mbox{\hyperlink{class_video_example_ae8110012f8d57f39d6355377cf20fb27}{m\_fps}} / 2),          \textcolor{comment}{// Minimal trajectory size}}
+\DoxyCodeLine{382                                 0.4f,                        \textcolor{comment}{// Minimal ratio raw\_trajectory\_points / trajectory\_lenght}}
+\DoxyCodeLine{383                                 cv::Size2f(0.1f, 8.0f)))      \textcolor{comment}{// Min and max ratio: width / height}}
+\DoxyCodeLine{384                 \mbox{\hyperlink{class_video_example_a137f6e99dc6dc3b60dc82aee2e69aa16}{DrawTrack}}(frame, track, \textcolor{keyword}{true}, framesCounter);}
+\DoxyCodeLine{385         \}}
+\DoxyCodeLine{386         \mbox{\hyperlink{class_video_example_a00fee4b18b68d605b87051f3bdaa1c92}{m\_detector}}-\/>CalcMotionMap(frame);}
+\DoxyCodeLine{387     \}}
+\DoxyCodeLine{388 \};}
+\DoxyCodeLine{389 }
+\DoxyCodeLine{390 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{391 }
+\DoxyCodeLine{395 \textcolor{keyword}{class }\mbox{\hyperlink{class_open_c_v_d_n_n_example}{OpenCVDNNExample}} final : \textcolor{keyword}{public} \mbox{\hyperlink{class_video_example}{VideoExample}}}
+\DoxyCodeLine{396 \{}
+\DoxyCodeLine{397 \textcolor{keyword}{public}:}
+\DoxyCodeLine{398     \mbox{\hyperlink{class_open_c_v_d_n_n_example_a604276d8cf4cd5541c5506deb69abba7}{OpenCVDNNExample}}(\textcolor{keyword}{const} cv::CommandLineParser\& parser)}
+\DoxyCodeLine{399         : \mbox{\hyperlink{class_video_example}{VideoExample}}(parser)}
+\DoxyCodeLine{400     \{}
+\DoxyCodeLine{401     \}}
+\DoxyCodeLine{402 }
+\DoxyCodeLine{403 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{409     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_open_c_v_d_n_n_example_abdc63fb5b82bd21024c08ed57548eb92}{InitDetector}}(cv::UMat frame)}
+\DoxyCodeLine{410     \{}
+\DoxyCodeLine{411         \mbox{\hyperlink{defines_8h_a9fcffa231cb8ff6a5fc4e2e2e71f3ead}{config\_t}} config;}
+\DoxyCodeLine{412 }
+\DoxyCodeLine{413 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{414         std::string pathToModel = \textcolor{stringliteral}{"{}../../data/"{}};}
+\DoxyCodeLine{415 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{416         std::string pathToModel = \textcolor{stringliteral}{"{}../data/"{}};}
+\DoxyCodeLine{417 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{418         \textcolor{keyword}{enum class} NNModels}
+\DoxyCodeLine{419         \{}
+\DoxyCodeLine{420             TinyYOLOv3 = 0,}
+\DoxyCodeLine{421             YOLOv3,}
+\DoxyCodeLine{422             YOLOv4,}
+\DoxyCodeLine{423             TinyYOLOv4,}
+\DoxyCodeLine{424             MobileNetSSD}
+\DoxyCodeLine{425         \};}
+\DoxyCodeLine{426         NNModels usedModel = NNModels::MobileNetSSD;}
+\DoxyCodeLine{427         \textcolor{keywordflow}{switch} (usedModel)}
+\DoxyCodeLine{428         \{}
+\DoxyCodeLine{429         \textcolor{keywordflow}{case} NNModels::TinyYOLOv3:}
+\DoxyCodeLine{430             config.emplace(\textcolor{stringliteral}{"{}modelConfiguration"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov3-\/tiny.cfg"{}});}
+\DoxyCodeLine{431             config.emplace(\textcolor{stringliteral}{"{}modelBinary"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov3-\/tiny.weights"{}});}
+\DoxyCodeLine{432             config.emplace(\textcolor{stringliteral}{"{}classNames"{}}, pathToModel + \textcolor{stringliteral}{"{}coco.names"{}});}
+\DoxyCodeLine{433             config.emplace(\textcolor{stringliteral}{"{}confidenceThreshold"{}}, \textcolor{stringliteral}{"{}0.5"{}});}
+\DoxyCodeLine{434             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{435 }
+\DoxyCodeLine{436         \textcolor{keywordflow}{case} NNModels::YOLOv3:}
+\DoxyCodeLine{437             config.emplace(\textcolor{stringliteral}{"{}modelConfiguration"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov3.cfg"{}});}
+\DoxyCodeLine{438             config.emplace(\textcolor{stringliteral}{"{}modelBinary"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov3.weights"{}});}
+\DoxyCodeLine{439             config.emplace(\textcolor{stringliteral}{"{}classNames"{}}, pathToModel + \textcolor{stringliteral}{"{}coco.names"{}});}
+\DoxyCodeLine{440             config.emplace(\textcolor{stringliteral}{"{}confidenceThreshold"{}}, \textcolor{stringliteral}{"{}0.7"{}});}
+\DoxyCodeLine{441             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{442 }
+\DoxyCodeLine{443         \textcolor{keywordflow}{case} NNModels::YOLOv4:}
+\DoxyCodeLine{444             config.emplace(\textcolor{stringliteral}{"{}modelConfiguration"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov4.cfg"{}});}
+\DoxyCodeLine{445             config.emplace(\textcolor{stringliteral}{"{}modelBinary"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov4.weights"{}});}
+\DoxyCodeLine{446             config.emplace(\textcolor{stringliteral}{"{}classNames"{}}, pathToModel + \textcolor{stringliteral}{"{}coco.names"{}});}
+\DoxyCodeLine{447             config.emplace(\textcolor{stringliteral}{"{}confidenceThreshold"{}}, \textcolor{stringliteral}{"{}0.5"{}});}
+\DoxyCodeLine{448             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{449 }
+\DoxyCodeLine{450         \textcolor{keywordflow}{case} NNModels::TinyYOLOv4:}
+\DoxyCodeLine{451             config.emplace(\textcolor{stringliteral}{"{}modelConfiguration"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov4-\/tiny.cfg"{}});}
+\DoxyCodeLine{452             config.emplace(\textcolor{stringliteral}{"{}modelBinary"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov4-\/tiny.weights"{}});}
+\DoxyCodeLine{453             config.emplace(\textcolor{stringliteral}{"{}classNames"{}}, pathToModel + \textcolor{stringliteral}{"{}coco.names"{}});}
+\DoxyCodeLine{454             config.emplace(\textcolor{stringliteral}{"{}confidenceThreshold"{}}, \textcolor{stringliteral}{"{}0.5"{}});}
+\DoxyCodeLine{455             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{456 }
+\DoxyCodeLine{457         \textcolor{keywordflow}{case} NNModels::MobileNetSSD:}
+\DoxyCodeLine{458             config.emplace(\textcolor{stringliteral}{"{}modelConfiguration"{}}, pathToModel + \textcolor{stringliteral}{"{}MobileNetSSD\_deploy.prototxt"{}});}
+\DoxyCodeLine{459             config.emplace(\textcolor{stringliteral}{"{}modelBinary"{}}, pathToModel + \textcolor{stringliteral}{"{}MobileNetSSD\_deploy.caffemodel"{}});}
+\DoxyCodeLine{460             config.emplace(\textcolor{stringliteral}{"{}classNames"{}}, pathToModel + \textcolor{stringliteral}{"{}voc.names"{}});}
+\DoxyCodeLine{461             config.emplace(\textcolor{stringliteral}{"{}confidenceThreshold"{}}, \textcolor{stringliteral}{"{}0.5"{}});}
+\DoxyCodeLine{462             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{463         \}}
+\DoxyCodeLine{464         config.emplace(\textcolor{stringliteral}{"{}maxCropRatio"{}}, \textcolor{stringliteral}{"{}-\/1"{}});}
+\DoxyCodeLine{465 }
+\DoxyCodeLine{466         config.emplace(\textcolor{stringliteral}{"{}dnnTarget"{}}, \textcolor{stringliteral}{"{}DNN\_TARGET\_CPU"{}});}
+\DoxyCodeLine{467         config.emplace(\textcolor{stringliteral}{"{}dnnBackend"{}}, \textcolor{stringliteral}{"{}DNN\_BACKEND\_DEFAULT"{}});}
+\DoxyCodeLine{468 }
+\DoxyCodeLine{469         \mbox{\hyperlink{class_video_example_a00fee4b18b68d605b87051f3bdaa1c92}{m\_detector}} = \mbox{\hyperlink{class_base_detector_ace4947f819fe58544ac2f005f4f35ca0}{BaseDetector::CreateDetector}}(\mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760abdea7a6f6616904879fd0eb85f951dbb}{tracking::Detectors::DNN\_OCV}}, config, frame);}
+\DoxyCodeLine{470         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_video_example_a00fee4b18b68d605b87051f3bdaa1c92}{m\_detector}}.get())}
+\DoxyCodeLine{471             \mbox{\hyperlink{class_video_example_a00fee4b18b68d605b87051f3bdaa1c92}{m\_detector}}-\/>SetMinObjectSize(cv::Size(frame.cols / 40, frame.rows / 40));}
+\DoxyCodeLine{472         \textcolor{keywordflow}{return} (\mbox{\hyperlink{class_video_example_a00fee4b18b68d605b87051f3bdaa1c92}{m\_detector}}.get() != \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{473     \}}
+\DoxyCodeLine{474 }
+\DoxyCodeLine{480     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_open_c_v_d_n_n_example_a14958c18dc521ccf99a8c621d3393767}{InitTracker}}(cv::UMat frame)}
+\DoxyCodeLine{481     \{}
+\DoxyCodeLine{482         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{class_video_example_a71d27647505468a77659beb64def6b6e}{m\_trackerSettingsLoaded}})}
+\DoxyCodeLine{483         \{}
+\DoxyCodeLine{484         \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a55398bbe62fbb0efa36479e58aa11a9c}{SetDistance}}(\mbox{\hyperlink{namespacetracking_a55743c5e18b9b228c4ba2587260b2502a30176bdc0b4f965c6812767a2fa52e1e}{tracking::DistCenters}});}
+\DoxyCodeLine{485         \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a3856a809067135c1c3f2d3c61fc4d6b7}{m\_kalmanType}} = \mbox{\hyperlink{namespacetracking_a83f2c4d58ea2737f7d6296dce3eb722aa889eca583e371386c92e05814797a885}{tracking::KalmanLinear}};}
+\DoxyCodeLine{486         \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_afd6c83aa8b0eaa4f131f45852a0b89e4}{m\_filterGoal}} = \mbox{\hyperlink{namespacetracking_a9b3e7d16c86cd8b781ab214e396b0ebfabb259eae9513c55b313c553ce6249aea}{tracking::FilterRect}};}
+\DoxyCodeLine{487         \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a61a59f1c5bcc2ee76cef1b174d4bb8a4}{m\_lostTrackType}} = \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a78f8ce9e03e5e13064aa3d0358654650}{tracking::TrackCSRT}};      \textcolor{comment}{// Use visual objects tracker for collisions resolving. Used if m\_filterGoal == tracking::FilterRect}}
+\DoxyCodeLine{488         \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a94a05cbda5eeeac7fa1b64baf9c703f5}{m\_matchType}} = \mbox{\hyperlink{namespacetracking_a491e50c9261ab820965d871a217d4f13a8c97315e46df8c0716a9538655fc967d}{tracking::MatchHungrian}};}
+\DoxyCodeLine{489         \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_aeb3d6871cca324005ece2964a09ad7cd}{m\_useAcceleration}} = \textcolor{keyword}{false};                   \textcolor{comment}{// Use constant acceleration motion model}}
+\DoxyCodeLine{490         \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_ae876ad4f3599a782cddb37e318430aaa}{m\_dt}} = \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_aeb3d6871cca324005ece2964a09ad7cd}{m\_useAcceleration}} ? 0.05f : 0.4f; \textcolor{comment}{// Delta time for Kalman filter}}
+\DoxyCodeLine{491         \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a9d4bcf1b68d5a13de8f9fea89f3b694f}{m\_accelNoiseMag}} = 0.2f;                     \textcolor{comment}{// Accel noise magnitude for Kalman filter}}
+\DoxyCodeLine{492         \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a10e76ae03bd840f6c9180ce67faaa83c}{m\_distThres}} = 0.8f;                         \textcolor{comment}{// Distance threshold between region and object on two frames}}
+\DoxyCodeLine{493 \textcolor{preprocessor}{\#if 0}}
+\DoxyCodeLine{494         \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_af6378fc73a53a7f68c1af6041ca36d6f}{m\_minAreaRadiusPix}} = frame.rows / 20.f;}
+\DoxyCodeLine{495 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{496         \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_af6378fc73a53a7f68c1af6041ca36d6f}{m\_minAreaRadiusPix}} = -\/1.f;}
+\DoxyCodeLine{497 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{498         \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a493048207098cee57208f32858b49ece}{m\_minAreaRadiusK}} = 0.8f;}
+\DoxyCodeLine{499         \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_a7825c3e88ee979fba2844c238fc51139}{m\_maximumAllowedSkippedFrames}} = cvRound(2 * \mbox{\hyperlink{class_video_example_ae8110012f8d57f39d6355377cf20fb27}{m\_fps}}); \textcolor{comment}{// Maximum allowed skipped frames}}
+\DoxyCodeLine{500         \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}}.\mbox{\hyperlink{struct_tracker_settings_abc7ce62dfe8de5ae33506aac41fddcac}{m\_maxTraceLength}} = cvRound(2 * \mbox{\hyperlink{class_video_example_ae8110012f8d57f39d6355377cf20fb27}{m\_fps}});      \textcolor{comment}{// Maximum trace length}}
+\DoxyCodeLine{501         \}}
+\DoxyCodeLine{502         \mbox{\hyperlink{class_video_example_a00d78d9bed36599aa94ecd05ab12779a}{m\_tracker}} = \mbox{\hyperlink{class_base_tracker_aaa8767ac3b994419a481e0fabd408a8b}{BaseTracker::CreateTracker}}(\mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}});}
+\DoxyCodeLine{503         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{504     \}}
+\DoxyCodeLine{505 }
+\DoxyCodeLine{513     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_open_c_v_d_n_n_example_a82d4565be6912a262551f98c952f4e30}{DrawData}}(cv::Mat frame, \textcolor{keyword}{const} std::vector<TrackingObject>\& tracks, \textcolor{keywordtype}{int} framesCounter, \textcolor{keywordtype}{int} currTime)}
+\DoxyCodeLine{514     \{}
+\DoxyCodeLine{515         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_video_example_af3bfe51e3e1452bb084016602c668463}{m\_showLogs}})}
+\DoxyCodeLine{516             std::cout << \textcolor{stringliteral}{"{}Frame "{}} << framesCounter << \textcolor{stringliteral}{"{}: tracks = "{}} << tracks.size() << \textcolor{stringliteral}{"{}, time = "{}} << currTime << std::endl;}
+\DoxyCodeLine{517 }
+\DoxyCodeLine{518         \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& track : tracks)}
+\DoxyCodeLine{519         \{}
+\DoxyCodeLine{520             \textcolor{keywordflow}{if} (track.IsRobust(3,                           \textcolor{comment}{// Minimal trajectory size}}
+\DoxyCodeLine{521                 0.5f,                        \textcolor{comment}{// Minimal ratio raw\_trajectory\_points / trajectory\_lenght}}
+\DoxyCodeLine{522                 cv::Size2f(0.1f, 8.0f)))      \textcolor{comment}{// Min and max ratio: width / height}}
+\DoxyCodeLine{523             \{}
+\DoxyCodeLine{524                 \mbox{\hyperlink{class_video_example_a137f6e99dc6dc3b60dc82aee2e69aa16}{DrawTrack}}(frame, track, \textcolor{keyword}{false}, framesCounter);}
+\DoxyCodeLine{525 }
+\DoxyCodeLine{526 }
+\DoxyCodeLine{527                 std::stringstream label;}
+\DoxyCodeLine{528                 label << \mbox{\hyperlink{class_type_converter_a2b5e9b43ad14b5783ccc3df42e882063}{TypeConverter::Type2Str}}(track.m\_type) << std::setprecision(2) << \textcolor{stringliteral}{"{}: "{}} << track.m\_confidence;}
+\DoxyCodeLine{529 }
+\DoxyCodeLine{530                 \textcolor{keywordtype}{int} baseLine = 0;}
+\DoxyCodeLine{531                 cv::Size labelSize = cv::getTextSize(label.str(), cv::FONT\_HERSHEY\_SIMPLEX, 0.5, 1, \&baseLine);}
+\DoxyCodeLine{532 }
+\DoxyCodeLine{533                 cv::Rect brect = track.m\_rrect.boundingRect();}
+\DoxyCodeLine{534                 \textcolor{keywordflow}{if} (brect.x < 0)}
+\DoxyCodeLine{535                 \{}
+\DoxyCodeLine{536                     brect.width = \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{std::min}}(brect.width, frame.cols -\/ 1);}
+\DoxyCodeLine{537                     brect.x = 0;}
+\DoxyCodeLine{538                 \}}
+\DoxyCodeLine{539                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (brect.x + brect.width >= frame.cols)}
+\DoxyCodeLine{540                 \{}
+\DoxyCodeLine{541                     brect.x = \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{std::max}}(0, frame.cols -\/ brect.width -\/ 1);}
+\DoxyCodeLine{542                     brect.width = \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{std::min}}(brect.width, frame.cols -\/ 1);}
+\DoxyCodeLine{543                 \}}
+\DoxyCodeLine{544                 \textcolor{keywordflow}{if} (brect.y -\/ labelSize.height < 0)}
+\DoxyCodeLine{545                 \{}
+\DoxyCodeLine{546                     brect.height = \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{std::min}}(brect.height, frame.rows -\/ 1);}
+\DoxyCodeLine{547                     brect.y = labelSize.height;}
+\DoxyCodeLine{548                 \}}
+\DoxyCodeLine{549                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (brect.y + brect.height >= frame.rows)}
+\DoxyCodeLine{550                 \{}
+\DoxyCodeLine{551                     brect.y = \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{std::max}}(0, frame.rows -\/ brect.height -\/ 1);}
+\DoxyCodeLine{552                     brect.height = \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{std::min}}(brect.height, frame.rows -\/ 1);}
+\DoxyCodeLine{553                 \}}
+\DoxyCodeLine{554                 \mbox{\hyperlink{examples_8h_accca05b42ef44c98d56e76957bd53a94}{DrawFilledRect}}(frame, cv::Rect(cv::Point(brect.x, brect.y -\/ labelSize.height), cv::Size(labelSize.width, labelSize.height + baseLine)), cv::Scalar(200, 200, 200), 150);}
+\DoxyCodeLine{555                 cv::putText(frame, label.str(), brect.tl(), cv::FONT\_HERSHEY\_SIMPLEX, 0.5, cv::Scalar(0, 0, 0));}
+\DoxyCodeLine{556             \}}
+\DoxyCodeLine{557         \}}
+\DoxyCodeLine{558 }
+\DoxyCodeLine{559         \textcolor{comment}{//m\_detector-\/>CalcMotionMap(frame);}}
+\DoxyCodeLine{560     \}}
+\DoxyCodeLine{561 \};}
+\DoxyCodeLine{562 }
+\DoxyCodeLine{563 \textcolor{preprocessor}{\#ifdef BUILD\_YOLO\_LIB}}
+\DoxyCodeLine{564 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{565 }
+\DoxyCodeLine{569 \textcolor{keyword}{class }YoloDarknetExample final : \textcolor{keyword}{public} \mbox{\hyperlink{class_video_example}{VideoExample}}}
+\DoxyCodeLine{570 \{}
+\DoxyCodeLine{571 \textcolor{keyword}{public}:}
+\DoxyCodeLine{572     YoloDarknetExample(\textcolor{keyword}{const} cv::CommandLineParser\& parser)}
+\DoxyCodeLine{573         : \mbox{\hyperlink{class_video_example}{VideoExample}}(parser)}
+\DoxyCodeLine{574     \{}
+\DoxyCodeLine{575     \}}
+\DoxyCodeLine{576 }
+\DoxyCodeLine{577 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{583     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_video_example_aa9e473f7b8c6bcb62b1255cf2759abc5}{InitDetector}}(cv::UMat frame)}
+\DoxyCodeLine{584     \{}
+\DoxyCodeLine{585         \mbox{\hyperlink{defines_8h_a9fcffa231cb8ff6a5fc4e2e2e71f3ead}{config\_t}} config;}
+\DoxyCodeLine{586 }
+\DoxyCodeLine{587         \textcolor{keywordflow}{if} (!m\_trackerSettingsLoaded)}
+\DoxyCodeLine{588         \{}
+\DoxyCodeLine{589 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{590             std::string pathToModel = \textcolor{stringliteral}{"{}../../data/"{}};}
+\DoxyCodeLine{591 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{592             std::string pathToModel = \textcolor{stringliteral}{"{}../data/"{}};}
+\DoxyCodeLine{593 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{594             \textcolor{keywordtype}{size\_t} maxBatch = 1;}
+\DoxyCodeLine{595             \textcolor{keyword}{enum class} YOLOModels}
+\DoxyCodeLine{596             \{}
+\DoxyCodeLine{597                 TinyYOLOv3 = 0,}
+\DoxyCodeLine{598                 YOLOv3,}
+\DoxyCodeLine{599                 YOLOv4,}
+\DoxyCodeLine{600                 TinyYOLOv4,}
+\DoxyCodeLine{601                 ScaledYOLOv4}
+\DoxyCodeLine{602             \};}
+\DoxyCodeLine{603             YOLOModels usedModel = YOLOModels::YOLOv4;}
+\DoxyCodeLine{604             \textcolor{keywordflow}{switch} (usedModel)}
+\DoxyCodeLine{605             \{}
+\DoxyCodeLine{606             \textcolor{keywordflow}{case} YOLOModels::TinyYOLOv3:}
+\DoxyCodeLine{607                 config.emplace(\textcolor{stringliteral}{"{}modelConfiguration"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov3-\/tiny.cfg"{}});}
+\DoxyCodeLine{608                 config.emplace(\textcolor{stringliteral}{"{}modelBinary"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov3-\/tiny.weights"{}});}
+\DoxyCodeLine{609                 config.emplace(\textcolor{stringliteral}{"{}confidenceThreshold"{}}, \textcolor{stringliteral}{"{}0.5"{}});}
+\DoxyCodeLine{610                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{611 }
+\DoxyCodeLine{612             \textcolor{keywordflow}{case} YOLOModels::YOLOv3:}
+\DoxyCodeLine{613                 config.emplace(\textcolor{stringliteral}{"{}modelConfiguration"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov3.cfg"{}});}
+\DoxyCodeLine{614                 config.emplace(\textcolor{stringliteral}{"{}modelBinary"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov3.weights"{}});}
+\DoxyCodeLine{615                 config.emplace(\textcolor{stringliteral}{"{}confidenceThreshold"{}}, \textcolor{stringliteral}{"{}0.7"{}});}
+\DoxyCodeLine{616                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{617 }
+\DoxyCodeLine{618             \textcolor{keywordflow}{case} YOLOModels::YOLOv4:}
+\DoxyCodeLine{619                 config.emplace(\textcolor{stringliteral}{"{}modelConfiguration"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov4.cfg"{}});}
+\DoxyCodeLine{620                 config.emplace(\textcolor{stringliteral}{"{}modelBinary"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov4.weights"{}});}
+\DoxyCodeLine{621                 config.emplace(\textcolor{stringliteral}{"{}confidenceThreshold"{}}, \textcolor{stringliteral}{"{}0.5"{}});}
+\DoxyCodeLine{622                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{623 }
+\DoxyCodeLine{624             \textcolor{keywordflow}{case} YOLOModels::TinyYOLOv4:}
+\DoxyCodeLine{625                 config.emplace(\textcolor{stringliteral}{"{}modelConfiguration"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov4-\/tiny.cfg"{}});}
+\DoxyCodeLine{626                 config.emplace(\textcolor{stringliteral}{"{}modelBinary"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov4-\/tiny.weights"{}});}
+\DoxyCodeLine{627                 config.emplace(\textcolor{stringliteral}{"{}confidenceThreshold"{}}, \textcolor{stringliteral}{"{}0.5"{}});}
+\DoxyCodeLine{628                 maxBatch = 4;}
+\DoxyCodeLine{629                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{630 }
+\DoxyCodeLine{631             \textcolor{keywordflow}{case} YOLOModels::ScaledYOLOv4:}
+\DoxyCodeLine{632                 config.emplace(\textcolor{stringliteral}{"{}modelConfiguration"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov4-\/csp.cfg"{}});}
+\DoxyCodeLine{633                 config.emplace(\textcolor{stringliteral}{"{}modelBinary"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov4-\/csp.weights"{}});}
+\DoxyCodeLine{634                 config.emplace(\textcolor{stringliteral}{"{}confidenceThreshold"{}}, \textcolor{stringliteral}{"{}0.5"{}});}
+\DoxyCodeLine{635                 maxBatch = 2;}
+\DoxyCodeLine{636                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{637             \}}
+\DoxyCodeLine{638             \textcolor{keywordflow}{if} (maxBatch < m\_batchSize)}
+\DoxyCodeLine{639                 maxBatch = \mbox{\hyperlink{class_video_example_af62de91e526f6314fa18b43bd1d7e817}{m\_batchSize}};}
+\DoxyCodeLine{640             config.emplace(\textcolor{stringliteral}{"{}maxBatch"{}}, std::to\_string(maxBatch));}
+\DoxyCodeLine{641             config.emplace(\textcolor{stringliteral}{"{}classNames"{}}, pathToModel + \textcolor{stringliteral}{"{}coco.names"{}});}
+\DoxyCodeLine{642             config.emplace(\textcolor{stringliteral}{"{}maxCropRatio"{}}, \textcolor{stringliteral}{"{}-\/1"{}});}
+\DoxyCodeLine{643         \}}
+\DoxyCodeLine{644         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{645         \{}
+\DoxyCodeLine{646             config.emplace(\textcolor{stringliteral}{"{}modelConfiguration"{}}, m\_trackerSettings.m\_nnConfig);}
+\DoxyCodeLine{647             config.emplace(\textcolor{stringliteral}{"{}modelBinary"{}}, m\_trackerSettings.m\_nnWeights);}
+\DoxyCodeLine{648             config.emplace(\textcolor{stringliteral}{"{}confidenceThreshold"{}}, std::to\_string(m\_trackerSettings.m\_confidenceThreshold));}
+\DoxyCodeLine{649             config.emplace(\textcolor{stringliteral}{"{}classNames"{}}, m\_trackerSettings.m\_classNames);}
+\DoxyCodeLine{650             config.emplace(\textcolor{stringliteral}{"{}maxCropRatio"{}}, std::to\_string(m\_trackerSettings.m\_maxCropRatio));}
+\DoxyCodeLine{651             config.emplace(\textcolor{stringliteral}{"{}maxBatch"{}}, std::to\_string(m\_trackerSettings.m\_maxBatch));}
+\DoxyCodeLine{652             config.emplace(\textcolor{stringliteral}{"{}gpuId"{}}, std::to\_string(m\_trackerSettings.m\_gpuId));}
+\DoxyCodeLine{653             config.emplace(\textcolor{stringliteral}{"{}net\_type"{}}, m\_trackerSettings.m\_netType);}
+\DoxyCodeLine{654             config.emplace(\textcolor{stringliteral}{"{}inference\_precison"{}}, m\_trackerSettings.m\_inferencePrecison);}
+\DoxyCodeLine{655         \}}
+\DoxyCodeLine{656 }
+\DoxyCodeLine{657         config.emplace(\textcolor{stringliteral}{"{}white\_list"{}}, std::to\_string((\mbox{\hyperlink{object__types_8h_aef073148585075f745f149202b5ccc90}{objtype\_t}})\mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94adbab5438cb4dcc14c828c1a2d0138a1f}{ObjectTypes::obj\_person}}));}
+\DoxyCodeLine{658         config.emplace(\textcolor{stringliteral}{"{}white\_list"{}}, std::to\_string((\mbox{\hyperlink{object__types_8h_aef073148585075f745f149202b5ccc90}{objtype\_t}})\mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94a429b1778763d9199fa2841cf2a93bfa0}{ObjectTypes::obj\_car}}));}
+\DoxyCodeLine{659         config.emplace(\textcolor{stringliteral}{"{}white\_list"{}}, std::to\_string((\mbox{\hyperlink{object__types_8h_aef073148585075f745f149202b5ccc90}{objtype\_t}})\mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94a8d3a2a4d4b4507ad7f3cf6a44f6e39a5}{ObjectTypes::obj\_bicycle}}));}
+\DoxyCodeLine{660         config.emplace(\textcolor{stringliteral}{"{}white\_list"{}}, std::to\_string((\mbox{\hyperlink{object__types_8h_aef073148585075f745f149202b5ccc90}{objtype\_t}})\mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94a6dae2e8f966c1e4034c19c51529a11b7}{ObjectTypes::obj\_motorbike}}));}
+\DoxyCodeLine{661         config.emplace(\textcolor{stringliteral}{"{}white\_list"{}}, std::to\_string((\mbox{\hyperlink{object__types_8h_aef073148585075f745f149202b5ccc90}{objtype\_t}})\mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94add9f20b15a1e5feeb7fb2d31f2ac00de}{ObjectTypes::obj\_bus}}));}
+\DoxyCodeLine{662         config.emplace(\textcolor{stringliteral}{"{}white\_list"{}}, std::to\_string((\mbox{\hyperlink{object__types_8h_aef073148585075f745f149202b5ccc90}{objtype\_t}})\mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94a0da1ecce0b02f6b5f32809c57046d333}{ObjectTypes::obj\_truck}}));}
+\DoxyCodeLine{663 }
+\DoxyCodeLine{664         m\_detector = \mbox{\hyperlink{class_base_detector_ace4947f819fe58544ac2f005f4f35ca0}{BaseDetector::CreateDetector}}(\mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a92cb97c8c0003db338921cb8433c3855}{tracking::Detectors::Yolo\_Darknet}}, config, frame);}
+\DoxyCodeLine{665         \textcolor{keywordflow}{if} (m\_detector.get())}
+\DoxyCodeLine{666         \{}
+\DoxyCodeLine{667             m\_detector-\/>SetMinObjectSize(cv::Size(frame.cols / 40, frame.rows / 40));}
+\DoxyCodeLine{668             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{669         \}}
+\DoxyCodeLine{670         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{671     \}}
+\DoxyCodeLine{672 }
+\DoxyCodeLine{678     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_video_example_a93e23d64075fb2f508423e45d15c5421}{InitTracker}}(cv::UMat frame)}
+\DoxyCodeLine{679     \{}
+\DoxyCodeLine{680         \textcolor{keywordflow}{if} (!m\_trackerSettingsLoaded)}
+\DoxyCodeLine{681         \{}
+\DoxyCodeLine{682             \textcolor{keywordtype}{bool} useDeepSORT = \textcolor{keyword}{false};}
+\DoxyCodeLine{683             \textcolor{keywordflow}{if} (useDeepSORT)}
+\DoxyCodeLine{684             \{}
+\DoxyCodeLine{685 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{686                 std::string pathToModel = \textcolor{stringliteral}{"{}../../data/"{}};}
+\DoxyCodeLine{687 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{688                 std::string pathToModel = \textcolor{stringliteral}{"{}../data/"{}};}
+\DoxyCodeLine{689 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{690 }
+\DoxyCodeLine{691 \textcolor{preprocessor}{\#if 1}}
+\DoxyCodeLine{692                 m\_trackerSettings.m\_embeddings.emplace\_back(pathToModel + \textcolor{stringliteral}{"{}open\_model\_zoo/person-\/reidentification-\/retail-\/0286/FP16-\/INT8/person-\/reidentification-\/retail-\/0286.xml"{}},}
+\DoxyCodeLine{693                                                             pathToModel + \textcolor{stringliteral}{"{}open\_model\_zoo/person-\/reidentification-\/retail-\/0286/FP16-\/INT8/person-\/reidentification-\/retail-\/0286.bin"{}},}
+\DoxyCodeLine{694                                                             cv::Size(128, 256),}
+\DoxyCodeLine{695                                                             std::vector<ObjectTypes>\{ \mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94adbab5438cb4dcc14c828c1a2d0138a1f}{ObjectTypes::obj\_person}} \});}
+\DoxyCodeLine{696 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{697 }
+\DoxyCodeLine{698 \textcolor{preprocessor}{\#if 0}}
+\DoxyCodeLine{699                 m\_trackerSettings.m\_embeddings.emplace\_back(pathToModel + \textcolor{stringliteral}{"{}open\_model\_zoo/vehicle-\/reid-\/0001/osnet\_ain\_x1\_0\_vehicle\_reid.xml"{}},}
+\DoxyCodeLine{700                                                             pathToModel + \textcolor{stringliteral}{"{}open\_model\_zoo/vehicle-\/reid-\/0001/osnet\_ain\_x1\_0\_vehicle\_reid.bin"{}},}
+\DoxyCodeLine{701                                                             cv::Size(208, 208),}
+\DoxyCodeLine{702                                                             std::vector<ObjectTypes>\{ \mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94a429b1778763d9199fa2841cf2a93bfa0}{ObjectTypes::obj\_car}}, \mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94add9f20b15a1e5feeb7fb2d31f2ac00de}{ObjectTypes::obj\_bus}}, \mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94a0da1ecce0b02f6b5f32809c57046d333}{ObjectTypes::obj\_truck}}, \mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94a160b7f4bc7edfe4707b5bad6c3f9b13e}{ObjectTypes::obj\_vehicle}} \});}
+\DoxyCodeLine{703 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{704 }
+\DoxyCodeLine{705                 std::array<track\_t, tracking::DistsCount> distType\{}
+\DoxyCodeLine{706                     0.f,   \textcolor{comment}{// DistCenters}}
+\DoxyCodeLine{707                     0.f,   \textcolor{comment}{// DistRects}}
+\DoxyCodeLine{708                     0.5f,  \textcolor{comment}{// DistJaccard}}
+\DoxyCodeLine{709                     0.f,   \textcolor{comment}{// DistHist}}
+\DoxyCodeLine{710                     0.5f   \textcolor{comment}{// DistFeatureCos}}
+\DoxyCodeLine{711                 \};}
+\DoxyCodeLine{712                 \textcolor{keywordflow}{if} (!m\_trackerSettings.SetDistances(distType))}
+\DoxyCodeLine{713                     std::cerr << \textcolor{stringliteral}{"{}SetDistances failed! Absolutly summ must be equal 1"{}} << std::endl;}
+\DoxyCodeLine{714             \}}
+\DoxyCodeLine{715             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{716             \{}
+\DoxyCodeLine{717                 m\_trackerSettings.SetDistance(\mbox{\hyperlink{namespacetracking_a55743c5e18b9b228c4ba2587260b2502a30176bdc0b4f965c6812767a2fa52e1e}{tracking::DistCenters}});}
+\DoxyCodeLine{718             \}}
+\DoxyCodeLine{719 }
+\DoxyCodeLine{720             m\_trackerSettings.m\_kalmanType = \mbox{\hyperlink{namespacetracking_a83f2c4d58ea2737f7d6296dce3eb722aa889eca583e371386c92e05814797a885}{tracking::KalmanLinear}};}
+\DoxyCodeLine{721             m\_trackerSettings.m\_filterGoal = \mbox{\hyperlink{namespacetracking_a9b3e7d16c86cd8b781ab214e396b0ebfabb259eae9513c55b313c553ce6249aea}{tracking::FilterRect}};}
+\DoxyCodeLine{722             m\_trackerSettings.m\_lostTrackType = useDeepSORT ? \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a3bd92892a83828375b9fce502732c491}{tracking::TrackNone}} : \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a78f8ce9e03e5e13064aa3d0358654650}{tracking::TrackCSRT}}; \textcolor{comment}{// Use visual objects tracker for collisions resolving. Used if m\_filterGoal == tracking::FilterRect}}
+\DoxyCodeLine{723             m\_trackerSettings.m\_matchType = \mbox{\hyperlink{namespacetracking_a491e50c9261ab820965d871a217d4f13a8c97315e46df8c0716a9538655fc967d}{tracking::MatchHungrian}};}
+\DoxyCodeLine{724             m\_trackerSettings.m\_useAcceleration = \textcolor{keyword}{false};                   \textcolor{comment}{// Use constant acceleration motion model}}
+\DoxyCodeLine{725             m\_trackerSettings.m\_dt = m\_trackerSettings.m\_useAcceleration ? 0.05f : 0.4f; \textcolor{comment}{// Delta time for Kalman filter}}
+\DoxyCodeLine{726             m\_trackerSettings.m\_accelNoiseMag = 0.2f;                     \textcolor{comment}{// Accel noise magnitude for Kalman filter}}
+\DoxyCodeLine{727             m\_trackerSettings.m\_distThres = useDeepSORT ? 0.7f : 0.8f;    \textcolor{comment}{// Distance threshold between region and object on two frames}}
+\DoxyCodeLine{728 \textcolor{preprocessor}{\#if 0}}
+\DoxyCodeLine{729             m\_trackerSettings.m\_minAreaRadiusPix = frame.rows / 20.f;}
+\DoxyCodeLine{730 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{731             m\_trackerSettings.m\_minAreaRadiusPix = -\/1.f;}
+\DoxyCodeLine{732 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{733             m\_trackerSettings.m\_minAreaRadiusK = 0.8f;}
+\DoxyCodeLine{734             m\_trackerSettings.m\_maximumAllowedSkippedFrames = cvRound(2 * m\_fps); \textcolor{comment}{// Maximum allowed skipped frames}}
+\DoxyCodeLine{735             m\_trackerSettings.m\_maxTraceLength = cvRound(2 * m\_fps);      \textcolor{comment}{// Maximum trace length}}
+\DoxyCodeLine{736         \}}
+\DoxyCodeLine{737         m\_trackerSettings.AddNearTypes(\mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94a429b1778763d9199fa2841cf2a93bfa0}{ObjectTypes::obj\_car}}, \mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94add9f20b15a1e5feeb7fb2d31f2ac00de}{ObjectTypes::obj\_bus}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{738         m\_trackerSettings.AddNearTypes(\mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94a429b1778763d9199fa2841cf2a93bfa0}{ObjectTypes::obj\_car}}, \mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94a0da1ecce0b02f6b5f32809c57046d333}{ObjectTypes::obj\_truck}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{739         m\_trackerSettings.AddNearTypes(\mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94add9f20b15a1e5feeb7fb2d31f2ac00de}{ObjectTypes::obj\_bus}}, \mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94a0da1ecce0b02f6b5f32809c57046d333}{ObjectTypes::obj\_truck}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{740         m\_trackerSettings.AddNearTypes(\mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94adbab5438cb4dcc14c828c1a2d0138a1f}{ObjectTypes::obj\_person}}, \mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94a8d3a2a4d4b4507ad7f3cf6a44f6e39a5}{ObjectTypes::obj\_bicycle}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{741         m\_trackerSettings.AddNearTypes(\mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94adbab5438cb4dcc14c828c1a2d0138a1f}{ObjectTypes::obj\_person}}, \mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94a6dae2e8f966c1e4034c19c51529a11b7}{ObjectTypes::obj\_motorbike}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{742 }
+\DoxyCodeLine{743         m\_tracker = \mbox{\hyperlink{class_base_tracker_aaa8767ac3b994419a481e0fabd408a8b}{BaseTracker::CreateTracker}}(m\_trackerSettings);}
+\DoxyCodeLine{744 }
+\DoxyCodeLine{745         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{746     \}}
+\DoxyCodeLine{747 }
+\DoxyCodeLine{755     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_video_example_ab596f681981326ab19792e751fac340a}{DrawData}}(cv::Mat frame, \textcolor{keyword}{const} std::vector<TrackingObject>\& tracks, \textcolor{keywordtype}{int} framesCounter, \textcolor{keywordtype}{int} currTime)}
+\DoxyCodeLine{756     \{}
+\DoxyCodeLine{757         \textcolor{keywordflow}{if} (m\_showLogs)}
+\DoxyCodeLine{758             std::cout << \textcolor{stringliteral}{"{}Frame "{}} << framesCounter << \textcolor{stringliteral}{"{}: tracks = "{}} << tracks.size() << \textcolor{stringliteral}{"{}, time = "{}} << currTime << std::endl;}
+\DoxyCodeLine{759 }
+\DoxyCodeLine{760         \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& track : tracks)}
+\DoxyCodeLine{761         \{}
+\DoxyCodeLine{762             \textcolor{keywordflow}{if} (track.IsRobust(3,                           \textcolor{comment}{// Minimal trajectory size}}
+\DoxyCodeLine{763                 0.5f,                        \textcolor{comment}{// Minimal ratio raw\_trajectory\_points / trajectory\_lenght}}
+\DoxyCodeLine{764                 cv::Size2f(0.1f, 8.0f)))      \textcolor{comment}{// Min and max ratio: width / height}}
+\DoxyCodeLine{765             \{}
+\DoxyCodeLine{766                 \mbox{\hyperlink{class_video_example_a137f6e99dc6dc3b60dc82aee2e69aa16}{DrawTrack}}(frame, track, \textcolor{keyword}{true}, framesCounter);}
+\DoxyCodeLine{767 }
+\DoxyCodeLine{768 }
+\DoxyCodeLine{769                 std::stringstream label;}
+\DoxyCodeLine{770 \textcolor{preprocessor}{\#if 1}}
+\DoxyCodeLine{771                 label << \mbox{\hyperlink{class_type_converter_a2b5e9b43ad14b5783ccc3df42e882063}{TypeConverter::Type2Str}}(track.m\_type) << std::setprecision(2) << \textcolor{stringliteral}{"{}: "{}} << track.m\_confidence;}
+\DoxyCodeLine{772 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{773                 label << \mbox{\hyperlink{class_type_converter_a2b5e9b43ad14b5783ccc3df42e882063}{TypeConverter::Type2Str}}(track.m\_type) << \textcolor{stringliteral}{"{} "{}} << std::setprecision(2) << track.m\_velocity << \textcolor{stringliteral}{"{}: "{}} << track.m\_confidence;}
+\DoxyCodeLine{774 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{775                 \textcolor{keywordtype}{int} baseLine = 0;}
+\DoxyCodeLine{776                 cv::Size labelSize = cv::getTextSize(label.str(), cv::FONT\_HERSHEY\_SIMPLEX, 0.5, 1, \&baseLine);}
+\DoxyCodeLine{777 }
+\DoxyCodeLine{778                 cv::Rect brect = track.m\_rrect.boundingRect();}
+\DoxyCodeLine{779                 \textcolor{keywordflow}{if} (brect.x < 0)}
+\DoxyCodeLine{780                 \{}
+\DoxyCodeLine{781                     brect.width = \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{std::min}}(brect.width, frame.cols -\/ 1);}
+\DoxyCodeLine{782                     brect.x = 0;}
+\DoxyCodeLine{783                 \}}
+\DoxyCodeLine{784                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (brect.x + brect.width >= frame.cols)}
+\DoxyCodeLine{785                 \{}
+\DoxyCodeLine{786                     brect.x = \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{std::max}}(0, frame.cols -\/ brect.width -\/ 1);}
+\DoxyCodeLine{787                     brect.width = \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{std::min}}(brect.width, frame.cols -\/ 1);}
+\DoxyCodeLine{788                 \}}
+\DoxyCodeLine{789                 \textcolor{keywordflow}{if} (brect.y -\/ labelSize.height < 0)}
+\DoxyCodeLine{790                 \{}
+\DoxyCodeLine{791                     brect.height = \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{std::min}}(brect.height, frame.rows -\/ 1);}
+\DoxyCodeLine{792                     brect.y = labelSize.height;}
+\DoxyCodeLine{793                 \}}
+\DoxyCodeLine{794                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (brect.y + brect.height >= frame.rows)}
+\DoxyCodeLine{795                 \{}
+\DoxyCodeLine{796                     brect.y = \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{std::max}}(0, frame.rows -\/ brect.height -\/ 1);}
+\DoxyCodeLine{797                     brect.height = \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{std::min}}(brect.height, frame.rows -\/ 1);}
+\DoxyCodeLine{798                 \}}
+\DoxyCodeLine{799                 \mbox{\hyperlink{examples_8h_accca05b42ef44c98d56e76957bd53a94}{DrawFilledRect}}(frame, cv::Rect(cv::Point(brect.x, brect.y -\/ labelSize.height), cv::Size(labelSize.width, labelSize.height + baseLine)), cv::Scalar(200, 200, 200), 150);}
+\DoxyCodeLine{800                 cv::putText(frame, label.str(), brect.tl(), cv::FONT\_HERSHEY\_SIMPLEX, 0.5, cv::Scalar(0, 0, 0));}
+\DoxyCodeLine{801             \}}
+\DoxyCodeLine{802         \}}
+\DoxyCodeLine{803 }
+\DoxyCodeLine{804         \textcolor{comment}{//m\_detector-\/>CalcMotionMap(frame);}}
+\DoxyCodeLine{805     \}}
+\DoxyCodeLine{806 \};}
+\DoxyCodeLine{807 }
+\DoxyCodeLine{808 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{809 }
+\DoxyCodeLine{810 \textcolor{preprocessor}{\#ifdef BUILD\_YOLO\_TENSORRT}}
+\DoxyCodeLine{811 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{812 }
+\DoxyCodeLine{816 \textcolor{keyword}{class }YoloTensorRTExample final : \textcolor{keyword}{public} \mbox{\hyperlink{class_video_example}{VideoExample}}}
+\DoxyCodeLine{817 \{}
+\DoxyCodeLine{818 \textcolor{keyword}{public}:}
+\DoxyCodeLine{819     YoloTensorRTExample(\textcolor{keyword}{const} cv::CommandLineParser\& parser)}
+\DoxyCodeLine{820         : \mbox{\hyperlink{class_video_example}{VideoExample}}(parser)}
+\DoxyCodeLine{821     \{}
+\DoxyCodeLine{822     \}}
+\DoxyCodeLine{823 }
+\DoxyCodeLine{824 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{830     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_video_example_aa9e473f7b8c6bcb62b1255cf2759abc5}{InitDetector}}(cv::UMat frame)}
+\DoxyCodeLine{831     \{}
+\DoxyCodeLine{832         \mbox{\hyperlink{defines_8h_a9fcffa231cb8ff6a5fc4e2e2e71f3ead}{config\_t}} config;}
+\DoxyCodeLine{833         \textcolor{keywordflow}{if} (!m\_trackerSettingsLoaded)}
+\DoxyCodeLine{834         \{}
+\DoxyCodeLine{835 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{836             std::string pathToModel = \textcolor{stringliteral}{"{}../../data/"{}};}
+\DoxyCodeLine{837 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{838             std::string pathToModel = \textcolor{stringliteral}{"{}../data/"{}};}
+\DoxyCodeLine{839 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{840             \textcolor{keywordtype}{size\_t} maxBatch = 1;}
+\DoxyCodeLine{841             \textcolor{keyword}{enum class} YOLOModels}
+\DoxyCodeLine{842             \{}
+\DoxyCodeLine{843                 TinyYOLOv3 = 0,}
+\DoxyCodeLine{844                 YOLOv3,}
+\DoxyCodeLine{845                 YOLOv4,}
+\DoxyCodeLine{846                 TinyYOLOv4,}
+\DoxyCodeLine{847                 YOLOv5}
+\DoxyCodeLine{848             \};}
+\DoxyCodeLine{849             YOLOModels usedModel = YOLOModels::YOLOv4;}
+\DoxyCodeLine{850             \textcolor{keywordflow}{switch} (usedModel)}
+\DoxyCodeLine{851             \{}
+\DoxyCodeLine{852             \textcolor{keywordflow}{case} YOLOModels::TinyYOLOv3:}
+\DoxyCodeLine{853                 config.emplace(\textcolor{stringliteral}{"{}modelConfiguration"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov3-\/tiny.cfg"{}});}
+\DoxyCodeLine{854                 config.emplace(\textcolor{stringliteral}{"{}modelBinary"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov3-\/tiny.weights"{}});}
+\DoxyCodeLine{855                 config.emplace(\textcolor{stringliteral}{"{}confidenceThreshold"{}}, \textcolor{stringliteral}{"{}0.5"{}});}
+\DoxyCodeLine{856                 config.emplace(\textcolor{stringliteral}{"{}inference\_precison"{}}, \textcolor{stringliteral}{"{}FP32"{}});}
+\DoxyCodeLine{857                 config.emplace(\textcolor{stringliteral}{"{}net\_type"{}}, \textcolor{stringliteral}{"{}YOLOV3"{}});}
+\DoxyCodeLine{858                 maxBatch = 4;}
+\DoxyCodeLine{859                 config.emplace(\textcolor{stringliteral}{"{}maxCropRatio"{}}, \textcolor{stringliteral}{"{}2"{}});}
+\DoxyCodeLine{860                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{861 }
+\DoxyCodeLine{862             \textcolor{keywordflow}{case} YOLOModels::YOLOv3:}
+\DoxyCodeLine{863                 config.emplace(\textcolor{stringliteral}{"{}modelConfiguration"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov3.cfg"{}});}
+\DoxyCodeLine{864                 config.emplace(\textcolor{stringliteral}{"{}modelBinary"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov3.weights"{}});}
+\DoxyCodeLine{865                 config.emplace(\textcolor{stringliteral}{"{}confidenceThreshold"{}}, \textcolor{stringliteral}{"{}0.7"{}});}
+\DoxyCodeLine{866                 config.emplace(\textcolor{stringliteral}{"{}inference\_precison"{}}, \textcolor{stringliteral}{"{}FP32"{}});}
+\DoxyCodeLine{867                 config.emplace(\textcolor{stringliteral}{"{}net\_type"{}}, \textcolor{stringliteral}{"{}YOLOV3"{}});}
+\DoxyCodeLine{868                 maxBatch = 2;}
+\DoxyCodeLine{869                 config.emplace(\textcolor{stringliteral}{"{}maxCropRatio"{}}, \textcolor{stringliteral}{"{}-\/1"{}});}
+\DoxyCodeLine{870                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{871 }
+\DoxyCodeLine{872             \textcolor{keywordflow}{case} YOLOModels::YOLOv4:}
+\DoxyCodeLine{873                 config.emplace(\textcolor{stringliteral}{"{}modelConfiguration"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov4.cfg"{}});}
+\DoxyCodeLine{874                 config.emplace(\textcolor{stringliteral}{"{}modelBinary"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov4.weights"{}});}
+\DoxyCodeLine{875                 config.emplace(\textcolor{stringliteral}{"{}confidenceThreshold"{}}, \textcolor{stringliteral}{"{}0.4"{}});}
+\DoxyCodeLine{876                 config.emplace(\textcolor{stringliteral}{"{}inference\_precison"{}}, \textcolor{stringliteral}{"{}FP32"{}});}
+\DoxyCodeLine{877                 config.emplace(\textcolor{stringliteral}{"{}net\_type"{}}, \textcolor{stringliteral}{"{}YOLOV4"{}});}
+\DoxyCodeLine{878                 maxBatch = 1;}
+\DoxyCodeLine{879                 config.emplace(\textcolor{stringliteral}{"{}maxCropRatio"{}}, \textcolor{stringliteral}{"{}-\/1"{}});}
+\DoxyCodeLine{880                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{881 }
+\DoxyCodeLine{882             \textcolor{keywordflow}{case} YOLOModels::TinyYOLOv4:}
+\DoxyCodeLine{883                 config.emplace(\textcolor{stringliteral}{"{}modelConfiguration"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov4-\/tiny.cfg"{}});}
+\DoxyCodeLine{884                 config.emplace(\textcolor{stringliteral}{"{}modelBinary"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov4-\/tiny.weights"{}});}
+\DoxyCodeLine{885                 config.emplace(\textcolor{stringliteral}{"{}confidenceThreshold"{}}, \textcolor{stringliteral}{"{}0.5"{}});}
+\DoxyCodeLine{886                 config.emplace(\textcolor{stringliteral}{"{}inference\_precison"{}}, \textcolor{stringliteral}{"{}FP32"{}});}
+\DoxyCodeLine{887                 config.emplace(\textcolor{stringliteral}{"{}net\_type"{}}, \textcolor{stringliteral}{"{}YOLOV4\_TINY"{}});}
+\DoxyCodeLine{888                 maxBatch = 1;}
+\DoxyCodeLine{889                 config.emplace(\textcolor{stringliteral}{"{}maxCropRatio"{}}, \textcolor{stringliteral}{"{}-\/1"{}});}
+\DoxyCodeLine{890                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{891 }
+\DoxyCodeLine{892             \textcolor{keywordflow}{case} YOLOModels::YOLOv5:}
+\DoxyCodeLine{893                 config.emplace(\textcolor{stringliteral}{"{}modelConfiguration"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov5x.cfg"{}});}
+\DoxyCodeLine{894                 config.emplace(\textcolor{stringliteral}{"{}modelBinary"{}}, pathToModel + \textcolor{stringliteral}{"{}yolov5x.weights"{}});}
+\DoxyCodeLine{895                 config.emplace(\textcolor{stringliteral}{"{}confidenceThreshold"{}}, \textcolor{stringliteral}{"{}0.5"{}});}
+\DoxyCodeLine{896                 config.emplace(\textcolor{stringliteral}{"{}inference\_precison"{}}, \textcolor{stringliteral}{"{}FP32"{}});}
+\DoxyCodeLine{897                 config.emplace(\textcolor{stringliteral}{"{}net\_type"{}}, \textcolor{stringliteral}{"{}YOLOV5"{}});}
+\DoxyCodeLine{898                 maxBatch = 1;}
+\DoxyCodeLine{899                 config.emplace(\textcolor{stringliteral}{"{}maxCropRatio"{}}, \textcolor{stringliteral}{"{}-\/1"{}});}
+\DoxyCodeLine{900                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{901             \}}
+\DoxyCodeLine{902             \textcolor{keywordflow}{if} (maxBatch < m\_batchSize)}
+\DoxyCodeLine{903                 maxBatch = \mbox{\hyperlink{class_video_example_af62de91e526f6314fa18b43bd1d7e817}{m\_batchSize}};}
+\DoxyCodeLine{904             config.emplace(\textcolor{stringliteral}{"{}maxBatch"{}}, std::to\_string(maxBatch));}
+\DoxyCodeLine{905             config.emplace(\textcolor{stringliteral}{"{}classNames"{}}, pathToModel + \textcolor{stringliteral}{"{}coco.names"{}});}
+\DoxyCodeLine{906         \}}
+\DoxyCodeLine{907         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{908         \{}
+\DoxyCodeLine{909             config.emplace(\textcolor{stringliteral}{"{}modelConfiguration"{}}, m\_trackerSettings.m\_nnConfig);}
+\DoxyCodeLine{910             config.emplace(\textcolor{stringliteral}{"{}modelBinary"{}}, m\_trackerSettings.m\_nnWeights);}
+\DoxyCodeLine{911             config.emplace(\textcolor{stringliteral}{"{}confidenceThreshold"{}}, std::to\_string(m\_trackerSettings.m\_confidenceThreshold));}
+\DoxyCodeLine{912             config.emplace(\textcolor{stringliteral}{"{}classNames"{}}, m\_trackerSettings.m\_classNames);}
+\DoxyCodeLine{913             config.emplace(\textcolor{stringliteral}{"{}maxCropRatio"{}}, std::to\_string(m\_trackerSettings.m\_maxCropRatio));}
+\DoxyCodeLine{914             config.emplace(\textcolor{stringliteral}{"{}maxBatch"{}}, std::to\_string(m\_trackerSettings.m\_maxBatch));}
+\DoxyCodeLine{915             config.emplace(\textcolor{stringliteral}{"{}gpuId"{}}, std::to\_string(m\_trackerSettings.m\_gpuId));}
+\DoxyCodeLine{916             config.emplace(\textcolor{stringliteral}{"{}net\_type"{}}, m\_trackerSettings.m\_netType);}
+\DoxyCodeLine{917             config.emplace(\textcolor{stringliteral}{"{}inference\_precison"{}}, m\_trackerSettings.m\_inferencePrecison);}
+\DoxyCodeLine{918         \}}
+\DoxyCodeLine{919 }
+\DoxyCodeLine{920         config.emplace(\textcolor{stringliteral}{"{}white\_list"{}}, std::to\_string((\mbox{\hyperlink{object__types_8h_aef073148585075f745f149202b5ccc90}{objtype\_t}})\mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94adbab5438cb4dcc14c828c1a2d0138a1f}{ObjectTypes::obj\_person}}));}
+\DoxyCodeLine{921         config.emplace(\textcolor{stringliteral}{"{}white\_list"{}}, std::to\_string((\mbox{\hyperlink{object__types_8h_aef073148585075f745f149202b5ccc90}{objtype\_t}})\mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94a429b1778763d9199fa2841cf2a93bfa0}{ObjectTypes::obj\_car}}));}
+\DoxyCodeLine{922         config.emplace(\textcolor{stringliteral}{"{}white\_list"{}}, std::to\_string((\mbox{\hyperlink{object__types_8h_aef073148585075f745f149202b5ccc90}{objtype\_t}})\mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94a8d3a2a4d4b4507ad7f3cf6a44f6e39a5}{ObjectTypes::obj\_bicycle}}));}
+\DoxyCodeLine{923         config.emplace(\textcolor{stringliteral}{"{}white\_list"{}}, std::to\_string((\mbox{\hyperlink{object__types_8h_aef073148585075f745f149202b5ccc90}{objtype\_t}})\mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94a6dae2e8f966c1e4034c19c51529a11b7}{ObjectTypes::obj\_motorbike}}));}
+\DoxyCodeLine{924         config.emplace(\textcolor{stringliteral}{"{}white\_list"{}}, std::to\_string((\mbox{\hyperlink{object__types_8h_aef073148585075f745f149202b5ccc90}{objtype\_t}})\mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94add9f20b15a1e5feeb7fb2d31f2ac00de}{ObjectTypes::obj\_bus}}));}
+\DoxyCodeLine{925         config.emplace(\textcolor{stringliteral}{"{}white\_list"{}}, std::to\_string((\mbox{\hyperlink{object__types_8h_aef073148585075f745f149202b5ccc90}{objtype\_t}})\mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94a0da1ecce0b02f6b5f32809c57046d333}{ObjectTypes::obj\_truck}}));}
+\DoxyCodeLine{926 }
+\DoxyCodeLine{927         m\_detector = \mbox{\hyperlink{class_base_detector_ace4947f819fe58544ac2f005f4f35ca0}{BaseDetector::CreateDetector}}(\mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760ae4a5051b95e76d3619192fc72b1f076f}{tracking::Detectors::Yolo\_TensorRT}}, config, frame);}
+\DoxyCodeLine{928         \textcolor{keywordflow}{if} (m\_detector.get())}
+\DoxyCodeLine{929         \{}
+\DoxyCodeLine{930             m\_detector-\/>SetMinObjectSize(cv::Size(frame.cols / 40, frame.rows / 40));}
+\DoxyCodeLine{931             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{932         \}}
+\DoxyCodeLine{933         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{934     \}}
+\DoxyCodeLine{935 }
+\DoxyCodeLine{941     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_video_example_a93e23d64075fb2f508423e45d15c5421}{InitTracker}}(cv::UMat frame)}
+\DoxyCodeLine{942     \{}
+\DoxyCodeLine{943         \textcolor{keywordflow}{if} (!m\_trackerSettingsLoaded)}
+\DoxyCodeLine{944         \{}
+\DoxyCodeLine{945             m\_trackerSettings.SetDistance(\mbox{\hyperlink{namespacetracking_a55743c5e18b9b228c4ba2587260b2502a30176bdc0b4f965c6812767a2fa52e1e}{tracking::DistCenters}});}
+\DoxyCodeLine{946             m\_trackerSettings.m\_kalmanType = \mbox{\hyperlink{namespacetracking_a83f2c4d58ea2737f7d6296dce3eb722aa889eca583e371386c92e05814797a885}{tracking::KalmanLinear}};}
+\DoxyCodeLine{947             m\_trackerSettings.m\_filterGoal = \mbox{\hyperlink{namespacetracking_a9b3e7d16c86cd8b781ab214e396b0ebfafac394783c1196957768400bc53ba491}{tracking::FilterCenter}};}
+\DoxyCodeLine{948             m\_trackerSettings.m\_lostTrackType = \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a9bba8e4377e562caa976576d47c5eb2e}{tracking::TrackKCF}};      \textcolor{comment}{// Use visual objects tracker for collisions resolving. Used if m\_filterGoal == tracking::FilterRect}}
+\DoxyCodeLine{949             m\_trackerSettings.m\_matchType = \mbox{\hyperlink{namespacetracking_a491e50c9261ab820965d871a217d4f13a8c97315e46df8c0716a9538655fc967d}{tracking::MatchHungrian}};}
+\DoxyCodeLine{950             m\_trackerSettings.m\_dt = 0.3f;                                \textcolor{comment}{// Delta time for Kalman filter}}
+\DoxyCodeLine{951             m\_trackerSettings.m\_accelNoiseMag = 0.2f;                     \textcolor{comment}{// Accel noise magnitude for Kalman filter}}
+\DoxyCodeLine{952             m\_trackerSettings.m\_distThres = 0.8f;                         \textcolor{comment}{// Distance threshold between region and object on two frames}}
+\DoxyCodeLine{953             m\_trackerSettings.m\_minAreaRadiusPix = frame.rows / 20.f;}
+\DoxyCodeLine{954             m\_trackerSettings.m\_maximumAllowedSkippedFrames = cvRound(2 * m\_fps); \textcolor{comment}{// Maximum allowed skipped frames}}
+\DoxyCodeLine{955             m\_trackerSettings.m\_maxTraceLength = cvRound(5 * m\_fps);      \textcolor{comment}{// Maximum trace length}}
+\DoxyCodeLine{956         \}}
+\DoxyCodeLine{957         m\_trackerSettings.AddNearTypes(\mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94a429b1778763d9199fa2841cf2a93bfa0}{ObjectTypes::obj\_car}}, \mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94add9f20b15a1e5feeb7fb2d31f2ac00de}{ObjectTypes::obj\_bus}}, \textcolor{keyword}{false});}
+\DoxyCodeLine{958         m\_trackerSettings.AddNearTypes(\mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94a429b1778763d9199fa2841cf2a93bfa0}{ObjectTypes::obj\_car}}, \mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94a0da1ecce0b02f6b5f32809c57046d333}{ObjectTypes::obj\_truck}}, \textcolor{keyword}{false});}
+\DoxyCodeLine{959         m\_trackerSettings.AddNearTypes(\mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94adbab5438cb4dcc14c828c1a2d0138a1f}{ObjectTypes::obj\_person}}, \mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94a8d3a2a4d4b4507ad7f3cf6a44f6e39a5}{ObjectTypes::obj\_bicycle}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{960         m\_trackerSettings.AddNearTypes(\mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94adbab5438cb4dcc14c828c1a2d0138a1f}{ObjectTypes::obj\_person}}, \mbox{\hyperlink{object__types_8h_aeb594bb7008341c7b10ecf8e8ef84f94a6dae2e8f966c1e4034c19c51529a11b7}{ObjectTypes::obj\_motorbike}}, \textcolor{keyword}{true});}
+\DoxyCodeLine{961 }
+\DoxyCodeLine{962         m\_tracker = \mbox{\hyperlink{class_base_tracker_aaa8767ac3b994419a481e0fabd408a8b}{BaseTracker::CreateTracker}}(m\_trackerSettings);}
+\DoxyCodeLine{963 }
+\DoxyCodeLine{964         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{965     \}}
+\DoxyCodeLine{966 }
+\DoxyCodeLine{974     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_video_example_ab596f681981326ab19792e751fac340a}{DrawData}}(cv::Mat frame, \textcolor{keyword}{const} std::vector<TrackingObject>\& tracks, \textcolor{keywordtype}{int} framesCounter, \textcolor{keywordtype}{int} currTime)}
+\DoxyCodeLine{975     \{}
+\DoxyCodeLine{976         \textcolor{keywordflow}{if} (m\_showLogs)}
+\DoxyCodeLine{977             std::cout << \textcolor{stringliteral}{"{}Frame "{}} << framesCounter << \textcolor{stringliteral}{"{}: tracks = "{}} << tracks.size() << \textcolor{stringliteral}{"{}, time = "{}} << currTime << std::endl;}
+\DoxyCodeLine{978 }
+\DoxyCodeLine{979         \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& track : tracks)}
+\DoxyCodeLine{980         \{}
+\DoxyCodeLine{981             \textcolor{keywordflow}{if} (track.IsRobust(2,                           \textcolor{comment}{// Minimal trajectory size}}
+\DoxyCodeLine{982                 0.5f,                        \textcolor{comment}{// Minimal ratio raw\_trajectory\_points / trajectory\_lenght}}
+\DoxyCodeLine{983                 cv::Size2f(0.1f, 8.0f)))      \textcolor{comment}{// Min and max ratio: width / height}}
+\DoxyCodeLine{984             \{}
+\DoxyCodeLine{985                 \mbox{\hyperlink{class_video_example_a137f6e99dc6dc3b60dc82aee2e69aa16}{DrawTrack}}(frame, track, \textcolor{keyword}{true}, framesCounter);}
+\DoxyCodeLine{986 }
+\DoxyCodeLine{987 }
+\DoxyCodeLine{988                 std::stringstream label;}
+\DoxyCodeLine{989                 label << \mbox{\hyperlink{class_type_converter_a2b5e9b43ad14b5783ccc3df42e882063}{TypeConverter::Type2Str}}(track.m\_type) << \textcolor{stringliteral}{"{} "{}} << std::setprecision(2) << track.m\_velocity << \textcolor{stringliteral}{"{}: "{}} << track.m\_confidence;}
+\DoxyCodeLine{990                 \textcolor{keywordtype}{int} baseLine = 0;}
+\DoxyCodeLine{991                 cv::Size labelSize = cv::getTextSize(label.str(), cv::FONT\_HERSHEY\_SIMPLEX, 0.5, 1, \&baseLine);}
+\DoxyCodeLine{992 }
+\DoxyCodeLine{993                 cv::Rect brect = track.m\_rrect.boundingRect();}
+\DoxyCodeLine{994                 \textcolor{keywordflow}{if} (brect.x < 0)}
+\DoxyCodeLine{995                 \{}
+\DoxyCodeLine{996                     brect.width = \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{std::min}}(brect.width, frame.cols -\/ 1);}
+\DoxyCodeLine{997                     brect.x = 0;}
+\DoxyCodeLine{998                 \}}
+\DoxyCodeLine{999                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (brect.x + brect.width >= frame.cols)}
+\DoxyCodeLine{1000                 \{}
+\DoxyCodeLine{1001                     brect.x = \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{std::max}}(0, frame.cols -\/ brect.width -\/ 1);}
+\DoxyCodeLine{1002                     brect.width = \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{std::min}}(brect.width, frame.cols -\/ 1);}
+\DoxyCodeLine{1003                 \}}
+\DoxyCodeLine{1004                 \textcolor{keywordflow}{if} (brect.y -\/ labelSize.height < 0)}
+\DoxyCodeLine{1005                 \{}
+\DoxyCodeLine{1006                     brect.height = \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{std::min}}(brect.height, frame.rows -\/ 1);}
+\DoxyCodeLine{1007                     brect.y = labelSize.height;}
+\DoxyCodeLine{1008                 \}}
+\DoxyCodeLine{1009                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (brect.y + brect.height >= frame.rows)}
+\DoxyCodeLine{1010                 \{}
+\DoxyCodeLine{1011                     brect.y = \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{std::max}}(0, frame.rows -\/ brect.height -\/ 1);}
+\DoxyCodeLine{1012                     brect.height = \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{std::min}}(brect.height, frame.rows -\/ 1);}
+\DoxyCodeLine{1013                 \}}
+\DoxyCodeLine{1014                 \mbox{\hyperlink{examples_8h_accca05b42ef44c98d56e76957bd53a94}{DrawFilledRect}}(frame, cv::Rect(cv::Point(brect.x, brect.y -\/ labelSize.height), cv::Size(labelSize.width, labelSize.height + baseLine)), cv::Scalar(200, 200, 200), 150);}
+\DoxyCodeLine{1015                 cv::putText(frame, label.str(), brect.tl(), cv::FONT\_HERSHEY\_SIMPLEX, 0.5, cv::Scalar(0, 0, 0));}
+\DoxyCodeLine{1016             \}}
+\DoxyCodeLine{1017         \}}
+\DoxyCodeLine{1018 }
+\DoxyCodeLine{1019         \textcolor{comment}{//m\_detector-\/>CalcMotionMap(frame);}}
+\DoxyCodeLine{1020     \}}
+\DoxyCodeLine{1021 \};}
+\DoxyCodeLine{1022 }
+\DoxyCodeLine{1023 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

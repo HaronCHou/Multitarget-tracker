@@ -1,0 +1,661 @@
+\hypertarget{stl__bind_8h_source}{}\doxysection{stl\+\_\+bind.\+h}
+\label{stl__bind_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/stl\_bind.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/stl\_bind.h}}
+\mbox{\hyperlink{stl__bind_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{    pybind11/std\_bind.h: Binding generators for STL data types}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{    Copyright (c) 2016 Sergey Lyskov and Wenzel Jakob}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{    All rights reserved. Use of this source code is governed by a}}
+\DoxyCodeLine{7 \textcolor{comment}{    BSD-\/style license that can be found in the LICENSE file.}}
+\DoxyCodeLine{8 \textcolor{comment}{*/}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{detail_2common_8h}{detail/common.h}}"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{operators_8h}{operators.h}}"{}}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <sstream>}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+\DoxyCodeLine{19 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{comment}{/* SFINAE helper class used by 'is\_comparable */}}
+\DoxyCodeLine{22 template <typename T>  struct \mbox{\hyperlink{structcontainer__traits}{container\_traits}} \{}
+\DoxyCodeLine{23     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T2> \textcolor{keyword}{static} std::true\_type \mbox{\hyperlink{structcontainer__traits_a0a60178e5fff65d3a89a1454776e1668}{test\_comparable}}(\textcolor{keyword}{decltype}(std::declval<const T2 \&>() == std::declval<const T2 \&>())*);}
+\DoxyCodeLine{24     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T2> \textcolor{keyword}{static} std::false\_type \mbox{\hyperlink{structcontainer__traits_ac2cd8fecd9029ec8e2a4d14b04223d6d}{test\_comparable}}(...);}
+\DoxyCodeLine{25     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T2> \textcolor{keyword}{static} std::true\_type \mbox{\hyperlink{structcontainer__traits_a00e1d17df72634112a0d82724df08e97}{test\_value}}(\textcolor{keyword}{typename} T2::value\_type *);}
+\DoxyCodeLine{26     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T2> \textcolor{keyword}{static} std::false\_type \mbox{\hyperlink{structcontainer__traits_a8ed5be321721d91c3d68ef269b848988}{test\_value}}(...);}
+\DoxyCodeLine{27     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T2> \textcolor{keyword}{static} std::true\_type \mbox{\hyperlink{structcontainer__traits_a29ea1a081953a79394605cc9ca7a3694}{test\_pair}}(\textcolor{keyword}{typename} T2::first\_type *, \textcolor{keyword}{typename} T2::second\_type *);}
+\DoxyCodeLine{28     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T2> \textcolor{keyword}{static} std::false\_type \mbox{\hyperlink{structcontainer__traits_afbc50d3448c347e73f94cfe1a8d1b2b8}{test\_pair}}(...);}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{const} \textcolor{keywordtype}{bool} \mbox{\hyperlink{structis__comparable}{is\_comparable}} = std::is\_same<std::true\_type, decltype(test\_comparable<T>(\textcolor{keyword}{nullptr}))>::value;}
+\DoxyCodeLine{31     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{const} \textcolor{keywordtype}{bool} is\_pair = std::is\_same<std::true\_type, decltype(test\_pair<T>(\textcolor{keyword}{nullptr}, \textcolor{keyword}{nullptr}))>::value;}
+\DoxyCodeLine{32     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{const} \textcolor{keywordtype}{bool} is\_vector = std::is\_same<std::true\_type, decltype(test\_value<T>(\textcolor{keyword}{nullptr}))>::value;}
+\DoxyCodeLine{33     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{const} \textcolor{keywordtype}{bool} is\_element = !is\_pair \&\& !is\_vector;}
+\DoxyCodeLine{34 \};}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{comment}{/* Default: is\_comparable -\/> std::false\_type */}}
+\DoxyCodeLine{37 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T, \textcolor{keyword}{typename} SFINAE = \textcolor{keywordtype}{void}>}
+\DoxyCodeLine{38 \textcolor{keyword}{struct }\mbox{\hyperlink{structis__comparable}{is\_comparable}} : std::false\_type \{ \};}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 \textcolor{comment}{/* For non-\/map data structures, check whether operator== can be instantiated */}}
+\DoxyCodeLine{41 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{42 \textcolor{keyword}{struct }\mbox{\hyperlink{structis__comparable}{is\_comparable}}<}
+\DoxyCodeLine{43     T, \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<\mbox{\hyperlink{structcontainer__traits}{container\_traits}}<T>::is\_element \&\&}
+\DoxyCodeLine{44                    \mbox{\hyperlink{structcontainer__traits}{container\_traits}}<T>\mbox{\hyperlink{structis__comparable}{::is\_comparable}}>>}
+\DoxyCodeLine{45     : std::true\_type \{ \};}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \textcolor{comment}{/* For a vector/map data structure, recursively check the value type (which is std::pair for maps) */}}
+\DoxyCodeLine{48 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{49 \textcolor{keyword}{struct }\mbox{\hyperlink{structis__comparable}{is\_comparable}}<T, \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<\mbox{\hyperlink{structcontainer__traits}{container\_traits}}<T>::is\_vector>> \{}
+\DoxyCodeLine{50     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{const} \textcolor{keywordtype}{bool} value =}
+\DoxyCodeLine{51         \mbox{\hyperlink{structis__comparable}{is\_comparable<typename T::value\_type>::value}};}
+\DoxyCodeLine{52 \};}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{comment}{/* For pairs, recursively check the two data types */}}
+\DoxyCodeLine{55 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{56 \textcolor{keyword}{struct }\mbox{\hyperlink{structis__comparable}{is\_comparable}}<T, \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<\mbox{\hyperlink{structcontainer__traits}{container\_traits}}<T>::is\_pair>> \{}
+\DoxyCodeLine{57     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{const} \textcolor{keywordtype}{bool} value =}
+\DoxyCodeLine{58         \mbox{\hyperlink{structis__comparable}{is\_comparable<typename T::first\_type>::value}} \&\&}
+\DoxyCodeLine{59         \mbox{\hyperlink{structis__comparable}{is\_comparable<typename T::second\_type>::value}};}
+\DoxyCodeLine{60 \};}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{comment}{/* Fallback functions */}}
+\DoxyCodeLine{63 \textcolor{keyword}{template} <\textcolor{keyword}{typename}, \textcolor{keyword}{typename}, \textcolor{keyword}{typename}... Args> \textcolor{keywordtype}{void} \mbox{\hyperlink{stl__bind_8h_a47e3a662b602db9d3b8efe78cf642ed5}{vector\_if\_copy\_constructible}}(\textcolor{keyword}{const} Args \&...) \{ \}}
+\DoxyCodeLine{64 \textcolor{keyword}{template} <\textcolor{keyword}{typename}, \textcolor{keyword}{typename}, \textcolor{keyword}{typename}... Args> \textcolor{keywordtype}{void} \mbox{\hyperlink{stl__bind_8h_a3321d31f31f31ce4f15df2a5ca0f3c5b}{vector\_if\_equal\_operator}}(\textcolor{keyword}{const} Args \&...) \{ \}}
+\DoxyCodeLine{65 \textcolor{keyword}{template} <\textcolor{keyword}{typename}, \textcolor{keyword}{typename}, \textcolor{keyword}{typename}... Args> \textcolor{keywordtype}{void} \mbox{\hyperlink{stl__bind_8h_ae934bc2550663d06f547d0aecdc133e5}{vector\_if\_insertion\_operator}}(\textcolor{keyword}{const} Args \&...) \{ \}}
+\DoxyCodeLine{66 \textcolor{keyword}{template} <\textcolor{keyword}{typename}, \textcolor{keyword}{typename}, \textcolor{keyword}{typename}... Args> \textcolor{keywordtype}{void} \mbox{\hyperlink{stl__bind_8h_a7b76294fb8225f2708a0ee188f80dc1f}{vector\_modifiers}}(\textcolor{keyword}{const} Args \&...) \{ \}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68 \textcolor{keyword}{template}<\textcolor{keyword}{typename} Vector, \textcolor{keyword}{typename} Class\_>}
+\DoxyCodeLine{69 \textcolor{keywordtype}{void} \mbox{\hyperlink{stl__bind_8h_a47e3a662b602db9d3b8efe78cf642ed5}{vector\_if\_copy\_constructible}}(\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<\mbox{\hyperlink{structis__copy__constructible}{is\_copy\_constructible<Vector>::value}}, Class\_> \&cl) \{}
+\DoxyCodeLine{70     cl.def(init<const Vector \&>(), \textcolor{stringliteral}{"{}Copy constructor"{}});}
+\DoxyCodeLine{71 \}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \textcolor{keyword}{template}<\textcolor{keyword}{typename} Vector, \textcolor{keyword}{typename} Class\_>}
+\DoxyCodeLine{74 \textcolor{keywordtype}{void} \mbox{\hyperlink{stl__bind_8h_a3321d31f31f31ce4f15df2a5ca0f3c5b}{vector\_if\_equal\_operator}}(\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<\mbox{\hyperlink{structis__comparable}{is\_comparable<Vector>::value}}, Class\_> \&cl) \{}
+\DoxyCodeLine{75     \textcolor{keyword}{using} T = \textcolor{keyword}{typename} Vector::value\_type;}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77     cl.def(\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}} == \mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}});}
+\DoxyCodeLine{78     cl.def(\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}} != \mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}});}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80     cl.def(\textcolor{stringliteral}{"{}count"{}},}
+\DoxyCodeLine{81         [](\textcolor{keyword}{const} Vector \&v, \textcolor{keyword}{const} T \&\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}) \{}
+\DoxyCodeLine{82             \textcolor{keywordflow}{return} std::count(v.begin(), v.end(), \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}});}
+\DoxyCodeLine{83         \},}
+\DoxyCodeLine{84         \mbox{\hyperlink{structarg}{arg}}(\textcolor{stringliteral}{"{}x"{}}),}
+\DoxyCodeLine{85         \textcolor{stringliteral}{"{}Return the number of times ``x`` appears in the list"{}}}
+\DoxyCodeLine{86     );}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88     cl.def(\textcolor{stringliteral}{"{}remove"{}}, [](Vector \&v, \textcolor{keyword}{const} T \&\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}) \{}
+\DoxyCodeLine{89             \textcolor{keyword}{auto} p = std::find(v.begin(), v.end(), \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}});}
+\DoxyCodeLine{90             \textcolor{keywordflow}{if} (p != v.end())}
+\DoxyCodeLine{91                 v.erase(p);}
+\DoxyCodeLine{92             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{93                 \textcolor{keywordflow}{throw} value\_error();}
+\DoxyCodeLine{94         \},}
+\DoxyCodeLine{95         \mbox{\hyperlink{structarg}{arg}}(\textcolor{stringliteral}{"{}x"{}}),}
+\DoxyCodeLine{96         \textcolor{stringliteral}{"{}Remove the first item from the list whose value is x. "{}}}
+\DoxyCodeLine{97         \textcolor{stringliteral}{"{}It is an error if there is no such item."{}}}
+\DoxyCodeLine{98     );}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100     cl.def(\textcolor{stringliteral}{"{}\_\_contains\_\_"{}},}
+\DoxyCodeLine{101         [](\textcolor{keyword}{const} Vector \&v, \textcolor{keyword}{const} T \&\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}) \{}
+\DoxyCodeLine{102             \textcolor{keywordflow}{return} std::find(v.begin(), v.end(), \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}) != v.end();}
+\DoxyCodeLine{103         \},}
+\DoxyCodeLine{104         \mbox{\hyperlink{structarg}{arg}}(\textcolor{stringliteral}{"{}x"{}}),}
+\DoxyCodeLine{105         \textcolor{stringliteral}{"{}Return true the container contains ``x``"{}}}
+\DoxyCodeLine{106     );}
+\DoxyCodeLine{107 \}}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109 \textcolor{comment}{// Vector modifiers -\/-\/ requires a copyable vector\_type:}}
+\DoxyCodeLine{110 \textcolor{comment}{// (Technically, some of these (pop and \_\_delitem\_\_) don't actually require copyability, but it seems}}
+\DoxyCodeLine{111 \textcolor{comment}{// silly to allow deletion but not insertion, so include them here too.)}}
+\DoxyCodeLine{112 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Vector, \textcolor{keyword}{typename} Class\_>}
+\DoxyCodeLine{113 \textcolor{keywordtype}{void} \mbox{\hyperlink{stl__bind_8h_a7b76294fb8225f2708a0ee188f80dc1f}{vector\_modifiers}}(\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<\mbox{\hyperlink{structis__copy__constructible}{is\_copy\_constructible<typename Vector::value\_type>::value}}, Class\_> \&cl) \{}
+\DoxyCodeLine{114     \textcolor{keyword}{using} T = \textcolor{keyword}{typename} Vector::value\_type;}
+\DoxyCodeLine{115     \textcolor{keyword}{using} SizeType = \textcolor{keyword}{typename} Vector::size\_type;}
+\DoxyCodeLine{116     \textcolor{keyword}{using} DiffType = \textcolor{keyword}{typename} Vector::difference\_type;}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118     \textcolor{keyword}{auto} wrap\_i = [](DiffType i, SizeType n) \{}
+\DoxyCodeLine{119         \textcolor{keywordflow}{if} (i < 0)}
+\DoxyCodeLine{120             i += n;}
+\DoxyCodeLine{121         \textcolor{keywordflow}{if} (i < 0 || (SizeType)i >= n)}
+\DoxyCodeLine{122             \textcolor{keywordflow}{throw} index\_error();}
+\DoxyCodeLine{123         \textcolor{keywordflow}{return} i;}
+\DoxyCodeLine{124     \};}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126     cl.def(\textcolor{stringliteral}{"{}append"{}},}
+\DoxyCodeLine{127            [](Vector \&v, \textcolor{keyword}{const} T \&value) \{ v.push\_back(value); \},}
+\DoxyCodeLine{128            \mbox{\hyperlink{structarg}{arg}}(\textcolor{stringliteral}{"{}x"{}}),}
+\DoxyCodeLine{129            \textcolor{stringliteral}{"{}Add an item to the end of the list"{}});}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131     cl.def(\mbox{\hyperlink{yolo__v2__class_8cpp_adcf7f587fe7c5bfdcbe67ffa797763be}{init}}([](\mbox{\hyperlink{classiterable}{iterable}} it) \{}
+\DoxyCodeLine{132         \textcolor{keyword}{auto} v = std::unique\_ptr<Vector>(\textcolor{keyword}{new} Vector());}
+\DoxyCodeLine{133         v-\/>reserve(\mbox{\hyperlink{group__python__builtins_ga348684b7b21dff091e602b1fa02d0195}{len\_hint}}(it));}
+\DoxyCodeLine{134         \textcolor{keywordflow}{for} (\mbox{\hyperlink{classhandle}{handle}} h : it)}
+\DoxyCodeLine{135            v-\/>push\_back(h.cast<T>());}
+\DoxyCodeLine{136         \textcolor{keywordflow}{return} v.release();}
+\DoxyCodeLine{137     \}));}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{139     cl.def(\textcolor{stringliteral}{"{}clear"{}},}
+\DoxyCodeLine{140         [](Vector \&v) \{}
+\DoxyCodeLine{141             v.clear();}
+\DoxyCodeLine{142         \},}
+\DoxyCodeLine{143         \textcolor{stringliteral}{"{}Clear the contents"{}}}
+\DoxyCodeLine{144     );}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146     cl.def(\textcolor{stringliteral}{"{}extend"{}},}
+\DoxyCodeLine{147        [](Vector \&v, \textcolor{keyword}{const} Vector \&src) \{}
+\DoxyCodeLine{148            v.insert(v.end(), src.begin(), src.end());}
+\DoxyCodeLine{149        \},}
+\DoxyCodeLine{150        \mbox{\hyperlink{structarg}{arg}}(\textcolor{stringliteral}{"{}L"{}}),}
+\DoxyCodeLine{151        \textcolor{stringliteral}{"{}Extend the list by appending all the items in the given list"{}}}
+\DoxyCodeLine{152     );}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154     cl.def(\textcolor{stringliteral}{"{}extend"{}},}
+\DoxyCodeLine{155        [](Vector \&v, \mbox{\hyperlink{classiterable}{iterable}} it) \{}
+\DoxyCodeLine{156            \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} old\_size = v.size();}
+\DoxyCodeLine{157            v.reserve(old\_size + \mbox{\hyperlink{group__python__builtins_ga348684b7b21dff091e602b1fa02d0195}{len\_hint}}(it));}
+\DoxyCodeLine{158            \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{159                \textcolor{keywordflow}{for} (\mbox{\hyperlink{classhandle}{handle}} h : it) \{}
+\DoxyCodeLine{160                    v.push\_back(h.cast<T>());}
+\DoxyCodeLine{161                \}}
+\DoxyCodeLine{162            \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} cast\_error \&) \{}
+\DoxyCodeLine{163                v.erase(v.begin() + \textcolor{keyword}{static\_cast<}typename Vector::difference\_type\textcolor{keyword}{>}(old\_size), v.end());}
+\DoxyCodeLine{164                \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{165                    v.shrink\_to\_fit();}
+\DoxyCodeLine{166                \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::exception \&) \{}
+\DoxyCodeLine{167                    \textcolor{comment}{// Do nothing}}
+\DoxyCodeLine{168                \}}
+\DoxyCodeLine{169                \textcolor{keywordflow}{throw};}
+\DoxyCodeLine{170            \}}
+\DoxyCodeLine{171        \},}
+\DoxyCodeLine{172        \mbox{\hyperlink{structarg}{arg}}(\textcolor{stringliteral}{"{}L"{}}),}
+\DoxyCodeLine{173        \textcolor{stringliteral}{"{}Extend the list by appending all the items in the given list"{}}}
+\DoxyCodeLine{174     );}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{176     cl.def(\textcolor{stringliteral}{"{}insert"{}},}
+\DoxyCodeLine{177         [](Vector \&v, DiffType i, \textcolor{keyword}{const} T \&\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}) \{}
+\DoxyCodeLine{178             \textcolor{comment}{// Can't use wrap\_i; i == v.size() is OK}}
+\DoxyCodeLine{179             \textcolor{keywordflow}{if} (i < 0)}
+\DoxyCodeLine{180                 i += v.size();}
+\DoxyCodeLine{181             \textcolor{keywordflow}{if} (i < 0 || (SizeType)i > v.size())}
+\DoxyCodeLine{182                 \textcolor{keywordflow}{throw} index\_error();}
+\DoxyCodeLine{183             v.insert(v.begin() + i, \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}});}
+\DoxyCodeLine{184         \},}
+\DoxyCodeLine{185         \mbox{\hyperlink{structarg}{arg}}(\textcolor{stringliteral}{"{}i"{}}) , \mbox{\hyperlink{structarg}{arg}}(\textcolor{stringliteral}{"{}x"{}}),}
+\DoxyCodeLine{186         \textcolor{stringliteral}{"{}Insert an item at a given position."{}}}
+\DoxyCodeLine{187     );}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189     cl.def(\textcolor{stringliteral}{"{}pop"{}},}
+\DoxyCodeLine{190         [](Vector \&v) \{}
+\DoxyCodeLine{191             \textcolor{keywordflow}{if} (v.empty())}
+\DoxyCodeLine{192                 \textcolor{keywordflow}{throw} index\_error();}
+\DoxyCodeLine{193             T t = v.back();}
+\DoxyCodeLine{194             v.pop\_back();}
+\DoxyCodeLine{195             \textcolor{keywordflow}{return} t;}
+\DoxyCodeLine{196         \},}
+\DoxyCodeLine{197         \textcolor{stringliteral}{"{}Remove and return the last item"{}}}
+\DoxyCodeLine{198     );}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{200     cl.def(\textcolor{stringliteral}{"{}pop"{}},}
+\DoxyCodeLine{201         [wrap\_i](Vector \&v, DiffType i) \{}
+\DoxyCodeLine{202             i = wrap\_i(i, v.size());}
+\DoxyCodeLine{203             T t = v[(SizeType) i];}
+\DoxyCodeLine{204             v.erase(v.begin() + i);}
+\DoxyCodeLine{205             \textcolor{keywordflow}{return} t;}
+\DoxyCodeLine{206         \},}
+\DoxyCodeLine{207         \mbox{\hyperlink{structarg}{arg}}(\textcolor{stringliteral}{"{}i"{}}),}
+\DoxyCodeLine{208         \textcolor{stringliteral}{"{}Remove and return the item at index ``i``"{}}}
+\DoxyCodeLine{209     );}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{211     cl.def(\textcolor{stringliteral}{"{}\_\_setitem\_\_"{}},}
+\DoxyCodeLine{212         [wrap\_i](Vector \&v, DiffType i, \textcolor{keyword}{const} T \&t) \{}
+\DoxyCodeLine{213             i = wrap\_i(i, v.size());}
+\DoxyCodeLine{214             v[(SizeType)i] = t;}
+\DoxyCodeLine{215         \}}
+\DoxyCodeLine{216     );}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{219     cl.def(\textcolor{stringliteral}{"{}\_\_getitem\_\_"{}},}
+\DoxyCodeLine{220         [](\textcolor{keyword}{const} Vector \&v, \mbox{\hyperlink{classslice}{slice}} \mbox{\hyperlink{classslice}{slice}}) -\/> Vector * \{}
+\DoxyCodeLine{221             \textcolor{keywordtype}{size\_t} start, stop, step, slicelength;}
+\DoxyCodeLine{222 }
+\DoxyCodeLine{223             \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classslice}{slice}}.\mbox{\hyperlink{classslice_ab45c9007278b27dcc5bacc3eb38be926}{compute}}(v.size(), \&start, \&stop, \&step, \&slicelength))}
+\DoxyCodeLine{224                 \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}();}
+\DoxyCodeLine{225 }
+\DoxyCodeLine{226             Vector *seq = \textcolor{keyword}{new} Vector();}
+\DoxyCodeLine{227             seq-\/>reserve((\textcolor{keywordtype}{size\_t}) slicelength);}
+\DoxyCodeLine{228 }
+\DoxyCodeLine{229             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i=0; i<slicelength; ++i) \{}
+\DoxyCodeLine{230                 seq-\/>push\_back(v[start]);}
+\DoxyCodeLine{231                 start += step;}
+\DoxyCodeLine{232             \}}
+\DoxyCodeLine{233             \textcolor{keywordflow}{return} seq;}
+\DoxyCodeLine{234         \},}
+\DoxyCodeLine{235         \mbox{\hyperlink{structarg}{arg}}(\textcolor{stringliteral}{"{}s"{}}),}
+\DoxyCodeLine{236         \textcolor{stringliteral}{"{}Retrieve list elements using a slice object"{}}}
+\DoxyCodeLine{237     );}
+\DoxyCodeLine{238 }
+\DoxyCodeLine{239     cl.def(\textcolor{stringliteral}{"{}\_\_setitem\_\_"{}},}
+\DoxyCodeLine{240         [](Vector \&v, \mbox{\hyperlink{classslice}{slice}} \mbox{\hyperlink{classslice}{slice}},  \textcolor{keyword}{const} Vector \&value) \{}
+\DoxyCodeLine{241             \textcolor{keywordtype}{size\_t} start, stop, step, slicelength;}
+\DoxyCodeLine{242             \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classslice}{slice}}.\mbox{\hyperlink{classslice_ab45c9007278b27dcc5bacc3eb38be926}{compute}}(v.size(), \&start, \&stop, \&step, \&slicelength))}
+\DoxyCodeLine{243                 \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}();}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{245             \textcolor{keywordflow}{if} (slicelength != value.size())}
+\DoxyCodeLine{246                 \textcolor{keywordflow}{throw} std::runtime\_error(\textcolor{stringliteral}{"{}Left and right hand size of slice assignment have different sizes!"{}});}
+\DoxyCodeLine{247 }
+\DoxyCodeLine{248             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i=0; i<slicelength; ++i) \{}
+\DoxyCodeLine{249                 v[start] = value[i];}
+\DoxyCodeLine{250                 start += step;}
+\DoxyCodeLine{251             \}}
+\DoxyCodeLine{252         \},}
+\DoxyCodeLine{253         \textcolor{stringliteral}{"{}Assign list elements using a slice object"{}}}
+\DoxyCodeLine{254     );}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{256     cl.def(\textcolor{stringliteral}{"{}\_\_delitem\_\_"{}},}
+\DoxyCodeLine{257         [wrap\_i](Vector \&v, DiffType i) \{}
+\DoxyCodeLine{258             i = wrap\_i(i, v.size());}
+\DoxyCodeLine{259             v.erase(v.begin() + i);}
+\DoxyCodeLine{260         \},}
+\DoxyCodeLine{261         \textcolor{stringliteral}{"{}Delete the list elements at index ``i``"{}}}
+\DoxyCodeLine{262     );}
+\DoxyCodeLine{263 }
+\DoxyCodeLine{264     cl.def(\textcolor{stringliteral}{"{}\_\_delitem\_\_"{}},}
+\DoxyCodeLine{265         [](Vector \&v, \mbox{\hyperlink{classslice}{slice}} \mbox{\hyperlink{classslice}{slice}}) \{}
+\DoxyCodeLine{266             \textcolor{keywordtype}{size\_t} start, stop, step, slicelength;}
+\DoxyCodeLine{267 }
+\DoxyCodeLine{268             \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classslice}{slice}}.\mbox{\hyperlink{classslice_ab45c9007278b27dcc5bacc3eb38be926}{compute}}(v.size(), \&start, \&stop, \&step, \&slicelength))}
+\DoxyCodeLine{269                 \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}();}
+\DoxyCodeLine{270 }
+\DoxyCodeLine{271             \textcolor{keywordflow}{if} (step == 1 \&\& \textcolor{keyword}{false}) \{}
+\DoxyCodeLine{272                 v.erase(v.begin() + (DiffType) start, v.begin() + DiffType(start + slicelength));}
+\DoxyCodeLine{273             \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{274                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < slicelength; ++i) \{}
+\DoxyCodeLine{275                     v.erase(v.begin() + DiffType(start));}
+\DoxyCodeLine{276                     start += step -\/ 1;}
+\DoxyCodeLine{277                 \}}
+\DoxyCodeLine{278             \}}
+\DoxyCodeLine{279         \},}
+\DoxyCodeLine{280         \textcolor{stringliteral}{"{}Delete list elements using a slice object"{}}}
+\DoxyCodeLine{281     );}
+\DoxyCodeLine{282 }
+\DoxyCodeLine{283 \}}
+\DoxyCodeLine{284 }
+\DoxyCodeLine{285 \textcolor{comment}{// If the type has an operator[] that doesn't return a reference (most notably std::vector<bool>),}}
+\DoxyCodeLine{286 \textcolor{comment}{// we have to access by copying; otherwise we return by reference.}}
+\DoxyCodeLine{287 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Vector> \textcolor{keyword}{using} \mbox{\hyperlink{structnegation}{vector\_needs\_copy}} = \mbox{\hyperlink{structnegation}{negation}}<}
+\DoxyCodeLine{288     std::is\_same<decltype(std::declval<Vector>()[\textcolor{keyword}{typename} Vector::size\_type()]), \textcolor{keyword}{typename} Vector::value\_type \&>>;}
+\DoxyCodeLine{289 }
+\DoxyCodeLine{290 \textcolor{comment}{// The usual case: access and iterate by reference}}
+\DoxyCodeLine{291 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Vector, \textcolor{keyword}{typename} Class\_>}
+\DoxyCodeLine{292 \textcolor{keywordtype}{void} \mbox{\hyperlink{stl__bind_8h_a3ca2fe5533b984a4dd055f2ba590f121}{vector\_accessor}}(\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<!\mbox{\hyperlink{structnegation}{vector\_needs\_copy<Vector>::value}}, Class\_> \&cl) \{}
+\DoxyCodeLine{293     \textcolor{keyword}{using} T = \textcolor{keyword}{typename} Vector::value\_type;}
+\DoxyCodeLine{294     \textcolor{keyword}{using} SizeType = \textcolor{keyword}{typename} Vector::size\_type;}
+\DoxyCodeLine{295     \textcolor{keyword}{using} DiffType = \textcolor{keyword}{typename} Vector::difference\_type;}
+\DoxyCodeLine{296     \textcolor{keyword}{using} ItType   = \textcolor{keyword}{typename} Vector::iterator;}
+\DoxyCodeLine{297 }
+\DoxyCodeLine{298     \textcolor{keyword}{auto} wrap\_i = [](DiffType i, SizeType n) \{}
+\DoxyCodeLine{299         \textcolor{keywordflow}{if} (i < 0)}
+\DoxyCodeLine{300             i += n;}
+\DoxyCodeLine{301         \textcolor{keywordflow}{if} (i < 0 || (SizeType)i >= n)}
+\DoxyCodeLine{302             \textcolor{keywordflow}{throw} index\_error();}
+\DoxyCodeLine{303         \textcolor{keywordflow}{return} i;}
+\DoxyCodeLine{304     \};}
+\DoxyCodeLine{305 }
+\DoxyCodeLine{306     cl.def(\textcolor{stringliteral}{"{}\_\_getitem\_\_"{}},}
+\DoxyCodeLine{307         [wrap\_i](Vector \&v, DiffType i) -\/> T \& \{}
+\DoxyCodeLine{308             i = wrap\_i(i, v.size());}
+\DoxyCodeLine{309             \textcolor{keywordflow}{return} v[(SizeType)i];}
+\DoxyCodeLine{310         \},}
+\DoxyCodeLine{311         \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841aa39bc0596cb125c1605a78fbd287df7f}{return\_value\_policy::reference\_internal}} \textcolor{comment}{// ref + keepalive}}
+\DoxyCodeLine{312     );}
+\DoxyCodeLine{313 }
+\DoxyCodeLine{314     cl.def(\textcolor{stringliteral}{"{}\_\_iter\_\_"{}},}
+\DoxyCodeLine{315            [](Vector \&v) \{}
+\DoxyCodeLine{316                \textcolor{keywordflow}{return} \mbox{\hyperlink{pybind11_8h_aaa00ecd4f616ff84b63e81c8e17e457d}{make\_iterator}}<}
+\DoxyCodeLine{317                    \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841aa39bc0596cb125c1605a78fbd287df7f}{return\_value\_policy::reference\_internal}}, ItType, ItType, T\&>(}
+\DoxyCodeLine{318                    v.begin(), v.end());}
+\DoxyCodeLine{319            \},}
+\DoxyCodeLine{320            \mbox{\hyperlink{structkeep__alive}{keep\_alive<0, 1>}}() \textcolor{comment}{/* Essential: keep list alive while iterator exists */}}
+\DoxyCodeLine{321     );}
+\DoxyCodeLine{322 \}}
+\DoxyCodeLine{323 }
+\DoxyCodeLine{324 \textcolor{comment}{// The case for special objects, like std::vector<bool>, that have to be returned-\/by-\/copy:}}
+\DoxyCodeLine{325 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Vector, \textcolor{keyword}{typename} Class\_>}
+\DoxyCodeLine{326 \textcolor{keywordtype}{void} \mbox{\hyperlink{stl__bind_8h_a3ca2fe5533b984a4dd055f2ba590f121}{vector\_accessor}}(\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<\mbox{\hyperlink{structnegation}{vector\_needs\_copy<Vector>::value}}, Class\_> \&cl) \{}
+\DoxyCodeLine{327     \textcolor{keyword}{using} T = \textcolor{keyword}{typename} Vector::value\_type;}
+\DoxyCodeLine{328     \textcolor{keyword}{using} SizeType = \textcolor{keyword}{typename} Vector::size\_type;}
+\DoxyCodeLine{329     \textcolor{keyword}{using} DiffType = \textcolor{keyword}{typename} Vector::difference\_type;}
+\DoxyCodeLine{330     \textcolor{keyword}{using} ItType   = \textcolor{keyword}{typename} Vector::iterator;}
+\DoxyCodeLine{331     cl.def(\textcolor{stringliteral}{"{}\_\_getitem\_\_"{}},}
+\DoxyCodeLine{332         [](\textcolor{keyword}{const} Vector \&v, DiffType i) -\/> T \{}
+\DoxyCodeLine{333             \textcolor{keywordflow}{if} (i < 0 \&\& (i += v.size()) < 0)}
+\DoxyCodeLine{334                 \textcolor{keywordflow}{throw} index\_error();}
+\DoxyCodeLine{335             \textcolor{keywordflow}{if} ((SizeType)i >= v.size())}
+\DoxyCodeLine{336                 \textcolor{keywordflow}{throw} index\_error();}
+\DoxyCodeLine{337             \textcolor{keywordflow}{return} v[(SizeType)i];}
+\DoxyCodeLine{338         \}}
+\DoxyCodeLine{339     );}
+\DoxyCodeLine{340 }
+\DoxyCodeLine{341     cl.def(\textcolor{stringliteral}{"{}\_\_iter\_\_"{}},}
+\DoxyCodeLine{342            [](Vector \&v) \{}
+\DoxyCodeLine{343                \textcolor{keywordflow}{return} \mbox{\hyperlink{pybind11_8h_aaa00ecd4f616ff84b63e81c8e17e457d}{make\_iterator}}<}
+\DoxyCodeLine{344                    \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a12cba3ee81cf4a793796a51b6327c678}{return\_value\_policy::copy}}, ItType, ItType, T>(}
+\DoxyCodeLine{345                    v.begin(), v.end());}
+\DoxyCodeLine{346            \},}
+\DoxyCodeLine{347            \mbox{\hyperlink{structkeep__alive}{keep\_alive<0, 1>}}() \textcolor{comment}{/* Essential: keep list alive while iterator exists */}}
+\DoxyCodeLine{348     );}
+\DoxyCodeLine{349 \}}
+\DoxyCodeLine{350 }
+\DoxyCodeLine{351 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Vector, \textcolor{keyword}{typename} Class\_> \textcolor{keyword}{auto} \mbox{\hyperlink{stl__bind_8h_ae934bc2550663d06f547d0aecdc133e5}{vector\_if\_insertion\_operator}}(Class\_ \&cl, std::string \textcolor{keyword}{const} \&\mbox{\hyperlink{structname}{name}})}
+\DoxyCodeLine{352     -\/> \textcolor{keyword}{decltype}(std::declval<std::ostream\&>() << std::declval<typename Vector::value\_type>(), void()) \{}
+\DoxyCodeLine{353     \textcolor{keyword}{using} size\_type = \textcolor{keyword}{typename} Vector::size\_type;}
+\DoxyCodeLine{354 }
+\DoxyCodeLine{355     cl.def(\textcolor{stringliteral}{"{}\_\_repr\_\_"{}},}
+\DoxyCodeLine{356            [\mbox{\hyperlink{structname}{name}}](Vector \&v) \{}
+\DoxyCodeLine{357             std::ostringstream s;}
+\DoxyCodeLine{358             s << \mbox{\hyperlink{structname}{name}} << \textcolor{charliteral}{'['};}
+\DoxyCodeLine{359             \textcolor{keywordflow}{for} (size\_type i=0; i < v.size(); ++i) \{}
+\DoxyCodeLine{360                 s << v[i];}
+\DoxyCodeLine{361                 \textcolor{keywordflow}{if} (i != v.size() -\/ 1)}
+\DoxyCodeLine{362                     s << \textcolor{stringliteral}{"{}, "{}};}
+\DoxyCodeLine{363             \}}
+\DoxyCodeLine{364             s << \textcolor{charliteral}{']'};}
+\DoxyCodeLine{365             \textcolor{keywordflow}{return} s.str();}
+\DoxyCodeLine{366         \},}
+\DoxyCodeLine{367         \textcolor{stringliteral}{"{}Return the canonical string representation of this list."{}}}
+\DoxyCodeLine{368     );}
+\DoxyCodeLine{369 \}}
+\DoxyCodeLine{370 }
+\DoxyCodeLine{371 \textcolor{comment}{// Provide the buffer interface for vectors if we have data() and we have a format for it}}
+\DoxyCodeLine{372 \textcolor{comment}{// GCC seems to have "{}void std::vector<bool>::data()"{} -\/ doing SFINAE on the existence of data() is insufficient, we need to check it returns an appropriate pointer}}
+\DoxyCodeLine{373 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Vector, \textcolor{keyword}{typename} = \textcolor{keywordtype}{void}>}
+\DoxyCodeLine{374 \textcolor{keyword}{struct }\mbox{\hyperlink{structvector__has__data__and__format}{vector\_has\_data\_and\_format}} : std::false\_type \{\};}
+\DoxyCodeLine{375 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Vector>}
+\DoxyCodeLine{376 \textcolor{keyword}{struct }\mbox{\hyperlink{structvector__has__data__and__format}{vector\_has\_data\_and\_format}}<Vector, \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<\mbox{\hyperlink{namespacestd}{std}}::is\_same<decltype(format\_descriptor<typename Vector::value\_type>::format(), std::declval<Vector>().data()), typename Vector::value\_type*>::value>> : std::true\_type \{\};}
+\DoxyCodeLine{377 }
+\DoxyCodeLine{378 \textcolor{comment}{// Add the buffer interface to a vector}}
+\DoxyCodeLine{379 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Vector, \textcolor{keyword}{typename} Class\_, \textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{380 \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t<detail::any\_of<std::is\_same<Args, buffer\_protocol>}}...>::value>}
+\DoxyCodeLine{381 \mbox{\hyperlink{stl__bind_8h_a2b310c000d300d9621c1c4889b60f5f7}{vector\_buffer}}(Class\_\& cl) \{}
+\DoxyCodeLine{382     \textcolor{keyword}{using} T = \textcolor{keyword}{typename} Vector::value\_type;}
+\DoxyCodeLine{383 }
+\DoxyCodeLine{384     \textcolor{keyword}{static\_assert}(\mbox{\hyperlink{structvector__has__data__and__format}{vector\_has\_data\_and\_format<Vector>::value}}, \textcolor{stringliteral}{"{}There is not an appropriate format descriptor for this vector"{}});}
+\DoxyCodeLine{385 }
+\DoxyCodeLine{386     \textcolor{comment}{// numpy.h declares this for arbitrary types, but it may raise an exception and crash hard at runtime if PYBIND11\_NUMPY\_DTYPE hasn't been called, so check here}}
+\DoxyCodeLine{387     \mbox{\hyperlink{structformat__descriptor}{format\_descriptor<T>::format}}();}
+\DoxyCodeLine{388 }
+\DoxyCodeLine{389     cl.def\_buffer([](Vector\& v) -\/> \mbox{\hyperlink{structbuffer__info}{buffer\_info}} \{}
+\DoxyCodeLine{390         \textcolor{keywordflow}{return} \mbox{\hyperlink{structbuffer__info}{buffer\_info}}(v.data(), \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}\textcolor{keyword}{>}(\textcolor{keyword}{sizeof}(T)), \mbox{\hyperlink{structformat__descriptor}{format\_descriptor<T>::format}}(), 1, \{v.size()\}, \{sizeof(T)\});}
+\DoxyCodeLine{391     \});}
+\DoxyCodeLine{392 }
+\DoxyCodeLine{393     cl.def(\mbox{\hyperlink{yolo__v2__class_8cpp_adcf7f587fe7c5bfdcbe67ffa797763be}{init}}([](\mbox{\hyperlink{classbuffer}{buffer}} buf) \{}
+\DoxyCodeLine{394         \textcolor{keyword}{auto} \mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}} = buf.\mbox{\hyperlink{classbuffer_a410de778a607bf10ddfb1cdba4e72901}{request}}();}
+\DoxyCodeLine{395         \textcolor{keywordflow}{if} (\mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}.ndim != 1 || \mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}.strides[0] \% \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}\textcolor{keyword}{>}(\textcolor{keyword}{sizeof}(T)))}
+\DoxyCodeLine{396             \textcolor{keywordflow}{throw} type\_error(\textcolor{stringliteral}{"{}Only valid 1D buffers can be copied to a vector"{}});}
+\DoxyCodeLine{397         \textcolor{keywordflow}{if} (!detail::compare\_buffer\_info<T>::compare(\mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}) || (\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}) \textcolor{keyword}{sizeof}(T) != \mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}.itemsize)}
+\DoxyCodeLine{398             \textcolor{keywordflow}{throw} type\_error(\textcolor{stringliteral}{"{}Format mismatch (Python: "{}} + \mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}.format + \textcolor{stringliteral}{"{} C++: "{}} + \mbox{\hyperlink{structformat__descriptor}{format\_descriptor<T>::format}}() + \textcolor{stringliteral}{"{})"{}});}
+\DoxyCodeLine{399 }
+\DoxyCodeLine{400         \textcolor{keyword}{auto} vec = std::unique\_ptr<Vector>(\textcolor{keyword}{new} Vector());}
+\DoxyCodeLine{401         vec-\/>reserve((\textcolor{keywordtype}{size\_t}) \mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}.shape[0]);}
+\DoxyCodeLine{402         T *p = \textcolor{keyword}{static\_cast<}T*\textcolor{keyword}{>}(\mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}.ptr);}
+\DoxyCodeLine{403         \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} step = \mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}.strides[0] / \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}\textcolor{keyword}{>}(\textcolor{keyword}{sizeof}(T));}
+\DoxyCodeLine{404         T *\mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}} = p + \mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}.shape[0] * step;}
+\DoxyCodeLine{405         for (; p != \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}}; p += step)}
+\DoxyCodeLine{406             vec-\/>push\_back(*p);}
+\DoxyCodeLine{407         \textcolor{keywordflow}{return} vec.release();}
+\DoxyCodeLine{408     \}));}
+\DoxyCodeLine{409 }
+\DoxyCodeLine{410     \textcolor{keywordflow}{return};}
+\DoxyCodeLine{411 \}}
+\DoxyCodeLine{412 }
+\DoxyCodeLine{413 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Vector, \textcolor{keyword}{typename} Class\_, \textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{414 \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t<!detail::any\_of<std::is\_same<Args, buffer\_protocol>}}...>::value> \mbox{\hyperlink{stl__bind_8h_a2b310c000d300d9621c1c4889b60f5f7}{vector\_buffer}}(Class\_\&) \{\}}
+\DoxyCodeLine{415 }
+\DoxyCodeLine{416 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{417 }
+\DoxyCodeLine{418 \textcolor{comment}{//}}
+\DoxyCodeLine{419 \textcolor{comment}{// std::vector}}
+\DoxyCodeLine{420 \textcolor{comment}{//}}
+\DoxyCodeLine{421 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Vector, \textcolor{keyword}{typename} holder\_type = std::unique\_ptr<Vector>, \textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{422 \mbox{\hyperlink{classclass__}{class\_<Vector, holder\_type>}} \mbox{\hyperlink{stl__bind_8h_a2a748f396f5f33ad5b64e3b3b43f548a}{bind\_vector}}(\mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structscope}{scope}}, std::string \textcolor{keyword}{const} \&\mbox{\hyperlink{structname}{name}}, Args\&\&... \mbox{\hyperlink{classargs}{args}}) \{}
+\DoxyCodeLine{423     \textcolor{keyword}{using} Class\_ = \mbox{\hyperlink{classclass__}{class\_<Vector, holder\_type>}};}
+\DoxyCodeLine{424 }
+\DoxyCodeLine{425     \textcolor{comment}{// If the value\_type is unregistered (e.g. a converting type) or is itself registered}}
+\DoxyCodeLine{426     \textcolor{comment}{// module-\/local then make the vector binding module-\/local as well:}}
+\DoxyCodeLine{427     \textcolor{keyword}{using} vtype = \textcolor{keyword}{typename} Vector::value\_type;}
+\DoxyCodeLine{428     \textcolor{keyword}{auto} vtype\_info = \mbox{\hyperlink{cast_8h_a7cfdf88b5c39ce38304d9237a2006ecc}{detail::get\_type\_info}}(\textcolor{keyword}{typeid}(vtype));}
+\DoxyCodeLine{429     \textcolor{keywordtype}{bool} local = !vtype\_info || vtype\_info-\/>module\_local;}
+\DoxyCodeLine{430 }
+\DoxyCodeLine{431     Class\_ cl(\mbox{\hyperlink{structscope}{scope}}, \mbox{\hyperlink{structname}{name}}.c\_str(), pybind11::module\_local(local), std::forward<Args>(\mbox{\hyperlink{classargs}{args}})...);}
+\DoxyCodeLine{432 }
+\DoxyCodeLine{433     \textcolor{comment}{// Declare the buffer interface if a buffer\_protocol() is passed in}}
+\DoxyCodeLine{434     \mbox{\hyperlink{stl__bind_8h_a2b310c000d300d9621c1c4889b60f5f7}{detail::vector\_buffer}}<Vector, Class\_, Args...>(cl);}
+\DoxyCodeLine{435 }
+\DoxyCodeLine{436     cl.def(init<>());}
+\DoxyCodeLine{437 }
+\DoxyCodeLine{438     \textcolor{comment}{// Register copy constructor (if possible)}}
+\DoxyCodeLine{439     detail::vector\_if\_copy\_constructible<Vector, Class\_>(cl);}
+\DoxyCodeLine{440 }
+\DoxyCodeLine{441     \textcolor{comment}{// Register comparison-\/related operators and functions (if possible)}}
+\DoxyCodeLine{442     detail::vector\_if\_equal\_operator<Vector, Class\_>(cl);}
+\DoxyCodeLine{443 }
+\DoxyCodeLine{444     \textcolor{comment}{// Register stream insertion operator (if possible)}}
+\DoxyCodeLine{445     detail::vector\_if\_insertion\_operator<Vector, Class\_>(cl, \mbox{\hyperlink{structname}{name}});}
+\DoxyCodeLine{446 }
+\DoxyCodeLine{447     \textcolor{comment}{// Modifiers require copyable vector value type}}
+\DoxyCodeLine{448     detail::vector\_modifiers<Vector, Class\_>(cl);}
+\DoxyCodeLine{449 }
+\DoxyCodeLine{450     \textcolor{comment}{// Accessor and iterator; return by value if copyable, otherwise we return by ref + keep-\/alive}}
+\DoxyCodeLine{451     detail::vector\_accessor<Vector, Class\_>(cl);}
+\DoxyCodeLine{452 }
+\DoxyCodeLine{453     cl.def(\textcolor{stringliteral}{"{}\_\_bool\_\_"{}},}
+\DoxyCodeLine{454         [](\textcolor{keyword}{const} Vector \&v) -\/> \textcolor{keywordtype}{bool} \{}
+\DoxyCodeLine{455             \textcolor{keywordflow}{return} !v.empty();}
+\DoxyCodeLine{456         \},}
+\DoxyCodeLine{457         \textcolor{stringliteral}{"{}Check whether the list is nonempty"{}}}
+\DoxyCodeLine{458     );}
+\DoxyCodeLine{459 }
+\DoxyCodeLine{460     cl.def(\textcolor{stringliteral}{"{}\_\_len\_\_"{}}, \&Vector::size);}
+\DoxyCodeLine{461 }
+\DoxyCodeLine{462 }
+\DoxyCodeLine{463 }
+\DoxyCodeLine{464 }
+\DoxyCodeLine{465 \textcolor{preprocessor}{\#if 0}}
+\DoxyCodeLine{466     \textcolor{comment}{// C++ style functions deprecated, leaving it here as an example}}
+\DoxyCodeLine{467     cl.def(init<size\_type>());}
+\DoxyCodeLine{468 }
+\DoxyCodeLine{469     cl.def(\textcolor{stringliteral}{"{}resize"{}},}
+\DoxyCodeLine{470          (\textcolor{keywordtype}{void} (Vector::*) (size\_type count)) \& Vector::resize,}
+\DoxyCodeLine{471          \textcolor{stringliteral}{"{}changes the number of elements stored"{}});}
+\DoxyCodeLine{472 }
+\DoxyCodeLine{473     cl.def(\textcolor{stringliteral}{"{}erase"{}},}
+\DoxyCodeLine{474         [](Vector \&v, SizeType i) \{}
+\DoxyCodeLine{475         \textcolor{keywordflow}{if} (i >= v.size())}
+\DoxyCodeLine{476             \textcolor{keywordflow}{throw} index\_error();}
+\DoxyCodeLine{477         v.erase(v.begin() + i);}
+\DoxyCodeLine{478     \}, \textcolor{stringliteral}{"{}erases element at index ``i``"{}});}
+\DoxyCodeLine{479 }
+\DoxyCodeLine{480     cl.def(\textcolor{stringliteral}{"{}empty"{}},         \&Vector::empty,         \textcolor{stringliteral}{"{}checks whether the container is empty"{}});}
+\DoxyCodeLine{481     cl.def(\textcolor{stringliteral}{"{}size"{}},          \&Vector::size,          \textcolor{stringliteral}{"{}returns the number of elements"{}});}
+\DoxyCodeLine{482     cl.def(\textcolor{stringliteral}{"{}push\_back"{}}, (\textcolor{keywordtype}{void} (Vector::*)(\textcolor{keyword}{const} T\&)) \&Vector::push\_back, \textcolor{stringliteral}{"{}adds an element to the end"{}});}
+\DoxyCodeLine{483     cl.def(\textcolor{stringliteral}{"{}pop\_back"{}},                               \&Vector::pop\_back, \textcolor{stringliteral}{"{}removes the last element"{}});}
+\DoxyCodeLine{484 }
+\DoxyCodeLine{485     cl.def(\textcolor{stringliteral}{"{}max\_size"{}},      \&Vector::max\_size,      \textcolor{stringliteral}{"{}returns the maximum possible number of elements"{}});}
+\DoxyCodeLine{486     cl.def(\textcolor{stringliteral}{"{}reserve"{}},       \&Vector::reserve,       \textcolor{stringliteral}{"{}reserves storage"{}});}
+\DoxyCodeLine{487     cl.def(\textcolor{stringliteral}{"{}capacity"{}},      \&Vector::capacity,      \textcolor{stringliteral}{"{}returns the number of elements that can be held in currently allocated storage"{}});}
+\DoxyCodeLine{488     cl.def(\textcolor{stringliteral}{"{}shrink\_to\_fit"{}}, \&Vector::shrink\_to\_fit, \textcolor{stringliteral}{"{}reduces memory usage by freeing unused memory"{}});}
+\DoxyCodeLine{489 }
+\DoxyCodeLine{490     cl.def(\textcolor{stringliteral}{"{}clear"{}}, \&Vector::clear, \textcolor{stringliteral}{"{}clears the contents"{}});}
+\DoxyCodeLine{491     cl.def(\textcolor{stringliteral}{"{}swap"{}},   \&\mbox{\hyperlink{gemm_8c_a1c82d0dbfe1c362b02510494287bdffa}{Vector::swap}}, \textcolor{stringliteral}{"{}swaps the contents"{}});}
+\DoxyCodeLine{492 }
+\DoxyCodeLine{493     cl.def(\textcolor{stringliteral}{"{}front"{}}, [](Vector \&v) \{}
+\DoxyCodeLine{494         \textcolor{keywordflow}{if} (v.size()) \textcolor{keywordflow}{return} v.front();}
+\DoxyCodeLine{495         \textcolor{keywordflow}{else} \textcolor{keywordflow}{throw} index\_error();}
+\DoxyCodeLine{496     \}, \textcolor{stringliteral}{"{}access the first element"{}});}
+\DoxyCodeLine{497 }
+\DoxyCodeLine{498     cl.def(\textcolor{stringliteral}{"{}back"{}}, [](Vector \&v) \{}
+\DoxyCodeLine{499         \textcolor{keywordflow}{if} (v.size()) \textcolor{keywordflow}{return} v.back();}
+\DoxyCodeLine{500         \textcolor{keywordflow}{else} \textcolor{keywordflow}{throw} index\_error();}
+\DoxyCodeLine{501     \}, \textcolor{stringliteral}{"{}access the last element "{}});}
+\DoxyCodeLine{502 }
+\DoxyCodeLine{503 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{504 }
+\DoxyCodeLine{505     \textcolor{keywordflow}{return} cl;}
+\DoxyCodeLine{506 \}}
+\DoxyCodeLine{507 }
+\DoxyCodeLine{508 }
+\DoxyCodeLine{509 }
+\DoxyCodeLine{510 \textcolor{comment}{//}}
+\DoxyCodeLine{511 \textcolor{comment}{// std::map, std::unordered\_map}}
+\DoxyCodeLine{512 \textcolor{comment}{//}}
+\DoxyCodeLine{513 }
+\DoxyCodeLine{514 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{515 }
+\DoxyCodeLine{516 \textcolor{comment}{/* Fallback functions */}}
+\DoxyCodeLine{517 template <typename, typename, typename... Args> \textcolor{keywordtype}{void} \mbox{\hyperlink{stl__bind_8h_aef691c4b89c8302d78bc4d749981d3a9}{map\_if\_insertion\_operator}}(const Args \&...) \{ \}}
+\DoxyCodeLine{518 \textcolor{keyword}{template} <\textcolor{keyword}{typename}, \textcolor{keyword}{typename}, \textcolor{keyword}{typename}... Args> \textcolor{keywordtype}{void} \mbox{\hyperlink{stl__bind_8h_a4c7c4c2d3781e3d482b1ba30ff3e338e}{map\_assignment}}(\textcolor{keyword}{const} Args \&...) \{ \}}
+\DoxyCodeLine{519 }
+\DoxyCodeLine{520 \textcolor{comment}{// Map assignment when copy-\/assignable: just copy the value}}
+\DoxyCodeLine{521 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Map, \textcolor{keyword}{typename} Class\_>}
+\DoxyCodeLine{522 \textcolor{keywordtype}{void} \mbox{\hyperlink{stl__bind_8h_a4c7c4c2d3781e3d482b1ba30ff3e338e}{map\_assignment}}(\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<\mbox{\hyperlink{structis__copy__assignable}{is\_copy\_assignable<typename Map::mapped\_type>::value}}, Class\_> \&cl) \{}
+\DoxyCodeLine{523     \textcolor{keyword}{using} KeyType = \textcolor{keyword}{typename} Map::key\_type;}
+\DoxyCodeLine{524     \textcolor{keyword}{using} MappedType = \textcolor{keyword}{typename} Map::mapped\_type;}
+\DoxyCodeLine{525 }
+\DoxyCodeLine{526     cl.def(\textcolor{stringliteral}{"{}\_\_setitem\_\_"{}},}
+\DoxyCodeLine{527            [](Map \&m, \textcolor{keyword}{const} KeyType \&k, \textcolor{keyword}{const} MappedType \&v) \{}
+\DoxyCodeLine{528                \textcolor{keyword}{auto} it = m.find(k);}
+\DoxyCodeLine{529                \textcolor{keywordflow}{if} (it != m.end()) it-\/>second = v;}
+\DoxyCodeLine{530                \textcolor{keywordflow}{else} m.emplace(k, v);}
+\DoxyCodeLine{531            \}}
+\DoxyCodeLine{532     );}
+\DoxyCodeLine{533 \}}
+\DoxyCodeLine{534 }
+\DoxyCodeLine{535 \textcolor{comment}{// Not copy-\/assignable, but still copy-\/constructible: we can update the value by erasing and reinserting}}
+\DoxyCodeLine{536 \textcolor{keyword}{template}<\textcolor{keyword}{typename} Map, \textcolor{keyword}{typename} Class\_>}
+\DoxyCodeLine{537 \textcolor{keywordtype}{void} \mbox{\hyperlink{stl__bind_8h_a4c7c4c2d3781e3d482b1ba30ff3e338e}{map\_assignment}}(\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<}
+\DoxyCodeLine{538         !\mbox{\hyperlink{structis__copy__assignable}{is\_copy\_assignable<typename Map::mapped\_type>::value}} \&\&}
+\DoxyCodeLine{539         \mbox{\hyperlink{structis__copy__constructible}{is\_copy\_constructible<typename Map::mapped\_type>::value}},}
+\DoxyCodeLine{540         Class\_> \&cl) \{}
+\DoxyCodeLine{541     \textcolor{keyword}{using} KeyType = \textcolor{keyword}{typename} Map::key\_type;}
+\DoxyCodeLine{542     \textcolor{keyword}{using} MappedType = \textcolor{keyword}{typename} Map::mapped\_type;}
+\DoxyCodeLine{543 }
+\DoxyCodeLine{544     cl.def(\textcolor{stringliteral}{"{}\_\_setitem\_\_"{}},}
+\DoxyCodeLine{545            [](Map \&m, \textcolor{keyword}{const} KeyType \&k, \textcolor{keyword}{const} MappedType \&v) \{}
+\DoxyCodeLine{546                \textcolor{comment}{// We can't use m[k] = v; because value type might not be default constructable}}
+\DoxyCodeLine{547                \textcolor{keyword}{auto} \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}} = m.emplace(k, v);}
+\DoxyCodeLine{548                \textcolor{keywordflow}{if} (!\mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}}.second) \{}
+\DoxyCodeLine{549                    \textcolor{comment}{// value type is not copy assignable so the only way to insert it is to erase it first...}}
+\DoxyCodeLine{550                    m.erase(r.first);}
+\DoxyCodeLine{551                    m.emplace(k, v);}
+\DoxyCodeLine{552                \}}
+\DoxyCodeLine{553            \}}
+\DoxyCodeLine{554     );}
+\DoxyCodeLine{555 \}}
+\DoxyCodeLine{556 }
+\DoxyCodeLine{557 }
+\DoxyCodeLine{558 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Map, \textcolor{keyword}{typename} Class\_> \textcolor{keyword}{auto} \mbox{\hyperlink{stl__bind_8h_aef691c4b89c8302d78bc4d749981d3a9}{map\_if\_insertion\_operator}}(Class\_ \&cl, std::string \textcolor{keyword}{const} \&\mbox{\hyperlink{structname}{name}})}
+\DoxyCodeLine{559 -\/> \textcolor{keyword}{decltype}(std::declval<std::ostream\&>() << std::declval<typename Map::key\_type>() << std::declval<typename Map::mapped\_type>(), void()) \{}
+\DoxyCodeLine{560 }
+\DoxyCodeLine{561     cl.def(\textcolor{stringliteral}{"{}\_\_repr\_\_"{}},}
+\DoxyCodeLine{562            [\mbox{\hyperlink{structname}{name}}](Map \&m) \{}
+\DoxyCodeLine{563             std::ostringstream s;}
+\DoxyCodeLine{564             s << \mbox{\hyperlink{structname}{name}} << \textcolor{charliteral}{'\{'};}
+\DoxyCodeLine{565             \textcolor{keywordtype}{bool} \mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{566             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \textcolor{keyword}{const} \&kv : m) \{}
+\DoxyCodeLine{567                 \textcolor{keywordflow}{if} (\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}})}
+\DoxyCodeLine{568                     s << \textcolor{stringliteral}{"{}, "{}};}
+\DoxyCodeLine{569                 s << kv.first << \textcolor{stringliteral}{"{}: "{}} << kv.second;}
+\DoxyCodeLine{570                 \mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{571             \}}
+\DoxyCodeLine{572             s << \textcolor{charliteral}{'\}'};}
+\DoxyCodeLine{573             \textcolor{keywordflow}{return} s.str();}
+\DoxyCodeLine{574         \},}
+\DoxyCodeLine{575         \textcolor{stringliteral}{"{}Return the canonical string representation of this map."{}}}
+\DoxyCodeLine{576     );}
+\DoxyCodeLine{577 \}}
+\DoxyCodeLine{578 }
+\DoxyCodeLine{579 }
+\DoxyCodeLine{580 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{581 }
+\DoxyCodeLine{582 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Map, \textcolor{keyword}{typename} holder\_type = std::unique\_ptr<Map>, \textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{583 \mbox{\hyperlink{classclass__}{class\_<Map, holder\_type>}} \mbox{\hyperlink{stl__bind_8h_a999075e2fc70681f89a6e0f2bbd9b8e0}{bind\_map}}(\mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structscope}{scope}}, \textcolor{keyword}{const} std::string \&\mbox{\hyperlink{structname}{name}}, Args\&\&... \mbox{\hyperlink{classargs}{args}}) \{}
+\DoxyCodeLine{584     \textcolor{keyword}{using} KeyType = \textcolor{keyword}{typename} Map::key\_type;}
+\DoxyCodeLine{585     \textcolor{keyword}{using} MappedType = \textcolor{keyword}{typename} Map::mapped\_type;}
+\DoxyCodeLine{586     \textcolor{keyword}{using} Class\_ = \mbox{\hyperlink{classclass__}{class\_<Map, holder\_type>}};}
+\DoxyCodeLine{587 }
+\DoxyCodeLine{588     \textcolor{comment}{// If either type is a non-\/module-\/local bound type then make the map binding non-\/local as well;}}
+\DoxyCodeLine{589     \textcolor{comment}{// otherwise (e.g. both types are either module-\/local or converting) the map will be}}
+\DoxyCodeLine{590     \textcolor{comment}{// module-\/local.}}
+\DoxyCodeLine{591     \textcolor{keyword}{auto} tinfo = \mbox{\hyperlink{cast_8h_a7cfdf88b5c39ce38304d9237a2006ecc}{detail::get\_type\_info}}(\textcolor{keyword}{typeid}(MappedType));}
+\DoxyCodeLine{592     \textcolor{keywordtype}{bool} local = !tinfo || tinfo-\/>module\_local;}
+\DoxyCodeLine{593     \textcolor{keywordflow}{if} (local) \{}
+\DoxyCodeLine{594         tinfo = \mbox{\hyperlink{cast_8h_a7cfdf88b5c39ce38304d9237a2006ecc}{detail::get\_type\_info}}(\textcolor{keyword}{typeid}(KeyType));}
+\DoxyCodeLine{595         local = !tinfo || tinfo-\/>module\_local;}
+\DoxyCodeLine{596     \}}
+\DoxyCodeLine{597 }
+\DoxyCodeLine{598     Class\_ cl(\mbox{\hyperlink{structscope}{scope}}, \mbox{\hyperlink{structname}{name}}.c\_str(), pybind11::module\_local(local), std::forward<Args>(\mbox{\hyperlink{classargs}{args}})...);}
+\DoxyCodeLine{599 }
+\DoxyCodeLine{600     cl.def(init<>());}
+\DoxyCodeLine{601 }
+\DoxyCodeLine{602     \textcolor{comment}{// Register stream insertion operator (if possible)}}
+\DoxyCodeLine{603     detail::map\_if\_insertion\_operator<Map, Class\_>(cl, \mbox{\hyperlink{structname}{name}});}
+\DoxyCodeLine{604 }
+\DoxyCodeLine{605     cl.def(\textcolor{stringliteral}{"{}\_\_bool\_\_"{}},}
+\DoxyCodeLine{606         [](\textcolor{keyword}{const} Map \&m) -\/> \textcolor{keywordtype}{bool} \{ \textcolor{keywordflow}{return} !m.empty(); \},}
+\DoxyCodeLine{607         \textcolor{stringliteral}{"{}Check whether the map is nonempty"{}}}
+\DoxyCodeLine{608     );}
+\DoxyCodeLine{609 }
+\DoxyCodeLine{610     cl.def(\textcolor{stringliteral}{"{}\_\_iter\_\_"{}},}
+\DoxyCodeLine{611            [](Map \&m) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{pybind11_8h_a53d442f04a8921c7dcc4407b05420752}{make\_key\_iterator}}(m.begin(), m.end()); \},}
+\DoxyCodeLine{612            \mbox{\hyperlink{structkeep__alive}{keep\_alive<0, 1>}}() \textcolor{comment}{/* Essential: keep list alive while iterator exists */}}
+\DoxyCodeLine{613     );}
+\DoxyCodeLine{614 }
+\DoxyCodeLine{615     cl.def(\textcolor{stringliteral}{"{}items"{}},}
+\DoxyCodeLine{616            [](Map \&m) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{pybind11_8h_aaa00ecd4f616ff84b63e81c8e17e457d}{make\_iterator}}(m.begin(), m.end()); \},}
+\DoxyCodeLine{617            \mbox{\hyperlink{structkeep__alive}{keep\_alive<0, 1>}}() \textcolor{comment}{/* Essential: keep list alive while iterator exists */}}
+\DoxyCodeLine{618     );}
+\DoxyCodeLine{619 }
+\DoxyCodeLine{620     cl.def(\textcolor{stringliteral}{"{}\_\_getitem\_\_"{}},}
+\DoxyCodeLine{621         [](Map \&m, \textcolor{keyword}{const} KeyType \&k) -\/> MappedType \& \{}
+\DoxyCodeLine{622             \textcolor{keyword}{auto} it = m.find(k);}
+\DoxyCodeLine{623             \textcolor{keywordflow}{if} (it == m.end())}
+\DoxyCodeLine{624               \textcolor{keywordflow}{throw} key\_error();}
+\DoxyCodeLine{625            \textcolor{keywordflow}{return} it-\/>second;}
+\DoxyCodeLine{626         \},}
+\DoxyCodeLine{627         \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841aa39bc0596cb125c1605a78fbd287df7f}{return\_value\_policy::reference\_internal}} \textcolor{comment}{// ref + keepalive}}
+\DoxyCodeLine{628     );}
+\DoxyCodeLine{629 }
+\DoxyCodeLine{630     cl.def(\textcolor{stringliteral}{"{}\_\_contains\_\_"{}},}
+\DoxyCodeLine{631         [](Map \&m, \textcolor{keyword}{const} KeyType \&k) -\/> \textcolor{keywordtype}{bool} \{}
+\DoxyCodeLine{632             \textcolor{keyword}{auto} it = m.find(k);}
+\DoxyCodeLine{633             \textcolor{keywordflow}{if} (it == m.end())}
+\DoxyCodeLine{634               \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{635            \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{636         \}}
+\DoxyCodeLine{637     );}
+\DoxyCodeLine{638 }
+\DoxyCodeLine{639     \textcolor{comment}{// Assignment provided only if the type is copyable}}
+\DoxyCodeLine{640     detail::map\_assignment<Map, Class\_>(cl);}
+\DoxyCodeLine{641 }
+\DoxyCodeLine{642     cl.def(\textcolor{stringliteral}{"{}\_\_delitem\_\_"{}},}
+\DoxyCodeLine{643            [](Map \&m, \textcolor{keyword}{const} KeyType \&k) \{}
+\DoxyCodeLine{644                \textcolor{keyword}{auto} it = m.find(k);}
+\DoxyCodeLine{645                \textcolor{keywordflow}{if} (it == m.end())}
+\DoxyCodeLine{646                    \textcolor{keywordflow}{throw} key\_error();}
+\DoxyCodeLine{647                m.erase(it);}
+\DoxyCodeLine{648            \}}
+\DoxyCodeLine{649     );}
+\DoxyCodeLine{650 }
+\DoxyCodeLine{651     cl.def(\textcolor{stringliteral}{"{}\_\_len\_\_"{}}, \&Map::size);}
+\DoxyCodeLine{652 }
+\DoxyCodeLine{653     \textcolor{keywordflow}{return} cl;}
+\DoxyCodeLine{654 \}}
+\DoxyCodeLine{655 }
+\DoxyCodeLine{656 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+
+\end{DoxyCode}

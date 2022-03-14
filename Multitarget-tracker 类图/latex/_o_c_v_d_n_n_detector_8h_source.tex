@@ -1,0 +1,54 @@
+\hypertarget{_o_c_v_d_n_n_detector_8h_source}{}\doxysection{OCVDNNDetector.\+h}
+\label{_o_c_v_d_n_n_detector_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/OCVDNNDetector.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/OCVDNNDetector.h}}
+\mbox{\hyperlink{_o_c_v_d_n_n_detector_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#ifdef USE\_OCV\_DNN}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_base_detector_8h}{BaseDetector.h}}"{}}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <opencv2/dnn.hpp>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <opencv2/dnn/shape\_utils.hpp>}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{13 \textcolor{keyword}{class }OCVDNNDetector final : \textcolor{keyword}{public} \mbox{\hyperlink{class_base_detector}{BaseDetector}}}
+\DoxyCodeLine{14 \{}
+\DoxyCodeLine{15 \textcolor{keyword}{public}:}
+\DoxyCodeLine{16     OCVDNNDetector(\textcolor{keyword}{const} cv::UMat\& colorFrame);}
+\DoxyCodeLine{17     OCVDNNDetector(\textcolor{keyword}{const} cv::Mat\& colorFrame);}
+\DoxyCodeLine{18     \string~OCVDNNDetector(\textcolor{keywordtype}{void}) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_base_detector_a44c53608e9e4e3455ff553d987165260}{Init}}(\textcolor{keyword}{const} \mbox{\hyperlink{defines_8h_a9fcffa231cb8ff6a5fc4e2e2e71f3ead}{config\_t}}\& config) \textcolor{keyword}{override};}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_base_detector_a7a233d2d77dfc4ad678eb852b11f2937}{Detect}}(\textcolor{keyword}{const} cv::UMat\& colorFrame) \textcolor{keyword}{override};}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_base_detector_a90782137a95a0e6d243af591de7876dc}{CanGrayProcessing}}()\textcolor{keyword}{ const override}}
+\DoxyCodeLine{25 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{26         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{27     \}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{keyword}{private}:}
+\DoxyCodeLine{30     cv::dnn::Net m\_net;}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32     \textcolor{keywordtype}{void} DetectInCrop(\textcolor{keyword}{const} cv::UMat\& colorFrame, \textcolor{keyword}{const} cv::Rect\& crop, \mbox{\hyperlink{defines_8h_a01db0de56a20f4342820a093c5154536}{regions\_t}}\& tmpRegions);}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34     \textcolor{keywordtype}{int} m\_inWidth = 608;}
+\DoxyCodeLine{35     \textcolor{keywordtype}{int} m\_inHeight = 608;}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37     \textcolor{keywordtype}{float} m\_WHRatio = 1.f;}
+\DoxyCodeLine{38     \textcolor{keywordtype}{float} m\_inScaleFactor = 0.003921f;}
+\DoxyCodeLine{39     \textcolor{keywordtype}{float} m\_meanVal = 0.f;}
+\DoxyCodeLine{40     \textcolor{keywordtype}{float} m\_confidenceThreshold = 0.24f;}
+\DoxyCodeLine{41     \textcolor{keywordtype}{float} m\_nmsThreshold = 0.4f;}
+\DoxyCodeLine{42     \textcolor{keywordtype}{bool} m\_swapRB = \textcolor{keyword}{false};}
+\DoxyCodeLine{43     \textcolor{keywordtype}{float} m\_maxCropRatio = 2.0f;}
+\DoxyCodeLine{44     std::vector<std::string> m\_classNames;}
+\DoxyCodeLine{45     std::vector<cv::String> m\_outNames;}
+\DoxyCodeLine{46     std::vector<int> m\_outLayers;}
+\DoxyCodeLine{47     std::string m\_outLayerType;}
+\DoxyCodeLine{48     cv::UMat m\_inputBlob;}
+\DoxyCodeLine{49 \};}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

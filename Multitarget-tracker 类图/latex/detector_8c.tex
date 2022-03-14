@@ -1,0 +1,340 @@
+\hypertarget{detector_8c}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/detector.c 文件参考}
+\label{detector_8c}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/detector.c@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/detector.c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}darknet.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}network.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}region\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cost\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}parser.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}box.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}demo.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}option\+\_\+list.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}http\+\_\+stream.\+h\char`\"{}}\newline
+detector.\+c 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{detector_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structbox__prob}{box\+\_\+prob}}
+\item 
+struct \mbox{\hyperlink{structanchors__t}{anchors\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsection*{宏定义}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{detector_8c_a5b01b59ed3d085062320df3589722d37}{\+\_\+\+\_\+\+COMPAR\+\_\+\+FN\+\_\+T}}
+\end{DoxyCompactItemize}
+\doxysubsection*{类型定义}
+\begin{DoxyCompactItemize}
+\item 
+typedef int($\ast$ \mbox{\hyperlink{detector_8c_a35e28bfcc8d641e0eebd66f4dc559a3f}{\+\_\+\+\_\+compar\+\_\+fn\+\_\+t}}) (const void $\ast$, const void $\ast$)
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{detector_8c_a81e3fff67fbe4c4f7fd51f568e53e097}{train\+\_\+detector}} (char $\ast$datacfg, char $\ast$cfgfile, char $\ast$weightfile, int $\ast$gpus, int ngpus, int clear, int dont\+\_\+show, int calc\+\_\+map, float thresh, float iou\+\_\+thresh, int mjpeg\+\_\+port, int show\+\_\+imgs, int benchmark\+\_\+layers, char $\ast$chart\+\_\+path)
+\item 
+static int \mbox{\hyperlink{detector_8c_af3803bc907114e6d6e72146bc75507ed}{get\+\_\+coco\+\_\+image\+\_\+id}} (char $\ast$filename)
+\item 
+static void \mbox{\hyperlink{detector_8c_a639d14174229e9b54573e683b7ead7d3}{print\+\_\+cocos}} (FILE $\ast$fp, char $\ast$image\+\_\+path, \mbox{\hyperlink{structdetection}{detection}} $\ast$dets, int num\+\_\+boxes, int classes, int w, int h)
+\item 
+void \mbox{\hyperlink{detector_8c_a81513990339b88be3c0627e62c786283}{print\+\_\+detector\+\_\+detections}} (FILE $\ast$$\ast$fps, char $\ast$id, \mbox{\hyperlink{structdetection}{detection}} $\ast$dets, int total, int classes, int w, int h)
+\item 
+void \mbox{\hyperlink{detector_8c_afd8578ce1a519a0da8686cc23de14589}{print\+\_\+imagenet\+\_\+detections}} (FILE $\ast$fp, int id, \mbox{\hyperlink{structdetection}{detection}} $\ast$dets, int total, int classes, int w, int h)
+\item 
+static void \mbox{\hyperlink{detector_8c_ad0d3d74524262aefd7cea0c547b2fd71}{print\+\_\+kitti\+\_\+detections}} (FILE $\ast$$\ast$fps, char $\ast$id, \mbox{\hyperlink{structdetection}{detection}} $\ast$dets, int total, int classes, int w, int h, char $\ast$outfile, char $\ast$prefix)
+\item 
+static void \mbox{\hyperlink{detector_8c_a1b666dbb110a807e010f94bc1002720d}{eliminate\+\_\+bdd}} (char $\ast$buf, char $\ast$a)
+\item 
+static void \mbox{\hyperlink{detector_8c_afa334e7be4d652ae69a26c7f68b858aa}{get\+\_\+bdd\+\_\+image\+\_\+id}} (char $\ast$filename)
+\item 
+static void \mbox{\hyperlink{detector_8c_a4a0f6687d44b05e5ccfe5209df1d1c17}{print\+\_\+bdd\+\_\+detections}} (FILE $\ast$fp, char $\ast$image\+\_\+path, \mbox{\hyperlink{structdetection}{detection}} $\ast$dets, int num\+\_\+boxes, int classes, int w, int h)
+\item 
+void \mbox{\hyperlink{detector_8c_aea37ad211a83b40620a2df0eb6623a66}{validate\+\_\+detector}} (char $\ast$datacfg, char $\ast$cfgfile, char $\ast$weightfile, char $\ast$outfile)
+\item 
+void \mbox{\hyperlink{detector_8c_a9212fc77853f03203e5e4493e31c4c55}{validate\+\_\+detector\+\_\+recall}} (char $\ast$datacfg, char $\ast$cfgfile, char $\ast$weightfile)
+\item 
+int \mbox{\hyperlink{detector_8c_a63f9fd6677e619bd902ae20bedc6af24}{detections\+\_\+comparator}} (const void $\ast$pa, const void $\ast$pb)
+\item 
+float \mbox{\hyperlink{detector_8c_a6c87aa309dbdcd49e3723545aa95a311}{validate\+\_\+detector\+\_\+map}} (char $\ast$datacfg, char $\ast$cfgfile, char $\ast$weightfile, float thresh\+\_\+calc\+\_\+avg\+\_\+iou, const float iou\+\_\+thresh, const int map\+\_\+points, int letter\+\_\+box, \mbox{\hyperlink{structnetwork}{network}} $\ast$existing\+\_\+net)
+\item 
+int \mbox{\hyperlink{detector_8c_a417b5242533ce00ba85963933c8cab6f}{anchors\+\_\+comparator}} (const void $\ast$pa, const void $\ast$pb)
+\item 
+int \mbox{\hyperlink{detector_8c_ab22ea6a72ee26ab76b9ee8c772020493}{anchors\+\_\+data\+\_\+comparator}} (const float $\ast$$\ast$pa, const float $\ast$$\ast$pb)
+\item 
+void \mbox{\hyperlink{detector_8c_a615d4f8ade0d08710b89da00c80b0ae2}{calc\+\_\+anchors}} (char $\ast$datacfg, int num\+\_\+of\+\_\+clusters, int width, int height, int show)
+\item 
+void \mbox{\hyperlink{detector_8c_a44156bdb8ed52c80760c724b266f4ee9}{test\+\_\+detector}} (char $\ast$datacfg, char $\ast$cfgfile, char $\ast$weightfile, char $\ast$filename, float thresh, float hier\+\_\+thresh, int dont\+\_\+show, int ext\+\_\+output, int save\+\_\+labels, char $\ast$outfile, int letter\+\_\+box, int benchmark\+\_\+layers)
+\item 
+void \mbox{\hyperlink{detector_8c_a05d5ce6aa5e8a15351a0b592fbd3d7e9}{draw\+\_\+object}} (char $\ast$datacfg, char $\ast$cfgfile, char $\ast$weightfile, char $\ast$filename, float thresh, int dont\+\_\+show, int it\+\_\+num, int letter\+\_\+box, int benchmark\+\_\+layers)
+\item 
+void \mbox{\hyperlink{detector_8c_a677c1747fd7a58c7f7da3314af5d6120}{run\+\_\+detector}} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\doxysubsection*{变量}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{detector_8c_a5522024919a839fff7d996d9641d2a68}{check\+\_\+mistakes}} = 0
+\item 
+static int \mbox{\hyperlink{detector_8c_a510b483a1df4daf892d602b2deedd78d}{coco\+\_\+ids}} \mbox{[}$\,$\mbox{]} = \{ 1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,20,21,22,23,24,25,27,28,31,32,33,34,35,36,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,67,70,72,73,74,75,76,77,78,79,80,81,82,84,85,86,87,88,89,90 \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{宏定义说明}
+\mbox{\Hypertarget{detector_8c_a5b01b59ed3d085062320df3589722d37}\label{detector_8c_a5b01b59ed3d085062320df3589722d37}} 
+\index{detector.c@{detector.c}!\_\_COMPAR\_FN\_T@{\_\_COMPAR\_FN\_T}}
+\index{\_\_COMPAR\_FN\_T@{\_\_COMPAR\_FN\_T}!detector.c@{detector.c}}
+\doxysubsubsection{\texorpdfstring{\_\_COMPAR\_FN\_T}{\_\_COMPAR\_FN\_T}}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+COMPAR\+\_\+\+FN\+\_\+T}
+
+
+
+\doxysubsection{类型定义说明}
+\mbox{\Hypertarget{detector_8c_a35e28bfcc8d641e0eebd66f4dc559a3f}\label{detector_8c_a35e28bfcc8d641e0eebd66f4dc559a3f}} 
+\index{detector.c@{detector.c}!\_\_compar\_fn\_t@{\_\_compar\_fn\_t}}
+\index{\_\_compar\_fn\_t@{\_\_compar\_fn\_t}!detector.c@{detector.c}}
+\doxysubsubsection{\texorpdfstring{\_\_compar\_fn\_t}{\_\_compar\_fn\_t}}
+{\footnotesize\ttfamily typedef int($\ast$ \+\_\+\+\_\+compar\+\_\+fn\+\_\+t) (const void $\ast$, const void $\ast$)}
+
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{detector_8c_a417b5242533ce00ba85963933c8cab6f}\label{detector_8c_a417b5242533ce00ba85963933c8cab6f}} 
+\index{detector.c@{detector.c}!anchors\_comparator@{anchors\_comparator}}
+\index{anchors\_comparator@{anchors\_comparator}!detector.c@{detector.c}}
+\doxysubsubsection{\texorpdfstring{anchors\_comparator()}{anchors\_comparator()}}
+{\footnotesize\ttfamily int anchors\+\_\+comparator (\begin{DoxyParamCaption}\item[{const void $\ast$}]{pa,  }\item[{const void $\ast$}]{pb }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{detector_8c_ab22ea6a72ee26ab76b9ee8c772020493}\label{detector_8c_ab22ea6a72ee26ab76b9ee8c772020493}} 
+\index{detector.c@{detector.c}!anchors\_data\_comparator@{anchors\_data\_comparator}}
+\index{anchors\_data\_comparator@{anchors\_data\_comparator}!detector.c@{detector.c}}
+\doxysubsubsection{\texorpdfstring{anchors\_data\_comparator()}{anchors\_data\_comparator()}}
+{\footnotesize\ttfamily int anchors\+\_\+data\+\_\+comparator (\begin{DoxyParamCaption}\item[{const float $\ast$$\ast$}]{pa,  }\item[{const float $\ast$$\ast$}]{pb }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{detector_8c_a615d4f8ade0d08710b89da00c80b0ae2}\label{detector_8c_a615d4f8ade0d08710b89da00c80b0ae2}} 
+\index{detector.c@{detector.c}!calc\_anchors@{calc\_anchors}}
+\index{calc\_anchors@{calc\_anchors}!detector.c@{detector.c}}
+\doxysubsubsection{\texorpdfstring{calc\_anchors()}{calc\_anchors()}}
+{\footnotesize\ttfamily void calc\+\_\+anchors (\begin{DoxyParamCaption}\item[{char $\ast$}]{datacfg,  }\item[{int}]{num\+\_\+of\+\_\+clusters,  }\item[{int}]{width,  }\item[{int}]{height,  }\item[{int}]{show }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{detector_8c_a615d4f8ade0d08710b89da00c80b0ae2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{detector_8c_a63f9fd6677e619bd902ae20bedc6af24}\label{detector_8c_a63f9fd6677e619bd902ae20bedc6af24}} 
+\index{detector.c@{detector.c}!detections\_comparator@{detections\_comparator}}
+\index{detections\_comparator@{detections\_comparator}!detector.c@{detector.c}}
+\doxysubsubsection{\texorpdfstring{detections\_comparator()}{detections\_comparator()}}
+{\footnotesize\ttfamily int detections\+\_\+comparator (\begin{DoxyParamCaption}\item[{const void $\ast$}]{pa,  }\item[{const void $\ast$}]{pb }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{detector_8c_a05d5ce6aa5e8a15351a0b592fbd3d7e9}\label{detector_8c_a05d5ce6aa5e8a15351a0b592fbd3d7e9}} 
+\index{detector.c@{detector.c}!draw\_object@{draw\_object}}
+\index{draw\_object@{draw\_object}!detector.c@{detector.c}}
+\doxysubsubsection{\texorpdfstring{draw\_object()}{draw\_object()}}
+{\footnotesize\ttfamily void draw\+\_\+object (\begin{DoxyParamCaption}\item[{char $\ast$}]{datacfg,  }\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{char $\ast$}]{filename,  }\item[{float}]{thresh,  }\item[{int}]{dont\+\_\+show,  }\item[{int}]{it\+\_\+num,  }\item[{int}]{letter\+\_\+box,  }\item[{int}]{benchmark\+\_\+layers }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{detector_8c_a1b666dbb110a807e010f94bc1002720d}\label{detector_8c_a1b666dbb110a807e010f94bc1002720d}} 
+\index{detector.c@{detector.c}!eliminate\_bdd@{eliminate\_bdd}}
+\index{eliminate\_bdd@{eliminate\_bdd}!detector.c@{detector.c}}
+\doxysubsubsection{\texorpdfstring{eliminate\_bdd()}{eliminate\_bdd()}}
+{\footnotesize\ttfamily static void eliminate\+\_\+bdd (\begin{DoxyParamCaption}\item[{char $\ast$}]{buf,  }\item[{char $\ast$}]{a }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{detector_8c_afa334e7be4d652ae69a26c7f68b858aa}\label{detector_8c_afa334e7be4d652ae69a26c7f68b858aa}} 
+\index{detector.c@{detector.c}!get\_bdd\_image\_id@{get\_bdd\_image\_id}}
+\index{get\_bdd\_image\_id@{get\_bdd\_image\_id}!detector.c@{detector.c}}
+\doxysubsubsection{\texorpdfstring{get\_bdd\_image\_id()}{get\_bdd\_image\_id()}}
+{\footnotesize\ttfamily static void get\+\_\+bdd\+\_\+image\+\_\+id (\begin{DoxyParamCaption}\item[{char $\ast$}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{detector_8c_afa334e7be4d652ae69a26c7f68b858aa_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{detector_8c_af3803bc907114e6d6e72146bc75507ed}\label{detector_8c_af3803bc907114e6d6e72146bc75507ed}} 
+\index{detector.c@{detector.c}!get\_coco\_image\_id@{get\_coco\_image\_id}}
+\index{get\_coco\_image\_id@{get\_coco\_image\_id}!detector.c@{detector.c}}
+\doxysubsubsection{\texorpdfstring{get\_coco\_image\_id()}{get\_coco\_image\_id()}}
+{\footnotesize\ttfamily static int get\+\_\+coco\+\_\+image\+\_\+id (\begin{DoxyParamCaption}\item[{char $\ast$}]{filename }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{detector_8c_a4a0f6687d44b05e5ccfe5209df1d1c17}\label{detector_8c_a4a0f6687d44b05e5ccfe5209df1d1c17}} 
+\index{detector.c@{detector.c}!print\_bdd\_detections@{print\_bdd\_detections}}
+\index{print\_bdd\_detections@{print\_bdd\_detections}!detector.c@{detector.c}}
+\doxysubsubsection{\texorpdfstring{print\_bdd\_detections()}{print\_bdd\_detections()}}
+{\footnotesize\ttfamily static void print\+\_\+bdd\+\_\+detections (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{fp,  }\item[{char $\ast$}]{image\+\_\+path,  }\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{dets,  }\item[{int}]{num\+\_\+boxes,  }\item[{int}]{classes,  }\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{detector_8c_a4a0f6687d44b05e5ccfe5209df1d1c17_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{detector_8c_a639d14174229e9b54573e683b7ead7d3}\label{detector_8c_a639d14174229e9b54573e683b7ead7d3}} 
+\index{detector.c@{detector.c}!print\_cocos@{print\_cocos}}
+\index{print\_cocos@{print\_cocos}!detector.c@{detector.c}}
+\doxysubsubsection{\texorpdfstring{print\_cocos()}{print\_cocos()}}
+{\footnotesize\ttfamily static void print\+\_\+cocos (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{fp,  }\item[{char $\ast$}]{image\+\_\+path,  }\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{dets,  }\item[{int}]{num\+\_\+boxes,  }\item[{int}]{classes,  }\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{detector_8c_a639d14174229e9b54573e683b7ead7d3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{detector_8c_a81513990339b88be3c0627e62c786283}\label{detector_8c_a81513990339b88be3c0627e62c786283}} 
+\index{detector.c@{detector.c}!print\_detector\_detections@{print\_detector\_detections}}
+\index{print\_detector\_detections@{print\_detector\_detections}!detector.c@{detector.c}}
+\doxysubsubsection{\texorpdfstring{print\_detector\_detections()}{print\_detector\_detections()}}
+{\footnotesize\ttfamily void print\+\_\+detector\+\_\+detections (\begin{DoxyParamCaption}\item[{FILE $\ast$$\ast$}]{fps,  }\item[{char $\ast$}]{id,  }\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{dets,  }\item[{int}]{total,  }\item[{int}]{classes,  }\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{detector_8c_a81513990339b88be3c0627e62c786283_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{detector_8c_afd8578ce1a519a0da8686cc23de14589}\label{detector_8c_afd8578ce1a519a0da8686cc23de14589}} 
+\index{detector.c@{detector.c}!print\_imagenet\_detections@{print\_imagenet\_detections}}
+\index{print\_imagenet\_detections@{print\_imagenet\_detections}!detector.c@{detector.c}}
+\doxysubsubsection{\texorpdfstring{print\_imagenet\_detections()}{print\_imagenet\_detections()}}
+{\footnotesize\ttfamily void print\+\_\+imagenet\+\_\+detections (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{fp,  }\item[{int}]{id,  }\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{dets,  }\item[{int}]{total,  }\item[{int}]{classes,  }\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=309pt]{detector_8c_afd8578ce1a519a0da8686cc23de14589_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{detector_8c_ad0d3d74524262aefd7cea0c547b2fd71}\label{detector_8c_ad0d3d74524262aefd7cea0c547b2fd71}} 
+\index{detector.c@{detector.c}!print\_kitti\_detections@{print\_kitti\_detections}}
+\index{print\_kitti\_detections@{print\_kitti\_detections}!detector.c@{detector.c}}
+\doxysubsubsection{\texorpdfstring{print\_kitti\_detections()}{print\_kitti\_detections()}}
+{\footnotesize\ttfamily static void print\+\_\+kitti\+\_\+detections (\begin{DoxyParamCaption}\item[{FILE $\ast$$\ast$}]{fps,  }\item[{char $\ast$}]{id,  }\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{dets,  }\item[{int}]{total,  }\item[{int}]{classes,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{char $\ast$}]{outfile,  }\item[{char $\ast$}]{prefix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=285pt]{detector_8c_ad0d3d74524262aefd7cea0c547b2fd71_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{detector_8c_a677c1747fd7a58c7f7da3314af5d6120}\label{detector_8c_a677c1747fd7a58c7f7da3314af5d6120}} 
+\index{detector.c@{detector.c}!run\_detector@{run\_detector}}
+\index{run\_detector@{run\_detector}!detector.c@{detector.c}}
+\doxysubsubsection{\texorpdfstring{run\_detector()}{run\_detector()}}
+{\footnotesize\ttfamily void run\+\_\+detector (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{detector_8c_a677c1747fd7a58c7f7da3314af5d6120_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{detector_8c_a44156bdb8ed52c80760c724b266f4ee9}\label{detector_8c_a44156bdb8ed52c80760c724b266f4ee9}} 
+\index{detector.c@{detector.c}!test\_detector@{test\_detector}}
+\index{test\_detector@{test\_detector}!detector.c@{detector.c}}
+\doxysubsubsection{\texorpdfstring{test\_detector()}{test\_detector()}}
+{\footnotesize\ttfamily void test\+\_\+detector (\begin{DoxyParamCaption}\item[{char $\ast$}]{datacfg,  }\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{char $\ast$}]{filename,  }\item[{float}]{thresh,  }\item[{float}]{hier\+\_\+thresh,  }\item[{int}]{dont\+\_\+show,  }\item[{int}]{ext\+\_\+output,  }\item[{int}]{save\+\_\+labels,  }\item[{char $\ast$}]{outfile,  }\item[{int}]{letter\+\_\+box,  }\item[{int}]{benchmark\+\_\+layers }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{detector_8c_a44156bdb8ed52c80760c724b266f4ee9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{detector_8c_a81e3fff67fbe4c4f7fd51f568e53e097}\label{detector_8c_a81e3fff67fbe4c4f7fd51f568e53e097}} 
+\index{detector.c@{detector.c}!train\_detector@{train\_detector}}
+\index{train\_detector@{train\_detector}!detector.c@{detector.c}}
+\doxysubsubsection{\texorpdfstring{train\_detector()}{train\_detector()}}
+{\footnotesize\ttfamily void train\+\_\+detector (\begin{DoxyParamCaption}\item[{char $\ast$}]{datacfg,  }\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{int $\ast$}]{gpus,  }\item[{int}]{ngpus,  }\item[{int}]{clear,  }\item[{int}]{dont\+\_\+show,  }\item[{int}]{calc\+\_\+map,  }\item[{float}]{thresh,  }\item[{float}]{iou\+\_\+thresh,  }\item[{int}]{mjpeg\+\_\+port,  }\item[{int}]{show\+\_\+imgs,  }\item[{int}]{benchmark\+\_\+layers,  }\item[{char $\ast$}]{chart\+\_\+path }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{detector_8c_a81e3fff67fbe4c4f7fd51f568e53e097_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{detector_8c_aea37ad211a83b40620a2df0eb6623a66}\label{detector_8c_aea37ad211a83b40620a2df0eb6623a66}} 
+\index{detector.c@{detector.c}!validate\_detector@{validate\_detector}}
+\index{validate\_detector@{validate\_detector}!detector.c@{detector.c}}
+\doxysubsubsection{\texorpdfstring{validate\_detector()}{validate\_detector()}}
+{\footnotesize\ttfamily void validate\+\_\+detector (\begin{DoxyParamCaption}\item[{char $\ast$}]{datacfg,  }\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{char $\ast$}]{outfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{detector_8c_aea37ad211a83b40620a2df0eb6623a66_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{detector_8c_a6c87aa309dbdcd49e3723545aa95a311}\label{detector_8c_a6c87aa309dbdcd49e3723545aa95a311}} 
+\index{detector.c@{detector.c}!validate\_detector\_map@{validate\_detector\_map}}
+\index{validate\_detector\_map@{validate\_detector\_map}!detector.c@{detector.c}}
+\doxysubsubsection{\texorpdfstring{validate\_detector\_map()}{validate\_detector\_map()}}
+{\footnotesize\ttfamily float validate\+\_\+detector\+\_\+map (\begin{DoxyParamCaption}\item[{char $\ast$}]{datacfg,  }\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{float}]{thresh\+\_\+calc\+\_\+avg\+\_\+iou,  }\item[{const float}]{iou\+\_\+thresh,  }\item[{const int}]{map\+\_\+points,  }\item[{int}]{letter\+\_\+box,  }\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{existing\+\_\+net }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{detector_8c_a6c87aa309dbdcd49e3723545aa95a311_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{detector_8c_a9212fc77853f03203e5e4493e31c4c55}\label{detector_8c_a9212fc77853f03203e5e4493e31c4c55}} 
+\index{detector.c@{detector.c}!validate\_detector\_recall@{validate\_detector\_recall}}
+\index{validate\_detector\_recall@{validate\_detector\_recall}!detector.c@{detector.c}}
+\doxysubsubsection{\texorpdfstring{validate\_detector\_recall()}{validate\_detector\_recall()}}
+{\footnotesize\ttfamily void validate\+\_\+detector\+\_\+recall (\begin{DoxyParamCaption}\item[{char $\ast$}]{datacfg,  }\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{detector_8c_a9212fc77853f03203e5e4493e31c4c55_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{变量说明}
+\mbox{\Hypertarget{detector_8c_a5522024919a839fff7d996d9641d2a68}\label{detector_8c_a5522024919a839fff7d996d9641d2a68}} 
+\index{detector.c@{detector.c}!check\_mistakes@{check\_mistakes}}
+\index{check\_mistakes@{check\_mistakes}!detector.c@{detector.c}}
+\doxysubsubsection{\texorpdfstring{check\_mistakes}{check\_mistakes}}
+{\footnotesize\ttfamily int check\+\_\+mistakes = 0}
+
+\mbox{\Hypertarget{detector_8c_a510b483a1df4daf892d602b2deedd78d}\label{detector_8c_a510b483a1df4daf892d602b2deedd78d}} 
+\index{detector.c@{detector.c}!coco\_ids@{coco\_ids}}
+\index{coco\_ids@{coco\_ids}!detector.c@{detector.c}}
+\doxysubsubsection{\texorpdfstring{coco\_ids}{coco\_ids}}
+{\footnotesize\ttfamily int coco\+\_\+ids\mbox{[}$\,$\mbox{]} = \{ 1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,20,21,22,23,24,25,27,28,31,32,33,34,35,36,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,67,70,72,73,74,75,76,77,78,79,80,81,82,84,85,86,87,88,89,90 \}\hspace{0.3cm}{\ttfamily [static]}}
+

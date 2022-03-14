@@ -1,0 +1,1374 @@
+\hypertarget{pthread_8h_source}{}\doxysection{pthread.\+h}
+\label{pthread_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/3rdparty/include/pthread.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/3rdparty/include/pthread.h}}
+\mbox{\hyperlink{pthread_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* This is an implementation of the threads API of POSIX 1003.1-\/2001.}}
+\DoxyCodeLine{2 \textcolor{comment}{ *}}
+\DoxyCodeLine{3 \textcolor{comment}{ * -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{4 \textcolor{comment}{ *}}
+\DoxyCodeLine{5 \textcolor{comment}{ *      Pthreads-\/win32 -\/ POSIX Threads Library for Win32}}
+\DoxyCodeLine{6 \textcolor{comment}{ *      Copyright(C) 1998 John E. Bossom}}
+\DoxyCodeLine{7 \textcolor{comment}{ *      Copyright(C) 1999,2005 Pthreads-\/win32 contributors}}
+\DoxyCodeLine{8 \textcolor{comment}{ * }}
+\DoxyCodeLine{9 \textcolor{comment}{ *      Contact Email: rpj@callisto.canberra.edu.au}}
+\DoxyCodeLine{10 \textcolor{comment}{ * }}
+\DoxyCodeLine{11 \textcolor{comment}{ *      The current list of contributors is contained}}
+\DoxyCodeLine{12 \textcolor{comment}{ *      in the file CONTRIBUTORS included with the source}}
+\DoxyCodeLine{13 \textcolor{comment}{ *      code distribution. The list can also be seen at the}}
+\DoxyCodeLine{14 \textcolor{comment}{ *      following World Wide Web location:}}
+\DoxyCodeLine{15 \textcolor{comment}{ *      http://sources.redhat.com/pthreads-\/win32/contributors.html}}
+\DoxyCodeLine{16 \textcolor{comment}{ * }}
+\DoxyCodeLine{17 \textcolor{comment}{ *      This library is free software; you can redistribute it and/or}}
+\DoxyCodeLine{18 \textcolor{comment}{ *      modify it under the terms of the GNU Lesser General Public}}
+\DoxyCodeLine{19 \textcolor{comment}{ *      License as published by the Free Software Foundation; either}}
+\DoxyCodeLine{20 \textcolor{comment}{ *      version 2 of the License, or (at your option) any later version.}}
+\DoxyCodeLine{21 \textcolor{comment}{ * }}
+\DoxyCodeLine{22 \textcolor{comment}{ *      This library is distributed in the hope that it will be useful,}}
+\DoxyCodeLine{23 \textcolor{comment}{ *      but WITHOUT ANY WARRANTY; without even the implied warranty of}}
+\DoxyCodeLine{24 \textcolor{comment}{ *      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU}}
+\DoxyCodeLine{25 \textcolor{comment}{ *      Lesser General Public License for more details.}}
+\DoxyCodeLine{26 \textcolor{comment}{ * }}
+\DoxyCodeLine{27 \textcolor{comment}{ *      You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{28 \textcolor{comment}{ *      License along with this library in the file COPYING.LIB;}}
+\DoxyCodeLine{29 \textcolor{comment}{ *      if not, write to the Free Software Foundation, Inc.,}}
+\DoxyCodeLine{30 \textcolor{comment}{ *      59 Temple Place -\/ Suite 330, Boston, MA 02111-\/1307, USA}}
+\DoxyCodeLine{31 \textcolor{comment}{ */}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#if !defined( PTHREAD\_H )}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#define PTHREAD\_H}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{comment}{/*}}
+\DoxyCodeLine{37 \textcolor{comment}{ * See the README file for an explanation of the pthreads-\/win32 version}}
+\DoxyCodeLine{38 \textcolor{comment}{ * numbering scheme and how the DLL is named etc.}}
+\DoxyCodeLine{39 \textcolor{comment}{ */}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#define PTW32\_VERSION 2,9,1,0}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#define PTW32\_VERSION\_STRING "{}2, 9, 1, 0\(\backslash\)0"{}}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 \textcolor{comment}{/* There are three implementations of cancel cleanup.}}
+\DoxyCodeLine{44 \textcolor{comment}{ * Note that pthread.h is included in both application}}
+\DoxyCodeLine{45 \textcolor{comment}{ * compilation units and also internally for the library.}}
+\DoxyCodeLine{46 \textcolor{comment}{ * The code here and within the library aims to work}}
+\DoxyCodeLine{47 \textcolor{comment}{ * for all reasonable combinations of environments.}}
+\DoxyCodeLine{48 \textcolor{comment}{ *}}
+\DoxyCodeLine{49 \textcolor{comment}{ * The three implementations are:}}
+\DoxyCodeLine{50 \textcolor{comment}{ *}}
+\DoxyCodeLine{51 \textcolor{comment}{ *   WIN32 SEH}}
+\DoxyCodeLine{52 \textcolor{comment}{ *   C}}
+\DoxyCodeLine{53 \textcolor{comment}{ *   C++}}
+\DoxyCodeLine{54 \textcolor{comment}{ *}}
+\DoxyCodeLine{55 \textcolor{comment}{ * Please note that exiting a push/pop block via}}
+\DoxyCodeLine{56 \textcolor{comment}{ * "{}return"{}, "{}exit"{}, "{}break"{}, or "{}continue"{} will}}
+\DoxyCodeLine{57 \textcolor{comment}{ * lead to different behaviour amongst applications}}
+\DoxyCodeLine{58 \textcolor{comment}{ * depending upon whether the library was built}}
+\DoxyCodeLine{59 \textcolor{comment}{ * using SEH, C++, or C. For example, a library built}}
+\DoxyCodeLine{60 \textcolor{comment}{ * with SEH will call the cleanup routine, while both}}
+\DoxyCodeLine{61 \textcolor{comment}{ * C++ and C built versions will not.}}
+\DoxyCodeLine{62 \textcolor{comment}{ */}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 \textcolor{comment}{/*}}
+\DoxyCodeLine{65 \textcolor{comment}{ * Define defaults for cleanup code.}}
+\DoxyCodeLine{66 \textcolor{comment}{ * Note: Unless the build explicitly defines one of the following, then}}
+\DoxyCodeLine{67 \textcolor{comment}{ * we default to standard C style cleanup. This style uses setjmp/longjmp}}
+\DoxyCodeLine{68 \textcolor{comment}{ * in the cancelation and thread exit implementations and therefore won't}}
+\DoxyCodeLine{69 \textcolor{comment}{ * do stack unwinding if linked to applications that have it (e.g.}}
+\DoxyCodeLine{70 \textcolor{comment}{ * C++ apps). This is currently consistent with most/all commercial Unix}}
+\DoxyCodeLine{71 \textcolor{comment}{ * POSIX threads implementations.}}
+\DoxyCodeLine{72 \textcolor{comment}{ */}}
+\DoxyCodeLine{73 \textcolor{preprocessor}{\#if !defined( \_\_CLEANUP\_SEH ) \&\& !defined( \_\_CLEANUP\_CXX ) \&\& !defined( \_\_CLEANUP\_C )}}
+\DoxyCodeLine{74 \textcolor{preprocessor}{\# define \_\_CLEANUP\_C}}
+\DoxyCodeLine{75 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{preprocessor}{\#if defined( \_\_CLEANUP\_SEH ) \&\& ( !defined( \_MSC\_VER ) \&\& !defined(PTW32\_RC\_MSC))}}
+\DoxyCodeLine{78 \textcolor{preprocessor}{\#error ERROR [\_\_FILE\_\_, line \_\_LINE\_\_]: SEH is not supported for this compiler.}}
+\DoxyCodeLine{79 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81 \textcolor{comment}{/*}}
+\DoxyCodeLine{82 \textcolor{comment}{ * Stop here if we are being included by the resource compiler.}}
+\DoxyCodeLine{83 \textcolor{comment}{ */}}
+\DoxyCodeLine{84 \textcolor{preprocessor}{\#if !defined(RC\_INVOKED)}}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#undef PTW32\_LEVEL}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88 \textcolor{preprocessor}{\#if defined(\_POSIX\_SOURCE)}}
+\DoxyCodeLine{89 \textcolor{preprocessor}{\#define PTW32\_LEVEL 0}}
+\DoxyCodeLine{90 \textcolor{comment}{/* Early POSIX */}}
+\DoxyCodeLine{91 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93 \textcolor{preprocessor}{\#if defined(\_POSIX\_C\_SOURCE) \&\& \_POSIX\_C\_SOURCE >= 199309}}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#undef PTW32\_LEVEL}}
+\DoxyCodeLine{95 \textcolor{preprocessor}{\#define PTW32\_LEVEL 1}}
+\DoxyCodeLine{96 \textcolor{comment}{/* Include 1b, 1c and 1d */}}
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#if defined(INCLUDE\_NP)}}
+\DoxyCodeLine{100 \textcolor{preprocessor}{\#undef PTW32\_LEVEL}}
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#define PTW32\_LEVEL 2}}
+\DoxyCodeLine{102 \textcolor{comment}{/* Include Non-\/Portable extensions */}}
+\DoxyCodeLine{103 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105 \textcolor{preprocessor}{\#define PTW32\_LEVEL\_MAX 3}}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107 \textcolor{preprocessor}{\#if ( defined(\_POSIX\_C\_SOURCE) \&\& \_POSIX\_C\_SOURCE >= 200112 )  || !defined(PTW32\_LEVEL)}}
+\DoxyCodeLine{108 \textcolor{preprocessor}{\#define PTW32\_LEVEL PTW32\_LEVEL\_MAX}}
+\DoxyCodeLine{109 \textcolor{comment}{/* Include everything */}}
+\DoxyCodeLine{110 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112 \textcolor{preprocessor}{\#if defined(\_UWIN)}}
+\DoxyCodeLine{113 \textcolor{preprocessor}{\#   define HAVE\_STRUCT\_TIMESPEC 1}}
+\DoxyCodeLine{114 \textcolor{preprocessor}{\#   define HAVE\_SIGNAL\_H        1}}
+\DoxyCodeLine{115 \textcolor{preprocessor}{\#   undef HAVE\_PTW32\_CONFIG\_H}}
+\DoxyCodeLine{116 \textcolor{preprocessor}{\#   pragma comment(lib, "{}pthread"{}})}
+\DoxyCodeLine{117 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119 \textcolor{comment}{/*}}
+\DoxyCodeLine{120 \textcolor{comment}{ * -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{121 \textcolor{comment}{ *}}
+\DoxyCodeLine{122 \textcolor{comment}{ *}}
+\DoxyCodeLine{123 \textcolor{comment}{ * Module: pthread.h}}
+\DoxyCodeLine{124 \textcolor{comment}{ *}}
+\DoxyCodeLine{125 \textcolor{comment}{ * Purpose:}}
+\DoxyCodeLine{126 \textcolor{comment}{ *      Provides an implementation of PThreads based upon the}}
+\DoxyCodeLine{127 \textcolor{comment}{ *      standard:}}
+\DoxyCodeLine{128 \textcolor{comment}{ *}}
+\DoxyCodeLine{129 \textcolor{comment}{ *              POSIX 1003.1-\/2001}}
+\DoxyCodeLine{130 \textcolor{comment}{ *  and}}
+\DoxyCodeLine{131 \textcolor{comment}{ *    The Single Unix Specification version 3}}
+\DoxyCodeLine{132 \textcolor{comment}{ *}}
+\DoxyCodeLine{133 \textcolor{comment}{ *    (these two are equivalent)}}
+\DoxyCodeLine{134 \textcolor{comment}{ *}}
+\DoxyCodeLine{135 \textcolor{comment}{ *      in order to enhance code portability between Windows,}}
+\DoxyCodeLine{136 \textcolor{comment}{ *  various commercial Unix implementations, and Linux.}}
+\DoxyCodeLine{137 \textcolor{comment}{ *}}
+\DoxyCodeLine{138 \textcolor{comment}{ *      See the ANNOUNCE file for a full list of conforming}}
+\DoxyCodeLine{139 \textcolor{comment}{ *      routines and defined constants, and a list of missing}}
+\DoxyCodeLine{140 \textcolor{comment}{ *      routines and constants not defined in this implementation.}}
+\DoxyCodeLine{141 \textcolor{comment}{ *}}
+\DoxyCodeLine{142 \textcolor{comment}{ * Authors:}}
+\DoxyCodeLine{143 \textcolor{comment}{ *      There have been many contributors to this library.}}
+\DoxyCodeLine{144 \textcolor{comment}{ *      The initial implementation was contributed by}}
+\DoxyCodeLine{145 \textcolor{comment}{ *      John Bossom, and several others have provided major}}
+\DoxyCodeLine{146 \textcolor{comment}{ *      sections or revisions of parts of the implementation.}}
+\DoxyCodeLine{147 \textcolor{comment}{ *      Often significant effort has been contributed to}}
+\DoxyCodeLine{148 \textcolor{comment}{ *      find and fix important bugs and other problems to}}
+\DoxyCodeLine{149 \textcolor{comment}{ *      improve the reliability of the library, which sometimes}}
+\DoxyCodeLine{150 \textcolor{comment}{ *      is not reflected in the amount of code which changed as}}
+\DoxyCodeLine{151 \textcolor{comment}{ *      result.}}
+\DoxyCodeLine{152 \textcolor{comment}{ *      As much as possible, the contributors are acknowledged}}
+\DoxyCodeLine{153 \textcolor{comment}{ *      in the ChangeLog file in the source code distribution}}
+\DoxyCodeLine{154 \textcolor{comment}{ *      where their changes are noted in detail.}}
+\DoxyCodeLine{155 \textcolor{comment}{ *}}
+\DoxyCodeLine{156 \textcolor{comment}{ *      Contributors are listed in the CONTRIBUTORS file.}}
+\DoxyCodeLine{157 \textcolor{comment}{ *}}
+\DoxyCodeLine{158 \textcolor{comment}{ *      As usual, all bouquets go to the contributors, and all}}
+\DoxyCodeLine{159 \textcolor{comment}{ *      brickbats go to the project maintainer.}}
+\DoxyCodeLine{160 \textcolor{comment}{ *}}
+\DoxyCodeLine{161 \textcolor{comment}{ * Maintainer:}}
+\DoxyCodeLine{162 \textcolor{comment}{ *      The code base for this project is coordinated and}}
+\DoxyCodeLine{163 \textcolor{comment}{ *      eventually pre-\/tested, packaged, and made available by}}
+\DoxyCodeLine{164 \textcolor{comment}{ *}}
+\DoxyCodeLine{165 \textcolor{comment}{ *              Ross Johnson <rpj@callisto.canberra.edu.au>}}
+\DoxyCodeLine{166 \textcolor{comment}{ *}}
+\DoxyCodeLine{167 \textcolor{comment}{ * QA Testers:}}
+\DoxyCodeLine{168 \textcolor{comment}{ *      Ultimately, the library is tested in the real world by}}
+\DoxyCodeLine{169 \textcolor{comment}{ *      a host of competent and demanding scientists and}}
+\DoxyCodeLine{170 \textcolor{comment}{ *      engineers who report bugs and/or provide solutions}}
+\DoxyCodeLine{171 \textcolor{comment}{ *      which are then fixed or incorporated into subsequent}}
+\DoxyCodeLine{172 \textcolor{comment}{ *      versions of the library. Each time a bug is fixed, a}}
+\DoxyCodeLine{173 \textcolor{comment}{ *      test case is written to prove the fix and ensure}}
+\DoxyCodeLine{174 \textcolor{comment}{ *      that later changes to the code don't reintroduce the}}
+\DoxyCodeLine{175 \textcolor{comment}{ *      same error. The number of test cases is slowly growing}}
+\DoxyCodeLine{176 \textcolor{comment}{ *      and therefore so is the code reliability.}}
+\DoxyCodeLine{177 \textcolor{comment}{ *}}
+\DoxyCodeLine{178 \textcolor{comment}{ * Compliance:}}
+\DoxyCodeLine{179 \textcolor{comment}{ *      See the file ANNOUNCE for the list of implemented}}
+\DoxyCodeLine{180 \textcolor{comment}{ *      and not-\/implemented routines and defined options.}}
+\DoxyCodeLine{181 \textcolor{comment}{ *      Of course, these are all defined is this file as well.}}
+\DoxyCodeLine{182 \textcolor{comment}{ *}}
+\DoxyCodeLine{183 \textcolor{comment}{ * Web site:}}
+\DoxyCodeLine{184 \textcolor{comment}{ *      The source code and other information about this library}}
+\DoxyCodeLine{185 \textcolor{comment}{ *      are available from}}
+\DoxyCodeLine{186 \textcolor{comment}{ *}}
+\DoxyCodeLine{187 \textcolor{comment}{ *              http://sources.redhat.com/pthreads-\/win32/}}
+\DoxyCodeLine{188 \textcolor{comment}{ *}}
+\DoxyCodeLine{189 \textcolor{comment}{ * -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{190 \textcolor{comment}{ */}}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192 \textcolor{comment}{/* Try to avoid including windows.h */}}
+\DoxyCodeLine{193 \textcolor{preprocessor}{\#if (defined(\_\_MINGW64\_\_) || defined(\_\_MINGW32\_\_)) \&\& defined(\_\_cplusplus)}}
+\DoxyCodeLine{194 \textcolor{preprocessor}{\#define PTW32\_INCLUDE\_WINDOWS\_H}}
+\DoxyCodeLine{195 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{197 \textcolor{preprocessor}{\#if defined(PTW32\_INCLUDE\_WINDOWS\_H)}}
+\DoxyCodeLine{198 \textcolor{preprocessor}{\#include <windows.h>}}
+\DoxyCodeLine{199 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{200 }
+\DoxyCodeLine{201 \textcolor{preprocessor}{\#if defined(\_MSC\_VER) \&\& \_MSC\_VER < 1300 || defined(\_\_DMC\_\_)}}
+\DoxyCodeLine{202 \textcolor{comment}{/*}}
+\DoxyCodeLine{203 \textcolor{comment}{ * VC++6.0 or early compiler's header has no DWORD\_PTR type.}}
+\DoxyCodeLine{204 \textcolor{comment}{ */}}
+\DoxyCodeLine{205 \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} DWORD\_PTR;}
+\DoxyCodeLine{206 \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} ULONG\_PTR;}
+\DoxyCodeLine{207 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{208 \textcolor{comment}{/*}}
+\DoxyCodeLine{209 \textcolor{comment}{ * -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{210 \textcolor{comment}{ * autoconf switches}}
+\DoxyCodeLine{211 \textcolor{comment}{ * -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{212 \textcolor{comment}{ */}}
+\DoxyCodeLine{213 }
+\DoxyCodeLine{214 \textcolor{preprocessor}{\#if defined(HAVE\_PTW32\_CONFIG\_H)}}
+\DoxyCodeLine{215 \textcolor{preprocessor}{\#include "{}config.h"{}}}
+\DoxyCodeLine{216 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* HAVE\_PTW32\_CONFIG\_H */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218 \textcolor{preprocessor}{\#if !defined(NEED\_FTIME)}}
+\DoxyCodeLine{219 \textcolor{preprocessor}{\#include <time.h>}}
+\DoxyCodeLine{220 \textcolor{preprocessor}{\#else }\textcolor{comment}{/* NEED\_FTIME */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{221 \textcolor{comment}{/* use native WIN32 time API */}}
+\DoxyCodeLine{222 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* NEED\_FTIME */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{224 \textcolor{preprocessor}{\#if defined(HAVE\_SIGNAL\_H)}}
+\DoxyCodeLine{225 \textcolor{preprocessor}{\#include <signal.h>}}
+\DoxyCodeLine{226 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* HAVE\_SIGNAL\_H */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{228 \textcolor{preprocessor}{\#include <limits.h>}}
+\DoxyCodeLine{229 }
+\DoxyCodeLine{230 \textcolor{comment}{/*}}
+\DoxyCodeLine{231 \textcolor{comment}{ * Boolean values to make us independent of system includes.}}
+\DoxyCodeLine{232 \textcolor{comment}{ */}}
+\DoxyCodeLine{233 \textcolor{keyword}{enum} \{}
+\DoxyCodeLine{234   \mbox{\hyperlink{pthread_8h_a06fc87d81c62e9abb8790b6e5713c55ba343b8b7b252f706fa206f1ca5f07ef34}{PTW32\_FALSE}} = 0,}
+\DoxyCodeLine{235   \mbox{\hyperlink{pthread_8h_a06fc87d81c62e9abb8790b6e5713c55ba70bc7f92c20752f710d06c078d88d1ab}{PTW32\_TRUE}} = (! \mbox{\hyperlink{pthread_8h_a06fc87d81c62e9abb8790b6e5713c55ba343b8b7b252f706fa206f1ca5f07ef34}{PTW32\_FALSE}})}
+\DoxyCodeLine{236 \};}
+\DoxyCodeLine{237 }
+\DoxyCodeLine{238 \textcolor{comment}{/*}}
+\DoxyCodeLine{239 \textcolor{comment}{ * This is a duplicate of what is in the autoconf config.h,}}
+\DoxyCodeLine{240 \textcolor{comment}{ * which is only used when building the pthread-\/win32 libraries.}}
+\DoxyCodeLine{241 \textcolor{comment}{ */}}
+\DoxyCodeLine{242 }
+\DoxyCodeLine{243 \textcolor{preprocessor}{\#if !defined(PTW32\_CONFIG\_H)}}
+\DoxyCodeLine{244 \textcolor{preprocessor}{\#  if defined(WINCE)}}
+\DoxyCodeLine{245 \textcolor{preprocessor}{\#    define NEED\_ERRNO}}
+\DoxyCodeLine{246 \textcolor{preprocessor}{\#    define NEED\_SEM}}
+\DoxyCodeLine{247 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{248 \textcolor{preprocessor}{\#  if defined(\_\_MINGW64\_\_)}}
+\DoxyCodeLine{249 \textcolor{preprocessor}{\#    define HAVE\_STRUCT\_TIMESPEC}}
+\DoxyCodeLine{250 \textcolor{preprocessor}{\#    define HAVE\_MODE\_T}}
+\DoxyCodeLine{251 \textcolor{preprocessor}{\#  elif defined(\_UWIN) || defined(\_\_MINGW32\_\_)}}
+\DoxyCodeLine{252 \textcolor{preprocessor}{\#    define HAVE\_MODE\_T}}
+\DoxyCodeLine{253 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{254 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{256 \textcolor{comment}{/*}}
+\DoxyCodeLine{257 \textcolor{comment}{ *}}
+\DoxyCodeLine{258 \textcolor{comment}{ */}}
+\DoxyCodeLine{259 }
+\DoxyCodeLine{260 \textcolor{preprocessor}{\#if PTW32\_LEVEL >= PTW32\_LEVEL\_MAX}}
+\DoxyCodeLine{261 \textcolor{preprocessor}{\#if defined(NEED\_ERRNO)}}
+\DoxyCodeLine{262 \textcolor{preprocessor}{\#include "{}need\_errno.h"{}}}
+\DoxyCodeLine{263 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{264 \textcolor{preprocessor}{\#include <errno.h>}}
+\DoxyCodeLine{265 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{266 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* PTW32\_LEVEL >= PTW32\_LEVEL\_MAX */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{267 }
+\DoxyCodeLine{268 \textcolor{comment}{/*}}
+\DoxyCodeLine{269 \textcolor{comment}{ * Several systems don't define some error numbers.}}
+\DoxyCodeLine{270 \textcolor{comment}{ */}}
+\DoxyCodeLine{271 \textcolor{preprocessor}{\#if !defined(ENOTSUP)}}
+\DoxyCodeLine{272 \textcolor{preprocessor}{\#  define ENOTSUP 48   }\textcolor{comment}{/* This is the value in Solaris. */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{273 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{274 }
+\DoxyCodeLine{275 \textcolor{preprocessor}{\#if !defined(ETIMEDOUT)}}
+\DoxyCodeLine{276 \textcolor{preprocessor}{\#  define ETIMEDOUT 10060 }\textcolor{comment}{/* Same as WSAETIMEDOUT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{277 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{278 }
+\DoxyCodeLine{279 \textcolor{preprocessor}{\#if !defined(ENOSYS)}}
+\DoxyCodeLine{280 \textcolor{preprocessor}{\#  define ENOSYS 140     }\textcolor{comment}{/* Semi-\/arbitrary value */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{281 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{282 }
+\DoxyCodeLine{283 \textcolor{preprocessor}{\#if !defined(EDEADLK)}}
+\DoxyCodeLine{284 \textcolor{preprocessor}{\#  if defined(EDEADLOCK)}}
+\DoxyCodeLine{285 \textcolor{preprocessor}{\#    define EDEADLK EDEADLOCK}}
+\DoxyCodeLine{286 \textcolor{preprocessor}{\#  else}}
+\DoxyCodeLine{287 \textcolor{preprocessor}{\#    define EDEADLK 36     }\textcolor{comment}{/* This is the value in MSVC. */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{288 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{289 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{290 }
+\DoxyCodeLine{291 \textcolor{comment}{/* POSIX 2008 -\/ related to robust mutexes */}}
+\DoxyCodeLine{292 \textcolor{preprocessor}{\#if !defined(EOWNERDEAD)}}
+\DoxyCodeLine{293 \textcolor{preprocessor}{\#  define EOWNERDEAD 43}}
+\DoxyCodeLine{294 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{295 \textcolor{preprocessor}{\#if !defined(ENOTRECOVERABLE)}}
+\DoxyCodeLine{296 \textcolor{preprocessor}{\#  define ENOTRECOVERABLE 44}}
+\DoxyCodeLine{297 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{298 }
+\DoxyCodeLine{299 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{sched_8h}{sched.h}}>}}
+\DoxyCodeLine{300 }
+\DoxyCodeLine{301 \textcolor{comment}{/*}}
+\DoxyCodeLine{302 \textcolor{comment}{ * To avoid including windows.h we define only those things that we}}
+\DoxyCodeLine{303 \textcolor{comment}{ * actually need from it.}}
+\DoxyCodeLine{304 \textcolor{comment}{ */}}
+\DoxyCodeLine{305 \textcolor{preprocessor}{\#if !defined(PTW32\_INCLUDE\_WINDOWS\_H)}}
+\DoxyCodeLine{306 \textcolor{preprocessor}{\#if !defined(HANDLE)}}
+\DoxyCodeLine{307 \textcolor{preprocessor}{\# define PTW32\_\_HANDLE\_DEF}}
+\DoxyCodeLine{308 \textcolor{preprocessor}{\# define HANDLE void *}}
+\DoxyCodeLine{309 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{310 \textcolor{preprocessor}{\#if !defined(DWORD)}}
+\DoxyCodeLine{311 \textcolor{preprocessor}{\# define PTW32\_\_DWORD\_DEF}}
+\DoxyCodeLine{312 \textcolor{preprocessor}{\# define DWORD unsigned long}}
+\DoxyCodeLine{313 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{314 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{315 }
+\DoxyCodeLine{316 \textcolor{preprocessor}{\#if !defined(HAVE\_STRUCT\_TIMESPEC)}}
+\DoxyCodeLine{317 \textcolor{preprocessor}{\#define HAVE\_STRUCT\_TIMESPEC}}
+\DoxyCodeLine{318 \textcolor{preprocessor}{\#if !defined(\_TIMESPEC\_DEFINED)}}
+\DoxyCodeLine{319 \textcolor{preprocessor}{\#define \_TIMESPEC\_DEFINED}}
+\DoxyCodeLine{320 \textcolor{keyword}{struct }\mbox{\hyperlink{structtimespec}{timespec}} \{}
+\DoxyCodeLine{321         time\_t \mbox{\hyperlink{structtimespec_afc3302668d7cb5952f590da69fdd4955}{tv\_sec}};}
+\DoxyCodeLine{322         \textcolor{keywordtype}{long} \mbox{\hyperlink{structtimespec_ae3c7510dafa8cbcaede866ed13c99683}{tv\_nsec}};}
+\DoxyCodeLine{323 \};}
+\DoxyCodeLine{324 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* \_TIMESPEC\_DEFINED */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{325 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* HAVE\_STRUCT\_TIMESPEC */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{326 }
+\DoxyCodeLine{327 \textcolor{preprocessor}{\#if !defined(SIG\_BLOCK)}}
+\DoxyCodeLine{328 \textcolor{preprocessor}{\#define SIG\_BLOCK 0}}
+\DoxyCodeLine{329 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* SIG\_BLOCK */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{330 }
+\DoxyCodeLine{331 \textcolor{preprocessor}{\#if !defined(SIG\_UNBLOCK)}}
+\DoxyCodeLine{332 \textcolor{preprocessor}{\#define SIG\_UNBLOCK 1}}
+\DoxyCodeLine{333 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* SIG\_UNBLOCK */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{335 \textcolor{preprocessor}{\#if !defined(SIG\_SETMASK)}}
+\DoxyCodeLine{336 \textcolor{preprocessor}{\#define SIG\_SETMASK 2}}
+\DoxyCodeLine{337 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* SIG\_SETMASK */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{338 }
+\DoxyCodeLine{339 \textcolor{preprocessor}{\#if defined(\_\_cplusplus)}}
+\DoxyCodeLine{340 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}}}
+\DoxyCodeLine{341 \{}
+\DoxyCodeLine{342 \textcolor{preprocessor}{\#endif                          }\textcolor{comment}{/* \_\_cplusplus */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{343 }
+\DoxyCodeLine{344 \textcolor{comment}{/*}}
+\DoxyCodeLine{345 \textcolor{comment}{ * -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{346 \textcolor{comment}{ *}}
+\DoxyCodeLine{347 \textcolor{comment}{ * POSIX 1003.1-\/2001 Options}}
+\DoxyCodeLine{348 \textcolor{comment}{ * =========================}}
+\DoxyCodeLine{349 \textcolor{comment}{ *}}
+\DoxyCodeLine{350 \textcolor{comment}{ * Options are normally set in <unistd.h>, which is not provided}}
+\DoxyCodeLine{351 \textcolor{comment}{ * with pthreads-\/win32.}}
+\DoxyCodeLine{352 \textcolor{comment}{ *}}
+\DoxyCodeLine{353 \textcolor{comment}{ * For conformance with the Single Unix Specification (version 3), all of the}}
+\DoxyCodeLine{354 \textcolor{comment}{ * options below are defined, and have a value of either -\/1 (not supported)}}
+\DoxyCodeLine{355 \textcolor{comment}{ * or 200112L (supported).}}
+\DoxyCodeLine{356 \textcolor{comment}{ *}}
+\DoxyCodeLine{357 \textcolor{comment}{ * These options can neither be left undefined nor have a value of 0, because}}
+\DoxyCodeLine{358 \textcolor{comment}{ * either indicates that sysconf(), which is not implemented, may be used at}}
+\DoxyCodeLine{359 \textcolor{comment}{ * runtime to check the status of the option.}}
+\DoxyCodeLine{360 \textcolor{comment}{ *}}
+\DoxyCodeLine{361 \textcolor{comment}{ * \_POSIX\_THREADS (== 200112L)}}
+\DoxyCodeLine{362 \textcolor{comment}{ *                      If == 200112L, you can use threads}}
+\DoxyCodeLine{363 \textcolor{comment}{ *}}
+\DoxyCodeLine{364 \textcolor{comment}{ * \_POSIX\_THREAD\_ATTR\_STACKSIZE (== 200112L)}}
+\DoxyCodeLine{365 \textcolor{comment}{ *                      If == 200112L, you can control the size of a thread's}}
+\DoxyCodeLine{366 \textcolor{comment}{ *                      stack}}
+\DoxyCodeLine{367 \textcolor{comment}{ *                              pthread\_attr\_getstacksize}}
+\DoxyCodeLine{368 \textcolor{comment}{ *                              pthread\_attr\_setstacksize}}
+\DoxyCodeLine{369 \textcolor{comment}{ *}}
+\DoxyCodeLine{370 \textcolor{comment}{ * \_POSIX\_THREAD\_ATTR\_STACKADDR (== -\/1)}}
+\DoxyCodeLine{371 \textcolor{comment}{ *                      If == 200112L, you can allocate and control a thread's}}
+\DoxyCodeLine{372 \textcolor{comment}{ *                      stack. If not supported, the following functions}}
+\DoxyCodeLine{373 \textcolor{comment}{ *                      will return ENOSYS, indicating they are not}}
+\DoxyCodeLine{374 \textcolor{comment}{ *                      supported:}}
+\DoxyCodeLine{375 \textcolor{comment}{ *                              pthread\_attr\_getstackaddr}}
+\DoxyCodeLine{376 \textcolor{comment}{ *                              pthread\_attr\_setstackaddr}}
+\DoxyCodeLine{377 \textcolor{comment}{ *}}
+\DoxyCodeLine{378 \textcolor{comment}{ * \_POSIX\_THREAD\_PRIORITY\_SCHEDULING (== -\/1)}}
+\DoxyCodeLine{379 \textcolor{comment}{ *                      If == 200112L, you can use realtime scheduling.}}
+\DoxyCodeLine{380 \textcolor{comment}{ *                      This option indicates that the behaviour of some}}
+\DoxyCodeLine{381 \textcolor{comment}{ *                      implemented functions conforms to the additional TPS}}
+\DoxyCodeLine{382 \textcolor{comment}{ *                      requirements in the standard. E.g. rwlocks favour}}
+\DoxyCodeLine{383 \textcolor{comment}{ *                      writers over readers when threads have equal priority.}}
+\DoxyCodeLine{384 \textcolor{comment}{ *}}
+\DoxyCodeLine{385 \textcolor{comment}{ * \_POSIX\_THREAD\_PRIO\_INHERIT (== -\/1)}}
+\DoxyCodeLine{386 \textcolor{comment}{ *                      If == 200112L, you can create priority inheritance}}
+\DoxyCodeLine{387 \textcolor{comment}{ *                      mutexes.}}
+\DoxyCodeLine{388 \textcolor{comment}{ *                              pthread\_mutexattr\_getprotocol +}}
+\DoxyCodeLine{389 \textcolor{comment}{ *                              pthread\_mutexattr\_setprotocol +}}
+\DoxyCodeLine{390 \textcolor{comment}{ *}}
+\DoxyCodeLine{391 \textcolor{comment}{ * \_POSIX\_THREAD\_PRIO\_PROTECT (== -\/1)}}
+\DoxyCodeLine{392 \textcolor{comment}{ *                      If == 200112L, you can create priority ceiling mutexes}}
+\DoxyCodeLine{393 \textcolor{comment}{ *                      Indicates the availability of:}}
+\DoxyCodeLine{394 \textcolor{comment}{ *                              pthread\_mutex\_getprioceiling}}
+\DoxyCodeLine{395 \textcolor{comment}{ *                              pthread\_mutex\_setprioceiling}}
+\DoxyCodeLine{396 \textcolor{comment}{ *                              pthread\_mutexattr\_getprioceiling}}
+\DoxyCodeLine{397 \textcolor{comment}{ *                              pthread\_mutexattr\_getprotocol     +}}
+\DoxyCodeLine{398 \textcolor{comment}{ *                              pthread\_mutexattr\_setprioceiling}}
+\DoxyCodeLine{399 \textcolor{comment}{ *                              pthread\_mutexattr\_setprotocol     +}}
+\DoxyCodeLine{400 \textcolor{comment}{ *}}
+\DoxyCodeLine{401 \textcolor{comment}{ * \_POSIX\_THREAD\_PROCESS\_SHARED (== -\/1)}}
+\DoxyCodeLine{402 \textcolor{comment}{ *                      If set, you can create mutexes and condition}}
+\DoxyCodeLine{403 \textcolor{comment}{ *                      variables that can be shared with another}}
+\DoxyCodeLine{404 \textcolor{comment}{ *                      process.If set, indicates the availability}}
+\DoxyCodeLine{405 \textcolor{comment}{ *                      of:}}
+\DoxyCodeLine{406 \textcolor{comment}{ *                              pthread\_mutexattr\_getpshared}}
+\DoxyCodeLine{407 \textcolor{comment}{ *                              pthread\_mutexattr\_setpshared}}
+\DoxyCodeLine{408 \textcolor{comment}{ *                              pthread\_condattr\_getpshared}}
+\DoxyCodeLine{409 \textcolor{comment}{ *                              pthread\_condattr\_setpshared}}
+\DoxyCodeLine{410 \textcolor{comment}{ *}}
+\DoxyCodeLine{411 \textcolor{comment}{ * \_POSIX\_THREAD\_SAFE\_FUNCTIONS (== 200112L)}}
+\DoxyCodeLine{412 \textcolor{comment}{ *                      If == 200112L you can use the special *\_r library}}
+\DoxyCodeLine{413 \textcolor{comment}{ *                      functions that provide thread-\/safe behaviour}}
+\DoxyCodeLine{414 \textcolor{comment}{ *}}
+\DoxyCodeLine{415 \textcolor{comment}{ * \_POSIX\_READER\_WRITER\_LOCKS (== 200112L)}}
+\DoxyCodeLine{416 \textcolor{comment}{ *                      If == 200112L, you can use read/write locks}}
+\DoxyCodeLine{417 \textcolor{comment}{ *}}
+\DoxyCodeLine{418 \textcolor{comment}{ * \_POSIX\_SPIN\_LOCKS (== 200112L)}}
+\DoxyCodeLine{419 \textcolor{comment}{ *                      If == 200112L, you can use spin locks}}
+\DoxyCodeLine{420 \textcolor{comment}{ *}}
+\DoxyCodeLine{421 \textcolor{comment}{ * \_POSIX\_BARRIERS (== 200112L)}}
+\DoxyCodeLine{422 \textcolor{comment}{ *                      If == 200112L, you can use barriers}}
+\DoxyCodeLine{423 \textcolor{comment}{ *}}
+\DoxyCodeLine{424 \textcolor{comment}{ *      + These functions provide both 'inherit' and/or}}
+\DoxyCodeLine{425 \textcolor{comment}{ *        'protect' protocol, based upon these macro}}
+\DoxyCodeLine{426 \textcolor{comment}{ *        settings.}}
+\DoxyCodeLine{427 \textcolor{comment}{ *}}
+\DoxyCodeLine{428 \textcolor{comment}{ * -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{429 \textcolor{comment}{ */}}
+\DoxyCodeLine{430 }
+\DoxyCodeLine{431 \textcolor{comment}{/*}}
+\DoxyCodeLine{432 \textcolor{comment}{ * POSIX Options}}
+\DoxyCodeLine{433 \textcolor{comment}{ */}}
+\DoxyCodeLine{434 \textcolor{preprocessor}{\#undef \_POSIX\_THREADS}}
+\DoxyCodeLine{435 \textcolor{preprocessor}{\#define \_POSIX\_THREADS 200809L}}
+\DoxyCodeLine{436 }
+\DoxyCodeLine{437 \textcolor{preprocessor}{\#undef \_POSIX\_READER\_WRITER\_LOCKS}}
+\DoxyCodeLine{438 \textcolor{preprocessor}{\#define \_POSIX\_READER\_WRITER\_LOCKS 200809L}}
+\DoxyCodeLine{439 }
+\DoxyCodeLine{440 \textcolor{preprocessor}{\#undef \_POSIX\_SPIN\_LOCKS}}
+\DoxyCodeLine{441 \textcolor{preprocessor}{\#define \_POSIX\_SPIN\_LOCKS 200809L}}
+\DoxyCodeLine{442 }
+\DoxyCodeLine{443 \textcolor{preprocessor}{\#undef \_POSIX\_BARRIERS}}
+\DoxyCodeLine{444 \textcolor{preprocessor}{\#define \_POSIX\_BARRIERS 200809L}}
+\DoxyCodeLine{445 }
+\DoxyCodeLine{446 \textcolor{preprocessor}{\#undef \_POSIX\_THREAD\_SAFE\_FUNCTIONS}}
+\DoxyCodeLine{447 \textcolor{preprocessor}{\#define \_POSIX\_THREAD\_SAFE\_FUNCTIONS 200809L}}
+\DoxyCodeLine{448 }
+\DoxyCodeLine{449 \textcolor{preprocessor}{\#undef \_POSIX\_THREAD\_ATTR\_STACKSIZE}}
+\DoxyCodeLine{450 \textcolor{preprocessor}{\#define \_POSIX\_THREAD\_ATTR\_STACKSIZE 200809L}}
+\DoxyCodeLine{451 }
+\DoxyCodeLine{452 \textcolor{comment}{/*}}
+\DoxyCodeLine{453 \textcolor{comment}{ * The following options are not supported}}
+\DoxyCodeLine{454 \textcolor{comment}{ */}}
+\DoxyCodeLine{455 \textcolor{preprocessor}{\#undef \_POSIX\_THREAD\_ATTR\_STACKADDR}}
+\DoxyCodeLine{456 \textcolor{preprocessor}{\#define \_POSIX\_THREAD\_ATTR\_STACKADDR -\/1}}
+\DoxyCodeLine{457 }
+\DoxyCodeLine{458 \textcolor{preprocessor}{\#undef \_POSIX\_THREAD\_PRIO\_INHERIT}}
+\DoxyCodeLine{459 \textcolor{preprocessor}{\#define \_POSIX\_THREAD\_PRIO\_INHERIT -\/1}}
+\DoxyCodeLine{460 }
+\DoxyCodeLine{461 \textcolor{preprocessor}{\#undef \_POSIX\_THREAD\_PRIO\_PROTECT}}
+\DoxyCodeLine{462 \textcolor{preprocessor}{\#define \_POSIX\_THREAD\_PRIO\_PROTECT -\/1}}
+\DoxyCodeLine{463 }
+\DoxyCodeLine{464 \textcolor{comment}{/* TPS is not fully supported.  */}}
+\DoxyCodeLine{465 \textcolor{preprocessor}{\#undef \_POSIX\_THREAD\_PRIORITY\_SCHEDULING}}
+\DoxyCodeLine{466 \textcolor{preprocessor}{\#define \_POSIX\_THREAD\_PRIORITY\_SCHEDULING -\/1}}
+\DoxyCodeLine{467 }
+\DoxyCodeLine{468 \textcolor{preprocessor}{\#undef \_POSIX\_THREAD\_PROCESS\_SHARED}}
+\DoxyCodeLine{469 \textcolor{preprocessor}{\#define \_POSIX\_THREAD\_PROCESS\_SHARED -\/1}}
+\DoxyCodeLine{470 }
+\DoxyCodeLine{471 }
+\DoxyCodeLine{472 \textcolor{comment}{/*}}
+\DoxyCodeLine{473 \textcolor{comment}{ * POSIX 1003.1-\/2001 Limits}}
+\DoxyCodeLine{474 \textcolor{comment}{ * ===========================}}
+\DoxyCodeLine{475 \textcolor{comment}{ *}}
+\DoxyCodeLine{476 \textcolor{comment}{ * These limits are normally set in <limits.h>, which is not provided with}}
+\DoxyCodeLine{477 \textcolor{comment}{ * pthreads-\/win32.}}
+\DoxyCodeLine{478 \textcolor{comment}{ *}}
+\DoxyCodeLine{479 \textcolor{comment}{ * PTHREAD\_DESTRUCTOR\_ITERATIONS}}
+\DoxyCodeLine{480 \textcolor{comment}{ *                      Maximum number of attempts to destroy}}
+\DoxyCodeLine{481 \textcolor{comment}{ *                      a thread's thread-\/specific data on}}
+\DoxyCodeLine{482 \textcolor{comment}{ *                      termination (must be at least 4)}}
+\DoxyCodeLine{483 \textcolor{comment}{ *}}
+\DoxyCodeLine{484 \textcolor{comment}{ * PTHREAD\_KEYS\_MAX}}
+\DoxyCodeLine{485 \textcolor{comment}{ *                      Maximum number of thread-\/specific data keys}}
+\DoxyCodeLine{486 \textcolor{comment}{ *                      available per process (must be at least 128)}}
+\DoxyCodeLine{487 \textcolor{comment}{ *}}
+\DoxyCodeLine{488 \textcolor{comment}{ * PTHREAD\_STACK\_MIN}}
+\DoxyCodeLine{489 \textcolor{comment}{ *                      Minimum supported stack size for a thread}}
+\DoxyCodeLine{490 \textcolor{comment}{ *}}
+\DoxyCodeLine{491 \textcolor{comment}{ * PTHREAD\_THREADS\_MAX}}
+\DoxyCodeLine{492 \textcolor{comment}{ *                      Maximum number of threads supported per}}
+\DoxyCodeLine{493 \textcolor{comment}{ *                      process (must be at least 64).}}
+\DoxyCodeLine{494 \textcolor{comment}{ *}}
+\DoxyCodeLine{495 \textcolor{comment}{ * SEM\_NSEMS\_MAX}}
+\DoxyCodeLine{496 \textcolor{comment}{ *                      The maximum number of semaphores a process can have.}}
+\DoxyCodeLine{497 \textcolor{comment}{ *                      (must be at least 256)}}
+\DoxyCodeLine{498 \textcolor{comment}{ *}}
+\DoxyCodeLine{499 \textcolor{comment}{ * SEM\_VALUE\_MAX}}
+\DoxyCodeLine{500 \textcolor{comment}{ *                      The maximum value a semaphore can have.}}
+\DoxyCodeLine{501 \textcolor{comment}{ *                      (must be at least 32767)}}
+\DoxyCodeLine{502 \textcolor{comment}{ *}}
+\DoxyCodeLine{503 \textcolor{comment}{ */}}
+\DoxyCodeLine{504 \textcolor{preprocessor}{\#undef \_POSIX\_THREAD\_DESTRUCTOR\_ITERATIONS}}
+\DoxyCodeLine{505 \textcolor{preprocessor}{\#define \_POSIX\_THREAD\_DESTRUCTOR\_ITERATIONS     4}}
+\DoxyCodeLine{506 }
+\DoxyCodeLine{507 \textcolor{preprocessor}{\#undef PTHREAD\_DESTRUCTOR\_ITERATIONS}}
+\DoxyCodeLine{508 \textcolor{preprocessor}{\#define PTHREAD\_DESTRUCTOR\_ITERATIONS           \_POSIX\_THREAD\_DESTRUCTOR\_ITERATIONS}}
+\DoxyCodeLine{509 }
+\DoxyCodeLine{510 \textcolor{preprocessor}{\#undef \_POSIX\_THREAD\_KEYS\_MAX}}
+\DoxyCodeLine{511 \textcolor{preprocessor}{\#define \_POSIX\_THREAD\_KEYS\_MAX                  128}}
+\DoxyCodeLine{512 }
+\DoxyCodeLine{513 \textcolor{preprocessor}{\#undef PTHREAD\_KEYS\_MAX}}
+\DoxyCodeLine{514 \textcolor{preprocessor}{\#define PTHREAD\_KEYS\_MAX                        \_POSIX\_THREAD\_KEYS\_MAX}}
+\DoxyCodeLine{515 }
+\DoxyCodeLine{516 \textcolor{preprocessor}{\#undef PTHREAD\_STACK\_MIN}}
+\DoxyCodeLine{517 \textcolor{preprocessor}{\#define PTHREAD\_STACK\_MIN                       0}}
+\DoxyCodeLine{518 }
+\DoxyCodeLine{519 \textcolor{preprocessor}{\#undef \_POSIX\_THREAD\_THREADS\_MAX}}
+\DoxyCodeLine{520 \textcolor{preprocessor}{\#define \_POSIX\_THREAD\_THREADS\_MAX               64}}
+\DoxyCodeLine{521 }
+\DoxyCodeLine{522   \textcolor{comment}{/* Arbitrary value */}}
+\DoxyCodeLine{523 \textcolor{preprocessor}{\#undef PTHREAD\_THREADS\_MAX}}
+\DoxyCodeLine{524 \textcolor{preprocessor}{\#define PTHREAD\_THREADS\_MAX                     2019}}
+\DoxyCodeLine{525 }
+\DoxyCodeLine{526 \textcolor{preprocessor}{\#undef \_POSIX\_SEM\_NSEMS\_MAX}}
+\DoxyCodeLine{527 \textcolor{preprocessor}{\#define \_POSIX\_SEM\_NSEMS\_MAX                    256}}
+\DoxyCodeLine{528 }
+\DoxyCodeLine{529   \textcolor{comment}{/* Arbitrary value */}}
+\DoxyCodeLine{530 \textcolor{preprocessor}{\#undef SEM\_NSEMS\_MAX}}
+\DoxyCodeLine{531 \textcolor{preprocessor}{\#define SEM\_NSEMS\_MAX                           1024}}
+\DoxyCodeLine{532 }
+\DoxyCodeLine{533 \textcolor{preprocessor}{\#undef \_POSIX\_SEM\_VALUE\_MAX}}
+\DoxyCodeLine{534 \textcolor{preprocessor}{\#define \_POSIX\_SEM\_VALUE\_MAX                    32767}}
+\DoxyCodeLine{535 }
+\DoxyCodeLine{536 \textcolor{preprocessor}{\#undef SEM\_VALUE\_MAX}}
+\DoxyCodeLine{537 \textcolor{preprocessor}{\#define SEM\_VALUE\_MAX                           INT\_MAX}}
+\DoxyCodeLine{538 }
+\DoxyCodeLine{539 }
+\DoxyCodeLine{540 \textcolor{preprocessor}{\#if defined(\_\_GNUC\_\_) \&\& !defined(\_\_declspec)}}
+\DoxyCodeLine{541 \textcolor{preprocessor}{\# error Please upgrade your GNU compiler to one that supports \_\_declspec.}}
+\DoxyCodeLine{542 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{543 }
+\DoxyCodeLine{544 \textcolor{comment}{/*}}
+\DoxyCodeLine{545 \textcolor{comment}{ * When building the library, you should define PTW32\_BUILD so that}}
+\DoxyCodeLine{546 \textcolor{comment}{ * the variables/functions are exported correctly. When using the library,}}
+\DoxyCodeLine{547 \textcolor{comment}{ * do NOT define PTW32\_BUILD, and then the variables/functions will}}
+\DoxyCodeLine{548 \textcolor{comment}{ * be imported correctly.}}
+\DoxyCodeLine{549 \textcolor{comment}{ */}}
+\DoxyCodeLine{550 \textcolor{preprocessor}{\#if !defined(PTW32\_STATIC\_LIB)}}
+\DoxyCodeLine{551 \textcolor{preprocessor}{\#  if defined(PTW32\_BUILD)}}
+\DoxyCodeLine{552 \textcolor{preprocessor}{\#    define PTW32\_DLLPORT \_\_declspec (dllexport)}}
+\DoxyCodeLine{553 \textcolor{preprocessor}{\#  else}}
+\DoxyCodeLine{554 \textcolor{preprocessor}{\#    define PTW32\_DLLPORT \_\_declspec (dllimport)}}
+\DoxyCodeLine{555 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{556 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{557 \textcolor{preprocessor}{\#  define PTW32\_DLLPORT}}
+\DoxyCodeLine{558 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{559 }
+\DoxyCodeLine{560 \textcolor{comment}{/*}}
+\DoxyCodeLine{561 \textcolor{comment}{ * The Open Watcom C/C++ compiler uses a non-\/standard calling convention}}
+\DoxyCodeLine{562 \textcolor{comment}{ * that passes function args in registers unless \_\_cdecl is explicitly specified}}
+\DoxyCodeLine{563 \textcolor{comment}{ * in exposed function prototypes.}}
+\DoxyCodeLine{564 \textcolor{comment}{ *}}
+\DoxyCodeLine{565 \textcolor{comment}{ * We force all calls to cdecl even though this could slow Watcom code down}}
+\DoxyCodeLine{566 \textcolor{comment}{ * slightly. If you know that the Watcom compiler will be used to build both}}
+\DoxyCodeLine{567 \textcolor{comment}{ * the DLL and application, then you can probably define this as a null string.}}
+\DoxyCodeLine{568 \textcolor{comment}{ * Remember that pthread.h (this file) is used for both the DLL and application builds.}}
+\DoxyCodeLine{569 \textcolor{comment}{ */}}
+\DoxyCodeLine{570 \textcolor{preprocessor}{\#define PTW32\_CDECL \_\_cdecl}}
+\DoxyCodeLine{571 }
+\DoxyCodeLine{572 \textcolor{preprocessor}{\#if defined(\_UWIN) \&\& PTW32\_LEVEL >= PTW32\_LEVEL\_MAX}}
+\DoxyCodeLine{573 \textcolor{preprocessor}{\#   include     <sys/types.h>}}
+\DoxyCodeLine{574 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{575 \textcolor{comment}{/*}}
+\DoxyCodeLine{576 \textcolor{comment}{ * Generic handle type -\/ intended to extend uniqueness beyond}}
+\DoxyCodeLine{577 \textcolor{comment}{ * that available with a simple pointer. It should scale for either}}
+\DoxyCodeLine{578 \textcolor{comment}{ * IA-\/32 or IA-\/64.}}
+\DoxyCodeLine{579 \textcolor{comment}{ */}}
+\DoxyCodeLine{580 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{581     \textcolor{keywordtype}{void} * \mbox{\hyperlink{structptw32__handle__t_ad5c9721a0ae3e8d13766c5d901c8a157}{p}};                   \textcolor{comment}{/* Pointer to actual object */}}
+\DoxyCodeLine{582     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{structptw32__handle__t_a156e4e4394eb30aa3f977794496db34b}{x}};             \textcolor{comment}{/* Extra information -\/ reuse count etc */}}
+\DoxyCodeLine{583 \} \mbox{\hyperlink{structptw32__handle__t}{ptw32\_handle\_t}};}
+\DoxyCodeLine{584 }
+\DoxyCodeLine{585 \textcolor{keyword}{typedef} \mbox{\hyperlink{structptw32__handle__t}{ptw32\_handle\_t}} \mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\_t}};}
+\DoxyCodeLine{586 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }pthread\_attr\_t\_ * \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\_attr\_t}};}
+\DoxyCodeLine{587 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structpthread__once__t__}{pthread\_once\_t\_}} \mbox{\hyperlink{structpthread__once__t__}{pthread\_once\_t}};}
+\DoxyCodeLine{588 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }pthread\_key\_t\_ * \mbox{\hyperlink{pthread_8h_ad0376f110bc69993ad8bee03134fbd7d}{pthread\_key\_t}};}
+\DoxyCodeLine{589 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }pthread\_mutex\_t\_ * \mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\_mutex\_t}};}
+\DoxyCodeLine{590 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }pthread\_mutexattr\_t\_ * \mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\_mutexattr\_t}};}
+\DoxyCodeLine{591 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }pthread\_cond\_t\_ * \mbox{\hyperlink{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}{pthread\_cond\_t}};}
+\DoxyCodeLine{592 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }pthread\_condattr\_t\_ * \mbox{\hyperlink{pthread_8h_ab77e7203e4ab594ba14d1f92969d19ef}{pthread\_condattr\_t}};}
+\DoxyCodeLine{593 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{594 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }pthread\_rwlock\_t\_ * \mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\_rwlock\_t}};}
+\DoxyCodeLine{595 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }pthread\_rwlockattr\_t\_ * \mbox{\hyperlink{pthread_8h_a516f3fa0225b050ba34327f6491638fd}{pthread\_rwlockattr\_t}};}
+\DoxyCodeLine{596 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }pthread\_spinlock\_t\_ * \mbox{\hyperlink{pthread_8h_a8481ca14ebb4b48ccc42d2c805e75e54}{pthread\_spinlock\_t}};}
+\DoxyCodeLine{597 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }pthread\_barrier\_t\_ * \mbox{\hyperlink{pthread_8h_a9cd526c5e963f8f6b9fc31adbfb49608}{pthread\_barrier\_t}};}
+\DoxyCodeLine{598 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }pthread\_barrierattr\_t\_ * \mbox{\hyperlink{pthread_8h_a6c1bb0434bca06a34fee71ee8965dd34}{pthread\_barrierattr\_t}};}
+\DoxyCodeLine{599 }
+\DoxyCodeLine{600 \textcolor{comment}{/*}}
+\DoxyCodeLine{601 \textcolor{comment}{ * ====================}}
+\DoxyCodeLine{602 \textcolor{comment}{ * ====================}}
+\DoxyCodeLine{603 \textcolor{comment}{ * POSIX Threads}}
+\DoxyCodeLine{604 \textcolor{comment}{ * ====================}}
+\DoxyCodeLine{605 \textcolor{comment}{ * ====================}}
+\DoxyCodeLine{606 \textcolor{comment}{ */}}
+\DoxyCodeLine{607 }
+\DoxyCodeLine{608 \textcolor{keyword}{enum} \{}
+\DoxyCodeLine{609 \textcolor{comment}{/*}}
+\DoxyCodeLine{610 \textcolor{comment}{ * pthread\_attr\_\{get,set\}detachstate}}
+\DoxyCodeLine{611 \textcolor{comment}{ */}}
+\DoxyCodeLine{612   \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7aedde61df7c9c0c7589106ab45c7980a5}{PTHREAD\_CREATE\_JOINABLE}}       = 0,  \textcolor{comment}{/* Default */}}
+\DoxyCodeLine{613   \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a2512d11dd7fa9db00e8ae247e21344a5}{PTHREAD\_CREATE\_DETACHED}}       = 1,}
+\DoxyCodeLine{614 }
+\DoxyCodeLine{615 \textcolor{comment}{/*}}
+\DoxyCodeLine{616 \textcolor{comment}{ * pthread\_attr\_\{get,set\}inheritsched}}
+\DoxyCodeLine{617 \textcolor{comment}{ */}}
+\DoxyCodeLine{618   \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a63e1b1953bee944d07218f02021d0bcb}{PTHREAD\_INHERIT\_SCHED}}         = 0,}
+\DoxyCodeLine{619   \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7ad04777d52cc78357fb1d29f309e801e8}{PTHREAD\_EXPLICIT\_SCHED}}        = 1,  \textcolor{comment}{/* Default */}}
+\DoxyCodeLine{620 }
+\DoxyCodeLine{621 \textcolor{comment}{/*}}
+\DoxyCodeLine{622 \textcolor{comment}{ * pthread\_\{get,set\}scope}}
+\DoxyCodeLine{623 \textcolor{comment}{ */}}
+\DoxyCodeLine{624   \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a7592df21cac6b1e35bec267f6c733cd6}{PTHREAD\_SCOPE\_PROCESS}}         = 0,}
+\DoxyCodeLine{625   \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7adf110376f12d0244378522922f3c313f}{PTHREAD\_SCOPE\_SYSTEM}}          = 1,  \textcolor{comment}{/* Default */}}
+\DoxyCodeLine{626 }
+\DoxyCodeLine{627 \textcolor{comment}{/*}}
+\DoxyCodeLine{628 \textcolor{comment}{ * pthread\_setcancelstate paramters}}
+\DoxyCodeLine{629 \textcolor{comment}{ */}}
+\DoxyCodeLine{630   \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a0107de44d6bf8ca8f270853d3079f2ce}{PTHREAD\_CANCEL\_ENABLE}}         = 0,  \textcolor{comment}{/* Default */}}
+\DoxyCodeLine{631   \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7aa2bc8caabe477c20eb2437b04a7ca951}{PTHREAD\_CANCEL\_DISABLE}}        = 1,}
+\DoxyCodeLine{632 }
+\DoxyCodeLine{633 \textcolor{comment}{/*}}
+\DoxyCodeLine{634 \textcolor{comment}{ * pthread\_setcanceltype parameters}}
+\DoxyCodeLine{635 \textcolor{comment}{ */}}
+\DoxyCodeLine{636   \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7afde2fe11618067c09922faa311f5d053}{PTHREAD\_CANCEL\_ASYNCHRONOUS}}   = 0,}
+\DoxyCodeLine{637   \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7accf936610764207fb210dc3e2053a40f}{PTHREAD\_CANCEL\_DEFERRED}}       = 1,  \textcolor{comment}{/* Default */}}
+\DoxyCodeLine{638 }
+\DoxyCodeLine{639 \textcolor{comment}{/*}}
+\DoxyCodeLine{640 \textcolor{comment}{ * pthread\_mutexattr\_\{get,set\}pshared}}
+\DoxyCodeLine{641 \textcolor{comment}{ * pthread\_condattr\_\{get,set\}pshared}}
+\DoxyCodeLine{642 \textcolor{comment}{ */}}
+\DoxyCodeLine{643   \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a4b597774e6a4da2b7572ecaba5d78f7b}{PTHREAD\_PROCESS\_PRIVATE}}       = 0,}
+\DoxyCodeLine{644   \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a08295b03be77cfee92360b82e4f07963}{PTHREAD\_PROCESS\_SHARED}}        = 1,}
+\DoxyCodeLine{645 }
+\DoxyCodeLine{646 \textcolor{comment}{/*}}
+\DoxyCodeLine{647 \textcolor{comment}{ * pthread\_mutexattr\_\{get,set\}robust}}
+\DoxyCodeLine{648 \textcolor{comment}{ */}}
+\DoxyCodeLine{649   \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7aa2eecfff4ef9e6d1cd72b06ebb80479c}{PTHREAD\_MUTEX\_STALLED}}         = 0,  \textcolor{comment}{/* Default */}}
+\DoxyCodeLine{650   \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a1d15b780c0738efc4f9892521664061d}{PTHREAD\_MUTEX\_ROBUST}}          = 1,}
+\DoxyCodeLine{651 }
+\DoxyCodeLine{652 \textcolor{comment}{/*}}
+\DoxyCodeLine{653 \textcolor{comment}{ * pthread\_barrier\_wait}}
+\DoxyCodeLine{654 \textcolor{comment}{ */}}
+\DoxyCodeLine{655   \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7ab8cb5055533bdf0fe1d122a77cf0354c}{PTHREAD\_BARRIER\_SERIAL\_THREAD}} = -\/1}
+\DoxyCodeLine{656 \};}
+\DoxyCodeLine{657 }
+\DoxyCodeLine{658 \textcolor{comment}{/*}}
+\DoxyCodeLine{659 \textcolor{comment}{ * ====================}}
+\DoxyCodeLine{660 \textcolor{comment}{ * ====================}}
+\DoxyCodeLine{661 \textcolor{comment}{ * Cancelation}}
+\DoxyCodeLine{662 \textcolor{comment}{ * ====================}}
+\DoxyCodeLine{663 \textcolor{comment}{ * ====================}}
+\DoxyCodeLine{664 \textcolor{comment}{ */}}
+\DoxyCodeLine{665 \textcolor{preprocessor}{\#define PTHREAD\_CANCELED       ((void *)(size\_t) -\/1)}}
+\DoxyCodeLine{666 }
+\DoxyCodeLine{667 }
+\DoxyCodeLine{668 \textcolor{comment}{/*}}
+\DoxyCodeLine{669 \textcolor{comment}{ * ====================}}
+\DoxyCodeLine{670 \textcolor{comment}{ * ====================}}
+\DoxyCodeLine{671 \textcolor{comment}{ * Once Key}}
+\DoxyCodeLine{672 \textcolor{comment}{ * ====================}}
+\DoxyCodeLine{673 \textcolor{comment}{ * ====================}}
+\DoxyCodeLine{674 \textcolor{comment}{ */}}
+\DoxyCodeLine{675 \textcolor{preprocessor}{\#define PTHREAD\_ONCE\_INIT       \{ PTW32\_FALSE, 0, 0, 0\}}}
+\DoxyCodeLine{676 }
+\DoxyCodeLine{677 \textcolor{keyword}{struct }\mbox{\hyperlink{structpthread__once__t__}{pthread\_once\_t\_}}}
+\DoxyCodeLine{678 \{}
+\DoxyCodeLine{679   \textcolor{keywordtype}{int}          \mbox{\hyperlink{structpthread__once__t___a863ce43daa3b264c20a79f9c3eb65b06}{done}};        \textcolor{comment}{/* indicates if user function has been executed */}}
+\DoxyCodeLine{680   \textcolor{keywordtype}{void} *       \mbox{\hyperlink{structpthread__once__t___a9e674c271b3500a3fb315ba6a26587d8}{lock}};}
+\DoxyCodeLine{681   \textcolor{keywordtype}{int}          \mbox{\hyperlink{structpthread__once__t___ac92841b1c04034128491e463297b4c3d}{reserved1}};}
+\DoxyCodeLine{682   \textcolor{keywordtype}{int}          \mbox{\hyperlink{structpthread__once__t___aaef156d8d36d991e6f113b0ec0c481b4}{reserved2}};}
+\DoxyCodeLine{683 \};}
+\DoxyCodeLine{684 }
+\DoxyCodeLine{685 }
+\DoxyCodeLine{686 \textcolor{comment}{/*}}
+\DoxyCodeLine{687 \textcolor{comment}{ * ====================}}
+\DoxyCodeLine{688 \textcolor{comment}{ * ====================}}
+\DoxyCodeLine{689 \textcolor{comment}{ * Object initialisers}}
+\DoxyCodeLine{690 \textcolor{comment}{ * ====================}}
+\DoxyCodeLine{691 \textcolor{comment}{ * ====================}}
+\DoxyCodeLine{692 \textcolor{comment}{ */}}
+\DoxyCodeLine{693 \textcolor{preprocessor}{\#define PTHREAD\_MUTEX\_INITIALIZER ((pthread\_mutex\_t)(size\_t) -\/1)}}
+\DoxyCodeLine{694 \textcolor{preprocessor}{\#define PTHREAD\_RECURSIVE\_MUTEX\_INITIALIZER ((pthread\_mutex\_t)(size\_t) -\/2)}}
+\DoxyCodeLine{695 \textcolor{preprocessor}{\#define PTHREAD\_ERRORCHECK\_MUTEX\_INITIALIZER ((pthread\_mutex\_t)(size\_t) -\/3)}}
+\DoxyCodeLine{696 }
+\DoxyCodeLine{697 \textcolor{comment}{/*}}
+\DoxyCodeLine{698 \textcolor{comment}{ * Compatibility with LinuxThreads}}
+\DoxyCodeLine{699 \textcolor{comment}{ */}}
+\DoxyCodeLine{700 \textcolor{preprocessor}{\#define PTHREAD\_RECURSIVE\_MUTEX\_INITIALIZER\_NP PTHREAD\_RECURSIVE\_MUTEX\_INITIALIZER}}
+\DoxyCodeLine{701 \textcolor{preprocessor}{\#define PTHREAD\_ERRORCHECK\_MUTEX\_INITIALIZER\_NP PTHREAD\_ERRORCHECK\_MUTEX\_INITIALIZER}}
+\DoxyCodeLine{702 }
+\DoxyCodeLine{703 \textcolor{preprocessor}{\#define PTHREAD\_COND\_INITIALIZER ((pthread\_cond\_t)(size\_t) -\/1)}}
+\DoxyCodeLine{704 }
+\DoxyCodeLine{705 \textcolor{preprocessor}{\#define PTHREAD\_RWLOCK\_INITIALIZER ((pthread\_rwlock\_t)(size\_t) -\/1)}}
+\DoxyCodeLine{706 }
+\DoxyCodeLine{707 \textcolor{preprocessor}{\#define PTHREAD\_SPINLOCK\_INITIALIZER ((pthread\_spinlock\_t)(size\_t) -\/1)}}
+\DoxyCodeLine{708 }
+\DoxyCodeLine{709 }
+\DoxyCodeLine{710 \textcolor{comment}{/*}}
+\DoxyCodeLine{711 \textcolor{comment}{ * Mutex types.}}
+\DoxyCodeLine{712 \textcolor{comment}{ */}}
+\DoxyCodeLine{713 \textcolor{keyword}{enum}}
+\DoxyCodeLine{714 \{}
+\DoxyCodeLine{715   \textcolor{comment}{/* Compatibility with LinuxThreads */}}
+\DoxyCodeLine{716   \mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5a01edd504ac7d7b5f9de62ff00890609b}{PTHREAD\_MUTEX\_FAST\_NP}},}
+\DoxyCodeLine{717   \mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5acce072a3d99dd4cfad8a609089f34f15}{PTHREAD\_MUTEX\_RECURSIVE\_NP}},}
+\DoxyCodeLine{718   \mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5ac4347bd162505ca1224fe0fc3f48327d}{PTHREAD\_MUTEX\_ERRORCHECK\_NP}},}
+\DoxyCodeLine{719   \mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5a7de470be3659bf2cb4220ac081e93dc8}{PTHREAD\_MUTEX\_TIMED\_NP}} = \mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5a01edd504ac7d7b5f9de62ff00890609b}{PTHREAD\_MUTEX\_FAST\_NP}},}
+\DoxyCodeLine{720   \mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5a9e8ac90bbb9d4737d345b2de6bdbf3de}{PTHREAD\_MUTEX\_ADAPTIVE\_NP}} = \mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5a01edd504ac7d7b5f9de62ff00890609b}{PTHREAD\_MUTEX\_FAST\_NP}},}
+\DoxyCodeLine{721   \textcolor{comment}{/* For compatibility with POSIX */}}
+\DoxyCodeLine{722   \mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5abea5d963222d69ea123978b50dfe8a7a}{PTHREAD\_MUTEX\_NORMAL}} = \mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5a01edd504ac7d7b5f9de62ff00890609b}{PTHREAD\_MUTEX\_FAST\_NP}},}
+\DoxyCodeLine{723   \mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5a02e48297eea4a6d3c2b8182d73691475}{PTHREAD\_MUTEX\_RECURSIVE}} = \mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5acce072a3d99dd4cfad8a609089f34f15}{PTHREAD\_MUTEX\_RECURSIVE\_NP}},}
+\DoxyCodeLine{724   \mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5a3a806dca7fa5a505456e978151a3cc95}{PTHREAD\_MUTEX\_ERRORCHECK}} = \mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5ac4347bd162505ca1224fe0fc3f48327d}{PTHREAD\_MUTEX\_ERRORCHECK\_NP}},}
+\DoxyCodeLine{725   \mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5aed70ed455310e0cc0a964ea462e27d31}{PTHREAD\_MUTEX\_DEFAULT}} = \mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5abea5d963222d69ea123978b50dfe8a7a}{PTHREAD\_MUTEX\_NORMAL}}}
+\DoxyCodeLine{726 \};}
+\DoxyCodeLine{727 }
+\DoxyCodeLine{728 }
+\DoxyCodeLine{729 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structptw32__cleanup__t}{ptw32\_cleanup\_t}} \mbox{\hyperlink{structptw32__cleanup__t}{ptw32\_cleanup\_t}};}
+\DoxyCodeLine{730 }
+\DoxyCodeLine{731 \textcolor{preprocessor}{\#if defined(\_MSC\_VER)}}
+\DoxyCodeLine{732 \textcolor{comment}{/* Disable MSVC 'anachronism used' warning */}}
+\DoxyCodeLine{733 \textcolor{preprocessor}{\#pragma warning( disable : 4229 )}}
+\DoxyCodeLine{734 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{735 }
+\DoxyCodeLine{736 \textcolor{keyword}{typedef} void (* \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} ptw32\_cleanup\_callback\_t)(\textcolor{keywordtype}{void} *);}
+\DoxyCodeLine{737 }
+\DoxyCodeLine{738 \textcolor{preprocessor}{\#if defined(\_MSC\_VER)}}
+\DoxyCodeLine{739 \textcolor{preprocessor}{\#pragma warning( default : 4229 )}}
+\DoxyCodeLine{740 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{741 }
+\DoxyCodeLine{742 \textcolor{keyword}{struct }\mbox{\hyperlink{structptw32__cleanup__t}{ptw32\_cleanup\_t}}}
+\DoxyCodeLine{743 \{}
+\DoxyCodeLine{744   ptw32\_cleanup\_callback\_t \mbox{\hyperlink{structptw32__cleanup__t_ad197a94dcb95ce712f2d8f6c141a9aef}{routine}};}
+\DoxyCodeLine{745   \textcolor{keywordtype}{void} *\mbox{\hyperlink{structptw32__cleanup__t_a2a4e7cc43435bafabdbcdfa892da4d88}{arg}};}
+\DoxyCodeLine{746   \textcolor{keyword}{struct }\mbox{\hyperlink{structptw32__cleanup__t}{ptw32\_cleanup\_t}} *\mbox{\hyperlink{structptw32__cleanup__t_a01e8236d7e28e823b8277e81e9e03d03}{prev}};}
+\DoxyCodeLine{747 \};}
+\DoxyCodeLine{748 }
+\DoxyCodeLine{749 \textcolor{preprocessor}{\#if defined(\_\_CLEANUP\_SEH)}}
+\DoxyCodeLine{750         \textcolor{comment}{/*}}
+\DoxyCodeLine{751 \textcolor{comment}{         * WIN32 SEH version of cancel cleanup.}}
+\DoxyCodeLine{752 \textcolor{comment}{         */}}
+\DoxyCodeLine{753 }
+\DoxyCodeLine{754 \textcolor{preprocessor}{\#define pthread\_cleanup\_push( \_rout, \_arg ) \(\backslash\)}}
+\DoxyCodeLine{755 \textcolor{preprocessor}{        \{ \(\backslash\)}}
+\DoxyCodeLine{756 \textcolor{preprocessor}{            ptw32\_cleanup\_t     \_cleanup; \(\backslash\)}}
+\DoxyCodeLine{757 \textcolor{preprocessor}{            \(\backslash\)}}
+\DoxyCodeLine{758 \textcolor{preprocessor}{        \_cleanup.routine        = (ptw32\_cleanup\_callback\_t)(\_rout); \(\backslash\)}}
+\DoxyCodeLine{759 \textcolor{preprocessor}{            \_cleanup.arg        = (\_arg); \(\backslash\)}}
+\DoxyCodeLine{760 \textcolor{preprocessor}{            \_\_try \(\backslash\)}}
+\DoxyCodeLine{761 \textcolor{preprocessor}{              \{ \(\backslash\)}}
+\DoxyCodeLine{762 \textcolor{preprocessor}{}}
+\DoxyCodeLine{763 \textcolor{preprocessor}{\#define pthread\_cleanup\_pop( \_execute ) \(\backslash\)}}
+\DoxyCodeLine{764 \textcolor{preprocessor}{              \} \(\backslash\)}}
+\DoxyCodeLine{765 \textcolor{preprocessor}{            \_\_finally \(\backslash\)}}
+\DoxyCodeLine{766 \textcolor{preprocessor}{                \{ \(\backslash\)}}
+\DoxyCodeLine{767 \textcolor{preprocessor}{                    if( \_execute || AbnormalTermination()) \(\backslash\)}}
+\DoxyCodeLine{768 \textcolor{preprocessor}{                      \{ \(\backslash\)}}
+\DoxyCodeLine{769 \textcolor{preprocessor}{                          (*(\_cleanup.routine))( \_cleanup.arg ); \(\backslash\)}}
+\DoxyCodeLine{770 \textcolor{preprocessor}{                      \} \(\backslash\)}}
+\DoxyCodeLine{771 \textcolor{preprocessor}{                \} \(\backslash\)}}
+\DoxyCodeLine{772 \textcolor{preprocessor}{        \}}}
+\DoxyCodeLine{773 }
+\DoxyCodeLine{774 \textcolor{preprocessor}{\#else }\textcolor{comment}{/* \_\_CLEANUP\_SEH */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{775 }
+\DoxyCodeLine{776 \textcolor{preprocessor}{\#if defined(\_\_CLEANUP\_C)}}
+\DoxyCodeLine{777 }
+\DoxyCodeLine{778         \textcolor{comment}{/*}}
+\DoxyCodeLine{779 \textcolor{comment}{         * C implementation of PThreads cancel cleanup}}
+\DoxyCodeLine{780 \textcolor{comment}{         */}}
+\DoxyCodeLine{781 }
+\DoxyCodeLine{782 \textcolor{preprocessor}{\#define pthread\_cleanup\_push( \_rout, \_arg ) \(\backslash\)}}
+\DoxyCodeLine{783 \textcolor{preprocessor}{        \{ \(\backslash\)}}
+\DoxyCodeLine{784 \textcolor{preprocessor}{            ptw32\_cleanup\_t     \_cleanup; \(\backslash\)}}
+\DoxyCodeLine{785 \textcolor{preprocessor}{            \(\backslash\)}}
+\DoxyCodeLine{786 \textcolor{preprocessor}{            ptw32\_push\_cleanup( \&\_cleanup, (ptw32\_cleanup\_callback\_t) (\_rout), (\_arg) ); \(\backslash\)}}
+\DoxyCodeLine{787 \textcolor{preprocessor}{}}
+\DoxyCodeLine{788 \textcolor{preprocessor}{\#define pthread\_cleanup\_pop( \_execute ) \(\backslash\)}}
+\DoxyCodeLine{789 \textcolor{preprocessor}{            (void) ptw32\_pop\_cleanup( \_execute ); \(\backslash\)}}
+\DoxyCodeLine{790 \textcolor{preprocessor}{        \}}}
+\DoxyCodeLine{791 }
+\DoxyCodeLine{792 \textcolor{preprocessor}{\#else }\textcolor{comment}{/* \_\_CLEANUP\_C */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{793 }
+\DoxyCodeLine{794 \textcolor{preprocessor}{\#if defined(\_\_CLEANUP\_CXX)}}
+\DoxyCodeLine{795 }
+\DoxyCodeLine{796         \textcolor{comment}{/*}}
+\DoxyCodeLine{797 \textcolor{comment}{         * C++ version of cancel cleanup.}}
+\DoxyCodeLine{798 \textcolor{comment}{         * -\/ John E. Bossom.}}
+\DoxyCodeLine{799 \textcolor{comment}{         */}}
+\DoxyCodeLine{800 }
+\DoxyCodeLine{801         \textcolor{keyword}{class }PThreadCleanup \{}
+\DoxyCodeLine{802           \textcolor{comment}{/*}}
+\DoxyCodeLine{803 \textcolor{comment}{           * PThreadCleanup}}
+\DoxyCodeLine{804 \textcolor{comment}{           *}}
+\DoxyCodeLine{805 \textcolor{comment}{           * Purpose}}
+\DoxyCodeLine{806 \textcolor{comment}{           *      This class is a C++ helper class that is}}
+\DoxyCodeLine{807 \textcolor{comment}{           *      used to implement pthread\_cleanup\_push/}}
+\DoxyCodeLine{808 \textcolor{comment}{           *      pthread\_cleanup\_pop.}}
+\DoxyCodeLine{809 \textcolor{comment}{           *      The destructor of this class automatically}}
+\DoxyCodeLine{810 \textcolor{comment}{           *      pops the pushed cleanup routine regardless}}
+\DoxyCodeLine{811 \textcolor{comment}{           *      of how the code exits the scope}}
+\DoxyCodeLine{812 \textcolor{comment}{           *      (i.e. such as by an exception)}}
+\DoxyCodeLine{813 \textcolor{comment}{           */}}
+\DoxyCodeLine{814       ptw32\_cleanup\_callback\_t cleanUpRout;}
+\DoxyCodeLine{815           \textcolor{keywordtype}{void}    *       obj;}
+\DoxyCodeLine{816           \textcolor{keywordtype}{int}             executeIt;}
+\DoxyCodeLine{817 }
+\DoxyCodeLine{818         \textcolor{keyword}{public}:}
+\DoxyCodeLine{819           PThreadCleanup() :}
+\DoxyCodeLine{820             cleanUpRout( 0 ),}
+\DoxyCodeLine{821             obj( 0 ),}
+\DoxyCodeLine{822             executeIt( 0 )}
+\DoxyCodeLine{823             \textcolor{comment}{/*}}
+\DoxyCodeLine{824 \textcolor{comment}{             * No cleanup performed}}
+\DoxyCodeLine{825 \textcolor{comment}{             */}}
+\DoxyCodeLine{826             \{}
+\DoxyCodeLine{827             \}}
+\DoxyCodeLine{828 }
+\DoxyCodeLine{829           PThreadCleanup(}
+\DoxyCodeLine{830              ptw32\_cleanup\_callback\_t routine,}
+\DoxyCodeLine{831                          \textcolor{keywordtype}{void}    *       \mbox{\hyperlink{structarg}{arg}} ) :}
+\DoxyCodeLine{832             cleanUpRout( routine ),}
+\DoxyCodeLine{833             obj( \mbox{\hyperlink{structarg}{arg}} ),}
+\DoxyCodeLine{834             executeIt( 1 )}
+\DoxyCodeLine{835             \textcolor{comment}{/*}}
+\DoxyCodeLine{836 \textcolor{comment}{             * Registers a cleanup routine for 'arg'}}
+\DoxyCodeLine{837 \textcolor{comment}{             */}}
+\DoxyCodeLine{838             \{}
+\DoxyCodeLine{839             \}}
+\DoxyCodeLine{840 }
+\DoxyCodeLine{841           \string~PThreadCleanup()}
+\DoxyCodeLine{842             \{}
+\DoxyCodeLine{843               \textcolor{keywordflow}{if} ( executeIt \&\& ((\textcolor{keywordtype}{void} *) cleanUpRout != (\textcolor{keywordtype}{void} *) 0) )}
+\DoxyCodeLine{844                 \{}
+\DoxyCodeLine{845                   (void) (*cleanUpRout)( obj );}
+\DoxyCodeLine{846                 \}}
+\DoxyCodeLine{847             \}}
+\DoxyCodeLine{848 }
+\DoxyCodeLine{849           \textcolor{keywordtype}{void} execute( \textcolor{keywordtype}{int} \mbox{\hyperlink{eval_8h_aae9679de60fdf33114386f7c79e3ba0e}{exec}} )}
+\DoxyCodeLine{850             \{}
+\DoxyCodeLine{851               executeIt = \mbox{\hyperlink{eval_8h_aae9679de60fdf33114386f7c79e3ba0e}{exec}};}
+\DoxyCodeLine{852             \}}
+\DoxyCodeLine{853         \};}
+\DoxyCodeLine{854 }
+\DoxyCodeLine{855         \textcolor{comment}{/*}}
+\DoxyCodeLine{856 \textcolor{comment}{         * C++ implementation of PThreads cancel cleanup;}}
+\DoxyCodeLine{857 \textcolor{comment}{         * This implementation takes advantage of a helper}}
+\DoxyCodeLine{858 \textcolor{comment}{         * class who's destructor automatically calls the}}
+\DoxyCodeLine{859 \textcolor{comment}{         * cleanup routine if we exit our scope weirdly}}
+\DoxyCodeLine{860 \textcolor{comment}{         */}}
+\DoxyCodeLine{861 \textcolor{preprocessor}{\#define pthread\_cleanup\_push( \_rout, \_arg ) \(\backslash\)}}
+\DoxyCodeLine{862 \textcolor{preprocessor}{        \{ \(\backslash\)}}
+\DoxyCodeLine{863 \textcolor{preprocessor}{            PThreadCleanup  cleanup((ptw32\_cleanup\_callback\_t)(\_rout), \(\backslash\)}}
+\DoxyCodeLine{864 \textcolor{preprocessor}{                                    (void *) (\_arg) );}}
+\DoxyCodeLine{865 }
+\DoxyCodeLine{866 \textcolor{preprocessor}{\#define pthread\_cleanup\_pop( \_execute ) \(\backslash\)}}
+\DoxyCodeLine{867 \textcolor{preprocessor}{            cleanup.execute( \_execute ); \(\backslash\)}}
+\DoxyCodeLine{868 \textcolor{preprocessor}{        \}}}
+\DoxyCodeLine{869 }
+\DoxyCodeLine{870 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{871 }
+\DoxyCodeLine{872 \textcolor{preprocessor}{\#error ERROR [\_\_FILE\_\_, line \_\_LINE\_\_]: Cleanup type undefined.}}
+\DoxyCodeLine{873 }
+\DoxyCodeLine{874 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* \_\_CLEANUP\_CXX */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{875 }
+\DoxyCodeLine{876 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* \_\_CLEANUP\_C */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{877 }
+\DoxyCodeLine{878 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* \_\_CLEANUP\_SEH */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{879 }
+\DoxyCodeLine{880 \textcolor{comment}{/*}}
+\DoxyCodeLine{881 \textcolor{comment}{ * ===============}}
+\DoxyCodeLine{882 \textcolor{comment}{ * ===============}}
+\DoxyCodeLine{883 \textcolor{comment}{ * Methods}}
+\DoxyCodeLine{884 \textcolor{comment}{ * ===============}}
+\DoxyCodeLine{885 \textcolor{comment}{ * ===============}}
+\DoxyCodeLine{886 \textcolor{comment}{ */}}
+\DoxyCodeLine{887 }
+\DoxyCodeLine{888 \textcolor{comment}{/*}}
+\DoxyCodeLine{889 \textcolor{comment}{ * PThread Attribute Functions}}
+\DoxyCodeLine{890 \textcolor{comment}{ */}}
+\DoxyCodeLine{891 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a233ec381ddfac891f1180c492e265339}{pthread\_attr\_init}} (\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\_attr\_t}} * attr);}
+\DoxyCodeLine{892 }
+\DoxyCodeLine{893 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a50335580950b3c48323f0ed36a4ea96d}{pthread\_attr\_destroy}} (\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\_attr\_t}} * attr);}
+\DoxyCodeLine{894 }
+\DoxyCodeLine{895 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_ad6412a38f971d1902f205a8aeb2e327a}{pthread\_attr\_getdetachstate}} (\textcolor{keyword}{const} \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\_attr\_t}} * attr,}
+\DoxyCodeLine{896                                          \textcolor{keywordtype}{int} *detachstate);}
+\DoxyCodeLine{897 }
+\DoxyCodeLine{898 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a8afdfd0a4371f1a37c4f5c3d1f97b7d4}{pthread\_attr\_getstackaddr}} (\textcolor{keyword}{const} \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\_attr\_t}} * attr,}
+\DoxyCodeLine{899                                        \textcolor{keywordtype}{void} **stackaddr);}
+\DoxyCodeLine{900 }
+\DoxyCodeLine{901 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a0eaa73e7811a82a8916749a2d093e3ee}{pthread\_attr\_getstacksize}} (\textcolor{keyword}{const} \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\_attr\_t}} * attr,}
+\DoxyCodeLine{902                                        \textcolor{keywordtype}{size\_t} * stacksize);}
+\DoxyCodeLine{903 }
+\DoxyCodeLine{904 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_ab832983dc76a65ca3f0bdcef99a46c56}{pthread\_attr\_setdetachstate}} (\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\_attr\_t}} * attr,}
+\DoxyCodeLine{905                                          \textcolor{keywordtype}{int} detachstate);}
+\DoxyCodeLine{906 }
+\DoxyCodeLine{907 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a922a32f3aeedcc20459a3dfabc9a201d}{pthread\_attr\_setstackaddr}} (\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\_attr\_t}} * attr,}
+\DoxyCodeLine{908                                        \textcolor{keywordtype}{void} *stackaddr);}
+\DoxyCodeLine{909 }
+\DoxyCodeLine{910 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a03ca37cf80250af1a39e03ae937b5aae}{pthread\_attr\_setstacksize}} (\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\_attr\_t}} * attr,}
+\DoxyCodeLine{911                                        \textcolor{keywordtype}{size\_t} stacksize);}
+\DoxyCodeLine{912 }
+\DoxyCodeLine{913 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a4a1db9aa4b0d70229991b0e061fdfe70}{pthread\_attr\_getschedparam}} (\textcolor{keyword}{const} \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\_attr\_t}} *attr,}
+\DoxyCodeLine{914                                         \textcolor{keyword}{struct} \mbox{\hyperlink{structsched__param}{sched\_param}} *param);}
+\DoxyCodeLine{915 }
+\DoxyCodeLine{916 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_acded755dff2e91a76e4619a73ddd7592}{pthread\_attr\_setschedparam}} (\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\_attr\_t}} *attr,}
+\DoxyCodeLine{917                                         \textcolor{keyword}{const} \textcolor{keyword}{struct} \mbox{\hyperlink{structsched__param}{sched\_param}} *param);}
+\DoxyCodeLine{918 }
+\DoxyCodeLine{919 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a309bb60a0dce82095287c78bebc8c911}{pthread\_attr\_setschedpolicy}} (\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\_attr\_t}} *,}
+\DoxyCodeLine{920                                          \textcolor{keywordtype}{int});}
+\DoxyCodeLine{921 }
+\DoxyCodeLine{922 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a7484fc9841befb18ad17b1ceac9e3efd}{pthread\_attr\_getschedpolicy}} (\textcolor{keyword}{const} \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\_attr\_t}} *,}
+\DoxyCodeLine{923                                          \textcolor{keywordtype}{int} *);}
+\DoxyCodeLine{924 }
+\DoxyCodeLine{925 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a42693136811c95c2b852cab01f7ae88c}{pthread\_attr\_setinheritsched}}(\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\_attr\_t}} * attr,}
+\DoxyCodeLine{926                                          \textcolor{keywordtype}{int} inheritsched);}
+\DoxyCodeLine{927 }
+\DoxyCodeLine{928 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a2bc4e0f5a270f37414a5a18d627d839b}{pthread\_attr\_getinheritsched}}(\textcolor{keyword}{const} \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\_attr\_t}} * attr,}
+\DoxyCodeLine{929                                          \textcolor{keywordtype}{int} * inheritsched);}
+\DoxyCodeLine{930 }
+\DoxyCodeLine{931 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_afd31c956c8a0a321d2eba62d2689f6b1}{pthread\_attr\_setscope}} (\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\_attr\_t}} *,}
+\DoxyCodeLine{932                                    \textcolor{keywordtype}{int});}
+\DoxyCodeLine{933 }
+\DoxyCodeLine{934 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_abd6135fcecf2fd9646a4e0aca85b2ab3}{pthread\_attr\_getscope}} (\textcolor{keyword}{const} \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\_attr\_t}} *,}
+\DoxyCodeLine{935                                    \textcolor{keywordtype}{int} *);}
+\DoxyCodeLine{936 }
+\DoxyCodeLine{937 \textcolor{comment}{/*}}
+\DoxyCodeLine{938 \textcolor{comment}{ * PThread Functions}}
+\DoxyCodeLine{939 \textcolor{comment}{ */}}
+\DoxyCodeLine{940 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a263f28dc2825a4e62b2126294d839ac2}{pthread\_create}} (\mbox{\hyperlink{structptw32__handle__t}{pthread\_t}} * tid,}
+\DoxyCodeLine{941                             \textcolor{keyword}{const} \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\_attr\_t}} * attr,}
+\DoxyCodeLine{942                             \textcolor{keywordtype}{void} *(\mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} *start) (\textcolor{keywordtype}{void} *),}
+\DoxyCodeLine{943                             \textcolor{keywordtype}{void} *\mbox{\hyperlink{structarg}{arg}});}
+\DoxyCodeLine{944 }
+\DoxyCodeLine{945 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a63dff6d0e31eba46785ba0daa14bebb0}{pthread\_detach}} (\mbox{\hyperlink{structptw32__handle__t}{pthread\_t}} tid);}
+\DoxyCodeLine{946 }
+\DoxyCodeLine{947 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_abd5e197f5bb562cf30e149571ad6e51f}{pthread\_equal}} (\mbox{\hyperlink{structptw32__handle__t}{pthread\_t}} \mbox{\hyperlink{gml2nestedsql_8cpp_a214bd1a0500f5739ce581a8bcffb518a}{t1}},}
+\DoxyCodeLine{948                            \mbox{\hyperlink{structptw32__handle__t}{pthread\_t}} t2);}
+\DoxyCodeLine{949 }
+\DoxyCodeLine{950 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{void} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a0d15af992e1e2b72f2df584c198b9aa7}{pthread\_exit}} (\textcolor{keywordtype}{void} *value\_ptr);}
+\DoxyCodeLine{951 }
+\DoxyCodeLine{952 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a49f1914675a9a21671cb0871281a3276}{pthread\_join}} (\mbox{\hyperlink{structptw32__handle__t}{pthread\_t}} thread,}
+\DoxyCodeLine{953                           \textcolor{keywordtype}{void} **value\_ptr);}
+\DoxyCodeLine{954 }
+\DoxyCodeLine{955 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \mbox{\hyperlink{structptw32__handle__t}{pthread\_t}} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_ab817f3baacf5f0b911e1a440cc97c109}{pthread\_self}} (\textcolor{keywordtype}{void});}
+\DoxyCodeLine{956 }
+\DoxyCodeLine{957 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_aab4eb0a6a5be18d82421942dac137f30}{pthread\_cancel}} (\mbox{\hyperlink{structptw32__handle__t}{pthread\_t}} thread);}
+\DoxyCodeLine{958 }
+\DoxyCodeLine{959 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a4106226e5a0b24d373e400e387dac334}{pthread\_setcancelstate}} (\textcolor{keywordtype}{int} state,}
+\DoxyCodeLine{960                                     \textcolor{keywordtype}{int} *oldstate);}
+\DoxyCodeLine{961 }
+\DoxyCodeLine{962 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a66acf8bb759895422b215ed7a8bb4c50}{pthread\_setcanceltype}} (\textcolor{keywordtype}{int} type,}
+\DoxyCodeLine{963                                    \textcolor{keywordtype}{int} *oldtype);}
+\DoxyCodeLine{964 }
+\DoxyCodeLine{965 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{void} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a9aaf8f6e21da6b9e6eb7583fdd551ea5}{pthread\_testcancel}} (\textcolor{keywordtype}{void});}
+\DoxyCodeLine{966 }
+\DoxyCodeLine{967 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_abfa1663a318b2e18a0943d7de8adffb1}{pthread\_once}} (\mbox{\hyperlink{structpthread__once__t__}{pthread\_once\_t}} * once\_control,}
+\DoxyCodeLine{968                           \textcolor{keywordtype}{void} (\mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} *init\_routine) (\textcolor{keywordtype}{void}));}
+\DoxyCodeLine{969 }
+\DoxyCodeLine{970 \textcolor{preprocessor}{\#if PTW32\_LEVEL >= PTW32\_LEVEL\_MAX}}
+\DoxyCodeLine{971 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \mbox{\hyperlink{structptw32__cleanup__t}{ptw32\_cleanup\_t}} * \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a3c90e1d0ffae6dedd248f39abc6a581d}{ptw32\_pop\_cleanup}} (\textcolor{keywordtype}{int} execute);}
+\DoxyCodeLine{972 }
+\DoxyCodeLine{973 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{void} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_af4e43660b45ebecd4fdc536edea22d4c}{ptw32\_push\_cleanup}} (\mbox{\hyperlink{structptw32__cleanup__t}{ptw32\_cleanup\_t}} * cleanup,}
+\DoxyCodeLine{974                                  ptw32\_cleanup\_callback\_t routine,}
+\DoxyCodeLine{975                                  \textcolor{keywordtype}{void} *\mbox{\hyperlink{structarg}{arg}});}
+\DoxyCodeLine{976 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* PTW32\_LEVEL >= PTW32\_LEVEL\_MAX */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{977 }
+\DoxyCodeLine{978 \textcolor{comment}{/*}}
+\DoxyCodeLine{979 \textcolor{comment}{ * Thread Specific Data Functions}}
+\DoxyCodeLine{980 \textcolor{comment}{ */}}
+\DoxyCodeLine{981 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_aa6b87bb25e4cfae0c933632fa2ca24ea}{pthread\_key\_create}} (\mbox{\hyperlink{pthread_8h_ad0376f110bc69993ad8bee03134fbd7d}{pthread\_key\_t}} * key,}
+\DoxyCodeLine{982                                 \textcolor{keywordtype}{void} (\mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} *destructor) (\textcolor{keywordtype}{void} *));}
+\DoxyCodeLine{983 }
+\DoxyCodeLine{984 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a4511523e853e2070c82c519220478d0a}{pthread\_key\_delete}} (\mbox{\hyperlink{pthread_8h_ad0376f110bc69993ad8bee03134fbd7d}{pthread\_key\_t}} key);}
+\DoxyCodeLine{985 }
+\DoxyCodeLine{986 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a70508e8085a6652a4176584617c65a93}{pthread\_setspecific}} (\mbox{\hyperlink{pthread_8h_ad0376f110bc69993ad8bee03134fbd7d}{pthread\_key\_t}} key,}
+\DoxyCodeLine{987                                  \textcolor{keyword}{const} \textcolor{keywordtype}{void} *value);}
+\DoxyCodeLine{988 }
+\DoxyCodeLine{989 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{void} * \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_ab3dee7585800e6f3c863d4192d0ef4c5}{pthread\_getspecific}} (\mbox{\hyperlink{pthread_8h_ad0376f110bc69993ad8bee03134fbd7d}{pthread\_key\_t}} key);}
+\DoxyCodeLine{990 }
+\DoxyCodeLine{991 }
+\DoxyCodeLine{992 \textcolor{comment}{/*}}
+\DoxyCodeLine{993 \textcolor{comment}{ * Mutex Attribute Functions}}
+\DoxyCodeLine{994 \textcolor{comment}{ */}}
+\DoxyCodeLine{995 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a051d6c0d7ebd725cfcdb4d7620ed7127}{pthread\_mutexattr\_init}} (\mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\_mutexattr\_t}} * attr);}
+\DoxyCodeLine{996 }
+\DoxyCodeLine{997 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a9acd8cda4095a3ea418518f659adea97}{pthread\_mutexattr\_destroy}} (\mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\_mutexattr\_t}} * attr);}
+\DoxyCodeLine{998 }
+\DoxyCodeLine{999 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a64dd38ac66074db355fc1c5b18ddfb5a}{pthread\_mutexattr\_getpshared}} (\textcolor{keyword}{const} \mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\_mutexattr\_t}}}
+\DoxyCodeLine{1000                                           * attr,}
+\DoxyCodeLine{1001                                           \textcolor{keywordtype}{int} *pshared);}
+\DoxyCodeLine{1002 }
+\DoxyCodeLine{1003 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a07229ffe3eb84b4a3fe02e9c673e16d2}{pthread\_mutexattr\_setpshared}} (\mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\_mutexattr\_t}} * attr,}
+\DoxyCodeLine{1004                                           \textcolor{keywordtype}{int} pshared);}
+\DoxyCodeLine{1005 }
+\DoxyCodeLine{1006 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_acafedc981ddf60df3bf39a970f15d477}{pthread\_mutexattr\_settype}} (\mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\_mutexattr\_t}} * attr, \textcolor{keywordtype}{int} kind);}
+\DoxyCodeLine{1007 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a09ec983b7f42c0d4fefa36fabcec3d0a}{pthread\_mutexattr\_gettype}} (\textcolor{keyword}{const} \mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\_mutexattr\_t}} * attr, \textcolor{keywordtype}{int} *kind);}
+\DoxyCodeLine{1008 }
+\DoxyCodeLine{1009 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a576513773e8765ab651da5b375242e01}{pthread\_mutexattr\_setrobust}}(}
+\DoxyCodeLine{1010                                            \mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\_mutexattr\_t}} *attr,}
+\DoxyCodeLine{1011                                            \textcolor{keywordtype}{int} robust);}
+\DoxyCodeLine{1012 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a8bda789a288f22df10fd761e94ef1775}{pthread\_mutexattr\_getrobust}}(}
+\DoxyCodeLine{1013                                            \textcolor{keyword}{const} \mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\_mutexattr\_t}} * attr,}
+\DoxyCodeLine{1014                                            \textcolor{keywordtype}{int} * robust);}
+\DoxyCodeLine{1015 }
+\DoxyCodeLine{1016 \textcolor{comment}{/*}}
+\DoxyCodeLine{1017 \textcolor{comment}{ * Barrier Attribute Functions}}
+\DoxyCodeLine{1018 \textcolor{comment}{ */}}
+\DoxyCodeLine{1019 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a1def5c7cb6ca87b746ecea2e45b601dd}{pthread\_barrierattr\_init}} (\mbox{\hyperlink{pthread_8h_a6c1bb0434bca06a34fee71ee8965dd34}{pthread\_barrierattr\_t}} * attr);}
+\DoxyCodeLine{1020 }
+\DoxyCodeLine{1021 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_ae7b73c216e7ee2e7b381ea2ce49cc1b4}{pthread\_barrierattr\_destroy}} (\mbox{\hyperlink{pthread_8h_a6c1bb0434bca06a34fee71ee8965dd34}{pthread\_barrierattr\_t}} * attr);}
+\DoxyCodeLine{1022 }
+\DoxyCodeLine{1023 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a8d82645fc1e9de26b75cd1b1278d133a}{pthread\_barrierattr\_getpshared}} (\textcolor{keyword}{const} \mbox{\hyperlink{pthread_8h_a6c1bb0434bca06a34fee71ee8965dd34}{pthread\_barrierattr\_t}}}
+\DoxyCodeLine{1024                                             * attr,}
+\DoxyCodeLine{1025                                             \textcolor{keywordtype}{int} *pshared);}
+\DoxyCodeLine{1026 }
+\DoxyCodeLine{1027 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_ad9c1e49254c1bfb0270dcd6ddfc79adc}{pthread\_barrierattr\_setpshared}} (\mbox{\hyperlink{pthread_8h_a6c1bb0434bca06a34fee71ee8965dd34}{pthread\_barrierattr\_t}} * attr,}
+\DoxyCodeLine{1028                                             \textcolor{keywordtype}{int} pshared);}
+\DoxyCodeLine{1029 }
+\DoxyCodeLine{1030 \textcolor{comment}{/*}}
+\DoxyCodeLine{1031 \textcolor{comment}{ * Mutex Functions}}
+\DoxyCodeLine{1032 \textcolor{comment}{ */}}
+\DoxyCodeLine{1033 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a67e427da2ca618b8ea8cc238704365f6}{pthread\_mutex\_init}} (\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\_mutex\_t}} * \mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{mutex}},}
+\DoxyCodeLine{1034                                 \textcolor{keyword}{const} \mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\_mutexattr\_t}} * attr);}
+\DoxyCodeLine{1035 }
+\DoxyCodeLine{1036 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_aa004edfa9d205948987fc16d1ed066c5}{pthread\_mutex\_destroy}} (\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\_mutex\_t}} * \mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{mutex}});}
+\DoxyCodeLine{1037 }
+\DoxyCodeLine{1038 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_aef3f55cad288fdbc9c39bff9d668de1e}{pthread\_mutex\_lock}} (\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\_mutex\_t}} * \mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{mutex}});}
+\DoxyCodeLine{1039 }
+\DoxyCodeLine{1040 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_aa96593fce8d2088dbf148528bf7f3ad4}{pthread\_mutex\_timedlock}}(\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\_mutex\_t}} * \mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{mutex}},}
+\DoxyCodeLine{1041                                     \textcolor{keyword}{const} \textcolor{keyword}{struct} \mbox{\hyperlink{structtimespec}{timespec}} *abstime);}
+\DoxyCodeLine{1042 }
+\DoxyCodeLine{1043 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a16f083c38b7d3e6e58b6d4454599e793}{pthread\_mutex\_trylock}} (\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\_mutex\_t}} * \mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{mutex}});}
+\DoxyCodeLine{1044 }
+\DoxyCodeLine{1045 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a2e24c7aa54ba10a032b7b6cd06c3caaa}{pthread\_mutex\_unlock}} (\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\_mutex\_t}} * \mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{mutex}});}
+\DoxyCodeLine{1046 }
+\DoxyCodeLine{1047 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_aed997547f0442c71792a7fc812c39d69}{pthread\_mutex\_consistent}} (\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\_mutex\_t}} * \mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{mutex}});}
+\DoxyCodeLine{1048 }
+\DoxyCodeLine{1049 \textcolor{comment}{/*}}
+\DoxyCodeLine{1050 \textcolor{comment}{ * Spinlock Functions}}
+\DoxyCodeLine{1051 \textcolor{comment}{ */}}
+\DoxyCodeLine{1052 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a7d1e0feb499ed6c2ec25fe4f2a72dd16}{pthread\_spin\_init}} (\mbox{\hyperlink{pthread_8h_a8481ca14ebb4b48ccc42d2c805e75e54}{pthread\_spinlock\_t}} * lock, \textcolor{keywordtype}{int} pshared);}
+\DoxyCodeLine{1053 }
+\DoxyCodeLine{1054 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a7cbf10e08febd9d8642b4856fab73e46}{pthread\_spin\_destroy}} (\mbox{\hyperlink{pthread_8h_a8481ca14ebb4b48ccc42d2c805e75e54}{pthread\_spinlock\_t}} * lock);}
+\DoxyCodeLine{1055 }
+\DoxyCodeLine{1056 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_af47165b8bc6ef3215ede56fa45a2860e}{pthread\_spin\_lock}} (\mbox{\hyperlink{pthread_8h_a8481ca14ebb4b48ccc42d2c805e75e54}{pthread\_spinlock\_t}} * lock);}
+\DoxyCodeLine{1057 }
+\DoxyCodeLine{1058 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_acec9b0ce898853be7afbb64286ffce29}{pthread\_spin\_trylock}} (\mbox{\hyperlink{pthread_8h_a8481ca14ebb4b48ccc42d2c805e75e54}{pthread\_spinlock\_t}} * lock);}
+\DoxyCodeLine{1059 }
+\DoxyCodeLine{1060 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a8257239fc03fb14a96f162d829c0ecf9}{pthread\_spin\_unlock}} (\mbox{\hyperlink{pthread_8h_a8481ca14ebb4b48ccc42d2c805e75e54}{pthread\_spinlock\_t}} * lock);}
+\DoxyCodeLine{1061 }
+\DoxyCodeLine{1062 \textcolor{comment}{/*}}
+\DoxyCodeLine{1063 \textcolor{comment}{ * Barrier Functions}}
+\DoxyCodeLine{1064 \textcolor{comment}{ */}}
+\DoxyCodeLine{1065 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a64383f18835ca6913c96b722864ed070}{pthread\_barrier\_init}} (\mbox{\hyperlink{pthread_8h_a9cd526c5e963f8f6b9fc31adbfb49608}{pthread\_barrier\_t}} * barrier,}
+\DoxyCodeLine{1066                                   \textcolor{keyword}{const} \mbox{\hyperlink{pthread_8h_a6c1bb0434bca06a34fee71ee8965dd34}{pthread\_barrierattr\_t}} * attr,}
+\DoxyCodeLine{1067                                   \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} count);}
+\DoxyCodeLine{1068 }
+\DoxyCodeLine{1069 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a568823b9d1f1af8da415edc872b60acc}{pthread\_barrier\_destroy}} (\mbox{\hyperlink{pthread_8h_a9cd526c5e963f8f6b9fc31adbfb49608}{pthread\_barrier\_t}} * barrier);}
+\DoxyCodeLine{1070 }
+\DoxyCodeLine{1071 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a1922825aab81d188e853c84c73a0bc34}{pthread\_barrier\_wait}} (\mbox{\hyperlink{pthread_8h_a9cd526c5e963f8f6b9fc31adbfb49608}{pthread\_barrier\_t}} * barrier);}
+\DoxyCodeLine{1072 }
+\DoxyCodeLine{1073 \textcolor{comment}{/*}}
+\DoxyCodeLine{1074 \textcolor{comment}{ * Condition Variable Attribute Functions}}
+\DoxyCodeLine{1075 \textcolor{comment}{ */}}
+\DoxyCodeLine{1076 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_ab4f09e50ad468e518d3f7ddda442dd69}{pthread\_condattr\_init}} (\mbox{\hyperlink{pthread_8h_ab77e7203e4ab594ba14d1f92969d19ef}{pthread\_condattr\_t}} * attr);}
+\DoxyCodeLine{1077 }
+\DoxyCodeLine{1078 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_aceabe31f8e012a02be4f1da7c6496f8d}{pthread\_condattr\_destroy}} (\mbox{\hyperlink{pthread_8h_ab77e7203e4ab594ba14d1f92969d19ef}{pthread\_condattr\_t}} * attr);}
+\DoxyCodeLine{1079 }
+\DoxyCodeLine{1080 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a5a0b03a00065b02ea13f8085d09f9d13}{pthread\_condattr\_getpshared}} (\textcolor{keyword}{const} \mbox{\hyperlink{pthread_8h_ab77e7203e4ab594ba14d1f92969d19ef}{pthread\_condattr\_t}} * attr,}
+\DoxyCodeLine{1081                                          \textcolor{keywordtype}{int} *pshared);}
+\DoxyCodeLine{1082 }
+\DoxyCodeLine{1083 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a63c9ae89354b54ae864852c7591cf8e4}{pthread\_condattr\_setpshared}} (\mbox{\hyperlink{pthread_8h_ab77e7203e4ab594ba14d1f92969d19ef}{pthread\_condattr\_t}} * attr,}
+\DoxyCodeLine{1084                                          \textcolor{keywordtype}{int} pshared);}
+\DoxyCodeLine{1085 }
+\DoxyCodeLine{1086 \textcolor{comment}{/*}}
+\DoxyCodeLine{1087 \textcolor{comment}{ * Condition Variable Functions}}
+\DoxyCodeLine{1088 \textcolor{comment}{ */}}
+\DoxyCodeLine{1089 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_aef4d3338d205f245ebd83dd1c89211e6}{pthread\_cond\_init}} (\mbox{\hyperlink{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}{pthread\_cond\_t}} * cond,}
+\DoxyCodeLine{1090                                \textcolor{keyword}{const} \mbox{\hyperlink{pthread_8h_ab77e7203e4ab594ba14d1f92969d19ef}{pthread\_condattr\_t}} * attr);}
+\DoxyCodeLine{1091 }
+\DoxyCodeLine{1092 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_af4ede487c145c4669c5905c399ccee26}{pthread\_cond\_destroy}} (\mbox{\hyperlink{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}{pthread\_cond\_t}} * cond);}
+\DoxyCodeLine{1093 }
+\DoxyCodeLine{1094 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a9035020a597e6c45a28444e23a6f9772}{pthread\_cond\_wait}} (\mbox{\hyperlink{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}{pthread\_cond\_t}} * cond,}
+\DoxyCodeLine{1095                                \mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\_mutex\_t}} * \mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{mutex}});}
+\DoxyCodeLine{1096 }
+\DoxyCodeLine{1097 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_af56c2145ec4faede0c8d518665f845d6}{pthread\_cond\_timedwait}} (\mbox{\hyperlink{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}{pthread\_cond\_t}} * cond,}
+\DoxyCodeLine{1098                                     \mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\_mutex\_t}} * \mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{mutex}},}
+\DoxyCodeLine{1099                                     \textcolor{keyword}{const} \textcolor{keyword}{struct} \mbox{\hyperlink{structtimespec}{timespec}} *abstime);}
+\DoxyCodeLine{1100 }
+\DoxyCodeLine{1101 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a105816a30aaf691997231de1be04f84e}{pthread\_cond\_signal}} (\mbox{\hyperlink{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}{pthread\_cond\_t}} * cond);}
+\DoxyCodeLine{1102 }
+\DoxyCodeLine{1103 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a16e8dfccfb672b9a29aa8afa6f0ce94e}{pthread\_cond\_broadcast}} (\mbox{\hyperlink{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}{pthread\_cond\_t}} * cond);}
+\DoxyCodeLine{1104 }
+\DoxyCodeLine{1105 \textcolor{comment}{/*}}
+\DoxyCodeLine{1106 \textcolor{comment}{ * Scheduling}}
+\DoxyCodeLine{1107 \textcolor{comment}{ */}}
+\DoxyCodeLine{1108 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a9e906d879b9b8d757ebce40ef44f941e}{pthread\_setschedparam}} (\mbox{\hyperlink{structptw32__handle__t}{pthread\_t}} thread,}
+\DoxyCodeLine{1109                                    \textcolor{keywordtype}{int} policy,}
+\DoxyCodeLine{1110                                    \textcolor{keyword}{const} \textcolor{keyword}{struct} \mbox{\hyperlink{structsched__param}{sched\_param}} *param);}
+\DoxyCodeLine{1111 }
+\DoxyCodeLine{1112 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a3c0a5f0a269e7bd4381680c8f1deb0a3}{pthread\_getschedparam}} (\mbox{\hyperlink{structptw32__handle__t}{pthread\_t}} thread,}
+\DoxyCodeLine{1113                                    \textcolor{keywordtype}{int} *policy,}
+\DoxyCodeLine{1114                                    \textcolor{keyword}{struct} \mbox{\hyperlink{structsched__param}{sched\_param}} *param);}
+\DoxyCodeLine{1115 }
+\DoxyCodeLine{1116 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a700b6bade0a18d05513b9e6f0e03f460}{pthread\_setconcurrency}} (\textcolor{keywordtype}{int});}
+\DoxyCodeLine{1117  }
+\DoxyCodeLine{1118 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_ae8013566ddc5a14102dc423c97614528}{pthread\_getconcurrency}} (\textcolor{keywordtype}{void});}
+\DoxyCodeLine{1119 }
+\DoxyCodeLine{1120 \textcolor{comment}{/*}}
+\DoxyCodeLine{1121 \textcolor{comment}{ * Read-\/Write Lock Functions}}
+\DoxyCodeLine{1122 \textcolor{comment}{ */}}
+\DoxyCodeLine{1123 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a2e37baf55dda04dd7abfa80083528480}{pthread\_rwlock\_init}}(\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\_rwlock\_t}} *lock,}
+\DoxyCodeLine{1124                                 \textcolor{keyword}{const} \mbox{\hyperlink{pthread_8h_a516f3fa0225b050ba34327f6491638fd}{pthread\_rwlockattr\_t}} *attr);}
+\DoxyCodeLine{1125 }
+\DoxyCodeLine{1126 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a4bbc654f777f188db7b77e9f760aecd2}{pthread\_rwlock\_destroy}}(\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\_rwlock\_t}} *lock);}
+\DoxyCodeLine{1127 }
+\DoxyCodeLine{1128 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a3bd74d79519b333ec7bf44e5d6dfcf76}{pthread\_rwlock\_tryrdlock}}(\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\_rwlock\_t}} *);}
+\DoxyCodeLine{1129 }
+\DoxyCodeLine{1130 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_ae14bb7aa25d120e2ccc31ba50387400d}{pthread\_rwlock\_trywrlock}}(\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\_rwlock\_t}} *);}
+\DoxyCodeLine{1131 }
+\DoxyCodeLine{1132 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a37c859ff91371ed1dda62aa34f8d5ea7}{pthread\_rwlock\_rdlock}}(\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\_rwlock\_t}} *lock);}
+\DoxyCodeLine{1133 }
+\DoxyCodeLine{1134 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_ab1581386c8c21c16b76750f70c755407}{pthread\_rwlock\_timedrdlock}}(\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\_rwlock\_t}} *lock,}
+\DoxyCodeLine{1135                                        \textcolor{keyword}{const} \textcolor{keyword}{struct} \mbox{\hyperlink{structtimespec}{timespec}} *abstime);}
+\DoxyCodeLine{1136 }
+\DoxyCodeLine{1137 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_afdceb6ceb25bbc31854c5108de55cdd5}{pthread\_rwlock\_wrlock}}(\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\_rwlock\_t}} *lock);}
+\DoxyCodeLine{1138 }
+\DoxyCodeLine{1139 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a52433d05535bc70a26f46f1740e93fbe}{pthread\_rwlock\_timedwrlock}}(\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\_rwlock\_t}} *lock,}
+\DoxyCodeLine{1140                                        \textcolor{keyword}{const} \textcolor{keyword}{struct} \mbox{\hyperlink{structtimespec}{timespec}} *abstime);}
+\DoxyCodeLine{1141 }
+\DoxyCodeLine{1142 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a3f8864786d4efc639811a7f3b268d257}{pthread\_rwlock\_unlock}}(\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\_rwlock\_t}} *lock);}
+\DoxyCodeLine{1143 }
+\DoxyCodeLine{1144 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a01b24ca706f34301420c136c2f2768f9}{pthread\_rwlockattr\_init}} (\mbox{\hyperlink{pthread_8h_a516f3fa0225b050ba34327f6491638fd}{pthread\_rwlockattr\_t}} * attr);}
+\DoxyCodeLine{1145 }
+\DoxyCodeLine{1146 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_ab5485b6bd6bf581762c89c8157dcc40d}{pthread\_rwlockattr\_destroy}} (\mbox{\hyperlink{pthread_8h_a516f3fa0225b050ba34327f6491638fd}{pthread\_rwlockattr\_t}} * attr);}
+\DoxyCodeLine{1147 }
+\DoxyCodeLine{1148 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a035376244a23895053db5911eee94037}{pthread\_rwlockattr\_getpshared}} (\textcolor{keyword}{const} \mbox{\hyperlink{pthread_8h_a516f3fa0225b050ba34327f6491638fd}{pthread\_rwlockattr\_t}} * attr,}
+\DoxyCodeLine{1149                                            \textcolor{keywordtype}{int} *pshared);}
+\DoxyCodeLine{1150 }
+\DoxyCodeLine{1151 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a76b5925cab830955d7c974dc93710135}{pthread\_rwlockattr\_setpshared}} (\mbox{\hyperlink{pthread_8h_a516f3fa0225b050ba34327f6491638fd}{pthread\_rwlockattr\_t}} * attr,}
+\DoxyCodeLine{1152                                            \textcolor{keywordtype}{int} pshared);}
+\DoxyCodeLine{1153 }
+\DoxyCodeLine{1154 \textcolor{preprocessor}{\#if PTW32\_LEVEL >= PTW32\_LEVEL\_MAX -\/ 1}}
+\DoxyCodeLine{1155 }
+\DoxyCodeLine{1156 \textcolor{comment}{/*}}
+\DoxyCodeLine{1157 \textcolor{comment}{ * Signal Functions. Should be defined in <signal.h> but MSVC and MinGW32}}
+\DoxyCodeLine{1158 \textcolor{comment}{ * already have signal.h that don't define these.}}
+\DoxyCodeLine{1159 \textcolor{comment}{ */}}
+\DoxyCodeLine{1160 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a8d7893d132fcbfb75cc83f71dc610301}{pthread\_kill}}(\mbox{\hyperlink{structptw32__handle__t}{pthread\_t}} thread, \textcolor{keywordtype}{int} sig);}
+\DoxyCodeLine{1161 }
+\DoxyCodeLine{1162 \textcolor{comment}{/*}}
+\DoxyCodeLine{1163 \textcolor{comment}{ * Non-\/portable functions}}
+\DoxyCodeLine{1164 \textcolor{comment}{ */}}
+\DoxyCodeLine{1165 }
+\DoxyCodeLine{1166 \textcolor{comment}{/*}}
+\DoxyCodeLine{1167 \textcolor{comment}{ * Compatibility with Linux.}}
+\DoxyCodeLine{1168 \textcolor{comment}{ */}}
+\DoxyCodeLine{1169 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a7ca8ca573c6417dc157dbd75112b97e1}{pthread\_mutexattr\_setkind\_np}}(\mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\_mutexattr\_t}} * attr,}
+\DoxyCodeLine{1170                                          \textcolor{keywordtype}{int} kind);}
+\DoxyCodeLine{1171 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_aac08d02d9bf0c624c97b63842e5364cf}{pthread\_mutexattr\_getkind\_np}}(\mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\_mutexattr\_t}} * attr,}
+\DoxyCodeLine{1172                                          \textcolor{keywordtype}{int} *kind);}
+\DoxyCodeLine{1173 }
+\DoxyCodeLine{1174 \textcolor{comment}{/*}}
+\DoxyCodeLine{1175 \textcolor{comment}{ * Possibly supported by other POSIX threads implementations}}
+\DoxyCodeLine{1176 \textcolor{comment}{ */}}
+\DoxyCodeLine{1177 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a97256a2a3a17c8a01649e3ed6a226303}{pthread\_delay\_np}} (\textcolor{keyword}{struct} \mbox{\hyperlink{structtimespec}{timespec}} * interval);}
+\DoxyCodeLine{1178 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a5eaa89ddb2f49f3c0aabb9b02af1c41a}{pthread\_num\_processors\_np}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{1179 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{unsigned} \_\_int64 \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a7334d010cbf7ba9793e15ead3e2a3ca7}{pthread\_getunique\_np}}(\mbox{\hyperlink{structptw32__handle__t}{pthread\_t}} thread);}
+\DoxyCodeLine{1180 }
+\DoxyCodeLine{1181 \textcolor{comment}{/*}}
+\DoxyCodeLine{1182 \textcolor{comment}{ * Useful if an application wants to statically link}}
+\DoxyCodeLine{1183 \textcolor{comment}{ * the lib rather than load the DLL at run-\/time.}}
+\DoxyCodeLine{1184 \textcolor{comment}{ */}}
+\DoxyCodeLine{1185 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a54447dac6247f871b997016b234368bc}{pthread\_win32\_process\_attach\_np}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{1186 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a1e5681f9bf4379e816c6910669da3d22}{pthread\_win32\_process\_detach\_np}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{1187 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a8b51f50b2c482fdad5f3c954a16d9b42}{pthread\_win32\_thread\_attach\_np}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{1188 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_af2dc3c1a6301d39e16416731d2ceda8b}{pthread\_win32\_thread\_detach\_np}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{1189 }
+\DoxyCodeLine{1190 \textcolor{comment}{/*}}
+\DoxyCodeLine{1191 \textcolor{comment}{ * Features that are auto-\/detected at load/run time.}}
+\DoxyCodeLine{1192 \textcolor{comment}{ */}}
+\DoxyCodeLine{1193 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_ae657dd834dde0b40712219adc2a98ce1}{pthread\_win32\_test\_features\_np}}(\textcolor{keywordtype}{int});}
+\DoxyCodeLine{1194 \textcolor{keyword}{enum} \mbox{\hyperlink{pthread_8h_a4a774bc048b9769b9542886175bba8cb}{ptw32\_features}} \{}
+\DoxyCodeLine{1195   \mbox{\hyperlink{pthread_8h_a4a774bc048b9769b9542886175bba8cba5070a13a659cc8de3d9902af9503961a}{PTW32\_SYSTEM\_INTERLOCKED\_COMPARE\_EXCHANGE}} = 0x0001, \textcolor{comment}{/* System provides it. */}}
+\DoxyCodeLine{1196   \mbox{\hyperlink{pthread_8h_a4a774bc048b9769b9542886175bba8cba5633aa8ed9c08c70740d274c9aa85538}{PTW32\_ALERTABLE\_ASYNC\_CANCEL}}              = 0x0002  \textcolor{comment}{/* Can cancel blocked threads. */}}
+\DoxyCodeLine{1197 \};}
+\DoxyCodeLine{1198 }
+\DoxyCodeLine{1199 \textcolor{comment}{/*}}
+\DoxyCodeLine{1200 \textcolor{comment}{ * Register a system time change with the library.}}
+\DoxyCodeLine{1201 \textcolor{comment}{ * Causes the library to perform various functions}}
+\DoxyCodeLine{1202 \textcolor{comment}{ * in response to the change. Should be called whenever}}
+\DoxyCodeLine{1203 \textcolor{comment}{ * the application's top level window receives a}}
+\DoxyCodeLine{1204 \textcolor{comment}{ * WM\_TIMECHANGE message. It can be passed directly to}}
+\DoxyCodeLine{1205 \textcolor{comment}{ * pthread\_create() as a new thread if desired.}}
+\DoxyCodeLine{1206 \textcolor{comment}{ */}}
+\DoxyCodeLine{1207 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{void} * \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_afd4e052d762360f6559914c865831758}{pthread\_timechange\_handler\_np}}(\textcolor{keywordtype}{void} *);}
+\DoxyCodeLine{1208 }
+\DoxyCodeLine{1209 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/*PTW32\_LEVEL >= PTW32\_LEVEL\_MAX -\/ 1 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{1210 }
+\DoxyCodeLine{1211 \textcolor{preprocessor}{\#if PTW32\_LEVEL >= PTW32\_LEVEL\_MAX}}
+\DoxyCodeLine{1212 }
+\DoxyCodeLine{1213 \textcolor{comment}{/*}}
+\DoxyCodeLine{1214 \textcolor{comment}{ * Returns the Win32 HANDLE for the POSIX thread.}}
+\DoxyCodeLine{1215 \textcolor{comment}{ */}}
+\DoxyCodeLine{1216 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \mbox{\hyperlink{pthread_8h_ab521aa5010fb1afb801a899a55569e03}{HANDLE}} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a301e894a99c332d3894c2db179a73176}{pthread\_getw32threadhandle\_np}}(\mbox{\hyperlink{structptw32__handle__t}{pthread\_t}} thread);}
+\DoxyCodeLine{1217 \textcolor{comment}{/*}}
+\DoxyCodeLine{1218 \textcolor{comment}{ * Returns the win32 thread ID for POSIX thread.}}
+\DoxyCodeLine{1219 \textcolor{comment}{ */}}
+\DoxyCodeLine{1220 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \mbox{\hyperlink{pthread_8h_aa39b39d94407451a6ec0226479db68cf}{DWORD}} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a408a4c644acff58249ecb78085c8b39c}{pthread\_getw32threadid\_np}} (\mbox{\hyperlink{structptw32__handle__t}{pthread\_t}} thread);}
+\DoxyCodeLine{1221 }
+\DoxyCodeLine{1222 }
+\DoxyCodeLine{1223 \textcolor{comment}{/*}}
+\DoxyCodeLine{1224 \textcolor{comment}{ * Protected Methods}}
+\DoxyCodeLine{1225 \textcolor{comment}{ *}}
+\DoxyCodeLine{1226 \textcolor{comment}{ * This function blocks until the given WIN32 handle}}
+\DoxyCodeLine{1227 \textcolor{comment}{ * is signaled or pthread\_cancel had been called.}}
+\DoxyCodeLine{1228 \textcolor{comment}{ * This function allows the caller to hook into the}}
+\DoxyCodeLine{1229 \textcolor{comment}{ * PThreads cancel mechanism. It is implemented using}}
+\DoxyCodeLine{1230 \textcolor{comment}{ *}}
+\DoxyCodeLine{1231 \textcolor{comment}{ *              WaitForMultipleObjects}}
+\DoxyCodeLine{1232 \textcolor{comment}{ *}}
+\DoxyCodeLine{1233 \textcolor{comment}{ * on 'waitHandle' and a manually reset WIN32 Event}}
+\DoxyCodeLine{1234 \textcolor{comment}{ * used to implement pthread\_cancel. The 'timeout'}}
+\DoxyCodeLine{1235 \textcolor{comment}{ * argument to TimedWait is simply passed to}}
+\DoxyCodeLine{1236 \textcolor{comment}{ * WaitForMultipleObjects.}}
+\DoxyCodeLine{1237 \textcolor{comment}{ */}}
+\DoxyCodeLine{1238 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a143d9645c5fd1237c00bffdeb95e5d83}{pthreadCancelableWait}} (\mbox{\hyperlink{pthread_8h_ab521aa5010fb1afb801a899a55569e03}{HANDLE}} waitHandle);}
+\DoxyCodeLine{1239 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a6271587898b5432c811f84fb100e6297}{pthreadCancelableTimedWait}} (\mbox{\hyperlink{pthread_8h_ab521aa5010fb1afb801a899a55569e03}{HANDLE}} waitHandle,}
+\DoxyCodeLine{1240                                         \mbox{\hyperlink{pthread_8h_aa39b39d94407451a6ec0226479db68cf}{DWORD}} timeout);}
+\DoxyCodeLine{1241 }
+\DoxyCodeLine{1242 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* PTW32\_LEVEL >= PTW32\_LEVEL\_MAX */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{1243 }
+\DoxyCodeLine{1244 \textcolor{comment}{/*}}
+\DoxyCodeLine{1245 \textcolor{comment}{ * Thread-\/Safe C Runtime Library Mappings.}}
+\DoxyCodeLine{1246 \textcolor{comment}{ */}}
+\DoxyCodeLine{1247 \textcolor{preprocessor}{\#if !defined(\_UWIN)}}
+\DoxyCodeLine{1248 \textcolor{preprocessor}{\#  if defined(NEED\_ERRNO)}}
+\DoxyCodeLine{1249      \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} * \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \_errno( \textcolor{keywordtype}{void} );}
+\DoxyCodeLine{1250 \textcolor{preprocessor}{\#  else}}
+\DoxyCodeLine{1251 \textcolor{preprocessor}{\#    if !defined(errno)}}
+\DoxyCodeLine{1252 \textcolor{preprocessor}{\#      if (defined(\_MT) || defined(\_DLL))}}
+\DoxyCodeLine{1253          \_\_declspec(dllimport) \textcolor{keyword}{extern} \textcolor{keywordtype}{int} * \_\_cdecl \_errno(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{1254 \textcolor{preprocessor}{\#        define errno   (*\_errno())}}
+\DoxyCodeLine{1255 \textcolor{preprocessor}{\#      endif}}
+\DoxyCodeLine{1256 \textcolor{preprocessor}{\#    endif}}
+\DoxyCodeLine{1257 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{1258 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1259 }
+\DoxyCodeLine{1260 \textcolor{comment}{/*}}
+\DoxyCodeLine{1261 \textcolor{comment}{ * Some compiler environments don't define some things.}}
+\DoxyCodeLine{1262 \textcolor{comment}{ */}}
+\DoxyCodeLine{1263 \textcolor{preprocessor}{\#if defined(\_\_BORLANDC\_\_)}}
+\DoxyCodeLine{1264 \textcolor{preprocessor}{\#  define \_ftime ftime}}
+\DoxyCodeLine{1265 \textcolor{preprocessor}{\#  define \_timeb timeb}}
+\DoxyCodeLine{1266 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1267 }
+\DoxyCodeLine{1268 \textcolor{preprocessor}{\#if defined(\_\_cplusplus)}}
+\DoxyCodeLine{1269 }
+\DoxyCodeLine{1270 \textcolor{comment}{/*}}
+\DoxyCodeLine{1271 \textcolor{comment}{ * Internal exceptions}}
+\DoxyCodeLine{1272 \textcolor{comment}{ */}}
+\DoxyCodeLine{1273 \textcolor{keyword}{class }ptw32\_exception \{\};}
+\DoxyCodeLine{1274 \textcolor{keyword}{class }ptw32\_exception\_cancel : \textcolor{keyword}{public} ptw32\_exception \{\};}
+\DoxyCodeLine{1275 \textcolor{keyword}{class }ptw32\_exception\_exit   : \textcolor{keyword}{public} ptw32\_exception \{\};}
+\DoxyCodeLine{1276 }
+\DoxyCodeLine{1277 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1278 }
+\DoxyCodeLine{1279 \textcolor{preprocessor}{\#if PTW32\_LEVEL >= PTW32\_LEVEL\_MAX}}
+\DoxyCodeLine{1280 }
+\DoxyCodeLine{1281 \textcolor{comment}{/* FIXME: This is only required if the library was built using SEH */}}
+\DoxyCodeLine{1282 \textcolor{comment}{/*}}
+\DoxyCodeLine{1283 \textcolor{comment}{ * Get internal SEH tag}}
+\DoxyCodeLine{1284 \textcolor{comment}{ */}}
+\DoxyCodeLine{1285 \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \mbox{\hyperlink{pthread_8h_aa39b39d94407451a6ec0226479db68cf}{DWORD}} \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\_CDECL}} \mbox{\hyperlink{pthread_8h_a0f3375320c170b991305596a32e1cf59}{ptw32\_get\_exception\_services\_code}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{1286 }
+\DoxyCodeLine{1287 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* PTW32\_LEVEL >= PTW32\_LEVEL\_MAX */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{1288 }
+\DoxyCodeLine{1289 \textcolor{preprocessor}{\#if !defined(PTW32\_BUILD)}}
+\DoxyCodeLine{1290 }
+\DoxyCodeLine{1291 \textcolor{preprocessor}{\#if defined(\_\_CLEANUP\_SEH)}}
+\DoxyCodeLine{1292 }
+\DoxyCodeLine{1293 \textcolor{comment}{/*}}
+\DoxyCodeLine{1294 \textcolor{comment}{ * Redefine the SEH \_\_except keyword to ensure that applications}}
+\DoxyCodeLine{1295 \textcolor{comment}{ * propagate our internal exceptions up to the library's internal handlers.}}
+\DoxyCodeLine{1296 \textcolor{comment}{ */}}
+\DoxyCodeLine{1297 \textcolor{preprocessor}{\#define \_\_except( E ) \(\backslash\)}}
+\DoxyCodeLine{1298 \textcolor{preprocessor}{        \_\_except( ( GetExceptionCode() == ptw32\_get\_exception\_services\_code() ) \(\backslash\)}}
+\DoxyCodeLine{1299 \textcolor{preprocessor}{                 ? EXCEPTION\_CONTINUE\_SEARCH : ( E ) )}}
+\DoxyCodeLine{1300 }
+\DoxyCodeLine{1301 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* \_\_CLEANUP\_SEH */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{1302 }
+\DoxyCodeLine{1303 \textcolor{preprocessor}{\#if defined(\_\_CLEANUP\_CXX)}}
+\DoxyCodeLine{1304 }
+\DoxyCodeLine{1305 \textcolor{comment}{/*}}
+\DoxyCodeLine{1306 \textcolor{comment}{ * Redefine the C++ catch keyword to ensure that applications}}
+\DoxyCodeLine{1307 \textcolor{comment}{ * propagate our internal exceptions up to the library's internal handlers.}}
+\DoxyCodeLine{1308 \textcolor{comment}{ */}}
+\DoxyCodeLine{1309 \textcolor{preprocessor}{\#if defined(\_MSC\_VER)}}
+\DoxyCodeLine{1310         \textcolor{comment}{/*}}
+\DoxyCodeLine{1311 \textcolor{comment}{         * WARNING: Replace any 'catch( ... )' with 'PtW32CatchAll'}}
+\DoxyCodeLine{1312 \textcolor{comment}{         * if you want Pthread-\/Win32 cancelation and pthread\_exit to work.}}
+\DoxyCodeLine{1313 \textcolor{comment}{         */}}
+\DoxyCodeLine{1314 }
+\DoxyCodeLine{1315 \textcolor{preprocessor}{\#if !defined(PtW32NoCatchWarn)}}
+\DoxyCodeLine{1316 }
+\DoxyCodeLine{1317 \textcolor{preprocessor}{\#pragma message("{}Specify \(\backslash\)"{}/DPtW32NoCatchWarn\(\backslash\)"{} compiler flag to skip this message."{}})}
+\DoxyCodeLine{1318 \textcolor{preprocessor}{\#pragma message("{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"{}})}
+\DoxyCodeLine{1319 \textcolor{preprocessor}{\#pragma message("{}When compiling applications with MSVC++ and C++ exception handling:"{}})}
+\DoxyCodeLine{1320 \textcolor{preprocessor}{\#pragma message("{}  Replace any 'catch( ... )' in routines called from POSIX threads"{}})}
+\DoxyCodeLine{1321 \textcolor{preprocessor}{\#pragma message("{}  with 'PtW32CatchAll' or 'CATCHALL' if you want POSIX thread"{}})}
+\DoxyCodeLine{1322 \textcolor{preprocessor}{\#pragma message("{}  cancelation and pthread\_exit to work. For example:"{}})}
+\DoxyCodeLine{1323 \textcolor{preprocessor}{\#pragma message("{}"{}})}
+\DoxyCodeLine{1324 \textcolor{preprocessor}{\#pragma message("{}    \#if defined(PtW32CatchAll)"{}})}
+\DoxyCodeLine{1325 \textcolor{preprocessor}{\#pragma message("{}      PtW32CatchAll"{}})}
+\DoxyCodeLine{1326 \textcolor{preprocessor}{\#pragma message("{}    \#else"{}})}
+\DoxyCodeLine{1327 \textcolor{preprocessor}{\#pragma message("{}      catch(...)"{}})}
+\DoxyCodeLine{1328 \textcolor{preprocessor}{\#pragma message("{}    \#endif"{}})}
+\DoxyCodeLine{1329 \textcolor{preprocessor}{\#pragma message("{}        \{"{}})}
+\DoxyCodeLine{1330 \textcolor{preprocessor}{\#pragma message("{}          /* Catchall block processing */"{}})}
+\DoxyCodeLine{1331 \textcolor{preprocessor}{\#pragma message("{}        \}"{}})}
+\DoxyCodeLine{1332 \textcolor{preprocessor}{\#pragma message("{}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/"{}})}
+\DoxyCodeLine{1333 }
+\DoxyCodeLine{1334 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1335 }
+\DoxyCodeLine{1336 \textcolor{preprocessor}{\#define PtW32CatchAll \(\backslash\)}}
+\DoxyCodeLine{1337 \textcolor{preprocessor}{        catch( ptw32\_exception \& ) \{ throw; \} \(\backslash\)}}
+\DoxyCodeLine{1338 \textcolor{preprocessor}{        catch( ... )}}
+\DoxyCodeLine{1339 }
+\DoxyCodeLine{1340 \textcolor{preprocessor}{\#else }\textcolor{comment}{/* \_MSC\_VER */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{1341 }
+\DoxyCodeLine{1342 \textcolor{preprocessor}{\#define catch( E ) \(\backslash\)}}
+\DoxyCodeLine{1343 \textcolor{preprocessor}{        catch( ptw32\_exception \& ) \{ throw; \} \(\backslash\)}}
+\DoxyCodeLine{1344 \textcolor{preprocessor}{        catch( E )}}
+\DoxyCodeLine{1345 }
+\DoxyCodeLine{1346 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* \_MSC\_VER */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{1347 }
+\DoxyCodeLine{1348 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* \_\_CLEANUP\_CXX */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{1349 }
+\DoxyCodeLine{1350 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ! PTW32\_BUILD */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{1351 }
+\DoxyCodeLine{1352 \textcolor{preprocessor}{\#if defined(\_\_cplusplus)}}
+\DoxyCodeLine{1353 \}                               \textcolor{comment}{/* End of extern "{}C"{} */}}
+\DoxyCodeLine{1354 \textcolor{preprocessor}{\#endif                          }\textcolor{comment}{/* \_\_cplusplus */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{1355 }
+\DoxyCodeLine{1356 \textcolor{preprocessor}{\#if defined(PTW32\_\_HANDLE\_DEF)}}
+\DoxyCodeLine{1357 \textcolor{preprocessor}{\# undef HANDLE}}
+\DoxyCodeLine{1358 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1359 \textcolor{preprocessor}{\#if defined(PTW32\_\_DWORD\_DEF)}}
+\DoxyCodeLine{1360 \textcolor{preprocessor}{\# undef DWORD}}
+\DoxyCodeLine{1361 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1362 }
+\DoxyCodeLine{1363 \textcolor{preprocessor}{\#undef PTW32\_LEVEL}}
+\DoxyCodeLine{1364 \textcolor{preprocessor}{\#undef PTW32\_LEVEL\_MAX}}
+\DoxyCodeLine{1365 }
+\DoxyCodeLine{1366 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ! RC\_INVOKED */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{1367 }
+\DoxyCodeLine{1368 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* PTHREAD\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

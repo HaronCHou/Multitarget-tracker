@@ -1,0 +1,93 @@
+\hypertarget{classedge__map}{}\doxysection{edge\+\_\+map\texorpdfstring{$<$}{<} T, Alloc \texorpdfstring{$>$}{>} 模板类 参考}
+\label{classedge__map}\index{edge\_map$<$ T, Alloc $>$@{edge\_map$<$ T, Alloc $>$}}
+
+
+A specialized map with edges as keys  
+
+
+
+
+{\ttfamily \#include $<$edge\+\_\+map.\+h$>$}
+
+
+
+类 edge\+\_\+map\texorpdfstring{$<$}{<} T, Alloc \texorpdfstring{$>$}{>} 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{classedge__map__inherit__graph}
+\end{center}
+\end{figure}
+
+
+edge\+\_\+map\texorpdfstring{$<$}{<} T, Alloc \texorpdfstring{$>$}{>} 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{classedge__map__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classedge__map_a947fa280ba03fd11b1813d484572e6df}{edge\+\_\+map}} ()
+\item 
+\mbox{\hyperlink{classedge__map_a30bd07fe13081b22071b721f66bb6796}{edge\+\_\+map}} (const \mbox{\hyperlink{classgraph}{graph}} \&\mbox{\hyperlink{rings_8cpp_aa9df5aa3976a89a96a5f1c7611d42938}{g}}, T t=T())
+\end{DoxyCompactItemize}
+\doxysubsection*{额外继承的成员函数}
+
+
+\doxysubsection{详细描述}
+\subsubsection*{template$<$class T, class Alloc = std\+::allocator$<$\+T$>$$>$\newline
+class edge\+\_\+map$<$ T, Alloc $>$}
+A specialized map with edges as keys 
+
+A {\ttfamily \mbox{\hyperlink{classedge__map}{edge\+\_\+map}}} is a specialized and optimized map implementation with edges as keys. Using a {\ttfamily \mbox{\hyperlink{classedge__map}{edge\+\_\+map}}} is the standard way to attach user defined information to the edges of a {\ttfamily graph}.
+
+An example of usage\+: 
+\begin{DoxyPre}
+  graph g;
+
+  node v1 = g.new\_node();
+  node v2 = g.new\_node();
+  edge e = g.new\_edge(v1, v2);
+
+  \mbox{\hyperlink{classedge__map}{edge\_map}}<string> label(g, "{}Default Label"{});
+
+  label[e] = "{}An edge"{};
+
+  assert(label[e] == "{}An edge"{});
+\end{DoxyPre}
+
+
+The edges used as keys for a {\ttfamily \mbox{\hyperlink{classedge__map}{edge\+\_\+map}}} MUST be edges of the same graph. If you want to use edges from different graphs, use a {\ttfamily map\texorpdfstring{$<$}{<}edge,T\texorpdfstring{$>$}{>}} instead. A graph and a copy of it are considered to be different.
+
+Most of the functionality of {\ttfamily \mbox{\hyperlink{classedge__map}{edge\+\_\+map}}} is inherited from \mbox{\hyperlink{classne__map}{ne\+\_\+map}}.
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classnode__map}{node\+\_\+map}} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classedge__map_a947fa280ba03fd11b1813d484572e6df}\label{classedge__map_a947fa280ba03fd11b1813d484572e6df}} 
+\index{edge\_map$<$ T, Alloc $>$@{edge\_map$<$ T, Alloc $>$}!edge\_map@{edge\_map}}
+\index{edge\_map@{edge\_map}!edge\_map$<$ T, Alloc $>$@{edge\_map$<$ T, Alloc $>$}}
+\doxysubsubsection{\texorpdfstring{edge\_map()}{edge\_map()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T , class Alloc  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$ T, Alloc $>$\mbox{\hyperlink{classedge__map}{\+::edge\+\_\+map}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructs an empty {\ttfamily \mbox{\hyperlink{classedge__map}{edge\+\_\+map}}} not associated with any {\ttfamily graph}. You may (but need not) call {\ttfamily ne\+\_\+map\+::init(const graph \&, T)} to associate it to a {\ttfamily graph}. \mbox{\Hypertarget{classedge__map_a30bd07fe13081b22071b721f66bb6796}\label{classedge__map_a30bd07fe13081b22071b721f66bb6796}} 
+\index{edge\_map$<$ T, Alloc $>$@{edge\_map$<$ T, Alloc $>$}!edge\_map@{edge\_map}}
+\index{edge\_map@{edge\_map}!edge\_map$<$ T, Alloc $>$@{edge\_map$<$ T, Alloc $>$}}
+\doxysubsubsection{\texorpdfstring{edge\_map()}{edge\_map()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T , class Alloc  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$ T, Alloc $>$\mbox{\hyperlink{classedge__map}{\+::edge\+\_\+map}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgraph}{graph}} \&}]{g,  }\item[{T}]{t = {\ttfamily T()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+Constructs a {\ttfamily \mbox{\hyperlink{classedge__map}{edge\+\_\+map}}} associated to the graph {\ttfamily g}. The value associated to each edge in {\ttfamily g} is set to {\ttfamily t}. 
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Tracker/graph/\+GTL/include/\+GTL/\mbox{\hyperlink{edge__map_8h}{edge\+\_\+map.\+h}}\end{DoxyCompactItemize}

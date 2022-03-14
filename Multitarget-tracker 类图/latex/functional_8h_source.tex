@@ -1,0 +1,107 @@
+\hypertarget{functional_8h_source}{}\doxysection{functional.\+h}
+\label{functional_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/functional.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/functional.h}}
+\mbox{\hyperlink{functional_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{    pybind11/functional.h: std::function<> support}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{    Copyright (c) 2016 Wenzel Jakob <wenzel.jakob@epfl.ch>}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{    All rights reserved. Use of this source code is governed by a}}
+\DoxyCodeLine{7 \textcolor{comment}{    BSD-\/style license that can be found in the LICENSE file.}}
+\DoxyCodeLine{8 \textcolor{comment}{*/}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{pybind11_8h}{pybind11.h}}"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <functional>}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+\DoxyCodeLine{16 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Return, \textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{19 \textcolor{keyword}{struct }\mbox{\hyperlink{classtype__caster}{type\_caster}}<\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{classfunction}{function}}<Return(Args...)>> \{}
+\DoxyCodeLine{20     \textcolor{keyword}{using} \mbox{\hyperlink{structtype__caster_3_01std_1_1function_3_01_return_07_args_8_8_8_08_4_01_4_a999a24be8c1275653033e2a779d54df4}{type}} = std::function<Return(Args...)>;}
+\DoxyCodeLine{21     \textcolor{keyword}{using} \mbox{\hyperlink{structtype__caster_3_01std_1_1function_3_01_return_07_args_8_8_8_08_4_01_4_af58553629081c43d42bf22aeef9b427b}{retval\_type}} = \mbox{\hyperlink{detail_2common_8h_acdb0eff728aec08ed6fff07d2885ea9d}{conditional\_t<std::is\_same<Return, void>::value}}, \mbox{\hyperlink{structvoid__type}{void\_type}}, Return>;}
+\DoxyCodeLine{22     \textcolor{keyword}{using} \mbox{\hyperlink{structtype__caster_3_01std_1_1function_3_01_return_07_args_8_8_8_08_4_01_4_a6e676866eac82dd787cf2567db70c67d}{function\_type}} = Return (*) (Args...);}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{keyword}{public}:}
+\DoxyCodeLine{25     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structtype__caster_3_01std_1_1function_3_01_return_07_args_8_8_8_08_4_01_4_a0663ae2830092a6f20eb81195742d2bc}{load}}(\mbox{\hyperlink{classhandle}{handle}} src, \textcolor{keywordtype}{bool} convert) \{}
+\DoxyCodeLine{26         \textcolor{keywordflow}{if} (src.is\_none()) \{}
+\DoxyCodeLine{27             \textcolor{comment}{// Defer accepting None to other overloads (if we aren't in convert mode):}}
+\DoxyCodeLine{28             \textcolor{keywordflow}{if} (!convert) \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{29             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{30         \}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32         \textcolor{keywordflow}{if} (!isinstance<function>(src))}
+\DoxyCodeLine{33             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35         \textcolor{keyword}{auto} func = reinterpret\_borrow<function>(src);}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37         \textcolor{comment}{/*}}
+\DoxyCodeLine{38 \textcolor{comment}{           When passing a C++ function as an argument to another C++}}
+\DoxyCodeLine{39 \textcolor{comment}{           function via Python, every function call would normally involve}}
+\DoxyCodeLine{40 \textcolor{comment}{           a full C++ -\/> Python -\/> C++ roundtrip, which can be prohibitive.}}
+\DoxyCodeLine{41 \textcolor{comment}{           Here, we try to at least detect the case where the function is}}
+\DoxyCodeLine{42 \textcolor{comment}{           stateless (i.e. function pointer or lambda function without}}
+\DoxyCodeLine{43 \textcolor{comment}{           captured variables), in which case the roundtrip can be avoided.}}
+\DoxyCodeLine{44 \textcolor{comment}{         */}}
+\DoxyCodeLine{45         \textcolor{keywordflow}{if} (\textcolor{keyword}{auto} cfunc = func.cpp\_function()) \{}
+\DoxyCodeLine{46             \textcolor{keyword}{auto} c = reinterpret\_borrow<capsule>(PyCFunction\_GET\_SELF(cfunc.ptr()));}
+\DoxyCodeLine{47             \textcolor{keyword}{auto} rec = (\mbox{\hyperlink{structfunction__record}{function\_record}} *) c;}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49             \textcolor{keywordflow}{if} (rec \&\& rec-\/>is\_stateless \&\&}
+\DoxyCodeLine{50                     \mbox{\hyperlink{internals_8h_af90d902fda8bf068ff26b9fda7e77727}{same\_type}}(\textcolor{keyword}{typeid}(\mbox{\hyperlink{structtype__caster_3_01std_1_1function_3_01_return_07_args_8_8_8_08_4_01_4_a6e676866eac82dd787cf2567db70c67d}{function\_type}}), *\textcolor{keyword}{reinterpret\_cast<}\textcolor{keyword}{const }std::type\_info *\textcolor{keyword}{>}(rec-\/>data[1]))) \{}
+\DoxyCodeLine{51                 \textcolor{keyword}{struct }capture \{ \mbox{\hyperlink{structtype__caster_3_01std_1_1function_3_01_return_07_args_8_8_8_08_4_01_4_a6e676866eac82dd787cf2567db70c67d}{function\_type}} \mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}}; \};}
+\DoxyCodeLine{52                 \mbox{\hyperlink{classtype__caster__generic_a077b8d1e4af829443b2e41c3e5786f4d}{value}} = ((capture *) \&rec-\/>data)-\/>f;}
+\DoxyCodeLine{53                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{54             \}}
+\DoxyCodeLine{55         \}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57         \textcolor{comment}{// ensure GIL is held during functor destruction}}
+\DoxyCodeLine{58         \textcolor{keyword}{struct }func\_handle \{}
+\DoxyCodeLine{59             \mbox{\hyperlink{classfunction}{function}} \mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}};}
+\DoxyCodeLine{60             func\_handle(\mbox{\hyperlink{classfunction}{function}}\&\& f\_) : \mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}}(std::move(f\_)) \{\}}
+\DoxyCodeLine{61             func\_handle(\textcolor{keyword}{const} func\_handle\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{62             \string~func\_handle() \{}
+\DoxyCodeLine{63                 \mbox{\hyperlink{classgil__scoped__acquire}{gil\_scoped\_acquire}} acq;}
+\DoxyCodeLine{64                 \mbox{\hyperlink{classfunction}{function}} kill\_f(std::move(\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}}));}
+\DoxyCodeLine{65             \}}
+\DoxyCodeLine{66         \};}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68         \textcolor{comment}{// to emulate 'move initialization capture' in C++11}}
+\DoxyCodeLine{69         \textcolor{keyword}{struct }func\_wrapper \{}
+\DoxyCodeLine{70             func\_handle hfunc;}
+\DoxyCodeLine{71             func\_wrapper(func\_handle\&\& hf): hfunc(std::move(hf)) \{\}}
+\DoxyCodeLine{72             Return operator()(Args... \mbox{\hyperlink{classargs}{args}})\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{73                 \mbox{\hyperlink{classgil__scoped__acquire}{gil\_scoped\_acquire}} acq;}
+\DoxyCodeLine{74                 \textcolor{keywordtype}{object} retval(hfunc.f(std::forward<Args>(\mbox{\hyperlink{classargs}{args}})...));}
+\DoxyCodeLine{75                 \textcolor{comment}{/* Visual studio 2015 parser issue: need parentheses around this expression */}}
+\DoxyCodeLine{76                 \textcolor{keywordflow}{return} (retval.template cast<Return>());}
+\DoxyCodeLine{77             \}}
+\DoxyCodeLine{78         \};}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80         \mbox{\hyperlink{classtype__caster__generic_a077b8d1e4af829443b2e41c3e5786f4d}{value}} = func\_wrapper(func\_handle(std::move(func)));}
+\DoxyCodeLine{81         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{82     \}}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Func>}
+\DoxyCodeLine{85     \textcolor{keyword}{static} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structtype__caster_3_01std_1_1function_3_01_return_07_args_8_8_8_08_4_01_4_a1aa8ac47ff237f05e9d23bc199754e7a}{cast}}(Func \&\&f\_, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} policy, \mbox{\hyperlink{classhandle}{handle}} \textcolor{comment}{/* parent */}) \{}
+\DoxyCodeLine{86         \textcolor{keywordflow}{if} (!f\_)}
+\DoxyCodeLine{87             \textcolor{keywordflow}{return} \mbox{\hyperlink{classnone}{none}}().\mbox{\hyperlink{classhandle_a1a13c72238d8df4d42c1656e446fbfcb}{inc\_ref}}();}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89         \textcolor{keyword}{auto} result = f\_.template target<function\_type>();}
+\DoxyCodeLine{90         \textcolor{keywordflow}{if} (result)}
+\DoxyCodeLine{91             \textcolor{keywordflow}{return} \mbox{\hyperlink{classcpp__function}{cpp\_function}}(*result, policy).\mbox{\hyperlink{classobject_a4ce66b1d44b37ae6b28e80228b075aae}{release}}();}
+\DoxyCodeLine{92         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{93             \textcolor{keywordflow}{return} \mbox{\hyperlink{classcpp__function}{cpp\_function}}(std::forward<Func>(f\_), policy).\mbox{\hyperlink{classobject_a4ce66b1d44b37ae6b28e80228b075aae}{release}}();}
+\DoxyCodeLine{94     \}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96     \mbox{\hyperlink{structtype__caster_3_01std_1_1function_3_01_return_07_args_8_8_8_08_4_01_4_a08c7d15f59155364101977b4a4fadb52}{PYBIND11\_TYPE\_CASTER}}(\mbox{\hyperlink{structtype__caster_3_01std_1_1function_3_01_return_07_args_8_8_8_08_4_01_4_a999a24be8c1275653033e2a779d54df4}{type}}, \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}Callable[["{}}) + \mbox{\hyperlink{descr_8h_a8c0d3505d8fb5963c5e157eabdbd3c7f}{concat}}(\mbox{\hyperlink{classtype__caster}{make\_caster<Args>::name}}...) + \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}], "{}})}
+\DoxyCodeLine{97                                + \mbox{\hyperlink{classtype__caster}{make\_caster<retval\_type>::name}} + \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}]"{}}));}
+\DoxyCodeLine{98 \};}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{101 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+
+\end{DoxyCode}

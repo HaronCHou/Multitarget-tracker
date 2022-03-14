@@ -1,0 +1,1301 @@
+\hypertarget{pytypes_8h_source}{}\doxysection{pytypes.\+h}
+\label{pytypes_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/pytypes.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/pytypes.h}}
+\mbox{\hyperlink{pytypes_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{    pybind11/pytypes.h: Convenience wrapper classes for basic Python types}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{    Copyright (c) 2016 Wenzel Jakob <wenzel.jakob@epfl.ch>}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{    All rights reserved. Use of this source code is governed by a}}
+\DoxyCodeLine{7 \textcolor{comment}{    BSD-\/style license that can be found in the LICENSE file.}}
+\DoxyCodeLine{8 \textcolor{comment}{*/}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{detail_2common_8h}{detail/common.h}}"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{buffer__info_8h}{buffer\_info.h}}"{}}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <utility>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <type\_traits>}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{comment}{/* A few forward declarations */}}
+\DoxyCodeLine{20 \textcolor{keyword}{class }\mbox{\hyperlink{classhandle}{handle}}; \textcolor{keyword}{class }\mbox{\hyperlink{classobject}{object}};}
+\DoxyCodeLine{21 \textcolor{keyword}{class }\mbox{\hyperlink{classstr}{str}}; \textcolor{keyword}{class }\mbox{\hyperlink{classiterator}{iterator}};}
+\DoxyCodeLine{22 \textcolor{keyword}{struct }\mbox{\hyperlink{structarg}{arg}}; \textcolor{keyword}{struct }\mbox{\hyperlink{structarg__v}{arg\_v}};}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{25 \textcolor{keyword}{class }\mbox{\hyperlink{classargs__proxy}{args\_proxy}};}
+\DoxyCodeLine{26 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{pytypes_8h_a33bd8d89760e4e554eb535f3fbdb8412}{isinstance\_generic}}(\mbox{\hyperlink{classhandle}{handle}} obj, \textcolor{keyword}{const} std::type\_info \&tp);}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{comment}{// Accessor forward declarations}}
+\DoxyCodeLine{29 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Policy> \textcolor{keyword}{class }\mbox{\hyperlink{classaccessor}{accessor}};}
+\DoxyCodeLine{30 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceaccessor__policies}{accessor\_policies}} \{}
+\DoxyCodeLine{31     \textcolor{keyword}{struct }\mbox{\hyperlink{structobj__attr}{obj\_attr}};}
+\DoxyCodeLine{32     \textcolor{keyword}{struct }\mbox{\hyperlink{structstr__attr}{str\_attr}};}
+\DoxyCodeLine{33     \textcolor{keyword}{struct }\mbox{\hyperlink{structgeneric__item}{generic\_item}};}
+\DoxyCodeLine{34     \textcolor{keyword}{struct }\mbox{\hyperlink{structsequence__item}{sequence\_item}};}
+\DoxyCodeLine{35     \textcolor{keyword}{struct }\mbox{\hyperlink{structlist__item}{list\_item}};}
+\DoxyCodeLine{36     \textcolor{keyword}{struct }\mbox{\hyperlink{structtuple__item}{tuple\_item}};}
+\DoxyCodeLine{37 \}}
+\DoxyCodeLine{38 \textcolor{keyword}{using} \mbox{\hyperlink{classaccessor}{obj\_attr\_accessor}} = \mbox{\hyperlink{classaccessor}{accessor<accessor\_policies::obj\_attr>}};}
+\DoxyCodeLine{39 \textcolor{keyword}{using} \mbox{\hyperlink{classaccessor}{str\_attr\_accessor}} = \mbox{\hyperlink{classaccessor}{accessor<accessor\_policies::str\_attr>}};}
+\DoxyCodeLine{40 \textcolor{keyword}{using} \mbox{\hyperlink{classaccessor}{item\_accessor}} = \mbox{\hyperlink{classaccessor}{accessor<accessor\_policies::generic\_item>}};}
+\DoxyCodeLine{41 \textcolor{keyword}{using} \mbox{\hyperlink{classaccessor}{sequence\_accessor}} = \mbox{\hyperlink{classaccessor}{accessor<accessor\_policies::sequence\_item>}};}
+\DoxyCodeLine{42 \textcolor{keyword}{using} \mbox{\hyperlink{classaccessor}{list\_accessor}} = \mbox{\hyperlink{classaccessor}{accessor<accessor\_policies::list\_item>}};}
+\DoxyCodeLine{43 \textcolor{keyword}{using} \mbox{\hyperlink{classaccessor}{tuple\_accessor}} = \mbox{\hyperlink{classaccessor}{accessor<accessor\_policies::tuple\_item>}};}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{46 \textcolor{keyword}{class }\mbox{\hyperlink{classpyobject__tag}{pyobject\_tag}} \{ \};}
+\DoxyCodeLine{47 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{using} \mbox{\hyperlink{pytypes_8h_a41ef7089a656c80c4319844f62409f7d}{is\_pyobject}} = std::is\_base\_of<pyobject\_tag, remove\_reference\_t<T>>;}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{53 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Derived>}
+\DoxyCodeLine{54 \textcolor{keyword}{class }\mbox{\hyperlink{classobject__api}{object\_api}} : \textcolor{keyword}{public} \mbox{\hyperlink{classpyobject__tag}{pyobject\_tag}} \{}
+\DoxyCodeLine{55     \textcolor{keyword}{const} Derived \&\mbox{\hyperlink{classobject__api_a65860ac4d2d496a5a003a62dc75359cb}{derived}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keyword}{const }Derived \&\textcolor{keyword}{>}(*this); \}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{keyword}{public}:}
+\DoxyCodeLine{62     \mbox{\hyperlink{classiterator}{iterator}} \mbox{\hyperlink{classobject__api_a18ff315942ef1238c6c9d28c0ef9301f}{begin}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{64     \mbox{\hyperlink{classiterator}{iterator}} \mbox{\hyperlink{classobject__api_a67b1b3d151adc273eeda39837e63f581}{end}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{72     \mbox{\hyperlink{classaccessor}{item\_accessor}} \mbox{\hyperlink{classobject__api_a22a02d920a489c385a2502802e547943}{operator[]}}(\mbox{\hyperlink{classhandle}{handle}} key) \textcolor{keyword}{const};}
+\DoxyCodeLine{74     \mbox{\hyperlink{classaccessor}{item\_accessor}} \mbox{\hyperlink{classobject__api_a81277a47b87a2a79f216895d7a5018a8}{operator[]}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *key) \textcolor{keyword}{const};}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{82     \mbox{\hyperlink{classaccessor}{obj\_attr\_accessor}} \mbox{\hyperlink{classobject__api_a17b39579263007abe74cfbf80015ebd9}{attr}}(\mbox{\hyperlink{classhandle}{handle}} key) \textcolor{keyword}{const};}
+\DoxyCodeLine{84     \mbox{\hyperlink{classaccessor}{str\_attr\_accessor}} \mbox{\hyperlink{classobject__api_ae5a18d371ec699cd68561d78503b493f}{attr}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *key) \textcolor{keyword}{const};}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{92     \mbox{\hyperlink{classargs__proxy}{args\_proxy}} \mbox{\hyperlink{classobject__api_a52879030de31db181cb1ec02c6f001b4}{operator*}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{95     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keywordtype}{bool} \mbox{\hyperlink{classobject__api_a07869da2a7cdbcb1a8877c50b18aee83}{contains}}(T \&\&item) \textcolor{keyword}{const};}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{107     \textcolor{keyword}{template} <\mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} policy = \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a1c1628c22d69b3b9bac4b5c3674852e3}{return\_value\_policy::automatic\_reference}}, \textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{108     \textcolor{keywordtype}{object} \mbox{\hyperlink{classobject__api_abe9df612ead8f4239dc32154d68e0cc1}{operator()}}(Args \&\&...\mbox{\hyperlink{classargs}{args}}) \textcolor{keyword}{const};}
+\DoxyCodeLine{109     \textcolor{keyword}{template} <\mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} policy = \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a1c1628c22d69b3b9bac4b5c3674852e3}{return\_value\_policy::automatic\_reference}}, \textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{110     \mbox{\hyperlink{classobject__api_a805215f1a7d50f7fb6a6ffb723707c73}{PYBIND11\_DEPRECATED}}(\textcolor{stringliteral}{"{}call(...) was deprecated in favor of operator()(...)"{}})}
+\DoxyCodeLine{111         \mbox{\hyperlink{classobject}{object}} call(Args\&\&... \mbox{\hyperlink{classargs}{args}}) const;}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{114     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classobject__api_a63b93f9f16e8e08c9672fe553c054885}{is}}(\mbox{\hyperlink{classobject__api}{object\_api}} const\& other)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classobject__api_a65860ac4d2d496a5a003a62dc75359cb}{derived}}().ptr() == other.derived().ptr(); \}}
+\DoxyCodeLine{116     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classobject__api_a29bb566d25e37a236a322267ef1c59eb}{is\_none}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classobject__api_a65860ac4d2d496a5a003a62dc75359cb}{derived}}().ptr() == Py\_None; \}}
+\DoxyCodeLine{118     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classobject__api_ae1d3648ad3568f13a4e9f28556bb6e99}{equal}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other)\textcolor{keyword}{ const      }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classobject__api_a5fe9a41837cfbe5504fdd5c41a79b557}{rich\_compare}}(other, Py\_EQ); \}}
+\DoxyCodeLine{119     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classobject__api_acd277a1d6dea84b197d78925b523133c}{not\_equal}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other)\textcolor{keyword}{ const  }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classobject__api_a5fe9a41837cfbe5504fdd5c41a79b557}{rich\_compare}}(other, Py\_NE); \}}
+\DoxyCodeLine{120     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classobject__api_a31c5855f0468b7e83584997a9ccb48bf}{operator<}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other)\textcolor{keyword}{ const  }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classobject__api_a5fe9a41837cfbe5504fdd5c41a79b557}{rich\_compare}}(other, Py\_LT); \}}
+\DoxyCodeLine{121     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classobject__api_a04fe4d81ee95c83ba2eb0f25220b9881}{operator<=}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classobject__api_a5fe9a41837cfbe5504fdd5c41a79b557}{rich\_compare}}(other, Py\_LE); \}}
+\DoxyCodeLine{122     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classobject__api_ac99465e3bdd49159c9964ba927f63a19}{operator>}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other)\textcolor{keyword}{ const  }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classobject__api_a5fe9a41837cfbe5504fdd5c41a79b557}{rich\_compare}}(other, Py\_GT); \}}
+\DoxyCodeLine{123     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classobject__api_a774f6938db60a302a924c140a8b2b2db}{operator>=}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classobject__api_a5fe9a41837cfbe5504fdd5c41a79b557}{rich\_compare}}(other, Py\_GE); \}}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125     \textcolor{keywordtype}{object} \mbox{\hyperlink{classobject__api_a7a3fb2cd069528bbd6fc27191644e825}{operator-\/}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{126     \textcolor{keywordtype}{object} \mbox{\hyperlink{classobject__api_a94189a6ba2cc0b6d6d37c15ab687020c}{operator\string~}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{127     \textcolor{keywordtype}{object} \mbox{\hyperlink{classobject__api_ad6ef9a4778c241d7de5be1d156d9fe9f}{operator+}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other) \textcolor{keyword}{const};}
+\DoxyCodeLine{128     \textcolor{keywordtype}{object} \mbox{\hyperlink{classobject__api_a45163ca4d236907be32d912e557e788d}{operator+=}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other) \textcolor{keyword}{const};}
+\DoxyCodeLine{129     \textcolor{keywordtype}{object} \mbox{\hyperlink{classobject__api_af0b869fef44a2e9fa441cf401cb5924e}{operator-\/}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other) \textcolor{keyword}{const};}
+\DoxyCodeLine{130     \textcolor{keywordtype}{object} \mbox{\hyperlink{classobject__api_adb8d619cd0c82fdba2abf02874b36a9b}{operator-\/=}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other) \textcolor{keyword}{const};}
+\DoxyCodeLine{131     \textcolor{keywordtype}{object} \mbox{\hyperlink{classobject__api_a0234fe4fb54ebbb5ef66d2871877ebee}{operator*}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other) \textcolor{keyword}{const};}
+\DoxyCodeLine{132     \textcolor{keywordtype}{object} \mbox{\hyperlink{classobject__api_a851b5be0ac808f1e9ed1fc79ac770ae2}{operator*=}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other) \textcolor{keyword}{const};}
+\DoxyCodeLine{133     \textcolor{keywordtype}{object} \mbox{\hyperlink{classobject__api_a9b19ab413bd6077f45efeb6cff06b5c4}{operator/}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other) \textcolor{keyword}{const};}
+\DoxyCodeLine{134     \textcolor{keywordtype}{object} \mbox{\hyperlink{classobject__api_a4b9e5ae02327c2ff44e25dc0f1168e64}{operator/=}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other) \textcolor{keyword}{const};}
+\DoxyCodeLine{135     \textcolor{keywordtype}{object} \mbox{\hyperlink{classobject__api_afd4b5ba4bd12f50897ecd210af322703}{operator|}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other) \textcolor{keyword}{const};}
+\DoxyCodeLine{136     \textcolor{keywordtype}{object} \mbox{\hyperlink{classobject__api_a625aa25cf930253e2e731349b91d8048}{operator|=}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other) \textcolor{keyword}{const};}
+\DoxyCodeLine{137     \textcolor{keywordtype}{object} \mbox{\hyperlink{classobject__api_a16d99ba5de2da080463080fd20eba640}{operator\&}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other) \textcolor{keyword}{const};}
+\DoxyCodeLine{138     \textcolor{keywordtype}{object} \mbox{\hyperlink{classobject__api_ac5a561b5ef0c8518d5c1f0e98185fb3e}{operator\&=}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other) \textcolor{keyword}{const};}
+\DoxyCodeLine{139     \textcolor{keywordtype}{object} \mbox{\hyperlink{classobject__api_acc1fc225681c932e6f3579bf43ef1e47}{operator\string^}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other) \textcolor{keyword}{const};}
+\DoxyCodeLine{140     \textcolor{keywordtype}{object} \mbox{\hyperlink{classobject__api_aa0287f61e2ec9962bead679f640c62ea}{operator\string^=}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other) \textcolor{keyword}{const};}
+\DoxyCodeLine{141     \textcolor{keywordtype}{object} \mbox{\hyperlink{classobject__api_a497229c4f1c3842eba6ceeddbfb5dca7}{operator<<}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other) \textcolor{keyword}{const};}
+\DoxyCodeLine{142     \textcolor{keywordtype}{object} \mbox{\hyperlink{classobject__api_a68ca4903ae971465b87c148e9e4a4bed}{operator<<=}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other) \textcolor{keyword}{const};}
+\DoxyCodeLine{143     \textcolor{keywordtype}{object} \mbox{\hyperlink{classobject__api_a1c874cdc51a00badff0938afca076365}{operator>>}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other) \textcolor{keyword}{const};}
+\DoxyCodeLine{144     \textcolor{keywordtype}{object} \mbox{\hyperlink{classobject__api_abcee9a0ac25d249d8ae6d17a5747ee2f}{operator>>=}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other) \textcolor{keyword}{const};}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146     \mbox{\hyperlink{classobject__api_a805215f1a7d50f7fb6a6ffb723707c73}{PYBIND11\_DEPRECATED}}(\textcolor{stringliteral}{"{}Use py::str(obj) instead"{}})}
+\DoxyCodeLine{147     \mbox{\hyperlink{namespacepybind11}{pybind11}}::\mbox{\hyperlink{classstr}{str}} \mbox{\hyperlink{classstr}{str}}() const;}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{150     \mbox{\hyperlink{classaccessor}{str\_attr\_accessor}} \mbox{\hyperlink{structdoc}{doc}}() const;}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{153     \textcolor{keywordtype}{int} \mbox{\hyperlink{classobject__api_ad342c9c181e1c9bdd634828276aebd24}{ref\_count}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(Py\_REFCNT(\mbox{\hyperlink{classobject__api_a65860ac4d2d496a5a003a62dc75359cb}{derived}}().ptr())); \}}
+\DoxyCodeLine{155     \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{classobject__api_a6e7d5542b300b4ef13c65c58124a410a}{get\_type}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157 \textcolor{keyword}{private}:}
+\DoxyCodeLine{158     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classobject__api_a5fe9a41837cfbe5504fdd5c41a79b557}{rich\_compare}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other, \textcolor{keywordtype}{int} value) \textcolor{keyword}{const};}
+\DoxyCodeLine{159 \};}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163 }
+\DoxyCodeLine{174 class \mbox{\hyperlink{classhandle}{handle}} : public detail::\mbox{\hyperlink{classobject__api}{object\_api}}<\mbox{\hyperlink{classhandle}{handle}}> \{}
+\DoxyCodeLine{175 \textcolor{keyword}{public}:}
+\DoxyCodeLine{177     \mbox{\hyperlink{classhandle_a53ba30cccfb1cabee421fd4ea555cf44}{handle}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{179     \mbox{\hyperlink{classhandle_a99eb912e1b9b823bc447980a16772584}{handle}}(PyObject *ptr) : m\_ptr(ptr) \{ \} \textcolor{comment}{// Allow implicit conversion from PyObject*}}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{182     PyObject *\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} m\_ptr; \}}
+\DoxyCodeLine{183     PyObject *\&\mbox{\hyperlink{classhandle_af314d063eb29074fcc64595d85b12cec}{ptr}}() \{ \textcolor{keywordflow}{return} m\_ptr; \}}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{190     \textcolor{keyword}{const} \mbox{\hyperlink{classhandle}{handle}}\& \mbox{\hyperlink{classhandle_a1a13c72238d8df4d42c1656e446fbfcb}{inc\_ref}}() const \& \{ Py\_XINCREF(m\_ptr); \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{197     \textcolor{keyword}{const} \mbox{\hyperlink{classhandle}{handle}}\& \mbox{\hyperlink{classhandle_a4bd9642229b0b331172c37b02aa73eda}{dec\_ref}}() const \& \{ Py\_XDECREF(m\_ptr); \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{203     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> T \mbox{\hyperlink{cast_8h_a42ebc557ef15690c3171a99f46d59aab}{cast}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{205     \textcolor{keyword}{explicit} \textcolor{keyword}{operator} bool()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} m\_ptr != \textcolor{keyword}{nullptr}; \}}
+\DoxyCodeLine{210     \mbox{\hyperlink{detail_2common_8h_ae4ba3bb24593b13133ae78407f466353}{PYBIND11\_DEPRECATED}}(\textcolor{stringliteral}{"{}Use obj1.is(obj2) instead"{}})}
+\DoxyCodeLine{211     bool operator==(const \mbox{\hyperlink{classhandle}{handle}} \&h)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} m\_ptr == h.m\_ptr; \}}
+\DoxyCodeLine{212     \mbox{\hyperlink{detail_2common_8h_ae4ba3bb24593b13133ae78407f466353}{PYBIND11\_DEPRECATED}}(\textcolor{stringliteral}{"{}Use !obj1.is(obj2) instead"{}})}
+\DoxyCodeLine{213     bool operator!=(const \mbox{\hyperlink{classhandle}{handle}} \&h)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} m\_ptr != h.m\_ptr; \}}
+\DoxyCodeLine{214     \mbox{\hyperlink{detail_2common_8h_ae4ba3bb24593b13133ae78407f466353}{PYBIND11\_DEPRECATED}}(\textcolor{stringliteral}{"{}Use handle::operator bool() instead"{}})}
+\DoxyCodeLine{215     bool check()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} m\_ptr != \textcolor{keyword}{nullptr}; \}}
+\DoxyCodeLine{216 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{217     PyObject *m\_ptr = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{218 \};}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{230 \textcolor{keyword}{class }\mbox{\hyperlink{classobject}{object}} : \textcolor{keyword}{public} \mbox{\hyperlink{classhandle}{handle}} \{}
+\DoxyCodeLine{231 \textcolor{keyword}{public}:}
+\DoxyCodeLine{232     \mbox{\hyperlink{classobject_a9ac91a751171ebf7e3af73720238818e}{object}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{233     \mbox{\hyperlink{classobject_af2b49798a85dc52371995578108d84e1}{PYBIND11\_DEPRECATED}}(\textcolor{stringliteral}{"{}Use reinterpret\_borrow<object>() or reinterpret\_steal<object>()"{}})}
+\DoxyCodeLine{234     \mbox{\hyperlink{classobject}{object}}(\mbox{\hyperlink{classhandle}{handle}} h, \textcolor{keywordtype}{bool} \mbox{\hyperlink{classobject_a4ebda2f2d08435f4d70d822908d7e431}{is\_borrowed}}) : \mbox{\hyperlink{classhandle}{handle}}(h) \{ \textcolor{keywordflow}{if} (\mbox{\hyperlink{classobject_a4ebda2f2d08435f4d70d822908d7e431}{is\_borrowed}}) \mbox{\hyperlink{classhandle_a1a13c72238d8df4d42c1656e446fbfcb}{inc\_ref}}(); \}}
+\DoxyCodeLine{236     \mbox{\hyperlink{classobject_a6537d8aee1fc94555af84e5bb9ecad21}{object}}(\textcolor{keyword}{const} \textcolor{keywordtype}{object} \&o) : \mbox{\hyperlink{classhandle}{handle}}(o) \{ \mbox{\hyperlink{classhandle_a1a13c72238d8df4d42c1656e446fbfcb}{inc\_ref}}(); \}}
+\DoxyCodeLine{238     \mbox{\hyperlink{classobject_a3fc437bccb86b745433164bc3a04a2a4}{object}}(\textcolor{keywordtype}{object} \&\&other) \textcolor{keyword}{noexcept} \{ \mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}} = other.m\_ptr; other.m\_ptr = \textcolor{keyword}{nullptr}; \}}
+\DoxyCodeLine{240     \mbox{\hyperlink{classobject_aecd824abdc96ff340acf4ea25a34d76d}{\string~object}}() \{ \mbox{\hyperlink{classhandle_a4bd9642229b0b331172c37b02aa73eda}{dec\_ref}}(); \}}
+\DoxyCodeLine{241 }
+\DoxyCodeLine{247     \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{classobject_a4ce66b1d44b37ae6b28e80228b075aae}{release}}() \{}
+\DoxyCodeLine{248       PyObject *tmp = \mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}};}
+\DoxyCodeLine{249       \mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{250       \textcolor{keywordflow}{return} \mbox{\hyperlink{classhandle_a53ba30cccfb1cabee421fd4ea555cf44}{handle}}(tmp);}
+\DoxyCodeLine{251     \}}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{253     \textcolor{keywordtype}{object}\& \mbox{\hyperlink{classobject_a600c71c7485ceee065a5b5e0b09ea7c6}{operator=}}(\textcolor{keyword}{const} \textcolor{keywordtype}{object} \&other) \{}
+\DoxyCodeLine{254         other.\mbox{\hyperlink{classhandle_a1a13c72238d8df4d42c1656e446fbfcb}{inc\_ref}}();}
+\DoxyCodeLine{255         \mbox{\hyperlink{classhandle_a4bd9642229b0b331172c37b02aa73eda}{dec\_ref}}();}
+\DoxyCodeLine{256         \mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}} = other.\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}};}
+\DoxyCodeLine{257         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{258     \}}
+\DoxyCodeLine{259 }
+\DoxyCodeLine{260     \textcolor{keywordtype}{object}\& \mbox{\hyperlink{classobject_a8c46c1e3db8b47af31e158e92ef7ec02}{operator=}}(\textcolor{keywordtype}{object} \&\&other) \textcolor{keyword}{noexcept} \{}
+\DoxyCodeLine{261         \textcolor{keywordflow}{if} (\textcolor{keyword}{this} != \&other) \{}
+\DoxyCodeLine{262             \mbox{\hyperlink{classhandle}{handle}} temp(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}});}
+\DoxyCodeLine{263             \mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}} = other.m\_ptr;}
+\DoxyCodeLine{264             other.m\_ptr = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{265             temp.\mbox{\hyperlink{classhandle_a4bd9642229b0b331172c37b02aa73eda}{dec\_ref}}();}
+\DoxyCodeLine{266         \}}
+\DoxyCodeLine{267         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{268     \}}
+\DoxyCodeLine{269 }
+\DoxyCodeLine{270     \textcolor{comment}{// Calling cast() on an object lvalue just copies (via handle::cast)}}
+\DoxyCodeLine{271     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> T \mbox{\hyperlink{classobject_acf93eb705d6539ef22e2c4a8eebc4c68}{cast}}() const \&;}
+\DoxyCodeLine{272     \textcolor{comment}{// Calling on an object rvalue does a move, if needed and/or possible}}
+\DoxyCodeLine{273     template <typename T> T \mbox{\hyperlink{classhandle_a8158ff37b59a73d48140ab4d718316b9}{cast}}() \&\&;}
+\DoxyCodeLine{274 }
+\DoxyCodeLine{275 protected:}
+\DoxyCodeLine{276     \textcolor{comment}{// Tags for choosing constructors from raw PyObject *}}
+\DoxyCodeLine{277     struct \mbox{\hyperlink{structobject_1_1borrowed__t}{borrowed\_t}} \{ \};}
+\DoxyCodeLine{278     \textcolor{keyword}{struct }\mbox{\hyperlink{structobject_1_1stolen__t}{stolen\_t}} \{ \};}
+\DoxyCodeLine{279 }
+\DoxyCodeLine{280     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{friend} T \mbox{\hyperlink{classobject_ac1ea1a4cbcf197d7c8096037633720d7}{reinterpret\_borrow}}(\mbox{\hyperlink{classhandle}{handle}});}
+\DoxyCodeLine{281     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{friend} T \mbox{\hyperlink{classobject_ae1de2ab5a755c10582ac1e46071de5c5}{reinterpret\_steal}}(\mbox{\hyperlink{classhandle}{handle}});}
+\DoxyCodeLine{282 }
+\DoxyCodeLine{283 \textcolor{keyword}{public}:}
+\DoxyCodeLine{284     \textcolor{comment}{// Only accessible from derived classes and the reinterpret\_* functions}}
+\DoxyCodeLine{285     \mbox{\hyperlink{classobject_ad2db8259e6e585a4b61b9a9a9627b7f0}{object}}(\mbox{\hyperlink{classhandle}{handle}} h, \mbox{\hyperlink{structobject_1_1borrowed__t}{borrowed\_t}}) : \mbox{\hyperlink{classhandle}{handle}}(h) \{ \mbox{\hyperlink{classhandle_a1a13c72238d8df4d42c1656e446fbfcb}{inc\_ref}}(); \}}
+\DoxyCodeLine{286     \mbox{\hyperlink{classobject_a8202a0f0f7fe12a68d8d5fb18e766b07}{object}}(\mbox{\hyperlink{classhandle}{handle}} h, \mbox{\hyperlink{structobject_1_1stolen__t}{stolen\_t}}) : \mbox{\hyperlink{classhandle}{handle}}(h) \{ \}}
+\DoxyCodeLine{287 \};}
+\DoxyCodeLine{288 }
+\DoxyCodeLine{302 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> T \mbox{\hyperlink{pytypes_8h_ae55e745a477e38745337a75ab5439f81}{reinterpret\_borrow}}(\mbox{\hyperlink{classhandle}{handle}} h) \{ \textcolor{keywordflow}{return} \{h, \mbox{\hyperlink{structobject_1_1borrowed__t}{object::borrowed\_t}}\{\}\}; \}}
+\DoxyCodeLine{303 }
+\DoxyCodeLine{312 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> T \mbox{\hyperlink{pytypes_8h_a43d037958870ee4b6984930d0b5abdf0}{reinterpret\_steal}}(\mbox{\hyperlink{classhandle}{handle}} h) \{ \textcolor{keywordflow}{return} \{h, \mbox{\hyperlink{structobject_1_1stolen__t}{object::stolen\_t}}\{\}\}; \}}
+\DoxyCodeLine{313 }
+\DoxyCodeLine{314 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{315 \textcolor{keyword}{inline} std::string \mbox{\hyperlink{pytypes_8h_acfbb415a2ed7294667d2b67ceec94df1}{error\_string}}();}
+\DoxyCodeLine{316 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{317 }
+\DoxyCodeLine{318 }
+\DoxyCodeLine{322 class \mbox{\hyperlink{classerror__already__set}{error\_already\_set}} : public \mbox{\hyperlink{namespacestd}{std}}::runtime\_error \{}
+\DoxyCodeLine{323 \textcolor{keyword}{public}:}
+\DoxyCodeLine{326     \mbox{\hyperlink{classerror__already__set_a9f6456fb9f03460d943682037132e819}{error\_already\_set}}() : \mbox{\hyperlink{namespacestd}{std}}::runtime\_error(detail::\mbox{\hyperlink{pytypes_8h_acfbb415a2ed7294667d2b67ceec94df1}{error\_string}}()) \{}
+\DoxyCodeLine{327         PyErr\_Fetch(\&m\_type.ptr(), \&m\_value.ptr(), \&m\_trace.ptr());}
+\DoxyCodeLine{328     \}}
+\DoxyCodeLine{329 }
+\DoxyCodeLine{330     \mbox{\hyperlink{classerror__already__set_a8bea74f30b56b414ee2629009cb252f4}{error\_already\_set}}(\textcolor{keyword}{const} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}} \&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{331     \mbox{\hyperlink{classerror__already__set_a77db6b6c5770db3ec72f6e522375084a}{error\_already\_set}}(\mbox{\hyperlink{classerror__already__set}{error\_already\_set}} \&\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{332 }
+\DoxyCodeLine{333     \textcolor{keyword}{inline} \mbox{\hyperlink{classerror__already__set}{\string~error\_already\_set}}();}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{338     \textcolor{keywordtype}{void} \mbox{\hyperlink{classerror__already__set_a751b231e5c796447d867cf30007a7fc0}{restore}}() \{ PyErr\_Restore(m\_type.release().ptr(), m\_value.release().ptr(), m\_trace.release().ptr()); \}}
+\DoxyCodeLine{339 }
+\DoxyCodeLine{340     \textcolor{comment}{// Does nothing; provided for backwards compatibility.}}
+\DoxyCodeLine{341     \mbox{\hyperlink{detail_2common_8h_ae4ba3bb24593b13133ae78407f466353}{PYBIND11\_DEPRECATED}}(\textcolor{stringliteral}{"{}Use of error\_already\_set.clear() is deprecated"{}})}
+\DoxyCodeLine{342     void clear() \{\}}
+\DoxyCodeLine{343 }
+\DoxyCodeLine{347     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classerror__already__set_a6585d62b1153c401745df155a7c87f6f}{matches}}(\mbox{\hyperlink{classhandle}{handle}} exc)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} PyErr\_GivenExceptionMatches(m\_type.ptr(), exc.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()); \}}
+\DoxyCodeLine{348 }
+\DoxyCodeLine{349     \textcolor{keyword}{const} \textcolor{keywordtype}{object}\& \mbox{\hyperlink{classerror__already__set_a837ac3c84def45be3a018e796e7c8b28}{type}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} m\_type; \}}
+\DoxyCodeLine{350     \textcolor{keyword}{const} \textcolor{keywordtype}{object}\& \mbox{\hyperlink{classerror__already__set_a8338c35feee04b20a745ac7123e2dc81}{value}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} m\_value; \}}
+\DoxyCodeLine{351     \textcolor{keyword}{const} \textcolor{keywordtype}{object}\& \mbox{\hyperlink{classerror__already__set_a7df5afe2a73db865aa754f7affe751ff}{trace}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} m\_trace; \}}
+\DoxyCodeLine{352 }
+\DoxyCodeLine{353 \textcolor{keyword}{private}:}
+\DoxyCodeLine{354     \textcolor{keywordtype}{object} m\_type, m\_value, \mbox{\hyperlink{classerror__already__set_a0289c345099b55760dd13f076dbd9368}{m\_trace}};}
+\DoxyCodeLine{355 \};}
+\DoxyCodeLine{356 }
+\DoxyCodeLine{367 template <typename T, detail::enable\_if\_t<std::is\_base\_of<object, T>::value, \textcolor{keywordtype}{int}> = 0>}
+\DoxyCodeLine{368 \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__python__builtins_gade020f155a1f133cc9e245bac2981280}{isinstance}}(\mbox{\hyperlink{classhandle}{handle}} obj) \{ \textcolor{keywordflow}{return} T::check\_(obj); \}}
+\DoxyCodeLine{369 }
+\DoxyCodeLine{370 template <typename T, detail::enable\_if\_t<!std::is\_base\_of<object, T>::value, \textcolor{keywordtype}{int}> = 0>}
+\DoxyCodeLine{371 \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__python__builtins_gade020f155a1f133cc9e245bac2981280}{isinstance}}(\mbox{\hyperlink{classhandle}{handle}} obj) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{pytypes_8h_a33bd8d89760e4e554eb535f3fbdb8412}{detail::isinstance\_generic}}(obj, \textcolor{keyword}{typeid}(T)); \}}
+\DoxyCodeLine{372 }
+\DoxyCodeLine{373 \textcolor{keyword}{template} <> \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{pytypes_8h_a29c3c1664b4f1d66504f2f604dc4da57}{isinstance<handle>}}(\mbox{\hyperlink{classhandle}{handle}} obj) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{374 \textcolor{keyword}{template} <> \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{pytypes_8h_ae6cd2e184e596914efdda964848cf174}{isinstance<object>}}(\mbox{\hyperlink{classhandle}{handle}} obj) \{ \textcolor{keywordflow}{return} obj.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}() != \textcolor{keyword}{nullptr}; \}}
+\DoxyCodeLine{375 }
+\DoxyCodeLine{378 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__python__builtins_gade020f155a1f133cc9e245bac2981280}{isinstance}}(\mbox{\hyperlink{classhandle}{handle}} obj, \mbox{\hyperlink{classhandle}{handle}} type) \{}
+\DoxyCodeLine{379     \textcolor{keyword}{const} \textcolor{keyword}{auto} result = PyObject\_IsInstance(obj.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), type.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}());}
+\DoxyCodeLine{380     \textcolor{keywordflow}{if} (result == -\/1)}
+\DoxyCodeLine{381         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}();}
+\DoxyCodeLine{382     \textcolor{keywordflow}{return} result != 0;}
+\DoxyCodeLine{383 \}}
+\DoxyCodeLine{384 }
+\DoxyCodeLine{387 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__python__builtins_gacc0a69f008d341c07ff939e0580c5985}{hasattr}}(\mbox{\hyperlink{classhandle}{handle}} obj, \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structname}{name}}) \{}
+\DoxyCodeLine{388     \textcolor{keywordflow}{return} PyObject\_HasAttr(obj.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), \mbox{\hyperlink{structname}{name}}.ptr()) == 1;}
+\DoxyCodeLine{389 \}}
+\DoxyCodeLine{390 }
+\DoxyCodeLine{391 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{group__python__builtins_gacc0a69f008d341c07ff939e0580c5985}{hasattr}}(\mbox{\hyperlink{classhandle}{handle}} obj, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{structname}{name}}) \{}
+\DoxyCodeLine{392     \textcolor{keywordflow}{return} PyObject\_HasAttrString(obj.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), \mbox{\hyperlink{structname}{name}}) == 1;}
+\DoxyCodeLine{393 \}}
+\DoxyCodeLine{394 }
+\DoxyCodeLine{395 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__python__builtins_ga74473a4403c91a8862e2b384245cb628}{delattr}}(\mbox{\hyperlink{classhandle}{handle}} obj, \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structname}{name}}) \{}
+\DoxyCodeLine{396     \textcolor{keywordflow}{if} (PyObject\_DelAttr(obj.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), \mbox{\hyperlink{structname}{name}}.ptr()) != 0) \{ \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}(); \}}
+\DoxyCodeLine{397 \}}
+\DoxyCodeLine{398 }
+\DoxyCodeLine{399 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__python__builtins_ga74473a4403c91a8862e2b384245cb628}{delattr}}(\mbox{\hyperlink{classhandle}{handle}} obj, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{structname}{name}}) \{}
+\DoxyCodeLine{400     \textcolor{keywordflow}{if} (PyObject\_DelAttrString(obj.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), \mbox{\hyperlink{structname}{name}}) != 0) \{ \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}(); \}}
+\DoxyCodeLine{401 \}}
+\DoxyCodeLine{402 }
+\DoxyCodeLine{403 \textcolor{keyword}{inline} \textcolor{keywordtype}{object} \mbox{\hyperlink{group__python__builtins_ga6343b45dbc05aa5698562c291766743a}{getattr}}(\mbox{\hyperlink{classhandle}{handle}} obj, \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structname}{name}}) \{}
+\DoxyCodeLine{404     PyObject *result = PyObject\_GetAttr(obj.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), \mbox{\hyperlink{structname}{name}}.ptr());}
+\DoxyCodeLine{405     \textcolor{keywordflow}{if} (!result) \{ \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}(); \}}
+\DoxyCodeLine{406     \textcolor{keywordflow}{return} reinterpret\_steal<object>(result);}
+\DoxyCodeLine{407 \}}
+\DoxyCodeLine{408 }
+\DoxyCodeLine{409 \textcolor{keyword}{inline} \textcolor{keywordtype}{object} \mbox{\hyperlink{group__python__builtins_ga6343b45dbc05aa5698562c291766743a}{getattr}}(\mbox{\hyperlink{classhandle}{handle}} obj, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{structname}{name}}) \{}
+\DoxyCodeLine{410     PyObject *result = PyObject\_GetAttrString(obj.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), \mbox{\hyperlink{structname}{name}});}
+\DoxyCodeLine{411     \textcolor{keywordflow}{if} (!result) \{ \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}(); \}}
+\DoxyCodeLine{412     \textcolor{keywordflow}{return} reinterpret\_steal<object>(result);}
+\DoxyCodeLine{413 \}}
+\DoxyCodeLine{414 }
+\DoxyCodeLine{415 \textcolor{keyword}{inline} \textcolor{keywordtype}{object} \mbox{\hyperlink{group__python__builtins_ga6343b45dbc05aa5698562c291766743a}{getattr}}(\mbox{\hyperlink{classhandle}{handle}} obj, \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structname}{name}}, \mbox{\hyperlink{classhandle}{handle}} default\_) \{}
+\DoxyCodeLine{416     \textcolor{keywordflow}{if} (PyObject *result = PyObject\_GetAttr(obj.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), \mbox{\hyperlink{structname}{name}}.ptr())) \{}
+\DoxyCodeLine{417         \textcolor{keywordflow}{return} reinterpret\_steal<object>(result);}
+\DoxyCodeLine{418     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{419         PyErr\_Clear();}
+\DoxyCodeLine{420         \textcolor{keywordflow}{return} reinterpret\_borrow<object>(default\_);}
+\DoxyCodeLine{421     \}}
+\DoxyCodeLine{422 \}}
+\DoxyCodeLine{423 }
+\DoxyCodeLine{424 \textcolor{keyword}{inline} \textcolor{keywordtype}{object} \mbox{\hyperlink{group__python__builtins_ga6343b45dbc05aa5698562c291766743a}{getattr}}(\mbox{\hyperlink{classhandle}{handle}} obj, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{structname}{name}}, \mbox{\hyperlink{classhandle}{handle}} default\_) \{}
+\DoxyCodeLine{425     \textcolor{keywordflow}{if} (PyObject *result = PyObject\_GetAttrString(obj.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), \mbox{\hyperlink{structname}{name}})) \{}
+\DoxyCodeLine{426         \textcolor{keywordflow}{return} reinterpret\_steal<object>(result);}
+\DoxyCodeLine{427     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{428         PyErr\_Clear();}
+\DoxyCodeLine{429         \textcolor{keywordflow}{return} reinterpret\_borrow<object>(default\_);}
+\DoxyCodeLine{430     \}}
+\DoxyCodeLine{431 \}}
+\DoxyCodeLine{432 }
+\DoxyCodeLine{433 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__python__builtins_ga786700afa0e3e4bd67530355c4c5dec9}{setattr}}(\mbox{\hyperlink{classhandle}{handle}} obj, \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structname}{name}}, \mbox{\hyperlink{classhandle}{handle}} value) \{}
+\DoxyCodeLine{434     \textcolor{keywordflow}{if} (PyObject\_SetAttr(obj.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), \mbox{\hyperlink{structname}{name}}.ptr(), value.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()) != 0) \{ \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}(); \}}
+\DoxyCodeLine{435 \}}
+\DoxyCodeLine{436 }
+\DoxyCodeLine{437 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{group__python__builtins_ga786700afa0e3e4bd67530355c4c5dec9}{setattr}}(\mbox{\hyperlink{classhandle}{handle}} obj, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{structname}{name}}, \mbox{\hyperlink{classhandle}{handle}} value) \{}
+\DoxyCodeLine{438     \textcolor{keywordflow}{if} (PyObject\_SetAttrString(obj.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), \mbox{\hyperlink{structname}{name}}, value.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()) != 0) \{ \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}(); \}}
+\DoxyCodeLine{439 \}}
+\DoxyCodeLine{440 }
+\DoxyCodeLine{441 \textcolor{keyword}{inline} \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} \mbox{\hyperlink{group__python__builtins_ga117a7eab72791313448c40a2f25f3582}{hash}}(\mbox{\hyperlink{classhandle}{handle}} obj) \{}
+\DoxyCodeLine{442     \textcolor{keyword}{auto} h = PyObject\_Hash(obj.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}());}
+\DoxyCodeLine{443     \textcolor{keywordflow}{if} (h == -\/1) \{ \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}(); \}}
+\DoxyCodeLine{444     \textcolor{keywordflow}{return} h;}
+\DoxyCodeLine{445 \}}
+\DoxyCodeLine{446 }
+\DoxyCodeLine{448 }
+\DoxyCodeLine{449 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{450 inline \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{pytypes_8h_a1e02a729a8736412f4c310004d34c105}{get\_function}}(\mbox{\hyperlink{classhandle}{handle}} value) \{}
+\DoxyCodeLine{451     \textcolor{keywordflow}{if} (value) \{}
+\DoxyCodeLine{452 \textcolor{preprocessor}{\#if PY\_MAJOR\_VERSION >= 3}}
+\DoxyCodeLine{453         \textcolor{keywordflow}{if} (PyInstanceMethod\_Check(value.ptr()))}
+\DoxyCodeLine{454             value = PyInstanceMethod\_GET\_FUNCTION(value.ptr());}
+\DoxyCodeLine{455         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{456 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{457         \textcolor{keywordflow}{if} (PyMethod\_Check(value.ptr()))}
+\DoxyCodeLine{458             value = PyMethod\_GET\_FUNCTION(value.ptr());}
+\DoxyCodeLine{459     \}}
+\DoxyCodeLine{460     \textcolor{keywordflow}{return} value;}
+\DoxyCodeLine{461 \}}
+\DoxyCodeLine{462 }
+\DoxyCodeLine{463 \textcolor{comment}{// Helper aliases/functions to support implicit casting of values given to python accessors/methods.}}
+\DoxyCodeLine{464 \textcolor{comment}{// When given a pyobject, this simply returns the pyobject as-\/is; for other C++ type, the value goes}}
+\DoxyCodeLine{465 \textcolor{comment}{// through pybind11::cast(obj) to convert it to an `object`.}}
+\DoxyCodeLine{466 template <typename T, enable\_if\_t<is\_pyobject<T>::value, \textcolor{keywordtype}{int}> = 0>}
+\DoxyCodeLine{467 \textcolor{keyword}{auto} \mbox{\hyperlink{pytypes_8h_ad7e58c002de44fd35202129e47a93bd8}{object\_or\_cast}}(T \&\&o) -\/> \textcolor{keyword}{decltype}(std::forward<T>(o)) \{ \textcolor{keywordflow}{return} std::forward<T>(o); \}}
+\DoxyCodeLine{468 \textcolor{comment}{// The following casting version is implemented in cast.h:}}
+\DoxyCodeLine{469 template <typename T, enable\_if\_t<!is\_pyobject<T>::value, \textcolor{keywordtype}{int}> = 0>}
+\DoxyCodeLine{470 \textcolor{keywordtype}{object} \mbox{\hyperlink{pytypes_8h_ad7e58c002de44fd35202129e47a93bd8}{object\_or\_cast}}(T \&\&o);}
+\DoxyCodeLine{471 \textcolor{comment}{// Match a PyObject*, which we want to convert directly to handle via its converting constructor}}
+\DoxyCodeLine{472 \textcolor{keyword}{inline} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{pytypes_8h_ad7e58c002de44fd35202129e47a93bd8}{object\_or\_cast}}(PyObject *ptr) \{ \textcolor{keywordflow}{return} ptr; \}}
+\DoxyCodeLine{473 }
+\DoxyCodeLine{474 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Policy>}
+\DoxyCodeLine{475 \textcolor{keyword}{class }\mbox{\hyperlink{classaccessor}{accessor}} : \textcolor{keyword}{public} \mbox{\hyperlink{classobject__api}{object\_api}}<accessor<Policy>> \{}
+\DoxyCodeLine{476     \textcolor{keyword}{using} \mbox{\hyperlink{classaccessor_a5a3f66d77af88764344832e509ca3ace}{key\_type}} = \textcolor{keyword}{typename} Policy::key\_type;}
+\DoxyCodeLine{477 }
+\DoxyCodeLine{478 \textcolor{keyword}{public}:}
+\DoxyCodeLine{479     \mbox{\hyperlink{classaccessor_a7545c456f71e9d6265ed0ce54a104be1}{accessor}}(\mbox{\hyperlink{classhandle}{handle}} obj, \mbox{\hyperlink{classaccessor_a5a3f66d77af88764344832e509ca3ace}{key\_type}} \mbox{\hyperlink{classaccessor_ac599d310f957d08a51d4cfc03fdef059}{key}}) : obj(obj), \mbox{\hyperlink{classaccessor_ac599d310f957d08a51d4cfc03fdef059}{key}}(\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a3734a903022249b3010be1897042568e}{move}}(\mbox{\hyperlink{classaccessor_ac599d310f957d08a51d4cfc03fdef059}{key}})) \{ \}}
+\DoxyCodeLine{480     \mbox{\hyperlink{classaccessor_aca9ebf02da5b9869397d12fbda0e8854}{accessor}}(\textcolor{keyword}{const} \mbox{\hyperlink{classaccessor}{accessor}} \&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{481     \mbox{\hyperlink{classaccessor_a60c29e25d1efacef831283af158fd16b}{accessor}}(\mbox{\hyperlink{classaccessor}{accessor}} \&\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{482 }
+\DoxyCodeLine{483     \textcolor{comment}{// accessor overload required to override default assignment operator (templates are not allowed}}
+\DoxyCodeLine{484     \textcolor{comment}{// to replace default compiler-\/generated assignments).}}
+\DoxyCodeLine{485     \textcolor{keywordtype}{void} \mbox{\hyperlink{classaccessor_a3d1b6cebd43e008d426f69e2440940a3}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{classaccessor}{accessor}} \&a) \&\& \{ std::move(*this).operator=(\mbox{\hyperlink{classhandle}{handle}}(a)); \}}
+\DoxyCodeLine{486     \textcolor{keywordtype}{void} \mbox{\hyperlink{classaccessor_a69d00cfba942eeeda666733bf8b3e420}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{classaccessor}{accessor}} \&a) \& \{ \mbox{\hyperlink{classaccessor_a69d00cfba942eeeda666733bf8b3e420}{operator=}}(\mbox{\hyperlink{classhandle}{handle}}(a)); \}}
+\DoxyCodeLine{487 }
+\DoxyCodeLine{488     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keywordtype}{void} \mbox{\hyperlink{classaccessor_a41751202ddf456a8e1a2829867073ea0}{operator=}}(T \&\&value) \&\& \{}
+\DoxyCodeLine{489         Policy::set(obj, \mbox{\hyperlink{classaccessor_ac599d310f957d08a51d4cfc03fdef059}{key}}, \mbox{\hyperlink{pytypes_8h_ad7e58c002de44fd35202129e47a93bd8}{object\_or\_cast}}(std::forward<T>(value)));}
+\DoxyCodeLine{490     \}}
+\DoxyCodeLine{491     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keywordtype}{void} \mbox{\hyperlink{classaccessor_ac05d86a5bc5fcd789dca880f7fe961a1}{operator=}}(T \&\&value) \& \{}
+\DoxyCodeLine{492         get\_cache() = reinterpret\_borrow<object>(\mbox{\hyperlink{pytypes_8h_ad7e58c002de44fd35202129e47a93bd8}{object\_or\_cast}}(std::forward<T>(value)));}
+\DoxyCodeLine{493     \}}
+\DoxyCodeLine{494 }
+\DoxyCodeLine{495     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T = Policy>}
+\DoxyCodeLine{496     \mbox{\hyperlink{classobject__api_a805215f1a7d50f7fb6a6ffb723707c73}{PYBIND11\_DEPRECATED}}(\textcolor{stringliteral}{"{}Use of obj.attr(...) as bool is deprecated in favor of pybind11::hasattr(obj, ...)"{}})}
+\DoxyCodeLine{497     explicit operator \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<\mbox{\hyperlink{namespacestd}{std}}::is\_same<T, \mbox{\hyperlink{namespaceaccessor__policies}{accessor\_policies}}::\mbox{\hyperlink{structstr__attr}{str\_attr}}>::value ||}
+\DoxyCodeLine{498             \mbox{\hyperlink{namespacestd}{std}}::is\_same<T, \mbox{\hyperlink{namespaceaccessor__policies}{accessor\_policies}}::\mbox{\hyperlink{structobj__attr}{obj\_attr}}>::value, \textcolor{keywordtype}{bool}>()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{499         \textcolor{keywordflow}{return} \mbox{\hyperlink{group__python__builtins_gacc0a69f008d341c07ff939e0580c5985}{hasattr}}(obj, \mbox{\hyperlink{classaccessor_ac599d310f957d08a51d4cfc03fdef059}{key}});}
+\DoxyCodeLine{500     \}}
+\DoxyCodeLine{501     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T = Policy>}
+\DoxyCodeLine{502     \mbox{\hyperlink{classobject__api_a805215f1a7d50f7fb6a6ffb723707c73}{PYBIND11\_DEPRECATED}}(\textcolor{stringliteral}{"{}Use of obj[key] as bool is deprecated in favor of obj.contains(key)"{}})}
+\DoxyCodeLine{503     explicit operator \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<\mbox{\hyperlink{namespacestd}{std}}::is\_same<T, \mbox{\hyperlink{namespaceaccessor__policies}{accessor\_policies}}::\mbox{\hyperlink{structgeneric__item}{generic\_item}}>::value, \textcolor{keywordtype}{bool}>()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{504         \textcolor{keywordflow}{return} obj.contains(\mbox{\hyperlink{classaccessor_ac599d310f957d08a51d4cfc03fdef059}{key}});}
+\DoxyCodeLine{505     \}}
+\DoxyCodeLine{506 }
+\DoxyCodeLine{507     \textcolor{keyword}{operator} \mbox{\hyperlink{classobject}{object}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} get\_cache(); \}}
+\DoxyCodeLine{508     PyObject *ptr()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} get\_cache().ptr(); \}}
+\DoxyCodeLine{509     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> T \mbox{\hyperlink{cast_8h_a42ebc557ef15690c3171a99f46d59aab}{cast}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} get\_cache().template cast<T>(); \}}
+\DoxyCodeLine{510 }
+\DoxyCodeLine{511 \textcolor{keyword}{private}:}
+\DoxyCodeLine{512     \textcolor{keywordtype}{object} \&get\_cache()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{513         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classaccessor_a438d2ca6be1c59c62f7323c5ba330bb3}{cache}}) \{ \mbox{\hyperlink{classaccessor_a438d2ca6be1c59c62f7323c5ba330bb3}{cache}} = Policy::get(obj, \mbox{\hyperlink{classaccessor_ac599d310f957d08a51d4cfc03fdef059}{key}}); \}}
+\DoxyCodeLine{514         \textcolor{keywordflow}{return} \mbox{\hyperlink{classaccessor_a438d2ca6be1c59c62f7323c5ba330bb3}{cache}};}
+\DoxyCodeLine{515     \}}
+\DoxyCodeLine{516 }
+\DoxyCodeLine{517 \textcolor{keyword}{private}:}
+\DoxyCodeLine{518     \mbox{\hyperlink{classhandle}{handle}} obj;}
+\DoxyCodeLine{519     \mbox{\hyperlink{classaccessor_a5a3f66d77af88764344832e509ca3ace}{key\_type}} \mbox{\hyperlink{classaccessor_ac599d310f957d08a51d4cfc03fdef059}{key}};}
+\DoxyCodeLine{520     \textcolor{keyword}{mutable} \textcolor{keywordtype}{object} \mbox{\hyperlink{classaccessor_a438d2ca6be1c59c62f7323c5ba330bb3}{cache}};}
+\DoxyCodeLine{521 \};}
+\DoxyCodeLine{522 }
+\DoxyCodeLine{523 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(\mbox{\hyperlink{namespaceaccessor__policies}{accessor\_policies}})}
+\DoxyCodeLine{524 struct \mbox{\hyperlink{structobj__attr}{obj\_attr}} \{}
+\DoxyCodeLine{525     \textcolor{keyword}{using} \mbox{\hyperlink{classobject}{key\_type}} = \mbox{\hyperlink{classobject}{object}};}
+\DoxyCodeLine{526     \textcolor{keyword}{static} \textcolor{keywordtype}{object} \mbox{\hyperlink{structobj__attr_a3b7c2c8831bed4aa4c058e2252b8c12f}{get}}(\mbox{\hyperlink{classhandle}{handle}} obj, \mbox{\hyperlink{classhandle}{handle}} key) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{group__python__builtins_ga6343b45dbc05aa5698562c291766743a}{getattr}}(obj, key); \}}
+\DoxyCodeLine{527     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{structobj__attr_a16b65196c72f9a16bc85232aa3383b3b}{set}}(\mbox{\hyperlink{classhandle}{handle}} obj, \mbox{\hyperlink{classhandle}{handle}} key, \mbox{\hyperlink{classhandle}{handle}} val) \{ \mbox{\hyperlink{group__python__builtins_ga786700afa0e3e4bd67530355c4c5dec9}{setattr}}(obj, key, val); \}}
+\DoxyCodeLine{528 \};}
+\DoxyCodeLine{529 }
+\DoxyCodeLine{530 \textcolor{keyword}{struct }\mbox{\hyperlink{structstr__attr}{str\_attr}} \{}
+\DoxyCodeLine{531     \textcolor{keyword}{using} \mbox{\hyperlink{structstr__attr_ac6715dfd0dc3e39e4ee71f2eed8939b7}{key\_type}} = \textcolor{keyword}{const} \textcolor{keywordtype}{char} *;}
+\DoxyCodeLine{532     \textcolor{keyword}{static} \textcolor{keywordtype}{object} \mbox{\hyperlink{structstr__attr_aba6a5f0515f28d5f3ff827559ac3446b}{get}}(\mbox{\hyperlink{classhandle}{handle}} obj, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *key) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{group__python__builtins_ga6343b45dbc05aa5698562c291766743a}{getattr}}(obj, key); \}}
+\DoxyCodeLine{533     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{structstr__attr_a547cb1910803f5a385d742f0a7dc7b78}{set}}(\mbox{\hyperlink{classhandle}{handle}} obj, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *key, \mbox{\hyperlink{classhandle}{handle}} val) \{ \mbox{\hyperlink{group__python__builtins_ga786700afa0e3e4bd67530355c4c5dec9}{setattr}}(obj, key, val); \}}
+\DoxyCodeLine{534 \};}
+\DoxyCodeLine{535 }
+\DoxyCodeLine{536 \textcolor{keyword}{struct }\mbox{\hyperlink{structgeneric__item}{generic\_item}} \{}
+\DoxyCodeLine{537     \textcolor{keyword}{using} \mbox{\hyperlink{classobject}{key\_type}} = \mbox{\hyperlink{classobject}{object}};}
+\DoxyCodeLine{538 }
+\DoxyCodeLine{539     \textcolor{keyword}{static} \textcolor{keywordtype}{object} \mbox{\hyperlink{structgeneric__item_a5891008ff5364e7f6d8d8caab9c94d48}{get}}(\mbox{\hyperlink{classhandle}{handle}} obj, \mbox{\hyperlink{classhandle}{handle}} key) \{}
+\DoxyCodeLine{540         PyObject *result = PyObject\_GetItem(obj.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), key.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}());}
+\DoxyCodeLine{541         \textcolor{keywordflow}{if} (!result) \{ \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}(); \}}
+\DoxyCodeLine{542         \textcolor{keywordflow}{return} reinterpret\_steal<object>(result);}
+\DoxyCodeLine{543     \}}
+\DoxyCodeLine{544 }
+\DoxyCodeLine{545     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{structgeneric__item_a83223e508d3929a33c1c304bc60b6374}{set}}(\mbox{\hyperlink{classhandle}{handle}} obj, \mbox{\hyperlink{classhandle}{handle}} key, \mbox{\hyperlink{classhandle}{handle}} val) \{}
+\DoxyCodeLine{546         \textcolor{keywordflow}{if} (PyObject\_SetItem(obj.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), key.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), val.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()) != 0) \{ \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}(); \}}
+\DoxyCodeLine{547     \}}
+\DoxyCodeLine{548 \};}
+\DoxyCodeLine{549 }
+\DoxyCodeLine{550 \textcolor{keyword}{struct }\mbox{\hyperlink{structsequence__item}{sequence\_item}} \{}
+\DoxyCodeLine{551     \textcolor{keyword}{using} \mbox{\hyperlink{structsequence__item_a87cb414345251dca7dc372dfac88bdc4}{key\_type}} = \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\_t}};}
+\DoxyCodeLine{552 }
+\DoxyCodeLine{553     \textcolor{keyword}{static} \textcolor{keywordtype}{object} \mbox{\hyperlink{structsequence__item_a1fe9bd4ca1289023d16bdd9184158d2f}{get}}(\mbox{\hyperlink{classhandle}{handle}} obj, \textcolor{keywordtype}{size\_t} index) \{}
+\DoxyCodeLine{554         PyObject *result = PySequence\_GetItem(obj.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}\textcolor{keyword}{>}(index));}
+\DoxyCodeLine{555         \textcolor{keywordflow}{if} (!result) \{ \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}(); \}}
+\DoxyCodeLine{556         \textcolor{keywordflow}{return} reinterpret\_steal<object>(result);}
+\DoxyCodeLine{557     \}}
+\DoxyCodeLine{558 }
+\DoxyCodeLine{559     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{structsequence__item_aee77098b776b17d7d237d5eb750bf735}{set}}(\mbox{\hyperlink{classhandle}{handle}} obj, \textcolor{keywordtype}{size\_t} index, \mbox{\hyperlink{classhandle}{handle}} val) \{}
+\DoxyCodeLine{560         \textcolor{comment}{// PySequence\_SetItem does not steal a reference to 'val'}}
+\DoxyCodeLine{561         \textcolor{keywordflow}{if} (PySequence\_SetItem(obj.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}\textcolor{keyword}{>}(index), val.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()) != 0) \{}
+\DoxyCodeLine{562             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}();}
+\DoxyCodeLine{563         \}}
+\DoxyCodeLine{564     \}}
+\DoxyCodeLine{565 \};}
+\DoxyCodeLine{566 }
+\DoxyCodeLine{567 \textcolor{keyword}{struct }\mbox{\hyperlink{structlist__item}{list\_item}} \{}
+\DoxyCodeLine{568     \textcolor{keyword}{using} \mbox{\hyperlink{structlist__item_a8161f969e54abc8caaa5115ae8fdd535}{key\_type}} = \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\_t}};}
+\DoxyCodeLine{569 }
+\DoxyCodeLine{570     \textcolor{keyword}{static} \textcolor{keywordtype}{object} \mbox{\hyperlink{structlist__item_a49b34355f8d246e5e26c14b840b74cfa}{get}}(\mbox{\hyperlink{classhandle}{handle}} obj, \textcolor{keywordtype}{size\_t} index) \{}
+\DoxyCodeLine{571         PyObject *result = PyList\_GetItem(obj.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}\textcolor{keyword}{>}(index));}
+\DoxyCodeLine{572         \textcolor{keywordflow}{if} (!result) \{ \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}(); \}}
+\DoxyCodeLine{573         \textcolor{keywordflow}{return} reinterpret\_borrow<object>(result);}
+\DoxyCodeLine{574     \}}
+\DoxyCodeLine{575 }
+\DoxyCodeLine{576     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{structlist__item_a26f4e8eff2de092ab9d64b847790b7dd}{set}}(\mbox{\hyperlink{classhandle}{handle}} obj, \textcolor{keywordtype}{size\_t} index, \mbox{\hyperlink{classhandle}{handle}} val) \{}
+\DoxyCodeLine{577         \textcolor{comment}{// PyList\_SetItem steals a reference to 'val'}}
+\DoxyCodeLine{578         \textcolor{keywordflow}{if} (PyList\_SetItem(obj.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}\textcolor{keyword}{>}(index), val.\mbox{\hyperlink{classhandle_a1a13c72238d8df4d42c1656e446fbfcb}{inc\_ref}}().\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()) != 0) \{}
+\DoxyCodeLine{579             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}();}
+\DoxyCodeLine{580         \}}
+\DoxyCodeLine{581     \}}
+\DoxyCodeLine{582 \};}
+\DoxyCodeLine{583 }
+\DoxyCodeLine{584 \textcolor{keyword}{struct }\mbox{\hyperlink{structtuple__item}{tuple\_item}} \{}
+\DoxyCodeLine{585     \textcolor{keyword}{using} \mbox{\hyperlink{structtuple__item_ac6a1e89372fbb8f9f84cf99a012a02ed}{key\_type}} = \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\_t}};}
+\DoxyCodeLine{586 }
+\DoxyCodeLine{587     \textcolor{keyword}{static} \textcolor{keywordtype}{object} \mbox{\hyperlink{structtuple__item_af80c59a378316fae1a31338a953786f7}{get}}(\mbox{\hyperlink{classhandle}{handle}} obj, \textcolor{keywordtype}{size\_t} index) \{}
+\DoxyCodeLine{588         PyObject *result = PyTuple\_GetItem(obj.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}\textcolor{keyword}{>}(index));}
+\DoxyCodeLine{589         \textcolor{keywordflow}{if} (!result) \{ \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}(); \}}
+\DoxyCodeLine{590         \textcolor{keywordflow}{return} reinterpret\_borrow<object>(result);}
+\DoxyCodeLine{591     \}}
+\DoxyCodeLine{592 }
+\DoxyCodeLine{593     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{structtuple__item_aeecd66f2a8b6a24b240e54e09d208006}{set}}(\mbox{\hyperlink{classhandle}{handle}} obj, \textcolor{keywordtype}{size\_t} index, \mbox{\hyperlink{classhandle}{handle}} val) \{}
+\DoxyCodeLine{594         \textcolor{comment}{// PyTuple\_SetItem steals a reference to 'val'}}
+\DoxyCodeLine{595         \textcolor{keywordflow}{if} (PyTuple\_SetItem(obj.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}\textcolor{keyword}{>}(index), val.\mbox{\hyperlink{classhandle_a1a13c72238d8df4d42c1656e446fbfcb}{inc\_ref}}().\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()) != 0) \{}
+\DoxyCodeLine{596             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}();}
+\DoxyCodeLine{597         \}}
+\DoxyCodeLine{598     \}}
+\DoxyCodeLine{599 \};}
+\DoxyCodeLine{600 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(\mbox{\hyperlink{namespaceaccessor__policies}{accessor\_policies}})}
+\DoxyCodeLine{601 }
+\DoxyCodeLine{602 }
+\DoxyCodeLine{603 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Policy>}
+\DoxyCodeLine{604 \textcolor{keyword}{class }\mbox{\hyperlink{classgeneric__iterator}{generic\_iterator}} : \textcolor{keyword}{public} Policy \{}
+\DoxyCodeLine{605     \textcolor{keyword}{using} \mbox{\hyperlink{classgeneric__iterator}{It}} = \mbox{\hyperlink{classgeneric__iterator_a38559672eba50c4e004eaf58aa45be41}{generic\_iterator}};}
+\DoxyCodeLine{606 }
+\DoxyCodeLine{607 \textcolor{keyword}{public}:}
+\DoxyCodeLine{608     \textcolor{keyword}{using} \mbox{\hyperlink{classgeneric__iterator_a307cd6eddc16127eb873d76bcfc07233}{difference\_type}} = \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}};}
+\DoxyCodeLine{609     \textcolor{keyword}{using} \mbox{\hyperlink{classgeneric__iterator_a49d278e5bd704d850843005e61b62883}{iterator\_category}} = \textcolor{keyword}{typename} Policy::iterator\_category;}
+\DoxyCodeLine{610     \textcolor{keyword}{using} \mbox{\hyperlink{classgeneric__iterator_ae0024f1a05a39cbf0a2bc6f07b4357e0}{value\_type}} = \textcolor{keyword}{typename} Policy::value\_type;}
+\DoxyCodeLine{611     \textcolor{keyword}{using} \mbox{\hyperlink{classgeneric__iterator_aed22b28672b10453f89e239e55277808}{reference}} = \textcolor{keyword}{typename} Policy::reference;}
+\DoxyCodeLine{612     \textcolor{keyword}{using} \mbox{\hyperlink{classgeneric__iterator_ab1e9fe365dec39e05180fb7e1c153f2e}{pointer}} = \textcolor{keyword}{typename} Policy::pointer;}
+\DoxyCodeLine{613 }
+\DoxyCodeLine{614     \mbox{\hyperlink{classgeneric__iterator_a38559672eba50c4e004eaf58aa45be41}{generic\_iterator}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{615     \mbox{\hyperlink{classgeneric__iterator_a68c753fced7ae65e4469cb2f6932b3a5}{generic\_iterator}}(\mbox{\hyperlink{classhandle}{handle}} seq, \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} index) : Policy(seq, index) \{ \}}
+\DoxyCodeLine{616 }
+\DoxyCodeLine{617     \mbox{\hyperlink{classgeneric__iterator_aed22b28672b10453f89e239e55277808}{reference}} \mbox{\hyperlink{classgeneric__iterator_ad352d13be04ed66335ecac5ac5c96608}{operator*}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} Policy::dereference(); \}}
+\DoxyCodeLine{618     \mbox{\hyperlink{classgeneric__iterator_aed22b28672b10453f89e239e55277808}{reference}} \mbox{\hyperlink{classgeneric__iterator_aa0918f810b09d39e43ab8df9f3661379}{operator[]}}(\mbox{\hyperlink{classgeneric__iterator_a307cd6eddc16127eb873d76bcfc07233}{difference\_type}} n)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} *(*\textcolor{keyword}{this} + n); \}}
+\DoxyCodeLine{619     \mbox{\hyperlink{classgeneric__iterator_ab1e9fe365dec39e05180fb7e1c153f2e}{pointer}} \mbox{\hyperlink{classgeneric__iterator_a9ea55fcb56d1658a69cb0eda30b8f6b5}{operator-\/>}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} **\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{620 }
+\DoxyCodeLine{621     \mbox{\hyperlink{classgeneric__iterator}{It}} \&\mbox{\hyperlink{classgeneric__iterator_af5273f92265e0556c542bae1fa589833}{operator++}}() \{ Policy::increment(); \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{622     \mbox{\hyperlink{classgeneric__iterator}{It}} \mbox{\hyperlink{classgeneric__iterator_aa1914566d242ab0db2be3e8e73e04ec2}{operator++}}(\textcolor{keywordtype}{int}) \{ \textcolor{keyword}{auto} \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a12cba3ee81cf4a793796a51b6327c678}{copy}} = *\textcolor{keyword}{this}; Policy::increment(); \textcolor{keywordflow}{return} \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a12cba3ee81cf4a793796a51b6327c678}{copy}}; \}}
+\DoxyCodeLine{623     \mbox{\hyperlink{classgeneric__iterator}{It}} \&\mbox{\hyperlink{classgeneric__iterator_a55ee6fdc732008c2282ce95f19b06c7d}{operator-\/-\/}}() \{ Policy::decrement(); \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{624     \mbox{\hyperlink{classgeneric__iterator}{It}} \mbox{\hyperlink{classgeneric__iterator_a85925b5b5a1eb238a8bf1214f5ca5742}{operator-\/-\/}}(\textcolor{keywordtype}{int}) \{ \textcolor{keyword}{auto} \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a12cba3ee81cf4a793796a51b6327c678}{copy}} = *\textcolor{keyword}{this}; Policy::decrement(); \textcolor{keywordflow}{return} \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a12cba3ee81cf4a793796a51b6327c678}{copy}}; \}}
+\DoxyCodeLine{625     \mbox{\hyperlink{classgeneric__iterator}{It}} \&\mbox{\hyperlink{classgeneric__iterator_a5296f6aa6b1d299f1aec0798b7bf8cb9}{operator+=}}(\mbox{\hyperlink{classgeneric__iterator_a307cd6eddc16127eb873d76bcfc07233}{difference\_type}} n) \{ Policy::advance(n); \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{626     \mbox{\hyperlink{classgeneric__iterator}{It}} \&\mbox{\hyperlink{classgeneric__iterator_a1f28501bcf6001fa3e4b91d361b0dde7}{operator-\/=}}(\mbox{\hyperlink{classgeneric__iterator_a307cd6eddc16127eb873d76bcfc07233}{difference\_type}} n) \{ Policy::advance(-\/n); \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{627 }
+\DoxyCodeLine{628     \textcolor{keyword}{friend} \mbox{\hyperlink{classgeneric__iterator}{It}} \mbox{\hyperlink{classgeneric__iterator_a33b5fcd097d1dcc87426b4f085094d30}{operator+}}(\textcolor{keyword}{const} \mbox{\hyperlink{classgeneric__iterator}{It}} \&a, \mbox{\hyperlink{classgeneric__iterator_a307cd6eddc16127eb873d76bcfc07233}{difference\_type}} n) \{ \textcolor{keyword}{auto} \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a12cba3ee81cf4a793796a51b6327c678}{copy}} = a; \textcolor{keywordflow}{return} \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a12cba3ee81cf4a793796a51b6327c678}{copy}} += n; \}}
+\DoxyCodeLine{629     \textcolor{keyword}{friend} \mbox{\hyperlink{classgeneric__iterator}{It}} \mbox{\hyperlink{classgeneric__iterator_a7f7c67731fffe592d503faa2ac6929e9}{operator+}}(\mbox{\hyperlink{classgeneric__iterator_a307cd6eddc16127eb873d76bcfc07233}{difference\_type}} n, \textcolor{keyword}{const} \mbox{\hyperlink{classgeneric__iterator}{It}} \&b) \{ \textcolor{keywordflow}{return} b + n; \}}
+\DoxyCodeLine{630     \textcolor{keyword}{friend} \mbox{\hyperlink{classgeneric__iterator}{It}} \mbox{\hyperlink{classgeneric__iterator_a040063b4d21cbdf70abffd52563067da}{operator-\/}}(\textcolor{keyword}{const} \mbox{\hyperlink{classgeneric__iterator}{It}} \&a, \mbox{\hyperlink{classgeneric__iterator_a307cd6eddc16127eb873d76bcfc07233}{difference\_type}} n) \{ \textcolor{keyword}{auto} \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a12cba3ee81cf4a793796a51b6327c678}{copy}} = a; \textcolor{keywordflow}{return} \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a12cba3ee81cf4a793796a51b6327c678}{copy}} -\/= n; \}}
+\DoxyCodeLine{631     \textcolor{keyword}{friend} \mbox{\hyperlink{classgeneric__iterator_a307cd6eddc16127eb873d76bcfc07233}{difference\_type}} \mbox{\hyperlink{classgeneric__iterator_a970506dfb104f24039493a495ff45a2e}{operator-\/}}(\textcolor{keyword}{const} \mbox{\hyperlink{classgeneric__iterator}{It}} \&a, \textcolor{keyword}{const} \mbox{\hyperlink{classgeneric__iterator}{It}} \&b) \{ \textcolor{keywordflow}{return} a.distance\_to(b); \}}
+\DoxyCodeLine{632 }
+\DoxyCodeLine{633     \textcolor{keyword}{friend} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classgeneric__iterator_a4c3a003f1490fd5ac1289f8b7c63565c}{operator==}}(\textcolor{keyword}{const} \mbox{\hyperlink{classgeneric__iterator}{It}} \&a, \textcolor{keyword}{const} \mbox{\hyperlink{classgeneric__iterator}{It}} \&b) \{ \textcolor{keywordflow}{return} a.equal(b); \}}
+\DoxyCodeLine{634     \textcolor{keyword}{friend} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classgeneric__iterator_a00afb6c7a0f23ae65ef61656fa48dbc3}{operator!=}}(\textcolor{keyword}{const} \mbox{\hyperlink{classgeneric__iterator}{It}} \&a, \textcolor{keyword}{const} \mbox{\hyperlink{classgeneric__iterator}{It}} \&b) \{ \textcolor{keywordflow}{return} !(a == b); \}}
+\DoxyCodeLine{635     \textcolor{keyword}{friend} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classgeneric__iterator_a1ba57b963ed90488609924525018c0ba}{operator< }}(\textcolor{keyword}{const} \mbox{\hyperlink{classgeneric__iterator}{It}} \&a, \textcolor{keyword}{const} \mbox{\hyperlink{classgeneric__iterator}{It}} \&b) \{ \textcolor{keywordflow}{return} b -\/ a > 0; \}}
+\DoxyCodeLine{636     \textcolor{keyword}{friend} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classgeneric__iterator_a86651101e3caeb262109b10e9393a6c6}{operator> }}(\textcolor{keyword}{const} \mbox{\hyperlink{classgeneric__iterator}{It}} \&a, \textcolor{keyword}{const} \mbox{\hyperlink{classgeneric__iterator}{It}} \&b) \{ \textcolor{keywordflow}{return} b < a; \}}
+\DoxyCodeLine{637     \textcolor{keyword}{friend} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classgeneric__iterator_a089329cd2b3273776dcdd13b8cd1e396}{operator>=}}(\textcolor{keyword}{const} \mbox{\hyperlink{classgeneric__iterator}{It}} \&a, \textcolor{keyword}{const} \mbox{\hyperlink{classgeneric__iterator}{It}} \&b) \{ \textcolor{keywordflow}{return} !(a < b); \}}
+\DoxyCodeLine{638     \textcolor{keyword}{friend} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classgeneric__iterator_a1fb0728d300b006b90032e11e3aafe76}{operator<=}}(\textcolor{keyword}{const} \mbox{\hyperlink{classgeneric__iterator}{It}} \&a, \textcolor{keyword}{const} \mbox{\hyperlink{classgeneric__iterator}{It}} \&b) \{ \textcolor{keywordflow}{return} !(a > b); \}}
+\DoxyCodeLine{639 \};}
+\DoxyCodeLine{640 }
+\DoxyCodeLine{641 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(iterator\_policies)}
+\DoxyCodeLine{643 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{644 \textcolor{keyword}{struct }\mbox{\hyperlink{structarrow__proxy}{arrow\_proxy}} \{}
+\DoxyCodeLine{645     T \mbox{\hyperlink{structarrow__proxy_a710c1d70612055324d70d539eadaaf9d}{value}};}
+\DoxyCodeLine{646 }
+\DoxyCodeLine{647     \mbox{\hyperlink{structarrow__proxy_a5af5df87f6fe57037be0c51da220395d}{arrow\_proxy}}(T \&\&\mbox{\hyperlink{structarrow__proxy_a710c1d70612055324d70d539eadaaf9d}{value}}) : \mbox{\hyperlink{structarrow__proxy_a710c1d70612055324d70d539eadaaf9d}{value}}(\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a3734a903022249b3010be1897042568e}{move}}(\mbox{\hyperlink{structarrow__proxy_a710c1d70612055324d70d539eadaaf9d}{value}})) \{ \}}
+\DoxyCodeLine{648     T *\mbox{\hyperlink{structarrow__proxy_a5e9376ecf6d9fd08b4522dea4745e69e}{operator-\/>}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \&\mbox{\hyperlink{structarrow__proxy_a710c1d70612055324d70d539eadaaf9d}{value}}; \}}
+\DoxyCodeLine{649 \};}
+\DoxyCodeLine{650 }
+\DoxyCodeLine{652 \textcolor{keyword}{class }\mbox{\hyperlink{classsequence__fast__readonly}{sequence\_fast\_readonly}} \{}
+\DoxyCodeLine{653 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{654     \textcolor{keyword}{using} \mbox{\hyperlink{classsequence__fast__readonly_ae4b169ed0c818d34dfe03e94880c822a}{iterator\_category}} = std::random\_access\_iterator\_tag;}
+\DoxyCodeLine{655     \textcolor{keyword}{using} \mbox{\hyperlink{classhandle}{value\_type}} = \mbox{\hyperlink{classhandle}{handle}};}
+\DoxyCodeLine{656     \textcolor{keyword}{using} \mbox{\hyperlink{classhandle}{reference}} = \textcolor{keyword}{const} \mbox{\hyperlink{classhandle}{handle}};}
+\DoxyCodeLine{657     \textcolor{keyword}{using} \mbox{\hyperlink{structarrow__proxy}{pointer}} = \mbox{\hyperlink{structarrow__proxy}{arrow\_proxy<const handle>}};}
+\DoxyCodeLine{658 }
+\DoxyCodeLine{659     \mbox{\hyperlink{classsequence__fast__readonly_aadd473034fbf872253a773156515da81}{sequence\_fast\_readonly}}(\mbox{\hyperlink{classhandle}{handle}} obj, \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} n) : \mbox{\hyperlink{classsequence__fast__readonly_a3abaae05b86767b75a50db2314e84463}{ptr}}(PySequence\_Fast\_ITEMS(obj.\mbox{\hyperlink{classsequence__fast__readonly_a3abaae05b86767b75a50db2314e84463}{ptr}}()) + n) \{ \}}
+\DoxyCodeLine{660 }
+\DoxyCodeLine{661     \mbox{\hyperlink{classhandle}{reference}} \mbox{\hyperlink{classsequence__fast__readonly_a66ee58d3a059273dffe9dc0cf76a9550}{dereference}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} *\mbox{\hyperlink{classsequence__fast__readonly_a3abaae05b86767b75a50db2314e84463}{ptr}}; \}}
+\DoxyCodeLine{662     \textcolor{keywordtype}{void} \mbox{\hyperlink{classsequence__fast__readonly_a36b3faf2c60a135e8245d7bf8d922000}{increment}}() \{ ++\mbox{\hyperlink{classsequence__fast__readonly_a3abaae05b86767b75a50db2314e84463}{ptr}}; \}}
+\DoxyCodeLine{663     \textcolor{keywordtype}{void} \mbox{\hyperlink{classsequence__fast__readonly_a7f31daab2a88f9120f06c0bc140ad4af}{decrement}}() \{ -\/-\/\mbox{\hyperlink{classsequence__fast__readonly_a3abaae05b86767b75a50db2314e84463}{ptr}}; \}}
+\DoxyCodeLine{664     \textcolor{keywordtype}{void} \mbox{\hyperlink{classsequence__fast__readonly_a7ffa2a811265609444262806136b7204}{advance}}(\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} n) \{ \mbox{\hyperlink{classsequence__fast__readonly_a3abaae05b86767b75a50db2314e84463}{ptr}} += n; \}}
+\DoxyCodeLine{665     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classsequence__fast__readonly_afcbe394740b9209db9a28034e5483794}{equal}}(\textcolor{keyword}{const} \mbox{\hyperlink{classsequence__fast__readonly}{sequence\_fast\_readonly}} \&b)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classsequence__fast__readonly_a3abaae05b86767b75a50db2314e84463}{ptr}} == b.\mbox{\hyperlink{classsequence__fast__readonly_a3abaae05b86767b75a50db2314e84463}{ptr}}; \}}
+\DoxyCodeLine{666     \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} \mbox{\hyperlink{classsequence__fast__readonly_a943d3956a923d5e3bbe3e1e944a20699}{distance\_to}}(\textcolor{keyword}{const} \mbox{\hyperlink{classsequence__fast__readonly}{sequence\_fast\_readonly}} \&b)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classsequence__fast__readonly_a3abaae05b86767b75a50db2314e84463}{ptr}} -\/ b.\mbox{\hyperlink{classsequence__fast__readonly_a3abaae05b86767b75a50db2314e84463}{ptr}}; \}}
+\DoxyCodeLine{667 }
+\DoxyCodeLine{668 \textcolor{keyword}{private}:}
+\DoxyCodeLine{669     PyObject **\mbox{\hyperlink{classsequence__fast__readonly_a3abaae05b86767b75a50db2314e84463}{ptr}};}
+\DoxyCodeLine{670 \};}
+\DoxyCodeLine{671 }
+\DoxyCodeLine{673 \textcolor{keyword}{class }\mbox{\hyperlink{classsequence__slow__readwrite}{sequence\_slow\_readwrite}} \{}
+\DoxyCodeLine{674 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{675     \textcolor{keyword}{using} \mbox{\hyperlink{classsequence__slow__readwrite_a2697f5faf3ab47b580e49071a9993010}{iterator\_category}} = std::random\_access\_iterator\_tag;}
+\DoxyCodeLine{676     \textcolor{keyword}{using} \mbox{\hyperlink{classobject}{value\_type}} = \mbox{\hyperlink{classobject}{object}};}
+\DoxyCodeLine{677     \textcolor{keyword}{using} \mbox{\hyperlink{classaccessor}{reference}} = \mbox{\hyperlink{pytypes_8h_afb835b9074801782e0f25a6d78d1d450}{sequence\_accessor}};}
+\DoxyCodeLine{678     \textcolor{keyword}{using} \mbox{\hyperlink{structarrow__proxy}{pointer}} = \mbox{\hyperlink{structarrow__proxy}{arrow\_proxy<const sequence\_accessor>}};}
+\DoxyCodeLine{679 }
+\DoxyCodeLine{680     \mbox{\hyperlink{classsequence__slow__readwrite_a955e2d54fdeeb18c53e268ca6d5aa04e}{sequence\_slow\_readwrite}}(\mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{classsequence__slow__readwrite_a5994776ab2bdaee761add4b819409a30}{obj}}, \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} \mbox{\hyperlink{classsequence__slow__readwrite_a577235a9eefa7405454e770c164cebfe}{index}}) : \mbox{\hyperlink{classsequence__slow__readwrite_a5994776ab2bdaee761add4b819409a30}{obj}}(\mbox{\hyperlink{classsequence__slow__readwrite_a5994776ab2bdaee761add4b819409a30}{obj}}), \mbox{\hyperlink{classsequence__slow__readwrite_a577235a9eefa7405454e770c164cebfe}{index}}(\mbox{\hyperlink{classsequence__slow__readwrite_a577235a9eefa7405454e770c164cebfe}{index}}) \{ \}}
+\DoxyCodeLine{681 }
+\DoxyCodeLine{682     \mbox{\hyperlink{classaccessor}{reference}} \mbox{\hyperlink{classsequence__slow__readwrite_a6061367a92256c30a9b69e062f839682}{dereference}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \{\mbox{\hyperlink{classsequence__slow__readwrite_a5994776ab2bdaee761add4b819409a30}{obj}}, \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(\mbox{\hyperlink{classsequence__slow__readwrite_a577235a9eefa7405454e770c164cebfe}{index}})\}; \}}
+\DoxyCodeLine{683     \textcolor{keywordtype}{void} \mbox{\hyperlink{classsequence__slow__readwrite_a96167779622e78b49732210fd0c18855}{increment}}() \{ ++\mbox{\hyperlink{classsequence__slow__readwrite_a577235a9eefa7405454e770c164cebfe}{index}}; \}}
+\DoxyCodeLine{684     \textcolor{keywordtype}{void} \mbox{\hyperlink{classsequence__slow__readwrite_a14d280d9247d5b25b81486bb08cdf4a4}{decrement}}() \{ -\/-\/\mbox{\hyperlink{classsequence__slow__readwrite_a577235a9eefa7405454e770c164cebfe}{index}}; \}}
+\DoxyCodeLine{685     \textcolor{keywordtype}{void} \mbox{\hyperlink{classsequence__slow__readwrite_a8bef7e89f0ebfadca7cca71d688fb5cd}{advance}}(\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} n) \{ \mbox{\hyperlink{classsequence__slow__readwrite_a577235a9eefa7405454e770c164cebfe}{index}} += n; \}}
+\DoxyCodeLine{686     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classsequence__slow__readwrite_a7efc0f4d3cc74714cc043ef1d65c3ab7}{equal}}(\textcolor{keyword}{const} \mbox{\hyperlink{classsequence__slow__readwrite}{sequence\_slow\_readwrite}} \&b)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classsequence__slow__readwrite_a577235a9eefa7405454e770c164cebfe}{index}} == b.\mbox{\hyperlink{classsequence__slow__readwrite_a577235a9eefa7405454e770c164cebfe}{index}}; \}}
+\DoxyCodeLine{687     \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} \mbox{\hyperlink{classsequence__slow__readwrite_a971f935ea0b4db43994eb1adc4327ec4}{distance\_to}}(\textcolor{keyword}{const} \mbox{\hyperlink{classsequence__slow__readwrite}{sequence\_slow\_readwrite}} \&b)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classsequence__slow__readwrite_a577235a9eefa7405454e770c164cebfe}{index}} -\/ b.\mbox{\hyperlink{classsequence__slow__readwrite_a577235a9eefa7405454e770c164cebfe}{index}}; \}}
+\DoxyCodeLine{688 }
+\DoxyCodeLine{689 \textcolor{keyword}{private}:}
+\DoxyCodeLine{690     \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{classsequence__slow__readwrite_a5994776ab2bdaee761add4b819409a30}{obj}};}
+\DoxyCodeLine{691     \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} \mbox{\hyperlink{classsequence__slow__readwrite_a577235a9eefa7405454e770c164cebfe}{index}};}
+\DoxyCodeLine{692 \};}
+\DoxyCodeLine{693 }
+\DoxyCodeLine{695 \textcolor{keyword}{class }\mbox{\hyperlink{classdict__readonly}{dict\_readonly}} \{}
+\DoxyCodeLine{696 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{697     \textcolor{keyword}{using} \mbox{\hyperlink{classdict__readonly_a03ca5952047f74c722d9a9a7b7170518}{iterator\_category}} = std::forward\_iterator\_tag;}
+\DoxyCodeLine{698     \textcolor{keyword}{using} \mbox{\hyperlink{classdict__readonly_a127806c5f2c38bfb96bb8dcbc5045734}{value\_type}} = std::pair<handle, handle>;}
+\DoxyCodeLine{699     \textcolor{keyword}{using} \mbox{\hyperlink{classdict__readonly_a84d59082eaadc1ea6eb819992cc74f0e}{reference}} = \textcolor{keyword}{const} \mbox{\hyperlink{classdict__readonly_a127806c5f2c38bfb96bb8dcbc5045734}{value\_type}};}
+\DoxyCodeLine{700     \textcolor{keyword}{using} \mbox{\hyperlink{structarrow__proxy}{pointer}} = \mbox{\hyperlink{structarrow__proxy}{arrow\_proxy<const value\_type>}};}
+\DoxyCodeLine{701 }
+\DoxyCodeLine{702     \mbox{\hyperlink{classdict__readonly_a52c3ca198cb013e3ba952950d6ee95de}{dict\_readonly}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{703     \mbox{\hyperlink{classdict__readonly_a53cb6c65507a2455c3eff4e3e43cc048}{dict\_readonly}}(\mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{classdict__readonly_ab53de351bd7826c067f07dcab9914b94}{obj}}, \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} \mbox{\hyperlink{classdict__readonly_ab8cfe454c80834592fa1635233972220}{pos}}) : \mbox{\hyperlink{classdict__readonly_ab53de351bd7826c067f07dcab9914b94}{obj}}(\mbox{\hyperlink{classdict__readonly_ab53de351bd7826c067f07dcab9914b94}{obj}}), \mbox{\hyperlink{classdict__readonly_ab8cfe454c80834592fa1635233972220}{pos}}(\mbox{\hyperlink{classdict__readonly_ab8cfe454c80834592fa1635233972220}{pos}}) \{ \mbox{\hyperlink{classdict__readonly_aed97e06f8d73b62e2af0d9034d0459cb}{increment}}(); \}}
+\DoxyCodeLine{704 }
+\DoxyCodeLine{705     \mbox{\hyperlink{classdict__readonly_a84d59082eaadc1ea6eb819992cc74f0e}{reference}} \mbox{\hyperlink{classdict__readonly_a28eef7ab54bace49d245676429d91830}{dereference}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \{\mbox{\hyperlink{classdict__readonly_af2b0e7ae20a72d55068f9907e6503690}{key}}, \mbox{\hyperlink{classdict__readonly_ab02971b731caecf256127b98e804a12a}{value}}\}; \}}
+\DoxyCodeLine{706     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdict__readonly_aed97e06f8d73b62e2af0d9034d0459cb}{increment}}() \{ \textcolor{keywordflow}{if} (!PyDict\_Next(\mbox{\hyperlink{classdict__readonly_ab53de351bd7826c067f07dcab9914b94}{obj}}.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), \&\mbox{\hyperlink{classdict__readonly_ab8cfe454c80834592fa1635233972220}{pos}}, \&\mbox{\hyperlink{classdict__readonly_af2b0e7ae20a72d55068f9907e6503690}{key}}, \&\mbox{\hyperlink{classdict__readonly_ab02971b731caecf256127b98e804a12a}{value}})) \{ \mbox{\hyperlink{classdict__readonly_ab8cfe454c80834592fa1635233972220}{pos}} = -\/1; \} \}}
+\DoxyCodeLine{707     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classdict__readonly_a5190cd6607fe555c164fcc104903d11c}{equal}}(\textcolor{keyword}{const} \mbox{\hyperlink{classdict__readonly}{dict\_readonly}} \&b)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classdict__readonly_ab8cfe454c80834592fa1635233972220}{pos}} == b.\mbox{\hyperlink{classdict__readonly_ab8cfe454c80834592fa1635233972220}{pos}}; \}}
+\DoxyCodeLine{708 }
+\DoxyCodeLine{709 \textcolor{keyword}{private}:}
+\DoxyCodeLine{710     \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{classdict__readonly_ab53de351bd7826c067f07dcab9914b94}{obj}};}
+\DoxyCodeLine{711     PyObject *\mbox{\hyperlink{classdict__readonly_af2b0e7ae20a72d55068f9907e6503690}{key}} = \textcolor{keyword}{nullptr}, *\mbox{\hyperlink{classdict__readonly_ab02971b731caecf256127b98e804a12a}{value}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{712     \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} \mbox{\hyperlink{classdict__readonly_ab8cfe454c80834592fa1635233972220}{pos}} = -\/1;}
+\DoxyCodeLine{713 \};}
+\DoxyCodeLine{714 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(iterator\_policies)}
+\DoxyCodeLine{715 }
+\DoxyCodeLine{716 \textcolor{preprocessor}{\#if !defined(PYPY\_VERSION)}}
+\DoxyCodeLine{717 \textcolor{keyword}{using} \mbox{\hyperlink{classgeneric__iterator}{tuple\_iterator}} = \mbox{\hyperlink{classgeneric__iterator}{generic\_iterator<iterator\_policies::sequence\_fast\_readonly>}};}
+\DoxyCodeLine{718 \textcolor{keyword}{using} \mbox{\hyperlink{classgeneric__iterator}{list\_iterator}} = \mbox{\hyperlink{classgeneric__iterator}{generic\_iterator<iterator\_policies::sequence\_fast\_readonly>}};}
+\DoxyCodeLine{719 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{720 \textcolor{keyword}{using} \mbox{\hyperlink{classgeneric__iterator}{tuple\_iterator}} = \mbox{\hyperlink{classgeneric__iterator}{generic\_iterator<iterator\_policies::sequence\_slow\_readwrite>}};}
+\DoxyCodeLine{721 \textcolor{keyword}{using} \mbox{\hyperlink{classgeneric__iterator}{list\_iterator}} = \mbox{\hyperlink{classgeneric__iterator}{generic\_iterator<iterator\_policies::sequence\_slow\_readwrite>}};}
+\DoxyCodeLine{722 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{723 }
+\DoxyCodeLine{724 \textcolor{keyword}{using} \mbox{\hyperlink{classgeneric__iterator}{sequence\_iterator}} = \mbox{\hyperlink{classgeneric__iterator}{generic\_iterator<iterator\_policies::sequence\_slow\_readwrite>}};}
+\DoxyCodeLine{725 \textcolor{keyword}{using} \mbox{\hyperlink{classgeneric__iterator}{dict\_iterator}} = \mbox{\hyperlink{classgeneric__iterator}{generic\_iterator<iterator\_policies::dict\_readonly>}};}
+\DoxyCodeLine{726 }
+\DoxyCodeLine{727 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{pytypes_8h_a7c5672a2d47059a0d0fe5e79726bfb28}{PyIterable\_Check}}(PyObject *obj) \{}
+\DoxyCodeLine{728     PyObject *\mbox{\hyperlink{group__python__builtins_ga0f2342d8d9000a3bcef531c39e97c531}{iter}} = PyObject\_GetIter(obj);}
+\DoxyCodeLine{729     \textcolor{keywordflow}{if} (\mbox{\hyperlink{group__python__builtins_ga0f2342d8d9000a3bcef531c39e97c531}{iter}}) \{}
+\DoxyCodeLine{730         Py\_DECREF(\mbox{\hyperlink{group__python__builtins_ga0f2342d8d9000a3bcef531c39e97c531}{iter}});}
+\DoxyCodeLine{731         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{732     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{733         PyErr\_Clear();}
+\DoxyCodeLine{734         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{735     \}}
+\DoxyCodeLine{736 \}}
+\DoxyCodeLine{737 }
+\DoxyCodeLine{738 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{pytypes_8h_a07da587b49322edcfae93b81ba326969}{PyNone\_Check}}(PyObject *o) \{ \textcolor{keywordflow}{return} o == Py\_None; \}}
+\DoxyCodeLine{739 \textcolor{preprocessor}{\#if PY\_MAJOR\_VERSION >= 3}}
+\DoxyCodeLine{740 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} PyEllipsis\_Check(PyObject *o) \{ \textcolor{keywordflow}{return} o == Py\_Ellipsis; \}}
+\DoxyCodeLine{741 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{742 }
+\DoxyCodeLine{743 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{pytypes_8h_aa6c77dac9b295da58e7e59bdf82fc797}{PyUnicode\_Check\_Permissive}}(PyObject *o) \{ \textcolor{keywordflow}{return} PyUnicode\_Check(o) || \mbox{\hyperlink{detail_2common_8h_a88e12d91c83488db6594602d276f6ebb}{PYBIND11\_BYTES\_CHECK}}(o); \}}
+\DoxyCodeLine{744 }
+\DoxyCodeLine{745 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{pytypes_8h_ada0f4d2d6f60700eba37f079476f7f22}{PyStaticMethod\_Check}}(PyObject *o) \{ \textcolor{keywordflow}{return} o-\/>ob\_type == \&PyStaticMethod\_Type; \}}
+\DoxyCodeLine{746 }
+\DoxyCodeLine{747 \textcolor{keyword}{class }\mbox{\hyperlink{classkwargs__proxy}{kwargs\_proxy}} : \textcolor{keyword}{public} \mbox{\hyperlink{classhandle}{handle}} \{}
+\DoxyCodeLine{748 \textcolor{keyword}{public}:}
+\DoxyCodeLine{749     \textcolor{keyword}{explicit} \mbox{\hyperlink{classkwargs__proxy_a365362a83bba30bd75f8bc610dd93563}{kwargs\_proxy}}(\mbox{\hyperlink{classhandle}{handle}} h) : \mbox{\hyperlink{classhandle}{handle}}(h) \{ \}}
+\DoxyCodeLine{750 \};}
+\DoxyCodeLine{751 }
+\DoxyCodeLine{752 \textcolor{keyword}{class }\mbox{\hyperlink{classargs__proxy}{args\_proxy}} : \textcolor{keyword}{public} \mbox{\hyperlink{classhandle}{handle}} \{}
+\DoxyCodeLine{753 \textcolor{keyword}{public}:}
+\DoxyCodeLine{754     \textcolor{keyword}{explicit} \mbox{\hyperlink{classargs__proxy_ae573f34702db968299ab9df3cfa13d0d}{args\_proxy}}(\mbox{\hyperlink{classhandle}{handle}} h) : \mbox{\hyperlink{classhandle}{handle}}(h) \{ \}}
+\DoxyCodeLine{755     \mbox{\hyperlink{classkwargs__proxy}{kwargs\_proxy}} \mbox{\hyperlink{classargs__proxy_aa9b370a5f09da4e0264795ba12302abd}{operator*}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classkwargs__proxy}{kwargs\_proxy}}(*\textcolor{keyword}{this}); \}}
+\DoxyCodeLine{756 \};}
+\DoxyCodeLine{757 }
+\DoxyCodeLine{759 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{using} \mbox{\hyperlink{pytypes_8h_af60b370455b7cab1d3d0869060111075}{is\_keyword}} = std::is\_base\_of<arg, T>;}
+\DoxyCodeLine{760 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{using} \mbox{\hyperlink{pytypes_8h_a548c1af079329f40581c3c433de756ff}{is\_s\_unpacking}} = std::is\_same<args\_proxy, T>; \textcolor{comment}{// * unpacking}}
+\DoxyCodeLine{761 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{using} \mbox{\hyperlink{pytypes_8h_a6132aced430b317c5825d4775a415708}{is\_ds\_unpacking}} = std::is\_same<kwargs\_proxy, T>; \textcolor{comment}{// ** unpacking}}
+\DoxyCodeLine{762 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{using} \mbox{\hyperlink{structnegation}{is\_positional}} = \mbox{\hyperlink{structnegation}{satisfies\_none\_of}}<T,}
+\DoxyCodeLine{763     \mbox{\hyperlink{pytypes_8h_af60b370455b7cab1d3d0869060111075}{is\_keyword}}, \mbox{\hyperlink{pytypes_8h_a548c1af079329f40581c3c433de756ff}{is\_s\_unpacking}}, \mbox{\hyperlink{pytypes_8h_a6132aced430b317c5825d4775a415708}{is\_ds\_unpacking}}}
+\DoxyCodeLine{764 >;}
+\DoxyCodeLine{765 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{using} \mbox{\hyperlink{structnegation}{is\_keyword\_or\_ds}} = \mbox{\hyperlink{structnegation}{satisfies\_any\_of<T, is\_keyword, is\_ds\_unpacking>}};}
+\DoxyCodeLine{766 }
+\DoxyCodeLine{767 \textcolor{comment}{// Call argument collector forward declarations}}
+\DoxyCodeLine{768 \textcolor{keyword}{template} <return\_value\_policy policy = return\_value\_policy::automatic\_reference>}
+\DoxyCodeLine{769 \textcolor{keyword}{class }\mbox{\hyperlink{classsimple__collector}{simple\_collector}};}
+\DoxyCodeLine{770 \textcolor{keyword}{template} <return\_value\_policy policy = return\_value\_policy::automatic\_reference>}
+\DoxyCodeLine{771 \textcolor{keyword}{class }\mbox{\hyperlink{classunpacking__collector}{unpacking\_collector}};}
+\DoxyCodeLine{772 }
+\DoxyCodeLine{773 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{774 }
+\DoxyCodeLine{775 \textcolor{comment}{// TODO: After the deprecated constructors are removed, this macro can be simplified by}}
+\DoxyCodeLine{776 \textcolor{comment}{//       inheriting ctors: `using Parent::Parent`. It's not an option right now because}}
+\DoxyCodeLine{777 \textcolor{comment}{//       the `using` statement triggers the parent deprecation warning even if the ctor}}
+\DoxyCodeLine{778 \textcolor{comment}{//       isn't even used.}}
+\DoxyCodeLine{779 \textcolor{preprocessor}{\#define PYBIND11\_OBJECT\_COMMON(Name, Parent, CheckFun) \(\backslash\)}}
+\DoxyCodeLine{780 \textcolor{preprocessor}{    public: \(\backslash\)}}
+\DoxyCodeLine{781 \textcolor{preprocessor}{        PYBIND11\_DEPRECATED("{}Use reinterpret\_borrow<"{}}\#Name"{}>() or reinterpret\_steal<"{}\#Name"{}>()"{}) \(\backslash\)}
+\DoxyCodeLine{782         Name(handle h, bool is\_borrowed) : Parent(is\_borrowed ? Parent(h, borrowed\_t\{\}) : Parent(h, stolen\_t\{\})) \{ \} \(\backslash\)}
+\DoxyCodeLine{783         Name(handle h, borrowed\_t) : Parent(h, borrowed\_t\{\}) \{ \} \(\backslash\)}
+\DoxyCodeLine{784         Name(handle h, stolen\_t) : Parent(h, stolen\_t\{\}) \{ \} \(\backslash\)}
+\DoxyCodeLine{785         PYBIND11\_DEPRECATED("{}Use py::isinstance<py::python\_type>(obj) instead"{}) \(\backslash\)}
+\DoxyCodeLine{786         bool check() const \{ return m\_ptr != nullptr \&\& (bool) CheckFun(m\_ptr); \} \(\backslash\)}
+\DoxyCodeLine{787         static bool check\_(handle h) \{ return h.ptr() != nullptr \&\& CheckFun(h.ptr()); \}}
+\DoxyCodeLine{788 }
+\DoxyCodeLine{789 \textcolor{preprocessor}{\#define PYBIND11\_OBJECT\_CVT(Name, Parent, CheckFun, ConvertFun) \(\backslash\)}}
+\DoxyCodeLine{790 \textcolor{preprocessor}{    PYBIND11\_OBJECT\_COMMON(Name, Parent, CheckFun) \(\backslash\)}}
+\DoxyCodeLine{791 \textcolor{preprocessor}{    }\textcolor{comment}{/* This is deliberately not 'explicit' to allow implicit conversion from object: */}\textcolor{preprocessor}{ \(\backslash\)}}
+\DoxyCodeLine{792 \textcolor{preprocessor}{    Name(const object \&o) \(\backslash\)}}
+\DoxyCodeLine{793 \textcolor{preprocessor}{    : Parent(check\_(o) ? o.inc\_ref().ptr() : ConvertFun(o.ptr()), stolen\_t\{\}) \(\backslash\)}}
+\DoxyCodeLine{794 \textcolor{preprocessor}{    \{ if (!m\_ptr) throw error\_already\_set(); \} \(\backslash\)}}
+\DoxyCodeLine{795 \textcolor{preprocessor}{    Name(object \&\&o) \(\backslash\)}}
+\DoxyCodeLine{796 \textcolor{preprocessor}{    : Parent(check\_(o) ? o.release().ptr() : ConvertFun(o.ptr()), stolen\_t\{\}) \(\backslash\)}}
+\DoxyCodeLine{797 \textcolor{preprocessor}{    \{ if (!m\_ptr) throw error\_already\_set(); \} \(\backslash\)}}
+\DoxyCodeLine{798 \textcolor{preprocessor}{    template <typename Policy\_> \(\backslash\)}}
+\DoxyCodeLine{799 \textcolor{preprocessor}{    Name(const ::pybind11::detail::accessor<Policy\_> \&a) : Name(object(a)) \{ \}}}
+\DoxyCodeLine{800 }
+\DoxyCodeLine{801 \textcolor{preprocessor}{\#define PYBIND11\_OBJECT(Name, Parent, CheckFun) \(\backslash\)}}
+\DoxyCodeLine{802 \textcolor{preprocessor}{    PYBIND11\_OBJECT\_COMMON(Name, Parent, CheckFun) \(\backslash\)}}
+\DoxyCodeLine{803 \textcolor{preprocessor}{    }\textcolor{comment}{/* This is deliberately not 'explicit' to allow implicit conversion from object: */}\textcolor{preprocessor}{ \(\backslash\)}}
+\DoxyCodeLine{804 \textcolor{preprocessor}{    Name(const object \&o) : Parent(o) \{ \} \(\backslash\)}}
+\DoxyCodeLine{805 \textcolor{preprocessor}{    Name(object \&\&o) : Parent(std::move(o)) \{ \}}}
+\DoxyCodeLine{806 }
+\DoxyCodeLine{807 \textcolor{preprocessor}{\#define PYBIND11\_OBJECT\_DEFAULT(Name, Parent, CheckFun) \(\backslash\)}}
+\DoxyCodeLine{808 \textcolor{preprocessor}{    PYBIND11\_OBJECT(Name, Parent, CheckFun) \(\backslash\)}}
+\DoxyCodeLine{809 \textcolor{preprocessor}{    Name() : Parent() \{ \}}}
+\DoxyCodeLine{810 }
+\DoxyCodeLine{813 }
+\DoxyCodeLine{822 \textcolor{keyword}{class }\mbox{\hyperlink{classiterator}{iterator}} : \textcolor{keyword}{public} \mbox{\hyperlink{classobject}{object}} \{}
+\DoxyCodeLine{823 \textcolor{keyword}{public}:}
+\DoxyCodeLine{824     \textcolor{keyword}{using} \mbox{\hyperlink{classiterator_ab77598aff5149ea763f55e0a375c58bd}{iterator\_category}} = std::input\_iterator\_tag;}
+\DoxyCodeLine{825     \textcolor{keyword}{using} \mbox{\hyperlink{classiterator_a573d7d10c131e60e9dbc7f691a3c03b1}{difference\_type}} = \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}};}
+\DoxyCodeLine{826     \textcolor{keyword}{using} \mbox{\hyperlink{classhandle}{value\_type}} = \mbox{\hyperlink{classhandle_a53ba30cccfb1cabee421fd4ea555cf44}{handle}};}
+\DoxyCodeLine{827     \textcolor{keyword}{using} \mbox{\hyperlink{classhandle}{reference}} = \textcolor{keyword}{const} \mbox{\hyperlink{classhandle_a53ba30cccfb1cabee421fd4ea555cf44}{handle}};}
+\DoxyCodeLine{828     \textcolor{keyword}{using} \mbox{\hyperlink{classhandle}{pointer}} = \textcolor{keyword}{const} \mbox{\hyperlink{classhandle}{handle}} *;}
+\DoxyCodeLine{829 }
+\DoxyCodeLine{830     \mbox{\hyperlink{pytypes_8h_a358db65eea2be228232617d1353daff7}{PYBIND11\_OBJECT\_DEFAULT}}(\mbox{\hyperlink{classiterator}{iterator}}, \textcolor{keywordtype}{object}, PyIter\_Check)}
+\DoxyCodeLine{831 }
+\DoxyCodeLine{832     \mbox{\hyperlink{classiterator}{iterator}}\& operator++() \{}
+\DoxyCodeLine{833         \mbox{\hyperlink{classiterator_ab04b3480fcce40c9d37d7a8b425e46a8}{advance}}();}
+\DoxyCodeLine{834         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{835     \}}
+\DoxyCodeLine{836 }
+\DoxyCodeLine{837     \mbox{\hyperlink{classiterator}{iterator}} \mbox{\hyperlink{classiterator_a49f48e4e587336b7fa48d609ee8f1779}{operator++}}(\textcolor{keywordtype}{int}) \{}
+\DoxyCodeLine{838         \textcolor{keyword}{auto} rv = *\textcolor{keyword}{this};}
+\DoxyCodeLine{839         \mbox{\hyperlink{classiterator_ab04b3480fcce40c9d37d7a8b425e46a8}{advance}}();}
+\DoxyCodeLine{840         \textcolor{keywordflow}{return} rv;}
+\DoxyCodeLine{841     \}}
+\DoxyCodeLine{842 }
+\DoxyCodeLine{843     \mbox{\hyperlink{classhandle}{reference}} \mbox{\hyperlink{classiterator_ac92dc18748448d5e9878c2df3c36eca2}{operator*}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{844         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}} \&\& !\mbox{\hyperlink{classiterator_a6713b0f7092affdad18ae668b86dd81f}{value}}.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()) \{}
+\DoxyCodeLine{845             \textcolor{keyword}{auto}\& \mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}} = \textcolor{keyword}{const\_cast<}\mbox{\hyperlink{classiterator}{iterator}} \&\textcolor{keyword}{>}(*this);}
+\DoxyCodeLine{846             \mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}.advance();}
+\DoxyCodeLine{847         \}}
+\DoxyCodeLine{848         \textcolor{keywordflow}{return} \mbox{\hyperlink{classiterator_a6713b0f7092affdad18ae668b86dd81f}{value}};}
+\DoxyCodeLine{849     \}}
+\DoxyCodeLine{850 }
+\DoxyCodeLine{851     \mbox{\hyperlink{classhandle}{pointer}} \mbox{\hyperlink{classiterator_ae157ebb58c3c02e644023b31616f2491}{operator-\/>}}()\textcolor{keyword}{ const }\{ \mbox{\hyperlink{classiterator_ac92dc18748448d5e9878c2df3c36eca2}{operator*}}(); \textcolor{keywordflow}{return} \&\mbox{\hyperlink{classiterator_a6713b0f7092affdad18ae668b86dd81f}{value}}; \}}
+\DoxyCodeLine{852 }
+\DoxyCodeLine{866     \textcolor{keyword}{static} \mbox{\hyperlink{classiterator}{iterator}} \mbox{\hyperlink{classiterator_ace2b4797f9e34e51c1df9d52ba164203}{sentinel}}() \{ \textcolor{keywordflow}{return} \{\}; \}}
+\DoxyCodeLine{867 }
+\DoxyCodeLine{868     \textcolor{keyword}{friend} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classiterator_a81d10d7799462c7ca5e7cf19119ca356}{operator==}}(\textcolor{keyword}{const} \mbox{\hyperlink{classiterator}{iterator}} \&a, \textcolor{keyword}{const} \mbox{\hyperlink{classiterator}{iterator}} \&b) \{ \textcolor{keywordflow}{return} a-\/>\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}() == b-\/>\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(); \}}
+\DoxyCodeLine{869     \textcolor{keyword}{friend} \textcolor{keywordtype}{bool} \mbox{\hyperlink{classiterator_a55a8ee0e80dad1a7da9d751c25bc0386}{operator!=}}(\textcolor{keyword}{const} \mbox{\hyperlink{classiterator}{iterator}} \&a, \textcolor{keyword}{const} \mbox{\hyperlink{classiterator}{iterator}} \&b) \{ \textcolor{keywordflow}{return} a-\/>\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}() != b-\/>\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(); \}}
+\DoxyCodeLine{870 }
+\DoxyCodeLine{871 \textcolor{keyword}{private}:}
+\DoxyCodeLine{872     \textcolor{keywordtype}{void} \mbox{\hyperlink{classiterator_ab04b3480fcce40c9d37d7a8b425e46a8}{advance}}() \{}
+\DoxyCodeLine{873         \mbox{\hyperlink{classiterator_a6713b0f7092affdad18ae668b86dd81f}{value}} = reinterpret\_steal<object>(PyIter\_Next(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}));}
+\DoxyCodeLine{874         \textcolor{keywordflow}{if} (PyErr\_Occurred()) \{ \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}(); \}}
+\DoxyCodeLine{875     \}}
+\DoxyCodeLine{876 }
+\DoxyCodeLine{877 \textcolor{keyword}{private}:}
+\DoxyCodeLine{878     \textcolor{keywordtype}{object} \mbox{\hyperlink{classiterator_a6713b0f7092affdad18ae668b86dd81f}{value}} = \{\};}
+\DoxyCodeLine{879 \};}
+\DoxyCodeLine{880 }
+\DoxyCodeLine{881 \textcolor{keyword}{class }\mbox{\hyperlink{classiterable}{iterable}} : \textcolor{keyword}{public} \mbox{\hyperlink{classobject}{object}} \{}
+\DoxyCodeLine{882 \textcolor{keyword}{public}:}
+\DoxyCodeLine{883     \mbox{\hyperlink{pytypes_8h_a358db65eea2be228232617d1353daff7}{PYBIND11\_OBJECT\_DEFAULT}}(\mbox{\hyperlink{classiterable}{iterable}}, \textcolor{keywordtype}{object}, \mbox{\hyperlink{pytypes_8h_a7c5672a2d47059a0d0fe5e79726bfb28}{detail::PyIterable\_Check}})}
+\DoxyCodeLine{884 \};}
+\DoxyCodeLine{885 }
+\DoxyCodeLine{886 \textcolor{keyword}{class }\mbox{\hyperlink{classbytes}{bytes}};}
+\DoxyCodeLine{887 }
+\DoxyCodeLine{888 \textcolor{keyword}{class }\mbox{\hyperlink{classstr}{str}} : \textcolor{keyword}{public} \mbox{\hyperlink{classobject}{object}} \{}
+\DoxyCodeLine{889 \textcolor{keyword}{public}:}
+\DoxyCodeLine{890     \mbox{\hyperlink{pytypes_8h_a4fc2dbd315f5508afb7a5940a7c5e823}{PYBIND11\_OBJECT\_CVT}}(\mbox{\hyperlink{classstr}{str}}, \textcolor{keywordtype}{object}, \mbox{\hyperlink{pytypes_8h_aa6c77dac9b295da58e7e59bdf82fc797}{detail::PyUnicode\_Check\_Permissive}}, \mbox{\hyperlink{classstr_ae00ce7a7b5f8ea57fb08044ad90379bf}{raw\_str}})}
+\DoxyCodeLine{891 }
+\DoxyCodeLine{892     \mbox{\hyperlink{classstr}{str}}(const \textcolor{keywordtype}{char} *c, \textcolor{keywordtype}{size\_t} n)}
+\DoxyCodeLine{893         : \textcolor{keywordtype}{object}(PyUnicode\_FromStringAndSize(c, (\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}) n), \mbox{\hyperlink{structobject_1_1stolen__t}{stolen\_t}}\{\}) \{}
+\DoxyCodeLine{894         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}) \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Could not allocate string object!"{}});}
+\DoxyCodeLine{895     \}}
+\DoxyCodeLine{896 }
+\DoxyCodeLine{897     \textcolor{comment}{// 'explicit' is explicitly omitted from the following constructors to allow implicit conversion to py::str from C++ string-\/like objects}}
+\DoxyCodeLine{898     \mbox{\hyperlink{classstr_a7275e75f478d9a5eff2d28d4a9ca9768}{str}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *c = \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{899         : \mbox{\hyperlink{classobject}{object}}(PyUnicode\_FromString(c), \mbox{\hyperlink{structobject_1_1stolen__t}{stolen\_t}}\{\}) \{}
+\DoxyCodeLine{900         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}) \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Could not allocate string object!"{}});}
+\DoxyCodeLine{901     \}}
+\DoxyCodeLine{902 }
+\DoxyCodeLine{903     \mbox{\hyperlink{classstr_aefc81e0d991f5df7e9d2e57a32308c33}{str}}(\textcolor{keyword}{const} std::string \&s) : \mbox{\hyperlink{classstr}{str}}(s.\mbox{\hyperlink{structdata}{data}}(), s.size()) \{ \}}
+\DoxyCodeLine{904 }
+\DoxyCodeLine{905     \textcolor{keyword}{explicit} \mbox{\hyperlink{classstr_a75cebb809550e845521f0a554452ddc3}{str}}(\textcolor{keyword}{const} \mbox{\hyperlink{classbytes}{bytes}} \&b);}
+\DoxyCodeLine{906 }
+\DoxyCodeLine{911     \textcolor{keyword}{explicit} \mbox{\hyperlink{classstr_a4bff3c112fa3379ba8a668ca1547b85a}{str}}(\mbox{\hyperlink{classhandle}{handle}} h) : \mbox{\hyperlink{classobject}{object}}(\mbox{\hyperlink{classstr_ae00ce7a7b5f8ea57fb08044ad90379bf}{raw\_str}}(h.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()), \mbox{\hyperlink{structobject_1_1stolen__t}{stolen\_t}}\{\}) \{ \}}
+\DoxyCodeLine{912 }
+\DoxyCodeLine{913     \textcolor{keyword}{operator} std::string()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{914         \textcolor{keywordtype}{object} temp = *\textcolor{keyword}{this};}
+\DoxyCodeLine{915         \textcolor{keywordflow}{if} (PyUnicode\_Check(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}})) \{}
+\DoxyCodeLine{916             temp = reinterpret\_steal<object>(PyUnicode\_AsUTF8String(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}));}
+\DoxyCodeLine{917             \textcolor{keywordflow}{if} (!temp)}
+\DoxyCodeLine{918                 \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Unable to extract string contents! (encoding issue)"{}});}
+\DoxyCodeLine{919         \}}
+\DoxyCodeLine{920         \textcolor{keywordtype}{char} *\mbox{\hyperlink{classbuffer}{buffer}};}
+\DoxyCodeLine{921         \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} length;}
+\DoxyCodeLine{922         \textcolor{keywordflow}{if} (\mbox{\hyperlink{detail_2common_8h_a639f3ae94f69a47c9e269495e0da807c}{PYBIND11\_BYTES\_AS\_STRING\_AND\_SIZE}}(temp.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), \&\mbox{\hyperlink{classbuffer}{buffer}}, \&length))}
+\DoxyCodeLine{923             \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Unable to extract string contents! (invalid type)"{}});}
+\DoxyCodeLine{924         \textcolor{keywordflow}{return} std::string(\mbox{\hyperlink{classbuffer}{buffer}}, (\textcolor{keywordtype}{size\_t}) length);}
+\DoxyCodeLine{925     \}}
+\DoxyCodeLine{926 }
+\DoxyCodeLine{927     \textcolor{keyword}{template} <\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{928     \mbox{\hyperlink{classstr}{str}} \mbox{\hyperlink{classstr_a2919bac4ba269742be227ecdf70249af}{format}}(Args \&\&...\mbox{\hyperlink{classargs}{args}})\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{929         \textcolor{keywordflow}{return} attr(\textcolor{stringliteral}{"{}format"{}})(std::forward<Args>(\mbox{\hyperlink{classargs}{args}})...);}
+\DoxyCodeLine{930     \}}
+\DoxyCodeLine{931 }
+\DoxyCodeLine{932 \textcolor{keyword}{private}:}
+\DoxyCodeLine{934     \textcolor{keyword}{static} PyObject *\mbox{\hyperlink{classstr_ae00ce7a7b5f8ea57fb08044ad90379bf}{raw\_str}}(PyObject *op) \{}
+\DoxyCodeLine{935         PyObject *str\_value = PyObject\_Str(op);}
+\DoxyCodeLine{936 \textcolor{preprocessor}{\#if PY\_MAJOR\_VERSION < 3}}
+\DoxyCodeLine{937         \textcolor{keywordflow}{if} (!str\_value) \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}();}
+\DoxyCodeLine{938         PyObject *unicode = PyUnicode\_FromEncodedObject(str\_value, \textcolor{stringliteral}{"{}utf-\/8"{}}, \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{939         Py\_XDECREF(str\_value); str\_value = unicode;}
+\DoxyCodeLine{940 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{941         \textcolor{keywordflow}{return} str\_value;}
+\DoxyCodeLine{942     \}}
+\DoxyCodeLine{943 \};}
+\DoxyCodeLine{945 }
+\DoxyCodeLine{946 \textcolor{keyword}{inline} \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceliterals}{literals}} \{}
+\DoxyCodeLine{950 \textcolor{keyword}{inline} \mbox{\hyperlink{classstr}{str}} \textcolor{keyword}{operator}\textcolor{stringliteral}{"{}"{}} \_s(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *s, \textcolor{keywordtype}{size\_t} size) \{ \textcolor{keywordflow}{return} \{s, size\}; \}}
+\DoxyCodeLine{951 \}}
+\DoxyCodeLine{952 }
+\DoxyCodeLine{955 \textcolor{keyword}{class }\mbox{\hyperlink{classbytes}{bytes}} : \textcolor{keyword}{public} \mbox{\hyperlink{classobject}{object}} \{}
+\DoxyCodeLine{956 \textcolor{keyword}{public}:}
+\DoxyCodeLine{957     \mbox{\hyperlink{pytypes_8h_ad4b7fc54168d44c54c0ca9863af90858}{PYBIND11\_OBJECT}}(\mbox{\hyperlink{classbytes}{bytes}}, \textcolor{keywordtype}{object}, \mbox{\hyperlink{detail_2common_8h_a88e12d91c83488db6594602d276f6ebb}{PYBIND11\_BYTES\_CHECK}})}
+\DoxyCodeLine{958 }
+\DoxyCodeLine{959     \textcolor{comment}{// Allow implicit conversion:}}
+\DoxyCodeLine{960     \mbox{\hyperlink{classbytes}{bytes}}(const \textcolor{keywordtype}{char} *c = "{}"{})}
+\DoxyCodeLine{961         : \textcolor{keywordtype}{object}(\mbox{\hyperlink{detail_2common_8h_a77c80e7232ce873995a75ad22a6f876c}{PYBIND11\_BYTES\_FROM\_STRING}}(c), \mbox{\hyperlink{structobject_1_1stolen__t}{stolen\_t}}\{\}) \{}
+\DoxyCodeLine{962         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}) \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Could not allocate bytes object!"{}});}
+\DoxyCodeLine{963     \}}
+\DoxyCodeLine{964 }
+\DoxyCodeLine{965     \mbox{\hyperlink{classbytes_a8205f27ee2cd267771e4bc304baf44db}{bytes}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *c, \textcolor{keywordtype}{size\_t} n)}
+\DoxyCodeLine{966         : \mbox{\hyperlink{classobject}{object}}(\mbox{\hyperlink{detail_2common_8h_a2035228df69404443c62a841a7932fee}{PYBIND11\_BYTES\_FROM\_STRING\_AND\_SIZE}}(c, (\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}) n), \mbox{\hyperlink{structobject_1_1stolen__t}{stolen\_t}}\{\}) \{}
+\DoxyCodeLine{967         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}) \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Could not allocate bytes object!"{}});}
+\DoxyCodeLine{968     \}}
+\DoxyCodeLine{969 }
+\DoxyCodeLine{970     \textcolor{comment}{// Allow implicit conversion:}}
+\DoxyCodeLine{971     \mbox{\hyperlink{classbytes_a39cb6d38b9530c023063852b013ecf50}{bytes}}(\textcolor{keyword}{const} std::string \&s) : \mbox{\hyperlink{classbytes}{bytes}}(s.\mbox{\hyperlink{structdata}{data}}(), s.size()) \{ \}}
+\DoxyCodeLine{972 }
+\DoxyCodeLine{973     \textcolor{keyword}{explicit} \mbox{\hyperlink{classbytes_a61beb3470b0464c351a2d8e4cd892691}{bytes}}(\textcolor{keyword}{const} pybind11::str \&s);}
+\DoxyCodeLine{974 }
+\DoxyCodeLine{975     \textcolor{keyword}{operator} std::string()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{976         \textcolor{keywordtype}{char} *\mbox{\hyperlink{classbuffer}{buffer}};}
+\DoxyCodeLine{977         \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} length;}
+\DoxyCodeLine{978         \textcolor{keywordflow}{if} (\mbox{\hyperlink{detail_2common_8h_a639f3ae94f69a47c9e269495e0da807c}{PYBIND11\_BYTES\_AS\_STRING\_AND\_SIZE}}(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}, \&\mbox{\hyperlink{classbuffer}{buffer}}, \&length))}
+\DoxyCodeLine{979             \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Unable to extract bytes contents!"{}});}
+\DoxyCodeLine{980         \textcolor{keywordflow}{return} std::string(\mbox{\hyperlink{classbuffer}{buffer}}, (\textcolor{keywordtype}{size\_t}) length);}
+\DoxyCodeLine{981     \}}
+\DoxyCodeLine{982 \};}
+\DoxyCodeLine{983 }
+\DoxyCodeLine{984 \textcolor{keyword}{inline} \mbox{\hyperlink{classbytes_a61beb3470b0464c351a2d8e4cd892691}{bytes::bytes}}(\textcolor{keyword}{const} pybind11::str \&s) \{}
+\DoxyCodeLine{985     \textcolor{keywordtype}{object} temp = s;}
+\DoxyCodeLine{986     \textcolor{keywordflow}{if} (PyUnicode\_Check(s.ptr())) \{}
+\DoxyCodeLine{987         temp = reinterpret\_steal<object>(PyUnicode\_AsUTF8String(s.ptr()));}
+\DoxyCodeLine{988         \textcolor{keywordflow}{if} (!temp)}
+\DoxyCodeLine{989             \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Unable to extract string contents! (encoding issue)"{}});}
+\DoxyCodeLine{990     \}}
+\DoxyCodeLine{991     \textcolor{keywordtype}{char} *\mbox{\hyperlink{classbuffer}{buffer}};}
+\DoxyCodeLine{992     \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} length;}
+\DoxyCodeLine{993     \textcolor{keywordflow}{if} (\mbox{\hyperlink{detail_2common_8h_a639f3ae94f69a47c9e269495e0da807c}{PYBIND11\_BYTES\_AS\_STRING\_AND\_SIZE}}(temp.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), \&\mbox{\hyperlink{classbuffer}{buffer}}, \&length))}
+\DoxyCodeLine{994         \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Unable to extract string contents! (invalid type)"{}});}
+\DoxyCodeLine{995     \textcolor{keyword}{auto} obj = reinterpret\_steal<object>(\mbox{\hyperlink{detail_2common_8h_a2035228df69404443c62a841a7932fee}{PYBIND11\_BYTES\_FROM\_STRING\_AND\_SIZE}}(\mbox{\hyperlink{classbuffer}{buffer}}, length));}
+\DoxyCodeLine{996     \textcolor{keywordflow}{if} (!obj)}
+\DoxyCodeLine{997         \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Could not allocate bytes object!"{}});}
+\DoxyCodeLine{998     \mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}} = obj.release().\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}();}
+\DoxyCodeLine{999 \}}
+\DoxyCodeLine{1000 }
+\DoxyCodeLine{1001 \textcolor{keyword}{inline} \mbox{\hyperlink{classstr_a75cebb809550e845521f0a554452ddc3}{str::str}}(\textcolor{keyword}{const} \mbox{\hyperlink{classbytes}{bytes}}\& b) \{}
+\DoxyCodeLine{1002     \textcolor{keywordtype}{char} *\mbox{\hyperlink{classbuffer}{buffer}};}
+\DoxyCodeLine{1003     \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} length;}
+\DoxyCodeLine{1004     \textcolor{keywordflow}{if} (\mbox{\hyperlink{detail_2common_8h_a639f3ae94f69a47c9e269495e0da807c}{PYBIND11\_BYTES\_AS\_STRING\_AND\_SIZE}}(b.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), \&\mbox{\hyperlink{classbuffer}{buffer}}, \&length))}
+\DoxyCodeLine{1005         \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Unable to extract bytes contents!"{}});}
+\DoxyCodeLine{1006     \textcolor{keyword}{auto} obj = reinterpret\_steal<object>(PyUnicode\_FromStringAndSize(\mbox{\hyperlink{classbuffer}{buffer}}, (\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}) length));}
+\DoxyCodeLine{1007     \textcolor{keywordflow}{if} (!obj)}
+\DoxyCodeLine{1008         \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Could not allocate string object!"{}});}
+\DoxyCodeLine{1009     \mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}} = obj.release().\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}();}
+\DoxyCodeLine{1010 \}}
+\DoxyCodeLine{1011 }
+\DoxyCodeLine{1012 \textcolor{keyword}{class }\mbox{\hyperlink{classnone}{none}} : \textcolor{keyword}{public} \mbox{\hyperlink{classobject}{object}} \{}
+\DoxyCodeLine{1013 \textcolor{keyword}{public}:}
+\DoxyCodeLine{1014     \mbox{\hyperlink{pytypes_8h_ad4b7fc54168d44c54c0ca9863af90858}{PYBIND11\_OBJECT}}(\mbox{\hyperlink{classnone}{none}}, \textcolor{keywordtype}{object}, \mbox{\hyperlink{pytypes_8h_a07da587b49322edcfae93b81ba326969}{detail::PyNone\_Check}})}
+\DoxyCodeLine{1015     \mbox{\hyperlink{classnone}{none}}() : \textcolor{keywordtype}{object}(Py\_None, \mbox{\hyperlink{structobject_1_1borrowed__t}{borrowed\_t}}\{\}) \{ \}}
+\DoxyCodeLine{1016 \};}
+\DoxyCodeLine{1017 }
+\DoxyCodeLine{1018 \textcolor{preprocessor}{\#if PY\_MAJOR\_VERSION >= 3}}
+\DoxyCodeLine{1019 \textcolor{keyword}{class }ellipsis : \textcolor{keyword}{public} \mbox{\hyperlink{classobject}{object}} \{}
+\DoxyCodeLine{1020 \textcolor{keyword}{public}:}
+\DoxyCodeLine{1021     \mbox{\hyperlink{pytypes_8h_ad4b7fc54168d44c54c0ca9863af90858}{PYBIND11\_OBJECT}}(ellipsis, \textcolor{keywordtype}{object}, detail::PyEllipsis\_Check)}
+\DoxyCodeLine{1022     ellipsis() : \mbox{\hyperlink{classobject}{object}}(Py\_Ellipsis, borrowed\_t\{\}) \{ \}}
+\DoxyCodeLine{1023 \};}
+\DoxyCodeLine{1024 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1025 }
+\DoxyCodeLine{1026 \textcolor{keyword}{class }\mbox{\hyperlink{classbool__}{bool\_}} : \textcolor{keyword}{public} \mbox{\hyperlink{classobject}{object}} \{}
+\DoxyCodeLine{1027 \textcolor{keyword}{public}:}
+\DoxyCodeLine{1028     \mbox{\hyperlink{pytypes_8h_a4fc2dbd315f5508afb7a5940a7c5e823}{PYBIND11\_OBJECT\_CVT}}(\mbox{\hyperlink{classbool__}{bool\_}}, \textcolor{keywordtype}{object}, PyBool\_Check, \mbox{\hyperlink{classbool___af2514044dfd8e926265df69e1301cf81}{raw\_bool}})}
+\DoxyCodeLine{1029     \mbox{\hyperlink{classbool__}{bool\_}}() : \textcolor{keywordtype}{object}(Py\_False, \mbox{\hyperlink{structobject_1_1borrowed__t}{borrowed\_t}}\{\}) \{ \}}
+\DoxyCodeLine{1030     \textcolor{comment}{// Allow implicit conversion from and to `bool`:}}
+\DoxyCodeLine{1031     \mbox{\hyperlink{classbool___a9a6df8a2673d2c7652afc7ffd284d947}{bool\_}}(\textcolor{keywordtype}{bool} value) : \mbox{\hyperlink{classobject}{object}}(value ? Py\_True : Py\_False, \mbox{\hyperlink{structobject_1_1borrowed__t}{borrowed\_t}}\{\}) \{ \}}
+\DoxyCodeLine{1032     \textcolor{keyword}{operator} bool()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}} \&\& PyLong\_AsLong(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}) != 0; \}}
+\DoxyCodeLine{1033 }
+\DoxyCodeLine{1034 \textcolor{keyword}{private}:}
+\DoxyCodeLine{1036     \textcolor{keyword}{static} PyObject *\mbox{\hyperlink{classbool___af2514044dfd8e926265df69e1301cf81}{raw\_bool}}(PyObject *op) \{}
+\DoxyCodeLine{1037         \textcolor{keyword}{const} \textcolor{keyword}{auto} value = PyObject\_IsTrue(op);}
+\DoxyCodeLine{1038         \textcolor{keywordflow}{if} (value == -\/1) \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{1039         \textcolor{keywordflow}{return} \mbox{\hyperlink{classhandle_a53ba30cccfb1cabee421fd4ea555cf44}{handle}}(value ? Py\_True : Py\_False).inc\_ref().ptr();}
+\DoxyCodeLine{1040     \}}
+\DoxyCodeLine{1041 \};}
+\DoxyCodeLine{1042 }
+\DoxyCodeLine{1043 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{1044 \textcolor{comment}{// Converts a value to the given unsigned type.  If an error occurs, you get back (Unsigned) -\/1;}}
+\DoxyCodeLine{1045 \textcolor{comment}{// otherwise you get back the unsigned long or unsigned long long value cast to (Unsigned).}}
+\DoxyCodeLine{1046 \textcolor{comment}{// (The distinction is critically important when casting a returned -\/1 error value to some other}}
+\DoxyCodeLine{1047 \textcolor{comment}{// unsigned type: (A)-\/1 != (B)-\/1 when A and B are unsigned types of different sizes).}}
+\DoxyCodeLine{1048 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Un\textcolor{keywordtype}{signed}>}
+\DoxyCodeLine{1049 Unsigned \mbox{\hyperlink{group__pytypes_ga5cf5177f54cd2d3a17326b8a729417a1}{as\_unsigned}}(PyObject *o) \{}
+\DoxyCodeLine{1050     \textcolor{keywordflow}{if} (\textcolor{keyword}{sizeof}(Unsigned) <= \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long})}
+\DoxyCodeLine{1051 \#\textcolor{keywordflow}{if} PY\_VERSION\_HEX < 0x03000000}
+\DoxyCodeLine{1052             || PyInt\_Check(o)}
+\DoxyCodeLine{1053 \#endif}
+\DoxyCodeLine{1054     ) \{}
+\DoxyCodeLine{1055         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} v = PyLong\_AsUnsignedLong(o);}
+\DoxyCodeLine{1056         \textcolor{keywordflow}{return} v == (\textcolor{keywordtype}{unsigned} long) -\/1 \&\& PyErr\_Occurred() ? (Unsigned) -\/1 : (Unsigned) v;}
+\DoxyCodeLine{1057     \}}
+\DoxyCodeLine{1058     \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{1059         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} v = PyLong\_AsUnsignedLongLong(o);}
+\DoxyCodeLine{1060         \textcolor{keywordflow}{return} v == (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} long) -\/1 \&\& PyErr\_Occurred() ? (Unsigned) -\/1 : (Unsigned) v;}
+\DoxyCodeLine{1061     \}}
+\DoxyCodeLine{1062 \}}
+\DoxyCodeLine{1063 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{1064 }
+\DoxyCodeLine{1065 class \mbox{\hyperlink{classint__}{int\_}} : public \textcolor{keywordtype}{object} \{}
+\DoxyCodeLine{1066 \textcolor{keyword}{public}:}
+\DoxyCodeLine{1067     \mbox{\hyperlink{pytypes_8h_a4fc2dbd315f5508afb7a5940a7c5e823}{PYBIND11\_OBJECT\_CVT}}(\mbox{\hyperlink{classint__}{int\_}}, \textcolor{keywordtype}{object}, \mbox{\hyperlink{detail_2common_8h_a8b4988058713dfd2429d330586a9f334}{PYBIND11\_LONG\_CHECK}}, PyNumber\_Long)}
+\DoxyCodeLine{1068     \mbox{\hyperlink{classint__}{int\_}}() : \textcolor{keywordtype}{object}(PyLong\_FromLong(0), \mbox{\hyperlink{structobject_1_1stolen__t}{stolen\_t}}\{\}) \{ \}}
+\DoxyCodeLine{1069     \textcolor{comment}{// Allow implicit conversion from C++ integral types:}}
+\DoxyCodeLine{1070     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T,}
+\DoxyCodeLine{1071               detail::enable\_if\_t<std::is\_integral<T>::value, \textcolor{keywordtype}{int}> = 0>}
+\DoxyCodeLine{1072     \mbox{\hyperlink{classint___a9ec72c4afa30290e22b7ce250b6e537c}{int\_}}(T value) \{}
+\DoxyCodeLine{1073         \textcolor{keywordflow}{if} (\textcolor{keyword}{sizeof}(T) <= \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{long})) \{}
+\DoxyCodeLine{1074             \textcolor{keywordflow}{if} (std::is\_signed<T>::value)}
+\DoxyCodeLine{1075                 m\_ptr = PyLong\_FromLong((\textcolor{keywordtype}{long}) value);}
+\DoxyCodeLine{1076             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{1077                 m\_ptr = PyLong\_FromUnsignedLong((\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long}) value);}
+\DoxyCodeLine{1078         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{1079             \textcolor{keywordflow}{if} (std::is\_signed<T>::value)}
+\DoxyCodeLine{1080                 m\_ptr = PyLong\_FromLongLong((\textcolor{keywordtype}{long} \textcolor{keywordtype}{long}) value);}
+\DoxyCodeLine{1081             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{1082                 m\_ptr = PyLong\_FromUnsignedLongLong((\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \textcolor{keywordtype}{long}) value);}
+\DoxyCodeLine{1083         \}}
+\DoxyCodeLine{1084         \textcolor{keywordflow}{if} (!m\_ptr) \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Could not allocate int object!"{}});}
+\DoxyCodeLine{1085     \}}
+\DoxyCodeLine{1086 }
+\DoxyCodeLine{1087     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T,}
+\DoxyCodeLine{1088               detail::enable\_if\_t<std::is\_integral<T>::value, \textcolor{keywordtype}{int}> = 0>}
+\DoxyCodeLine{1089     \textcolor{keyword}{operator} T()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{1090         \textcolor{keywordflow}{return} std::is\_unsigned<T>::value}
+\DoxyCodeLine{1091             ? detail::as\_unsigned<T>(m\_ptr)}
+\DoxyCodeLine{1092             : \textcolor{keyword}{sizeof}(T) <= \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{long})}
+\DoxyCodeLine{1093               ? (T) PyLong\_AsLong(m\_ptr)}
+\DoxyCodeLine{1094               : (T) \mbox{\hyperlink{detail_2common_8h_a1875e825dd4cdcb110d87a5ad227f8d6}{PYBIND11\_LONG\_AS\_LONGLONG}}(m\_ptr);}
+\DoxyCodeLine{1095     \}}
+\DoxyCodeLine{1096 \};}
+\DoxyCodeLine{1097 }
+\DoxyCodeLine{1098 \textcolor{keyword}{class }\mbox{\hyperlink{classfloat__}{float\_}} : \textcolor{keyword}{public} \mbox{\hyperlink{classobject}{object}} \{}
+\DoxyCodeLine{1099 \textcolor{keyword}{public}:}
+\DoxyCodeLine{1100     \mbox{\hyperlink{pytypes_8h_a4fc2dbd315f5508afb7a5940a7c5e823}{PYBIND11\_OBJECT\_CVT}}(\mbox{\hyperlink{classfloat__}{float\_}}, \textcolor{keywordtype}{object}, PyFloat\_Check, PyNumber\_Float)}
+\DoxyCodeLine{1101     \textcolor{comment}{// Allow implicit conversion from float/double:}}
+\DoxyCodeLine{1102     \mbox{\hyperlink{classfloat__}{float\_}}(\textcolor{keywordtype}{float} value) : \textcolor{keywordtype}{object}(PyFloat\_FromDouble((\textcolor{keywordtype}{double}) value), \mbox{\hyperlink{structobject_1_1stolen__t}{stolen\_t}}\{\}) \{}
+\DoxyCodeLine{1103         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}) \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Could not allocate float object!"{}});}
+\DoxyCodeLine{1104     \}}
+\DoxyCodeLine{1105     \mbox{\hyperlink{classfloat___ab7d3e2fa041e2aa97a415b256875370f}{float\_}}(\textcolor{keywordtype}{double} value = .0) : \mbox{\hyperlink{classobject}{object}}(PyFloat\_FromDouble((double) value), \mbox{\hyperlink{structobject_1_1stolen__t}{stolen\_t}}\{\}) \{}
+\DoxyCodeLine{1106         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}) \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Could not allocate float object!"{}});}
+\DoxyCodeLine{1107     \}}
+\DoxyCodeLine{1108     \textcolor{keyword}{operator} float()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} (\textcolor{keywordtype}{float}) PyFloat\_AsDouble(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}); \}}
+\DoxyCodeLine{1109     \textcolor{keyword}{operator} double()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} (\textcolor{keywordtype}{double}) PyFloat\_AsDouble(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}); \}}
+\DoxyCodeLine{1110 \};}
+\DoxyCodeLine{1111 }
+\DoxyCodeLine{1112 \textcolor{keyword}{class }\mbox{\hyperlink{classweakref}{weakref}} : \textcolor{keyword}{public} \mbox{\hyperlink{classobject}{object}} \{}
+\DoxyCodeLine{1113 \textcolor{keyword}{public}:}
+\DoxyCodeLine{1114     \mbox{\hyperlink{pytypes_8h_a358db65eea2be228232617d1353daff7}{PYBIND11\_OBJECT\_DEFAULT}}(\mbox{\hyperlink{classweakref}{weakref}}, \textcolor{keywordtype}{object}, PyWeakref\_Check)}
+\DoxyCodeLine{1115     explicit \mbox{\hyperlink{classweakref}{weakref}}(\mbox{\hyperlink{classhandle}{handle}} obj, \mbox{\hyperlink{classhandle}{handle}} callback = \{\})}
+\DoxyCodeLine{1116         : \textcolor{keywordtype}{object}(PyWeakref\_NewRef(obj.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), callback.ptr()), stolen\_t\{\}) \{}
+\DoxyCodeLine{1117         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}) \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Could not allocate weak reference!"{}});}
+\DoxyCodeLine{1118     \}}
+\DoxyCodeLine{1119 \};}
+\DoxyCodeLine{1120 }
+\DoxyCodeLine{1121 \textcolor{keyword}{class }\mbox{\hyperlink{classslice}{slice}} : \textcolor{keyword}{public} \mbox{\hyperlink{classobject}{object}} \{}
+\DoxyCodeLine{1122 \textcolor{keyword}{public}:}
+\DoxyCodeLine{1123     \mbox{\hyperlink{pytypes_8h_a358db65eea2be228232617d1353daff7}{PYBIND11\_OBJECT\_DEFAULT}}(\mbox{\hyperlink{classslice}{slice}}, \textcolor{keywordtype}{object}, PySlice\_Check)}
+\DoxyCodeLine{1124     \mbox{\hyperlink{classslice}{slice}}(\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} start\_, \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} stop\_, \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} step\_) \{}
+\DoxyCodeLine{1125         \mbox{\hyperlink{classint__}{int\_}} start(start\_), stop(stop\_), step(step\_);}
+\DoxyCodeLine{1126         \mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}} = PySlice\_New(start.ptr(), stop.ptr(), step.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}());}
+\DoxyCodeLine{1127         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}) \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Could not allocate slice object!"{}});}
+\DoxyCodeLine{1128     \}}
+\DoxyCodeLine{1129     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classslice_ab45c9007278b27dcc5bacc3eb38be926}{compute}}(\textcolor{keywordtype}{size\_t} length, \textcolor{keywordtype}{size\_t} *start, \textcolor{keywordtype}{size\_t} *stop, \textcolor{keywordtype}{size\_t} *step,}
+\DoxyCodeLine{1130                  \textcolor{keywordtype}{size\_t} *slicelength)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{1131         \textcolor{keywordflow}{return} PySlice\_GetIndicesEx((\mbox{\hyperlink{detail_2common_8h_af86a8b4554e6b97571555ea879ce7620}{PYBIND11\_SLICE\_OBJECT}} *) \mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}},}
+\DoxyCodeLine{1132                                     (\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}) length, (\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} *) start,}
+\DoxyCodeLine{1133                                     (\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} *) stop, (\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} *) step,}
+\DoxyCodeLine{1134                                     (\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} *) slicelength) == 0;}
+\DoxyCodeLine{1135     \}}
+\DoxyCodeLine{1136     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classslice_a68ba66da048421e022a694d37f8b1c9b}{compute}}(\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} length, \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} *start, \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} *stop, \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} *step,}
+\DoxyCodeLine{1137       \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} *slicelength)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{1138       \textcolor{keywordflow}{return} PySlice\_GetIndicesEx((\mbox{\hyperlink{detail_2common_8h_af86a8b4554e6b97571555ea879ce7620}{PYBIND11\_SLICE\_OBJECT}} *) \mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}},}
+\DoxyCodeLine{1139           length, start,}
+\DoxyCodeLine{1140           stop, step,}
+\DoxyCodeLine{1141           slicelength) == 0;}
+\DoxyCodeLine{1142     \}}
+\DoxyCodeLine{1143 \};}
+\DoxyCodeLine{1144 }
+\DoxyCodeLine{1145 \textcolor{keyword}{class }\mbox{\hyperlink{classcapsule}{capsule}} : \textcolor{keyword}{public} \mbox{\hyperlink{classobject}{object}} \{}
+\DoxyCodeLine{1146 \textcolor{keyword}{public}:}
+\DoxyCodeLine{1147     \mbox{\hyperlink{pytypes_8h_a358db65eea2be228232617d1353daff7}{PYBIND11\_OBJECT\_DEFAULT}}(\mbox{\hyperlink{classcapsule}{capsule}}, \textcolor{keywordtype}{object}, PyCapsule\_CheckExact)}
+\DoxyCodeLine{1148     \mbox{\hyperlink{classcapsule_a461da1cc0a43114173609990128e23d4}{PYBIND11\_DEPRECATED}}("{}Use \mbox{\hyperlink{classobject_ac1ea1a4cbcf197d7c8096037633720d7}{reinterpret\_borrow}}<\mbox{\hyperlink{classcapsule}{capsule}}>() or \mbox{\hyperlink{classobject_ae1de2ab5a755c10582ac1e46071de5c5}{reinterpret\_steal}}<\mbox{\hyperlink{classcapsule}{capsule}}>()"{})}
+\DoxyCodeLine{1149     \mbox{\hyperlink{classcapsule}{capsule}}(PyObject *\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}, \textcolor{keywordtype}{bool} \mbox{\hyperlink{classcapsule_a95816c90b9bf7ed133bd05c1f59a84e4}{is\_borrowed}}) : \textcolor{keywordtype}{object}(\mbox{\hyperlink{classcapsule_a95816c90b9bf7ed133bd05c1f59a84e4}{is\_borrowed}} ? \textcolor{keywordtype}{object}(\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}, \mbox{\hyperlink{structobject_1_1borrowed__t}{borrowed\_t}}\{\}) : \textcolor{keywordtype}{object}(\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}, stolen\_t\{\})) \{ \}}
+\DoxyCodeLine{1150 }
+\DoxyCodeLine{1151     \textcolor{keyword}{explicit} \mbox{\hyperlink{classcapsule}{capsule}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void} *value, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{structname}{name}} = \textcolor{keyword}{nullptr}, \textcolor{keywordtype}{void} (*destructor)(PyObject *) = \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{1152         : \mbox{\hyperlink{classobject}{object}}(PyCapsule\_New(const\_cast<void *>(value), \mbox{\hyperlink{structname}{name}}, destructor), stolen\_t\{\}) \{}
+\DoxyCodeLine{1153         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}})}
+\DoxyCodeLine{1154             \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Could not allocate capsule object!"{}});}
+\DoxyCodeLine{1155     \}}
+\DoxyCodeLine{1156 }
+\DoxyCodeLine{1157     \mbox{\hyperlink{classcapsule_a461da1cc0a43114173609990128e23d4}{PYBIND11\_DEPRECATED}}(\textcolor{stringliteral}{"{}Please pass a destructor that takes a void pointer as input"{}})}
+\DoxyCodeLine{1158     \mbox{\hyperlink{classcapsule}{capsule}}(const \textcolor{keywordtype}{void} *value, \textcolor{keywordtype}{void} (*destruct)(PyObject *))}
+\DoxyCodeLine{1159         : \textcolor{keywordtype}{object}(PyCapsule\_New(const\_cast<\textcolor{keywordtype}{void}*>(value), \textcolor{keywordtype}{nullptr}, destruct), stolen\_t\{\}) \{}
+\DoxyCodeLine{1160         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}})}
+\DoxyCodeLine{1161             \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Could not allocate capsule object!"{}});}
+\DoxyCodeLine{1162     \}}
+\DoxyCodeLine{1163 }
+\DoxyCodeLine{1164     \mbox{\hyperlink{classcapsule}{capsule}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void} *value, \textcolor{keywordtype}{void} (*destructor)(\textcolor{keywordtype}{void} *)) \{}
+\DoxyCodeLine{1165         \mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}} = PyCapsule\_New(\textcolor{keyword}{const\_cast<}\textcolor{keywordtype}{void} *\textcolor{keyword}{>}(value), \textcolor{keyword}{nullptr}, [](PyObject *o) \{}
+\DoxyCodeLine{1166             \textcolor{keyword}{auto} destructor = \textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{void} (*)(\textcolor{keywordtype}{void} *)\textcolor{keyword}{>}(PyCapsule\_GetContext(o));}
+\DoxyCodeLine{1167             \textcolor{keywordtype}{void} *\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}} = PyCapsule\_GetPointer(o, \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{1168             destructor(\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}});}
+\DoxyCodeLine{1169         \});}
+\DoxyCodeLine{1170 }
+\DoxyCodeLine{1171         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}})}
+\DoxyCodeLine{1172             \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Could not allocate capsule object!"{}});}
+\DoxyCodeLine{1173 }
+\DoxyCodeLine{1174         \textcolor{keywordflow}{if} (PyCapsule\_SetContext(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}, (\textcolor{keywordtype}{void} *) destructor) != 0)}
+\DoxyCodeLine{1175             \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Could not set capsule context!"{}});}
+\DoxyCodeLine{1176     \}}
+\DoxyCodeLine{1177 }
+\DoxyCodeLine{1178     \mbox{\hyperlink{classcapsule}{capsule}}(\textcolor{keywordtype}{void} (*destructor)()) \{}
+\DoxyCodeLine{1179         \mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}} = PyCapsule\_New(\textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{void} *\textcolor{keyword}{>}(destructor), \textcolor{keyword}{nullptr}, [](PyObject *o) \{}
+\DoxyCodeLine{1180             \textcolor{keyword}{auto} destructor = \textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{void} (*)()\textcolor{keyword}{>}(PyCapsule\_GetPointer(o, \textcolor{keyword}{nullptr}));}
+\DoxyCodeLine{1181             destructor();}
+\DoxyCodeLine{1182         \});}
+\DoxyCodeLine{1183 }
+\DoxyCodeLine{1184         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}})}
+\DoxyCodeLine{1185             \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Could not allocate capsule object!"{}});}
+\DoxyCodeLine{1186     \}}
+\DoxyCodeLine{1187 }
+\DoxyCodeLine{1188     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{operator} T *() \textcolor{keyword}{const} \{}
+\DoxyCodeLine{1189         \textcolor{keyword}{auto} \mbox{\hyperlink{structname}{name}} = this-\/>\mbox{\hyperlink{structname}{name}}();}
+\DoxyCodeLine{1190         T * result = \textcolor{keyword}{static\_cast<}T *\textcolor{keyword}{>}(PyCapsule\_GetPointer(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}, \mbox{\hyperlink{structname}{name}}));}
+\DoxyCodeLine{1191         \textcolor{keywordflow}{if} (!result) \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Unable to extract capsule contents!"{}});}
+\DoxyCodeLine{1192         \textcolor{keywordflow}{return} result;}
+\DoxyCodeLine{1193     \}}
+\DoxyCodeLine{1194 }
+\DoxyCodeLine{1195     \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{structname}{name}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} PyCapsule\_GetName(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}); \}}
+\DoxyCodeLine{1196 \};}
+\DoxyCodeLine{1197 }
+\DoxyCodeLine{1198 \textcolor{keyword}{class }\mbox{\hyperlink{classtuple}{tuple}} : \textcolor{keyword}{public} \mbox{\hyperlink{classobject}{object}} \{}
+\DoxyCodeLine{1199 \textcolor{keyword}{public}:}
+\DoxyCodeLine{1200     \mbox{\hyperlink{pytypes_8h_a4fc2dbd315f5508afb7a5940a7c5e823}{PYBIND11\_OBJECT\_CVT}}(\mbox{\hyperlink{classtuple}{tuple}}, \textcolor{keywordtype}{object}, PyTuple\_Check, PySequence\_Tuple)}
+\DoxyCodeLine{1201     explicit \mbox{\hyperlink{classtuple}{tuple}}(\textcolor{keywordtype}{size\_t} \mbox{\hyperlink{classtuple_ab962c5f22da58f5d94f2107bec093f81}{size}} = 0) : \textcolor{keywordtype}{object}(PyTuple\_New((\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}) \mbox{\hyperlink{classtuple_ab962c5f22da58f5d94f2107bec093f81}{size}}), \mbox{\hyperlink{structobject_1_1stolen__t}{stolen\_t}}\{\}) \{}
+\DoxyCodeLine{1202         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}) \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Could not allocate tuple object!"{}});}
+\DoxyCodeLine{1203     \}}
+\DoxyCodeLine{1204     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{classtuple_ab962c5f22da58f5d94f2107bec093f81}{size}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} (\textcolor{keywordtype}{size\_t}) PyTuple\_Size(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}); \}}
+\DoxyCodeLine{1205     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classtuple_a7cadb6ce02b4f9202c47bbdf15912972}{empty}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classtuple_ab962c5f22da58f5d94f2107bec093f81}{size}}() == 0; \}}
+\DoxyCodeLine{1206     \mbox{\hyperlink{pytypes_8h_a2345c1cb65083637589e00a50f7b3876}{detail::tuple\_accessor}} \mbox{\hyperlink{classtuple_aae04fa4cd62a8cb8834f4ce50a276688}{operator[]}}(\textcolor{keywordtype}{size\_t} index)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \{*\textcolor{keyword}{this}, index\}; \}}
+\DoxyCodeLine{1207     \mbox{\hyperlink{pytypes_8h_a9907d3edf962653e33d36bccc8b8a268}{detail::item\_accessor}} \mbox{\hyperlink{classtuple_a1a491611659e1556fa4ece44b495e9a0}{operator[]}}(\mbox{\hyperlink{classhandle}{handle}} h)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} object::operator[](h); \}}
+\DoxyCodeLine{1208     \mbox{\hyperlink{pytypes_8h_ab687138c20cfdae7f2935d4fe93cb83a}{detail::tuple\_iterator}} \mbox{\hyperlink{classtuple_a4f9fdd4818d98a30ebd5001c69409902}{begin}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \{*\textcolor{keyword}{this}, 0\}; \}}
+\DoxyCodeLine{1209     \mbox{\hyperlink{pytypes_8h_ab687138c20cfdae7f2935d4fe93cb83a}{detail::tuple\_iterator}} \mbox{\hyperlink{classtuple_ae02904f7b808223cb2922e9c6f7a67b3}{end}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \{*\textcolor{keyword}{this}, PyTuple\_GET\_SIZE(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}})\}; \}}
+\DoxyCodeLine{1210 \};}
+\DoxyCodeLine{1211 }
+\DoxyCodeLine{1212 \textcolor{keyword}{class }\mbox{\hyperlink{classdict}{dict}} : \textcolor{keyword}{public} \mbox{\hyperlink{classobject}{object}} \{}
+\DoxyCodeLine{1213 \textcolor{keyword}{public}:}
+\DoxyCodeLine{1214     \mbox{\hyperlink{pytypes_8h_a4fc2dbd315f5508afb7a5940a7c5e823}{PYBIND11\_OBJECT\_CVT}}(\mbox{\hyperlink{classdict}{dict}}, \textcolor{keywordtype}{object}, PyDict\_Check, \mbox{\hyperlink{classdict_aae29dbff19e854dffb1071a988f1cad5}{raw\_dict}})}
+\DoxyCodeLine{1215     \mbox{\hyperlink{classdict}{dict}}() : \textcolor{keywordtype}{object}(PyDict\_New(), \mbox{\hyperlink{structobject_1_1stolen__t}{stolen\_t}}\{\}) \{}
+\DoxyCodeLine{1216         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}) \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Could not allocate dict object!"{}});}
+\DoxyCodeLine{1217     \}}
+\DoxyCodeLine{1218     \textcolor{keyword}{template} <\textcolor{keyword}{typename}... Args,}
+\DoxyCodeLine{1219               \textcolor{keyword}{typename} = detail::enable\_if\_t<detail::all\_of<detail::is\_keyword\_or\_ds<Args>...>::value>,}
+\DoxyCodeLine{1220               \textcolor{comment}{// MSVC workaround: it can't compile an out-\/of-\/line definition, so defer the collector}}
+\DoxyCodeLine{1221               \textcolor{keyword}{typename} collector = detail::deferred\_t<detail::unpacking\_collector<>, Args...>>}
+\DoxyCodeLine{1222     \textcolor{keyword}{explicit} \mbox{\hyperlink{classdict_aa3fad12466e620bf39db98715843786a}{dict}}(Args \&\&...\mbox{\hyperlink{classargs}{args}}) : \mbox{\hyperlink{classdict}{dict}}(collector(\mbox{\hyperlink{namespacestd}{std}}::forward<Args>(\mbox{\hyperlink{classargs}{args}})...).\mbox{\hyperlink{classkwargs}{kwargs}}()) \{ \}}
+\DoxyCodeLine{1223 }
+\DoxyCodeLine{1224     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{classdict_a9be291f1c7d50a4ea786626593b8bee3}{size}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} (\textcolor{keywordtype}{size\_t}) PyDict\_Size(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}); \}}
+\DoxyCodeLine{1225     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classdict_a0ac76651aa555371b44ebced658edb9a}{empty}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classdict_a9be291f1c7d50a4ea786626593b8bee3}{size}}() == 0; \}}
+\DoxyCodeLine{1226     \mbox{\hyperlink{pytypes_8h_a3c02b3eee4eaa3b690bcdb0405242079}{detail::dict\_iterator}} \mbox{\hyperlink{classdict_afed9b5478ca2a25cd3f6f156a416613c}{begin}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \{*\textcolor{keyword}{this}, 0\}; \}}
+\DoxyCodeLine{1227     \mbox{\hyperlink{pytypes_8h_a3c02b3eee4eaa3b690bcdb0405242079}{detail::dict\_iterator}} \mbox{\hyperlink{classdict_ade49fb36897f05ec11bf639bc76a2383}{end}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \{\}; \}}
+\DoxyCodeLine{1228     \textcolor{keywordtype}{void} \mbox{\hyperlink{classdict_a6bc691cda775c31d30b0184680e7ac81}{clear}}()\textcolor{keyword}{ const }\{ PyDict\_Clear(\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()); \}}
+\DoxyCodeLine{1229     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keywordtype}{bool} \mbox{\hyperlink{classdict_a2f38b348815bbbc385042b249b4177bc}{contains}}(T \&\&key)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{1230         \textcolor{keywordflow}{return} PyDict\_Contains(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}, \mbox{\hyperlink{pytypes_8h_ad7e58c002de44fd35202129e47a93bd8}{detail::object\_or\_cast}}(std::forward<T>(key)).\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()) == 1;}
+\DoxyCodeLine{1231     \}}
+\DoxyCodeLine{1232 }
+\DoxyCodeLine{1233 \textcolor{keyword}{private}:}
+\DoxyCodeLine{1235     \textcolor{keyword}{static} PyObject *\mbox{\hyperlink{classdict_aae29dbff19e854dffb1071a988f1cad5}{raw\_dict}}(PyObject *op) \{}
+\DoxyCodeLine{1236         \textcolor{keywordflow}{if} (PyDict\_Check(op))}
+\DoxyCodeLine{1237             \textcolor{keywordflow}{return} \mbox{\hyperlink{classhandle_a53ba30cccfb1cabee421fd4ea555cf44}{handle}}(op).inc\_ref().ptr();}
+\DoxyCodeLine{1238         \textcolor{keywordflow}{return} PyObject\_CallFunctionObjArgs((PyObject *) \&PyDict\_Type, op, \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{1239     \}}
+\DoxyCodeLine{1240 \};}
+\DoxyCodeLine{1241 }
+\DoxyCodeLine{1242 \textcolor{keyword}{class }\mbox{\hyperlink{classsequence}{sequence}} : \textcolor{keyword}{public} \mbox{\hyperlink{classobject}{object}} \{}
+\DoxyCodeLine{1243 \textcolor{keyword}{public}:}
+\DoxyCodeLine{1244     \mbox{\hyperlink{pytypes_8h_a358db65eea2be228232617d1353daff7}{PYBIND11\_OBJECT\_DEFAULT}}(\mbox{\hyperlink{classsequence}{sequence}}, \textcolor{keywordtype}{object}, PySequence\_Check)}
+\DoxyCodeLine{1245     \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\_t}} \mbox{\hyperlink{classsequence_af35c852590d4618481b22030d82de2ff}{size}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} (\textcolor{keywordtype}{size\_t}) PySequence\_Size(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}); \}}
+\DoxyCodeLine{1246     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classsequence_a7a4891d7cf93e5be62a64234cacdc1f5}{empty}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classsequence_af35c852590d4618481b22030d82de2ff}{size}}() == 0; \}}
+\DoxyCodeLine{1247     \mbox{\hyperlink{pytypes_8h_afb835b9074801782e0f25a6d78d1d450}{detail::sequence\_accessor}} \mbox{\hyperlink{classsequence_a81ac692e1c3c30d1b1e20a2adb74e584}{operator[]}}(\textcolor{keywordtype}{size\_t} index)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \{*\textcolor{keyword}{this}, index\}; \}}
+\DoxyCodeLine{1248     \mbox{\hyperlink{pytypes_8h_a9907d3edf962653e33d36bccc8b8a268}{detail::item\_accessor}} \mbox{\hyperlink{classsequence_a2c7987585276aebba74a9463f6a458e0}{operator[]}}(\mbox{\hyperlink{classhandle}{handle}} h)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} object::operator[](h); \}}
+\DoxyCodeLine{1249     \mbox{\hyperlink{pytypes_8h_ab0cb36845bb4ad0fcdbc49fbc78bc765}{detail::sequence\_iterator}} \mbox{\hyperlink{classsequence_a6ee816a2ebf7527e19fa141d685c701b}{begin}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \{*\textcolor{keyword}{this}, 0\}; \}}
+\DoxyCodeLine{1250     \mbox{\hyperlink{pytypes_8h_ab0cb36845bb4ad0fcdbc49fbc78bc765}{detail::sequence\_iterator}} \mbox{\hyperlink{classsequence_ab2111257eac7ea5438d4ba0bc74914a8}{end}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \{*\textcolor{keyword}{this}, PySequence\_Size(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}})\}; \}}
+\DoxyCodeLine{1251 \};}
+\DoxyCodeLine{1252 }
+\DoxyCodeLine{1253 \textcolor{keyword}{class }\mbox{\hyperlink{structlist}{list}} : \textcolor{keyword}{public} \mbox{\hyperlink{classobject}{object}} \{}
+\DoxyCodeLine{1254 \textcolor{keyword}{public}:}
+\DoxyCodeLine{1255     \mbox{\hyperlink{pytypes_8h_a4fc2dbd315f5508afb7a5940a7c5e823}{PYBIND11\_OBJECT\_CVT}}(\mbox{\hyperlink{structlist}{list}}, \textcolor{keywordtype}{object}, PyList\_Check, PySequence\_List)}
+\DoxyCodeLine{1256     explicit \mbox{\hyperlink{structlist}{list}}(\textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structlist_a3b03adad0c0429bae9493667ff366dc2}{size}} = 0) : \textcolor{keywordtype}{object}(PyList\_New((\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}) \mbox{\hyperlink{structlist_a3b03adad0c0429bae9493667ff366dc2}{size}}), \mbox{\hyperlink{structobject_1_1stolen__t}{stolen\_t}}\{\}) \{}
+\DoxyCodeLine{1257         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}) \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Could not allocate list object!"{}});}
+\DoxyCodeLine{1258     \}}
+\DoxyCodeLine{1259     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structlist_a8fcc9151a36f5802b0ec7d42a0b592f6}{size}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} (\textcolor{keywordtype}{size\_t}) PyList\_Size(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}); \}}
+\DoxyCodeLine{1260     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structlist_aeb4d6c3d1fc142b0ff35a3ec203b7b3f}{empty}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{structlist_a3b03adad0c0429bae9493667ff366dc2}{size}}() == 0; \}}
+\DoxyCodeLine{1261     \mbox{\hyperlink{pytypes_8h_ad3aeae242a70c970305503390f417317}{detail::list\_accessor}} \mbox{\hyperlink{structlist_aab85ae5bde0b7e32e2f31de39a80b6e8}{operator[]}}(\textcolor{keywordtype}{size\_t} index)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \{*\textcolor{keyword}{this}, index\}; \}}
+\DoxyCodeLine{1262     \mbox{\hyperlink{pytypes_8h_a9907d3edf962653e33d36bccc8b8a268}{detail::item\_accessor}} \mbox{\hyperlink{structlist_ab71068000935a82764ec026dba392b1e}{operator[]}}(\mbox{\hyperlink{classhandle}{handle}} h)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} object::operator[](h); \}}
+\DoxyCodeLine{1263     \mbox{\hyperlink{pytypes_8h_a185da221b77a3f194e5764f8b6babb1d}{detail::list\_iterator}} \mbox{\hyperlink{structlist_a64e9fbac58507bf5ee4683bb0d5b6862}{begin}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \{*\textcolor{keyword}{this}, 0\}; \}}
+\DoxyCodeLine{1264     \mbox{\hyperlink{pytypes_8h_a185da221b77a3f194e5764f8b6babb1d}{detail::list\_iterator}} \mbox{\hyperlink{structlist_a3de409f3499b5c3e27502a1bb79ea45a}{end}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \{*\textcolor{keyword}{this}, PyList\_GET\_SIZE(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}})\}; \}}
+\DoxyCodeLine{1265     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keywordtype}{void} \mbox{\hyperlink{structlist_a150b194a333339dc1f248dff200adaf8}{append}}(T \&\&val)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{1266         PyList\_Append(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}, \mbox{\hyperlink{pytypes_8h_ad7e58c002de44fd35202129e47a93bd8}{detail::object\_or\_cast}}(std::forward<T>(val)).\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}());}
+\DoxyCodeLine{1267     \}}
+\DoxyCodeLine{1268     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keywordtype}{void} \mbox{\hyperlink{structlist_a7d4e4cc91234b815e792262ad110ba62}{insert}}(\textcolor{keywordtype}{size\_t} index, T \&\&val)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{1269         PyList\_Insert(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}, \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}\textcolor{keyword}{>}(index),}
+\DoxyCodeLine{1270             \mbox{\hyperlink{pytypes_8h_ad7e58c002de44fd35202129e47a93bd8}{detail::object\_or\_cast}}(std::forward<T>(val)).\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}());}
+\DoxyCodeLine{1271     \}}
+\DoxyCodeLine{1272 \};}
+\DoxyCodeLine{1273 }
+\DoxyCodeLine{1274 \textcolor{keyword}{class }\mbox{\hyperlink{classargs}{args}} : \textcolor{keyword}{public} \mbox{\hyperlink{classtuple}{tuple}} \{ \mbox{\hyperlink{pytypes_8h_a358db65eea2be228232617d1353daff7}{PYBIND11\_OBJECT\_DEFAULT}}(\mbox{\hyperlink{classargs}{args}}, \mbox{\hyperlink{classtuple}{tuple}}, PyTuple\_Check) \};}
+\DoxyCodeLine{1275 \textcolor{keyword}{class }\mbox{\hyperlink{classkwargs}{kwargs}} : \textcolor{keyword}{public} \mbox{\hyperlink{classdict}{dict}} \{ \mbox{\hyperlink{pytypes_8h_a358db65eea2be228232617d1353daff7}{PYBIND11\_OBJECT\_DEFAULT}}(\mbox{\hyperlink{classkwargs}{kwargs}}, \mbox{\hyperlink{classdict}{dict}}, PyDict\_Check)  \};}
+\DoxyCodeLine{1276 }
+\DoxyCodeLine{1277 \textcolor{keyword}{class }\mbox{\hyperlink{classset}{set}} : \textcolor{keyword}{public} \mbox{\hyperlink{classobject}{object}} \{}
+\DoxyCodeLine{1278 \textcolor{keyword}{public}:}
+\DoxyCodeLine{1279     \mbox{\hyperlink{pytypes_8h_a4fc2dbd315f5508afb7a5940a7c5e823}{PYBIND11\_OBJECT\_CVT}}(\mbox{\hyperlink{classset}{set}}, \textcolor{keywordtype}{object}, PySet\_Check, PySet\_New)}
+\DoxyCodeLine{1280     \mbox{\hyperlink{classset}{set}}() : \textcolor{keywordtype}{object}(PySet\_New(\textcolor{keywordtype}{nullptr}), \mbox{\hyperlink{structobject_1_1stolen__t}{stolen\_t}}\{\}) \{}
+\DoxyCodeLine{1281         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}) \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Could not allocate set object!"{}});}
+\DoxyCodeLine{1282     \}}
+\DoxyCodeLine{1283     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{classset_a3984afa9c391124b55643dee185c18a6}{size}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} (\textcolor{keywordtype}{size\_t}) PySet\_Size(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}); \}}
+\DoxyCodeLine{1284     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classset_abf21683c7b52da9f9c2d9c7c4b44201c}{empty}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classset_a3984afa9c391124b55643dee185c18a6}{size}}() == 0; \}}
+\DoxyCodeLine{1285     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keywordtype}{bool} \mbox{\hyperlink{classset_a3ffbfe51196f7032c1605c10a1cfe35a}{add}}(T \&\&val)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{1286         \textcolor{keywordflow}{return} PySet\_Add(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}, \mbox{\hyperlink{pytypes_8h_ad7e58c002de44fd35202129e47a93bd8}{detail::object\_or\_cast}}(std::forward<T>(val)).\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()) == 0;}
+\DoxyCodeLine{1287     \}}
+\DoxyCodeLine{1288     \textcolor{keywordtype}{void} \mbox{\hyperlink{classset_ad19a86d7faa035b3561835fcb3cef758}{clear}}()\textcolor{keyword}{ const }\{ PySet\_Clear(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}); \}}
+\DoxyCodeLine{1289     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keywordtype}{bool} \mbox{\hyperlink{classset_a85fff3ee49f3056125ceb479386ef524}{contains}}(T \&\&val)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{1290         \textcolor{keywordflow}{return} PySet\_Contains(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}, \mbox{\hyperlink{pytypes_8h_ad7e58c002de44fd35202129e47a93bd8}{detail::object\_or\_cast}}(std::forward<T>(val)).\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()) == 1;}
+\DoxyCodeLine{1291     \}}
+\DoxyCodeLine{1292 \};}
+\DoxyCodeLine{1293 }
+\DoxyCodeLine{1294 \textcolor{keyword}{class }\mbox{\hyperlink{classfunction}{function}} : \textcolor{keyword}{public} \mbox{\hyperlink{classobject}{object}} \{}
+\DoxyCodeLine{1295 \textcolor{keyword}{public}:}
+\DoxyCodeLine{1296     \mbox{\hyperlink{pytypes_8h_a358db65eea2be228232617d1353daff7}{PYBIND11\_OBJECT\_DEFAULT}}(\mbox{\hyperlink{classfunction}{function}}, \textcolor{keywordtype}{object}, PyCallable\_Check)}
+\DoxyCodeLine{1297     \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{classcpp__function}{cpp\_function}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{1298         \mbox{\hyperlink{classhandle}{handle}} fun = \mbox{\hyperlink{pytypes_8h_a1e02a729a8736412f4c310004d34c105}{detail::get\_function}}(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}});}
+\DoxyCodeLine{1299         \textcolor{keywordflow}{if} (fun \&\& PyCFunction\_Check(fun.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()))}
+\DoxyCodeLine{1300             \textcolor{keywordflow}{return} fun;}
+\DoxyCodeLine{1301         \textcolor{keywordflow}{return} \mbox{\hyperlink{classhandle_a53ba30cccfb1cabee421fd4ea555cf44}{handle}}();}
+\DoxyCodeLine{1302     \}}
+\DoxyCodeLine{1303     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classfunction_accf0840a607c586ac159024928b98c49}{is\_cpp\_function}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} (\textcolor{keywordtype}{bool}) \mbox{\hyperlink{classfunction_a05dae3c06b8b416ac4a508f72fdbc841}{cpp\_function}}(); \}}
+\DoxyCodeLine{1304 \};}
+\DoxyCodeLine{1305 }
+\DoxyCodeLine{1306 \textcolor{keyword}{class }\mbox{\hyperlink{classstaticmethod}{staticmethod}} : \textcolor{keyword}{public} \mbox{\hyperlink{classobject}{object}} \{}
+\DoxyCodeLine{1307 \textcolor{keyword}{public}:}
+\DoxyCodeLine{1308     \mbox{\hyperlink{pytypes_8h_a4fc2dbd315f5508afb7a5940a7c5e823}{PYBIND11\_OBJECT\_CVT}}(\mbox{\hyperlink{classstaticmethod}{staticmethod}}, \textcolor{keywordtype}{object}, \mbox{\hyperlink{pytypes_8h_ada0f4d2d6f60700eba37f079476f7f22}{detail::PyStaticMethod\_Check}}, PyStaticMethod\_New)}
+\DoxyCodeLine{1309 \};}
+\DoxyCodeLine{1310 }
+\DoxyCodeLine{1311 \textcolor{keyword}{class }\mbox{\hyperlink{classbuffer}{buffer}} : \textcolor{keyword}{public} \mbox{\hyperlink{classobject}{object}} \{}
+\DoxyCodeLine{1312 \textcolor{keyword}{public}:}
+\DoxyCodeLine{1313     \mbox{\hyperlink{pytypes_8h_a358db65eea2be228232617d1353daff7}{PYBIND11\_OBJECT\_DEFAULT}}(\mbox{\hyperlink{classbuffer}{buffer}}, \textcolor{keywordtype}{object}, PyObject\_CheckBuffer)}
+\DoxyCodeLine{1314 }
+\DoxyCodeLine{1315     \mbox{\hyperlink{structbuffer__info}{buffer\_info}} \mbox{\hyperlink{classbuffer_a410de778a607bf10ddfb1cdba4e72901}{request}}(\textcolor{keywordtype}{bool} writable = false)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{1316         \textcolor{keywordtype}{int} flags = PyBUF\_STRIDES | PyBUF\_FORMAT;}
+\DoxyCodeLine{1317         \textcolor{keywordflow}{if} (writable) flags |= PyBUF\_WRITABLE;}
+\DoxyCodeLine{1318         Py\_buffer *view = \textcolor{keyword}{new} Py\_buffer();}
+\DoxyCodeLine{1319         \textcolor{keywordflow}{if} (PyObject\_GetBuffer(\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}}, view, flags) != 0) \{}
+\DoxyCodeLine{1320             \textcolor{keyword}{delete} view;}
+\DoxyCodeLine{1321             \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}();}
+\DoxyCodeLine{1322         \}}
+\DoxyCodeLine{1323         \textcolor{keywordflow}{return} \mbox{\hyperlink{structbuffer__info}{buffer\_info}}(view);}
+\DoxyCodeLine{1324     \}}
+\DoxyCodeLine{1325 \};}
+\DoxyCodeLine{1326 }
+\DoxyCodeLine{1327 \textcolor{keyword}{class }\mbox{\hyperlink{classmemoryview}{memoryview}} : \textcolor{keyword}{public} \mbox{\hyperlink{classobject}{object}} \{}
+\DoxyCodeLine{1328 \textcolor{keyword}{public}:}
+\DoxyCodeLine{1329     \textcolor{keyword}{explicit} \mbox{\hyperlink{classmemoryview_a9b68f7e02bfa56bffd6dd0e00d0cc8f9}{memoryview}}(\textcolor{keyword}{const} \mbox{\hyperlink{structbuffer__info}{buffer\_info}}\& \mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}) \{}
+\DoxyCodeLine{1330         \textcolor{keyword}{static} Py\_buffer buf \{ \};}
+\DoxyCodeLine{1331         \textcolor{comment}{// Py\_buffer uses signed sizes, strides and shape!..}}
+\DoxyCodeLine{1332         \textcolor{keyword}{static} std::vector<Py\_ssize\_t> py\_strides \{ \};}
+\DoxyCodeLine{1333         \textcolor{keyword}{static} std::vector<Py\_ssize\_t> py\_shape \{ \};}
+\DoxyCodeLine{1334         buf.buf = \mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}.ptr;}
+\DoxyCodeLine{1335         buf.itemsize = \mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}.itemsize;}
+\DoxyCodeLine{1336         buf.format = \textcolor{keyword}{const\_cast<}\textcolor{keywordtype}{char} *\textcolor{keyword}{>}(\mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}.format.c\_str());}
+\DoxyCodeLine{1337         buf.ndim = (int) \mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}.ndim;}
+\DoxyCodeLine{1338         buf.len = \mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}.size;}
+\DoxyCodeLine{1339         py\_strides.clear();}
+\DoxyCodeLine{1340         py\_shape.clear();}
+\DoxyCodeLine{1341         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < (\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\_t}}) \mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}.ndim; ++i) \{}
+\DoxyCodeLine{1342             py\_strides.push\_back(\mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}.strides[i]);}
+\DoxyCodeLine{1343             py\_shape.push\_back(\mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}.shape[i]);}
+\DoxyCodeLine{1344         \}}
+\DoxyCodeLine{1345         buf.strides = py\_strides.data();}
+\DoxyCodeLine{1346         buf.shape = py\_shape.data();}
+\DoxyCodeLine{1347         buf.suboffsets = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{1348         buf.readonly = \mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}.readonly;}
+\DoxyCodeLine{1349         buf.internal = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{1350 }
+\DoxyCodeLine{1351         \mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}} = PyMemoryView\_FromBuffer(\&buf);}
+\DoxyCodeLine{1352         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\_ptr}})}
+\DoxyCodeLine{1353             \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Unable to create memoryview from buffer descriptor"{}});}
+\DoxyCodeLine{1354     \}}
+\DoxyCodeLine{1355 }
+\DoxyCodeLine{1356     \mbox{\hyperlink{pytypes_8h_a4fc2dbd315f5508afb7a5940a7c5e823}{PYBIND11\_OBJECT\_CVT}}(\mbox{\hyperlink{classmemoryview}{memoryview}}, \textcolor{keywordtype}{object}, PyMemoryView\_Check, PyMemoryView\_FromObject)}
+\DoxyCodeLine{1357 \};}
+\DoxyCodeLine{1359 }
+\DoxyCodeLine{1362 \textcolor{keyword}{inline} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{group__python__builtins_gaeff368081ac50b8fe2cc0230d96e3acb}{len}}(\mbox{\hyperlink{classhandle}{handle}} h) \{}
+\DoxyCodeLine{1363     \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} result = PyObject\_Length(h.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}());}
+\DoxyCodeLine{1364     \textcolor{keywordflow}{if} (result < 0)}
+\DoxyCodeLine{1365         \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Unable to compute length of object"{}});}
+\DoxyCodeLine{1366     \textcolor{keywordflow}{return} (\textcolor{keywordtype}{size\_t}) result;}
+\DoxyCodeLine{1367 \}}
+\DoxyCodeLine{1368 }
+\DoxyCodeLine{1369 \textcolor{keyword}{inline} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{group__python__builtins_ga348684b7b21dff091e602b1fa02d0195}{len\_hint}}(\mbox{\hyperlink{classhandle}{handle}} h) \{}
+\DoxyCodeLine{1370 \textcolor{preprocessor}{\#if PY\_VERSION\_HEX >= 0x03040000}}
+\DoxyCodeLine{1371     \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} result = PyObject\_LengthHint(h.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), 0);}
+\DoxyCodeLine{1372 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{1373     \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} result = PyObject\_Length(h.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}());}
+\DoxyCodeLine{1374 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1375     \textcolor{keywordflow}{if} (result < 0) \{}
+\DoxyCodeLine{1376         \textcolor{comment}{// Sometimes a length can't be determined at all (eg generators)}}
+\DoxyCodeLine{1377         \textcolor{comment}{// In which case simply return 0}}
+\DoxyCodeLine{1378         PyErr\_Clear();}
+\DoxyCodeLine{1379         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{1380     \}}
+\DoxyCodeLine{1381     \textcolor{keywordflow}{return} (\textcolor{keywordtype}{size\_t}) result;}
+\DoxyCodeLine{1382 \}}
+\DoxyCodeLine{1383 }
+\DoxyCodeLine{1384 \textcolor{keyword}{inline} \mbox{\hyperlink{classstr}{str}} \mbox{\hyperlink{group__python__builtins_ga7118ad0f420ebd4a3aa3debbc834e7d7}{repr}}(\mbox{\hyperlink{classhandle}{handle}} h) \{}
+\DoxyCodeLine{1385     PyObject *str\_value = PyObject\_Repr(h.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}());}
+\DoxyCodeLine{1386     \textcolor{keywordflow}{if} (!str\_value) \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}();}
+\DoxyCodeLine{1387 \textcolor{preprocessor}{\#if PY\_MAJOR\_VERSION < 3}}
+\DoxyCodeLine{1388     PyObject *unicode = PyUnicode\_FromEncodedObject(str\_value, \textcolor{stringliteral}{"{}utf-\/8"{}}, \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{1389     Py\_XDECREF(str\_value); str\_value = unicode;}
+\DoxyCodeLine{1390     \textcolor{keywordflow}{if} (!str\_value) \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}();}
+\DoxyCodeLine{1391 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1392     \textcolor{keywordflow}{return} reinterpret\_steal<str>(str\_value);}
+\DoxyCodeLine{1393 \}}
+\DoxyCodeLine{1394 }
+\DoxyCodeLine{1395 \textcolor{keyword}{inline} \mbox{\hyperlink{classiterator}{iterator}} \mbox{\hyperlink{group__python__builtins_ga0f2342d8d9000a3bcef531c39e97c531}{iter}}(\mbox{\hyperlink{classhandle}{handle}} obj) \{}
+\DoxyCodeLine{1396     PyObject *result = PyObject\_GetIter(obj.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}());}
+\DoxyCodeLine{1397     \textcolor{keywordflow}{if} (!result) \{ \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}(); \}}
+\DoxyCodeLine{1398     \textcolor{keywordflow}{return} reinterpret\_steal<iterator>(result);}
+\DoxyCodeLine{1399 \}}
+\DoxyCodeLine{1401 }
+\DoxyCodeLine{1402 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{1403 template <typename D> \mbox{\hyperlink{classiterator}{iterator}} \mbox{\hyperlink{classobject__api}{object\_api}}<D>::begin()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{group__python__builtins_ga0f2342d8d9000a3bcef531c39e97c531}{iter}}(derived()); \}}
+\DoxyCodeLine{1404 \textcolor{keyword}{template} <\textcolor{keyword}{typename} D> \mbox{\hyperlink{classiterator}{iterator}} \mbox{\hyperlink{classobject__api_a67b1b3d151adc273eeda39837e63f581}{object\_api<D>::end}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classiterator_ace2b4797f9e34e51c1df9d52ba164203}{iterator::sentinel}}(); \}}
+\DoxyCodeLine{1405 \textcolor{keyword}{template} <\textcolor{keyword}{typename} D> \mbox{\hyperlink{classaccessor}{item\_accessor}} \mbox{\hyperlink{classobject__api_a22a02d920a489c385a2502802e547943}{object\_api<D>::operator[]}}(\mbox{\hyperlink{classhandle}{handle}} key)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{1406     \textcolor{keywordflow}{return} \{derived(), reinterpret\_borrow<object>(key)\};}
+\DoxyCodeLine{1407 \}}
+\DoxyCodeLine{1408 \textcolor{keyword}{template} <\textcolor{keyword}{typename} D> \mbox{\hyperlink{classaccessor}{item\_accessor}} \mbox{\hyperlink{classobject__api_a22a02d920a489c385a2502802e547943}{object\_api<D>::operator[]}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *key)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{1409     \textcolor{keywordflow}{return} \{derived(), pybind11::str(key)\};}
+\DoxyCodeLine{1410 \}}
+\DoxyCodeLine{1411 \textcolor{keyword}{template} <\textcolor{keyword}{typename} D> \mbox{\hyperlink{classaccessor}{obj\_attr\_accessor}} \mbox{\hyperlink{classobject__api_a17b39579263007abe74cfbf80015ebd9}{object\_api<D>::attr}}(\mbox{\hyperlink{classhandle}{handle}} key)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{1412     \textcolor{keywordflow}{return} \{derived(), reinterpret\_borrow<object>(key)\};}
+\DoxyCodeLine{1413 \}}
+\DoxyCodeLine{1414 \textcolor{keyword}{template} <\textcolor{keyword}{typename} D> \mbox{\hyperlink{classaccessor}{str\_attr\_accessor}} \mbox{\hyperlink{classobject__api_a17b39579263007abe74cfbf80015ebd9}{object\_api<D>::attr}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *key)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{1415     \textcolor{keywordflow}{return} \{derived(), key\};}
+\DoxyCodeLine{1416 \}}
+\DoxyCodeLine{1417 \textcolor{keyword}{template} <\textcolor{keyword}{typename} D> \mbox{\hyperlink{classargs__proxy}{args\_proxy}} \mbox{\hyperlink{classobject__api_a52879030de31db181cb1ec02c6f001b4}{object\_api<D>::operator*}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{1418     \textcolor{keywordflow}{return} \mbox{\hyperlink{classargs__proxy}{args\_proxy}}(derived().ptr());}
+\DoxyCodeLine{1419 \}}
+\DoxyCodeLine{1420 \textcolor{keyword}{template} <\textcolor{keyword}{typename} D> \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keywordtype}{bool} \mbox{\hyperlink{classobject__api_a07869da2a7cdbcb1a8877c50b18aee83}{object\_api<D>::contains}}(T \&\&item)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{1421     \textcolor{keywordflow}{return} attr(\textcolor{stringliteral}{"{}\_\_contains\_\_"{}})(std::forward<T>(item)).\textcolor{keyword}{template} cast<bool>();}
+\DoxyCodeLine{1422 \}}
+\DoxyCodeLine{1423 }
+\DoxyCodeLine{1424 \textcolor{keyword}{template} <\textcolor{keyword}{typename} D>}
+\DoxyCodeLine{1425 pybind11::str \mbox{\hyperlink{classobject__api_afcae7cc760d93c39ae46192c2545f371}{object\_api<D>::str}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} pybind11::str(derived()); \}}
+\DoxyCodeLine{1426 }
+\DoxyCodeLine{1427 \textcolor{keyword}{template} <\textcolor{keyword}{typename} D>}
+\DoxyCodeLine{1428 \mbox{\hyperlink{classaccessor}{str\_attr\_accessor}} \mbox{\hyperlink{classobject__api_ad1febfb66cd1ecdc3d339ad0125f6da8}{object\_api<D>::doc}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} attr(\textcolor{stringliteral}{"{}\_\_doc\_\_"{}}); \}}
+\DoxyCodeLine{1429 }
+\DoxyCodeLine{1430 \textcolor{keyword}{template} <\textcolor{keyword}{typename} D>}
+\DoxyCodeLine{1431 \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{classobject__api_a6e7d5542b300b4ef13c65c58124a410a}{object\_api<D>::get\_type}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} (PyObject *) Py\_TYPE(derived().ptr()); \}}
+\DoxyCodeLine{1432 }
+\DoxyCodeLine{1433 \textcolor{keyword}{template} <\textcolor{keyword}{typename} D>}
+\DoxyCodeLine{1434 \textcolor{keywordtype}{bool} \mbox{\hyperlink{classobject__api_a5fe9a41837cfbe5504fdd5c41a79b557}{object\_api<D>::rich\_compare}}(\mbox{\hyperlink{classobject__api}{object\_api}} \textcolor{keyword}{const} \&other, \textcolor{keywordtype}{int} value)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{1435     \textcolor{keywordtype}{int} rv = PyObject\_RichCompareBool(derived().ptr(), other.\mbox{\hyperlink{classobject__api_a65860ac4d2d496a5a003a62dc75359cb}{derived}}().ptr(), value);}
+\DoxyCodeLine{1436     \textcolor{keywordflow}{if} (rv == -\/1)}
+\DoxyCodeLine{1437         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}();}
+\DoxyCodeLine{1438     \textcolor{keywordflow}{return} rv == 1;}
+\DoxyCodeLine{1439 \}}
+\DoxyCodeLine{1440 }
+\DoxyCodeLine{1441 \textcolor{preprocessor}{\#define PYBIND11\_MATH\_OPERATOR\_UNARY(op, fn)                                   \(\backslash\)}}
+\DoxyCodeLine{1442 \textcolor{preprocessor}{    template <typename D> object object\_api<D>::op() const \{                   \(\backslash\)}}
+\DoxyCodeLine{1443 \textcolor{preprocessor}{        object result = reinterpret\_steal<object>(fn(derived().ptr()));        \(\backslash\)}}
+\DoxyCodeLine{1444 \textcolor{preprocessor}{        if (!result.ptr())                                                     \(\backslash\)}}
+\DoxyCodeLine{1445 \textcolor{preprocessor}{            throw error\_already\_set();                                         \(\backslash\)}}
+\DoxyCodeLine{1446 \textcolor{preprocessor}{        return result;                                                         \(\backslash\)}}
+\DoxyCodeLine{1447 \textcolor{preprocessor}{    \}}}
+\DoxyCodeLine{1448 }
+\DoxyCodeLine{1449 \textcolor{preprocessor}{\#define PYBIND11\_MATH\_OPERATOR\_BINARY(op, fn)                                  \(\backslash\)}}
+\DoxyCodeLine{1450 \textcolor{preprocessor}{    template <typename D>                                                      \(\backslash\)}}
+\DoxyCodeLine{1451 \textcolor{preprocessor}{    object object\_api<D>::op(object\_api const \&other) const \{                  \(\backslash\)}}
+\DoxyCodeLine{1452 \textcolor{preprocessor}{        object result = reinterpret\_steal<object>(                             \(\backslash\)}}
+\DoxyCodeLine{1453 \textcolor{preprocessor}{            fn(derived().ptr(), other.derived().ptr()));                       \(\backslash\)}}
+\DoxyCodeLine{1454 \textcolor{preprocessor}{        if (!result.ptr())                                                     \(\backslash\)}}
+\DoxyCodeLine{1455 \textcolor{preprocessor}{            throw error\_already\_set();                                         \(\backslash\)}}
+\DoxyCodeLine{1456 \textcolor{preprocessor}{        return result;                                                         \(\backslash\)}}
+\DoxyCodeLine{1457 \textcolor{preprocessor}{    \}}}
+\DoxyCodeLine{1458 }
+\DoxyCodeLine{1459 \mbox{\hyperlink{pytypes_8h_acf6296df2d1132af1bab5debbf632eac}{PYBIND11\_MATH\_OPERATOR\_UNARY}} (\textcolor{keyword}{operator}\string~,   PyNumber\_Invert)}
+\DoxyCodeLine{1460 \mbox{\hyperlink{pytypes_8h_acf6296df2d1132af1bab5debbf632eac}{PYBIND11\_MATH\_OPERATOR\_UNARY}} (\textcolor{keyword}{operator}-\/,   PyNumber\_Negative)}
+\DoxyCodeLine{1461 \mbox{\hyperlink{pytypes_8h_afab783ecf6e7ecae61d7555d595dd080}{PYBIND11\_MATH\_OPERATOR\_BINARY}}(\textcolor{keyword}{operator}+,   PyNumber\_Add)}
+\DoxyCodeLine{1462 \mbox{\hyperlink{pytypes_8h_afab783ecf6e7ecae61d7555d595dd080}{PYBIND11\_MATH\_OPERATOR\_BINARY}}(\textcolor{keyword}{operator}+=,  PyNumber\_InPlaceAdd)}
+\DoxyCodeLine{1463 \mbox{\hyperlink{pytypes_8h_afab783ecf6e7ecae61d7555d595dd080}{PYBIND11\_MATH\_OPERATOR\_BINARY}}(\textcolor{keyword}{operator}-\/,   PyNumber\_Subtract)}
+\DoxyCodeLine{1464 \mbox{\hyperlink{pytypes_8h_afab783ecf6e7ecae61d7555d595dd080}{PYBIND11\_MATH\_OPERATOR\_BINARY}}(\textcolor{keyword}{operator}-\/=,  PyNumber\_InPlaceSubtract)}
+\DoxyCodeLine{1465 \mbox{\hyperlink{pytypes_8h_afab783ecf6e7ecae61d7555d595dd080}{PYBIND11\_MATH\_OPERATOR\_BINARY}}(\textcolor{keyword}{operator}*,   PyNumber\_Multiply)}
+\DoxyCodeLine{1466 \mbox{\hyperlink{pytypes_8h_afab783ecf6e7ecae61d7555d595dd080}{PYBIND11\_MATH\_OPERATOR\_BINARY}}(\textcolor{keyword}{operator}*=,  PyNumber\_InPlaceMultiply)}
+\DoxyCodeLine{1467 \mbox{\hyperlink{pytypes_8h_afab783ecf6e7ecae61d7555d595dd080}{PYBIND11\_MATH\_OPERATOR\_BINARY}}(\textcolor{keyword}{operator}/,   PyNumber\_TrueDivide)}
+\DoxyCodeLine{1468 \mbox{\hyperlink{pytypes_8h_afab783ecf6e7ecae61d7555d595dd080}{PYBIND11\_MATH\_OPERATOR\_BINARY}}(\textcolor{keyword}{operator}/=,  PyNumber\_InPlaceTrueDivide)}
+\DoxyCodeLine{1469 \mbox{\hyperlink{pytypes_8h_afab783ecf6e7ecae61d7555d595dd080}{PYBIND11\_MATH\_OPERATOR\_BINARY}}(\textcolor{keyword}{operator}|,   PyNumber\_Or)}
+\DoxyCodeLine{1470 \mbox{\hyperlink{pytypes_8h_afab783ecf6e7ecae61d7555d595dd080}{PYBIND11\_MATH\_OPERATOR\_BINARY}}(\textcolor{keyword}{operator}|=,  PyNumber\_InPlaceOr)}
+\DoxyCodeLine{1471 \mbox{\hyperlink{pytypes_8h_afab783ecf6e7ecae61d7555d595dd080}{PYBIND11\_MATH\_OPERATOR\_BINARY}}(\textcolor{keyword}{operator}\&,   PyNumber\_And)}
+\DoxyCodeLine{1472 \mbox{\hyperlink{pytypes_8h_afab783ecf6e7ecae61d7555d595dd080}{PYBIND11\_MATH\_OPERATOR\_BINARY}}(\textcolor{keyword}{operator}\&=,  PyNumber\_InPlaceAnd)}
+\DoxyCodeLine{1473 \mbox{\hyperlink{pytypes_8h_afab783ecf6e7ecae61d7555d595dd080}{PYBIND11\_MATH\_OPERATOR\_BINARY}}(\textcolor{keyword}{operator}\string^,   PyNumber\_Xor)}
+\DoxyCodeLine{1474 \mbox{\hyperlink{pytypes_8h_afab783ecf6e7ecae61d7555d595dd080}{PYBIND11\_MATH\_OPERATOR\_BINARY}}(\textcolor{keyword}{operator}\string^=,  PyNumber\_InPlaceXor)}
+\DoxyCodeLine{1475 \mbox{\hyperlink{pytypes_8h_afab783ecf6e7ecae61d7555d595dd080}{PYBIND11\_MATH\_OPERATOR\_BINARY}}(\textcolor{keyword}{operator}<<,  PyNumber\_Lshift)}
+\DoxyCodeLine{1476 \mbox{\hyperlink{pytypes_8h_afab783ecf6e7ecae61d7555d595dd080}{PYBIND11\_MATH\_OPERATOR\_BINARY}}(\textcolor{keyword}{operator}<<=, PyNumber\_InPlaceLshift)}
+\DoxyCodeLine{1477 \mbox{\hyperlink{pytypes_8h_afab783ecf6e7ecae61d7555d595dd080}{PYBIND11\_MATH\_OPERATOR\_BINARY}}(\textcolor{keyword}{operator}>>,  PyNumber\_Rshift)}
+\DoxyCodeLine{1478 \mbox{\hyperlink{pytypes_8h_afab783ecf6e7ecae61d7555d595dd080}{PYBIND11\_MATH\_OPERATOR\_BINARY}}(\textcolor{keyword}{operator}>>=, PyNumber\_InPlaceRshift)}
+\DoxyCodeLine{1479 }
+\DoxyCodeLine{1480 \textcolor{preprocessor}{\#undef PYBIND11\_MATH\_OPERATOR\_UNARY}}
+\DoxyCodeLine{1481 \textcolor{preprocessor}{\#undef PYBIND11\_MATH\_OPERATOR\_BINARY}}
+\DoxyCodeLine{1482 }
+\DoxyCodeLine{1483 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{1484 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+
+\end{DoxyCode}

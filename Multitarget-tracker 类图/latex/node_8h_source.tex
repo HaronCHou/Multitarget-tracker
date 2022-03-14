@@ -1,0 +1,213 @@
+\hypertarget{node_8h_source}{}\doxysection{node.\+h}
+\label{node_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/node.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/node.h}}
+\mbox{\hyperlink{node_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* This software is distributed under the GNU Lesser General Public License */}}
+\DoxyCodeLine{2 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{//   node.h}}
+\DoxyCodeLine{5 \textcolor{comment}{//}}
+\DoxyCodeLine{6 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{// \$Id: node.h,v 1.20 2003/11/27 13:36:56 raitner Exp \$}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#ifndef GTL\_NODE\_H}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define GTL\_NODE\_H}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{_g_t_l_8h}{GTL/GTL.h}}>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{edge_8h}{GTL/edge.h}}>}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <list>}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \mbox{\hyperlink{_g_t_l_8h_a2d9f24096ac60918452dd51f32b64aa9}{\_\_GTL\_BEGIN\_NAMESPACE}}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{20 \textcolor{comment}{//   For MSVC 5.0 node.h has to be included before \{node,edge\}\_data.h.}}
+\DoxyCodeLine{21 \textcolor{comment}{//   So we only declare node\_data here}}
+\DoxyCodeLine{22 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{keyword}{class }\mbox{\hyperlink{classnode__data}{node\_data}};}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{27 \textcolor{comment}{//   nodes}}
+\DoxyCodeLine{28 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{33 \textcolor{keyword}{class }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{structnode}{node}}}
+\DoxyCodeLine{34 \{}
+\DoxyCodeLine{35 \textcolor{keyword}{public}:}
+\DoxyCodeLine{49     \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{node}}();}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{55     \textcolor{keywordtype}{int} degree() \textcolor{keyword}{const};}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{60     \textcolor{keywordtype}{int} outdeg() \textcolor{keyword}{const};}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{65     \textcolor{keywordtype}{int} indeg() \textcolor{keyword}{const};}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{70     \textcolor{keywordtype}{int} id() \textcolor{keyword}{const};}
+\DoxyCodeLine{71     }
+\DoxyCodeLine{77     \textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& opposite(GTL::edge e) \textcolor{keyword}{const};}
+\DoxyCodeLine{78     }
+\DoxyCodeLine{82     \mbox{\hyperlink{edge_8h_a22ac17689106ba21a84e7bc54d1199d6}{nodes\_t}} opposites(GTL::edge) \textcolor{keyword}{const};}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{91     \textcolor{keywordtype}{bool} is\_hidden () \textcolor{keyword}{const};}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{99     \textcolor{keywordtype}{int} excentricity() \textcolor{keyword}{const};}
+\DoxyCodeLine{100     }
+\DoxyCodeLine{101     \textcolor{comment}{//================================================== Iterator types}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{106     \textcolor{keyword}{typedef} edges\_t::const\_iterator \mbox{\hyperlink{structnode_a9a96be92add7c1a2771bcd0431ebf8ab}{in\_edges\_iterator}};}
+\DoxyCodeLine{110     \textcolor{keyword}{typedef} edges\_t::const\_iterator \mbox{\hyperlink{structnode_a90e17ed34de55072e8077f4367499a98}{out\_edges\_iterator}};}
+\DoxyCodeLine{111     }
+\DoxyCodeLine{115     \textcolor{keyword}{class }inout\_edges\_iterator;}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{120     \textcolor{keyword}{class }adj\_nodes\_iterator;}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{125     \textcolor{keyword}{class }adj\_edges\_iterator;}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127     \textcolor{comment}{//================================================== Iterators}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{134     adj\_nodes\_iterator adj\_nodes\_begin() \textcolor{keyword}{const};}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{141     adj\_nodes\_iterator adj\_nodes\_end() \textcolor{keyword}{const};}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{148     adj\_edges\_iterator adj\_edges\_begin() \textcolor{keyword}{const};}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{155     adj\_edges\_iterator adj\_edges\_end() \textcolor{keyword}{const};}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{162     \mbox{\hyperlink{structnode_a9a96be92add7c1a2771bcd0431ebf8ab}{in\_edges\_iterator}} in\_edges\_begin() \textcolor{keyword}{const};}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{169     \mbox{\hyperlink{structnode_a9a96be92add7c1a2771bcd0431ebf8ab}{in\_edges\_iterator}} in\_edges\_end() \textcolor{keyword}{const};}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{176     \mbox{\hyperlink{structnode_a90e17ed34de55072e8077f4367499a98}{out\_edges\_iterator}} out\_edges\_begin() \textcolor{keyword}{const};}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{183     \mbox{\hyperlink{structnode_a90e17ed34de55072e8077f4367499a98}{out\_edges\_iterator}} out\_edges\_end() \textcolor{keyword}{const};}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{190     inout\_edges\_iterator inout\_edges\_begin() \textcolor{keyword}{const};}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{197     inout\_edges\_iterator inout\_edges\_end() \textcolor{keyword}{const};}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199     \textcolor{comment}{//================================================== Implementation}}
+\DoxyCodeLine{200     }
+\DoxyCodeLine{201 \textcolor{keyword}{private}:}
+\DoxyCodeLine{202     \mbox{\hyperlink{classnode__data}{node\_data}} *\mbox{\hyperlink{structnode_a4ae3d54ebb61be3a102bedf5b91bef75}{data}};}
+\DoxyCodeLine{203     }
+\DoxyCodeLine{204     \textcolor{keywordtype}{bool} is\_directed() \textcolor{keyword}{const};}
+\DoxyCodeLine{205     \textcolor{keywordtype}{bool} is\_undirected() \textcolor{keyword}{const};}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{207     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classgraph}{graph}};}
+\DoxyCodeLine{208     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classedge}{edge}};}
+\DoxyCodeLine{209     \textcolor{keyword}{friend} \textcolor{keyword}{class }adj\_edges\_iterator;}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{211     \mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \textcolor{keyword}{friend} \textcolor{keywordtype}{bool} \mbox{\hyperlink{edge_8cpp_ad107b2688063201a330ef7c61a03f322}{operator==}}(\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}});}
+\DoxyCodeLine{212     \mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \textcolor{keyword}{friend} \textcolor{keywordtype}{bool} \mbox{\hyperlink{edge_8cpp_a9f07154a2cc988530fdaed40906338aa}{operator!=}}(\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}});}
+\DoxyCodeLine{213     \mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \textcolor{keyword}{friend} \textcolor{keywordtype}{bool} \mbox{\hyperlink{edge_8cpp_add4913782c64132a3cb946dcc8e0ead8}{operator<}}(\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}});}
+\DoxyCodeLine{214     \mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \textcolor{keyword}{friend} std::ostream\& \mbox{\hyperlink{edge_8cpp_acdb629fb6ead9586f586235139d7e160}{operator<< }}(std::ostream\& os, \textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n);}
+\DoxyCodeLine{215 \};}
+\DoxyCodeLine{216 }
+\DoxyCodeLine{220 \textcolor{keyword}{class }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{structnode}{node}}::adj\_edges\_iterator}
+\DoxyCodeLine{221 \{}
+\DoxyCodeLine{222 \textcolor{keyword}{public}:}
+\DoxyCodeLine{223     \textcolor{keyword}{using} \mbox{\hyperlink{structnode_a14f131040c4e45737c952fe655bdc7c8}{iterator\_category}} = std::bidirectional\_iterator\_tag;}
+\DoxyCodeLine{224     \textcolor{keyword}{using} \mbox{\hyperlink{structnode_afd21814b0205a3d09d7bf9465a8461f0}{value\_type}} = GTL::edge;}
+\DoxyCodeLine{225     }
+\DoxyCodeLine{226     \textcolor{comment}{// constructor}}
+\DoxyCodeLine{227     \mbox{\hyperlink{structnode_a12cb1a2167f5f03c054de5e707d3156f}{adj\_edges\_iterator}}();}
+\DoxyCodeLine{228     \mbox{\hyperlink{structnode_adfeb318312d9e40617018adcef49e6db}{adj\_edges\_iterator}}(\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}, \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{229 }
+\DoxyCodeLine{230     \textcolor{comment}{// comparibility}}
+\DoxyCodeLine{231     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structnode_a7ae20e73507364af0c1df22ecd0df444}{operator==}}(\textcolor{keyword}{const} adj\_edges\_iterator\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{232     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structnode_aa30fcffcf193cc94d3e1f3fe419ce42a}{operator!=}}(\textcolor{keyword}{const} adj\_edges\_iterator\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{234     \textcolor{comment}{// operators}}
+\DoxyCodeLine{235     adj\_edges\_iterator \&\mbox{\hyperlink{structnode_ab22c08ba4c5c42e7db0295c4d73670f5}{operator++}}();}
+\DoxyCodeLine{236     adj\_edges\_iterator \mbox{\hyperlink{structnode_ac112a3065e69e4897d38c11980fe1789}{operator++}}(\textcolor{keywordtype}{int});}
+\DoxyCodeLine{237     adj\_edges\_iterator \&\mbox{\hyperlink{structnode_a9a8ea6da218e2d7b5a7e5b0bfd681e1c}{operator-\/-\/}}();}
+\DoxyCodeLine{238     adj\_edges\_iterator \mbox{\hyperlink{structnode_a1e5751de7ba220836ffee941707c277b}{operator-\/-\/}}(\textcolor{keywordtype}{int});}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{240     \textcolor{comment}{// dereferencing}}
+\DoxyCodeLine{241     \textcolor{keyword}{const} \mbox{\hyperlink{classedge}{edge}}\& \mbox{\hyperlink{structnode_aca14540405990affba58517cd99b8dc5}{operator*}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{242     \textcolor{keyword}{const} \mbox{\hyperlink{classedge}{edge}}* \mbox{\hyperlink{structnode_aff93bc07f525794d5ef5b59daaef0100}{operator-\/>}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{243 }
+\DoxyCodeLine{244 \textcolor{keyword}{private}:}
+\DoxyCodeLine{245     \mbox{\hyperlink{structnode_a9a96be92add7c1a2771bcd0431ebf8ab}{in\_edges\_iterator}} akt\_edge[2], last\_edge[2], begin\_edge[2];}
+\DoxyCodeLine{246     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnode_a2cfc899adde47c9ce3a6d6610a369e23}{inout}};     \textcolor{comment}{// in=0, out=1}}
+\DoxyCodeLine{247     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structnode_ab1b38276f1b8ca748cf1d95be98201c1}{directed}}; \textcolor{comment}{// graph directed ??}}
+\DoxyCodeLine{248 \};}
+\DoxyCodeLine{249     }
+\DoxyCodeLine{253 \textcolor{keyword}{class }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{structnode}{node}}::inout\_edges\_iterator}
+\DoxyCodeLine{254 \{}
+\DoxyCodeLine{255 \textcolor{keyword}{public}:}
+\DoxyCodeLine{256     \textcolor{keyword}{using} \mbox{\hyperlink{structnode_a14f131040c4e45737c952fe655bdc7c8}{iterator\_category}} = std::bidirectional\_iterator\_tag;}
+\DoxyCodeLine{257     \textcolor{keyword}{using} \mbox{\hyperlink{structnode_afd21814b0205a3d09d7bf9465a8461f0}{value\_type}} = GTL::edge;}
+\DoxyCodeLine{258 }
+\DoxyCodeLine{259     \textcolor{comment}{// constructor}}
+\DoxyCodeLine{260     \mbox{\hyperlink{structnode_a854d596611e6a3342090cce71cedf300}{inout\_edges\_iterator}}();}
+\DoxyCodeLine{261     \mbox{\hyperlink{structnode_ab5a58104571f8841317782a3f513fd7f}{inout\_edges\_iterator}}(\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} n, \textcolor{keywordtype}{bool} start);}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263     \textcolor{comment}{// comparibility}}
+\DoxyCodeLine{264     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structnode_ae6b790b8b1dd9733be73b1d2c84716df}{operator==}}(\textcolor{keyword}{const} inout\_edges\_iterator\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{265     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structnode_ac4efb2e8423b3502f9d3a1bd6de80e73}{operator!=}}(\textcolor{keyword}{const} inout\_edges\_iterator\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{267     \textcolor{comment}{// operators}}
+\DoxyCodeLine{268     inout\_edges\_iterator \&\mbox{\hyperlink{structnode_ad399153f180e9412e29ab6ba74bc1493}{operator++}}();}
+\DoxyCodeLine{269     inout\_edges\_iterator \mbox{\hyperlink{structnode_a754f5fcf2ab3d5bf26e1e4fdc47cc766}{operator++}}(\textcolor{keywordtype}{int});}
+\DoxyCodeLine{270     inout\_edges\_iterator \&\mbox{\hyperlink{structnode_ade9dfe8bc95387864ef0f604d87739d0}{operator-\/-\/}}();}
+\DoxyCodeLine{271     inout\_edges\_iterator \mbox{\hyperlink{structnode_a9b906907ed01bb04c06bed300428da11}{operator-\/-\/}}(\textcolor{keywordtype}{int});}
+\DoxyCodeLine{272 }
+\DoxyCodeLine{273     \textcolor{comment}{// dereferencing}}
+\DoxyCodeLine{274     \textcolor{keyword}{const} \mbox{\hyperlink{classedge}{edge}}\& \mbox{\hyperlink{structnode_aca14540405990affba58517cd99b8dc5}{operator*}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{275     \textcolor{keyword}{const} \mbox{\hyperlink{classedge}{edge}}* \mbox{\hyperlink{structnode_aff93bc07f525794d5ef5b59daaef0100}{operator-\/>}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{276     }
+\DoxyCodeLine{277 \textcolor{keyword}{private}:}
+\DoxyCodeLine{278     \mbox{\hyperlink{structnode_a9a96be92add7c1a2771bcd0431ebf8ab}{in\_edges\_iterator}} akt\_edge[2], last\_edge, begin\_edge;}
+\DoxyCodeLine{279     \textcolor{keywordtype}{int} inout;     \textcolor{comment}{// in=0, out=1}}
+\DoxyCodeLine{280 \};}
+\DoxyCodeLine{281 }
+\DoxyCodeLine{285 \textcolor{keyword}{class }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{structnode}{node}}::adj\_nodes\_iterator}
+\DoxyCodeLine{286 \{}
+\DoxyCodeLine{287 \textcolor{keyword}{public}:}
+\DoxyCodeLine{288     \textcolor{keyword}{using} \mbox{\hyperlink{structnode_a14f131040c4e45737c952fe655bdc7c8}{iterator\_category}} = std::bidirectional\_iterator\_tag;}
+\DoxyCodeLine{289     \textcolor{keyword}{using} \mbox{\hyperlink{structnode_afd21814b0205a3d09d7bf9465a8461f0}{value\_type}} = \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}};}
+\DoxyCodeLine{290 }
+\DoxyCodeLine{291     \textcolor{comment}{// constructor}}
+\DoxyCodeLine{292     \mbox{\hyperlink{structnode_a392f19ea6dfa344bdf5c4d5a4b25eb8c}{adj\_nodes\_iterator}}();}
+\DoxyCodeLine{293     \mbox{\hyperlink{structnode_ade9ca1b2c63a0467be176756545b3c2c}{adj\_nodes\_iterator}}(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\&, \textcolor{keywordtype}{bool});}
+\DoxyCodeLine{294 }
+\DoxyCodeLine{295     \textcolor{comment}{// comparibility}}
+\DoxyCodeLine{296     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structnode_abe20131c7427c6f045ab4c23916efa3c}{operator==}}(\textcolor{keyword}{const} adj\_nodes\_iterator\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{297     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structnode_abfcd7e8ce1391bd60f155a5de47419c5}{operator!=}}(\textcolor{keyword}{const} adj\_nodes\_iterator\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{298 }
+\DoxyCodeLine{299     \textcolor{comment}{// operators}}
+\DoxyCodeLine{300     adj\_nodes\_iterator \&\mbox{\hyperlink{structnode_a8fdf7d726b73987a5316e9bc96eb284e}{operator++}}();}
+\DoxyCodeLine{301     adj\_nodes\_iterator \mbox{\hyperlink{structnode_af12ab69bcd07d4d41052b50801690520}{operator++}}(\textcolor{keywordtype}{int});}
+\DoxyCodeLine{302     adj\_nodes\_iterator \&\mbox{\hyperlink{structnode_a5b0a467ffad818c3717c2e2c856bc5bb}{operator-\/-\/}}();}
+\DoxyCodeLine{303     adj\_nodes\_iterator \mbox{\hyperlink{structnode_ae7cdb2be553782c2dcf48c6ec8ef9d67}{operator-\/-\/}}(\textcolor{keywordtype}{int});}
+\DoxyCodeLine{304 }
+\DoxyCodeLine{305     \textcolor{comment}{// dereferencing}}
+\DoxyCodeLine{306     \textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& \mbox{\hyperlink{structnode_a89715b5cb05666341e89ec6a4815aaef}{operator*}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{307     \textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}* \mbox{\hyperlink{structnode_ac36494cdc84740f19d209bf1f7f07b91}{operator-\/>}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{308 }
+\DoxyCodeLine{309 \textcolor{keyword}{private}:}
+\DoxyCodeLine{310     adj\_edges\_iterator \mbox{\hyperlink{structnode_a56cf4b809cc3b1a7f03327caff125d52}{akt\_edge}};}
+\DoxyCodeLine{311     \mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{structnode_aea3ac7e8efe26d960bc6c76f741ebce5}{int\_node}};}
+\DoxyCodeLine{312 \};}
+\DoxyCodeLine{313 }
+\DoxyCodeLine{314 }
+\DoxyCodeLine{315 \mbox{\hyperlink{_g_t_l_8h_a46af2b3ec266ac2f9d36fa7222358017}{\_\_GTL\_END\_NAMESPACE}}}
+\DoxyCodeLine{316 }
+\DoxyCodeLine{317 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{318 \textcolor{comment}{//   Iteration}}
+\DoxyCodeLine{319 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{320 }
+\DoxyCodeLine{321 \textcolor{comment}{// \#define forall\_adj\_nodes(v,w)    GTL\_FORALL(v,w,node::adj\_nodes\_iterator,adj\_nodes\_)}}
+\DoxyCodeLine{322 \textcolor{preprocessor}{\#define forall\_out\_edges(e,v)   GTL\_FORALL(e,v,GTL::node::out\_edges\_iterator,out\_edges\_)}}
+\DoxyCodeLine{323 \textcolor{preprocessor}{\#define forall\_in\_edges(e,v)    GTL\_FORALL(e,v,GTL::node::in\_edges\_iterator,in\_edges\_)}}
+\DoxyCodeLine{324 \textcolor{preprocessor}{\#define forall\_inout\_edges(e,v) GTL\_FORALL(e,v,GTL::node::inout\_edges\_iterator,inout\_edges\_)}}
+\DoxyCodeLine{325 \textcolor{preprocessor}{\#define forall\_adj\_edges(e,v)   GTL\_FORALL(e,v,GTL::node::adj\_edges\_iterator,adj\_edges\_)}}
+\DoxyCodeLine{326     }
+\DoxyCodeLine{327 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GTL\_NODE\_H}}
+\DoxyCodeLine{328 }
+\DoxyCodeLine{329 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{330 \textcolor{comment}{//   end of file}}
+\DoxyCodeLine{331 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+
+\end{DoxyCode}

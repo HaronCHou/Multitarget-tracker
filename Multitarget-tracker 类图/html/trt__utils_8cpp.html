@@ -1,0 +1,2445 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: D:/zhr_files/Multitarget-tracker-master/src/Detector/tensorrt_yolo/trt_utils.cpp 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">My Project
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_4c3458e0ccdb4c3720723c1caa1aaa1c.html">zhr_files</a></li><li class="navelem"><a class="el" href="dir_5a8d4bff745a16410b5074d3583a347e.html">Multitarget-tracker-master</a></li><li class="navelem"><a class="el" href="dir_46a27ab0460a6f8f8d12d2f44f38bf6b.html">src</a></li><li class="navelem"><a class="el" href="dir_458a7b7bb24e4af0790226fff519699f.html">Detector</a></li><li class="navelem"><a class="el" href="dir_8e643222b94d12c04b910a1af0a73cce.html">tensorrt_yolo</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle"><div class="title">trt_utils.cpp 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="trt__utils_8h_source.html">trt_utils.h</a>&quot;</code><br />
+<code>#include &lt;NvInferRuntimeCommon.h&gt;</code><br />
+<code>#include &lt;experimental/filesystem&gt;</code><br />
+<code>#include &lt;fstream&gt;</code><br />
+<code>#include &lt;iomanip&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+trt_utils.cpp 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp__incl.png" border="0" usemap="#a_d_1_2zhr__files_2_multitarget-tracker-master_2src_2_detector_2tensorrt__yolo_2trt__utils_8cpp" alt=""/></div>
+<map name="a_d_1_2zhr__files_2_multitarget-tracker-master_2src_2_detector_2tensorrt__yolo_2trt__utils_8cpp" id="a_d_1_2zhr__files_2_multitarget-tracker-master_2src_2_detector_2tensorrt__yolo_2trt__utils_8cpp">
+<area shape="rect" title=" " alt="" coords="1407,5,1593,61"/>
+<area shape="rect" href="trt__utils_8h.html" title=" " alt="" coords="1125,109,1201,136"/>
+<area shape="rect" title=" " alt="" coords="1225,109,1396,136"/>
+<area shape="rect" title=" " alt="" coords="1421,109,1579,136"/>
+<area shape="rect" title=" " alt="" coords="1603,109,1669,136"/>
+<area shape="rect" title=" " alt="" coords="1693,109,1760,136"/>
+<area shape="rect" title=" " alt="" coords="5,184,144,211"/>
+<area shape="rect" title=" " alt="" coords="168,184,320,211"/>
+<area shape="rect" title=" " alt="" coords="344,184,488,211"/>
+<area shape="rect" title=" " alt="" coords="512,184,696,211"/>
+<area shape="rect" title=" " alt="" coords="720,184,915,211"/>
+<area shape="rect" href="mish_8h.html" title=" " alt="" coords="939,184,1000,211"/>
+<area shape="rect" title=" " alt="" coords="1118,259,1189,285"/>
+<area shape="rect" href="chunk_8h.html" title=" " alt="" coords="1025,184,1093,211"/>
+<area shape="rect" href="hardswish_8h.html" title=" " alt="" coords="1117,184,1208,211"/>
+<area shape="rect" title=" " alt="" coords="1421,184,1461,211"/>
+<area shape="rect" title=" " alt="" coords="1486,184,1549,211"/>
+<area shape="rect" title=" " alt="" coords="1573,184,1648,211"/>
+<area shape="rect" href="ds__image_8h.html" title=" " alt="" coords="1673,184,1762,211"/>
+<area shape="rect" href="plugin__factory_8h.html" title=" " alt="" coords="1283,184,1397,211"/>
+<area shape="rect" title=" " alt="" coords="958,259,1013,285"/>
+<area shape="rect" title=" " alt="" coords="1037,259,1093,285"/>
+<area shape="rect" title=" " alt="" coords="1307,259,1373,285"/>
+<area shape="rect" title=" " alt="" coords="1397,259,1459,285"/>
+<area shape="rect" title=" " alt="" coords="1483,259,1551,285"/>
+<area shape="rect" title=" " alt="" coords="1576,259,1648,285"/>
+<area shape="rect" title=" " alt="" coords="1213,259,1283,285"/>
+</map>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:a1e0ac68896c1a3ebc439a8319c9d7730"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a1e0ac68896c1a3ebc439a8319c9d7730">REGISTER_TENSORRT_PLUGIN</a> (<a class="el" href="classnvinfer1_1_1_mish_plugin_creator.html">MishPluginCreator</a>)</td></tr>
+<tr class="separator:a1e0ac68896c1a3ebc439a8319c9d7730"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add0075a86d394a3f613f3565ac9fe10b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#add0075a86d394a3f613f3565ac9fe10b">REGISTER_TENSORRT_PLUGIN</a> (<a class="el" href="classnvinfer1_1_1_chunk_plugin_creator.html">ChunkPluginCreator</a>)</td></tr>
+<tr class="separator:add0075a86d394a3f613f3565ac9fe10b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27381dd63beab2fb3bca28666b262944"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a27381dd63beab2fb3bca28666b262944">REGISTER_TENSORRT_PLUGIN</a> (<a class="el" href="classnvinfer1_1_1_hardswish_plugin_creator.html">HardswishPluginCreator</a>)</td></tr>
+<tr class="separator:a27381dd63beab2fb3bca28666b262944"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a380b76a6603fc1f0d41a23e0064be1d3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a380b76a6603fc1f0d41a23e0064be1d3">REGISTER_TENSORRT_PLUGIN</a> (<a class="el" href="classnvinfer1_1_1_yolo_layer_plugin_creator.html">YoloLayerPluginCreator</a>)</td></tr>
+<tr class="separator:a380b76a6603fc1f0d41a23e0064be1d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb0f94d2500292926bc8416c9a904297"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#aeb0f94d2500292926bc8416c9a904297">blobFromDsImages</a> (const std::vector&lt; <a class="el" href="class_ds_image.html">DsImage</a> &gt; &amp;inputImages, cv::Mat &amp;blob, const int &amp;inputH, const int &amp;inputW)</td></tr>
+<tr class="separator:aeb0f94d2500292926bc8416c9a904297"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7fea79d9eec38dbbc62b5d1b6df374f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#af7fea79d9eec38dbbc62b5d1b6df374f">leftTrim</a> (std::string &amp;s)</td></tr>
+<tr class="separator:af7fea79d9eec38dbbc62b5d1b6df374f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57cc21f5208e82ae3aa4be00f3c4a593"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a57cc21f5208e82ae3aa4be00f3c4a593">rightTrim</a> (std::string &amp;s)</td></tr>
+<tr class="separator:a57cc21f5208e82ae3aa4be00f3c4a593"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9de43e600ebc3a0f919582b007c25322"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a9de43e600ebc3a0f919582b007c25322">trim</a> (std::string s)</td></tr>
+<tr class="separator:a9de43e600ebc3a0f919582b007c25322"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbdafbe11cc77edd6d4c99a1fda70d2c"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#abbdafbe11cc77edd6d4c99a1fda70d2c">triml</a> (std::string s, const char *t)</td></tr>
+<tr class="separator:abbdafbe11cc77edd6d4c99a1fda70d2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0154026299e5fc73737172009e714d50"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a0154026299e5fc73737172009e714d50">trimr</a> (std::string s, const char *t)</td></tr>
+<tr class="separator:a0154026299e5fc73737172009e714d50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfab750429265ecfdced0e67e7120325"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#abfab750429265ecfdced0e67e7120325">clamp</a> (const float val, const float minVal, const float maxVal)</td></tr>
+<tr class="separator:abfab750429265ecfdced0e67e7120325"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d4bc21489f536102b7e46d966259a1e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a5d4bc21489f536102b7e46d966259a1e">fileExists</a> (const std::string fileName, bool verbose)</td></tr>
+<tr class="separator:a5d4bc21489f536102b7e46d966259a1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcb46afd4bada782cab0f1962502bb03"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_b_box.html">BBox</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#afcb46afd4bada782cab0f1962502bb03">convertBBoxNetRes</a> (const float &amp;bx, const float &amp;by, const float &amp;bw, const float &amp;bh, const uint32_t &amp;stride, const uint32_t &amp;netW, const uint32_t &amp;netH)</td></tr>
+<tr class="separator:afcb46afd4bada782cab0f1962502bb03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ffb8af5e042500c5b1914f5d62d9969"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a1ffb8af5e042500c5b1914f5d62d9969">convertBBoxImgRes</a> (const float scalingFactor, const float xOffset, const float yOffset, <a class="el" href="struct_b_box.html">BBox</a> &amp;bbox)</td></tr>
+<tr class="separator:a1ffb8af5e042500c5b1914f5d62d9969"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a009b0b88f21c3ab0a6bf4758eb9024e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a009b0b88f21c3ab0a6bf4758eb9024e1">printPredictions</a> (const <a class="el" href="struct_b_box_info.html">BBoxInfo</a> &amp;b, const std::string &amp;className)</td></tr>
+<tr class="separator:a009b0b88f21c3ab0a6bf4758eb9024e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5008482093197b2c41c92e4f4c1a0a73"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a5008482093197b2c41c92e4f4c1a0a73">loadListFromTextFile</a> (const std::string filename)</td></tr>
+<tr class="separator:a5008482093197b2c41c92e4f4c1a0a73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7f84a69c05af87778a897de4e4b55cd"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#ab7f84a69c05af87778a897de4e4b55cd">loadImageList</a> (const std::string filename, const std::string prefix)</td></tr>
+<tr class="separator:ab7f84a69c05af87778a897de4e4b55cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a32da7bd6620d4ba5d17910fbd3fc3e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_b_box_info.html">BBoxInfo</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a6a32da7bd6620d4ba5d17910fbd3fc3e">nmsAllClasses</a> (const float nmsThresh, std::vector&lt; <a class="el" href="struct_b_box_info.html">BBoxInfo</a> &gt; &amp;binfo, const uint32_t numClasses, const std::string &amp;model_type)</td></tr>
+<tr class="separator:a6a32da7bd6620d4ba5d17910fbd3fc3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec995b34cc9a0fe2893def755875537b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_b_box_info.html">BBoxInfo</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#aec995b34cc9a0fe2893def755875537b">diou_nms</a> (const float nmsThresh, std::vector&lt; <a class="el" href="struct_b_box_info.html">BBoxInfo</a> &gt; binfo)</td></tr>
+<tr class="separator:aec995b34cc9a0fe2893def755875537b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45e762481b9e65f8387491193bcd2d62"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_b_box_info.html">BBoxInfo</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a45e762481b9e65f8387491193bcd2d62">nonMaximumSuppression</a> (const float nmsThresh, std::vector&lt; <a class="el" href="struct_b_box_info.html">BBoxInfo</a> &gt; binfo)</td></tr>
+<tr class="separator:a45e762481b9e65f8387491193bcd2d62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8eb0fe94034053ae9ebb52e614d4739"><td class="memItemLeft" align="right" valign="top">nvinfer1::ICudaEngine *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#ae8eb0fe94034053ae9ebb52e614d4739">loadTRTEngine</a> (const std::string planFilePath, <a class="el" href="class_logger.html">Logger</a> &amp;logger)</td></tr>
+<tr class="separator:ae8eb0fe94034053ae9ebb52e614d4739"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9531f4cb628a3223962aad7927e4696"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#ac9531f4cb628a3223962aad7927e4696">loadWeights</a> (const std::string weightsFilePath, const std::string &amp;)</td></tr>
+<tr class="separator:ac9531f4cb628a3223962aad7927e4696"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed750fa89d08b75ff9a692b191bf4715"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#aed750fa89d08b75ff9a692b191bf4715">dimsToString</a> (const nvinfer1::Dims d)</td></tr>
+<tr class="separator:aed750fa89d08b75ff9a692b191bf4715"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff66fa220f3baee9755337748eaecfdc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#aff66fa220f3baee9755337748eaecfdc">displayDimType</a> (const nvinfer1::Dims d)</td></tr>
+<tr class="separator:aff66fa220f3baee9755337748eaecfdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bff9bcbf45a029f18e9a99610cc9249"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a7bff9bcbf45a029f18e9a99610cc9249">getNumChannels</a> (nvinfer1::ITensor *t)</td></tr>
+<tr class="separator:a7bff9bcbf45a029f18e9a99610cc9249"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9de629449e53b871ddc700c43c111e06"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a9de629449e53b871ddc700c43c111e06">get3DTensorVolume</a> (nvinfer1::Dims inputDims)</td></tr>
+<tr class="separator:a9de629449e53b871ddc700c43c111e06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62b1daf2ac3defa199e502199ea9f7cb"><td class="memItemLeft" align="right" valign="top">nvinfer1::ILayer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a62b1daf2ac3defa199e502199ea9f7cb">netAddMaxpool</a> (int layerIdx, std::map&lt; std::string, std::string &gt; &amp;block, nvinfer1::ITensor *input, nvinfer1::INetworkDefinition *<a class="el" href="structnetwork.html">network</a>)</td></tr>
+<tr class="separator:a62b1daf2ac3defa199e502199ea9f7cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5eb9a5f6fe24782a6c3ec767dc1c1efb"><td class="memItemLeft" align="right" valign="top">nvinfer1::ILayer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a5eb9a5f6fe24782a6c3ec767dc1c1efb">netAddConvLinear</a> (int layerIdx, std::map&lt; std::string, std::string &gt; &amp;block, std::vector&lt; float &gt; &amp;weights, std::vector&lt; nvinfer1::Weights &gt; &amp;trtWeights, int &amp;weightPtr, int &amp;inputChannels, nvinfer1::ITensor *input, nvinfer1::INetworkDefinition *<a class="el" href="structnetwork.html">network</a>)</td></tr>
+<tr class="separator:a5eb9a5f6fe24782a6c3ec767dc1c1efb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b0587f7147a5e01bcbeb04946542f12"><td class="memItemLeft" align="right" valign="top">nvinfer1::ILayer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a2b0587f7147a5e01bcbeb04946542f12">net_conv_bn_mish</a> (int layerIdx, std::map&lt; std::string, std::string &gt; &amp;block, std::vector&lt; float &gt; &amp;weights, std::vector&lt; nvinfer1::Weights &gt; &amp;trtWeights, int &amp;weightPtr, int &amp;inputChannels, nvinfer1::ITensor *input, nvinfer1::INetworkDefinition *<a class="el" href="structnetwork.html">network</a>)</td></tr>
+<tr class="separator:a2b0587f7147a5e01bcbeb04946542f12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a359d8589c73e577d53e25f9b215bf8"><td class="memItemLeft" align="right" valign="top">nvinfer1::ILayer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a1a359d8589c73e577d53e25f9b215bf8">layer_split</a> (const int n_layer_index_, nvinfer1::ITensor *input_, nvinfer1::INetworkDefinition *<a class="el" href="structnetwork.html">network</a>)</td></tr>
+<tr class="separator:a1a359d8589c73e577d53e25f9b215bf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92fa92cf8203fd79df2242436943502e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a92fa92cf8203fd79df2242436943502e">parse_int_list</a> (const std::string s_args_)</td></tr>
+<tr class="separator:a92fa92cf8203fd79df2242436943502e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7154a8b2287fe450e29b0b3c9184af3c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a7154a8b2287fe450e29b0b3c9184af3c">dims2chw</a> (const nvinfer1::Dims d)</td></tr>
+<tr class="separator:a7154a8b2287fe450e29b0b3c9184af3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6b5e5ec616398ff7daf8447c8729d9d"><td class="memItemLeft" align="right" valign="top">nvinfer1::ILayer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#ad6b5e5ec616398ff7daf8447c8729d9d">layer_bottleneck</a> (std::vector&lt; nvinfer1::Weights &gt; &amp;trtWeights_, std::string s_layer_name_, std::map&lt; std::string, std::vector&lt; float &gt; &gt; &amp;map_wts_, nvinfer1::INetworkDefinition *network_, nvinfer1::ITensor *input_, const int c2_, bool shortcut_=true, const int gouup_=1, const float e_=0.5)</td></tr>
+<tr class="separator:ad6b5e5ec616398ff7daf8447c8729d9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a027d3c623393d702658637b4c33dccdf"><td class="memItemLeft" align="right" valign="top">nvinfer1::ILayer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a027d3c623393d702658637b4c33dccdf">layer_concate</a> (nvinfer1::ITensor **concatInputs, const int n_size_, const int n_axis_, nvinfer1::INetworkDefinition *network_)</td></tr>
+<tr class="separator:a027d3c623393d702658637b4c33dccdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4f92c613de25c7b77416b0c2459c59a"><td class="memItemLeft" align="right" valign="top">nvinfer1::ILayer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#ae4f92c613de25c7b77416b0c2459c59a">layer_bn</a> (std::vector&lt; nvinfer1::Weights &gt; &amp;trtWeights_, const std::string s_layer_name_, std::map&lt; std::string, std::vector&lt; float &gt; &gt; &amp;map_wts_, nvinfer1::ITensor *input_, const int n_filters_, nvinfer1::INetworkDefinition *network_)</td></tr>
+<tr class="separator:ae4f92c613de25c7b77416b0c2459c59a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6f71bb65626e831af083d018c79bfdb"><td class="memItemLeft" align="right" valign="top">nvinfer1::ILayer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#ae6f71bb65626e831af083d018c79bfdb">layer_act</a> (nvinfer1::ITensor *input_, nvinfer1::INetworkDefinition *network_, const std::string s_act_)</td></tr>
+<tr class="separator:ae6f71bb65626e831af083d018c79bfdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd516898aa9d05b3748ebe8c0483c941"><td class="memItemLeft" align="right" valign="top">nvinfer1::ILayer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#abd516898aa9d05b3748ebe8c0483c941">layer_conv</a> (std::vector&lt; nvinfer1::Weights &gt; &amp;trtWeights_, const std::string s_layer_name_, std::map&lt; std::string, std::vector&lt; float &gt; &gt; &amp;map_wts_, nvinfer1::ITensor *input_, nvinfer1::INetworkDefinition *network_, const int n_filters_, const int n_kernel_size_, const int n_stride_, const bool b_bias_, const int group_, const bool b_padding_)</td></tr>
+<tr class="separator:abd516898aa9d05b3748ebe8c0483c941"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4efe1e9c2b00009a7aa5423340006309"><td class="memItemLeft" align="right" valign="top">nvinfer1::ILayer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a4efe1e9c2b00009a7aa5423340006309">C3</a> (std::vector&lt; nvinfer1::Weights &gt; &amp;trtWeights_, std::string s_model_name_, std::map&lt; std::string, std::vector&lt; float &gt; &gt; &amp;map_wts_, nvinfer1::INetworkDefinition *network_, nvinfer1::ITensor *input_, const int c2_, const int n_depth_, const bool b_short_cut_, const int group_, const float e_)</td></tr>
+<tr class="separator:a4efe1e9c2b00009a7aa5423340006309"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa26a3863aebc10909c98437be3a59e1a"><td class="memItemLeft" align="right" valign="top">nvinfer1::ILayer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#aa26a3863aebc10909c98437be3a59e1a">layer_bottleneck_csp</a> (std::vector&lt; nvinfer1::Weights &gt; &amp;trtWeights_, std::string s_model_name_, std::map&lt; std::string, std::vector&lt; float &gt; &gt; &amp;map_wts_, nvinfer1::INetworkDefinition *network_, nvinfer1::ITensor *input_, const int c2_, const int n_depth_, const bool b_short_cut_, const int group_, const float e_)</td></tr>
+<tr class="separator:aa26a3863aebc10909c98437be3a59e1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1adb16a0d6e7d1c22d9f73fb74732d09"><td class="memItemLeft" align="right" valign="top">nvinfer1::ILayer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a1adb16a0d6e7d1c22d9f73fb74732d09">layer_spp</a> (std::vector&lt; nvinfer1::Weights &gt; &amp;trtWeights_, std::string s_model_name_, std::map&lt; std::string, std::vector&lt; float &gt; &gt; &amp;map_wts_, nvinfer1::INetworkDefinition *network_, nvinfer1::ITensor *input_, const int c2_, const std::vector&lt; int &gt; &amp;vec_args_)</td></tr>
+<tr class="separator:a1adb16a0d6e7d1c22d9f73fb74732d09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11405f4d7148539c986372291d834b02"><td class="memItemLeft" align="right" valign="top">nvinfer1::ILayer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a11405f4d7148539c986372291d834b02">layer_sppf</a> (std::vector&lt; nvinfer1::Weights &gt; &amp;trtWeights_, std::string s_model_name_, std::map&lt; std::string, std::vector&lt; float &gt; &gt; &amp;map_wts_, nvinfer1::INetworkDefinition *network_, nvinfer1::ITensor *input_, const int c2_, int k_)</td></tr>
+<tr class="separator:a11405f4d7148539c986372291d834b02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2b50679d0e2f13ea1855357a85ef94f"><td class="memItemLeft" align="right" valign="top">nvinfer1::ILayer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#ab2b50679d0e2f13ea1855357a85ef94f">layer_upsample</a> (std::string s_model_name_, std::map&lt; std::string, std::vector&lt; float &gt; &gt; &amp;map_wts_, nvinfer1::INetworkDefinition *network_, nvinfer1::ITensor *input_, const int n_scale_)</td></tr>
+<tr class="separator:ab2b50679d0e2f13ea1855357a85ef94f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d770c1d2152cba65e9d869cf38eaebb"><td class="memItemLeft" align="right" valign="top">nvinfer1::ILayer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a9d770c1d2152cba65e9d869cf38eaebb">layer_conv_bn_act</a> (std::vector&lt; nvinfer1::Weights &gt; &amp;trtWeights_, const std::string s_layer_name_, std::map&lt; std::string, std::vector&lt; float &gt; &gt; &amp;map_wts_, nvinfer1::ITensor *input_, nvinfer1::INetworkDefinition *network_, const int n_filters_, const int n_kernel_size_, const int n_stride_, const int group_, const bool b_padding_, const bool b_bn_, const std::string s_act_)</td></tr>
+<tr class="separator:a9d770c1d2152cba65e9d869cf38eaebb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ab89a0c81092b4ef6ce96143240046e"><td class="memItemLeft" align="right" valign="top">nvinfer1::ILayer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a3ab89a0c81092b4ef6ce96143240046e">layer_focus</a> (std::vector&lt; nvinfer1::Weights &gt; &amp;trtWeights_, std::string s_model_name_, std::map&lt; std::string, std::vector&lt; float &gt; &gt; &amp;map_wts_, nvinfer1::ITensor *input, const int out_channels_, const int kernel_size_, std::vector&lt; nvinfer1::Weights &gt; &amp;trtWeights, nvinfer1::INetworkDefinition *<a class="el" href="structnetwork.html">network</a>)</td></tr>
+<tr class="separator:a3ab89a0c81092b4ef6ce96143240046e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9d863781c46745dbd718cc6ff9068b0"><td class="memItemLeft" align="right" valign="top">nvinfer1::ILayer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#aa9d863781c46745dbd718cc6ff9068b0">netAddConvBNLeaky</a> (int layerIdx, std::map&lt; std::string, std::string &gt; &amp;block, std::vector&lt; float &gt; &amp;weights, std::vector&lt; nvinfer1::Weights &gt; &amp;trtWeights, int &amp;weightPtr, int &amp;inputChannels, nvinfer1::ITensor *input, nvinfer1::INetworkDefinition *<a class="el" href="structnetwork.html">network</a>)</td></tr>
+<tr class="separator:aa9d863781c46745dbd718cc6ff9068b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c82311a83296a49c11fc9f154d3bd71"><td class="memItemLeft" align="right" valign="top">nvinfer1::ILayer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#a8c82311a83296a49c11fc9f154d3bd71">netAddUpsample</a> (int layerIdx, std::map&lt; std::string, std::string &gt; &amp;block, std::vector&lt; float &gt; &amp;, std::vector&lt; nvinfer1::Weights &gt; &amp;trtWeights, int &amp;, nvinfer1::ITensor *input, nvinfer1::INetworkDefinition *<a class="el" href="structnetwork.html">network</a>)</td></tr>
+<tr class="separator:a8c82311a83296a49c11fc9f154d3bd71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8916d83be16511bbe571ea56c040b5a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trt__utils_8cpp.html#ae8916d83be16511bbe571ea56c040b5a">printLayerInfo</a> (std::string layerIndex, std::string layerName, std::string layerInput, std::string layerOutput, std::string weightPtr)</td></tr>
+<tr class="separator:ae8916d83be16511bbe571ea56c040b5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">函数说明</h2>
+<a id="aeb0f94d2500292926bc8416c9a904297" name="aeb0f94d2500292926bc8416c9a904297"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb0f94d2500292926bc8416c9a904297">&#9670;&nbsp;</a></span>blobFromDsImages()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void blobFromDsImages </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="class_ds_image.html">DsImage</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>inputImages</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">cv::Mat &amp;&#160;</td>
+          <td class="paramname"><em>blob</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>inputH</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>inputW</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4efe1e9c2b00009a7aa5423340006309" name="a4efe1e9c2b00009a7aa5423340006309"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4efe1e9c2b00009a7aa5423340006309">&#9670;&nbsp;</a></span>C3()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nvinfer1::ILayer * C3 </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; nvinfer1::Weights &gt; &amp;&#160;</td>
+          <td class="paramname"><em>trtWeights_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>s_model_name_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; std::string, std::vector&lt; float &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>map_wts_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::INetworkDefinition *&#160;</td>
+          <td class="paramname"><em>network_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::ITensor *&#160;</td>
+          <td class="paramname"><em>input_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>c2_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>n_depth_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>b_short_cut_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>group_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>e_</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_a4efe1e9c2b00009a7aa5423340006309_cgraph.png" border="0" usemap="#atrt__utils_8cpp_a4efe1e9c2b00009a7aa5423340006309_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_a4efe1e9c2b00009a7aa5423340006309_cgraph" id="atrt__utils_8cpp_a4efe1e9c2b00009a7aa5423340006309_cgraph">
+<area shape="rect" title=" " alt="" coords="5,71,44,98"/>
+<area shape="rect" href="namespacemkdoc.html#a85ae95dfe8536ee978dcacf1f5dcfe00" title=" " alt="" coords="693,21,765,47"/>
+<area shape="rect" href="trt__utils_8cpp.html#ad6b5e5ec616398ff7daf8447c8729d9d" title=" " alt="" coords="92,46,209,73"/>
+<area shape="rect" href="trt__utils_8cpp.html#a9d770c1d2152cba65e9d869cf38eaebb" title=" " alt="" coords="257,97,387,123"/>
+<area shape="rect" href="trt__utils_8cpp.html#a027d3c623393d702658637b4c33dccdf" title=" " alt="" coords="99,147,202,174"/>
+<area shape="rect" href="trt__utils_8cpp.html#a7154a8b2287fe450e29b0b3c9184af3c" title=" " alt="" coords="565,46,645,73"/>
+<area shape="rect" href="trt__utils_8cpp.html#ae6f71bb65626e831af083d018c79bfdb" title=" " alt="" coords="439,97,513,123"/>
+<area shape="rect" href="trt__utils_8cpp.html#ae4f92c613de25c7b77416b0c2459c59a" title=" " alt="" coords="441,147,511,174"/>
+<area shape="rect" href="trt__utils_8cpp.html#abd516898aa9d05b3748ebe8c0483c941" title=" " alt="" coords="435,198,517,225"/>
+<area shape="rect" href="descr_8h.html#a8c0d3505d8fb5963c5e157eabdbd3c7f" title=" " alt="" coords="291,147,353,174"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="abfab750429265ecfdced0e67e7120325" name="abfab750429265ecfdced0e67e7120325"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfab750429265ecfdced0e67e7120325">&#9670;&nbsp;</a></span>clamp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float clamp </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>val</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>minVal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>maxVal</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1ffb8af5e042500c5b1914f5d62d9969" name="a1ffb8af5e042500c5b1914f5d62d9969"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ffb8af5e042500c5b1914f5d62d9969">&#9670;&nbsp;</a></span>convertBBoxImgRes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void convertBBoxImgRes </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>scalingFactor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>xOffset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>yOffset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_b_box.html">BBox</a> &amp;&#160;</td>
+          <td class="paramname"><em>bbox</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afcb46afd4bada782cab0f1962502bb03" name="afcb46afd4bada782cab0f1962502bb03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcb46afd4bada782cab0f1962502bb03">&#9670;&nbsp;</a></span>convertBBoxNetRes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_b_box.html">BBox</a> convertBBoxNetRes </td>
+          <td>(</td>
+          <td class="paramtype">const float &amp;&#160;</td>
+          <td class="paramname"><em>bx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float &amp;&#160;</td>
+          <td class="paramname"><em>by</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float &amp;&#160;</td>
+          <td class="paramname"><em>bw</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float &amp;&#160;</td>
+          <td class="paramname"><em>bh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t &amp;&#160;</td>
+          <td class="paramname"><em>stride</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t &amp;&#160;</td>
+          <td class="paramname"><em>netW</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t &amp;&#160;</td>
+          <td class="paramname"><em>netH</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_afcb46afd4bada782cab0f1962502bb03_cgraph.png" border="0" usemap="#atrt__utils_8cpp_afcb46afd4bada782cab0f1962502bb03_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_afcb46afd4bada782cab0f1962502bb03_cgraph" id="atrt__utils_8cpp_afcb46afd4bada782cab0f1962502bb03_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,144,32"/>
+<area shape="rect" href="trt__utils_8cpp.html#abfab750429265ecfdced0e67e7120325" title=" " alt="" coords="192,5,249,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a7154a8b2287fe450e29b0b3c9184af3c" name="a7154a8b2287fe450e29b0b3c9184af3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7154a8b2287fe450e29b0b3c9184af3c">&#9670;&nbsp;</a></span>dims2chw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; int &gt; dims2chw </td>
+          <td>(</td>
+          <td class="paramtype">const nvinfer1::Dims&#160;</td>
+          <td class="paramname"><em>d</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_a7154a8b2287fe450e29b0b3c9184af3c_cgraph.png" border="0" usemap="#atrt__utils_8cpp_a7154a8b2287fe450e29b0b3c9184af3c_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_a7154a8b2287fe450e29b0b3c9184af3c_cgraph" id="atrt__utils_8cpp_a7154a8b2287fe450e29b0b3c9184af3c_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,85,32"/>
+<area shape="rect" href="namespacemkdoc.html#a85ae95dfe8536ee978dcacf1f5dcfe00" title=" " alt="" coords="133,5,205,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aed750fa89d08b75ff9a692b191bf4715" name="aed750fa89d08b75ff9a692b191bf4715"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed750fa89d08b75ff9a692b191bf4715">&#9670;&nbsp;</a></span>dimsToString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string dimsToString </td>
+          <td>(</td>
+          <td class="paramtype">const nvinfer1::Dims&#160;</td>
+          <td class="paramname"><em>d</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_aed750fa89d08b75ff9a692b191bf4715_cgraph.png" border="0" usemap="#atrt__utils_8cpp_aed750fa89d08b75ff9a692b191bf4715_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_aed750fa89d08b75ff9a692b191bf4715_cgraph" id="atrt__utils_8cpp_aed750fa89d08b75ff9a692b191bf4715_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,104,32"/>
+<area shape="rect" href="namespacemkdoc.html#a85ae95dfe8536ee978dcacf1f5dcfe00" title=" " alt="" coords="152,5,224,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aec995b34cc9a0fe2893def755875537b" name="aec995b34cc9a0fe2893def755875537b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec995b34cc9a0fe2893def755875537b">&#9670;&nbsp;</a></span>diou_nms()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="struct_b_box_info.html">BBoxInfo</a> &gt; diou_nms </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>nmsThresh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="struct_b_box_info.html">BBoxInfo</a> &gt;&#160;</td>
+          <td class="paramname"><em>binfo</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_aec995b34cc9a0fe2893def755875537b_cgraph.png" border="0" usemap="#atrt__utils_8cpp_aec995b34cc9a0fe2893def755875537b_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_aec995b34cc9a0fe2893def755875537b_cgraph" id="atrt__utils_8cpp_aec995b34cc9a0fe2893def755875537b_cgraph">
+<area shape="rect" title=" " alt="" coords="5,31,84,57"/>
+<area shape="rect" href="box_8c.html#a49bbaf2c74dad0f7bbca22c9e41286ca" title=" " alt="" coords="139,5,202,32"/>
+<area shape="rect" href="namespacenvinfer1.html#ad3e635d1f15cdaca5d23251c775ef725" title=" " alt="" coords="132,56,209,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aff66fa220f3baee9755337748eaecfdc" name="aff66fa220f3baee9755337748eaecfdc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff66fa220f3baee9755337748eaecfdc">&#9670;&nbsp;</a></span>displayDimType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void displayDimType </td>
+          <td>(</td>
+          <td class="paramtype">const nvinfer1::Dims&#160;</td>
+          <td class="paramname"><em>d</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_aff66fa220f3baee9755337748eaecfdc_cgraph.png" border="0" usemap="#atrt__utils_8cpp_aff66fa220f3baee9755337748eaecfdc_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_aff66fa220f3baee9755337748eaecfdc_cgraph" id="atrt__utils_8cpp_aff66fa220f3baee9755337748eaecfdc_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,120,32"/>
+<area shape="rect" href="namespacemkdoc.html#a85ae95dfe8536ee978dcacf1f5dcfe00" title=" " alt="" coords="168,5,240,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a5d4bc21489f536102b7e46d966259a1e" name="a5d4bc21489f536102b7e46d966259a1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d4bc21489f536102b7e46d966259a1e">&#9670;&nbsp;</a></span>fileExists()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool fileExists </td>
+          <td>(</td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>fileName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>verbose</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9de629449e53b871ddc700c43c111e06" name="a9de629449e53b871ddc700c43c111e06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9de629449e53b871ddc700c43c111e06">&#9670;&nbsp;</a></span>get3DTensorVolume()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint64_t get3DTensorVolume </td>
+          <td>(</td>
+          <td class="paramtype">nvinfer1::Dims&#160;</td>
+          <td class="paramname"><em>inputDims</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7bff9bcbf45a029f18e9a99610cc9249" name="a7bff9bcbf45a029f18e9a99610cc9249"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bff9bcbf45a029f18e9a99610cc9249">&#9670;&nbsp;</a></span>getNumChannels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int getNumChannels </td>
+          <td>(</td>
+          <td class="paramtype">nvinfer1::ITensor *&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_a7bff9bcbf45a029f18e9a99610cc9249_cgraph.png" border="0" usemap="#atrt__utils_8cpp_a7bff9bcbf45a029f18e9a99610cc9249_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_a7bff9bcbf45a029f18e9a99610cc9249_cgraph" id="atrt__utils_8cpp_a7bff9bcbf45a029f18e9a99610cc9249_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,127,32"/>
+<area shape="rect" href="namespacemkdoc.html#a85ae95dfe8536ee978dcacf1f5dcfe00" title=" " alt="" coords="175,5,247,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ae6f71bb65626e831af083d018c79bfdb" name="ae6f71bb65626e831af083d018c79bfdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6f71bb65626e831af083d018c79bfdb">&#9670;&nbsp;</a></span>layer_act()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nvinfer1::ILayer * layer_act </td>
+          <td>(</td>
+          <td class="paramtype">nvinfer1::ITensor *&#160;</td>
+          <td class="paramname"><em>input_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::INetworkDefinition *&#160;</td>
+          <td class="paramname"><em>network_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>s_act_</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae4f92c613de25c7b77416b0c2459c59a" name="ae4f92c613de25c7b77416b0c2459c59a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4f92c613de25c7b77416b0c2459c59a">&#9670;&nbsp;</a></span>layer_bn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nvinfer1::ILayer * layer_bn </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; nvinfer1::Weights &gt; &amp;&#160;</td>
+          <td class="paramname"><em>trtWeights_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>s_layer_name_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; std::string, std::vector&lt; float &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>map_wts_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::ITensor *&#160;</td>
+          <td class="paramname"><em>input_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>n_filters_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::INetworkDefinition *&#160;</td>
+          <td class="paramname"><em>network_</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad6b5e5ec616398ff7daf8447c8729d9d" name="ad6b5e5ec616398ff7daf8447c8729d9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6b5e5ec616398ff7daf8447c8729d9d">&#9670;&nbsp;</a></span>layer_bottleneck()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nvinfer1::ILayer * layer_bottleneck </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; nvinfer1::Weights &gt; &amp;&#160;</td>
+          <td class="paramname"><em>trtWeights_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>s_layer_name_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; std::string, std::vector&lt; float &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>map_wts_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::INetworkDefinition *&#160;</td>
+          <td class="paramname"><em>network_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::ITensor *&#160;</td>
+          <td class="paramname"><em>input_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>c2_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>shortcut_</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>gouup_</em> = <code>1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>e_</em> = <code>0.5</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_ad6b5e5ec616398ff7daf8447c8729d9d_cgraph.png" border="0" usemap="#atrt__utils_8cpp_ad6b5e5ec616398ff7daf8447c8729d9d_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_ad6b5e5ec616398ff7daf8447c8729d9d_cgraph" id="atrt__utils_8cpp_ad6b5e5ec616398ff7daf8447c8729d9d_cgraph">
+<area shape="rect" title=" " alt="" coords="5,49,123,76"/>
+<area shape="rect" href="trt__utils_8cpp.html#a9d770c1d2152cba65e9d869cf38eaebb" title=" " alt="" coords="171,49,300,76"/>
+<area shape="rect" href="trt__utils_8cpp.html#a7154a8b2287fe450e29b0b3c9184af3c" title=" " alt="" coords="479,49,559,76"/>
+<area shape="rect" href="trt__utils_8cpp.html#ae6f71bb65626e831af083d018c79bfdb" title=" " alt="" coords="352,24,427,51"/>
+<area shape="rect" href="trt__utils_8cpp.html#ae4f92c613de25c7b77416b0c2459c59a" title=" " alt="" coords="354,75,425,101"/>
+<area shape="rect" href="trt__utils_8cpp.html#abd516898aa9d05b3748ebe8c0483c941" title=" " alt="" coords="348,125,431,152"/>
+<area shape="rect" href="namespacemkdoc.html#a85ae95dfe8536ee978dcacf1f5dcfe00" title=" " alt="" coords="607,49,679,76"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa26a3863aebc10909c98437be3a59e1a" name="aa26a3863aebc10909c98437be3a59e1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa26a3863aebc10909c98437be3a59e1a">&#9670;&nbsp;</a></span>layer_bottleneck_csp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nvinfer1::ILayer * layer_bottleneck_csp </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; nvinfer1::Weights &gt; &amp;&#160;</td>
+          <td class="paramname"><em>trtWeights_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>s_model_name_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; std::string, std::vector&lt; float &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>map_wts_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::INetworkDefinition *&#160;</td>
+          <td class="paramname"><em>network_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::ITensor *&#160;</td>
+          <td class="paramname"><em>input_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>c2_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>n_depth_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>b_short_cut_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>group_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>e_</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_aa26a3863aebc10909c98437be3a59e1a_cgraph.png" border="0" usemap="#atrt__utils_8cpp_aa26a3863aebc10909c98437be3a59e1a_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_aa26a3863aebc10909c98437be3a59e1a_cgraph" id="atrt__utils_8cpp_aa26a3863aebc10909c98437be3a59e1a_cgraph">
+<area shape="rect" title=" " alt="" coords="5,169,151,196"/>
+<area shape="rect" href="namespacemkdoc.html#a85ae95dfe8536ee978dcacf1f5dcfe00" title=" " alt="" coords="800,17,872,44"/>
+<area shape="rect" href="trt__utils_8cpp.html#a7154a8b2287fe450e29b0b3c9184af3c" title=" " alt="" coords="672,68,752,95"/>
+<area shape="rect" href="trt__utils_8cpp.html#ae6f71bb65626e831af083d018c79bfdb" title=" " alt="" coords="545,233,620,260"/>
+<area shape="rect" href="trt__utils_8cpp.html#ae4f92c613de25c7b77416b0c2459c59a" title=" " alt="" coords="547,296,618,323"/>
+<area shape="rect" href="trt__utils_8cpp.html#ad6b5e5ec616398ff7daf8447c8729d9d" title=" " alt="" coords="199,144,316,171"/>
+<area shape="rect" href="trt__utils_8cpp.html#a9d770c1d2152cba65e9d869cf38eaebb" title=" " alt="" coords="364,169,493,196"/>
+<area shape="rect" href="trt__utils_8cpp.html#abd516898aa9d05b3748ebe8c0483c941" title=" " alt="" coords="541,93,624,120"/>
+<area shape="rect" href="trt__utils_8cpp.html#a027d3c623393d702658637b4c33dccdf" title=" " alt="" coords="206,347,309,373"/>
+<area shape="rect" href="descr_8h.html#a8c0d3505d8fb5963c5e157eabdbd3c7f" title=" " alt="" coords="398,347,459,373"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a027d3c623393d702658637b4c33dccdf" name="a027d3c623393d702658637b4c33dccdf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a027d3c623393d702658637b4c33dccdf">&#9670;&nbsp;</a></span>layer_concate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nvinfer1::ILayer * layer_concate </td>
+          <td>(</td>
+          <td class="paramtype">nvinfer1::ITensor **&#160;</td>
+          <td class="paramname"><em>concatInputs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>n_size_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>n_axis_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::INetworkDefinition *&#160;</td>
+          <td class="paramname"><em>network_</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_a027d3c623393d702658637b4c33dccdf_cgraph.png" border="0" usemap="#atrt__utils_8cpp_a027d3c623393d702658637b4c33dccdf_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_a027d3c623393d702658637b4c33dccdf_cgraph" id="atrt__utils_8cpp_a027d3c623393d702658637b4c33dccdf_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,108,32"/>
+<area shape="rect" href="descr_8h.html#a8c0d3505d8fb5963c5e157eabdbd3c7f" title=" " alt="" coords="156,5,217,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="abd516898aa9d05b3748ebe8c0483c941" name="abd516898aa9d05b3748ebe8c0483c941"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd516898aa9d05b3748ebe8c0483c941">&#9670;&nbsp;</a></span>layer_conv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nvinfer1::ILayer * layer_conv </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; nvinfer1::Weights &gt; &amp;&#160;</td>
+          <td class="paramname"><em>trtWeights_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>s_layer_name_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; std::string, std::vector&lt; float &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>map_wts_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::ITensor *&#160;</td>
+          <td class="paramname"><em>input_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::INetworkDefinition *&#160;</td>
+          <td class="paramname"><em>network_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>n_filters_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>n_kernel_size_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>n_stride_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>b_bias_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>group_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>b_padding_</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_abd516898aa9d05b3748ebe8c0483c941_cgraph.png" border="0" usemap="#atrt__utils_8cpp_abd516898aa9d05b3748ebe8c0483c941_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_abd516898aa9d05b3748ebe8c0483c941_cgraph" id="atrt__utils_8cpp_abd516898aa9d05b3748ebe8c0483c941_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,88,32"/>
+<area shape="rect" href="trt__utils_8cpp.html#a7154a8b2287fe450e29b0b3c9184af3c" title=" " alt="" coords="136,5,216,32"/>
+<area shape="rect" href="namespacemkdoc.html#a85ae95dfe8536ee978dcacf1f5dcfe00" title=" " alt="" coords="264,5,336,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a9d770c1d2152cba65e9d869cf38eaebb" name="a9d770c1d2152cba65e9d869cf38eaebb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d770c1d2152cba65e9d869cf38eaebb">&#9670;&nbsp;</a></span>layer_conv_bn_act()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nvinfer1::ILayer * layer_conv_bn_act </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; nvinfer1::Weights &gt; &amp;&#160;</td>
+          <td class="paramname"><em>trtWeights_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>s_layer_name_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; std::string, std::vector&lt; float &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>map_wts_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::ITensor *&#160;</td>
+          <td class="paramname"><em>input_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::INetworkDefinition *&#160;</td>
+          <td class="paramname"><em>network_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>n_filters_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>n_kernel_size_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>n_stride_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>group_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>b_padding_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>b_bn_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>s_act_</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_a9d770c1d2152cba65e9d869cf38eaebb_cgraph.png" border="0" usemap="#atrt__utils_8cpp_a9d770c1d2152cba65e9d869cf38eaebb_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_a9d770c1d2152cba65e9d869cf38eaebb_cgraph" id="atrt__utils_8cpp_a9d770c1d2152cba65e9d869cf38eaebb_cgraph">
+<area shape="rect" title=" " alt="" coords="5,49,135,76"/>
+<area shape="rect" href="trt__utils_8cpp.html#a7154a8b2287fe450e29b0b3c9184af3c" title=" " alt="" coords="313,49,393,76"/>
+<area shape="rect" href="trt__utils_8cpp.html#ae6f71bb65626e831af083d018c79bfdb" title=" " alt="" coords="187,24,261,51"/>
+<area shape="rect" href="trt__utils_8cpp.html#ae4f92c613de25c7b77416b0c2459c59a" title=" " alt="" coords="189,75,259,101"/>
+<area shape="rect" href="trt__utils_8cpp.html#abd516898aa9d05b3748ebe8c0483c941" title=" " alt="" coords="183,125,265,152"/>
+<area shape="rect" href="namespacemkdoc.html#a85ae95dfe8536ee978dcacf1f5dcfe00" title=" " alt="" coords="441,49,513,76"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a3ab89a0c81092b4ef6ce96143240046e" name="a3ab89a0c81092b4ef6ce96143240046e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ab89a0c81092b4ef6ce96143240046e">&#9670;&nbsp;</a></span>layer_focus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nvinfer1::ILayer * layer_focus </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; nvinfer1::Weights &gt; &amp;&#160;</td>
+          <td class="paramname"><em>trtWeights_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>s_model_name_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; std::string, std::vector&lt; float &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>map_wts_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::ITensor *&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>out_channels_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>kernel_size_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; nvinfer1::Weights &gt; &amp;&#160;</td>
+          <td class="paramname"><em>trtWeights</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::INetworkDefinition *&#160;</td>
+          <td class="paramname"><em>network</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_a3ab89a0c81092b4ef6ce96143240046e_cgraph.png" border="0" usemap="#atrt__utils_8cpp_a3ab89a0c81092b4ef6ce96143240046e_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_a3ab89a0c81092b4ef6ce96143240046e_cgraph" id="atrt__utils_8cpp_a3ab89a0c81092b4ef6ce96143240046e_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,93,32"/>
+<area shape="rect" href="trt__utils_8cpp.html#a7154a8b2287fe450e29b0b3c9184af3c" title=" " alt="" coords="449,5,529,32"/>
+<area shape="rect" href="trt__utils_8cpp.html#a9d770c1d2152cba65e9d869cf38eaebb" title=" " alt="" coords="141,56,271,83"/>
+<area shape="rect" href="namespacemkdoc.html#a85ae95dfe8536ee978dcacf1f5dcfe00" title=" " alt="" coords="577,5,649,32"/>
+<area shape="rect" href="trt__utils_8cpp.html#ae6f71bb65626e831af083d018c79bfdb" title=" " alt="" coords="323,56,397,83"/>
+<area shape="rect" href="trt__utils_8cpp.html#ae4f92c613de25c7b77416b0c2459c59a" title=" " alt="" coords="325,107,395,133"/>
+<area shape="rect" href="trt__utils_8cpp.html#abd516898aa9d05b3748ebe8c0483c941" title=" " alt="" coords="319,157,401,184"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a1a359d8589c73e577d53e25f9b215bf8" name="a1a359d8589c73e577d53e25f9b215bf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a359d8589c73e577d53e25f9b215bf8">&#9670;&nbsp;</a></span>layer_split()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nvinfer1::ILayer * layer_split </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>n_layer_index_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::ITensor *&#160;</td>
+          <td class="paramname"><em>input_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::INetworkDefinition *&#160;</td>
+          <td class="paramname"><em>network</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_a1a359d8589c73e577d53e25f9b215bf8_cgraph.png" border="0" usemap="#atrt__utils_8cpp_a1a359d8589c73e577d53e25f9b215bf8_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_a1a359d8589c73e577d53e25f9b215bf8_cgraph" id="atrt__utils_8cpp_a1a359d8589c73e577d53e25f9b215bf8_cgraph">
+<area shape="rect" title=" " alt="" coords="5,477,87,504"/>
+<area shape="rect" href="internals_8h.html#ae139ca7042b502d77d304c4e0c744ec6" title=" " alt="" coords="135,477,185,504"/>
+<area shape="rect" href="internals_8h.html#a6c7959e5bcf56993e43c61758aa697ac" title="Return a reference to the current internals data" alt="" coords="233,477,329,504"/>
+<area shape="rect" href="internals_8h.html#a1abbb5ac518b087af801c6a306924d06" title=" " alt="" coords="408,5,525,32"/>
+<area shape="rect" href="class_8h.html#a208e43f161a9e5d055948fabe479dc04" title=" " alt="" coords="383,680,550,707"/>
+<area shape="rect" href="detail_2common_8h.html#aeea9746c2787bab3a5a0c983ef965520" title="Used internally" alt="" coords="1615,427,1712,453"/>
+<area shape="rect" href="class_8h.html#a22ea570ce07bc0565deaff837ebe4d7f" title=" " alt="" coords="385,401,548,428"/>
+<area shape="rect" href="class_8h.html#a7b0038e104523235e205b13488390b72" title=" " alt="" coords="377,604,556,631"/>
+<area shape="rect" href="internals_8h.html#aab710766797199094667cee0bb3b6623" title=" " alt="" coords="399,984,534,1011"/>
+<area shape="rect" href="internals_8h.html#a9a48a53855a575eaf70192282e8eefae" title=" " alt="" coords="382,933,551,960"/>
+<area shape="rect" href="class_8h.html#a7a2d1b9a42df823366b438980fadb488" title=" " alt="" coords="605,832,767,859"/>
+<area shape="rect" href="group__python__builtins.html#ga786700afa0e3e4bd67530355c4c5dec9" title=" " alt="" coords="657,629,715,656"/>
+<area shape="rect" href="class_8h.html#a28c5c1e0535f8e634cbf9f488bad6a5b" title=" " alt="" coords="643,680,729,707"/>
+<area shape="rect" href="classhandle.html#aa58c40063166c7cedefdc4db2d6fa608" title="Return the underlying PyObject * pointer" alt="" coords="848,629,931,656"/>
+<area shape="rect" href="cast_8h.html#af50c237c1ebe85cf7e290a97197dd2c1" title=" " alt="" coords="643,325,729,352"/>
+<area shape="rect" href="class_8h.html#a629cca75d875fdd8b55c5a3a7cd33cdb" title=" " alt="" coords="604,173,768,200"/>
+<area shape="rect" href="class_8h.html#a44b3a6702982c09e74d9db412a6dd3c3" title=" " alt="" coords="616,376,756,403"/>
+<area shape="rect" href="class_8h.html#a1f2a474f13d16235d905e4bf9fc9b6b7" title=" " alt="" coords="816,275,963,301"/>
+<area shape="rect" href="classhandle.html#a8158ff37b59a73d48140ab4d718316b9" title=" " alt="" coords="843,351,936,377"/>
+<area shape="rect" href="class_8h.html#a66c13496282e829d83ba0711a10363a8" title=" " alt="" coords="836,173,943,200"/>
+<area shape="rect" href="class_8h.html#a4a2af2ab16d6d444f7142b9b4485cb43" title=" " alt="" coords="1029,325,1131,352"/>
+<area shape="rect" href="structinstance.html#a0e6db8a0edd9f4d440a4b31fb1f59d19" title="Destroys/deallocates all of the above" alt="" coords="1011,209,1149,250"/>
+<area shape="rect" href="class_8h.html#a50304f7593df56fd5e2def288643653f" title=" " alt="" coords="1013,157,1147,184"/>
+<area shape="rect" href="class_8h.html#ab53cc81121d4b87ebbbb3722756ebe92" title=" " alt="" coords="1197,107,1364,133"/>
+<area shape="rect" href="class_8h.html#ad9b07afb9ab14dab442a1ca53387f4ad" title=" " alt="" coords="1207,181,1354,208"/>
+<area shape="rect" href="rings_8cpp.html#a77369fc4d5326a16d2c603e032023528" title=" " alt="" coords="1455,207,1493,233"/>
+<area shape="rect" href="cast_8h.html#a7cfdf88b5c39ce38304d9237a2006ecc" title=" " alt="" coords="1425,156,1523,183"/>
+<area shape="rect" href="cast_8h.html#a9e6ac7e7af67150d979668c1451ae2bf" title=" " alt="" coords="1616,181,1711,208"/>
+<area shape="rect" href="pybind11_8h.html#aef025a4af8a46127594ecb41de1094e4" title=" " alt="" coords="1791,177,1952,204"/>
+<area shape="rect" href="cast_8h.html#ac653a09ddb39e162a6592a3347d293f5" title=" " alt="" coords="1796,593,1947,620"/>
+<area shape="rect" href="classobject.html#a4ce66b1d44b37ae6b28e80228b075aae" title=" " alt="" coords="2000,189,2107,216"/>
+<area shape="rect" href="namespacenvinfer1.html#adb7e28fc142f6b26d9988688f9267dbb" title=" " alt="" coords="2010,139,2097,165"/>
+<area shape="rect" href="classhandle.html#a53ba30cccfb1cabee421fd4ea555cf44" title="The default constructor creates a handle with a nullptr&#45;valued pointer" alt="" coords="2155,189,2261,216"/>
+<area shape="rect" href="class_8h.html#abb2fe0279a14711984bde348fa88afba" title=" " alt="" coords="1211,269,1351,296"/>
+<area shape="rect" href="structinstance.html#addb02b48487bafc757c28d40d1d6a995" title="Initializes all of the above type/values/holders data (but not the instance values themselves)" alt="" coords="1412,258,1536,299"/>
+<area shape="rect" href="detail_2common_8h.html#a24241089c1b051b143781ff5a6193a76" title=" " alt="" coords="1584,291,1743,333"/>
+<area shape="rect" href="detail_2common_8h.html#a1a767b0d9e7dcc29e74c67c50bfb1ea9" title=" " alt="" coords="1825,276,1917,303"/>
+<area shape="rect" href="detail_2common_8h.html#a7e6056fe5e08a5a51eecd1fffca2a4d8" title=" " alt="" coords="2030,276,2077,303"/>
+<area shape="rect" href="class_8h.html#af8800841a2cf036f2b8aee4eb8db9a27" title="pybind11_static_property.__get__(): Always pass the class instead of the instance." alt="" coords="617,528,755,555"/>
+<area shape="rect" href="class_8h.html#a390e869f7c6120e463bd5c4db7a6c12d" title="pybind11_static_property.__set__(): Just like the above __get__()." alt="" coords="617,731,755,757"/>
+<area shape="rect" href="classerror__already__set.html#a751b231e5c796447d867cf30007a7fc0" title=" " alt="" coords="621,955,751,997"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a1adb16a0d6e7d1c22d9f73fb74732d09" name="a1adb16a0d6e7d1c22d9f73fb74732d09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1adb16a0d6e7d1c22d9f73fb74732d09">&#9670;&nbsp;</a></span>layer_spp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nvinfer1::ILayer * layer_spp </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; nvinfer1::Weights &gt; &amp;&#160;</td>
+          <td class="paramname"><em>trtWeights_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>s_model_name_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; std::string, std::vector&lt; float &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>map_wts_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::INetworkDefinition *&#160;</td>
+          <td class="paramname"><em>network_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::ITensor *&#160;</td>
+          <td class="paramname"><em>input_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>c2_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>vec_args_</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_a1adb16a0d6e7d1c22d9f73fb74732d09_cgraph.png" border="0" usemap="#atrt__utils_8cpp_a1adb16a0d6e7d1c22d9f73fb74732d09_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_a1adb16a0d6e7d1c22d9f73fb74732d09_cgraph" id="atrt__utils_8cpp_a1adb16a0d6e7d1c22d9f73fb74732d09_cgraph">
+<area shape="rect" title=" " alt="" coords="5,56,84,83"/>
+<area shape="rect" href="descr_8h.html#a8c0d3505d8fb5963c5e157eabdbd3c7f" title=" " alt="" coords="166,5,227,32"/>
+<area shape="rect" href="trt__utils_8cpp.html#a7154a8b2287fe450e29b0b3c9184af3c" title=" " alt="" coords="440,107,520,133"/>
+<area shape="rect" href="trt__utils_8cpp.html#a9d770c1d2152cba65e9d869cf38eaebb" title=" " alt="" coords="132,157,261,184"/>
+<area shape="rect" href="namespacemkdoc.html#a85ae95dfe8536ee978dcacf1f5dcfe00" title=" " alt="" coords="568,107,640,133"/>
+<area shape="rect" href="trt__utils_8cpp.html#ae6f71bb65626e831af083d018c79bfdb" title=" " alt="" coords="313,157,388,184"/>
+<area shape="rect" href="trt__utils_8cpp.html#ae4f92c613de25c7b77416b0c2459c59a" title=" " alt="" coords="315,208,386,235"/>
+<area shape="rect" href="trt__utils_8cpp.html#abd516898aa9d05b3748ebe8c0483c941" title=" " alt="" coords="309,259,392,285"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a11405f4d7148539c986372291d834b02" name="a11405f4d7148539c986372291d834b02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11405f4d7148539c986372291d834b02">&#9670;&nbsp;</a></span>layer_sppf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nvinfer1::ILayer * layer_sppf </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; nvinfer1::Weights &gt; &amp;&#160;</td>
+          <td class="paramname"><em>trtWeights_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>s_model_name_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; std::string, std::vector&lt; float &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>map_wts_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::INetworkDefinition *&#160;</td>
+          <td class="paramname"><em>network_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::ITensor *&#160;</td>
+          <td class="paramname"><em>input_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>c2_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>k_</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_a11405f4d7148539c986372291d834b02_cgraph.png" border="0" usemap="#atrt__utils_8cpp_a11405f4d7148539c986372291d834b02_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_a11405f4d7148539c986372291d834b02_cgraph" id="atrt__utils_8cpp_a11405f4d7148539c986372291d834b02_cgraph">
+<area shape="rect" title=" " alt="" coords="5,56,87,83"/>
+<area shape="rect" href="descr_8h.html#a8c0d3505d8fb5963c5e157eabdbd3c7f" title=" " alt="" coords="169,5,230,32"/>
+<area shape="rect" href="trt__utils_8cpp.html#a7154a8b2287fe450e29b0b3c9184af3c" title=" " alt="" coords="443,107,523,133"/>
+<area shape="rect" href="trt__utils_8cpp.html#a9d770c1d2152cba65e9d869cf38eaebb" title=" " alt="" coords="135,157,264,184"/>
+<area shape="rect" href="namespacemkdoc.html#a85ae95dfe8536ee978dcacf1f5dcfe00" title=" " alt="" coords="571,107,643,133"/>
+<area shape="rect" href="trt__utils_8cpp.html#ae6f71bb65626e831af083d018c79bfdb" title=" " alt="" coords="316,157,391,184"/>
+<area shape="rect" href="trt__utils_8cpp.html#ae4f92c613de25c7b77416b0c2459c59a" title=" " alt="" coords="318,208,389,235"/>
+<area shape="rect" href="trt__utils_8cpp.html#abd516898aa9d05b3748ebe8c0483c941" title=" " alt="" coords="312,259,395,285"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab2b50679d0e2f13ea1855357a85ef94f" name="ab2b50679d0e2f13ea1855357a85ef94f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2b50679d0e2f13ea1855357a85ef94f">&#9670;&nbsp;</a></span>layer_upsample()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nvinfer1::ILayer * layer_upsample </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>s_model_name_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; std::string, std::vector&lt; float &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>map_wts_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::INetworkDefinition *&#160;</td>
+          <td class="paramname"><em>network_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::ITensor *&#160;</td>
+          <td class="paramname"><em>input_</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>n_scale_</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_ab2b50679d0e2f13ea1855357a85ef94f_cgraph.png" border="0" usemap="#atrt__utils_8cpp_ab2b50679d0e2f13ea1855357a85ef94f_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_ab2b50679d0e2f13ea1855357a85ef94f_cgraph" id="atrt__utils_8cpp_ab2b50679d0e2f13ea1855357a85ef94f_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,119,32"/>
+<area shape="rect" href="trt__utils_8cpp.html#a7154a8b2287fe450e29b0b3c9184af3c" title=" " alt="" coords="167,5,247,32"/>
+<area shape="rect" href="namespacemkdoc.html#a85ae95dfe8536ee978dcacf1f5dcfe00" title=" " alt="" coords="295,5,367,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="af7fea79d9eec38dbbc62b5d1b6df374f" name="af7fea79d9eec38dbbc62b5d1b6df374f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7fea79d9eec38dbbc62b5d1b6df374f">&#9670;&nbsp;</a></span>leftTrim()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void leftTrim </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab7f84a69c05af87778a897de4e4b55cd" name="ab7f84a69c05af87778a897de4e4b55cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7f84a69c05af87778a897de4e4b55cd">&#9670;&nbsp;</a></span>loadImageList()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::string &gt; loadImageList </td>
+          <td>(</td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>prefix</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_ab7f84a69c05af87778a897de4e4b55cd_cgraph.png" border="0" usemap="#atrt__utils_8cpp_ab7f84a69c05af87778a897de4e4b55cd_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_ab7f84a69c05af87778a897de4e4b55cd_cgraph" id="atrt__utils_8cpp_ab7f84a69c05af87778a897de4e4b55cd_cgraph">
+<area shape="rect" title=" " alt="" coords="5,31,108,57"/>
+<area shape="rect" href="trt__utils_8cpp.html#a5d4bc21489f536102b7e46d966259a1e" title=" " alt="" coords="347,5,421,32"/>
+<area shape="rect" href="trt__utils_8cpp.html#a5008482093197b2c41c92e4f4c1a0a73" title=" " alt="" coords="156,56,299,83"/>
+<area shape="rect" href="rings_8cpp.html#a77369fc4d5326a16d2c603e032023528" title=" " alt="" coords="365,56,403,83"/>
+<area shape="rect" href="trt__utils_8cpp.html#a9de43e600ebc3a0f919582b007c25322" title=" " alt="" coords="362,107,406,133"/>
+<area shape="rect" href="trt__utils_8cpp.html#af7fea79d9eec38dbbc62b5d1b6df374f" title=" " alt="" coords="473,81,537,108"/>
+<area shape="rect" href="trt__utils_8cpp.html#a57cc21f5208e82ae3aa4be00f3c4a593" title=" " alt="" coords="469,132,541,159"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a5008482093197b2c41c92e4f4c1a0a73" name="a5008482093197b2c41c92e4f4c1a0a73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5008482093197b2c41c92e4f4c1a0a73">&#9670;&nbsp;</a></span>loadListFromTextFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::string &gt; loadListFromTextFile </td>
+          <td>(</td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_a5008482093197b2c41c92e4f4c1a0a73_cgraph.png" border="0" usemap="#atrt__utils_8cpp_a5008482093197b2c41c92e4f4c1a0a73_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_a5008482093197b2c41c92e4f4c1a0a73_cgraph" id="atrt__utils_8cpp_a5008482093197b2c41c92e4f4c1a0a73_cgraph">
+<area shape="rect" title=" " alt="" coords="5,56,148,83"/>
+<area shape="rect" href="rings_8cpp.html#a77369fc4d5326a16d2c603e032023528" title=" " alt="" coords="214,5,253,32"/>
+<area shape="rect" href="trt__utils_8cpp.html#a5d4bc21489f536102b7e46d966259a1e" title=" " alt="" coords="196,56,271,83"/>
+<area shape="rect" href="trt__utils_8cpp.html#a9de43e600ebc3a0f919582b007c25322" title=" " alt="" coords="211,107,255,133"/>
+<area shape="rect" href="trt__utils_8cpp.html#af7fea79d9eec38dbbc62b5d1b6df374f" title=" " alt="" coords="323,81,387,108"/>
+<area shape="rect" href="trt__utils_8cpp.html#a57cc21f5208e82ae3aa4be00f3c4a593" title=" " alt="" coords="319,132,391,159"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ae8eb0fe94034053ae9ebb52e614d4739" name="ae8eb0fe94034053ae9ebb52e614d4739"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8eb0fe94034053ae9ebb52e614d4739">&#9670;&nbsp;</a></span>loadTRTEngine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nvinfer1::ICudaEngine * loadTRTEngine </td>
+          <td>(</td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>planFilePath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_logger.html">Logger</a> &amp;&#160;</td>
+          <td class="paramname"><em>logger</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_ae8eb0fe94034053ae9ebb52e614d4739_cgraph.png" border="0" usemap="#atrt__utils_8cpp_ae8eb0fe94034053ae9ebb52e614d4739_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_ae8eb0fe94034053ae9ebb52e614d4739_cgraph" id="atrt__utils_8cpp_ae8eb0fe94034053ae9ebb52e614d4739_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,115,32"/>
+<area shape="rect" href="trt__utils_8cpp.html#a5d4bc21489f536102b7e46d966259a1e" title=" " alt="" coords="163,5,237,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ac9531f4cb628a3223962aad7927e4696" name="ac9531f4cb628a3223962aad7927e4696"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9531f4cb628a3223962aad7927e4696">&#9670;&nbsp;</a></span>loadWeights()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; float &gt; loadWeights </td>
+          <td>(</td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>weightsFilePath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>networkType</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_ac9531f4cb628a3223962aad7927e4696_cgraph.png" border="0" usemap="#atrt__utils_8cpp_ac9531f4cb628a3223962aad7927e4696_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_ac9531f4cb628a3223962aad7927e4696_cgraph" id="atrt__utils_8cpp_ac9531f4cb628a3223962aad7927e4696_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,100,32"/>
+<area shape="rect" href="trt__utils_8cpp.html#a5d4bc21489f536102b7e46d966259a1e" title=" " alt="" coords="148,5,223,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a2b0587f7147a5e01bcbeb04946542f12" name="a2b0587f7147a5e01bcbeb04946542f12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b0587f7147a5e01bcbeb04946542f12">&#9670;&nbsp;</a></span>net_conv_bn_mish()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nvinfer1::ILayer * net_conv_bn_mish </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>layerIdx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; std::string, std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>block</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; float &gt; &amp;&#160;</td>
+          <td class="paramname"><em>weights</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; nvinfer1::Weights &gt; &amp;&#160;</td>
+          <td class="paramname"><em>trtWeights</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>weightPtr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>inputChannels</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::ITensor *&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::INetworkDefinition *&#160;</td>
+          <td class="paramname"><em>network</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_a2b0587f7147a5e01bcbeb04946542f12_cgraph.png" border="0" usemap="#atrt__utils_8cpp_a2b0587f7147a5e01bcbeb04946542f12_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_a2b0587f7147a5e01bcbeb04946542f12_cgraph" id="atrt__utils_8cpp_a2b0587f7147a5e01bcbeb04946542f12_cgraph">
+<area shape="rect" title=" " alt="" coords="5,477,135,504"/>
+<area shape="rect" href="internals_8h.html#ae139ca7042b502d77d304c4e0c744ec6" title=" " alt="" coords="183,477,233,504"/>
+<area shape="rect" href="internals_8h.html#a6c7959e5bcf56993e43c61758aa697ac" title="Return a reference to the current internals data" alt="" coords="281,477,377,504"/>
+<area shape="rect" href="internals_8h.html#a1abbb5ac518b087af801c6a306924d06" title=" " alt="" coords="456,5,573,32"/>
+<area shape="rect" href="class_8h.html#a208e43f161a9e5d055948fabe479dc04" title=" " alt="" coords="431,680,598,707"/>
+<area shape="rect" href="detail_2common_8h.html#aeea9746c2787bab3a5a0c983ef965520" title="Used internally" alt="" coords="1663,427,1760,453"/>
+<area shape="rect" href="class_8h.html#a22ea570ce07bc0565deaff837ebe4d7f" title=" " alt="" coords="433,401,596,428"/>
+<area shape="rect" href="class_8h.html#a7b0038e104523235e205b13488390b72" title=" " alt="" coords="425,604,604,631"/>
+<area shape="rect" href="internals_8h.html#aab710766797199094667cee0bb3b6623" title=" " alt="" coords="447,984,582,1011"/>
+<area shape="rect" href="internals_8h.html#a9a48a53855a575eaf70192282e8eefae" title=" " alt="" coords="430,933,599,960"/>
+<area shape="rect" href="class_8h.html#a7a2d1b9a42df823366b438980fadb488" title=" " alt="" coords="653,832,815,859"/>
+<area shape="rect" href="group__python__builtins.html#ga786700afa0e3e4bd67530355c4c5dec9" title=" " alt="" coords="705,629,763,656"/>
+<area shape="rect" href="class_8h.html#a28c5c1e0535f8e634cbf9f488bad6a5b" title=" " alt="" coords="691,680,777,707"/>
+<area shape="rect" href="classhandle.html#aa58c40063166c7cedefdc4db2d6fa608" title="Return the underlying PyObject * pointer" alt="" coords="896,629,979,656"/>
+<area shape="rect" href="cast_8h.html#af50c237c1ebe85cf7e290a97197dd2c1" title=" " alt="" coords="691,325,777,352"/>
+<area shape="rect" href="class_8h.html#a629cca75d875fdd8b55c5a3a7cd33cdb" title=" " alt="" coords="652,173,816,200"/>
+<area shape="rect" href="class_8h.html#a44b3a6702982c09e74d9db412a6dd3c3" title=" " alt="" coords="664,376,804,403"/>
+<area shape="rect" href="class_8h.html#a1f2a474f13d16235d905e4bf9fc9b6b7" title=" " alt="" coords="864,275,1011,301"/>
+<area shape="rect" href="classhandle.html#a8158ff37b59a73d48140ab4d718316b9" title=" " alt="" coords="891,351,984,377"/>
+<area shape="rect" href="class_8h.html#a66c13496282e829d83ba0711a10363a8" title=" " alt="" coords="884,173,991,200"/>
+<area shape="rect" href="class_8h.html#a4a2af2ab16d6d444f7142b9b4485cb43" title=" " alt="" coords="1077,325,1179,352"/>
+<area shape="rect" href="structinstance.html#a0e6db8a0edd9f4d440a4b31fb1f59d19" title="Destroys/deallocates all of the above" alt="" coords="1059,209,1197,250"/>
+<area shape="rect" href="class_8h.html#a50304f7593df56fd5e2def288643653f" title=" " alt="" coords="1061,157,1195,184"/>
+<area shape="rect" href="class_8h.html#ab53cc81121d4b87ebbbb3722756ebe92" title=" " alt="" coords="1245,107,1412,133"/>
+<area shape="rect" href="class_8h.html#ad9b07afb9ab14dab442a1ca53387f4ad" title=" " alt="" coords="1255,181,1402,208"/>
+<area shape="rect" href="rings_8cpp.html#a77369fc4d5326a16d2c603e032023528" title=" " alt="" coords="1503,207,1541,233"/>
+<area shape="rect" href="cast_8h.html#a7cfdf88b5c39ce38304d9237a2006ecc" title=" " alt="" coords="1473,156,1571,183"/>
+<area shape="rect" href="cast_8h.html#a9e6ac7e7af67150d979668c1451ae2bf" title=" " alt="" coords="1664,181,1759,208"/>
+<area shape="rect" href="pybind11_8h.html#aef025a4af8a46127594ecb41de1094e4" title=" " alt="" coords="1839,177,2000,204"/>
+<area shape="rect" href="cast_8h.html#ac653a09ddb39e162a6592a3347d293f5" title=" " alt="" coords="1844,593,1995,620"/>
+<area shape="rect" href="classobject.html#a4ce66b1d44b37ae6b28e80228b075aae" title=" " alt="" coords="2048,189,2155,216"/>
+<area shape="rect" href="namespacenvinfer1.html#adb7e28fc142f6b26d9988688f9267dbb" title=" " alt="" coords="2058,139,2145,165"/>
+<area shape="rect" href="classhandle.html#a53ba30cccfb1cabee421fd4ea555cf44" title="The default constructor creates a handle with a nullptr&#45;valued pointer" alt="" coords="2203,189,2309,216"/>
+<area shape="rect" href="class_8h.html#abb2fe0279a14711984bde348fa88afba" title=" " alt="" coords="1259,269,1399,296"/>
+<area shape="rect" href="structinstance.html#addb02b48487bafc757c28d40d1d6a995" title="Initializes all of the above type/values/holders data (but not the instance values themselves)" alt="" coords="1460,258,1584,299"/>
+<area shape="rect" href="detail_2common_8h.html#a24241089c1b051b143781ff5a6193a76" title=" " alt="" coords="1632,291,1791,333"/>
+<area shape="rect" href="detail_2common_8h.html#a1a767b0d9e7dcc29e74c67c50bfb1ea9" title=" " alt="" coords="1873,276,1965,303"/>
+<area shape="rect" href="detail_2common_8h.html#a7e6056fe5e08a5a51eecd1fffca2a4d8" title=" " alt="" coords="2078,276,2125,303"/>
+<area shape="rect" href="class_8h.html#af8800841a2cf036f2b8aee4eb8db9a27" title="pybind11_static_property.__get__(): Always pass the class instead of the instance." alt="" coords="665,528,803,555"/>
+<area shape="rect" href="class_8h.html#a390e869f7c6120e463bd5c4db7a6c12d" title="pybind11_static_property.__set__(): Just like the above __get__()." alt="" coords="665,731,803,757"/>
+<area shape="rect" href="classerror__already__set.html#a751b231e5c796447d867cf30007a7fc0" title=" " alt="" coords="669,955,799,997"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa9d863781c46745dbd718cc6ff9068b0" name="aa9d863781c46745dbd718cc6ff9068b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9d863781c46745dbd718cc6ff9068b0">&#9670;&nbsp;</a></span>netAddConvBNLeaky()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nvinfer1::ILayer * netAddConvBNLeaky </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>layerIdx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; std::string, std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>block</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; float &gt; &amp;&#160;</td>
+          <td class="paramname"><em>weights</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; nvinfer1::Weights &gt; &amp;&#160;</td>
+          <td class="paramname"><em>trtWeights</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>weightPtr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>inputChannels</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::ITensor *&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::INetworkDefinition *&#160;</td>
+          <td class="paramname"><em>network</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5eb9a5f6fe24782a6c3ec767dc1c1efb" name="a5eb9a5f6fe24782a6c3ec767dc1c1efb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5eb9a5f6fe24782a6c3ec767dc1c1efb">&#9670;&nbsp;</a></span>netAddConvLinear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nvinfer1::ILayer * netAddConvLinear </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>layerIdx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; std::string, std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>block</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; float &gt; &amp;&#160;</td>
+          <td class="paramname"><em>weights</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; nvinfer1::Weights &gt; &amp;&#160;</td>
+          <td class="paramname"><em>trtWeights</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>weightPtr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>inputChannels</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::ITensor *&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::INetworkDefinition *&#160;</td>
+          <td class="paramname"><em>network</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a62b1daf2ac3defa199e502199ea9f7cb" name="a62b1daf2ac3defa199e502199ea9f7cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62b1daf2ac3defa199e502199ea9f7cb">&#9670;&nbsp;</a></span>netAddMaxpool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nvinfer1::ILayer * netAddMaxpool </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>layerIdx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; std::string, std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>block</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::ITensor *&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::INetworkDefinition *&#160;</td>
+          <td class="paramname"><em>network</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8c82311a83296a49c11fc9f154d3bd71" name="a8c82311a83296a49c11fc9f154d3bd71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c82311a83296a49c11fc9f154d3bd71">&#9670;&nbsp;</a></span>netAddUpsample()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">nvinfer1::ILayer * netAddUpsample </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>layerIdx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::map&lt; std::string, std::string &gt; &amp;&#160;</td>
+          <td class="paramname"><em>block</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; float &gt; &amp;&#160;</td>
+          <td class="paramname"><em>weights</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; nvinfer1::Weights &gt; &amp;&#160;</td>
+          <td class="paramname"><em>trtWeights</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>inputChannels</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::ITensor *&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nvinfer1::INetworkDefinition *&#160;</td>
+          <td class="paramname"><em>network</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_a8c82311a83296a49c11fc9f154d3bd71_cgraph.png" border="0" usemap="#atrt__utils_8cpp_a8c82311a83296a49c11fc9f154d3bd71_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_a8c82311a83296a49c11fc9f154d3bd71_cgraph" id="atrt__utils_8cpp_a8c82311a83296a49c11fc9f154d3bd71_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,127,32"/>
+<area shape="rect" href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867" title=" " alt="" coords="175,5,257,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6a32da7bd6620d4ba5d17910fbd3fc3e" name="a6a32da7bd6620d4ba5d17910fbd3fc3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a32da7bd6620d4ba5d17910fbd3fc3e">&#9670;&nbsp;</a></span>nmsAllClasses()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="struct_b_box_info.html">BBoxInfo</a> &gt; nmsAllClasses </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>nmsThresh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="struct_b_box_info.html">BBoxInfo</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>binfo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint32_t&#160;</td>
+          <td class="paramname"><em>numClasses</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>model_type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_a6a32da7bd6620d4ba5d17910fbd3fc3e_cgraph.png" border="0" usemap="#atrt__utils_8cpp_a6a32da7bd6620d4ba5d17910fbd3fc3e_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_a6a32da7bd6620d4ba5d17910fbd3fc3e_cgraph" id="atrt__utils_8cpp_a6a32da7bd6620d4ba5d17910fbd3fc3e_cgraph">
+<area shape="rect" title=" " alt="" coords="5,31,115,57"/>
+<area shape="rect" href="trt__utils_8cpp.html#aec995b34cc9a0fe2893def755875537b" title=" " alt="" coords="209,56,288,83"/>
+<area shape="rect" href="trt__utils_8cpp.html#a45e762481b9e65f8387491193bcd2d62" title=" " alt="" coords="163,5,335,32"/>
+<area shape="rect" href="box_8c.html#a49bbaf2c74dad0f7bbca22c9e41286ca" title=" " alt="" coords="390,5,453,32"/>
+<area shape="rect" href="namespacenvinfer1.html#ad3e635d1f15cdaca5d23251c775ef725" title=" " alt="" coords="383,56,460,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a45e762481b9e65f8387491193bcd2d62" name="a45e762481b9e65f8387491193bcd2d62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45e762481b9e65f8387491193bcd2d62">&#9670;&nbsp;</a></span>nonMaximumSuppression()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="struct_b_box_info.html">BBoxInfo</a> &gt; nonMaximumSuppression </td>
+          <td>(</td>
+          <td class="paramtype">const float&#160;</td>
+          <td class="paramname"><em>nmsThresh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="struct_b_box_info.html">BBoxInfo</a> &gt;&#160;</td>
+          <td class="paramname"><em>binfo</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_a45e762481b9e65f8387491193bcd2d62_cgraph.png" border="0" usemap="#atrt__utils_8cpp_a45e762481b9e65f8387491193bcd2d62_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_a45e762481b9e65f8387491193bcd2d62_cgraph" id="atrt__utils_8cpp_a45e762481b9e65f8387491193bcd2d62_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,177,32"/>
+<area shape="rect" href="box_8c.html#a49bbaf2c74dad0f7bbca22c9e41286ca" title=" " alt="" coords="225,5,288,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a92fa92cf8203fd79df2242436943502e" name="a92fa92cf8203fd79df2242436943502e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92fa92cf8203fd79df2242436943502e">&#9670;&nbsp;</a></span>parse_int_list()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; int &gt; parse_int_list </td>
+          <td>(</td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>s_args_</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_a92fa92cf8203fd79df2242436943502e_cgraph.png" border="0" usemap="#atrt__utils_8cpp_a92fa92cf8203fd79df2242436943502e_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_a92fa92cf8203fd79df2242436943502e_cgraph" id="atrt__utils_8cpp_a92fa92cf8203fd79df2242436943502e_cgraph">
+<area shape="rect" title=" " alt="" coords="5,31,104,57"/>
+<area shape="rect" href="trt__utils_8cpp.html#a9de43e600ebc3a0f919582b007c25322" title=" " alt="" coords="152,31,196,57"/>
+<area shape="rect" href="trt__utils_8cpp.html#af7fea79d9eec38dbbc62b5d1b6df374f" title=" " alt="" coords="248,5,312,32"/>
+<area shape="rect" href="trt__utils_8cpp.html#a57cc21f5208e82ae3aa4be00f3c4a593" title=" " alt="" coords="244,56,316,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ae8916d83be16511bbe571ea56c040b5a" name="ae8916d83be16511bbe571ea56c040b5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8916d83be16511bbe571ea56c040b5a">&#9670;&nbsp;</a></span>printLayerInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void printLayerInfo </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>layerIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>layerName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>layerInput</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>layerOutput</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>weightPtr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a009b0b88f21c3ab0a6bf4758eb9024e1" name="a009b0b88f21c3ab0a6bf4758eb9024e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a009b0b88f21c3ab0a6bf4758eb9024e1">&#9670;&nbsp;</a></span>printPredictions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void printPredictions </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_b_box_info.html">BBoxInfo</a> &amp;&#160;</td>
+          <td class="paramname"><em>b</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>className</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="add0075a86d394a3f613f3565ac9fe10b" name="add0075a86d394a3f613f3565ac9fe10b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add0075a86d394a3f613f3565ac9fe10b">&#9670;&nbsp;</a></span>REGISTER_TENSORRT_PLUGIN() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">REGISTER_TENSORRT_PLUGIN </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnvinfer1_1_1_chunk_plugin_creator.html">ChunkPluginCreator</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a27381dd63beab2fb3bca28666b262944" name="a27381dd63beab2fb3bca28666b262944"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27381dd63beab2fb3bca28666b262944">&#9670;&nbsp;</a></span>REGISTER_TENSORRT_PLUGIN() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">REGISTER_TENSORRT_PLUGIN </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnvinfer1_1_1_hardswish_plugin_creator.html">HardswishPluginCreator</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1e0ac68896c1a3ebc439a8319c9d7730" name="a1e0ac68896c1a3ebc439a8319c9d7730"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e0ac68896c1a3ebc439a8319c9d7730">&#9670;&nbsp;</a></span>REGISTER_TENSORRT_PLUGIN() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">REGISTER_TENSORRT_PLUGIN </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnvinfer1_1_1_mish_plugin_creator.html">MishPluginCreator</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a380b76a6603fc1f0d41a23e0064be1d3" name="a380b76a6603fc1f0d41a23e0064be1d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a380b76a6603fc1f0d41a23e0064be1d3">&#9670;&nbsp;</a></span>REGISTER_TENSORRT_PLUGIN() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">REGISTER_TENSORRT_PLUGIN </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classnvinfer1_1_1_yolo_layer_plugin_creator.html">YoloLayerPluginCreator</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a57cc21f5208e82ae3aa4be00f3c4a593" name="a57cc21f5208e82ae3aa4be00f3c4a593"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57cc21f5208e82ae3aa4be00f3c4a593">&#9670;&nbsp;</a></span>rightTrim()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void rightTrim </td>
+          <td>(</td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9de43e600ebc3a0f919582b007c25322" name="a9de43e600ebc3a0f919582b007c25322"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9de43e600ebc3a0f919582b007c25322">&#9670;&nbsp;</a></span>trim()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string trim </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="trt__utils_8cpp_a9de43e600ebc3a0f919582b007c25322_cgraph.png" border="0" usemap="#atrt__utils_8cpp_a9de43e600ebc3a0f919582b007c25322_cgraph" alt=""/></div>
+<map name="atrt__utils_8cpp_a9de43e600ebc3a0f919582b007c25322_cgraph" id="atrt__utils_8cpp_a9de43e600ebc3a0f919582b007c25322_cgraph">
+<area shape="rect" title=" " alt="" coords="5,31,49,57"/>
+<area shape="rect" href="trt__utils_8cpp.html#af7fea79d9eec38dbbc62b5d1b6df374f" title=" " alt="" coords="101,5,165,32"/>
+<area shape="rect" href="trt__utils_8cpp.html#a57cc21f5208e82ae3aa4be00f3c4a593" title=" " alt="" coords="97,56,169,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="abbdafbe11cc77edd6d4c99a1fda70d2c" name="abbdafbe11cc77edd6d4c99a1fda70d2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbdafbe11cc77edd6d4c99a1fda70d2c">&#9670;&nbsp;</a></span>triml()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string triml </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>t</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0154026299e5fc73737172009e714d50" name="a0154026299e5fc73737172009e714d50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0154026299e5fc73737172009e714d50">&#9670;&nbsp;</a></span>trimr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string trimr </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>t</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>

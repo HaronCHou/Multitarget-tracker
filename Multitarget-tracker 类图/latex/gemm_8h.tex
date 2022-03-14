@@ -1,0 +1,315 @@
+\hypertarget{gemm_8h}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/gemm.h 文件参考}
+\label{gemm_8h}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/gemm.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/gemm.h}}
+{\ttfamily \#include \char`\"{}activations.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+gemm.\+h 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gemm_8h__incl}
+\end{center}
+\end{figure}
+此图展示该文件直接或间接的被哪些文件引用了\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gemm_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{gemm_8h_a4e32a16f765640082ee369153bb7d74c}{convolution\+\_\+2d}} (int w, int h, int ksize, int n, int c, int pad, int stride, float $\ast$weights, float $\ast$input, float $\ast$output, float $\ast$mean)
+\item 
+static void \mbox{\hyperlink{gemm_8h_aef0960a9c469e77ee2c6ea982a3eddff}{set\+\_\+bit}} (unsigned char $\ast$const dst, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} index)
+\item 
+static unsigned char \mbox{\hyperlink{gemm_8h_aa2c9bc3f05c1b96ae7b6e557207068fd}{get\+\_\+bit}} (unsigned char const $\ast$const src, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} index)
+\item 
+int \mbox{\hyperlink{gemm_8h_a8e1908fd3f6cbc7da917f2e93e94e6d1}{is\+\_\+avx}} ()
+\item 
+int \mbox{\hyperlink{gemm_8h_a4e3d4e108499dd6ea33dab80eb98d861}{is\+\_\+fma\+\_\+avx2}} ()
+\item 
+void \mbox{\hyperlink{gemm_8h_af2faa7ba6073e78aaac43c1487dadfd7}{float\+\_\+to\+\_\+bit}} (float $\ast$src, unsigned char $\ast$dst, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} size)
+\item 
+void \mbox{\hyperlink{gemm_8h_a5106fb6ec72b4bcc07e02d76e21d6b37}{transpose\+\_\+block\+\_\+\+SSE4x4}} (float $\ast$A, float $\ast$B, const int n, const int m, const int lda, const int ldb, const int block\+\_\+size)
+\item 
+void \mbox{\hyperlink{gemm_8h_abc47efcfe9f9c9be4a2ae3886591be31}{transpose\+\_\+bin}} (uint32\+\_\+t $\ast$A, uint32\+\_\+t $\ast$B, const int n, const int m, const int lda, const int ldb, const int block\+\_\+size)
+\item 
+void \mbox{\hyperlink{gemm_8h_a4e0dda182a634df98155400af97f887f}{gemm\+\_\+nn\+\_\+custom\+\_\+bin\+\_\+mean\+\_\+transposed}} (int M, int N, int K, float ALPHA\+\_\+\+UNUSED, unsigned char $\ast$A, int lda, unsigned char $\ast$B, int ldb, float $\ast$C, int ldc, float $\ast$mean\+\_\+arr)
+\item 
+void \mbox{\hyperlink{gemm_8h_af39887e6db1b479406fc6464636f2d05}{im2col\+\_\+cpu\+\_\+custom}} (float $\ast$data\+\_\+im, int channels, int height, int width, int ksize, int stride, int pad, float $\ast$data\+\_\+col)
+\item 
+void \mbox{\hyperlink{gemm_8h_ae8f4e317c186a6d4f0556ca856b976b9}{im2col\+\_\+cpu\+\_\+custom\+\_\+align}} (float $\ast$data\+\_\+im, int channels, int height, int width, int ksize, int stride, int pad, float $\ast$data\+\_\+col, int bit\+\_\+align)
+\item 
+void \mbox{\hyperlink{gemm_8h_a6a3439a365c938d672a2dc39901f155f}{im2col\+\_\+cpu\+\_\+custom\+\_\+bin}} (float $\ast$data\+\_\+im, int channels, int height, int width, int ksize, int stride, int pad, float $\ast$data\+\_\+col, int bit\+\_\+align)
+\item 
+void \mbox{\hyperlink{gemm_8h_afee3277990045539e36e35ba66ae995b}{im2col\+\_\+cpu\+\_\+custom\+\_\+transpose}} (float $\ast$data\+\_\+im, int channels, int height, int width, int ksize, int stride, int pad, float $\ast$data\+\_\+col, int ldb\+\_\+align)
+\item 
+void \mbox{\hyperlink{gemm_8h_a0a3e1c2586fda33b9cd5a44fd59f43c1}{activate\+\_\+array\+\_\+cpu\+\_\+custom}} (float $\ast$\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, const int n, const \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032}{ACTIVATION}} a)
+\item 
+void \mbox{\hyperlink{gemm_8h_a0625444c982324c1a858a342ff8abc27}{transpose\+\_\+32x32\+\_\+bits\+\_\+reversed\+\_\+diagonale}} (uint32\+\_\+t $\ast$A, uint32\+\_\+t $\ast$B, int m, int n)
+\item 
+void \mbox{\hyperlink{gemm_8h_a39304cbcf3858c9e2416ef1d1cf3879f}{gemm\+\_\+bin}} (int M, int N, int K, float ALPHA, char $\ast$A, int lda, float $\ast$B, int ldb, float $\ast$C, int ldc)
+\item 
+void \mbox{\hyperlink{gemm_8h_a6aa7e1556948e534866527878b8cfe9e}{repack\+\_\+input}} (float $\ast$input, float $\ast$re\+\_\+packed\+\_\+input, int w, int h, int c)
+\item 
+void \mbox{\hyperlink{gemm_8h_a15ed089fe74aaa8643d01f91829815af}{convolution\+\_\+repacked}} (uint32\+\_\+t $\ast$packed\+\_\+input, uint32\+\_\+t $\ast$packed\+\_\+weights, float $\ast$output, int w, int h, int c, int n, int size, int pad, int new\+\_\+lda, float $\ast$mean\+\_\+arr)
+\item 
+void \mbox{\hyperlink{gemm_8h_a4bcaf2f46868b70329a3cf194b9db637}{gemm\+\_\+nn\+\_\+bin\+\_\+32bit\+\_\+packed}} (int M, int N, int K, float ALPHA, uint32\+\_\+t $\ast$A, int lda, uint32\+\_\+t $\ast$B, int ldb, float $\ast$C, int ldc, float $\ast$mean\+\_\+arr)
+\item 
+void \mbox{\hyperlink{gemm_8h_a20b21acd1fd344065eccc4e3517f2ad3}{transpose\+\_\+uint32}} (uint32\+\_\+t $\ast$src, uint32\+\_\+t $\ast$dst, int src\+\_\+h, int src\+\_\+w, int src\+\_\+align, int dst\+\_\+align)
+\item 
+void \mbox{\hyperlink{gemm_8h_a2d13ac0e25be1b28329490be38c82475}{gemm\+\_\+nn\+\_\+bin\+\_\+transposed\+\_\+32bit\+\_\+packed}} (int M, int N, int K, float ALPHA, uint32\+\_\+t $\ast$A, int lda, uint32\+\_\+t $\ast$B, int ldb, float $\ast$C, int ldc, float $\ast$mean\+\_\+arr)
+\item 
+void \mbox{\hyperlink{gemm_8h_afece54d7949918bb0306af73d2ad595e}{forward\+\_\+maxpool\+\_\+layer\+\_\+avx}} (float $\ast$src, float $\ast$dst, int $\ast$indexes, int size, int w, int h, int out\+\_\+w, int out\+\_\+h, int c, int pad, int stride, int batch)
+\item 
+void \mbox{\hyperlink{gemm_8h_aa240ba331e3abf53f9fca7d240322669}{gemm}} (int TA, int TB, int M, int N, int K, float ALPHA, float $\ast$A, int lda, float $\ast$B, int ldb, float BETA, float $\ast$C, int ldc)
+\item 
+void \mbox{\hyperlink{gemm_8h_a44c67f1aa36826c2fe8b8da5022a7ce6}{gemm\+\_\+cpu}} (int TA, int TB, int M, int N, int K, float ALPHA, float $\ast$A, int lda, float $\ast$B, int ldb, float BETA, float $\ast$C, int ldc)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{gemm_8h_a0a3e1c2586fda33b9cd5a44fd59f43c1}\label{gemm_8h_a0a3e1c2586fda33b9cd5a44fd59f43c1}} 
+\index{gemm.h@{gemm.h}!activate\_array\_cpu\_custom@{activate\_array\_cpu\_custom}}
+\index{activate\_array\_cpu\_custom@{activate\_array\_cpu\_custom}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{activate\_array\_cpu\_custom()}{activate\_array\_cpu\_custom()}}
+{\footnotesize\ttfamily void activate\+\_\+array\+\_\+cpu\+\_\+custom (\begin{DoxyParamCaption}\item[{float $\ast$}]{x,  }\item[{const int}]{n,  }\item[{const \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032}{ACTIVATION}}}]{a }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{gemm_8h_a0a3e1c2586fda33b9cd5a44fd59f43c1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{gemm_8h_a4e32a16f765640082ee369153bb7d74c}\label{gemm_8h_a4e32a16f765640082ee369153bb7d74c}} 
+\index{gemm.h@{gemm.h}!convolution\_2d@{convolution\_2d}}
+\index{convolution\_2d@{convolution\_2d}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{convolution\_2d()}{convolution\_2d()}}
+{\footnotesize\ttfamily void convolution\+\_\+2d (\begin{DoxyParamCaption}\item[{int}]{w,  }\item[{int}]{h,  }\item[{int}]{ksize,  }\item[{int}]{n,  }\item[{int}]{c,  }\item[{int}]{pad,  }\item[{int}]{stride,  }\item[{float $\ast$}]{weights,  }\item[{float $\ast$}]{input,  }\item[{float $\ast$}]{output,  }\item[{float $\ast$}]{mean }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{gemm_8h_a4e32a16f765640082ee369153bb7d74c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{gemm_8h_a15ed089fe74aaa8643d01f91829815af}\label{gemm_8h_a15ed089fe74aaa8643d01f91829815af}} 
+\index{gemm.h@{gemm.h}!convolution\_repacked@{convolution\_repacked}}
+\index{convolution\_repacked@{convolution\_repacked}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{convolution\_repacked()}{convolution\_repacked()}}
+{\footnotesize\ttfamily void convolution\+\_\+repacked (\begin{DoxyParamCaption}\item[{uint32\+\_\+t $\ast$}]{packed\+\_\+input,  }\item[{uint32\+\_\+t $\ast$}]{packed\+\_\+weights,  }\item[{float $\ast$}]{output,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{int}]{c,  }\item[{int}]{n,  }\item[{int}]{size,  }\item[{int}]{pad,  }\item[{int}]{new\+\_\+lda,  }\item[{float $\ast$}]{mean\+\_\+arr }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{gemm_8h_a15ed089fe74aaa8643d01f91829815af_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{gemm_8h_af2faa7ba6073e78aaac43c1487dadfd7}\label{gemm_8h_af2faa7ba6073e78aaac43c1487dadfd7}} 
+\index{gemm.h@{gemm.h}!float\_to\_bit@{float\_to\_bit}}
+\index{float\_to\_bit@{float\_to\_bit}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{float\_to\_bit()}{float\_to\_bit()}}
+{\footnotesize\ttfamily void float\+\_\+to\+\_\+bit (\begin{DoxyParamCaption}\item[{float $\ast$}]{src,  }\item[{unsigned char $\ast$}]{dst,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gemm_8h_afece54d7949918bb0306af73d2ad595e}\label{gemm_8h_afece54d7949918bb0306af73d2ad595e}} 
+\index{gemm.h@{gemm.h}!forward\_maxpool\_layer\_avx@{forward\_maxpool\_layer\_avx}}
+\index{forward\_maxpool\_layer\_avx@{forward\_maxpool\_layer\_avx}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{forward\_maxpool\_layer\_avx()}{forward\_maxpool\_layer\_avx()}}
+{\footnotesize\ttfamily void forward\+\_\+maxpool\+\_\+layer\+\_\+avx (\begin{DoxyParamCaption}\item[{float $\ast$}]{src,  }\item[{float $\ast$}]{dst,  }\item[{int $\ast$}]{indexes,  }\item[{int}]{size,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{int}]{out\+\_\+w,  }\item[{int}]{out\+\_\+h,  }\item[{int}]{c,  }\item[{int}]{pad,  }\item[{int}]{stride,  }\item[{int}]{batch }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=313pt]{gemm_8h_afece54d7949918bb0306af73d2ad595e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{gemm_8h_aa240ba331e3abf53f9fca7d240322669}\label{gemm_8h_aa240ba331e3abf53f9fca7d240322669}} 
+\index{gemm.h@{gemm.h}!gemm@{gemm}}
+\index{gemm@{gemm}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{gemm()}{gemm()}}
+{\footnotesize\ttfamily void gemm (\begin{DoxyParamCaption}\item[{int}]{TA,  }\item[{int}]{TB,  }\item[{int}]{M,  }\item[{int}]{N,  }\item[{int}]{K,  }\item[{float}]{ALPHA,  }\item[{float $\ast$}]{A,  }\item[{int}]{lda,  }\item[{float $\ast$}]{B,  }\item[{int}]{ldb,  }\item[{float}]{BETA,  }\item[{float $\ast$}]{C,  }\item[{int}]{ldc }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=341pt]{gemm_8h_aa240ba331e3abf53f9fca7d240322669_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{gemm_8h_a39304cbcf3858c9e2416ef1d1cf3879f}\label{gemm_8h_a39304cbcf3858c9e2416ef1d1cf3879f}} 
+\index{gemm.h@{gemm.h}!gemm\_bin@{gemm\_bin}}
+\index{gemm\_bin@{gemm\_bin}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{gemm\_bin()}{gemm\_bin()}}
+{\footnotesize\ttfamily void gemm\+\_\+bin (\begin{DoxyParamCaption}\item[{int}]{M,  }\item[{int}]{N,  }\item[{int}]{K,  }\item[{float}]{ALPHA,  }\item[{char $\ast$}]{A,  }\item[{int}]{lda,  }\item[{float $\ast$}]{B,  }\item[{int}]{ldb,  }\item[{float $\ast$}]{C,  }\item[{int}]{ldc }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gemm_8h_a44c67f1aa36826c2fe8b8da5022a7ce6}\label{gemm_8h_a44c67f1aa36826c2fe8b8da5022a7ce6}} 
+\index{gemm.h@{gemm.h}!gemm\_cpu@{gemm\_cpu}}
+\index{gemm\_cpu@{gemm\_cpu}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{gemm\_cpu()}{gemm\_cpu()}}
+{\footnotesize\ttfamily void gemm\+\_\+cpu (\begin{DoxyParamCaption}\item[{int}]{TA,  }\item[{int}]{TB,  }\item[{int}]{M,  }\item[{int}]{N,  }\item[{int}]{K,  }\item[{float}]{ALPHA,  }\item[{float $\ast$}]{A,  }\item[{int}]{lda,  }\item[{float $\ast$}]{B,  }\item[{int}]{ldb,  }\item[{float}]{BETA,  }\item[{float $\ast$}]{C,  }\item[{int}]{ldc }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=261pt]{gemm_8h_a44c67f1aa36826c2fe8b8da5022a7ce6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{gemm_8h_a4bcaf2f46868b70329a3cf194b9db637}\label{gemm_8h_a4bcaf2f46868b70329a3cf194b9db637}} 
+\index{gemm.h@{gemm.h}!gemm\_nn\_bin\_32bit\_packed@{gemm\_nn\_bin\_32bit\_packed}}
+\index{gemm\_nn\_bin\_32bit\_packed@{gemm\_nn\_bin\_32bit\_packed}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{gemm\_nn\_bin\_32bit\_packed()}{gemm\_nn\_bin\_32bit\_packed()}}
+{\footnotesize\ttfamily void gemm\+\_\+nn\+\_\+bin\+\_\+32bit\+\_\+packed (\begin{DoxyParamCaption}\item[{int}]{M,  }\item[{int}]{N,  }\item[{int}]{K,  }\item[{float}]{ALPHA,  }\item[{uint32\+\_\+t $\ast$}]{A,  }\item[{int}]{lda,  }\item[{uint32\+\_\+t $\ast$}]{B,  }\item[{int}]{ldb,  }\item[{float $\ast$}]{C,  }\item[{int}]{ldc,  }\item[{float $\ast$}]{mean\+\_\+arr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gemm_8h_a2d13ac0e25be1b28329490be38c82475}\label{gemm_8h_a2d13ac0e25be1b28329490be38c82475}} 
+\index{gemm.h@{gemm.h}!gemm\_nn\_bin\_transposed\_32bit\_packed@{gemm\_nn\_bin\_transposed\_32bit\_packed}}
+\index{gemm\_nn\_bin\_transposed\_32bit\_packed@{gemm\_nn\_bin\_transposed\_32bit\_packed}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{gemm\_nn\_bin\_transposed\_32bit\_packed()}{gemm\_nn\_bin\_transposed\_32bit\_packed()}}
+{\footnotesize\ttfamily void gemm\+\_\+nn\+\_\+bin\+\_\+transposed\+\_\+32bit\+\_\+packed (\begin{DoxyParamCaption}\item[{int}]{M,  }\item[{int}]{N,  }\item[{int}]{K,  }\item[{float}]{ALPHA,  }\item[{uint32\+\_\+t $\ast$}]{A,  }\item[{int}]{lda,  }\item[{uint32\+\_\+t $\ast$}]{B,  }\item[{int}]{ldb,  }\item[{float $\ast$}]{C,  }\item[{int}]{ldc,  }\item[{float $\ast$}]{mean\+\_\+arr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gemm_8h_a4e0dda182a634df98155400af97f887f}\label{gemm_8h_a4e0dda182a634df98155400af97f887f}} 
+\index{gemm.h@{gemm.h}!gemm\_nn\_custom\_bin\_mean\_transposed@{gemm\_nn\_custom\_bin\_mean\_transposed}}
+\index{gemm\_nn\_custom\_bin\_mean\_transposed@{gemm\_nn\_custom\_bin\_mean\_transposed}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{gemm\_nn\_custom\_bin\_mean\_transposed()}{gemm\_nn\_custom\_bin\_mean\_transposed()}}
+{\footnotesize\ttfamily void gemm\+\_\+nn\+\_\+custom\+\_\+bin\+\_\+mean\+\_\+transposed (\begin{DoxyParamCaption}\item[{int}]{M,  }\item[{int}]{N,  }\item[{int}]{K,  }\item[{float}]{ALPHA\+\_\+\+UNUSED,  }\item[{unsigned char $\ast$}]{A,  }\item[{int}]{lda,  }\item[{unsigned char $\ast$}]{B,  }\item[{int}]{ldb,  }\item[{float $\ast$}]{C,  }\item[{int}]{ldc,  }\item[{float $\ast$}]{mean\+\_\+arr }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=293pt]{gemm_8h_a4e0dda182a634df98155400af97f887f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{gemm_8h_aa2c9bc3f05c1b96ae7b6e557207068fd}\label{gemm_8h_aa2c9bc3f05c1b96ae7b6e557207068fd}} 
+\index{gemm.h@{gemm.h}!get\_bit@{get\_bit}}
+\index{get\_bit@{get\_bit}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{get\_bit()}{get\_bit()}}
+{\footnotesize\ttfamily static unsigned char get\+\_\+bit (\begin{DoxyParamCaption}\item[{unsigned char const $\ast$const}]{src,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\Hypertarget{gemm_8h_af39887e6db1b479406fc6464636f2d05}\label{gemm_8h_af39887e6db1b479406fc6464636f2d05}} 
+\index{gemm.h@{gemm.h}!im2col\_cpu\_custom@{im2col\_cpu\_custom}}
+\index{im2col\_cpu\_custom@{im2col\_cpu\_custom}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{im2col\_cpu\_custom()}{im2col\_cpu\_custom()}}
+{\footnotesize\ttfamily void im2col\+\_\+cpu\+\_\+custom (\begin{DoxyParamCaption}\item[{float $\ast$}]{data\+\_\+im,  }\item[{int}]{channels,  }\item[{int}]{height,  }\item[{int}]{width,  }\item[{int}]{ksize,  }\item[{int}]{stride,  }\item[{int}]{pad,  }\item[{float $\ast$}]{data\+\_\+col }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gemm_8h_af39887e6db1b479406fc6464636f2d05_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{gemm_8h_ae8f4e317c186a6d4f0556ca856b976b9}\label{gemm_8h_ae8f4e317c186a6d4f0556ca856b976b9}} 
+\index{gemm.h@{gemm.h}!im2col\_cpu\_custom\_align@{im2col\_cpu\_custom\_align}}
+\index{im2col\_cpu\_custom\_align@{im2col\_cpu\_custom\_align}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{im2col\_cpu\_custom\_align()}{im2col\_cpu\_custom\_align()}}
+{\footnotesize\ttfamily void im2col\+\_\+cpu\+\_\+custom\+\_\+align (\begin{DoxyParamCaption}\item[{float $\ast$}]{data\+\_\+im,  }\item[{int}]{channels,  }\item[{int}]{height,  }\item[{int}]{width,  }\item[{int}]{ksize,  }\item[{int}]{stride,  }\item[{int}]{pad,  }\item[{float $\ast$}]{data\+\_\+col,  }\item[{int}]{bit\+\_\+align }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gemm_8h_a6a3439a365c938d672a2dc39901f155f}\label{gemm_8h_a6a3439a365c938d672a2dc39901f155f}} 
+\index{gemm.h@{gemm.h}!im2col\_cpu\_custom\_bin@{im2col\_cpu\_custom\_bin}}
+\index{im2col\_cpu\_custom\_bin@{im2col\_cpu\_custom\_bin}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{im2col\_cpu\_custom\_bin()}{im2col\_cpu\_custom\_bin()}}
+{\footnotesize\ttfamily void im2col\+\_\+cpu\+\_\+custom\+\_\+bin (\begin{DoxyParamCaption}\item[{float $\ast$}]{data\+\_\+im,  }\item[{int}]{channels,  }\item[{int}]{height,  }\item[{int}]{width,  }\item[{int}]{ksize,  }\item[{int}]{stride,  }\item[{int}]{pad,  }\item[{float $\ast$}]{data\+\_\+col,  }\item[{int}]{bit\+\_\+align }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=327pt]{gemm_8h_a6a3439a365c938d672a2dc39901f155f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{gemm_8h_afee3277990045539e36e35ba66ae995b}\label{gemm_8h_afee3277990045539e36e35ba66ae995b}} 
+\index{gemm.h@{gemm.h}!im2col\_cpu\_custom\_transpose@{im2col\_cpu\_custom\_transpose}}
+\index{im2col\_cpu\_custom\_transpose@{im2col\_cpu\_custom\_transpose}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{im2col\_cpu\_custom\_transpose()}{im2col\_cpu\_custom\_transpose()}}
+{\footnotesize\ttfamily void im2col\+\_\+cpu\+\_\+custom\+\_\+transpose (\begin{DoxyParamCaption}\item[{float $\ast$}]{data\+\_\+im,  }\item[{int}]{channels,  }\item[{int}]{height,  }\item[{int}]{width,  }\item[{int}]{ksize,  }\item[{int}]{stride,  }\item[{int}]{pad,  }\item[{float $\ast$}]{data\+\_\+col,  }\item[{int}]{ldb\+\_\+align }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gemm_8h_a8e1908fd3f6cbc7da917f2e93e94e6d1}\label{gemm_8h_a8e1908fd3f6cbc7da917f2e93e94e6d1}} 
+\index{gemm.h@{gemm.h}!is\_avx@{is\_avx}}
+\index{is\_avx@{is\_avx}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{is\_avx()}{is\_avx()}}
+{\footnotesize\ttfamily int is\+\_\+avx (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gemm_8h_a4e3d4e108499dd6ea33dab80eb98d861}\label{gemm_8h_a4e3d4e108499dd6ea33dab80eb98d861}} 
+\index{gemm.h@{gemm.h}!is\_fma\_avx2@{is\_fma\_avx2}}
+\index{is\_fma\_avx2@{is\_fma\_avx2}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{is\_fma\_avx2()}{is\_fma\_avx2()}}
+{\footnotesize\ttfamily int is\+\_\+fma\+\_\+avx2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gemm_8h_a6aa7e1556948e534866527878b8cfe9e}\label{gemm_8h_a6aa7e1556948e534866527878b8cfe9e}} 
+\index{gemm.h@{gemm.h}!repack\_input@{repack\_input}}
+\index{repack\_input@{repack\_input}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{repack\_input()}{repack\_input()}}
+{\footnotesize\ttfamily void repack\+\_\+input (\begin{DoxyParamCaption}\item[{float $\ast$}]{input,  }\item[{float $\ast$}]{re\+\_\+packed\+\_\+input,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{int}]{c }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=250pt]{gemm_8h_a6aa7e1556948e534866527878b8cfe9e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{gemm_8h_aef0960a9c469e77ee2c6ea982a3eddff}\label{gemm_8h_aef0960a9c469e77ee2c6ea982a3eddff}} 
+\index{gemm.h@{gemm.h}!set\_bit@{set\_bit}}
+\index{set\_bit@{set\_bit}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{set\_bit()}{set\_bit()}}
+{\footnotesize\ttfamily static void set\+\_\+bit (\begin{DoxyParamCaption}\item[{unsigned char $\ast$const}]{dst,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\Hypertarget{gemm_8h_a0625444c982324c1a858a342ff8abc27}\label{gemm_8h_a0625444c982324c1a858a342ff8abc27}} 
+\index{gemm.h@{gemm.h}!transpose\_32x32\_bits\_reversed\_diagonale@{transpose\_32x32\_bits\_reversed\_diagonale}}
+\index{transpose\_32x32\_bits\_reversed\_diagonale@{transpose\_32x32\_bits\_reversed\_diagonale}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{transpose\_32x32\_bits\_reversed\_diagonale()}{transpose\_32x32\_bits\_reversed\_diagonale()}}
+{\footnotesize\ttfamily void transpose\+\_\+32x32\+\_\+bits\+\_\+reversed\+\_\+diagonale (\begin{DoxyParamCaption}\item[{uint32\+\_\+t $\ast$}]{A,  }\item[{uint32\+\_\+t $\ast$}]{B,  }\item[{int}]{m,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gemm_8h_a0625444c982324c1a858a342ff8abc27_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{gemm_8h_abc47efcfe9f9c9be4a2ae3886591be31}\label{gemm_8h_abc47efcfe9f9c9be4a2ae3886591be31}} 
+\index{gemm.h@{gemm.h}!transpose\_bin@{transpose\_bin}}
+\index{transpose\_bin@{transpose\_bin}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{transpose\_bin()}{transpose\_bin()}}
+{\footnotesize\ttfamily void transpose\+\_\+bin (\begin{DoxyParamCaption}\item[{uint32\+\_\+t $\ast$}]{A,  }\item[{uint32\+\_\+t $\ast$}]{B,  }\item[{const int}]{n,  }\item[{const int}]{m,  }\item[{const int}]{lda,  }\item[{const int}]{ldb,  }\item[{const int}]{block\+\_\+size }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gemm_8h_abc47efcfe9f9c9be4a2ae3886591be31_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{gemm_8h_a5106fb6ec72b4bcc07e02d76e21d6b37}\label{gemm_8h_a5106fb6ec72b4bcc07e02d76e21d6b37}} 
+\index{gemm.h@{gemm.h}!transpose\_block\_SSE4x4@{transpose\_block\_SSE4x4}}
+\index{transpose\_block\_SSE4x4@{transpose\_block\_SSE4x4}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{transpose\_block\_SSE4x4()}{transpose\_block\_SSE4x4()}}
+{\footnotesize\ttfamily void transpose\+\_\+block\+\_\+\+SSE4x4 (\begin{DoxyParamCaption}\item[{float $\ast$}]{A,  }\item[{float $\ast$}]{B,  }\item[{const int}]{n,  }\item[{const int}]{m,  }\item[{const int}]{lda,  }\item[{const int}]{ldb,  }\item[{const int}]{block\+\_\+size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gemm_8h_a20b21acd1fd344065eccc4e3517f2ad3}\label{gemm_8h_a20b21acd1fd344065eccc4e3517f2ad3}} 
+\index{gemm.h@{gemm.h}!transpose\_uint32@{transpose\_uint32}}
+\index{transpose\_uint32@{transpose\_uint32}!gemm.h@{gemm.h}}
+\doxysubsubsection{\texorpdfstring{transpose\_uint32()}{transpose\_uint32()}}
+{\footnotesize\ttfamily void transpose\+\_\+uint32 (\begin{DoxyParamCaption}\item[{uint32\+\_\+t $\ast$}]{src,  }\item[{uint32\+\_\+t $\ast$}]{dst,  }\item[{int}]{src\+\_\+h,  }\item[{int}]{src\+\_\+w,  }\item[{int}]{src\+\_\+align,  }\item[{int}]{dst\+\_\+align }\end{DoxyParamCaption})}
+

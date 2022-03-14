@@ -1,0 +1,491 @@
+\hypertarget{symlist_8h_source}{}\doxysection{symlist.\+h}
+\label{symlist_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/symlist.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/symlist.h}}
+\mbox{\hyperlink{symlist_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* This software is distributed under the GNU Lesser General Public License */}}
+\DoxyCodeLine{2 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{//   symlist.h}}
+\DoxyCodeLine{5 \textcolor{comment}{//}}
+\DoxyCodeLine{6 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{// \$Id: symlist.h,v 1.17 2002/12/20 08:26:08 chris Exp \$}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#ifndef SYMLIST\_H}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define SYMLIST\_H}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{_g_t_l_8h}{GTL/GTL.h}}>} }
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <cassert>}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \mbox{\hyperlink{_g_t_l_8h_a2d9f24096ac60918452dd51f32b64aa9}{\_\_GTL\_BEGIN\_NAMESPACE}}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{21 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{22 \textcolor{keyword}{struct }\mbox{\hyperlink{structsymnode}{symnode}} }
+\DoxyCodeLine{23 \{}
+\DoxyCodeLine{27     \mbox{\hyperlink{structsymnode_a4ceac5ed640182626797841251f71e23}{symnode}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{32     \mbox{\hyperlink{structsymnode_a30bcafe2d065258082d937d9879a6e5b}{symnode}}(\textcolor{keyword}{const} T\& n) : \mbox{\hyperlink{structdata}{data}}(n)}
+\DoxyCodeLine{33     \{}
+\DoxyCodeLine{34     \}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{39     \mbox{\hyperlink{structsymnode}{symnode}}* \mbox{\hyperlink{structsymnode_aba7e8f525fb4d85417384a6ccff59241}{adj}}[2]\{\textcolor{keyword}{nullptr}, \textcolor{keyword}{nullptr}\};}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{44     T \mbox{\hyperlink{structsymnode_a079c4145d1af3d5ddab2cc9c7b3e0563}{data}};}
+\DoxyCodeLine{45 \};}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{50 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keyword}{class} Ref>}
+\DoxyCodeLine{51 \textcolor{keyword}{struct }\mbox{\hyperlink{structsymlist__iterator}{symlist\_iterator}} }
+\DoxyCodeLine{52 \{}
+\DoxyCodeLine{56     \textcolor{keyword}{typedef} \mbox{\hyperlink{structsymlist__iterator}{symlist\_iterator<T, Ref>}} \mbox{\hyperlink{structsymlist__iterator_ae1426e0085d4c88445c0a84675ee7d38}{self}};}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{61     \textcolor{keyword}{typedef} \mbox{\hyperlink{structsymnode}{symnode<T>}}* \mbox{\hyperlink{structsymlist__iterator_ad9462ba519f8ca01ea64e04e25ee3750}{linktype}};}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{66     \mbox{\hyperlink{structsymlist__iterator_a9205d4298c3ab0caad86e2f4242a23bb}{symlist\_iterator}}() : \mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}} (0)}
+\DoxyCodeLine{67     \{}
+\DoxyCodeLine{68     \}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{73     \mbox{\hyperlink{structsymlist__iterator_ad2bfdc772635fde5f302c197e3aecb3a}{symlist\_iterator}}(\textcolor{keyword}{const} \mbox{\hyperlink{structsymlist__iterator}{self}}\& it) : \mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}}(it.\mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}}), \mbox{\hyperlink{structsymlist__iterator_a8433e558ceb6b17b225414ef46b4a3e2}{dir}}(it.\mbox{\hyperlink{structsymlist__iterator_a8433e558ceb6b17b225414ef46b4a3e2}{dir}})}
+\DoxyCodeLine{74     \{}
+\DoxyCodeLine{75     \}}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{80     \mbox{\hyperlink{structsymlist__iterator_addbd9bd7f755bf6272b0f4cc0c37cd5e}{symlist\_iterator}}(\mbox{\hyperlink{structsymnode}{linktype}} \_act, \textcolor{keywordtype}{int} \_dir) : \mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}}(\_act), \mbox{\hyperlink{structsymlist__iterator_a8433e558ceb6b17b225414ef46b4a3e2}{dir}}(\_dir)}
+\DoxyCodeLine{81     \{}
+\DoxyCodeLine{82     \}}
+\DoxyCodeLine{83     }
+\DoxyCodeLine{87     \mbox{\hyperlink{structsymlist__iterator_a747f066c9c718ffc91688c5c4ed96f59}{symlist\_iterator}}(\mbox{\hyperlink{structsymnode}{linktype}} \_act, \mbox{\hyperlink{structsymnode}{linktype}} \_prev) :}
+\DoxyCodeLine{88     \mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}}(\_act),}
+\DoxyCodeLine{89     \mbox{\hyperlink{structsymlist__iterator_a8433e558ceb6b17b225414ef46b4a3e2}{dir}} (\mbox{\hyperlink{structsymlist__iterator_abeee238d3bfff557cdbf08a05b632fa8}{where\_not}} (\_act, \_prev))}
+\DoxyCodeLine{90     \{}
+\DoxyCodeLine{91     \}}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{96     \mbox{\hyperlink{structsymlist__iterator}{self}}\& \mbox{\hyperlink{structsymlist__iterator_a705bef048e644ffc5e6228006725c788}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{structsymlist__iterator}{self}}\& it)}
+\DoxyCodeLine{97     \{}
+\DoxyCodeLine{98     \mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}} = it.\mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}};}
+\DoxyCodeLine{99     \mbox{\hyperlink{structsymlist__iterator_a8433e558ceb6b17b225414ef46b4a3e2}{dir}} = it.\mbox{\hyperlink{structsymlist__iterator_a8433e558ceb6b17b225414ef46b4a3e2}{dir}};}
+\DoxyCodeLine{100     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{101     \}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{106     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structsymlist__iterator_ace4bd4255b49937b7ee77d2f726ccf0b}{operator==}}(\textcolor{keyword}{const} \mbox{\hyperlink{structsymlist__iterator}{self}}\& it)\textcolor{keyword}{ const}}
+\DoxyCodeLine{107 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{108     \textcolor{keywordflow}{return} \mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}} == it.\mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}};}
+\DoxyCodeLine{109     \}}
+\DoxyCodeLine{110     }
+\DoxyCodeLine{114     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structsymlist__iterator_ac440e4e4d3f66483a699eebc8ba1ed6e}{operator!=}}(\textcolor{keyword}{const} \mbox{\hyperlink{structsymlist__iterator}{self}}\& it)\textcolor{keyword}{ const}}
+\DoxyCodeLine{115 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{116     \textcolor{keywordflow}{return} \mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}} != it.\mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}};}
+\DoxyCodeLine{117     \}}
+\DoxyCodeLine{118     }
+\DoxyCodeLine{122     Ref \mbox{\hyperlink{structsymlist__iterator_adcb398097fb58caeb6c55ef78744bccf}{operator*}}() }
+\DoxyCodeLine{123     \{}
+\DoxyCodeLine{124     \textcolor{keywordflow}{return} \mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}}-\/>\mbox{\hyperlink{structsymnode_a079c4145d1af3d5ddab2cc9c7b3e0563}{data}};}
+\DoxyCodeLine{125     \}}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{130     \mbox{\hyperlink{structsymlist__iterator}{self}}\& \mbox{\hyperlink{structsymlist__iterator_a04939591b3f553d3e59b004d07cc8598}{operator++}}();}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{135     \mbox{\hyperlink{structsymlist__iterator}{self}}\& \mbox{\hyperlink{structsymlist__iterator_a510c633d2c7d830afa57acfa36434e52}{operator-\/-\/}}();}
+\DoxyCodeLine{136     }
+\DoxyCodeLine{140     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{structsymlist__iterator_a260b63ae284e3f07ae510105c7edd6a0}{where}}(\mbox{\hyperlink{structsymnode}{linktype}} \_act, \mbox{\hyperlink{structsymnode}{linktype}} \_prev) }
+\DoxyCodeLine{141     \{}
+\DoxyCodeLine{142     \textcolor{keywordflow}{return} \_prev == \_act-\/>\mbox{\hyperlink{structsymnode_aba7e8f525fb4d85417384a6ccff59241}{adj}}[0] ? 0 : 1;}
+\DoxyCodeLine{143     \}}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{148     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{structsymlist__iterator_abeee238d3bfff557cdbf08a05b632fa8}{where\_not}}(\mbox{\hyperlink{structsymnode}{linktype}} \_act, \mbox{\hyperlink{structsymnode}{linktype}} \_prev)}
+\DoxyCodeLine{149     \{}
+\DoxyCodeLine{150     \textcolor{keywordflow}{return} \_prev == \_act-\/>\mbox{\hyperlink{structsymnode_aba7e8f525fb4d85417384a6ccff59241}{adj}}[1] ? 0 : 1;}
+\DoxyCodeLine{151     \}}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{156     \textcolor{keywordtype}{void} \mbox{\hyperlink{structsymlist__iterator_a4135864290fda971467e41869b20e904}{reverse}}()}
+\DoxyCodeLine{157     \{}
+\DoxyCodeLine{158     \mbox{\hyperlink{structsymlist__iterator_a8433e558ceb6b17b225414ef46b4a3e2}{dir}} = 1 -\/ \mbox{\hyperlink{structsymlist__iterator_a8433e558ceb6b17b225414ef46b4a3e2}{dir}};}
+\DoxyCodeLine{159     \}}
+\DoxyCodeLine{160     }
+\DoxyCodeLine{164     \mbox{\hyperlink{structsymnode}{linktype}}\& \mbox{\hyperlink{structsymlist__iterator_a65ea7c2f048c38bd36bd3004db02a2bc}{next}}()}
+\DoxyCodeLine{165     \{}
+\DoxyCodeLine{166     \textcolor{keywordflow}{return} \mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}}-\/>\mbox{\hyperlink{structsymnode_aba7e8f525fb4d85417384a6ccff59241}{adj}}[\mbox{\hyperlink{structsymlist__iterator_a8433e558ceb6b17b225414ef46b4a3e2}{dir}}];}
+\DoxyCodeLine{167     \}}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{172     \mbox{\hyperlink{structsymnode}{linktype}}\& \mbox{\hyperlink{structsymlist__iterator_a7a1984437387a3d68534ea82ebf22167}{prev}}()}
+\DoxyCodeLine{173     \{}
+\DoxyCodeLine{174     \textcolor{keywordflow}{return} \mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}}-\/>\mbox{\hyperlink{structsymnode_aba7e8f525fb4d85417384a6ccff59241}{adj}}[1 -\/ \mbox{\hyperlink{structsymlist__iterator_a8433e558ceb6b17b225414ef46b4a3e2}{dir}}];}
+\DoxyCodeLine{175     \}}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{180     \mbox{\hyperlink{structsymnode}{linktype}} \mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}};}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{185     \textcolor{keywordtype}{int} \mbox{\hyperlink{structsymlist__iterator_a8433e558ceb6b17b225414ef46b4a3e2}{dir}} = 0;}
+\DoxyCodeLine{186 \};}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{206 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{207 \textcolor{keyword}{class }\mbox{\hyperlink{classsymlist}{symlist}} }
+\DoxyCodeLine{208 \{}
+\DoxyCodeLine{209 \textcolor{keyword}{public}:}
+\DoxyCodeLine{213     \textcolor{keyword}{typedef} \mbox{\hyperlink{structsymlist__iterator}{symlist\_iterator<T, T\&>}} \mbox{\hyperlink{classsymlist_a66045fbe3d98975e5537092ede8b50df}{iterator}};}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{218     \textcolor{keyword}{typedef} \mbox{\hyperlink{structsymlist__iterator}{symlist\_iterator<T, const T\&>}} \mbox{\hyperlink{classsymlist_af15c0ca931299054f83d17a1580a5159}{const\_iterator}};}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{223     \mbox{\hyperlink{classsymlist_a678dc0ddb02994195a2359a361ee0ea6}{symlist}}()}
+\DoxyCodeLine{224     \{}
+\DoxyCodeLine{225     \mbox{\hyperlink{classsymlist_a8fa81a7f6d0bb986bb593776db582c90}{link}} = \textcolor{keyword}{new} \mbox{\hyperlink{structsymnode}{symnode<T>}};}
+\DoxyCodeLine{226     \mbox{\hyperlink{classsymlist_a8fa81a7f6d0bb986bb593776db582c90}{link}}-\/>adj[0] = \mbox{\hyperlink{classsymlist_a8fa81a7f6d0bb986bb593776db582c90}{link}}-\/>adj[1] = \mbox{\hyperlink{classsymlist_a8fa81a7f6d0bb986bb593776db582c90}{link}};}
+\DoxyCodeLine{227     \}}
+\DoxyCodeLine{228 }
+\DoxyCodeLine{234     \mbox{\hyperlink{classsymlist_a5c17d54592dac03b2c4d940a10153797}{symlist}}(\textcolor{keyword}{const} \mbox{\hyperlink{classsymlist}{symlist<T>}}\& li);}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{245     \mbox{\hyperlink{classsymlist}{symlist<T>}}\& \mbox{\hyperlink{classsymlist_aab326eda0f6d3a78f193a249342670bc}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{classsymlist}{symlist<T>}}\& li);}
+\DoxyCodeLine{246 }
+\DoxyCodeLine{250     \mbox{\hyperlink{classsymlist_a45c3a0b7f0e996998037fb876effefd4}{\string~symlist}}();}
+\DoxyCodeLine{251 }
+\DoxyCodeLine{259     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classsymlist_aca11cd6c621376bc52a18828ef92e753}{empty}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{260 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{261     \textcolor{keywordflow}{return} \mbox{\hyperlink{classsymlist_a8fa81a7f6d0bb986bb593776db582c90}{link}}-\/>adj[0] == \mbox{\hyperlink{classsymlist_a8fa81a7f6d0bb986bb593776db582c90}{link}} \&\& \mbox{\hyperlink{classsymlist_a8fa81a7f6d0bb986bb593776db582c90}{link}}-\/>adj[1] == \mbox{\hyperlink{classsymlist_a8fa81a7f6d0bb986bb593776db582c90}{link}};}
+\DoxyCodeLine{262     \}}
+\DoxyCodeLine{263 }
+\DoxyCodeLine{271     T\& \mbox{\hyperlink{classsymlist_a0bf4be46b85078f1ea911325f7c92def}{front}}()}
+\DoxyCodeLine{272     \{}
+\DoxyCodeLine{273     \textcolor{keywordflow}{return} \mbox{\hyperlink{classsymlist_a8fa81a7f6d0bb986bb593776db582c90}{link}}-\/>adj[0]-\/>data;}
+\DoxyCodeLine{274     \}}
+\DoxyCodeLine{275 }
+\DoxyCodeLine{283     T\& \mbox{\hyperlink{classsymlist_aa9fb9d62c1a182af3dda78d919037ec0}{back}}()}
+\DoxyCodeLine{284     \{}
+\DoxyCodeLine{285     \textcolor{keywordflow}{return} \mbox{\hyperlink{classsymlist_a8fa81a7f6d0bb986bb593776db582c90}{link}}-\/>adj[1]-\/>data;}
+\DoxyCodeLine{286     \}}
+\DoxyCodeLine{287 }
+\DoxyCodeLine{293     \mbox{\hyperlink{structsymlist__iterator}{iterator}} \mbox{\hyperlink{classsymlist_a525b8d44af5d771fe15916372515cce0}{begin}}()}
+\DoxyCodeLine{294     \{}
+\DoxyCodeLine{295     \textcolor{keywordflow}{return} ++\mbox{\hyperlink{classsymlist_a7283589fa01f79d722f8256d7a6a7883}{end}}();}
+\DoxyCodeLine{296     \}}
+\DoxyCodeLine{297 }
+\DoxyCodeLine{303     \mbox{\hyperlink{structsymlist__iterator}{iterator}} \mbox{\hyperlink{classsymlist_a7283589fa01f79d722f8256d7a6a7883}{end}}()}
+\DoxyCodeLine{304     \{}
+\DoxyCodeLine{305     \textcolor{keywordflow}{return} \mbox{\hyperlink{classsymlist_a66045fbe3d98975e5537092ede8b50df}{iterator}}(\mbox{\hyperlink{classsymlist_a8fa81a7f6d0bb986bb593776db582c90}{link}}, 0);}
+\DoxyCodeLine{306     \}}
+\DoxyCodeLine{307 }
+\DoxyCodeLine{313     \mbox{\hyperlink{structsymlist__iterator}{const\_iterator}} \mbox{\hyperlink{classsymlist_a843d2df09f34079f6547f338b50823cd}{begin}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{314 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{315     \textcolor{keywordflow}{return} ++\mbox{\hyperlink{classsymlist_a7283589fa01f79d722f8256d7a6a7883}{end}}();}
+\DoxyCodeLine{316     \}}
+\DoxyCodeLine{317 }
+\DoxyCodeLine{323     \mbox{\hyperlink{structsymlist__iterator}{const\_iterator}} \mbox{\hyperlink{classsymlist_a189c41a13b3dd377c113d802258ef418}{end}} ()\textcolor{keyword}{ const}}
+\DoxyCodeLine{324 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{325     \textcolor{keywordflow}{return} \mbox{\hyperlink{classsymlist_af15c0ca931299054f83d17a1580a5159}{const\_iterator}} (\mbox{\hyperlink{classsymlist_a8fa81a7f6d0bb986bb593776db582c90}{link}}, 0);}
+\DoxyCodeLine{326     \}}
+\DoxyCodeLine{327 }
+\DoxyCodeLine{333     \mbox{\hyperlink{structsymlist__iterator}{iterator}} \mbox{\hyperlink{classsymlist_ae5250e0c0c2bedee285f72584ddce29d}{rbegin}}()}
+\DoxyCodeLine{334     \{}
+\DoxyCodeLine{335     \textcolor{keywordflow}{return} ++\mbox{\hyperlink{classsymlist_a421fc482e62f257a9081e9e1c29d66a6}{rend}}();}
+\DoxyCodeLine{336     \}}
+\DoxyCodeLine{337 }
+\DoxyCodeLine{343     \mbox{\hyperlink{structsymlist__iterator}{iterator}} \mbox{\hyperlink{classsymlist_a421fc482e62f257a9081e9e1c29d66a6}{rend}}()}
+\DoxyCodeLine{344     \{}
+\DoxyCodeLine{345     \textcolor{keywordflow}{return} \mbox{\hyperlink{classsymlist_a66045fbe3d98975e5537092ede8b50df}{iterator}} (\mbox{\hyperlink{classsymlist_a8fa81a7f6d0bb986bb593776db582c90}{link}}, 1);}
+\DoxyCodeLine{346     \}}
+\DoxyCodeLine{347 }
+\DoxyCodeLine{353     \mbox{\hyperlink{structsymlist__iterator}{const\_iterator}} \mbox{\hyperlink{classsymlist_a3779415d5588f9621494f40789841caf}{rbegin}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{354 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{355     \textcolor{keywordflow}{return} ++\mbox{\hyperlink{classsymlist_a421fc482e62f257a9081e9e1c29d66a6}{rend}}();}
+\DoxyCodeLine{356     \}}
+\DoxyCodeLine{357 }
+\DoxyCodeLine{363     \mbox{\hyperlink{structsymlist__iterator}{const\_iterator}} \mbox{\hyperlink{classsymlist_a42379ebaa07ddb1160d785fec701712d}{rend}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{364 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{365     \textcolor{keywordflow}{return} \mbox{\hyperlink{classsymlist_af15c0ca931299054f83d17a1580a5159}{const\_iterator}}(\mbox{\hyperlink{classsymlist_a8fa81a7f6d0bb986bb593776db582c90}{link}}, 1);}
+\DoxyCodeLine{366     \}}
+\DoxyCodeLine{367 }
+\DoxyCodeLine{376     \mbox{\hyperlink{structsymlist__iterator}{iterator}} \mbox{\hyperlink{classsymlist_a8b3327b8a33b180bf1eb802856f755c3}{insert}} (\mbox{\hyperlink{structsymlist__iterator}{iterator}} pos, \textcolor{keyword}{const} T\& \mbox{\hyperlink{structdata}{data}});}
+\DoxyCodeLine{377 }
+\DoxyCodeLine{389     \textcolor{keywordtype}{void} \mbox{\hyperlink{classsymlist_ac2bd4d9db62ea6a3282662c62a97c3b2}{splice}} (\mbox{\hyperlink{structsymlist__iterator}{iterator}} pos, \mbox{\hyperlink{structsymlist__iterator}{iterator}} it);}
+\DoxyCodeLine{390 }
+\DoxyCodeLine{403     \textcolor{keywordtype}{void} \mbox{\hyperlink{classsymlist_a27889c85e97c1e8dec7a871987a12b29}{splice}} (\mbox{\hyperlink{structsymlist__iterator}{iterator}} pos, \mbox{\hyperlink{structsymlist__iterator}{iterator}} it, \mbox{\hyperlink{structsymlist__iterator}{iterator}} \mbox{\hyperlink{classsymlist_a7283589fa01f79d722f8256d7a6a7883}{end}});}
+\DoxyCodeLine{404 }
+\DoxyCodeLine{412     \mbox{\hyperlink{structsymlist__iterator}{iterator}} \mbox{\hyperlink{classsymlist_a36f0569ab6e7912c6fa64c867e2c9a30}{erase}} (\mbox{\hyperlink{structsymlist__iterator}{iterator}} pos);}
+\DoxyCodeLine{413 }
+\DoxyCodeLine{422     \mbox{\hyperlink{structsymlist__iterator}{iterator}} \mbox{\hyperlink{classsymlist_a542487e4ceff13e6e6f4da53cbde03a0}{erase}} (\mbox{\hyperlink{structsymlist__iterator}{iterator}} it, \mbox{\hyperlink{structsymlist__iterator}{iterator}} \mbox{\hyperlink{classsymlist_a7283589fa01f79d722f8256d7a6a7883}{end}});}
+\DoxyCodeLine{423 }
+\DoxyCodeLine{427     \textcolor{keywordtype}{void} \mbox{\hyperlink{classsymlist_a526206a1d6fd2f2cef9f73ec499b6315}{attach\_sublist}} (\mbox{\hyperlink{structsymlist__iterator}{iterator}}, \mbox{\hyperlink{structsymlist__iterator}{iterator}});}
+\DoxyCodeLine{428 }
+\DoxyCodeLine{432     \textcolor{keywordtype}{void} \mbox{\hyperlink{classsymlist_a784f81bf9dfbfc1865f188a82681779f}{detach\_sublist}} ();}
+\DoxyCodeLine{433 }
+\DoxyCodeLine{439     \textcolor{keywordtype}{void} \mbox{\hyperlink{classsymlist_ae22b65101604c694e96974cc9579ab78}{reverse}} ();}
+\DoxyCodeLine{440 \textcolor{keyword}{private}:}
+\DoxyCodeLine{444     \mbox{\hyperlink{structsymnode}{symnode<T>}}* \mbox{\hyperlink{classsymlist_a8fa81a7f6d0bb986bb593776db582c90}{link}};}
+\DoxyCodeLine{445 }
+\DoxyCodeLine{451     \mbox{\hyperlink{structsymlist__iterator}{iterator}} \mbox{\hyperlink{classsymlist_ac5e2276db5018abebf297079a324ed9e}{\_prev}};}
+\DoxyCodeLine{452 }
+\DoxyCodeLine{458     \mbox{\hyperlink{structsymlist__iterator}{iterator}} \mbox{\hyperlink{classsymlist_a376c701eae20490b74a6866124bcb24c}{\_next}};}
+\DoxyCodeLine{459 \};}
+\DoxyCodeLine{460 }
+\DoxyCodeLine{461 }
+\DoxyCodeLine{462 \textcolor{comment}{// Implementation Begin}}
+\DoxyCodeLine{463 }
+\DoxyCodeLine{464 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keyword}{class} Ref>}
+\DoxyCodeLine{465 \mbox{\hyperlink{structsymlist__iterator}{symlist\_iterator<T, Ref>}}\& \mbox{\hyperlink{structsymlist__iterator_a04939591b3f553d3e59b004d07cc8598}{symlist\_iterator<T, Ref>::operator++}}()}
+\DoxyCodeLine{466 \{}
+\DoxyCodeLine{467     \mbox{\hyperlink{structsymnode}{symnode<T>}}* prev = act; }
+\DoxyCodeLine{468     act = act-\/>\mbox{\hyperlink{structsymnode_aba7e8f525fb4d85417384a6ccff59241}{adj}}[dir];}
+\DoxyCodeLine{469     dir = where\_not(act, prev);}
+\DoxyCodeLine{470     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{471 \}}
+\DoxyCodeLine{472 }
+\DoxyCodeLine{473 }
+\DoxyCodeLine{474 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keyword}{class} Ref>}
+\DoxyCodeLine{475 \mbox{\hyperlink{structsymlist__iterator}{symlist\_iterator<T, Ref>}}\& \mbox{\hyperlink{structsymlist__iterator_a510c633d2c7d830afa57acfa36434e52}{symlist\_iterator<T, Ref>::operator-\/-\/}}()}
+\DoxyCodeLine{476 \{}
+\DoxyCodeLine{477     \mbox{\hyperlink{structsymnode}{symnode<T>}}* prev = act;}
+\DoxyCodeLine{478     act = act-\/>\mbox{\hyperlink{structsymnode_aba7e8f525fb4d85417384a6ccff59241}{adj}}[1 -\/ dir];}
+\DoxyCodeLine{479     dir = where(act, prev); }
+\DoxyCodeLine{480     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{481 \}}
+\DoxyCodeLine{482 }
+\DoxyCodeLine{483 }
+\DoxyCodeLine{484 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{485 \mbox{\hyperlink{classsymlist_a678dc0ddb02994195a2359a361ee0ea6}{symlist<T>::symlist}} (\textcolor{keyword}{const} \mbox{\hyperlink{classsymlist}{symlist<T>}}\& l)}
+\DoxyCodeLine{486 \{}
+\DoxyCodeLine{487     link = \textcolor{keyword}{new} \mbox{\hyperlink{structsymnode}{symnode<T>}};}
+\DoxyCodeLine{488     link-\/>\mbox{\hyperlink{structsymnode_aba7e8f525fb4d85417384a6ccff59241}{adj}}[0] = link-\/>\mbox{\hyperlink{structsymnode_aba7e8f525fb4d85417384a6ccff59241}{adj}}[1] = link;    }
+\DoxyCodeLine{489     }
+\DoxyCodeLine{490     \mbox{\hyperlink{structsymlist__iterator}{const\_iterator}} it = l.\mbox{\hyperlink{classsymlist_a525b8d44af5d771fe15916372515cce0}{begin}}();}
+\DoxyCodeLine{491     \mbox{\hyperlink{structsymlist__iterator}{const\_iterator}} e = l.\mbox{\hyperlink{classsymlist_a7283589fa01f79d722f8256d7a6a7883}{end}}();}
+\DoxyCodeLine{492 }
+\DoxyCodeLine{493     \textcolor{keywordflow}{while} (it != e)}
+\DoxyCodeLine{494     \{}
+\DoxyCodeLine{495     insert(\mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}}(), *it);}
+\DoxyCodeLine{496     ++it;}
+\DoxyCodeLine{497     \}}
+\DoxyCodeLine{498 \}}
+\DoxyCodeLine{499 }
+\DoxyCodeLine{500 }
+\DoxyCodeLine{501 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{502 \mbox{\hyperlink{classsymlist_a45c3a0b7f0e996998037fb876effefd4}{symlist<T>::\string~symlist}}()}
+\DoxyCodeLine{503 \{}
+\DoxyCodeLine{504     \textcolor{keywordflow}{if} (\_next == \mbox{\hyperlink{structsymlist__iterator}{iterator}}())}
+\DoxyCodeLine{505     \{}
+\DoxyCodeLine{506     erase (begin(), \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}}());}
+\DoxyCodeLine{507     \}}
+\DoxyCodeLine{508     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{509     \{}
+\DoxyCodeLine{510     detach\_sublist();}
+\DoxyCodeLine{511     \}}
+\DoxyCodeLine{512     }
+\DoxyCodeLine{513     \textcolor{keyword}{delete} link;}
+\DoxyCodeLine{514 \}}
+\DoxyCodeLine{515 }
+\DoxyCodeLine{516 }
+\DoxyCodeLine{517 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{518 \mbox{\hyperlink{classsymlist}{symlist<T>}}\& \mbox{\hyperlink{classsymlist_aab326eda0f6d3a78f193a249342670bc}{symlist<T>::operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{classsymlist}{symlist<T>}}\& l) }
+\DoxyCodeLine{519 \{}
+\DoxyCodeLine{520     erase(begin(), \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}}());}
+\DoxyCodeLine{521 }
+\DoxyCodeLine{522     \mbox{\hyperlink{structsymlist__iterator}{const\_iterator}} it = l.\mbox{\hyperlink{classsymlist_a525b8d44af5d771fe15916372515cce0}{begin}}();}
+\DoxyCodeLine{523     \mbox{\hyperlink{structsymlist__iterator}{const\_iterator}} e = l.\mbox{\hyperlink{classsymlist_a7283589fa01f79d722f8256d7a6a7883}{end}}();}
+\DoxyCodeLine{524 }
+\DoxyCodeLine{525     \textcolor{keywordflow}{while} (it != e)}
+\DoxyCodeLine{526     \{}
+\DoxyCodeLine{527     insert(\mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}}(), *it);}
+\DoxyCodeLine{528     ++it;}
+\DoxyCodeLine{529     \}}
+\DoxyCodeLine{530     }
+\DoxyCodeLine{531     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{532 \}}
+\DoxyCodeLine{533 }
+\DoxyCodeLine{534 }
+\DoxyCodeLine{535 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{536 \mbox{\hyperlink{structsymlist__iterator}{symlist\_iterator<T, T\&>}} \mbox{\hyperlink{classsymlist_a8b3327b8a33b180bf1eb802856f755c3}{symlist<T>::insert}}(}
+\DoxyCodeLine{537     \mbox{\hyperlink{structsymlist__iterator}{symlist\_iterator<T,T\&>}} pos,}
+\DoxyCodeLine{538     \textcolor{keyword}{const} T\& ins)}
+\DoxyCodeLine{539 \{}
+\DoxyCodeLine{540     \mbox{\hyperlink{structsymlist__iterator}{iterator}} prev = pos;}
+\DoxyCodeLine{541     -\/-\/prev;}
+\DoxyCodeLine{542     \mbox{\hyperlink{structsymnode}{symnode<T>}}* n = \textcolor{keyword}{new} \mbox{\hyperlink{structsymnode}{symnode<T>}}(ins);}
+\DoxyCodeLine{543     n-\/>\mbox{\hyperlink{structsymnode_aba7e8f525fb4d85417384a6ccff59241}{adj}}[0] = pos.\mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}};}
+\DoxyCodeLine{544     n-\/>\mbox{\hyperlink{structsymnode_aba7e8f525fb4d85417384a6ccff59241}{adj}}[1] = prev.\mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}};}
+\DoxyCodeLine{545 }
+\DoxyCodeLine{546     \textcolor{keywordflow}{if} (pos == prev)}
+\DoxyCodeLine{547     \{}
+\DoxyCodeLine{548     pos = prev;}
+\DoxyCodeLine{549     \}}
+\DoxyCodeLine{550 }
+\DoxyCodeLine{551     pos.\mbox{\hyperlink{structsymlist__iterator_a7a1984437387a3d68534ea82ebf22167}{prev}}() = n;}
+\DoxyCodeLine{552     prev.\mbox{\hyperlink{structsymlist__iterator_a65ea7c2f048c38bd36bd3004db02a2bc}{next}}() = n;}
+\DoxyCodeLine{553 }
+\DoxyCodeLine{554     \textcolor{keywordflow}{return} \mbox{\hyperlink{structsymlist__iterator}{iterator}}(n, 0);}
+\DoxyCodeLine{555 \}}
+\DoxyCodeLine{556 }
+\DoxyCodeLine{557 }
+\DoxyCodeLine{558 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{559 \textcolor{keywordtype}{void} \mbox{\hyperlink{classsymlist_ac2bd4d9db62ea6a3282662c62a97c3b2}{symlist<T>::splice}}(\mbox{\hyperlink{structsymlist__iterator}{symlist\_iterator<T, T\&>}} pos,}
+\DoxyCodeLine{560             \mbox{\hyperlink{structsymlist__iterator}{symlist\_iterator<T, T\&>}} beg,}
+\DoxyCodeLine{561             \mbox{\hyperlink{structsymlist__iterator}{symlist\_iterator<T, T\&>}} \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}}) }
+\DoxyCodeLine{562 \{}
+\DoxyCodeLine{563     \textcolor{keywordflow}{if} (beg != \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}})}
+\DoxyCodeLine{564     \{}
+\DoxyCodeLine{565     \mbox{\hyperlink{structsymlist__iterator}{iterator}} prev = beg;}
+\DoxyCodeLine{566     -\/-\/prev;}
+\DoxyCodeLine{567     \mbox{\hyperlink{structsymlist__iterator}{iterator}} \mbox{\hyperlink{detail_2common_8h_a16195acbb4bd947bbd0f805af9f2670b}{last}} = \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}};}
+\DoxyCodeLine{568     -\/-\/\mbox{\hyperlink{detail_2common_8h_a16195acbb4bd947bbd0f805af9f2670b}{last}};}
+\DoxyCodeLine{569 }
+\DoxyCodeLine{570     \textcolor{comment}{//}}
+\DoxyCodeLine{571     \textcolor{comment}{// The following seems to be rather senseless, but it is required}}
+\DoxyCodeLine{572     \textcolor{comment}{// since two iterator are equal, iff the point to the same element.}}
+\DoxyCodeLine{573     \textcolor{comment}{// This implies that they might have different directions. Suppose}}
+\DoxyCodeLine{574     \textcolor{comment}{// that prev == end is true and they have different directions,}}
+\DoxyCodeLine{575     \textcolor{comment}{// than prev.next() and end.prev() return the same element !! Thus}}
+\DoxyCodeLine{576     \textcolor{comment}{// the assignment prev = end corrects this, since the direction}}
+\DoxyCodeLine{577     \textcolor{comment}{// gets copied, too.}}
+\DoxyCodeLine{578     \textcolor{comment}{//}}
+\DoxyCodeLine{579     \textcolor{keywordflow}{if} (prev == \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}})}
+\DoxyCodeLine{580     \{}
+\DoxyCodeLine{581         prev = \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}};}
+\DoxyCodeLine{582     \}}
+\DoxyCodeLine{583         }
+\DoxyCodeLine{584     prev.\mbox{\hyperlink{structsymlist__iterator_a65ea7c2f048c38bd36bd3004db02a2bc}{next}}() = \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}}.act;}
+\DoxyCodeLine{585     \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}}.prev() = prev.\mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}};}
+\DoxyCodeLine{586 }
+\DoxyCodeLine{587     prev = pos;}
+\DoxyCodeLine{588     -\/-\/prev;}
+\DoxyCodeLine{589 }
+\DoxyCodeLine{590     \textcolor{keywordflow}{if} (pos == prev)}
+\DoxyCodeLine{591     \{}
+\DoxyCodeLine{592         pos = prev;}
+\DoxyCodeLine{593     \}}
+\DoxyCodeLine{594 }
+\DoxyCodeLine{595     \textcolor{keywordflow}{if} (\mbox{\hyperlink{detail_2common_8h_a16195acbb4bd947bbd0f805af9f2670b}{last}} == beg)}
+\DoxyCodeLine{596     \{}
+\DoxyCodeLine{597         \mbox{\hyperlink{detail_2common_8h_a16195acbb4bd947bbd0f805af9f2670b}{last}} = beg;}
+\DoxyCodeLine{598     \}}
+\DoxyCodeLine{599     }
+\DoxyCodeLine{600     prev.\mbox{\hyperlink{structsymlist__iterator_a65ea7c2f048c38bd36bd3004db02a2bc}{next}}() = beg.\mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}};}
+\DoxyCodeLine{601     beg.\mbox{\hyperlink{structsymlist__iterator_a7a1984437387a3d68534ea82ebf22167}{prev}}() = prev.\mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}};}
+\DoxyCodeLine{602     pos.\mbox{\hyperlink{structsymlist__iterator_a7a1984437387a3d68534ea82ebf22167}{prev}}() = \mbox{\hyperlink{detail_2common_8h_a16195acbb4bd947bbd0f805af9f2670b}{last}}.act;}
+\DoxyCodeLine{603     \mbox{\hyperlink{detail_2common_8h_a16195acbb4bd947bbd0f805af9f2670b}{last}}.next() = pos.\mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}};}
+\DoxyCodeLine{604     \}}
+\DoxyCodeLine{605 \}}
+\DoxyCodeLine{606 }
+\DoxyCodeLine{607 }
+\DoxyCodeLine{608 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{609 \textcolor{keywordtype}{void} \mbox{\hyperlink{classsymlist_ac2bd4d9db62ea6a3282662c62a97c3b2}{symlist<T>::splice}}(\mbox{\hyperlink{structsymlist__iterator}{symlist\_iterator<T,T\&>}} pos, }
+\DoxyCodeLine{610             \mbox{\hyperlink{structsymlist__iterator}{symlist\_iterator<T,T\&>}} beg)}
+\DoxyCodeLine{611 \{}
+\DoxyCodeLine{612     \mbox{\hyperlink{structsymlist__iterator}{iterator}} tmp = beg;}
+\DoxyCodeLine{613     ++tmp;}
+\DoxyCodeLine{614     splice(pos, beg, tmp);}
+\DoxyCodeLine{615 \}}
+\DoxyCodeLine{616 }
+\DoxyCodeLine{617 }
+\DoxyCodeLine{618 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{619 \mbox{\hyperlink{structsymlist__iterator}{symlist\_iterator<T,T\&>}} \mbox{\hyperlink{classsymlist_a36f0569ab6e7912c6fa64c867e2c9a30}{symlist<T>::erase}}(\mbox{\hyperlink{structsymlist__iterator}{symlist\_iterator<T,T\&>}} pos) }
+\DoxyCodeLine{620 \{}
+\DoxyCodeLine{621     assert (pos.\mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}} != link);}
+\DoxyCodeLine{622     \mbox{\hyperlink{structsymlist__iterator}{iterator}} prev = pos;}
+\DoxyCodeLine{623     -\/-\/prev;}
+\DoxyCodeLine{624     \mbox{\hyperlink{structsymlist__iterator}{iterator}} next = pos;}
+\DoxyCodeLine{625     ++next;}
+\DoxyCodeLine{626     }
+\DoxyCodeLine{627     \textcolor{keywordflow}{if} (next == prev)}
+\DoxyCodeLine{628     \{}
+\DoxyCodeLine{629     next = prev;}
+\DoxyCodeLine{630     \}}
+\DoxyCodeLine{631 }
+\DoxyCodeLine{632     next.\mbox{\hyperlink{structsymlist__iterator_a7a1984437387a3d68534ea82ebf22167}{prev}}() = prev.\mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}};}
+\DoxyCodeLine{633     prev.\mbox{\hyperlink{structsymlist__iterator_a65ea7c2f048c38bd36bd3004db02a2bc}{next}}() = next.\mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}};}
+\DoxyCodeLine{634 }
+\DoxyCodeLine{635     \textcolor{keyword}{delete} (pos.\mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}});}
+\DoxyCodeLine{636 }
+\DoxyCodeLine{637     \textcolor{keywordflow}{return} next;}
+\DoxyCodeLine{638 \}}
+\DoxyCodeLine{639 }
+\DoxyCodeLine{640 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{641 \mbox{\hyperlink{structsymlist__iterator}{symlist\_iterator<T,T\&>}} \mbox{\hyperlink{classsymlist_a36f0569ab6e7912c6fa64c867e2c9a30}{symlist<T>::erase}}(\mbox{\hyperlink{structsymlist__iterator}{symlist\_iterator<T,T\&>}} beg, }
+\DoxyCodeLine{642                      \mbox{\hyperlink{structsymlist__iterator}{symlist\_iterator<T,T\&>}} \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}})}
+\DoxyCodeLine{643 \{}
+\DoxyCodeLine{644     \mbox{\hyperlink{structsymlist__iterator}{iterator}} prev = beg;}
+\DoxyCodeLine{645     -\/-\/prev;}
+\DoxyCodeLine{646     \mbox{\hyperlink{structsymlist__iterator}{iterator}} it = beg;}
+\DoxyCodeLine{647     \mbox{\hyperlink{structsymnode}{symnode<T>}}* act;}
+\DoxyCodeLine{648 }
+\DoxyCodeLine{649     \textcolor{keywordflow}{while} (it != \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}})}
+\DoxyCodeLine{650     \{}
+\DoxyCodeLine{651     assert (it.\mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}} != link);}
+\DoxyCodeLine{652     act = it.\mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}};}
+\DoxyCodeLine{653     ++it;}
+\DoxyCodeLine{654     \textcolor{keyword}{delete} (act);}
+\DoxyCodeLine{655     \}}
+\DoxyCodeLine{656 }
+\DoxyCodeLine{657     \textcolor{keywordflow}{if} (prev == \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}})}
+\DoxyCodeLine{658     \{}
+\DoxyCodeLine{659     prev = \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}};}
+\DoxyCodeLine{660     \}   }
+\DoxyCodeLine{661     }
+\DoxyCodeLine{662     \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}}.prev() = prev.\mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}};}
+\DoxyCodeLine{663     prev.\mbox{\hyperlink{structsymlist__iterator_a65ea7c2f048c38bd36bd3004db02a2bc}{next}}() = \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}}.act;}
+\DoxyCodeLine{664    }
+\DoxyCodeLine{665     \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}};}
+\DoxyCodeLine{666 \}    }
+\DoxyCodeLine{667 }
+\DoxyCodeLine{668 }
+\DoxyCodeLine{669 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{670 \textcolor{keywordtype}{void} \mbox{\hyperlink{classsymlist_a526206a1d6fd2f2cef9f73ec499b6315}{symlist<T>::attach\_sublist}}(\mbox{\hyperlink{structsymlist__iterator}{symlist\_iterator<T,T\&>}} it, }
+\DoxyCodeLine{671                 \mbox{\hyperlink{structsymlist__iterator}{symlist\_iterator<T,T\&>}} \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}}) }
+\DoxyCodeLine{672 \{ }
+\DoxyCodeLine{673     assert (empty());}
+\DoxyCodeLine{674     \mbox{\hyperlink{structsymlist__iterator}{iterator}} \mbox{\hyperlink{detail_2common_8h_a16195acbb4bd947bbd0f805af9f2670b}{last}} = \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}};}
+\DoxyCodeLine{675     -\/-\/\mbox{\hyperlink{detail_2common_8h_a16195acbb4bd947bbd0f805af9f2670b}{last}};}
+\DoxyCodeLine{676     \_prev = it;}
+\DoxyCodeLine{677     -\/-\/\_prev;}
+\DoxyCodeLine{678     \_next = \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}};}
+\DoxyCodeLine{679 }
+\DoxyCodeLine{680     \textcolor{keywordflow}{if} (it == \mbox{\hyperlink{detail_2common_8h_a16195acbb4bd947bbd0f805af9f2670b}{last}})}
+\DoxyCodeLine{681     \{}
+\DoxyCodeLine{682     it = \mbox{\hyperlink{detail_2common_8h_a16195acbb4bd947bbd0f805af9f2670b}{last}};}
+\DoxyCodeLine{683     \}}
+\DoxyCodeLine{684 }
+\DoxyCodeLine{685     link-\/>adj[0] = it.\mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}};}
+\DoxyCodeLine{686     it.\mbox{\hyperlink{structsymlist__iterator_a7a1984437387a3d68534ea82ebf22167}{prev}}() = link;}
+\DoxyCodeLine{687     link-\/>\mbox{\hyperlink{structsymnode_aba7e8f525fb4d85417384a6ccff59241}{adj}}[1] = \mbox{\hyperlink{detail_2common_8h_a16195acbb4bd947bbd0f805af9f2670b}{last}}.act;}
+\DoxyCodeLine{688     \mbox{\hyperlink{detail_2common_8h_a16195acbb4bd947bbd0f805af9f2670b}{last}}.next() = link;}
+\DoxyCodeLine{689 \}   }
+\DoxyCodeLine{690 }
+\DoxyCodeLine{691     }
+\DoxyCodeLine{692 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{693 \textcolor{keywordtype}{void} \mbox{\hyperlink{classsymlist_a784f81bf9dfbfc1865f188a82681779f}{symlist<T>::detach\_sublist}}() }
+\DoxyCodeLine{694 \{}
+\DoxyCodeLine{695     \textcolor{keywordflow}{if} (\_next != \mbox{\hyperlink{structsymlist__iterator}{iterator}}())}
+\DoxyCodeLine{696     \{}
+\DoxyCodeLine{697     \mbox{\hyperlink{structsymlist__iterator}{iterator}} it(begin());}
+\DoxyCodeLine{698     \mbox{\hyperlink{structsymlist__iterator}{iterator}} e(\mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}}());}
+\DoxyCodeLine{699     }
+\DoxyCodeLine{700     -\/-\/e;}
+\DoxyCodeLine{701     }
+\DoxyCodeLine{702     \textcolor{keywordflow}{if} (e == it)}
+\DoxyCodeLine{703     \{}
+\DoxyCodeLine{704         e = it;}
+\DoxyCodeLine{705     \}}
+\DoxyCodeLine{706 }
+\DoxyCodeLine{707     \_prev.\mbox{\hyperlink{structsymlist__iterator_a65ea7c2f048c38bd36bd3004db02a2bc}{next}}() = it.\mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}};}
+\DoxyCodeLine{708     it.\mbox{\hyperlink{structsymlist__iterator_a7a1984437387a3d68534ea82ebf22167}{prev}}() = \_prev.act;}
+\DoxyCodeLine{709     \_next.prev() = e.\mbox{\hyperlink{structsymlist__iterator_a1c7a0193ab85baa7705070975d841fc8}{act}};}
+\DoxyCodeLine{710     e.\mbox{\hyperlink{structsymlist__iterator_a65ea7c2f048c38bd36bd3004db02a2bc}{next}}() = \_next.act;}
+\DoxyCodeLine{711     link-\/>\mbox{\hyperlink{structsymnode_aba7e8f525fb4d85417384a6ccff59241}{adj}}[0] = link-\/>\mbox{\hyperlink{structsymnode_aba7e8f525fb4d85417384a6ccff59241}{adj}}[1] = link;}
+\DoxyCodeLine{712 }
+\DoxyCodeLine{713     \_next = \mbox{\hyperlink{structsymlist__iterator}{iterator}}();}
+\DoxyCodeLine{714     \_prev = \mbox{\hyperlink{structsymlist__iterator}{iterator}}();}
+\DoxyCodeLine{715     \}}
+\DoxyCodeLine{716 \}}
+\DoxyCodeLine{717 }
+\DoxyCodeLine{718 }
+\DoxyCodeLine{719 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{720 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{classsymlist_ae22b65101604c694e96974cc9579ab78}{symlist<T>::reverse}}()}
+\DoxyCodeLine{721 \{}
+\DoxyCodeLine{722     \mbox{\hyperlink{structsymnode}{symnode<T>}}* tmp = link-\/>\mbox{\hyperlink{structsymnode_aba7e8f525fb4d85417384a6ccff59241}{adj}}[0];}
+\DoxyCodeLine{723     link-\/>\mbox{\hyperlink{structsymnode_aba7e8f525fb4d85417384a6ccff59241}{adj}}[0] = link-\/>\mbox{\hyperlink{structsymnode_aba7e8f525fb4d85417384a6ccff59241}{adj}}[1];}
+\DoxyCodeLine{724     link-\/>\mbox{\hyperlink{structsymnode_aba7e8f525fb4d85417384a6ccff59241}{adj}}[1] = tmp;}
+\DoxyCodeLine{725 \}}
+\DoxyCodeLine{726 }
+\DoxyCodeLine{727 \textcolor{comment}{// Implementation End}}
+\DoxyCodeLine{728 }
+\DoxyCodeLine{729 \mbox{\hyperlink{_g_t_l_8h_a46af2b3ec266ac2f9d36fa7222358017}{\_\_GTL\_END\_NAMESPACE}}}
+\DoxyCodeLine{730 }
+\DoxyCodeLine{731 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// SYMLIST\_H}}
+\DoxyCodeLine{732 }
+\DoxyCodeLine{733 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{734 \textcolor{comment}{//   end of file}}
+\DoxyCodeLine{735 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+
+\end{DoxyCode}

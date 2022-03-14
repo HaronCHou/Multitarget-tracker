@@ -1,0 +1,219 @@
+\hypertarget{structinstance}{}\doxysection{instance结构体 参考}
+\label{structinstance}\index{instance@{instance}}
+
+
+The \textquotesingle{}instance\textquotesingle{} type which needs to be standard layout (need to be able to use \textquotesingle{}offsetof\textquotesingle{})  
+
+
+
+
+{\ttfamily \#include $<$common.\+h$>$}
+
+
+
+instance 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=194pt]{structinstance__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{structinstance_addb02b48487bafc757c28d40d1d6a995}{allocate\+\_\+layout}} ()
+\begin{DoxyCompactList}\small\item\em Initializes all of the above type/values/holders data (but not the instance values themselves) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{structinstance_a0e6db8a0edd9f4d440a4b31fb1f59d19}{deallocate\+\_\+layout}} ()
+\begin{DoxyCompactList}\small\item\em Destroys/deallocates all of the above \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structvalue__and__holder}{value\+\_\+and\+\_\+holder}} \mbox{\hyperlink{structinstance_a33fb0acd9a08898baf6dfefc54477821}{get\+\_\+value\+\_\+and\+\_\+holder}} (const \mbox{\hyperlink{structtype__info}{type\+\_\+info}} $\ast$find\+\_\+type=nullptr, bool throw\+\_\+if\+\_\+missing=true)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 属性}
+\begin{DoxyCompactItemize}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>void $\ast$ \mbox{\hyperlink{structinstance_a41170a51b771a937d421d60d97d50e48}{simple\_value\_holder}} \mbox{[}1+\mbox{\hyperlink{detail_2common_8h_a24241089c1b051b143781ff5a6193a76}{instance\_simple\_holder\_in\_ptrs}}()\mbox{]}\\
+\>\mbox{\hyperlink{structnonsimple__values__and__holders}{nonsimple\_values\_and\_holders}} \mbox{\hyperlink{structinstance_a0a744abc33ad85e3df4d4aa69093f38f}{nonsimple}}\\
+\}; \\
+
+\end{tabbing}\begin{DoxyCompactList}\small\item\em Storage for pointers and holder; see simple\+\_\+layout, below, for a description \end{DoxyCompactList}\item 
+Py\+Object $\ast$ \mbox{\hyperlink{structinstance_a23dd4c6144dbfa8ed0ba6d2a7a964998}{weakrefs}}
+\begin{DoxyCompactList}\small\item\em Weak references \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structinstance_a69b3e638c182ecbbaaa5625ce3c36e99}{owned}}\+: 1
+\begin{DoxyCompactList}\small\item\em If true, the pointer is owned which means we\textquotesingle{}re free to manage it with a holder. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structinstance_a1e23897fd281cdd5cecd2d36b5d7a26d}{simple\+\_\+layout}}\+: 1
+\item 
+bool \mbox{\hyperlink{structinstance_a70b19567d7738df6679e1599e7d3ff75}{simple\+\_\+holder\+\_\+constructed}}\+: 1
+\begin{DoxyCompactList}\small\item\em For simple layout, tracks whether the holder has been constructed \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structinstance_a464df414f8c21853c43be0ab4ccf8e93}{simple\+\_\+instance\+\_\+registered}}\+: 1
+\begin{DoxyCompactList}\small\item\em For simple layout, tracks whether the instance is registered in {\ttfamily registered\+\_\+instances} \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structinstance_a30d2da1bf481e5628e3f20a84a4bcd1a}{has\+\_\+patients}}\+: 1
+\begin{DoxyCompactList}\small\item\em If true, \mbox{\hyperlink{internals_8h_a6c7959e5bcf56993e43c61758aa697ac}{get\+\_\+internals()}}.patients has an entry for this object \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{静态 Public 属性}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr uint8\+\_\+t \mbox{\hyperlink{structinstance_a2d8ccf4b4d7dcb8083cee8cc030ec871}{status\+\_\+holder\+\_\+constructed}} = 1
+\begin{DoxyCompactList}\small\item\em Bit values for the non-\/simple status flags \end{DoxyCompactList}\item 
+static constexpr uint8\+\_\+t \mbox{\hyperlink{structinstance_a48612cbb682f9b16cbaeba60f1bca052}{status\+\_\+instance\+\_\+registered}} = 2
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+The \textquotesingle{}instance\textquotesingle{} type which needs to be standard layout (need to be able to use \textquotesingle{}offsetof\textquotesingle{}) 
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{structinstance_addb02b48487bafc757c28d40d1d6a995}\label{structinstance_addb02b48487bafc757c28d40d1d6a995}} 
+\index{instance@{instance}!allocate\_layout@{allocate\_layout}}
+\index{allocate\_layout@{allocate\_layout}!instance@{instance}}
+\doxysubsubsection{\texorpdfstring{allocate\_layout()}{allocate\_layout()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\+\_\+\+NOINLINE}} void instance\+::allocate\+\_\+layout (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initializes all of the above type/values/holders data (but not the instance values themselves) 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structinstance_addb02b48487bafc757c28d40d1d6a995_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{structinstance_a0e6db8a0edd9f4d440a4b31fb1f59d19}\label{structinstance_a0e6db8a0edd9f4d440a4b31fb1f59d19}} 
+\index{instance@{instance}!deallocate\_layout@{deallocate\_layout}}
+\index{deallocate\_layout@{deallocate\_layout}!instance@{instance}}
+\doxysubsubsection{\texorpdfstring{deallocate\_layout()}{deallocate\_layout()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\+\_\+\+NOINLINE}} void instance\+::deallocate\+\_\+layout (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destroys/deallocates all of the above 
+
+\mbox{\Hypertarget{structinstance_a33fb0acd9a08898baf6dfefc54477821}\label{structinstance_a33fb0acd9a08898baf6dfefc54477821}} 
+\index{instance@{instance}!get\_value\_and\_holder@{get\_value\_and\_holder}}
+\index{get\_value\_and\_holder@{get\_value\_and\_holder}!instance@{instance}}
+\doxysubsubsection{\texorpdfstring{get\_value\_and\_holder()}{get\_value\_and\_holder()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\+\_\+\+NOINLINE}} \mbox{\hyperlink{structvalue__and__holder}{value\+\_\+and\+\_\+holder}} instance\+::get\+\_\+value\+\_\+and\+\_\+holder (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structtype__info}{type\+\_\+info}} $\ast$}]{find\+\_\+type = {\ttfamily nullptr},  }\item[{bool}]{throw\+\_\+if\+\_\+missing = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns the \mbox{\hyperlink{structvalue__and__holder}{value\+\_\+and\+\_\+holder}} wrapper for the given type (or the first, if {\ttfamily find\+\_\+type} omitted). Returns a default-\/constructed (with {\ttfamily .inst = nullptr}) object on failure if {\ttfamily throw\+\_\+if\+\_\+missing} is false.
+
+Extracts C++ value and holder pointer references from an instance (which may contain multiple values/holders for python-\/side multiple inheritance) that match the given type. Throws an error if the given type (or Value\+Type, if omitted) is not a \mbox{\hyperlink{namespacepybind11}{pybind11}} base of the given instance. If {\ttfamily find\+\_\+type} is omitted (or explicitly specified as nullptr) the first value/holder are returned, regardless of type (and the resulting .type will be nullptr).
+
+The returned object should be short-\/lived\+: in particular, it must not outlive the called-\/upon instance. 函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=289pt]{structinstance_a33fb0acd9a08898baf6dfefc54477821_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{structinstance_ad38854cd784784f2087fea1f40c9e476}\label{structinstance_ad38854cd784784f2087fea1f40c9e476}} 
+\doxysubsubsection{\texorpdfstring{}{}}
+{\footnotesize\ttfamily Py\+Object\+\_\+\+HEAD union  \{ ... \}  instance\+::@10}
+
+
+
+Storage for pointers and holder; see simple\+\_\+layout, below, for a description 
+
+\mbox{\Hypertarget{structinstance_a30d2da1bf481e5628e3f20a84a4bcd1a}\label{structinstance_a30d2da1bf481e5628e3f20a84a4bcd1a}} 
+\index{instance@{instance}!has\_patients@{has\_patients}}
+\index{has\_patients@{has\_patients}!instance@{instance}}
+\doxysubsubsection{\texorpdfstring{has\_patients}{has\_patients}}
+{\footnotesize\ttfamily bool instance\+::has\+\_\+patients}
+
+
+
+If true, \mbox{\hyperlink{internals_8h_a6c7959e5bcf56993e43c61758aa697ac}{get\+\_\+internals()}}.patients has an entry for this object 
+
+\mbox{\Hypertarget{structinstance_a0a744abc33ad85e3df4d4aa69093f38f}\label{structinstance_a0a744abc33ad85e3df4d4aa69093f38f}} 
+\index{instance@{instance}!nonsimple@{nonsimple}}
+\index{nonsimple@{nonsimple}!instance@{instance}}
+\doxysubsubsection{\texorpdfstring{nonsimple}{nonsimple}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structnonsimple__values__and__holders}{nonsimple\+\_\+values\+\_\+and\+\_\+holders}} instance\+::nonsimple}
+
+\mbox{\Hypertarget{structinstance_a69b3e638c182ecbbaaa5625ce3c36e99}\label{structinstance_a69b3e638c182ecbbaaa5625ce3c36e99}} 
+\index{instance@{instance}!owned@{owned}}
+\index{owned@{owned}!instance@{instance}}
+\doxysubsubsection{\texorpdfstring{owned}{owned}}
+{\footnotesize\ttfamily bool instance\+::owned}
+
+
+
+If true, the pointer is owned which means we\textquotesingle{}re free to manage it with a holder. 
+
+\mbox{\Hypertarget{structinstance_a70b19567d7738df6679e1599e7d3ff75}\label{structinstance_a70b19567d7738df6679e1599e7d3ff75}} 
+\index{instance@{instance}!simple\_holder\_constructed@{simple\_holder\_constructed}}
+\index{simple\_holder\_constructed@{simple\_holder\_constructed}!instance@{instance}}
+\doxysubsubsection{\texorpdfstring{simple\_holder\_constructed}{simple\_holder\_constructed}}
+{\footnotesize\ttfamily bool instance\+::simple\+\_\+holder\+\_\+constructed}
+
+
+
+For simple layout, tracks whether the holder has been constructed 
+
+\mbox{\Hypertarget{structinstance_a464df414f8c21853c43be0ab4ccf8e93}\label{structinstance_a464df414f8c21853c43be0ab4ccf8e93}} 
+\index{instance@{instance}!simple\_instance\_registered@{simple\_instance\_registered}}
+\index{simple\_instance\_registered@{simple\_instance\_registered}!instance@{instance}}
+\doxysubsubsection{\texorpdfstring{simple\_instance\_registered}{simple\_instance\_registered}}
+{\footnotesize\ttfamily bool instance\+::simple\+\_\+instance\+\_\+registered}
+
+
+
+For simple layout, tracks whether the instance is registered in {\ttfamily registered\+\_\+instances} 
+
+\mbox{\Hypertarget{structinstance_a1e23897fd281cdd5cecd2d36b5d7a26d}\label{structinstance_a1e23897fd281cdd5cecd2d36b5d7a26d}} 
+\index{instance@{instance}!simple\_layout@{simple\_layout}}
+\index{simple\_layout@{simple\_layout}!instance@{instance}}
+\doxysubsubsection{\texorpdfstring{simple\_layout}{simple\_layout}}
+{\footnotesize\ttfamily bool instance\+::simple\+\_\+layout}
+
+An instance has two possible value/holder layouts.
+
+Simple layout (when this flag is true), means the {\ttfamily simple\+\_\+value\+\_\+holder} is set with a pointer and the holder object governing that pointer, i.\+e. \mbox{[}val1$\ast$\mbox{]}\mbox{[}holder\mbox{]}. This layout is applied whenever there is no python-\/side multiple inheritance of bound C++ types {\itshape and} the type\textquotesingle{}s holder will fit in the default space (which is large enough to hold either a std\+::unique\+\_\+ptr or std\+::shared\+\_\+ptr).
+
+Non-\/simple layout applies when using custom holders that require more space than {\ttfamily shared\+\_\+ptr} (which is typically the size of two pointers), or when multiple inheritance is used on the python side. Non-\/simple layout allocates the required amount of memory to have multiple bound C++ classes as parents. Under this layout, {\ttfamily nonsimple.\+values\+\_\+and\+\_\+holders} is set to a pointer to allocated space of the required space to hold a sequence of value pointers and holders followed {\ttfamily status}, a set of bit flags (1 byte each), i.\+e. \mbox{[}val1$\ast$\mbox{]}\mbox{[}holder1\mbox{]}\mbox{[}val2$\ast$\mbox{]}\mbox{[}holder2\mbox{]}...\mbox{[}bb...\mbox{]} where each \mbox{[}block\mbox{]} is rounded up to a multiple of {\ttfamily sizeof(void $\ast$)}. {\ttfamily nonsimple.\+status} is, for convenience, a pointer to the beginning of the \mbox{[}bb...\mbox{]} block (but not independently allocated).
+
+Status bits indicate whether the associated holder is constructed (\& status\+\_\+holder\+\_\+constructed) and whether the value pointer is registered (\& status\+\_\+instance\+\_\+registered) in {\ttfamily registered\+\_\+instances}. \mbox{\Hypertarget{structinstance_a41170a51b771a937d421d60d97d50e48}\label{structinstance_a41170a51b771a937d421d60d97d50e48}} 
+\index{instance@{instance}!simple\_value\_holder@{simple\_value\_holder}}
+\index{simple\_value\_holder@{simple\_value\_holder}!instance@{instance}}
+\doxysubsubsection{\texorpdfstring{simple\_value\_holder}{simple\_value\_holder}}
+{\footnotesize\ttfamily void$\ast$ instance\+::simple\+\_\+value\+\_\+holder\mbox{[}1+\mbox{\hyperlink{detail_2common_8h_a24241089c1b051b143781ff5a6193a76}{instance\+\_\+simple\+\_\+holder\+\_\+in\+\_\+ptrs}}()\mbox{]}}
+
+\mbox{\Hypertarget{structinstance_a2d8ccf4b4d7dcb8083cee8cc030ec871}\label{structinstance_a2d8ccf4b4d7dcb8083cee8cc030ec871}} 
+\index{instance@{instance}!status\_holder\_constructed@{status\_holder\_constructed}}
+\index{status\_holder\_constructed@{status\_holder\_constructed}!instance@{instance}}
+\doxysubsubsection{\texorpdfstring{status\_holder\_constructed}{status\_holder\_constructed}}
+{\footnotesize\ttfamily constexpr uint8\+\_\+t instance\+::status\+\_\+holder\+\_\+constructed = 1\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+Bit values for the non-\/simple status flags 
+
+\mbox{\Hypertarget{structinstance_a48612cbb682f9b16cbaeba60f1bca052}\label{structinstance_a48612cbb682f9b16cbaeba60f1bca052}} 
+\index{instance@{instance}!status\_instance\_registered@{status\_instance\_registered}}
+\index{status\_instance\_registered@{status\_instance\_registered}!instance@{instance}}
+\doxysubsubsection{\texorpdfstring{status\_instance\_registered}{status\_instance\_registered}}
+{\footnotesize\ttfamily constexpr uint8\+\_\+t instance\+::status\+\_\+instance\+\_\+registered = 2\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\mbox{\Hypertarget{structinstance_a23dd4c6144dbfa8ed0ba6d2a7a964998}\label{structinstance_a23dd4c6144dbfa8ed0ba6d2a7a964998}} 
+\index{instance@{instance}!weakrefs@{weakrefs}}
+\index{weakrefs@{weakrefs}!instance@{instance}}
+\doxysubsubsection{\texorpdfstring{weakrefs}{weakrefs}}
+{\footnotesize\ttfamily Py\+Object$\ast$ instance\+::weakrefs}
+
+
+
+Weak references 
+
+
+
+该结构体的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/detail/\mbox{\hyperlink{detail_2common_8h}{common.\+h}}\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/\mbox{\hyperlink{cast_8h}{cast.\+h}}\end{DoxyCompactItemize}

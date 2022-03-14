@@ -1,0 +1,225 @@
+\hypertarget{getopt_8h_source}{}\doxysection{getopt.\+h}
+\label{getopt_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/getopt.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/getopt.h}}
+\mbox{\hyperlink{getopt_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifdef \_MSC\_VER}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#ifndef \_\_GETOPT\_H\_\_}}
+\DoxyCodeLine{12 \textcolor{comment}{/*}}
+\DoxyCodeLine{13 \textcolor{comment}{ * Copyright (c) 2002 Todd C. Miller <Todd.Miller@courtesan.com>}}
+\DoxyCodeLine{14 \textcolor{comment}{ *}}
+\DoxyCodeLine{15 \textcolor{comment}{ * Permission to use, copy, modify, and distribute this software for any}}
+\DoxyCodeLine{16 \textcolor{comment}{ * purpose with or without fee is hereby granted, provided that the above}}
+\DoxyCodeLine{17 \textcolor{comment}{ * copyright notice and this permission notice appear in all copies.}}
+\DoxyCodeLine{18 \textcolor{comment}{ *}}
+\DoxyCodeLine{19 \textcolor{comment}{ * THE SOFTWARE IS PROVIDED "{}AS IS"{} AND THE AUTHOR DISCLAIMS ALL WARRANTIES}}
+\DoxyCodeLine{20 \textcolor{comment}{ * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF}}
+\DoxyCodeLine{21 \textcolor{comment}{ * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR}}
+\DoxyCodeLine{22 \textcolor{comment}{ * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES}}
+\DoxyCodeLine{23 \textcolor{comment}{ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN}}
+\DoxyCodeLine{24 \textcolor{comment}{ * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF}}
+\DoxyCodeLine{25 \textcolor{comment}{ * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.}}
+\DoxyCodeLine{26 \textcolor{comment}{ *}}
+\DoxyCodeLine{27 \textcolor{comment}{ * Sponsored in part by the Defense Advanced Research Projects}}
+\DoxyCodeLine{28 \textcolor{comment}{ * Agency (DARPA) and Air Force Research Laboratory, Air Force}}
+\DoxyCodeLine{29 \textcolor{comment}{ * Materiel Command, USAF, under agreement number F39502-\/99-\/1-\/0512.}}
+\DoxyCodeLine{30 \textcolor{comment}{ */}}
+\DoxyCodeLine{31 \textcolor{comment}{/*-\/}}
+\DoxyCodeLine{32 \textcolor{comment}{ * Copyright (c) 2000 The NetBSD Foundation, Inc.}}
+\DoxyCodeLine{33 \textcolor{comment}{ * All rights reserved.}}
+\DoxyCodeLine{34 \textcolor{comment}{ *}}
+\DoxyCodeLine{35 \textcolor{comment}{ * This code is derived from software contributed to The NetBSD Foundation}}
+\DoxyCodeLine{36 \textcolor{comment}{ * by Dieter Baron and Thomas Klausner.}}
+\DoxyCodeLine{37 \textcolor{comment}{ *}}
+\DoxyCodeLine{38 \textcolor{comment}{ * Redistribution and use in source and binary forms, with or without}}
+\DoxyCodeLine{39 \textcolor{comment}{ * modification, are permitted provided that the following conditions}}
+\DoxyCodeLine{40 \textcolor{comment}{ * are met:}}
+\DoxyCodeLine{41 \textcolor{comment}{ * 1. Redistributions of source code must retain the above copyright}}
+\DoxyCodeLine{42 \textcolor{comment}{ *    notice, this list of conditions and the following disclaimer.}}
+\DoxyCodeLine{43 \textcolor{comment}{ * 2. Redistributions in binary form must reproduce the above copyright}}
+\DoxyCodeLine{44 \textcolor{comment}{ *    notice, this list of conditions and the following disclaimer in the}}
+\DoxyCodeLine{45 \textcolor{comment}{ *    documentation and/or other materials provided with the distribution.}}
+\DoxyCodeLine{46 \textcolor{comment}{ *}}
+\DoxyCodeLine{47 \textcolor{comment}{ * THIS SOFTWARE IS PROVIDED BY THE NETBSD FOUNDATION, INC. AND CONTRIBUTORS}}
+\DoxyCodeLine{48 \textcolor{comment}{ * ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED}}
+\DoxyCodeLine{49 \textcolor{comment}{ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR}}
+\DoxyCodeLine{50 \textcolor{comment}{ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE FOUNDATION OR CONTRIBUTORS}}
+\DoxyCodeLine{51 \textcolor{comment}{ * BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR}}
+\DoxyCodeLine{52 \textcolor{comment}{ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF}}
+\DoxyCodeLine{53 \textcolor{comment}{ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS}}
+\DoxyCodeLine{54 \textcolor{comment}{ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN}}
+\DoxyCodeLine{55 \textcolor{comment}{ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)}}
+\DoxyCodeLine{56 \textcolor{comment}{ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE}}
+\DoxyCodeLine{57 \textcolor{comment}{ * POSSIBILITY OF SUCH DAMAGE.}}
+\DoxyCodeLine{58 \textcolor{comment}{ */}}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#define \_\_GETOPT\_H\_\_}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{comment}{/* All the headers include this file. */}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#include <crtdefs.h>}}
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#include <errno.h>}}
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#include <stdarg.h>}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{67 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#include <string.h>}}
+\DoxyCodeLine{69 \textcolor{preprocessor}{\#define WIN32\_LEAN\_AND\_MEAN}}
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#include <windows.h>}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{73 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76 \textcolor{preprocessor}{\#define REPLACE\_GETOPT }\textcolor{comment}{/* use this getopt as the system getopt(3) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 \textcolor{comment}{//extern int optind;        /* index of first non-\/option in argv      */}}
+\DoxyCodeLine{79 \textcolor{comment}{//extern int optopt;        /* single option character, as parsed     */}}
+\DoxyCodeLine{80 \textcolor{comment}{//extern int opterr;        /* flag to enable built-\/in diagnostics... */}}
+\DoxyCodeLine{81 \textcolor{comment}{//              /* (user may set to zero, to suppress)    */}}
+\DoxyCodeLine{82 \textcolor{comment}{//}}
+\DoxyCodeLine{83 \textcolor{comment}{//extern char *optarg;      /* pointer to argument of current option  */}}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85 \textcolor{preprocessor}{\#define PRINT\_ERROR ((opterr) \&\& (*options != ':'))}}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87 \textcolor{preprocessor}{\#define FLAG\_PERMUTE 0x01 }\textcolor{comment}{/* permute non-\/options to the end of argv */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{88 \textcolor{preprocessor}{\#define FLAG\_ALLARGS 0x02 }\textcolor{comment}{/* treat non-\/options as args to option "{}-\/1"{} */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{89 \textcolor{preprocessor}{\#define FLAG\_LONGONLY 0x04 }\textcolor{comment}{/* operate as getopt\_long\_only */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91 \textcolor{comment}{/* return values */}}
+\DoxyCodeLine{92 \textcolor{preprocessor}{\#define BADCH (int)'?'}}
+\DoxyCodeLine{93 \textcolor{preprocessor}{\#define BADARG ((*options == ':') ? (int)':' : (int)'?')}}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#define INORDER (int)1}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96 \textcolor{preprocessor}{\#ifndef \_\_CYGWIN\_\_}}
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#define \_\_progname \_\_argv[0]}}
+\DoxyCodeLine{98 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{99 \textcolor{keyword}{extern} \textcolor{keywordtype}{char} \_\_declspec(dllimport) * \_\_progname;}
+\DoxyCodeLine{100 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#ifdef \_\_CYGWIN\_\_}}
+\DoxyCodeLine{103 \textcolor{keyword}{static} \textcolor{keywordtype}{char} EMSG[] = \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{104 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{105 \textcolor{preprocessor}{\#define EMSG "{}"{}}}
+\DoxyCodeLine{106 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108 \textcolor{keyword}{static} \textcolor{keywordtype}{int} getopt\_internal(\textcolor{keywordtype}{int}, \textcolor{keywordtype}{char}* \textcolor{keyword}{const}*, \textcolor{keyword}{const} \textcolor{keywordtype}{char}*,}
+\DoxyCodeLine{109     \textcolor{keyword}{const} \textcolor{keyword}{struct} option*, \textcolor{keywordtype}{int}*, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{110 \textcolor{keyword}{static} \textcolor{keywordtype}{int} parse\_long\_options(\textcolor{keywordtype}{char}* \textcolor{keyword}{const}*, \textcolor{keyword}{const} \textcolor{keywordtype}{char}*,}
+\DoxyCodeLine{111     \textcolor{keyword}{const} \textcolor{keyword}{struct} option*, \textcolor{keywordtype}{int}*, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{112 \textcolor{keyword}{static} \textcolor{keywordtype}{int} gcd(\textcolor{keywordtype}{int}, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{113 \textcolor{keyword}{static} \textcolor{keywordtype}{void} permute\_args(\textcolor{keywordtype}{int}, \textcolor{keywordtype}{int}, \textcolor{keywordtype}{int}, \textcolor{keywordtype}{char}* \textcolor{keyword}{const}*);}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115 \textcolor{keyword}{static} \textcolor{keywordtype}{char}* place = EMSG; \textcolor{comment}{/* option letter processing */}}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117 \textcolor{comment}{/* XXX: set optreset to 1 rather than these two */}}
+\DoxyCodeLine{118 \textcolor{keyword}{static} \textcolor{keywordtype}{int} nonopt\_start = -\/1; \textcolor{comment}{/* first non option argument (for permute) */}}
+\DoxyCodeLine{119 \textcolor{keyword}{static} \textcolor{keywordtype}{int} nonopt\_end = -\/1; \textcolor{comment}{/* first option after non options (for permute) */}}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121 \textcolor{comment}{/* Error messages */}}
+\DoxyCodeLine{122 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char} recargchar[] = \textcolor{stringliteral}{"{}option requires an argument -\/-\/ \%c"{}};}
+\DoxyCodeLine{123 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char} recargstring[] = \textcolor{stringliteral}{"{}option requires an argument -\/-\/ \%s"{}};}
+\DoxyCodeLine{124 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char} ambig[] = \textcolor{stringliteral}{"{}ambiguous option -\/-\/ \%.*s"{}};}
+\DoxyCodeLine{125 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char} noarg[] = \textcolor{stringliteral}{"{}option doesn't take an argument -\/-\/ \%.*s"{}};}
+\DoxyCodeLine{126 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char} illoptchar[] = \textcolor{stringliteral}{"{}unknown option -\/-\/ \%c"{}};}
+\DoxyCodeLine{127 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char} illoptstring[] = \textcolor{stringliteral}{"{}unknown option -\/-\/ \%s"{}};}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129 \textcolor{keyword}{static} \textcolor{keywordtype}{void} \_vwarnx(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* fmt, va\_list ap);}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131 \textcolor{keyword}{static} \textcolor{keywordtype}{void} warnx(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* fmt, ...);}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133 \textcolor{comment}{/*}}
+\DoxyCodeLine{134 \textcolor{comment}{ * Compute the greatest common divisor of a and b.}}
+\DoxyCodeLine{135 \textcolor{comment}{ */}}
+\DoxyCodeLine{136 \textcolor{keyword}{static} \textcolor{keywordtype}{int} gcd(\textcolor{keywordtype}{int} a, \textcolor{keywordtype}{int} b);}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138 \textcolor{comment}{/*}}
+\DoxyCodeLine{139 \textcolor{comment}{ * Exchange the block from nonopt\_start to nonopt\_end with the block}}
+\DoxyCodeLine{140 \textcolor{comment}{ * from nonopt\_end to opt\_end (keeping the same order of arguments}}
+\DoxyCodeLine{141 \textcolor{comment}{ * in each block).}}
+\DoxyCodeLine{142 \textcolor{comment}{ */}}
+\DoxyCodeLine{143 \textcolor{keyword}{static} \textcolor{keywordtype}{void} permute\_args(\textcolor{keywordtype}{int} panonopt\_start, \textcolor{keywordtype}{int} panonopt\_end, \textcolor{keywordtype}{int} opt\_end, \textcolor{keywordtype}{char}* \textcolor{keyword}{const}* nargv);}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145 \textcolor{preprocessor}{\#ifdef REPLACE\_GETOPT}}
+\DoxyCodeLine{146 \textcolor{comment}{/*}}
+\DoxyCodeLine{147 \textcolor{comment}{ * getopt -\/-\/}}
+\DoxyCodeLine{148 \textcolor{comment}{ *  Parse argc/argv argument vector.}}
+\DoxyCodeLine{149 \textcolor{comment}{ *}}
+\DoxyCodeLine{150 \textcolor{comment}{ * [eventually this will replace the BSD getopt]}}
+\DoxyCodeLine{151 \textcolor{comment}{ */}}
+\DoxyCodeLine{152 \textcolor{keywordtype}{int} getopt(\textcolor{keywordtype}{int} nargc, \textcolor{keywordtype}{char}* \textcolor{keyword}{const}* nargv, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{classoptions}{options}});}
+\DoxyCodeLine{153 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* REPLACE\_GETOPT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155 \textcolor{comment}{//extern int getopt(int nargc, char * const *nargv, const char *options);}}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157 \textcolor{preprocessor}{\#ifdef \_BSD\_SOURCE}}
+\DoxyCodeLine{158 \textcolor{comment}{/*}}
+\DoxyCodeLine{159 \textcolor{comment}{ * BSD adds the non-\/standard `optreset' feature, for reinitialisation}}
+\DoxyCodeLine{160 \textcolor{comment}{ * of `getopt' parsing.  We support this feature, for applications which}}
+\DoxyCodeLine{161 \textcolor{comment}{ * proclaim their BSD heritage, before including this header; however,}}
+\DoxyCodeLine{162 \textcolor{comment}{ * to maintain portability, developers are advised to avoid it.}}
+\DoxyCodeLine{163 \textcolor{comment}{ */}}
+\DoxyCodeLine{164 \textcolor{preprocessor}{\#define optreset \_\_mingw\_optreset}}
+\DoxyCodeLine{165 \textcolor{keyword}{extern} \textcolor{keywordtype}{int} optreset;}
+\DoxyCodeLine{166 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{167 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{168 \}}
+\DoxyCodeLine{169 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{170 \textcolor{comment}{/*}}
+\DoxyCodeLine{171 \textcolor{comment}{ * POSIX requires the `getopt' API to be specified in `unistd.h';}}
+\DoxyCodeLine{172 \textcolor{comment}{ * thus, `unistd.h' includes this header.  However, we do not want}}
+\DoxyCodeLine{173 \textcolor{comment}{ * to expose the `getopt\_long' or `getopt\_long\_only' APIs, when}}
+\DoxyCodeLine{174 \textcolor{comment}{ * included in this manner.  Thus, close the standard \_\_GETOPT\_H\_\_}}
+\DoxyCodeLine{175 \textcolor{comment}{ * declarations block, and open an additional \_\_GETOPT\_LONG\_H\_\_}}
+\DoxyCodeLine{176 \textcolor{comment}{ * specific block, only when *not* \_\_UNISTD\_H\_SOURCED\_\_, in which}}
+\DoxyCodeLine{177 \textcolor{comment}{ * to declare the extended API.}}
+\DoxyCodeLine{178 \textcolor{comment}{ */}}
+\DoxyCodeLine{179 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* !defined(\_\_GETOPT\_H\_\_) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181 \textcolor{preprocessor}{\#if !defined(\_\_UNISTD\_H\_SOURCED\_\_) \&\& !defined(\_\_GETOPT\_LONG\_H\_\_)}}
+\DoxyCodeLine{182 \textcolor{preprocessor}{\#define \_\_GETOPT\_LONG\_H\_\_}}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{185 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{186 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188 \textcolor{comment}{/*}}
+\DoxyCodeLine{189 \textcolor{comment}{ * parse\_long\_options -\/-\/}}
+\DoxyCodeLine{190 \textcolor{comment}{ *  Parse long options in argc/argv argument vector.}}
+\DoxyCodeLine{191 \textcolor{comment}{ * Returns -\/1 if short\_too is set and the option does not match long\_options.}}
+\DoxyCodeLine{192 \textcolor{comment}{ */}}
+\DoxyCodeLine{193 \textcolor{comment}{/* static int parse\_long\_options(char* const* nargv, const char* options, const struct option* long\_options, int* idx, int short\_too); */}}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{195 \textcolor{comment}{/*}}
+\DoxyCodeLine{196 \textcolor{comment}{ * getopt\_internal -\/-\/}}
+\DoxyCodeLine{197 \textcolor{comment}{ *  Parse argc/argv argument vector.  Called by user level routines.}}
+\DoxyCodeLine{198 \textcolor{comment}{ */}}
+\DoxyCodeLine{199 \textcolor{comment}{/* static int getopt\_internal(int nargc, char* const* nargv, const char* options, const struct option* long\_options, int* idx, int flags); */}}
+\DoxyCodeLine{200 }
+\DoxyCodeLine{201 \textcolor{comment}{/*}}
+\DoxyCodeLine{202 \textcolor{comment}{ * getopt\_long -\/-\/}}
+\DoxyCodeLine{203 \textcolor{comment}{ *  Parse argc/argv argument vector.}}
+\DoxyCodeLine{204 \textcolor{comment}{ */}}
+\DoxyCodeLine{205 \textcolor{keywordtype}{int} getopt\_long(\textcolor{keywordtype}{int} nargc, \textcolor{keywordtype}{char}* \textcolor{keyword}{const}* nargv, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{classoptions}{options}}, \textcolor{keyword}{const} \textcolor{keyword}{struct} option* long\_options, \textcolor{keywordtype}{int}* idx);}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{207 \textcolor{comment}{/*}}
+\DoxyCodeLine{208 \textcolor{comment}{ * getopt\_long\_only -\/-\/}}
+\DoxyCodeLine{209 \textcolor{comment}{ *  Parse argc/argv argument vector.}}
+\DoxyCodeLine{210 \textcolor{comment}{ */}}
+\DoxyCodeLine{211 \textcolor{keywordtype}{int} getopt\_long\_only(\textcolor{keywordtype}{int} nargc, \textcolor{keywordtype}{char}* \textcolor{keyword}{const}* nargv, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{classoptions}{options}}, \textcolor{keyword}{const} \textcolor{keyword}{struct} option* long\_options, \textcolor{keywordtype}{int}* idx);}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{213 \textcolor{comment}{/*}}
+\DoxyCodeLine{214 \textcolor{comment}{ * Previous MinGW implementation had...}}
+\DoxyCodeLine{215 \textcolor{comment}{ */}}
+\DoxyCodeLine{216 \textcolor{preprocessor}{\#ifndef HAVE\_DECL\_GETOPT}}
+\DoxyCodeLine{217 \textcolor{comment}{/*}}
+\DoxyCodeLine{218 \textcolor{comment}{ * ...for the long form API only; keep this for compatibility.}}
+\DoxyCodeLine{219 \textcolor{comment}{ */}}
+\DoxyCodeLine{220 \textcolor{preprocessor}{\#define HAVE\_DECL\_GETOPT 1}}
+\DoxyCodeLine{221 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{222 }
+\DoxyCodeLine{223 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{224 \}}
+\DoxyCodeLine{225 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{226 }
+\DoxyCodeLine{227 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* !defined(\_\_UNISTD\_H\_SOURCED\_\_) \&\& !defined(\_\_GETOPT\_LONG\_H\_\_) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{228 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

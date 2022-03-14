@@ -1,0 +1,103 @@
+\hypertarget{ndarray__converter_8cpp}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/python\+\_\+bind/ndarray\+\_\+converter.cpp 文件参考}
+\label{ndarray__converter_8cpp}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/python\_bind/ndarray\_converter.cpp@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/python\_bind/ndarray\_converter.cpp}}
+{\ttfamily \#include \char`\"{}ndarray\+\_\+converter.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$numpy/ndarrayobject.\+h$>$}\newline
+ndarray\+\_\+converter.\+cpp 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ndarray__converter_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_tmp}{Tmp}}
+\item 
+class \mbox{\hyperlink{class_py_allow_threads}{Py\+Allow\+Threads}}
+\item 
+class \mbox{\hyperlink{class_py_ensure_g_i_l}{Py\+Ensure\+GIL}}
+\item 
+class \mbox{\hyperlink{class_numpy_allocator}{Numpy\+Allocator}}
+\end{DoxyCompactItemize}
+\doxysubsection*{宏定义}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ndarray__converter_8cpp_ab6e6ee86736f9ebb56e74ae21bf3ff8a}{NPY\+\_\+\+NO\+\_\+\+DEPRECATED\+\_\+\+API}}~NPY\+\_\+1\+\_\+7\+\_\+\+API\+\_\+\+VERSION
+\item 
+\#define \mbox{\hyperlink{ndarray__converter_8cpp_a1dbb0f1a245a4dc0666126cbfec04739}{ERRWRAP2}}(expr)
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{ndarray__converter_8cpp_a84ace95ce7aa56bc22642dfaaaa41b25}{failmsg}} (const char $\ast$fmt,...)
+\end{DoxyCompactItemize}
+\doxysubsection*{变量}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_tmp}{Tmp}} \mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}} (\char`\"{}return value\char`\"{})
+\item 
+static Py\+Object $\ast$ \mbox{\hyperlink{ndarray__converter_8cpp_ab392ffad793f38f4b2c143cbf1a8bad9}{opencv\+\_\+error}} = 0
+\item 
+\mbox{\hyperlink{class_numpy_allocator}{Numpy\+Allocator}} \mbox{\hyperlink{ndarray__converter_8cpp_aa309097169dcb9bdd444eb73dc45d29e}{g\+\_\+numpy\+Allocator}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{宏定义说明}
+\mbox{\Hypertarget{ndarray__converter_8cpp_a1dbb0f1a245a4dc0666126cbfec04739}\label{ndarray__converter_8cpp_a1dbb0f1a245a4dc0666126cbfec04739}} 
+\index{ndarray\_converter.cpp@{ndarray\_converter.cpp}!ERRWRAP2@{ERRWRAP2}}
+\index{ERRWRAP2@{ERRWRAP2}!ndarray\_converter.cpp@{ndarray\_converter.cpp}}
+\doxysubsubsection{\texorpdfstring{ERRWRAP2}{ERRWRAP2}}
+{\footnotesize\ttfamily \#define ERRWRAP2(\begin{DoxyParamCaption}\item[{}]{expr }\end{DoxyParamCaption})}
+
+{\bfseries 值\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{try} \(\backslash\)}
+\DoxyCodeLine{\{ \(\backslash\)}
+\DoxyCodeLine{    PyAllowThreads allowThreads; \(\backslash\)}
+\DoxyCodeLine{    expr; \(\backslash\)}
+\DoxyCodeLine{\} \(\backslash\)}
+\DoxyCodeLine{catch (\textcolor{keyword}{const} cv::Exception \&e) \(\backslash\)}
+\DoxyCodeLine{\{ \(\backslash\)}
+\DoxyCodeLine{    PyErr\_SetString(\mbox{\hyperlink{ndarray__converter_8cpp_ab392ffad793f38f4b2c143cbf1a8bad9}{opencv\_error}}, e.what()); \(\backslash\)}
+\DoxyCodeLine{    return 0; \(\backslash\)}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{ndarray__converter_8cpp_ab6e6ee86736f9ebb56e74ae21bf3ff8a}\label{ndarray__converter_8cpp_ab6e6ee86736f9ebb56e74ae21bf3ff8a}} 
+\index{ndarray\_converter.cpp@{ndarray\_converter.cpp}!NPY\_NO\_DEPRECATED\_API@{NPY\_NO\_DEPRECATED\_API}}
+\index{NPY\_NO\_DEPRECATED\_API@{NPY\_NO\_DEPRECATED\_API}!ndarray\_converter.cpp@{ndarray\_converter.cpp}}
+\doxysubsubsection{\texorpdfstring{NPY\_NO\_DEPRECATED\_API}{NPY\_NO\_DEPRECATED\_API}}
+{\footnotesize\ttfamily \#define NPY\+\_\+\+NO\+\_\+\+DEPRECATED\+\_\+\+API~NPY\+\_\+1\+\_\+7\+\_\+\+API\+\_\+\+VERSION}
+
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{ndarray__converter_8cpp_a84ace95ce7aa56bc22642dfaaaa41b25}\label{ndarray__converter_8cpp_a84ace95ce7aa56bc22642dfaaaa41b25}} 
+\index{ndarray\_converter.cpp@{ndarray\_converter.cpp}!failmsg@{failmsg}}
+\index{failmsg@{failmsg}!ndarray\_converter.cpp@{ndarray\_converter.cpp}}
+\doxysubsubsection{\texorpdfstring{failmsg()}{failmsg()}}
+{\footnotesize\ttfamily static int failmsg (\begin{DoxyParamCaption}\item[{const char $\ast$}]{fmt,  }\item[{}]{... }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+\doxysubsection{变量说明}
+\mbox{\Hypertarget{ndarray__converter_8cpp_aa309097169dcb9bdd444eb73dc45d29e}\label{ndarray__converter_8cpp_aa309097169dcb9bdd444eb73dc45d29e}} 
+\index{ndarray\_converter.cpp@{ndarray\_converter.cpp}!g\_numpyAllocator@{g\_numpyAllocator}}
+\index{g\_numpyAllocator@{g\_numpyAllocator}!ndarray\_converter.cpp@{ndarray\_converter.cpp}}
+\doxysubsubsection{\texorpdfstring{g\_numpyAllocator}{g\_numpyAllocator}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_numpy_allocator}{Numpy\+Allocator}} g\+\_\+numpy\+Allocator}
+
+\mbox{\Hypertarget{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}\label{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}} 
+\index{ndarray\_converter.cpp@{ndarray\_converter.cpp}!info@{info}}
+\index{info@{info}!ndarray\_converter.cpp@{ndarray\_converter.cpp}}
+\doxysubsubsection{\texorpdfstring{info}{info}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_tmp}{Tmp}} info(\char`\"{}return value\char`\"{}) (\begin{DoxyParamCaption}\item[{\char`\"{}return value\char`\"{}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{ndarray__converter_8cpp_ab392ffad793f38f4b2c143cbf1a8bad9}\label{ndarray__converter_8cpp_ab392ffad793f38f4b2c143cbf1a8bad9}} 
+\index{ndarray\_converter.cpp@{ndarray\_converter.cpp}!opencv\_error@{opencv\_error}}
+\index{opencv\_error@{opencv\_error}!ndarray\_converter.cpp@{ndarray\_converter.cpp}}
+\doxysubsubsection{\texorpdfstring{opencv\_error}{opencv\_error}}
+{\footnotesize\ttfamily Py\+Object$\ast$ opencv\+\_\+error = 0\hspace{0.3cm}{\ttfamily [static]}}
+

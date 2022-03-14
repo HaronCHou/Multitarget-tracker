@@ -1,0 +1,125 @@
+\hypertarget{gemm_8h_source}{}\doxysection{gemm.\+h}
+\label{gemm_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/gemm.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/gemm.h}}
+\mbox{\hyperlink{gemm_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef GEMM\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define GEMM\_H}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{activations_8h}{activations.h}}"{}}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <stdint.h>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <stddef.h>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{7 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keywordtype}{void} \mbox{\hyperlink{gemm_8h_a4e32a16f765640082ee369153bb7d74c}{convolution\_2d}}(\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h, \textcolor{keywordtype}{int} ksize, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} c, \textcolor{keywordtype}{int} pad, \textcolor{keywordtype}{int} stride,}
+\DoxyCodeLine{11     \textcolor{keywordtype}{float} *weights, \textcolor{keywordtype}{float} *input, \textcolor{keywordtype}{float} *output, \textcolor{keywordtype}{float} *mean);}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{gemm_8h_aef0960a9c469e77ee2c6ea982a3eddff}{set\_bit}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *\textcolor{keyword}{const} dst, \textcolor{keywordtype}{size\_t} index) \{}
+\DoxyCodeLine{14     \textcolor{keywordtype}{size\_t} dst\_i = index / 8;}
+\DoxyCodeLine{15     \textcolor{keywordtype}{int} dst\_shift = index \% 8;}
+\DoxyCodeLine{16     dst[dst\_i] |= 1 << dst\_shift;}
+\DoxyCodeLine{17     \textcolor{comment}{//dst[dst\_i] |= 1 << (8 -\/ dst\_shift);}}
+\DoxyCodeLine{18 \}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} \mbox{\hyperlink{gemm_8h_aa2c9bc3f05c1b96ae7b6e557207068fd}{get\_bit}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} \textcolor{keyword}{const}*\textcolor{keyword}{const} src, \textcolor{keywordtype}{size\_t} index) \{}
+\DoxyCodeLine{21     \textcolor{keywordtype}{size\_t} src\_i = index / 8;}
+\DoxyCodeLine{22     \textcolor{keywordtype}{int} src\_shift = index \% 8;}
+\DoxyCodeLine{23     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} val = (src[src\_i] \& (1 << src\_shift)) > 0;}
+\DoxyCodeLine{24     \textcolor{comment}{//unsigned char val = (src[src\_i] \& (1 << (8 -\/ src\_shift))) > 0;}}
+\DoxyCodeLine{25     \textcolor{keywordflow}{return} val;}
+\DoxyCodeLine{26 \}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{keywordtype}{int} \mbox{\hyperlink{gemm_8h_a8e1908fd3f6cbc7da917f2e93e94e6d1}{is\_avx}}();}
+\DoxyCodeLine{29 \textcolor{keywordtype}{int} \mbox{\hyperlink{gemm_8h_a4e3d4e108499dd6ea33dab80eb98d861}{is\_fma\_avx2}}();}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{keywordtype}{void} \mbox{\hyperlink{gemm_8h_af2faa7ba6073e78aaac43c1487dadfd7}{float\_to\_bit}}(\textcolor{keywordtype}{float} *src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *dst, \textcolor{keywordtype}{size\_t} size);}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{keywordtype}{void} \mbox{\hyperlink{gemm_8h_a5106fb6ec72b4bcc07e02d76e21d6b37}{transpose\_block\_SSE4x4}}(\textcolor{keywordtype}{float} *A, \textcolor{keywordtype}{float} *B, \textcolor{keyword}{const} \textcolor{keywordtype}{int} n, \textcolor{keyword}{const} \textcolor{keywordtype}{int} m,}
+\DoxyCodeLine{34     \textcolor{keyword}{const} \textcolor{keywordtype}{int} lda, \textcolor{keyword}{const} \textcolor{keywordtype}{int} ldb, \textcolor{keyword}{const} \textcolor{keywordtype}{int} block\_size);}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{keywordtype}{void} \mbox{\hyperlink{gemm_8h_abc47efcfe9f9c9be4a2ae3886591be31}{transpose\_bin}}(uint32\_t *A, uint32\_t *B, \textcolor{keyword}{const} \textcolor{keywordtype}{int} n, \textcolor{keyword}{const} \textcolor{keywordtype}{int} m,}
+\DoxyCodeLine{37     \textcolor{keyword}{const} \textcolor{keywordtype}{int} lda, \textcolor{keyword}{const} \textcolor{keywordtype}{int} ldb, \textcolor{keyword}{const} \textcolor{keywordtype}{int} block\_size);}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{keywordtype}{void} \mbox{\hyperlink{gemm_8h_a4e0dda182a634df98155400af97f887f}{gemm\_nn\_custom\_bin\_mean\_transposed}}(\textcolor{keywordtype}{int} M, \textcolor{keywordtype}{int} N, \textcolor{keywordtype}{int} K, \textcolor{keywordtype}{float} ALPHA\_UNUSED,}
+\DoxyCodeLine{40     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *A, \textcolor{keywordtype}{int} lda,}
+\DoxyCodeLine{41     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *B, \textcolor{keywordtype}{int} ldb,}
+\DoxyCodeLine{42     \textcolor{keywordtype}{float} *C, \textcolor{keywordtype}{int} ldc, \textcolor{keywordtype}{float} *mean\_arr);}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{keywordtype}{void} \mbox{\hyperlink{gemm_8h_af39887e6db1b479406fc6464636f2d05}{im2col\_cpu\_custom}}(\textcolor{keywordtype}{float}* data\_im,}
+\DoxyCodeLine{45     \textcolor{keywordtype}{int} channels, \textcolor{keywordtype}{int} height, \textcolor{keywordtype}{int} width,}
+\DoxyCodeLine{46     \textcolor{keywordtype}{int} ksize, \textcolor{keywordtype}{int} stride, \textcolor{keywordtype}{int} pad, \textcolor{keywordtype}{float}* data\_col);}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 \textcolor{keywordtype}{void} \mbox{\hyperlink{gemm_8h_ae8f4e317c186a6d4f0556ca856b976b9}{im2col\_cpu\_custom\_align}}(\textcolor{keywordtype}{float}* data\_im,}
+\DoxyCodeLine{49     \textcolor{keywordtype}{int} channels, \textcolor{keywordtype}{int} height, \textcolor{keywordtype}{int} width,}
+\DoxyCodeLine{50     \textcolor{keywordtype}{int} ksize, \textcolor{keywordtype}{int} stride, \textcolor{keywordtype}{int} pad, \textcolor{keywordtype}{float}* data\_col, \textcolor{keywordtype}{int} bit\_align);}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{keywordtype}{void} \mbox{\hyperlink{gemm_8h_a6a3439a365c938d672a2dc39901f155f}{im2col\_cpu\_custom\_bin}}(\textcolor{keywordtype}{float}* data\_im,}
+\DoxyCodeLine{53     \textcolor{keywordtype}{int} channels, \textcolor{keywordtype}{int} height, \textcolor{keywordtype}{int} width,}
+\DoxyCodeLine{54     \textcolor{keywordtype}{int} ksize, \textcolor{keywordtype}{int} stride, \textcolor{keywordtype}{int} pad, \textcolor{keywordtype}{float}* data\_col, \textcolor{keywordtype}{int} bit\_align);}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 \textcolor{keywordtype}{void} \mbox{\hyperlink{gemm_8h_afee3277990045539e36e35ba66ae995b}{im2col\_cpu\_custom\_transpose}}(\textcolor{keywordtype}{float}* data\_im,}
+\DoxyCodeLine{57     \textcolor{keywordtype}{int} channels, \textcolor{keywordtype}{int} height, \textcolor{keywordtype}{int} width,}
+\DoxyCodeLine{58     \textcolor{keywordtype}{int} ksize, \textcolor{keywordtype}{int} stride, \textcolor{keywordtype}{int} pad, \textcolor{keywordtype}{float}* data\_col, \textcolor{keywordtype}{int} ldb\_align);}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60 \textcolor{keywordtype}{void} \mbox{\hyperlink{gemm_8h_a0a3e1c2586fda33b9cd5a44fd59f43c1}{activate\_array\_cpu\_custom}}(\textcolor{keywordtype}{float} *\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \textcolor{keyword}{const} \textcolor{keywordtype}{int} n, \textcolor{keyword}{const} \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032}{ACTIVATION}} a);}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{keywordtype}{void} \mbox{\hyperlink{gemm_8h_a0625444c982324c1a858a342ff8abc27}{transpose\_32x32\_bits\_reversed\_diagonale}}(uint32\_t *A, uint32\_t *B, \textcolor{keywordtype}{int} m, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 \textcolor{keywordtype}{void} \mbox{\hyperlink{gemm_8h_a39304cbcf3858c9e2416ef1d1cf3879f}{gemm\_bin}}(\textcolor{keywordtype}{int} M, \textcolor{keywordtype}{int} N, \textcolor{keywordtype}{int} K, \textcolor{keywordtype}{float} ALPHA,}
+\DoxyCodeLine{65         \textcolor{keywordtype}{char}  *A, \textcolor{keywordtype}{int} lda,}
+\DoxyCodeLine{66         \textcolor{keywordtype}{float} *B, \textcolor{keywordtype}{int} ldb,}
+\DoxyCodeLine{67         \textcolor{keywordtype}{float} *C, \textcolor{keywordtype}{int} ldc);}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69 \textcolor{keywordtype}{void} \mbox{\hyperlink{gemm_8h_a6aa7e1556948e534866527878b8cfe9e}{repack\_input}}(\textcolor{keywordtype}{float} *input, \textcolor{keywordtype}{float} *re\_packed\_input, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h, \textcolor{keywordtype}{int} c);}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71 \textcolor{keywordtype}{void} \mbox{\hyperlink{gemm_8h_a15ed089fe74aaa8643d01f91829815af}{convolution\_repacked}}(uint32\_t *packed\_input, uint32\_t *packed\_weights, \textcolor{keywordtype}{float} *output,}
+\DoxyCodeLine{72     \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h, \textcolor{keywordtype}{int} c, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} size, \textcolor{keywordtype}{int} pad, \textcolor{keywordtype}{int} new\_lda, \textcolor{keywordtype}{float} *mean\_arr);}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74 \textcolor{keywordtype}{void} \mbox{\hyperlink{gemm_8h_a4bcaf2f46868b70329a3cf194b9db637}{gemm\_nn\_bin\_32bit\_packed}}(\textcolor{keywordtype}{int} M, \textcolor{keywordtype}{int} N, \textcolor{keywordtype}{int} K, \textcolor{keywordtype}{float} ALPHA,}
+\DoxyCodeLine{75     uint32\_t *A, \textcolor{keywordtype}{int} lda,}
+\DoxyCodeLine{76     uint32\_t *B, \textcolor{keywordtype}{int} ldb,}
+\DoxyCodeLine{77     \textcolor{keywordtype}{float} *C, \textcolor{keywordtype}{int} ldc, \textcolor{keywordtype}{float} *mean\_arr);}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79 \textcolor{keywordtype}{void} \mbox{\hyperlink{gemm_8h_a20b21acd1fd344065eccc4e3517f2ad3}{transpose\_uint32}}(uint32\_t *src, uint32\_t *dst, \textcolor{keywordtype}{int} src\_h, \textcolor{keywordtype}{int} src\_w, \textcolor{keywordtype}{int} src\_align, \textcolor{keywordtype}{int} dst\_align);}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81 \textcolor{keywordtype}{void} \mbox{\hyperlink{gemm_8h_a2d13ac0e25be1b28329490be38c82475}{gemm\_nn\_bin\_transposed\_32bit\_packed}}(\textcolor{keywordtype}{int} M, \textcolor{keywordtype}{int} N, \textcolor{keywordtype}{int} K, \textcolor{keywordtype}{float} ALPHA,}
+\DoxyCodeLine{82     uint32\_t *A, \textcolor{keywordtype}{int} lda,}
+\DoxyCodeLine{83     uint32\_t *B, \textcolor{keywordtype}{int} ldb,}
+\DoxyCodeLine{84     \textcolor{keywordtype}{float} *C, \textcolor{keywordtype}{int} ldc, \textcolor{keywordtype}{float} *mean\_arr);}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87 \textcolor{keywordtype}{void} \mbox{\hyperlink{gemm_8h_afece54d7949918bb0306af73d2ad595e}{forward\_maxpool\_layer\_avx}}(\textcolor{keywordtype}{float} *src, \textcolor{keywordtype}{float} *dst, \textcolor{keywordtype}{int} *indexes, \textcolor{keywordtype}{int} size, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h, \textcolor{keywordtype}{int} out\_w, \textcolor{keywordtype}{int} out\_h, \textcolor{keywordtype}{int} c,}
+\DoxyCodeLine{88     \textcolor{keywordtype}{int} pad, \textcolor{keywordtype}{int} stride, \textcolor{keywordtype}{int} batch);}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91 \textcolor{keywordtype}{void} \mbox{\hyperlink{gemm_8h_aa240ba331e3abf53f9fca7d240322669}{gemm}}(\textcolor{keywordtype}{int} TA, \textcolor{keywordtype}{int} TB, \textcolor{keywordtype}{int} M, \textcolor{keywordtype}{int} N, \textcolor{keywordtype}{int} K, \textcolor{keywordtype}{float} ALPHA,}
+\DoxyCodeLine{92                     \textcolor{keywordtype}{float} *A, \textcolor{keywordtype}{int} lda,}
+\DoxyCodeLine{93                     \textcolor{keywordtype}{float} *B, \textcolor{keywordtype}{int} ldb,}
+\DoxyCodeLine{94                     \textcolor{keywordtype}{float} BETA,}
+\DoxyCodeLine{95                     \textcolor{keywordtype}{float} *C, \textcolor{keywordtype}{int} ldc);}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97 \textcolor{keywordtype}{void} \mbox{\hyperlink{gemm_8h_a44c67f1aa36826c2fe8b8da5022a7ce6}{gemm\_cpu}}(\textcolor{keywordtype}{int} TA, \textcolor{keywordtype}{int} TB, \textcolor{keywordtype}{int} M, \textcolor{keywordtype}{int} N, \textcolor{keywordtype}{int} K, \textcolor{keywordtype}{float} ALPHA,}
+\DoxyCodeLine{98         \textcolor{keywordtype}{float} *A, \textcolor{keywordtype}{int} lda,}
+\DoxyCodeLine{99         \textcolor{keywordtype}{float} *B, \textcolor{keywordtype}{int} ldb,}
+\DoxyCodeLine{100         \textcolor{keywordtype}{float} BETA,}
+\DoxyCodeLine{101         \textcolor{keywordtype}{float} *C, \textcolor{keywordtype}{int} ldc);}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103 \textcolor{preprocessor}{\#ifdef GPU}}
+\DoxyCodeLine{104 \textcolor{keywordtype}{void} gemm\_ongpu(\textcolor{keywordtype}{int} TA, \textcolor{keywordtype}{int} TB, \textcolor{keywordtype}{int} M, \textcolor{keywordtype}{int} N, \textcolor{keywordtype}{int} K, \textcolor{keywordtype}{float} ALPHA,}
+\DoxyCodeLine{105         \textcolor{keywordtype}{float} *A\_gpu, \textcolor{keywordtype}{int} lda,}
+\DoxyCodeLine{106         \textcolor{keywordtype}{float} *B\_gpu, \textcolor{keywordtype}{int} ldb,}
+\DoxyCodeLine{107         \textcolor{keywordtype}{float} BETA,}
+\DoxyCodeLine{108         \textcolor{keywordtype}{float} *C\_gpu, \textcolor{keywordtype}{int} ldc);}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110 \textcolor{keywordtype}{void} gemm\_gpu(\textcolor{keywordtype}{int} TA, \textcolor{keywordtype}{int} TB, \textcolor{keywordtype}{int} M, \textcolor{keywordtype}{int} N, \textcolor{keywordtype}{int} K, \textcolor{keywordtype}{float} ALPHA,}
+\DoxyCodeLine{111         \textcolor{keywordtype}{float} *A, \textcolor{keywordtype}{int} lda,}
+\DoxyCodeLine{112         \textcolor{keywordtype}{float} *B, \textcolor{keywordtype}{int} ldb,}
+\DoxyCodeLine{113         \textcolor{keywordtype}{float} BETA,}
+\DoxyCodeLine{114         \textcolor{keywordtype}{float} *C, \textcolor{keywordtype}{int} ldc);}
+\DoxyCodeLine{115 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{116 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{117 \}}
+\DoxyCodeLine{118 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{119 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

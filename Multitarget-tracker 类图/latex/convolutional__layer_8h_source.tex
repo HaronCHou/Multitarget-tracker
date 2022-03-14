@@ -1,0 +1,74 @@
+\hypertarget{convolutional__layer_8h_source}{}\doxysection{convolutional\+\_\+layer.\+h}
+\label{convolutional__layer_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/convolutional\_layer.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/convolutional\_layer.h}}
+\mbox{\hyperlink{convolutional__layer_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef CONVOLUTIONAL\_LAYER\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define CONVOLUTIONAL\_LAYER\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{dark__cuda_8h}{dark\_cuda.h}}"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{image_8h}{image.h}}"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{activations_8h}{activations.h}}"{}}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{layer_8h}{layer.h}}"{}}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{network_8h}{network.h}}"{}}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{typedef} \mbox{\hyperlink{structlayer}{layer}} \mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\_layer}};}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{13 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#ifdef GPU}}
+\DoxyCodeLine{16 \textcolor{keywordtype}{void} forward\_convolutional\_layer\_gpu(\mbox{\hyperlink{structlayer}{convolutional\_layer}} \mbox{\hyperlink{structlayer}{layer}}, \mbox{\hyperlink{structnetwork__state}{network\_state}} state);}
+\DoxyCodeLine{17 \textcolor{keywordtype}{void} backward\_convolutional\_layer\_gpu(\mbox{\hyperlink{structlayer}{convolutional\_layer}} \mbox{\hyperlink{structlayer}{layer}}, \mbox{\hyperlink{structnetwork__state}{network\_state}} state);}
+\DoxyCodeLine{18 \textcolor{keywordtype}{void} update\_convolutional\_layer\_gpu(\mbox{\hyperlink{structlayer}{convolutional\_layer}} \mbox{\hyperlink{structlayer}{layer}}, \textcolor{keywordtype}{int} batch, \textcolor{keywordtype}{float} learning\_rate, \textcolor{keywordtype}{float} momentum, \textcolor{keywordtype}{float} decay, \textcolor{keywordtype}{float} loss\_scale);}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{keywordtype}{void} push\_convolutional\_layer(\mbox{\hyperlink{structlayer}{convolutional\_layer}} \mbox{\hyperlink{structlayer}{layer}});}
+\DoxyCodeLine{21 \textcolor{keywordtype}{void} pull\_convolutional\_layer(\mbox{\hyperlink{structlayer}{convolutional\_layer}} \mbox{\hyperlink{structlayer}{layer}});}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{keywordtype}{void} add\_bias\_gpu(\textcolor{keywordtype}{float} *output, \textcolor{keywordtype}{float} *biases, \textcolor{keywordtype}{int} batch, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} size);}
+\DoxyCodeLine{24 \textcolor{keywordtype}{void} backward\_bias\_gpu(\textcolor{keywordtype}{float} *bias\_updates, \textcolor{keywordtype}{float} *delta, \textcolor{keywordtype}{int} batch, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} size);}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#ifdef CUDNN}}
+\DoxyCodeLine{26 \textcolor{keywordtype}{void} cudnn\_convolutional\_setup(\mbox{\hyperlink{structlayer}{layer}} *l, \textcolor{keywordtype}{int} cudnn\_preference, \textcolor{keywordtype}{size\_t} workspace\_size\_specify);}
+\DoxyCodeLine{27 \textcolor{keywordtype}{void} create\_convolutional\_cudnn\_tensors(\mbox{\hyperlink{structlayer}{layer}} *l);}
+\DoxyCodeLine{28 \textcolor{keywordtype}{void} cuda\_convert\_f32\_to\_f16(\textcolor{keywordtype}{float}* input\_f32, \textcolor{keywordtype}{size\_t} size, \textcolor{keywordtype}{float} *output\_f16);}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{31 \textcolor{keywordtype}{void} \mbox{\hyperlink{convolutional__layer_8h_acca9262212caf9bda8a86e39954d929b}{free\_convolutional\_batchnorm}}(\mbox{\hyperlink{structlayer}{convolutional\_layer}} *l);}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{convolutional__layer_8h_a7fa2ac3618460e1f005ff0f50b9e0779}{get\_convolutional\_workspace\_size}}(\mbox{\hyperlink{structlayer}{layer}} l);}
+\DoxyCodeLine{34 \mbox{\hyperlink{structlayer}{convolutional\_layer}} \mbox{\hyperlink{convolutional__layer_8h_a4bef7605ee2c6711f95476f66cd2960d}{make\_convolutional\_layer}}(\textcolor{keywordtype}{int} batch, \textcolor{keywordtype}{int} steps, \textcolor{keywordtype}{int} h, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} c, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} groups, \textcolor{keywordtype}{int} size, \textcolor{keywordtype}{int} stride\_x, \textcolor{keywordtype}{int} stride\_y, \textcolor{keywordtype}{int} dilation, \textcolor{keywordtype}{int} padding, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032}{ACTIVATION}} activation, \textcolor{keywordtype}{int} batch\_normalize, \textcolor{keywordtype}{int} binary, \textcolor{keywordtype}{int} \mbox{\hyperlink{gemm_8c_abeaa8b11b9d81279309458f72eb74034}{xnor}}, \textcolor{keywordtype}{int} adam, \textcolor{keywordtype}{int} use\_bin\_output, \textcolor{keywordtype}{int} index, \textcolor{keywordtype}{int} antialiasing, \mbox{\hyperlink{structlayer}{convolutional\_layer}} *share\_layer, \textcolor{keywordtype}{int} assisted\_excitation, \textcolor{keywordtype}{int} deform, \textcolor{keywordtype}{int} train);}
+\DoxyCodeLine{35 \textcolor{keywordtype}{void} \mbox{\hyperlink{convolutional__layer_8h_aa48893181b794b4ef14f013390f999e2}{denormalize\_convolutional\_layer}}(\mbox{\hyperlink{structlayer}{convolutional\_layer}} l);}
+\DoxyCodeLine{36 \textcolor{keywordtype}{void} \mbox{\hyperlink{convolutional__layer_8h_aff1898fbd81da62c1fe135ed993143fc}{set\_specified\_workspace\_limit}}(\mbox{\hyperlink{structlayer}{convolutional\_layer}} *l, \textcolor{keywordtype}{size\_t} workspace\_size\_limit);}
+\DoxyCodeLine{37 \textcolor{keywordtype}{void} \mbox{\hyperlink{convolutional__layer_8h_a291c28a7422b93446758e12f95944bb1}{resize\_convolutional\_layer}}(\mbox{\hyperlink{structlayer}{convolutional\_layer}} *\mbox{\hyperlink{structlayer}{layer}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h);}
+\DoxyCodeLine{38 \textcolor{keywordtype}{void} \mbox{\hyperlink{convolutional__layer_8h_a634fa3d7e723ac8c63c04c13212649a4}{forward\_convolutional\_layer}}(\textcolor{keyword}{const} \mbox{\hyperlink{structlayer}{convolutional\_layer}} \mbox{\hyperlink{structlayer}{layer}}, \mbox{\hyperlink{structnetwork__state}{network\_state}} state);}
+\DoxyCodeLine{39 \textcolor{keywordtype}{void} \mbox{\hyperlink{convolutional__layer_8h_a58a439493765ccf1aa100282668cd34e}{update\_convolutional\_layer}}(\mbox{\hyperlink{structlayer}{convolutional\_layer}} \mbox{\hyperlink{structlayer}{layer}}, \textcolor{keywordtype}{int} batch, \textcolor{keywordtype}{float} learning\_rate, \textcolor{keywordtype}{float} momentum, \textcolor{keywordtype}{float} decay);}
+\DoxyCodeLine{40 \mbox{\hyperlink{structimage}{image}} *\mbox{\hyperlink{convolutional__layer_8h_af99eccff8b9f730e924a68e8be7fd1b8}{visualize\_convolutional\_layer}}(\mbox{\hyperlink{structlayer}{convolutional\_layer}} \mbox{\hyperlink{structlayer}{layer}}, \textcolor{keywordtype}{char} *window, \mbox{\hyperlink{structimage}{image}} *prev\_weights);}
+\DoxyCodeLine{41 \textcolor{keywordtype}{void} \mbox{\hyperlink{convolutional__layer_8h_aa2ba9c5688fe3b221afba283cd60dd04}{binarize\_weights}}(\textcolor{keywordtype}{float} *weights, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} size, \textcolor{keywordtype}{float} *binary);}
+\DoxyCodeLine{42 \textcolor{keywordtype}{void} \mbox{\hyperlink{convolutional__layer_8h_a00eb21237b64c4f49eabe4e7f3f2cef1}{swap\_binary}}(\mbox{\hyperlink{structlayer}{convolutional\_layer}} *l);}
+\DoxyCodeLine{43 \textcolor{keywordtype}{void} \mbox{\hyperlink{convolutional__layer_8h_a32000d09bcfb7d6b65b07d5c4654ddb3}{binarize\_weights2}}(\textcolor{keywordtype}{float} *weights, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} size, \textcolor{keywordtype}{char} *binary, \textcolor{keywordtype}{float} *scales);}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 \textcolor{keywordtype}{void} \mbox{\hyperlink{convolutional__layer_8h_a23c3775162193b4c18deba6c9c3b742b}{binary\_align\_weights}}(\mbox{\hyperlink{structlayer}{convolutional\_layer}} *l);}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \textcolor{keywordtype}{void} \mbox{\hyperlink{convolutional__layer_8h_af3f918993f853d94f3d01bc545497ea6}{backward\_convolutional\_layer}}(\mbox{\hyperlink{structlayer}{convolutional\_layer}} \mbox{\hyperlink{structlayer}{layer}}, \mbox{\hyperlink{structnetwork__state}{network\_state}} state);}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 \textcolor{keywordtype}{void} \mbox{\hyperlink{convolutional__layer_8h_ad6cf2da6713f5eb405eb21cb5bfe8dc9}{add\_bias}}(\textcolor{keywordtype}{float} *output, \textcolor{keywordtype}{float} *biases, \textcolor{keywordtype}{int} batch, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} size);}
+\DoxyCodeLine{50 \textcolor{keywordtype}{void} \mbox{\hyperlink{convolutional__layer_8h_a3fe122b5a5807135e39655276f708d98}{backward\_bias}}(\textcolor{keywordtype}{float} *bias\_updates, \textcolor{keywordtype}{float} *delta, \textcolor{keywordtype}{int} batch, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} size);}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \mbox{\hyperlink{structimage}{image}} \mbox{\hyperlink{convolutional__layer_8h_aa69edcecd3e3a89897907ec2efd6413f}{get\_convolutional\_image}}(\mbox{\hyperlink{structlayer}{convolutional\_layer}} \mbox{\hyperlink{structlayer}{layer}});}
+\DoxyCodeLine{53 \mbox{\hyperlink{structimage}{image}} \mbox{\hyperlink{convolutional__layer_8h_a083c004da3175489eb440a93fc5beed6}{get\_convolutional\_delta}}(\mbox{\hyperlink{structlayer}{convolutional\_layer}} \mbox{\hyperlink{structlayer}{layer}});}
+\DoxyCodeLine{54 \mbox{\hyperlink{structimage}{image}} \mbox{\hyperlink{convolutional__layer_8h_aa7414f39a78cf8f5294dbd497e459501}{get\_convolutional\_weight}}(\mbox{\hyperlink{structlayer}{convolutional\_layer}} \mbox{\hyperlink{structlayer}{layer}}, \textcolor{keywordtype}{int} i);}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{keywordtype}{int} \mbox{\hyperlink{convolutional__layer_8h_a3ff29e84717c593951e350574cdf5508}{convolutional\_out\_height}}(\mbox{\hyperlink{structlayer}{convolutional\_layer}} \mbox{\hyperlink{structlayer}{layer}});}
+\DoxyCodeLine{58 \textcolor{keywordtype}{int} \mbox{\hyperlink{convolutional__layer_8h_a66d5cb61b1475c871c5c3812dfc30756}{convolutional\_out\_width}}(\mbox{\hyperlink{structlayer}{convolutional\_layer}} \mbox{\hyperlink{structlayer}{layer}});}
+\DoxyCodeLine{59 \textcolor{keywordtype}{void} \mbox{\hyperlink{convolutional__layer_8h_a2b8d3bb34b2aa7c6c729f32a96d1ebc1}{rescale\_weights}}(\mbox{\hyperlink{structlayer}{convolutional\_layer}} l, \textcolor{keywordtype}{float} scale, \textcolor{keywordtype}{float} trans);}
+\DoxyCodeLine{60 \textcolor{keywordtype}{void} \mbox{\hyperlink{convolutional__layer_8h_a1f0aba3f00cb0554384cc88998a67609}{rgbgr\_weights}}(\mbox{\hyperlink{structlayer}{convolutional\_layer}} l);}
+\DoxyCodeLine{61 \textcolor{keywordtype}{void} \mbox{\hyperlink{convolutional__layer_8h_a1176684c19d8ccf1b17bb568438a21b1}{assisted\_excitation\_forward}}(\mbox{\hyperlink{structlayer}{convolutional\_layer}} l, \mbox{\hyperlink{structnetwork__state}{network\_state}} state);}
+\DoxyCodeLine{62 \textcolor{keywordtype}{void} \mbox{\hyperlink{convolutional__layer_8h_a01fb5f0e6d64501749b10e72c39c5c7d}{assisted\_excitation\_forward\_gpu}}(\mbox{\hyperlink{structlayer}{convolutional\_layer}} l, \mbox{\hyperlink{structnetwork__state}{network\_state}} state);}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{65 \}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

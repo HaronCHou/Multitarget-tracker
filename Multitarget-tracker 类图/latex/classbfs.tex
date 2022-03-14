@@ -1,0 +1,1069 @@
+\hypertarget{classbfs}{}\doxysection{bfs类 参考}
+\label{classbfs}\index{bfs@{bfs}}
+
+
+Breadth-\/\+First-\/\+Search (BFS) algorithm.  
+
+
+
+
+{\ttfamily \#include $<$bfs.\+h$>$}
+
+
+
+类 bfs 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=136pt]{classbfs__inherit__graph}
+\end{center}
+\end{figure}
+
+
+bfs 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classbfs__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 类型}
+\begin{DoxyCompactItemize}
+\item 
+typedef edges\+\_\+t\+::const\+\_\+iterator \mbox{\hyperlink{classbfs_a04e608fe18089e5495cadb995aa75261}{tree\+\_\+edges\+\_\+iterator}}
+\begin{DoxyCompactList}\small\item\em Iterator for tree-\/edges. \end{DoxyCompactList}\item 
+typedef nodes\+\_\+t\+::const\+\_\+iterator \mbox{\hyperlink{classbfs_a1035f068a96de0370789ec315aef4f73}{bfs\+\_\+iterator}}
+\begin{DoxyCompactList}\small\item\em Iterator for nodes in BFS-\/order. \end{DoxyCompactList}\item 
+typedef edges\+\_\+t\+::const\+\_\+iterator \mbox{\hyperlink{classbfs_a89ec32919076618d9eef18990fef543f}{non\+\_\+tree\+\_\+edges\+\_\+iterator}}
+\begin{DoxyCompactList}\small\item\em Iterator for non-\/tree-\/edges. \end{DoxyCompactList}\item 
+typedef \mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$ \mbox{\hyperlink{classbfs_a1035f068a96de0370789ec315aef4f73}{bfs\+\_\+iterator}} $>$\+::const\+\_\+iterator \mbox{\hyperlink{classbfs_a70b915179053a2993154614d4358fdc1}{roots\+\_\+iterator}}
+\begin{DoxyCompactList}\small\item\em Iterator for roots of trees in BFS-\/forest. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbfs_a21bcb84fc2db7cf5e789c0459e11c501}{bfs}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classbfs_a6999a08f3cee2b54f07ffeac0d484df1}{$\sim$bfs}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classbfs_a2b173e4acce8ee1095bd19f70062fd66}{run}} (GTL\+::graph \&G)
+\begin{DoxyCompactList}\small\item\em Applies algorithm to graph g. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{classbfs_a9d2deab6d367674e640e96fc83d9a6bc}{check}} (GTL\+::graph \&)
+\begin{DoxyCompactList}\small\item\em Checks whether the preconditions for BFS are satisfied. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classbfs_a6398bc230f9723cd5fdd32cd603647cc}{reset}} ()
+\begin{DoxyCompactList}\small\item\em Resets algorithm \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbfs_a23e2981c2ee617a6e12a8833d2db6210}{start\+\_\+node}} (const \mbox{\hyperlink{structnode}{node}} \&n)
+\begin{DoxyCompactList}\small\item\em Sets start-\/node for BFS. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classbfs_afac59b4a0d92449d8fa46a202b11ae4b}{start\+\_\+node}} () const
+\begin{DoxyCompactList}\small\item\em Returns start-\/node for BFS. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbfs_a25fc51b1bfbbdd3afefe0a84c1bd2f6b}{scan\+\_\+whole\+\_\+graph}} (bool \mbox{\hyperlink{classset}{set}})
+\begin{DoxyCompactList}\small\item\em Enables or disables scanning of the whole graph. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classbfs_a1378f5cfbc59b036e9215c02563bac23}{scan\+\_\+whole\+\_\+graph}} () const
+\begin{DoxyCompactList}\small\item\em Returns whether the whole graph will be scanned. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbfs_a491515da4eb8efca0be4fef0df350a8e}{calc\+\_\+level}} (bool \mbox{\hyperlink{classset}{set}})
+\begin{DoxyCompactList}\small\item\em Enables or disables the calculation of level-\/numbers for each node. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classbfs_a78ea23abb1461e62dd7ecd416fecbd96}{calc\+\_\+level}} () const
+\begin{DoxyCompactList}\small\item\em Returns whether level-\/numbers will be calculated. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbfs_a7de47b820fb9532f497660f767c9457f}{store\+\_\+non\+\_\+tree\+\_\+edges}} (bool \mbox{\hyperlink{classset}{set}})
+\begin{DoxyCompactList}\small\item\em Enables or disables the storing of non-\/tree-\/edges. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classbfs_a9fe165e0a6d979d6d55b6234bfbe5b8f}{store\+\_\+non\+\_\+tree\+\_\+edges}} () const
+\begin{DoxyCompactList}\small\item\em Returns whether the storing of non-\/tree-\/edges is enabled. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbfs_a8c7ce0ea2cd8e1932d1da5693d90cf61}{store\+\_\+preds}} (bool \mbox{\hyperlink{classset}{set}})
+\begin{DoxyCompactList}\small\item\em Enables or disables the storing of predecessors. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classbfs_ac4373b51885382f6f1a9312c1b0923bd}{store\+\_\+preds}} () const
+\begin{DoxyCompactList}\small\item\em Returns whether the storing of predecessors is enabled. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classbfs_ab1a7882a7d56e0e72bbe1a344381bdae}{reached}} (const \mbox{\hyperlink{structnode}{node}} \&n) const
+\begin{DoxyCompactList}\small\item\em Checks whether node {\itshape n} was reached in BFS. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classbfs_a6205cc191bc0bedf1ff9d74af0925735}{bfs\+\_\+num}} (const \mbox{\hyperlink{structnode}{node}} \&n) const
+\begin{DoxyCompactList}\small\item\em BFS-\/number of {\itshape n}. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classbfs_addc2a3d0a275007455d22f6b76830e66}{operator\mbox{[}$\,$\mbox{]}}} (const \mbox{\hyperlink{structnode}{node}} \&n) const
+\begin{DoxyCompactList}\small\item\em BFS-\/number of {\itshape n}. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classbfs_ac0158a0453fb17a89be4049d21db56b1}{level}} (const \mbox{\hyperlink{structnode}{node}} \&n) const
+\begin{DoxyCompactList}\small\item\em Level-\/number of node {\itshape n}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classbfs_a3e1a7b0e4bde586d0be44616e533c59c}{father}} (const \mbox{\hyperlink{structnode}{node}} \&n) const
+\begin{DoxyCompactList}\small\item\em Father of node {\itshape n} in BFS-\/forest. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbfs_a04e608fe18089e5495cadb995aa75261}{tree\+\_\+edges\+\_\+iterator}} \mbox{\hyperlink{classbfs_a56959215efdfee1a37826ad315ac13e7}{tree\+\_\+edges\+\_\+begin}} () const
+\begin{DoxyCompactList}\small\item\em Iterate through all tree-\/edges of last BFS. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbfs_a04e608fe18089e5495cadb995aa75261}{tree\+\_\+edges\+\_\+iterator}} \mbox{\hyperlink{classbfs_a7db47d5d68e21e95fd548beea1a8db2b}{tree\+\_\+edges\+\_\+end}} () const
+\begin{DoxyCompactList}\small\item\em End-\/iterator for iteration through all tree-\/edges picked of last BFS. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbfs_a1035f068a96de0370789ec315aef4f73}{bfs\+\_\+iterator}} \mbox{\hyperlink{classbfs_aff214e6d33f7f2bbd899cf335540def9}{begin}} () const
+\begin{DoxyCompactList}\small\item\em Iterate through all (reached) nodes in BFS-\/\+Order. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbfs_a1035f068a96de0370789ec315aef4f73}{bfs\+\_\+iterator}} \mbox{\hyperlink{classbfs_ac35b3d3c37d33eb80adb752e17a60df9}{end}} () const
+\begin{DoxyCompactList}\small\item\em End-\/iterator for iteration through all (reached) nodes in BFS-\/\+Order. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbfs_a89ec32919076618d9eef18990fef543f}{non\+\_\+tree\+\_\+edges\+\_\+iterator}} \mbox{\hyperlink{classbfs_a06d02d2643f184b4c086678771f0ff90}{non\+\_\+tree\+\_\+edges\+\_\+begin}} () const
+\begin{DoxyCompactList}\small\item\em Iterate through all non-\/tree-\/edges (if enabled). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbfs_a89ec32919076618d9eef18990fef543f}{non\+\_\+tree\+\_\+edges\+\_\+iterator}} \mbox{\hyperlink{classbfs_a9fb470cd36eb487004ca28c1723cabda}{non\+\_\+tree\+\_\+edges\+\_\+end}} () const
+\begin{DoxyCompactList}\small\item\em End-\/iterator for iteration through all non-\/tree-\/edges (if enabled). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbfs_a70b915179053a2993154614d4358fdc1}{roots\+\_\+iterator}} \mbox{\hyperlink{classbfs_a45d58d06d0dcd6427edad2ec52a6ebb9}{roots\+\_\+begin}} () const
+\begin{DoxyCompactList}\small\item\em Iterator pointing towards the first root in the BFS-\/forest. ~\newline
+ \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbfs_a70b915179053a2993154614d4358fdc1}{roots\+\_\+iterator}} \mbox{\hyperlink{classbfs_ac84b90f777adeb90390689db62602d73}{roots\+\_\+end}} () const
+\begin{DoxyCompactList}\small\item\em Iterator pointing to the end of all roots. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classbfs_abb971551139ed87e6c78062275301c1b}{number\+\_\+of\+\_\+reached\+\_\+nodes}} () const
+\begin{DoxyCompactList}\small\item\em Number of nodes reached in last BFS. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classbfs_a34587829c64e90e08dc5ec445552da54}{init\+\_\+handler}} (GTL\+::graph \&)
+\begin{DoxyCompactList}\small\item\em Called at the start of BFS. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classbfs_a68c86cd3193cd439726cf40683e49ef6}{end\+\_\+handler}} (GTL\+::graph \&)
+\begin{DoxyCompactList}\small\item\em Called right before the end of BFS. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classbfs_a0cc3df730352ceda47f8b863e989ed5d}{popped\+\_\+node\+\_\+handler}} (GTL\+::graph \&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}} \&)
+\begin{DoxyCompactList}\small\item\em Called after the node {\itshape n} was taken out of the queue. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classbfs_a795da80d8e97cfe5c79622a48ed8067d}{finished\+\_\+node\+\_\+handler}} (GTL\+::graph \&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}} \&)
+\begin{DoxyCompactList}\small\item\em Called when finished with the node {\itshape n}. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classbfs_aabdc5480495611c4d62d87a576609387}{unused\+\_\+node\+\_\+handler}} (GTL\+::graph \&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}} \&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}} \&)
+\begin{DoxyCompactList}\small\item\em Called when an unused node {\itshape n} was discovered. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classbfs_a795b3bd7ff041d2cfa83260e3947458a}{used\+\_\+node\+\_\+handler}} (GTL\+::graph \&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}} \&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}} \&)
+\begin{DoxyCompactList}\small\item\em Called when an used node {\itshape n} was found. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classbfs_aa2314c17b3762e84fed5d2657d0189bf}{new\+\_\+start\+\_\+handler}} (GTL\+::graph \&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}} \&)
+\begin{DoxyCompactList}\small\item\em Called when BFS is started with start-\/node {\itshape n}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected 属性}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classbfs_a5a4adad9562896536b8b58ab237e8478}{act\+\_\+bfs\+\_\+num}}
+\begin{DoxyCompactList}\small\item\em BFS number that will be assigned next. \end{DoxyCompactList}\item 
+std\+::deque$<$ \mbox{\hyperlink{structnode}{node}} $>$ \mbox{\hyperlink{classbfs_ad2ef1030dcc16a1056e6ef6dfc3f1b6b}{qu}}
+\begin{DoxyCompactList}\small\item\em queue used in BFS. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{edge_8h_a22ac17689106ba21a84e7bc54d1199d6}{nodes\+\_\+t}} \mbox{\hyperlink{classbfs_a2596d2cf52f6e7922fd94ce1adde760e}{bfs\+\_\+order}}
+\begin{DoxyCompactList}\small\item\em List of nodes in BFS-\/order \end{DoxyCompactList}\item 
+\mbox{\hyperlink{edge_8h_a8f9587479bda6cf612c103494b3858e3}{edges\+\_\+t}} \mbox{\hyperlink{classbfs_a8bc83afea6d1066ea4ceca3007799912}{tree}}
+\begin{DoxyCompactList}\small\item\em List of all edges of the BFS-\/tree \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ int $>$ \mbox{\hyperlink{classbfs_a59d0c5c5ad2715776b20b1aec03dbc3a}{bfs\+\_\+number}}
+\begin{DoxyCompactList}\small\item\em Stores BFS-\/number of nodes. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classbfs_ac3db80b59d5db049199936445a6c2da8}{reached\+\_\+nodes}}
+\begin{DoxyCompactList}\small\item\em Number of nodes reached so far. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$ \mbox{\hyperlink{classbfs_a1035f068a96de0370789ec315aef4f73}{bfs\+\_\+iterator}} $>$ \mbox{\hyperlink{classbfs_acea071a6fdad8e590b40830ced241824}{roots}}
+\begin{DoxyCompactList}\small\item\em List of all roots of the BFS-\/tree \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classbfs_a6c08fbcc90d71f1cbdd03a1cdaa9dc99}{whole\+\_\+graph}}
+\begin{DoxyCompactList}\small\item\em Stores whether whole graph will be scanned. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classbfs_af2ab561d9e60a9fc2e25b02d1f807f96}{start}}
+\begin{DoxyCompactList}\small\item\em Stores start node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ int $>$ $\ast$ \mbox{\hyperlink{classbfs_aab92e9d128612c28324aafe4750dbc84}{level\+\_\+number}}
+\begin{DoxyCompactList}\small\item\em Stores level number of each node (if enabled) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{edge_8h_a8f9587479bda6cf612c103494b3858e3}{edges\+\_\+t}} $\ast$ \mbox{\hyperlink{classbfs_a056b2131db11e62eb8f41c8dcc117d2e}{non\+\_\+tree}}
+\begin{DoxyCompactList}\small\item\em List of non-\/tree edges (if enabled) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ \mbox{\hyperlink{structnode}{node}} $>$ $\ast$ \mbox{\hyperlink{classbfs_a3bac5ed333bb78a30a67099c3b94aa0c}{preds}}
+\begin{DoxyCompactList}\small\item\em Stores father of each node (if enabled) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classbfs_ad382cd4f6572dcbd7e1c8c001869c559}{bfs\+\_\+sub}} (GTL\+::graph \&, const \mbox{\hyperlink{structnode}{node}} \&, GTL\+::edge\+\_\+map$<$ int $>$ $\ast$)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+Breadth-\/\+First-\/\+Search (BFS) algorithm. 
+
+\begin{DoxyParagraph}{Date}
+2003/03/24 15\+:58\+:54 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Revision}
+1.\+14 
+\end{DoxyParagraph}
+
+
+Encapsulates the BFS algorithm together with all data produced by it. There are a few parameters, which on the one hand influence the behaviour of BFS (e.\+g. \mbox{\hyperlink{classbfs_a23e2981c2ee617a6e12a8833d2db6210}{bfs\+::start\+\_\+node}}) and on the other hand toggle the storing of extra information, such as the level-\/number of each node. In detail these are\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{classbfs_a23e2981c2ee617a6e12a8833d2db6210}{bfs\+::start\+\_\+node}} (default\+: an arbitrary node will be chosen)
+\item \mbox{\hyperlink{classbfs_a25fc51b1bfbbdd3afefe0a84c1bd2f6b}{bfs\+::scan\+\_\+whole\+\_\+graph}} states whether BFS will be continued in the unused part of the graph, if not all nodes were touched at the end of BFS started at the start-\/node. (default\+: disabled)
+\item \mbox{\hyperlink{classbfs_a491515da4eb8efca0be4fef0df350a8e}{bfs\+::calc\+\_\+level}} toggle storing of level-\/numbers for each node, i.\+e. its distance from the start-\/node. (default\+: disabled)
+\item \mbox{\hyperlink{classbfs_a8c7ce0ea2cd8e1932d1da5693d90cf61}{bfs\+::store\+\_\+preds}} toggle storing the predecessor of each node, i.\+e. the father in the BFS-\/tree. (default\+: disabled)
+\item \mbox{\hyperlink{classbfs_a7de47b820fb9532f497660f767c9457f}{bfs\+::store\+\_\+non\+\_\+tree\+\_\+edges}} toggle storing of all non\+\_\+tree\+\_\+edges (tree\+\_\+edges are always stored) in a list and thus enable or disable iteration through all non\+\_\+tree\+\_\+edges. (default\+: disabled)
+\end{DoxyItemize}
+
+{\itshape Please} {\itshape note} that the algorithm always starts with the given start-\/node (if none was given, the first node is chosen and stored, thus after BFS the root of the tree is always accesible via \mbox{\hyperlink{classbfs_a23e2981c2ee617a6e12a8833d2db6210}{bfs\+::start\+\_\+node}}) and continues until no more unused nodes are reachable from already used ones. Thus if the graph isn\textquotesingle{}t connected not {\itshape all} nodes will be reached. If \mbox{\hyperlink{classbfs_a25fc51b1bfbbdd3afefe0a84c1bd2f6b}{bfs\+::scan\+\_\+whole\+\_\+graph}} isn\textquotesingle{}t set the BFS stops here. If it is set, the BFS will be continued with the next unused node and so on until all nodes were used.
+
+For further customization a few virtual functions, so called handler, are called at crucial stages of the algorithm. In this basic implementation all of these handler are empty. So if one wants to add only a few lines of code (e.\+g. some new numbering) he is likely to take this class as base-\/class and override the handler where neccessary. In detail these are (please look at the source code to see where they are called)\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{classbfs_a34587829c64e90e08dc5ec445552da54}{bfs\+::init\+\_\+handler}}
+\item \mbox{\hyperlink{classbfs_a68c86cd3193cd439726cf40683e49ef6}{bfs\+::end\+\_\+handler}}
+\item \mbox{\hyperlink{classbfs_a0cc3df730352ceda47f8b863e989ed5d}{bfs\+::popped\+\_\+node\+\_\+handler}}
+\item \mbox{\hyperlink{classbfs_a795da80d8e97cfe5c79622a48ed8067d}{bfs\+::finished\+\_\+node\+\_\+handler}}
+\item \mbox{\hyperlink{classbfs_aabdc5480495611c4d62d87a576609387}{bfs\+::unused\+\_\+node\+\_\+handler}}
+\item \mbox{\hyperlink{classbfs_a795b3bd7ff041d2cfa83260e3947458a}{bfs\+::used\+\_\+node\+\_\+handler}}
+\item \mbox{\hyperlink{classbfs_aa2314c17b3762e84fed5d2657d0189bf}{bfs\+::new\+\_\+start\+\_\+handler}}
+\end{DoxyItemize}
+
+{\itshape Please} {\itshape note\+:} We do {\itshape not} claim that the set of handlers provided is sufficient in any way. So if you believe that some new handler is needed urgently please let us know.
+
+There is a lot of information stored during BFS (e.\+g. nodes in bfs-\/order, list of non-\/tree edges). Some of it can be obtained directly by using the corresponding member-\/function (e.\+g. \mbox{\hyperlink{classbfs_a6205cc191bc0bedf1ff9d74af0925735}{bfs\+::bfs\+\_\+num}}), but all information that can be thought of as a list (e.\+g. nodes in bfs-\/order) can be accessed through iterators. In detail these are (of course depending on what options are chosen!)\+:
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{classbfs_a1035f068a96de0370789ec315aef4f73}{bfs\+::bfs\+\_\+iterator}}
+\item \mbox{\hyperlink{classbfs_a04e608fe18089e5495cadb995aa75261}{bfs\+::tree\+\_\+edges\+\_\+iterator}}
+\item \mbox{\hyperlink{classbfs_a89ec32919076618d9eef18990fef543f}{bfs\+::non\+\_\+tree\+\_\+edges\+\_\+iterator}}
+\item \mbox{\hyperlink{classbfs_a70b915179053a2993154614d4358fdc1}{bfs\+::roots\+\_\+iterator}} 
+\end{DoxyItemize}
+
+\doxysubsection{成员类型定义说明}
+\mbox{\Hypertarget{classbfs_a1035f068a96de0370789ec315aef4f73}\label{classbfs_a1035f068a96de0370789ec315aef4f73}} 
+\index{bfs@{bfs}!bfs\_iterator@{bfs\_iterator}}
+\index{bfs\_iterator@{bfs\_iterator}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{bfs\_iterator}{bfs\_iterator}}
+{\footnotesize\ttfamily typedef nodes\+\_\+t\+::const\+\_\+iterator \mbox{\hyperlink{classbfs_a1035f068a96de0370789ec315aef4f73}{bfs\+::bfs\+\_\+iterator}}}
+
+
+
+Iterator for nodes in BFS-\/order. 
+
+\mbox{\Hypertarget{classbfs_a89ec32919076618d9eef18990fef543f}\label{classbfs_a89ec32919076618d9eef18990fef543f}} 
+\index{bfs@{bfs}!non\_tree\_edges\_iterator@{non\_tree\_edges\_iterator}}
+\index{non\_tree\_edges\_iterator@{non\_tree\_edges\_iterator}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{non\_tree\_edges\_iterator}{non\_tree\_edges\_iterator}}
+{\footnotesize\ttfamily typedef edges\+\_\+t\+::const\+\_\+iterator \mbox{\hyperlink{classbfs_a89ec32919076618d9eef18990fef543f}{bfs\+::non\+\_\+tree\+\_\+edges\+\_\+iterator}}}
+
+
+
+Iterator for non-\/tree-\/edges. 
+
+\mbox{\Hypertarget{classbfs_a70b915179053a2993154614d4358fdc1}\label{classbfs_a70b915179053a2993154614d4358fdc1}} 
+\index{bfs@{bfs}!roots\_iterator@{roots\_iterator}}
+\index{roots\_iterator@{roots\_iterator}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{roots\_iterator}{roots\_iterator}}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$\mbox{\hyperlink{classbfs_a1035f068a96de0370789ec315aef4f73}{bfs\+\_\+iterator}}$>$\+::const\+\_\+iterator \mbox{\hyperlink{classbfs_a70b915179053a2993154614d4358fdc1}{bfs\+::roots\+\_\+iterator}}}
+
+
+
+Iterator for roots of trees in BFS-\/forest. 
+
+\mbox{\Hypertarget{classbfs_a04e608fe18089e5495cadb995aa75261}\label{classbfs_a04e608fe18089e5495cadb995aa75261}} 
+\index{bfs@{bfs}!tree\_edges\_iterator@{tree\_edges\_iterator}}
+\index{tree\_edges\_iterator@{tree\_edges\_iterator}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{tree\_edges\_iterator}{tree\_edges\_iterator}}
+{\footnotesize\ttfamily typedef edges\+\_\+t\+::const\+\_\+iterator \mbox{\hyperlink{classbfs_a04e608fe18089e5495cadb995aa75261}{bfs\+::tree\+\_\+edges\+\_\+iterator}}}
+
+
+
+Iterator for tree-\/edges. 
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classbfs_a21bcb84fc2db7cf5e789c0459e11c501}\label{classbfs_a21bcb84fc2db7cf5e789c0459e11c501}} 
+\index{bfs@{bfs}!bfs@{bfs}}
+\index{bfs@{bfs}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{bfs()}{bfs()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_g_t_l_8h_a2d9f24096ac60918452dd51f32b64aa9}{\+\_\+\+\_\+\+GTL\+\_\+\+BEGIN\+\_\+\+NAMESPACE}} bfs\+::bfs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+\mbox{\Hypertarget{classbfs_a6999a08f3cee2b54f07ffeac0d484df1}\label{classbfs_a6999a08f3cee2b54f07ffeac0d484df1}} 
+\index{bfs@{bfs}!````~bfs@{$\sim$bfs}}
+\index{````~bfs@{$\sim$bfs}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{$\sim$bfs()}{~bfs()}}
+{\footnotesize\ttfamily bfs\+::$\sim$bfs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classbfs_aff214e6d33f7f2bbd899cf335540def9}\label{classbfs_aff214e6d33f7f2bbd899cf335540def9}} 
+\index{bfs@{bfs}!begin@{begin}}
+\index{begin@{begin}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbfs_a1035f068a96de0370789ec315aef4f73}{bfs\+\_\+iterator}} bfs\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Iterate through all (reached) nodes in BFS-\/\+Order. 
+
+\begin{DoxyReturn}{返回}
+Start for iteration through all nodes in BFS-\/order. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbfs_a6205cc191bc0bedf1ff9d74af0925735}\label{classbfs_a6205cc191bc0bedf1ff9d74af0925735}} 
+\index{bfs@{bfs}!bfs\_num@{bfs\_num}}
+\index{bfs\_num@{bfs\_num}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{bfs\_num()}{bfs\_num()}}
+{\footnotesize\ttfamily int bfs\+::bfs\+\_\+num (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structnode}{node}} \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+BFS-\/number of {\itshape n}. 
+
+{\itshape Please} {\itshape note} that BFS-\/number 0 means that this node wasn\textquotesingle{}t reached.
+
+
+\begin{DoxyParams}{参数}
+{\em n} & node. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+BFS-\/number of {\itshape n}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbfs_ad382cd4f6572dcbd7e1c8c001869c559}\label{classbfs_ad382cd4f6572dcbd7e1c8c001869c559}} 
+\index{bfs@{bfs}!bfs\_sub@{bfs\_sub}}
+\index{bfs\_sub@{bfs\_sub}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{bfs\_sub()}{bfs\_sub()}}
+{\footnotesize\ttfamily void bfs\+::bfs\+\_\+sub (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{G,  }\item[{const \mbox{\hyperlink{structnode}{node}} \&}]{st,  }\item[{GTL\+::edge\+\_\+map$<$ int $>$ $\ast$}]{used }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=315pt]{classbfs_ad382cd4f6572dcbd7e1c8c001869c559_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classbfs_a78ea23abb1461e62dd7ecd416fecbd96}\label{classbfs_a78ea23abb1461e62dd7ecd416fecbd96}} 
+\index{bfs@{bfs}!calc\_level@{calc\_level}}
+\index{calc\_level@{calc\_level}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{calc\_level()}{calc\_level()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool bfs\+::calc\+\_\+level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns whether level-\/numbers will be calculated. 
+
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & iff level-\/numbers will be calculated. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs_ac0158a0453fb17a89be4049d21db56b1}{bfs\+::level}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbfs_a491515da4eb8efca0be4fef0df350a8e}\label{classbfs_a491515da4eb8efca0be4fef0df350a8e}} 
+\index{bfs@{bfs}!calc\_level@{calc\_level}}
+\index{calc\_level@{calc\_level}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{calc\_level()}{calc\_level()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void bfs\+::calc\+\_\+level (\begin{DoxyParamCaption}\item[{bool}]{set }\end{DoxyParamCaption})}
+
+
+
+Enables or disables the calculation of level-\/numbers for each node. 
+
+If enabled each node gets a level-\/number, i.\+e. its distance from the start-\/node.
+
+
+\begin{DoxyParams}{参数}
+{\em set} & if true level-\/number will be calculated. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs_ac0158a0453fb17a89be4049d21db56b1}{bfs\+::level}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbfs_a9d2deab6d367674e640e96fc83d9a6bc}\label{classbfs_a9d2deab6d367674e640e96fc83d9a6bc}} 
+\index{bfs@{bfs}!check@{check}}
+\index{check@{check}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{check()}{check()}}
+{\footnotesize\ttfamily virtual int bfs\+::check (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Checks whether the preconditions for BFS are satisfied. 
+
+Currently there aren\textquotesingle{}t any restricitions for the BFS algorithm.
+
+
+\begin{DoxyParams}{参数}
+{\em G} & graph. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{返回值}
+{\em \mbox{\hyperlink{classalgorithm_a7ecf5c2bab575f8f2fae9e9e5093a6eaa5114c20e4a96a76b5de9f28bf15e282b}{algorithm\+::\+GTL\+\_\+\+OK}}} & if algorithm can be applied \\
+\hline
+{\em \mbox{\hyperlink{classalgorithm_a7ecf5c2bab575f8f2fae9e9e5093a6eaa6fcf574690bbd6cf710837a169510dd7}{algorithm\+::\+GTL\+\_\+\+ERROR}}} & otherwise. \\
+\hline
+\end{DoxyRetVals}
+
+
+实现了 \mbox{\hyperlink{classalgorithm_a528100c0e54d446fab1e329a53935364}{algorithm}}.
+
+\mbox{\Hypertarget{classbfs_ac35b3d3c37d33eb80adb752e17a60df9}\label{classbfs_ac35b3d3c37d33eb80adb752e17a60df9}} 
+\index{bfs@{bfs}!end@{end}}
+\index{end@{end}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbfs_a1035f068a96de0370789ec315aef4f73}{bfs\+\_\+iterator}} bfs\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+End-\/iterator for iteration through all (reached) nodes in BFS-\/\+Order. 
+
+\begin{DoxyReturn}{返回}
+End for iteration through all (reached) nodes 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbfs_a68c86cd3193cd439726cf40683e49ef6}\label{classbfs_a68c86cd3193cd439726cf40683e49ef6}} 
+\index{bfs@{bfs}!end\_handler@{end\_handler}}
+\index{end\_handler@{end\_handler}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{end\_handler()}{end\_handler()}}
+{\footnotesize\ttfamily virtual void bfs\+::end\+\_\+handler (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Called right before the end of BFS. 
+
+
+\begin{DoxyParams}{参数}
+{\em G} & graph for which BFS was invoked. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbfs_a3e1a7b0e4bde586d0be44616e533c59c}\label{classbfs_a3e1a7b0e4bde586d0be44616e533c59c}} 
+\index{bfs@{bfs}!father@{father}}
+\index{father@{father}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{father()}{father()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structnode}{node}} bfs\+::father (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structnode}{node}} \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Father of node {\itshape n} in BFS-\/forest. 
+
+If {\itshape n} is a root in the forest or wasn\textquotesingle{}t reached the return value is the invalid node \mbox{\hyperlink{structnode_a6da4ea35f222059db9a59cf40be459f9}{node\+::node()}}. ~\newline
+
+
+{\itshape Please} {\itshape note} that this requires that this option was enabled during last run.
+
+
+\begin{DoxyParams}{参数}
+{\em n} & node. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+Father of {\itshape n}. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs_a8c7ce0ea2cd8e1932d1da5693d90cf61}{bfs\+::store\+\_\+preds}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbfs_a795da80d8e97cfe5c79622a48ed8067d}\label{classbfs_a795da80d8e97cfe5c79622a48ed8067d}} 
+\index{bfs@{bfs}!finished\_node\_handler@{finished\_node\_handler}}
+\index{finished\_node\_handler@{finished\_node\_handler}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{finished\_node\_handler()}{finished\_node\_handler()}}
+{\footnotesize\ttfamily virtual void bfs\+::finished\+\_\+node\+\_\+handler (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{,  }\item[{\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Called when finished with the node {\itshape n}. 
+
+A node is finished after all its neighbors have been visited.
+
+
+\begin{DoxyParams}{参数}
+{\em G} & graph for which BFS was invoked. \\
+\hline
+{\em n} & finished node. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbfs_a34587829c64e90e08dc5ec445552da54}\label{classbfs_a34587829c64e90e08dc5ec445552da54}} 
+\index{bfs@{bfs}!init\_handler@{init\_handler}}
+\index{init\_handler@{init\_handler}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{init\_handler()}{init\_handler()}}
+{\footnotesize\ttfamily virtual void bfs\+::init\+\_\+handler (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Called at the start of BFS. 
+
+
+\begin{DoxyParams}{参数}
+{\em G} & graph for which BFS was invoked. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbfs_ac0158a0453fb17a89be4049d21db56b1}\label{classbfs_ac0158a0453fb17a89be4049d21db56b1}} 
+\index{bfs@{bfs}!level@{level}}
+\index{level@{level}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{level()}{level()}}
+{\footnotesize\ttfamily int bfs\+::level (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structnode}{node}} \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Level-\/number of node {\itshape n}. 
+
+{\itshape Please} {\itshape note} that this requires that this option was enabled during last run.
+
+
+\begin{DoxyParams}{参数}
+{\em n} & node. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+level-\/number of {\itshape n}. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs_a491515da4eb8efca0be4fef0df350a8e}{bfs\+::calc\+\_\+level}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbfs_aa2314c17b3762e84fed5d2657d0189bf}\label{classbfs_aa2314c17b3762e84fed5d2657d0189bf}} 
+\index{bfs@{bfs}!new\_start\_handler@{new\_start\_handler}}
+\index{new\_start\_handler@{new\_start\_handler}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{new\_start\_handler()}{new\_start\_handler()}}
+{\footnotesize\ttfamily virtual void bfs\+::new\+\_\+start\+\_\+handler (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{,  }\item[{\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Called when BFS is started with start-\/node {\itshape n}. 
+
+This is particularly useful when BFS was invoked with the {\ttfamily scan\+\_\+whole\+\_\+graph} option.
+
+
+\begin{DoxyParams}{参数}
+{\em G} & graph for which BFS was invoked. \\
+\hline
+{\em n} & start-\/node. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs_a25fc51b1bfbbdd3afefe0a84c1bd2f6b}{bfs\+::scan\+\_\+whole\+\_\+graph}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbfs_a06d02d2643f184b4c086678771f0ff90}\label{classbfs_a06d02d2643f184b4c086678771f0ff90}} 
+\index{bfs@{bfs}!non\_tree\_edges\_begin@{non\_tree\_edges\_begin}}
+\index{non\_tree\_edges\_begin@{non\_tree\_edges\_begin}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{non\_tree\_edges\_begin()}{non\_tree\_edges\_begin()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbfs_a89ec32919076618d9eef18990fef543f}{non\+\_\+tree\+\_\+edges\+\_\+iterator}} bfs\+::non\+\_\+tree\+\_\+edges\+\_\+begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Iterate through all non-\/tree-\/edges (if enabled). 
+
+\begin{DoxyReturn}{返回}
+Start for iteration through all non-\/tree-\/edges. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs_a7de47b820fb9532f497660f767c9457f}{bfs\+::store\+\_\+non\+\_\+tree\+\_\+edges}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbfs_a9fb470cd36eb487004ca28c1723cabda}\label{classbfs_a9fb470cd36eb487004ca28c1723cabda}} 
+\index{bfs@{bfs}!non\_tree\_edges\_end@{non\_tree\_edges\_end}}
+\index{non\_tree\_edges\_end@{non\_tree\_edges\_end}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{non\_tree\_edges\_end()}{non\_tree\_edges\_end()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbfs_a89ec32919076618d9eef18990fef543f}{non\+\_\+tree\+\_\+edges\+\_\+iterator}} bfs\+::non\+\_\+tree\+\_\+edges\+\_\+end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+End-\/iterator for iteration through all non-\/tree-\/edges (if enabled). 
+
+\begin{DoxyReturn}{返回}
+End for iteration through all non-\/tree-\/edges. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs_a7de47b820fb9532f497660f767c9457f}{bfs\+::store\+\_\+non\+\_\+tree\+\_\+edges}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbfs_abb971551139ed87e6c78062275301c1b}\label{classbfs_abb971551139ed87e6c78062275301c1b}} 
+\index{bfs@{bfs}!number\_of\_reached\_nodes@{number\_of\_reached\_nodes}}
+\index{number\_of\_reached\_nodes@{number\_of\_reached\_nodes}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{number\_of\_reached\_nodes()}{number\_of\_reached\_nodes()}}
+{\footnotesize\ttfamily int bfs\+::number\+\_\+of\+\_\+reached\+\_\+nodes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of nodes reached in last BFS. 
+
+\begin{DoxyReturn}{返回}
+Number of reached nodes. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs_a25fc51b1bfbbdd3afefe0a84c1bd2f6b}{bfs\+::scan\+\_\+whole\+\_\+graph}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbfs_addc2a3d0a275007455d22f6b76830e66}\label{classbfs_addc2a3d0a275007455d22f6b76830e66}} 
+\index{bfs@{bfs}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily int bfs\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structnode}{node}} \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+BFS-\/number of {\itshape n}. 
+
+{\itshape Please} {\itshape note} that BFS-\/number 0 means that this node wasn\textquotesingle{}t reached.
+
+
+\begin{DoxyParams}{参数}
+{\em n} & node. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+BFS-\/number of {\itshape n}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbfs_a0cc3df730352ceda47f8b863e989ed5d}\label{classbfs_a0cc3df730352ceda47f8b863e989ed5d}} 
+\index{bfs@{bfs}!popped\_node\_handler@{popped\_node\_handler}}
+\index{popped\_node\_handler@{popped\_node\_handler}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{popped\_node\_handler()}{popped\_node\_handler()}}
+{\footnotesize\ttfamily virtual void bfs\+::popped\+\_\+node\+\_\+handler (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{,  }\item[{\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Called after the node {\itshape n} was taken out of the queue. 
+
+
+\begin{DoxyParams}{参数}
+{\em G} & graph for which BFS was invoked. \\
+\hline
+{\em n} & node taken out of the queue. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbfs_ab1a7882a7d56e0e72bbe1a344381bdae}\label{classbfs_ab1a7882a7d56e0e72bbe1a344381bdae}} 
+\index{bfs@{bfs}!reached@{reached}}
+\index{reached@{reached}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{reached()}{reached()}}
+{\footnotesize\ttfamily bool bfs\+::reached (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structnode}{node}} \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks whether node {\itshape n} was reached in BFS. 
+
+
+\begin{DoxyParams}{参数}
+{\em n} & node. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & iff {\itshape n} was reached. \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{classbfs_a6398bc230f9723cd5fdd32cd603647cc}\label{classbfs_a6398bc230f9723cd5fdd32cd603647cc}} 
+\index{bfs@{bfs}!reset@{reset}}
+\index{reset@{reset}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void bfs\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Resets algorithm 
+
+Prepares the algorithm to be applied to another graph. {\itshape Please} {\itshape note\+:} The options an algorithm may support do {\itshape not} get reset by this. It is just to reset internally used datastructures. 
+
+实现了 \mbox{\hyperlink{classalgorithm_a21aba63d066ae7897de6ca7d8425c408}{algorithm}}.
+
+\mbox{\Hypertarget{classbfs_a45d58d06d0dcd6427edad2ec52a6ebb9}\label{classbfs_a45d58d06d0dcd6427edad2ec52a6ebb9}} 
+\index{bfs@{bfs}!roots\_begin@{roots\_begin}}
+\index{roots\_begin@{roots\_begin}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{roots\_begin()}{roots\_begin()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbfs_a70b915179053a2993154614d4358fdc1}{roots\+\_\+iterator}} bfs\+::roots\+\_\+begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Iterator pointing towards the first root in the BFS-\/forest. ~\newline
+ 
+
+{\itshape Please} {\itshape note} that instead of pointing directly towards the node (i.\+e. {\ttfamily $\ast$it} is of type {\ttfamily node}) the iterator points towards a bfs-\/iterator, which represents the root (i.\+e. {\ttfamily $\ast$it} is of type {\ttfamily bfs\+\_\+iterator}).
+
+Using this technique makes it possible not only to obtain all the roots in the forest, but also the whole trees associated with each one. This can be achieved because a {\ttfamily root\+\_\+iterator} specifies the exact position of the root in the BFS-\/ordering and by definition of BFS all the descendents of the root, i.\+e. the whole tree below, will come later in BFS, such that by incrementing the {\ttfamily bfs\+\_\+iterator} a {\ttfamily roots\+\_\+iterator} refers to, one can traverse the whole tree with this given root.
+
+Of course if the root isn\textquotesingle{}t the last node in the BFS-\/forest all following trees also will be traversed. But since the first node of such a tree, that will be discovered, is its root, the successor of the {\ttfamily roots\+\_\+iterator} can be used as end-\/iterator.
+
+\begin{DoxyReturn}{返回}
+Start for iteration through all roots in BFS-\/forest. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs_a25fc51b1bfbbdd3afefe0a84c1bd2f6b}{bfs\+::scan\+\_\+whole\+\_\+graph}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbfs_ac84b90f777adeb90390689db62602d73}\label{classbfs_ac84b90f777adeb90390689db62602d73}} 
+\index{bfs@{bfs}!roots\_end@{roots\_end}}
+\index{roots\_end@{roots\_end}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{roots\_end()}{roots\_end()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbfs_a70b915179053a2993154614d4358fdc1}{roots\+\_\+iterator}} bfs\+::roots\+\_\+end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Iterator pointing to the end of all roots. 
+
+\begin{DoxyReturn}{返回}
+End for iteration through all roots in BFS-\/forest. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs_a25fc51b1bfbbdd3afefe0a84c1bd2f6b}{bfs\+::scan\+\_\+whole\+\_\+graph}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbfs_a2b173e4acce8ee1095bd19f70062fd66}\label{classbfs_a2b173e4acce8ee1095bd19f70062fd66}} 
+\index{bfs@{bfs}!run@{run}}
+\index{run@{run}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily int bfs\+::run (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{g }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Applies algorithm to graph g. 
+
+
+\begin{DoxyParams}{参数}
+{\em g} & graph \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{返回值}
+{\em \mbox{\hyperlink{classalgorithm_a7ecf5c2bab575f8f2fae9e9e5093a6eaa5114c20e4a96a76b5de9f28bf15e282b}{algorithm\+::\+GTL\+\_\+\+OK}}} & on success \\
+\hline
+{\em \mbox{\hyperlink{classalgorithm_a7ecf5c2bab575f8f2fae9e9e5093a6eaa6fcf574690bbd6cf710837a169510dd7}{algorithm\+::\+GTL\+\_\+\+ERROR}}} & otherwise \\
+\hline
+\end{DoxyRetVals}
+
+
+实现了 \mbox{\hyperlink{classalgorithm_a4baee48c513c5802975743152c33f34c}{algorithm}}.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classbfs_a2b173e4acce8ee1095bd19f70062fd66_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classbfs_a1378f5cfbc59b036e9215c02563bac23}\label{classbfs_a1378f5cfbc59b036e9215c02563bac23}} 
+\index{bfs@{bfs}!scan\_whole\_graph@{scan\_whole\_graph}}
+\index{scan\_whole\_graph@{scan\_whole\_graph}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{scan\_whole\_graph()}{scan\_whole\_graph()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool bfs\+::scan\+\_\+whole\+\_\+graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns whether the whole graph will be scanned. 
+
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & iff the whole graph will be scanned. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs_a45d58d06d0dcd6427edad2ec52a6ebb9}{bfs\+::roots\+\_\+begin}}, \mbox{\hyperlink{classbfs_ac84b90f777adeb90390689db62602d73}{bfs\+::roots\+\_\+end}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbfs_a25fc51b1bfbbdd3afefe0a84c1bd2f6b}\label{classbfs_a25fc51b1bfbbdd3afefe0a84c1bd2f6b}} 
+\index{bfs@{bfs}!scan\_whole\_graph@{scan\_whole\_graph}}
+\index{scan\_whole\_graph@{scan\_whole\_graph}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{scan\_whole\_graph()}{scan\_whole\_graph()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void bfs\+::scan\+\_\+whole\+\_\+graph (\begin{DoxyParamCaption}\item[{bool}]{set }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enables or disables scanning of the whole graph. 
+
+If enabled and the BFS started at the given start-\/node stops without having touched all nodes, it will be continued with the next unused node, and so on until all nodes were used. This makes sure that for every node \mbox{\hyperlink{classbfs_a6205cc191bc0bedf1ff9d74af0925735}{bfs\+::bfs\+\_\+num}} is defined.
+
+If this feature is disabled, you are able to check what nodes can be reached, when starting a BFS at the start-\/node, because for those not reached \mbox{\hyperlink{classbfs_a6205cc191bc0bedf1ff9d74af0925735}{bfs\+::bfs\+\_\+num}} will be 0.
+
+
+\begin{DoxyParams}{参数}
+{\em set} & if true enable scanning the whole graph. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs_a45d58d06d0dcd6427edad2ec52a6ebb9}{bfs\+::roots\+\_\+begin}}, \mbox{\hyperlink{classbfs_ac84b90f777adeb90390689db62602d73}{bfs\+::roots\+\_\+end}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbfs_afac59b4a0d92449d8fa46a202b11ae4b}\label{classbfs_afac59b4a0d92449d8fa46a202b11ae4b}} 
+\index{bfs@{bfs}!start\_node@{start\_node}}
+\index{start\_node@{start\_node}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{start\_node()}{start\_node()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structnode}{node}} bfs\+::start\+\_\+node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns start-\/node for BFS. 
+
+\begin{DoxyReturn}{返回}
+start-\/node. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbfs_a23e2981c2ee617a6e12a8833d2db6210}\label{classbfs_a23e2981c2ee617a6e12a8833d2db6210}} 
+\index{bfs@{bfs}!start\_node@{start\_node}}
+\index{start\_node@{start\_node}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{start\_node()}{start\_node()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void bfs\+::start\+\_\+node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structnode}{node}} \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets start-\/node for BFS. 
+
+The default start-\/node is the invalid node (GTL\+::node\+::node()), in this case an arbitrary node is chosen and stored when BFS is run.
+
+
+\begin{DoxyParams}{参数}
+{\em n} & start-\/node. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbfs_a9fe165e0a6d979d6d55b6234bfbe5b8f}\label{classbfs_a9fe165e0a6d979d6d55b6234bfbe5b8f}} 
+\index{bfs@{bfs}!store\_non\_tree\_edges@{store\_non\_tree\_edges}}
+\index{store\_non\_tree\_edges@{store\_non\_tree\_edges}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{store\_non\_tree\_edges()}{store\_non\_tree\_edges()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool bfs\+::store\+\_\+non\+\_\+tree\+\_\+edges (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns whether the storing of non-\/tree-\/edges is enabled. 
+
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & iff the storing of non-\/tree-\/edges is enabled. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs_a06d02d2643f184b4c086678771f0ff90}{bfs\+::non\+\_\+tree\+\_\+edges\+\_\+begin}}, \mbox{\hyperlink{classbfs_a9fb470cd36eb487004ca28c1723cabda}{bfs\+::non\+\_\+tree\+\_\+edges\+\_\+end}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbfs_a7de47b820fb9532f497660f767c9457f}\label{classbfs_a7de47b820fb9532f497660f767c9457f}} 
+\index{bfs@{bfs}!store\_non\_tree\_edges@{store\_non\_tree\_edges}}
+\index{store\_non\_tree\_edges@{store\_non\_tree\_edges}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{store\_non\_tree\_edges()}{store\_non\_tree\_edges()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void bfs\+::store\+\_\+non\+\_\+tree\+\_\+edges (\begin{DoxyParamCaption}\item[{bool}]{set }\end{DoxyParamCaption})}
+
+
+
+Enables or disables the storing of non-\/tree-\/edges. 
+
+If enabled all non-\/tree-\/edges will be stored in the order they occured.
+
+
+\begin{DoxyParams}{参数}
+{\em set} & if true non-\/tree-\/edges will be stored. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs_a06d02d2643f184b4c086678771f0ff90}{bfs\+::non\+\_\+tree\+\_\+edges\+\_\+begin}}, \mbox{\hyperlink{classbfs_a9fb470cd36eb487004ca28c1723cabda}{bfs\+::non\+\_\+tree\+\_\+edges\+\_\+end}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbfs_ac4373b51885382f6f1a9312c1b0923bd}\label{classbfs_ac4373b51885382f6f1a9312c1b0923bd}} 
+\index{bfs@{bfs}!store\_preds@{store\_preds}}
+\index{store\_preds@{store\_preds}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{store\_preds()}{store\_preds()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool bfs\+::store\+\_\+preds (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns whether the storing of predecessors is enabled. 
+
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & iff the storing of predecessors is enabled. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs_a3e1a7b0e4bde586d0be44616e533c59c}{bfs\+::father}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbfs_a8c7ce0ea2cd8e1932d1da5693d90cf61}\label{classbfs_a8c7ce0ea2cd8e1932d1da5693d90cf61}} 
+\index{bfs@{bfs}!store\_preds@{store\_preds}}
+\index{store\_preds@{store\_preds}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{store\_preds()}{store\_preds()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void bfs\+::store\+\_\+preds (\begin{DoxyParamCaption}\item[{bool}]{set }\end{DoxyParamCaption})}
+
+
+
+Enables or disables the storing of predecessors. 
+
+If enabled for every node the predecessor in the BFS-\/forest will be stored.
+
+
+\begin{DoxyParams}{参数}
+{\em set} & if true predecessors will be stored. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs_a3e1a7b0e4bde586d0be44616e533c59c}{bfs\+::father}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbfs_a56959215efdfee1a37826ad315ac13e7}\label{classbfs_a56959215efdfee1a37826ad315ac13e7}} 
+\index{bfs@{bfs}!tree\_edges\_begin@{tree\_edges\_begin}}
+\index{tree\_edges\_begin@{tree\_edges\_begin}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{tree\_edges\_begin()}{tree\_edges\_begin()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbfs_a04e608fe18089e5495cadb995aa75261}{tree\+\_\+edges\+\_\+iterator}} bfs\+::tree\+\_\+edges\+\_\+begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Iterate through all tree-\/edges of last BFS. 
+
+{\itshape Please} {\itshape note} that this edges not always form a tree. In case the graph is not (strongly) connected and the whole graph was scanned, they form a forest.
+
+\begin{DoxyReturn}{返回}
+Start for iteration through all tree-\/edges. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbfs_a7db47d5d68e21e95fd548beea1a8db2b}\label{classbfs_a7db47d5d68e21e95fd548beea1a8db2b}} 
+\index{bfs@{bfs}!tree\_edges\_end@{tree\_edges\_end}}
+\index{tree\_edges\_end@{tree\_edges\_end}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{tree\_edges\_end()}{tree\_edges\_end()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbfs_a04e608fe18089e5495cadb995aa75261}{tree\+\_\+edges\+\_\+iterator}} bfs\+::tree\+\_\+edges\+\_\+end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+End-\/iterator for iteration through all tree-\/edges picked of last BFS. 
+
+\begin{DoxyReturn}{返回}
+End for iteration through all tree-\/edges. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbfs_aabdc5480495611c4d62d87a576609387}\label{classbfs_aabdc5480495611c4d62d87a576609387}} 
+\index{bfs@{bfs}!unused\_node\_handler@{unused\_node\_handler}}
+\index{unused\_node\_handler@{unused\_node\_handler}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{unused\_node\_handler()}{unused\_node\_handler()}}
+{\footnotesize\ttfamily virtual void bfs\+::unused\+\_\+node\+\_\+handler (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{,  }\item[{\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}} \&}]{,  }\item[{\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Called when an unused node {\itshape n} was discovered. 
+
+This means that the actual node\textquotesingle{}s {\itshape f} neighbor {\itshape n} was not previously discovered.
+
+
+\begin{DoxyParams}{参数}
+{\em G} & graph for which BFS was invoked. \\
+\hline
+{\em n} & unused node. \\
+\hline
+{\em f} & actual node. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbfs_a795b3bd7ff041d2cfa83260e3947458a}\label{classbfs_a795b3bd7ff041d2cfa83260e3947458a}} 
+\index{bfs@{bfs}!used\_node\_handler@{used\_node\_handler}}
+\index{used\_node\_handler@{used\_node\_handler}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{used\_node\_handler()}{used\_node\_handler()}}
+{\footnotesize\ttfamily virtual void bfs\+::used\+\_\+node\+\_\+handler (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{,  }\item[{\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}} \&}]{,  }\item[{\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Called when an used node {\itshape n} was found. 
+
+This means that the actual node\textquotesingle{}s ({\itshape f}) neighbor {\itshape n} has already been discovered.
+
+
+\begin{DoxyParams}{参数}
+{\em G} & graph for which BFS was invoked. \\
+\hline
+{\em n} & used node. \\
+\hline
+{\em f} & actual node. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classbfs_a5a4adad9562896536b8b58ab237e8478}\label{classbfs_a5a4adad9562896536b8b58ab237e8478}} 
+\index{bfs@{bfs}!act\_bfs\_num@{act\_bfs\_num}}
+\index{act\_bfs\_num@{act\_bfs\_num}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{act\_bfs\_num}{act\_bfs\_num}}
+{\footnotesize\ttfamily int bfs\+::act\+\_\+bfs\+\_\+num\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+BFS number that will be assigned next. 
+
+\mbox{\Hypertarget{classbfs_a59d0c5c5ad2715776b20b1aec03dbc3a}\label{classbfs_a59d0c5c5ad2715776b20b1aec03dbc3a}} 
+\index{bfs@{bfs}!bfs\_number@{bfs\_number}}
+\index{bfs\_number@{bfs\_number}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{bfs\_number}{bfs\_number}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$int$>$ bfs\+::bfs\+\_\+number\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Stores BFS-\/number of nodes. 
+
+\mbox{\Hypertarget{classbfs_a2596d2cf52f6e7922fd94ce1adde760e}\label{classbfs_a2596d2cf52f6e7922fd94ce1adde760e}} 
+\index{bfs@{bfs}!bfs\_order@{bfs\_order}}
+\index{bfs\_order@{bfs\_order}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{bfs\_order}{bfs\_order}}
+{\footnotesize\ttfamily \mbox{\hyperlink{edge_8h_a22ac17689106ba21a84e7bc54d1199d6}{nodes\+\_\+t}} bfs\+::bfs\+\_\+order\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+List of nodes in BFS-\/order 
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs_aff214e6d33f7f2bbd899cf335540def9}{bfs\+::begin}}, \mbox{\hyperlink{classbfs_ac35b3d3c37d33eb80adb752e17a60df9}{bfs\+::end}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbfs_aab92e9d128612c28324aafe4750dbc84}\label{classbfs_aab92e9d128612c28324aafe4750dbc84}} 
+\index{bfs@{bfs}!level\_number@{level\_number}}
+\index{level\_number@{level\_number}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{level\_number}{level\_number}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$int$>$$\ast$ bfs\+::level\+\_\+number\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Stores level number of each node (if enabled) 
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs_a491515da4eb8efca0be4fef0df350a8e}{bfs\+::calc\+\_\+level}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbfs_a056b2131db11e62eb8f41c8dcc117d2e}\label{classbfs_a056b2131db11e62eb8f41c8dcc117d2e}} 
+\index{bfs@{bfs}!non\_tree@{non\_tree}}
+\index{non\_tree@{non\_tree}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{non\_tree}{non\_tree}}
+{\footnotesize\ttfamily \mbox{\hyperlink{edge_8h_a8f9587479bda6cf612c103494b3858e3}{edges\+\_\+t}}$\ast$ bfs\+::non\+\_\+tree\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+List of non-\/tree edges (if enabled) 
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs_a7de47b820fb9532f497660f767c9457f}{bfs\+::store\+\_\+non\+\_\+tree\+\_\+edges}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbfs_a3bac5ed333bb78a30a67099c3b94aa0c}\label{classbfs_a3bac5ed333bb78a30a67099c3b94aa0c}} 
+\index{bfs@{bfs}!preds@{preds}}
+\index{preds@{preds}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{preds}{preds}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$\mbox{\hyperlink{structnode}{node}}$>$$\ast$ bfs\+::preds\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Stores father of each node (if enabled) 
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs_a8c7ce0ea2cd8e1932d1da5693d90cf61}{bfs\+::store\+\_\+preds}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbfs_ad2ef1030dcc16a1056e6ef6dfc3f1b6b}\label{classbfs_ad2ef1030dcc16a1056e6ef6dfc3f1b6b}} 
+\index{bfs@{bfs}!qu@{qu}}
+\index{qu@{qu}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{qu}{qu}}
+{\footnotesize\ttfamily std\+::deque$<$\mbox{\hyperlink{structnode}{node}}$>$ bfs\+::qu\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+queue used in BFS. 
+
+\mbox{\Hypertarget{classbfs_ac3db80b59d5db049199936445a6c2da8}\label{classbfs_ac3db80b59d5db049199936445a6c2da8}} 
+\index{bfs@{bfs}!reached\_nodes@{reached\_nodes}}
+\index{reached\_nodes@{reached\_nodes}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{reached\_nodes}{reached\_nodes}}
+{\footnotesize\ttfamily int bfs\+::reached\+\_\+nodes\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Number of nodes reached so far. 
+
+\mbox{\Hypertarget{classbfs_acea071a6fdad8e590b40830ced241824}\label{classbfs_acea071a6fdad8e590b40830ced241824}} 
+\index{bfs@{bfs}!roots@{roots}}
+\index{roots@{roots}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{roots}{roots}}
+{\footnotesize\ttfamily \mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$\mbox{\hyperlink{classbfs_a1035f068a96de0370789ec315aef4f73}{bfs\+\_\+iterator}}$>$ bfs\+::roots\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+List of all roots of the BFS-\/tree 
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs_a45d58d06d0dcd6427edad2ec52a6ebb9}{bfs\+::roots\+\_\+begin}}, \mbox{\hyperlink{classbfs_ac84b90f777adeb90390689db62602d73}{bfs\+::roots\+\_\+end}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbfs_af2ab561d9e60a9fc2e25b02d1f807f96}\label{classbfs_af2ab561d9e60a9fc2e25b02d1f807f96}} 
+\index{bfs@{bfs}!start@{start}}
+\index{start@{start}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{start}{start}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structnode}{node}} bfs\+::start\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Stores start node. 
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs}{bfs}}\+:\mbox{\hyperlink{classbfs_a23e2981c2ee617a6e12a8833d2db6210}{start\+\_\+node}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbfs_a8bc83afea6d1066ea4ceca3007799912}\label{classbfs_a8bc83afea6d1066ea4ceca3007799912}} 
+\index{bfs@{bfs}!tree@{tree}}
+\index{tree@{tree}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{tree}{tree}}
+{\footnotesize\ttfamily \mbox{\hyperlink{edge_8h_a8f9587479bda6cf612c103494b3858e3}{edges\+\_\+t}} bfs\+::tree\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+List of all edges of the BFS-\/tree 
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs_a56959215efdfee1a37826ad315ac13e7}{bfs\+::tree\+\_\+edges\+\_\+begin}}, \mbox{\hyperlink{classbfs_a7db47d5d68e21e95fd548beea1a8db2b}{bfs\+::tree\+\_\+edges\+\_\+end}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbfs_a6c08fbcc90d71f1cbdd03a1cdaa9dc99}\label{classbfs_a6c08fbcc90d71f1cbdd03a1cdaa9dc99}} 
+\index{bfs@{bfs}!whole\_graph@{whole\_graph}}
+\index{whole\_graph@{whole\_graph}!bfs@{bfs}}
+\doxysubsubsection{\texorpdfstring{whole\_graph}{whole\_graph}}
+{\footnotesize\ttfamily bool bfs\+::whole\+\_\+graph\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Stores whether whole graph will be scanned. 
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbfs_a25fc51b1bfbbdd3afefe0a84c1bd2f6b}{bfs\+::scan\+\_\+whole\+\_\+graph}} 
+\end{DoxySeeAlso}
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Tracker/graph/\+GTL/include/\+GTL/\mbox{\hyperlink{bfs_8h}{bfs.\+h}}\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Tracker/graph/\+GTL/src/\mbox{\hyperlink{bfs_8cpp}{bfs.\+cpp}}\end{DoxyCompactItemize}

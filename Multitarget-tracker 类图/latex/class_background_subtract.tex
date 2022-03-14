@@ -1,0 +1,222 @@
+\hypertarget{class_background_subtract}{}\doxysection{Background\+Subtract类 参考}
+\label{class_background_subtract}\index{BackgroundSubtract@{BackgroundSubtract}}
+
+
+The \mbox{\hyperlink{class_background_subtract}{Background\+Subtract}} class  
+
+
+
+
+{\ttfamily \#include $<$Background\+Subtract.\+h$>$}
+
+\doxysubsection*{Public 类型}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949f}{BGFG\+\_\+\+ALGS}} \{ \newline
+\mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949fa1905f812773a0029b59688e57990f172}{ALG\+\_\+\+VIBE}}
+, \mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949fa6ce3f5db7dc79642df7c113be3a28d14}{ALG\+\_\+\+MOG}}
+, \mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949fa3d46f57cfb0a9b1b5b037b387a35f652}{ALG\+\_\+\+GMG}}
+, \mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949fa4e734ae21b8add9022427f8da9469cfb}{ALG\+\_\+\+CNT}}
+, \newline
+\mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949fa0a4e184ec94bca58e58dd4226f1b1f7f}{ALG\+\_\+\+Su\+BSENSE}}
+, \mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949fae4cc76d1ae01949bc7e6be6ed046ddaf}{ALG\+\_\+\+LOBSTER}}
+, \mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949fa35994e745da8eb824d3808ee50ad3ebf}{ALG\+\_\+\+MOG2}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_background_subtract_a0b5096a3823c7af66b6d22cdd36e8fda}{Background\+Subtract}} (\mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949f}{BGFG\+\_\+\+ALGS}} alg\+Type, int channels)
+\item 
+\mbox{\hyperlink{class_background_subtract_a09aacb2923748c49f7cc94e3550a0c8a}{$\sim$\+Background\+Subtract}} ()=default
+\item 
+bool \mbox{\hyperlink{class_background_subtract_a9dacb4cc5cf41c4a37cc776a8142aecc}{Init}} (const \mbox{\hyperlink{defines_8h_a9fcffa231cb8ff6a5fc4e2e2e71f3ead}{config\+\_\+t}} \&config)
+\item 
+void \mbox{\hyperlink{class_background_subtract_a1cd989730164da1c2523975d2ed32147}{Subtract}} (const cv\+::\+UMat \&\mbox{\hyperlink{structimage}{image}}, cv\+::\+UMat \&foreground)
+\item 
+void \mbox{\hyperlink{class_background_subtract_a63b5092a3d3cf257b1ded87aa5c74fa2}{Reset\+Model}} (const cv\+::\+UMat \&img, const cv\+::\+Rect \&roi\+Rect)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 属性}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_background_subtract_a676897a571788e0fee84d568bc68caf0}{m\+\_\+channels}} = 1
+\item 
+\mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949f}{BGFG\+\_\+\+ALGS}} \mbox{\hyperlink{class_background_subtract_a3d569052b6954fa87f04a0aa8a970f97}{m\+\_\+alg\+Type}} = BGFG\+\_\+\+ALGS\+::\+ALG\+\_\+\+MOG2
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+cv\+::\+UMat \mbox{\hyperlink{class_background_subtract_a0451799e7c935951538af6a80321deaf}{Get\+Img}} (const cv\+::\+UMat \&\mbox{\hyperlink{structimage}{image}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classvibe_1_1_v_i_b_e}{vibe\+::\+VIBE}} $>$ \mbox{\hyperlink{class_background_subtract_a57c251abeed9a2c73a3c97d0f7f8b527}{m\+\_\+model\+Vibe}}
+\item 
+cv\+::\+Ptr$<$ cv\+::\+Background\+Subtractor $>$ \mbox{\hyperlink{class_background_subtract_a80782a38138a430437095f625603e599}{m\+\_\+model\+OCV}}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_background_subtractor_l_b_s_p}{Background\+Subtractor\+LBSP}} $>$ \mbox{\hyperlink{class_background_subtract_a56275963c8cacca97b97d0cde884f4c1}{m\+\_\+model\+Su\+BSENSE}}
+\item 
+cv\+::\+UMat \mbox{\hyperlink{class_background_subtract_a5d49feceec4ef7def459300ebcc00f1e}{m\+\_\+raw\+Foreground}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+The \mbox{\hyperlink{class_background_subtract}{Background\+Subtract}} class 
+
+\doxysubsection{成员枚举类型说明}
+\mbox{\Hypertarget{class_background_subtract_a56850081696df68b55f87b4f3d87949f}\label{class_background_subtract_a56850081696df68b55f87b4f3d87949f}} 
+\index{BackgroundSubtract@{BackgroundSubtract}!BGFG\_ALGS@{BGFG\_ALGS}}
+\index{BGFG\_ALGS@{BGFG\_ALGS}!BackgroundSubtract@{BackgroundSubtract}}
+\doxysubsubsection{\texorpdfstring{BGFG\_ALGS}{BGFG\_ALGS}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949f}{Background\+Subtract\+::\+BGFG\+\_\+\+ALGS}}}
+
+\begin{DoxyEnumFields}{枚举值}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ALG\_VIBE@{ALG\_VIBE}!BackgroundSubtract@{BackgroundSubtract}}\index{BackgroundSubtract@{BackgroundSubtract}!ALG\_VIBE@{ALG\_VIBE}}}\mbox{\Hypertarget{class_background_subtract_a56850081696df68b55f87b4f3d87949fa1905f812773a0029b59688e57990f172}\label{class_background_subtract_a56850081696df68b55f87b4f3d87949fa1905f812773a0029b59688e57990f172}} 
+ALG\+\_\+\+VIBE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ALG\_MOG@{ALG\_MOG}!BackgroundSubtract@{BackgroundSubtract}}\index{BackgroundSubtract@{BackgroundSubtract}!ALG\_MOG@{ALG\_MOG}}}\mbox{\Hypertarget{class_background_subtract_a56850081696df68b55f87b4f3d87949fa6ce3f5db7dc79642df7c113be3a28d14}\label{class_background_subtract_a56850081696df68b55f87b4f3d87949fa6ce3f5db7dc79642df7c113be3a28d14}} 
+ALG\+\_\+\+MOG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ALG\_GMG@{ALG\_GMG}!BackgroundSubtract@{BackgroundSubtract}}\index{BackgroundSubtract@{BackgroundSubtract}!ALG\_GMG@{ALG\_GMG}}}\mbox{\Hypertarget{class_background_subtract_a56850081696df68b55f87b4f3d87949fa3d46f57cfb0a9b1b5b037b387a35f652}\label{class_background_subtract_a56850081696df68b55f87b4f3d87949fa3d46f57cfb0a9b1b5b037b387a35f652}} 
+ALG\+\_\+\+GMG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ALG\_CNT@{ALG\_CNT}!BackgroundSubtract@{BackgroundSubtract}}\index{BackgroundSubtract@{BackgroundSubtract}!ALG\_CNT@{ALG\_CNT}}}\mbox{\Hypertarget{class_background_subtract_a56850081696df68b55f87b4f3d87949fa4e734ae21b8add9022427f8da9469cfb}\label{class_background_subtract_a56850081696df68b55f87b4f3d87949fa4e734ae21b8add9022427f8da9469cfb}} 
+ALG\+\_\+\+CNT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ALG\_SuBSENSE@{ALG\_SuBSENSE}!BackgroundSubtract@{BackgroundSubtract}}\index{BackgroundSubtract@{BackgroundSubtract}!ALG\_SuBSENSE@{ALG\_SuBSENSE}}}\mbox{\Hypertarget{class_background_subtract_a56850081696df68b55f87b4f3d87949fa0a4e184ec94bca58e58dd4226f1b1f7f}\label{class_background_subtract_a56850081696df68b55f87b4f3d87949fa0a4e184ec94bca58e58dd4226f1b1f7f}} 
+ALG\+\_\+\+Su\+BSENSE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ALG\_LOBSTER@{ALG\_LOBSTER}!BackgroundSubtract@{BackgroundSubtract}}\index{BackgroundSubtract@{BackgroundSubtract}!ALG\_LOBSTER@{ALG\_LOBSTER}}}\mbox{\Hypertarget{class_background_subtract_a56850081696df68b55f87b4f3d87949fae4cc76d1ae01949bc7e6be6ed046ddaf}\label{class_background_subtract_a56850081696df68b55f87b4f3d87949fae4cc76d1ae01949bc7e6be6ed046ddaf}} 
+ALG\+\_\+\+LOBSTER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ALG\_MOG2@{ALG\_MOG2}!BackgroundSubtract@{BackgroundSubtract}}\index{BackgroundSubtract@{BackgroundSubtract}!ALG\_MOG2@{ALG\_MOG2}}}\mbox{\Hypertarget{class_background_subtract_a56850081696df68b55f87b4f3d87949fa35994e745da8eb824d3808ee50ad3ebf}\label{class_background_subtract_a56850081696df68b55f87b4f3d87949fa35994e745da8eb824d3808ee50ad3ebf}} 
+ALG\+\_\+\+MOG2&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{class_background_subtract_a0b5096a3823c7af66b6d22cdd36e8fda}\label{class_background_subtract_a0b5096a3823c7af66b6d22cdd36e8fda}} 
+\index{BackgroundSubtract@{BackgroundSubtract}!BackgroundSubtract@{BackgroundSubtract}}
+\index{BackgroundSubtract@{BackgroundSubtract}!BackgroundSubtract@{BackgroundSubtract}}
+\doxysubsubsection{\texorpdfstring{BackgroundSubtract()}{BackgroundSubtract()}}
+{\footnotesize\ttfamily Background\+Subtract\+::\+Background\+Subtract (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949f}{BGFG\+\_\+\+ALGS}}}]{alg\+Type,  }\item[{int}]{channels }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_background_subtract_a0b5096a3823c7af66b6d22cdd36e8fda_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_background_subtract_a09aacb2923748c49f7cc94e3550a0c8a}\label{class_background_subtract_a09aacb2923748c49f7cc94e3550a0c8a}} 
+\index{BackgroundSubtract@{BackgroundSubtract}!````~BackgroundSubtract@{$\sim$BackgroundSubtract}}
+\index{````~BackgroundSubtract@{$\sim$BackgroundSubtract}!BackgroundSubtract@{BackgroundSubtract}}
+\doxysubsubsection{\texorpdfstring{$\sim$BackgroundSubtract()}{~BackgroundSubtract()}}
+{\footnotesize\ttfamily Background\+Subtract\+::$\sim$\+Background\+Subtract (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{class_background_subtract_a0451799e7c935951538af6a80321deaf}\label{class_background_subtract_a0451799e7c935951538af6a80321deaf}} 
+\index{BackgroundSubtract@{BackgroundSubtract}!GetImg@{GetImg}}
+\index{GetImg@{GetImg}!BackgroundSubtract@{BackgroundSubtract}}
+\doxysubsubsection{\texorpdfstring{GetImg()}{GetImg()}}
+{\footnotesize\ttfamily cv\+::\+UMat Background\+Subtract\+::\+Get\+Img (\begin{DoxyParamCaption}\item[{const cv\+::\+UMat \&}]{image }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_background_subtract_a9dacb4cc5cf41c4a37cc776a8142aecc}\label{class_background_subtract_a9dacb4cc5cf41c4a37cc776a8142aecc}} 
+\index{BackgroundSubtract@{BackgroundSubtract}!Init@{Init}}
+\index{Init@{Init}!BackgroundSubtract@{BackgroundSubtract}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily bool Background\+Subtract\+::\+Init (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{defines_8h_a9fcffa231cb8ff6a5fc4e2e2e71f3ead}{config\+\_\+t}} \&}]{config }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{class_background_subtract_a9dacb4cc5cf41c4a37cc776a8142aecc_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_background_subtract_a63b5092a3d3cf257b1ded87aa5c74fa2}\label{class_background_subtract_a63b5092a3d3cf257b1ded87aa5c74fa2}} 
+\index{BackgroundSubtract@{BackgroundSubtract}!ResetModel@{ResetModel}}
+\index{ResetModel@{ResetModel}!BackgroundSubtract@{BackgroundSubtract}}
+\doxysubsubsection{\texorpdfstring{ResetModel()}{ResetModel()}}
+{\footnotesize\ttfamily void Background\+Subtract\+::\+Reset\+Model (\begin{DoxyParamCaption}\item[{const cv\+::\+UMat \&}]{img,  }\item[{const cv\+::\+Rect \&}]{roi\+Rect }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=326pt]{class_background_subtract_a63b5092a3d3cf257b1ded87aa5c74fa2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_background_subtract_a1cd989730164da1c2523975d2ed32147}\label{class_background_subtract_a1cd989730164da1c2523975d2ed32147}} 
+\index{BackgroundSubtract@{BackgroundSubtract}!Subtract@{Subtract}}
+\index{Subtract@{Subtract}!BackgroundSubtract@{BackgroundSubtract}}
+\doxysubsubsection{\texorpdfstring{Subtract()}{Subtract()}}
+{\footnotesize\ttfamily void Background\+Subtract\+::\+Subtract (\begin{DoxyParamCaption}\item[{const cv\+::\+UMat \&}]{image,  }\item[{cv\+::\+UMat \&}]{foreground }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=326pt]{class_background_subtract_a1cd989730164da1c2523975d2ed32147_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{class_background_subtract_a3d569052b6954fa87f04a0aa8a970f97}\label{class_background_subtract_a3d569052b6954fa87f04a0aa8a970f97}} 
+\index{BackgroundSubtract@{BackgroundSubtract}!m\_algType@{m\_algType}}
+\index{m\_algType@{m\_algType}!BackgroundSubtract@{BackgroundSubtract}}
+\doxysubsubsection{\texorpdfstring{m\_algType}{m\_algType}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949f}{BGFG\+\_\+\+ALGS}} Background\+Subtract\+::m\+\_\+alg\+Type = BGFG\+\_\+\+ALGS\+::\+ALG\+\_\+\+MOG2}
+
+\mbox{\Hypertarget{class_background_subtract_a676897a571788e0fee84d568bc68caf0}\label{class_background_subtract_a676897a571788e0fee84d568bc68caf0}} 
+\index{BackgroundSubtract@{BackgroundSubtract}!m\_channels@{m\_channels}}
+\index{m\_channels@{m\_channels}!BackgroundSubtract@{BackgroundSubtract}}
+\doxysubsubsection{\texorpdfstring{m\_channels}{m\_channels}}
+{\footnotesize\ttfamily int Background\+Subtract\+::m\+\_\+channels = 1}
+
+\mbox{\Hypertarget{class_background_subtract_a80782a38138a430437095f625603e599}\label{class_background_subtract_a80782a38138a430437095f625603e599}} 
+\index{BackgroundSubtract@{BackgroundSubtract}!m\_modelOCV@{m\_modelOCV}}
+\index{m\_modelOCV@{m\_modelOCV}!BackgroundSubtract@{BackgroundSubtract}}
+\doxysubsubsection{\texorpdfstring{m\_modelOCV}{m\_modelOCV}}
+{\footnotesize\ttfamily cv\+::\+Ptr$<$cv\+::\+Background\+Subtractor$>$ Background\+Subtract\+::m\+\_\+model\+OCV\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_background_subtract_a56275963c8cacca97b97d0cde884f4c1}\label{class_background_subtract_a56275963c8cacca97b97d0cde884f4c1}} 
+\index{BackgroundSubtract@{BackgroundSubtract}!m\_modelSuBSENSE@{m\_modelSuBSENSE}}
+\index{m\_modelSuBSENSE@{m\_modelSuBSENSE}!BackgroundSubtract@{BackgroundSubtract}}
+\doxysubsubsection{\texorpdfstring{m\_modelSuBSENSE}{m\_modelSuBSENSE}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{class_background_subtractor_l_b_s_p}{Background\+Subtractor\+LBSP}}$>$ Background\+Subtract\+::m\+\_\+model\+Su\+BSENSE\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_background_subtract_a57c251abeed9a2c73a3c97d0f7f8b527}\label{class_background_subtract_a57c251abeed9a2c73a3c97d0f7f8b527}} 
+\index{BackgroundSubtract@{BackgroundSubtract}!m\_modelVibe@{m\_modelVibe}}
+\index{m\_modelVibe@{m\_modelVibe}!BackgroundSubtract@{BackgroundSubtract}}
+\doxysubsubsection{\texorpdfstring{m\_modelVibe}{m\_modelVibe}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classvibe_1_1_v_i_b_e}{vibe\+::\+VIBE}}$>$ Background\+Subtract\+::m\+\_\+model\+Vibe\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_background_subtract_a5d49feceec4ef7def459300ebcc00f1e}\label{class_background_subtract_a5d49feceec4ef7def459300ebcc00f1e}} 
+\index{BackgroundSubtract@{BackgroundSubtract}!m\_rawForeground@{m\_rawForeground}}
+\index{m\_rawForeground@{m\_rawForeground}!BackgroundSubtract@{BackgroundSubtract}}
+\doxysubsubsection{\texorpdfstring{m\_rawForeground}{m\_rawForeground}}
+{\footnotesize\ttfamily cv\+::\+UMat Background\+Subtract\+::m\+\_\+raw\+Foreground\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/\mbox{\hyperlink{_background_subtract_8h}{Background\+Subtract.\+h}}\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/\mbox{\hyperlink{_background_subtract_8cpp}{Background\+Subtract.\+cpp}}\end{DoxyCompactItemize}

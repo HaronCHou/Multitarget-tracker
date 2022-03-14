@@ -1,0 +1,2828 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: D:/zhr_files/Multitarget-tracker-master/src/Detector/darknet/src/gemm.c 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">My Project
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_4c3458e0ccdb4c3720723c1caa1aaa1c.html">zhr_files</a></li><li class="navelem"><a class="el" href="dir_5a8d4bff745a16410b5074d3583a347e.html">Multitarget-tracker-master</a></li><li class="navelem"><a class="el" href="dir_46a27ab0460a6f8f8d12d2f44f38bf6b.html">src</a></li><li class="navelem"><a class="el" href="dir_458a7b7bb24e4af0790226fff519699f.html">Detector</a></li><li class="navelem"><a class="el" href="dir_30d5c7ca63d0957fa3fc1828f81516c9.html">darknet</a></li><li class="navelem"><a class="el" href="dir_87c8877901facfda8fbda37bca313156.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">宏定义</a> &#124;
+<a href="#func-members">函数</a> &#124;
+<a href="#var-members">变量</a>  </div>
+  <div class="headertitle"><div class="title">gemm.c 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="gemm_8h_source.html">gemm.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="utils_8h_source.html">utils.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="im2col_8h_source.html">im2col.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="dark__cuda_8h_source.html">dark_cuda.h</a>&quot;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;math.h&gt;</code><br />
+<code>#include &lt;float.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+gemm.c 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="gemm_8c__incl.png" border="0" usemap="#a_d_1_2zhr__files_2_multitarget-tracker-master_2src_2_detector_2darknet_2src_2gemm_8c" alt=""/></div>
+<map name="a_d_1_2zhr__files_2_multitarget-tracker-master_2src_2_detector_2darknet_2src_2gemm_8c" id="a_d_1_2zhr__files_2_multitarget-tracker-master_2src_2_detector_2darknet_2src_2gemm_8c">
+<area shape="rect" title=" " alt="" coords="210,5,395,61"/>
+<area shape="rect" href="gemm_8h.html" title=" " alt="" coords="436,109,505,136"/>
+<area shape="rect" title=" " alt="" coords="128,408,192,435"/>
+<area shape="rect" title=" " alt="" coords="43,408,104,435"/>
+<area shape="rect" title=" " alt="" coords="217,408,282,435"/>
+<area shape="rect" title=" " alt="" coords="611,408,677,435"/>
+<area shape="rect" href="dark__cuda_8h.html" title=" " alt="" coords="347,259,440,285"/>
+<area shape="rect" title=" " alt="" coords="515,259,578,285"/>
+<area shape="rect" href="utils_8h.html" title=" " alt="" coords="203,259,261,285"/>
+<area shape="rect" href="im2col_8h.html" title=" " alt="" coords="311,109,382,136"/>
+<area shape="rect" title=" " alt="" coords="762,109,819,136"/>
+<area shape="rect" href="activations_8h.html" title=" " alt="" coords="439,184,534,211"/>
+<area shape="rect" title=" " alt="" coords="347,184,415,211"/>
+<area shape="rect" href="darknet_8h.html" title=" " alt="" coords="369,333,445,360"/>
+<area shape="rect" title=" " alt="" coords="307,408,376,435"/>
+<area shape="rect" href="pthread_8h.html" title=" " alt="" coords="401,408,477,435"/>
+<area shape="rect" title=" " alt="" coords="107,483,165,509"/>
+<area shape="rect" title=" " alt="" coords="337,483,401,509"/>
+<area shape="rect" title=" " alt="" coords="443,557,506,584"/>
+<area shape="rect" href="sched_8h.html" title=" " alt="" coords="477,483,545,509"/>
+<area shape="rect" href="list_8h.html" title=" " alt="" coords="293,333,344,360"/>
+<area shape="rect" title=" " alt="" coords="195,333,269,360"/>
+</map>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+宏定义</h2></td></tr>
+<tr class="memitem:a23261f4c4625431d67806894a051358a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a23261f4c4625431d67806894a051358a">TILE_M</a>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:a23261f4c4625431d67806894a051358a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a456fc54c7318b28b4ffd09661879be22"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a456fc54c7318b28b4ffd09661879be22">TILE_N</a>&#160;&#160;&#160;16</td></tr>
+<tr class="separator:a456fc54c7318b28b4ffd09661879be22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d0423119da710f17613afc56295a58f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a7d0423119da710f17613afc56295a58f">TILE_K</a>&#160;&#160;&#160;16</td></tr>
+<tr class="separator:a7d0423119da710f17613afc56295a58f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc8952dcb998379e93d195bb7e7c6330"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#acc8952dcb998379e93d195bb7e7c6330">PUT_IN_REGISTER</a>&#160;&#160;&#160;register</td></tr>
+<tr class="separator:acc8952dcb998379e93d195bb7e7c6330"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c82d0dbfe1c362b02510494287bdffa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a1c82d0dbfe1c362b02510494287bdffa">swap</a>(a0,  a1,  j,  m)&#160;&#160;&#160;t = (a0 ^ (a1 &gt;&gt;j)) &amp; m; a0 = a0 ^ t; a1 = a1 ^ (t &lt;&lt; j);</td></tr>
+<tr class="separator:a1c82d0dbfe1c362b02510494287bdffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:a39304cbcf3858c9e2416ef1d1cf3879f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a39304cbcf3858c9e2416ef1d1cf3879f">gemm_bin</a> (int M, int N, int K, float ALPHA, char *A, int lda, float *B, int ldb, float *C, int ldc)</td></tr>
+<tr class="separator:a39304cbcf3858c9e2416ef1d1cf3879f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a838e03f82a5b4e5e97b1ab0b660190a2"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a838e03f82a5b4e5e97b1ab0b660190a2">random_matrix</a> (int rows, int cols)</td></tr>
+<tr class="separator:a838e03f82a5b4e5e97b1ab0b660190a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abec5c296a1f7f8fb79e08ca2c1ab8c53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#abec5c296a1f7f8fb79e08ca2c1ab8c53">time_random_matrix</a> (int TA, int TB, int m, int k, int n)</td></tr>
+<tr class="separator:abec5c296a1f7f8fb79e08ca2c1ab8c53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa240ba331e3abf53f9fca7d240322669"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#aa240ba331e3abf53f9fca7d240322669">gemm</a> (int TA, int TB, int M, int N, int K, float ALPHA, float *A, int lda, float *B, int ldb, float BETA, float *C, int ldc)</td></tr>
+<tr class="separator:aa240ba331e3abf53f9fca7d240322669"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abeaa8b11b9d81279309458f72eb74034"><td class="memItemLeft" align="right" valign="top">static unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#abeaa8b11b9d81279309458f72eb74034">xnor</a> (unsigned char a, unsigned char b)</td></tr>
+<tr class="separator:abeaa8b11b9d81279309458f72eb74034"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6804acd44d0e81cf43b13df934e7df97"><td class="memItemLeft" align="right" valign="top">static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a6804acd44d0e81cf43b13df934e7df97">get_bit_int32</a> (uint32_t const *const src, <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> index)</td></tr>
+<tr class="separator:a6804acd44d0e81cf43b13df934e7df97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a896be9234090e9f1735fee9af7a8b234"><td class="memItemLeft" align="right" valign="top">static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a896be9234090e9f1735fee9af7a8b234">xnor_int32</a> (uint32_t a, uint32_t b)</td></tr>
+<tr class="separator:a896be9234090e9f1735fee9af7a8b234"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a452212cd4d732e06954bedd7ef61a4e2"><td class="memItemLeft" align="right" valign="top">static uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a452212cd4d732e06954bedd7ef61a4e2">xnor_int64</a> (uint64_t a, uint64_t b)</td></tr>
+<tr class="separator:a452212cd4d732e06954bedd7ef61a4e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a559a5f78af60057594d6d02d167c1655"><td class="memItemLeft" align="right" valign="top">static uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a559a5f78af60057594d6d02d167c1655">fill_bit_int32</a> (char src)</td></tr>
+<tr class="separator:a559a5f78af60057594d6d02d167c1655"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51ff62d526b44b6c5614ffb970d07983"><td class="memItemLeft" align="right" valign="top">static uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a51ff62d526b44b6c5614ffb970d07983">fill_bit_int64</a> (char src)</td></tr>
+<tr class="separator:a51ff62d526b44b6c5614ffb970d07983"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9012ac882711b9d6093dda2b945db0a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a9012ac882711b9d6093dda2b945db0a5">binary_int32_printf</a> (uint32_t src)</td></tr>
+<tr class="separator:a9012ac882711b9d6093dda2b945db0a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab434a3a87c6e52ee27f727fa10aca4bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#ab434a3a87c6e52ee27f727fa10aca4bc">binary_int64_printf</a> (uint64_t src)</td></tr>
+<tr class="separator:ab434a3a87c6e52ee27f727fa10aca4bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ddca840e90f8d291c6f5a82aaa033c3"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a0ddca840e90f8d291c6f5a82aaa033c3">reverse_8_bit</a> (uint8_t a)</td></tr>
+<tr class="separator:a0ddca840e90f8d291c6f5a82aaa033c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad58a7359f42c75b3b6cea15e9d774ec3"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#ad58a7359f42c75b3b6cea15e9d774ec3">reverse_32_bit</a> (uint32_t a)</td></tr>
+<tr class="separator:ad58a7359f42c75b3b6cea15e9d774ec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cfeb05b46cd39b63faa6b7c40ecbcfc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a9cfeb05b46cd39b63faa6b7c40ecbcfc">transpose32_optimized</a> (uint32_t A[32])</td></tr>
+<tr class="separator:a9cfeb05b46cd39b63faa6b7c40ecbcfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0625444c982324c1a858a342ff8abc27"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a0625444c982324c1a858a342ff8abc27">transpose_32x32_bits_reversed_diagonale</a> (uint32_t *A, uint32_t *B, int m, int n)</td></tr>
+<tr class="separator:a0625444c982324c1a858a342ff8abc27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0969d90d3adc585365d6626b66a12472"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a0969d90d3adc585365d6626b66a12472">transpose_8x8_bits_my</a> (unsigned char *A, unsigned char *B, int lda, int ldb)</td></tr>
+<tr class="separator:a0969d90d3adc585365d6626b66a12472"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a241f8e502958733a9fdf08fd7e9e6280"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a241f8e502958733a9fdf08fd7e9e6280">reverse_byte_1</a> (char a)</td></tr>
+<tr class="separator:a241f8e502958733a9fdf08fd7e9e6280"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa360afe6714233e67446b62fc2709ed0"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#aa360afe6714233e67446b62fc2709ed0">reverse_byte</a> (unsigned char a)</td></tr>
+<tr class="separator:aa360afe6714233e67446b62fc2709ed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5a5481c1029c201444e5d56715f7f9f"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#ac5a5481c1029c201444e5d56715f7f9f">reverse_byte_3</a> (unsigned char n)</td></tr>
+<tr class="separator:ac5a5481c1029c201444e5d56715f7f9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bd62b90ad64e32ec8d15370ba0a61a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a8bd62b90ad64e32ec8d15370ba0a61a5">transpose8rS32_reversed_diagonale</a> (unsigned char *A, unsigned char *B, int m, int n)</td></tr>
+<tr class="separator:a8bd62b90ad64e32ec8d15370ba0a61a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc47efcfe9f9c9be4a2ae3886591be31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#abc47efcfe9f9c9be4a2ae3886591be31">transpose_bin</a> (uint32_t *A, uint32_t *B, const int n, const int m, const int lda, const int ldb, const int block_size)</td></tr>
+<tr class="separator:abc47efcfe9f9c9be4a2ae3886591be31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e1908fd3f6cbc7da917f2e93e94e6d1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a8e1908fd3f6cbc7da917f2e93e94e6d1">is_avx</a> ()</td></tr>
+<tr class="separator:a8e1908fd3f6cbc7da917f2e93e94e6d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e3d4e108499dd6ea33dab80eb98d861"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a4e3d4e108499dd6ea33dab80eb98d861">is_fma_avx2</a> ()</td></tr>
+<tr class="separator:a4e3d4e108499dd6ea33dab80eb98d861"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14ab4a1fb811893dc00f63d5a38cd865"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a14ab4a1fb811893dc00f63d5a38cd865">gemm_nn</a> (int M, int N, int K, float ALPHA, float *A, int lda, float *B, int ldb, float *C, int ldc)</td></tr>
+<tr class="separator:a14ab4a1fb811893dc00f63d5a38cd865"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ae7e78a9f93ac585922cfa288bd06e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a0ae7e78a9f93ac585922cfa288bd06e4">gemm_nn_fast</a> (int M, int N, int K, float ALPHA, float *A, int lda, float *B, int ldb, float *C, int ldc)</td></tr>
+<tr class="separator:a0ae7e78a9f93ac585922cfa288bd06e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bcaf2f46868b70329a3cf194b9db637"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a4bcaf2f46868b70329a3cf194b9db637">gemm_nn_bin_32bit_packed</a> (int M, int N, int K, float ALPHA, uint32_t *A, int lda, uint32_t *B, int ldb, float *C, int ldc, float *mean_arr)</td></tr>
+<tr class="separator:a4bcaf2f46868b70329a3cf194b9db637"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e32a16f765640082ee369153bb7d74c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a4e32a16f765640082ee369153bb7d74c">convolution_2d</a> (int w, int h, int ksize, int n, int c, int pad, int stride, float *weights, float *input, float *output, float *mean)</td></tr>
+<tr class="separator:a4e32a16f765640082ee369153bb7d74c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e0dda182a634df98155400af97f887f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a4e0dda182a634df98155400af97f887f">gemm_nn_custom_bin_mean_transposed</a> (int M, int N, int K, float ALPHA_UNUSED, unsigned char *A, int lda, unsigned char *B, int ldb, float *C, int ldc, float *mean_arr)</td></tr>
+<tr class="separator:a4e0dda182a634df98155400af97f887f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afee3277990045539e36e35ba66ae995b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#afee3277990045539e36e35ba66ae995b">im2col_cpu_custom_transpose</a> (float *data_im, int channels, int height, int width, int ksize, int stride, int pad, float *data_col, int ldb_align)</td></tr>
+<tr class="separator:afee3277990045539e36e35ba66ae995b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af39887e6db1b479406fc6464636f2d05"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#af39887e6db1b479406fc6464636f2d05">im2col_cpu_custom</a> (float *data_im, int channels, int height, int width, int ksize, int stride, int pad, float *data_col)</td></tr>
+<tr class="separator:af39887e6db1b479406fc6464636f2d05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a3439a365c938d672a2dc39901f155f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a6a3439a365c938d672a2dc39901f155f">im2col_cpu_custom_bin</a> (float *data_im, int channels, int height, int width, int ksize, int stride, int pad, float *data_col, int bit_align)</td></tr>
+<tr class="separator:a6a3439a365c938d672a2dc39901f155f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a3e1c2586fda33b9cd5a44fd59f43c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a0a3e1c2586fda33b9cd5a44fd59f43c1">activate_array_cpu_custom</a> (float *<a class="el" href="utils_8c.html#a676e0da0ef83bbbdf42538e54b97506b">x</a>, const int n, const <a class="el" href="darknet_8h.html#aea09b678fab8ab931902378cbbd79032">ACTIVATION</a> a)</td></tr>
+<tr class="separator:a0a3e1c2586fda33b9cd5a44fd59f43c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2faa7ba6073e78aaac43c1487dadfd7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#af2faa7ba6073e78aaac43c1487dadfd7">float_to_bit</a> (float *src, unsigned char *dst, <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> size)</td></tr>
+<tr class="separator:af2faa7ba6073e78aaac43c1487dadfd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc3a6afe6759faa4fecf72b0c141512f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#acc3a6afe6759faa4fecf72b0c141512f">transpose_scalar_block</a> (float *A, float *B, const int lda, const int ldb, const int block_size)</td></tr>
+<tr class="separator:acc3a6afe6759faa4fecf72b0c141512f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5106fb6ec72b4bcc07e02d76e21d6b37"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a5106fb6ec72b4bcc07e02d76e21d6b37">transpose_block_SSE4x4</a> (float *A, float *B, const int n, const int m, const int lda, const int ldb, const int block_size)</td></tr>
+<tr class="separator:a5106fb6ec72b4bcc07e02d76e21d6b37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afece54d7949918bb0306af73d2ad595e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#afece54d7949918bb0306af73d2ad595e">forward_maxpool_layer_avx</a> (float *src, float *dst, int *indexes, int size, int w, int h, int out_w, int out_h, int c, int pad, int stride, int batch)</td></tr>
+<tr class="separator:afece54d7949918bb0306af73d2ad595e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aa7e1556948e534866527878b8cfe9e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a6aa7e1556948e534866527878b8cfe9e">repack_input</a> (float *input, float *re_packed_input, int w, int h, int c)</td></tr>
+<tr class="separator:a6aa7e1556948e534866527878b8cfe9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20b21acd1fd344065eccc4e3517f2ad3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a20b21acd1fd344065eccc4e3517f2ad3">transpose_uint32</a> (uint32_t *src, uint32_t *dst, int src_h, int src_w, int src_align, int dst_align)</td></tr>
+<tr class="separator:a20b21acd1fd344065eccc4e3517f2ad3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d13ac0e25be1b28329490be38c82475"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a2d13ac0e25be1b28329490be38c82475">gemm_nn_bin_transposed_32bit_packed</a> (int M, int N, int K, float ALPHA, uint32_t *A, int lda, uint32_t *B, int ldb, float *C, int ldc, float *mean_arr)</td></tr>
+<tr class="separator:a2d13ac0e25be1b28329490be38c82475"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15ed089fe74aaa8643d01f91829815af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a15ed089fe74aaa8643d01f91829815af">convolution_repacked</a> (uint32_t *packed_input, uint32_t *packed_weights, float *output, int w, int h, int c, int n, int size, int pad, int new_lda, float *mean_arr)</td></tr>
+<tr class="separator:a15ed089fe74aaa8643d01f91829815af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37c53215a2359d80bc7738195c73e078"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a37c53215a2359d80bc7738195c73e078">gemm_nt</a> (int M, int N, int K, float ALPHA, float *A, int lda, float *B, int ldb, float *C, int ldc)</td></tr>
+<tr class="separator:a37c53215a2359d80bc7738195c73e078"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5977bc756e0987452155d6644205b5b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a5977bc756e0987452155d6644205b5b1">gemm_tn</a> (int M, int N, int K, float ALPHA, float *A, int lda, float *B, int ldb, float *C, int ldc)</td></tr>
+<tr class="separator:a5977bc756e0987452155d6644205b5b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0428aa4e1bc4de1c273ffa4df2c195b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#ac0428aa4e1bc4de1c273ffa4df2c195b">gemm_tt</a> (int M, int N, int K, float ALPHA, float *A, int lda, float *B, int ldb, float *C, int ldc)</td></tr>
+<tr class="separator:ac0428aa4e1bc4de1c273ffa4df2c195b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44c67f1aa36826c2fe8b8da5022a7ce6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a44c67f1aa36826c2fe8b8da5022a7ce6">gemm_cpu</a> (int TA, int TB, int M, int N, int K, float ALPHA, float *A, int lda, float *B, int ldb, float BETA, float *C, int ldc)</td></tr>
+<tr class="separator:a44c67f1aa36826c2fe8b8da5022a7ce6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54df6a71e616fd233c9a697ff8b9d44b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a54df6a71e616fd233c9a697ff8b9d44b">init_cpu</a> ()</td></tr>
+<tr class="separator:a54df6a71e616fd233c9a697ff8b9d44b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+变量</h2></td></tr>
+<tr class="memitem:a408b031312d60083e4230ecd62137deb"><td class="memItemLeft" align="right" valign="top">static unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gemm_8c.html#a408b031312d60083e4230ecd62137deb">lookup</a> [16]</td></tr>
+<tr class="separator:a408b031312d60083e4230ecd62137deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">宏定义说明</h2>
+<a id="acc8952dcb998379e93d195bb7e7c6330" name="acc8952dcb998379e93d195bb7e7c6330"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc8952dcb998379e93d195bb7e7c6330">&#9670;&nbsp;</a></span>PUT_IN_REGISTER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PUT_IN_REGISTER&#160;&#160;&#160;register</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1c82d0dbfe1c362b02510494287bdffa" name="a1c82d0dbfe1c362b02510494287bdffa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c82d0dbfe1c362b02510494287bdffa">&#9670;&nbsp;</a></span>swap</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define swap</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a0, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">a1, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">j, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">m&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;t = (a0 ^ (a1 &gt;&gt;j)) &amp; m; a0 = a0 ^ t; a1 = a1 ^ (t &lt;&lt; j);</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7d0423119da710f17613afc56295a58f" name="a7d0423119da710f17613afc56295a58f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d0423119da710f17613afc56295a58f">&#9670;&nbsp;</a></span>TILE_K</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TILE_K&#160;&#160;&#160;16</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a23261f4c4625431d67806894a051358a" name="a23261f4c4625431d67806894a051358a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23261f4c4625431d67806894a051358a">&#9670;&nbsp;</a></span>TILE_M</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TILE_M&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a456fc54c7318b28b4ffd09661879be22" name="a456fc54c7318b28b4ffd09661879be22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a456fc54c7318b28b4ffd09661879be22">&#9670;&nbsp;</a></span>TILE_N</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TILE_N&#160;&#160;&#160;16</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">函数说明</h2>
+<a id="a0a3e1c2586fda33b9cd5a44fd59f43c1" name="a0a3e1c2586fda33b9cd5a44fd59f43c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a3e1c2586fda33b9cd5a44fd59f43c1">&#9670;&nbsp;</a></span>activate_array_cpu_custom()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void activate_array_cpu_custom </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="darknet_8h.html#aea09b678fab8ab931902378cbbd79032">ACTIVATION</a>&#160;</td>
+          <td class="paramname"><em>a</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="gemm_8c_a0a3e1c2586fda33b9cd5a44fd59f43c1_cgraph.png" border="0" usemap="#agemm_8c_a0a3e1c2586fda33b9cd5a44fd59f43c1_cgraph" alt=""/></div>
+<map name="agemm_8c_a0a3e1c2586fda33b9cd5a44fd59f43c1_cgraph" id="agemm_8c_a0a3e1c2586fda33b9cd5a44fd59f43c1_cgraph">
+<area shape="rect" title=" " alt="" coords="5,353,136,394"/>
+<area shape="rect" href="activations_8c.html#a031d574d016f6a31eae5bbddfbac3dc5" title=" " alt="" coords="184,360,251,387"/>
+<area shape="rect" href="activations_8h.html#acce967bf6526bd7994919b94b5b3af14" title=" " alt="" coords="311,5,402,32"/>
+<area shape="rect" href="activations_8h.html#aebcbfa6834226f3a7b2cb8beb611f8a9" title=" " alt="" coords="308,56,405,83"/>
+<area shape="rect" href="activations_8h.html#ae2948bccc35ed0c3387f7d3c8ec79787" title=" " alt="" coords="299,107,415,133"/>
+<area shape="rect" href="activations_8h.html#a5a6368990806124d3250b333ed565b4a" title=" " alt="" coords="305,157,409,184"/>
+<area shape="rect" href="activations_8h.html#acc9d7e9215ddc5c6a01dcafb3d796e27" title=" " alt="" coords="306,208,407,235"/>
+<area shape="rect" href="activations_8h.html#a1f5850078bfdb4497930848b0f2038e6" title=" " alt="" coords="305,259,409,285"/>
+<area shape="rect" href="activations_8h.html#a44310fdff610a48bdf99bb1c77802660" title=" " alt="" coords="305,309,409,336"/>
+<area shape="rect" href="activations_8h.html#a851af6d779ff52c59d910f3692565361" title=" " alt="" coords="299,360,414,387"/>
+<area shape="rect" href="activations_8h.html#a6b8b9d9498305d2ef7000dd6a1f818bc" title=" " alt="" coords="308,411,405,437"/>
+<area shape="rect" href="activations_8h.html#a86e53d56302efa6b39c8728066ceb14a" title=" " alt="" coords="305,461,408,488"/>
+<area shape="rect" href="activations_8h.html#a4e3cc496939c8e1b87a15de3c87df807" title=" " alt="" coords="308,512,405,539"/>
+<area shape="rect" href="activations_8h.html#a6fb9a058235cf6c731a6eb3ee8616fd7" title=" " alt="" coords="309,563,404,589"/>
+<area shape="rect" href="activations_8h.html#a2d765810ec6ef57f66f63defccd9e8bb" title=" " alt="" coords="308,613,405,640"/>
+<area shape="rect" href="activations_8h.html#aac25575dac41b794e1f4fff6ad56e6c7" title=" " alt="" coords="307,664,406,691"/>
+<area shape="rect" href="activations_8h.html#abe8175839177b65bd6b33c32200f348c" title=" " alt="" coords="307,715,406,741"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a9012ac882711b9d6093dda2b945db0a5" name="a9012ac882711b9d6093dda2b945db0a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9012ac882711b9d6093dda2b945db0a5">&#9670;&nbsp;</a></span>binary_int32_printf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void binary_int32_printf </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>src</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab434a3a87c6e52ee27f727fa10aca4bc" name="ab434a3a87c6e52ee27f727fa10aca4bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab434a3a87c6e52ee27f727fa10aca4bc">&#9670;&nbsp;</a></span>binary_int64_printf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void binary_int64_printf </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>src</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4e32a16f765640082ee369153bb7d74c" name="a4e32a16f765640082ee369153bb7d74c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e32a16f765640082ee369153bb7d74c">&#9670;&nbsp;</a></span>convolution_2d()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void convolution_2d </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ksize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pad</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>stride</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>weights</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>output</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>mean</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="gemm_8c_a4e32a16f765640082ee369153bb7d74c_cgraph.png" border="0" usemap="#agemm_8c_a4e32a16f765640082ee369153bb7d74c_cgraph" alt=""/></div>
+<map name="agemm_8c_a4e32a16f765640082ee369153bb7d74c_cgraph" id="agemm_8c_a4e32a16f765640082ee369153bb7d74c_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,112,32"/>
+<area shape="rect" href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867" title=" " alt="" coords="160,5,243,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a15ed089fe74aaa8643d01f91829815af" name="a15ed089fe74aaa8643d01f91829815af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15ed089fe74aaa8643d01f91829815af">&#9670;&nbsp;</a></span>convolution_repacked()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void convolution_repacked </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>packed_input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>packed_weights</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>output</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pad</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>new_lda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>mean_arr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="gemm_8c_a15ed089fe74aaa8643d01f91829815af_cgraph.png" border="0" usemap="#agemm_8c_a15ed089fe74aaa8643d01f91829815af_cgraph" alt=""/></div>
+<map name="agemm_8c_a15ed089fe74aaa8643d01f91829815af_cgraph" id="agemm_8c_a15ed089fe74aaa8643d01f91829815af_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,152,32"/>
+<area shape="rect" href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867" title=" " alt="" coords="200,5,283,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a559a5f78af60057594d6d02d167c1655" name="a559a5f78af60057594d6d02d167c1655"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a559a5f78af60057594d6d02d167c1655">&#9670;&nbsp;</a></span>fill_bit_int32()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static uint32_t fill_bit_int32 </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>src</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a51ff62d526b44b6c5614ffb970d07983" name="a51ff62d526b44b6c5614ffb970d07983"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51ff62d526b44b6c5614ffb970d07983">&#9670;&nbsp;</a></span>fill_bit_int64()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static uint64_t fill_bit_int64 </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>src</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af2faa7ba6073e78aaac43c1487dadfd7" name="af2faa7ba6073e78aaac43c1487dadfd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2faa7ba6073e78aaac43c1487dadfd7">&#9670;&nbsp;</a></span>float_to_bit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void float_to_bit </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>dst</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afece54d7949918bb0306af73d2ad595e" name="afece54d7949918bb0306af73d2ad595e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afece54d7949918bb0306af73d2ad595e">&#9670;&nbsp;</a></span>forward_maxpool_layer_avx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void forward_maxpool_layer_avx </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>dst</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>indexes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>out_w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>out_h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pad</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>stride</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>batch</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="gemm_8c_afece54d7949918bb0306af73d2ad595e_cgraph.png" border="0" usemap="#agemm_8c_afece54d7949918bb0306af73d2ad595e_cgraph" alt=""/></div>
+<map name="agemm_8c_afece54d7949918bb0306af73d2ad595e_cgraph" id="agemm_8c_afece54d7949918bb0306af73d2ad595e_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,185,32"/>
+<area shape="rect" href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867" title=" " alt="" coords="233,5,316,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa240ba331e3abf53f9fca7d240322669" name="aa240ba331e3abf53f9fca7d240322669"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa240ba331e3abf53f9fca7d240322669">&#9670;&nbsp;</a></span>gemm()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gemm </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>TA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>TB</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>M</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>N</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>K</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>ALPHA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>lda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>BETA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>C</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="gemm_8c_aa240ba331e3abf53f9fca7d240322669_cgraph.png" border="0" usemap="#agemm_8c_aa240ba331e3abf53f9fca7d240322669_cgraph" alt=""/></div>
+<map name="agemm_8c_aa240ba331e3abf53f9fca7d240322669_cgraph" id="agemm_8c_aa240ba331e3abf53f9fca7d240322669_cgraph">
+<area shape="rect" title=" " alt="" coords="5,157,64,184"/>
+<area shape="rect" href="gemm_8c.html#a44c67f1aa36826c2fe8b8da5022a7ce6" title=" " alt="" coords="112,157,199,184"/>
+<area shape="rect" href="gemm_8c.html#a14ab4a1fb811893dc00f63d5a38cd865" title=" " alt="" coords="261,5,339,32"/>
+<area shape="rect" href="gemm_8c.html#a0ae7e78a9f93ac585922cfa288bd06e4" title=" " alt="" coords="247,56,353,83"/>
+<area shape="rect" href="gemm_8c.html#a37c53215a2359d80bc7738195c73e078" title=" " alt="" coords="262,107,338,133"/>
+<area shape="rect" href="gemm_8c.html#a5977bc756e0987452155d6644205b5b1" title=" " alt="" coords="262,157,338,184"/>
+<area shape="rect" href="gemm_8c.html#ac0428aa4e1bc4de1c273ffa4df2c195b" title=" " alt="" coords="263,208,337,235"/>
+<area shape="rect" href="gemm_8c.html#a8e1908fd3f6cbc7da917f2e93e94e6d1" title=" " alt="" coords="271,259,329,285"/>
+<area shape="rect" href="gemm_8c.html#a4e3d4e108499dd6ea33dab80eb98d861" title=" " alt="" coords="253,309,347,336"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a39304cbcf3858c9e2416ef1d1cf3879f" name="a39304cbcf3858c9e2416ef1d1cf3879f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39304cbcf3858c9e2416ef1d1cf3879f">&#9670;&nbsp;</a></span>gemm_bin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gemm_bin </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>M</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>N</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>K</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>ALPHA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>lda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>C</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a44c67f1aa36826c2fe8b8da5022a7ce6" name="a44c67f1aa36826c2fe8b8da5022a7ce6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44c67f1aa36826c2fe8b8da5022a7ce6">&#9670;&nbsp;</a></span>gemm_cpu()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gemm_cpu </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>TA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>TB</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>M</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>N</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>K</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>ALPHA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>lda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>BETA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>C</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="gemm_8c_a44c67f1aa36826c2fe8b8da5022a7ce6_cgraph.png" border="0" usemap="#agemm_8c_a44c67f1aa36826c2fe8b8da5022a7ce6_cgraph" alt=""/></div>
+<map name="agemm_8c_a44c67f1aa36826c2fe8b8da5022a7ce6_cgraph" id="agemm_8c_a44c67f1aa36826c2fe8b8da5022a7ce6_cgraph">
+<area shape="rect" title=" " alt="" coords="5,157,92,184"/>
+<area shape="rect" href="gemm_8c.html#a14ab4a1fb811893dc00f63d5a38cd865" title=" " alt="" coords="154,5,233,32"/>
+<area shape="rect" href="gemm_8c.html#a0ae7e78a9f93ac585922cfa288bd06e4" title=" " alt="" coords="140,56,247,83"/>
+<area shape="rect" href="gemm_8c.html#a37c53215a2359d80bc7738195c73e078" title=" " alt="" coords="155,107,231,133"/>
+<area shape="rect" href="gemm_8c.html#a5977bc756e0987452155d6644205b5b1" title=" " alt="" coords="155,157,231,184"/>
+<area shape="rect" href="gemm_8c.html#ac0428aa4e1bc4de1c273ffa4df2c195b" title=" " alt="" coords="157,208,230,235"/>
+<area shape="rect" href="gemm_8c.html#a8e1908fd3f6cbc7da917f2e93e94e6d1" title=" " alt="" coords="164,259,223,285"/>
+<area shape="rect" href="gemm_8c.html#a4e3d4e108499dd6ea33dab80eb98d861" title=" " alt="" coords="147,309,240,336"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a14ab4a1fb811893dc00f63d5a38cd865" name="a14ab4a1fb811893dc00f63d5a38cd865"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14ab4a1fb811893dc00f63d5a38cd865">&#9670;&nbsp;</a></span>gemm_nn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gemm_nn </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>M</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>N</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>K</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>ALPHA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>lda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>C</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4bcaf2f46868b70329a3cf194b9db637" name="a4bcaf2f46868b70329a3cf194b9db637"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bcaf2f46868b70329a3cf194b9db637">&#9670;&nbsp;</a></span>gemm_nn_bin_32bit_packed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gemm_nn_bin_32bit_packed </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>M</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>N</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>K</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>ALPHA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>lda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>C</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>mean_arr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2d13ac0e25be1b28329490be38c82475" name="a2d13ac0e25be1b28329490be38c82475"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d13ac0e25be1b28329490be38c82475">&#9670;&nbsp;</a></span>gemm_nn_bin_transposed_32bit_packed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gemm_nn_bin_transposed_32bit_packed </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>M</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>N</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>K</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>ALPHA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>lda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>C</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>mean_arr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4e0dda182a634df98155400af97f887f" name="a4e0dda182a634df98155400af97f887f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e0dda182a634df98155400af97f887f">&#9670;&nbsp;</a></span>gemm_nn_custom_bin_mean_transposed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gemm_nn_custom_bin_mean_transposed </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>M</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>N</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>K</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>ALPHA_UNUSED</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>lda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>C</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>mean_arr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="gemm_8c_a4e0dda182a634df98155400af97f887f_cgraph.png" border="0" usemap="#agemm_8c_a4e0dda182a634df98155400af97f887f_cgraph" alt=""/></div>
+<map name="agemm_8c_a4e0dda182a634df98155400af97f887f_cgraph" id="agemm_8c_a4e0dda182a634df98155400af97f887f_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,159,47"/>
+<area shape="rect" href="gemm_8c.html#a452212cd4d732e06954bedd7ef61a4e2" title=" " alt="" coords="207,13,289,39"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a0ae7e78a9f93ac585922cfa288bd06e4" name="a0ae7e78a9f93ac585922cfa288bd06e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ae7e78a9f93ac585922cfa288bd06e4">&#9670;&nbsp;</a></span>gemm_nn_fast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gemm_nn_fast </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>M</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>N</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>K</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>ALPHA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>lda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>C</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a37c53215a2359d80bc7738195c73e078" name="a37c53215a2359d80bc7738195c73e078"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37c53215a2359d80bc7738195c73e078">&#9670;&nbsp;</a></span>gemm_nt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gemm_nt </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>M</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>N</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>K</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>ALPHA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>lda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>C</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5977bc756e0987452155d6644205b5b1" name="a5977bc756e0987452155d6644205b5b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5977bc756e0987452155d6644205b5b1">&#9670;&nbsp;</a></span>gemm_tn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gemm_tn </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>M</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>N</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>K</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>ALPHA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>lda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>C</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac0428aa4e1bc4de1c273ffa4df2c195b" name="ac0428aa4e1bc4de1c273ffa4df2c195b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0428aa4e1bc4de1c273ffa4df2c195b">&#9670;&nbsp;</a></span>gemm_tt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gemm_tt </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>M</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>N</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>K</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>ALPHA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>lda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>C</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6804acd44d0e81cf43b13df934e7df97" name="a6804acd44d0e81cf43b13df934e7df97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6804acd44d0e81cf43b13df934e7df97">&#9670;&nbsp;</a></span>get_bit_int32()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static uint32_t get_bit_int32 </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t const *const&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af39887e6db1b479406fc6464636f2d05" name="af39887e6db1b479406fc6464636f2d05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af39887e6db1b479406fc6464636f2d05">&#9670;&nbsp;</a></span>im2col_cpu_custom()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void im2col_cpu_custom </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>data_im</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>channels</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ksize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>stride</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pad</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>data_col</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="gemm_8c_af39887e6db1b479406fc6464636f2d05_cgraph.png" border="0" usemap="#agemm_8c_af39887e6db1b479406fc6464636f2d05_cgraph" alt=""/></div>
+<map name="agemm_8c_af39887e6db1b479406fc6464636f2d05_cgraph" id="agemm_8c_af39887e6db1b479406fc6464636f2d05_cgraph">
+<area shape="rect" title=" " alt="" coords="5,31,144,57"/>
+<area shape="rect" href="im2col_8c.html#a75c68e7a88c78eec8bc874ebcfb2cea2" title=" " alt="" coords="192,31,280,57"/>
+<area shape="rect" href="im2col_8c.html#a926633415d519e82388c2fbe8d1d24ed" title=" " alt="" coords="328,5,447,32"/>
+<area shape="rect" href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867" title=" " alt="" coords="346,68,429,95"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6a3439a365c938d672a2dc39901f155f" name="a6a3439a365c938d672a2dc39901f155f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a3439a365c938d672a2dc39901f155f">&#9670;&nbsp;</a></span>im2col_cpu_custom_bin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void im2col_cpu_custom_bin </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>data_im</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>channels</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ksize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>stride</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pad</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>data_col</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>bit_align</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="gemm_8c_a6a3439a365c938d672a2dc39901f155f_cgraph.png" border="0" usemap="#agemm_8c_a6a3439a365c938d672a2dc39901f155f_cgraph" alt=""/></div>
+<map name="agemm_8c_a6a3439a365c938d672a2dc39901f155f_cgraph" id="agemm_8c_a6a3439a365c938d672a2dc39901f155f_cgraph">
+<area shape="rect" title=" " alt="" coords="5,56,168,83"/>
+<area shape="rect" href="im2col_8c.html#a926633415d519e82388c2fbe8d1d24ed" title=" " alt="" coords="216,5,335,32"/>
+<area shape="rect" href="gemm_8h.html#aef0960a9c469e77ee2c6ea982a3eddff" title=" " alt="" coords="245,56,306,83"/>
+<area shape="rect" href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867" title=" " alt="" coords="234,107,317,133"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="afee3277990045539e36e35ba66ae995b" name="afee3277990045539e36e35ba66ae995b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afee3277990045539e36e35ba66ae995b">&#9670;&nbsp;</a></span>im2col_cpu_custom_transpose()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void im2col_cpu_custom_transpose </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>data_im</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>channels</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ksize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>stride</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pad</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>data_col</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldb_align</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a54df6a71e616fd233c9a697ff8b9d44b" name="a54df6a71e616fd233c9a697ff8b9d44b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54df6a71e616fd233c9a697ff8b9d44b">&#9670;&nbsp;</a></span>init_cpu()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void init_cpu </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="gemm_8c_a54df6a71e616fd233c9a697ff8b9d44b_cgraph.png" border="0" usemap="#agemm_8c_a54df6a71e616fd233c9a697ff8b9d44b_cgraph" alt=""/></div>
+<map name="agemm_8c_a54df6a71e616fd233c9a697ff8b9d44b_cgraph" id="agemm_8c_a54df6a71e616fd233c9a697ff8b9d44b_cgraph">
+<area shape="rect" title=" " alt="" coords="5,31,72,57"/>
+<area shape="rect" href="gemm_8c.html#a8e1908fd3f6cbc7da917f2e93e94e6d1" title=" " alt="" coords="137,5,196,32"/>
+<area shape="rect" href="gemm_8c.html#a4e3d4e108499dd6ea33dab80eb98d861" title=" " alt="" coords="120,56,213,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a8e1908fd3f6cbc7da917f2e93e94e6d1" name="a8e1908fd3f6cbc7da917f2e93e94e6d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e1908fd3f6cbc7da917f2e93e94e6d1">&#9670;&nbsp;</a></span>is_avx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int is_avx </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4e3d4e108499dd6ea33dab80eb98d861" name="a4e3d4e108499dd6ea33dab80eb98d861"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e3d4e108499dd6ea33dab80eb98d861">&#9670;&nbsp;</a></span>is_fma_avx2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int is_fma_avx2 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a838e03f82a5b4e5e97b1ab0b660190a2" name="a838e03f82a5b4e5e97b1ab0b660190a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a838e03f82a5b4e5e97b1ab0b660190a2">&#9670;&nbsp;</a></span>random_matrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float * random_matrix </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>rows</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cols</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6aa7e1556948e534866527878b8cfe9e" name="a6aa7e1556948e534866527878b8cfe9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6aa7e1556948e534866527878b8cfe9e">&#9670;&nbsp;</a></span>repack_input()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void repack_input </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>re_packed_input</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>c</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="gemm_8c_a6aa7e1556948e534866527878b8cfe9e_cgraph.png" border="0" usemap="#agemm_8c_a6aa7e1556948e534866527878b8cfe9e_cgraph" alt=""/></div>
+<map name="agemm_8c_a6aa7e1556948e534866527878b8cfe9e_cgraph" id="agemm_8c_a6aa7e1556948e534866527878b8cfe9e_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,101,32"/>
+<area shape="rect" href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867" title=" " alt="" coords="149,5,232,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ad58a7359f42c75b3b6cea15e9d774ec3" name="ad58a7359f42c75b3b6cea15e9d774ec3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad58a7359f42c75b3b6cea15e9d774ec3">&#9670;&nbsp;</a></span>reverse_32_bit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t reverse_32_bit </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="gemm_8c_ad58a7359f42c75b3b6cea15e9d774ec3_cgraph.png" border="0" usemap="#agemm_8c_ad58a7359f42c75b3b6cea15e9d774ec3_cgraph" alt=""/></div>
+<map name="agemm_8c_ad58a7359f42c75b3b6cea15e9d774ec3_cgraph" id="agemm_8c_ad58a7359f42c75b3b6cea15e9d774ec3_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,111,32"/>
+<area shape="rect" href="gemm_8c.html#a0ddca840e90f8d291c6f5a82aaa033c3" title=" " alt="" coords="159,5,257,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a0ddca840e90f8d291c6f5a82aaa033c3" name="a0ddca840e90f8d291c6f5a82aaa033c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ddca840e90f8d291c6f5a82aaa033c3">&#9670;&nbsp;</a></span>reverse_8_bit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t reverse_8_bit </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa360afe6714233e67446b62fc2709ed0" name="aa360afe6714233e67446b62fc2709ed0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa360afe6714233e67446b62fc2709ed0">&#9670;&nbsp;</a></span>reverse_byte()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char reverse_byte </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a241f8e502958733a9fdf08fd7e9e6280" name="a241f8e502958733a9fdf08fd7e9e6280"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a241f8e502958733a9fdf08fd7e9e6280">&#9670;&nbsp;</a></span>reverse_byte_1()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char reverse_byte_1 </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>a</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac5a5481c1029c201444e5d56715f7f9f" name="ac5a5481c1029c201444e5d56715f7f9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5a5481c1029c201444e5d56715f7f9f">&#9670;&nbsp;</a></span>reverse_byte_3()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char reverse_byte_3 </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abec5c296a1f7f8fb79e08ca2c1ab8c53" name="abec5c296a1f7f8fb79e08ca2c1ab8c53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abec5c296a1f7f8fb79e08ca2c1ab8c53">&#9670;&nbsp;</a></span>time_random_matrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void time_random_matrix </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>TA</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>TB</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>k</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="gemm_8c_abec5c296a1f7f8fb79e08ca2c1ab8c53_cgraph.png" border="0" usemap="#agemm_8c_abec5c296a1f7f8fb79e08ca2c1ab8c53_cgraph" alt=""/></div>
+<map name="agemm_8c_abec5c296a1f7f8fb79e08ca2c1ab8c53_cgraph" id="agemm_8c_abec5c296a1f7f8fb79e08ca2c1ab8c53_cgraph">
+<area shape="rect" title=" " alt="" coords="5,183,145,209"/>
+<area shape="rect" href="gemm_8c.html#a44c67f1aa36826c2fe8b8da5022a7ce6" title=" " alt="" coords="204,157,291,184"/>
+<area shape="rect" href="gemm_8c.html#a838e03f82a5b4e5e97b1ab0b660190a2" title=" " alt="" coords="193,208,301,235"/>
+<area shape="rect" href="gemm_8c.html#a14ab4a1fb811893dc00f63d5a38cd865" title=" " alt="" coords="363,5,442,32"/>
+<area shape="rect" href="gemm_8c.html#a0ae7e78a9f93ac585922cfa288bd06e4" title=" " alt="" coords="349,56,456,83"/>
+<area shape="rect" href="gemm_8c.html#a37c53215a2359d80bc7738195c73e078" title=" " alt="" coords="365,107,441,133"/>
+<area shape="rect" href="gemm_8c.html#a5977bc756e0987452155d6644205b5b1" title=" " alt="" coords="365,157,441,184"/>
+<area shape="rect" href="gemm_8c.html#ac0428aa4e1bc4de1c273ffa4df2c195b" title=" " alt="" coords="366,208,439,235"/>
+<area shape="rect" href="gemm_8c.html#a8e1908fd3f6cbc7da917f2e93e94e6d1" title=" " alt="" coords="373,259,432,285"/>
+<area shape="rect" href="gemm_8c.html#a4e3d4e108499dd6ea33dab80eb98d861" title=" " alt="" coords="356,309,449,336"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a9cfeb05b46cd39b63faa6b7c40ecbcfc" name="a9cfeb05b46cd39b63faa6b7c40ecbcfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cfeb05b46cd39b63faa6b7c40ecbcfc">&#9670;&nbsp;</a></span>transpose32_optimized()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void transpose32_optimized </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>A</em>[32]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="gemm_8c_a9cfeb05b46cd39b63faa6b7c40ecbcfc_cgraph.png" border="0" usemap="#agemm_8c_a9cfeb05b46cd39b63faa6b7c40ecbcfc_cgraph" alt=""/></div>
+<map name="agemm_8c_a9cfeb05b46cd39b63faa6b7c40ecbcfc_cgraph" id="agemm_8c_a9cfeb05b46cd39b63faa6b7c40ecbcfc_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,161,32"/>
+<area shape="rect" href="gemm_8c.html#ad58a7359f42c75b3b6cea15e9d774ec3" title=" " alt="" coords="209,5,315,32"/>
+<area shape="rect" href="gemm_8c.html#a0ddca840e90f8d291c6f5a82aaa033c3" title=" " alt="" coords="363,5,461,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a8bd62b90ad64e32ec8d15370ba0a61a5" name="a8bd62b90ad64e32ec8d15370ba0a61a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bd62b90ad64e32ec8d15370ba0a61a5">&#9670;&nbsp;</a></span>transpose8rS32_reversed_diagonale()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void transpose8rS32_reversed_diagonale </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="gemm_8c_a8bd62b90ad64e32ec8d15370ba0a61a5_cgraph.png" border="0" usemap="#agemm_8c_a8bd62b90ad64e32ec8d15370ba0a61a5_cgraph" alt=""/></div>
+<map name="agemm_8c_a8bd62b90ad64e32ec8d15370ba0a61a5_cgraph" id="agemm_8c_a8bd62b90ad64e32ec8d15370ba0a61a5_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,173,47"/>
+<area shape="rect" href="gemm_8c.html#aa360afe6714233e67446b62fc2709ed0" title=" " alt="" coords="221,13,316,39"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a0625444c982324c1a858a342ff8abc27" name="a0625444c982324c1a858a342ff8abc27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0625444c982324c1a858a342ff8abc27">&#9670;&nbsp;</a></span>transpose_32x32_bits_reversed_diagonale()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void transpose_32x32_bits_reversed_diagonale </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="gemm_8c_a0625444c982324c1a858a342ff8abc27_cgraph.png" border="0" usemap="#agemm_8c_a0625444c982324c1a858a342ff8abc27_cgraph" alt=""/></div>
+<map name="agemm_8c_a0625444c982324c1a858a342ff8abc27_cgraph" id="agemm_8c_a0625444c982324c1a858a342ff8abc27_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,155,47"/>
+<area shape="rect" href="gemm_8c.html#a9cfeb05b46cd39b63faa6b7c40ecbcfc" title=" " alt="" coords="203,13,359,39"/>
+<area shape="rect" href="gemm_8c.html#ad58a7359f42c75b3b6cea15e9d774ec3" title=" " alt="" coords="407,13,512,39"/>
+<area shape="rect" href="gemm_8c.html#a0ddca840e90f8d291c6f5a82aaa033c3" title=" " alt="" coords="560,13,659,39"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a0969d90d3adc585365d6626b66a12472" name="a0969d90d3adc585365d6626b66a12472"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0969d90d3adc585365d6626b66a12472">&#9670;&nbsp;</a></span>transpose_8x8_bits_my()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void transpose_8x8_bits_my </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>lda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ldb</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abc47efcfe9f9c9be4a2ae3886591be31" name="abc47efcfe9f9c9be4a2ae3886591be31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc47efcfe9f9c9be4a2ae3886591be31">&#9670;&nbsp;</a></span>transpose_bin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void transpose_bin </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>lda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>ldb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>block_size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="gemm_8c_abc47efcfe9f9c9be4a2ae3886591be31_cgraph.png" border="0" usemap="#agemm_8c_abc47efcfe9f9c9be4a2ae3886591be31_cgraph" alt=""/></div>
+<map name="agemm_8c_abc47efcfe9f9c9be4a2ae3886591be31_cgraph" id="agemm_8c_abc47efcfe9f9c9be4a2ae3886591be31_cgraph">
+<area shape="rect" title=" " alt="" coords="5,56,108,83"/>
+<area shape="rect" href="gemm_8h.html#aa2c9bc3f05c1b96ae7b6e557207068fd" title=" " alt="" coords="200,5,261,32"/>
+<area shape="rect" href="gemm_8h.html#aef0960a9c469e77ee2c6ea982a3eddff" title=" " alt="" coords="200,56,261,83"/>
+<area shape="rect" href="gemm_8c.html#a0625444c982324c1a858a342ff8abc27" title=" " alt="" coords="156,107,305,149"/>
+<area shape="rect" href="gemm_8c.html#a9cfeb05b46cd39b63faa6b7c40ecbcfc" title=" " alt="" coords="353,115,509,141"/>
+<area shape="rect" href="gemm_8c.html#ad58a7359f42c75b3b6cea15e9d774ec3" title=" " alt="" coords="557,115,663,141"/>
+<area shape="rect" href="gemm_8c.html#a0ddca840e90f8d291c6f5a82aaa033c3" title=" " alt="" coords="711,115,809,141"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a5106fb6ec72b4bcc07e02d76e21d6b37" name="a5106fb6ec72b4bcc07e02d76e21d6b37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5106fb6ec72b4bcc07e02d76e21d6b37">&#9670;&nbsp;</a></span>transpose_block_SSE4x4()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void transpose_block_SSE4x4 </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>n</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>lda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>ldb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>block_size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acc3a6afe6759faa4fecf72b0c141512f" name="acc3a6afe6759faa4fecf72b0c141512f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc3a6afe6759faa4fecf72b0c141512f">&#9670;&nbsp;</a></span>transpose_scalar_block()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void transpose_scalar_block </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>lda</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>ldb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>block_size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a20b21acd1fd344065eccc4e3517f2ad3" name="a20b21acd1fd344065eccc4e3517f2ad3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20b21acd1fd344065eccc4e3517f2ad3">&#9670;&nbsp;</a></span>transpose_uint32()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void transpose_uint32 </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>dst</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>src_h</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>src_w</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>src_align</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>dst_align</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abeaa8b11b9d81279309458f72eb74034" name="abeaa8b11b9d81279309458f72eb74034"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abeaa8b11b9d81279309458f72eb74034">&#9670;&nbsp;</a></span>xnor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static unsigned char xnor </td>
+          <td>(</td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a896be9234090e9f1735fee9af7a8b234" name="a896be9234090e9f1735fee9af7a8b234"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a896be9234090e9f1735fee9af7a8b234">&#9670;&nbsp;</a></span>xnor_int32()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static uint32_t xnor_int32 </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a452212cd4d732e06954bedd7ef61a4e2" name="a452212cd4d732e06954bedd7ef61a4e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a452212cd4d732e06954bedd7ef61a4e2">&#9670;&nbsp;</a></span>xnor_int64()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static uint64_t xnor_int64 </td>
+          <td>(</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">变量说明</h2>
+<a id="a408b031312d60083e4230ecd62137deb" name="a408b031312d60083e4230ecd62137deb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a408b031312d60083e4230ecd62137deb">&#9670;&nbsp;</a></span>lookup</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned char lookup[16]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>初始值:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    0x0, 0x8, 0x4, 0xc, 0x2, 0xa, 0x6, 0xe,</div>
+<div class="line">    0x1, 0x9, 0x5, 0xd, 0x3, 0xb, 0x7, 0xf, }</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>

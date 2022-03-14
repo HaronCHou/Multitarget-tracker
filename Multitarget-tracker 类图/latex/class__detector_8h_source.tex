@@ -1,0 +1,85 @@
+\hypertarget{class__detector_8h_source}{}\doxysection{class\+\_\+detector.\+h}
+\label{class__detector_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/class\_detector.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/class\_detector.h}}
+\mbox{\hyperlink{class__detector_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef CLASS\_DETECTOR\_H\_}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define CLASS\_DETECTOR\_H\_}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_a_p_i_8h}{API.h}}"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <opencv2/opencv.hpp>}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacetensor__rt}{tensor\_rt}}}
+\DoxyCodeLine{9 \{}
+\DoxyCodeLine{10     \textcolor{keyword}{struct }\mbox{\hyperlink{structtensor__rt_1_1_result}{Result}}}
+\DoxyCodeLine{11     \{}
+\DoxyCodeLine{12         \textcolor{keywordtype}{int}      \textcolor{keywordtype}{id} = -\/1;}
+\DoxyCodeLine{13         \textcolor{keywordtype}{float}    \mbox{\hyperlink{structtensor__rt_1_1_result_a1758b34c97e23fa3cdff8fe9026a1df7}{prob}} = 0.f;}
+\DoxyCodeLine{14         cv::Rect \mbox{\hyperlink{structtensor__rt_1_1_result_ab39d83d2238bf1e049ad752baa335083}{rect}};}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16         \mbox{\hyperlink{structtensor__rt_1_1_result_ab07e342e8c953ea19a0d6c574678236e}{Result}}(\textcolor{keywordtype}{int} id\_, \textcolor{keywordtype}{float} prob\_, cv::Rect \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{17             : \mbox{\hyperlink{structtensor__rt_1_1_result_ade318641bfb74af411dc1483ce5c03ba}{id}}(id\_), \mbox{\hyperlink{structtensor__rt_1_1_result_a1758b34c97e23fa3cdff8fe9026a1df7}{prob}}(prob\_), \mbox{\hyperlink{structtensor__rt_1_1_result_ab39d83d2238bf1e049ad752baa335083}{rect}}(\mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{18         \{}
+\DoxyCodeLine{19         \}}
+\DoxyCodeLine{20     \};}
+\DoxyCodeLine{21     }
+\DoxyCodeLine{22     \textcolor{keyword}{using} \mbox{\hyperlink{namespacetensor__rt_acdec4cbe1d51d11eea3865684b1135da}{BatchResult}} = std::vector<Result>;}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24     \textcolor{keyword}{enum} \mbox{\hyperlink{namespacetensor__rt_ab32fac74a8601d1d087b4a668903ca09}{ModelType}}}
+\DoxyCodeLine{25     \{}
+\DoxyCodeLine{26         \mbox{\hyperlink{namespacetensor__rt_ab32fac74a8601d1d087b4a668903ca09affe69ec769c2bcc37e62f6f9829d504a}{YOLOV3}},}
+\DoxyCodeLine{27         \mbox{\hyperlink{namespacetensor__rt_ab32fac74a8601d1d087b4a668903ca09a5a8ce5583fa3444d685a85589f1c4ce6}{YOLOV4}},}
+\DoxyCodeLine{28         \mbox{\hyperlink{namespacetensor__rt_ab32fac74a8601d1d087b4a668903ca09acce8e28a5d590955a382e6cf89771d5f}{YOLOV4\_TINY}},}
+\DoxyCodeLine{29         \mbox{\hyperlink{namespacetensor__rt_ab32fac74a8601d1d087b4a668903ca09a838f252367ec9d3ab28b54e6661e8389}{YOLOV5}}}
+\DoxyCodeLine{30     \};}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32     \textcolor{keyword}{enum} \mbox{\hyperlink{namespacetensor__rt_af15ff6c320592da48306f53c104684c0}{Precision}}}
+\DoxyCodeLine{33     \{}
+\DoxyCodeLine{34         \mbox{\hyperlink{namespacetensor__rt_af15ff6c320592da48306f53c104684c0a5d6bcb6535e5d95dcb3cfb4568593ef7}{INT8}} = 0,}
+\DoxyCodeLine{35         \mbox{\hyperlink{namespacetensor__rt_af15ff6c320592da48306f53c104684c0a040d045c9492d49822656d40e8b31e90}{FP16}},}
+\DoxyCodeLine{36         \mbox{\hyperlink{namespacetensor__rt_af15ff6c320592da48306f53c104684c0a818eba444d18b7e54c88a36e692ffe3e}{FP32}}}
+\DoxyCodeLine{37     \};}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39     \textcolor{keyword}{struct }\mbox{\hyperlink{structtensor__rt_1_1_config}{Config}}}
+\DoxyCodeLine{40     \{}
+\DoxyCodeLine{41         std::string \mbox{\hyperlink{structtensor__rt_1_1_config_a695c6c5b8146c45eda8c9d13d81ab5c8}{file\_model\_cfg}} = \textcolor{stringliteral}{"{}yolov4.cfg"{}};}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43         std::string \mbox{\hyperlink{structtensor__rt_1_1_config_a80347587cb8f2e32c48dd6deba9d2613}{file\_model\_weights}} = \textcolor{stringliteral}{"{}yolov4.weights"{}};}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45         \textcolor{keywordtype}{float} \mbox{\hyperlink{structtensor__rt_1_1_config_acd54fa9b8775862316f46ce16dc24b41}{detect\_thresh}} = 0.5f;}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47         \mbox{\hyperlink{namespacetensor__rt_ab32fac74a8601d1d087b4a668903ca09}{ModelType}}  \mbox{\hyperlink{structtensor__rt_1_1_config_a1e8c8f4fbe7480ea0252a5e14ab8e60f}{net\_type}} = \mbox{\hyperlink{namespacetensor__rt_ab32fac74a8601d1d087b4a668903ca09a5a8ce5583fa3444d685a85589f1c4ce6}{YOLOV4}};}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49         \mbox{\hyperlink{namespacetensor__rt_af15ff6c320592da48306f53c104684c0}{Precision}}  \mbox{\hyperlink{structtensor__rt_1_1_config_ab180f0538c4085588c105bf9dd937afe}{inference\_precison}} = \mbox{\hyperlink{namespacetensor__rt_af15ff6c320592da48306f53c104684c0a818eba444d18b7e54c88a36e692ffe3e}{FP32}};}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51         \textcolor{keywordtype}{int} \mbox{\hyperlink{structtensor__rt_1_1_config_aed2f32b4b2944e36e1f25e42ed84a60c}{gpu\_id}} = 0;}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53         uint32\_t \mbox{\hyperlink{structtensor__rt_1_1_config_a681aa0db414b1a1e8c503904d869b2e3}{batch\_size}} = 1;}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55         std::string \mbox{\hyperlink{structtensor__rt_1_1_config_a8d4233e4a48c88f40db4e8c144e5f360}{calibration\_image\_list\_file\_txt}} = \textcolor{stringliteral}{"{}configs/calibration\_images.txt"{}};}
+\DoxyCodeLine{56     \};}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58     \textcolor{keyword}{class }\mbox{\hyperlink{_a_p_i_8h_ad8ce4efaa307683d3d763b37b4711c53}{API}} \mbox{\hyperlink{classtensor__rt_1_1_detector}{Detector}}}
+\DoxyCodeLine{59     \{}
+\DoxyCodeLine{60     \textcolor{keyword}{public}:}
+\DoxyCodeLine{61         \textcolor{keyword}{explicit} \mbox{\hyperlink{classtensor__rt_1_1_detector}{Detector}}();}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63         \mbox{\hyperlink{classtensor__rt_1_1_detector}{\string~Detector}}();}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65         \textcolor{keywordtype}{void} \mbox{\hyperlink{yolo__v2__class_8cpp_adcf7f587fe7c5bfdcbe67ffa797763be}{init}}(\textcolor{keyword}{const} \mbox{\hyperlink{structtensor__rt_1_1_config}{Config}} \&config);}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67         \textcolor{keywordtype}{void} detect(\textcolor{keyword}{const} std::vector<cv::Mat> \&mat\_image, std::vector<BatchResult> \&vec\_batch\_result);}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69         cv::Size get\_input\_size() \textcolor{keyword}{const};}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71     \textcolor{keyword}{private}:}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73         \mbox{\hyperlink{classtensor__rt_1_1_detector_ac1472af0ed80ca6460efe9edd8fc619a}{Detector}}(\textcolor{keyword}{const} \mbox{\hyperlink{classtensor__rt_1_1_detector}{Detector}} \&);}
+\DoxyCodeLine{74         \textcolor{keyword}{const} \mbox{\hyperlink{classtensor__rt_1_1_detector}{Detector}} \&operator =(\textcolor{keyword}{const} \mbox{\hyperlink{classtensor__rt_1_1_detector}{Detector}} \&);}
+\DoxyCodeLine{75         \textcolor{keyword}{class }\mbox{\hyperlink{classtensor__rt_1_1_detector_1_1_impl}{Impl}};}
+\DoxyCodeLine{76         \mbox{\hyperlink{classtensor__rt_1_1_detector_1_1_impl}{Impl}} *\_impl = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{77     \};}
+\DoxyCodeLine{78 \}}
+\DoxyCodeLine{79 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// !CLASS\_QH\_DETECTOR\_H\_}}
+
+\end{DoxyCode}

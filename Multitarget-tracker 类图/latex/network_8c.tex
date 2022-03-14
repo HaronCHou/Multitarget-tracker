@@ -1,0 +1,1061 @@
+\hypertarget{network_8c}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/network.c 文件参考}
+\label{network_8c}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/network.c@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/network.c}}
+{\ttfamily \#include \char`\"{}darknet.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}network.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}image.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}data.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}blas.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}crop\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}connected\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gru\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}rnn\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}crnn\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}conv\+\_\+lstm\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}local\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}convolutional\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}activation\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}detection\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}region\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}normalization\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}batchnorm\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}maxpool\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}reorg\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}reorg\+\_\+old\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}avgpool\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cost\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}softmax\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dropout\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}route\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}shortcut\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}scale\+\_\+channels\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sam\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}yolo\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gaussian\+\_\+yolo\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}upsample\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}parser.\+h\char`\"{}}\newline
+network.\+c 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structload__args}{load\+\_\+args}} \mbox{\hyperlink{network_8c_afd4223b3d5e1fa18bdc5e636c71a962e}{get\+\_\+base\+\_\+args}} (\mbox{\hyperlink{structnetwork}{network}} $\ast$net)
+\item 
+int64\+\_\+t \mbox{\hyperlink{network_8c_a947571d2d8ca60387d1d827118241393}{get\+\_\+current\+\_\+iteration}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+int \mbox{\hyperlink{network_8c_a95734b6e69a080abf33395707ab56b59}{get\+\_\+current\+\_\+batch}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+void \mbox{\hyperlink{network_8c_a1fa8069c4dcc291063967cf6c960749a}{reset\+\_\+network\+\_\+state}} (\mbox{\hyperlink{structnetwork}{network}} $\ast$net, int b)
+\item 
+void \mbox{\hyperlink{network_8c_a2fa6dbb01b65d7ec1e6dcb490fdda445}{reset\+\_\+rnn}} (\mbox{\hyperlink{structnetwork}{network}} $\ast$net)
+\item 
+float \mbox{\hyperlink{network_8c_a38133fd1fde9f03b10ad34fb88545ab2}{get\+\_\+current\+\_\+seq\+\_\+subdivisions}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+int \mbox{\hyperlink{network_8c_a972a0ca9abacb6a2b48f38c015d86c9b}{get\+\_\+sequence\+\_\+value}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+float \mbox{\hyperlink{network_8c_ac997daf700149608de15d93a083c33dc}{get\+\_\+current\+\_\+rate}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+char $\ast$ \mbox{\hyperlink{network_8c_a12782ce6d5a2d3c663dfa28879e5ddbb}{get\+\_\+layer\+\_\+string}} (\mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154}{LAYER\+\_\+\+TYPE}} a)
+\item 
+\mbox{\hyperlink{structnetwork}{network}} \mbox{\hyperlink{network_8c_ad2dcde69603d71857d11484ae99bd8fe}{make\+\_\+network}} (int n)
+\item 
+void \mbox{\hyperlink{network_8c_a3d37980bfc1ac87112a8cb750a863086}{forward\+\_\+network}} (\mbox{\hyperlink{structnetwork}{network}} net, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{network_8c_a87d52c62f9d37ca596ddecc132a0f0ab}{update\+\_\+network}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+float $\ast$ \mbox{\hyperlink{network_8c_a80be2d9576b5e94e38f2e5337159c2a0}{get\+\_\+network\+\_\+output}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+float \mbox{\hyperlink{network_8c_a46b7f52c4149617c9f99a5c80ddb3c62}{get\+\_\+network\+\_\+cost}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+int \mbox{\hyperlink{network_8c_a7a804bdac41f35d78938f15579109979}{get\+\_\+predicted\+\_\+class\+\_\+network}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+void \mbox{\hyperlink{network_8c_aa2be63492179595eaccc4ec7a4392a2f}{backward\+\_\+network}} (\mbox{\hyperlink{structnetwork}{network}} net, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+float \mbox{\hyperlink{network_8c_a0f3d3c4cbdf9c64f7f22eb649d2019a6}{train\+\_\+network\+\_\+datum}} (\mbox{\hyperlink{structnetwork}{network}} net, float $\ast$\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, float $\ast$\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}})
+\item 
+float \mbox{\hyperlink{network_8c_a8b54b8e2d0a90c40d03b84d67503e279}{train\+\_\+network\+\_\+sgd}} (\mbox{\hyperlink{structnetwork}{network}} net, \mbox{\hyperlink{structdata}{data}} d, int n)
+\item 
+float \mbox{\hyperlink{network_8c_aeb752f771f5cfe8c401fc8dee8f3e439}{train\+\_\+network}} (\mbox{\hyperlink{structnetwork}{network}} net, \mbox{\hyperlink{structdata}{data}} d)
+\item 
+float \mbox{\hyperlink{network_8c_a04614f46839fba458294a79cfef40382}{train\+\_\+network\+\_\+waitkey}} (\mbox{\hyperlink{structnetwork}{network}} net, \mbox{\hyperlink{structdata}{data}} d, int wait\+\_\+key)
+\item 
+float \mbox{\hyperlink{network_8c_a4b91888b95e37adf361669399843a940}{train\+\_\+network\+\_\+batch}} (\mbox{\hyperlink{structnetwork}{network}} net, \mbox{\hyperlink{structdata}{data}} d, int n)
+\item 
+int \mbox{\hyperlink{network_8c_ac91a6f724426c7daf59b6b99e724af2c}{recalculate\+\_\+workspace\+\_\+size}} (\mbox{\hyperlink{structnetwork}{network}} $\ast$net)
+\item 
+void \mbox{\hyperlink{network_8c_a0cf39a1104b8f0415c56796b54a3670a}{set\+\_\+batch\+\_\+network}} (\mbox{\hyperlink{structnetwork}{network}} $\ast$net, int b)
+\item 
+int \mbox{\hyperlink{network_8c_a6ae710d2d9ad32cfdec1f925f48c2b50}{resize\+\_\+network}} (\mbox{\hyperlink{structnetwork}{network}} $\ast$net, int w, int h)
+\item 
+int \mbox{\hyperlink{network_8c_a4c84d1db6ac9eb1beb77c84b7d962fab}{get\+\_\+network\+\_\+output\+\_\+size}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+int \mbox{\hyperlink{network_8c_add852ed9ae352068b9faebde88432e0a}{get\+\_\+network\+\_\+input\+\_\+size}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+\mbox{\hyperlink{detection__layer_8h_a3a5018a4d1685b278fc2586711a3a976}{detection\+\_\+layer}} \mbox{\hyperlink{network_8c_a242e1c3a11daeb8420068d79f1e53f8c}{get\+\_\+network\+\_\+detection\+\_\+layer}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+\mbox{\hyperlink{structimage}{image}} \mbox{\hyperlink{network_8c_a5bb83a6363a3ed2358ce290c69be0d06}{get\+\_\+network\+\_\+image\+\_\+layer}} (\mbox{\hyperlink{structnetwork}{network}} net, int i)
+\item 
+\mbox{\hyperlink{structlayer}{layer}} $\ast$ \mbox{\hyperlink{network_8c_adac37852db41f539966b8ce0e65bdd34}{get\+\_\+network\+\_\+layer}} (\mbox{\hyperlink{structnetwork}{network}} $\ast$net, int i)
+\item 
+\mbox{\hyperlink{structimage}{image}} \mbox{\hyperlink{network_8c_a565138b1e47b93ded561ae9bc4a1ed10}{get\+\_\+network\+\_\+image}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+void \mbox{\hyperlink{network_8c_ad1b0b41c13be3bdaeb07f5c9f59c62c6}{visualize\+\_\+network}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+void \mbox{\hyperlink{network_8c_aaa4dd7e194fcffacdc8dc06955370527}{top\+\_\+predictions}} (\mbox{\hyperlink{structnetwork}{network}} net, int k, int $\ast$index)
+\item 
+float $\ast$ \mbox{\hyperlink{network_8c_a98d20ac80bfbfc6353c2b3ce1209c587}{network\+\_\+predict\+\_\+ptr}} (\mbox{\hyperlink{structnetwork}{network}} $\ast$net, float $\ast$input)
+\item 
+float $\ast$ \mbox{\hyperlink{network_8c_ac90adcb059cb26e2d30b7add256f266e}{network\+\_\+predict}} (\mbox{\hyperlink{structnetwork}{network}} net, float $\ast$input)
+\item 
+int \mbox{\hyperlink{network_8c_ac0b84033651f97833207b0e0c9776d11}{num\+\_\+detections}} (\mbox{\hyperlink{structnetwork}{network}} $\ast$net, float thresh)
+\item 
+int \mbox{\hyperlink{network_8c_ad2aae8379d7abffc2d8419b4a59d0758}{num\+\_\+detections\+\_\+batch}} (\mbox{\hyperlink{structnetwork}{network}} $\ast$net, float thresh, int batch)
+\item 
+\mbox{\hyperlink{structdetection}{detection}} $\ast$ \mbox{\hyperlink{network_8c_ad25743407e072b2c124f4a01a9927df9}{make\+\_\+network\+\_\+boxes}} (\mbox{\hyperlink{structnetwork}{network}} $\ast$net, float thresh, int $\ast$num)
+\item 
+\mbox{\hyperlink{structdetection}{detection}} $\ast$ \mbox{\hyperlink{network_8c_ac5caa5f69ac025cf3e62b3a986c1832f}{make\+\_\+network\+\_\+boxes\+\_\+batch}} (\mbox{\hyperlink{structnetwork}{network}} $\ast$net, float thresh, int $\ast$num, int batch)
+\item 
+void \mbox{\hyperlink{network_8c_a9d2c6afe906776472a50899c430f4367}{custom\+\_\+get\+\_\+region\+\_\+detections}} (\mbox{\hyperlink{structlayer}{layer}} l, int w, int h, int net\+\_\+w, int net\+\_\+h, float thresh, int $\ast$map, float hier, int relative, \mbox{\hyperlink{structdetection}{detection}} $\ast$dets, int letter)
+\item 
+void \mbox{\hyperlink{network_8c_a7eab6157b3e3092dc95ce02d8d85664f}{fill\+\_\+network\+\_\+boxes}} (\mbox{\hyperlink{structnetwork}{network}} $\ast$net, int w, int h, float thresh, float hier, int $\ast$map, int relative, \mbox{\hyperlink{structdetection}{detection}} $\ast$dets, int letter)
+\item 
+void \mbox{\hyperlink{network_8c_a3cb44c1c298edb64eb091035afa1b5a5}{fill\+\_\+network\+\_\+boxes\+\_\+batch}} (\mbox{\hyperlink{structnetwork}{network}} $\ast$net, int w, int h, float thresh, float hier, int $\ast$map, int relative, \mbox{\hyperlink{structdetection}{detection}} $\ast$dets, int letter, int batch)
+\item 
+\mbox{\hyperlink{structdetection}{detection}} $\ast$ \mbox{\hyperlink{network_8c_a8b112853cbeb8ea2486bf0ab60926bf3}{get\+\_\+network\+\_\+boxes}} (\mbox{\hyperlink{structnetwork}{network}} $\ast$net, int w, int h, float thresh, float hier, int $\ast$map, int relative, int $\ast$num, int letter)
+\item 
+void \mbox{\hyperlink{network_8c_a7ecacd03177d009c8f43c76c53f6b363}{free\+\_\+detections}} (\mbox{\hyperlink{structdetection}{detection}} $\ast$dets, int n)
+\item 
+void \mbox{\hyperlink{network_8c_a8d96d4a98d170af7919b0d1c2d656776}{free\+\_\+batch\+\_\+detections}} (\mbox{\hyperlink{structdet__num__pair}{det\+\_\+num\+\_\+pair}} $\ast$det\+\_\+num\+\_\+pairs, int n)
+\item 
+char $\ast$ \mbox{\hyperlink{network_8c_a1bb5ba0b05c25a1c2cc912b3a19cbb42}{detection\+\_\+to\+\_\+json}} (\mbox{\hyperlink{structdetection}{detection}} $\ast$dets, int nboxes, int classes, char $\ast$$\ast$names, long long int frame\+\_\+id, char $\ast$filename)
+\item 
+float $\ast$ \mbox{\hyperlink{network_8c_abbf418110515274c493016ede3f32420}{network\+\_\+predict\+\_\+image}} (\mbox{\hyperlink{structnetwork}{network}} $\ast$net, \mbox{\hyperlink{structimage}{image}} im)
+\item 
+\mbox{\hyperlink{structdet__num__pair}{det\+\_\+num\+\_\+pair}} $\ast$ \mbox{\hyperlink{network_8c_ac02079bf1198cde9e1396a7524ab0df8}{network\+\_\+predict\+\_\+batch}} (\mbox{\hyperlink{structnetwork}{network}} $\ast$net, \mbox{\hyperlink{structimage}{image}} im, int batch\+\_\+size, int w, int h, float thresh, float hier, int $\ast$map, int relative, int letter)
+\item 
+float $\ast$ \mbox{\hyperlink{network_8c_a59527bf7aceca7381cd29718e3720fbb}{network\+\_\+predict\+\_\+image\+\_\+letterbox}} (\mbox{\hyperlink{structnetwork}{network}} $\ast$net, \mbox{\hyperlink{structimage}{image}} im)
+\item 
+int \mbox{\hyperlink{network_8c_a5df4a28ccc9a076423f749953e1fd393}{network\+\_\+width}} (\mbox{\hyperlink{structnetwork}{network}} $\ast$net)
+\item 
+int \mbox{\hyperlink{network_8c_ab1b9d257b7f53d7bd6419cca198927c9}{network\+\_\+height}} (\mbox{\hyperlink{structnetwork}{network}} $\ast$net)
+\item 
+\mbox{\hyperlink{structmatrix}{matrix}} \mbox{\hyperlink{network_8c_a74ce5c6fc19f5491a674543a43c32d13}{network\+\_\+predict\+\_\+data\+\_\+multi}} (\mbox{\hyperlink{structnetwork}{network}} net, \mbox{\hyperlink{structdata}{data}} test, int n)
+\item 
+\mbox{\hyperlink{structmatrix}{matrix}} \mbox{\hyperlink{network_8c_aad8d8b4979ad81ba5a61b4f3d2e39fc9}{network\+\_\+predict\+\_\+data}} (\mbox{\hyperlink{structnetwork}{network}} net, \mbox{\hyperlink{structdata}{data}} test)
+\item 
+void \mbox{\hyperlink{network_8c_aded1fe29d38b99e33a816677a4c01078}{print\+\_\+network}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+void \mbox{\hyperlink{network_8c_a43091e7a4045ba98a2ad310577744b8a}{compare\+\_\+networks}} (\mbox{\hyperlink{structnetwork}{network}} n1, \mbox{\hyperlink{structnetwork}{network}} n2, \mbox{\hyperlink{structdata}{data}} test)
+\item 
+float \mbox{\hyperlink{network_8c_ac046932b096b7f11a444efdb93ed920d}{network\+\_\+accuracy}} (\mbox{\hyperlink{structnetwork}{network}} net, \mbox{\hyperlink{structdata}{data}} d)
+\item 
+float $\ast$ \mbox{\hyperlink{network_8c_a5aaa1cd36832c1b6b1e2ef33ade17341}{network\+\_\+accuracies}} (\mbox{\hyperlink{structnetwork}{network}} net, \mbox{\hyperlink{structdata}{data}} d, int n)
+\item 
+float \mbox{\hyperlink{network_8c_aaa77e8c97a6c4963b95512f377725e0e}{network\+\_\+accuracy\+\_\+multi}} (\mbox{\hyperlink{structnetwork}{network}} net, \mbox{\hyperlink{structdata}{data}} d, int n)
+\item 
+void \mbox{\hyperlink{network_8c_a0fa10b91b9c796804982c700a4c76571}{free\+\_\+network\+\_\+ptr}} (\mbox{\hyperlink{structnetwork}{network}} $\ast$net)
+\item 
+void \mbox{\hyperlink{network_8c_a0ea16ce7d9aefb606cc9dac3e322b447}{free\+\_\+network}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+static float \mbox{\hyperlink{network_8c_a688285c977a75a3d3a2a5f853c8077f1}{relu}} (float src)
+\item 
+static float \mbox{\hyperlink{network_8c_ae6ace48f77d38e97dff8fe86848320a6}{lrelu}} (float src)
+\item 
+void \mbox{\hyperlink{network_8c_a55892f9e3920b129a302ed7184cc8563}{fuse\+\_\+conv\+\_\+batchnorm}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+void \mbox{\hyperlink{network_8c_ab1ff3449af04e06b4aee9283175d30d2}{forward\+\_\+blank\+\_\+layer}} (\mbox{\hyperlink{structlayer}{layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{network_8c_ac51d5efb164b69282b7aa46ba1a02c62}{calculate\+\_\+binary\+\_\+weights}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+void \mbox{\hyperlink{network_8c_a9dff9dfd8f58f014b3f69b9026627076}{copy\+\_\+cudnn\+\_\+descriptors}} (\mbox{\hyperlink{structlayer}{layer}} src, \mbox{\hyperlink{structlayer}{layer}} $\ast$dst)
+\item 
+void \mbox{\hyperlink{network_8c_ab7f32dd9f51963f1754ebfdc0db69f5d}{copy\+\_\+weights\+\_\+net}} (\mbox{\hyperlink{structnetwork}{network}} net\+\_\+train, \mbox{\hyperlink{structnetwork}{network}} $\ast$net\+\_\+map)
+\item 
+\mbox{\hyperlink{structnetwork}{network}} \mbox{\hyperlink{network_8c_a580fbf1ea108cccba4f80930cbc9510f}{combine\+\_\+train\+\_\+valid\+\_\+networks}} (\mbox{\hyperlink{structnetwork}{network}} net\+\_\+train, \mbox{\hyperlink{structnetwork}{network}} net\+\_\+map)
+\item 
+void \mbox{\hyperlink{network_8c_a395325b5be7921434d47965f9b3aabc3}{free\+\_\+network\+\_\+recurrent\+\_\+state}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+void \mbox{\hyperlink{network_8c_ab69bec742eb3e270d13be4a2a833bcb9}{randomize\+\_\+network\+\_\+recurrent\+\_\+state}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+void \mbox{\hyperlink{network_8c_aab21fd7e8728622b883fe4c4d691eb06}{remember\+\_\+network\+\_\+recurrent\+\_\+state}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+void \mbox{\hyperlink{network_8c_ad2e19f76773ce95b9795f8796b5523bd}{restore\+\_\+network\+\_\+recurrent\+\_\+state}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+int \mbox{\hyperlink{network_8c_a0643a1e5b2bba9db81453c92d4966ff9}{is\+\_\+ema\+\_\+initialized}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+void \mbox{\hyperlink{network_8c_aae40075a4919e24e1ebaa59ec53c6cea}{ema\+\_\+update}} (\mbox{\hyperlink{structnetwork}{network}} net, float ema\+\_\+alpha)
+\item 
+void \mbox{\hyperlink{network_8c_a356340c1fccaf752cb1a2c6c16bf1cb7}{ema\+\_\+apply}} (\mbox{\hyperlink{structnetwork}{network}} net)
+\item 
+void \mbox{\hyperlink{network_8c_a7201d2eb22ebe2c966d4707751af3008}{reject\+\_\+similar\+\_\+weights}} (\mbox{\hyperlink{structnetwork}{network}} net, float sim\+\_\+threshold)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{network_8c_aa2be63492179595eaccc4ec7a4392a2f}\label{network_8c_aa2be63492179595eaccc4ec7a4392a2f}} 
+\index{network.c@{network.c}!backward\_network@{backward\_network}}
+\index{backward\_network@{backward\_network}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{backward\_network()}{backward\_network()}}
+{\footnotesize\ttfamily void backward\+\_\+network (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{network_8c_ac51d5efb164b69282b7aa46ba1a02c62}\label{network_8c_ac51d5efb164b69282b7aa46ba1a02c62}} 
+\index{network.c@{network.c}!calculate\_binary\_weights@{calculate\_binary\_weights}}
+\index{calculate\_binary\_weights@{calculate\_binary\_weights}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{calculate\_binary\_weights()}{calculate\_binary\_weights()}}
+{\footnotesize\ttfamily void calculate\+\_\+binary\+\_\+weights (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_ac51d5efb164b69282b7aa46ba1a02c62_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a580fbf1ea108cccba4f80930cbc9510f}\label{network_8c_a580fbf1ea108cccba4f80930cbc9510f}} 
+\index{network.c@{network.c}!combine\_train\_valid\_networks@{combine\_train\_valid\_networks}}
+\index{combine\_train\_valid\_networks@{combine\_train\_valid\_networks}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{combine\_train\_valid\_networks()}{combine\_train\_valid\_networks()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structnetwork}{network}} combine\+\_\+train\+\_\+valid\+\_\+networks (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net\+\_\+train,  }\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net\+\_\+map }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=297pt]{network_8c_a580fbf1ea108cccba4f80930cbc9510f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a43091e7a4045ba98a2ad310577744b8a}\label{network_8c_a43091e7a4045ba98a2ad310577744b8a}} 
+\index{network.c@{network.c}!compare\_networks@{compare\_networks}}
+\index{compare\_networks@{compare\_networks}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{compare\_networks()}{compare\_networks()}}
+{\footnotesize\ttfamily void compare\+\_\+networks (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{n1,  }\item[{\mbox{\hyperlink{structnetwork}{network}}}]{n2,  }\item[{\mbox{\hyperlink{structdata}{data}}}]{test }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_a43091e7a4045ba98a2ad310577744b8a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a9dff9dfd8f58f014b3f69b9026627076}\label{network_8c_a9dff9dfd8f58f014b3f69b9026627076}} 
+\index{network.c@{network.c}!copy\_cudnn\_descriptors@{copy\_cudnn\_descriptors}}
+\index{copy\_cudnn\_descriptors@{copy\_cudnn\_descriptors}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{copy\_cudnn\_descriptors()}{copy\_cudnn\_descriptors()}}
+{\footnotesize\ttfamily void copy\+\_\+cudnn\+\_\+descriptors (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{src,  }\item[{\mbox{\hyperlink{structlayer}{layer}} $\ast$}]{dst }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{network_8c_ab7f32dd9f51963f1754ebfdc0db69f5d}\label{network_8c_ab7f32dd9f51963f1754ebfdc0db69f5d}} 
+\index{network.c@{network.c}!copy\_weights\_net@{copy\_weights\_net}}
+\index{copy\_weights\_net@{copy\_weights\_net}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{copy\_weights\_net()}{copy\_weights\_net()}}
+{\footnotesize\ttfamily void copy\+\_\+weights\+\_\+net (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net\+\_\+train,  }\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{net\+\_\+map }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=333pt]{network_8c_ab7f32dd9f51963f1754ebfdc0db69f5d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a9d2c6afe906776472a50899c430f4367}\label{network_8c_a9d2c6afe906776472a50899c430f4367}} 
+\index{network.c@{network.c}!custom\_get\_region\_detections@{custom\_get\_region\_detections}}
+\index{custom\_get\_region\_detections@{custom\_get\_region\_detections}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{custom\_get\_region\_detections()}{custom\_get\_region\_detections()}}
+{\footnotesize\ttfamily void custom\+\_\+get\+\_\+region\+\_\+detections (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{int}]{net\+\_\+w,  }\item[{int}]{net\+\_\+h,  }\item[{float}]{thresh,  }\item[{int $\ast$}]{map,  }\item[{float}]{hier,  }\item[{int}]{relative,  }\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{dets,  }\item[{int}]{letter }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_a9d2c6afe906776472a50899c430f4367_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a1bb5ba0b05c25a1c2cc912b3a19cbb42}\label{network_8c_a1bb5ba0b05c25a1c2cc912b3a19cbb42}} 
+\index{network.c@{network.c}!detection\_to\_json@{detection\_to\_json}}
+\index{detection\_to\_json@{detection\_to\_json}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{detection\_to\_json()}{detection\_to\_json()}}
+{\footnotesize\ttfamily char $\ast$ detection\+\_\+to\+\_\+json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{dets,  }\item[{int}]{nboxes,  }\item[{int}]{classes,  }\item[{char $\ast$$\ast$}]{names,  }\item[{long long int}]{frame\+\_\+id,  }\item[{char $\ast$}]{filename }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{network_8c_a356340c1fccaf752cb1a2c6c16bf1cb7}\label{network_8c_a356340c1fccaf752cb1a2c6c16bf1cb7}} 
+\index{network.c@{network.c}!ema\_apply@{ema\_apply}}
+\index{ema\_apply@{ema\_apply}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{ema\_apply()}{ema\_apply()}}
+{\footnotesize\ttfamily void ema\+\_\+apply (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{network_8c_aae40075a4919e24e1ebaa59ec53c6cea}\label{network_8c_aae40075a4919e24e1ebaa59ec53c6cea}} 
+\index{network.c@{network.c}!ema\_update@{ema\_update}}
+\index{ema\_update@{ema\_update}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{ema\_update()}{ema\_update()}}
+{\footnotesize\ttfamily void ema\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net,  }\item[{float}]{ema\+\_\+alpha }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{network_8c_a7eab6157b3e3092dc95ce02d8d85664f}\label{network_8c_a7eab6157b3e3092dc95ce02d8d85664f}} 
+\index{network.c@{network.c}!fill\_network\_boxes@{fill\_network\_boxes}}
+\index{fill\_network\_boxes@{fill\_network\_boxes}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{fill\_network\_boxes()}{fill\_network\_boxes()}}
+{\footnotesize\ttfamily void fill\+\_\+network\+\_\+boxes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{net,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{float}]{thresh,  }\item[{float}]{hier,  }\item[{int $\ast$}]{map,  }\item[{int}]{relative,  }\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{dets,  }\item[{int}]{letter }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_a7eab6157b3e3092dc95ce02d8d85664f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a3cb44c1c298edb64eb091035afa1b5a5}\label{network_8c_a3cb44c1c298edb64eb091035afa1b5a5}} 
+\index{network.c@{network.c}!fill\_network\_boxes\_batch@{fill\_network\_boxes\_batch}}
+\index{fill\_network\_boxes\_batch@{fill\_network\_boxes\_batch}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{fill\_network\_boxes\_batch()}{fill\_network\_boxes\_batch()}}
+{\footnotesize\ttfamily void fill\+\_\+network\+\_\+boxes\+\_\+batch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{net,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{float}]{thresh,  }\item[{float}]{hier,  }\item[{int $\ast$}]{map,  }\item[{int}]{relative,  }\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{dets,  }\item[{int}]{letter,  }\item[{int}]{batch }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_a3cb44c1c298edb64eb091035afa1b5a5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_ab1ff3449af04e06b4aee9283175d30d2}\label{network_8c_ab1ff3449af04e06b4aee9283175d30d2}} 
+\index{network.c@{network.c}!forward\_blank\_layer@{forward\_blank\_layer}}
+\index{forward\_blank\_layer@{forward\_blank\_layer}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{forward\_blank\_layer()}{forward\_blank\_layer()}}
+{\footnotesize\ttfamily void forward\+\_\+blank\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{network_8c_a3d37980bfc1ac87112a8cb750a863086}\label{network_8c_a3d37980bfc1ac87112a8cb750a863086}} 
+\index{network.c@{network.c}!forward\_network@{forward\_network}}
+\index{forward\_network@{forward\_network}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{forward\_network()}{forward\_network()}}
+{\footnotesize\ttfamily void forward\+\_\+network (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{network_8c_a3d37980bfc1ac87112a8cb750a863086_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a8d96d4a98d170af7919b0d1c2d656776}\label{network_8c_a8d96d4a98d170af7919b0d1c2d656776}} 
+\index{network.c@{network.c}!free\_batch\_detections@{free\_batch\_detections}}
+\index{free\_batch\_detections@{free\_batch\_detections}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{free\_batch\_detections()}{free\_batch\_detections()}}
+{\footnotesize\ttfamily void free\+\_\+batch\+\_\+detections (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structdet__num__pair}{det\+\_\+num\+\_\+pair}} $\ast$}]{det\+\_\+num\+\_\+pairs,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=311pt]{network_8c_a8d96d4a98d170af7919b0d1c2d656776_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a7ecacd03177d009c8f43c76c53f6b363}\label{network_8c_a7ecacd03177d009c8f43c76c53f6b363}} 
+\index{network.c@{network.c}!free\_detections@{free\_detections}}
+\index{free\_detections@{free\_detections}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{free\_detections()}{free\_detections()}}
+{\footnotesize\ttfamily void free\+\_\+detections (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{dets,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{network_8c_a0ea16ce7d9aefb606cc9dac3e322b447}\label{network_8c_a0ea16ce7d9aefb606cc9dac3e322b447}} 
+\index{network.c@{network.c}!free\_network@{free\_network}}
+\index{free\_network@{free\_network}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{free\_network()}{free\_network()}}
+{\footnotesize\ttfamily void free\+\_\+network (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_a0ea16ce7d9aefb606cc9dac3e322b447_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a0fa10b91b9c796804982c700a4c76571}\label{network_8c_a0fa10b91b9c796804982c700a4c76571}} 
+\index{network.c@{network.c}!free\_network\_ptr@{free\_network\_ptr}}
+\index{free\_network\_ptr@{free\_network\_ptr}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{free\_network\_ptr()}{free\_network\_ptr()}}
+{\footnotesize\ttfamily void free\+\_\+network\+\_\+ptr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{net }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_a0fa10b91b9c796804982c700a4c76571_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a395325b5be7921434d47965f9b3aabc3}\label{network_8c_a395325b5be7921434d47965f9b3aabc3}} 
+\index{network.c@{network.c}!free\_network\_recurrent\_state@{free\_network\_recurrent\_state}}
+\index{free\_network\_recurrent\_state@{free\_network\_recurrent\_state}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{free\_network\_recurrent\_state()}{free\_network\_recurrent\_state()}}
+{\footnotesize\ttfamily void free\+\_\+network\+\_\+recurrent\+\_\+state (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_a395325b5be7921434d47965f9b3aabc3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a55892f9e3920b129a302ed7184cc8563}\label{network_8c_a55892f9e3920b129a302ed7184cc8563}} 
+\index{network.c@{network.c}!fuse\_conv\_batchnorm@{fuse\_conv\_batchnorm}}
+\index{fuse\_conv\_batchnorm@{fuse\_conv\_batchnorm}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{fuse\_conv\_batchnorm()}{fuse\_conv\_batchnorm()}}
+{\footnotesize\ttfamily void fuse\+\_\+conv\+\_\+batchnorm (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=319pt]{network_8c_a55892f9e3920b129a302ed7184cc8563_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_afd4223b3d5e1fa18bdc5e636c71a962e}\label{network_8c_afd4223b3d5e1fa18bdc5e636c71a962e}} 
+\index{network.c@{network.c}!get\_base\_args@{get\_base\_args}}
+\index{get\_base\_args@{get\_base\_args}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{get\_base\_args()}{get\_base\_args()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structload__args}{load\+\_\+args}} get\+\_\+base\+\_\+args (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{net }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{network_8c_afd4223b3d5e1fa18bdc5e636c71a962e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a95734b6e69a080abf33395707ab56b59}\label{network_8c_a95734b6e69a080abf33395707ab56b59}} 
+\index{network.c@{network.c}!get\_current\_batch@{get\_current\_batch}}
+\index{get\_current\_batch@{get\_current\_batch}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{get\_current\_batch()}{get\_current\_batch()}}
+{\footnotesize\ttfamily int get\+\_\+current\+\_\+batch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{network_8c_a947571d2d8ca60387d1d827118241393}\label{network_8c_a947571d2d8ca60387d1d827118241393}} 
+\index{network.c@{network.c}!get\_current\_iteration@{get\_current\_iteration}}
+\index{get\_current\_iteration@{get\_current\_iteration}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{get\_current\_iteration()}{get\_current\_iteration()}}
+{\footnotesize\ttfamily int64\+\_\+t get\+\_\+current\+\_\+iteration (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{network_8c_ac997daf700149608de15d93a083c33dc}\label{network_8c_ac997daf700149608de15d93a083c33dc}} 
+\index{network.c@{network.c}!get\_current\_rate@{get\_current\_rate}}
+\index{get\_current\_rate@{get\_current\_rate}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{get\_current\_rate()}{get\_current\_rate()}}
+{\footnotesize\ttfamily float get\+\_\+current\+\_\+rate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=298pt]{network_8c_ac997daf700149608de15d93a083c33dc_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a38133fd1fde9f03b10ad34fb88545ab2}\label{network_8c_a38133fd1fde9f03b10ad34fb88545ab2}} 
+\index{network.c@{network.c}!get\_current\_seq\_subdivisions@{get\_current\_seq\_subdivisions}}
+\index{get\_current\_seq\_subdivisions@{get\_current\_seq\_subdivisions}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{get\_current\_seq\_subdivisions()}{get\_current\_seq\_subdivisions()}}
+{\footnotesize\ttfamily float get\+\_\+current\+\_\+seq\+\_\+subdivisions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_a38133fd1fde9f03b10ad34fb88545ab2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a12782ce6d5a2d3c663dfa28879e5ddbb}\label{network_8c_a12782ce6d5a2d3c663dfa28879e5ddbb}} 
+\index{network.c@{network.c}!get\_layer\_string@{get\_layer\_string}}
+\index{get\_layer\_string@{get\_layer\_string}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{get\_layer\_string()}{get\_layer\_string()}}
+{\footnotesize\ttfamily char $\ast$ get\+\_\+layer\+\_\+string (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154}{LAYER\+\_\+\+TYPE}}}]{a }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{network_8c_a8b112853cbeb8ea2486bf0ab60926bf3}\label{network_8c_a8b112853cbeb8ea2486bf0ab60926bf3}} 
+\index{network.c@{network.c}!get\_network\_boxes@{get\_network\_boxes}}
+\index{get\_network\_boxes@{get\_network\_boxes}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{get\_network\_boxes()}{get\_network\_boxes()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structdetection}{detection}} $\ast$ get\+\_\+network\+\_\+boxes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{net,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{float}]{thresh,  }\item[{float}]{hier,  }\item[{int $\ast$}]{map,  }\item[{int}]{relative,  }\item[{int $\ast$}]{num,  }\item[{int}]{letter }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_a8b112853cbeb8ea2486bf0ab60926bf3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a46b7f52c4149617c9f99a5c80ddb3c62}\label{network_8c_a46b7f52c4149617c9f99a5c80ddb3c62}} 
+\index{network.c@{network.c}!get\_network\_cost@{get\_network\_cost}}
+\index{get\_network\_cost@{get\_network\_cost}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{get\_network\_cost()}{get\_network\_cost()}}
+{\footnotesize\ttfamily float get\+\_\+network\+\_\+cost (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{network_8c_a242e1c3a11daeb8420068d79f1e53f8c}\label{network_8c_a242e1c3a11daeb8420068d79f1e53f8c}} 
+\index{network.c@{network.c}!get\_network\_detection\_layer@{get\_network\_detection\_layer}}
+\index{get\_network\_detection\_layer@{get\_network\_detection\_layer}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{get\_network\_detection\_layer()}{get\_network\_detection\_layer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detection__layer_8h_a3a5018a4d1685b278fc2586711a3a976}{detection\+\_\+layer}} get\+\_\+network\+\_\+detection\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{network_8c_a565138b1e47b93ded561ae9bc4a1ed10}\label{network_8c_a565138b1e47b93ded561ae9bc4a1ed10}} 
+\index{network.c@{network.c}!get\_network\_image@{get\_network\_image}}
+\index{get\_network\_image@{get\_network\_image}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{get\_network\_image()}{get\_network\_image()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structimage}{image}} get\+\_\+network\+\_\+image (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_a565138b1e47b93ded561ae9bc4a1ed10_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a5bb83a6363a3ed2358ce290c69be0d06}\label{network_8c_a5bb83a6363a3ed2358ce290c69be0d06}} 
+\index{network.c@{network.c}!get\_network\_image\_layer@{get\_network\_image\_layer}}
+\index{get\_network\_image\_layer@{get\_network\_image\_layer}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{get\_network\_image\_layer()}{get\_network\_image\_layer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structimage}{image}} get\+\_\+network\+\_\+image\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net,  }\item[{int}]{i }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_a5bb83a6363a3ed2358ce290c69be0d06_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_add852ed9ae352068b9faebde88432e0a}\label{network_8c_add852ed9ae352068b9faebde88432e0a}} 
+\index{network.c@{network.c}!get\_network\_input\_size@{get\_network\_input\_size}}
+\index{get\_network\_input\_size@{get\_network\_input\_size}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{get\_network\_input\_size()}{get\_network\_input\_size()}}
+{\footnotesize\ttfamily int get\+\_\+network\+\_\+input\+\_\+size (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{network_8c_adac37852db41f539966b8ce0e65bdd34}\label{network_8c_adac37852db41f539966b8ce0e65bdd34}} 
+\index{network.c@{network.c}!get\_network\_layer@{get\_network\_layer}}
+\index{get\_network\_layer@{get\_network\_layer}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{get\_network\_layer()}{get\_network\_layer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlayer}{layer}} $\ast$ get\+\_\+network\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{net,  }\item[{int}]{i }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{network_8c_a80be2d9576b5e94e38f2e5337159c2a0}\label{network_8c_a80be2d9576b5e94e38f2e5337159c2a0}} 
+\index{network.c@{network.c}!get\_network\_output@{get\_network\_output}}
+\index{get\_network\_output@{get\_network\_output}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{get\_network\_output()}{get\_network\_output()}}
+{\footnotesize\ttfamily float $\ast$ get\+\_\+network\+\_\+output (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{network_8c_a4c84d1db6ac9eb1beb77c84b7d962fab}\label{network_8c_a4c84d1db6ac9eb1beb77c84b7d962fab}} 
+\index{network.c@{network.c}!get\_network\_output\_size@{get\_network\_output\_size}}
+\index{get\_network\_output\_size@{get\_network\_output\_size}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{get\_network\_output\_size()}{get\_network\_output\_size()}}
+{\footnotesize\ttfamily int get\+\_\+network\+\_\+output\+\_\+size (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{network_8c_a7a804bdac41f35d78938f15579109979}\label{network_8c_a7a804bdac41f35d78938f15579109979}} 
+\index{network.c@{network.c}!get\_predicted\_class\_network@{get\_predicted\_class\_network}}
+\index{get\_predicted\_class\_network@{get\_predicted\_class\_network}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{get\_predicted\_class\_network()}{get\_predicted\_class\_network()}}
+{\footnotesize\ttfamily int get\+\_\+predicted\+\_\+class\+\_\+network (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=345pt]{network_8c_a7a804bdac41f35d78938f15579109979_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a972a0ca9abacb6a2b48f38c015d86c9b}\label{network_8c_a972a0ca9abacb6a2b48f38c015d86c9b}} 
+\index{network.c@{network.c}!get\_sequence\_value@{get\_sequence\_value}}
+\index{get\_sequence\_value@{get\_sequence\_value}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{get\_sequence\_value()}{get\_sequence\_value()}}
+{\footnotesize\ttfamily int get\+\_\+sequence\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{network_8c_a0643a1e5b2bba9db81453c92d4966ff9}\label{network_8c_a0643a1e5b2bba9db81453c92d4966ff9}} 
+\index{network.c@{network.c}!is\_ema\_initialized@{is\_ema\_initialized}}
+\index{is\_ema\_initialized@{is\_ema\_initialized}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{is\_ema\_initialized()}{is\_ema\_initialized()}}
+{\footnotesize\ttfamily int is\+\_\+ema\+\_\+initialized (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{network_8c_ae6ace48f77d38e97dff8fe86848320a6}\label{network_8c_ae6ace48f77d38e97dff8fe86848320a6}} 
+\index{network.c@{network.c}!lrelu@{lrelu}}
+\index{lrelu@{lrelu}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{lrelu()}{lrelu()}}
+{\footnotesize\ttfamily static float lrelu (\begin{DoxyParamCaption}\item[{float}]{src }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{network_8c_ad2dcde69603d71857d11484ae99bd8fe}\label{network_8c_ad2dcde69603d71857d11484ae99bd8fe}} 
+\index{network.c@{network.c}!make\_network@{make\_network}}
+\index{make\_network@{make\_network}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{make\_network()}{make\_network()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structnetwork}{network}} make\+\_\+network (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{network_8c_ad25743407e072b2c124f4a01a9927df9}\label{network_8c_ad25743407e072b2c124f4a01a9927df9}} 
+\index{network.c@{network.c}!make\_network\_boxes@{make\_network\_boxes}}
+\index{make\_network\_boxes@{make\_network\_boxes}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{make\_network\_boxes()}{make\_network\_boxes()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structdetection}{detection}} $\ast$ make\+\_\+network\+\_\+boxes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{net,  }\item[{float}]{thresh,  }\item[{int $\ast$}]{num }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_ad25743407e072b2c124f4a01a9927df9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_ac5caa5f69ac025cf3e62b3a986c1832f}\label{network_8c_ac5caa5f69ac025cf3e62b3a986c1832f}} 
+\index{network.c@{network.c}!make\_network\_boxes\_batch@{make\_network\_boxes\_batch}}
+\index{make\_network\_boxes\_batch@{make\_network\_boxes\_batch}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{make\_network\_boxes\_batch()}{make\_network\_boxes\_batch()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structdetection}{detection}} $\ast$ make\+\_\+network\+\_\+boxes\+\_\+batch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{net,  }\item[{float}]{thresh,  }\item[{int $\ast$}]{num,  }\item[{int}]{batch }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_ac5caa5f69ac025cf3e62b3a986c1832f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a5aaa1cd36832c1b6b1e2ef33ade17341}\label{network_8c_a5aaa1cd36832c1b6b1e2ef33ade17341}} 
+\index{network.c@{network.c}!network\_accuracies@{network\_accuracies}}
+\index{network\_accuracies@{network\_accuracies}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{network\_accuracies()}{network\_accuracies()}}
+{\footnotesize\ttfamily float $\ast$ network\+\_\+accuracies (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net,  }\item[{\mbox{\hyperlink{structdata}{data}}}]{d,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_a5aaa1cd36832c1b6b1e2ef33ade17341_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_ac046932b096b7f11a444efdb93ed920d}\label{network_8c_ac046932b096b7f11a444efdb93ed920d}} 
+\index{network.c@{network.c}!network\_accuracy@{network\_accuracy}}
+\index{network\_accuracy@{network\_accuracy}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{network\_accuracy()}{network\_accuracy()}}
+{\footnotesize\ttfamily float network\+\_\+accuracy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net,  }\item[{\mbox{\hyperlink{structdata}{data}}}]{d }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_ac046932b096b7f11a444efdb93ed920d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_aaa77e8c97a6c4963b95512f377725e0e}\label{network_8c_aaa77e8c97a6c4963b95512f377725e0e}} 
+\index{network.c@{network.c}!network\_accuracy\_multi@{network\_accuracy\_multi}}
+\index{network\_accuracy\_multi@{network\_accuracy\_multi}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{network\_accuracy\_multi()}{network\_accuracy\_multi()}}
+{\footnotesize\ttfamily float network\+\_\+accuracy\+\_\+multi (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net,  }\item[{\mbox{\hyperlink{structdata}{data}}}]{d,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_aaa77e8c97a6c4963b95512f377725e0e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_ab1b9d257b7f53d7bd6419cca198927c9}\label{network_8c_ab1b9d257b7f53d7bd6419cca198927c9}} 
+\index{network.c@{network.c}!network\_height@{network\_height}}
+\index{network\_height@{network\_height}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{network\_height()}{network\_height()}}
+{\footnotesize\ttfamily int network\+\_\+height (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{net }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{network_8c_ac90adcb059cb26e2d30b7add256f266e}\label{network_8c_ac90adcb059cb26e2d30b7add256f266e}} 
+\index{network.c@{network.c}!network\_predict@{network\_predict}}
+\index{network\_predict@{network\_predict}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{network\_predict()}{network\_predict()}}
+{\footnotesize\ttfamily float $\ast$ network\+\_\+predict (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net,  }\item[{float $\ast$}]{input }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_ac90adcb059cb26e2d30b7add256f266e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_ac02079bf1198cde9e1396a7524ab0df8}\label{network_8c_ac02079bf1198cde9e1396a7524ab0df8}} 
+\index{network.c@{network.c}!network\_predict\_batch@{network\_predict\_batch}}
+\index{network\_predict\_batch@{network\_predict\_batch}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{network\_predict\_batch()}{network\_predict\_batch()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structdet__num__pair}{det\+\_\+num\+\_\+pair}} $\ast$ network\+\_\+predict\+\_\+batch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{net,  }\item[{\mbox{\hyperlink{structimage}{image}}}]{im,  }\item[{int}]{batch\+\_\+size,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{float}]{thresh,  }\item[{float}]{hier,  }\item[{int $\ast$}]{map,  }\item[{int}]{relative,  }\item[{int}]{letter }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_ac02079bf1198cde9e1396a7524ab0df8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_aad8d8b4979ad81ba5a61b4f3d2e39fc9}\label{network_8c_aad8d8b4979ad81ba5a61b4f3d2e39fc9}} 
+\index{network.c@{network.c}!network\_predict\_data@{network\_predict\_data}}
+\index{network\_predict\_data@{network\_predict\_data}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{network\_predict\_data()}{network\_predict\_data()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmatrix}{matrix}} network\+\_\+predict\+\_\+data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net,  }\item[{\mbox{\hyperlink{structdata}{data}}}]{test }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_aad8d8b4979ad81ba5a61b4f3d2e39fc9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a74ce5c6fc19f5491a674543a43c32d13}\label{network_8c_a74ce5c6fc19f5491a674543a43c32d13}} 
+\index{network.c@{network.c}!network\_predict\_data\_multi@{network\_predict\_data\_multi}}
+\index{network\_predict\_data\_multi@{network\_predict\_data\_multi}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{network\_predict\_data\_multi()}{network\_predict\_data\_multi()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmatrix}{matrix}} network\+\_\+predict\+\_\+data\+\_\+multi (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net,  }\item[{\mbox{\hyperlink{structdata}{data}}}]{test,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_a74ce5c6fc19f5491a674543a43c32d13_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_abbf418110515274c493016ede3f32420}\label{network_8c_abbf418110515274c493016ede3f32420}} 
+\index{network.c@{network.c}!network\_predict\_image@{network\_predict\_image}}
+\index{network\_predict\_image@{network\_predict\_image}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{network\_predict\_image()}{network\_predict\_image()}}
+{\footnotesize\ttfamily float $\ast$ network\+\_\+predict\+\_\+image (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{net,  }\item[{\mbox{\hyperlink{structimage}{image}}}]{im }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_abbf418110515274c493016ede3f32420_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a59527bf7aceca7381cd29718e3720fbb}\label{network_8c_a59527bf7aceca7381cd29718e3720fbb}} 
+\index{network.c@{network.c}!network\_predict\_image\_letterbox@{network\_predict\_image\_letterbox}}
+\index{network\_predict\_image\_letterbox@{network\_predict\_image\_letterbox}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{network\_predict\_image\_letterbox()}{network\_predict\_image\_letterbox()}}
+{\footnotesize\ttfamily float $\ast$ network\+\_\+predict\+\_\+image\+\_\+letterbox (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{net,  }\item[{\mbox{\hyperlink{structimage}{image}}}]{im }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_a59527bf7aceca7381cd29718e3720fbb_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a98d20ac80bfbfc6353c2b3ce1209c587}\label{network_8c_a98d20ac80bfbfc6353c2b3ce1209c587}} 
+\index{network.c@{network.c}!network\_predict\_ptr@{network\_predict\_ptr}}
+\index{network\_predict\_ptr@{network\_predict\_ptr}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{network\_predict\_ptr()}{network\_predict\_ptr()}}
+{\footnotesize\ttfamily float $\ast$ network\+\_\+predict\+\_\+ptr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{net,  }\item[{float $\ast$}]{input }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_a98d20ac80bfbfc6353c2b3ce1209c587_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a5df4a28ccc9a076423f749953e1fd393}\label{network_8c_a5df4a28ccc9a076423f749953e1fd393}} 
+\index{network.c@{network.c}!network\_width@{network\_width}}
+\index{network\_width@{network\_width}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{network\_width()}{network\_width()}}
+{\footnotesize\ttfamily int network\+\_\+width (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{net }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{network_8c_ac0b84033651f97833207b0e0c9776d11}\label{network_8c_ac0b84033651f97833207b0e0c9776d11}} 
+\index{network.c@{network.c}!num\_detections@{num\_detections}}
+\index{num\_detections@{num\_detections}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{num\_detections()}{num\_detections()}}
+{\footnotesize\ttfamily int num\+\_\+detections (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{net,  }\item[{float}]{thresh }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_ac0b84033651f97833207b0e0c9776d11_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_ad2aae8379d7abffc2d8419b4a59d0758}\label{network_8c_ad2aae8379d7abffc2d8419b4a59d0758}} 
+\index{network.c@{network.c}!num\_detections\_batch@{num\_detections\_batch}}
+\index{num\_detections\_batch@{num\_detections\_batch}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{num\_detections\_batch()}{num\_detections\_batch()}}
+{\footnotesize\ttfamily int num\+\_\+detections\+\_\+batch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{net,  }\item[{float}]{thresh,  }\item[{int}]{batch }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_ad2aae8379d7abffc2d8419b4a59d0758_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_aded1fe29d38b99e33a816677a4c01078}\label{network_8c_aded1fe29d38b99e33a816677a4c01078}} 
+\index{network.c@{network.c}!print\_network@{print\_network}}
+\index{print\_network@{print\_network}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{print\_network()}{print\_network()}}
+{\footnotesize\ttfamily void print\+\_\+network (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_aded1fe29d38b99e33a816677a4c01078_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_ab69bec742eb3e270d13be4a2a833bcb9}\label{network_8c_ab69bec742eb3e270d13be4a2a833bcb9}} 
+\index{network.c@{network.c}!randomize\_network\_recurrent\_state@{randomize\_network\_recurrent\_state}}
+\index{randomize\_network\_recurrent\_state@{randomize\_network\_recurrent\_state}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{randomize\_network\_recurrent\_state()}{randomize\_network\_recurrent\_state()}}
+{\footnotesize\ttfamily void randomize\+\_\+network\+\_\+recurrent\+\_\+state (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_ab69bec742eb3e270d13be4a2a833bcb9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_ac91a6f724426c7daf59b6b99e724af2c}\label{network_8c_ac91a6f724426c7daf59b6b99e724af2c}} 
+\index{network.c@{network.c}!recalculate\_workspace\_size@{recalculate\_workspace\_size}}
+\index{recalculate\_workspace\_size@{recalculate\_workspace\_size}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{recalculate\_workspace\_size()}{recalculate\_workspace\_size()}}
+{\footnotesize\ttfamily int recalculate\+\_\+workspace\+\_\+size (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{net }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_ac91a6f724426c7daf59b6b99e724af2c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a7201d2eb22ebe2c966d4707751af3008}\label{network_8c_a7201d2eb22ebe2c966d4707751af3008}} 
+\index{network.c@{network.c}!reject\_similar\_weights@{reject\_similar\_weights}}
+\index{reject\_similar\_weights@{reject\_similar\_weights}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{reject\_similar\_weights()}{reject\_similar\_weights()}}
+{\footnotesize\ttfamily void reject\+\_\+similar\+\_\+weights (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net,  }\item[{float}]{sim\+\_\+threshold }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=318pt]{network_8c_a7201d2eb22ebe2c966d4707751af3008_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a688285c977a75a3d3a2a5f853c8077f1}\label{network_8c_a688285c977a75a3d3a2a5f853c8077f1}} 
+\index{network.c@{network.c}!relu@{relu}}
+\index{relu@{relu}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{relu()}{relu()}}
+{\footnotesize\ttfamily static float relu (\begin{DoxyParamCaption}\item[{float}]{src }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{network_8c_aab21fd7e8728622b883fe4c4d691eb06}\label{network_8c_aab21fd7e8728622b883fe4c4d691eb06}} 
+\index{network.c@{network.c}!remember\_network\_recurrent\_state@{remember\_network\_recurrent\_state}}
+\index{remember\_network\_recurrent\_state@{remember\_network\_recurrent\_state}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{remember\_network\_recurrent\_state()}{remember\_network\_recurrent\_state()}}
+{\footnotesize\ttfamily void remember\+\_\+network\+\_\+recurrent\+\_\+state (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_aab21fd7e8728622b883fe4c4d691eb06_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a1fa8069c4dcc291063967cf6c960749a}\label{network_8c_a1fa8069c4dcc291063967cf6c960749a}} 
+\index{network.c@{network.c}!reset\_network\_state@{reset\_network\_state}}
+\index{reset\_network\_state@{reset\_network\_state}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{reset\_network\_state()}{reset\_network\_state()}}
+{\footnotesize\ttfamily void reset\+\_\+network\+\_\+state (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{net,  }\item[{int}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{network_8c_a2fa6dbb01b65d7ec1e6dcb490fdda445}\label{network_8c_a2fa6dbb01b65d7ec1e6dcb490fdda445}} 
+\index{network.c@{network.c}!reset\_rnn@{reset\_rnn}}
+\index{reset\_rnn@{reset\_rnn}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{reset\_rnn()}{reset\_rnn()}}
+{\footnotesize\ttfamily void reset\+\_\+rnn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{net }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=277pt]{network_8c_a2fa6dbb01b65d7ec1e6dcb490fdda445_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a6ae710d2d9ad32cfdec1f925f48c2b50}\label{network_8c_a6ae710d2d9ad32cfdec1f925f48c2b50}} 
+\index{network.c@{network.c}!resize\_network@{resize\_network}}
+\index{resize\_network@{resize\_network}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{resize\_network()}{resize\_network()}}
+{\footnotesize\ttfamily int resize\+\_\+network (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{net,  }\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_a6ae710d2d9ad32cfdec1f925f48c2b50_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_ad2e19f76773ce95b9795f8796b5523bd}\label{network_8c_ad2e19f76773ce95b9795f8796b5523bd}} 
+\index{network.c@{network.c}!restore\_network\_recurrent\_state@{restore\_network\_recurrent\_state}}
+\index{restore\_network\_recurrent\_state@{restore\_network\_recurrent\_state}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{restore\_network\_recurrent\_state()}{restore\_network\_recurrent\_state()}}
+{\footnotesize\ttfamily void restore\+\_\+network\+\_\+recurrent\+\_\+state (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_ad2e19f76773ce95b9795f8796b5523bd_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a0cf39a1104b8f0415c56796b54a3670a}\label{network_8c_a0cf39a1104b8f0415c56796b54a3670a}} 
+\index{network.c@{network.c}!set\_batch\_network@{set\_batch\_network}}
+\index{set\_batch\_network@{set\_batch\_network}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{set\_batch\_network()}{set\_batch\_network()}}
+{\footnotesize\ttfamily void set\+\_\+batch\+\_\+network (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{net,  }\item[{int}]{b }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_a0cf39a1104b8f0415c56796b54a3670a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_aaa4dd7e194fcffacdc8dc06955370527}\label{network_8c_aaa4dd7e194fcffacdc8dc06955370527}} 
+\index{network.c@{network.c}!top\_predictions@{top\_predictions}}
+\index{top\_predictions@{top\_predictions}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{top\_predictions()}{top\_predictions()}}
+{\footnotesize\ttfamily void top\+\_\+predictions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net,  }\item[{int}]{k,  }\item[{int $\ast$}]{index }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=324pt]{network_8c_aaa4dd7e194fcffacdc8dc06955370527_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_aeb752f771f5cfe8c401fc8dee8f3e439}\label{network_8c_aeb752f771f5cfe8c401fc8dee8f3e439}} 
+\index{network.c@{network.c}!train\_network@{train\_network}}
+\index{train\_network@{train\_network}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{train\_network()}{train\_network()}}
+{\footnotesize\ttfamily float train\+\_\+network (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net,  }\item[{\mbox{\hyperlink{structdata}{data}}}]{d }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_aeb752f771f5cfe8c401fc8dee8f3e439_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a4b91888b95e37adf361669399843a940}\label{network_8c_a4b91888b95e37adf361669399843a940}} 
+\index{network.c@{network.c}!train\_network\_batch@{train\_network\_batch}}
+\index{train\_network\_batch@{train\_network\_batch}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{train\_network\_batch()}{train\_network\_batch()}}
+{\footnotesize\ttfamily float train\+\_\+network\+\_\+batch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net,  }\item[{\mbox{\hyperlink{structdata}{data}}}]{d,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_a4b91888b95e37adf361669399843a940_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a0f3d3c4cbdf9c64f7f22eb649d2019a6}\label{network_8c_a0f3d3c4cbdf9c64f7f22eb649d2019a6}} 
+\index{network.c@{network.c}!train\_network\_datum@{train\_network\_datum}}
+\index{train\_network\_datum@{train\_network\_datum}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{train\_network\_datum()}{train\_network\_datum()}}
+{\footnotesize\ttfamily float train\+\_\+network\+\_\+datum (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net,  }\item[{float $\ast$}]{x,  }\item[{float $\ast$}]{y }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_a0f3d3c4cbdf9c64f7f22eb649d2019a6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a8b54b8e2d0a90c40d03b84d67503e279}\label{network_8c_a8b54b8e2d0a90c40d03b84d67503e279}} 
+\index{network.c@{network.c}!train\_network\_sgd@{train\_network\_sgd}}
+\index{train\_network\_sgd@{train\_network\_sgd}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{train\_network\_sgd()}{train\_network\_sgd()}}
+{\footnotesize\ttfamily float train\+\_\+network\+\_\+sgd (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net,  }\item[{\mbox{\hyperlink{structdata}{data}}}]{d,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_a8b54b8e2d0a90c40d03b84d67503e279_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a04614f46839fba458294a79cfef40382}\label{network_8c_a04614f46839fba458294a79cfef40382}} 
+\index{network.c@{network.c}!train\_network\_waitkey@{train\_network\_waitkey}}
+\index{train\_network\_waitkey@{train\_network\_waitkey}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{train\_network\_waitkey()}{train\_network\_waitkey()}}
+{\footnotesize\ttfamily float train\+\_\+network\+\_\+waitkey (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net,  }\item[{\mbox{\hyperlink{structdata}{data}}}]{d,  }\item[{int}]{wait\+\_\+key }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_a04614f46839fba458294a79cfef40382_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_a87d52c62f9d37ca596ddecc132a0f0ab}\label{network_8c_a87d52c62f9d37ca596ddecc132a0f0ab}} 
+\index{network.c@{network.c}!update\_network@{update\_network}}
+\index{update\_network@{update\_network}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{update\_network()}{update\_network()}}
+{\footnotesize\ttfamily void update\+\_\+network (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_a87d52c62f9d37ca596ddecc132a0f0ab_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{network_8c_ad1b0b41c13be3bdaeb07f5c9f59c62c6}\label{network_8c_ad1b0b41c13be3bdaeb07f5c9f59c62c6}} 
+\index{network.c@{network.c}!visualize\_network@{visualize\_network}}
+\index{visualize\_network@{visualize\_network}!network.c@{network.c}}
+\doxysubsubsection{\texorpdfstring{visualize\_network()}{visualize\_network()}}
+{\footnotesize\ttfamily void visualize\+\_\+network (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structnetwork}{network}}}]{net }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{network_8c_ad1b0b41c13be3bdaeb07f5c9f59c62c6_cgraph}
+\end{center}
+\end{figure}

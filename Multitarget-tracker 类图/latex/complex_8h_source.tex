@@ -1,0 +1,70 @@
+\hypertarget{complex_8h_source}{}\doxysection{complex.\+h}
+\label{complex_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/complex.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/complex.h}}
+\mbox{\hyperlink{complex_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{    pybind11/complex.h: Complex number support}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{    Copyright (c) 2016 Wenzel Jakob <wenzel.jakob@epfl.ch>}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{    All rights reserved. Use of this source code is governed by a}}
+\DoxyCodeLine{7 \textcolor{comment}{    BSD-\/style license that can be found in the LICENSE file.}}
+\DoxyCodeLine{8 \textcolor{comment}{*/}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{pybind11_8h}{pybind11.h}}"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <complex>}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#ifdef I}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#  undef I}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 template <typename T> struct \mbox{\hyperlink{structformat__descriptor}{format\_descriptor}}<\mbox{\hyperlink{namespacestd}{std}}::complex<T>, detail::\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<\mbox{\hyperlink{namespacestd}{std}}::is\_floating\_point<T>::value>> \{}
+\DoxyCodeLine{23     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{const} \textcolor{keywordtype}{char} c = \mbox{\hyperlink{structformat__descriptor}{format\_descriptor<T>::c}};}
+\DoxyCodeLine{24     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{const} \textcolor{keywordtype}{char} value[3] = \{ \textcolor{charliteral}{'Z'}, c, \textcolor{charliteral}{'\(\backslash\)0'} \};}
+\DoxyCodeLine{25     \textcolor{keyword}{static} std::string \mbox{\hyperlink{structformat__descriptor_3_01std_1_1complex_3_01_t_01_4_00_01detail_1_1enable__if__t_3_01std_1_183b0c7485f88e97534b116276abc2578_a533c13d21f493e2487e71b050dff7880}{format}}() \{ \textcolor{keywordflow}{return} std::string(value); \}}
+\DoxyCodeLine{26 \};}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#ifndef PYBIND11\_CPP17}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{constexpr} \textcolor{keyword}{const} \textcolor{keywordtype}{char} \mbox{\hyperlink{structformat__descriptor}{format\_descriptor}}<}
+\DoxyCodeLine{31     std::complex<T>, detail::enable\_if\_t<std::is\_floating\_point<T>::value>>::value[3];}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 template <typename T> struct \mbox{\hyperlink{structis__fmt__numeric}{is\_fmt\_numeric}}<\mbox{\hyperlink{namespacestd}{std}}::complex<T>, detail::\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<\mbox{\hyperlink{namespacestd}{std}}::is\_floating\_point<T>::value>> \{}
+\DoxyCodeLine{38     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{bool} value = \textcolor{keyword}{true};}
+\DoxyCodeLine{39     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{int} index = \mbox{\hyperlink{structis__fmt__numeric}{is\_fmt\_numeric<T>::index}} + 3;}
+\DoxyCodeLine{40 \};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{class }\mbox{\hyperlink{classtype__caster}{type\_caster}}<\mbox{\hyperlink{namespacestd}{std}}::complex<T>> \{}
+\DoxyCodeLine{43 \textcolor{keyword}{public}:}
+\DoxyCodeLine{44     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classtype__caster_3_01std_1_1complex_3_01_t_01_4_01_4_a0358066accceb09dc3e88f9a50f0fb00}{load}}(\mbox{\hyperlink{classhandle}{handle}} src, \textcolor{keywordtype}{bool} convert) \{}
+\DoxyCodeLine{45         \textcolor{keywordflow}{if} (!src)}
+\DoxyCodeLine{46             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{47         \textcolor{keywordflow}{if} (!convert \&\& !PyComplex\_Check(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()))}
+\DoxyCodeLine{48             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{49         Py\_complex result = PyComplex\_AsCComplex(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}());}
+\DoxyCodeLine{50         \textcolor{keywordflow}{if} (result.real == -\/1.0 \&\& PyErr\_Occurred()) \{}
+\DoxyCodeLine{51             PyErr\_Clear();}
+\DoxyCodeLine{52             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{53         \}}
+\DoxyCodeLine{54         \mbox{\hyperlink{classtype__caster__generic_a077b8d1e4af829443b2e41c3e5786f4d}{value}} = std::complex<T>((T) result.real, (T) result.imag);}
+\DoxyCodeLine{55         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{56     \}}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58     \textcolor{keyword}{static} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{classtype__caster_3_01std_1_1complex_3_01_t_01_4_01_4_ae0a66f06eff200f0ea8105945f5e39de}{cast}}(\textcolor{keyword}{const} std::complex<T> \&src, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} \textcolor{comment}{/* policy */}, \mbox{\hyperlink{classhandle}{handle}} \textcolor{comment}{/* parent */}) \{}
+\DoxyCodeLine{59         \textcolor{keywordflow}{return} PyComplex\_FromDoubles((\textcolor{keywordtype}{double}) src.real(), (\textcolor{keywordtype}{double}) src.imag());}
+\DoxyCodeLine{60     \}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62     \mbox{\hyperlink{classtype__caster_3_01std_1_1complex_3_01_t_01_4_01_4_a58b7128eed3564ae4060242f99c8dd61}{PYBIND11\_TYPE\_CASTER}}(std::complex<T>, \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}complex"{}}));}
+\DoxyCodeLine{63 \};}
+\DoxyCodeLine{64 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{65 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+
+\end{DoxyCode}

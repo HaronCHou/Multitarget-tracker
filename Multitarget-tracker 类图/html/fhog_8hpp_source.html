@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: D:/zhr_files/Multitarget-tracker-master/src/Tracker/ldes/fhog.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">My Project
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_4c3458e0ccdb4c3720723c1caa1aaa1c.html">zhr_files</a></li><li class="navelem"><a class="el" href="dir_5a8d4bff745a16410b5074d3583a347e.html">Multitarget-tracker-master</a></li><li class="navelem"><a class="el" href="dir_46a27ab0460a6f8f8d12d2f44f38bf6b.html">src</a></li><li class="navelem"><a class="el" href="dir_49af9105677bf904e08b5b3082398310.html">Tracker</a></li><li class="navelem"><a class="el" href="dir_74228cc2cfe84fb0773107d64fc94a91.html">ldes</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">fhog.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="fhog_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*M///////////////////////////////////////////////////////////////////////////////////////</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">//</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//  By downloading, copying, installing or using the software you agree to this license.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//  If you do not agree to this license, do not download, install,</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">//  copy or use the software.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">//</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//                           License Agreement</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">//                For Open Source Computer Vision Library</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">//</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Copyright (C) 2010-2013, University of Nizhny Novgorod, all rights reserved.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// Third party copyrights are property of their respective owners.</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">//</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// Redistribution and use in source and binary forms, with or without modification,</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// are permitted provided that the following conditions are met:</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">//</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">//   * Redistribution&#39;s of source code must retain the above copyright notice,</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">//     this list of conditions and the following disclaimer.</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">//</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">//   * Redistribution&#39;s in binary form must reproduce the above copyright notice,</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">//     this list of conditions and the following disclaimer in the documentation</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">//     and/or other materials provided with the distribution.</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">//</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">//   * The name of the copyright holders may not be used to endorse or promote products</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">//     derived from this software without specific prior written permission.</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">//</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">// This software is provided by the copyright holders and contributors &quot;as is&quot; and</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">// any express or implied warranties, including, but not limited to, the implied</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">// warranties of merchantability and fitness for a particular purpose are disclaimed.</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">// In no event shall the Intel Corporation or contributors be liable for any direct,</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">// indirect, incidental, special, exemplary, or consequential damages</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">// (including, but not limited to, procurement of substitute goods or services;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">// loss of use, data, or profits; or business interruption) however caused</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">// and on any theory of liability, whether in contract, strict liability,</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">// or tort (including negligence or otherwise) arising in any way out of</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">// the use of this software, even if advised of the possibility of such damage.</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">//</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">//M*/</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">//Modified from latentsvm module&#39;s &quot;_lsvmc_latentsvm.h&quot;.</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">/*                      Latent SVM prediction API                            */</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">/*****************************************************************************/</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="preprocessor">#ifndef _FHOG_H_</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="preprocessor">#define _FHOG_H_</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">//#include &quot;_lsvmc_types.h&quot;</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">//#include &quot;_lsvmc_error.h&quot;</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">//#include &quot;_lsvmc_routine.h&quot;</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#include &lt;opencv2/imgproc.hpp&gt;</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">//modified from &quot;_lsvmc_types.h&quot;</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">// DataType: STRUCT featureMap</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">// FEATURE MAP DESCRIPTION</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">//   Rectangular map (sizeX x sizeY), </span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">//   every cell stores feature vector (dimension = numFeatures)</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">// map             - matrix of feature vectors</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">//                   to set and get feature vectors (i,j) </span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">//                   used formula map[(j * sizeX + i) * p + k], where</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">//                   k - component of feature vector in cell (i, j)</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="struct_cv_l_s_v_m_feature_map_caskade.html">   71</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span>{</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="struct_cv_l_s_v_m_feature_map_caskade.html#a44871b8ea18991e52d84a8d6712c6568">   72</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="struct_cv_l_s_v_m_feature_map_caskade.html#a44871b8ea18991e52d84a8d6712c6568">sizeX</a>;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="struct_cv_l_s_v_m_feature_map_caskade.html#a1a366b92065c42fccbd15a346f536334">   73</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="struct_cv_l_s_v_m_feature_map_caskade.html#a1a366b92065c42fccbd15a346f536334">sizeY</a>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="struct_cv_l_s_v_m_feature_map_caskade.html#af21ee5ff544db7eccfaca657fe505bb2">   74</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="struct_cv_l_s_v_m_feature_map_caskade.html#af21ee5ff544db7eccfaca657fe505bb2">numFeatures</a>;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="struct_cv_l_s_v_m_feature_map_caskade.html#a532eeb182fa8954b411c3ec905d16184">   75</a></span>    <span class="keywordtype">float</span> *<a class="code hl_variable" href="struct_cv_l_s_v_m_feature_map_caskade.html#a532eeb182fa8954b411c3ec905d16184">map</a>;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>} <a class="code hl_struct" href="struct_cv_l_s_v_m_feature_map_caskade.html">CvLSVMFeatureMapCaskade</a>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="preprocessor">#include &quot;float.h&quot;</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="fhog_8hpp.html#a598a3330b3c21701223ee0ca14316eca">   81</a></span><span class="preprocessor">#define PI    CV_PI</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="fhog_8hpp.html#a6ebf6899d6c1c8b7b9d09be872c05aae">   83</a></span><span class="preprocessor">#define EPS 0.000001</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="fhog_8hpp.html#aa0b293b417126db6e8ddde328d829756">   85</a></span><span class="preprocessor">#define F_MAX FLT_MAX</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="fhog_8hpp.html#ab5bbc5eef54f1f3a0adbbf08c5df6899">   86</a></span><span class="preprocessor">#define F_MIN -FLT_MAX</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">// The number of elements in bin</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">// The number of sectors in gradient histogram building</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="fhog_8hpp.html#a70fe6f9216bb18c8c518fb3668804612">   90</a></span><span class="preprocessor">#define NUM_SECTOR 9</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">// The number of levels in image resize procedure</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">// We need Lambda levels to resize image twice</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno"><a class="line" href="fhog_8hpp.html#a738607799d6938e1b15f463688029cd5">   94</a></span><span class="preprocessor">#define LAMBDA 10</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">// Block size. Used in feature pyramid building procedure</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="fhog_8hpp.html#a07cb507ae058322799c72d71638a20a7">   97</a></span><span class="preprocessor">#define SIDE_LENGTH 8</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="fhog_8hpp.html#ad7424c855a2b7f17a41f770654472555">   99</a></span><span class="preprocessor">#define VAL_OF_TRUNCATE 0.2f </span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment">//modified from &quot;_lsvm_error.h&quot;</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="fhog_8hpp.html#aa1be1610db3d4cafe3d90e655ad2019a">  103</a></span><span class="preprocessor">#define LATENT_SVM_OK 0</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="fhog_8hpp.html#a789bfaff1f30ea0c76e4eed620749a7d">  104</a></span><span class="preprocessor">#define LATENT_SVM_MEM_NULL 2</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="fhog_8hpp.html#a9c2461142254f46d682965eb93ceed20">  105</a></span><span class="preprocessor">#define DISTANCE_TRANSFORM_OK 1</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="fhog_8hpp.html#ae54e891d0507b63ba82a948bbbd47b7c">  106</a></span><span class="preprocessor">#define DISTANCE_TRANSFORM_GET_INTERSECTION_ERROR -1</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="fhog_8hpp.html#aa517c7da4ef79f0c6a753ba1663c088a">  107</a></span><span class="preprocessor">#define DISTANCE_TRANSFORM_ERROR -2</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="fhog_8hpp.html#a65048cd64e7df143acbfd1d2dc3c5daf">  108</a></span><span class="preprocessor">#define DISTANCE_TRANSFORM_EQUAL_POINTS -3</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="fhog_8hpp.html#a59cf3624059d36e9d1dc003d63af2cce">  109</a></span><span class="preprocessor">#define LATENT_SVM_GET_FEATURE_PYRAMID_FAILED -4</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="fhog_8hpp.html#a2841b0f0974a6bd754ce12a9f046c8c2">  110</a></span><span class="preprocessor">#define LATENT_SVM_SEARCH_OBJECT_FAILED -5</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno"><a class="line" href="fhog_8hpp.html#a0d4ad280eec779935cb0102df9d12f5a">  111</a></span><span class="preprocessor">#define LATENT_SVM_FAILED_SUPERPOSITION -6</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="fhog_8hpp.html#ab4922578d2df8cedb23b4b4db31a002c">  112</a></span><span class="preprocessor">#define FILTER_OUT_OF_BOUNDARIES -7</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="fhog_8hpp.html#acff94dfd5a524e74cbc596cb38894ec6">  113</a></span><span class="preprocessor">#define LATENT_SVM_TBB_SCHEDULE_CREATION_FAILED -8</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="fhog_8hpp.html#acf4c2ffaaa990ff0054016e69b252927">  114</a></span><span class="preprocessor">#define LATENT_SVM_TBB_NUMTHREADS_NOT_CORRECT -9</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="fhog_8hpp.html#ad802f59502358b1c71658e8b22b222dc">  115</a></span><span class="preprocessor">#define FFT_OK 2</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="fhog_8hpp.html#a2c2fb03f055afc7bb2c857a52a614c64">  116</a></span><span class="preprocessor">#define FFT_ERROR -10</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="fhog_8hpp.html#af4aebd8245bf8239be833b9e98578273">  117</a></span><span class="preprocessor">#define LSVM_PARSER_FILE_NOT_FOUND -11</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="comment">// Getting feature map for the selected subimage  </span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="comment">//</span></div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="comment">// API</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="comment">// int getFeatureMaps(const cv::Mat&amp; image, const int k, featureMap **map);</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="comment">// INPUT</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment">// image             - selected subimage</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment">// k                 - size of cells</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment">// OUTPUT</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment">// map               - feature map</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="comment">// RESULT</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="comment">// Error status</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="comment">*/</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="keywordtype">int</span> <a class="code hl_function" href="fhog_8hpp.html#a647913ecf376186d56a1dc1e75a26399">getFeatureMaps</a>(<span class="keyword">const</span> cv::Mat&amp; <a class="code hl_struct" href="structimage.html">image</a>, <span class="keyword">const</span> <span class="keywordtype">int</span> k, <a class="code hl_struct" href="struct_cv_l_s_v_m_feature_map_caskade.html">CvLSVMFeatureMapCaskade</a> **map);</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="comment">// Feature map Normalization and Truncation </span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="comment">//</span></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="comment">// API</span></div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="comment">// int normalizationAndTruncationFeatureMaps(featureMap *map, const float alfa);</span></div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span><span class="comment">// INPUT</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="comment">// map               - feature map</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="comment">// alfa              - truncation threshold</span></div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="comment">// OUTPUT</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="comment">// map               - truncated and normalized feature map</span></div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="comment">// RESULT</span></div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="comment">// Error status</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="comment">*/</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="keywordtype">int</span> <a class="code hl_function" href="fhog_8hpp.html#a4d72bd91b0a5ba99cd4ac0d30531d921">normalizeAndTruncate</a>(<a class="code hl_struct" href="struct_cv_l_s_v_m_feature_map_caskade.html">CvLSVMFeatureMapCaskade</a> *map, <span class="keyword">const</span> <span class="keywordtype">float</span> alfa);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="comment">// Feature map reduction</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="comment">// In each cell we reduce dimension of the feature vector</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="comment">// according to original paper special procedure</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="comment">//</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="comment">// API</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="comment">// int PCAFeatureMaps(featureMap *map)</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="comment">// INPUT</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="comment">// map               - feature map</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="comment">// OUTPUT</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="comment">// map               - feature map</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span><span class="comment">// RESULT</span></div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="comment">// Error status</span></div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="comment">*/</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="keywordtype">int</span> <a class="code hl_function" href="fhog_8hpp.html#a2519db8b7fb0548c8068476b45cac834">PCAFeatureMaps</a>(<a class="code hl_struct" href="struct_cv_l_s_v_m_feature_map_caskade.html">CvLSVMFeatureMapCaskade</a> *map);</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="comment">//modified from &quot;lsvmc_routine.h&quot;</span></div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="keywordtype">int</span> <a class="code hl_function" href="fhog_8hpp.html#a15d4195820d743b2d99f0d1311554cfc">allocFeatureMapObject</a>(<a class="code hl_struct" href="struct_cv_l_s_v_m_feature_map_caskade.html">CvLSVMFeatureMapCaskade</a> **obj, <span class="keyword">const</span> <span class="keywordtype">int</span> sizeX, <span class="keyword">const</span> <span class="keywordtype">int</span> sizeY,</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>                          <span class="keyword">const</span> <span class="keywordtype">int</span> p);</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="keywordtype">int</span> <a class="code hl_function" href="fhog_8hpp.html#a08df84e370cca7ce93e290aa853a8fd7">freeFeatureMapObject</a> (<a class="code hl_struct" href="struct_cv_l_s_v_m_feature_map_caskade.html">CvLSVMFeatureMapCaskade</a> **obj);</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="afhog_8hpp_html_a08df84e370cca7ce93e290aa853a8fd7"><div class="ttname"><a href="fhog_8hpp.html#a08df84e370cca7ce93e290aa853a8fd7">freeFeatureMapObject</a></div><div class="ttdeci">int freeFeatureMapObject(CvLSVMFeatureMapCaskade **obj)</div><div class="ttdef"><b>Definition:</b> fhog.cpp:478</div></div>
+<div class="ttc" id="afhog_8hpp_html_a15d4195820d743b2d99f0d1311554cfc"><div class="ttname"><a href="fhog_8hpp.html#a15d4195820d743b2d99f0d1311554cfc">allocFeatureMapObject</a></div><div class="ttdeci">int allocFeatureMapObject(CvLSVMFeatureMapCaskade **obj, const int sizeX, const int sizeY, const int p)</div><div class="ttdef"><b>Definition:</b> fhog.cpp:461</div></div>
+<div class="ttc" id="afhog_8hpp_html_a2519db8b7fb0548c8068476b45cac834"><div class="ttname"><a href="fhog_8hpp.html#a2519db8b7fb0548c8068476b45cac834">PCAFeatureMaps</a></div><div class="ttdeci">int PCAFeatureMaps(CvLSVMFeatureMapCaskade *map)</div><div class="ttdef"><b>Definition:</b> fhog.cpp:388</div></div>
+<div class="ttc" id="afhog_8hpp_html_a4d72bd91b0a5ba99cd4ac0d30531d921"><div class="ttname"><a href="fhog_8hpp.html#a4d72bd91b0a5ba99cd4ac0d30531d921">normalizeAndTruncate</a></div><div class="ttdeci">int normalizeAndTruncate(CvLSVMFeatureMapCaskade *map, const float alfa)</div><div class="ttdef"><b>Definition:</b> fhog.cpp:264</div></div>
+<div class="ttc" id="afhog_8hpp_html_a647913ecf376186d56a1dc1e75a26399"><div class="ttname"><a href="fhog_8hpp.html#a647913ecf376186d56a1dc1e75a26399">getFeatureMaps</a></div><div class="ttdeci">int getFeatureMaps(const cv::Mat &amp;image, const int k, CvLSVMFeatureMapCaskade **map)</div><div class="ttdef"><b>Definition:</b> fhog.cpp:80</div></div>
+<div class="ttc" id="astruct_cv_l_s_v_m_feature_map_caskade_html"><div class="ttname"><a href="struct_cv_l_s_v_m_feature_map_caskade.html">CvLSVMFeatureMapCaskade</a></div><div class="ttdef"><b>Definition:</b> fhog.hpp:71</div></div>
+<div class="ttc" id="astruct_cv_l_s_v_m_feature_map_caskade_html_a1a366b92065c42fccbd15a346f536334"><div class="ttname"><a href="struct_cv_l_s_v_m_feature_map_caskade.html#a1a366b92065c42fccbd15a346f536334">CvLSVMFeatureMapCaskade::sizeY</a></div><div class="ttdeci">int sizeY</div><div class="ttdef"><b>Definition:</b> fhog.hpp:73</div></div>
+<div class="ttc" id="astruct_cv_l_s_v_m_feature_map_caskade_html_a44871b8ea18991e52d84a8d6712c6568"><div class="ttname"><a href="struct_cv_l_s_v_m_feature_map_caskade.html#a44871b8ea18991e52d84a8d6712c6568">CvLSVMFeatureMapCaskade::sizeX</a></div><div class="ttdeci">int sizeX</div><div class="ttdef"><b>Definition:</b> fhog.hpp:72</div></div>
+<div class="ttc" id="astruct_cv_l_s_v_m_feature_map_caskade_html_a532eeb182fa8954b411c3ec905d16184"><div class="ttname"><a href="struct_cv_l_s_v_m_feature_map_caskade.html#a532eeb182fa8954b411c3ec905d16184">CvLSVMFeatureMapCaskade::map</a></div><div class="ttdeci">float * map</div><div class="ttdef"><b>Definition:</b> fhog.hpp:75</div></div>
+<div class="ttc" id="astruct_cv_l_s_v_m_feature_map_caskade_html_af21ee5ff544db7eccfaca657fe505bb2"><div class="ttname"><a href="struct_cv_l_s_v_m_feature_map_caskade.html#af21ee5ff544db7eccfaca657fe505bb2">CvLSVMFeatureMapCaskade::numFeatures</a></div><div class="ttdeci">int numFeatures</div><div class="ttdef"><b>Definition:</b> fhog.hpp:74</div></div>
+<div class="ttc" id="astructimage_html"><div class="ttname"><a href="structimage.html">image</a></div><div class="ttdef"><b>Definition:</b> darknet.h:861</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>

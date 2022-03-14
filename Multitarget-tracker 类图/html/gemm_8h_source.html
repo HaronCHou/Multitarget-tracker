@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: D:/zhr_files/Multitarget-tracker-master/src/Detector/darknet/src/gemm.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">My Project
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_4c3458e0ccdb4c3720723c1caa1aaa1c.html">zhr_files</a></li><li class="navelem"><a class="el" href="dir_5a8d4bff745a16410b5074d3583a347e.html">Multitarget-tracker-master</a></li><li class="navelem"><a class="el" href="dir_46a27ab0460a6f8f8d12d2f44f38bf6b.html">src</a></li><li class="navelem"><a class="el" href="dir_458a7b7bb24e4af0790226fff519699f.html">Detector</a></li><li class="navelem"><a class="el" href="dir_30d5c7ca63d0957fa3fc1828f81516c9.html">darknet</a></li><li class="navelem"><a class="el" href="dir_87c8877901facfda8fbda37bca313156.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">gemm.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="gemm_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef GEMM_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define GEMM_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="activations_8h.html">activations.h</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keywordtype">void</span> <a class="code hl_function" href="gemm_8h.html#a4e32a16f765640082ee369153bb7d74c">convolution_2d</a>(<span class="keywordtype">int</span> <a class="code hl_function" href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867">w</a>, <span class="keywordtype">int</span> h, <span class="keywordtype">int</span> ksize, <span class="keywordtype">int</span> n, <span class="keywordtype">int</span> c, <span class="keywordtype">int</span> pad, <span class="keywordtype">int</span> stride,</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keywordtype">float</span> *weights, <span class="keywordtype">float</span> *input, <span class="keywordtype">float</span> *output, <span class="keywordtype">float</span> *mean);</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="gemm_8h.html#aef0960a9c469e77ee2c6ea982a3eddff">   13</a></span><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="gemm_8h.html#aef0960a9c469e77ee2c6ea982a3eddff">set_bit</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *<span class="keyword">const</span> dst, <span class="keywordtype">size_t</span> index) {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordtype">size_t</span> dst_i = index / 8;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordtype">int</span> dst_shift = index % 8;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    dst[dst_i] |= 1 &lt;&lt; dst_shift;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="comment">//dst[dst_i] |= 1 &lt;&lt; (8 - dst_shift);</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>}</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="gemm_8h.html#aa2c9bc3f05c1b96ae7b6e557207068fd">   20</a></span><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code hl_function" href="gemm_8h.html#aa2c9bc3f05c1b96ae7b6e557207068fd">get_bit</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <span class="keyword">const</span>*<span class="keyword">const</span> src, <span class="keywordtype">size_t</span> index) {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordtype">size_t</span> src_i = index / 8;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">int</span> src_shift = index % 8;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> val = (src[src_i] &amp; (1 &lt;&lt; src_shift)) &gt; 0;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="comment">//unsigned char val = (src[src_i] &amp; (1 &lt;&lt; (8 - src_shift))) &gt; 0;</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordflow">return</span> val;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>}</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keywordtype">int</span> <a class="code hl_function" href="gemm_8h.html#a8e1908fd3f6cbc7da917f2e93e94e6d1">is_avx</a>();</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keywordtype">int</span> <a class="code hl_function" href="gemm_8h.html#a4e3d4e108499dd6ea33dab80eb98d861">is_fma_avx2</a>();</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keywordtype">void</span> <a class="code hl_function" href="gemm_8h.html#af2faa7ba6073e78aaac43c1487dadfd7">float_to_bit</a>(<span class="keywordtype">float</span> *src, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *dst, <span class="keywordtype">size_t</span> size);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keywordtype">void</span> <a class="code hl_function" href="gemm_8h.html#a5106fb6ec72b4bcc07e02d76e21d6b37">transpose_block_SSE4x4</a>(<span class="keywordtype">float</span> *A, <span class="keywordtype">float</span> *B, <span class="keyword">const</span> <span class="keywordtype">int</span> n, <span class="keyword">const</span> <span class="keywordtype">int</span> m,</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> lda, <span class="keyword">const</span> <span class="keywordtype">int</span> ldb, <span class="keyword">const</span> <span class="keywordtype">int</span> block_size);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keywordtype">void</span> <a class="code hl_function" href="gemm_8h.html#abc47efcfe9f9c9be4a2ae3886591be31">transpose_bin</a>(uint32_t *A, uint32_t *B, <span class="keyword">const</span> <span class="keywordtype">int</span> n, <span class="keyword">const</span> <span class="keywordtype">int</span> m,</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> lda, <span class="keyword">const</span> <span class="keywordtype">int</span> ldb, <span class="keyword">const</span> <span class="keywordtype">int</span> block_size);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keywordtype">void</span> <a class="code hl_function" href="gemm_8h.html#a4e0dda182a634df98155400af97f887f">gemm_nn_custom_bin_mean_transposed</a>(<span class="keywordtype">int</span> M, <span class="keywordtype">int</span> N, <span class="keywordtype">int</span> K, <span class="keywordtype">float</span> ALPHA_UNUSED,</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *A, <span class="keywordtype">int</span> lda,</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *B, <span class="keywordtype">int</span> ldb,</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">float</span> *C, <span class="keywordtype">int</span> ldc, <span class="keywordtype">float</span> *mean_arr);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keywordtype">void</span> <a class="code hl_function" href="gemm_8h.html#af39887e6db1b479406fc6464636f2d05">im2col_cpu_custom</a>(<span class="keywordtype">float</span>* data_im,</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordtype">int</span> channels, <span class="keywordtype">int</span> height, <span class="keywordtype">int</span> width,</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">int</span> ksize, <span class="keywordtype">int</span> stride, <span class="keywordtype">int</span> pad, <span class="keywordtype">float</span>* data_col);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="gemm_8h.html#ae8f4e317c186a6d4f0556ca856b976b9">   48</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="gemm_8h.html#ae8f4e317c186a6d4f0556ca856b976b9">im2col_cpu_custom_align</a>(<span class="keywordtype">float</span>* data_im,</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">int</span> channels, <span class="keywordtype">int</span> height, <span class="keywordtype">int</span> width,</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keywordtype">int</span> ksize, <span class="keywordtype">int</span> stride, <span class="keywordtype">int</span> pad, <span class="keywordtype">float</span>* data_col, <span class="keywordtype">int</span> bit_align);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="keywordtype">void</span> <a class="code hl_function" href="gemm_8h.html#a6a3439a365c938d672a2dc39901f155f">im2col_cpu_custom_bin</a>(<span class="keywordtype">float</span>* data_im,</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordtype">int</span> channels, <span class="keywordtype">int</span> height, <span class="keywordtype">int</span> width,</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordtype">int</span> ksize, <span class="keywordtype">int</span> stride, <span class="keywordtype">int</span> pad, <span class="keywordtype">float</span>* data_col, <span class="keywordtype">int</span> bit_align);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="keywordtype">void</span> <a class="code hl_function" href="gemm_8h.html#afee3277990045539e36e35ba66ae995b">im2col_cpu_custom_transpose</a>(<span class="keywordtype">float</span>* data_im,</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordtype">int</span> channels, <span class="keywordtype">int</span> height, <span class="keywordtype">int</span> width,</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordtype">int</span> ksize, <span class="keywordtype">int</span> stride, <span class="keywordtype">int</span> pad, <span class="keywordtype">float</span>* data_col, <span class="keywordtype">int</span> ldb_align);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="keywordtype">void</span> <a class="code hl_function" href="gemm_8h.html#a0a3e1c2586fda33b9cd5a44fd59f43c1">activate_array_cpu_custom</a>(<span class="keywordtype">float</span> *<a class="code hl_variable" href="utils_8c.html#a676e0da0ef83bbbdf42538e54b97506b">x</a>, <span class="keyword">const</span> <span class="keywordtype">int</span> n, <span class="keyword">const</span> <a class="code hl_enumeration" href="darknet_8h.html#aea09b678fab8ab931902378cbbd79032">ACTIVATION</a> a);</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="keywordtype">void</span> <a class="code hl_function" href="gemm_8h.html#a0625444c982324c1a858a342ff8abc27">transpose_32x32_bits_reversed_diagonale</a>(uint32_t *A, uint32_t *B, <span class="keywordtype">int</span> m, <span class="keywordtype">int</span> n);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="keywordtype">void</span> <a class="code hl_function" href="gemm_8h.html#a39304cbcf3858c9e2416ef1d1cf3879f">gemm_bin</a>(<span class="keywordtype">int</span> M, <span class="keywordtype">int</span> N, <span class="keywordtype">int</span> K, <span class="keywordtype">float</span> ALPHA,</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keywordtype">char</span>  *A, <span class="keywordtype">int</span> lda,</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordtype">float</span> *B, <span class="keywordtype">int</span> ldb,</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="keywordtype">float</span> *C, <span class="keywordtype">int</span> ldc);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="keywordtype">void</span> <a class="code hl_function" href="gemm_8h.html#a6aa7e1556948e534866527878b8cfe9e">repack_input</a>(<span class="keywordtype">float</span> *input, <span class="keywordtype">float</span> *re_packed_input, <span class="keywordtype">int</span> <a class="code hl_function" href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867">w</a>, <span class="keywordtype">int</span> h, <span class="keywordtype">int</span> c);</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="keywordtype">void</span> <a class="code hl_function" href="gemm_8h.html#a15ed089fe74aaa8643d01f91829815af">convolution_repacked</a>(uint32_t *packed_input, uint32_t *packed_weights, <span class="keywordtype">float</span> *output,</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867">w</a>, <span class="keywordtype">int</span> h, <span class="keywordtype">int</span> c, <span class="keywordtype">int</span> n, <span class="keywordtype">int</span> size, <span class="keywordtype">int</span> pad, <span class="keywordtype">int</span> new_lda, <span class="keywordtype">float</span> *mean_arr);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="keywordtype">void</span> <a class="code hl_function" href="gemm_8h.html#a4bcaf2f46868b70329a3cf194b9db637">gemm_nn_bin_32bit_packed</a>(<span class="keywordtype">int</span> M, <span class="keywordtype">int</span> N, <span class="keywordtype">int</span> K, <span class="keywordtype">float</span> ALPHA,</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    uint32_t *A, <span class="keywordtype">int</span> lda,</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    uint32_t *B, <span class="keywordtype">int</span> ldb,</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keywordtype">float</span> *C, <span class="keywordtype">int</span> ldc, <span class="keywordtype">float</span> *mean_arr);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="keywordtype">void</span> <a class="code hl_function" href="gemm_8h.html#a20b21acd1fd344065eccc4e3517f2ad3">transpose_uint32</a>(uint32_t *src, uint32_t *dst, <span class="keywordtype">int</span> src_h, <span class="keywordtype">int</span> src_w, <span class="keywordtype">int</span> src_align, <span class="keywordtype">int</span> dst_align);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="keywordtype">void</span> <a class="code hl_function" href="gemm_8h.html#a2d13ac0e25be1b28329490be38c82475">gemm_nn_bin_transposed_32bit_packed</a>(<span class="keywordtype">int</span> M, <span class="keywordtype">int</span> N, <span class="keywordtype">int</span> K, <span class="keywordtype">float</span> ALPHA,</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    uint32_t *A, <span class="keywordtype">int</span> lda,</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    uint32_t *B, <span class="keywordtype">int</span> ldb,</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordtype">float</span> *C, <span class="keywordtype">int</span> ldc, <span class="keywordtype">float</span> *mean_arr);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="keywordtype">void</span> <a class="code hl_function" href="gemm_8h.html#afece54d7949918bb0306af73d2ad595e">forward_maxpool_layer_avx</a>(<span class="keywordtype">float</span> *src, <span class="keywordtype">float</span> *dst, <span class="keywordtype">int</span> *indexes, <span class="keywordtype">int</span> size, <span class="keywordtype">int</span> <a class="code hl_function" href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867">w</a>, <span class="keywordtype">int</span> h, <span class="keywordtype">int</span> out_w, <span class="keywordtype">int</span> out_h, <span class="keywordtype">int</span> c,</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordtype">int</span> pad, <span class="keywordtype">int</span> stride, <span class="keywordtype">int</span> batch);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="keywordtype">void</span> <a class="code hl_function" href="gemm_8h.html#aa240ba331e3abf53f9fca7d240322669">gemm</a>(<span class="keywordtype">int</span> TA, <span class="keywordtype">int</span> TB, <span class="keywordtype">int</span> M, <span class="keywordtype">int</span> N, <span class="keywordtype">int</span> K, <span class="keywordtype">float</span> ALPHA,</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                    <span class="keywordtype">float</span> *A, <span class="keywordtype">int</span> lda,</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                    <span class="keywordtype">float</span> *B, <span class="keywordtype">int</span> ldb,</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                    <span class="keywordtype">float</span> BETA,</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                    <span class="keywordtype">float</span> *C, <span class="keywordtype">int</span> ldc);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="keywordtype">void</span> <a class="code hl_function" href="gemm_8h.html#a44c67f1aa36826c2fe8b8da5022a7ce6">gemm_cpu</a>(<span class="keywordtype">int</span> TA, <span class="keywordtype">int</span> TB, <span class="keywordtype">int</span> M, <span class="keywordtype">int</span> N, <span class="keywordtype">int</span> K, <span class="keywordtype">float</span> ALPHA,</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <span class="keywordtype">float</span> *A, <span class="keywordtype">int</span> lda,</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        <span class="keywordtype">float</span> *B, <span class="keywordtype">int</span> ldb,</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <span class="keywordtype">float</span> BETA,</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keywordtype">float</span> *C, <span class="keywordtype">int</span> ldc);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="preprocessor">#ifdef GPU</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="keywordtype">void</span> gemm_ongpu(<span class="keywordtype">int</span> TA, <span class="keywordtype">int</span> TB, <span class="keywordtype">int</span> M, <span class="keywordtype">int</span> N, <span class="keywordtype">int</span> K, <span class="keywordtype">float</span> ALPHA,</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <span class="keywordtype">float</span> *A_gpu, <span class="keywordtype">int</span> lda,</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <span class="keywordtype">float</span> *B_gpu, <span class="keywordtype">int</span> ldb,</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <span class="keywordtype">float</span> BETA,</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="keywordtype">float</span> *C_gpu, <span class="keywordtype">int</span> ldc);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="keywordtype">void</span> gemm_gpu(<span class="keywordtype">int</span> TA, <span class="keywordtype">int</span> TB, <span class="keywordtype">int</span> M, <span class="keywordtype">int</span> N, <span class="keywordtype">int</span> K, <span class="keywordtype">float</span> ALPHA,</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        <span class="keywordtype">float</span> *A, <span class="keywordtype">int</span> lda,</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        <span class="keywordtype">float</span> *B, <span class="keywordtype">int</span> ldb,</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <span class="keywordtype">float</span> BETA,</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        <span class="keywordtype">float</span> *C, <span class="keywordtype">int</span> ldc);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="preprocessor">#ifdef __cplusplus</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>}</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aactivations_8h_html"><div class="ttname"><a href="activations_8h.html">activations.h</a></div></div>
+<div class="ttc" id="adarknet_8h_html_aea09b678fab8ab931902378cbbd79032"><div class="ttname"><a href="darknet_8h.html#aea09b678fab8ab931902378cbbd79032">ACTIVATION</a></div><div class="ttdeci">ACTIVATION</div><div class="ttdef"><b>Definition:</b> darknet.h:106</div></div>
+<div class="ttc" id="agemm_8h_html_a0625444c982324c1a858a342ff8abc27"><div class="ttname"><a href="gemm_8h.html#a0625444c982324c1a858a342ff8abc27">transpose_32x32_bits_reversed_diagonale</a></div><div class="ttdeci">void transpose_32x32_bits_reversed_diagonale(uint32_t *A, uint32_t *B, int m, int n)</div><div class="ttdef"><b>Definition:</b> gemm.c:413</div></div>
+<div class="ttc" id="agemm_8h_html_a0a3e1c2586fda33b9cd5a44fd59f43c1"><div class="ttname"><a href="gemm_8h.html#a0a3e1c2586fda33b9cd5a44fd59f43c1">activate_array_cpu_custom</a></div><div class="ttdeci">void activate_array_cpu_custom(float *x, const int n, const ACTIVATION a)</div><div class="ttdef"><b>Definition:</b> gemm.c:2334</div></div>
+<div class="ttc" id="agemm_8h_html_a15ed089fe74aaa8643d01f91829815af"><div class="ttname"><a href="gemm_8h.html#a15ed089fe74aaa8643d01f91829815af">convolution_repacked</a></div><div class="ttdeci">void convolution_repacked(uint32_t *packed_input, uint32_t *packed_weights, float *output, int w, int h, int c, int n, int size, int pad, int new_lda, float *mean_arr)</div><div class="ttdef"><b>Definition:</b> gemm.c:2517</div></div>
+<div class="ttc" id="agemm_8h_html_a20b21acd1fd344065eccc4e3517f2ad3"><div class="ttname"><a href="gemm_8h.html#a20b21acd1fd344065eccc4e3517f2ad3">transpose_uint32</a></div><div class="ttdeci">void transpose_uint32(uint32_t *src, uint32_t *dst, int src_h, int src_w, int src_align, int dst_align)</div><div class="ttdef"><b>Definition:</b> gemm.c:2473</div></div>
+<div class="ttc" id="agemm_8h_html_a2d13ac0e25be1b28329490be38c82475"><div class="ttname"><a href="gemm_8h.html#a2d13ac0e25be1b28329490be38c82475">gemm_nn_bin_transposed_32bit_packed</a></div><div class="ttdeci">void gemm_nn_bin_transposed_32bit_packed(int M, int N, int K, float ALPHA, uint32_t *A, int lda, uint32_t *B, int ldb, float *C, int ldc, float *mean_arr)</div><div class="ttdef"><b>Definition:</b> gemm.c:2490</div></div>
+<div class="ttc" id="agemm_8h_html_a39304cbcf3858c9e2416ef1d1cf3879f"><div class="ttname"><a href="gemm_8h.html#a39304cbcf3858c9e2416ef1d1cf3879f">gemm_bin</a></div><div class="ttdeci">void gemm_bin(int M, int N, int K, float ALPHA, char *A, int lda, float *B, int ldb, float *C, int ldc)</div><div class="ttdef"><b>Definition:</b> gemm.c:53</div></div>
+<div class="ttc" id="agemm_8h_html_a44c67f1aa36826c2fe8b8da5022a7ce6"><div class="ttname"><a href="gemm_8h.html#a44c67f1aa36826c2fe8b8da5022a7ce6">gemm_cpu</a></div><div class="ttdeci">void gemm_cpu(int TA, int TB, int M, int N, int K, float ALPHA, float *A, int lda, float *B, int ldb, float BETA, float *C, int ldc)</div><div class="ttdef"><b>Definition:</b> gemm.c:2634</div></div>
+<div class="ttc" id="agemm_8h_html_a4bcaf2f46868b70329a3cf194b9db637"><div class="ttname"><a href="gemm_8h.html#a4bcaf2f46868b70329a3cf194b9db637">gemm_nn_bin_32bit_packed</a></div><div class="ttdeci">void gemm_nn_bin_32bit_packed(int M, int N, int K, float ALPHA, uint32_t *A, int lda, uint32_t *B, int ldb, float *C, int ldc, float *mean_arr)</div><div class="ttdef"><b>Definition:</b> gemm.c:2009</div></div>
+<div class="ttc" id="agemm_8h_html_a4e0dda182a634df98155400af97f887f"><div class="ttname"><a href="gemm_8h.html#a4e0dda182a634df98155400af97f887f">gemm_nn_custom_bin_mean_transposed</a></div><div class="ttdeci">void gemm_nn_custom_bin_mean_transposed(int M, int N, int K, float ALPHA_UNUSED, unsigned char *A, int lda, unsigned char *B, int ldb, float *C, int ldc, float *mean_arr)</div><div class="ttdef"><b>Definition:</b> gemm.c:2088</div></div>
+<div class="ttc" id="agemm_8h_html_a4e32a16f765640082ee369153bb7d74c"><div class="ttname"><a href="gemm_8h.html#a4e32a16f765640082ee369153bb7d74c">convolution_2d</a></div><div class="ttdeci">void convolution_2d(int w, int h, int ksize, int n, int c, int pad, int stride, float *weights, float *input, float *output, float *mean)</div><div class="ttdef"><b>Definition:</b> gemm.c:2040</div></div>
+<div class="ttc" id="agemm_8h_html_a4e3d4e108499dd6ea33dab80eb98d861"><div class="ttname"><a href="gemm_8h.html#a4e3d4e108499dd6ea33dab80eb98d861">is_fma_avx2</a></div><div class="ttdeci">int is_fma_avx2()</div><div class="ttdef"><b>Definition:</b> gemm.c:1972</div></div>
+<div class="ttc" id="agemm_8h_html_a5106fb6ec72b4bcc07e02d76e21d6b37"><div class="ttname"><a href="gemm_8h.html#a5106fb6ec72b4bcc07e02d76e21d6b37">transpose_block_SSE4x4</a></div><div class="ttdeci">void transpose_block_SSE4x4(float *A, float *B, const int n, const int m, const int lda, const int ldb, const int block_size)</div><div class="ttdef"><b>Definition:</b> gemm.c:2395</div></div>
+<div class="ttc" id="agemm_8h_html_a6a3439a365c938d672a2dc39901f155f"><div class="ttname"><a href="gemm_8h.html#a6a3439a365c938d672a2dc39901f155f">im2col_cpu_custom_bin</a></div><div class="ttdeci">void im2col_cpu_custom_bin(float *data_im, int channels, int height, int width, int ksize, int stride, int pad, float *data_col, int bit_align)</div><div class="ttdef"><b>Definition:</b> gemm.c:2224</div></div>
+<div class="ttc" id="agemm_8h_html_a6aa7e1556948e534866527878b8cfe9e"><div class="ttname"><a href="gemm_8h.html#a6aa7e1556948e534866527878b8cfe9e">repack_input</a></div><div class="ttdeci">void repack_input(float *input, float *re_packed_input, int w, int h, int c)</div><div class="ttdef"><b>Definition:</b> gemm.c:2455</div></div>
+<div class="ttc" id="agemm_8h_html_a8e1908fd3f6cbc7da917f2e93e94e6d1"><div class="ttname"><a href="gemm_8h.html#a8e1908fd3f6cbc7da917f2e93e94e6d1">is_avx</a></div><div class="ttdeci">int is_avx()</div><div class="ttdef"><b>Definition:</b> gemm.c:1968</div></div>
+<div class="ttc" id="agemm_8h_html_aa240ba331e3abf53f9fca7d240322669"><div class="ttname"><a href="gemm_8h.html#aa240ba331e3abf53f9fca7d240322669">gemm</a></div><div class="ttdeci">void gemm(int TA, int TB, int M, int N, int K, float ALPHA, float *A, int lda, float *B, int ldb, float BETA, float *C, int ldc)</div><div class="ttdef"><b>Definition:</b> gemm.c:110</div></div>
+<div class="ttc" id="agemm_8h_html_aa2c9bc3f05c1b96ae7b6e557207068fd"><div class="ttname"><a href="gemm_8h.html#aa2c9bc3f05c1b96ae7b6e557207068fd">get_bit</a></div><div class="ttdeci">static unsigned char get_bit(unsigned char const *const src, size_t index)</div><div class="ttdef"><b>Definition:</b> gemm.h:20</div></div>
+<div class="ttc" id="agemm_8h_html_abc47efcfe9f9c9be4a2ae3886591be31"><div class="ttname"><a href="gemm_8h.html#abc47efcfe9f9c9be4a2ae3886591be31">transpose_bin</a></div><div class="ttdeci">void transpose_bin(uint32_t *A, uint32_t *B, const int n, const int m, const int lda, const int ldb, const int block_size)</div><div class="ttdef"><b>Definition:</b> gemm.c:507</div></div>
+<div class="ttc" id="agemm_8h_html_ae8f4e317c186a6d4f0556ca856b976b9"><div class="ttname"><a href="gemm_8h.html#ae8f4e317c186a6d4f0556ca856b976b9">im2col_cpu_custom_align</a></div><div class="ttdeci">void im2col_cpu_custom_align(float *data_im, int channels, int height, int width, int ksize, int stride, int pad, float *data_col, int bit_align)</div></div>
+<div class="ttc" id="agemm_8h_html_aef0960a9c469e77ee2c6ea982a3eddff"><div class="ttname"><a href="gemm_8h.html#aef0960a9c469e77ee2c6ea982a3eddff">set_bit</a></div><div class="ttdeci">static void set_bit(unsigned char *const dst, size_t index)</div><div class="ttdef"><b>Definition:</b> gemm.h:13</div></div>
+<div class="ttc" id="agemm_8h_html_af2faa7ba6073e78aaac43c1487dadfd7"><div class="ttname"><a href="gemm_8h.html#af2faa7ba6073e78aaac43c1487dadfd7">float_to_bit</a></div><div class="ttdeci">void float_to_bit(float *src, unsigned char *dst, size_t size)</div><div class="ttdef"><b>Definition:</b> gemm.c:2353</div></div>
+<div class="ttc" id="agemm_8h_html_af39887e6db1b479406fc6464636f2d05"><div class="ttname"><a href="gemm_8h.html#af39887e6db1b479406fc6464636f2d05">im2col_cpu_custom</a></div><div class="ttdeci">void im2col_cpu_custom(float *data_im, int channels, int height, int width, int ksize, int stride, int pad, float *data_col)</div><div class="ttdef"><b>Definition:</b> gemm.c:2130</div></div>
+<div class="ttc" id="agemm_8h_html_afece54d7949918bb0306af73d2ad595e"><div class="ttname"><a href="gemm_8h.html#afece54d7949918bb0306af73d2ad595e">forward_maxpool_layer_avx</a></div><div class="ttdeci">void forward_maxpool_layer_avx(float *src, float *dst, int *indexes, int size, int w, int h, int out_w, int out_h, int c, int pad, int stride, int batch)</div><div class="ttdef"><b>Definition:</b> gemm.c:2414</div></div>
+<div class="ttc" id="agemm_8h_html_afee3277990045539e36e35ba66ae995b"><div class="ttname"><a href="gemm_8h.html#afee3277990045539e36e35ba66ae995b">im2col_cpu_custom_transpose</a></div><div class="ttdeci">void im2col_cpu_custom_transpose(float *data_im, int channels, int height, int width, int ksize, int stride, int pad, float *data_col, int ldb_align)</div><div class="ttdef"><b>Definition:</b> gemm.c:2121</div></div>
+<div class="ttc" id="anamespacenvinfer1_html_abbfdeb9b425ae9b70088a3d288670867"><div class="ttname"><a href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867">nvinfer1::w</a></div><div class="ttdeci">void w(char *&amp;buffer, const T &amp;val)</div><div class="ttdef"><b>Definition:</b> hardswish.h:12</div></div>
+<div class="ttc" id="autils_8c_html_a676e0da0ef83bbbdf42538e54b97506b"><div class="ttname"><a href="utils_8c.html#a676e0da0ef83bbbdf42538e54b97506b">x</a></div><div class="ttdeci">static unsigned int x</div><div class="ttdef"><b>Definition:</b> utils.c:877</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>

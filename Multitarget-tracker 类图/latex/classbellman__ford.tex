@@ -1,0 +1,525 @@
+\hypertarget{classbellman__ford}{}\doxysection{bellman\+\_\+ford类 参考}
+\label{classbellman__ford}\index{bellman\_ford@{bellman\_ford}}
+
+
+Bellman Ford algorithm.  
+
+
+
+
+{\ttfamily \#include $<$bellman\+\_\+ford.\+h$>$}
+
+
+
+类 bellman\+\_\+ford 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=151pt]{classbellman__ford__inherit__graph}
+\end{center}
+\end{figure}
+
+
+bellman\+\_\+ford 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classbellman__ford__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbellman__ford_a0bc366d9bbdecf3748b7eeee80690386}{bellman\+\_\+ford}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classbellman__ford_a8461c6b8d7663b05a97b6d270347a49c}{$\sim$bellman\+\_\+ford}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classbellman__ford_a2feba45fef64b848ee5b32a5b9a13152}{check}} (GTL\+::graph \&G)
+\begin{DoxyCompactList}\small\item\em Checks whether the preconditions for Bellman Ford are satisfied. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classbellman__ford_a91f6efcc76bb10d64446cca3dadd27a4}{run}} (GTL\+::graph \&G)
+\begin{DoxyCompactList}\small\item\em Applies algorithm to graph g. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbellman__ford_a7d28afa62ce8068c4d0f2d1f96136fd6}{reset}} ()
+\begin{DoxyCompactList}\small\item\em Resets the algorithm. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbellman__ford_a98cad540fd2d211c1ba44bb6fa8416f3}{source}} (const \mbox{\hyperlink{structnode}{node}} \&n)
+\begin{DoxyCompactList}\small\item\em Sets source. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classbellman__ford_a86e3fe7fe71d7569cc73e9e531d58539}{source}} () const
+\begin{DoxyCompactList}\small\item\em Returns source. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbellman__ford_a9e276cc9f30c2e608d320db4a08b2a74}{weights}} (const \mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$ double $>$ \&weight)
+\begin{DoxyCompactList}\small\item\em Sets weights of the edges. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbellman__ford_aac87169a3cf4f95477ce215a0cb7a12b}{store\+\_\+preds}} (bool \mbox{\hyperlink{classset}{set}})
+\begin{DoxyCompactList}\small\item\em Enables or disables the storing of predecessors. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classbellman__ford_a2ded0950bfaca6c3ee65a3617c1ccaa8}{store\+\_\+preds}} () const
+\begin{DoxyCompactList}\small\item\em Returns whether the storing of predecessors is enabled. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classbellman__ford_a93f7c34ec9662690230ca7a9c31933cd}{reached}} (const \mbox{\hyperlink{structnode}{node}} \&n) const
+\begin{DoxyCompactList}\small\item\em Returns whether is reachable from source. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classbellman__ford_a881e5b021e69aced997185208438f910}{distance}} (const \mbox{\hyperlink{structnode}{node}} \&n) const
+\begin{DoxyCompactList}\small\item\em Returns the distance from source to {\itshape n} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classedge}{edge}} \mbox{\hyperlink{classbellman__ford_a39f93b0b1e427cf26059fa6141c6f61c}{predecessor\+\_\+edge}} (const \mbox{\hyperlink{structnode}{node}} \&n) const
+\begin{DoxyCompactList}\small\item\em edge to predecessor of node {\itshape n} on the shortest path from source \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classbellman__ford_a403e286ec8cbe3c30a7a729c5041155e}{predecessor\+\_\+node}} (const \mbox{\hyperlink{structnode}{node}} \&n) const
+\begin{DoxyCompactList}\small\item\em predecessor of node {\itshape n} on the shortest path from source \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classbellman__ford_af9cd8be38bb1504089997581d9aa4f64}{negative\+\_\+cycle}} () const
+\begin{DoxyCompactList}\small\item\em Returns whether there is a cycle with negative weight. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classbellman__ford_a7beb9204dc5bc65ed880a044a5aad81b}{relax}} (const \mbox{\hyperlink{classedge}{edge}} \&e, bool dir)
+\begin{DoxyCompactList}\small\item\em Main method for Bellman Ford \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classbellman__ford_a2d6ce715e65b26822c622b322811c3b0}{s}}
+\begin{DoxyCompactList}\small\item\em Stores source. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$ double $>$ \mbox{\hyperlink{classbellman__ford_ae05c9a40c2257f1e1f333b6a4f6fa656}{w}}
+\begin{DoxyCompactList}\small\item\em Stores the weights of the edges. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classbellman__ford_a0b727de83366d019041694f890f19dbb}{vars\+\_\+set}} = false
+\begin{DoxyCompactList}\small\item\em Indicates whether weights were set. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ double $>$ \mbox{\hyperlink{classbellman__ford_a0e3b99854a3f998f8ef6cde6fb902040}{d}}
+\begin{DoxyCompactList}\small\item\em distance from source s. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ bool $>$ \mbox{\hyperlink{classbellman__ford_a5c69a3ac59077a7a7e4b0484e5f85a32}{inf}}
+\begin{DoxyCompactList}\small\item\em Indicates whether the node has distance infinity \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ \mbox{\hyperlink{classedge}{edge}} $>$ $\ast$ \mbox{\hyperlink{classbellman__ford_a1ce37529c697ec5b89e8dc09204e4f59}{preds}}
+\begin{DoxyCompactList}\small\item\em Stores father of each node (if enabled) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classbellman__ford_aa2168afff14546b2fd99d2b52681156b}{cycle}} = 0
+\begin{DoxyCompactList}\small\item\em Indicates whether there is a cycle with negative weight \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{额外继承的成员函数}
+
+
+\doxysubsection{详细描述}
+Bellman Ford algorithm. 
+
+\begin{DoxyParagraph}{Date}
+2003/03/24 15\+:58\+:54 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Revision}
+1.\+5 
+\end{DoxyParagraph}
+
+
+Implementation of the single source shortest path due to Bellman and Ford. Unlike Dijkstra\textquotesingle{}s SSSP algorithm this one allows negative edge weights, as long as there are no cycles with negative weight. If there are negative cycles this implementation finds them. 
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classbellman__ford_a0bc366d9bbdecf3748b7eeee80690386}\label{classbellman__ford_a0bc366d9bbdecf3748b7eeee80690386}} 
+\index{bellman\_ford@{bellman\_ford}!bellman\_ford@{bellman\_ford}}
+\index{bellman\_ford@{bellman\_ford}!bellman\_ford@{bellman\_ford}}
+\doxysubsubsection{\texorpdfstring{bellman\_ford()}{bellman\_ford()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_g_t_l_8h_a2d9f24096ac60918452dd51f32b64aa9}{\+\_\+\+\_\+\+GTL\+\_\+\+BEGIN\+\_\+\+NAMESPACE}} bellman\+\_\+ford\+::bellman\+\_\+ford (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+\mbox{\Hypertarget{classbellman__ford_a8461c6b8d7663b05a97b6d270347a49c}\label{classbellman__ford_a8461c6b8d7663b05a97b6d270347a49c}} 
+\index{bellman\_ford@{bellman\_ford}!````~bellman\_ford@{$\sim$bellman\_ford}}
+\index{````~bellman\_ford@{$\sim$bellman\_ford}!bellman\_ford@{bellman\_ford}}
+\doxysubsubsection{\texorpdfstring{$\sim$bellman\_ford()}{~bellman\_ford()}}
+{\footnotesize\ttfamily bellman\+\_\+ford\+::$\sim$bellman\+\_\+ford (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classbellman__ford_a2feba45fef64b848ee5b32a5b9a13152}\label{classbellman__ford_a2feba45fef64b848ee5b32a5b9a13152}} 
+\index{bellman\_ford@{bellman\_ford}!check@{check}}
+\index{check@{check}!bellman\_ford@{bellman\_ford}}
+\doxysubsubsection{\texorpdfstring{check()}{check()}}
+{\footnotesize\ttfamily int bellman\+\_\+ford\+::check (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{G }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Checks whether the preconditions for Bellman Ford are satisfied. 
+
+The Precondition are that the weights of the edges have been set and that the graph has at least one node.
+
+
+\begin{DoxyParams}{参数}
+{\em G} & graph. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{返回值}
+{\em \mbox{\hyperlink{classalgorithm_a7ecf5c2bab575f8f2fae9e9e5093a6eaa5114c20e4a96a76b5de9f28bf15e282b}{algorithm\+::\+GTL\+\_\+\+OK}}} & if algorithm can be applied \\
+\hline
+{\em \mbox{\hyperlink{classalgorithm_a7ecf5c2bab575f8f2fae9e9e5093a6eaa6fcf574690bbd6cf710837a169510dd7}{algorithm\+::\+GTL\+\_\+\+ERROR}}} & otherwise. \\
+\hline
+\end{DoxyRetVals}
+
+
+实现了 \mbox{\hyperlink{classalgorithm_a528100c0e54d446fab1e329a53935364}{algorithm}}.
+
+\mbox{\Hypertarget{classbellman__ford_a881e5b021e69aced997185208438f910}\label{classbellman__ford_a881e5b021e69aced997185208438f910}} 
+\index{bellman\_ford@{bellman\_ford}!distance@{distance}}
+\index{distance@{distance}!bellman\_ford@{bellman\_ford}}
+\doxysubsubsection{\texorpdfstring{distance()}{distance()}}
+{\footnotesize\ttfamily double bellman\+\_\+ford\+::distance (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structnode}{node}} \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the distance from source to {\itshape n} 
+
+
+\begin{DoxyParams}{参数}
+{\em n} & node \\
+\hline
+\end{DoxyParams}
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=284pt]{classbellman__ford_a881e5b021e69aced997185208438f910_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classbellman__ford_af9cd8be38bb1504089997581d9aa4f64}\label{classbellman__ford_af9cd8be38bb1504089997581d9aa4f64}} 
+\index{bellman\_ford@{bellman\_ford}!negative\_cycle@{negative\_cycle}}
+\index{negative\_cycle@{negative\_cycle}!bellman\_ford@{bellman\_ford}}
+\doxysubsubsection{\texorpdfstring{negative\_cycle()}{negative\_cycle()}}
+{\footnotesize\ttfamily bool bellman\+\_\+ford\+::negative\+\_\+cycle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns whether there is a cycle with negative weight. 
+
+\mbox{\Hypertarget{classbellman__ford_a39f93b0b1e427cf26059fa6141c6f61c}\label{classbellman__ford_a39f93b0b1e427cf26059fa6141c6f61c}} 
+\index{bellman\_ford@{bellman\_ford}!predecessor\_edge@{predecessor\_edge}}
+\index{predecessor\_edge@{predecessor\_edge}!bellman\_ford@{bellman\_ford}}
+\doxysubsubsection{\texorpdfstring{predecessor\_edge()}{predecessor\_edge()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classedge}{edge}} bellman\+\_\+ford\+::predecessor\+\_\+edge (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structnode}{node}} \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+edge to predecessor of node {\itshape n} on the shortest path from source 
+
+If {\itshape n} is a root or wasn\textquotesingle{}t reached the return value is the invalid edge \mbox{\hyperlink{classedge_a746a705d37781374c8d5991abd1f7f58}{edge\+::edge()}}.
+
+{\itshape Please} {\itshape note} that this requires that this option was enabled during last run.
+
+
+\begin{DoxyParams}{参数}
+{\em n} & node. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+predecessor of {\itshape n}. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbellman__ford_aac87169a3cf4f95477ce215a0cb7a12b}{bellman\+\_\+ford\+::store\+\_\+preds}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbellman__ford_a403e286ec8cbe3c30a7a729c5041155e}\label{classbellman__ford_a403e286ec8cbe3c30a7a729c5041155e}} 
+\index{bellman\_ford@{bellman\_ford}!predecessor\_node@{predecessor\_node}}
+\index{predecessor\_node@{predecessor\_node}!bellman\_ford@{bellman\_ford}}
+\doxysubsubsection{\texorpdfstring{predecessor\_node()}{predecessor\_node()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structnode}{node}} bellman\+\_\+ford\+::predecessor\+\_\+node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structnode}{node}} \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+predecessor of node {\itshape n} on the shortest path from source 
+
+If {\itshape n} is a root or wasn\textquotesingle{}t reached the return value is the invalid node \mbox{\hyperlink{structnode_a6da4ea35f222059db9a59cf40be459f9}{node\+::node()}}.
+
+{\itshape Please} {\itshape note} that this requires that this option was enabled during last run.
+
+
+\begin{DoxyParams}{参数}
+{\em n} & node. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+predecessor of {\itshape n}. 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbellman__ford_aac87169a3cf4f95477ce215a0cb7a12b}{bellman\+\_\+ford\+::store\+\_\+preds}} 
+\end{DoxySeeAlso}
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classbellman__ford_a403e286ec8cbe3c30a7a729c5041155e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classbellman__ford_a93f7c34ec9662690230ca7a9c31933cd}\label{classbellman__ford_a93f7c34ec9662690230ca7a9c31933cd}} 
+\index{bellman\_ford@{bellman\_ford}!reached@{reached}}
+\index{reached@{reached}!bellman\_ford@{bellman\_ford}}
+\doxysubsubsection{\texorpdfstring{reached()}{reached()}}
+{\footnotesize\ttfamily bool bellman\+\_\+ford\+::reached (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structnode}{node}} \&}]{n }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns whether is reachable from source. 
+
+
+\begin{DoxyParams}{参数}
+{\em n} & node \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbellman__ford_a7beb9204dc5bc65ed880a044a5aad81b}\label{classbellman__ford_a7beb9204dc5bc65ed880a044a5aad81b}} 
+\index{bellman\_ford@{bellman\_ford}!relax@{relax}}
+\index{relax@{relax}!bellman\_ford@{bellman\_ford}}
+\doxysubsubsection{\texorpdfstring{relax()}{relax()}}
+{\footnotesize\ttfamily void bellman\+\_\+ford\+::relax (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classedge}{edge}} \&}]{e,  }\item[{bool}]{dir }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Main method for Bellman Ford 
+
+
+\begin{DoxyParams}{参数}
+{\em e} & edge to be relaxed \\
+\hline
+\end{DoxyParams}
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=287pt]{classbellman__ford_a7beb9204dc5bc65ed880a044a5aad81b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classbellman__ford_a7d28afa62ce8068c4d0f2d1f96136fd6}\label{classbellman__ford_a7d28afa62ce8068c4d0f2d1f96136fd6}} 
+\index{bellman\_ford@{bellman\_ford}!reset@{reset}}
+\index{reset@{reset}!bellman\_ford@{bellman\_ford}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void bellman\+\_\+ford\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Resets the algorithm. 
+
+The weights are not reset. You can apply this algorithms twice without setting the weights for the second call. 
+
+实现了 \mbox{\hyperlink{classalgorithm_a21aba63d066ae7897de6ca7d8425c408}{algorithm}}.
+
+\mbox{\Hypertarget{classbellman__ford_a91f6efcc76bb10d64446cca3dadd27a4}\label{classbellman__ford_a91f6efcc76bb10d64446cca3dadd27a4}} 
+\index{bellman\_ford@{bellman\_ford}!run@{run}}
+\index{run@{run}!bellman\_ford@{bellman\_ford}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily int bellman\+\_\+ford\+::run (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{g }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Applies algorithm to graph g. 
+
+
+\begin{DoxyParams}{参数}
+{\em g} & graph \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{返回值}
+{\em \mbox{\hyperlink{classalgorithm_a7ecf5c2bab575f8f2fae9e9e5093a6eaa5114c20e4a96a76b5de9f28bf15e282b}{algorithm\+::\+GTL\+\_\+\+OK}}} & on success \\
+\hline
+{\em \mbox{\hyperlink{classalgorithm_a7ecf5c2bab575f8f2fae9e9e5093a6eaa6fcf574690bbd6cf710837a169510dd7}{algorithm\+::\+GTL\+\_\+\+ERROR}}} & otherwise \\
+\hline
+\end{DoxyRetVals}
+
+
+实现了 \mbox{\hyperlink{classalgorithm_a4baee48c513c5802975743152c33f34c}{algorithm}}.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classbellman__ford_a91f6efcc76bb10d64446cca3dadd27a4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classbellman__ford_a86e3fe7fe71d7569cc73e9e531d58539}\label{classbellman__ford_a86e3fe7fe71d7569cc73e9e531d58539}} 
+\index{bellman\_ford@{bellman\_ford}!source@{source}}
+\index{source@{source}!bellman\_ford@{bellman\_ford}}
+\doxysubsubsection{\texorpdfstring{source()}{source()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structnode}{node}} bellman\+\_\+ford\+::source (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns source. 
+
+\begin{DoxyReturn}{返回}
+source. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbellman__ford_a98cad540fd2d211c1ba44bb6fa8416f3}\label{classbellman__ford_a98cad540fd2d211c1ba44bb6fa8416f3}} 
+\index{bellman\_ford@{bellman\_ford}!source@{source}}
+\index{source@{source}!bellman\_ford@{bellman\_ford}}
+\doxysubsubsection{\texorpdfstring{source()}{source()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void bellman\+\_\+ford\+::source (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structnode}{node}} \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets source. 
+
+The default source is the invalid node (GTL\+::node\+::node()), in this case an arbitrary node is chosen and stored when this algorithm is run.
+
+
+\begin{DoxyParams}{参数}
+{\em n} & source. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbellman__ford_a2ded0950bfaca6c3ee65a3617c1ccaa8}\label{classbellman__ford_a2ded0950bfaca6c3ee65a3617c1ccaa8}} 
+\index{bellman\_ford@{bellman\_ford}!store\_preds@{store\_preds}}
+\index{store\_preds@{store\_preds}!bellman\_ford@{bellman\_ford}}
+\doxysubsubsection{\texorpdfstring{store\_preds()}{store\_preds()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool bellman\+\_\+ford\+::store\+\_\+preds (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns whether the storing of predecessors is enabled. 
+
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & iff the storing of predecessors is enabled. ~\newline
+\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbellman__ford_a403e286ec8cbe3c30a7a729c5041155e}{bellman\+\_\+ford\+::predecessor\+\_\+node}}, \mbox{\hyperlink{classbellman__ford_a39f93b0b1e427cf26059fa6141c6f61c}{bellman\+\_\+ford\+::predecessor\+\_\+edge}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbellman__ford_aac87169a3cf4f95477ce215a0cb7a12b}\label{classbellman__ford_aac87169a3cf4f95477ce215a0cb7a12b}} 
+\index{bellman\_ford@{bellman\_ford}!store\_preds@{store\_preds}}
+\index{store\_preds@{store\_preds}!bellman\_ford@{bellman\_ford}}
+\doxysubsubsection{\texorpdfstring{store\_preds()}{store\_preds()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void bellman\+\_\+ford\+::store\+\_\+preds (\begin{DoxyParamCaption}\item[{bool}]{set }\end{DoxyParamCaption})}
+
+
+
+Enables or disables the storing of predecessors. 
+
+If enabled for every node the predecessor on the shortest path from will be stored.
+
+
+\begin{DoxyParams}{参数}
+{\em set} & if true predecessors will be stored. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbellman__ford_a403e286ec8cbe3c30a7a729c5041155e}{bellman\+\_\+ford\+::predecessor\+\_\+node}}, \mbox{\hyperlink{classbellman__ford_a39f93b0b1e427cf26059fa6141c6f61c}{bellman\+\_\+ford\+::predecessor\+\_\+edge}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbellman__ford_a9e276cc9f30c2e608d320db4a08b2a74}\label{classbellman__ford_a9e276cc9f30c2e608d320db4a08b2a74}} 
+\index{bellman\_ford@{bellman\_ford}!weights@{weights}}
+\index{weights@{weights}!bellman\_ford@{bellman\_ford}}
+\doxysubsubsection{\texorpdfstring{weights()}{weights()}}
+{\footnotesize\ttfamily void bellman\+\_\+ford\+::weights (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$ double $>$ \&}]{weight }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets weights of the edges. 
+
+This method {\bfseries{must}} be called before run.
+
+
+\begin{DoxyParams}{参数}
+{\em w} & weights of the edges. \\
+\hline
+\end{DoxyParams}
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{classbellman__ford_a9e276cc9f30c2e608d320db4a08b2a74_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classbellman__ford_aa2168afff14546b2fd99d2b52681156b}\label{classbellman__ford_aa2168afff14546b2fd99d2b52681156b}} 
+\index{bellman\_ford@{bellman\_ford}!cycle@{cycle}}
+\index{cycle@{cycle}!bellman\_ford@{bellman\_ford}}
+\doxysubsubsection{\texorpdfstring{cycle}{cycle}}
+{\footnotesize\ttfamily bool bellman\+\_\+ford\+::cycle = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Indicates whether there is a cycle with negative weight 
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbellman__ford_af9cd8be38bb1504089997581d9aa4f64}{bellman\+\_\+ford\+::negative\+\_\+cycle}}. 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbellman__ford_a0e3b99854a3f998f8ef6cde6fb902040}\label{classbellman__ford_a0e3b99854a3f998f8ef6cde6fb902040}} 
+\index{bellman\_ford@{bellman\_ford}!d@{d}}
+\index{d@{d}!bellman\_ford@{bellman\_ford}}
+\doxysubsubsection{\texorpdfstring{d}{d}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$double$>$ bellman\+\_\+ford\+::d\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+distance from source s. 
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbellman__ford_a881e5b021e69aced997185208438f910}{bellman\+\_\+ford\+::distance}}. 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbellman__ford_a5c69a3ac59077a7a7e4b0484e5f85a32}\label{classbellman__ford_a5c69a3ac59077a7a7e4b0484e5f85a32}} 
+\index{bellman\_ford@{bellman\_ford}!inf@{inf}}
+\index{inf@{inf}!bellman\_ford@{bellman\_ford}}
+\doxysubsubsection{\texorpdfstring{inf}{inf}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$bool$>$ bellman\+\_\+ford\+::inf\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Indicates whether the node has distance infinity 
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbellman__ford_a881e5b021e69aced997185208438f910}{bellman\+\_\+ford\+::distance}}. 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbellman__ford_a1ce37529c697ec5b89e8dc09204e4f59}\label{classbellman__ford_a1ce37529c697ec5b89e8dc09204e4f59}} 
+\index{bellman\_ford@{bellman\_ford}!preds@{preds}}
+\index{preds@{preds}!bellman\_ford@{bellman\_ford}}
+\doxysubsubsection{\texorpdfstring{preds}{preds}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$\mbox{\hyperlink{classedge}{edge}}$>$$\ast$ bellman\+\_\+ford\+::preds\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Stores father of each node (if enabled) 
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbellman__ford_aac87169a3cf4f95477ce215a0cb7a12b}{bellman\+\_\+ford\+::store\+\_\+preds}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbellman__ford_a2d6ce715e65b26822c622b322811c3b0}\label{classbellman__ford_a2d6ce715e65b26822c622b322811c3b0}} 
+\index{bellman\_ford@{bellman\_ford}!s@{s}}
+\index{s@{s}!bellman\_ford@{bellman\_ford}}
+\doxysubsubsection{\texorpdfstring{s}{s}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structnode}{node}} bellman\+\_\+ford\+::s\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Stores source. 
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbellman__ford_a98cad540fd2d211c1ba44bb6fa8416f3}{bellman\+\_\+ford\+::source}}. 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbellman__ford_a0b727de83366d019041694f890f19dbb}\label{classbellman__ford_a0b727de83366d019041694f890f19dbb}} 
+\index{bellman\_ford@{bellman\_ford}!vars\_set@{vars\_set}}
+\index{vars\_set@{vars\_set}!bellman\_ford@{bellman\_ford}}
+\doxysubsubsection{\texorpdfstring{vars\_set}{vars\_set}}
+{\footnotesize\ttfamily bool bellman\+\_\+ford\+::vars\+\_\+set = false\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Indicates whether weights were set. 
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbellman__ford_a9e276cc9f30c2e608d320db4a08b2a74}{bellman\+\_\+ford\+::weights}}. 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbellman__ford_ae05c9a40c2257f1e1f333b6a4f6fa656}\label{classbellman__ford_ae05c9a40c2257f1e1f333b6a4f6fa656}} 
+\index{bellman\_ford@{bellman\_ford}!w@{w}}
+\index{w@{w}!bellman\_ford@{bellman\_ford}}
+\doxysubsubsection{\texorpdfstring{w}{w}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$double$>$ bellman\+\_\+ford\+::w\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Stores the weights of the edges. 
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbellman__ford_a9e276cc9f30c2e608d320db4a08b2a74}{bellman\+\_\+ford\+::weights}}. 
+\end{DoxySeeAlso}
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Tracker/graph/\+GTL/include/\+GTL/\mbox{\hyperlink{bellman__ford_8h}{bellman\+\_\+ford.\+h}}\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Tracker/graph/\+GTL/src/\mbox{\hyperlink{bellman__ford_8cpp}{bellman\+\_\+ford.\+cpp}}\end{DoxyCompactItemize}

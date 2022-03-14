@@ -1,0 +1,206 @@
+\hypertarget{planarity_8h_source}{}\doxysection{planarity.\+h}
+\label{planarity_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/planarity.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/planarity.h}}
+\mbox{\hyperlink{planarity_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* This software is distributed under the GNU Lesser General Public License */}}
+\DoxyCodeLine{2 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{//   planarity.h}}
+\DoxyCodeLine{5 \textcolor{comment}{//}}
+\DoxyCodeLine{6 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{// \$Id: planarity.h,v 1.22 2008/02/03 18:17:08 chris Exp \$}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#ifndef PLANARITY\_H}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define PLANARITY\_H}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{_g_t_l_8h}{GTL/GTL.h}}>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{graph_8h}{GTL/graph.h}}>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{algorithm_8h}{GTL/algorithm.h}}>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{st__number_8h}{GTL/st\_number.h}}>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{embedding_8h}{GTL/embedding.h}}>}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{biconnectivity_8h}{GTL/biconnectivity.h}}>}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{pq__node_8h}{GTL/pq\_node.h}}>}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \mbox{\hyperlink{_g_t_l_8h_a2d9f24096ac60918452dd51f32b64aa9}{\_\_GTL\_BEGIN\_NAMESPACE}}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{47 \textcolor{keyword}{class }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{classplanarity}{planarity}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classalgorithm}{algorithm}} }
+\DoxyCodeLine{48 \{}
+\DoxyCodeLine{49 \textcolor{keyword}{public}:}
+\DoxyCodeLine{55     \mbox{\hyperlink{classplanarity}{planarity}}();}
+\DoxyCodeLine{56     }
+\DoxyCodeLine{60     \mbox{\hyperlink{classplanarity}{\string~planarity}}();}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{81     \textcolor{keywordtype}{int} \mbox{\hyperlink{classalgorithm_a528100c0e54d446fab1e329a53935364}{check}}(GTL::graph\& G);}
+\DoxyCodeLine{82     }
+\DoxyCodeLine{99     \textcolor{keywordtype}{int} \mbox{\hyperlink{classalgorithm_a4baee48c513c5802975743152c33f34c}{run}}(GTL::graph\& G);}
+\DoxyCodeLine{100     }
+\DoxyCodeLine{107     \textcolor{keywordtype}{void} \mbox{\hyperlink{classalgorithm_a21aba63d066ae7897de6ca7d8425c408}{reset}}();}
+\DoxyCodeLine{108     }
+\DoxyCodeLine{118     \textcolor{keywordtype}{void} \mbox{\hyperlink{classplanarity_a1679e285a7135b48b572764f5e8e773d}{calc\_embedding}}(\textcolor{keywordtype}{bool} p)}
+\DoxyCodeLine{119     \{}
+\DoxyCodeLine{120     emp = p;}
+\DoxyCodeLine{121     \textcolor{keywordflow}{if} (!emp) kup = \textcolor{keyword}{false};}
+\DoxyCodeLine{122     \}}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{133     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classplanarity_aea94b0de2deb46ef774179dd3572bf2d}{calc\_embedding}} ()\textcolor{keyword}{ const}}
+\DoxyCodeLine{134 \textcolor{keyword}{    }\{ \textcolor{keywordflow}{return} emp; \}}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{147     \textcolor{keywordtype}{void} \mbox{\hyperlink{classplanarity_a7b8e8e5414a4eedb0f99253d3b62ffa3}{calc\_obstruction}}(\textcolor{keywordtype}{bool} p)}
+\DoxyCodeLine{148     \{}
+\DoxyCodeLine{149     kup = p;}
+\DoxyCodeLine{150     \textcolor{keywordflow}{if} (kup) emp = \textcolor{keyword}{true};}
+\DoxyCodeLine{151     \}}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{162     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classplanarity_a0c520ff8f91336a2dc644f9e4ed8bb2e}{calc\_obstruction}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{163 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{164     \textcolor{keywordflow}{return} kup;}
+\DoxyCodeLine{165     \}}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{184     \textcolor{keywordtype}{void} \mbox{\hyperlink{classplanarity_af67236533dce559d2670eae581750f54}{make\_biconnected}}(\textcolor{keywordtype}{bool} p) }
+\DoxyCodeLine{185     \{}
+\DoxyCodeLine{186     bip = p;}
+\DoxyCodeLine{187     \}}
+\DoxyCodeLine{188     }
+\DoxyCodeLine{197     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classplanarity_a822d67100814e1887494e7213e6f0531}{make\_biconnected}}()\textcolor{keyword}{ const }}
+\DoxyCodeLine{198 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{199     \textcolor{keywordflow}{return} bip;}
+\DoxyCodeLine{200     \}}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{207     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classplanarity_af60c3d06cffa7ce3a470797fd758be5f}{is\_planar}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{208 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{209     \textcolor{keywordflow}{return} planar;}
+\DoxyCodeLine{210     \}}
+\DoxyCodeLine{211     }
+\DoxyCodeLine{220     \mbox{\hyperlink{classplanar__embedding}{planar\_embedding}}\& \mbox{\hyperlink{classplanarity_a40ac3d6c3ac52fa704510f8ded1532a2}{get\_embedding}}()}
+\DoxyCodeLine{221     \{}
+\DoxyCodeLine{222     \textcolor{keywordflow}{return} embedding;}
+\DoxyCodeLine{223     \}}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{234     \mbox{\hyperlink{edge_8h_a8f9587479bda6cf612c103494b3858e3}{edges\_t}}\& \mbox{\hyperlink{classplanarity_ac37c9051d01256804ed17df7934d3a30}{get\_obstruction\_edges}}()}
+\DoxyCodeLine{235     \{}
+\DoxyCodeLine{236     \textcolor{keywordflow}{return} ob\_edges;}
+\DoxyCodeLine{237     \}}
+\DoxyCodeLine{238 }
+\DoxyCodeLine{248     \mbox{\hyperlink{edge_8h_a22ac17689106ba21a84e7bc54d1199d6}{nodes\_t}}\& \mbox{\hyperlink{classplanarity_a66c062d3774b629ea78e5e8424bdede0}{get\_obstruction\_nodes}}()}
+\DoxyCodeLine{249     \{}
+\DoxyCodeLine{250     \textcolor{keywordflow}{return} ob\_nodes;}
+\DoxyCodeLine{251     \}}
+\DoxyCodeLine{252 \textcolor{keyword}{private}:}
+\DoxyCodeLine{264     \textcolor{keywordtype}{bool} run\_on\_biconnected(GTL::graph\& G, \mbox{\hyperlink{classplanar__embedding}{planar\_embedding}}\& em);}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{274     \textcolor{keywordtype}{void} add\_to\_embedding(GTL::graph\& G, \mbox{\hyperlink{classplanar__embedding}{planar\_embedding}}\& em);}
+\DoxyCodeLine{275 }
+\DoxyCodeLine{288     \textcolor{keywordtype}{void} correct\_embedding(\mbox{\hyperlink{classplanar__embedding}{planar\_embedding}}\& em,}
+\DoxyCodeLine{289                \mbox{\hyperlink{classst__number}{st\_number}}\& st,}
+\DoxyCodeLine{290                \mbox{\hyperlink{classnode__map}{node\_map}}<std::list<direction\_indicator> >\& dirs);}
+\DoxyCodeLine{291 }
+\DoxyCodeLine{306     \textcolor{keywordtype}{void} extend\_embedding(}
+\DoxyCodeLine{307     \mbox{\hyperlink{structnode}{node}} n,}
+\DoxyCodeLine{308     \mbox{\hyperlink{classplanar__embedding}{planar\_embedding}}\& em,}
+\DoxyCodeLine{309     \mbox{\hyperlink{classnode__map}{node\_map<int>}}\& mark,}
+\DoxyCodeLine{310     \mbox{\hyperlink{classnode__map}{node\_map}}<\mbox{\hyperlink{structsymlist__iterator}{symlist<edge>::iterator}} >\& upward\_begin);}
+\DoxyCodeLine{311     }
+\DoxyCodeLine{324     \textcolor{keywordtype}{void} switch\_to\_component(GTL::graph\& G,}
+\DoxyCodeLine{325                  \mbox{\hyperlink{classbiconnectivity_abbecb73233a3e93c610f9d6fbeb6023e}{biconnectivity::component\_iterator}} it);}
+\DoxyCodeLine{326  }
+\DoxyCodeLine{344     \textcolor{keywordtype}{void} examine\_obstruction(GTL::graph\& G,}
+\DoxyCodeLine{345                  \mbox{\hyperlink{classst__number}{st\_number}}\& st,}
+\DoxyCodeLine{346                  \mbox{\hyperlink{structnode}{node}} act,}
+\DoxyCodeLine{347                  \mbox{\hyperlink{classpq__node}{pq\_node}}* fail,}
+\DoxyCodeLine{348                  \textcolor{keywordtype}{bool} failed\_at\_root,}
+\DoxyCodeLine{349                  \mbox{\hyperlink{classplanar__embedding}{planar\_embedding}}\& em,}
+\DoxyCodeLine{350                  \mbox{\hyperlink{classnode__map}{node\_map}}<std::list<direction\_indicator> >\& dirs,}
+\DoxyCodeLine{351                  \mbox{\hyperlink{classpq__tree}{pq\_tree}}* PQ); }
+\DoxyCodeLine{352 }
+\DoxyCodeLine{367     \textcolor{keywordtype}{void} dfs\_bushform(\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} act,}
+\DoxyCodeLine{368               \mbox{\hyperlink{classnode__map}{node\_map<int>}}\& mark,}
+\DoxyCodeLine{369               \mbox{\hyperlink{classst__number}{st\_number}}\& st,}
+\DoxyCodeLine{370               \textcolor{keywordtype}{int} stop,}
+\DoxyCodeLine{371               \mbox{\hyperlink{classnode__map}{node\_map<edge>}}\& to\_father);}
+\DoxyCodeLine{372 }
+\DoxyCodeLine{373     }
+\DoxyCodeLine{386     \textcolor{keywordtype}{void} attachment\_cycle (\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} n, \mbox{\hyperlink{classplanar__embedding}{planar\_embedding}}\& em);}
+\DoxyCodeLine{387 }
+\DoxyCodeLine{399     \textcolor{keywordtype}{void} mark\_all\_neighbors\_of\_leaves (\mbox{\hyperlink{classpq__node}{pq\_node}}* act, GTL::node\_map<int>\& mark);}
+\DoxyCodeLine{400     }
+\DoxyCodeLine{414     \mbox{\hyperlink{classpq__leaf}{pq\_leaf}}* run\_through\_partial(\mbox{\hyperlink{classq__node}{q\_node}}* \mbox{\hyperlink{darknet_8c_a4663de4fa674346c82a366077969fd4b}{partial}},}
+\DoxyCodeLine{415                  \mbox{\hyperlink{classnode__map}{node\_map<int>}}\& mark,}
+\DoxyCodeLine{416                  \mbox{\hyperlink{classnode__map}{node\_map<edge>}}\& to\_father,}
+\DoxyCodeLine{417                                  \mbox{\hyperlink{structnode}{node}} v);}
+\DoxyCodeLine{418 }
+\DoxyCodeLine{429     \mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classplanarity_a881042458bbe12364f6a3203ba2fbedd}{up\_until\_marked}}(\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} act,}
+\DoxyCodeLine{430              \mbox{\hyperlink{classnode__map}{node\_map<int>}}\& mark,}
+\DoxyCodeLine{431              \mbox{\hyperlink{classnode__map}{node\_map<edge>}}\& to\_father);}
+\DoxyCodeLine{432 }
+\DoxyCodeLine{444     \mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classplanarity_a588db2503875211c570b16709bcc360b}{up\_until\_marked}}(\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} act,}
+\DoxyCodeLine{445              \mbox{\hyperlink{classnode__map}{node\_map<int>}}\& mark,}
+\DoxyCodeLine{446              \mbox{\hyperlink{classst__number}{st\_number}}\& st);}
+\DoxyCodeLine{447 }
+\DoxyCodeLine{456     \mbox{\hyperlink{classpq__leaf}{pq\_leaf}}* search\_full\_leaf (\mbox{\hyperlink{classpq__node}{pq\_node}}* n);}
+\DoxyCodeLine{457     }
+\DoxyCodeLine{466     \mbox{\hyperlink{classpq__leaf}{pq\_leaf}}* search\_empty\_leaf(\mbox{\hyperlink{classpq__node}{pq\_node}}* n);}
+\DoxyCodeLine{467 }
+\DoxyCodeLine{479     \textcolor{keywordtype}{void} case\_A(\mbox{\hyperlink{classp__node}{p\_node}}* p\_fail,}
+\DoxyCodeLine{480         \mbox{\hyperlink{structnode}{node}} act,}
+\DoxyCodeLine{481         \mbox{\hyperlink{classst__number}{st\_number}}\& \_st,}
+\DoxyCodeLine{482         \mbox{\hyperlink{classnode__map}{node\_map<edge>}} to\_father,}
+\DoxyCodeLine{483         \mbox{\hyperlink{classgraph}{graph}}\& G);}
+\DoxyCodeLine{484 }
+\DoxyCodeLine{496     \textcolor{keywordtype}{void} case\_B(\mbox{\hyperlink{classp__node}{p\_node}}* p\_fail,}
+\DoxyCodeLine{497         \mbox{\hyperlink{structnode}{node}} act,}
+\DoxyCodeLine{498         \mbox{\hyperlink{classst__number}{st\_number}}\& \_st,}
+\DoxyCodeLine{499         \mbox{\hyperlink{classnode__map}{node\_map<edge>}} to\_father,}
+\DoxyCodeLine{500         \mbox{\hyperlink{classgraph}{graph}}\& G);}
+\DoxyCodeLine{501 }
+\DoxyCodeLine{516     \textcolor{keywordtype}{void} case\_C(\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}* nodes,}
+\DoxyCodeLine{517         \mbox{\hyperlink{classpq__leaf}{pq\_leaf}}** leaves,}
+\DoxyCodeLine{518         \mbox{\hyperlink{classst__number}{st\_number}}\& \_st,}
+\DoxyCodeLine{519         \mbox{\hyperlink{classnode__map}{node\_map<edge>}} to\_father,}
+\DoxyCodeLine{520         \mbox{\hyperlink{classgraph}{graph}}\& G,}
+\DoxyCodeLine{521         \mbox{\hyperlink{classq__node}{q\_node}}* q\_fail);}
+\DoxyCodeLine{522 }
+\DoxyCodeLine{537     \textcolor{keywordtype}{void} case\_D(\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}* nodes,}
+\DoxyCodeLine{538         \mbox{\hyperlink{classpq__leaf}{pq\_leaf}}** leaves,}
+\DoxyCodeLine{539         \mbox{\hyperlink{classst__number}{st\_number}}\& \_st,}
+\DoxyCodeLine{540         \mbox{\hyperlink{classnode__map}{node\_map<edge>}} to\_father,}
+\DoxyCodeLine{541         \mbox{\hyperlink{classgraph}{graph}}\& G,}
+\DoxyCodeLine{542         \mbox{\hyperlink{classq__node}{q\_node}}* q\_fail);}
+\DoxyCodeLine{543 }
+\DoxyCodeLine{558     \textcolor{keywordtype}{void} case\_E(\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}* nodes,}
+\DoxyCodeLine{559         \mbox{\hyperlink{classpq__leaf}{pq\_leaf}}** leaves,}
+\DoxyCodeLine{560         \mbox{\hyperlink{classst__number}{st\_number}}\& \_st,}
+\DoxyCodeLine{561         \mbox{\hyperlink{classnode__map}{node\_map<edge>}} to\_father,}
+\DoxyCodeLine{562         \mbox{\hyperlink{classgraph}{graph}}\& G,}
+\DoxyCodeLine{563         \mbox{\hyperlink{classq__node}{q\_node}}* q\_fail);}
+\DoxyCodeLine{564 }
+\DoxyCodeLine{565 \textcolor{preprocessor}{\#ifdef \_DEBUG}}
+\DoxyCodeLine{569     \textcolor{keywordtype}{void} write\_bushform(GTL::graph\& G, \mbox{\hyperlink{classst__number}{st\_number}}\& \_st, \textcolor{keywordtype}{int} k, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{structname}{name}},}
+\DoxyCodeLine{570                         \textcolor{keyword}{const} \mbox{\hyperlink{classnode__map}{node\_map<int>}}\& mark, \textcolor{keyword}{const} \mbox{\hyperlink{classnode__map}{node\_map<edge>}}\& to\_father);}
+\DoxyCodeLine{571 }
+\DoxyCodeLine{575     \textcolor{keywordtype}{void} write\_node(std::ostream\& os, \textcolor{keywordtype}{int} \textcolor{keywordtype}{id}, \textcolor{keywordtype}{int} label, \textcolor{keywordtype}{int} mark);}
+\DoxyCodeLine{576 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{577     }
+\DoxyCodeLine{581     \mbox{\hyperlink{edge_8h_a8f9587479bda6cf612c103494b3858e3}{edges\_t}} \mbox{\hyperlink{classplanarity_abde3aedda2039ff1233a0e8a69481bb7}{ob\_edges}};}
+\DoxyCodeLine{582     }
+\DoxyCodeLine{586     \mbox{\hyperlink{edge_8h_a22ac17689106ba21a84e7bc54d1199d6}{nodes\_t}} \mbox{\hyperlink{classplanarity_af9ac45a388b224134ce1dd7e643901c8}{ob\_nodes}};}
+\DoxyCodeLine{587     }
+\DoxyCodeLine{591     \mbox{\hyperlink{classplanar__embedding}{planar\_embedding}} \mbox{\hyperlink{classplanarity_a2f8ce8ea2c29de3d0c218265f3c3c5f6}{embedding}};}
+\DoxyCodeLine{592     }
+\DoxyCodeLine{596     \textcolor{keywordtype}{bool} planar = \textcolor{keyword}{false};}
+\DoxyCodeLine{597     }
+\DoxyCodeLine{601     \textcolor{keywordtype}{bool} emp = \textcolor{keyword}{false};}
+\DoxyCodeLine{602     }
+\DoxyCodeLine{606     \textcolor{keywordtype}{bool} kup = \textcolor{keyword}{false};}
+\DoxyCodeLine{607     }
+\DoxyCodeLine{611     \textcolor{keywordtype}{bool} bip = \textcolor{keyword}{false};}
+\DoxyCodeLine{612 \};}
+\DoxyCodeLine{613 }
+\DoxyCodeLine{614 \mbox{\hyperlink{_g_t_l_8h_a46af2b3ec266ac2f9d36fa7222358017}{\_\_GTL\_END\_NAMESPACE}}}
+\DoxyCodeLine{615 }
+\DoxyCodeLine{616 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// PLANARITY\_H}}
+\DoxyCodeLine{617 }
+\DoxyCodeLine{618 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{619 \textcolor{comment}{//   end of file}}
+\DoxyCodeLine{620 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+
+\end{DoxyCode}

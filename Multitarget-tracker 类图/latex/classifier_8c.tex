@@ -1,0 +1,257 @@
+\hypertarget{classifier_8c}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/classifier.c 文件参考}
+\label{classifier_8c}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/classifier.c@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/classifier.c}}
+{\ttfamily \#include \char`\"{}network.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}parser.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}option\+\_\+list.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}blas.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}assert.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}classifier.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dark\+\_\+cuda.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$sys/time.\+h$>$}\newline
+classifier.\+c 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classifier_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{classifier_8c_a92f5db923be3e69c4870aa5278e30891}{validate\+\_\+classifier\+\_\+single}} (char $\ast$datacfg, char $\ast$filename, char $\ast$weightfile, \mbox{\hyperlink{structnetwork}{network}} $\ast$existing\+\_\+net, int topk\+\_\+custom)
+\item 
+float $\ast$ \mbox{\hyperlink{classifier_8c_aca26e1b008ab4828f3ae7ea61ec8dda9}{get\+\_\+regression\+\_\+values}} (char $\ast$$\ast$labels, int n)
+\item 
+void \mbox{\hyperlink{classifier_8c_a4a42eed2204a07e88f15610adf351b90}{train\+\_\+classifier}} (char $\ast$datacfg, char $\ast$cfgfile, char $\ast$weightfile, int $\ast$gpus, int ngpus, int clear, int dontuse\+\_\+opencv, int dont\+\_\+show, int mjpeg\+\_\+port, int calc\+\_\+topk, int show\+\_\+imgs, char $\ast$chart\+\_\+path)
+\item 
+void \mbox{\hyperlink{classifier_8c_a636dccf9308a3ae0dbd8660f29db4e02}{validate\+\_\+classifier\+\_\+crop}} (char $\ast$datacfg, char $\ast$filename, char $\ast$weightfile)
+\item 
+void \mbox{\hyperlink{classifier_8c_ae6830ebfccd79c255f5cac844aa5454b}{validate\+\_\+classifier\+\_\+10}} (char $\ast$datacfg, char $\ast$filename, char $\ast$weightfile)
+\item 
+void \mbox{\hyperlink{classifier_8c_aeae387d13aac40e2eb3aff9584f03a8b}{validate\+\_\+classifier\+\_\+full}} (char $\ast$datacfg, char $\ast$filename, char $\ast$weightfile)
+\item 
+void \mbox{\hyperlink{classifier_8c_a4b863efd1e5f3105ed4843963b8d8412}{validate\+\_\+classifier\+\_\+multi}} (char $\ast$datacfg, char $\ast$filename, char $\ast$weightfile)
+\item 
+void \mbox{\hyperlink{classifier_8c_a894dd692d95f8f8a8da05dae07e60138}{try\+\_\+classifier}} (char $\ast$datacfg, char $\ast$cfgfile, char $\ast$weightfile, char $\ast$filename, int layer\+\_\+num)
+\item 
+void \mbox{\hyperlink{classifier_8c_aa8603edf5e9da49cdee89b35d6bc5b42}{predict\+\_\+classifier}} (char $\ast$datacfg, char $\ast$cfgfile, char $\ast$weightfile, char $\ast$filename, int top)
+\item 
+void \mbox{\hyperlink{classifier_8c_a9ae475089952950f04778d56a5dd0f8e}{label\+\_\+classifier}} (char $\ast$datacfg, char $\ast$filename, char $\ast$weightfile)
+\item 
+void \mbox{\hyperlink{classifier_8c_aceccf5b6380cf57e56df5655b85fb52e}{test\+\_\+classifier}} (char $\ast$datacfg, char $\ast$cfgfile, char $\ast$weightfile, int target\+\_\+layer)
+\item 
+void \mbox{\hyperlink{classifier_8c_ab770e80d03219ab55ec93fdd0237f13b}{threat\+\_\+classifier}} (char $\ast$datacfg, char $\ast$cfgfile, char $\ast$weightfile, int cam\+\_\+index, const char $\ast$filename)
+\item 
+void \mbox{\hyperlink{classifier_8c_a8901a041f50c430e093fddb249d78d2f}{gun\+\_\+classifier}} (char $\ast$datacfg, char $\ast$cfgfile, char $\ast$weightfile, int cam\+\_\+index, const char $\ast$filename)
+\item 
+void \mbox{\hyperlink{classifier_8c_a526b894f38cd20cb5f11b7d482ae13d7}{demo\+\_\+classifier}} (char $\ast$datacfg, char $\ast$cfgfile, char $\ast$weightfile, int cam\+\_\+index, const char $\ast$filename, int benchmark, int benchmark\+\_\+layers)
+\item 
+void \mbox{\hyperlink{classifier_8c_a08cb29ba2c4674431352eff4e6274b56}{run\+\_\+classifier}} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{classifier_8c_a526b894f38cd20cb5f11b7d482ae13d7}\label{classifier_8c_a526b894f38cd20cb5f11b7d482ae13d7}} 
+\index{classifier.c@{classifier.c}!demo\_classifier@{demo\_classifier}}
+\index{demo\_classifier@{demo\_classifier}!classifier.c@{classifier.c}}
+\doxysubsubsection{\texorpdfstring{demo\_classifier()}{demo\_classifier()}}
+{\footnotesize\ttfamily void demo\+\_\+classifier (\begin{DoxyParamCaption}\item[{char $\ast$}]{datacfg,  }\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{int}]{cam\+\_\+index,  }\item[{const char $\ast$}]{filename,  }\item[{int}]{benchmark,  }\item[{int}]{benchmark\+\_\+layers }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classifier_8c_a526b894f38cd20cb5f11b7d482ae13d7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classifier_8c_aca26e1b008ab4828f3ae7ea61ec8dda9}\label{classifier_8c_aca26e1b008ab4828f3ae7ea61ec8dda9}} 
+\index{classifier.c@{classifier.c}!get\_regression\_values@{get\_regression\_values}}
+\index{get\_regression\_values@{get\_regression\_values}!classifier.c@{classifier.c}}
+\doxysubsubsection{\texorpdfstring{get\_regression\_values()}{get\_regression\_values()}}
+{\footnotesize\ttfamily float $\ast$ get\+\_\+regression\+\_\+values (\begin{DoxyParamCaption}\item[{char $\ast$$\ast$}]{labels,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classifier_8c_a8901a041f50c430e093fddb249d78d2f}\label{classifier_8c_a8901a041f50c430e093fddb249d78d2f}} 
+\index{classifier.c@{classifier.c}!gun\_classifier@{gun\_classifier}}
+\index{gun\_classifier@{gun\_classifier}!classifier.c@{classifier.c}}
+\doxysubsubsection{\texorpdfstring{gun\_classifier()}{gun\_classifier()}}
+{\footnotesize\ttfamily void gun\+\_\+classifier (\begin{DoxyParamCaption}\item[{char $\ast$}]{datacfg,  }\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{int}]{cam\+\_\+index,  }\item[{const char $\ast$}]{filename }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classifier_8c_a8901a041f50c430e093fddb249d78d2f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classifier_8c_a9ae475089952950f04778d56a5dd0f8e}\label{classifier_8c_a9ae475089952950f04778d56a5dd0f8e}} 
+\index{classifier.c@{classifier.c}!label\_classifier@{label\_classifier}}
+\index{label\_classifier@{label\_classifier}!classifier.c@{classifier.c}}
+\doxysubsubsection{\texorpdfstring{label\_classifier()}{label\_classifier()}}
+{\footnotesize\ttfamily void label\+\_\+classifier (\begin{DoxyParamCaption}\item[{char $\ast$}]{datacfg,  }\item[{char $\ast$}]{filename,  }\item[{char $\ast$}]{weightfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classifier_8c_a9ae475089952950f04778d56a5dd0f8e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classifier_8c_aa8603edf5e9da49cdee89b35d6bc5b42}\label{classifier_8c_aa8603edf5e9da49cdee89b35d6bc5b42}} 
+\index{classifier.c@{classifier.c}!predict\_classifier@{predict\_classifier}}
+\index{predict\_classifier@{predict\_classifier}!classifier.c@{classifier.c}}
+\doxysubsubsection{\texorpdfstring{predict\_classifier()}{predict\_classifier()}}
+{\footnotesize\ttfamily void predict\+\_\+classifier (\begin{DoxyParamCaption}\item[{char $\ast$}]{datacfg,  }\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{char $\ast$}]{filename,  }\item[{int}]{top }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classifier_8c_aa8603edf5e9da49cdee89b35d6bc5b42_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classifier_8c_a08cb29ba2c4674431352eff4e6274b56}\label{classifier_8c_a08cb29ba2c4674431352eff4e6274b56}} 
+\index{classifier.c@{classifier.c}!run\_classifier@{run\_classifier}}
+\index{run\_classifier@{run\_classifier}!classifier.c@{classifier.c}}
+\doxysubsubsection{\texorpdfstring{run\_classifier()}{run\_classifier()}}
+{\footnotesize\ttfamily void run\+\_\+classifier (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classifier_8c_a08cb29ba2c4674431352eff4e6274b56_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classifier_8c_aceccf5b6380cf57e56df5655b85fb52e}\label{classifier_8c_aceccf5b6380cf57e56df5655b85fb52e}} 
+\index{classifier.c@{classifier.c}!test\_classifier@{test\_classifier}}
+\index{test\_classifier@{test\_classifier}!classifier.c@{classifier.c}}
+\doxysubsubsection{\texorpdfstring{test\_classifier()}{test\_classifier()}}
+{\footnotesize\ttfamily void test\+\_\+classifier (\begin{DoxyParamCaption}\item[{char $\ast$}]{datacfg,  }\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{int}]{target\+\_\+layer }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classifier_8c_aceccf5b6380cf57e56df5655b85fb52e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classifier_8c_ab770e80d03219ab55ec93fdd0237f13b}\label{classifier_8c_ab770e80d03219ab55ec93fdd0237f13b}} 
+\index{classifier.c@{classifier.c}!threat\_classifier@{threat\_classifier}}
+\index{threat\_classifier@{threat\_classifier}!classifier.c@{classifier.c}}
+\doxysubsubsection{\texorpdfstring{threat\_classifier()}{threat\_classifier()}}
+{\footnotesize\ttfamily void threat\+\_\+classifier (\begin{DoxyParamCaption}\item[{char $\ast$}]{datacfg,  }\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{int}]{cam\+\_\+index,  }\item[{const char $\ast$}]{filename }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classifier_8c_ab770e80d03219ab55ec93fdd0237f13b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classifier_8c_a4a42eed2204a07e88f15610adf351b90}\label{classifier_8c_a4a42eed2204a07e88f15610adf351b90}} 
+\index{classifier.c@{classifier.c}!train\_classifier@{train\_classifier}}
+\index{train\_classifier@{train\_classifier}!classifier.c@{classifier.c}}
+\doxysubsubsection{\texorpdfstring{train\_classifier()}{train\_classifier()}}
+{\footnotesize\ttfamily void train\+\_\+classifier (\begin{DoxyParamCaption}\item[{char $\ast$}]{datacfg,  }\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{int $\ast$}]{gpus,  }\item[{int}]{ngpus,  }\item[{int}]{clear,  }\item[{int}]{dontuse\+\_\+opencv,  }\item[{int}]{dont\+\_\+show,  }\item[{int}]{mjpeg\+\_\+port,  }\item[{int}]{calc\+\_\+topk,  }\item[{int}]{show\+\_\+imgs,  }\item[{char $\ast$}]{chart\+\_\+path }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classifier_8c_a4a42eed2204a07e88f15610adf351b90_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classifier_8c_a894dd692d95f8f8a8da05dae07e60138}\label{classifier_8c_a894dd692d95f8f8a8da05dae07e60138}} 
+\index{classifier.c@{classifier.c}!try\_classifier@{try\_classifier}}
+\index{try\_classifier@{try\_classifier}!classifier.c@{classifier.c}}
+\doxysubsubsection{\texorpdfstring{try\_classifier()}{try\_classifier()}}
+{\footnotesize\ttfamily void try\+\_\+classifier (\begin{DoxyParamCaption}\item[{char $\ast$}]{datacfg,  }\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{char $\ast$}]{filename,  }\item[{int}]{layer\+\_\+num }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classifier_8c_a894dd692d95f8f8a8da05dae07e60138_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classifier_8c_ae6830ebfccd79c255f5cac844aa5454b}\label{classifier_8c_ae6830ebfccd79c255f5cac844aa5454b}} 
+\index{classifier.c@{classifier.c}!validate\_classifier\_10@{validate\_classifier\_10}}
+\index{validate\_classifier\_10@{validate\_classifier\_10}!classifier.c@{classifier.c}}
+\doxysubsubsection{\texorpdfstring{validate\_classifier\_10()}{validate\_classifier\_10()}}
+{\footnotesize\ttfamily void validate\+\_\+classifier\+\_\+10 (\begin{DoxyParamCaption}\item[{char $\ast$}]{datacfg,  }\item[{char $\ast$}]{filename,  }\item[{char $\ast$}]{weightfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classifier_8c_ae6830ebfccd79c255f5cac844aa5454b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classifier_8c_a636dccf9308a3ae0dbd8660f29db4e02}\label{classifier_8c_a636dccf9308a3ae0dbd8660f29db4e02}} 
+\index{classifier.c@{classifier.c}!validate\_classifier\_crop@{validate\_classifier\_crop}}
+\index{validate\_classifier\_crop@{validate\_classifier\_crop}!classifier.c@{classifier.c}}
+\doxysubsubsection{\texorpdfstring{validate\_classifier\_crop()}{validate\_classifier\_crop()}}
+{\footnotesize\ttfamily void validate\+\_\+classifier\+\_\+crop (\begin{DoxyParamCaption}\item[{char $\ast$}]{datacfg,  }\item[{char $\ast$}]{filename,  }\item[{char $\ast$}]{weightfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classifier_8c_a636dccf9308a3ae0dbd8660f29db4e02_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classifier_8c_aeae387d13aac40e2eb3aff9584f03a8b}\label{classifier_8c_aeae387d13aac40e2eb3aff9584f03a8b}} 
+\index{classifier.c@{classifier.c}!validate\_classifier\_full@{validate\_classifier\_full}}
+\index{validate\_classifier\_full@{validate\_classifier\_full}!classifier.c@{classifier.c}}
+\doxysubsubsection{\texorpdfstring{validate\_classifier\_full()}{validate\_classifier\_full()}}
+{\footnotesize\ttfamily void validate\+\_\+classifier\+\_\+full (\begin{DoxyParamCaption}\item[{char $\ast$}]{datacfg,  }\item[{char $\ast$}]{filename,  }\item[{char $\ast$}]{weightfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classifier_8c_aeae387d13aac40e2eb3aff9584f03a8b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classifier_8c_a4b863efd1e5f3105ed4843963b8d8412}\label{classifier_8c_a4b863efd1e5f3105ed4843963b8d8412}} 
+\index{classifier.c@{classifier.c}!validate\_classifier\_multi@{validate\_classifier\_multi}}
+\index{validate\_classifier\_multi@{validate\_classifier\_multi}!classifier.c@{classifier.c}}
+\doxysubsubsection{\texorpdfstring{validate\_classifier\_multi()}{validate\_classifier\_multi()}}
+{\footnotesize\ttfamily void validate\+\_\+classifier\+\_\+multi (\begin{DoxyParamCaption}\item[{char $\ast$}]{datacfg,  }\item[{char $\ast$}]{filename,  }\item[{char $\ast$}]{weightfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classifier_8c_a4b863efd1e5f3105ed4843963b8d8412_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classifier_8c_a92f5db923be3e69c4870aa5278e30891}\label{classifier_8c_a92f5db923be3e69c4870aa5278e30891}} 
+\index{classifier.c@{classifier.c}!validate\_classifier\_single@{validate\_classifier\_single}}
+\index{validate\_classifier\_single@{validate\_classifier\_single}!classifier.c@{classifier.c}}
+\doxysubsubsection{\texorpdfstring{validate\_classifier\_single()}{validate\_classifier\_single()}}
+{\footnotesize\ttfamily float validate\+\_\+classifier\+\_\+single (\begin{DoxyParamCaption}\item[{char $\ast$}]{datacfg,  }\item[{char $\ast$}]{filename,  }\item[{char $\ast$}]{weightfile,  }\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{existing\+\_\+net,  }\item[{int}]{topk\+\_\+custom }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classifier_8c_a92f5db923be3e69c4870aa5278e30891_cgraph}
+\end{center}
+\end{figure}

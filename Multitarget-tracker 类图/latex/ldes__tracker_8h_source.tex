@@ -1,0 +1,137 @@
+\hypertarget{ldes__tracker_8h_source}{}\doxysection{ldes\+\_\+tracker.\+h}
+\label{ldes__tracker_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/ldes/ldes\_tracker.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/ldes/ldes\_tracker.h}}
+\mbox{\hyperlink{ldes__tracker_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <opencv2/opencv.hpp>}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{fft__functions_8h}{fft\_functions.h}}"{}}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{correlation_8h}{correlation.h}}"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{fhog_8hpp}{fhog.hpp}}"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{hann_8h}{hann.h}}"{}}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}../VOTTracker.hpp"{}}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{class }\mbox{\hyperlink{class_l_d_e_s_tracker}{LDESTracker}} final : \textcolor{keyword}{public} \mbox{\hyperlink{class_v_o_t_tracker}{VOTTracker}}}
+\DoxyCodeLine{11 \{}
+\DoxyCodeLine{12 \textcolor{keyword}{public}:}
+\DoxyCodeLine{13     \mbox{\hyperlink{class_l_d_e_s_tracker_aaba70db7f7b94254447ff9038f25f1fd}{LDESTracker}}();}
+\DoxyCodeLine{14     \mbox{\hyperlink{class_l_d_e_s_tracker_a7b59c838841fc6c21efbadb477525ebe}{\string~LDESTracker}}();}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_d_e_s_tracker_a8bff1f8193f9556a47ec42449e107c25}{Initialize}}(\textcolor{keyword}{const} cv::Mat \&im, cv::Rect region);}
+\DoxyCodeLine{17     cv::RotatedRect \mbox{\hyperlink{class_l_d_e_s_tracker_aeb6787e2111fe4e0adc66143d5dc3321}{Update}}(\textcolor{keyword}{const} cv::Mat \&im, \textcolor{keywordtype}{float}\& confidence);}
+\DoxyCodeLine{18     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_d_e_s_tracker_ace42ba92eabcd9bbcb185ff923b0e559}{Train}}(\textcolor{keyword}{const} cv::Mat \&\textcolor{comment}{/*im*/}, \textcolor{keywordtype}{bool} \textcolor{comment}{/*first*/})}
+\DoxyCodeLine{19     \{}
+\DoxyCodeLine{20     \}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{23     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_a048a0ddf31374e81e8041d652992132f}{interp\_n}};}
+\DoxyCodeLine{24     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_a19b1108728ed4b1fb10abd374a441c96}{interp\_factor}}; \textcolor{comment}{// linear interpolation factor for adaptation}}
+\DoxyCodeLine{25     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_a43a6372eac8af2d77fdefced96f9fd81}{sigma}}; \textcolor{comment}{// gaussian kernel bandwidth}}
+\DoxyCodeLine{26     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_a8e9029fbd8e95a5ddbf668652db8aa0f}{lambda}}; \textcolor{comment}{// regularization}}
+\DoxyCodeLine{27     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_l_d_e_s_tracker_a7694b9173da3c7280f27e4b15e9511b1}{cell\_size}}; \textcolor{comment}{// HOG cell size}}
+\DoxyCodeLine{28     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_l_d_e_s_tracker_acacebb23951c9faa837bf3c3f912e58d}{cell\_sizeQ}}; \textcolor{comment}{// cell size\string^2, to avoid repeated operations}}
+\DoxyCodeLine{29     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_l_d_e_s_tracker_abfb4c32e3b6cd77e2955384797a870ea}{cell\_size\_scale}};}
+\DoxyCodeLine{30     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_af7749b5eb5298e402515db74a4d04f10}{padding}}; \textcolor{comment}{// extra area surrounding the target}}
+\DoxyCodeLine{31     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_a0eb0f663e0d944cb074176d4bea0750b}{scale\_padding}};}
+\DoxyCodeLine{32     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_a7454469a1b9f469e9911096c96027fca}{output\_sigma\_factor}}; \textcolor{comment}{// bandwidth of gaussian target}}
+\DoxyCodeLine{33     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_l_d_e_s_tracker_aa0ee58023a5aba24611b929a80957520}{template\_size}}; \textcolor{comment}{// template size}}
+\DoxyCodeLine{34     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_l_d_e_s_tracker_a52173be29985758ce85223d6304bbcdd}{scale\_template\_size}};}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_a53bed0f62493ea734e9b1eac31413e42}{scale\_step}}; \textcolor{comment}{// scale step for multi-\/scale estimation}}
+\DoxyCodeLine{37     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_a629c3e2676856d2a14667d889475a80e}{scale\_weight}};  \textcolor{comment}{// to downweight detection scores of other scales for added stability}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_af6eda28dc5aa540048de279b8f540b84}{train\_interp\_factor}};}
+\DoxyCodeLine{40     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_ae446a6357831e22264e6e87601390853}{interp\_factor\_scale}};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_a09f7d88f11bf2169e04df1817104a639}{cscore}};}
+\DoxyCodeLine{43     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_a650426f0319fa074c00ecf4d819d718a}{sscore}};}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45     cv::Size \mbox{\hyperlink{class_l_d_e_s_tracker_aab61b7511c01d7b81cd6ee78932f0ee1}{target\_sz}};}
+\DoxyCodeLine{46     cv::Size \mbox{\hyperlink{class_l_d_e_s_tracker_a70e5500af8f2ae3f855100481b872280}{target\_sz0}};}
+\DoxyCodeLine{47     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_l_d_e_s_tracker_a43f065706df64b14d058b7b162988d06}{window\_sz}};}
+\DoxyCodeLine{48     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_l_d_e_s_tracker_aabbfc0cce201fd049f7948b916390cee}{window\_sz0}};}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_l_d_e_s_tracker_a2cd80969334198340c44e355db555a72}{scale\_sz}};}
+\DoxyCodeLine{51     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_l_d_e_s_tracker_a0ac26ebe27333ea43fd8dec6702b88f7}{scale\_sz0}};}
+\DoxyCodeLine{52     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_a466c1ff3a9cd35a32adc4a94322a0b62}{scale\_base}};}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54     cv::Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a7f1334e9df4096cafd88e1b2c29e5bd8}{hann}};}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56     cv::Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a8da3e329a9c7bdaf50a2dc16cf72ec9b}{patch}};}
+\DoxyCodeLine{57     cv::Mat \mbox{\hyperlink{class_l_d_e_s_tracker_aee739c2b02f01a55d57bfa537dc1bd52}{patchL}};}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59     cv::Point2i \mbox{\hyperlink{class_l_d_e_s_tracker_a749642268fb92f9790e692ab9f5a6a12}{cur\_pos}};}
+\DoxyCodeLine{60     cv::Rect \mbox{\hyperlink{class_l_d_e_s_tracker_a7fdc930c3c7c9eebbf53afdc5652d656}{cur\_roi}};}
+\DoxyCodeLine{61     std::vector<cv::Point2i> \mbox{\hyperlink{class_l_d_e_s_tracker_a588c1899c5952a13ebb34961ddcb54c4}{rotated\_roi}};}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_l_d_e_s_tracker_a5614d7a70c6f80ae0822cffb2d88696b}{im\_width}};}
+\DoxyCodeLine{64     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_l_d_e_s_tracker_a1fbeca27d9caf10b9bcea36c5bf9eb6f}{im\_height}};}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66     \textcolor{keyword}{const} \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_aaa51a8c1b20dfece26369373d62d350d}{min\_area}} = 100 * 100;}
+\DoxyCodeLine{67     \textcolor{keyword}{const} \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_a29e6c6c65a6bcd2f994048cc0f4b9101}{max\_area}} = 350 * 350;}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69     cv::Rect \mbox{\hyperlink{class_l_d_e_s_tracker_abffdbd79fdb8d141fdcebde9404c81a5}{cur\_position}};}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_a4a1ecfbfa5e6367aafdf78e78a27f410}{cur\_rot\_degree}};}
+\DoxyCodeLine{72     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_a1c2a2edb9d84aed7c2c80ca382a5f462}{cur\_scale}};}
+\DoxyCodeLine{73     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_a2eea37ca8a378a7833c18a0050ddacfd}{\_scale}};}
+\DoxyCodeLine{74     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_aa237c53e2a154802f29d6bd49cc988e4}{\_scale2}};}
+\DoxyCodeLine{75     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_ac0f7aa5084156dbc490af9012a860f83}{delta\_rot}};}
+\DoxyCodeLine{76     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_a925b7efda9b5132224ce983531ef49a2}{delta\_scale}};}
+\DoxyCodeLine{77     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_abd27e9fd52141b7ec3ef96214a469a54}{mag}};}
+\DoxyCodeLine{78     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_a6f7292450bdf4ea4c4a30c2e37029d0a}{conf}};}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80     cv::Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a194ad82c71152b5f76ad92f4c327ba72}{resmap\_location}};}
+\DoxyCodeLine{81     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_a4bf49a3747e7f95f93438c1fd89e8b9f}{pv\_location}};}
+\DoxyCodeLine{82     cv::Point2f \mbox{\hyperlink{class_l_d_e_s_tracker_ac0f331fa1a592fefa79db33727794c6f}{peak\_loc}};}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85     cv::Rect \mbox{\hyperlink{class_l_d_e_s_tracker_afadb53b7bc415c573fdf1f0bfb3337a8}{testKCFTracker}}(\textcolor{keyword}{const} cv::Mat\& \mbox{\hyperlink{structimage}{image}}, cv::Rect\& rect, \textcolor{keywordtype}{bool} \mbox{\hyperlink{yolo__v2__class_8cpp_adcf7f587fe7c5bfdcbe67ffa797763be}{init}} = \textcolor{keyword}{false});}
+\DoxyCodeLine{86     cv::Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a96d1bbb9db58eb6bf2b4af10987807a8}{getFeatures}}(\textcolor{keyword}{const} cv::Mat \& \mbox{\hyperlink{class_l_d_e_s_tracker_a8da3e329a9c7bdaf50a2dc16cf72ec9b}{patch}}, cv::Mat\& han, \textcolor{keywordtype}{int}* sizes, \textcolor{keywordtype}{bool} inithann = \textcolor{keyword}{false});}
+\DoxyCodeLine{87     cv::Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a184fbf905ef9806d2e59e950dcf4c9ce}{getPixFeatures}}(\textcolor{keyword}{const} cv::Mat\& \mbox{\hyperlink{class_l_d_e_s_tracker_a8da3e329a9c7bdaf50a2dc16cf72ec9b}{patch}}, \textcolor{keywordtype}{int}* size);}
+\DoxyCodeLine{88     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_a9635d478fda23d5d469f3ebc332e7d97}{subPixelPeak}}(\textcolor{keywordtype}{float} left, \textcolor{keywordtype}{float} center, \textcolor{keywordtype}{float} right);}
+\DoxyCodeLine{89     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_d_e_s_tracker_aa514ef7af99c9cd096872f0fa6a63cb8}{weightedPeak}}(cv::Mat\& resmap, cv::Point2f\& peak, \textcolor{keywordtype}{int} pad=2);}
+\DoxyCodeLine{90     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_d_e_s_tracker_a4e948ed63c15f3641114ffe49d80addc}{calcPSR}}();}
+\DoxyCodeLine{91     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_d_e_s_tracker_ac9e74557bc5f22e75833fb7a5eae1db3}{updateModel}}(\textcolor{keyword}{const} cv::Mat\& \mbox{\hyperlink{structimage}{image}}, \textcolor{keywordtype}{int} polish); \textcolor{comment}{//MATLAB code}}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_d_e_s_tracker_af14e45023f747b275b6acdff7ad35d7a}{estimateLocation}}(cv::Mat\& \mbox{\hyperlink{utils_8c_a3d99b005d0fb73033dce14d4a135d01f}{z}}, cv::Mat \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}});}
+\DoxyCodeLine{94     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_d_e_s_tracker_a89bbabe2f8cd3a6006947d3b41624b37}{estimateScale}}(cv::Mat\& \mbox{\hyperlink{utils_8c_a3d99b005d0fb73033dce14d4a135d01f}{z}}, cv::Mat\& \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}});  }
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_d_e_s_tracker_ab92d1883932a0cb37d7209b881859bbf}{trainLocation}}(cv::Mat\& \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \textcolor{keywordtype}{float} train\_interp\_factor\_);}
+\DoxyCodeLine{97     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_d_e_s_tracker_a9b36cdc00e94b31b76b42f80bde51f3a}{trainScale}}(cv::Mat\& \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \textcolor{keywordtype}{float} train\_interp\_factor\_);}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_d_e_s_tracker_aa01da938d5114b7362959a2f35901843}{createGaussianPeak}}(\textcolor{keywordtype}{int} sizey, \textcolor{keywordtype}{int} sizex);}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_d_e_s_tracker_af99c0efb85c627bccd77dbcae5922f5d}{getTemplates}}(\textcolor{keyword}{const} cv::Mat\& \mbox{\hyperlink{structimage}{image}});}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_d_e_s_tracker_aad7aeec67c94957ba4c06bb0c12e8401}{getSubWindow}}(\textcolor{keyword}{const} cv::Mat\& \mbox{\hyperlink{structimage}{image}}, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* type=\textcolor{stringliteral}{"{}loc"{}});}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105     cv::Mat \mbox{\hyperlink{class_l_d_e_s_tracker_aaf5f190ce548258948b7d692633ea583}{padImage}}(\textcolor{keyword}{const} cv::Mat\& \mbox{\hyperlink{structimage}{image}}, \textcolor{keywordtype}{int}\& x1, \textcolor{keywordtype}{int}\& y1, \textcolor{keywordtype}{int}\& x2, \textcolor{keywordtype}{int}\& y2);}
+\DoxyCodeLine{106     cv::Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a31fd75624683205d2b9864c71ca03831}{cropImage}}(\textcolor{keyword}{const} cv::Mat\& \mbox{\hyperlink{structimage}{image}}, \textcolor{keyword}{const} cv::Point2i\& pos, \textcolor{keywordtype}{int} sz);}
+\DoxyCodeLine{107     cv::Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a330de22cd3a9fe29a6546f728a1b385a}{cropImageAffine}}(\textcolor{keyword}{const} cv::Mat\& \mbox{\hyperlink{structimage}{image}}, \textcolor{keyword}{const} cv::Point2i\& pos, \textcolor{keywordtype}{int} win\_sz, \textcolor{keywordtype}{float} rot);}
+\DoxyCodeLine{108     }
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110     cv::Mat \mbox{\hyperlink{class_l_d_e_s_tracker_abdc324cfed3a37c86281bbc1ea150b5a}{hogFeatures}};}
+\DoxyCodeLine{111     cv::Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a4aac76a0558aba97952cf2f7584f5930}{\_alphaf}};}
+\DoxyCodeLine{112     cv::Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a03997d29bd2b5fd742daac56656ffc12}{\_y}};}
+\DoxyCodeLine{113     cv::Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a42257d4b37d1d75a9cc4f8eafb36c3de}{\_yf}}; \textcolor{comment}{//alphaf on f domain}}
+\DoxyCodeLine{114     cv::Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a7e47ee55f35f6e7bb42fd0c8bf32af74}{\_z}};   \textcolor{comment}{//template on time domain}}
+\DoxyCodeLine{115     cv::Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a41b0d455fe97c6b53b9270fee4222006}{\_z\_srch}};}
+\DoxyCodeLine{116     cv::Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a1226776af78fff71528dade3f4925287}{modelPatch}};}
+\DoxyCodeLine{117     cv::Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a1b5a4252c437ada5073b55efa248206d}{\_num}};}
+\DoxyCodeLine{118     cv::Mat \mbox{\hyperlink{class_l_d_e_s_tracker_ac344ed54df2a9423957b3bf0821f5467}{\_den}};}
+\DoxyCodeLine{119     cv::Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a3e1356df43710556d40cd4b7e986bc0f}{\_labCentroids}};}
+\DoxyCodeLine{120     cv::Rect \mbox{\hyperlink{class_l_d_e_s_tracker_ac69c969cf1922c94c27a8b4f7d94df86}{\_roi}};}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122 \textcolor{keyword}{private}:}
+\DoxyCodeLine{123     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_l_d_e_s_tracker_a1cf7672fecb23578d26419748d47ec6b}{size\_patch}}[3];}
+\DoxyCodeLine{124     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_l_d_e_s_tracker_a6222c5f83dc79d28f392fe762a3be2b3}{size\_scale}}[3];}
+\DoxyCodeLine{125     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_l_d_e_s_tracker_a8d28a2a47a3e46d66ea88c96db7c633b}{size\_search}}[3];}
+\DoxyCodeLine{126     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_l_d_e_s_tracker_ac53dabfc8bd8b0a877e9c909cbe5d9d4}{\_gaussian\_size}};}
+\DoxyCodeLine{127     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_l_d_e_s_tracker_aa9a7f920b279e40fb41b48d1e79568bd}{\_hogfeatures}};}
+\DoxyCodeLine{128     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_l_d_e_s_tracker_aeaca85cfc96c48bc9ea56fd3be7e8aa5}{\_labfeatures}};}
+\DoxyCodeLine{129     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_l_d_e_s_tracker_a1df11e09b8e5df40984d5ded0870b38f}{\_rotation}};}
+\DoxyCodeLine{130     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_l_d_e_s_tracker_a285bbcd6ee5f73cd6ea563e0afa50b6b}{\_scale\_hog}};}
+\DoxyCodeLine{131 \};}
+
+\end{DoxyCode}

@@ -1,0 +1,126 @@
+\hypertarget{ne__map_8h_source}{}\doxysection{ne\+\_\+map.\+h}
+\label{ne__map_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/ne\_map.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/ne\_map.h}}
+\mbox{\hyperlink{ne__map_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* This software is distributed under the GNU Lesser General Public License */}}
+\DoxyCodeLine{2 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{//   ne\_map.h -\/ common implementation of node\_map and edge\_map}}
+\DoxyCodeLine{5 \textcolor{comment}{//}}
+\DoxyCodeLine{6 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{// \$Id: ne\_map.h,v 1.20 2005/06/14 12:22:12 raitner Exp \$}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#ifndef GTL\_NE\_MAP\_H}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define GTL\_NE\_MAP\_H}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{_g_t_l_8h}{GTL/GTL.h}}>}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <cassert>}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{18 \textcolor{comment}{//   Class declaration}}
+\DoxyCodeLine{19 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \mbox{\hyperlink{_g_t_l_8h_a2d9f24096ac60918452dd51f32b64aa9}{\_\_GTL\_BEGIN\_NAMESPACE}}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{30 \textcolor{keyword}{template} <\textcolor{keyword}{class} Key, \textcolor{keyword}{class} Value, \textcolor{keyword}{class} Graph, \textcolor{keyword}{class} Alloc = std::allocator<Value> > }
+\DoxyCodeLine{31 \textcolor{keyword}{class }\mbox{\hyperlink{classne__map}{ne\_map}}}
+\DoxyCodeLine{32 \{}
+\DoxyCodeLine{33 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{34     }
+\DoxyCodeLine{35     \textcolor{comment}{//================================================== Constructors}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{41     \mbox{\hyperlink{classne__map_acbe94c2209408e8af27fb9580251f360}{ne\_map}}();}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{54     \textcolor{keyword}{explicit} \mbox{\hyperlink{classne__map_a769ee373d4cd8d3ef2c1577372da149c}{ne\_map}}(\textcolor{keyword}{const} Graph \&\mbox{\hyperlink{rings_8cpp_aa9df5aa3976a89a96a5f1c7611d42938}{g}}, Value def=Value());}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56     \textcolor{comment}{//================================================== Operations}}
+\DoxyCodeLine{57     }
+\DoxyCodeLine{58 \textcolor{keyword}{public}:}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{67     \textcolor{keywordtype}{void} \mbox{\hyperlink{classne__map_a4ef2ab4aebcb57a7a101975bf6a88e24}{init}}(\textcolor{keyword}{const} Graph \&, Value def=Value());}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{72 \textcolor{preprocessor}{\#if defined(\_\_GTL\_MSVCC) \&\& \_MSC\_VER < 1310}}
+\DoxyCodeLine{73     \textcolor{keyword}{typedef} Value\& \mbox{\hyperlink{classne__map_a359e504fa404ced05076e66c6b62d1cc}{value\_reference}};}
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{75     \textcolor{keyword}{typedef} \textcolor{keyword}{typename} std::vector<Value, Alloc>::reference \mbox{\hyperlink{classne__map_a359e504fa404ced05076e66c6b62d1cc}{value\_reference}};}
+\DoxyCodeLine{76 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#if defined(\_\_GTL\_MSVCC) \&\& \_MSC\_VER < 1310}}
+\DoxyCodeLine{82     \textcolor{keyword}{typedef} \textcolor{keyword}{const} Value\& \mbox{\hyperlink{classne__map_a96414329412e1964d5d3b6dedd9df8ee}{const\_value\_reference}};}
+\DoxyCodeLine{83 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{84     \textcolor{keyword}{typedef} \textcolor{keyword}{typename} std::vector<Value, Alloc>::const\_reference \mbox{\hyperlink{classne__map_a96414329412e1964d5d3b6dedd9df8ee}{const\_value\_reference}};}
+\DoxyCodeLine{85 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{86     }
+\DoxyCodeLine{104     \mbox{\hyperlink{classne__map_a359e504fa404ced05076e66c6b62d1cc}{value\_reference}} \mbox{\hyperlink{classne__map_a4bcfa7ec2dcbfaa42fab93dfa81e8ab0}{operator[]}}(Key key);}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{121     \mbox{\hyperlink{classne__map_a96414329412e1964d5d3b6dedd9df8ee}{const\_value\_reference}} \mbox{\hyperlink{classne__map_ad8d23cc924963ddff8267e625dcbffc6}{operator[]}}(Key key) \textcolor{keyword}{const};}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{126     \textcolor{keywordtype}{void} \mbox{\hyperlink{classne__map_aebe555c23769c6dcc869b5ac7fae6a9c}{clear}} ();}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128     \textcolor{comment}{//================================================== Implementation}}
+\DoxyCodeLine{129     }
+\DoxyCodeLine{130 \textcolor{keyword}{private}:}
+\DoxyCodeLine{131     std::vector<Value, Alloc> \mbox{\hyperlink{classne__map_af73307678e05a9c24c084d98b267afa8}{data}};}
+\DoxyCodeLine{132 \};}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{134 \textcolor{comment}{// Implementation Begin}}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136 \textcolor{keyword}{template} <\textcolor{keyword}{class} Key, \textcolor{keyword}{class} Value, \textcolor{keyword}{class} Graph, \textcolor{keyword}{class} Alloc>}
+\DoxyCodeLine{137   \mbox{\hyperlink{classne__map_acbe94c2209408e8af27fb9580251f360}{ne\_map<Key,Value,Graph,Alloc>::ne\_map}}()}
+\DoxyCodeLine{138 \{}
+\DoxyCodeLine{139 \}}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141 \textcolor{keyword}{template} <\textcolor{keyword}{class} Key, \textcolor{keyword}{class} Value, \textcolor{keyword}{class} Graph, \textcolor{keyword}{class} Alloc>}
+\DoxyCodeLine{142 \mbox{\hyperlink{classne__map_acbe94c2209408e8af27fb9580251f360}{ne\_map<Key,Value,Graph,Alloc>::ne\_map}}(\textcolor{keyword}{const} Graph \&\mbox{\hyperlink{rings_8cpp_aa9df5aa3976a89a96a5f1c7611d42938}{g}}, Value t2) :}
+\DoxyCodeLine{143     \mbox{\hyperlink{structdata}{data}}(\mbox{\hyperlink{rings_8cpp_aa9df5aa3976a89a96a5f1c7611d42938}{g}}.number\_of\_ids(Key()), t2)}
+\DoxyCodeLine{144 \{}
+\DoxyCodeLine{145 \}}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147 \textcolor{keyword}{template} <\textcolor{keyword}{class} Key, \textcolor{keyword}{class} Value, \textcolor{keyword}{class} Graph, \textcolor{keyword}{class} Alloc>}
+\DoxyCodeLine{148 \textcolor{keywordtype}{void} \mbox{\hyperlink{classne__map_a4ef2ab4aebcb57a7a101975bf6a88e24}{ne\_map<Key,Value,Graph,Alloc>::init}}(\textcolor{keyword}{const} Graph \&\mbox{\hyperlink{rings_8cpp_aa9df5aa3976a89a96a5f1c7611d42938}{g}}, Value t2)}
+\DoxyCodeLine{149 \{}
+\DoxyCodeLine{150     \textcolor{keywordtype}{int} n = \mbox{\hyperlink{rings_8cpp_aa9df5aa3976a89a96a5f1c7611d42938}{g}}.number\_of\_ids(Key());}
+\DoxyCodeLine{151     \mbox{\hyperlink{structdata}{data}}.resize(n);}
+\DoxyCodeLine{152     fill\_n(\mbox{\hyperlink{structdata}{data}}.begin(), n, t2);}
+\DoxyCodeLine{153 \}}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155 \textcolor{keyword}{template} <\textcolor{keyword}{class} Key, \textcolor{keyword}{class} Value, \textcolor{keyword}{class} Graph, \textcolor{keyword}{class} Alloc>}
+\DoxyCodeLine{156 \textcolor{keyword}{typename} \mbox{\hyperlink{classne__map_a359e504fa404ced05076e66c6b62d1cc}{ne\_map<Key,Value,Graph,Alloc>::value\_reference}} \mbox{\hyperlink{classne__map_a4bcfa7ec2dcbfaa42fab93dfa81e8ab0}{ne\_map<Key,Value,Graph,Alloc>::operator[]}}(Key \mbox{\hyperlink{gml2nestedsql_8cpp_a214bd1a0500f5739ce581a8bcffb518a}{t1}})}
+\DoxyCodeLine{157 \{}
+\DoxyCodeLine{158     \textcolor{keywordflow}{if}(\mbox{\hyperlink{gml2nestedsql_8cpp_a214bd1a0500f5739ce581a8bcffb518a}{t1}}.id() >= (\textcolor{keywordtype}{signed})\mbox{\hyperlink{structdata}{data}}.size())}
+\DoxyCodeLine{159     \{}
+\DoxyCodeLine{160     \textcolor{keywordflow}{if} (\mbox{\hyperlink{gml2nestedsql_8cpp_a214bd1a0500f5739ce581a8bcffb518a}{t1}}.id() >= (\textcolor{keywordtype}{signed})\mbox{\hyperlink{structdata}{data}}.capacity()) \{}
+\DoxyCodeLine{161         \mbox{\hyperlink{structdata}{data}}.reserve((6 * \mbox{\hyperlink{gml2nestedsql_8cpp_a214bd1a0500f5739ce581a8bcffb518a}{t1}}.id()) / 5 + 1);}
+\DoxyCodeLine{162     \}}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164     \mbox{\hyperlink{structdata}{data}}.insert(\mbox{\hyperlink{structdata}{data}}.end(), \mbox{\hyperlink{gml2nestedsql_8cpp_a214bd1a0500f5739ce581a8bcffb518a}{t1}}.id()+1-\/\mbox{\hyperlink{structdata}{data}}.size(), Value());}
+\DoxyCodeLine{165     \}}
+\DoxyCodeLine{166     \textcolor{keywordflow}{return} \mbox{\hyperlink{structdata}{data}}.operator[](\mbox{\hyperlink{gml2nestedsql_8cpp_a214bd1a0500f5739ce581a8bcffb518a}{t1}}.id());}
+\DoxyCodeLine{167 \}}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{169 \textcolor{keyword}{template} <\textcolor{keyword}{class} Key, \textcolor{keyword}{class} Value, \textcolor{keyword}{class} Graph, \textcolor{keyword}{class} Alloc>}
+\DoxyCodeLine{170 \textcolor{keyword}{typename} \mbox{\hyperlink{classne__map_a96414329412e1964d5d3b6dedd9df8ee}{ne\_map<Key,Value,Graph,Alloc>::const\_value\_reference}} \mbox{\hyperlink{classne__map_a4bcfa7ec2dcbfaa42fab93dfa81e8ab0}{ne\_map<Key,Value,Graph,Alloc>::operator[]}}(Key \mbox{\hyperlink{gml2nestedsql_8cpp_a214bd1a0500f5739ce581a8bcffb518a}{t1}})\textcolor{keyword}{ const}}
+\DoxyCodeLine{171 \textcolor{keyword}{}\{}
+\DoxyCodeLine{172     assert(\mbox{\hyperlink{gml2nestedsql_8cpp_a214bd1a0500f5739ce581a8bcffb518a}{t1}}.id() < (\textcolor{keywordtype}{signed})\mbox{\hyperlink{structdata}{data}}.size());}
+\DoxyCodeLine{173     \textcolor{keywordflow}{return} \mbox{\hyperlink{structdata}{data}}.operator[](\mbox{\hyperlink{gml2nestedsql_8cpp_a214bd1a0500f5739ce581a8bcffb518a}{t1}}.id());}
+\DoxyCodeLine{174 \}}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{176 \textcolor{keyword}{template} <\textcolor{keyword}{class} Key, \textcolor{keyword}{class} Value, \textcolor{keyword}{class} Graph, \textcolor{keyword}{class} Alloc>}
+\DoxyCodeLine{177 \textcolor{keywordtype}{void} \mbox{\hyperlink{classne__map_aebe555c23769c6dcc869b5ac7fae6a9c}{ne\_map<Key,Value,Graph,Alloc>::clear}} ()}
+\DoxyCodeLine{178 \{}
+\DoxyCodeLine{179     \mbox{\hyperlink{structdata}{data}}.clear();}
+\DoxyCodeLine{180 \}}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182 \textcolor{comment}{// Implementation End}}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184 \mbox{\hyperlink{_g_t_l_8h_a46af2b3ec266ac2f9d36fa7222358017}{\_\_GTL\_END\_NAMESPACE}}}
+\DoxyCodeLine{185 }
+\DoxyCodeLine{186 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GTL\_NE\_MAP\_H}}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{189 \textcolor{comment}{//   end of file}}
+\DoxyCodeLine{190 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+
+\end{DoxyCode}

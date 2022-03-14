@@ -1,0 +1,124 @@
+\hypertarget{fheap_8c}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Tracker/graph/fheap.c 文件参考}
+\label{fheap_8c}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/fheap.c@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/fheap.c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}fheap.\+h\char`\"{}}\newline
+fheap.\+c 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=260pt]{fheap_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{宏定义}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{fheap_8c_aa1dd92158663cbc7ba3a6520b4e28090}{FHEAP\+\_\+\+DUMP}}~0
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{fheap_8c_aebe49ab32683a4650cb05149f8b7adbe}{fh\+\_\+dump\+\_\+nodes}} (\mbox{\hyperlink{fheap_8h_a53fae6b2c22ff759dc01aa6cdb496d8d}{fheap\+\_\+node\+\_\+t}} $\ast$ptr, int level)
+\item 
+void \mbox{\hyperlink{fheap_8c_a2477574c1ffd36f746abb612ee03c23c}{fh\+\_\+meld}} (\mbox{\hyperlink{fheap_8h_a4d198db73a7aecf55d6d1f4600f88968}{fheap\+\_\+t}} $\ast$h, \mbox{\hyperlink{fheap_8h_a53fae6b2c22ff759dc01aa6cdb496d8d}{fheap\+\_\+node\+\_\+t}} $\ast$tree\+\_\+list)
+\item 
+\mbox{\hyperlink{fheap_8h_a4d198db73a7aecf55d6d1f4600f88968}{fheap\+\_\+t}} $\ast$ \mbox{\hyperlink{fheap_8c_aa176e72e45f9b3c08f9e27c5460a5559}{fh\+\_\+alloc}} (int max\+\_\+nodes)
+\item 
+void \mbox{\hyperlink{fheap_8c_a11e6d24701acd9d4f1ffc8652dcfa340}{fh\+\_\+free}} (\mbox{\hyperlink{fheap_8h_a4d198db73a7aecf55d6d1f4600f88968}{fheap\+\_\+t}} $\ast$h)
+\item 
+void \mbox{\hyperlink{fheap_8c_a4489cad6a8830374aaa7db8705d222a1}{fh\+\_\+insert}} (\mbox{\hyperlink{fheap_8h_a4d198db73a7aecf55d6d1f4600f88968}{fheap\+\_\+t}} $\ast$h, int vertex\+\_\+no, long k)
+\item 
+int \mbox{\hyperlink{fheap_8c_a1103efc45c2f1814139914353e684f1a}{fh\+\_\+delete\+\_\+min}} (\mbox{\hyperlink{fheap_8h_a4d198db73a7aecf55d6d1f4600f88968}{fheap\+\_\+t}} $\ast$h)
+\item 
+void \mbox{\hyperlink{fheap_8c_aae5cdb4b5c64bb4597d36eb36d3d2c4b}{fh\+\_\+decrease\+\_\+key}} (\mbox{\hyperlink{fheap_8h_a4d198db73a7aecf55d6d1f4600f88968}{fheap\+\_\+t}} $\ast$h, int vertex\+\_\+no, long new\+\_\+value)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+Fibonacci heap 
+
+\doxysubsection{宏定义说明}
+\mbox{\Hypertarget{fheap_8c_aa1dd92158663cbc7ba3a6520b4e28090}\label{fheap_8c_aa1dd92158663cbc7ba3a6520b4e28090}} 
+\index{fheap.c@{fheap.c}!FHEAP\_DUMP@{FHEAP\_DUMP}}
+\index{FHEAP\_DUMP@{FHEAP\_DUMP}!fheap.c@{fheap.c}}
+\doxysubsubsection{\texorpdfstring{FHEAP\_DUMP}{FHEAP\_DUMP}}
+{\footnotesize\ttfamily \#define FHEAP\+\_\+\+DUMP~0}
+
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{fheap_8c_aa176e72e45f9b3c08f9e27c5460a5559}\label{fheap_8c_aa176e72e45f9b3c08f9e27c5460a5559}} 
+\index{fheap.c@{fheap.c}!fh\_alloc@{fh\_alloc}}
+\index{fh\_alloc@{fh\_alloc}!fheap.c@{fheap.c}}
+\doxysubsubsection{\texorpdfstring{fh\_alloc()}{fh\_alloc()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{fheap_8h_a4d198db73a7aecf55d6d1f4600f88968}{fheap\+\_\+t}} $\ast$ fh\+\_\+alloc (\begin{DoxyParamCaption}\item[{int}]{max\+\_\+nodes }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{fheap_8c_aae5cdb4b5c64bb4597d36eb36d3d2c4b}\label{fheap_8c_aae5cdb4b5c64bb4597d36eb36d3d2c4b}} 
+\index{fheap.c@{fheap.c}!fh\_decrease\_key@{fh\_decrease\_key}}
+\index{fh\_decrease\_key@{fh\_decrease\_key}!fheap.c@{fheap.c}}
+\doxysubsubsection{\texorpdfstring{fh\_decrease\_key()}{fh\_decrease\_key()}}
+{\footnotesize\ttfamily void fh\+\_\+decrease\+\_\+key (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{fheap_8h_a4d198db73a7aecf55d6d1f4600f88968}{fheap\+\_\+t}} $\ast$}]{h,  }\item[{int}]{vertex\+\_\+no,  }\item[{long}]{new\+\_\+value }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fheap_8c_aae5cdb4b5c64bb4597d36eb36d3d2c4b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fheap_8c_a1103efc45c2f1814139914353e684f1a}\label{fheap_8c_a1103efc45c2f1814139914353e684f1a}} 
+\index{fheap.c@{fheap.c}!fh\_delete\_min@{fh\_delete\_min}}
+\index{fh\_delete\_min@{fh\_delete\_min}!fheap.c@{fheap.c}}
+\doxysubsubsection{\texorpdfstring{fh\_delete\_min()}{fh\_delete\_min()}}
+{\footnotesize\ttfamily int fh\+\_\+delete\+\_\+min (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{fheap_8h_a4d198db73a7aecf55d6d1f4600f88968}{fheap\+\_\+t}} $\ast$}]{h }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=337pt]{fheap_8c_a1103efc45c2f1814139914353e684f1a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fheap_8c_aebe49ab32683a4650cb05149f8b7adbe}\label{fheap_8c_aebe49ab32683a4650cb05149f8b7adbe}} 
+\index{fheap.c@{fheap.c}!fh\_dump\_nodes@{fh\_dump\_nodes}}
+\index{fh\_dump\_nodes@{fh\_dump\_nodes}!fheap.c@{fheap.c}}
+\doxysubsubsection{\texorpdfstring{fh\_dump\_nodes()}{fh\_dump\_nodes()}}
+{\footnotesize\ttfamily void fh\+\_\+dump\+\_\+nodes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{fheap_8h_a53fae6b2c22ff759dc01aa6cdb496d8d}{fheap\+\_\+node\+\_\+t}} $\ast$}]{ptr,  }\item[{int}]{level }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{fheap_8c_a11e6d24701acd9d4f1ffc8652dcfa340}\label{fheap_8c_a11e6d24701acd9d4f1ffc8652dcfa340}} 
+\index{fheap.c@{fheap.c}!fh\_free@{fh\_free}}
+\index{fh\_free@{fh\_free}!fheap.c@{fheap.c}}
+\doxysubsubsection{\texorpdfstring{fh\_free()}{fh\_free()}}
+{\footnotesize\ttfamily void fh\+\_\+free (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{fheap_8h_a4d198db73a7aecf55d6d1f4600f88968}{fheap\+\_\+t}} $\ast$}]{h }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{fheap_8c_a4489cad6a8830374aaa7db8705d222a1}\label{fheap_8c_a4489cad6a8830374aaa7db8705d222a1}} 
+\index{fheap.c@{fheap.c}!fh\_insert@{fh\_insert}}
+\index{fh\_insert@{fh\_insert}!fheap.c@{fheap.c}}
+\doxysubsubsection{\texorpdfstring{fh\_insert()}{fh\_insert()}}
+{\footnotesize\ttfamily void fh\+\_\+insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{fheap_8h_a4d198db73a7aecf55d6d1f4600f88968}{fheap\+\_\+t}} $\ast$}]{h,  }\item[{int}]{vertex\+\_\+no,  }\item[{long}]{k }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=313pt]{fheap_8c_a4489cad6a8830374aaa7db8705d222a1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{fheap_8c_a2477574c1ffd36f746abb612ee03c23c}\label{fheap_8c_a2477574c1ffd36f746abb612ee03c23c}} 
+\index{fheap.c@{fheap.c}!fh\_meld@{fh\_meld}}
+\index{fh\_meld@{fh\_meld}!fheap.c@{fheap.c}}
+\doxysubsubsection{\texorpdfstring{fh\_meld()}{fh\_meld()}}
+{\footnotesize\ttfamily void fh\+\_\+meld (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{fheap_8h_a4d198db73a7aecf55d6d1f4600f88968}{fheap\+\_\+t}} $\ast$}]{h,  }\item[{\mbox{\hyperlink{fheap_8h_a53fae6b2c22ff759dc01aa6cdb496d8d}{fheap\+\_\+node\+\_\+t}} $\ast$}]{tree\+\_\+list }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=224pt]{fheap_8c_a2477574c1ffd36f746abb612ee03c23c_cgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,178 @@
+\hypertarget{bfs_8h_source}{}\doxysection{bfs.\+h}
+\label{bfs_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/bfs.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/bfs.h}}
+\mbox{\hyperlink{bfs_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* This software is distributed under the GNU Lesser General Public License */}}
+\DoxyCodeLine{2 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{//   bfs.h}}
+\DoxyCodeLine{5 \textcolor{comment}{//}}
+\DoxyCodeLine{6 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{// \$Id: bfs.h,v 1.14 2003/03/24 15:58:54 raitner Exp \$}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#ifndef GTL\_BFS\_H}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define GTL\_BFS\_H}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{_g_t_l_8h}{GTL/GTL.h}}>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{algorithm_8h}{GTL/algorithm.h}}>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{node__map_8h}{GTL/node\_map.h}}>}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <deque>}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \mbox{\hyperlink{_g_t_l_8h_a2d9f24096ac60918452dd51f32b64aa9}{\_\_GTL\_BEGIN\_NAMESPACE}}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{87 \textcolor{keyword}{class }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{classbfs}{bfs}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classalgorithm}{algorithm}}}
+\DoxyCodeLine{88 \{}
+\DoxyCodeLine{89 \textcolor{keyword}{public}:}
+\DoxyCodeLine{90     }
+\DoxyCodeLine{94     \mbox{\hyperlink{classbfs}{bfs}} ();}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{99     \textcolor{keyword}{virtual} \mbox{\hyperlink{classbfs}{\string~bfs}} ();}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101     \textcolor{keywordtype}{int} \mbox{\hyperlink{classalgorithm_a4baee48c513c5802975743152c33f34c}{run}} (GTL::graph\& G);}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{112     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{classbfs_a9d2deab6d367674e640e96fc83d9a6bc}{check}} (GTL::graph\& \textcolor{comment}{/*G*/}) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classalgorithm_a7ecf5c2bab575f8f2fae9e9e5093a6eaa5114c20e4a96a76b5de9f28bf15e282b}{GTL\_OK}}; \}}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classalgorithm_a21aba63d066ae7897de6ca7d8425c408}{reset}} ();}
+\DoxyCodeLine{115     }
+\DoxyCodeLine{116     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{117     \textcolor{comment}{//  Parameters}}
+\DoxyCodeLine{118     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{129     \textcolor{keywordtype}{void} \mbox{\hyperlink{classbfs_a23e2981c2ee617a6e12a8833d2db6210}{start\_node}} (\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n) \{start = n;\}}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{136     \mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classbfs_afac59b4a0d92449d8fa46a202b11ae4b}{start\_node}} ()\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} start;\}}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{155     \textcolor{keywordtype}{void} \mbox{\hyperlink{classbfs_a25fc51b1bfbbdd3afefe0a84c1bd2f6b}{scan\_whole\_graph}} (\textcolor{keywordtype}{bool} \mbox{\hyperlink{classset}{set}}) \{whole\_graph = \mbox{\hyperlink{classset}{set}};\}}
+\DoxyCodeLine{156     }
+\DoxyCodeLine{163     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classbfs_a1378f5cfbc59b036e9215c02563bac23}{scan\_whole\_graph}} ()\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} whole\_graph;\}}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{175     \textcolor{keywordtype}{void} calc\_level (\textcolor{keywordtype}{bool} \mbox{\hyperlink{classset}{set}});}
+\DoxyCodeLine{176     }
+\DoxyCodeLine{183     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classbfs_a78ea23abb1461e62dd7ecd416fecbd96}{calc\_level}} ()\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} level\_number != 0;\}}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{194     \textcolor{keywordtype}{void} store\_non\_tree\_edges (\textcolor{keywordtype}{bool} \mbox{\hyperlink{classset}{set}});}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{203     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classbfs_a9fe165e0a6d979d6d55b6234bfbe5b8f}{store\_non\_tree\_edges}} ()\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} non\_tree != 0;\}}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205 }
+\DoxyCodeLine{215     \textcolor{keywordtype}{void} store\_preds (\textcolor{keywordtype}{bool} \mbox{\hyperlink{classset}{set}});}
+\DoxyCodeLine{216 }
+\DoxyCodeLine{223     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classbfs_ac4373b51885382f6f1a9312c1b0923bd}{store\_preds}} ()\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} preds != 0;\}}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{231     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classbfs_ab1a7882a7d56e0e72bbe1a344381bdae}{reached}} (\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n)\textcolor{keyword}{ const}}
+\DoxyCodeLine{232 \textcolor{keyword}{    }\{\textcolor{keywordflow}{return} bfs\_number[n] != 0;\}}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{243     \textcolor{keywordtype}{int} \mbox{\hyperlink{classbfs_a6205cc191bc0bedf1ff9d74af0925735}{bfs\_num}} (\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n)\textcolor{keyword}{ const }}
+\DoxyCodeLine{244 \textcolor{keyword}{    }\{\textcolor{keywordflow}{return} bfs\_number[n];\}}
+\DoxyCodeLine{245 }
+\DoxyCodeLine{255     \textcolor{keywordtype}{int} operator[] (\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n)\textcolor{keyword}{ const }}
+\DoxyCodeLine{256 \textcolor{keyword}{    }\{\textcolor{keywordflow}{return} bfs\_number[n];\}}
+\DoxyCodeLine{257 }
+\DoxyCodeLine{268     \textcolor{keywordtype}{int} \mbox{\hyperlink{classbfs_ac0158a0453fb17a89be4049d21db56b1}{level}} (\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n)\textcolor{keyword}{ const}}
+\DoxyCodeLine{269 \textcolor{keyword}{    }\{assert (level\_number); \textcolor{keywordflow}{return} (*level\_number)[n];\}}
+\DoxyCodeLine{270 }
+\DoxyCodeLine{284     \mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classbfs_a3e1a7b0e4bde586d0be44616e533c59c}{father}} (\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n)\textcolor{keyword}{ const}}
+\DoxyCodeLine{285 \textcolor{keyword}{    }\{assert (preds); \textcolor{keywordflow}{return} (*preds)[n];\}}
+\DoxyCodeLine{286 }
+\DoxyCodeLine{290     \textcolor{keyword}{typedef} edges\_t::const\_iterator \mbox{\hyperlink{classbfs_a04e608fe18089e5495cadb995aa75261}{tree\_edges\_iterator}};}
+\DoxyCodeLine{291 }
+\DoxyCodeLine{301     \mbox{\hyperlink{classbfs_a04e608fe18089e5495cadb995aa75261}{tree\_edges\_iterator}} \mbox{\hyperlink{classbfs_a56959215efdfee1a37826ad315ac13e7}{tree\_edges\_begin}} ()\textcolor{keyword}{ const }}
+\DoxyCodeLine{302 \textcolor{keyword}{    }\{\textcolor{keywordflow}{return} \mbox{\hyperlink{structtree}{tree}}.begin();\}}
+\DoxyCodeLine{303 }
+\DoxyCodeLine{310     \mbox{\hyperlink{classbfs_a04e608fe18089e5495cadb995aa75261}{tree\_edges\_iterator}} \mbox{\hyperlink{classbfs_a7db47d5d68e21e95fd548beea1a8db2b}{tree\_edges\_end}} ()\textcolor{keyword}{ const}}
+\DoxyCodeLine{311 \textcolor{keyword}{    }\{\textcolor{keywordflow}{return} \mbox{\hyperlink{structtree}{tree}}.end();\}}
+\DoxyCodeLine{312    }
+\DoxyCodeLine{316     \textcolor{keyword}{typedef} nodes\_t::const\_iterator \mbox{\hyperlink{classbfs_a1035f068a96de0370789ec315aef4f73}{bfs\_iterator}};}
+\DoxyCodeLine{317 }
+\DoxyCodeLine{323     \mbox{\hyperlink{classbfs_a1035f068a96de0370789ec315aef4f73}{bfs\_iterator}} \mbox{\hyperlink{classbfs_aff214e6d33f7f2bbd899cf335540def9}{begin}} ()\textcolor{keyword}{ const }}
+\DoxyCodeLine{324 \textcolor{keyword}{    }\{\textcolor{keywordflow}{return} bfs\_order.begin();\}}
+\DoxyCodeLine{325 }
+\DoxyCodeLine{332     \mbox{\hyperlink{classbfs_a1035f068a96de0370789ec315aef4f73}{bfs\_iterator}} \mbox{\hyperlink{classbfs_ac35b3d3c37d33eb80adb752e17a60df9}{end}} ()\textcolor{keyword}{ const }}
+\DoxyCodeLine{333 \textcolor{keyword}{    }\{\textcolor{keywordflow}{return} bfs\_order.end();\}}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{338     \textcolor{keyword}{typedef} edges\_t::const\_iterator \mbox{\hyperlink{classbfs_a89ec32919076618d9eef18990fef543f}{non\_tree\_edges\_iterator}};}
+\DoxyCodeLine{339 }
+\DoxyCodeLine{346     \mbox{\hyperlink{classbfs_a89ec32919076618d9eef18990fef543f}{non\_tree\_edges\_iterator}} \mbox{\hyperlink{classbfs_a06d02d2643f184b4c086678771f0ff90}{non\_tree\_edges\_begin}} ()\textcolor{keyword}{ const }}
+\DoxyCodeLine{347 \textcolor{keyword}{    }\{assert (non\_tree);  \textcolor{keywordflow}{return} non\_tree-\/>begin(); \}}
+\DoxyCodeLine{348 }
+\DoxyCodeLine{356     \mbox{\hyperlink{classbfs_a89ec32919076618d9eef18990fef543f}{non\_tree\_edges\_iterator}} \mbox{\hyperlink{classbfs_a9fb470cd36eb487004ca28c1723cabda}{non\_tree\_edges\_end}} ()\textcolor{keyword}{ const }}
+\DoxyCodeLine{357 \textcolor{keyword}{    }\{assert (non\_tree); \textcolor{keywordflow}{return} non\_tree-\/>end(); \}}
+\DoxyCodeLine{358     }
+\DoxyCodeLine{362     \textcolor{keyword}{typedef} std::list<bfs\_iterator>::const\_iterator \mbox{\hyperlink{classbfs_a70b915179053a2993154614d4358fdc1}{roots\_iterator}};}
+\DoxyCodeLine{363 }
+\DoxyCodeLine{393     \mbox{\hyperlink{classbfs_a70b915179053a2993154614d4358fdc1}{roots\_iterator}} \mbox{\hyperlink{classbfs_a45d58d06d0dcd6427edad2ec52a6ebb9}{roots\_begin}} ()\textcolor{keyword}{ const }}
+\DoxyCodeLine{394 \textcolor{keyword}{    }\{\textcolor{keywordflow}{return} roots.begin();\}}
+\DoxyCodeLine{395 }
+\DoxyCodeLine{402     \mbox{\hyperlink{classbfs_a70b915179053a2993154614d4358fdc1}{roots\_iterator}} \mbox{\hyperlink{classbfs_ac84b90f777adeb90390689db62602d73}{roots\_end}} ()\textcolor{keyword}{ const }}
+\DoxyCodeLine{403 \textcolor{keyword}{    }\{\textcolor{keywordflow}{return} roots.end();\}}
+\DoxyCodeLine{404 }
+\DoxyCodeLine{411     \textcolor{keywordtype}{int} \mbox{\hyperlink{classbfs_abb971551139ed87e6c78062275301c1b}{number\_of\_reached\_nodes}} ()\textcolor{keyword}{ const}}
+\DoxyCodeLine{412 \textcolor{keyword}{    }\{\textcolor{keywordflow}{return} reached\_nodes;\}}
+\DoxyCodeLine{413 }
+\DoxyCodeLine{414     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{415     \textcolor{comment}{//   Handler}}
+\DoxyCodeLine{416     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{417 }
+\DoxyCodeLine{423     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classbfs_a34587829c64e90e08dc5ec445552da54}{init\_handler}} (GTL::graph\& \textcolor{comment}{/*G*/}) \{ \};}
+\DoxyCodeLine{424 }
+\DoxyCodeLine{430     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classbfs_a68c86cd3193cd439726cf40683e49ef6}{end\_handler}} (GTL::graph\& \textcolor{comment}{/*G*/}) \{ \};}
+\DoxyCodeLine{431 }
+\DoxyCodeLine{438     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classbfs_a0cc3df730352ceda47f8b863e989ed5d}{popped\_node\_handler}} (GTL::graph\& \textcolor{comment}{/*G*/}, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\& \textcolor{comment}{/*n*/}) \{ \};}
+\DoxyCodeLine{439 }
+\DoxyCodeLine{449     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classbfs_a795da80d8e97cfe5c79622a48ed8067d}{finished\_node\_handler}} (GTL::graph\& \textcolor{comment}{/*G*/}, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\& \textcolor{comment}{/*n*/}) \{ \};}
+\DoxyCodeLine{450 }
+\DoxyCodeLine{461     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classbfs_aabdc5480495611c4d62d87a576609387}{unused\_node\_handler}} (GTL::graph\& \textcolor{comment}{/*G*/}, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\& \textcolor{comment}{/*n*/}, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\& \textcolor{comment}{/*f*/}) \{ \};}
+\DoxyCodeLine{462 }
+\DoxyCodeLine{473     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classbfs_a795b3bd7ff041d2cfa83260e3947458a}{used\_node\_handler}} (GTL::graph\& \textcolor{comment}{/*G*/}, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\& \textcolor{comment}{/*n*/}, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\& \textcolor{comment}{/*f*/}) \{ \};}
+\DoxyCodeLine{474 }
+\DoxyCodeLine{486     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classbfs_aa2314c17b3762e84fed5d2657d0189bf}{new\_start\_handler}} (GTL::graph\& \textcolor{comment}{/*G*/}, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\& \textcolor{comment}{/*n*/}) \{ \};}
+\DoxyCodeLine{487 }
+\DoxyCodeLine{488 \textcolor{keyword}{private}:}
+\DoxyCodeLine{489 }
+\DoxyCodeLine{490     \textcolor{keywordtype}{void} bfs\_sub (GTL::graph\&, \textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\&, GTL::edge\_map<int>*);}
+\DoxyCodeLine{491 }
+\DoxyCodeLine{492 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{493 }
+\DoxyCodeLine{494     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{495     \textcolor{comment}{//   Data}}
+\DoxyCodeLine{496     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{497     }
+\DoxyCodeLine{501     \textcolor{keywordtype}{int} \mbox{\hyperlink{classbfs_a5a4adad9562896536b8b58ab237e8478}{act\_bfs\_num}};}
+\DoxyCodeLine{502 }
+\DoxyCodeLine{506     std::deque<node> \mbox{\hyperlink{classbfs_ad2ef1030dcc16a1056e6ef6dfc3f1b6b}{qu}};}
+\DoxyCodeLine{507 }
+\DoxyCodeLine{513     \mbox{\hyperlink{edge_8h_a22ac17689106ba21a84e7bc54d1199d6}{nodes\_t}} \mbox{\hyperlink{classbfs_a2596d2cf52f6e7922fd94ce1adde760e}{bfs\_order}};}
+\DoxyCodeLine{514 }
+\DoxyCodeLine{520     \mbox{\hyperlink{edge_8h_a8f9587479bda6cf612c103494b3858e3}{edges\_t}} \mbox{\hyperlink{classbfs_a8bc83afea6d1066ea4ceca3007799912}{tree}};}
+\DoxyCodeLine{521 }
+\DoxyCodeLine{525     \mbox{\hyperlink{classnode__map}{node\_map<int>}} \mbox{\hyperlink{classbfs_a59d0c5c5ad2715776b20b1aec03dbc3a}{bfs\_number}};}
+\DoxyCodeLine{526 }
+\DoxyCodeLine{530     \textcolor{keywordtype}{int} \mbox{\hyperlink{classbfs_ac3db80b59d5db049199936445a6c2da8}{reached\_nodes}};}
+\DoxyCodeLine{531     }
+\DoxyCodeLine{537     std::list<bfs\_iterator> \mbox{\hyperlink{classbfs_acea071a6fdad8e590b40830ced241824}{roots}};}
+\DoxyCodeLine{538 }
+\DoxyCodeLine{539     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{540     \textcolor{comment}{//   Optional}}
+\DoxyCodeLine{541     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{542 }
+\DoxyCodeLine{548     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classbfs_a6c08fbcc90d71f1cbdd03a1cdaa9dc99}{whole\_graph}};}
+\DoxyCodeLine{549 }
+\DoxyCodeLine{555     \mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classbfs_af2ab561d9e60a9fc2e25b02d1f807f96}{start}};}
+\DoxyCodeLine{556 }
+\DoxyCodeLine{562     \mbox{\hyperlink{classnode__map}{node\_map<int>}}* \mbox{\hyperlink{classbfs_aab92e9d128612c28324aafe4750dbc84}{level\_number}};}
+\DoxyCodeLine{563 }
+\DoxyCodeLine{569     \mbox{\hyperlink{edge_8h_a8f9587479bda6cf612c103494b3858e3}{edges\_t}}* \mbox{\hyperlink{classbfs_a056b2131db11e62eb8f41c8dcc117d2e}{non\_tree}};}
+\DoxyCodeLine{570 }
+\DoxyCodeLine{576     \mbox{\hyperlink{classnode__map}{node\_map<node>}}* \mbox{\hyperlink{classbfs_a3bac5ed333bb78a30a67099c3b94aa0c}{preds}};}
+\DoxyCodeLine{577 \};}
+\DoxyCodeLine{578 }
+\DoxyCodeLine{579 \mbox{\hyperlink{_g_t_l_8h_a46af2b3ec266ac2f9d36fa7222358017}{\_\_GTL\_END\_NAMESPACE}}}
+\DoxyCodeLine{580 }
+\DoxyCodeLine{581 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GTL\_BFS\_H}}
+\DoxyCodeLine{582 }
+\DoxyCodeLine{583 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{584 \textcolor{comment}{//   end of file}}
+\DoxyCodeLine{585 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+
+\end{DoxyCode}

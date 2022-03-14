@@ -1,0 +1,400 @@
+\hypertarget{pq__node_8h_source}{}\doxysection{pq\+\_\+node.\+h}
+\label{pq__node_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/pq\_node.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/pq\_node.h}}
+\mbox{\hyperlink{pq__node_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* This software is distributed under the GNU Lesser General Public License */}}
+\DoxyCodeLine{2 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{//   pq\_node.h}}
+\DoxyCodeLine{5 \textcolor{comment}{//}}
+\DoxyCodeLine{6 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{// \$Id: pq\_node.h,v 1.15 2003/04/03 11:48:26 raitner Exp \$}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#ifndef PQ\_NODE\_H}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define PQ\_NODE\_H}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{_g_t_l_8h}{GTL/GTL.h}}>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{symlist_8h}{GTL/symlist.h}}>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{graph_8h}{GTL/graph.h}}>}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <list>}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \mbox{\hyperlink{_g_t_l_8h_a2d9f24096ac60918452dd51f32b64aa9}{\_\_GTL\_BEGIN\_NAMESPACE}}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{keyword}{class }\mbox{\hyperlink{classpq__tree}{pq\_tree}};}
+\DoxyCodeLine{22 \textcolor{keyword}{class }\mbox{\hyperlink{classp__node}{p\_node}};}
+\DoxyCodeLine{23 \textcolor{keyword}{class }\mbox{\hyperlink{classq__node}{q\_node}}; }
+\DoxyCodeLine{24 \textcolor{keyword}{class }\mbox{\hyperlink{classpq__leaf}{pq\_leaf}};}
+\DoxyCodeLine{25 \textcolor{keyword}{class }\mbox{\hyperlink{classdirection__indicator}{direction\_indicator}};}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{30 \textcolor{keyword}{class }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{classpq__node}{pq\_node}} }
+\DoxyCodeLine{31 \{}
+\DoxyCodeLine{32 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{36     \textcolor{keyword}{typedef} \mbox{\hyperlink{classsymlist}{symlist<pq\_node*>::iterator}} \mbox{\hyperlink{classpq__node_a34898c9eb1527787c07e8ebefd6bfba5}{iterator}};}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{41     \textcolor{keyword}{enum} \mbox{\hyperlink{classpq__node_a96827bdca8bf81d20213405dd27f8fa6}{PQ\_KIND}} \{P\_NODE, Q\_NODE, LEAF, DIR\};}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{46     \textcolor{keyword}{enum} \mbox{\hyperlink{classpq__node_a6236b20cd5f6cc02cb5f637ed34c96d9}{PQ\_MARK}} \{UNMARKED, QUEUED, \mbox{\hyperlink{classpq__node_a6236b20cd5f6cc02cb5f637ed34c96d9a70312622ded9f04f068838ec195fc53c}{BLOCKED}}, UNBLOCKED\};}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{51     \mbox{\hyperlink{classpq__node_ad521c84741d9095288f879339e314ae7}{pq\_node}} (\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} n\_, \textcolor{keywordtype}{int} id\_) :  pert\_children(0),}
+\DoxyCodeLine{52                   pert\_leaves(0),}
+\DoxyCodeLine{53                   mark (UNMARKED),}
+\DoxyCodeLine{54                   n (n\_),}
+\DoxyCodeLine{55                   id (id\_)}
+\DoxyCodeLine{56     \{}
+\DoxyCodeLine{57     \}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{62     \textcolor{keyword}{virtual} \mbox{\hyperlink{classpq__node}{\string~pq\_node}} ();}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{68     \textcolor{keyword}{virtual} \mbox{\hyperlink{classpq__node_a96827bdca8bf81d20213405dd27f8fa6}{PQ\_KIND}} \mbox{\hyperlink{classpq__node_aa9873c0cfad88bc4404857ce57d422e4}{kind}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{74     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classpq__node_aa6830ab47a280f41fe61b7d2f8b508bb}{partial}}(\mbox{\hyperlink{classiterator}{iterator}})}
+\DoxyCodeLine{75     \{}
+\DoxyCodeLine{76     \}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{82     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classpq__node_af1ba861293e4493dba7cc2c9332fee76}{full}}(\mbox{\hyperlink{classiterator}{iterator}})}
+\DoxyCodeLine{83     \{}
+\DoxyCodeLine{84     \}}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{90     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classpq__node_aab7bddb053b6b25b90be00cba7de97f9}{write}}(std::ostream\&, \textcolor{keywordtype}{int}) = 0;}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{96     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classpq__node_a13100e0b030cc047f382d9ddf6a44f4a}{clear}}()}
+\DoxyCodeLine{97     \{}
+\DoxyCodeLine{98     mark = UNMARKED;}
+\DoxyCodeLine{99     pert\_leaves = 0;}
+\DoxyCodeLine{100     pert\_children = 0;}
+\DoxyCodeLine{101     \}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103     \textcolor{comment}{// type-\/casts }}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{109     \textcolor{keyword}{virtual} \mbox{\hyperlink{classp__node}{p\_node}}* \mbox{\hyperlink{classpq__node_af838df17af1f9e0492c74da3dcd64a04}{P}}() = 0;}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{115     \textcolor{keyword}{virtual} \mbox{\hyperlink{classq__node}{q\_node}}* \mbox{\hyperlink{classpq__node_adc0dd21636d7fdb580aaeb407ab4f12c}{Q}}() = 0;}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{121     \textcolor{keyword}{virtual} \mbox{\hyperlink{classdirection__indicator}{direction\_indicator}}* \mbox{\hyperlink{classpq__node_a130d55bb597cbc47cfb6d9c9cd0ef06a}{D}}() = 0;}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{127     \textcolor{keyword}{virtual} \mbox{\hyperlink{classpq__leaf}{pq\_leaf}}* \mbox{\hyperlink{classpq__node_a565c52c174b753c7f676362acf566a33}{L}}() = 0;}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129     \textcolor{comment}{//}}
+\DoxyCodeLine{130     \textcolor{comment}{// Data used in reductions}}
+\DoxyCodeLine{131     \textcolor{comment}{//}}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{140     \textcolor{keywordtype}{int} pert\_children = 0;}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{148     \textcolor{keywordtype}{int} pert\_leaves = 0;}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{158     \textcolor{keywordtype}{bool} is\_endmost = \textcolor{keyword}{false};}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{166     \mbox{\hyperlink{classpq__node}{pq\_node}}* father = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{180     \mbox{\hyperlink{classpq__node_a6236b20cd5f6cc02cb5f637ed34c96d9}{PQ\_MARK}} \mbox{\hyperlink{classpq__node_aee913582a7b268ce2570bee8a8367c50}{mark}};}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{186     \mbox{\hyperlink{classsymlist}{symlist<pq\_node*>}} \mbox{\hyperlink{classpq__node_a2cc030cfa4560872acea8b50ebd0542b}{sons}};}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{192     \mbox{\hyperlink{classiterator}{iterator}} \mbox{\hyperlink{classpq__node_a5e8a5defa0fec4ff2e82fabee97296b4}{pos}};}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{202     std::list<pq\_node*>::iterator \mbox{\hyperlink{classpq__node_a71cc9bb3c11aac468ff77d64643c38dc}{lpos}};}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204     \textcolor{comment}{//}}
+\DoxyCodeLine{205     \textcolor{comment}{// Application specific data (should become template parameter)}}
+\DoxyCodeLine{206     \textcolor{comment}{//}}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{212     \mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classpq__node_a4997fd09a95d9a659b99cea04197740a}{n}};}
+\DoxyCodeLine{213 }
+\DoxyCodeLine{217     \textcolor{keywordtype}{int} \textcolor{keywordtype}{id} = 0;}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{222     \mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classpq__node_ae6d5a236397b9a57159487eac7ec168d}{up}};}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{227     \textcolor{keywordtype}{int} up\_id = 0;}
+\DoxyCodeLine{228 }
+\DoxyCodeLine{229     \textcolor{comment}{//}}
+\DoxyCodeLine{230     \textcolor{comment}{// Friends}}
+\DoxyCodeLine{231     \textcolor{comment}{//}}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{237     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classq__node}{q\_node}};}
+\DoxyCodeLine{238 }
+\DoxyCodeLine{243     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classp__node}{p\_node}};}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{249     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classpq__tree}{pq\_tree}};}
+\DoxyCodeLine{250 }
+\DoxyCodeLine{255     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classplanarity}{planarity}};}
+\DoxyCodeLine{256 }
+\DoxyCodeLine{261     \mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \textcolor{keyword}{friend} std::ostream\& \mbox{\hyperlink{edge_8cpp_acdb629fb6ead9586f586235139d7e160}{operator<<}}(std::ostream\&, \textcolor{keyword}{const} \mbox{\hyperlink{classpq__tree}{pq\_tree}}\&);}
+\DoxyCodeLine{262 \};}
+\DoxyCodeLine{263 }
+\DoxyCodeLine{264 }
+\DoxyCodeLine{268 \textcolor{keyword}{class }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{classp__node}{p\_node}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classpq__node}{pq\_node}} }
+\DoxyCodeLine{269 \{}
+\DoxyCodeLine{270 \textcolor{keyword}{private}:}
+\DoxyCodeLine{274     \mbox{\hyperlink{classp__node}{p\_node}}(\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{275 }
+\DoxyCodeLine{279     \mbox{\hyperlink{classp__node}{p\_node}}(\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}, \textcolor{keywordtype}{int}, \mbox{\hyperlink{classsymlist}{symlist<pq\_node*>}}\&);}
+\DoxyCodeLine{280     }
+\DoxyCodeLine{281     \textcolor{comment}{//}}
+\DoxyCodeLine{282     \textcolor{comment}{// pq\_node interface}}
+\DoxyCodeLine{283     \textcolor{comment}{// }}
+\DoxyCodeLine{284 }
+\DoxyCodeLine{288     \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8c_a4663de4fa674346c82a366077969fd4b}{partial}}(\mbox{\hyperlink{classiterator}{iterator}});}
+\DoxyCodeLine{289 }
+\DoxyCodeLine{293     \textcolor{keywordtype}{void} full(\mbox{\hyperlink{classiterator}{iterator}});}
+\DoxyCodeLine{294 }
+\DoxyCodeLine{299     \mbox{\hyperlink{classpq__node_a96827bdca8bf81d20213405dd27f8fa6}{PQ\_KIND}} \mbox{\hyperlink{classp__node_a58cceed9fc9d92f36ec3fb6425d99cec}{kind}} ()\textcolor{keyword}{ const }}
+\DoxyCodeLine{300 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{301     \textcolor{keywordflow}{return} P\_NODE;}
+\DoxyCodeLine{302     \}}
+\DoxyCodeLine{303 }
+\DoxyCodeLine{308     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacenvinfer1_a8455d49d12f876ef3c07a5df62bbe17c}{write}}(std::ostream\&, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{309 }
+\DoxyCodeLine{313     \textcolor{keywordtype}{void} clear ();}
+\DoxyCodeLine{314 }
+\DoxyCodeLine{315     \textcolor{comment}{// type-\/casts}}
+\DoxyCodeLine{316 }
+\DoxyCodeLine{321     \mbox{\hyperlink{classp__node}{p\_node}}* \mbox{\hyperlink{classp__node_a24e5b38cd4ffa7b2615110ec71403a2d}{P}}()}
+\DoxyCodeLine{322     \{}
+\DoxyCodeLine{323     \textcolor{keywordflow}{return} \textcolor{keyword}{this};}
+\DoxyCodeLine{324     \}}
+\DoxyCodeLine{325 }
+\DoxyCodeLine{330     \mbox{\hyperlink{classq__node}{q\_node}}* \mbox{\hyperlink{classp__node_a498bbcd0e8124240b833b4e9c5e61b21}{Q}}()}
+\DoxyCodeLine{331     \{}
+\DoxyCodeLine{332     assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{333     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{334     \}}
+\DoxyCodeLine{335 }
+\DoxyCodeLine{340     \mbox{\hyperlink{classdirection__indicator}{direction\_indicator}}* \mbox{\hyperlink{classp__node_a5580eada77004502c41425d278ee27b6}{D}}()}
+\DoxyCodeLine{341     \{}
+\DoxyCodeLine{342     assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{343     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{344     \}}
+\DoxyCodeLine{345 }
+\DoxyCodeLine{350     \mbox{\hyperlink{classpq__leaf}{pq\_leaf}}* \mbox{\hyperlink{classp__node_a674160253f80c3db19e287a1be85b02b}{L}}()}
+\DoxyCodeLine{351     \{}
+\DoxyCodeLine{352     assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{353     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{354     \}}
+\DoxyCodeLine{355 }
+\DoxyCodeLine{356     \textcolor{comment}{//}}
+\DoxyCodeLine{357     \textcolor{comment}{// Additional}}
+\DoxyCodeLine{358     \textcolor{comment}{//}}
+\DoxyCodeLine{359 }
+\DoxyCodeLine{365     \mbox{\hyperlink{classsymlist}{symlist<pq\_node*>}} \mbox{\hyperlink{classp__node_a09658fb7a7212e51b877444e4cee4378}{full\_sons}};}
+\DoxyCodeLine{366 }
+\DoxyCodeLine{372     \mbox{\hyperlink{classsymlist}{symlist<pq\_node*>}} \mbox{\hyperlink{classp__node_a8acc45be68133af1b6a2823875729798}{partial\_sons}};}
+\DoxyCodeLine{373 }
+\DoxyCodeLine{378     \textcolor{keywordtype}{int} child\_count = 0;}
+\DoxyCodeLine{379 }
+\DoxyCodeLine{384     \textcolor{keywordtype}{int} partial\_count = 0;}
+\DoxyCodeLine{385 }
+\DoxyCodeLine{390     \textcolor{keywordtype}{int} full\_count = 0;}
+\DoxyCodeLine{391 }
+\DoxyCodeLine{392     \textcolor{comment}{//}}
+\DoxyCodeLine{393     \textcolor{comment}{// Friends }}
+\DoxyCodeLine{394     \textcolor{comment}{//}}
+\DoxyCodeLine{395 }
+\DoxyCodeLine{400     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classplanarity}{planarity}};}
+\DoxyCodeLine{401 }
+\DoxyCodeLine{406     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classpq__tree}{pq\_tree}};}
+\DoxyCodeLine{407 }
+\DoxyCodeLine{412     \mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \textcolor{keyword}{friend} std::ostream\& \mbox{\hyperlink{edge_8cpp_acdb629fb6ead9586f586235139d7e160}{operator<<}}(std::ostream\&, \textcolor{keyword}{const} \mbox{\hyperlink{classpq__tree}{pq\_tree}}\&);}
+\DoxyCodeLine{413 \};}
+\DoxyCodeLine{414 }
+\DoxyCodeLine{415 }
+\DoxyCodeLine{419 \textcolor{keyword}{class }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{classq__node}{q\_node}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classpq__node}{pq\_node}} }
+\DoxyCodeLine{420 \{}
+\DoxyCodeLine{421 \textcolor{keyword}{private}:}
+\DoxyCodeLine{425     \mbox{\hyperlink{classq__node}{q\_node}} (\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{426 }
+\DoxyCodeLine{427     \textcolor{comment}{//}}
+\DoxyCodeLine{428     \textcolor{comment}{// pq\_node interface}}
+\DoxyCodeLine{429     \textcolor{comment}{// }}
+\DoxyCodeLine{430 }
+\DoxyCodeLine{434     \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8c_a4663de4fa674346c82a366077969fd4b}{partial}}(\mbox{\hyperlink{classiterator}{iterator}});}
+\DoxyCodeLine{435 }
+\DoxyCodeLine{439     \textcolor{keywordtype}{void} full(\mbox{\hyperlink{classiterator}{iterator}});}
+\DoxyCodeLine{440 }
+\DoxyCodeLine{445     \mbox{\hyperlink{classpq__node_a96827bdca8bf81d20213405dd27f8fa6}{PQ\_KIND}} \mbox{\hyperlink{classq__node_afcacf644da450a075d01b76803aa5da0}{kind}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{446 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{447     \textcolor{keywordflow}{return} Q\_NODE;}
+\DoxyCodeLine{448     \}}
+\DoxyCodeLine{449 }
+\DoxyCodeLine{454     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacenvinfer1_a8455d49d12f876ef3c07a5df62bbe17c}{write}}(std::ostream\&, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{455 }
+\DoxyCodeLine{459     \textcolor{keywordtype}{void} clear();}
+\DoxyCodeLine{460 }
+\DoxyCodeLine{461     \textcolor{comment}{// type-\/casts}}
+\DoxyCodeLine{462 }
+\DoxyCodeLine{467     \mbox{\hyperlink{classp__node}{p\_node}}* \mbox{\hyperlink{classq__node_a8cd3c283fc6717288af6256413f52d1b}{P}}()}
+\DoxyCodeLine{468     \{}
+\DoxyCodeLine{469     assert (\textcolor{keyword}{false});}
+\DoxyCodeLine{470     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{471     \}}
+\DoxyCodeLine{472 }
+\DoxyCodeLine{477     \mbox{\hyperlink{classq__node}{q\_node}}* \mbox{\hyperlink{classq__node_a97d0d7e765001f163a7c14c8dc744786}{Q}}()}
+\DoxyCodeLine{478     \{}
+\DoxyCodeLine{479     \textcolor{keywordflow}{return} \textcolor{keyword}{this};}
+\DoxyCodeLine{480     \}}
+\DoxyCodeLine{481 }
+\DoxyCodeLine{486     \mbox{\hyperlink{classdirection__indicator}{direction\_indicator}}* \mbox{\hyperlink{classq__node_a9b4dfdf5e54133ac6b252e9168ddeaa8}{D}}()}
+\DoxyCodeLine{487     \{}
+\DoxyCodeLine{488     assert (\textcolor{keyword}{false});}
+\DoxyCodeLine{489     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{490     \}}
+\DoxyCodeLine{491 }
+\DoxyCodeLine{496     \mbox{\hyperlink{classpq__leaf}{pq\_leaf}}* \mbox{\hyperlink{classq__node_ace87caa930b28182faeb82c748003d86}{L}}()}
+\DoxyCodeLine{497     \{}
+\DoxyCodeLine{498     assert (\textcolor{keyword}{false});}
+\DoxyCodeLine{499     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{500     \}}
+\DoxyCodeLine{501 }
+\DoxyCodeLine{502     \textcolor{comment}{//}}
+\DoxyCodeLine{503     \textcolor{comment}{// Additional}}
+\DoxyCodeLine{504     \textcolor{comment}{//}}
+\DoxyCodeLine{505 }
+\DoxyCodeLine{511     \textcolor{keywordtype}{void} pertinent(\mbox{\hyperlink{classiterator}{iterator}});}
+\DoxyCodeLine{512     }
+\DoxyCodeLine{519     \mbox{\hyperlink{classq__node}{q\_node}}* merge (\mbox{\hyperlink{classiterator}{iterator}});}
+\DoxyCodeLine{520     }
+\DoxyCodeLine{525     \textcolor{keywordtype}{void} turn (); }
+\DoxyCodeLine{526 }
+\DoxyCodeLine{532     \mbox{\hyperlink{classiterator}{iterator}} \mbox{\hyperlink{classq__node_ac636443853e4074a0e6c441d7bcb249a}{pert\_begin}};    }
+\DoxyCodeLine{533 }
+\DoxyCodeLine{538     \mbox{\hyperlink{classiterator}{iterator}} \mbox{\hyperlink{classq__node_a7a331cc1f5d9f7b4b77b7b25b4976c3b}{pert\_end}};}
+\DoxyCodeLine{539 }
+\DoxyCodeLine{546     \mbox{\hyperlink{classiterator}{iterator}} partial\_pos[3];}
+\DoxyCodeLine{547 }
+\DoxyCodeLine{555     \textcolor{keywordtype}{bool} pert\_cons = \textcolor{keyword}{false};}
+\DoxyCodeLine{556 }
+\DoxyCodeLine{561     \textcolor{keywordtype}{int} partial\_count = 0;}
+\DoxyCodeLine{562 }
+\DoxyCodeLine{567     \textcolor{keywordtype}{int} full\_count = 0;}
+\DoxyCodeLine{568     }
+\DoxyCodeLine{569     \textcolor{comment}{//}}
+\DoxyCodeLine{570     \textcolor{comment}{// Friends }}
+\DoxyCodeLine{571     \textcolor{comment}{//}}
+\DoxyCodeLine{572 }
+\DoxyCodeLine{577     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classplanarity}{planarity}};}
+\DoxyCodeLine{578 }
+\DoxyCodeLine{583     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classpq__tree}{pq\_tree}};}
+\DoxyCodeLine{584 \};}
+\DoxyCodeLine{585 }
+\DoxyCodeLine{586 }
+\DoxyCodeLine{590 \textcolor{keyword}{class }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{classpq__leaf}{pq\_leaf}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classpq__node}{pq\_node}} }
+\DoxyCodeLine{591 \{}
+\DoxyCodeLine{592 \textcolor{keyword}{public}:}
+\DoxyCodeLine{596     \mbox{\hyperlink{classpq__leaf}{pq\_leaf}} (\textcolor{keywordtype}{int}, \textcolor{keywordtype}{int}, GTL::edge, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}});}
+\DoxyCodeLine{597 \textcolor{keyword}{private}:}
+\DoxyCodeLine{602     \mbox{\hyperlink{classpq__node_a96827bdca8bf81d20213405dd27f8fa6}{PQ\_KIND}} \mbox{\hyperlink{classpq__leaf_a31c4b7512aae53901bb20308fe3a8834}{kind}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{603 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{604     \textcolor{keywordflow}{return} LEAF;}
+\DoxyCodeLine{605     \}}
+\DoxyCodeLine{606 }
+\DoxyCodeLine{611     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacenvinfer1_a8455d49d12f876ef3c07a5df62bbe17c}{write}}(std::ostream\&, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{612 }
+\DoxyCodeLine{613     \textcolor{comment}{// type-\/casts}}
+\DoxyCodeLine{614 }
+\DoxyCodeLine{619     \mbox{\hyperlink{classp__node}{p\_node}}* \mbox{\hyperlink{classpq__leaf_ac9453114e85e14b52cb2fc62ee117398}{P}}()}
+\DoxyCodeLine{620     \{}
+\DoxyCodeLine{621     assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{622     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{623     \}}
+\DoxyCodeLine{624 }
+\DoxyCodeLine{629     \mbox{\hyperlink{classq__node}{q\_node}}* \mbox{\hyperlink{classpq__leaf_af095768adb826b3bbf4bc0080c58e67a}{Q}}()}
+\DoxyCodeLine{630     \{}
+\DoxyCodeLine{631     assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{632     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{633     \}}
+\DoxyCodeLine{634 }
+\DoxyCodeLine{639     \mbox{\hyperlink{classdirection__indicator}{direction\_indicator}}* \mbox{\hyperlink{classpq__leaf_a644b19eb7d26967ad9bf4c3994c984df}{D}}()}
+\DoxyCodeLine{640     \{}
+\DoxyCodeLine{641     assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{642     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{643     \}}
+\DoxyCodeLine{644 }
+\DoxyCodeLine{649     \mbox{\hyperlink{classpq__leaf}{pq\_leaf}}* \mbox{\hyperlink{classpq__leaf_afb7bdabcf7e7b18e29fbd72db35f53b6}{L}}()}
+\DoxyCodeLine{650     \{}
+\DoxyCodeLine{651     \textcolor{keywordflow}{return} \textcolor{keyword}{this};}
+\DoxyCodeLine{652     \}}
+\DoxyCodeLine{653     }
+\DoxyCodeLine{654     \textcolor{comment}{//}}
+\DoxyCodeLine{655     \textcolor{comment}{// Additional}}
+\DoxyCodeLine{656     \textcolor{comment}{//}}
+\DoxyCodeLine{657 }
+\DoxyCodeLine{661     \textcolor{keywordtype}{int} \mbox{\hyperlink{classpq__leaf_a4f4e0c05ee8e704fb1be7b04bae11b43}{other\_id}};}
+\DoxyCodeLine{662 }
+\DoxyCodeLine{666     \mbox{\hyperlink{classedge}{edge}} \mbox{\hyperlink{classpq__leaf_a9edebd6049b8633158d7f1db3c33ee7c}{e}};}
+\DoxyCodeLine{667 }
+\DoxyCodeLine{668     \textcolor{comment}{//}}
+\DoxyCodeLine{669     \textcolor{comment}{// Friends }}
+\DoxyCodeLine{670     \textcolor{comment}{//}}
+\DoxyCodeLine{671 }
+\DoxyCodeLine{676     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classplanarity}{planarity}};}
+\DoxyCodeLine{677 }
+\DoxyCodeLine{682     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classpq__tree}{pq\_tree}};}
+\DoxyCodeLine{683 \};}
+\DoxyCodeLine{684 }
+\DoxyCodeLine{685 }
+\DoxyCodeLine{689 \textcolor{keyword}{class }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{classdirection__indicator}{direction\_indicator}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classpq__node}{pq\_node}} }
+\DoxyCodeLine{690 \{}
+\DoxyCodeLine{691 \textcolor{keyword}{private}:}
+\DoxyCodeLine{695     \mbox{\hyperlink{classdirection__indicator_a6fd861eb14b2c717efd113f7acc3249c}{direction\_indicator}} (\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} n\_, \textcolor{keywordtype}{int} id\_) : \mbox{\hyperlink{classpq__node}{pq\_node}} (n\_, id\_) \{ \};}
+\DoxyCodeLine{696 }
+\DoxyCodeLine{697     \textcolor{comment}{//}}
+\DoxyCodeLine{698     \textcolor{comment}{// pq\_node interface}}
+\DoxyCodeLine{699     \textcolor{comment}{// }}
+\DoxyCodeLine{700     }
+\DoxyCodeLine{705     \mbox{\hyperlink{classpq__node_a96827bdca8bf81d20213405dd27f8fa6}{PQ\_KIND}} \mbox{\hyperlink{classdirection__indicator_ab0ffeb761ec0d157b4c6ba13ece96d9b}{kind}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{706 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{707     \textcolor{keywordflow}{return} DIR;}
+\DoxyCodeLine{708     \}}
+\DoxyCodeLine{709 }
+\DoxyCodeLine{714     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacenvinfer1_a8455d49d12f876ef3c07a5df62bbe17c}{write}}(std::ostream\& os, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{715 }
+\DoxyCodeLine{716     \textcolor{comment}{// type-\/casts }}
+\DoxyCodeLine{717 }
+\DoxyCodeLine{722     \mbox{\hyperlink{classp__node}{p\_node}}* \mbox{\hyperlink{classdirection__indicator_a7b56706775dc080f81d94548f3f7264b}{P}}()}
+\DoxyCodeLine{723     \{}
+\DoxyCodeLine{724     assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{725     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{726     \}}
+\DoxyCodeLine{727 }
+\DoxyCodeLine{732     \mbox{\hyperlink{classq__node}{q\_node}}* \mbox{\hyperlink{classdirection__indicator_ab793b7a888594e18e53f47d48731a3db}{Q}}()}
+\DoxyCodeLine{733     \{}
+\DoxyCodeLine{734     assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{735     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{736     \}}
+\DoxyCodeLine{737 }
+\DoxyCodeLine{742     \mbox{\hyperlink{classdirection__indicator}{direction\_indicator}}* \mbox{\hyperlink{classdirection__indicator_aee879cc877e027719f532ef513b222e3}{D}}()}
+\DoxyCodeLine{743     \{}
+\DoxyCodeLine{744     \textcolor{keywordflow}{return} \textcolor{keyword}{this};}
+\DoxyCodeLine{745     \}}
+\DoxyCodeLine{746 }
+\DoxyCodeLine{751     \mbox{\hyperlink{classpq__leaf}{pq\_leaf}}* \mbox{\hyperlink{classdirection__indicator_a1cce361c1069cc682230effde0703276}{L}}()}
+\DoxyCodeLine{752     \{}
+\DoxyCodeLine{753     assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{754     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{755     \}}
+\DoxyCodeLine{756     }
+\DoxyCodeLine{757     \textcolor{comment}{//}}
+\DoxyCodeLine{758     \textcolor{comment}{// Additional}}
+\DoxyCodeLine{759     \textcolor{comment}{//}}
+\DoxyCodeLine{760 }
+\DoxyCodeLine{764     \textcolor{keywordtype}{bool} direction = \textcolor{keyword}{false}; }
+\DoxyCodeLine{765 }
+\DoxyCodeLine{766     \textcolor{comment}{//}}
+\DoxyCodeLine{767     \textcolor{comment}{// Friends }}
+\DoxyCodeLine{768     \textcolor{comment}{//}}
+\DoxyCodeLine{769 }
+\DoxyCodeLine{774     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classplanarity}{planarity}};}
+\DoxyCodeLine{775 }
+\DoxyCodeLine{780     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classpq__tree}{pq\_tree}};}
+\DoxyCodeLine{781 \};}
+\DoxyCodeLine{782 }
+\DoxyCodeLine{783 \mbox{\hyperlink{_g_t_l_8h_a46af2b3ec266ac2f9d36fa7222358017}{\_\_GTL\_END\_NAMESPACE}}}
+\DoxyCodeLine{784 }
+\DoxyCodeLine{785 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{786 }
+\DoxyCodeLine{787 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{788 \textcolor{comment}{//   end of file}}
+\DoxyCodeLine{789 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+
+\end{DoxyCode}

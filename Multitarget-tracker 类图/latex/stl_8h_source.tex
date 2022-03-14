@@ -1,0 +1,383 @@
+\hypertarget{stl_8h_source}{}\doxysection{stl.\+h}
+\label{stl_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/stl.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/stl.h}}
+\mbox{\hyperlink{stl_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{    pybind11/stl.h: Transparent conversion for STL data types}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{    Copyright (c) 2016 Wenzel Jakob <wenzel.jakob@epfl.ch>}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{    All rights reserved. Use of this source code is governed by a}}
+\DoxyCodeLine{7 \textcolor{comment}{    BSD-\/style license that can be found in the LICENSE file.}}
+\DoxyCodeLine{8 \textcolor{comment}{*/}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{pybind11_8h}{pybind11.h}}"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <set>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <unordered\_set>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <unordered\_map>}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <list>}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include <deque>}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <valarray>}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#if defined(\_MSC\_VER)}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#pragma warning(push)}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#pragma warning(disable: 4127) }\textcolor{comment}{// warning C4127: Conditional expression is constant}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#ifdef \_\_has\_include}}
+\DoxyCodeLine{28 \textcolor{comment}{// std::optional (but including it in c++14 mode isn't allowed)}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#  if defined(PYBIND11\_CPP17) \&\& \_\_has\_include(<optional>)}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#    include <optional>}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#    define PYBIND11\_HAS\_OPTIONAL 1}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{33 \textcolor{comment}{// std::experimental::optional (but not allowed in c++11 mode)}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#  if defined(PYBIND11\_CPP14) \&\& (\_\_has\_include(<experimental/optional>) \&\& \(\backslash\)}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{                                 !\_\_has\_include(<optional>))}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#    include <experimental/optional>}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#    define PYBIND11\_HAS\_EXP\_OPTIONAL 1}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{39 \textcolor{comment}{// std::variant}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#  if defined(PYBIND11\_CPP17) \&\& \_\_has\_include(<variant>)}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#    include <variant>}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#    define PYBIND11\_HAS\_VARIANT 1}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#elif defined(\_MSC\_VER) \&\& defined(PYBIND11\_CPP17)}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#  include <optional>}}
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#  include <variant>}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#  define PYBIND11\_HAS\_OPTIONAL 1}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#  define PYBIND11\_HAS\_VARIANT 1}}
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+\DoxyCodeLine{52 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 }
+\DoxyCodeLine{56 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T, \textcolor{keyword}{typename} U>}
+\DoxyCodeLine{57 \textcolor{keyword}{using} \mbox{\hyperlink{stl_8h_a41f1c77f569a59a2c90e118856325acc}{forwarded\_type}} = \mbox{\hyperlink{detail_2common_8h_acdb0eff728aec08ed6fff07d2885ea9d}{conditional\_t}}<}
+\DoxyCodeLine{58     std::is\_lvalue\_reference<T>::value, \mbox{\hyperlink{detail_2common_8h_a3a08cea569e6926ac8d7d74dd7178b5f}{remove\_reference\_t<U>}} \&, \mbox{\hyperlink{detail_2common_8h_a3a08cea569e6926ac8d7d74dd7178b5f}{remove\_reference\_t<U>}} \&\&>;}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{62 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T, \textcolor{keyword}{typename} U>}
+\DoxyCodeLine{63 \mbox{\hyperlink{stl_8h_a41f1c77f569a59a2c90e118856325acc}{forwarded\_type<T, U>}} \mbox{\hyperlink{stl_8h_a46552d7dd740641d1924f53088eed157}{forward\_like}}(U \&\&u) \{}
+\DoxyCodeLine{64     \textcolor{keywordflow}{return} std::forward<detail::forwarded\_type<T, U>>(std::forward<U>(u));}
+\DoxyCodeLine{65 \}}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type, \textcolor{keyword}{typename} Key> \textcolor{keyword}{struct }\mbox{\hyperlink{structset__caster}{set\_caster}} \{}
+\DoxyCodeLine{68     \textcolor{keyword}{using} \mbox{\hyperlink{structset__caster_af955f5e8e104168a805e74992fc5fc63}{type}} = Type;}
+\DoxyCodeLine{69     \textcolor{keyword}{using} \mbox{\hyperlink{classtype__caster}{key\_conv}} = \mbox{\hyperlink{classtype__caster}{make\_caster<Key>}};}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structset__caster_ae10b8dc5a37d6e209bbcb94ce7b44c22}{load}}(\mbox{\hyperlink{classhandle}{handle}} src, \textcolor{keywordtype}{bool} convert) \{}
+\DoxyCodeLine{72         \textcolor{keywordflow}{if} (!isinstance<pybind11::set>(src))}
+\DoxyCodeLine{73             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{74         \textcolor{keyword}{auto} s = reinterpret\_borrow<pybind11::set>(src);}
+\DoxyCodeLine{75         value.clear();}
+\DoxyCodeLine{76         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} entry : s) \{}
+\DoxyCodeLine{77             \mbox{\hyperlink{classtype__caster}{key\_conv}} conv;}
+\DoxyCodeLine{78             \textcolor{keywordflow}{if} (!conv.\mbox{\hyperlink{classtype__caster__generic_aa841c81d370ff23ccafa8507cc01a0b1}{load}}(entry, convert))}
+\DoxyCodeLine{79                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{80             value.insert(cast\_op<Key \&\&>(std::move(conv)));}
+\DoxyCodeLine{81         \}}
+\DoxyCodeLine{82         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{83     \}}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{86     \textcolor{keyword}{static} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structset__caster_a28ff3fb56435999d7019c7f59e43a081}{cast}}(T \&\&src, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} policy, \mbox{\hyperlink{classhandle}{handle}} parent) \{}
+\DoxyCodeLine{87         \textcolor{keywordflow}{if} (!std::is\_lvalue\_reference<T>::value)}
+\DoxyCodeLine{88             policy = \mbox{\hyperlink{structreturn__value__policy__override_a65da8355449984fac8a8b4f5bfa70748}{return\_value\_policy\_override<Key>::policy}}(policy);}
+\DoxyCodeLine{89         pybind11::set s;}
+\DoxyCodeLine{90         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&\&value : src) \{}
+\DoxyCodeLine{91             \textcolor{keyword}{auto} value\_ = reinterpret\_steal<object>(\mbox{\hyperlink{classtype__caster__base_acd5bd2fafc86fb3160c7955bfc2f88de}{key\_conv::cast}}(forward\_like<T>(value), policy, parent));}
+\DoxyCodeLine{92             \textcolor{keywordflow}{if} (!value\_ || !s.add(value\_))}
+\DoxyCodeLine{93                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classhandle}{handle}}();}
+\DoxyCodeLine{94         \}}
+\DoxyCodeLine{95         \textcolor{keywordflow}{return} s.release();}
+\DoxyCodeLine{96     \}}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98     \mbox{\hyperlink{structset__caster_ab0f145baeba1be7b712d8a9d4ee70812}{PYBIND11\_TYPE\_CASTER}}(\mbox{\hyperlink{structset__caster_af955f5e8e104168a805e74992fc5fc63}{type}}, \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}Set["{}}) + \mbox{\hyperlink{classtype__caster__base_a1287a0b427306b31949df84e062373ba}{key\_conv::name}} + \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}]"{}}));}
+\DoxyCodeLine{99 \};}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type, \textcolor{keyword}{typename} Key, \textcolor{keyword}{typename} Value> \textcolor{keyword}{struct }\mbox{\hyperlink{structmap__caster}{map\_caster}} \{}
+\DoxyCodeLine{102     \textcolor{keyword}{using} \mbox{\hyperlink{classtype__caster}{key\_conv}}   = \mbox{\hyperlink{classtype__caster}{make\_caster<Key>}};}
+\DoxyCodeLine{103     \textcolor{keyword}{using} \mbox{\hyperlink{classtype__caster}{value\_conv}} = \mbox{\hyperlink{classtype__caster}{make\_caster<Value>}};}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structmap__caster_aa35d07c2fcaf64c021da0bff1f710992}{load}}(\mbox{\hyperlink{classhandle}{handle}} src, \textcolor{keywordtype}{bool} convert) \{}
+\DoxyCodeLine{106         \textcolor{keywordflow}{if} (!isinstance<dict>(src))}
+\DoxyCodeLine{107             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{108         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}} = reinterpret\_borrow<dict>(src);}
+\DoxyCodeLine{109         value.clear();}
+\DoxyCodeLine{110         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} it : \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}) \{}
+\DoxyCodeLine{111             \mbox{\hyperlink{classtype__caster}{key\_conv}} kconv;}
+\DoxyCodeLine{112             \mbox{\hyperlink{classtype__caster}{value\_conv}} vconv;}
+\DoxyCodeLine{113             \textcolor{keywordflow}{if} (!kconv.\mbox{\hyperlink{classtype__caster__generic_aa841c81d370ff23ccafa8507cc01a0b1}{load}}(it.first.ptr(), convert) ||}
+\DoxyCodeLine{114                 !vconv.\mbox{\hyperlink{classtype__caster__generic_aa841c81d370ff23ccafa8507cc01a0b1}{load}}(it.second.ptr(), convert))}
+\DoxyCodeLine{115                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{116             value.emplace(cast\_op<Key \&\&>(std::move(kconv)), cast\_op<Value \&\&>(std::move(vconv)));}
+\DoxyCodeLine{117         \}}
+\DoxyCodeLine{118         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{119     \}}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{122     \textcolor{keyword}{static} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structmap__caster_a445ec6f48f16736f1076420f79f19e92}{cast}}(T \&\&src, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} policy, \mbox{\hyperlink{classhandle}{handle}} parent) \{}
+\DoxyCodeLine{123         \mbox{\hyperlink{classdict}{dict}} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}};}
+\DoxyCodeLine{124         \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} policy\_key = policy;}
+\DoxyCodeLine{125         \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} policy\_value = policy;}
+\DoxyCodeLine{126         \textcolor{keywordflow}{if} (!std::is\_lvalue\_reference<T>::value) \{}
+\DoxyCodeLine{127             policy\_key = \mbox{\hyperlink{structreturn__value__policy__override_a65da8355449984fac8a8b4f5bfa70748}{return\_value\_policy\_override<Key>::policy}}(policy\_key);}
+\DoxyCodeLine{128             policy\_value = \mbox{\hyperlink{structreturn__value__policy__override_a65da8355449984fac8a8b4f5bfa70748}{return\_value\_policy\_override<Value>::policy}}(policy\_value);}
+\DoxyCodeLine{129         \}}
+\DoxyCodeLine{130         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&\&kv : src) \{}
+\DoxyCodeLine{131             \textcolor{keyword}{auto} key = reinterpret\_steal<object>(\mbox{\hyperlink{classtype__caster__base_acd5bd2fafc86fb3160c7955bfc2f88de}{key\_conv::cast}}(forward\_like<T>(kv.first), policy\_key, parent));}
+\DoxyCodeLine{132             \textcolor{keyword}{auto} value = reinterpret\_steal<object>(\mbox{\hyperlink{classtype__caster__base_acd5bd2fafc86fb3160c7955bfc2f88de}{value\_conv::cast}}(forward\_like<T>(kv.second), policy\_value, parent));}
+\DoxyCodeLine{133             \textcolor{keywordflow}{if} (!key || !value)}
+\DoxyCodeLine{134                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classhandle}{handle}}();}
+\DoxyCodeLine{135             \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}[key] = value;}
+\DoxyCodeLine{136         \}}
+\DoxyCodeLine{137         \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}.release();}
+\DoxyCodeLine{138     \}}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140     \mbox{\hyperlink{structmap__caster_a2aec5030fb62b7cdd6a201b15b322a79}{PYBIND11\_TYPE\_CASTER}}(Type, \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}Dict["{}}) + \mbox{\hyperlink{classtype__caster__base_a1287a0b427306b31949df84e062373ba}{key\_conv::name}} + \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}, "{}}) + \mbox{\hyperlink{classtype__caster__base_a1287a0b427306b31949df84e062373ba}{value\_conv::name}} + \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}]"{}}));}
+\DoxyCodeLine{141 \};}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type, \textcolor{keyword}{typename} Value> \textcolor{keyword}{struct }\mbox{\hyperlink{structlist__caster}{list\_caster}} \{}
+\DoxyCodeLine{144     \textcolor{keyword}{using} \mbox{\hyperlink{classtype__caster}{value\_conv}} = \mbox{\hyperlink{classtype__caster}{make\_caster<Value>}};}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structlist__caster_a6f4b4e4679fc465e40ef9f45480c3467}{load}}(\mbox{\hyperlink{classhandle}{handle}} src, \textcolor{keywordtype}{bool} convert) \{}
+\DoxyCodeLine{147         \textcolor{keywordflow}{if} (!isinstance<sequence>(src) || isinstance<str>(src))}
+\DoxyCodeLine{148             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{149         \textcolor{keyword}{auto} s = reinterpret\_borrow<sequence>(src);}
+\DoxyCodeLine{150         value.clear();}
+\DoxyCodeLine{151         \mbox{\hyperlink{structlist__caster_a1656633d6c6e18e7da5a084283b6debc}{reserve\_maybe}}(s, \&value);}
+\DoxyCodeLine{152         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} it : s) \{}
+\DoxyCodeLine{153             \mbox{\hyperlink{classtype__caster}{value\_conv}} conv;}
+\DoxyCodeLine{154             \textcolor{keywordflow}{if} (!conv.\mbox{\hyperlink{classtype__caster__generic_aa841c81d370ff23ccafa8507cc01a0b1}{load}}(it, convert))}
+\DoxyCodeLine{155                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{156             value.push\_back(cast\_op<Value \&\&>(std::move(conv)));}
+\DoxyCodeLine{157         \}}
+\DoxyCodeLine{158         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{159     \}}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161 \textcolor{keyword}{private}:}
+\DoxyCodeLine{162     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T = Type,}
+\DoxyCodeLine{163               \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t<std::is\_same<decltype(std::declval<T>}}().reserve(0)), \textcolor{keywordtype}{void}>::value, \textcolor{keywordtype}{int}> = 0>}
+\DoxyCodeLine{164     \textcolor{keywordtype}{void} \mbox{\hyperlink{structlist__caster_a1656633d6c6e18e7da5a084283b6debc}{reserve\_maybe}}(\mbox{\hyperlink{classsequence}{sequence}} s, Type *) \{ value.reserve(s.\mbox{\hyperlink{classsequence_af35c852590d4618481b22030d82de2ff}{size}}()); \}}
+\DoxyCodeLine{165     \textcolor{keywordtype}{void} \mbox{\hyperlink{structlist__caster_abf10f0b58c041eaf95ff3ae11219c17f}{reserve\_maybe}}(\mbox{\hyperlink{classsequence}{sequence}}, \textcolor{keywordtype}{void} *) \{ \}}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167 \textcolor{keyword}{public}:}
+\DoxyCodeLine{168     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{169     \textcolor{keyword}{static} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structlist__caster_add7c216960ed11015507b9c4356d088d}{cast}}(T \&\&src, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} policy, \mbox{\hyperlink{classhandle}{handle}} parent) \{}
+\DoxyCodeLine{170         \textcolor{keywordflow}{if} (!std::is\_lvalue\_reference<T>::value)}
+\DoxyCodeLine{171             policy = \mbox{\hyperlink{structreturn__value__policy__override_a65da8355449984fac8a8b4f5bfa70748}{return\_value\_policy\_override<Value>::policy}}(policy);}
+\DoxyCodeLine{172         \mbox{\hyperlink{structlist}{list}} l(src.size());}
+\DoxyCodeLine{173         \textcolor{keywordtype}{size\_t} index = 0;}
+\DoxyCodeLine{174         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&\&value : src) \{}
+\DoxyCodeLine{175             \textcolor{keyword}{auto} value\_ = reinterpret\_steal<object>(\mbox{\hyperlink{classtype__caster__base_acd5bd2fafc86fb3160c7955bfc2f88de}{value\_conv::cast}}(forward\_like<T>(value), policy, parent));}
+\DoxyCodeLine{176             \textcolor{keywordflow}{if} (!value\_)}
+\DoxyCodeLine{177                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classhandle}{handle}}();}
+\DoxyCodeLine{178             PyList\_SET\_ITEM(l.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), (\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}) index++, value\_.release().ptr()); \textcolor{comment}{// steals a reference}}
+\DoxyCodeLine{179         \}}
+\DoxyCodeLine{180         \textcolor{keywordflow}{return} l.\mbox{\hyperlink{classobject_a4ce66b1d44b37ae6b28e80228b075aae}{release}}();}
+\DoxyCodeLine{181     \}}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{183     \mbox{\hyperlink{structlist__caster_a88389469e8b23995d7834cc6715ce790}{PYBIND11\_TYPE\_CASTER}}(Type, \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}List["{}}) + \mbox{\hyperlink{classtype__caster__base_a1287a0b427306b31949df84e062373ba}{value\_conv::name}} + \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}]"{}}));}
+\DoxyCodeLine{184 \};}
+\DoxyCodeLine{185 }
+\DoxyCodeLine{186 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type, \textcolor{keyword}{typename} Alloc> \textcolor{keyword}{struct }\mbox{\hyperlink{classtype__caster}{type\_caster<std::vector<Type, Alloc>}}>}
+\DoxyCodeLine{187  : \mbox{\hyperlink{structlist__caster}{list\_caster<std::vector<Type, Alloc>}}, Type> \{ \};}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type, \textcolor{keyword}{typename} Alloc> \textcolor{keyword}{struct }\mbox{\hyperlink{classtype__caster}{type\_caster}}<\mbox{\hyperlink{namespacestd}{std}}::deque<Type, Alloc>>}
+\DoxyCodeLine{190  : \mbox{\hyperlink{structlist__caster}{list\_caster}}<std::deque<Type, Alloc>, Type> \{ \};}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type, \textcolor{keyword}{typename} Alloc> \textcolor{keyword}{struct }\mbox{\hyperlink{classtype__caster}{type\_caster}}<\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{structlist}{list}}<Type, Alloc>>}
+\DoxyCodeLine{193  : \mbox{\hyperlink{structlist__caster}{list\_caster}}<std::list<Type, Alloc>, Type> \{ \};}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{195 \textcolor{keyword}{template} <\textcolor{keyword}{typename} ArrayType, \textcolor{keyword}{typename} Value, \textcolor{keywordtype}{bool} Resizable, \textcolor{keywordtype}{size\_t} Size = 0> \textcolor{keyword}{struct }\mbox{\hyperlink{structarray__caster}{array\_caster}} \{}
+\DoxyCodeLine{196     \textcolor{keyword}{using} \mbox{\hyperlink{classtype__caster}{value\_conv}} = \mbox{\hyperlink{classtype__caster}{make\_caster<Value>}};}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{198 \textcolor{keyword}{private}:}
+\DoxyCodeLine{199     \textcolor{keyword}{template} <\textcolor{keywordtype}{bool} R = Resizable>}
+\DoxyCodeLine{200     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structarray__caster_ad03d44f30c641c1a3fdf5946e6a0b278}{require\_size}}(\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t<R, size\_t>}} size) \{}
+\DoxyCodeLine{201         \textcolor{keywordflow}{if} (value.size() != size)}
+\DoxyCodeLine{202             value.resize(size);}
+\DoxyCodeLine{203         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{204     \}}
+\DoxyCodeLine{205     \textcolor{keyword}{template} <\textcolor{keywordtype}{bool} R = Resizable>}
+\DoxyCodeLine{206     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structarray__caster_ab7f0af43c0cf800f662c468834dad5d6}{require\_size}}(\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t<!R, size\_t>}} size) \{}
+\DoxyCodeLine{207         \textcolor{keywordflow}{return} size == Size;}
+\DoxyCodeLine{208     \}}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210 \textcolor{keyword}{public}:}
+\DoxyCodeLine{211     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structarray__caster_ad0d8f8e2a90d20917e3496f8aeea6d8b}{load}}(\mbox{\hyperlink{classhandle}{handle}} src, \textcolor{keywordtype}{bool} convert) \{}
+\DoxyCodeLine{212         \textcolor{keywordflow}{if} (!isinstance<sequence>(src))}
+\DoxyCodeLine{213             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{214         \textcolor{keyword}{auto} l = reinterpret\_borrow<sequence>(src);}
+\DoxyCodeLine{215         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{structarray__caster_ad03d44f30c641c1a3fdf5946e6a0b278}{require\_size}}(l.size()))}
+\DoxyCodeLine{216             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{217         \textcolor{keywordtype}{size\_t} ctr = 0;}
+\DoxyCodeLine{218         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} it : l) \{}
+\DoxyCodeLine{219             \mbox{\hyperlink{classtype__caster}{value\_conv}} conv;}
+\DoxyCodeLine{220             \textcolor{keywordflow}{if} (!conv.\mbox{\hyperlink{classtype__caster__generic_aa841c81d370ff23ccafa8507cc01a0b1}{load}}(it, convert))}
+\DoxyCodeLine{221                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{222             value[ctr++] = cast\_op<Value \&\&>(std::move(conv));}
+\DoxyCodeLine{223         \}}
+\DoxyCodeLine{224         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{225     \}}
+\DoxyCodeLine{226 }
+\DoxyCodeLine{227     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{228     \textcolor{keyword}{static} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structarray__caster_a5eac243c7f9bca8dbe58fc914e93a2a0}{cast}}(T \&\&src, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} policy, \mbox{\hyperlink{classhandle}{handle}} parent) \{}
+\DoxyCodeLine{229         \mbox{\hyperlink{structlist}{list}} l(src.size());}
+\DoxyCodeLine{230         \textcolor{keywordtype}{size\_t} index = 0;}
+\DoxyCodeLine{231         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&\&value : src) \{}
+\DoxyCodeLine{232             \textcolor{keyword}{auto} value\_ = reinterpret\_steal<object>(\mbox{\hyperlink{classtype__caster__base_acd5bd2fafc86fb3160c7955bfc2f88de}{value\_conv::cast}}(forward\_like<T>(value), policy, parent));}
+\DoxyCodeLine{233             \textcolor{keywordflow}{if} (!value\_)}
+\DoxyCodeLine{234                 \textcolor{keywordflow}{return} \mbox{\hyperlink{classhandle}{handle}}();}
+\DoxyCodeLine{235             PyList\_SET\_ITEM(l.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), (\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}) index++, value\_.release().ptr()); \textcolor{comment}{// steals a reference}}
+\DoxyCodeLine{236         \}}
+\DoxyCodeLine{237         \textcolor{keywordflow}{return} l.\mbox{\hyperlink{classobject_a4ce66b1d44b37ae6b28e80228b075aae}{release}}();}
+\DoxyCodeLine{238     \}}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{240     \mbox{\hyperlink{structarray__caster_a0c14bf91b3fea20a11f5c086a1a04fa0}{PYBIND11\_TYPE\_CASTER}}(ArrayType, \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}List["{}}) + \mbox{\hyperlink{classtype__caster__base_a1287a0b427306b31949df84e062373ba}{value\_conv::name}} + \_<Resizable>(\mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}"{}}), \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}["{}}) + \_<Size>() + \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}]"{}})) + \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}]"{}}));}
+\DoxyCodeLine{241 \};}
+\DoxyCodeLine{242 }
+\DoxyCodeLine{243 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type, \textcolor{keywordtype}{size\_t} Size> \textcolor{keyword}{struct }\mbox{\hyperlink{classtype__caster}{type\_caster}}<\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{classarray}{array}}<Type, Size>>}
+\DoxyCodeLine{244  : \mbox{\hyperlink{structarray__caster}{array\_caster}}<std::array<Type, Size>, Type, false, Size> \{ \};}
+\DoxyCodeLine{245 }
+\DoxyCodeLine{246 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type> \textcolor{keyword}{struct }\mbox{\hyperlink{classtype__caster}{type\_caster}}<\mbox{\hyperlink{namespacestd}{std}}::valarray<Type>>}
+\DoxyCodeLine{247  : \mbox{\hyperlink{structarray__caster}{array\_caster}}<std::valarray<Type>, Type, true> \{ \};}
+\DoxyCodeLine{248 }
+\DoxyCodeLine{249 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Key, \textcolor{keyword}{typename} Compare, \textcolor{keyword}{typename} Alloc> \textcolor{keyword}{struct }\mbox{\hyperlink{classtype__caster}{type\_caster}}<\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{classset}{set}}<Key, Compare, Alloc>>}
+\DoxyCodeLine{250   : \mbox{\hyperlink{structset__caster}{set\_caster}}<std::set<Key, Compare, Alloc>, Key> \{ \};}
+\DoxyCodeLine{251 }
+\DoxyCodeLine{252 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Key, \textcolor{keyword}{typename} Hash, \textcolor{keyword}{typename} Equal, \textcolor{keyword}{typename} Alloc> \textcolor{keyword}{struct }\mbox{\hyperlink{classtype__caster}{type\_caster}}<\mbox{\hyperlink{namespacestd}{std}}::unordered\_set<Key, Hash, Equal, Alloc>>}
+\DoxyCodeLine{253   : \mbox{\hyperlink{structset__caster}{set\_caster}}<std::unordered\_set<Key, Hash, Equal, Alloc>, Key> \{ \};}
+\DoxyCodeLine{254 }
+\DoxyCodeLine{255 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Key, \textcolor{keyword}{typename} Value, \textcolor{keyword}{typename} Compare, \textcolor{keyword}{typename} Alloc> \textcolor{keyword}{struct }\mbox{\hyperlink{classtype__caster}{type\_caster}}<\mbox{\hyperlink{namespacestd}{std}}::map<Key, Value, Compare, Alloc>>}
+\DoxyCodeLine{256   : \mbox{\hyperlink{structmap__caster}{map\_caster}}<std::map<Key, Value, Compare, Alloc>, Key, Value> \{ \};}
+\DoxyCodeLine{257 }
+\DoxyCodeLine{258 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Key, \textcolor{keyword}{typename} Value, \textcolor{keyword}{typename} Hash, \textcolor{keyword}{typename} Equal, \textcolor{keyword}{typename} Alloc> \textcolor{keyword}{struct }\mbox{\hyperlink{classtype__caster}{type\_caster}}<\mbox{\hyperlink{namespacestd}{std}}::unordered\_map<Key, Value, Hash, Equal, Alloc>>}
+\DoxyCodeLine{259   : \mbox{\hyperlink{structmap__caster}{map\_caster}}<std::unordered\_map<Key, Value, Hash, Equal, Alloc>, Key, Value> \{ \};}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{261 \textcolor{comment}{// This type caster is intended to be used for std::optional and std::experimental::optional}}
+\DoxyCodeLine{262 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T> \textcolor{keyword}{struct }\mbox{\hyperlink{structoptional__caster}{optional\_caster}} \{}
+\DoxyCodeLine{263     \textcolor{keyword}{using} \mbox{\hyperlink{classtype__caster}{value\_conv}} = \mbox{\hyperlink{classtype__caster}{make\_caster<typename T::value\_type>}};}
+\DoxyCodeLine{264 }
+\DoxyCodeLine{265     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T\_>}
+\DoxyCodeLine{266     \textcolor{keyword}{static} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structoptional__caster_a6037ba36e2d38d203e038c341e74fa23}{cast}}(T\_ \&\&src, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} policy, \mbox{\hyperlink{classhandle}{handle}} parent) \{}
+\DoxyCodeLine{267         \textcolor{keywordflow}{if} (!src)}
+\DoxyCodeLine{268             \textcolor{keywordflow}{return} \mbox{\hyperlink{classnone}{none}}().\mbox{\hyperlink{classhandle_a1a13c72238d8df4d42c1656e446fbfcb}{inc\_ref}}();}
+\DoxyCodeLine{269         policy = \mbox{\hyperlink{structreturn__value__policy__override_a65da8355449984fac8a8b4f5bfa70748}{return\_value\_policy\_override<typename T::value\_type>::policy}}(policy);}
+\DoxyCodeLine{270         \textcolor{keywordflow}{return} \mbox{\hyperlink{classtype__caster__base_acd5bd2fafc86fb3160c7955bfc2f88de}{value\_conv::cast}}(*std::forward<T\_>(src), policy, parent);}
+\DoxyCodeLine{271     \}}
+\DoxyCodeLine{272 }
+\DoxyCodeLine{273     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structoptional__caster_aeac148e493d77cf9b1bfaedeb1bb60ca}{load}}(\mbox{\hyperlink{classhandle}{handle}} src, \textcolor{keywordtype}{bool} convert) \{}
+\DoxyCodeLine{274         \textcolor{keywordflow}{if} (!src) \{}
+\DoxyCodeLine{275             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{276         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (src.is\_none()) \{}
+\DoxyCodeLine{277             \textcolor{keywordflow}{return} \textcolor{keyword}{true};  \textcolor{comment}{// default-\/constructed value is already empty}}
+\DoxyCodeLine{278         \}}
+\DoxyCodeLine{279         \mbox{\hyperlink{classtype__caster}{value\_conv}} inner\_caster;}
+\DoxyCodeLine{280         \textcolor{keywordflow}{if} (!inner\_caster.\mbox{\hyperlink{classtype__caster__generic_aa841c81d370ff23ccafa8507cc01a0b1}{load}}(src, convert))}
+\DoxyCodeLine{281             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{282 }
+\DoxyCodeLine{283         value.emplace(cast\_op<typename T::value\_type \&\&>(std::move(inner\_caster)));}
+\DoxyCodeLine{284         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{285     \}}
+\DoxyCodeLine{286 }
+\DoxyCodeLine{287     \mbox{\hyperlink{structoptional__caster_aebf055b93d355d31460d99fdd8f2e309}{PYBIND11\_TYPE\_CASTER}}(T, \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}Optional["{}}) + \mbox{\hyperlink{classtype__caster__base_a1287a0b427306b31949df84e062373ba}{value\_conv::name}} + \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}]"{}}));}
+\DoxyCodeLine{288 \};}
+\DoxyCodeLine{289 }
+\DoxyCodeLine{290 \textcolor{preprocessor}{\#if PYBIND11\_HAS\_OPTIONAL}}
+\DoxyCodeLine{291 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T> \textcolor{keyword}{struct }\mbox{\hyperlink{classtype__caster}{type\_caster}}<\mbox{\hyperlink{namespacestd}{std}}::optional<T>>}
+\DoxyCodeLine{292     : \textcolor{keyword}{public} \mbox{\hyperlink{structoptional__caster}{optional\_caster}}<std::optional<T>> \{\};}
+\DoxyCodeLine{293 }
+\DoxyCodeLine{294 \textcolor{keyword}{template}<> \textcolor{keyword}{struct }\mbox{\hyperlink{classtype__caster}{type\_caster}}<\mbox{\hyperlink{namespacestd}{std}}::nullopt\_t>}
+\DoxyCodeLine{295     : \textcolor{keyword}{public} \mbox{\hyperlink{structvoid__caster}{void\_caster}}<std::nullopt\_t> \{\};}
+\DoxyCodeLine{296 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{297 }
+\DoxyCodeLine{298 \textcolor{preprocessor}{\#if PYBIND11\_HAS\_EXP\_OPTIONAL}}
+\DoxyCodeLine{299 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T> \textcolor{keyword}{struct }\mbox{\hyperlink{classtype__caster}{type\_caster}}<\mbox{\hyperlink{namespacestd}{std}}::experimental::optional<T>>}
+\DoxyCodeLine{300     : \textcolor{keyword}{public} \mbox{\hyperlink{structoptional__caster}{optional\_caster}}<std::experimental::optional<T>> \{\};}
+\DoxyCodeLine{301 }
+\DoxyCodeLine{302 \textcolor{keyword}{template}<> \textcolor{keyword}{struct }\mbox{\hyperlink{classtype__caster}{type\_caster}}<\mbox{\hyperlink{namespacestd}{std}}::experimental::nullopt\_t>}
+\DoxyCodeLine{303     : \textcolor{keyword}{public} \mbox{\hyperlink{structvoid__caster}{void\_caster}}<std::experimental::nullopt\_t> \{\};}
+\DoxyCodeLine{304 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{305 }
+\DoxyCodeLine{307 \textcolor{keyword}{struct }\mbox{\hyperlink{structvariant__caster__visitor}{variant\_caster\_visitor}} \{}
+\DoxyCodeLine{308     \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} \mbox{\hyperlink{structvariant__caster__visitor_a9cb67ab0573177ee440eb39af186293d}{policy}};}
+\DoxyCodeLine{309     \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structvariant__caster__visitor_a9997bb93f907d349f13930002b7981bf}{parent}};}
+\DoxyCodeLine{310 }
+\DoxyCodeLine{311     \textcolor{keyword}{using} \mbox{\hyperlink{classhandle}{result\_type}} = \mbox{\hyperlink{classhandle}{handle}}; \textcolor{comment}{// required by boost::variant in C++11}}
+\DoxyCodeLine{312 }
+\DoxyCodeLine{313     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{314     \mbox{\hyperlink{classhandle}{result\_type}} \mbox{\hyperlink{structvariant__caster__visitor_ab78e15bb76beb4aeb215cefea855f6d0}{operator()}}(T \&\&src)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{315         \textcolor{keywordflow}{return} \mbox{\hyperlink{classtype__caster__base_acd5bd2fafc86fb3160c7955bfc2f88de}{make\_caster<T>::cast}}(std::forward<T>(src), \mbox{\hyperlink{structvariant__caster__visitor_a9cb67ab0573177ee440eb39af186293d}{policy}}, \mbox{\hyperlink{structvariant__caster__visitor_a9997bb93f907d349f13930002b7981bf}{parent}});}
+\DoxyCodeLine{316     \}}
+\DoxyCodeLine{317 \};}
+\DoxyCodeLine{318 }
+\DoxyCodeLine{323 \textcolor{keyword}{template} <\textcolor{keyword}{template}<\textcolor{keyword}{typename}...> \textcolor{keyword}{class }Variant>}
+\DoxyCodeLine{324 \textcolor{keyword}{struct }\mbox{\hyperlink{structvisit__helper}{visit\_helper}} \{}
+\DoxyCodeLine{325     \textcolor{keyword}{template} <\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{326     \textcolor{keyword}{static} \textcolor{keyword}{auto} \mbox{\hyperlink{structvisit__helper_a473267b48de4dd59210914d9d70ea577}{call}}(Args \&\&...\mbox{\hyperlink{classargs}{args}}) -\/> \textcolor{keyword}{decltype}(visit(std::forward<Args>(\mbox{\hyperlink{classargs}{args}})...)) \{}
+\DoxyCodeLine{327         \textcolor{keywordflow}{return} visit(std::forward<Args>(\mbox{\hyperlink{classargs}{args}})...);}
+\DoxyCodeLine{328     \}}
+\DoxyCodeLine{329 \};}
+\DoxyCodeLine{330 }
+\DoxyCodeLine{332 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Variant> \textcolor{keyword}{struct }\mbox{\hyperlink{structvariant__caster}{variant\_caster}};}
+\DoxyCodeLine{333 }
+\DoxyCodeLine{334 \textcolor{keyword}{template} <\textcolor{keyword}{template}<\textcolor{keyword}{typename}...> \textcolor{keyword}{class }V, \textcolor{keyword}{typename}... Ts>}
+\DoxyCodeLine{335 \textcolor{keyword}{struct }\mbox{\hyperlink{structvariant__caster}{variant\_caster}}<V<Ts...>> \{}
+\DoxyCodeLine{336     \textcolor{keyword}{static\_assert}(\textcolor{keyword}{sizeof}...(Ts) > 0, \textcolor{stringliteral}{"{}Variant must consist of at least one alternative."{}});}
+\DoxyCodeLine{337 }
+\DoxyCodeLine{338     \textcolor{keyword}{template} <\textcolor{keyword}{typename} U, \textcolor{keyword}{typename}... Us>}
+\DoxyCodeLine{339     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structvariant__caster_3_01_v_3_01_ts_8_8_8_01_4_01_4_ab0b8352e25d9313f6fddcb19d1ce1bb2}{load\_alternative}}(\mbox{\hyperlink{classhandle}{handle}} src, \textcolor{keywordtype}{bool} convert, \mbox{\hyperlink{structtype__list}{type\_list<U, Us...>}}) \{}
+\DoxyCodeLine{340         \textcolor{keyword}{auto} caster = \mbox{\hyperlink{classtype__caster}{make\_caster<U>}}();}
+\DoxyCodeLine{341         \textcolor{keywordflow}{if} (caster.load(src, convert)) \{}
+\DoxyCodeLine{342             value = cast\_op<U>(caster);}
+\DoxyCodeLine{343             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{344         \}}
+\DoxyCodeLine{345         \textcolor{keywordflow}{return} load\_alternative(src, convert, \mbox{\hyperlink{structtype__list}{type\_list<Us...>}}\{\});}
+\DoxyCodeLine{346     \}}
+\DoxyCodeLine{347 }
+\DoxyCodeLine{348     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structvariant__caster_3_01_v_3_01_ts_8_8_8_01_4_01_4_a6a1767174a525e0ce1b7adf4c7ee2cbb}{load\_alternative}}(\mbox{\hyperlink{classhandle}{handle}}, \textcolor{keywordtype}{bool}, \mbox{\hyperlink{structtype__list}{type\_list<>}}) \{ \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \}}
+\DoxyCodeLine{349 }
+\DoxyCodeLine{350     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structvariant__caster_3_01_v_3_01_ts_8_8_8_01_4_01_4_a196dec699b44e16b730169c58701af6a}{load}}(\mbox{\hyperlink{classhandle}{handle}} src, \textcolor{keywordtype}{bool} convert) \{}
+\DoxyCodeLine{351         \textcolor{comment}{// Do a first pass without conversions to improve constructor resolution.}}
+\DoxyCodeLine{352         \textcolor{comment}{// E.g. `py::int\_(1).cast<variant<double, int>>()` needs to fill the `int`}}
+\DoxyCodeLine{353         \textcolor{comment}{// slot of the variant. Without two-\/pass loading `double` would be filled}}
+\DoxyCodeLine{354         \textcolor{comment}{// because it appears first and a conversion is possible.}}
+\DoxyCodeLine{355         \textcolor{keywordflow}{if} (convert \&\& load\_alternative(src, \textcolor{keyword}{false}, \mbox{\hyperlink{structtype__list}{type\_list<Ts...>}}\{\}))}
+\DoxyCodeLine{356             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{357         \textcolor{keywordflow}{return} load\_alternative(src, convert, \mbox{\hyperlink{structtype__list}{type\_list<Ts...>}}\{\});}
+\DoxyCodeLine{358     \}}
+\DoxyCodeLine{359 }
+\DoxyCodeLine{360     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Variant>}
+\DoxyCodeLine{361     \textcolor{keyword}{static} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structvariant__caster_3_01_v_3_01_ts_8_8_8_01_4_01_4_a4fc67a72a5dcdd1bfcdb2f99354b323a}{cast}}(Variant \&\&src, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} policy, \mbox{\hyperlink{classhandle}{handle}} parent) \{}
+\DoxyCodeLine{362         \textcolor{keywordflow}{return} \mbox{\hyperlink{structvisit__helper_a473267b48de4dd59210914d9d70ea577}{visit\_helper<V>::call}}(\mbox{\hyperlink{structvariant__caster__visitor}{variant\_caster\_visitor}}\{policy, parent\},}
+\DoxyCodeLine{363                                      std::forward<Variant>(src));}
+\DoxyCodeLine{364     \}}
+\DoxyCodeLine{365 }
+\DoxyCodeLine{366     \textcolor{keyword}{using} \mbox{\hyperlink{structvariant__caster_3_01_v_3_01_ts_8_8_8_01_4_01_4_af19893dac45401bbb67d1adfd284d463}{Type}} = V<Ts...>;}
+\DoxyCodeLine{367     \mbox{\hyperlink{structvariant__caster_3_01_v_3_01_ts_8_8_8_01_4_01_4_a3adec4059b0a4ff86b350c02541fcfff}{PYBIND11\_TYPE\_CASTER}}(\mbox{\hyperlink{structvariant__caster_3_01_v_3_01_ts_8_8_8_01_4_01_4_af19893dac45401bbb67d1adfd284d463}{Type}}, \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}Union["{}}) + \mbox{\hyperlink{descr_8h_a8c0d3505d8fb5963c5e157eabdbd3c7f}{detail::concat}}(\mbox{\hyperlink{classtype__caster}{make\_caster<Ts>::name}}...) + \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}]"{}}));}
+\DoxyCodeLine{368 \};}
+\DoxyCodeLine{369 }
+\DoxyCodeLine{370 \textcolor{preprocessor}{\#if PYBIND11\_HAS\_VARIANT}}
+\DoxyCodeLine{371 \textcolor{keyword}{template} <\textcolor{keyword}{typename}... Ts>}
+\DoxyCodeLine{372 \textcolor{keyword}{struct }\mbox{\hyperlink{classtype__caster}{type\_caster}}<\mbox{\hyperlink{namespacestd}{std}}::variant<Ts...>> : \mbox{\hyperlink{structvariant__caster}{variant\_caster}}<std::variant<Ts...>> \{ \};}
+\DoxyCodeLine{373 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{374 }
+\DoxyCodeLine{375 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{376 }
+\DoxyCodeLine{377 inline \mbox{\hyperlink{namespacestd}{std}}::ostream \&operator<<(\mbox{\hyperlink{namespacestd}{std}}::ostream \&os, const \mbox{\hyperlink{classhandle}{handle}} \&obj) \{}
+\DoxyCodeLine{378     os << (std::string) \mbox{\hyperlink{classstr}{str}}(obj);}
+\DoxyCodeLine{379     \textcolor{keywordflow}{return} os;}
+\DoxyCodeLine{380 \}}
+\DoxyCodeLine{381 }
+\DoxyCodeLine{382 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+\DoxyCodeLine{383 }
+\DoxyCodeLine{384 \textcolor{preprocessor}{\#if defined(\_MSC\_VER)}}
+\DoxyCodeLine{385 \textcolor{preprocessor}{\#pragma warning(pop)}}
+\DoxyCodeLine{386 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

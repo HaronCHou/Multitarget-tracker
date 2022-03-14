@@ -1,0 +1,103 @@
+\hypertarget{mygraph_8h_source}{}\doxysection{mygraph.\+h}
+\label{mygraph_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/mygraph.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/mygraph.h}}
+\mbox{\hyperlink{mygraph_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1  \textcolor{comment}{// \$Id: mygraph.h,v 1.6 2006/01/02 16:03:14 rdmp1c Exp \$}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#ifndef MYGRAPH\_H}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#define MYGRAPH\_H}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{comment}{// STL}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <set>}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{comment}{// GTL}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{graph_8h}{GTL/graph.h}}>}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 }
+\DoxyCodeLine{23 \textcolor{keyword}{class }\mbox{\hyperlink{class_my_graph}{MyGraph}} : \textcolor{keyword}{public} GTL::graph}
+\DoxyCodeLine{24 \{}
+\DoxyCodeLine{25 \textcolor{keyword}{public}:}
+\DoxyCodeLine{26     \mbox{\hyperlink{class_my_graph_a28bf434d062ec896de127989fe9ed303}{MyGraph}} () \{ \mbox{\hyperlink{class_my_graph_a1c451264db5a154029533d9368b90317}{labels\_as\_weights}} = \textcolor{keyword}{false}; \};}
+\DoxyCodeLine{27     }
+\DoxyCodeLine{28     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_my_graph_ad4d078899993b80cdf50afb560986a61}{get\_edge\_weight}} (GTL::edge e)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_my_graph_ae1d0f126f2ad927a88879490bfeeafc2}{weight}}[e]; \};}
+\DoxyCodeLine{29     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_a4179e03ef508f80ce922d4914b7f61e0}{set\_edge\_weight}} (GTL::edge e, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}) \{ \mbox{\hyperlink{class_my_graph_ae1d0f126f2ad927a88879490bfeeafc2}{weight}}[e] = \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}; \};}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32     std::string \mbox{\hyperlink{class_my_graph_ac6204a8290424ae6601929ffbc8e1d98}{get\_edge\_label}}(GTL::edge e)\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_my_graph_a63f132401b91a0100fc7ae0e8aca2a79}{edge\_label}}[e]; \};}
+\DoxyCodeLine{33     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_a310141aed4ab4a2ccf997563cc4a0c0a}{set\_edge\_label}}(GTL::edge e, std::string s) \{ \mbox{\hyperlink{class_my_graph_a63f132401b91a0100fc7ae0e8aca2a79}{edge\_label}}[e] = s; \};}
+\DoxyCodeLine{34     }
+\DoxyCodeLine{41     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_my_graph_a02595d1f696bda207e824792f03f2d92}{edge\_exists}} (\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} n1, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} n2);}
+\DoxyCodeLine{42     }
+\DoxyCodeLine{43     }
+\DoxyCodeLine{50     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_a9c3943bce70d81e91fb7185ad2da6abc}{delete\_edge}} (\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} n1, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} n2);}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52     }
+\DoxyCodeLine{61     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_a5d90ef0fba45bbbdf53a3bfe6f9a7061}{read\_labels\_as\_weights}} () \{ \mbox{\hyperlink{class_my_graph_a1c451264db5a154029533d9368b90317}{labels\_as\_weights}} = \textcolor{keyword}{true}; \};}
+\DoxyCodeLine{62     }
+\DoxyCodeLine{74     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_ae0e261884ff2bccb8787bdb640c8d075}{load\_edge\_info\_handler}} (GTL::edge e, GTL::GML\_pair* \mbox{\hyperlink{structlist}{list}});}
+\DoxyCodeLine{75     }
+\DoxyCodeLine{76     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_a8d1b31f9ecace80e9502cc3d12c13198}{store\_edge\_double}} (GTL::edge e, \textcolor{keywordtype}{char} *key, \textcolor{keywordtype}{double} value);}
+\DoxyCodeLine{77     }
+\DoxyCodeLine{88     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_abfa8050d31739c02eac19b276ed30598}{store\_edge\_integer}} (GTL::edge e, \textcolor{keywordtype}{char} *key, \textcolor{keywordtype}{int} value);}
+\DoxyCodeLine{101     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_a99b0c7ff1ad90343616ad24c9ba6ccfd}{store\_edge\_string}} (GTL::edge e, \textcolor{keywordtype}{char} *key, \textcolor{keywordtype}{char} *value);}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103     }
+\DoxyCodeLine{111     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_a69061a7398476c2a79a9ef62549b54d1}{post\_new\_edge\_handler}}(GTL::edge \textcolor{comment}{/*e*/}) \{}
+\DoxyCodeLine{112         \textcolor{comment}{//weight[e] = 1;}}
+\DoxyCodeLine{113         \textcolor{comment}{//edge\_label[e] = "{}"{};}}
+\DoxyCodeLine{114         \textcolor{comment}{//edge\_colour[e] = "{}black"{};}}
+\DoxyCodeLine{115     \}}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{124     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_acd4fff84b17a15b038cbae767c8b6819}{save\_edge\_info\_handler}}(std::ostream *os, GTL::edge e) \textcolor{keyword}{const};}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126 }
+\DoxyCodeLine{137     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_a2e5a7c4c0fb608a57e5cc7ff0ff1c2a2}{load\_node\_info\_handler}}(\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} n, GTL::GML\_pair* \mbox{\hyperlink{structlist}{list}} );}
+\DoxyCodeLine{138     }
+\DoxyCodeLine{139     }
+\DoxyCodeLine{140     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_aba04d7cce3273de54694e11712cd041b}{store\_node\_double}} (\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} n, \textcolor{keywordtype}{char} *key, \textcolor{keywordtype}{double} value);}
+\DoxyCodeLine{141     }
+\DoxyCodeLine{142     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_ab2ce06ebca6fc09e9b5dc63065a0324e}{store\_node\_integer}} (\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} n, \textcolor{keywordtype}{char} *key, \textcolor{keywordtype}{int} value);}
+\DoxyCodeLine{153     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_aed98c2a8fcbd2acc722931044d14382d}{store\_node\_string}} (\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} n, \textcolor{keywordtype}{char} *key, \textcolor{keywordtype}{char} *value);}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{161     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_aa8442fe04f069ef134fa0fc29378f7ed}{post\_new\_node\_handler}}(\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} \textcolor{comment}{/*n*/})}
+\DoxyCodeLine{162     \{}
+\DoxyCodeLine{163         \textcolor{comment}{//label[n] = "{}"{};}}
+\DoxyCodeLine{164         \textcolor{comment}{//node\_colour[n] = "{}white"{};}}
+\DoxyCodeLine{165     \}}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_ab67713b599b5e1c5e9ac307e06fa936e}{save\_node\_info\_handler}}(std::ostream *os, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} n) \textcolor{keyword}{const};}
+\DoxyCodeLine{168     }
+\DoxyCodeLine{176     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_acf68ca166eebb43a80b722c6ef15d22c}{save\_dot}}(std::ostream \&\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}}, \textcolor{keywordtype}{bool} weights = \textcolor{keyword}{false});}
+\DoxyCodeLine{177     }
+\DoxyCodeLine{185     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_acf68ca166eebb43a80b722c6ef15d22c}{save\_dot}} (\textcolor{keywordtype}{char} *fname, \textcolor{keywordtype}{bool} weights = \textcolor{keyword}{false});}
+\DoxyCodeLine{186     }
+\DoxyCodeLine{187     std::string \mbox{\hyperlink{class_my_graph_a75c4930060ebb0e7e9b56bff9d3ffccc}{get\_node\_label}}(\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} n) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_my_graph_a17ee545efaac92b7bdc8ead2e588219f}{label}}[n]; \};}
+\DoxyCodeLine{188     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_a6a1d3d18c7f6b093209d9b5d3fc40984}{set\_node\_label}}(\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} n, std::string s) \{ \mbox{\hyperlink{class_my_graph_a17ee545efaac92b7bdc8ead2e588219f}{label}}[n] = s; \};}
+\DoxyCodeLine{189     }
+\DoxyCodeLine{190     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_a585d535dfd7c5053874f588104606908}{set\_edge\_colour}}(GTL::edge e, std::string colour) \{ \mbox{\hyperlink{class_my_graph_a003377a70a9a5335c77b7431e243cd4d}{edge\_colour}}[e] = colour; \};}
+\DoxyCodeLine{191     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_a33ec58fff1bbe4dd7a1b9987d46ef57a}{set\_node\_colour}}(\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} n, std::string colour) \{ \mbox{\hyperlink{class_my_graph_a116ddb3b67fabaec45e1e77607001e6c}{node\_colour}}[n] = colour; \};}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193 }
+\DoxyCodeLine{194     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_my_graph_a2d930dfa35031cc2c7f74796a907f79d}{node\_cliqueishness}} (\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} \&n);}
+\DoxyCodeLine{195     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_my_graph_a2bb131d5401dc66c01acb976daa7e981}{cliqueishness}} ();}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{197             }
+\DoxyCodeLine{198 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{204     GTL::edge\_map<int> \mbox{\hyperlink{class_my_graph_ae1d0f126f2ad927a88879490bfeeafc2}{weight}};}
+\DoxyCodeLine{205     GTL::edge\_map<std::string> \mbox{\hyperlink{class_my_graph_a63f132401b91a0100fc7ae0e8aca2a79}{edge\_label}};}
+\DoxyCodeLine{206     GTL::node\_map<std::string> \mbox{\hyperlink{class_my_graph_a17ee545efaac92b7bdc8ead2e588219f}{label}};}
+\DoxyCodeLine{207     }
+\DoxyCodeLine{208     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_my_graph_a1c451264db5a154029533d9368b90317}{labels\_as\_weights}};}
+\DoxyCodeLine{209     }
+\DoxyCodeLine{210     \textcolor{comment}{// Styles}}
+\DoxyCodeLine{211     GTL::node\_map<std::string> \mbox{\hyperlink{class_my_graph_a116ddb3b67fabaec45e1e77607001e6c}{node\_colour}};}
+\DoxyCodeLine{212     GTL::edge\_map<std::string> \mbox{\hyperlink{class_my_graph_a003377a70a9a5335c77b7431e243cd4d}{edge\_colour}};}
+\DoxyCodeLine{213 \};  }
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

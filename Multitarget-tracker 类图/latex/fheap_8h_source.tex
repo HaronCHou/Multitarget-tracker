@@ -1,0 +1,148 @@
+\hypertarget{fheap_8h_source}{}\doxysection{fheap.\+h}
+\label{fheap_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/fheap.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/fheap.h}}
+\mbox{\hyperlink{fheap_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// \$Id : \$}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#ifndef FHEAP\_H}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#define FHEAP\_H}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{comment}{// rdmp}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{15 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{comment}{/*}}
+\DoxyCodeLine{20 \textcolor{comment}{This code comes from <A HREF="{}http://www.cosc.canterbury.ac.nz/research/reports/HonsReps/1999/hons\_9907.pdf"{}>}}
+\DoxyCodeLine{21 \textcolor{comment}{A Comparison of Data Structures for Dijkstra's }}
+\DoxyCodeLine{22 \textcolor{comment}{Single Source Shortest Path Algorithm</A> by Shane Saunders (Department }}
+\DoxyCodeLine{23 \textcolor{comment}{of Computer Science, University of Canterbury, NZ).}}
+\DoxyCodeLine{24 \textcolor{comment}{The code itself is available from Tadao Takaoka's <A HREF="{}http://www.cosc.canterbury.ac.nz/\string~tad/alg/heaps/heaps.html"{}>}}
+\DoxyCodeLine{25 \textcolor{comment}{ Algorithm Repository Home Page</A>}}
+\DoxyCodeLine{26 \textcolor{comment}{*/}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{comment}{/*** Header File for the Fibonacci Heap Implementation ***/}}
+\DoxyCodeLine{29 \textcolor{comment}{/*}}
+\DoxyCodeLine{30 \textcolor{comment}{ *   Shane Saunders}}
+\DoxyCodeLine{31 \textcolor{comment}{ */}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{comment}{/* Option to allow printing of debugging information.  Use 1 for yes, or 0 for}}
+\DoxyCodeLine{36 \textcolor{comment}{ * no.}}
+\DoxyCodeLine{37 \textcolor{comment}{ */}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#define FHEAP\_DUMP 0}}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#if FHEAP\_DUMP}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{    \#include <stdio.h>}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#endif }}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{comment}{/*** Definitions of structure types. ***/}}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 \textcolor{comment}{/* The structure type for Fibonacci heap nodes.}}
+\DoxyCodeLine{49 \textcolor{comment}{ *}}
+\DoxyCodeLine{50 \textcolor{comment}{ * Nodes have the following pointers:}}
+\DoxyCodeLine{51 \textcolor{comment}{ * parent      -\/ a pointer to the nodes parent node (if any).}}
+\DoxyCodeLine{52 \textcolor{comment}{ * child       -\/ a pointer to a child node (typically the highest rank child).}}
+\DoxyCodeLine{53 \textcolor{comment}{ * left, right -\/ sibling pointers which provide a circular doubly linked list}}
+\DoxyCodeLine{54 \textcolor{comment}{ *               containing all the parents nodes children.}}
+\DoxyCodeLine{55 \textcolor{comment}{ *}}
+\DoxyCodeLine{56 \textcolor{comment}{ * The remaining structure fields are:}}
+\DoxyCodeLine{57 \textcolor{comment}{ * rank        -\/ the nodes rank, that is, the number of children it has.}}
+\DoxyCodeLine{58 \textcolor{comment}{ * `key'       -\/ the nodes key.}}
+\DoxyCodeLine{59 \textcolor{comment}{ * vertex\_no   -\/ the number of the graph vertex that the node corresponds to.}}
+\DoxyCodeLine{60 \textcolor{comment}{ *               Vertex numbering in the graph should be:}}
+\DoxyCodeLine{61 \textcolor{comment}{ *                    1, 2, 3, ... max\_vertex.}}
+\DoxyCodeLine{62 \textcolor{comment}{ */}}
+\DoxyCodeLine{63 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structfheap__node}{fheap\_node}} \{}
+\DoxyCodeLine{64     \textcolor{keyword}{struct }\mbox{\hyperlink{structfheap__node}{fheap\_node}} *\mbox{\hyperlink{structfheap__node_a3dc01ed7a15e3eeb6971acf9c1d63e2f}{parent}};}
+\DoxyCodeLine{65     \textcolor{keyword}{struct }\mbox{\hyperlink{structfheap__node}{fheap\_node}} *\mbox{\hyperlink{structfheap__node_a714c50b04c29981fa46b7c937b328708}{left}}, *\mbox{\hyperlink{structfheap__node_af83e42765eddab9c0288352be54fe907}{right}};}
+\DoxyCodeLine{66     \textcolor{keyword}{struct }\mbox{\hyperlink{structfheap__node}{fheap\_node}} *\mbox{\hyperlink{structfheap__node_a5c0411a8c1b8e4712852691605484f80}{child}};}
+\DoxyCodeLine{67     \textcolor{keywordtype}{int} \mbox{\hyperlink{structfheap__node_a6e8d65cbe58c9646f5bc2a308f147343}{rank}};}
+\DoxyCodeLine{68     \textcolor{keywordtype}{int} \mbox{\hyperlink{structfheap__node_a157ede2cfd1f97c4b71e6eaf91537b56}{marked}};}
+\DoxyCodeLine{69     \textcolor{keywordtype}{long} \mbox{\hyperlink{structfheap__node_ae5b8eaa56de8c3e43b958bcc9c46a8e3}{key}};}
+\DoxyCodeLine{70     \textcolor{keywordtype}{int} \mbox{\hyperlink{structfheap__node_a830c8feb141fe01db7e4cfab6396ae0d}{vertex\_no}};}
+\DoxyCodeLine{71 \} \mbox{\hyperlink{fheap_8h_a53fae6b2c22ff759dc01aa6cdb496d8d}{fheap\_node\_t}};}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \textcolor{comment}{/* The structure type for a Fibonacci heap.}}
+\DoxyCodeLine{74 \textcolor{comment}{ *}}
+\DoxyCodeLine{75 \textcolor{comment}{ * trees -\/ An array of pointers to trees at root level in the heap.  Entry i}}
+\DoxyCodeLine{76 \textcolor{comment}{ *         in the array points to the root node of a tree that has nodes of}}
+\DoxyCodeLine{77 \textcolor{comment}{ *         dimension i on the main trunk.}}
+\DoxyCodeLine{78 \textcolor{comment}{ * nodes -\/ An array of pointers to nodes in the heap.  Nodes are indexed}}
+\DoxyCodeLine{79 \textcolor{comment}{ *         according to their vertex number.  This array can then be used to}}
+\DoxyCodeLine{80 \textcolor{comment}{ *         look up the node for corresponding to a vertex number, and is}}
+\DoxyCodeLine{81 \textcolor{comment}{ *         useful when freeing space taken up by the heap.}}
+\DoxyCodeLine{82 \textcolor{comment}{ * max\_nodes -\/ The maximum number of nodes allowed in the heap.}}
+\DoxyCodeLine{83 \textcolor{comment}{ * max\_trees -\/ The maximum number of trees allowed in the heap (calculated from}}
+\DoxyCodeLine{84 \textcolor{comment}{ *             max\_nodes).}}
+\DoxyCodeLine{85 \textcolor{comment}{ * n     -\/ The current number of nodes in the heap.}}
+\DoxyCodeLine{86 \textcolor{comment}{ * value -\/ The binary value represented by trees in the heap.}}
+\DoxyCodeLine{87 \textcolor{comment}{ *         By maintaining this it is easy to keep track of the maximum rank}}
+\DoxyCodeLine{88 \textcolor{comment}{ *         tree in the heap.}}
+\DoxyCodeLine{89 \textcolor{comment}{ * key\_comps -\/ can be used for experimental purposes when counting the number}}
+\DoxyCodeLine{90 \textcolor{comment}{ *             of key comparisons.}}
+\DoxyCodeLine{91 \textcolor{comment}{ */}}
+\DoxyCodeLine{92 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structfheap}{fheap}} \{}
+\DoxyCodeLine{93     \mbox{\hyperlink{structfheap__node}{fheap\_node\_t}} **\mbox{\hyperlink{structfheap_afc06f9768708fb48c24e7a788c108fb7}{trees}};}
+\DoxyCodeLine{94     \mbox{\hyperlink{structfheap__node}{fheap\_node\_t}} **\mbox{\hyperlink{structfheap_ab78171d6b052efe35f0ff7f6d9fd8f99}{nodes}};}
+\DoxyCodeLine{95     \textcolor{keywordtype}{int} \mbox{\hyperlink{structfheap_a05a5bfb7e168b7aacb49e998a87f4d6f}{max\_nodes}}, \mbox{\hyperlink{structfheap_a496e0271cc82f25d8c53588b7982954b}{max\_trees}}, \mbox{\hyperlink{structfheap_af369ea8f1202800c582fe570803fea9f}{n}}, \mbox{\hyperlink{structfheap_a04d7238a058ccbd0beb8e807d212f348}{value}};}
+\DoxyCodeLine{96     \textcolor{keywordtype}{long} \mbox{\hyperlink{structfheap_ab593aa07617376fafd3d1c378d5d73d9}{key\_comps}};}
+\DoxyCodeLine{97 \} \mbox{\hyperlink{fheap_8h_a4d198db73a7aecf55d6d1f4600f88968}{fheap\_t}};}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101 \textcolor{comment}{/*** Function prototypes. ***/}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103 \textcolor{comment}{/* Fibonacci heap functions. */}}
+\DoxyCodeLine{104 \textcolor{comment}{/* Note that fheap\_t pointers are used so that function definitions are compatible}}
+\DoxyCodeLine{105 \textcolor{comment}{ * with those of other heaps.  This allows any type heap to be given as an}}
+\DoxyCodeLine{106 \textcolor{comment}{ * argument to a particular algorithm.  It is up to the user to ensure the}}
+\DoxyCodeLine{107 \textcolor{comment}{ * correct heap type is passed to the given functions.}}
+\DoxyCodeLine{108 \textcolor{comment}{ */}}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110 \textcolor{comment}{/* fh\_alloc() -\/ creates and and returns a pointer to a F-\/heap which can contain}}
+\DoxyCodeLine{111 \textcolor{comment}{ * up to max\_nodes nodes.}}
+\DoxyCodeLine{112 \textcolor{comment}{ */}}
+\DoxyCodeLine{113 \mbox{\hyperlink{structfheap}{fheap\_t}} *\mbox{\hyperlink{fheap_8h_aa176e72e45f9b3c08f9e27c5460a5559}{fh\_alloc}}(\textcolor{keywordtype}{int} max\_nodes);}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115 \textcolor{comment}{/* fh\_free() -\/ destroys the heap pointed to by h, freeing up any space that was}}
+\DoxyCodeLine{116 \textcolor{comment}{ * used by it.}}
+\DoxyCodeLine{117 \textcolor{comment}{ */}}
+\DoxyCodeLine{118 \textcolor{keywordtype}{void} \mbox{\hyperlink{fheap_8h_a11e6d24701acd9d4f1ffc8652dcfa340}{fh\_free}}(\mbox{\hyperlink{structfheap}{fheap\_t}} *h);}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120 \textcolor{comment}{/* fh\_insert() -\/ creates and inserts new a node representing vertex\_no with key}}
+\DoxyCodeLine{121 \textcolor{comment}{ * k into the heap h.}}
+\DoxyCodeLine{122 \textcolor{comment}{ */}}
+\DoxyCodeLine{123 \textcolor{keywordtype}{void} \mbox{\hyperlink{fheap_8h_a4489cad6a8830374aaa7db8705d222a1}{fh\_insert}}(\mbox{\hyperlink{structfheap}{fheap\_t}} *h, \textcolor{keywordtype}{int} vertex\_no, \textcolor{keywordtype}{long} k);}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125 \textcolor{comment}{/* fh\_delete\_min() -\/ deletes the minimum node from the heap pointed to by h and}}
+\DoxyCodeLine{126 \textcolor{comment}{ * returns its vertex number.}}
+\DoxyCodeLine{127 \textcolor{comment}{ */}}
+\DoxyCodeLine{128 \textcolor{keywordtype}{int} \mbox{\hyperlink{fheap_8h_a1103efc45c2f1814139914353e684f1a}{fh\_delete\_min}}(\mbox{\hyperlink{structfheap}{fheap\_t}} *h);}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130 \textcolor{comment}{/* fh\_decrease\_key() -\/ decreases the key used for vertex, vertex\_no, to}}
+\DoxyCodeLine{131 \textcolor{comment}{ * new\_value.  No check is made to ensure that new\_value is in-\/fact less than}}
+\DoxyCodeLine{132 \textcolor{comment}{ * the current value so it is up to the user of this function to ensure that}}
+\DoxyCodeLine{133 \textcolor{comment}{ * it is.}}
+\DoxyCodeLine{134 \textcolor{comment}{ */}}
+\DoxyCodeLine{135 \textcolor{keywordtype}{void} \mbox{\hyperlink{fheap_8h_aae5cdb4b5c64bb4597d36eb36d3d2c4b}{fh\_decrease\_key}}(\mbox{\hyperlink{structfheap}{fheap\_t}} *h, \textcolor{keywordtype}{int} vertex\_no, \textcolor{keywordtype}{long} new\_value);}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137 \textcolor{comment}{/* Debugging functions. */}}
+\DoxyCodeLine{138 \textcolor{preprocessor}{\#if FHEAP\_DUMP}}
+\DoxyCodeLine{139 \textcolor{keywordtype}{void} fh\_dump(\mbox{\hyperlink{structfheap}{fheap\_t}} *h);}
+\DoxyCodeLine{140 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143 \textcolor{comment}{// rdmp}}
+\DoxyCodeLine{144 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{145 \}}
+\DoxyCodeLine{146 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

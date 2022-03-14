@@ -1,0 +1,25 @@
+\hypertarget{structcall__guard}{}\doxysection{call\+\_\+guard\texorpdfstring{$<$}{<} Ts \texorpdfstring{$>$}{>} 模板结构体 参考}
+\label{structcall__guard}\index{call\_guard$<$ Ts $>$@{call\_guard$<$ Ts $>$}}
+
+
+\doxysubsection{详细描述}
+\subsubsection*{template$<$typename... Ts$>$\newline
+struct call\+\_\+guard$<$ Ts $>$}
+\textbackslash{}rst A call policy which places one or more guard variables ({\ttfamily Ts...}) around the function call.
+
+For example, this definition\+:
+
+.. code-\/block\+:: cpp \begin{DoxyVerb}m.def("foo", foo, py::call_guard<T>());
+\end{DoxyVerb}
+ is equivalent to the following pseudocode\+:
+
+.. code-\/block\+:: cpp \begin{DoxyVerb}m.def("foo", [](args...) {
+    T scope_guard;
+    return foo(args...); // forwarded arguments
+});
+\end{DoxyVerb}
+ \textbackslash{}endrst 
+
+该结构体的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/\mbox{\hyperlink{attr_8h}{attr.\+h}}\end{DoxyCompactItemize}

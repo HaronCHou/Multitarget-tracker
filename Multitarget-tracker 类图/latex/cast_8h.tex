@@ -1,0 +1,819 @@
+\hypertarget{cast_8h}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/cast.h 文件参考}
+\label{cast_8h}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/cast.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/cast.h}}
+{\ttfamily \#include \char`\"{}pytypes.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}detail/typeid.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}detail/descr.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}detail/internals.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$array$>$}\newline
+{\ttfamily \#include $<$limits$>$}\newline
+{\ttfamily \#include $<$tuple$>$}\newline
+{\ttfamily \#include $<$type\+\_\+traits$>$}\newline
+cast.\+h 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cast_8h__incl}
+\end{center}
+\end{figure}
+此图展示该文件直接或间接的被哪些文件引用了\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cast_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classloader__life__support}{loader\+\_\+life\+\_\+support}}
+\item 
+struct \mbox{\hyperlink{structvalue__and__holder}{value\+\_\+and\+\_\+holder}}
+\item 
+struct \mbox{\hyperlink{structvalues__and__holders}{values\+\_\+and\+\_\+holders}}
+\item 
+struct \mbox{\hyperlink{structvalues__and__holders_1_1iterator}{values\+\_\+and\+\_\+holders\+::iterator}}
+\item 
+class \mbox{\hyperlink{classtype__caster__generic}{type\+\_\+caster\+\_\+generic}}
+\item 
+struct \mbox{\hyperlink{structis__copy__constructible}{is\+\_\+copy\+\_\+constructible$<$ T, SFINAE $>$}}
+\item 
+struct \mbox{\hyperlink{structis__copy__constructible_3_01_container_00_01enable__if__t_3_01all__of_3_01std_1_1is__copy_71035f87d87bde541f2f835e06fd54cb}{is\+\_\+copy\+\_\+constructible$<$ Container, enable\+\_\+if\+\_\+t$<$ all\+\_\+of$<$ std\+::is\+\_\+copy\+\_\+constructible$<$ Container $>$, std\+::is\+\_\+same$<$ typename Container\+::value\+\_\+type \&, typename Container\+::reference $>$, negation$<$ std\+::is\+\_\+same$<$ Container, typename Container\+::value\+\_\+type $>$ $>$ $>$\+::value $>$ $>$}}
+\item 
+struct \mbox{\hyperlink{structis__copy__constructible_3_01std_1_1pair_3_01_t1_00_01_t2_01_4_01_4}{is\+\_\+copy\+\_\+constructible$<$ std\+::pair$<$ T1, T2 $>$ $>$}}
+\item 
+struct \mbox{\hyperlink{structis__copy__assignable}{is\+\_\+copy\+\_\+assignable$<$ T, SFINAE $>$}}
+\item 
+struct \mbox{\hyperlink{structis__copy__assignable_3_01_container_00_01enable__if__t_3_01all__of_3_01std_1_1is__copy__as20354ef08d46a22473be8f5a1c6ade9a}{is\+\_\+copy\+\_\+assignable$<$ Container, enable\+\_\+if\+\_\+t$<$ all\+\_\+of$<$ std\+::is\+\_\+copy\+\_\+assignable$<$ Container $>$, std\+::is\+\_\+same$<$ typename Container\+::value\+\_\+type \&, typename Container\+::reference $>$ $>$\+::value $>$ $>$}}
+\item 
+struct \mbox{\hyperlink{structis__copy__assignable_3_01std_1_1pair_3_01_t1_00_01_t2_01_4_01_4}{is\+\_\+copy\+\_\+assignable$<$ std\+::pair$<$ T1, T2 $>$ $>$}}
+\item 
+struct \mbox{\hyperlink{structpolymorphic__type__hook}{polymorphic\+\_\+type\+\_\+hook$<$ itype, SFINAE $>$}}
+\item 
+struct \mbox{\hyperlink{structpolymorphic__type__hook_3_01itype_00_01detail_1_1enable__if__t_3_01std_1_1is__polymorphic_0beb76cac8a80692d7d7a957f3b6ad63}{polymorphic\+\_\+type\+\_\+hook$<$ itype, detail\+::enable\+\_\+if\+\_\+t$<$ std\+::is\+\_\+polymorphic$<$ itype $>$\+::value $>$ $>$}}
+\item 
+class \mbox{\hyperlink{classtype__caster__base}{type\+\_\+caster\+\_\+base$<$ type $>$}}
+\begin{DoxyCompactList}\small\item\em Generic type caster for objects stored on the heap \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classtype__caster}{type\+\_\+caster$<$ type, SFINAE $>$}}
+\item 
+class \mbox{\hyperlink{classtype__caster_3_01std_1_1reference__wrapper_3_01type_01_4_01_4}{type\+\_\+caster$<$ std\+::reference\+\_\+wrapper$<$ type $>$ $>$}}
+\item 
+struct \mbox{\hyperlink{structtype__caster_3_01_t_00_01enable__if__t_3_01std_1_1is__arithmetic_3_01_t_01_4_1_1value_01_624f9972c532456d927e4470192416960}{type\+\_\+caster$<$ T, enable\+\_\+if\+\_\+t$<$ std\+::is\+\_\+arithmetic$<$ T $>$\+::value \&\&!is\+\_\+std\+\_\+char\+\_\+type$<$ T $>$\+::value $>$ $>$}}
+\item 
+struct \mbox{\hyperlink{structvoid__caster}{void\+\_\+caster$<$ T $>$}}
+\item 
+class \mbox{\hyperlink{classtype__caster_3_01void__type_01_4}{type\+\_\+caster$<$ void\+\_\+type $>$}}
+\item 
+class \mbox{\hyperlink{classtype__caster_3_01void_01_4}{type\+\_\+caster$<$ void $>$}}
+\item 
+class \mbox{\hyperlink{classtype__caster_3_01std_1_1nullptr__t_01_4}{type\+\_\+caster$<$ std\+::nullptr\+\_\+t $>$}}
+\item 
+class \mbox{\hyperlink{classtype__caster_3_01bool_01_4}{type\+\_\+caster$<$ bool $>$}}
+\item 
+struct \mbox{\hyperlink{structstring__caster}{string\+\_\+caster$<$ String\+Type, Is\+View $>$}}
+\item 
+struct \mbox{\hyperlink{structtype__caster_3_01std_1_1basic__string_3_01_char_t_00_01_traits_00_01_allocator_01_4_00_01ece498b5200b790571970efc6b6c56da1}{type\+\_\+caster$<$ std\+::basic\+\_\+string$<$ Char\+T, Traits, Allocator $>$, enable\+\_\+if\+\_\+t$<$ is\+\_\+std\+\_\+char\+\_\+type$<$ Char\+T $>$\+::value $>$ $>$}}
+\item 
+struct \mbox{\hyperlink{structtype__caster_3_01_char_t_00_01enable__if__t_3_01is__std__char__type_3_01_char_t_01_4_1_1value_01_4_01_4}{type\+\_\+caster$<$ Char\+T, enable\+\_\+if\+\_\+t$<$ is\+\_\+std\+\_\+char\+\_\+type$<$ Char\+T $>$\+::value $>$ $>$}}
+\item 
+class \mbox{\hyperlink{classtuple__caster}{tuple\+\_\+caster$<$ Tuple, Ts $>$}}
+\item 
+class \mbox{\hyperlink{classtype__caster_3_01std_1_1pair_3_01_t1_00_01_t2_01_4_01_4}{type\+\_\+caster$<$ std\+::pair$<$ T1, T2 $>$ $>$}}
+\item 
+class \mbox{\hyperlink{classtype__caster_3_01std_1_1tuple_3_01_ts_8_8_8_01_4_01_4}{type\+\_\+caster$<$ std\+::tuple$<$ Ts... $>$ $>$}}
+\item 
+struct \mbox{\hyperlink{structholder__helper}{holder\+\_\+helper$<$ T $>$}}
+\item 
+struct \mbox{\hyperlink{structcopyable__holder__caster}{copyable\+\_\+holder\+\_\+caster$<$ type, holder\+\_\+type $>$}}
+\begin{DoxyCompactList}\small\item\em Type caster for holder types like std\+::shared\+\_\+ptr, etc. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classtype__caster_3_01std_1_1shared__ptr_3_01_t_01_4_01_4}{type\+\_\+caster$<$ std\+::shared\+\_\+ptr$<$ T $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em Specialize for the common std\+::shared\+\_\+ptr, so users don\textquotesingle{}t need to \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmove__only__holder__caster}{move\+\_\+only\+\_\+holder\+\_\+caster$<$ type, holder\+\_\+type $>$}}
+\item 
+class \mbox{\hyperlink{classtype__caster_3_01std_1_1unique__ptr_3_01type_00_01deleter_01_4_01_4}{type\+\_\+caster$<$ std\+::unique\+\_\+ptr$<$ type, deleter $>$ $>$}}
+\item 
+struct \mbox{\hyperlink{structalways__construct__holder}{always\+\_\+construct\+\_\+holder$<$ T, Value $>$}}
+\item 
+struct \mbox{\hyperlink{structis__holder__type}{is\+\_\+holder\+\_\+type$<$ base, holder $>$}}
+\item 
+struct \mbox{\hyperlink{structis__holder__type_3_01base_00_01std_1_1unique__ptr_3_01base_00_01deleter_01_4_01_4}{is\+\_\+holder\+\_\+type$<$ base, std\+::unique\+\_\+ptr$<$ base, deleter $>$ $>$}}
+\item 
+struct \mbox{\hyperlink{structhandle__type__name}{handle\+\_\+type\+\_\+name$<$ T $>$}}
+\item 
+struct \mbox{\hyperlink{structhandle__type__name_3_01bytes_01_4}{handle\+\_\+type\+\_\+name$<$ bytes $>$}}
+\item 
+struct \mbox{\hyperlink{structhandle__type__name_3_01args_01_4}{handle\+\_\+type\+\_\+name$<$ args $>$}}
+\item 
+struct \mbox{\hyperlink{structhandle__type__name_3_01kwargs_01_4}{handle\+\_\+type\+\_\+name$<$ kwargs $>$}}
+\item 
+struct \mbox{\hyperlink{structpyobject__caster}{pyobject\+\_\+caster$<$ type $>$}}
+\item 
+class \mbox{\hyperlink{classtype__caster_3_01_t_00_01enable__if__t_3_01is__pyobject_3_01_t_01_4_1_1value_01_4_01_4}{type\+\_\+caster$<$ T, enable\+\_\+if\+\_\+t$<$ is\+\_\+pyobject$<$ T $>$\+::value $>$ $>$}}
+\item 
+struct \mbox{\hyperlink{structmove__always}{move\+\_\+always$<$ T, SFINAE $>$}}
+\item 
+struct \mbox{\hyperlink{structmove__always_3_01_t_00_01enable__if__t_3_01all__of_3_01move__is__plain__type_3_01_t_01_4_0e50de7266671f846c74349820989631d}{move\+\_\+always$<$ T, enable\+\_\+if\+\_\+t$<$ all\+\_\+of$<$ move\+\_\+is\+\_\+plain\+\_\+type$<$ T $>$, negation$<$ is\+\_\+copy\+\_\+constructible$<$ T $>$ $>$, std\+::is\+\_\+move\+\_\+constructible$<$ T $>$, std\+::is\+\_\+same$<$ decltype(std\+::declval$<$ make\+\_\+caster$<$ T $>$ $>$().\+operator T\&()), T \& $>$ $>$\+::value $>$ $>$}}
+\item 
+struct \mbox{\hyperlink{structmove__if__unreferenced}{move\+\_\+if\+\_\+unreferenced$<$ T, SFINAE $>$}}
+\item 
+struct \mbox{\hyperlink{structmove__if__unreferenced_3_01_t_00_01enable__if__t_3_01all__of_3_01move__is__plain__type_3_07c25d7eec5482f057834f0ec805da40d}{move\+\_\+if\+\_\+unreferenced$<$ T, enable\+\_\+if\+\_\+t$<$ all\+\_\+of$<$ move\+\_\+is\+\_\+plain\+\_\+type$<$ T $>$, negation$<$ move\+\_\+always$<$ T $>$ $>$, std\+::is\+\_\+move\+\_\+constructible$<$ T $>$, std\+::is\+\_\+same$<$ decltype(std\+::declval$<$ make\+\_\+caster$<$ T $>$ $>$().\+operator T\&()), T \& $>$ $>$\+::value $>$ $>$}}
+\item 
+struct \mbox{\hyperlink{structreturn__value__policy__override}{return\+\_\+value\+\_\+policy\+\_\+override$<$ Return, SFINAE $>$}}
+\item 
+struct \mbox{\hyperlink{structreturn__value__policy__override_3_01_return_00_01detail_1_1enable__if__t_3_01std_1_1is__badbc5555ea30d1cff9fa4aef329884809}{return\+\_\+value\+\_\+policy\+\_\+override$<$ Return, detail\+::enable\+\_\+if\+\_\+t$<$ std\+::is\+\_\+base\+\_\+of$<$ type\+\_\+caster\+\_\+generic, make\+\_\+caster$<$ Return $>$ $>$\+::value, void $>$ $>$}}
+\item 
+struct \mbox{\hyperlink{structoverload__unused}{overload\+\_\+unused}}
+\item 
+struct \mbox{\hyperlink{structarg}{arg}}
+\item 
+struct \mbox{\hyperlink{structarg__v}{arg\+\_\+v}}
+\item 
+struct \mbox{\hyperlink{structfunction__call}{function\+\_\+call}}
+\begin{DoxyCompactList}\small\item\em Internal data associated with a single function call \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classargument__loader}{argument\+\_\+loader$<$ Args $>$}}
+\begin{DoxyCompactList}\small\item\em Helper class which loads arguments for C++ functions called from Python \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classsimple__collector}{simple\+\_\+collector$<$ policy $>$}}
+\item 
+class \mbox{\hyperlink{classunpacking__collector}{unpacking\+\_\+collector$<$ policy $>$}}
+\begin{DoxyCompactList}\small\item\em Helper class which collects positional, keyword, $\ast$ and $\ast$$\ast$ arguments for a Python function call \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{命名空间}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceliterals}{literals}}
+\end{DoxyCompactItemize}
+\doxysubsection*{宏定义}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{cast_8h_a026b55873d04f38f5ae026c900d16160}{PYBIND11\+\_\+\+TYPE\+\_\+\+CASTER}}(type,  py\+\_\+name)
+\item 
+\#define \mbox{\hyperlink{cast_8h_a5711cbddf22538bf081fba49042adea9}{PYBIND11\+\_\+\+DECLARE\+\_\+\+HOLDER\+\_\+\+TYPE}}(type,  holder\+\_\+type, ...)
+\begin{DoxyCompactList}\small\item\em Create a specialization for custom holder types (silently ignores std\+::shared\+\_\+ptr) \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{cast_8h_aeab3bc743bfe35b65ff81a79fc513402}{PYBIND11\+\_\+\+MAKE\+\_\+\+OPAQUE}}(...)
+\item 
+\#define \mbox{\hyperlink{cast_8h_abf638a034b5ed51437f70d736e85c0a6}{PYBIND11\+\_\+\+TYPE}}(...)~\+\_\+\+\_\+\+VA\+\_\+\+ARGS\+\_\+\+\_\+
+\end{DoxyCompactItemize}
+\doxysubsection*{类型定义}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\using \mbox{\hyperlink{cast_8h_a7acf8746a40fe31848a79ed85ec72701}{cast\+\_\+op\+\_\+type}} = \mbox{\hyperlink{detail_2common_8h_acdb0eff728aec08ed6fff07d2885ea9d}{conditional\+\_\+t}}$<$ std\+::is\+\_\+pointer$<$ \mbox{\hyperlink{detail_2common_8h_a3a08cea569e6926ac8d7d74dd7178b5f}{remove\+\_\+reference\+\_\+t}}$<$ T $>$ $>$\+::value, typename std\+::add\+\_\+pointer$<$ \mbox{\hyperlink{detail_2common_8h_a3e4beb3f4b7338384c98d70aa1ee9780}{intrinsic\+\_\+t}}$<$ T $>$ $>$\+::type, typename std\+::add\+\_\+lvalue\+\_\+reference$<$ \mbox{\hyperlink{detail_2common_8h_a3e4beb3f4b7338384c98d70aa1ee9780}{intrinsic\+\_\+t}}$<$ T $>$ $>$\+::type $>$
+\item 
+{\footnotesize template$<$typename T $>$ }\\using \mbox{\hyperlink{cast_8h_a32fe7f4c6e2ae670844b4f3ab92ba3b8}{movable\+\_\+cast\+\_\+op\+\_\+type}} = \mbox{\hyperlink{detail_2common_8h_acdb0eff728aec08ed6fff07d2885ea9d}{conditional\+\_\+t}}$<$ std\+::is\+\_\+pointer$<$ typename std\+::remove\+\_\+reference$<$ T $>$\+::type $>$\+::value, typename std\+::add\+\_\+pointer$<$ \mbox{\hyperlink{detail_2common_8h_a3e4beb3f4b7338384c98d70aa1ee9780}{intrinsic\+\_\+t}}$<$ T $>$ $>$\+::type, \mbox{\hyperlink{detail_2common_8h_acdb0eff728aec08ed6fff07d2885ea9d}{conditional\+\_\+t}}$<$ std\+::is\+\_\+rvalue\+\_\+reference$<$ T $>$\+::value, typename std\+::add\+\_\+rvalue\+\_\+reference$<$ \mbox{\hyperlink{detail_2common_8h_a3e4beb3f4b7338384c98d70aa1ee9780}{intrinsic\+\_\+t}}$<$ T $>$ $>$\+::type, typename std\+::add\+\_\+lvalue\+\_\+reference$<$ \mbox{\hyperlink{detail_2common_8h_a3e4beb3f4b7338384c98d70aa1ee9780}{intrinsic\+\_\+t}}$<$ T $>$ $>$\+::type $>$ $>$
+\item 
+{\footnotesize template$<$typename type $>$ }\\using \mbox{\hyperlink{cast_8h_ab32b52411a6b07420516d79074815713}{make\+\_\+caster}} = \mbox{\hyperlink{classtype__caster}{type\+\_\+caster}}$<$ \mbox{\hyperlink{detail_2common_8h_a3e4beb3f4b7338384c98d70aa1ee9780}{intrinsic\+\_\+t}}$<$ type $>$ $>$
+\item 
+{\footnotesize template$<$typename CharT $>$ }\\using \mbox{\hyperlink{cast_8h_a0ee0eaf3d12f9b0e472ed620777ba3c3}{is\+\_\+std\+\_\+char\+\_\+type}} = \mbox{\hyperlink{detail_2common_8h_a9fc2947c6f247b5bf1696117d6a46f5c}{any\+\_\+of}}$<$ std\+::is\+\_\+same$<$ CharT, char $>$, std\+::is\+\_\+same$<$ CharT, char16\+\_\+t $>$, std\+::is\+\_\+same$<$ CharT, char32\+\_\+t $>$, std\+::is\+\_\+same$<$ CharT, wchar\+\_\+t $>$ $>$
+\item 
+{\footnotesize template$<$typename type , typename holder\+\_\+type $>$ }\\using \mbox{\hyperlink{cast_8h_a024e48f7c159500a358e9228db141523}{type\+\_\+caster\+\_\+holder}} = \mbox{\hyperlink{detail_2common_8h_acdb0eff728aec08ed6fff07d2885ea9d}{conditional\+\_\+t}}$<$ \mbox{\hyperlink{structis__copy__constructible}{is\+\_\+copy\+\_\+constructible}}$<$ holder\+\_\+type $>$\+::value, \mbox{\hyperlink{structcopyable__holder__caster}{copyable\+\_\+holder\+\_\+caster}}$<$ type, holder\+\_\+type $>$, \mbox{\hyperlink{structmove__only__holder__caster}{move\+\_\+only\+\_\+holder\+\_\+caster}}$<$ type, holder\+\_\+type $>$ $>$
+\item 
+{\footnotesize template$<$typename T $>$ }\\using \mbox{\hyperlink{cast_8h_a6c297f0980e4a0227f88ce4278e0a026}{move\+\_\+is\+\_\+plain\+\_\+type}} = \mbox{\hyperlink{detail_2common_8h_ae5182888ef70c948e9b57c554e8fee7f}{satisfies\+\_\+none\+\_\+of}}$<$ T, std\+::is\+\_\+void, std\+::is\+\_\+pointer, std\+::is\+\_\+reference, std\+::is\+\_\+const $>$
+\item 
+{\footnotesize template$<$typename T $>$ }\\using \mbox{\hyperlink{cast_8h_a560bae0bccb1024585109570d155af15}{move\+\_\+never}} = \mbox{\hyperlink{detail_2common_8h_a4e24fdf4bff3a0fbd0b1b4f259048f9b}{none\+\_\+of}}$<$ \mbox{\hyperlink{structmove__always}{move\+\_\+always}}$<$ T $>$, \mbox{\hyperlink{structmove__if__unreferenced}{move\+\_\+if\+\_\+unreferenced}}$<$ T $>$ $>$
+\item 
+{\footnotesize template$<$typename type $>$ }\\using \mbox{\hyperlink{cast_8h_a77d407dcec34f53ede0bdd2a4cd492cd}{cast\+\_\+is\+\_\+temporary\+\_\+value\+\_\+reference}} = \mbox{\hyperlink{detail_2common_8h_a0d337b508cc2fb5a92d8e72db201e53b}{bool\+\_\+constant}}$<$(std\+::is\+\_\+reference$<$ type $>$\+::value$\vert$$\vert$std\+::is\+\_\+pointer$<$ type $>$\+::value) \&\&!std\+::is\+\_\+base\+\_\+of$<$ \mbox{\hyperlink{classtype__caster__generic}{type\+\_\+caster\+\_\+generic}}, \mbox{\hyperlink{cast_8h_ab32b52411a6b07420516d79074815713}{make\+\_\+caster}}$<$ type $>$ $>$\+::value \&\&!std\+::is\+\_\+same$<$ \mbox{\hyperlink{detail_2common_8h_a3e4beb3f4b7338384c98d70aa1ee9780}{intrinsic\+\_\+t}}$<$ type $>$, void $>$\+::value $>$
+\item 
+{\footnotesize template$<$typename ret\+\_\+type $>$ }\\using \mbox{\hyperlink{cast_8h_a39bb5276d16350fdf66149ba4f66e7ab}{overload\+\_\+caster\+\_\+t}} = \mbox{\hyperlink{detail_2common_8h_acdb0eff728aec08ed6fff07d2885ea9d}{conditional\+\_\+t}}$<$ \mbox{\hyperlink{cast_8h_a77d407dcec34f53ede0bdd2a4cd492cd}{cast\+\_\+is\+\_\+temporary\+\_\+value\+\_\+reference}}$<$ ret\+\_\+type $>$\+::value, \mbox{\hyperlink{cast_8h_ab32b52411a6b07420516d79074815713}{make\+\_\+caster}}$<$ ret\+\_\+type $>$, \mbox{\hyperlink{structoverload__unused}{overload\+\_\+unused}} $>$
+\item 
+{\footnotesize template$<$typename $>$ }\\using \mbox{\hyperlink{cast_8h_a2d46db7b438479cb66757c5d6dac98db}{arg\+\_\+t}} = \mbox{\hyperlink{structarg__v}{arg\+\_\+v}}
+\begin{DoxyCompactList}\small\item\em Alias for backward compatibility -- to be removed in version 2.\+0 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+std\+::pair$<$ decltype(\mbox{\hyperlink{structinternals_a6148bb4956e17d8a61f410cac7227d04}{internals\+::registered\+\_\+types\+\_\+py}})\mbox{\hyperlink{classiterator}{\+::iterator}}, bool $>$ \mbox{\hyperlink{cast_8h_aef025a4af8a46127594ecb41de1094e4}{all\+\_\+type\+\_\+info\+\_\+get\+\_\+cache}} (Py\+Type\+Object $\ast$type)
+\item 
+\mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\+\_\+\+NOINLINE}} void \mbox{\hyperlink{cast_8h_ac653a09ddb39e162a6592a3347d293f5}{all\+\_\+type\+\_\+info\+\_\+populate}} (Py\+Type\+Object $\ast$t, std\+::vector$<$ \mbox{\hyperlink{structtype__info}{type\+\_\+info}} $\ast$ $>$ \&bases)
+\item 
+const std\+::vector$<$ detail\+::type\+\_\+info $\ast$ $>$ \& \mbox{\hyperlink{cast_8h_a9e6ac7e7af67150d979668c1451ae2bf}{all\+\_\+type\+\_\+info}} (Py\+Type\+Object $\ast$type)
+\item 
+\mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\+\_\+\+NOINLINE}} detail\+::type\+\_\+info $\ast$ \mbox{\hyperlink{cast_8h_a7cfdf88b5c39ce38304d9237a2006ecc}{get\+\_\+type\+\_\+info}} (Py\+Type\+Object $\ast$type)
+\item 
+detail\+::type\+\_\+info $\ast$ \mbox{\hyperlink{cast_8h_afde5400b79034f8a3f234a8c69f408d4}{get\+\_\+local\+\_\+type\+\_\+info}} (const std\+::type\+\_\+index \&tp)
+\item 
+detail\+::type\+\_\+info $\ast$ \mbox{\hyperlink{cast_8h_ac4200faa8f80249732d6ffaf0f610855}{get\+\_\+global\+\_\+type\+\_\+info}} (const std\+::type\+\_\+index \&tp)
+\item 
+\mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\+\_\+\+NOINLINE}} detail\+::type\+\_\+info $\ast$ \mbox{\hyperlink{cast_8h_a34665265e8f179438a05a592bb6916e2}{get\+\_\+type\+\_\+info}} (const std\+::type\+\_\+index \&tp, bool throw\+\_\+if\+\_\+missing=false)
+\begin{DoxyCompactList}\small\item\em Return the type info for a given C++ type; on lookup failure can either throw or return nullptr. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\+\_\+\+NOINLINE}} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{cast_8h_a0d66e15ebc57c86a64dfc44a70dfc33b}{get\+\_\+type\+\_\+handle}} (const std\+::type\+\_\+info \&tp, bool throw\+\_\+if\+\_\+missing)
+\item 
+\mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\+\_\+\+NOINLINE}} bool \mbox{\hyperlink{cast_8h_a2245145263bfc05e6f2ce8cbc87fa856}{isinstance\+\_\+generic}} (\mbox{\hyperlink{classhandle}{handle}} obj, const std\+::type\+\_\+info \&tp)
+\item 
+\mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\+\_\+\+NOINLINE}} std\+::string \mbox{\hyperlink{cast_8h_af50c237c1ebe85cf7e290a97197dd2c1}{error\+\_\+string}} ()
+\item 
+\mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\+\_\+\+NOINLINE}} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{cast_8h_add2d0d8e20d5b3730349455b9628e2f4}{get\+\_\+object\+\_\+handle}} (const void $\ast$ptr, const detail\+::type\+\_\+info $\ast$type)
+\item 
+Py\+Thread\+State $\ast$ \mbox{\hyperlink{cast_8h_a4e6f67dd9fc6d87d585af6093e524ccf}{get\+\_\+thread\+\_\+state\+\_\+unchecked}} ()
+\item 
+void \mbox{\hyperlink{cast_8h_a8930f52c7348c6cf3c2c9195abbb3964}{keep\+\_\+alive\+\_\+impl}} (\mbox{\hyperlink{classhandle}{handle}} nurse, \mbox{\hyperlink{classhandle}{handle}} patient)
+\item 
+Py\+Object $\ast$ \mbox{\hyperlink{cast_8h_abb2fe0279a14711984bde348fa88afba}{make\+\_\+new\+\_\+instance}} (Py\+Type\+Object $\ast$type)
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{cast_8h_ab32b52411a6b07420516d79074815713}{make\+\_\+caster}}$<$ T $>$\+::template \mbox{\hyperlink{cast_8h_a7acf8746a40fe31848a79ed85ec72701}{cast\+\_\+op\+\_\+type}}$<$ T $>$ \mbox{\hyperlink{cast_8h_ae7181c07fe0dc18aff8b77218baa4636}{cast\+\_\+op}} (\mbox{\hyperlink{cast_8h_ab32b52411a6b07420516d79074815713}{make\+\_\+caster}}$<$ T $>$ \&caster)
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{cast_8h_ab32b52411a6b07420516d79074815713}{make\+\_\+caster}}$<$ T $>$\+::template \mbox{\hyperlink{cast_8h_a7acf8746a40fe31848a79ed85ec72701}{cast\+\_\+op\+\_\+type}}$<$ typename std\+::add\+\_\+rvalue\+\_\+reference$<$ T $>$\+::type $>$ \mbox{\hyperlink{cast_8h_a8512d015adb09d984bce57bd0c6cae4c}{cast\+\_\+op}} (\mbox{\hyperlink{cast_8h_ab32b52411a6b07420516d79074815713}{make\+\_\+caster}}$<$ T $>$ \&\&caster)
+\item 
+{\footnotesize template$<$typename T , typename SFINAE $>$ }\\\mbox{\hyperlink{classtype__caster}{type\+\_\+caster}}$<$ T, SFINAE $>$ \& \mbox{\hyperlink{cast_8h_afc2142f63ce5c52090a3b5f33b20a31e}{load\+\_\+type}} (\mbox{\hyperlink{classtype__caster}{type\+\_\+caster}}$<$ T, SFINAE $>$ \&conv, const \mbox{\hyperlink{classhandle}{handle}} \&\mbox{\hyperlink{classhandle}{handle}})
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{cast_8h_ab32b52411a6b07420516d79074815713}{make\+\_\+caster}}$<$ T $>$ \mbox{\hyperlink{cast_8h_af18d953a68cf37c12852832920aff448}{load\+\_\+type}} (const \mbox{\hyperlink{classhandle}{handle}} \&\mbox{\hyperlink{classhandle}{handle}})
+\item 
+{\footnotesize template$<$typename T , \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{detail\+::enable\+\_\+if\+\_\+t}}$<$!\mbox{\hyperlink{pytypes_8h_a41ef7089a656c80c4319844f62409f7d}{detail\+::is\+\_\+pyobject}}$<$ T $>$\+::value, int $>$  = 0$>$ }\\T \mbox{\hyperlink{cast_8h_a42ebc557ef15690c3171a99f46d59aab}{cast}} (const \mbox{\hyperlink{classhandle}{handle}} \&\mbox{\hyperlink{classhandle}{handle}})
+\item 
+{\footnotesize template$<$typename T , \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{detail\+::enable\+\_\+if\+\_\+t}}$<$!\mbox{\hyperlink{pytypes_8h_a41ef7089a656c80c4319844f62409f7d}{detail\+::is\+\_\+pyobject}}$<$ T $>$\+::value, int $>$  = 0$>$ }\\\mbox{\hyperlink{classobject}{object}} \mbox{\hyperlink{cast_8h_a7668fae50cf2343802f4a360a5d62094}{cast}} (const T \&value, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\+\_\+value\+\_\+policy}} policy=\mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a1c1628c22d69b3b9bac4b5c3674852e3}{return\+\_\+value\+\_\+policy\+::automatic\+\_\+reference}}, \mbox{\hyperlink{classhandle}{handle}} parent=\mbox{\hyperlink{classhandle}{handle}}())
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{detail\+::enable\+\_\+if\+\_\+t}}$<$!\mbox{\hyperlink{cast_8h_a560bae0bccb1024585109570d155af15}{detail\+::move\+\_\+never}}$<$ T $>$\+::value, T $>$ \mbox{\hyperlink{cast_8h_aa26cb17b5f2f55f99e792e7f6339f12e}{move}} (\mbox{\hyperlink{classobject}{object}} \&\&obj)
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{detail\+::enable\+\_\+if\+\_\+t}}$<$ detail\+::move\+\_\+always$<$ T $>$\+::value, T $>$ \mbox{\hyperlink{cast_8h_a8a84d1d34aeced1d866245ce1dc339f0}{cast}} (\mbox{\hyperlink{classobject}{object}} \&\&\mbox{\hyperlink{classobject}{object}})
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{detail\+::enable\+\_\+if\+\_\+t}}$<$ detail\+::move\+\_\+if\+\_\+unreferenced$<$ T $>$\+::value, T $>$ \mbox{\hyperlink{cast_8h_a40b8d78da3c0a9665673857b4e54fdd4}{cast}} (\mbox{\hyperlink{classobject}{object}} \&\&\mbox{\hyperlink{classobject}{object}})
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{detail\+::enable\+\_\+if\+\_\+t}}$<$ \mbox{\hyperlink{cast_8h_a560bae0bccb1024585109570d155af15}{detail\+::move\+\_\+never}}$<$ T $>$\+::value, T $>$ \mbox{\hyperlink{cast_8h_a559e4de78b412f42b7fbf441f8bcb08e}{cast}} (\mbox{\hyperlink{classobject}{object}} \&\&\mbox{\hyperlink{classobject}{object}})
+\item 
+{\footnotesize template$<$typename T , \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$!\mbox{\hyperlink{pytypes_8h_a41ef7089a656c80c4319844f62409f7d}{is\+\_\+pyobject}}$<$ T $>$\+::value, int $>$ $>$ }\\\mbox{\hyperlink{classobject}{object}} \mbox{\hyperlink{cast_8h_a68e7164670f08e7caeec688865dbe0e0}{object\+\_\+or\+\_\+cast}} (T \&\&o)
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$ \mbox{\hyperlink{cast_8h_a77d407dcec34f53ede0bdd2a4cd492cd}{cast\+\_\+is\+\_\+temporary\+\_\+value\+\_\+reference}}$<$ T $>$\+::value, T $>$ \mbox{\hyperlink{cast_8h_a88b3cf647b1bce0d7cc4cf474366fba2}{cast\+\_\+ref}} (\mbox{\hyperlink{classobject}{object}} \&\&o, \mbox{\hyperlink{cast_8h_ab32b52411a6b07420516d79074815713}{make\+\_\+caster}}$<$ T $>$ \&caster)
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$!\mbox{\hyperlink{cast_8h_a77d407dcec34f53ede0bdd2a4cd492cd}{cast\+\_\+is\+\_\+temporary\+\_\+value\+\_\+reference}}$<$ T $>$\+::value, T $>$ \mbox{\hyperlink{cast_8h_a5158e250ea39ed1f85bd76f95bfb068a}{cast\+\_\+ref}} (\mbox{\hyperlink{classobject}{object}} \&\&, \mbox{\hyperlink{structoverload__unused}{overload\+\_\+unused}} \&)
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$!\mbox{\hyperlink{cast_8h_a77d407dcec34f53ede0bdd2a4cd492cd}{cast\+\_\+is\+\_\+temporary\+\_\+value\+\_\+reference}}$<$ T $>$\+::value, T $>$ \mbox{\hyperlink{cast_8h_aabb5dfa9edfbc2d671b6b68dba07a7da}{cast\+\_\+safe}} (\mbox{\hyperlink{classobject}{object}} \&\&o)
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$ \mbox{\hyperlink{cast_8h_a77d407dcec34f53ede0bdd2a4cd492cd}{cast\+\_\+is\+\_\+temporary\+\_\+value\+\_\+reference}}$<$ T $>$\+::value, T $>$ \mbox{\hyperlink{cast_8h_adccf35d1e63760d87e3550be94a30370}{cast\+\_\+safe}} (\mbox{\hyperlink{classobject}{object}} \&\&)
+\item 
+template$<$$>$ void \mbox{\hyperlink{cast_8h_adf80f982ef1462cc61cfefe89d2c186c}{cast\+\_\+safe$<$ void $>$}} (\mbox{\hyperlink{classobject}{object}} \&\&)
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\+\_\+value\+\_\+policy}} policy = return\+\_\+value\+\_\+policy\+::automatic\+\_\+reference$>$ }\\\mbox{\hyperlink{classtuple}{tuple}} \mbox{\hyperlink{cast_8h_aa579291da56488336ff46fda4743248d}{make\+\_\+tuple}} ()
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\+\_\+value\+\_\+policy}} policy = return\+\_\+value\+\_\+policy\+::automatic\+\_\+reference, typename... Args$>$ }\\\mbox{\hyperlink{classtuple}{tuple}} \mbox{\hyperlink{cast_8h_aa41c01a57ee7570a0fd14111d2121d4c}{make\+\_\+tuple}} (Args \&\&... args\+\_\+)
+\item 
+constexpr \mbox{\hyperlink{structarg}{arg}} \mbox{\hyperlink{namespaceliterals_aeade6773ae4649d485c790a1eb9dc729}{literals\+::operator\char`\"{}\char`\"{}\+\_\+a}} (const char $\ast$\mbox{\hyperlink{structname}{name}}, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}})
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\+\_\+value\+\_\+policy}} policy, typename... Args, typename  = enable\+\_\+if\+\_\+t$<$all\+\_\+of$<$is\+\_\+positional$<$\+Args$>$...$>$\+::value$>$$>$ }\\\mbox{\hyperlink{classsimple__collector}{simple\+\_\+collector}}$<$ policy $>$ \mbox{\hyperlink{cast_8h_aee926be5abdebf51d9697be243693fb7}{collect\+\_\+arguments}} (Args \&\&...\mbox{\hyperlink{classargs}{args}})
+\begin{DoxyCompactList}\small\item\em Collect only positional arguments for a Python function call \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\+\_\+value\+\_\+policy}} policy, typename... Args, typename  = enable\+\_\+if\+\_\+t$<$!all\+\_\+of$<$is\+\_\+positional$<$\+Args$>$...$>$\+::value$>$$>$ }\\\mbox{\hyperlink{classunpacking__collector}{unpacking\+\_\+collector}}$<$ policy $>$ \mbox{\hyperlink{cast_8h_afeb5b55c6961021a0de9d5938aafe745}{collect\+\_\+arguments}} (Args \&\&...\mbox{\hyperlink{classargs}{args}})
+\begin{DoxyCompactList}\small\item\em Collect all arguments, including keywords and unpacking (only instantiated when needed) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{宏定义说明}
+\mbox{\Hypertarget{cast_8h_a5711cbddf22538bf081fba49042adea9}\label{cast_8h_a5711cbddf22538bf081fba49042adea9}} 
+\index{cast.h@{cast.h}!PYBIND11\_DECLARE\_HOLDER\_TYPE@{PYBIND11\_DECLARE\_HOLDER\_TYPE}}
+\index{PYBIND11\_DECLARE\_HOLDER\_TYPE@{PYBIND11\_DECLARE\_HOLDER\_TYPE}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{PYBIND11\_DECLARE\_HOLDER\_TYPE}{PYBIND11\_DECLARE\_HOLDER\_TYPE}}
+{\footnotesize\ttfamily \#define PYBIND11\+\_\+\+DECLARE\+\_\+\+HOLDER\+\_\+\+TYPE(\begin{DoxyParamCaption}\item[{}]{type,  }\item[{}]{holder\+\_\+type,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+{\bfseries 值\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacepybind11}{pybind11}} \{ \textcolor{keyword}{namespace }detail \{ \(\backslash\)}
+\DoxyCodeLine{    template <typename type> \(\backslash\)}
+\DoxyCodeLine{    struct \mbox{\hyperlink{structalways__construct__holder}{always\_construct\_holder<holder\_type>}} : \mbox{\hyperlink{structalways__construct__holder}{always\_construct\_holder<void, \#\#\_\_VA\_ARGS\_\_>}}  \{ \}; \(\backslash\)}
+\DoxyCodeLine{    template <typename type> \(\backslash\)}
+\DoxyCodeLine{    class \mbox{\hyperlink{classtype__caster}{type\_caster<holder\_type, enable\_if\_t<!is\_shared\_ptr<holder\_type>::value}}>> \(\backslash\)}
+\DoxyCodeLine{        : \textcolor{keyword}{public} \mbox{\hyperlink{cast_8h_a024e48f7c159500a358e9228db141523}{type\_caster\_holder<type, holder\_type>}} \{ \}; \(\backslash\)}
+\DoxyCodeLine{    \}\}}
+
+\end{DoxyCode}
+
+
+Create a specialization for custom holder types (silently ignores std\+::shared\+\_\+ptr) 
+
+\mbox{\Hypertarget{cast_8h_aeab3bc743bfe35b65ff81a79fc513402}\label{cast_8h_aeab3bc743bfe35b65ff81a79fc513402}} 
+\index{cast.h@{cast.h}!PYBIND11\_MAKE\_OPAQUE@{PYBIND11\_MAKE\_OPAQUE}}
+\index{PYBIND11\_MAKE\_OPAQUE@{PYBIND11\_MAKE\_OPAQUE}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{PYBIND11\_MAKE\_OPAQUE}{PYBIND11\_MAKE\_OPAQUE}}
+{\footnotesize\ttfamily \#define PYBIND11\+\_\+\+MAKE\+\_\+\+OPAQUE(\begin{DoxyParamCaption}\item[{}]{... }\end{DoxyParamCaption})}
+
+{\bfseries 值\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacepybind11}{pybind11}} \{ \textcolor{keyword}{namespace }detail \{ \(\backslash\)}
+\DoxyCodeLine{        template<> \textcolor{keyword}{class }\mbox{\hyperlink{classtype__caster}{type\_caster}}<\_\_VA\_ARGS\_\_> : \textcolor{keyword}{public} \mbox{\hyperlink{classtype__caster__base}{type\_caster\_base}}<\_\_VA\_ARGS\_\_> \{ \}; \(\backslash\)}
+\DoxyCodeLine{    \}\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{cast_8h_abf638a034b5ed51437f70d736e85c0a6}\label{cast_8h_abf638a034b5ed51437f70d736e85c0a6}} 
+\index{cast.h@{cast.h}!PYBIND11\_TYPE@{PYBIND11\_TYPE}}
+\index{PYBIND11\_TYPE@{PYBIND11\_TYPE}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{PYBIND11\_TYPE}{PYBIND11\_TYPE}}
+{\footnotesize\ttfamily \#define PYBIND11\+\_\+\+TYPE(\begin{DoxyParamCaption}\item[{}]{... }\end{DoxyParamCaption})~\+\_\+\+\_\+\+VA\+\_\+\+ARGS\+\_\+\+\_\+}
+
+Lets you pass a type containing a {\ttfamily ,} through a macro parameter without needing a separate typedef, e.\+g.\+: {\ttfamily PYBIND11\+\_\+\+OVERLOAD(PYBIND11\+\_\+\+TYPE(Return\+Type\texorpdfstring{$<$}{<}A, B\texorpdfstring{$>$}{>}), PYBIND11\+\_\+\+TYPE(Parent\texorpdfstring{$<$}{<}C, D\texorpdfstring{$>$}{>}), f, arg)} \mbox{\Hypertarget{cast_8h_a026b55873d04f38f5ae026c900d16160}\label{cast_8h_a026b55873d04f38f5ae026c900d16160}} 
+\index{cast.h@{cast.h}!PYBIND11\_TYPE\_CASTER@{PYBIND11\_TYPE\_CASTER}}
+\index{PYBIND11\_TYPE\_CASTER@{PYBIND11\_TYPE\_CASTER}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{PYBIND11\_TYPE\_CASTER}{PYBIND11\_TYPE\_CASTER}}
+{\footnotesize\ttfamily \#define PYBIND11\+\_\+\+TYPE\+\_\+\+CASTER(\begin{DoxyParamCaption}\item[{}]{type,  }\item[{}]{py\+\_\+name }\end{DoxyParamCaption})}
+
+{\bfseries 值\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keyword}{protected}: \(\backslash\)}
+\DoxyCodeLine{        type value; \(\backslash\)}
+\DoxyCodeLine{    public: \(\backslash\)}
+\DoxyCodeLine{        static \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structname}{name}} = py\_name; \(\backslash\)}
+\DoxyCodeLine{        template <typename T\_, enable\_if\_t<std::is\_same<type, remove\_cv\_t<T\_>>::value, \textcolor{keywordtype}{int}> = 0> \(\backslash\)}
+\DoxyCodeLine{        static \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{cast_8h_a42ebc557ef15690c3171a99f46d59aab}{cast}}(T\_ *src, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} policy, \mbox{\hyperlink{classhandle}{handle}} parent) \{ \(\backslash\)}
+\DoxyCodeLine{            if (!src) \textcolor{keywordflow}{return} \mbox{\hyperlink{classnone}{none}}().\mbox{\hyperlink{classobject_a4ce66b1d44b37ae6b28e80228b075aae}{release}}(); \(\backslash\)}
+\DoxyCodeLine{            if (policy == \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a5dc4bb19391b04351f49572019c628c0}{return\_value\_policy::take\_ownership}}) \{ \(\backslash\)}
+\DoxyCodeLine{                auto h = \mbox{\hyperlink{cast_8h_a42ebc557ef15690c3171a99f46d59aab}{cast}}(std::move(*src), policy, parent); \textcolor{keyword}{delete} src; \textcolor{keywordflow}{return} h; \(\backslash\)}
+\DoxyCodeLine{            \} \textcolor{keywordflow}{else} \{ \(\backslash\)}
+\DoxyCodeLine{                return \mbox{\hyperlink{cast_8h_a42ebc557ef15690c3171a99f46d59aab}{cast}}(*src, policy, parent); \(\backslash\)}
+\DoxyCodeLine{            \} \(\backslash\)}
+\DoxyCodeLine{        \} \(\backslash\)}
+\DoxyCodeLine{        operator type*() \{ \textcolor{keywordflow}{return} \&value; \} \(\backslash\)}
+\DoxyCodeLine{        operator type\&() \{ \textcolor{keywordflow}{return} value; \} \(\backslash\)}
+\DoxyCodeLine{        operator type\&\&() \&\& \{ \textcolor{keywordflow}{return} std::move(value); \} \(\backslash\)}
+\DoxyCodeLine{        template <typename T\_> \textcolor{keyword}{using} \mbox{\hyperlink{cast_8h_a7acf8746a40fe31848a79ed85ec72701}{cast\_op\_type}} = pybind11::detail::movable\_cast\_op\_type<T\_>}
+
+\end{DoxyCode}
+
+
+\doxysubsection{类型定义说明}
+\mbox{\Hypertarget{cast_8h_a2d46db7b438479cb66757c5d6dac98db}\label{cast_8h_a2d46db7b438479cb66757c5d6dac98db}} 
+\index{cast.h@{cast.h}!arg\_t@{arg\_t}}
+\index{arg\_t@{arg\_t}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{arg\_t}{arg\_t}}
+{\footnotesize\ttfamily template$<$typename $>$ \\
+using \mbox{\hyperlink{cast_8h_a2d46db7b438479cb66757c5d6dac98db}{arg\+\_\+t}} =  \mbox{\hyperlink{structarg__v}{arg\+\_\+v}}}
+
+
+
+Alias for backward compatibility -- to be removed in version 2.\+0 
+
+\mbox{\Hypertarget{cast_8h_a77d407dcec34f53ede0bdd2a4cd492cd}\label{cast_8h_a77d407dcec34f53ede0bdd2a4cd492cd}} 
+\index{cast.h@{cast.h}!cast\_is\_temporary\_value\_reference@{cast\_is\_temporary\_value\_reference}}
+\index{cast\_is\_temporary\_value\_reference@{cast\_is\_temporary\_value\_reference}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{cast\_is\_temporary\_value\_reference}{cast\_is\_temporary\_value\_reference}}
+{\footnotesize\ttfamily template$<$typename type $>$ \\
+using \mbox{\hyperlink{cast_8h_a77d407dcec34f53ede0bdd2a4cd492cd}{cast\+\_\+is\+\_\+temporary\+\_\+value\+\_\+reference}} =  \mbox{\hyperlink{detail_2common_8h_a0d337b508cc2fb5a92d8e72db201e53b}{bool\+\_\+constant}}$<$ (std\+::is\+\_\+reference$<$type$>$\+::value $\vert$$\vert$ std\+::is\+\_\+pointer$<$type$>$\+::value) \&\& !std\+::is\+\_\+base\+\_\+of$<$\mbox{\hyperlink{classtype__caster__generic}{type\+\_\+caster\+\_\+generic}}, \mbox{\hyperlink{cast_8h_ab32b52411a6b07420516d79074815713}{make\+\_\+caster}}$<$type$>$ $>$\+::value \&\& !std\+::is\+\_\+same$<$\mbox{\hyperlink{detail_2common_8h_a3e4beb3f4b7338384c98d70aa1ee9780}{intrinsic\+\_\+t}}$<$type$>$, void$>$\+::value $>$}
+
+\mbox{\Hypertarget{cast_8h_a7acf8746a40fe31848a79ed85ec72701}\label{cast_8h_a7acf8746a40fe31848a79ed85ec72701}} 
+\index{cast.h@{cast.h}!cast\_op\_type@{cast\_op\_type}}
+\index{cast\_op\_type@{cast\_op\_type}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{cast\_op\_type}{cast\_op\_type}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+using \mbox{\hyperlink{cast_8h_a7acf8746a40fe31848a79ed85ec72701}{cast\+\_\+op\+\_\+type}} =  \mbox{\hyperlink{detail_2common_8h_acdb0eff728aec08ed6fff07d2885ea9d}{conditional\+\_\+t}}$<$std\+::is\+\_\+pointer$<$\mbox{\hyperlink{detail_2common_8h_a3a08cea569e6926ac8d7d74dd7178b5f}{remove\+\_\+reference\+\_\+t}}$<$T$>$ $>$\+::value, typename std\+::add\+\_\+pointer$<$\mbox{\hyperlink{detail_2common_8h_a3e4beb3f4b7338384c98d70aa1ee9780}{intrinsic\+\_\+t}}$<$T$>$ $>$\+::type, typename std\+::add\+\_\+lvalue\+\_\+reference$<$\mbox{\hyperlink{detail_2common_8h_a3e4beb3f4b7338384c98d70aa1ee9780}{intrinsic\+\_\+t}}$<$T$>$ $>$\+::type$>$}
+
+Determine suitable casting operator for pointer-\/or-\/lvalue-\/casting type casters. The type caster needs to provide {\ttfamily operator T$\ast$()} and {\ttfamily operator T\&()} operators.
+
+If the type supports moving the value away via an {\ttfamily operator T\&\&() \&\&} method, it should use {\ttfamily movable\+\_\+cast\+\_\+op\+\_\+type} instead. \mbox{\Hypertarget{cast_8h_a0ee0eaf3d12f9b0e472ed620777ba3c3}\label{cast_8h_a0ee0eaf3d12f9b0e472ed620777ba3c3}} 
+\index{cast.h@{cast.h}!is\_std\_char\_type@{is\_std\_char\_type}}
+\index{is\_std\_char\_type@{is\_std\_char\_type}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{is\_std\_char\_type}{is\_std\_char\_type}}
+{\footnotesize\ttfamily template$<$typename CharT $>$ \\
+using \mbox{\hyperlink{cast_8h_a0ee0eaf3d12f9b0e472ed620777ba3c3}{is\+\_\+std\+\_\+char\+\_\+type}} =  \mbox{\hyperlink{detail_2common_8h_a9fc2947c6f247b5bf1696117d6a46f5c}{any\+\_\+of}}$<$ std\+::is\+\_\+same$<$CharT, char$>$, std\+::is\+\_\+same$<$CharT, char16\+\_\+t$>$, std\+::is\+\_\+same$<$CharT, char32\+\_\+t$>$, std\+::is\+\_\+same$<$CharT, wchar\+\_\+t$>$ $>$}
+
+\mbox{\Hypertarget{cast_8h_ab32b52411a6b07420516d79074815713}\label{cast_8h_ab32b52411a6b07420516d79074815713}} 
+\index{cast.h@{cast.h}!make\_caster@{make\_caster}}
+\index{make\_caster@{make\_caster}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{make\_caster}{make\_caster}}
+{\footnotesize\ttfamily template$<$typename type $>$ \\
+using \mbox{\hyperlink{cast_8h_ab32b52411a6b07420516d79074815713}{make\+\_\+caster}} =  \mbox{\hyperlink{classtype__caster}{type\+\_\+caster}}$<$\mbox{\hyperlink{detail_2common_8h_a3e4beb3f4b7338384c98d70aa1ee9780}{intrinsic\+\_\+t}}$<$type$>$ $>$}
+
+\mbox{\Hypertarget{cast_8h_a32fe7f4c6e2ae670844b4f3ab92ba3b8}\label{cast_8h_a32fe7f4c6e2ae670844b4f3ab92ba3b8}} 
+\index{cast.h@{cast.h}!movable\_cast\_op\_type@{movable\_cast\_op\_type}}
+\index{movable\_cast\_op\_type@{movable\_cast\_op\_type}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{movable\_cast\_op\_type}{movable\_cast\_op\_type}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+using \mbox{\hyperlink{cast_8h_a32fe7f4c6e2ae670844b4f3ab92ba3b8}{movable\+\_\+cast\+\_\+op\+\_\+type}} =  \mbox{\hyperlink{detail_2common_8h_acdb0eff728aec08ed6fff07d2885ea9d}{conditional\+\_\+t}}$<$std\+::is\+\_\+pointer$<$typename std\+::remove\+\_\+reference$<$T$>$\+::type$>$\+::value, typename std\+::add\+\_\+pointer$<$\mbox{\hyperlink{detail_2common_8h_a3e4beb3f4b7338384c98d70aa1ee9780}{intrinsic\+\_\+t}}$<$T$>$ $>$\+::type, \mbox{\hyperlink{detail_2common_8h_acdb0eff728aec08ed6fff07d2885ea9d}{conditional\+\_\+t}}$<$std\+::is\+\_\+rvalue\+\_\+reference$<$T$>$\+::value, typename std\+::add\+\_\+rvalue\+\_\+reference$<$\mbox{\hyperlink{detail_2common_8h_a3e4beb3f4b7338384c98d70aa1ee9780}{intrinsic\+\_\+t}}$<$T$>$ $>$\+::type, typename std\+::add\+\_\+lvalue\+\_\+reference$<$\mbox{\hyperlink{detail_2common_8h_a3e4beb3f4b7338384c98d70aa1ee9780}{intrinsic\+\_\+t}}$<$T$>$ $>$\+::type$>$ $>$}
+
+Determine suitable casting operator for a type caster with a movable value. Such a type caster needs to provide {\ttfamily operator T$\ast$()}, {\ttfamily operator T\&()}, and {\ttfamily operator T\&\&() \&\&}. The latter will be called in appropriate contexts where the value can be moved rather than copied.
+
+These operator are automatically provided when using the PYBIND11\+\_\+\+TYPE\+\_\+\+CASTER macro. \mbox{\Hypertarget{cast_8h_a6c297f0980e4a0227f88ce4278e0a026}\label{cast_8h_a6c297f0980e4a0227f88ce4278e0a026}} 
+\index{cast.h@{cast.h}!move\_is\_plain\_type@{move\_is\_plain\_type}}
+\index{move\_is\_plain\_type@{move\_is\_plain\_type}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{move\_is\_plain\_type}{move\_is\_plain\_type}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+using \mbox{\hyperlink{cast_8h_a6c297f0980e4a0227f88ce4278e0a026}{move\+\_\+is\+\_\+plain\+\_\+type}} =  \mbox{\hyperlink{detail_2common_8h_ae5182888ef70c948e9b57c554e8fee7f}{satisfies\+\_\+none\+\_\+of}}$<$T, std\+::is\+\_\+void, std\+::is\+\_\+pointer, std\+::is\+\_\+reference, std\+::is\+\_\+const $>$}
+
+\mbox{\Hypertarget{cast_8h_a560bae0bccb1024585109570d155af15}\label{cast_8h_a560bae0bccb1024585109570d155af15}} 
+\index{cast.h@{cast.h}!move\_never@{move\_never}}
+\index{move\_never@{move\_never}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{move\_never}{move\_never}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+using \mbox{\hyperlink{cast_8h_a560bae0bccb1024585109570d155af15}{move\+\_\+never}} =  \mbox{\hyperlink{detail_2common_8h_a4e24fdf4bff3a0fbd0b1b4f259048f9b}{none\+\_\+of}}$<$\mbox{\hyperlink{structmove__always}{move\+\_\+always}}$<$T$>$, \mbox{\hyperlink{structmove__if__unreferenced}{move\+\_\+if\+\_\+unreferenced}}$<$T$>$ $>$}
+
+\mbox{\Hypertarget{cast_8h_a39bb5276d16350fdf66149ba4f66e7ab}\label{cast_8h_a39bb5276d16350fdf66149ba4f66e7ab}} 
+\index{cast.h@{cast.h}!overload\_caster\_t@{overload\_caster\_t}}
+\index{overload\_caster\_t@{overload\_caster\_t}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{overload\_caster\_t}{overload\_caster\_t}}
+{\footnotesize\ttfamily template$<$typename ret\+\_\+type $>$ \\
+using \mbox{\hyperlink{cast_8h_a39bb5276d16350fdf66149ba4f66e7ab}{overload\+\_\+caster\+\_\+t}} =  \mbox{\hyperlink{detail_2common_8h_acdb0eff728aec08ed6fff07d2885ea9d}{conditional\+\_\+t}}$<$ \mbox{\hyperlink{cast_8h_a77d407dcec34f53ede0bdd2a4cd492cd}{cast\+\_\+is\+\_\+temporary\+\_\+value\+\_\+reference}}$<$ret\+\_\+type$>$\+::value, \mbox{\hyperlink{cast_8h_ab32b52411a6b07420516d79074815713}{make\+\_\+caster}}$<$ret\+\_\+type$>$, \mbox{\hyperlink{structoverload__unused}{overload\+\_\+unused}}$>$}
+
+\mbox{\Hypertarget{cast_8h_a024e48f7c159500a358e9228db141523}\label{cast_8h_a024e48f7c159500a358e9228db141523}} 
+\index{cast.h@{cast.h}!type\_caster\_holder@{type\_caster\_holder}}
+\index{type\_caster\_holder@{type\_caster\_holder}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{type\_caster\_holder}{type\_caster\_holder}}
+{\footnotesize\ttfamily template$<$typename type , typename holder\+\_\+type $>$ \\
+using \mbox{\hyperlink{cast_8h_a024e48f7c159500a358e9228db141523}{type\+\_\+caster\+\_\+holder}} =  \mbox{\hyperlink{detail_2common_8h_acdb0eff728aec08ed6fff07d2885ea9d}{conditional\+\_\+t}}$<$\mbox{\hyperlink{structis__copy__constructible}{is\+\_\+copy\+\_\+constructible}}$<$holder\+\_\+type$>$\+::value, \mbox{\hyperlink{structcopyable__holder__caster}{copyable\+\_\+holder\+\_\+caster}}$<$type, holder\+\_\+type$>$, \mbox{\hyperlink{structmove__only__holder__caster}{move\+\_\+only\+\_\+holder\+\_\+caster}}$<$type, holder\+\_\+type$>$ $>$}
+
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{cast_8h_a9e6ac7e7af67150d979668c1451ae2bf}\label{cast_8h_a9e6ac7e7af67150d979668c1451ae2bf}} 
+\index{cast.h@{cast.h}!all\_type\_info@{all\_type\_info}}
+\index{all\_type\_info@{all\_type\_info}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{all\_type\_info()}{all\_type\_info()}}
+{\footnotesize\ttfamily const std\+::vector$<$ detail\+::type\+\_\+info $\ast$ $>$ \& all\+\_\+type\+\_\+info (\begin{DoxyParamCaption}\item[{Py\+Type\+Object $\ast$}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Extracts vector of \mbox{\hyperlink{structtype__info}{type\+\_\+info}} pointers of pybind-\/registered roots of the given Python type. Will be just 1 pybind type for the Python type of a pybind-\/registered class, or for any Python-\/side derived class that uses single inheritance. Will contain as many types as required for a Python class that uses multiple inheritance to inherit (directly or indirectly) from multiple pybind-\/registered classes. Will be empty if neither the type nor any base classes are pybind-\/registered.
+
+The value is cached for the lifetime of the Python type. 函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cast_8h_a9e6ac7e7af67150d979668c1451ae2bf_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{cast_8h_aef025a4af8a46127594ecb41de1094e4}\label{cast_8h_aef025a4af8a46127594ecb41de1094e4}} 
+\index{cast.h@{cast.h}!all\_type\_info\_get\_cache@{all\_type\_info\_get\_cache}}
+\index{all\_type\_info\_get\_cache@{all\_type\_info\_get\_cache}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{all\_type\_info\_get\_cache()}{all\_type\_info\_get\_cache()}}
+{\footnotesize\ttfamily std\+::pair$<$ decltype(\mbox{\hyperlink{structinternals_a6148bb4956e17d8a61f410cac7227d04}{internals\+::registered\+\_\+types\+\_\+py}})\mbox{\hyperlink{classiterator}{\+::iterator}}, bool $>$ all\+\_\+type\+\_\+info\+\_\+get\+\_\+cache (\begin{DoxyParamCaption}\item[{Py\+Type\+Object $\ast$}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cast_8h_aef025a4af8a46127594ecb41de1094e4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{cast_8h_ac653a09ddb39e162a6592a3347d293f5}\label{cast_8h_ac653a09ddb39e162a6592a3347d293f5}} 
+\index{cast.h@{cast.h}!all\_type\_info\_populate@{all\_type\_info\_populate}}
+\index{all\_type\_info\_populate@{all\_type\_info\_populate}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{all\_type\_info\_populate()}{all\_type\_info\_populate()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\+\_\+\+NOINLINE}} void all\+\_\+type\+\_\+info\+\_\+populate (\begin{DoxyParamCaption}\item[{Py\+Type\+Object $\ast$}]{t,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structtype__info}{type\+\_\+info}} $\ast$ $>$ \&}]{bases }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cast_8h_ac653a09ddb39e162a6592a3347d293f5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{cast_8h_a42ebc557ef15690c3171a99f46d59aab}\label{cast_8h_a42ebc557ef15690c3171a99f46d59aab}} 
+\index{cast.h@{cast.h}!cast@{cast}}
+\index{cast@{cast}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{cast()}{cast()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily template$<$typename T , \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{detail\+::enable\+\_\+if\+\_\+t}}$<$!\mbox{\hyperlink{pytypes_8h_a41ef7089a656c80c4319844f62409f7d}{detail\+::is\+\_\+pyobject}}$<$ T $>$\+::value, int $>$  = 0$>$ \\
+T cast (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhandle}{handle}} \&}]{handle }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{cast_8h_a7668fae50cf2343802f4a360a5d62094}\label{cast_8h_a7668fae50cf2343802f4a360a5d62094}} 
+\index{cast.h@{cast.h}!cast@{cast}}
+\index{cast@{cast}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{cast()}{cast()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily template$<$typename T , \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{detail\+::enable\+\_\+if\+\_\+t}}$<$!\mbox{\hyperlink{pytypes_8h_a41ef7089a656c80c4319844f62409f7d}{detail\+::is\+\_\+pyobject}}$<$ T $>$\+::value, int $>$  = 0$>$ \\
+\mbox{\hyperlink{classobject}{object}} cast (\begin{DoxyParamCaption}\item[{const T \&}]{value,  }\item[{\mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\+\_\+value\+\_\+policy}}}]{policy = {\ttfamily \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a1c1628c22d69b3b9bac4b5c3674852e3}{return\+\_\+value\+\_\+policy\+::automatic\+\_\+reference}}},  }\item[{\mbox{\hyperlink{classhandle}{handle}}}]{parent = {\ttfamily \mbox{\hyperlink{classhandle}{handle}}()} }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=186pt]{cast_8h_a7668fae50cf2343802f4a360a5d62094_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{cast_8h_a8a84d1d34aeced1d866245ce1dc339f0}\label{cast_8h_a8a84d1d34aeced1d866245ce1dc339f0}} 
+\index{cast.h@{cast.h}!cast@{cast}}
+\index{cast@{cast}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{cast()}{cast()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{detail\+::enable\+\_\+if\+\_\+t}}$<$ detail\+::move\+\_\+always$<$ T $>$\+::value, T $>$ cast (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classobject}{object}} \&\&}]{object }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{cast_8h_a40b8d78da3c0a9665673857b4e54fdd4}\label{cast_8h_a40b8d78da3c0a9665673857b4e54fdd4}} 
+\index{cast.h@{cast.h}!cast@{cast}}
+\index{cast@{cast}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{cast()}{cast()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{detail\+::enable\+\_\+if\+\_\+t}}$<$ detail\+::move\+\_\+if\+\_\+unreferenced$<$ T $>$\+::value, T $>$ cast (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classobject}{object}} \&\&}]{object }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{cast_8h_a559e4de78b412f42b7fbf441f8bcb08e}\label{cast_8h_a559e4de78b412f42b7fbf441f8bcb08e}} 
+\index{cast.h@{cast.h}!cast@{cast}}
+\index{cast@{cast}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{cast()}{cast()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{detail\+::enable\+\_\+if\+\_\+t}}$<$ \mbox{\hyperlink{cast_8h_a560bae0bccb1024585109570d155af15}{detail\+::move\+\_\+never}}$<$ T $>$\+::value, T $>$ cast (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classobject}{object}} \&\&}]{object }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{cast_8h_a8512d015adb09d984bce57bd0c6cae4c}\label{cast_8h_a8512d015adb09d984bce57bd0c6cae4c}} 
+\index{cast.h@{cast.h}!cast\_op@{cast\_op}}
+\index{cast\_op@{cast\_op}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{cast\_op()}{cast\_op()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{cast_8h_ab32b52411a6b07420516d79074815713}{make\+\_\+caster}}$<$ T $>$\+::template \mbox{\hyperlink{cast_8h_a7acf8746a40fe31848a79ed85ec72701}{cast\+\_\+op\+\_\+type}}$<$ typename std\+::add\+\_\+rvalue\+\_\+reference$<$ T $>$\+::type $>$ cast\+\_\+op (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{cast_8h_ab32b52411a6b07420516d79074815713}{make\+\_\+caster}}$<$ T $>$ \&\&}]{caster }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{cast_8h_ae7181c07fe0dc18aff8b77218baa4636}\label{cast_8h_ae7181c07fe0dc18aff8b77218baa4636}} 
+\index{cast.h@{cast.h}!cast\_op@{cast\_op}}
+\index{cast\_op@{cast\_op}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{cast\_op()}{cast\_op()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{cast_8h_ab32b52411a6b07420516d79074815713}{make\+\_\+caster}}$<$ T $>$\+::template \mbox{\hyperlink{cast_8h_a7acf8746a40fe31848a79ed85ec72701}{cast\+\_\+op\+\_\+type}}$<$ T $>$ cast\+\_\+op (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{cast_8h_ab32b52411a6b07420516d79074815713}{make\+\_\+caster}}$<$ T $>$ \&}]{caster }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{cast_8h_a5158e250ea39ed1f85bd76f95bfb068a}\label{cast_8h_a5158e250ea39ed1f85bd76f95bfb068a}} 
+\index{cast.h@{cast.h}!cast\_ref@{cast\_ref}}
+\index{cast\_ref@{cast\_ref}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{cast\_ref()}{cast\_ref()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$!\mbox{\hyperlink{cast_8h_a77d407dcec34f53ede0bdd2a4cd492cd}{cast\+\_\+is\+\_\+temporary\+\_\+value\+\_\+reference}}$<$ T $>$\+::value, T $>$ cast\+\_\+ref (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classobject}{object}} \&\&}]{,  }\item[{\mbox{\hyperlink{structoverload__unused}{overload\+\_\+unused}} \&}]{ }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{cast_8h_a5158e250ea39ed1f85bd76f95bfb068a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{cast_8h_a88b3cf647b1bce0d7cc4cf474366fba2}\label{cast_8h_a88b3cf647b1bce0d7cc4cf474366fba2}} 
+\index{cast.h@{cast.h}!cast\_ref@{cast\_ref}}
+\index{cast\_ref@{cast\_ref}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{cast\_ref()}{cast\_ref()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$ \mbox{\hyperlink{cast_8h_a77d407dcec34f53ede0bdd2a4cd492cd}{cast\+\_\+is\+\_\+temporary\+\_\+value\+\_\+reference}}$<$ T $>$\+::value, T $>$ cast\+\_\+ref (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classobject}{object}} \&\&}]{o,  }\item[{\mbox{\hyperlink{cast_8h_ab32b52411a6b07420516d79074815713}{make\+\_\+caster}}$<$ T $>$ \&}]{caster }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cast_8h_a88b3cf647b1bce0d7cc4cf474366fba2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{cast_8h_adccf35d1e63760d87e3550be94a30370}\label{cast_8h_adccf35d1e63760d87e3550be94a30370}} 
+\index{cast.h@{cast.h}!cast\_safe@{cast\_safe}}
+\index{cast\_safe@{cast\_safe}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{cast\_safe()}{cast\_safe()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$ \mbox{\hyperlink{cast_8h_a77d407dcec34f53ede0bdd2a4cd492cd}{cast\+\_\+is\+\_\+temporary\+\_\+value\+\_\+reference}}$<$ T $>$\+::value, T $>$ cast\+\_\+safe (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classobject}{object}} \&\&}]{ }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=248pt]{cast_8h_adccf35d1e63760d87e3550be94a30370_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{cast_8h_aabb5dfa9edfbc2d671b6b68dba07a7da}\label{cast_8h_aabb5dfa9edfbc2d671b6b68dba07a7da}} 
+\index{cast.h@{cast.h}!cast\_safe@{cast\_safe}}
+\index{cast\_safe@{cast\_safe}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{cast\_safe()}{cast\_safe()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$!\mbox{\hyperlink{cast_8h_a77d407dcec34f53ede0bdd2a4cd492cd}{cast\+\_\+is\+\_\+temporary\+\_\+value\+\_\+reference}}$<$ T $>$\+::value, T $>$ cast\+\_\+safe (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classobject}{object}} \&\&}]{o }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{cast_8h_adf80f982ef1462cc61cfefe89d2c186c}\label{cast_8h_adf80f982ef1462cc61cfefe89d2c186c}} 
+\index{cast.h@{cast.h}!cast\_safe$<$ void $>$@{cast\_safe$<$ void $>$}}
+\index{cast\_safe$<$ void $>$@{cast\_safe$<$ void $>$}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{cast\_safe$<$ void $>$()}{cast\_safe< void >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+void \mbox{\hyperlink{cast_8h_adccf35d1e63760d87e3550be94a30370}{cast\+\_\+safe}}$<$ void $>$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classobject}{object}} \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{cast_8h_aee926be5abdebf51d9697be243693fb7}\label{cast_8h_aee926be5abdebf51d9697be243693fb7}} 
+\index{cast.h@{cast.h}!collect\_arguments@{collect\_arguments}}
+\index{collect\_arguments@{collect\_arguments}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{collect\_arguments()}{collect\_arguments()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\+\_\+value\+\_\+policy}} policy, typename... Args, typename  = enable\+\_\+if\+\_\+t$<$all\+\_\+of$<$is\+\_\+positional$<$\+Args$>$...$>$\+::value$>$$>$ \\
+\mbox{\hyperlink{classsimple__collector}{simple\+\_\+collector}}$<$ policy $>$ collect\+\_\+arguments (\begin{DoxyParamCaption}\item[{Args \&\&...}]{args }\end{DoxyParamCaption})}
+
+
+
+Collect only positional arguments for a Python function call 
+
+\mbox{\Hypertarget{cast_8h_afeb5b55c6961021a0de9d5938aafe745}\label{cast_8h_afeb5b55c6961021a0de9d5938aafe745}} 
+\index{cast.h@{cast.h}!collect\_arguments@{collect\_arguments}}
+\index{collect\_arguments@{collect\_arguments}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{collect\_arguments()}{collect\_arguments()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\+\_\+value\+\_\+policy}} policy, typename... Args, typename  = enable\+\_\+if\+\_\+t$<$!all\+\_\+of$<$is\+\_\+positional$<$\+Args$>$...$>$\+::value$>$$>$ \\
+\mbox{\hyperlink{classunpacking__collector}{unpacking\+\_\+collector}}$<$ policy $>$ collect\+\_\+arguments (\begin{DoxyParamCaption}\item[{Args \&\&...}]{args }\end{DoxyParamCaption})}
+
+
+
+Collect all arguments, including keywords and unpacking (only instantiated when needed) 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cast_8h_afeb5b55c6961021a0de9d5938aafe745_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{cast_8h_af50c237c1ebe85cf7e290a97197dd2c1}\label{cast_8h_af50c237c1ebe85cf7e290a97197dd2c1}} 
+\index{cast.h@{cast.h}!error\_string@{error\_string}}
+\index{error\_string@{error\_string}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{error\_string()}{error\_string()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\+\_\+\+NOINLINE}} std\+::string error\+\_\+string (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=251pt]{cast_8h_af50c237c1ebe85cf7e290a97197dd2c1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{cast_8h_ac4200faa8f80249732d6ffaf0f610855}\label{cast_8h_ac4200faa8f80249732d6ffaf0f610855}} 
+\index{cast.h@{cast.h}!get\_global\_type\_info@{get\_global\_type\_info}}
+\index{get\_global\_type\_info@{get\_global\_type\_info}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{get\_global\_type\_info()}{get\_global\_type\_info()}}
+{\footnotesize\ttfamily detail\+::type\+\_\+info $\ast$ get\+\_\+global\+\_\+type\+\_\+info (\begin{DoxyParamCaption}\item[{const std\+::type\+\_\+index \&}]{tp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cast_8h_ac4200faa8f80249732d6ffaf0f610855_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{cast_8h_afde5400b79034f8a3f234a8c69f408d4}\label{cast_8h_afde5400b79034f8a3f234a8c69f408d4}} 
+\index{cast.h@{cast.h}!get\_local\_type\_info@{get\_local\_type\_info}}
+\index{get\_local\_type\_info@{get\_local\_type\_info}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{get\_local\_type\_info()}{get\_local\_type\_info()}}
+{\footnotesize\ttfamily detail\+::type\+\_\+info $\ast$ get\+\_\+local\+\_\+type\+\_\+info (\begin{DoxyParamCaption}\item[{const std\+::type\+\_\+index \&}]{tp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cast_8h_afde5400b79034f8a3f234a8c69f408d4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{cast_8h_add2d0d8e20d5b3730349455b9628e2f4}\label{cast_8h_add2d0d8e20d5b3730349455b9628e2f4}} 
+\index{cast.h@{cast.h}!get\_object\_handle@{get\_object\_handle}}
+\index{get\_object\_handle@{get\_object\_handle}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{get\_object\_handle()}{get\_object\_handle()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\+\_\+\+NOINLINE}} \mbox{\hyperlink{classhandle}{handle}} get\+\_\+object\+\_\+handle (\begin{DoxyParamCaption}\item[{const void $\ast$}]{ptr,  }\item[{const detail\+::type\+\_\+info $\ast$}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cast_8h_add2d0d8e20d5b3730349455b9628e2f4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{cast_8h_a4e6f67dd9fc6d87d585af6093e524ccf}\label{cast_8h_a4e6f67dd9fc6d87d585af6093e524ccf}} 
+\index{cast.h@{cast.h}!get\_thread\_state\_unchecked@{get\_thread\_state\_unchecked}}
+\index{get\_thread\_state\_unchecked@{get\_thread\_state\_unchecked}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{get\_thread\_state\_unchecked()}{get\_thread\_state\_unchecked()}}
+{\footnotesize\ttfamily Py\+Thread\+State $\ast$ get\+\_\+thread\+\_\+state\+\_\+unchecked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{cast_8h_a0d66e15ebc57c86a64dfc44a70dfc33b}\label{cast_8h_a0d66e15ebc57c86a64dfc44a70dfc33b}} 
+\index{cast.h@{cast.h}!get\_type\_handle@{get\_type\_handle}}
+\index{get\_type\_handle@{get\_type\_handle}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{get\_type\_handle()}{get\_type\_handle()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\+\_\+\+NOINLINE}} \mbox{\hyperlink{classhandle}{handle}} get\+\_\+type\+\_\+handle (\begin{DoxyParamCaption}\item[{const std\+::type\+\_\+info \&}]{tp,  }\item[{bool}]{throw\+\_\+if\+\_\+missing }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cast_8h_a0d66e15ebc57c86a64dfc44a70dfc33b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{cast_8h_a34665265e8f179438a05a592bb6916e2}\label{cast_8h_a34665265e8f179438a05a592bb6916e2}} 
+\index{cast.h@{cast.h}!get\_type\_info@{get\_type\_info}}
+\index{get\_type\_info@{get\_type\_info}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{get\_type\_info()}{get\_type\_info()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\+\_\+\+NOINLINE}} detail\+::type\+\_\+info $\ast$ get\+\_\+type\+\_\+info (\begin{DoxyParamCaption}\item[{const std\+::type\+\_\+index \&}]{tp,  }\item[{bool}]{throw\+\_\+if\+\_\+missing = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the type info for a given C++ type; on lookup failure can either throw or return nullptr. 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cast_8h_a34665265e8f179438a05a592bb6916e2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{cast_8h_a7cfdf88b5c39ce38304d9237a2006ecc}\label{cast_8h_a7cfdf88b5c39ce38304d9237a2006ecc}} 
+\index{cast.h@{cast.h}!get\_type\_info@{get\_type\_info}}
+\index{get\_type\_info@{get\_type\_info}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{get\_type\_info()}{get\_type\_info()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\+\_\+\+NOINLINE}} detail\+::type\+\_\+info $\ast$ get\+\_\+type\+\_\+info (\begin{DoxyParamCaption}\item[{Py\+Type\+Object $\ast$}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Gets a single \mbox{\hyperlink{namespacepybind11}{pybind11}} type info for a python type. Returns nullptr if neither the type nor any ancestors are pybind11-\/registered. Throws an exception if there are multiple bases--use {\ttfamily all\+\_\+type\+\_\+info} instead if you want to support multiple bases. 函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cast_8h_a7cfdf88b5c39ce38304d9237a2006ecc_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{cast_8h_a2245145263bfc05e6f2ce8cbc87fa856}\label{cast_8h_a2245145263bfc05e6f2ce8cbc87fa856}} 
+\index{cast.h@{cast.h}!isinstance\_generic@{isinstance\_generic}}
+\index{isinstance\_generic@{isinstance\_generic}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{isinstance\_generic()}{isinstance\_generic()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\+\_\+\+NOINLINE}} bool isinstance\+\_\+generic (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhandle}{handle}}}]{obj,  }\item[{const std\+::type\+\_\+info \&}]{tp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cast_8h_a2245145263bfc05e6f2ce8cbc87fa856_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{cast_8h_a8930f52c7348c6cf3c2c9195abbb3964}\label{cast_8h_a8930f52c7348c6cf3c2c9195abbb3964}} 
+\index{cast.h@{cast.h}!keep\_alive\_impl@{keep\_alive\_impl}}
+\index{keep\_alive\_impl@{keep\_alive\_impl}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{keep\_alive\_impl()}{keep\_alive\_impl()}}
+{\footnotesize\ttfamily void keep\+\_\+alive\+\_\+impl (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhandle}{handle}}}]{nurse,  }\item[{\mbox{\hyperlink{classhandle}{handle}}}]{patient }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cast_8h_a8930f52c7348c6cf3c2c9195abbb3964_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{cast_8h_af18d953a68cf37c12852832920aff448}\label{cast_8h_af18d953a68cf37c12852832920aff448}} 
+\index{cast.h@{cast.h}!load\_type@{load\_type}}
+\index{load\_type@{load\_type}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{load\_type()}{load\_type()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{cast_8h_ab32b52411a6b07420516d79074815713}{make\+\_\+caster}}$<$ T $>$ load\+\_\+type (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhandle}{handle}} \&}]{handle }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cast_8h_af18d953a68cf37c12852832920aff448_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{cast_8h_afc2142f63ce5c52090a3b5f33b20a31e}\label{cast_8h_afc2142f63ce5c52090a3b5f33b20a31e}} 
+\index{cast.h@{cast.h}!load\_type@{load\_type}}
+\index{load\_type@{load\_type}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{load\_type()}{load\_type()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T , typename SFINAE $>$ \\
+\mbox{\hyperlink{classtype__caster}{type\+\_\+caster}}$<$ T, SFINAE $>$ \& load\+\_\+type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtype__caster}{type\+\_\+caster}}$<$ T, SFINAE $>$ \&}]{conv,  }\item[{const \mbox{\hyperlink{classhandle}{handle}} \&}]{handle }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=279pt]{cast_8h_afc2142f63ce5c52090a3b5f33b20a31e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{cast_8h_abb2fe0279a14711984bde348fa88afba}\label{cast_8h_abb2fe0279a14711984bde348fa88afba}} 
+\index{cast.h@{cast.h}!make\_new\_instance@{make\_new\_instance}}
+\index{make\_new\_instance@{make\_new\_instance}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{make\_new\_instance()}{make\_new\_instance()}}
+{\footnotesize\ttfamily Py\+Object $\ast$ make\+\_\+new\+\_\+instance (\begin{DoxyParamCaption}\item[{Py\+Type\+Object $\ast$}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Instance creation function for all \mbox{\hyperlink{namespacepybind11}{pybind11}} types. It allocates the internal instance layout for holding C++ objects and holders. Allocation is done lazily (the first time the instance is cast to a reference or pointer), and initialization is done by an {\ttfamily \+\_\+\+\_\+init\+\_\+\+\_\+} function. 函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{cast_8h_abb2fe0279a14711984bde348fa88afba_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{cast_8h_aa579291da56488336ff46fda4743248d}\label{cast_8h_aa579291da56488336ff46fda4743248d}} 
+\index{cast.h@{cast.h}!make\_tuple@{make\_tuple}}
+\index{make\_tuple@{make\_tuple}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{make\_tuple()}{make\_tuple()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\+\_\+value\+\_\+policy}} policy = return\+\_\+value\+\_\+policy\+::automatic\+\_\+reference$>$ \\
+\mbox{\hyperlink{classtuple}{tuple}} make\+\_\+tuple (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{cast_8h_aa41c01a57ee7570a0fd14111d2121d4c}\label{cast_8h_aa41c01a57ee7570a0fd14111d2121d4c}} 
+\index{cast.h@{cast.h}!make\_tuple@{make\_tuple}}
+\index{make\_tuple@{make\_tuple}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{make\_tuple()}{make\_tuple()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\+\_\+value\+\_\+policy}} policy = return\+\_\+value\+\_\+policy\+::automatic\+\_\+reference, typename... Args$>$ \\
+\mbox{\hyperlink{classtuple}{tuple}} make\+\_\+tuple (\begin{DoxyParamCaption}\item[{Args \&\&...}]{args\+\_\+ }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=245pt]{cast_8h_aa41c01a57ee7570a0fd14111d2121d4c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{cast_8h_aa26cb17b5f2f55f99e792e7f6339f12e}\label{cast_8h_aa26cb17b5f2f55f99e792e7f6339f12e}} 
+\index{cast.h@{cast.h}!move@{move}}
+\index{move@{move}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{detail\+::enable\+\_\+if\+\_\+t}}$<$!\mbox{\hyperlink{cast_8h_a560bae0bccb1024585109570d155af15}{detail\+::move\+\_\+never}}$<$ T $>$\+::value, T $>$ move (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classobject}{object}} \&\&}]{obj }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{cast_8h_a68e7164670f08e7caeec688865dbe0e0}\label{cast_8h_a68e7164670f08e7caeec688865dbe0e0}} 
+\index{cast.h@{cast.h}!object\_or\_cast@{object\_or\_cast}}
+\index{object\_or\_cast@{object\_or\_cast}!cast.h@{cast.h}}
+\doxysubsubsection{\texorpdfstring{object\_or\_cast()}{object\_or\_cast()}}
+{\footnotesize\ttfamily template$<$typename T , \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$!\mbox{\hyperlink{pytypes_8h_a41ef7089a656c80c4319844f62409f7d}{is\+\_\+pyobject}}$<$ T $>$\+::value, int $>$ $>$ \\
+\mbox{\hyperlink{classobject}{object}} object\+\_\+or\+\_\+cast (\begin{DoxyParamCaption}\item[{T \&\&}]{o }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=231pt]{cast_8h_a68e7164670f08e7caeec688865dbe0e0_cgraph}
+\end{center}
+\end{figure}

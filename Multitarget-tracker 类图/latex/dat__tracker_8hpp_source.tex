@@ -1,0 +1,92 @@
+\hypertarget{dat__tracker_8hpp_source}{}\doxysection{dat\+\_\+tracker.\+hpp}
+\label{dat__tracker_8hpp_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/dat/dat\_tracker.hpp@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/dat/dat\_tracker.hpp}}
+\mbox{\hyperlink{dat__tracker_8hpp}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <cmath>}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <opencv2/opencv.hpp>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <opencv2/core/core.hpp>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <opencv2/highgui/highgui.hpp>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <opencv2/imgproc/imgproc.hpp>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <opencv2/features2d/features2d.hpp>}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include "{}../VOTTracker.hpp"{}}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{19 \textcolor{keyword}{struct }\mbox{\hyperlink{structdat__cfg}{dat\_cfg}}}
+\DoxyCodeLine{20 \{}
+\DoxyCodeLine{21     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structdat__cfg_aa3450a3dfee3ca2582aa2790fde86a84}{show\_figures}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{22     \textcolor{keywordtype}{int}  \mbox{\hyperlink{structdat__cfg_a63cd3ae909f991cce2182ef73fa66961}{img\_scale\_target\_diagonal}} = 75;}
+\DoxyCodeLine{23     \textcolor{keywordtype}{double} \mbox{\hyperlink{structdat__cfg_a6c0d0a5aceeac102c874216aa905bb88}{search\_win\_padding}} = 2;}
+\DoxyCodeLine{24     \textcolor{keywordtype}{double} \mbox{\hyperlink{structdat__cfg_ab6c618ade83e5dcde893ee877e1cfbcb}{surr\_win\_factor}} = 1.9;}
+\DoxyCodeLine{25     \textcolor{keywordtype}{int} \mbox{\hyperlink{structdat__cfg_adc355d10737d6531163eed8facb1caef}{color\_space}} = 1; \textcolor{comment}{//1rgb 2lab 3hsv 4gray}}
+\DoxyCodeLine{26     \textcolor{keywordtype}{int} \mbox{\hyperlink{structdat__cfg_ae8ac403a4ed20029f7c6d99edf47af25}{num\_bins}} = 16;}
+\DoxyCodeLine{27     cv::Mat \mbox{\hyperlink{structdat__cfg_a13cc2d2349c3df7c24b0a9027bf054b9}{bin\_mapping}}; \textcolor{comment}{//getBinMapping(cfg.num\_bins);}}
+\DoxyCodeLine{28     \textcolor{keywordtype}{double} \mbox{\hyperlink{structdat__cfg_a1e6b704965b5232e0240c5c14c234016}{prob\_lut\_update\_rate}} = 0.05;}
+\DoxyCodeLine{29     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structdat__cfg_aa9452f491ce4b17a0f57460c37b35f98}{distractor\_aware}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{30     std::vector<double> \mbox{\hyperlink{structdat__cfg_a49e7fde780aa3605852113070a48148b}{adapt\_thresh\_prob\_bins}}; \textcolor{comment}{// 0:0.05 : 1;}}
+\DoxyCodeLine{31     \textcolor{keywordtype}{int} \mbox{\hyperlink{structdat__cfg_a84ee248b32f37a1ebc04c61bf16a2801}{motion\_estimation\_history\_size}} = 5;}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     \textcolor{keywordtype}{int} \mbox{\hyperlink{structdat__cfg_acf642875e95c94e65cd9eda1d8a76092}{nms\_scale}} = 1;}
+\DoxyCodeLine{34     \textcolor{keywordtype}{double} \mbox{\hyperlink{structdat__cfg_a75ba6239eeae5f21b0a668d58cbbcfb5}{nms\_overlap}} = 0.9;}
+\DoxyCodeLine{35     \textcolor{keywordtype}{double} \mbox{\hyperlink{structdat__cfg_a37fabcdcc096cf20f21eeddc30a5aab8}{nms\_score\_factor}} = 0.5;}
+\DoxyCodeLine{36     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structdat__cfg_a212a67e5566cc99a347e655ba6361895}{nms\_include\_center\_vote}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{37 \};}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{42 \textcolor{keyword}{class }\mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r}{DAT\_TRACKER}} final : \textcolor{keyword}{public} \mbox{\hyperlink{class_v_o_t_tracker}{VOTTracker}}}
+\DoxyCodeLine{43 \{}
+\DoxyCodeLine{44 \textcolor{keyword}{public}:}
+\DoxyCodeLine{45     \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_a3b3ee33b5bea804fb75881b25fdb71b0}{DAT\_TRACKER}}();}
+\DoxyCodeLine{46     \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_ab8e108d7d4a327825b4dcce77b2aac9c}{\string~DAT\_TRACKER}}();}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_ae9e5a0ec3dde0f338adda1187d074d8a}{Initialize}}(\textcolor{keyword}{const} cv::Mat \&im, cv::Rect region);}
+\DoxyCodeLine{49     cv::RotatedRect \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_a559ccce8e9f5f461351a9c31a60a254e}{Update}}(\textcolor{keyword}{const} cv::Mat \&im, \textcolor{keywordtype}{float}\& confidence);}
+\DoxyCodeLine{50     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_ad2bbd13cf69fe3a8c6babe03d018d141}{Train}}(\textcolor{keyword}{const} cv::Mat \&im, \textcolor{keywordtype}{bool} \mbox{\hyperlink{detail_2common_8h_a71226eea81f24762754f1413e2ead78f}{first}});}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{53     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_ad461fe9ba88c5c95e7cb621702dee536}{getNMSRects}}(cv::Mat prob\_map, cv::Size obj\_sz, \textcolor{keywordtype}{double} scale,}
+\DoxyCodeLine{54                      \textcolor{keywordtype}{double} \mbox{\hyperlink{box_8c_a49bbaf2c74dad0f7bbca22c9e41286ca}{overlap}}, \textcolor{keywordtype}{double} score\_frac, cv::Mat dist\_map, \textcolor{keywordtype}{bool} include\_inner,}
+\DoxyCodeLine{55                      std::vector<cv::Rect> \&top\_rects, std::vector<double> \&top\_vote\_scores, std::vector<double> \&top\_dist\_scores);}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_ae00ceb776348f735cabe8a559edd6b2a}{getForegroundBackgroundProbs}}(cv::Mat frame, cv::Rect obj\_rect, \textcolor{keywordtype}{int} num\_bins, cv::Mat bin\_mapping, cv::Mat \&prob\_lut, cv::Mat \&prob\_map);}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_ae00ceb776348f735cabe8a559edd6b2a}{getForegroundBackgroundProbs}}(cv::Mat frame, cv::Rect obj\_rect, \textcolor{keywordtype}{int} num\_bins, cv::Mat \&prob\_lut);}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61     cv::Mat \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_af48af6ac179513b419201b5ccf3a705a}{getForegroundDistractorProbs}}(cv::Mat frame, cv::Rect obj\_rect, std::vector<cv::Rect> distractors, \textcolor{keywordtype}{int} num\_bins);}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_addf3d325df6c0a8170bb84ba4e766b3a}{getAdaptiveThreshold}}(cv::Mat prob\_map, cv::Rect obj\_rect\_surr);}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65     cv::Mat \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_ac66e2c02be7a309f68f253113da1ae24}{getForegroundProb}}(cv::Mat frame, cv::Mat prob\_lut, cv::Mat bin\_mapping);}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67     cv::Mat \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_a5379dc93077031e17ddfc093aad0a29c}{CalculateHann}}(cv::Size sz);}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_ab9d5e63fa410901d33ddb532931bd966}{intersectionOverUnion}}(cv::Rect target\_rect, cv::Rect candidates);}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_a87909e6208333e36fe5c41117599bbcc}{getSubwindowMasked}}(cv::Mat im, cv::Point pos, cv::Size sz, cv::Mat \&out, cv::Mat \&mask);}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73     cv::Point \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_ae196ccd8c024e7f0f481ecfb9e53fa87}{getMotionPrediction}}(std::vector<cv::Point>values, \textcolor{keywordtype}{int} maxNumFrames);}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75     cv::Rect \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_af301cf8255fa6bfe9fba1857abc30b43}{pos2rect}}(cv::Point obj\_center, cv::Size obj\_size, cv::Size win\_size);}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77     cv::Rect \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_af301cf8255fa6bfe9fba1857abc30b43}{pos2rect}}(cv::Point obj\_center, cv::Size obj\_size);}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79     cv::Mat \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_a5f3b26915ac4bf9c5ac4466dea9124c8}{getSubwindow}}(\textcolor{keyword}{const} cv::Mat \&frame, cv::Point centerCoor, cv::Size sz);}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81     \mbox{\hyperlink{structdat__cfg}{dat\_cfg}} \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_abb640a6f4e330941ef88d60f062172f4}{default\_parameters\_dat}}(\mbox{\hyperlink{structdat__cfg}{dat\_cfg}} \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_a04da02b1ed0532270c3cd6f6b71caddd}{cfg}});}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83 \textcolor{keyword}{private}:}
+\DoxyCodeLine{84     \mbox{\hyperlink{structdat__cfg}{dat\_cfg}} \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_a04da02b1ed0532270c3cd6f6b71caddd}{cfg}};}
+\DoxyCodeLine{85     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_ab092ed22e08f4c74a11a77de8dc236de}{scale\_factor\_}};}
+\DoxyCodeLine{86     cv::Mat \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_ad01447de00f0da2cdc5e20be4598d623}{prob\_lut\_}};}
+\DoxyCodeLine{87     cv::Mat \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_a0f4a260f43f236480faaad759d05cbeb}{prob\_lut\_distractor\_}};}
+\DoxyCodeLine{88     cv::Mat \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_ae6ae092c61938d049e04b48f23574e45}{prob\_lut\_masked\_}};}
+\DoxyCodeLine{89     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_aeb6510da5ae67d5f513c3029251d5edb}{adaptive\_threshold\_}};}
+\DoxyCodeLine{90     std::vector<cv::Point>\mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_a8f5bca684d10c0302255270424d2ce37}{target\_pos\_history\_}};}
+\DoxyCodeLine{91     std::vector<cv::Size>\mbox{\hyperlink{class_d_a_t___t_r_a_c_k_e_r_aaed7d1ee5dc6edf366bfb161b06f1ce6}{target\_sz\_history\_}};}
+\DoxyCodeLine{92 \};}
+
+\end{DoxyCode}

@@ -1,0 +1,183 @@
+\hypertarget{fhog_8hpp_source}{}\doxysection{fhog.\+hpp}
+\label{fhog_8hpp_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/ldes/fhog.hpp@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/ldes/fhog.hpp}}
+\mbox{\hyperlink{fhog_8hpp}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*M///////////////////////////////////////////////////////////////////////////////////////}}
+\DoxyCodeLine{2 \textcolor{comment}{//}}
+\DoxyCodeLine{3 \textcolor{comment}{//  IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 \textcolor{comment}{//  By downloading, copying, installing or using the software you agree to this license.}}
+\DoxyCodeLine{6 \textcolor{comment}{//  If you do not agree to this license, do not download, install,}}
+\DoxyCodeLine{7 \textcolor{comment}{//  copy or use the software.}}
+\DoxyCodeLine{8 \textcolor{comment}{//}}
+\DoxyCodeLine{9 \textcolor{comment}{//}}
+\DoxyCodeLine{10 \textcolor{comment}{//                           License Agreement}}
+\DoxyCodeLine{11 \textcolor{comment}{//                For Open Source Computer Vision Library}}
+\DoxyCodeLine{12 \textcolor{comment}{//}}
+\DoxyCodeLine{13 \textcolor{comment}{// Copyright (C) 2010-\/2013, University of Nizhny Novgorod, all rights reserved.}}
+\DoxyCodeLine{14 \textcolor{comment}{// Third party copyrights are property of their respective owners.}}
+\DoxyCodeLine{15 \textcolor{comment}{//}}
+\DoxyCodeLine{16 \textcolor{comment}{// Redistribution and use in source and binary forms, with or without modification,}}
+\DoxyCodeLine{17 \textcolor{comment}{// are permitted provided that the following conditions are met:}}
+\DoxyCodeLine{18 \textcolor{comment}{//}}
+\DoxyCodeLine{19 \textcolor{comment}{//   * Redistribution's of source code must retain the above copyright notice,}}
+\DoxyCodeLine{20 \textcolor{comment}{//     this list of conditions and the following disclaimer.}}
+\DoxyCodeLine{21 \textcolor{comment}{//}}
+\DoxyCodeLine{22 \textcolor{comment}{//   * Redistribution's in binary form must reproduce the above copyright notice,}}
+\DoxyCodeLine{23 \textcolor{comment}{//     this list of conditions and the following disclaimer in the documentation}}
+\DoxyCodeLine{24 \textcolor{comment}{//     and/or other materials provided with the distribution.}}
+\DoxyCodeLine{25 \textcolor{comment}{//}}
+\DoxyCodeLine{26 \textcolor{comment}{//   * The name of the copyright holders may not be used to endorse or promote products}}
+\DoxyCodeLine{27 \textcolor{comment}{//     derived from this software without specific prior written permission.}}
+\DoxyCodeLine{28 \textcolor{comment}{//}}
+\DoxyCodeLine{29 \textcolor{comment}{// This software is provided by the copyright holders and contributors "{}as is"{} and}}
+\DoxyCodeLine{30 \textcolor{comment}{// any express or implied warranties, including, but not limited to, the implied}}
+\DoxyCodeLine{31 \textcolor{comment}{// warranties of merchantability and fitness for a particular purpose are disclaimed.}}
+\DoxyCodeLine{32 \textcolor{comment}{// In no event shall the Intel Corporation or contributors be liable for any direct,}}
+\DoxyCodeLine{33 \textcolor{comment}{// indirect, incidental, special, exemplary, or consequential damages}}
+\DoxyCodeLine{34 \textcolor{comment}{// (including, but not limited to, procurement of substitute goods or services;}}
+\DoxyCodeLine{35 \textcolor{comment}{// loss of use, data, or profits; or business interruption) however caused}}
+\DoxyCodeLine{36 \textcolor{comment}{// and on any theory of liability, whether in contract, strict liability,}}
+\DoxyCodeLine{37 \textcolor{comment}{// or tort (including negligence or otherwise) arising in any way out of}}
+\DoxyCodeLine{38 \textcolor{comment}{// the use of this software, even if advised of the possibility of such damage.}}
+\DoxyCodeLine{39 \textcolor{comment}{//}}
+\DoxyCodeLine{40 \textcolor{comment}{//M*/}}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 \textcolor{comment}{//Modified from latentsvm module's "{}\_lsvmc\_latentsvm.h"{}.}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{comment}{/*****************************************************************************/}}
+\DoxyCodeLine{47 \textcolor{comment}{/*                      Latent SVM prediction API                            */}}
+\DoxyCodeLine{48 \textcolor{comment}{/*****************************************************************************/}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#ifndef \_FHOG\_H\_}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#define \_FHOG\_H\_}}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{54 \textcolor{comment}{//\#include "{}\_lsvmc\_types.h"{}}}
+\DoxyCodeLine{55 \textcolor{comment}{//\#include "{}\_lsvmc\_error.h"{}}}
+\DoxyCodeLine{56 \textcolor{comment}{//\#include "{}\_lsvmc\_routine.h"{}}}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58 \textcolor{preprocessor}{\#include <opencv2/imgproc.hpp>}}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{comment}{//modified from "{}\_lsvmc\_types.h"{}}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63 \textcolor{comment}{// DataType: STRUCT featureMap}}
+\DoxyCodeLine{64 \textcolor{comment}{// FEATURE MAP DESCRIPTION}}
+\DoxyCodeLine{65 \textcolor{comment}{//   Rectangular map (sizeX x sizeY), }}
+\DoxyCodeLine{66 \textcolor{comment}{//   every cell stores feature vector (dimension = numFeatures)}}
+\DoxyCodeLine{67 \textcolor{comment}{// map             -\/ matrix of feature vectors}}
+\DoxyCodeLine{68 \textcolor{comment}{//                   to set and get feature vectors (i,j) }}
+\DoxyCodeLine{69 \textcolor{comment}{//                   used formula map[(j * sizeX + i) * p + k], where}}
+\DoxyCodeLine{70 \textcolor{comment}{//                   k -\/ component of feature vector in cell (i, j)}}
+\DoxyCodeLine{71 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}\{}
+\DoxyCodeLine{72     \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_cv_l_s_v_m_feature_map_caskade_a44871b8ea18991e52d84a8d6712c6568}{sizeX}};}
+\DoxyCodeLine{73     \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_cv_l_s_v_m_feature_map_caskade_a1a366b92065c42fccbd15a346f536334}{sizeY}};}
+\DoxyCodeLine{74     \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_cv_l_s_v_m_feature_map_caskade_af21ee5ff544db7eccfaca657fe505bb2}{numFeatures}};}
+\DoxyCodeLine{75     \textcolor{keywordtype}{float} *\mbox{\hyperlink{struct_cv_l_s_v_m_feature_map_caskade_a532eeb182fa8954b411c3ec905d16184}{map}};}
+\DoxyCodeLine{76 \} \mbox{\hyperlink{struct_cv_l_s_v_m_feature_map_caskade}{CvLSVMFeatureMapCaskade}};}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79 \textcolor{preprocessor}{\#include "{}float.h"{}}}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#define PI    CV\_PI}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83 \textcolor{preprocessor}{\#define EPS 0.000001}}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85 \textcolor{preprocessor}{\#define F\_MAX FLT\_MAX}}
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#define F\_MIN -\/FLT\_MAX}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88 \textcolor{comment}{// The number of elements in bin}}
+\DoxyCodeLine{89 \textcolor{comment}{// The number of sectors in gradient histogram building}}
+\DoxyCodeLine{90 \textcolor{preprocessor}{\#define NUM\_SECTOR 9}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92 \textcolor{comment}{// The number of levels in image resize procedure}}
+\DoxyCodeLine{93 \textcolor{comment}{// We need Lambda levels to resize image twice}}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#define LAMBDA 10}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96 \textcolor{comment}{// Block size. Used in feature pyramid building procedure}}
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#define SIDE\_LENGTH 8}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#define VAL\_OF\_TRUNCATE 0.2f }}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102 \textcolor{comment}{//modified from "{}\_lsvm\_error.h"{}}}
+\DoxyCodeLine{103 \textcolor{preprocessor}{\#define LATENT\_SVM\_OK 0}}
+\DoxyCodeLine{104 \textcolor{preprocessor}{\#define LATENT\_SVM\_MEM\_NULL 2}}
+\DoxyCodeLine{105 \textcolor{preprocessor}{\#define DISTANCE\_TRANSFORM\_OK 1}}
+\DoxyCodeLine{106 \textcolor{preprocessor}{\#define DISTANCE\_TRANSFORM\_GET\_INTERSECTION\_ERROR -\/1}}
+\DoxyCodeLine{107 \textcolor{preprocessor}{\#define DISTANCE\_TRANSFORM\_ERROR -\/2}}
+\DoxyCodeLine{108 \textcolor{preprocessor}{\#define DISTANCE\_TRANSFORM\_EQUAL\_POINTS -\/3}}
+\DoxyCodeLine{109 \textcolor{preprocessor}{\#define LATENT\_SVM\_GET\_FEATURE\_PYRAMID\_FAILED -\/4}}
+\DoxyCodeLine{110 \textcolor{preprocessor}{\#define LATENT\_SVM\_SEARCH\_OBJECT\_FAILED -\/5}}
+\DoxyCodeLine{111 \textcolor{preprocessor}{\#define LATENT\_SVM\_FAILED\_SUPERPOSITION -\/6}}
+\DoxyCodeLine{112 \textcolor{preprocessor}{\#define FILTER\_OUT\_OF\_BOUNDARIES -\/7}}
+\DoxyCodeLine{113 \textcolor{preprocessor}{\#define LATENT\_SVM\_TBB\_SCHEDULE\_CREATION\_FAILED -\/8}}
+\DoxyCodeLine{114 \textcolor{preprocessor}{\#define LATENT\_SVM\_TBB\_NUMTHREADS\_NOT\_CORRECT -\/9}}
+\DoxyCodeLine{115 \textcolor{preprocessor}{\#define FFT\_OK 2}}
+\DoxyCodeLine{116 \textcolor{preprocessor}{\#define FFT\_ERROR -\/10}}
+\DoxyCodeLine{117 \textcolor{preprocessor}{\#define LSVM\_PARSER\_FILE\_NOT\_FOUND -\/11}}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121 \textcolor{comment}{/*}}
+\DoxyCodeLine{122 \textcolor{comment}{// Getting feature map for the selected subimage  }}
+\DoxyCodeLine{123 \textcolor{comment}{//}}
+\DoxyCodeLine{124 \textcolor{comment}{// API}}
+\DoxyCodeLine{125 \textcolor{comment}{// int getFeatureMaps(const cv::Mat\& image, const int k, featureMap **map);}}
+\DoxyCodeLine{126 \textcolor{comment}{// INPUT}}
+\DoxyCodeLine{127 \textcolor{comment}{// image             -\/ selected subimage}}
+\DoxyCodeLine{128 \textcolor{comment}{// k                 -\/ size of cells}}
+\DoxyCodeLine{129 \textcolor{comment}{// OUTPUT}}
+\DoxyCodeLine{130 \textcolor{comment}{// map               -\/ feature map}}
+\DoxyCodeLine{131 \textcolor{comment}{// RESULT}}
+\DoxyCodeLine{132 \textcolor{comment}{// Error status}}
+\DoxyCodeLine{133 \textcolor{comment}{*/}}
+\DoxyCodeLine{134 \textcolor{keywordtype}{int} \mbox{\hyperlink{fhog_8hpp_a647913ecf376186d56a1dc1e75a26399}{getFeatureMaps}}(\textcolor{keyword}{const} cv::Mat\& \mbox{\hyperlink{structimage}{image}}, \textcolor{keyword}{const} \textcolor{keywordtype}{int} k, \mbox{\hyperlink{struct_cv_l_s_v_m_feature_map_caskade}{CvLSVMFeatureMapCaskade}} **map);}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137 \textcolor{comment}{/*}}
+\DoxyCodeLine{138 \textcolor{comment}{// Feature map Normalization and Truncation }}
+\DoxyCodeLine{139 \textcolor{comment}{//}}
+\DoxyCodeLine{140 \textcolor{comment}{// API}}
+\DoxyCodeLine{141 \textcolor{comment}{// int normalizationAndTruncationFeatureMaps(featureMap *map, const float alfa);}}
+\DoxyCodeLine{142 \textcolor{comment}{// INPUT}}
+\DoxyCodeLine{143 \textcolor{comment}{// map               -\/ feature map}}
+\DoxyCodeLine{144 \textcolor{comment}{// alfa              -\/ truncation threshold}}
+\DoxyCodeLine{145 \textcolor{comment}{// OUTPUT}}
+\DoxyCodeLine{146 \textcolor{comment}{// map               -\/ truncated and normalized feature map}}
+\DoxyCodeLine{147 \textcolor{comment}{// RESULT}}
+\DoxyCodeLine{148 \textcolor{comment}{// Error status}}
+\DoxyCodeLine{149 \textcolor{comment}{*/}}
+\DoxyCodeLine{150 \textcolor{keywordtype}{int} \mbox{\hyperlink{fhog_8hpp_a4d72bd91b0a5ba99cd4ac0d30531d921}{normalizeAndTruncate}}(\mbox{\hyperlink{struct_cv_l_s_v_m_feature_map_caskade}{CvLSVMFeatureMapCaskade}} *map, \textcolor{keyword}{const} \textcolor{keywordtype}{float} alfa);}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152 \textcolor{comment}{/*}}
+\DoxyCodeLine{153 \textcolor{comment}{// Feature map reduction}}
+\DoxyCodeLine{154 \textcolor{comment}{// In each cell we reduce dimension of the feature vector}}
+\DoxyCodeLine{155 \textcolor{comment}{// according to original paper special procedure}}
+\DoxyCodeLine{156 \textcolor{comment}{//}}
+\DoxyCodeLine{157 \textcolor{comment}{// API}}
+\DoxyCodeLine{158 \textcolor{comment}{// int PCAFeatureMaps(featureMap *map)}}
+\DoxyCodeLine{159 \textcolor{comment}{// INPUT}}
+\DoxyCodeLine{160 \textcolor{comment}{// map               -\/ feature map}}
+\DoxyCodeLine{161 \textcolor{comment}{// OUTPUT}}
+\DoxyCodeLine{162 \textcolor{comment}{// map               -\/ feature map}}
+\DoxyCodeLine{163 \textcolor{comment}{// RESULT}}
+\DoxyCodeLine{164 \textcolor{comment}{// Error status}}
+\DoxyCodeLine{165 \textcolor{comment}{*/}}
+\DoxyCodeLine{166 \textcolor{keywordtype}{int} \mbox{\hyperlink{fhog_8hpp_a2519db8b7fb0548c8068476b45cac834}{PCAFeatureMaps}}(\mbox{\hyperlink{struct_cv_l_s_v_m_feature_map_caskade}{CvLSVMFeatureMapCaskade}} *map);}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{168 }
+\DoxyCodeLine{169 \textcolor{comment}{//modified from "{}lsvmc\_routine.h"{}}}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{171 \textcolor{keywordtype}{int} \mbox{\hyperlink{fhog_8hpp_a15d4195820d743b2d99f0d1311554cfc}{allocFeatureMapObject}}(\mbox{\hyperlink{struct_cv_l_s_v_m_feature_map_caskade}{CvLSVMFeatureMapCaskade}} **obj, \textcolor{keyword}{const} \textcolor{keywordtype}{int} sizeX, \textcolor{keyword}{const} \textcolor{keywordtype}{int} sizeY,}
+\DoxyCodeLine{172                           \textcolor{keyword}{const} \textcolor{keywordtype}{int} p);}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174 \textcolor{keywordtype}{int} \mbox{\hyperlink{fhog_8hpp_a08df84e370cca7ce93e290aa853a8fd7}{freeFeatureMapObject}} (\mbox{\hyperlink{struct_cv_l_s_v_m_feature_map_caskade}{CvLSVMFeatureMapCaskade}} **obj);}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,299 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: D:/zhr_files/Multitarget-tracker-master/src/Detector/tensorrt_yolo/plugin_factory.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">My Project
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_4c3458e0ccdb4c3720723c1caa1aaa1c.html">zhr_files</a></li><li class="navelem"><a class="el" href="dir_5a8d4bff745a16410b5074d3583a347e.html">Multitarget-tracker-master</a></li><li class="navelem"><a class="el" href="dir_46a27ab0460a6f8f8d12d2f44f38bf6b.html">src</a></li><li class="navelem"><a class="el" href="dir_458a7b7bb24e4af0790226fff519699f.html">Detector</a></li><li class="navelem"><a class="el" href="dir_8e643222b94d12c04b910a1af0a73cce.html">tensorrt_yolo</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">plugin_factory.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="plugin__factory_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#ifndef __PLUGIN_LAYER_H__</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#define __PLUGIN_LAYER_H__</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &lt;cassert&gt;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &lt;cstring&gt;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &lt;cudnn.h&gt;</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &quot;NvInfer.h&quot;</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="plugin__factory_8h.html#a82aa7fdee16976219b7f8933cf4e13de">   37</a></span><span class="preprocessor">#define NV_CUDA_CHECK(status)                                                                      \</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">    {                                                                                              \</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">        if (status != 0)                                                                           \</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">        {                                                                                          \</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">            std::cout &lt;&lt; &quot;Cuda failure: &quot;</span> &lt;&lt; cudaGetErrorString(status) &lt;&lt; &quot; in file &quot; &lt;&lt; __FILE__ \</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>                      &lt;&lt; &quot; at line &quot; &lt;&lt; __LINE__ &lt;&lt; std::endl;                                     \</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            abort();                                                                               \</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        }                                                                                          \</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    }</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">// Forward declaration of cuda kernels</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="plugin__factory_8h.html#a9473606718eea68531a6f5e65005f89b">   48</a></span>cudaError_t <a class="code hl_function" href="plugin__factory_8h.html#a9473606718eea68531a6f5e65005f89b">cudaYoloLayerV3</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* input, <span class="keywordtype">void</span>* output, <span class="keyword">const</span> uint32_t&amp; batchSize,</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keyword">const</span> uint32_t&amp; n_grid_h_, <span class="keyword">const</span> uint32_t&amp; n_grid_w_,</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keyword">const</span> uint32_t&amp; numOutputClasses, <span class="keyword">const</span> uint32_t&amp; numBBoxes,</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    uint64_t outputSize, cudaStream_t stream);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">//class PluginFactory : public nvinfer1::IPluginFactory</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">//{</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">//</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">//public:</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">//    PluginFactory();</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">//    nvinfer1::IPlugin* createPlugin(const char* layerName, const void* serialData,</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">//                                    size_t serialLength);</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">//    bool isPlugin(const char* name);</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">//    void destroy();</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">//</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">//private:</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">//    static const int m_MaxLeakyLayers = 72;</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">//    static const int m_ReorgStride = 2;</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment">//    static constexpr float m_LeakyNegSlope = 0.1f;</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">//    static const int m_NumBoxes = 5;</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">//    static const int m_NumCoords = 4;</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">//    static const int m_NumClasses = 80;</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="comment">//    static const int m_MaxYoloLayers = 3;</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">//    int m_LeakyReLUCount = 0;</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">//    int m_YoloLayerCount = 0;</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">//    nvinfer1::plugin::RegionParameters m_RegionParameters{m_NumBoxes, m_NumCoords, m_NumClasses,</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment">//                                                          nullptr};</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">//</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment">//    struct INvPluginDeleter</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">//    {</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">//        void operator()(nvinfer1::plugin::INvPlugin* ptr)</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">//        {</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">//            if (ptr)</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">//            {</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">//                ptr-&gt;destroy();</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">//            }</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">//        }</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment">//    };</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment">//    struct IPluginDeleter</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">//    {</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">//        void operator()(nvinfer1::IPlugin* ptr)</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">//        {</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment">//            if (ptr)</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">//            {</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment">//                ptr-&gt;terminate();</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment">//            }</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment">//        }</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment">//    };</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment">//    typedef std::unique_ptr&lt;nvinfer1::plugin::INvPlugin, INvPluginDeleter&gt; unique_ptr_INvPlugin;</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">//    typedef std::unique_ptr&lt;nvinfer1::IPlugin, IPluginDeleter&gt; unique_ptr_IPlugin;</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">//</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment">//    unique_ptr_INvPlugin m_ReorgLayer;</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">//    unique_ptr_INvPlugin m_RegionLayer;</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">//    unique_ptr_INvPlugin m_LeakyReLULayers[m_MaxLeakyLayers];</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment">//    unique_ptr_IPlugin m_YoloLayers[m_MaxYoloLayers];</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment">//};</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacenvinfer1.html">nvinfer1</a></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>{</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="namespacenvinfer1.html#adb7e28fc142f6b26d9988688f9267dbb">  107</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacenvinfer1.html#adb7e28fc142f6b26d9988688f9267dbb">wr</a>(<span class="keywordtype">char</span>*&amp; <a class="code hl_class" href="classbuffer.html">buffer</a>, <span class="keyword">const</span> T&amp; val)</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        *<span class="keyword">reinterpret_cast&lt;</span>T*<span class="keyword">&gt;</span>(<a class="code hl_class" href="classbuffer.html">buffer</a>) = val;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        <a class="code hl_class" href="classbuffer.html">buffer</a> += <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    }</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="namespacenvinfer1.html#affff5bb340299fdfe10dcff3ff9dffca">  114</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacenvinfer1.html#affff5bb340299fdfe10dcff3ff9dffca">re</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>*&amp; <a class="code hl_class" href="classbuffer.html">buffer</a>, T&amp; val)</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        val = *<span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span>T*<span class="keyword">&gt;</span>(<a class="code hl_class" href="classbuffer.html">buffer</a>);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <a class="code hl_class" href="classbuffer.html">buffer</a> += <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    }</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_yolo_layer.html">  120</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classnvinfer1_1_1_yolo_layer.html">YoloLayer</a> : <span class="keyword">public</span> IPluginV2</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    {</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="keyword">explicit</span> <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer.html#a336adf29bbebd31d9fe1b6b394e1fe6e">YoloLayer</a>();</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer.html#a336adf29bbebd31d9fe1b6b394e1fe6e">YoloLayer</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* <a class="code hl_struct" href="structdata.html">data</a>, <span class="keywordtype">size_t</span> length);</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer.html#a336adf29bbebd31d9fe1b6b394e1fe6e">YoloLayer</a>(<span class="keyword">const</span> uint32_t&amp; numBoxes, <span class="keyword">const</span> uint32_t&amp; numClasses, <span class="keyword">const</span> uint32_t&amp; grid_h_, <span class="keyword">const</span> uint32_t &amp;grid_w_);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <span class="keywordtype">int</span> <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer.html#a0d8f6f42bb1412e2d7ae0bf00bffb8cc">getNbOutputs</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span> <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        nvinfer1::Dims <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer.html#a0ea4d6511ce5daa60ed65bfd54c34dc9">getOutputDimensions</a>(<span class="keywordtype">int</span> index, <span class="keyword">const</span> nvinfer1::Dims* inputs,</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            <span class="keywordtype">int</span> nbInputDims)<span class="keyword">noexcept</span> <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <span class="comment">/*void configure(const nvinfer1::Dims* inputDims, int nbInputs, const nvinfer1::Dims* outputDims,</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment">                       int nbOutputs, int maxBatchSize)noexcept override;*/</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>                       <span class="comment">/*void configure(const nvinfer1::Dims* inputDims, int nbInputs,</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="comment">                           const nvinfer1::Dims* outputDims, int nbOutputs, int maxBatchSize)noexcept override;*/</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        <span class="keywordtype">int</span> <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer.html#ae6073c0a144c2d0d63aebacb09f473db">initialize</a>()<span class="keyword">noexcept</span> <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer.html#a52e6bbcd6968b8e5aaaa8650e9dbdaf6">terminate</a>()<span class="keyword">noexcept</span> <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="keywordtype">size_t</span> <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer.html#ad9241538014e74c6f8c419c98741ff16">getWorkspaceSize</a>(<span class="keywordtype">int</span> maxBatchSize) <span class="keyword">const</span> <span class="keyword">noexcept</span> <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        <span class="keywordtype">int</span> <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer.html#a27a6f6f2dad0f6e298ec7a256825a692">enqueue</a>(<span class="keywordtype">int</span> batchSize, <span class="keyword">const</span> <span class="keywordtype">void</span>* <span class="keyword">const</span>* inputs, <span class="keywordtype">void</span>** outputs, <span class="keywordtype">void</span>* workspace, cudaStream_t stream) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        <span class="keywordtype">int</span> <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer.html#a27a6f6f2dad0f6e298ec7a256825a692">enqueue</a>(<span class="keywordtype">int</span> batchSize, <span class="keyword">const</span> <span class="keywordtype">void</span>* <span class="keyword">const</span>* inputs, <span class="keywordtype">void</span>* <span class="keyword">const</span>* outputs, <span class="keywordtype">void</span>* workspace, cudaStream_t stream) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        <span class="keywordtype">size_t</span> <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer.html#aaf4c95a6e08061a0721c5e88dddf3a1d">getSerializationSize</a>() <span class="keyword">const</span> <span class="keyword">noexcept</span>  <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer.html#a0640ec928c336b8c852cadbacceff554">serialize</a>(<span class="keywordtype">void</span>* <a class="code hl_class" href="classbuffer.html">buffer</a>) <span class="keyword">const</span> <span class="keyword">noexcept</span>  <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_yolo_layer.html#a82d6f0f759ce68b765c661f6ae070f16">  145</a></span>        <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer.html#a82d6f0f759ce68b765c661f6ae070f16">getPluginType</a>() const noexcept<span class="keyword">  override</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="keyword">        </span>{</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            <span class="keywordflow">return</span> <span class="stringliteral">&quot;YOLO_TRT&quot;</span>;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        }</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer.html#a7e559e4088a796e20c84eed8db359003">supportsFormat</a>(DataType type, PluginFormat format) <span class="keyword">const</span> <span class="keyword">noexcept</span> <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer.html#a572c4150106b44a372e489b32fd1a417">configureWithFormat</a>(<span class="keyword">const</span> Dims* inputDims, <span class="keywordtype">int</span> nbInputs, <span class="keyword">const</span> Dims* outputDims, <span class="keywordtype">int</span> nbOutputs, DataType type, PluginFormat format, <span class="keywordtype">int</span> maxBatchSize) <span class="keyword">noexcept</span> <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_yolo_layer.html#aa24abe216e23a02a722343a3aa6572cc">  152</a></span>        <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer.html#aa24abe216e23a02a722343a3aa6572cc">getPluginVersion</a>() const noexcept<span class="keyword">  override</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="keyword">        </span>{</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            <span class="keywordflow">return</span> <span class="stringliteral">&quot;1.0&quot;</span>;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        }</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_yolo_layer.html#a8ab0954f91f3ef07012db2537847d297">  157</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer.html#a8ab0954f91f3ef07012db2537847d297">setPluginNamespace</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* pluginNamespace) <span class="keyword">noexcept</span>  <span class="keyword">override</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        {</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>            <a class="code hl_variable" href="classnvinfer1_1_1_yolo_layer.html#a7c819999b570eed925263982d7303b2a">_s_plugin_namespace</a> = pluginNamespace;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        }</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_yolo_layer.html#a23d69057091cba3a2804b8e1b40f2e84">  161</a></span>        <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer.html#a23d69057091cba3a2804b8e1b40f2e84">getPluginNamespace</a>() const  noexcept<span class="keyword"> override</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="keyword">        </span>{</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="classnvinfer1_1_1_yolo_layer.html#a7c819999b570eed925263982d7303b2a">_s_plugin_namespace</a>.c_str();</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        }</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_yolo_layer.html#a44d811adbeaf438d43e78d18e8888e25">  165</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer.html#a44d811adbeaf438d43e78d18e8888e25">destroy</a>() noexcept<span class="keyword">  override</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="keyword">        </span>{</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>            <span class="keyword">delete</span> <span class="keyword">this</span>;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        }</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        IPluginV2* <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer.html#a31b0a8cff22326577d6d588e5fc47b59">clone</a>() const noexcept override;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    private:</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_yolo_layer.html#a7c819999b570eed925263982d7303b2a">  172</a></span>        <a class="code hl_namespace" href="namespacestd.html">std</a>::<span class="keywordtype">string</span> <a class="code hl_variable" href="classnvinfer1_1_1_yolo_layer.html#a7c819999b570eed925263982d7303b2a">_s_plugin_namespace</a>;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_yolo_layer.html#a26aecb82db109acdf36abdf61722c87c">  173</a></span>        uint32_t <a class="code hl_variable" href="classnvinfer1_1_1_yolo_layer.html#a26aecb82db109acdf36abdf61722c87c">m_NumBoxes</a>;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_yolo_layer.html#a25c64f177f02dfc3d67b603b061a954e">  174</a></span>        uint32_t <a class="code hl_variable" href="classnvinfer1_1_1_yolo_layer.html#a25c64f177f02dfc3d67b603b061a954e">m_NumClasses</a>;</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_yolo_layer.html#a2ad9a2427e3f9b7c5650f2b7c1fc8c84">  175</a></span>        uint32_t <a class="code hl_variable" href="classnvinfer1_1_1_yolo_layer.html#a2ad9a2427e3f9b7c5650f2b7c1fc8c84">m_GridSize</a>;</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_yolo_layer.html#a223ad79ed11cf3a8572488966f72bdd8">  176</a></span>        uint64_t <a class="code hl_variable" href="classnvinfer1_1_1_yolo_layer.html#a223ad79ed11cf3a8572488966f72bdd8">m_OutputSize</a>;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_yolo_layer.html#ac34bc53f362dc4dca7547fbf8c79892c">  177</a></span>        uint32_t <a class="code hl_variable" href="classnvinfer1_1_1_yolo_layer.html#ac34bc53f362dc4dca7547fbf8c79892c">_n_grid_h</a>;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_yolo_layer.html#ac5e2439d4b924f25dbdcb6be8f0e45df">  178</a></span>        uint32_t <a class="code hl_variable" href="classnvinfer1_1_1_yolo_layer.html#ac5e2439d4b924f25dbdcb6be8f0e45df">_n_grid_w</a>;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    };</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_yolo_layer_plugin_creator.html">  183</a></span>    class <a class="code hl_class" href="classnvinfer1_1_1_yolo_layer_plugin_creator.html">YoloLayerPluginCreator</a> : public IPluginCreator</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    {</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        <a class="code hl_class" href="classnvinfer1_1_1_yolo_layer_plugin_creator.html">YoloLayerPluginCreator</a>();</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_yolo_layer_plugin_creator.html#a665ff8c6d3edfcb5ab4eb8de4c8286e5">  188</a></span>        <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer_plugin_creator.html#a665ff8c6d3edfcb5ab4eb8de4c8286e5">~YoloLayerPluginCreator</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        <span class="keyword">const</span> <span class="keywordtype">char</span>* getPluginName() const noexcept  override;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        const <span class="keywordtype">char</span>* <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer.html#aa24abe216e23a02a722343a3aa6572cc">getPluginVersion</a>() const  noexcept override;</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        const PluginFieldCollection* getFieldNames() noexcept  override;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        IPluginV2* createPlugin(const <span class="keywordtype">char</span>* <a class="code hl_struct" href="structname.html">name</a>, const PluginFieldCollection* fc)  noexcept override;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        IPluginV2* deserializePlugin(const <span class="keywordtype">char</span>* <a class="code hl_struct" href="structname.html">name</a>, const <span class="keywordtype">void</span>* serialData, <span class="keywordtype">size_t</span> serialLength) noexcept  override;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer.html#a8ab0954f91f3ef07012db2537847d297">setPluginNamespace</a>(const <span class="keywordtype">char</span>* libNamespace) noexcept  override;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        const <span class="keywordtype">char</span>* <a class="code hl_function" href="classnvinfer1_1_1_yolo_layer.html#a23d69057091cba3a2804b8e1b40f2e84">getPluginNamespace</a>() const noexcept  override;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    private:</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_yolo_layer_plugin_creator.html#a61bbaeb38d3f5837b55575dd3a471651">  205</a></span>        <a class="code hl_namespace" href="namespacestd.html">std</a>::<span class="keywordtype">string</span> mNamespace;</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_yolo_layer_plugin_creator.html#aa7023bcf8a8d8ce4e55b6bf32ab8d9d2">  206</a></span>        static PluginFieldCollection mFC;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_yolo_layer_plugin_creator.html#abf5796e5f558c2b7e70c11ffc917c64e">  207</a></span>        static <a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;PluginField&gt; mPluginAttributes;</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    };</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>}</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="preprocessor">#endif </span><span class="comment">// __PLUGIN_LAYER_H__</span></div>
+<div class="ttc" id="aclassbuffer_html"><div class="ttname"><a href="classbuffer.html">buffer</a></div><div class="ttdef"><b>Definition:</b> pytypes.h:1311</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html">nvinfer1::YoloLayer</a></div><div class="ttdef"><b>Definition:</b> plugin_factory.h:121</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_a0640ec928c336b8c852cadbacceff554"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#a0640ec928c336b8c852cadbacceff554">nvinfer1::YoloLayer::serialize</a></div><div class="ttdeci">void serialize(void *buffer) const noexcept override</div><div class="ttdef"><b>Definition:</b> plugin_factory.cpp:23</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_a0d8f6f42bb1412e2d7ae0bf00bffb8cc"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#a0d8f6f42bb1412e2d7ae0bf00bffb8cc">nvinfer1::YoloLayer::getNbOutputs</a></div><div class="ttdeci">int getNbOutputs() const noexcept override</div><div class="ttdef"><b>Definition:</b> plugin_factory.cpp:63</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_a0ea4d6511ce5daa60ed65bfd54c34dc9"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#a0ea4d6511ce5daa60ed65bfd54c34dc9">nvinfer1::YoloLayer::getOutputDimensions</a></div><div class="ttdeci">nvinfer1::Dims getOutputDimensions(int index, const nvinfer1::Dims *inputs, int nbInputDims) noexcept override</div><div class="ttdef"><b>Definition:</b> plugin_factory.cpp:65</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_a223ad79ed11cf3a8572488966f72bdd8"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#a223ad79ed11cf3a8572488966f72bdd8">nvinfer1::YoloLayer::m_OutputSize</a></div><div class="ttdeci">uint64_t m_OutputSize</div><div class="ttdef"><b>Definition:</b> plugin_factory.h:176</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_a23d69057091cba3a2804b8e1b40f2e84"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#a23d69057091cba3a2804b8e1b40f2e84">nvinfer1::YoloLayer::getPluginNamespace</a></div><div class="ttdeci">const char * getPluginNamespace() const noexcept override</div><div class="ttdef"><b>Definition:</b> plugin_factory.h:161</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_a25c64f177f02dfc3d67b603b061a954e"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#a25c64f177f02dfc3d67b603b061a954e">nvinfer1::YoloLayer::m_NumClasses</a></div><div class="ttdeci">uint32_t m_NumClasses</div><div class="ttdef"><b>Definition:</b> plugin_factory.h:174</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_a26aecb82db109acdf36abdf61722c87c"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#a26aecb82db109acdf36abdf61722c87c">nvinfer1::YoloLayer::m_NumBoxes</a></div><div class="ttdeci">uint32_t m_NumBoxes</div><div class="ttdef"><b>Definition:</b> plugin_factory.h:173</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_a27a6f6f2dad0f6e298ec7a256825a692"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#a27a6f6f2dad0f6e298ec7a256825a692">nvinfer1::YoloLayer::enqueue</a></div><div class="ttdeci">int enqueue(int batchSize, const void *const *inputs, void **outputs, void *workspace, cudaStream_t stream) noexcept</div><div class="ttdef"><b>Definition:</b> plugin_factory.cpp:100</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_a2ad9a2427e3f9b7c5650f2b7c1fc8c84"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#a2ad9a2427e3f9b7c5650f2b7c1fc8c84">nvinfer1::YoloLayer::m_GridSize</a></div><div class="ttdeci">uint32_t m_GridSize</div><div class="ttdef"><b>Definition:</b> plugin_factory.h:175</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_a31b0a8cff22326577d6d588e5fc47b59"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#a31b0a8cff22326577d6d588e5fc47b59">nvinfer1::YoloLayer::clone</a></div><div class="ttdeci">IPluginV2 * clone() const noexcept override</div><div class="ttdef"><b>Definition:</b> plugin_factory.cpp:43</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_a336adf29bbebd31d9fe1b6b394e1fe6e"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#a336adf29bbebd31d9fe1b6b394e1fe6e">nvinfer1::YoloLayer::YoloLayer</a></div><div class="ttdeci">YoloLayer()</div><div class="ttdef"><b>Definition:</b> plugin_factory.cpp:10</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_a44d811adbeaf438d43e78d18e8888e25"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#a44d811adbeaf438d43e78d18e8888e25">nvinfer1::YoloLayer::destroy</a></div><div class="ttdeci">void destroy() noexcept override</div><div class="ttdef"><b>Definition:</b> plugin_factory.h:165</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_a52e6bbcd6968b8e5aaaa8650e9dbdaf6"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#a52e6bbcd6968b8e5aaaa8650e9dbdaf6">nvinfer1::YoloLayer::terminate</a></div><div class="ttdeci">void terminate() noexcept override</div><div class="ttdef"><b>Definition:</b> plugin_factory.cpp:82</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_a572c4150106b44a372e489b32fd1a417"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#a572c4150106b44a372e489b32fd1a417">nvinfer1::YoloLayer::configureWithFormat</a></div><div class="ttdeci">void configureWithFormat(const Dims *inputDims, int nbInputs, const Dims *outputDims, int nbOutputs, DataType type, PluginFormat format, int maxBatchSize) noexcept override</div><div class="ttdef"><b>Definition:</b> plugin_factory.cpp:39</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_a7c819999b570eed925263982d7303b2a"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#a7c819999b570eed925263982d7303b2a">nvinfer1::YoloLayer::_s_plugin_namespace</a></div><div class="ttdeci">std::string _s_plugin_namespace</div><div class="ttdef"><b>Definition:</b> plugin_factory.h:172</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_a7e559e4088a796e20c84eed8db359003"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#a7e559e4088a796e20c84eed8db359003">nvinfer1::YoloLayer::supportsFormat</a></div><div class="ttdeci">bool supportsFormat(DataType type, PluginFormat format) const noexcept override</div><div class="ttdef"><b>Definition:</b> plugin_factory.cpp:34</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_a82d6f0f759ce68b765c661f6ae070f16"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#a82d6f0f759ce68b765c661f6ae070f16">nvinfer1::YoloLayer::getPluginType</a></div><div class="ttdeci">const char * getPluginType() const noexcept override</div><div class="ttdef"><b>Definition:</b> plugin_factory.h:145</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_a8ab0954f91f3ef07012db2537847d297"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#a8ab0954f91f3ef07012db2537847d297">nvinfer1::YoloLayer::setPluginNamespace</a></div><div class="ttdeci">void setPluginNamespace(const char *pluginNamespace) noexcept override</div><div class="ttdef"><b>Definition:</b> plugin_factory.h:157</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_aa24abe216e23a02a722343a3aa6572cc"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#aa24abe216e23a02a722343a3aa6572cc">nvinfer1::YoloLayer::getPluginVersion</a></div><div class="ttdeci">const char * getPluginVersion() const noexcept override</div><div class="ttdef"><b>Definition:</b> plugin_factory.h:152</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_aaf4c95a6e08061a0721c5e88dddf3a1d"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#aaf4c95a6e08061a0721c5e88dddf3a1d">nvinfer1::YoloLayer::getSerializationSize</a></div><div class="ttdeci">size_t getSerializationSize() const noexcept override</div><div class="ttdef"><b>Definition:</b> plugin_factory.cpp:109</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_ac34bc53f362dc4dca7547fbf8c79892c"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#ac34bc53f362dc4dca7547fbf8c79892c">nvinfer1::YoloLayer::_n_grid_h</a></div><div class="ttdeci">uint32_t _n_grid_h</div><div class="ttdef"><b>Definition:</b> plugin_factory.h:177</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_ac5e2439d4b924f25dbdcb6be8f0e45df"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#ac5e2439d4b924f25dbdcb6be8f0e45df">nvinfer1::YoloLayer::_n_grid_w</a></div><div class="ttdeci">uint32_t _n_grid_w</div><div class="ttdef"><b>Definition:</b> plugin_factory.h:178</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_ad9241538014e74c6f8c419c98741ff16"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#ad9241538014e74c6f8c419c98741ff16">nvinfer1::YoloLayer::getWorkspaceSize</a></div><div class="ttdeci">size_t getWorkspaceSize(int maxBatchSize) const noexcept override</div><div class="ttdef"><b>Definition:</b> plugin_factory.cpp:84</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_html_ae6073c0a144c2d0d63aebacb09f473db"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer.html#ae6073c0a144c2d0d63aebacb09f473db">nvinfer1::YoloLayer::initialize</a></div><div class="ttdeci">int initialize() noexcept override</div><div class="ttdef"><b>Definition:</b> plugin_factory.cpp:80</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_plugin_creator_html"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer_plugin_creator.html">nvinfer1::YoloLayerPluginCreator</a></div><div class="ttdef"><b>Definition:</b> plugin_factory.h:184</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_yolo_layer_plugin_creator_html_a665ff8c6d3edfcb5ab4eb8de4c8286e5"><div class="ttname"><a href="classnvinfer1_1_1_yolo_layer_plugin_creator.html#a665ff8c6d3edfcb5ab4eb8de4c8286e5">nvinfer1::YoloLayerPluginCreator::~YoloLayerPluginCreator</a></div><div class="ttdeci">~YoloLayerPluginCreator() override=default</div></div>
+<div class="ttc" id="anamespacenvinfer1_html"><div class="ttname"><a href="namespacenvinfer1.html">nvinfer1</a></div><div class="ttdef"><b>Definition:</b> chunk.h:20</div></div>
+<div class="ttc" id="anamespacenvinfer1_html_adb7e28fc142f6b26d9988688f9267dbb"><div class="ttname"><a href="namespacenvinfer1.html#adb7e28fc142f6b26d9988688f9267dbb">nvinfer1::wr</a></div><div class="ttdeci">void wr(char *&amp;buffer, const T &amp;val)</div><div class="ttdef"><b>Definition:</b> plugin_factory.h:107</div></div>
+<div class="ttc" id="anamespacenvinfer1_html_affff5bb340299fdfe10dcff3ff9dffca"><div class="ttname"><a href="namespacenvinfer1.html#affff5bb340299fdfe10dcff3ff9dffca">nvinfer1::re</a></div><div class="ttdeci">void re(const char *&amp;buffer, T &amp;val)</div><div class="ttdef"><b>Definition:</b> plugin_factory.h:114</div></div>
+<div class="ttc" id="anamespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdef"><b>Definition:</b> defines.h:76</div></div>
+<div class="ttc" id="aplugin__factory_8h_html_a9473606718eea68531a6f5e65005f89b"><div class="ttname"><a href="plugin__factory_8h.html#a9473606718eea68531a6f5e65005f89b">cudaYoloLayerV3</a></div><div class="ttdeci">cudaError_t cudaYoloLayerV3(const void *input, void *output, const uint32_t &amp;batchSize, const uint32_t &amp;n_grid_h_, const uint32_t &amp;n_grid_w_, const uint32_t &amp;numOutputClasses, const uint32_t &amp;numBBoxes, uint64_t outputSize, cudaStream_t stream)</div></div>
+<div class="ttc" id="astructdata_html"><div class="ttname"><a href="structdata.html">data</a></div><div class="ttdef"><b>Definition:</b> darknet.h:928</div></div>
+<div class="ttc" id="astructname_html"><div class="ttname"><a href="structname.html">name</a></div><div class="ttdoc">Annotation for function names</div><div class="ttdef"><b>Definition:</b> attr.h:33</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>

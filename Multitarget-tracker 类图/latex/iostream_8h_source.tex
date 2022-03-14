@@ -1,0 +1,154 @@
+\hypertarget{iostream_8h_source}{}\doxysection{iostream.\+h}
+\label{iostream_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/iostream.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/iostream.h}}
+\mbox{\hyperlink{iostream_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{    pybind11/iostream.h -\/-\/ Tools to assist with redirecting cout and cerr to Python}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{    Copyright (c) 2017 Henry F. Schreiner}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{    All rights reserved. Use of this source code is governed by a}}
+\DoxyCodeLine{7 \textcolor{comment}{    BSD-\/style license that can be found in the LICENSE file.}}
+\DoxyCodeLine{8 \textcolor{comment}{*/}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{pybind11_8h}{pybind11.h}}"{}}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <streambuf>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <ostream>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+\DoxyCodeLine{21 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{comment}{// Buffer that writes to Python instead of C++}}
+\DoxyCodeLine{24 class \mbox{\hyperlink{classpythonbuf}{pythonbuf}} : public \mbox{\hyperlink{namespacestd}{std}}::streambuf \{}
+\DoxyCodeLine{25 \textcolor{keyword}{private}:}
+\DoxyCodeLine{26     \textcolor{keyword}{using} \mbox{\hyperlink{classpythonbuf_ae6a60a6edacac3b16708496ec44b0dc4}{traits\_type}} = std::streambuf::traits\_type;}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28     \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{classpythonbuf_a4d329c5a0d2667fbb91d0e676248ec6f}{buf\_size}};}
+\DoxyCodeLine{29     std::unique\_ptr<char[]> \mbox{\hyperlink{classpythonbuf_aacff2aeb9c7c5b4499fa64ad08c6fdb6}{d\_buffer}};}
+\DoxyCodeLine{30     \textcolor{keywordtype}{object} \mbox{\hyperlink{classpythonbuf_a5b4bfdc4cb684f6618d96b34e41b81c1}{pywrite}};}
+\DoxyCodeLine{31     \textcolor{keywordtype}{object} \mbox{\hyperlink{classpythonbuf_a91848fbddde6a5b968d1ccb76683448a}{pyflush}};}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     \textcolor{keywordtype}{int} \mbox{\hyperlink{classpythonbuf_a10a434c60550f6e59d7aa7aae56676c1}{overflow}}(\textcolor{keywordtype}{int} c) \{}
+\DoxyCodeLine{34         \textcolor{keywordflow}{if} (!traits\_type::eq\_int\_type(c, traits\_type::eof())) \{}
+\DoxyCodeLine{35             *pptr() = traits\_type::to\_char\_type(c);}
+\DoxyCodeLine{36             pbump(1);}
+\DoxyCodeLine{37         \}}
+\DoxyCodeLine{38         \textcolor{keywordflow}{return} sync() == 0 ? traits\_type::not\_eof(c) : traits\_type::eof();}
+\DoxyCodeLine{39     \}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     \textcolor{keywordtype}{int} \mbox{\hyperlink{classpythonbuf_acdc3bebe66d129fc5db5f5714ebeaaa0}{sync}}() \{}
+\DoxyCodeLine{42         \textcolor{keywordflow}{if} (pbase() != pptr()) \{}
+\DoxyCodeLine{43             \textcolor{comment}{// This subtraction cannot be negative, so dropping the sign}}
+\DoxyCodeLine{44             \mbox{\hyperlink{classstr}{str}} line(pbase(), \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(pptr() -\/ pbase()));}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46             \{}
+\DoxyCodeLine{47                 \mbox{\hyperlink{classgil__scoped__acquire}{gil\_scoped\_acquire}} tmp;}
+\DoxyCodeLine{48                 pywrite(line);}
+\DoxyCodeLine{49                 pyflush();}
+\DoxyCodeLine{50             \}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52             setp(pbase(), epptr());}
+\DoxyCodeLine{53         \}}
+\DoxyCodeLine{54         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{55     \}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{keyword}{public}:}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59     \mbox{\hyperlink{classpythonbuf_a5286bd8cbedf23ec98a042dfdd55467d}{pythonbuf}}(\textcolor{keywordtype}{object} pyostream, \textcolor{keywordtype}{size\_t} buffer\_size = 1024)}
+\DoxyCodeLine{60         : buf\_size(buffer\_size),}
+\DoxyCodeLine{61           d\_buffer(new char[buf\_size]),}
+\DoxyCodeLine{62           pywrite(pyostream.attr(\textcolor{stringliteral}{"{}write"{}})),}
+\DoxyCodeLine{63           pyflush(pyostream.attr(\textcolor{stringliteral}{"{}flush"{}})) \{}
+\DoxyCodeLine{64         setp(d\_buffer.get(), d\_buffer.get() + buf\_size -\/ 1);}
+\DoxyCodeLine{65     \}}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67     \mbox{\hyperlink{classpythonbuf_a9277a4666dce480159b40c6b7bf2d413}{pythonbuf}}(\mbox{\hyperlink{classpythonbuf}{pythonbuf}}\&\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{70     \mbox{\hyperlink{classpythonbuf_a3f1ff4b8d6c45c702a64251a0212a79c}{\string~pythonbuf}}() \{}
+\DoxyCodeLine{71         sync();}
+\DoxyCodeLine{72     \}}
+\DoxyCodeLine{73 \};}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 }
+\DoxyCodeLine{102 class \mbox{\hyperlink{classscoped__ostream__redirect}{scoped\_ostream\_redirect}} \{}
+\DoxyCodeLine{103 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{104     std::streambuf *\mbox{\hyperlink{classscoped__ostream__redirect_a519992f77b1bfc432f151b2a890a85cf}{old}};}
+\DoxyCodeLine{105     std::ostream \&\mbox{\hyperlink{classscoped__ostream__redirect_a1d9b813b2e4e5bd72b1a735a9e9b13cb}{costream}};}
+\DoxyCodeLine{106     detail::pythonbuf \mbox{\hyperlink{classscoped__ostream__redirect_a8c3f64929efe3287aaa247f5c8d0559d}{buffer}};}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108 \textcolor{keyword}{public}:}
+\DoxyCodeLine{109     \mbox{\hyperlink{classscoped__ostream__redirect_ad03c41b00f3efb1753c75e9e5962e1cd}{scoped\_ostream\_redirect}}(}
+\DoxyCodeLine{110             std::ostream \&costream = std::cout,}
+\DoxyCodeLine{111             \textcolor{keywordtype}{object} pyostream = \mbox{\hyperlink{classmodule_a40817edef0ded5727701534bcded9982}{module::import}}(\textcolor{stringliteral}{"{}sys"{}}).attr(\textcolor{stringliteral}{"{}stdout"{}}))}
+\DoxyCodeLine{112         : costream(costream), \mbox{\hyperlink{classbuffer}{buffer}}(pyostream) \{}
+\DoxyCodeLine{113         old = costream.rdbuf(\&\mbox{\hyperlink{classbuffer}{buffer}});}
+\DoxyCodeLine{114     \}}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116     \mbox{\hyperlink{classscoped__ostream__redirect_a95ab99016f73336eb87d275ee88adfbf}{\string~scoped\_ostream\_redirect}}() \{}
+\DoxyCodeLine{117         costream.rdbuf(old);}
+\DoxyCodeLine{118     \}}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120     \mbox{\hyperlink{classscoped__ostream__redirect_a1246061ecc80a86fb4ccdaba343ce2fc}{scoped\_ostream\_redirect}}(\textcolor{keyword}{const} \mbox{\hyperlink{classscoped__ostream__redirect}{scoped\_ostream\_redirect}} \&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{121     \mbox{\hyperlink{classscoped__ostream__redirect_a2c7e1be131aaf58cc07bd103b376c500}{scoped\_ostream\_redirect}}(\mbox{\hyperlink{classscoped__ostream__redirect}{scoped\_ostream\_redirect}} \&\&other) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{122     \mbox{\hyperlink{classscoped__ostream__redirect}{scoped\_ostream\_redirect}} \&\mbox{\hyperlink{classscoped__ostream__redirect_a6f376aefb213b0e39900b7a0e1603ef3}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{classscoped__ostream__redirect}{scoped\_ostream\_redirect}} \&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{123     \mbox{\hyperlink{classscoped__ostream__redirect}{scoped\_ostream\_redirect}} \&\mbox{\hyperlink{classscoped__ostream__redirect_ab502d4dd886b80293f54b0ce0425dac8}{operator=}}(\mbox{\hyperlink{classscoped__ostream__redirect}{scoped\_ostream\_redirect}} \&\&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{124 \};}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126 }
+\DoxyCodeLine{138 \textcolor{keyword}{class }\mbox{\hyperlink{classscoped__estream__redirect}{scoped\_estream\_redirect}} : \textcolor{keyword}{public} \mbox{\hyperlink{classscoped__ostream__redirect}{scoped\_ostream\_redirect}} \{}
+\DoxyCodeLine{139 \textcolor{keyword}{public}:}
+\DoxyCodeLine{140     \mbox{\hyperlink{classscoped__estream__redirect_a85d52a127c735fd9d4abc8f3748081bd}{scoped\_estream\_redirect}}(}
+\DoxyCodeLine{141             std::ostream \&\mbox{\hyperlink{classscoped__ostream__redirect_a1d9b813b2e4e5bd72b1a735a9e9b13cb}{costream}} = std::cerr,}
+\DoxyCodeLine{142             \textcolor{keywordtype}{object} pyostream = \mbox{\hyperlink{classmodule_a40817edef0ded5727701534bcded9982}{module::import}}(\textcolor{stringliteral}{"{}sys"{}}).attr(\textcolor{stringliteral}{"{}stderr"{}}))}
+\DoxyCodeLine{143         : \mbox{\hyperlink{classscoped__ostream__redirect}{scoped\_ostream\_redirect}}(\mbox{\hyperlink{classscoped__ostream__redirect_a1d9b813b2e4e5bd72b1a735a9e9b13cb}{costream}},pyostream) \{\}}
+\DoxyCodeLine{144 \};}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149 \textcolor{comment}{// Class to redirect output as a context manager. C++ backend.}}
+\DoxyCodeLine{150 class \mbox{\hyperlink{class_ostream_redirect}{OstreamRedirect}} \{}
+\DoxyCodeLine{151     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_ostream_redirect_ae4f38cc94cc1f470ab886dc2369cebdc}{do\_stdout\_}};}
+\DoxyCodeLine{152     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_ostream_redirect_a867058bf6c415633661cc82e5ab9f0e2}{do\_stderr\_}};}
+\DoxyCodeLine{153     std::unique\_ptr<scoped\_ostream\_redirect> \mbox{\hyperlink{class_ostream_redirect_acad7031966594695413a3912aa27d670}{redirect\_stdout}};}
+\DoxyCodeLine{154     std::unique\_ptr<scoped\_estream\_redirect> \mbox{\hyperlink{class_ostream_redirect_a6b8324507316a44498e521e0c17888e6}{redirect\_stderr}};}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156 \textcolor{keyword}{public}:}
+\DoxyCodeLine{157     \mbox{\hyperlink{class_ostream_redirect_a7bebe8402ded70194fe05724f5a0fe10}{OstreamRedirect}}(\textcolor{keywordtype}{bool} do\_stdout = \textcolor{keyword}{true}, \textcolor{keywordtype}{bool} do\_stderr = \textcolor{keyword}{true})}
+\DoxyCodeLine{158         : do\_stdout\_(do\_stdout), do\_stderr\_(do\_stderr) \{\}}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_ostream_redirect_a3cf2fbfe1135bba2c83297b80a12517c}{enter}}() \{}
+\DoxyCodeLine{161         \textcolor{keywordflow}{if} (do\_stdout\_)}
+\DoxyCodeLine{162             redirect\_stdout.reset(\textcolor{keyword}{new} \mbox{\hyperlink{classscoped__ostream__redirect}{scoped\_ostream\_redirect}}());}
+\DoxyCodeLine{163         \textcolor{keywordflow}{if} (do\_stderr\_)}
+\DoxyCodeLine{164             redirect\_stderr.reset(\textcolor{keyword}{new} \mbox{\hyperlink{classscoped__estream__redirect}{scoped\_estream\_redirect}}());}
+\DoxyCodeLine{165     \}}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_ostream_redirect_afc4e2df991c8740540abbae9731607ff}{exit}}() \{}
+\DoxyCodeLine{168         redirect\_stdout.reset();}
+\DoxyCodeLine{169         redirect\_stderr.reset();}
+\DoxyCodeLine{170     \}}
+\DoxyCodeLine{171 \};}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175 }
+\DoxyCodeLine{202 inline \mbox{\hyperlink{classclass__}{class\_}}<detail::\mbox{\hyperlink{class_ostream_redirect}{OstreamRedirect}}> \mbox{\hyperlink{iostream_8h_ad693871ec3d2fe6886035a24e87b56fe}{add\_ostream\_redirect}}(\mbox{\hyperlink{classmodule}{module}} m, \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string} \mbox{\hyperlink{structname}{name}} = "{}ostream\_redirect"{}) \{}
+\DoxyCodeLine{203     \textcolor{keywordflow}{return} \mbox{\hyperlink{classclass__}{class\_<detail::OstreamRedirect>}}(m, \mbox{\hyperlink{structname}{name}}.c\_str(), \mbox{\hyperlink{structmodule__local}{module\_local}}())}
+\DoxyCodeLine{204         .\mbox{\hyperlink{classclass___a784165521ee3567aad69c3bce78a999a}{def}}(init<bool,bool>(), \mbox{\hyperlink{structarg}{arg}}(\textcolor{stringliteral}{"{}stdout"{}})=\textcolor{keyword}{true}, \mbox{\hyperlink{structarg}{arg}}(\textcolor{stringliteral}{"{}stderr"{}})=\textcolor{keyword}{true})}
+\DoxyCodeLine{205         .\mbox{\hyperlink{classclass___a784165521ee3567aad69c3bce78a999a}{def}}(\textcolor{stringliteral}{"{}\_\_enter\_\_"{}}, \&detail::OstreamRedirect::enter)}
+\DoxyCodeLine{206         .\mbox{\hyperlink{classclass___a784165521ee3567aad69c3bce78a999a}{def}}(\textcolor{stringliteral}{"{}\_\_exit\_\_"{}}, [](detail::OstreamRedirect \&self\_, \mbox{\hyperlink{classargs}{args}}) \{ self\_.exit(); \});}
+\DoxyCodeLine{207 \}}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{209 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+
+\end{DoxyCode}

@@ -1,0 +1,133 @@
+\hypertarget{embed_8h_source}{}\doxysection{embed.\+h}
+\label{embed_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/embed.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/embed.h}}
+\mbox{\hyperlink{embed_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{    pybind11/embed.h: Support for embedding the interpreter}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{    Copyright (c) 2017 Wenzel Jakob <wenzel.jakob@epfl.ch>}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{    All rights reserved. Use of this source code is governed by a}}
+\DoxyCodeLine{7 \textcolor{comment}{    BSD-\/style license that can be found in the LICENSE file.}}
+\DoxyCodeLine{8 \textcolor{comment}{*/}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{pybind11_8h}{pybind11.h}}"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{eval_8h}{eval.h}}"{}}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#if defined(PYPY\_VERSION)}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#  error Embedding the interpreter is not supported with PyPy}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#if PY\_MAJOR\_VERSION >= 3}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#  define PYBIND11\_EMBEDDED\_MODULE\_IMPL(name)            \(\backslash\)}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{      extern "{}C"{}} PyObject *pybind11\_init\_impl\_\#\#name();  \(\backslash\)}
+\DoxyCodeLine{22       extern "{}C"{} PyObject *pybind11\_init\_impl\_\#\#name() \{ \(\backslash\)}
+\DoxyCodeLine{23           return pybind11\_init\_wrapper\_\#\#name();         \(\backslash\)}
+\DoxyCodeLine{24       \}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#  define PYBIND11\_EMBEDDED\_MODULE\_IMPL(name)            \(\backslash\)}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{      extern "{}C"{}} void pybind11\_init\_impl\_\#\#name();       \(\backslash\)}
+\DoxyCodeLine{28       extern "{}C"{} void pybind11\_init\_impl\_\#\#name() \{      \(\backslash\)}
+\DoxyCodeLine{29           pybind11\_init\_wrapper\_\#\#name();                \(\backslash\)}
+\DoxyCodeLine{30       \}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#define PYBIND11\_EMBEDDED\_MODULE(name, variable)                              \(\backslash\)}}
+\DoxyCodeLine{49 \textcolor{preprocessor}{    static void PYBIND11\_CONCAT(pybind11\_init\_, name)(pybind11::module \&);    \(\backslash\)}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{    static PyObject PYBIND11\_CONCAT(*pybind11\_init\_wrapper\_, name)() \{        \(\backslash\)}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{        auto m = pybind11::module(PYBIND11\_TOSTRING(name));                   \(\backslash\)}}
+\DoxyCodeLine{52 \textcolor{preprocessor}{        try \{                                                                 \(\backslash\)}}
+\DoxyCodeLine{53 \textcolor{preprocessor}{            PYBIND11\_CONCAT(pybind11\_init\_, name)(m);                         \(\backslash\)}}
+\DoxyCodeLine{54 \textcolor{preprocessor}{            return m.ptr();                                                   \(\backslash\)}}
+\DoxyCodeLine{55 \textcolor{preprocessor}{        \} catch (pybind11::error\_already\_set \&e) \{                            \(\backslash\)}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{            PyErr\_SetString(PyExc\_ImportError, e.what());                     \(\backslash\)}}
+\DoxyCodeLine{57 \textcolor{preprocessor}{            return nullptr;                                                   \(\backslash\)}}
+\DoxyCodeLine{58 \textcolor{preprocessor}{        \} catch (const std::exception \&e) \{                                   \(\backslash\)}}
+\DoxyCodeLine{59 \textcolor{preprocessor}{            PyErr\_SetString(PyExc\_ImportError, e.what());                     \(\backslash\)}}
+\DoxyCodeLine{60 \textcolor{preprocessor}{            return nullptr;                                                   \(\backslash\)}}
+\DoxyCodeLine{61 \textcolor{preprocessor}{        \}                                                                     \(\backslash\)}}
+\DoxyCodeLine{62 \textcolor{preprocessor}{    \}                                                                         \(\backslash\)}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{    PYBIND11\_EMBEDDED\_MODULE\_IMPL(name)                                       \(\backslash\)}}
+\DoxyCodeLine{64 \textcolor{preprocessor}{    pybind11::detail::embedded\_module name(PYBIND11\_TOSTRING(name),           \(\backslash\)}}
+\DoxyCodeLine{65 \textcolor{preprocessor}{                               PYBIND11\_CONCAT(pybind11\_init\_impl\_, name));   \(\backslash\)}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{    void PYBIND11\_CONCAT(pybind11\_init\_, name)(pybind11::module \&variable)}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+\DoxyCodeLine{70 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 struct \mbox{\hyperlink{structembedded__module}{embedded\_module}} \{}
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#if PY\_MAJOR\_VERSION >= 3}}
+\DoxyCodeLine{75     \textcolor{keyword}{using} \mbox{\hyperlink{structembedded__module_ae88ae8eea3f77832186b09176e2277d3}{init\_t}} = PyObject *(*)();}
+\DoxyCodeLine{76 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{77     \textcolor{keyword}{using} \mbox{\hyperlink{structembedded__module_ae88ae8eea3f77832186b09176e2277d3}{init\_t}} = void (*)();}
+\DoxyCodeLine{78 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{79     \mbox{\hyperlink{structembedded__module_adf4ff708284d6dc49a7cd5251260973e}{embedded\_module}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{structname}{name}}, \mbox{\hyperlink{structembedded__module_ae88ae8eea3f77832186b09176e2277d3}{init\_t}} \mbox{\hyperlink{yolo__v2__class_8cpp_adcf7f587fe7c5bfdcbe67ffa797763be}{init}}) \{}
+\DoxyCodeLine{80         \textcolor{keywordflow}{if} (Py\_IsInitialized())}
+\DoxyCodeLine{81             \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Can't add new modules after the interpreter has been initialized"{}});}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83         \textcolor{keyword}{auto} result = PyImport\_AppendInittab(\mbox{\hyperlink{structname}{name}}, \mbox{\hyperlink{yolo__v2__class_8cpp_adcf7f587fe7c5bfdcbe67ffa797763be}{init}});}
+\DoxyCodeLine{84         \textcolor{keywordflow}{if} (result == -\/1)}
+\DoxyCodeLine{85             \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Insufficient memory to add a new module"{}});}
+\DoxyCodeLine{86     \}}
+\DoxyCodeLine{87 \};}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91 }
+\DoxyCodeLine{104 inline \textcolor{keywordtype}{void} \mbox{\hyperlink{embed_8h_adf4788e07fa707f87427a91d6819c42c}{initialize\_interpreter}}(\textcolor{keywordtype}{bool} init\_signal\_handlers = true) \{}
+\DoxyCodeLine{105     \textcolor{keywordflow}{if} (Py\_IsInitialized())}
+\DoxyCodeLine{106         \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}The interpreter is already running"{}});}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108     Py\_InitializeEx(init\_signal\_handlers ? 1 : 0);}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110     \textcolor{comment}{// Make .py files in the working directory available by default}}
+\DoxyCodeLine{111     \mbox{\hyperlink{classmodule_a40817edef0ded5727701534bcded9982}{module::import}}(\textcolor{stringliteral}{"{}sys"{}}).attr(\textcolor{stringliteral}{"{}path"{}}).\mbox{\hyperlink{classobject_acf93eb705d6539ef22e2c4a8eebc4c68}{cast}}<\mbox{\hyperlink{structlist}{list}}>().append(\textcolor{stringliteral}{"{}."{}});}
+\DoxyCodeLine{112 \}}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{149 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{embed_8h_a0d80adcba8be5d0e73692b177cbf7d9b}{finalize\_interpreter}}() \{}
+\DoxyCodeLine{150     \mbox{\hyperlink{classhandle}{handle}} builtins(PyEval\_GetBuiltins());}
+\DoxyCodeLine{151     \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\textcolor{keywordtype}{id} = \mbox{\hyperlink{internals_8h_ad4044f737821eb5e0398e5f0139d621e}{PYBIND11\_INTERNALS\_ID}};}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153     \textcolor{comment}{// Get the internals pointer (without creating it if it doesn't exist).  It's possible for the}}
+\DoxyCodeLine{154     \textcolor{comment}{// internals to be created during Py\_Finalize() (e.g. if a py::capsule calls `get\_internals()`}}
+\DoxyCodeLine{155     \textcolor{comment}{// during destruction), so we get the pointer-\/pointer here and check it after Py\_Finalize().}}
+\DoxyCodeLine{156     detail::internals **internals\_ptr\_ptr = \mbox{\hyperlink{internals_8h_a1abbb5ac518b087af801c6a306924d06}{detail::get\_internals\_pp}}();}
+\DoxyCodeLine{157     \textcolor{comment}{// It could also be stashed in builtins, so look there too:}}
+\DoxyCodeLine{158     \textcolor{keywordflow}{if} (builtins.contains(\textcolor{keywordtype}{id}) \&\& isinstance<capsule>(builtins[\textcolor{keywordtype}{id}]))}
+\DoxyCodeLine{159         internals\_ptr\_ptr = \mbox{\hyperlink{classcapsule}{capsule}}(builtins[\textcolor{keywordtype}{id}]);}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161     Py\_Finalize();}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163     \textcolor{keywordflow}{if} (internals\_ptr\_ptr) \{}
+\DoxyCodeLine{164         \textcolor{keyword}{delete} *internals\_ptr\_ptr;}
+\DoxyCodeLine{165         *internals\_ptr\_ptr = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{166     \}}
+\DoxyCodeLine{167 \}}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{182 \textcolor{keyword}{class }\mbox{\hyperlink{classscoped__interpreter}{scoped\_interpreter}} \{}
+\DoxyCodeLine{183 \textcolor{keyword}{public}:}
+\DoxyCodeLine{184     \mbox{\hyperlink{classscoped__interpreter_a6ba04e4795ec864e8e23289819225bef}{scoped\_interpreter}}(\textcolor{keywordtype}{bool} init\_signal\_handlers = \textcolor{keyword}{true}) \{}
+\DoxyCodeLine{185         \mbox{\hyperlink{embed_8h_adf4788e07fa707f87427a91d6819c42c}{initialize\_interpreter}}(init\_signal\_handlers);}
+\DoxyCodeLine{186     \}}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188     \mbox{\hyperlink{classscoped__interpreter_a794109d4db2ba5daf345b9262b85ec3e}{scoped\_interpreter}}(\textcolor{keyword}{const} \mbox{\hyperlink{classscoped__interpreter}{scoped\_interpreter}} \&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{189     \mbox{\hyperlink{classscoped__interpreter_ac3d62f9f0065b0a627367d88d3ee38e9}{scoped\_interpreter}}(\mbox{\hyperlink{classscoped__interpreter}{scoped\_interpreter}} \&\&other) \textcolor{keyword}{noexcept} \{ other.is\_valid = \textcolor{keyword}{false}; \}}
+\DoxyCodeLine{190     \mbox{\hyperlink{classscoped__interpreter}{scoped\_interpreter}} \&\mbox{\hyperlink{classscoped__interpreter_a31cb8de4e663f0e3e19e2207670a9fce}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{classscoped__interpreter}{scoped\_interpreter}} \&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{191     \mbox{\hyperlink{classscoped__interpreter}{scoped\_interpreter}} \&\mbox{\hyperlink{classscoped__interpreter_a945ebd16dba6fb2f6520791fd473d379}{operator=}}(\mbox{\hyperlink{classscoped__interpreter}{scoped\_interpreter}} \&\&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{192 }
+\DoxyCodeLine{193     \mbox{\hyperlink{classscoped__interpreter_a482334b3d598cfffa28d4efa8a1bb3e9}{\string~scoped\_interpreter}}() \{}
+\DoxyCodeLine{194         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classscoped__interpreter_ac72f34be0c7f2fbd18f9b7db8754f402}{is\_valid}})}
+\DoxyCodeLine{195             \mbox{\hyperlink{embed_8h_a0d80adcba8be5d0e73692b177cbf7d9b}{finalize\_interpreter}}();}
+\DoxyCodeLine{196     \}}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{198 \textcolor{keyword}{private}:}
+\DoxyCodeLine{199     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classscoped__interpreter_ac72f34be0c7f2fbd18f9b7db8754f402}{is\_valid}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{200 \};}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+
+\end{DoxyCode}

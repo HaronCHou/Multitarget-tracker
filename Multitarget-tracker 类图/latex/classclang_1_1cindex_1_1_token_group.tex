@@ -1,0 +1,123 @@
+\hypertarget{classclang_1_1cindex_1_1_token_group}{}\doxysection{clang.\+cindex.\+Token\+Group类 参考}
+\label{classclang_1_1cindex_1_1_token_group}\index{clang.cindex.TokenGroup@{clang.cindex.TokenGroup}}
+
+
+类 clang.\+cindex.\+Token\+Group 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=207pt]{classclang_1_1cindex_1_1_token_group__inherit__graph}
+\end{center}
+\end{figure}
+
+
+clang.\+cindex.\+Token\+Group 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=207pt]{classclang_1_1cindex_1_1_token_group__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classclang_1_1cindex_1_1_token_group_a844ea69731f6b3473216e052cc550b3e}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}, tu, memory, count)
+\item 
+def \mbox{\hyperlink{classclang_1_1cindex_1_1_token_group_ab83cb9caa11a9f48940e1e226ce070dd}{\+\_\+\+\_\+del\+\_\+\+\_\+}} (\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}})
+\end{DoxyCompactItemize}
+\doxysubsection*{静态 Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classclang_1_1cindex_1_1_token_group_a9150328425087e3a58ecc402a372213e}{get\+\_\+tokens}} (tu, extent)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classclang_1_1cindex_1_1_token_group_ab6a6a0ad0a0240a33c058364ec9a1e43}{\+\_\+tu}}
+\item 
+\mbox{\hyperlink{classclang_1_1cindex_1_1_token_group_abc7639c1392742732bdac776bbb8feb0}{\+\_\+memory}}
+\item 
+\mbox{\hyperlink{classclang_1_1cindex_1_1_token_group_ac605d2d4464158d4b9c604739c31c559}{\+\_\+count}}
+\end{DoxyCompactItemize}
+\doxysubsection*{额外继承的成员函数}
+
+
+\doxysubsection{详细描述}
+\begin{DoxyVerb}Helper class to facilitate token management.
+
+Tokens are allocated from libclang in chunks. They must be disposed of as a
+collective group.
+
+One purpose of this class is for instances to represent groups of allocated
+tokens. Each token in a group contains a reference back to an instance of
+this class. When all tokens from a group are garbage collected, it allows
+this class to be garbage collected. When this class is garbage collected,
+it calls the libclang destructor which invalidates all tokens in the group.
+
+You should not instantiate this class outside of this module.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classclang_1_1cindex_1_1_token_group_a844ea69731f6b3473216e052cc550b3e}\label{classclang_1_1cindex_1_1_token_group_a844ea69731f6b3473216e052cc550b3e}} 
+\index{clang.cindex.TokenGroup@{clang.cindex.TokenGroup}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!clang.cindex.TokenGroup@{clang.cindex.TokenGroup}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def clang.\+cindex.\+Token\+Group.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{tu,  }\item[{}]{memory,  }\item[{}]{count }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classclang_1_1cindex_1_1_token_group_ab83cb9caa11a9f48940e1e226ce070dd}\label{classclang_1_1cindex_1_1_token_group_ab83cb9caa11a9f48940e1e226ce070dd}} 
+\index{clang.cindex.TokenGroup@{clang.cindex.TokenGroup}!\_\_del\_\_@{\_\_del\_\_}}
+\index{\_\_del\_\_@{\_\_del\_\_}!clang.cindex.TokenGroup@{clang.cindex.TokenGroup}}
+\doxysubsubsection{\texorpdfstring{\_\_del\_\_()}{\_\_del\_\_()}}
+{\footnotesize\ttfamily def clang.\+cindex.\+Token\+Group.\+\_\+\+\_\+del\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classclang_1_1cindex_1_1_token_group_a9150328425087e3a58ecc402a372213e}\label{classclang_1_1cindex_1_1_token_group_a9150328425087e3a58ecc402a372213e}} 
+\index{clang.cindex.TokenGroup@{clang.cindex.TokenGroup}!get\_tokens@{get\_tokens}}
+\index{get\_tokens@{get\_tokens}!clang.cindex.TokenGroup@{clang.cindex.TokenGroup}}
+\doxysubsubsection{\texorpdfstring{get\_tokens()}{get\_tokens()}}
+{\footnotesize\ttfamily def clang.\+cindex.\+Token\+Group.\+get\+\_\+tokens (\begin{DoxyParamCaption}\item[{}]{tu,  }\item[{}]{extent }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyVerb}Helper method to return all tokens in an extent.
+
+This functionality is needed multiple places in this module. We define
+it here because it seems like a logical place.
+\end{DoxyVerb}
+ 函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=329pt]{classclang_1_1cindex_1_1_token_group_a9150328425087e3a58ecc402a372213e_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classclang_1_1cindex_1_1_token_group_ac605d2d4464158d4b9c604739c31c559}\label{classclang_1_1cindex_1_1_token_group_ac605d2d4464158d4b9c604739c31c559}} 
+\index{clang.cindex.TokenGroup@{clang.cindex.TokenGroup}!\_count@{\_count}}
+\index{\_count@{\_count}!clang.cindex.TokenGroup@{clang.cindex.TokenGroup}}
+\doxysubsubsection{\texorpdfstring{\_count}{\_count}}
+{\footnotesize\ttfamily clang.\+cindex.\+Token\+Group.\+\_\+count\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classclang_1_1cindex_1_1_token_group_abc7639c1392742732bdac776bbb8feb0}\label{classclang_1_1cindex_1_1_token_group_abc7639c1392742732bdac776bbb8feb0}} 
+\index{clang.cindex.TokenGroup@{clang.cindex.TokenGroup}!\_memory@{\_memory}}
+\index{\_memory@{\_memory}!clang.cindex.TokenGroup@{clang.cindex.TokenGroup}}
+\doxysubsubsection{\texorpdfstring{\_memory}{\_memory}}
+{\footnotesize\ttfamily clang.\+cindex.\+Token\+Group.\+\_\+memory\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classclang_1_1cindex_1_1_token_group_ab6a6a0ad0a0240a33c058364ec9a1e43}\label{classclang_1_1cindex_1_1_token_group_ab6a6a0ad0a0240a33c058364ec9a1e43}} 
+\index{clang.cindex.TokenGroup@{clang.cindex.TokenGroup}!\_tu@{\_tu}}
+\index{\_tu@{\_tu}!clang.cindex.TokenGroup@{clang.cindex.TokenGroup}}
+\doxysubsubsection{\texorpdfstring{\_tu}{\_tu}}
+{\footnotesize\ttfamily clang.\+cindex.\+Token\+Group.\+\_\+tu\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/thirdparty/pybind11/tools/clang/\mbox{\hyperlink{cindex_8py}{cindex.\+py}}\end{DoxyCompactItemize}

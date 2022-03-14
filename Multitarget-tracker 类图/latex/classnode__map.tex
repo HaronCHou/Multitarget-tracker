@@ -1,0 +1,93 @@
+\hypertarget{classnode__map}{}\doxysection{node\+\_\+map\texorpdfstring{$<$}{<} T, Alloc \texorpdfstring{$>$}{>} 模板类 参考}
+\label{classnode__map}\index{node\_map$<$ T, Alloc $>$@{node\_map$<$ T, Alloc $>$}}
+
+
+A specialized map with nodes as keys  
+
+
+
+
+{\ttfamily \#include $<$node\+\_\+map.\+h$>$}
+
+
+
+类 node\+\_\+map\texorpdfstring{$<$}{<} T, Alloc \texorpdfstring{$>$}{>} 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{classnode__map__inherit__graph}
+\end{center}
+\end{figure}
+
+
+node\+\_\+map\texorpdfstring{$<$}{<} T, Alloc \texorpdfstring{$>$}{>} 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=205pt]{classnode__map__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classnode__map_a7a4c767f07f348d31a1004776485d17b}{node\+\_\+map}} ()
+\item 
+\mbox{\hyperlink{classnode__map_a5bd24349e3a56379592889abbe4c6b09}{node\+\_\+map}} (const \mbox{\hyperlink{classgraph}{graph}} \&\mbox{\hyperlink{rings_8cpp_aa9df5aa3976a89a96a5f1c7611d42938}{g}}, T t=T())
+\end{DoxyCompactItemize}
+\doxysubsection*{额外继承的成员函数}
+
+
+\doxysubsection{详细描述}
+\subsubsection*{template$<$class T, class Alloc = std\+::allocator$<$\+T$>$$>$\newline
+class node\+\_\+map$<$ T, Alloc $>$}
+A specialized map with nodes as keys 
+
+A {\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}} is a specialized and optimized map implementation with nodes as keys. Using a {\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}} is the standard way to attach user defined information to the nodes of a {\ttfamily graph}.
+
+An example of usage\+: 
+\begin{DoxyPre}
+  graph g;
+
+  node v1 = g.new\_node();
+  node v2 = g.new\_node();
+
+  \mbox{\hyperlink{classnode__map}{node\_map}}<string> label(g, "{}Default Label"{});
+
+  label[v1] = "{}v1"{};
+  label[v2] = "{}v2"{};
+
+  assert(label[v1] != label[v2]);
+\end{DoxyPre}
+
+
+The nodes used as keys for a {\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}} MUST be nodes of the same graph. If you want to use nodes from different graphs, use a {\ttfamily map\texorpdfstring{$<$}{<}node,T\texorpdfstring{$>$}{>}} instead. A graph and a copy of it are considered to be different.
+
+Most of the functionality of {\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}} is inherited from \mbox{\hyperlink{classne__map}{ne\+\_\+map}}.
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classedge__map}{edge\+\_\+map}} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classnode__map_a7a4c767f07f348d31a1004776485d17b}\label{classnode__map_a7a4c767f07f348d31a1004776485d17b}} 
+\index{node\_map$<$ T, Alloc $>$@{node\_map$<$ T, Alloc $>$}!node\_map@{node\_map}}
+\index{node\_map@{node\_map}!node\_map$<$ T, Alloc $>$@{node\_map$<$ T, Alloc $>$}}
+\doxysubsubsection{\texorpdfstring{node\_map()}{node\_map()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T , class Alloc  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ T, Alloc $>$\mbox{\hyperlink{classnode__map}{\+::node\+\_\+map}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Constructs an empty {\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}} not associated with any {\ttfamily graph}. You may (but need not) call {\ttfamily ne\+\_\+map\+::init(const graph \&, T)} to associate it to a {\ttfamily graph}. \mbox{\Hypertarget{classnode__map_a5bd24349e3a56379592889abbe4c6b09}\label{classnode__map_a5bd24349e3a56379592889abbe4c6b09}} 
+\index{node\_map$<$ T, Alloc $>$@{node\_map$<$ T, Alloc $>$}!node\_map@{node\_map}}
+\index{node\_map@{node\_map}!node\_map$<$ T, Alloc $>$@{node\_map$<$ T, Alloc $>$}}
+\doxysubsubsection{\texorpdfstring{node\_map()}{node\_map()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T , class Alloc  = std\+::allocator$<$\+T$>$$>$ \\
+\mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ T, Alloc $>$\mbox{\hyperlink{classnode__map}{\+::node\+\_\+map}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgraph}{graph}} \&}]{g,  }\item[{T}]{t = {\ttfamily T()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+Constructs a {\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}} associated to the graph {\ttfamily g}. The value associated to each node in {\ttfamily g} is set to {\ttfamily t}. 
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Tracker/graph/\+GTL/include/\+GTL/\mbox{\hyperlink{node__map_8h}{node\+\_\+map.\+h}}\end{DoxyCompactItemize}

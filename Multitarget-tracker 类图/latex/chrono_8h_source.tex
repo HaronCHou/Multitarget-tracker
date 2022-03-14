@@ -1,0 +1,190 @@
+\hypertarget{chrono_8h_source}{}\doxysection{chrono.\+h}
+\label{chrono_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/chrono.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/chrono.h}}
+\mbox{\hyperlink{chrono_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{    pybind11/chrono.h: Transparent conversion between std::chrono and python's datetime}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{    Copyright (c) 2016 Trent Houliston <trent@houliston.me> and}}
+\DoxyCodeLine{5 \textcolor{comment}{                       Wenzel Jakob <wenzel.jakob@epfl.ch>}}
+\DoxyCodeLine{6 \textcolor{comment}{}}
+\DoxyCodeLine{7 \textcolor{comment}{    All rights reserved. Use of this source code is governed by a}}
+\DoxyCodeLine{8 \textcolor{comment}{    BSD-\/style license that can be found in the LICENSE file.}}
+\DoxyCodeLine{9 \textcolor{comment}{*/}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{pybind11_8h}{pybind11.h}}"{}}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <cmath>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <ctime>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <datetime.h>}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{comment}{// Backport the PyDateTime\_DELTA functions from Python3.3 if required}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#ifndef PyDateTime\_DELTA\_GET\_DAYS}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#define PyDateTime\_DELTA\_GET\_DAYS(o)         (((PyDateTime\_Delta*)o)-\/>days)}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#ifndef PyDateTime\_DELTA\_GET\_SECONDS}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#define PyDateTime\_DELTA\_GET\_SECONDS(o)      (((PyDateTime\_Delta*)o)-\/>seconds)}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#ifndef PyDateTime\_DELTA\_GET\_MICROSECONDS}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#define PyDateTime\_DELTA\_GET\_MICROSECONDS(o) (((PyDateTime\_Delta*)o)-\/>microseconds)}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+\DoxyCodeLine{31 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 template <typename type> class \mbox{\hyperlink{classduration__caster}{duration\_caster}} \{}
+\DoxyCodeLine{34 \textcolor{keyword}{public}:}
+\DoxyCodeLine{35     \textcolor{keyword}{typedef} \textcolor{keyword}{typename} type::rep \mbox{\hyperlink{classduration__caster_aa56a3f1e4b4c1651fbe0b52f9575e1bd}{rep}};}
+\DoxyCodeLine{36     \textcolor{keyword}{typedef} \textcolor{keyword}{typename} type::period \mbox{\hyperlink{classduration__caster_ac22f4732d7e0b975d5c5d2e82a7635c4}{period}};}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38     \textcolor{keyword}{typedef} std::chrono::duration<uint\_fast32\_t, std::ratio<86400>> \mbox{\hyperlink{classduration__caster_a04fee4c68761f22d238c731c4a89e150}{days}};}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classduration__caster_ac5394869ec7d87be76a8cd574d76f3a4}{load}}(\mbox{\hyperlink{classhandle}{handle}} src, \textcolor{keywordtype}{bool}) \{}
+\DoxyCodeLine{41         \textcolor{keyword}{using namespace }std::chrono;}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43         \textcolor{comment}{// Lazy initialise the PyDateTime import}}
+\DoxyCodeLine{44         \textcolor{keywordflow}{if} (!PyDateTimeAPI) \{ PyDateTime\_IMPORT; \}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46         \textcolor{keywordflow}{if} (!src) \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{47         \textcolor{comment}{// If invoked with datetime.delta object}}
+\DoxyCodeLine{48         \textcolor{keywordflow}{if} (PyDelta\_Check(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}())) \{}
+\DoxyCodeLine{49             value = type(duration\_cast<duration<rep, period>>(}
+\DoxyCodeLine{50                   \mbox{\hyperlink{classduration__caster_a04fee4c68761f22d238c731c4a89e150}{days}}(\mbox{\hyperlink{chrono_8h_a63a70ee060130679f0e68c6158bc0915}{PyDateTime\_DELTA\_GET\_DAYS}}(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()))}
+\DoxyCodeLine{51                 + seconds(\mbox{\hyperlink{chrono_8h_a2f71a8da1deec5bf289504c423ba7bca}{PyDateTime\_DELTA\_GET\_SECONDS}}(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()))}
+\DoxyCodeLine{52                 + microseconds(\mbox{\hyperlink{chrono_8h_a53bf22cb6352ec82a79cb110211162ef}{PyDateTime\_DELTA\_GET\_MICROSECONDS}}(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()))));}
+\DoxyCodeLine{53             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{54         \}}
+\DoxyCodeLine{55         \textcolor{comment}{// If invoked with a float we assume it is seconds and convert}}
+\DoxyCodeLine{56         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (PyFloat\_Check(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}())) \{}
+\DoxyCodeLine{57             value = type(duration\_cast<duration<rep, period>>(duration<double>(PyFloat\_AsDouble(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()))));}
+\DoxyCodeLine{58             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{59         \}}
+\DoxyCodeLine{60         \textcolor{keywordflow}{else} \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{61     \}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63     \textcolor{comment}{// If this is a duration just return it back}}
+\DoxyCodeLine{64     \textcolor{keyword}{static} \textcolor{keyword}{const} std::chrono::duration<rep, period>\& \mbox{\hyperlink{classduration__caster_adfccf0dc93ce81610e0f6f01a379f9f5}{get\_duration}}(\textcolor{keyword}{const} std::chrono::duration<rep, period> \&src) \{}
+\DoxyCodeLine{65         \textcolor{keywordflow}{return} src;}
+\DoxyCodeLine{66     \}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68     \textcolor{comment}{// If this is a time\_point get the time\_since\_epoch}}
+\DoxyCodeLine{69     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Clock> \textcolor{keyword}{static} std::chrono::duration<rep, period> \mbox{\hyperlink{classduration__caster_a0699da0487732ab5999fa36b51349f21}{get\_duration}}(\textcolor{keyword}{const} std::chrono::time\_point<Clock, std::chrono::duration<rep, period>> \&src) \{}
+\DoxyCodeLine{70         \textcolor{keywordflow}{return} src.time\_since\_epoch();}
+\DoxyCodeLine{71     \}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73     \textcolor{keyword}{static} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{classduration__caster_a84c3172d12565e8d1921801f1cc5a698}{cast}}(\textcolor{keyword}{const} type \&src, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} \textcolor{comment}{/* policy */}, \mbox{\hyperlink{classhandle}{handle}} \textcolor{comment}{/* parent */}) \{}
+\DoxyCodeLine{74         \textcolor{keyword}{using namespace }std::chrono;}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76         \textcolor{comment}{// Use overloaded function to get our duration from our source}}
+\DoxyCodeLine{77         \textcolor{comment}{// Works out if it is a duration or time\_point and get the duration}}
+\DoxyCodeLine{78         \textcolor{keyword}{auto} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}} = get\_duration(src);}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80         \textcolor{comment}{// Lazy initialise the PyDateTime import}}
+\DoxyCodeLine{81         \textcolor{keywordflow}{if} (!PyDateTimeAPI) \{ PyDateTime\_IMPORT; \}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83         \textcolor{comment}{// Declare these special duration types so the conversions happen with the correct primitive types (int)}}
+\DoxyCodeLine{84         \textcolor{keyword}{using} dd\_t = duration<int, std::ratio<86400>>;}
+\DoxyCodeLine{85         \textcolor{keyword}{using} ss\_t = duration<int, std::ratio<1>>;}
+\DoxyCodeLine{86         \textcolor{keyword}{using} us\_t = duration<int, std::micro>;}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88         \textcolor{keyword}{auto} dd = duration\_cast<dd\_t>(\mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}});}
+\DoxyCodeLine{89         \textcolor{keyword}{auto} subd = \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}} -\/ dd;}
+\DoxyCodeLine{90         \textcolor{keyword}{auto} ss = duration\_cast<ss\_t>(subd);}
+\DoxyCodeLine{91         \textcolor{keyword}{auto} us = duration\_cast<us\_t>(subd -\/ ss);}
+\DoxyCodeLine{92         \textcolor{keywordflow}{return} PyDelta\_FromDSU(dd.count(), ss.count(), us.count());}
+\DoxyCodeLine{93     \}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95     \mbox{\hyperlink{classduration__caster_a3518d09fefb62b0be79c37d79c298822}{PYBIND11\_TYPE\_CASTER}}(type, \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}datetime.timedelta"{}}));}
+\DoxyCodeLine{96 \};}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98 \textcolor{comment}{// This is for casting times on the system clock into datetime.datetime instances}}
+\DoxyCodeLine{99 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Duration> \textcolor{keyword}{class }\mbox{\hyperlink{classtype__caster}{type\_caster}}<\mbox{\hyperlink{namespacestd}{std}}::chrono::time\_point<std::chrono::system\_clock, Duration>> \{}
+\DoxyCodeLine{100 \textcolor{keyword}{public}:}
+\DoxyCodeLine{101     \textcolor{keyword}{typedef} std::chrono::time\_point<std::chrono::system\_clock, Duration> \mbox{\hyperlink{classtype__caster_3_01std_1_1chrono_1_1time__point_3_01std_1_1chrono_1_1system__clock_00_01_duration_01_4_01_4_aa6ea8713f4efcca306c1ceb74a2877c7}{type}};}
+\DoxyCodeLine{102     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classtype__caster_3_01std_1_1chrono_1_1time__point_3_01std_1_1chrono_1_1system__clock_00_01_duration_01_4_01_4_a81319bc9d5f326aadb99d284efc1ba07}{load}}(\mbox{\hyperlink{classhandle}{handle}} src, \textcolor{keywordtype}{bool}) \{}
+\DoxyCodeLine{103         \textcolor{keyword}{using namespace }std::chrono;}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105         \textcolor{comment}{// Lazy initialise the PyDateTime import}}
+\DoxyCodeLine{106         \textcolor{keywordflow}{if} (!PyDateTimeAPI) \{ PyDateTime\_IMPORT; \}}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108         \textcolor{keywordflow}{if} (!src) \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110         std::tm cal;}
+\DoxyCodeLine{111         microseconds msecs;}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113         \textcolor{keywordflow}{if} (PyDateTime\_Check(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}())) \{}
+\DoxyCodeLine{114             cal.tm\_sec   = PyDateTime\_DATE\_GET\_SECOND(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}());}
+\DoxyCodeLine{115             cal.tm\_min   = PyDateTime\_DATE\_GET\_MINUTE(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}());}
+\DoxyCodeLine{116             cal.tm\_hour  = PyDateTime\_DATE\_GET\_HOUR(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}());}
+\DoxyCodeLine{117             cal.tm\_mday  = PyDateTime\_GET\_DAY(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}());}
+\DoxyCodeLine{118             cal.tm\_mon   = PyDateTime\_GET\_MONTH(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()) -\/ 1;}
+\DoxyCodeLine{119             cal.tm\_year  = PyDateTime\_GET\_YEAR(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()) -\/ 1900;}
+\DoxyCodeLine{120             cal.tm\_isdst = -\/1;}
+\DoxyCodeLine{121             msecs        = microseconds(PyDateTime\_DATE\_GET\_MICROSECOND(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()));}
+\DoxyCodeLine{122         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (PyDate\_Check(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}())) \{}
+\DoxyCodeLine{123             cal.tm\_sec   = 0;}
+\DoxyCodeLine{124             cal.tm\_min   = 0;}
+\DoxyCodeLine{125             cal.tm\_hour  = 0;}
+\DoxyCodeLine{126             cal.tm\_mday  = PyDateTime\_GET\_DAY(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}());}
+\DoxyCodeLine{127             cal.tm\_mon   = PyDateTime\_GET\_MONTH(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()) -\/ 1;}
+\DoxyCodeLine{128             cal.tm\_year  = PyDateTime\_GET\_YEAR(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()) -\/ 1900;}
+\DoxyCodeLine{129             cal.tm\_isdst = -\/1;}
+\DoxyCodeLine{130             msecs        = microseconds(0);}
+\DoxyCodeLine{131         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (PyTime\_Check(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}())) \{}
+\DoxyCodeLine{132             cal.tm\_sec   = PyDateTime\_TIME\_GET\_SECOND(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}());}
+\DoxyCodeLine{133             cal.tm\_min   = PyDateTime\_TIME\_GET\_MINUTE(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}());}
+\DoxyCodeLine{134             cal.tm\_hour  = PyDateTime\_TIME\_GET\_HOUR(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}());}
+\DoxyCodeLine{135             cal.tm\_mday  = 1;   \textcolor{comment}{// This date (day, month, year) = (1, 0, 70)}}
+\DoxyCodeLine{136             cal.tm\_mon   = 0;   \textcolor{comment}{// represents 1-\/Jan-\/1970, which is the first}}
+\DoxyCodeLine{137             cal.tm\_year  = 70;  \textcolor{comment}{// earliest available date for Python's datetime}}
+\DoxyCodeLine{138             cal.tm\_isdst = -\/1;}
+\DoxyCodeLine{139             msecs        = microseconds(PyDateTime\_TIME\_GET\_MICROSECOND(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}()));}
+\DoxyCodeLine{140         \}}
+\DoxyCodeLine{141         \textcolor{keywordflow}{else} \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143         \mbox{\hyperlink{classtype__caster__generic_a077b8d1e4af829443b2e41c3e5786f4d}{value}} = system\_clock::from\_time\_t(std::mktime(\&cal)) + msecs;}
+\DoxyCodeLine{144         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{145     \}}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147     \textcolor{keyword}{static} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{classtype__caster_3_01std_1_1chrono_1_1time__point_3_01std_1_1chrono_1_1system__clock_00_01_duration_01_4_01_4_af07115c3eac3ae89af558f4670d63c7f}{cast}}(\textcolor{keyword}{const} std::chrono::time\_point<std::chrono::system\_clock, Duration> \&src, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} \textcolor{comment}{/* policy */}, \mbox{\hyperlink{classhandle}{handle}} \textcolor{comment}{/* parent */}) \{}
+\DoxyCodeLine{148         \textcolor{keyword}{using namespace }std::chrono;}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{150         \textcolor{comment}{// Lazy initialise the PyDateTime import}}
+\DoxyCodeLine{151         \textcolor{keywordflow}{if} (!PyDateTimeAPI) \{ PyDateTime\_IMPORT; \}}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153         std::time\_t tt = system\_clock::to\_time\_t(time\_point\_cast<system\_clock::duration>(src));}
+\DoxyCodeLine{154         \textcolor{comment}{// this function uses static memory so it's best to copy it out asap just in case}}
+\DoxyCodeLine{155         \textcolor{comment}{// otherwise other code that is using localtime may break this (not just python code)}}
+\DoxyCodeLine{156         std::tm localtime = *std::localtime(\&tt);}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158         \textcolor{comment}{// Declare these special duration types so the conversions happen with the correct primitive types (int)}}
+\DoxyCodeLine{159         \textcolor{keyword}{using} us\_t = duration<int, std::micro>;}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161         \textcolor{keywordflow}{return} PyDateTime\_FromDateAndTime(localtime.tm\_year + 1900,}
+\DoxyCodeLine{162                                           localtime.tm\_mon + 1,}
+\DoxyCodeLine{163                                           localtime.tm\_mday,}
+\DoxyCodeLine{164                                           localtime.tm\_hour,}
+\DoxyCodeLine{165                                           localtime.tm\_min,}
+\DoxyCodeLine{166                                           localtime.tm\_sec,}
+\DoxyCodeLine{167                                           (duration\_cast<us\_t>(src.time\_since\_epoch() \% seconds(1))).count());}
+\DoxyCodeLine{168     \}}
+\DoxyCodeLine{169     \mbox{\hyperlink{classtype__caster_3_01std_1_1chrono_1_1time__point_3_01std_1_1chrono_1_1system__clock_00_01_duration_01_4_01_4_a2b40fcaf6bd75f557fbe809980edbaa8}{PYBIND11\_TYPE\_CASTER}}(\mbox{\hyperlink{classtype__caster_3_01std_1_1chrono_1_1time__point_3_01std_1_1chrono_1_1system__clock_00_01_duration_01_4_01_4_aa6ea8713f4efcca306c1ceb74a2877c7}{type}}, \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}datetime.datetime"{}}));}
+\DoxyCodeLine{170 \};}
+\DoxyCodeLine{171 }
+\DoxyCodeLine{172 \textcolor{comment}{// Other clocks that are not the system clock are not measured as datetime.datetime objects}}
+\DoxyCodeLine{173 \textcolor{comment}{// since they are not measured on calendar time. So instead we just make them timedeltas}}
+\DoxyCodeLine{174 \textcolor{comment}{// Or if they have passed us a time as a float we convert that}}
+\DoxyCodeLine{175 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Clock, \textcolor{keyword}{typename} Duration> \textcolor{keyword}{class }\mbox{\hyperlink{classtype__caster}{type\_caster}}<\mbox{\hyperlink{namespacestd}{std}}::chrono::time\_point<Clock, Duration>>}
+\DoxyCodeLine{176 : \textcolor{keyword}{public} \mbox{\hyperlink{classduration__caster}{duration\_caster}}<std::chrono::time\_point<Clock, Duration>> \{}
+\DoxyCodeLine{177 \};}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Rep, \textcolor{keyword}{typename} Period> \textcolor{keyword}{class }\mbox{\hyperlink{classtype__caster}{type\_caster}}<\mbox{\hyperlink{namespacestd}{std}}::chrono::duration<Rep, Period>>}
+\DoxyCodeLine{180 : \textcolor{keyword}{public} \mbox{\hyperlink{classduration__caster}{duration\_caster}}<std::chrono::duration<Rep, Period>> \{}
+\DoxyCodeLine{181 \};}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{183 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{184 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+
+\end{DoxyCode}

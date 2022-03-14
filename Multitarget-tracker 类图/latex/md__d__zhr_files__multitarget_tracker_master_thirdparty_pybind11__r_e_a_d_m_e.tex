@@ -1,0 +1,54 @@
+\hypertarget{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11__r_e_a_d_m_e_autotoc_md20}{}\doxysection{pybind11 — Seamless operability between C++11 and Python}\label{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11__r_e_a_d_m_e_autotoc_md20}
+\href{http://pybind11.readthedocs.org/en/master/?badge=master}{\texttt{ }} \href{http://pybind11.readthedocs.org/en/stable/?badge=stable}{\texttt{ }} \href{https://gitter.im/pybind/Lobby}{\texttt{ }} \href{https://travis-ci.org/pybind/pybind11}{\texttt{ }} \href{https://ci.appveyor.com/project/wjakob/pybind11}{\texttt{ }}
+
+{\bfseries{\mbox{\hyperlink{namespacepybind11}{pybind11}}}} is a lightweight header-\/only library that exposes C++ types in Python and vice versa, mainly to create Python bindings of existing C++ code. Its goals and syntax are similar to the excellent \href{http://www.boost.org/doc/libs/1_58_0/libs/python/doc/}{\texttt{ Boost.\+Python}} library by David Abrahams\+: to minimize boilerplate code in traditional extension modules by inferring type information using compile-\/time introspection.
+
+The main issue with Boost.\+Python—and the reason for creating such a similar project—is Boost. Boost is an enormously large and complex suite of utility libraries that works with almost every C++ compiler in existence. This compatibility has its cost\+: arcane template tricks and workarounds are necessary to support the oldest and buggiest of compiler specimens. Now that C++11-\/compatible compilers are widely available, this heavy machinery has become an excessively large and unnecessary dependency.
+
+Think of this library as a tiny self-\/contained version of Boost.\+Python with everything stripped away that isn\textquotesingle{}t relevant for binding generation. Without comments, the core header files only require $\sim$4K lines of code and depend on Python (2.\+7 or 3.\+x, or Py\+Py2.\+7 \texorpdfstring{$>$}{>}= 5.\+7) and the C++ standard library. This compact implementation was possible thanks to some of the new C++11 language features (specifically\+: tuples, lambda functions and variadic templates). Since its creation, this library has grown beyond Boost.\+Python in many ways, leading to dramatically simpler binding code in many common situations.
+
+Tutorial and reference documentation is provided at \href{http://pybind11.readthedocs.org/en/master}{\texttt{ http\+://pybind11.\+readthedocs.\+org/en/master}}. A PDF version of the manual is available \href{https://media.readthedocs.org/pdf/pybind11/master/pybind11.pdf}{\texttt{ here}}.\hypertarget{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11__r_e_a_d_m_e_autotoc_md21}{}\doxysubsection{Core features}\label{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11__r_e_a_d_m_e_autotoc_md21}
+\mbox{\hyperlink{namespacepybind11}{pybind11}} can map the following core C++ features to Python
+
+
+\begin{DoxyItemize}
+\item Functions accepting and returning custom data structures per value, reference, or pointer
+\item Instance methods and static methods
+\item Overloaded functions
+\item Instance attributes and static attributes
+\item Arbitrary exception types
+\item Enumerations
+\item Callbacks
+\item Iterators and ranges
+\item Custom operators
+\item Single and multiple inheritance
+\item STL data structures
+\item Smart pointers with reference counting like {\ttfamily std\+::shared\+\_\+ptr}
+\item Internal references with correct reference counting
+\item C++ classes with virtual (and pure virtual) methods can be extended in Python
+\end{DoxyItemize}\hypertarget{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11__r_e_a_d_m_e_autotoc_md22}{}\doxysubsection{Goodies}\label{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11__r_e_a_d_m_e_autotoc_md22}
+In addition to the core functionality, \mbox{\hyperlink{namespacepybind11}{pybind11}} provides some extra goodies\+:
+
+
+\begin{DoxyItemize}
+\item Python 2.\+7, 3.\+x, and Py\+Py (Py\+Py2.\+7 \texorpdfstring{$>$}{>}= 5.\+7) are supported with an implementation-\/agnostic interface.
+\item It is possible to bind C++11 lambda functions with captured variables. The lambda capture data is stored inside the resulting Python function object.
+\item \mbox{\hyperlink{namespacepybind11}{pybind11}} uses C++11 move constructors and move assignment operators whenever possible to efficiently transfer custom data types.
+\item It\textquotesingle{}s easy to expose the internal storage of custom data types through Pythons\textquotesingle{} buffer protocols. This is handy e.\+g. for fast conversion between C++ matrix classes like Eigen and Num\+Py without expensive copy operations.
+\item \mbox{\hyperlink{namespacepybind11}{pybind11}} can automatically vectorize functions so that they are transparently applied to all entries of one or more Num\+Py array arguments.
+\item Python\textquotesingle{}s slice-\/based access and assignment operations can be supported with just a few lines of code.
+\item Everything is contained in just a few header files; there is no need to link against any additional libraries.
+\item Binaries are generally smaller by a factor of at least 2 compared to equivalent bindings generated by Boost.\+Python. A recent \mbox{\hyperlink{namespacepybind11}{pybind11}} conversion of Py\+Rosetta, an enormous Boost.\+Python binding project, \href{http://graylab.jhu.edu/RosettaCon2016/PyRosetta-4.pdf}{\texttt{ reported}} a binary size reduction of {\bfseries{5.\+4x}} and compile time reduction by {\bfseries{5.\+8x}}.
+\item Function signatures are precomputed at compile time (using {\ttfamily constexpr}), leading to smaller binaries.
+\item With little extra effort, C++ types can be pickled and unpickled similar to regular Python objects.
+\end{DoxyItemize}\hypertarget{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11__r_e_a_d_m_e_autotoc_md23}{}\doxysubsection{Supported compilers}\label{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11__r_e_a_d_m_e_autotoc_md23}
+
+\begin{DoxyEnumerate}
+\item Clang/\+LLVM 3.\+3 or newer (for Apple Xcode\textquotesingle{}s clang, this is 5.\+0.\+0 or newer)
+\item GCC 4.\+8 or newer
+\item Microsoft Visual Studio 2015 Update 3 or newer
+\item Intel C++ compiler 17 or newer (16 with \mbox{\hyperlink{namespacepybind11}{pybind11}} v2.\+0 and 15 with \mbox{\hyperlink{namespacepybind11}{pybind11}} v2.\+0 and a \href{https://github.com/pybind/pybind11/issues/276}{\texttt{ workaround}})
+\item Cygwin/\+GCC (tested on 2.\+5.\+1)
+\end{DoxyEnumerate}\hypertarget{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11__r_e_a_d_m_e_autotoc_md24}{}\doxysubsection{About}\label{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11__r_e_a_d_m_e_autotoc_md24}
+This project was created by \href{http://rgl.epfl.ch/people/wjakob}{\texttt{ Wenzel Jakob}}. Significant features and/or improvements to the code were contributed by Jonas Adler, Lori A. Burns, Sylvain Corlay, Trent Houliston, Axel Huebl, @hulucc, Sergey Lyskov Johan Mabille, Tomasz Miąsko, Dean Moldovan, Ben Pritchard, Jason Rhinelander, Boris Schäling, Pim Schellart, Henry Schreiner, Ivan Smirnov, and Patrick Stewart.\hypertarget{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11__r_e_a_d_m_e_autotoc_md25}{}\doxysubsubsection{License}\label{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11__r_e_a_d_m_e_autotoc_md25}
+\mbox{\hyperlink{namespacepybind11}{pybind11}} is provided under a BSD-\/style license that can be found in the {\ttfamily LICENSE} file. By using, distributing, or contributing to this project, you agree to the terms and conditions of this license. 

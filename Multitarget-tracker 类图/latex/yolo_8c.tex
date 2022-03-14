@@ -1,0 +1,133 @@
+\hypertarget{yolo_8c}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/yolo.c 文件参考}
+\label{yolo_8c}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/yolo.c@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/yolo.c}}
+{\ttfamily \#include \char`\"{}network.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}detection\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cost\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}parser.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}box.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}demo.\+h\char`\"{}}\newline
+yolo.\+c 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{yolo_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{yolo_8c_a9ecf779a5ff54201713a5fae5265cbe8}{train\+\_\+yolo}} (char $\ast$cfgfile, char $\ast$weightfile)
+\item 
+void \mbox{\hyperlink{yolo_8c_af7b15bbdca60286e92370822c83d09a1}{print\+\_\+yolo\+\_\+detections}} (FILE $\ast$$\ast$fps, char $\ast$id, \mbox{\hyperlink{structbox}{box}} $\ast$boxes, float $\ast$$\ast$probs, int total, int classes, int w, int h)
+\item 
+void \mbox{\hyperlink{yolo_8c_aa370134e19dcbef76ef234c1ab7c6065}{validate\+\_\+yolo}} (char $\ast$cfgfile, char $\ast$weightfile)
+\item 
+void \mbox{\hyperlink{yolo_8c_ac6827c4a08385eddc23249beab6c2893}{validate\+\_\+yolo\+\_\+recall}} (char $\ast$cfgfile, char $\ast$weightfile)
+\item 
+void \mbox{\hyperlink{yolo_8c_ac1d1d478258afdb0266722f4a8571587}{test\+\_\+yolo}} (char $\ast$cfgfile, char $\ast$weightfile, char $\ast$filename, float thresh)
+\item 
+void \mbox{\hyperlink{yolo_8c_ae2af4814947b728e7cfafec8c446050e}{run\+\_\+yolo}} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\doxysubsection*{变量}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \mbox{\hyperlink{yolo_8c_a80db1124a9ba15199e0cc2f205f54e76}{voc\+\_\+names}} \mbox{[}$\,$\mbox{]} = \{\char`\"{}aeroplane\char`\"{}, \char`\"{}bicycle\char`\"{}, \char`\"{}bird\char`\"{}, \char`\"{}boat\char`\"{}, \char`\"{}bottle\char`\"{}, \char`\"{}bus\char`\"{}, \char`\"{}car\char`\"{}, \char`\"{}cat\char`\"{}, \char`\"{}chair\char`\"{}, \char`\"{}cow\char`\"{}, \char`\"{}diningtable\char`\"{}, \char`\"{}dog\char`\"{}, \char`\"{}horse\char`\"{}, \char`\"{}motorbike\char`\"{}, \char`\"{}person\char`\"{}, \char`\"{}pottedplant\char`\"{}, \char`\"{}sheep\char`\"{}, \char`\"{}sofa\char`\"{}, \char`\"{}train\char`\"{}, \char`\"{}tvmonitor\char`\"{}\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{yolo_8c_af7b15bbdca60286e92370822c83d09a1}\label{yolo_8c_af7b15bbdca60286e92370822c83d09a1}} 
+\index{yolo.c@{yolo.c}!print\_yolo\_detections@{print\_yolo\_detections}}
+\index{print\_yolo\_detections@{print\_yolo\_detections}!yolo.c@{yolo.c}}
+\doxysubsubsection{\texorpdfstring{print\_yolo\_detections()}{print\_yolo\_detections()}}
+{\footnotesize\ttfamily void print\+\_\+yolo\+\_\+detections (\begin{DoxyParamCaption}\item[{FILE $\ast$$\ast$}]{fps,  }\item[{char $\ast$}]{id,  }\item[{\mbox{\hyperlink{structbox}{box}} $\ast$}]{boxes,  }\item[{float $\ast$$\ast$}]{probs,  }\item[{int}]{total,  }\item[{int}]{classes,  }\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=287pt]{yolo_8c_af7b15bbdca60286e92370822c83d09a1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{yolo_8c_ae2af4814947b728e7cfafec8c446050e}\label{yolo_8c_ae2af4814947b728e7cfafec8c446050e}} 
+\index{yolo.c@{yolo.c}!run\_yolo@{run\_yolo}}
+\index{run\_yolo@{run\_yolo}!yolo.c@{yolo.c}}
+\doxysubsubsection{\texorpdfstring{run\_yolo()}{run\_yolo()}}
+{\footnotesize\ttfamily void run\+\_\+yolo (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{yolo_8c_ae2af4814947b728e7cfafec8c446050e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{yolo_8c_ac1d1d478258afdb0266722f4a8571587}\label{yolo_8c_ac1d1d478258afdb0266722f4a8571587}} 
+\index{yolo.c@{yolo.c}!test\_yolo@{test\_yolo}}
+\index{test\_yolo@{test\_yolo}!yolo.c@{yolo.c}}
+\doxysubsubsection{\texorpdfstring{test\_yolo()}{test\_yolo()}}
+{\footnotesize\ttfamily void test\+\_\+yolo (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{char $\ast$}]{filename,  }\item[{float}]{thresh }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{yolo_8c_ac1d1d478258afdb0266722f4a8571587_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{yolo_8c_a9ecf779a5ff54201713a5fae5265cbe8}\label{yolo_8c_a9ecf779a5ff54201713a5fae5265cbe8}} 
+\index{yolo.c@{yolo.c}!train\_yolo@{train\_yolo}}
+\index{train\_yolo@{train\_yolo}!yolo.c@{yolo.c}}
+\doxysubsubsection{\texorpdfstring{train\_yolo()}{train\_yolo()}}
+{\footnotesize\ttfamily void train\+\_\+yolo (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{yolo_8c_a9ecf779a5ff54201713a5fae5265cbe8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{yolo_8c_aa370134e19dcbef76ef234c1ab7c6065}\label{yolo_8c_aa370134e19dcbef76ef234c1ab7c6065}} 
+\index{yolo.c@{yolo.c}!validate\_yolo@{validate\_yolo}}
+\index{validate\_yolo@{validate\_yolo}!yolo.c@{yolo.c}}
+\doxysubsubsection{\texorpdfstring{validate\_yolo()}{validate\_yolo()}}
+{\footnotesize\ttfamily void validate\+\_\+yolo (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{yolo_8c_aa370134e19dcbef76ef234c1ab7c6065_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{yolo_8c_ac6827c4a08385eddc23249beab6c2893}\label{yolo_8c_ac6827c4a08385eddc23249beab6c2893}} 
+\index{yolo.c@{yolo.c}!validate\_yolo\_recall@{validate\_yolo\_recall}}
+\index{validate\_yolo\_recall@{validate\_yolo\_recall}!yolo.c@{yolo.c}}
+\doxysubsubsection{\texorpdfstring{validate\_yolo\_recall()}{validate\_yolo\_recall()}}
+{\footnotesize\ttfamily void validate\+\_\+yolo\+\_\+recall (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{yolo_8c_ac6827c4a08385eddc23249beab6c2893_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{变量说明}
+\mbox{\Hypertarget{yolo_8c_a80db1124a9ba15199e0cc2f205f54e76}\label{yolo_8c_a80db1124a9ba15199e0cc2f205f54e76}} 
+\index{yolo.c@{yolo.c}!voc\_names@{voc\_names}}
+\index{voc\_names@{voc\_names}!yolo.c@{yolo.c}}
+\doxysubsubsection{\texorpdfstring{voc\_names}{voc\_names}}
+{\footnotesize\ttfamily char$\ast$ voc\+\_\+names\mbox{[}$\,$\mbox{]} = \{\char`\"{}aeroplane\char`\"{}, \char`\"{}bicycle\char`\"{}, \char`\"{}bird\char`\"{}, \char`\"{}boat\char`\"{}, \char`\"{}bottle\char`\"{}, \char`\"{}bus\char`\"{}, \char`\"{}car\char`\"{}, \char`\"{}cat\char`\"{}, \char`\"{}chair\char`\"{}, \char`\"{}cow\char`\"{}, \char`\"{}diningtable\char`\"{}, \char`\"{}dog\char`\"{}, \char`\"{}horse\char`\"{}, \char`\"{}motorbike\char`\"{}, \char`\"{}person\char`\"{}, \char`\"{}pottedplant\char`\"{}, \char`\"{}sheep\char`\"{}, \char`\"{}sofa\char`\"{}, \char`\"{}train\char`\"{}, \char`\"{}tvmonitor\char`\"{}\}}
+

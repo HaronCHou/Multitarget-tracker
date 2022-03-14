@@ -1,0 +1,241 @@
+\hypertarget{classargument__loader}{}\doxysection{argument\+\_\+loader\texorpdfstring{$<$}{<} Args \texorpdfstring{$>$}{>} 模板类 参考}
+\label{classargument__loader}\index{argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}}
+
+
+Helper class which loads arguments for C++ functions called from Python  
+
+
+
+
+{\ttfamily \#include $<$cast.\+h$>$}
+
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classargument__loader_ac5cff5197a03f99f06169af9f43d6537}{load\+\_\+args}} (\mbox{\hyperlink{structfunction__call}{function\+\_\+call}} \&\mbox{\hyperlink{classargument__loader_acb978d9776e7b7d6a7a5f904c6b08671}{call}})
+\item 
+{\footnotesize template$<$typename Return , typename Guard , typename Func $>$ }\\\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$!std\+::is\+\_\+void$<$ Return $>$\+::value, Return $>$ \mbox{\hyperlink{classargument__loader_acb978d9776e7b7d6a7a5f904c6b08671}{call}} (Func \&\&\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}}) \&\&
+\item 
+{\footnotesize template$<$typename Return , typename Guard , typename Func $>$ }\\\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$ std\+::is\+\_\+void$<$ Return $>$\+::value, \mbox{\hyperlink{structvoid__type}{void\+\_\+type}} $>$ \mbox{\hyperlink{classargument__loader_a484b2cbfdf718144ea57cf75ede80606}{call}} (Func \&\&\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}}) \&\&
+\end{DoxyCompactItemize}
+\doxysubsection*{静态 Public 属性}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr bool \mbox{\hyperlink{classargument__loader_aefd489f954b4706554d6c4e7e705617f}{has\+\_\+kwargs}} = \mbox{\hyperlink{classargument__loader_a498bd813bd22efca13e6aab2191408c0}{kwargs\+\_\+pos}} $<$ 0
+\item 
+static constexpr bool \mbox{\hyperlink{classargument__loader_a9436dd2f1d26de4dcfb7e5f7edffef93}{has\+\_\+args}} = \mbox{\hyperlink{classargument__loader_a284643dafad9d0b0bc558ad6c6811fd5}{args\+\_\+pos}} $<$ 0
+\item 
+static constexpr auto \mbox{\hyperlink{classargument__loader_a48c33de6037140357b1ba8fd154cff59}{arg\+\_\+names}} = \mbox{\hyperlink{descr_8h_a762f34ac72937914a32540134c260665}{concat}}(\mbox{\hyperlink{descr_8h_a7dd2c89703d270c38d112ed3a44dbb86}{type\+\_\+descr}}(\mbox{\hyperlink{cast_8h_ab32b52411a6b07420516d79074815713}{make\+\_\+caster}}$<$Args$>$\mbox{\hyperlink{structname}{\+::name}})...)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 类型}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classargument__loader_a986ee7712a6ab2a9aa87a6b1a5de091e}{indices}} = \mbox{\hyperlink{detail_2common_8h_ab5e942a7ee11e93c8b5ed281c28261b2}{make\+\_\+index\+\_\+sequence}}$<$ sizeof...(Args)$>$
+\item 
+{\footnotesize template$<$typename Arg $>$ }\\using \mbox{\hyperlink{classargument__loader_a76572f7ee75b4c32372ce5f7d1042862}{argument\+\_\+is\+\_\+args}} = std\+::is\+\_\+same$<$ \mbox{\hyperlink{detail_2common_8h_a3e4beb3f4b7338384c98d70aa1ee9780}{intrinsic\+\_\+t}}$<$ Arg $>$, \mbox{\hyperlink{classargs}{args}} $>$
+\item 
+{\footnotesize template$<$typename Arg $>$ }\\using \mbox{\hyperlink{classargument__loader_abc37fc86f897e620ab7013d80797ad94}{argument\+\_\+is\+\_\+kwargs}} = std\+::is\+\_\+same$<$ \mbox{\hyperlink{detail_2common_8h_a3e4beb3f4b7338384c98d70aa1ee9780}{intrinsic\+\_\+t}}$<$ Arg $>$, \mbox{\hyperlink{classkwargs}{kwargs}} $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$size\+\_\+t... Is$>$ }\\bool \mbox{\hyperlink{classargument__loader_a1bd02f5a72913ab5b0b1e5fbf4e5eede}{load\+\_\+impl\+\_\+sequence}} (\mbox{\hyperlink{structfunction__call}{function\+\_\+call}} \&\mbox{\hyperlink{classargument__loader_acb978d9776e7b7d6a7a5f904c6b08671}{call}}, \mbox{\hyperlink{structindex__sequence}{index\+\_\+sequence}}$<$ Is... $>$)
+\item 
+{\footnotesize template$<$typename Return , typename Func , size\+\_\+t... Is, typename Guard $>$ }\\Return \mbox{\hyperlink{classargument__loader_a38a1cbd58521b54b47a194371f44458e}{call\+\_\+impl}} (Func \&\&\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}}, \mbox{\hyperlink{structindex__sequence}{index\+\_\+sequence}}$<$ Is... $>$, Guard \&\&) \&\&
+\end{DoxyCompactItemize}
+\doxysubsection*{静态 Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classargument__loader_a847cfcbb6d6d0a145f6efa534bc365cc}{load\+\_\+impl\+\_\+sequence}} (\mbox{\hyperlink{structfunction__call}{function\+\_\+call}} \&, \mbox{\hyperlink{structindex__sequence}{index\+\_\+sequence}}$<$$>$)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+std\+::tuple$<$ \mbox{\hyperlink{cast_8h_ab32b52411a6b07420516d79074815713}{make\+\_\+caster}}$<$ Args $>$... $>$ \mbox{\hyperlink{classargument__loader_a6407a173182c5bb8a3edc757690e8437}{argcasters}}
+\end{DoxyCompactItemize}
+\doxysubsection*{静态 Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr auto \mbox{\hyperlink{classargument__loader_a284643dafad9d0b0bc558ad6c6811fd5}{args\+\_\+pos}} = \mbox{\hyperlink{detail_2common_8h_a3b338d68ac276f1ac405ef556cca63ad}{constexpr\+\_\+first}}$<$\mbox{\hyperlink{classargument__loader_a76572f7ee75b4c32372ce5f7d1042862}{argument\+\_\+is\+\_\+args}}, Args...$>$() -\/ (int) sizeof...(Args)
+\item 
+static constexpr auto \mbox{\hyperlink{classargument__loader_a498bd813bd22efca13e6aab2191408c0}{kwargs\+\_\+pos}} = \mbox{\hyperlink{detail_2common_8h_a3b338d68ac276f1ac405ef556cca63ad}{constexpr\+\_\+first}}$<$\mbox{\hyperlink{classargument__loader_abc37fc86f897e620ab7013d80797ad94}{argument\+\_\+is\+\_\+kwargs}}, Args...$>$() -\/ (int) sizeof...(Args)
+\item 
+static constexpr bool \mbox{\hyperlink{classargument__loader_a985850612f7b99d46f96166b000dfdc3}{args\+\_\+kwargs\+\_\+are\+\_\+last}} = \mbox{\hyperlink{classargument__loader_a498bd813bd22efca13e6aab2191408c0}{kwargs\+\_\+pos}} $>$= -\/ 1 \&\& \mbox{\hyperlink{classargument__loader_a284643dafad9d0b0bc558ad6c6811fd5}{args\+\_\+pos}} $>$= \mbox{\hyperlink{classargument__loader_a498bd813bd22efca13e6aab2191408c0}{kwargs\+\_\+pos}} -\/ 1
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+\subsubsection*{template$<$typename... Args$>$\newline
+class argument\+\_\+loader$<$ Args $>$}
+Helper class which loads arguments for C++ functions called from Python 
+
+\doxysubsection{成员类型定义说明}
+\mbox{\Hypertarget{classargument__loader_a76572f7ee75b4c32372ce5f7d1042862}\label{classargument__loader_a76572f7ee75b4c32372ce5f7d1042862}} 
+\index{argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}!argument\_is\_args@{argument\_is\_args}}
+\index{argument\_is\_args@{argument\_is\_args}!argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}}
+\doxysubsubsection{\texorpdfstring{argument\_is\_args}{argument\_is\_args}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+template$<$typename Arg $>$ \\
+using \mbox{\hyperlink{classargument__loader}{argument\+\_\+loader}}$<$ Args $>$\+::argument\+\_\+is\+\_\+args =  std\+::is\+\_\+same$<$\mbox{\hyperlink{detail_2common_8h_a3e4beb3f4b7338384c98d70aa1ee9780}{intrinsic\+\_\+t}}$<$Arg$>$, \mbox{\hyperlink{classargs}{args}}$>$\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classargument__loader_abc37fc86f897e620ab7013d80797ad94}\label{classargument__loader_abc37fc86f897e620ab7013d80797ad94}} 
+\index{argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}!argument\_is\_kwargs@{argument\_is\_kwargs}}
+\index{argument\_is\_kwargs@{argument\_is\_kwargs}!argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}}
+\doxysubsubsection{\texorpdfstring{argument\_is\_kwargs}{argument\_is\_kwargs}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+template$<$typename Arg $>$ \\
+using \mbox{\hyperlink{classargument__loader}{argument\+\_\+loader}}$<$ Args $>$\+::argument\+\_\+is\+\_\+kwargs =  std\+::is\+\_\+same$<$\mbox{\hyperlink{detail_2common_8h_a3e4beb3f4b7338384c98d70aa1ee9780}{intrinsic\+\_\+t}}$<$Arg$>$, \mbox{\hyperlink{classkwargs}{kwargs}}$>$\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classargument__loader_a986ee7712a6ab2a9aa87a6b1a5de091e}\label{classargument__loader_a986ee7712a6ab2a9aa87a6b1a5de091e}} 
+\index{argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}!indices@{indices}}
+\index{indices@{indices}!argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}}
+\doxysubsubsection{\texorpdfstring{indices}{indices}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+using \mbox{\hyperlink{classargument__loader}{argument\+\_\+loader}}$<$ Args $>$\+::indices =  \mbox{\hyperlink{detail_2common_8h_ab5e942a7ee11e93c8b5ed281c28261b2}{make\+\_\+index\+\_\+sequence}}$<$sizeof...(Args)$>$\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classargument__loader_acb978d9776e7b7d6a7a5f904c6b08671}\label{classargument__loader_acb978d9776e7b7d6a7a5f904c6b08671}} 
+\index{argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}!call@{call}}
+\index{call@{call}!argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}}
+\doxysubsubsection{\texorpdfstring{call()}{call()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+template$<$typename Return , typename Guard , typename Func $>$ \\
+\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$!std\+::is\+\_\+void$<$ Return $>$\+::value, Return $>$ \mbox{\hyperlink{classargument__loader}{argument\+\_\+loader}}$<$ Args $>$\+::call (\begin{DoxyParamCaption}\item[{Func \&\&}]{f }\end{DoxyParamCaption}) \&\&\hspace{0.3cm}{\ttfamily [inline]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=255pt]{classargument__loader_acb978d9776e7b7d6a7a5f904c6b08671_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classargument__loader_a484b2cbfdf718144ea57cf75ede80606}\label{classargument__loader_a484b2cbfdf718144ea57cf75ede80606}} 
+\index{argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}!call@{call}}
+\index{call@{call}!argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}}
+\doxysubsubsection{\texorpdfstring{call()}{call()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+template$<$typename Return , typename Guard , typename Func $>$ \\
+\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$ std\+::is\+\_\+void$<$ Return $>$\+::value, \mbox{\hyperlink{structvoid__type}{void\+\_\+type}} $>$ \mbox{\hyperlink{classargument__loader}{argument\+\_\+loader}}$<$ Args $>$\+::call (\begin{DoxyParamCaption}\item[{Func \&\&}]{f }\end{DoxyParamCaption}) \&\&\hspace{0.3cm}{\ttfamily [inline]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=255pt]{classargument__loader_a484b2cbfdf718144ea57cf75ede80606_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classargument__loader_a38a1cbd58521b54b47a194371f44458e}\label{classargument__loader_a38a1cbd58521b54b47a194371f44458e}} 
+\index{argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}!call\_impl@{call\_impl}}
+\index{call\_impl@{call\_impl}!argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}}
+\doxysubsubsection{\texorpdfstring{call\_impl()}{call\_impl()}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+template$<$typename Return , typename Func , size\+\_\+t... Is, typename Guard $>$ \\
+Return \mbox{\hyperlink{classargument__loader}{argument\+\_\+loader}}$<$ Args $>$\+::call\+\_\+impl (\begin{DoxyParamCaption}\item[{Func \&\&}]{f,  }\item[{\mbox{\hyperlink{structindex__sequence}{index\+\_\+sequence}}$<$ Is... $>$}]{,  }\item[{Guard \&\&}]{ }\end{DoxyParamCaption}) \&\&\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{classargument__loader_a38a1cbd58521b54b47a194371f44458e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classargument__loader_ac5cff5197a03f99f06169af9f43d6537}\label{classargument__loader_ac5cff5197a03f99f06169af9f43d6537}} 
+\index{argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}!load\_args@{load\_args}}
+\index{load\_args@{load\_args}!argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}}
+\doxysubsubsection{\texorpdfstring{load\_args()}{load\_args()}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+bool \mbox{\hyperlink{classargument__loader}{argument\+\_\+loader}}$<$ Args $>$\mbox{\hyperlink{structload__args}{\+::load\+\_\+args}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structfunction__call}{function\+\_\+call}} \&}]{call }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classargument__loader_ac5cff5197a03f99f06169af9f43d6537_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classargument__loader_a847cfcbb6d6d0a145f6efa534bc365cc}\label{classargument__loader_a847cfcbb6d6d0a145f6efa534bc365cc}} 
+\index{argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}!load\_impl\_sequence@{load\_impl\_sequence}}
+\index{load\_impl\_sequence@{load\_impl\_sequence}!argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}}
+\doxysubsubsection{\texorpdfstring{load\_impl\_sequence()}{load\_impl\_sequence()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+static bool \mbox{\hyperlink{classargument__loader}{argument\+\_\+loader}}$<$ Args $>$\+::load\+\_\+impl\+\_\+sequence (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structfunction__call}{function\+\_\+call}} \&}]{,  }\item[{\mbox{\hyperlink{structindex__sequence}{index\+\_\+sequence}}$<$$>$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classargument__loader_a1bd02f5a72913ab5b0b1e5fbf4e5eede}\label{classargument__loader_a1bd02f5a72913ab5b0b1e5fbf4e5eede}} 
+\index{argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}!load\_impl\_sequence@{load\_impl\_sequence}}
+\index{load\_impl\_sequence@{load\_impl\_sequence}!argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}}
+\doxysubsubsection{\texorpdfstring{load\_impl\_sequence()}{load\_impl\_sequence()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+template$<$size\+\_\+t... Is$>$ \\
+bool \mbox{\hyperlink{classargument__loader}{argument\+\_\+loader}}$<$ Args $>$\+::load\+\_\+impl\+\_\+sequence (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structfunction__call}{function\+\_\+call}} \&}]{call,  }\item[{\mbox{\hyperlink{structindex__sequence}{index\+\_\+sequence}}$<$ Is... $>$}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classargument__loader_a1bd02f5a72913ab5b0b1e5fbf4e5eede_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classargument__loader_a48c33de6037140357b1ba8fd154cff59}\label{classargument__loader_a48c33de6037140357b1ba8fd154cff59}} 
+\index{argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}!arg\_names@{arg\_names}}
+\index{arg\_names@{arg\_names}!argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}}
+\doxysubsubsection{\texorpdfstring{arg\_names}{arg\_names}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+constexpr auto \mbox{\hyperlink{classargument__loader}{argument\+\_\+loader}}$<$ Args $>$\+::arg\+\_\+names = \mbox{\hyperlink{descr_8h_a762f34ac72937914a32540134c260665}{concat}}(\mbox{\hyperlink{descr_8h_a7dd2c89703d270c38d112ed3a44dbb86}{type\+\_\+descr}}(\mbox{\hyperlink{cast_8h_ab32b52411a6b07420516d79074815713}{make\+\_\+caster}}$<$Args$>$\mbox{\hyperlink{structname}{\+::name}})...)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\mbox{\Hypertarget{classargument__loader_a6407a173182c5bb8a3edc757690e8437}\label{classargument__loader_a6407a173182c5bb8a3edc757690e8437}} 
+\index{argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}!argcasters@{argcasters}}
+\index{argcasters@{argcasters}!argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}}
+\doxysubsubsection{\texorpdfstring{argcasters}{argcasters}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+std\+::tuple$<$\mbox{\hyperlink{cast_8h_ab32b52411a6b07420516d79074815713}{make\+\_\+caster}}$<$Args$>$...$>$ \mbox{\hyperlink{classargument__loader}{argument\+\_\+loader}}$<$ Args $>$\+::argcasters\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classargument__loader_a985850612f7b99d46f96166b000dfdc3}\label{classargument__loader_a985850612f7b99d46f96166b000dfdc3}} 
+\index{argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}!args\_kwargs\_are\_last@{args\_kwargs\_are\_last}}
+\index{args\_kwargs\_are\_last@{args\_kwargs\_are\_last}!argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}}
+\doxysubsubsection{\texorpdfstring{args\_kwargs\_are\_last}{args\_kwargs\_are\_last}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+constexpr bool \mbox{\hyperlink{classargument__loader}{argument\+\_\+loader}}$<$ Args $>$\+::args\+\_\+kwargs\+\_\+are\+\_\+last = \mbox{\hyperlink{classargument__loader_a498bd813bd22efca13e6aab2191408c0}{kwargs\+\_\+pos}} $>$= -\/ 1 \&\& \mbox{\hyperlink{classargument__loader_a284643dafad9d0b0bc558ad6c6811fd5}{args\+\_\+pos}} $>$= \mbox{\hyperlink{classargument__loader_a498bd813bd22efca13e6aab2191408c0}{kwargs\+\_\+pos}} -\/ 1\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classargument__loader_a284643dafad9d0b0bc558ad6c6811fd5}\label{classargument__loader_a284643dafad9d0b0bc558ad6c6811fd5}} 
+\index{argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}!args\_pos@{args\_pos}}
+\index{args\_pos@{args\_pos}!argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}}
+\doxysubsubsection{\texorpdfstring{args\_pos}{args\_pos}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+constexpr auto \mbox{\hyperlink{classargument__loader}{argument\+\_\+loader}}$<$ Args $>$\+::args\+\_\+pos = \mbox{\hyperlink{detail_2common_8h_a3b338d68ac276f1ac405ef556cca63ad}{constexpr\+\_\+first}}$<$\mbox{\hyperlink{classargument__loader_a76572f7ee75b4c32372ce5f7d1042862}{argument\+\_\+is\+\_\+args}}, Args...$>$() -\/ (int) sizeof...(Args)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classargument__loader_a9436dd2f1d26de4dcfb7e5f7edffef93}\label{classargument__loader_a9436dd2f1d26de4dcfb7e5f7edffef93}} 
+\index{argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}!has\_args@{has\_args}}
+\index{has\_args@{has\_args}!argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}}
+\doxysubsubsection{\texorpdfstring{has\_args}{has\_args}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+constexpr bool \mbox{\hyperlink{classargument__loader}{argument\+\_\+loader}}$<$ Args $>$\+::has\+\_\+args = \mbox{\hyperlink{classargument__loader_a284643dafad9d0b0bc558ad6c6811fd5}{args\+\_\+pos}} $<$ 0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\mbox{\Hypertarget{classargument__loader_aefd489f954b4706554d6c4e7e705617f}\label{classargument__loader_aefd489f954b4706554d6c4e7e705617f}} 
+\index{argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}!has\_kwargs@{has\_kwargs}}
+\index{has\_kwargs@{has\_kwargs}!argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}}
+\doxysubsubsection{\texorpdfstring{has\_kwargs}{has\_kwargs}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+constexpr bool \mbox{\hyperlink{classargument__loader}{argument\+\_\+loader}}$<$ Args $>$\+::has\+\_\+kwargs = \mbox{\hyperlink{classargument__loader_a498bd813bd22efca13e6aab2191408c0}{kwargs\+\_\+pos}} $<$ 0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\mbox{\Hypertarget{classargument__loader_a498bd813bd22efca13e6aab2191408c0}\label{classargument__loader_a498bd813bd22efca13e6aab2191408c0}} 
+\index{argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}!kwargs\_pos@{kwargs\_pos}}
+\index{kwargs\_pos@{kwargs\_pos}!argument\_loader$<$ Args $>$@{argument\_loader$<$ Args $>$}}
+\doxysubsubsection{\texorpdfstring{kwargs\_pos}{kwargs\_pos}}
+{\footnotesize\ttfamily template$<$typename... Args$>$ \\
+constexpr auto \mbox{\hyperlink{classargument__loader}{argument\+\_\+loader}}$<$ Args $>$\+::kwargs\+\_\+pos = \mbox{\hyperlink{detail_2common_8h_a3b338d68ac276f1ac405ef556cca63ad}{constexpr\+\_\+first}}$<$\mbox{\hyperlink{classargument__loader_abc37fc86f897e620ab7013d80797ad94}{argument\+\_\+is\+\_\+kwargs}}, Args...$>$() -\/ (int) sizeof...(Args)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/\mbox{\hyperlink{cast_8h}{cast.\+h}}\end{DoxyCompactItemize}

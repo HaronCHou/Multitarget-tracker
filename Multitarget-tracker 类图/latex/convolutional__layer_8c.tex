@@ -1,0 +1,496 @@
+\hypertarget{convolutional__layer_8c}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/convolutional\+\_\+layer.c 文件参考}
+\label{convolutional__layer_8c}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/convolutional\_layer.c@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/convolutional\_layer.c}}
+{\ttfamily \#include \char`\"{}convolutional\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}batchnorm\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}im2col.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}col2im.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}blas.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gemm.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}box.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+convolutional\+\_\+layer.\+c 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{convolutional__layer_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{宏定义}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{convolutional__layer_8c_acc8952dcb998379e93d195bb7e7c6330}{PUT\+\_\+\+IN\+\_\+\+REGISTER}}~register
+\item 
+\#define \mbox{\hyperlink{convolutional__layer_8c_a3238fd6d91e91519337e2eff17e5ca43}{AI2}}~0
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{convolutional__layer_8c_acba86453da5d682f07098afd14fa7b7f}{forward\+\_\+xnor\+\_\+layer}} (\mbox{\hyperlink{structlayer}{layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{convolutional__layer_8c_a00eb21237b64c4f49eabe4e7f3f2cef1}{swap\+\_\+binary}} (\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} $\ast$l)
+\item 
+void \mbox{\hyperlink{convolutional__layer_8c_aa2ba9c5688fe3b221afba283cd60dd04}{binarize\+\_\+weights}} (float $\ast$weights, int n, int size, float $\ast$binary)
+\item 
+void \mbox{\hyperlink{convolutional__layer_8c_a5c0bcad43fbcf2b264e33b007e283953}{binarize\+\_\+cpu}} (float $\ast$input, int n, float $\ast$binary)
+\item 
+void \mbox{\hyperlink{convolutional__layer_8c_ab0773bc29fbd5de7f3f89533535f3a6b}{binarize\+\_\+input}} (float $\ast$input, int n, int size, float $\ast$binary)
+\item 
+int \mbox{\hyperlink{convolutional__layer_8c_a4e3f4ec3fb327f0072ae7feec101e20d}{convolutional\+\_\+out\+\_\+height}} (\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} l)
+\item 
+int \mbox{\hyperlink{convolutional__layer_8c_a8dd3db32f1bca91f42f9b755ab05810a}{convolutional\+\_\+out\+\_\+width}} (\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} l)
+\item 
+\mbox{\hyperlink{structimage}{image}} \mbox{\hyperlink{convolutional__layer_8c_ac42e3b85ed2690decac4214fe8c302fc}{get\+\_\+convolutional\+\_\+image}} (\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} l)
+\item 
+\mbox{\hyperlink{structimage}{image}} \mbox{\hyperlink{convolutional__layer_8c_a4ec851cd49b213363fed1002ff3ab398}{get\+\_\+convolutional\+\_\+delta}} (\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} l)
+\item 
+\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{convolutional__layer_8c_ac3f2de986385381b5cffe2aeba3824a8}{get\+\_\+workspace\+\_\+size32}} (\mbox{\hyperlink{structlayer}{layer}} l)
+\item 
+\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{convolutional__layer_8c_a78a7aba20f1469ee0b7126c7ddb1ef89}{get\+\_\+workspace\+\_\+size16}} (\mbox{\hyperlink{structlayer}{layer}} l)
+\item 
+\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{convolutional__layer_8c_a7fa2ac3618460e1f005ff0f50b9e0779}{get\+\_\+convolutional\+\_\+workspace\+\_\+size}} (\mbox{\hyperlink{structlayer}{layer}} l)
+\item 
+void \mbox{\hyperlink{convolutional__layer_8c_acca9262212caf9bda8a86e39954d929b}{free\+\_\+convolutional\+\_\+batchnorm}} (\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} $\ast$l)
+\item 
+\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} \mbox{\hyperlink{convolutional__layer_8c_a4bef7605ee2c6711f95476f66cd2960d}{make\+\_\+convolutional\+\_\+layer}} (int batch, int steps, int h, int w, int c, int n, int groups, int size, int stride\+\_\+x, int stride\+\_\+y, int dilation, int padding, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032}{ACTIVATION}} activation, int batch\+\_\+normalize, int binary, int \mbox{\hyperlink{gemm_8c_abeaa8b11b9d81279309458f72eb74034}{xnor}}, int adam, int use\+\_\+bin\+\_\+output, int index, int antialiasing, \mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} $\ast$share\+\_\+layer, int assisted\+\_\+excitation, int deform, int train)
+\item 
+void \mbox{\hyperlink{convolutional__layer_8c_aa48893181b794b4ef14f013390f999e2}{denormalize\+\_\+convolutional\+\_\+layer}} (\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} l)
+\item 
+void \mbox{\hyperlink{convolutional__layer_8c_a69b04d3b7e68e9e6d819064a6f0bfdfe}{test\+\_\+convolutional\+\_\+layer}} ()
+\item 
+void \mbox{\hyperlink{convolutional__layer_8c_ab4e8bb8b50e2058d861892bed77238de}{resize\+\_\+convolutional\+\_\+layer}} (\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} $\ast$l, int w, int h)
+\item 
+void \mbox{\hyperlink{convolutional__layer_8c_aff1898fbd81da62c1fe135ed993143fc}{set\+\_\+specified\+\_\+workspace\+\_\+limit}} (\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} $\ast$l, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} workspace\+\_\+size\+\_\+limit)
+\item 
+void \mbox{\hyperlink{convolutional__layer_8c_ad6cf2da6713f5eb405eb21cb5bfe8dc9}{add\+\_\+bias}} (float $\ast$output, float $\ast$biases, int batch, int n, int size)
+\item 
+void \mbox{\hyperlink{convolutional__layer_8c_ad2afef6b2dde26f2a1098e42f8b48e8f}{scale\+\_\+bias}} (float $\ast$output, float $\ast$scales, int batch, int n, int size)
+\item 
+void \mbox{\hyperlink{convolutional__layer_8c_a3fe122b5a5807135e39655276f708d98}{backward\+\_\+bias}} (float $\ast$bias\+\_\+updates, float $\ast$delta, int batch, int n, int size)
+\item 
+void \mbox{\hyperlink{convolutional__layer_8c_a7aceadc7b1c6183628d270c2fc38d0b1}{gemm\+\_\+nn\+\_\+custom}} (int M, int N, int K, float ALPHA, float $\ast$A, int lda, float $\ast$B, int ldb, float $\ast$C, int ldc)
+\item 
+void \mbox{\hyperlink{convolutional__layer_8c_a9c2c5a4d82b511e4bb6b1a4e0a3ae5c1}{get\+\_\+mean\+\_\+array}} (float $\ast$src, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} size, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} filters, float $\ast$mean\+\_\+arr)
+\item 
+void \mbox{\hyperlink{convolutional__layer_8c_a92137e4f792d7ad5a4eaa9599d5e1624}{bit\+\_\+to\+\_\+float}} (unsigned char $\ast$src, float $\ast$dst, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} size, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} filters, float $\ast$mean\+\_\+arr)
+\item 
+void \mbox{\hyperlink{convolutional__layer_8c_a23c3775162193b4c18deba6c9c3b742b}{binary\+\_\+align\+\_\+weights}} (\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} $\ast$l)
+\item 
+\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{convolutional__layer_8c_aa00f26778676fd821ac0b798fdcc5a5b}{binary\+\_\+transpose\+\_\+align\+\_\+input}} (int k, int n, float $\ast$b, char $\ast$$\ast$t\+\_\+bit\+\_\+input, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} ldb\+\_\+align, int bit\+\_\+align)
+\item 
+void \mbox{\hyperlink{convolutional__layer_8c_a41faadcd03e383c6eff3e9f55bab1b1d}{forward\+\_\+convolutional\+\_\+layer}} (\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{convolutional__layer_8c_a1176684c19d8ccf1b17bb568438a21b1}{assisted\+\_\+excitation\+\_\+forward}} (\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{convolutional__layer_8c_ad63b40d6fda98ace68136f709b9cb0dd}{backward\+\_\+convolutional\+\_\+layer}} (\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{convolutional__layer_8c_af40ef7cf282497f22f37145e4cec4741}{update\+\_\+convolutional\+\_\+layer}} (\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} l, int batch, float learning\+\_\+rate\+\_\+init, float momentum, float decay)
+\item 
+\mbox{\hyperlink{structimage}{image}} \mbox{\hyperlink{convolutional__layer_8c_ac75c4e8ba3158b823ea2e08142a84d55}{get\+\_\+convolutional\+\_\+weight}} (\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} l, int i)
+\item 
+void \mbox{\hyperlink{convolutional__layer_8c_a1f0aba3f00cb0554384cc88998a67609}{rgbgr\+\_\+weights}} (\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} l)
+\item 
+void \mbox{\hyperlink{convolutional__layer_8c_a2b8d3bb34b2aa7c6c729f32a96d1ebc1}{rescale\+\_\+weights}} (\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} l, float scale, float trans)
+\item 
+\mbox{\hyperlink{structimage}{image}} $\ast$ \mbox{\hyperlink{convolutional__layer_8c_a1654f868902525e1b2e8398ad4faa827}{get\+\_\+weights}} (\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} l)
+\item 
+\mbox{\hyperlink{structimage}{image}} $\ast$ \mbox{\hyperlink{convolutional__layer_8c_a229f34491522314604ecd170b92601f3}{visualize\+\_\+convolutional\+\_\+layer}} (\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} l, char $\ast$window, \mbox{\hyperlink{structimage}{image}} $\ast$prev\+\_\+weights)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{宏定义说明}
+\mbox{\Hypertarget{convolutional__layer_8c_a3238fd6d91e91519337e2eff17e5ca43}\label{convolutional__layer_8c_a3238fd6d91e91519337e2eff17e5ca43}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!AI2@{AI2}}
+\index{AI2@{AI2}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{AI2}{AI2}}
+{\footnotesize\ttfamily \#define AI2~0}
+
+\mbox{\Hypertarget{convolutional__layer_8c_acc8952dcb998379e93d195bb7e7c6330}\label{convolutional__layer_8c_acc8952dcb998379e93d195bb7e7c6330}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!PUT\_IN\_REGISTER@{PUT\_IN\_REGISTER}}
+\index{PUT\_IN\_REGISTER@{PUT\_IN\_REGISTER}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{PUT\_IN\_REGISTER}{PUT\_IN\_REGISTER}}
+{\footnotesize\ttfamily \#define PUT\+\_\+\+IN\+\_\+\+REGISTER~register}
+
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{convolutional__layer_8c_ad6cf2da6713f5eb405eb21cb5bfe8dc9}\label{convolutional__layer_8c_ad6cf2da6713f5eb405eb21cb5bfe8dc9}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!add\_bias@{add\_bias}}
+\index{add\_bias@{add\_bias}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{add\_bias()}{add\_bias()}}
+{\footnotesize\ttfamily void add\+\_\+bias (\begin{DoxyParamCaption}\item[{float $\ast$}]{output,  }\item[{float $\ast$}]{biases,  }\item[{int}]{batch,  }\item[{int}]{n,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{convolutional__layer_8c_a1176684c19d8ccf1b17bb568438a21b1}\label{convolutional__layer_8c_a1176684c19d8ccf1b17bb568438a21b1}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!assisted\_excitation\_forward@{assisted\_excitation\_forward}}
+\index{assisted\_excitation\_forward@{assisted\_excitation\_forward}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{assisted\_excitation\_forward()}{assisted\_excitation\_forward()}}
+{\footnotesize\ttfamily void assisted\+\_\+excitation\+\_\+forward (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{convolutional__layer_8c_a1176684c19d8ccf1b17bb568438a21b1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{convolutional__layer_8c_a3fe122b5a5807135e39655276f708d98}\label{convolutional__layer_8c_a3fe122b5a5807135e39655276f708d98}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!backward\_bias@{backward\_bias}}
+\index{backward\_bias@{backward\_bias}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{backward\_bias()}{backward\_bias()}}
+{\footnotesize\ttfamily void backward\+\_\+bias (\begin{DoxyParamCaption}\item[{float $\ast$}]{bias\+\_\+updates,  }\item[{float $\ast$}]{delta,  }\item[{int}]{batch,  }\item[{int}]{n,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=259pt]{convolutional__layer_8c_a3fe122b5a5807135e39655276f708d98_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{convolutional__layer_8c_ad63b40d6fda98ace68136f709b9cb0dd}\label{convolutional__layer_8c_ad63b40d6fda98ace68136f709b9cb0dd}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!backward\_convolutional\_layer@{backward\_convolutional\_layer}}
+\index{backward\_convolutional\_layer@{backward\_convolutional\_layer}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{backward\_convolutional\_layer()}{backward\_convolutional\_layer()}}
+{\footnotesize\ttfamily void backward\+\_\+convolutional\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{convolutional__layer_8c_ad63b40d6fda98ace68136f709b9cb0dd_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{convolutional__layer_8c_a5c0bcad43fbcf2b264e33b007e283953}\label{convolutional__layer_8c_a5c0bcad43fbcf2b264e33b007e283953}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!binarize\_cpu@{binarize\_cpu}}
+\index{binarize\_cpu@{binarize\_cpu}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{binarize\_cpu()}{binarize\_cpu()}}
+{\footnotesize\ttfamily void binarize\+\_\+cpu (\begin{DoxyParamCaption}\item[{float $\ast$}]{input,  }\item[{int}]{n,  }\item[{float $\ast$}]{binary }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{convolutional__layer_8c_ab0773bc29fbd5de7f3f89533535f3a6b}\label{convolutional__layer_8c_ab0773bc29fbd5de7f3f89533535f3a6b}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!binarize\_input@{binarize\_input}}
+\index{binarize\_input@{binarize\_input}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{binarize\_input()}{binarize\_input()}}
+{\footnotesize\ttfamily void binarize\+\_\+input (\begin{DoxyParamCaption}\item[{float $\ast$}]{input,  }\item[{int}]{n,  }\item[{int}]{size,  }\item[{float $\ast$}]{binary }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{convolutional__layer_8c_aa2ba9c5688fe3b221afba283cd60dd04}\label{convolutional__layer_8c_aa2ba9c5688fe3b221afba283cd60dd04}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!binarize\_weights@{binarize\_weights}}
+\index{binarize\_weights@{binarize\_weights}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{binarize\_weights()}{binarize\_weights()}}
+{\footnotesize\ttfamily void binarize\+\_\+weights (\begin{DoxyParamCaption}\item[{float $\ast$}]{weights,  }\item[{int}]{n,  }\item[{int}]{size,  }\item[{float $\ast$}]{binary }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{convolutional__layer_8c_aa2ba9c5688fe3b221afba283cd60dd04_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{convolutional__layer_8c_a23c3775162193b4c18deba6c9c3b742b}\label{convolutional__layer_8c_a23c3775162193b4c18deba6c9c3b742b}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!binary\_align\_weights@{binary\_align\_weights}}
+\index{binary\_align\_weights@{binary\_align\_weights}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{binary\_align\_weights()}{binary\_align\_weights()}}
+{\footnotesize\ttfamily void binary\+\_\+align\+\_\+weights (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} $\ast$}]{l }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{convolutional__layer_8c_a23c3775162193b4c18deba6c9c3b742b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{convolutional__layer_8c_aa00f26778676fd821ac0b798fdcc5a5b}\label{convolutional__layer_8c_aa00f26778676fd821ac0b798fdcc5a5b}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!binary\_transpose\_align\_input@{binary\_transpose\_align\_input}}
+\index{binary\_transpose\_align\_input@{binary\_transpose\_align\_input}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{binary\_transpose\_align\_input()}{binary\_transpose\_align\_input()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} binary\+\_\+transpose\+\_\+align\+\_\+input (\begin{DoxyParamCaption}\item[{int}]{k,  }\item[{int}]{n,  }\item[{float $\ast$}]{b,  }\item[{char $\ast$$\ast$}]{t\+\_\+bit\+\_\+input,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{ldb\+\_\+align,  }\item[{int}]{bit\+\_\+align }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{convolutional__layer_8c_aa00f26778676fd821ac0b798fdcc5a5b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{convolutional__layer_8c_a92137e4f792d7ad5a4eaa9599d5e1624}\label{convolutional__layer_8c_a92137e4f792d7ad5a4eaa9599d5e1624}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!bit\_to\_float@{bit\_to\_float}}
+\index{bit\_to\_float@{bit\_to\_float}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{bit\_to\_float()}{bit\_to\_float()}}
+{\footnotesize\ttfamily void bit\+\_\+to\+\_\+float (\begin{DoxyParamCaption}\item[{unsigned char $\ast$}]{src,  }\item[{float $\ast$}]{dst,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{size,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{filters,  }\item[{float $\ast$}]{mean\+\_\+arr }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{convolutional__layer_8c_a92137e4f792d7ad5a4eaa9599d5e1624_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{convolutional__layer_8c_a4e3f4ec3fb327f0072ae7feec101e20d}\label{convolutional__layer_8c_a4e3f4ec3fb327f0072ae7feec101e20d}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!convolutional\_out\_height@{convolutional\_out\_height}}
+\index{convolutional\_out\_height@{convolutional\_out\_height}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{convolutional\_out\_height()}{convolutional\_out\_height()}}
+{\footnotesize\ttfamily int convolutional\+\_\+out\+\_\+height (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}}}]{l }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{convolutional__layer_8c_a8dd3db32f1bca91f42f9b755ab05810a}\label{convolutional__layer_8c_a8dd3db32f1bca91f42f9b755ab05810a}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!convolutional\_out\_width@{convolutional\_out\_width}}
+\index{convolutional\_out\_width@{convolutional\_out\_width}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{convolutional\_out\_width()}{convolutional\_out\_width()}}
+{\footnotesize\ttfamily int convolutional\+\_\+out\+\_\+width (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}}}]{l }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{convolutional__layer_8c_aa48893181b794b4ef14f013390f999e2}\label{convolutional__layer_8c_aa48893181b794b4ef14f013390f999e2}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!denormalize\_convolutional\_layer@{denormalize\_convolutional\_layer}}
+\index{denormalize\_convolutional\_layer@{denormalize\_convolutional\_layer}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{denormalize\_convolutional\_layer()}{denormalize\_convolutional\_layer()}}
+{\footnotesize\ttfamily void denormalize\+\_\+convolutional\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}}}]{l }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{convolutional__layer_8c_a41faadcd03e383c6eff3e9f55bab1b1d}\label{convolutional__layer_8c_a41faadcd03e383c6eff3e9f55bab1b1d}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!forward\_convolutional\_layer@{forward\_convolutional\_layer}}
+\index{forward\_convolutional\_layer@{forward\_convolutional\_layer}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{forward\_convolutional\_layer()}{forward\_convolutional\_layer()}}
+{\footnotesize\ttfamily void forward\+\_\+convolutional\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{convolutional__layer_8c_a41faadcd03e383c6eff3e9f55bab1b1d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{convolutional__layer_8c_acba86453da5d682f07098afd14fa7b7f}\label{convolutional__layer_8c_acba86453da5d682f07098afd14fa7b7f}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!forward\_xnor\_layer@{forward\_xnor\_layer}}
+\index{forward\_xnor\_layer@{forward\_xnor\_layer}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{forward\_xnor\_layer()}{forward\_xnor\_layer()}}
+{\footnotesize\ttfamily void forward\+\_\+xnor\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{convolutional__layer_8c_acca9262212caf9bda8a86e39954d929b}\label{convolutional__layer_8c_acca9262212caf9bda8a86e39954d929b}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!free\_convolutional\_batchnorm@{free\_convolutional\_batchnorm}}
+\index{free\_convolutional\_batchnorm@{free\_convolutional\_batchnorm}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{free\_convolutional\_batchnorm()}{free\_convolutional\_batchnorm()}}
+{\footnotesize\ttfamily void free\+\_\+convolutional\+\_\+batchnorm (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} $\ast$}]{l }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{convolutional__layer_8c_a7aceadc7b1c6183628d270c2fc38d0b1}\label{convolutional__layer_8c_a7aceadc7b1c6183628d270c2fc38d0b1}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!gemm\_nn\_custom@{gemm\_nn\_custom}}
+\index{gemm\_nn\_custom@{gemm\_nn\_custom}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{gemm\_nn\_custom()}{gemm\_nn\_custom()}}
+{\footnotesize\ttfamily void gemm\+\_\+nn\+\_\+custom (\begin{DoxyParamCaption}\item[{int}]{M,  }\item[{int}]{N,  }\item[{int}]{K,  }\item[{float}]{ALPHA,  }\item[{float $\ast$}]{A,  }\item[{int}]{lda,  }\item[{float $\ast$}]{B,  }\item[{int}]{ldb,  }\item[{float $\ast$}]{C,  }\item[{int}]{ldc }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{convolutional__layer_8c_a4ec851cd49b213363fed1002ff3ab398}\label{convolutional__layer_8c_a4ec851cd49b213363fed1002ff3ab398}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!get\_convolutional\_delta@{get\_convolutional\_delta}}
+\index{get\_convolutional\_delta@{get\_convolutional\_delta}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{get\_convolutional\_delta()}{get\_convolutional\_delta()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structimage}{image}} get\+\_\+convolutional\+\_\+delta (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}}}]{l }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{convolutional__layer_8c_a4ec851cd49b213363fed1002ff3ab398_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{convolutional__layer_8c_ac42e3b85ed2690decac4214fe8c302fc}\label{convolutional__layer_8c_ac42e3b85ed2690decac4214fe8c302fc}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!get\_convolutional\_image@{get\_convolutional\_image}}
+\index{get\_convolutional\_image@{get\_convolutional\_image}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{get\_convolutional\_image()}{get\_convolutional\_image()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structimage}{image}} get\+\_\+convolutional\+\_\+image (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}}}]{l }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{convolutional__layer_8c_ac42e3b85ed2690decac4214fe8c302fc_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{convolutional__layer_8c_ac75c4e8ba3158b823ea2e08142a84d55}\label{convolutional__layer_8c_ac75c4e8ba3158b823ea2e08142a84d55}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!get\_convolutional\_weight@{get\_convolutional\_weight}}
+\index{get\_convolutional\_weight@{get\_convolutional\_weight}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{get\_convolutional\_weight()}{get\_convolutional\_weight()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structimage}{image}} get\+\_\+convolutional\+\_\+weight (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}}}]{l,  }\item[{int}]{i }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{convolutional__layer_8c_ac75c4e8ba3158b823ea2e08142a84d55_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{convolutional__layer_8c_a7fa2ac3618460e1f005ff0f50b9e0779}\label{convolutional__layer_8c_a7fa2ac3618460e1f005ff0f50b9e0779}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!get\_convolutional\_workspace\_size@{get\_convolutional\_workspace\_size}}
+\index{get\_convolutional\_workspace\_size@{get\_convolutional\_workspace\_size}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{get\_convolutional\_workspace\_size()}{get\_convolutional\_workspace\_size()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} get\+\_\+convolutional\+\_\+workspace\+\_\+size (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{l }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{convolutional__layer_8c_a7fa2ac3618460e1f005ff0f50b9e0779_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{convolutional__layer_8c_a9c2c5a4d82b511e4bb6b1a4e0a3ae5c1}\label{convolutional__layer_8c_a9c2c5a4d82b511e4bb6b1a4e0a3ae5c1}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!get\_mean\_array@{get\_mean\_array}}
+\index{get\_mean\_array@{get\_mean\_array}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{get\_mean\_array()}{get\_mean\_array()}}
+{\footnotesize\ttfamily void get\+\_\+mean\+\_\+array (\begin{DoxyParamCaption}\item[{float $\ast$}]{src,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{size,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{filters,  }\item[{float $\ast$}]{mean\+\_\+arr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{convolutional__layer_8c_a1654f868902525e1b2e8398ad4faa827}\label{convolutional__layer_8c_a1654f868902525e1b2e8398ad4faa827}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!get\_weights@{get\_weights}}
+\index{get\_weights@{get\_weights}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{get\_weights()}{get\_weights()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structimage}{image}} $\ast$ get\+\_\+weights (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}}}]{l }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{convolutional__layer_8c_a1654f868902525e1b2e8398ad4faa827_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{convolutional__layer_8c_a78a7aba20f1469ee0b7126c7ddb1ef89}\label{convolutional__layer_8c_a78a7aba20f1469ee0b7126c7ddb1ef89}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!get\_workspace\_size16@{get\_workspace\_size16}}
+\index{get\_workspace\_size16@{get\_workspace\_size16}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{get\_workspace\_size16()}{get\_workspace\_size16()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} get\+\_\+workspace\+\_\+size16 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{l }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{convolutional__layer_8c_ac3f2de986385381b5cffe2aeba3824a8}\label{convolutional__layer_8c_ac3f2de986385381b5cffe2aeba3824a8}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!get\_workspace\_size32@{get\_workspace\_size32}}
+\index{get\_workspace\_size32@{get\_workspace\_size32}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{get\_workspace\_size32()}{get\_workspace\_size32()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} get\+\_\+workspace\+\_\+size32 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{l }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{convolutional__layer_8c_a4bef7605ee2c6711f95476f66cd2960d}\label{convolutional__layer_8c_a4bef7605ee2c6711f95476f66cd2960d}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!make\_convolutional\_layer@{make\_convolutional\_layer}}
+\index{make\_convolutional\_layer@{make\_convolutional\_layer}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{make\_convolutional\_layer()}{make\_convolutional\_layer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} make\+\_\+convolutional\+\_\+layer (\begin{DoxyParamCaption}\item[{int}]{batch,  }\item[{int}]{steps,  }\item[{int}]{h,  }\item[{int}]{w,  }\item[{int}]{c,  }\item[{int}]{n,  }\item[{int}]{groups,  }\item[{int}]{size,  }\item[{int}]{stride\+\_\+x,  }\item[{int}]{stride\+\_\+y,  }\item[{int}]{dilation,  }\item[{int}]{padding,  }\item[{\mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032}{ACTIVATION}}}]{activation,  }\item[{int}]{batch\+\_\+normalize,  }\item[{int}]{binary,  }\item[{int}]{xnor,  }\item[{int}]{adam,  }\item[{int}]{use\+\_\+bin\+\_\+output,  }\item[{int}]{index,  }\item[{int}]{antialiasing,  }\item[{\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} $\ast$}]{share\+\_\+layer,  }\item[{int}]{assisted\+\_\+excitation,  }\item[{int}]{deform,  }\item[{int}]{train }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{convolutional__layer_8c_a4bef7605ee2c6711f95476f66cd2960d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{convolutional__layer_8c_a2b8d3bb34b2aa7c6c729f32a96d1ebc1}\label{convolutional__layer_8c_a2b8d3bb34b2aa7c6c729f32a96d1ebc1}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!rescale\_weights@{rescale\_weights}}
+\index{rescale\_weights@{rescale\_weights}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{rescale\_weights()}{rescale\_weights()}}
+{\footnotesize\ttfamily void rescale\+\_\+weights (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}}}]{l,  }\item[{float}]{scale,  }\item[{float}]{trans }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{convolutional__layer_8c_a2b8d3bb34b2aa7c6c729f32a96d1ebc1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{convolutional__layer_8c_ab4e8bb8b50e2058d861892bed77238de}\label{convolutional__layer_8c_ab4e8bb8b50e2058d861892bed77238de}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!resize\_convolutional\_layer@{resize\_convolutional\_layer}}
+\index{resize\_convolutional\_layer@{resize\_convolutional\_layer}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{resize\_convolutional\_layer()}{resize\_convolutional\_layer()}}
+{\footnotesize\ttfamily void resize\+\_\+convolutional\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} $\ast$}]{l,  }\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{convolutional__layer_8c_ab4e8bb8b50e2058d861892bed77238de_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{convolutional__layer_8c_a1f0aba3f00cb0554384cc88998a67609}\label{convolutional__layer_8c_a1f0aba3f00cb0554384cc88998a67609}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!rgbgr\_weights@{rgbgr\_weights}}
+\index{rgbgr\_weights@{rgbgr\_weights}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{rgbgr\_weights()}{rgbgr\_weights()}}
+{\footnotesize\ttfamily void rgbgr\+\_\+weights (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}}}]{l }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{convolutional__layer_8c_a1f0aba3f00cb0554384cc88998a67609_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{convolutional__layer_8c_ad2afef6b2dde26f2a1098e42f8b48e8f}\label{convolutional__layer_8c_ad2afef6b2dde26f2a1098e42f8b48e8f}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!scale\_bias@{scale\_bias}}
+\index{scale\_bias@{scale\_bias}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{scale\_bias()}{scale\_bias()}}
+{\footnotesize\ttfamily void scale\+\_\+bias (\begin{DoxyParamCaption}\item[{float $\ast$}]{output,  }\item[{float $\ast$}]{scales,  }\item[{int}]{batch,  }\item[{int}]{n,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{convolutional__layer_8c_aff1898fbd81da62c1fe135ed993143fc}\label{convolutional__layer_8c_aff1898fbd81da62c1fe135ed993143fc}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!set\_specified\_workspace\_limit@{set\_specified\_workspace\_limit}}
+\index{set\_specified\_workspace\_limit@{set\_specified\_workspace\_limit}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{set\_specified\_workspace\_limit()}{set\_specified\_workspace\_limit()}}
+{\footnotesize\ttfamily void set\+\_\+specified\+\_\+workspace\+\_\+limit (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} $\ast$}]{l,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{workspace\+\_\+size\+\_\+limit }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{convolutional__layer_8c_aff1898fbd81da62c1fe135ed993143fc_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{convolutional__layer_8c_a00eb21237b64c4f49eabe4e7f3f2cef1}\label{convolutional__layer_8c_a00eb21237b64c4f49eabe4e7f3f2cef1}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!swap\_binary@{swap\_binary}}
+\index{swap\_binary@{swap\_binary}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{swap\_binary()}{swap\_binary()}}
+{\footnotesize\ttfamily void swap\+\_\+binary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}} $\ast$}]{l }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{convolutional__layer_8c_a69b04d3b7e68e9e6d819064a6f0bfdfe}\label{convolutional__layer_8c_a69b04d3b7e68e9e6d819064a6f0bfdfe}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!test\_convolutional\_layer@{test\_convolutional\_layer}}
+\index{test\_convolutional\_layer@{test\_convolutional\_layer}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{test\_convolutional\_layer()}{test\_convolutional\_layer()}}
+{\footnotesize\ttfamily void test\+\_\+convolutional\+\_\+layer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{convolutional__layer_8c_a69b04d3b7e68e9e6d819064a6f0bfdfe_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{convolutional__layer_8c_af40ef7cf282497f22f37145e4cec4741}\label{convolutional__layer_8c_af40ef7cf282497f22f37145e4cec4741}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!update\_convolutional\_layer@{update\_convolutional\_layer}}
+\index{update\_convolutional\_layer@{update\_convolutional\_layer}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{update\_convolutional\_layer()}{update\_convolutional\_layer()}}
+{\footnotesize\ttfamily void update\+\_\+convolutional\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}}}]{l,  }\item[{int}]{batch,  }\item[{float}]{learning\+\_\+rate\+\_\+init,  }\item[{float}]{momentum,  }\item[{float}]{decay }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=282pt]{convolutional__layer_8c_af40ef7cf282497f22f37145e4cec4741_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{convolutional__layer_8c_a229f34491522314604ecd170b92601f3}\label{convolutional__layer_8c_a229f34491522314604ecd170b92601f3}} 
+\index{convolutional\_layer.c@{convolutional\_layer.c}!visualize\_convolutional\_layer@{visualize\_convolutional\_layer}}
+\index{visualize\_convolutional\_layer@{visualize\_convolutional\_layer}!convolutional\_layer.c@{convolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{visualize\_convolutional\_layer()}{visualize\_convolutional\_layer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structimage}{image}} $\ast$ visualize\+\_\+convolutional\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{convolutional__layer_8h_a3d5c19fbd473fc9ef62fec3f3a31b318}{convolutional\+\_\+layer}}}]{l,  }\item[{char $\ast$}]{window,  }\item[{\mbox{\hyperlink{structimage}{image}} $\ast$}]{prev\+\_\+weights }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{convolutional__layer_8c_a229f34491522314604ecd170b92601f3_cgraph}
+\end{center}
+\end{figure}

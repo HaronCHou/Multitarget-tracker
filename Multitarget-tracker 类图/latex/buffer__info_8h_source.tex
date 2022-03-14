@@ -1,0 +1,120 @@
+\hypertarget{buffer__info_8h_source}{}\doxysection{buffer\+\_\+info.\+h}
+\label{buffer__info_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/buffer\_info.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/buffer\_info.h}}
+\mbox{\hyperlink{buffer__info_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{    pybind11/buffer\_info.h: Python buffer object interface}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{    Copyright (c) 2016 Wenzel Jakob <wenzel.jakob@epfl.ch>}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{    All rights reserved. Use of this source code is governed by a}}
+\DoxyCodeLine{7 \textcolor{comment}{    BSD-\/style license that can be found in the LICENSE file.}}
+\DoxyCodeLine{8 \textcolor{comment}{*/}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{detail_2common_8h}{detail/common.h}}"{}}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 struct \mbox{\hyperlink{structbuffer__info}{buffer\_info}} \{}
+\DoxyCodeLine{18     \textcolor{keywordtype}{void} *ptr = \textcolor{keyword}{nullptr};          \textcolor{comment}{// Pointer to the underlying storage}}
+\DoxyCodeLine{19     \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} itemsize = 0;         \textcolor{comment}{// Size of individual items in bytes}}
+\DoxyCodeLine{20     \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} size = 0;             \textcolor{comment}{// Total number of entries}}
+\DoxyCodeLine{21     std::string \mbox{\hyperlink{structbuffer__info_af5d89b84be8905b695a23b914e92bbda}{format}};           \textcolor{comment}{// For homogeneous buffers, this should be set to format\_descriptor<T>::format()}}
+\DoxyCodeLine{22     \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} ndim = 0;             \textcolor{comment}{// Number of dimensions}}
+\DoxyCodeLine{23     std::vector<ssize\_t> \mbox{\hyperlink{structbuffer__info_a69da91575dde98ab488789dfd2d8daf4}{shape}};   \textcolor{comment}{// Shape of the tensor (1 entry per dimension)}}
+\DoxyCodeLine{24     std::vector<ssize\_t> \mbox{\hyperlink{structbuffer__info_abd738097cc1960c4955040eec0619026}{strides}}; \textcolor{comment}{// Number of bytes between adjacent entries (for each per dimension)}}
+\DoxyCodeLine{25     \textcolor{keywordtype}{bool} readonly = \textcolor{keyword}{false};        \textcolor{comment}{// flag to indicate if the underlying storage may be written to}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27     \mbox{\hyperlink{structbuffer__info_a7ba465a026eab59b502922baceb7e196}{buffer\_info}}() \{ \}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29     \mbox{\hyperlink{structbuffer__info_a8104f4194a05f50ce3150367dcc52196}{buffer\_info}}(\textcolor{keywordtype}{void} *ptr, \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} itemsize, \textcolor{keyword}{const} std::string \&format, \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} ndim,}
+\DoxyCodeLine{30                 detail::any\_container<ssize\_t> shape\_in, detail::any\_container<ssize\_t> strides\_in, \textcolor{keywordtype}{bool} readonly=\textcolor{keyword}{false})}
+\DoxyCodeLine{31     : ptr(ptr), itemsize(itemsize), size(1), format(format), ndim(ndim),}
+\DoxyCodeLine{32       shape(\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{cast_8h_aa26cb17b5f2f55f99e792e7f6339f12e}{move}}(shape\_in)), strides(\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{cast_8h_aa26cb17b5f2f55f99e792e7f6339f12e}{move}}(strides\_in)), readonly(readonly) \{}
+\DoxyCodeLine{33         \textcolor{keywordflow}{if} (ndim != (\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}) shape.size() || ndim != (\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}) strides.size())}
+\DoxyCodeLine{34             \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}buffer\_info: ndim doesn't match shape and/or strides length"{}});}
+\DoxyCodeLine{35         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < (\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\_t}}) ndim; ++i)}
+\DoxyCodeLine{36             size *= shape[i];}
+\DoxyCodeLine{37     \}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{40     \mbox{\hyperlink{structbuffer__info_ac0c1b6032f809ef3ee6cd44af001b573}{buffer\_info}}(T *ptr, detail::any\_container<ssize\_t> shape\_in, detail::any\_container<ssize\_t> strides\_in, \textcolor{keywordtype}{bool} readonly=\textcolor{keyword}{false})}
+\DoxyCodeLine{41     : \mbox{\hyperlink{structbuffer__info}{buffer\_info}}(\mbox{\hyperlink{structbuffer__info_1_1private__ctr__tag}{private\_ctr\_tag}}(), ptr, sizeof(T), \mbox{\hyperlink{structformat__descriptor}{format\_descriptor}}<T>::format(), static\_cast<\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}>(shape\_in-\/>size()), \mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{cast_8h_aa26cb17b5f2f55f99e792e7f6339f12e}{move}}(shape\_in), \mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{cast_8h_aa26cb17b5f2f55f99e792e7f6339f12e}{move}}(strides\_in), readonly) \{ \}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43     \mbox{\hyperlink{structbuffer__info_aa127fd9449a1c9c883866b6aa8012843}{buffer\_info}}(\textcolor{keywordtype}{void} *ptr, \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} itemsize, \textcolor{keyword}{const} std::string \&format, \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} size, \textcolor{keywordtype}{bool} readonly=\textcolor{keyword}{false})}
+\DoxyCodeLine{44     : \mbox{\hyperlink{structbuffer__info}{buffer\_info}}(ptr, itemsize, format, 1, \{size\}, \{itemsize\}, readonly) \{ \}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{47     \mbox{\hyperlink{structbuffer__info_a0d78ac362b1859220c0cb859b5483390}{buffer\_info}}(T *ptr, \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} size, \textcolor{keywordtype}{bool} readonly=\textcolor{keyword}{false})}
+\DoxyCodeLine{48     : \mbox{\hyperlink{structbuffer__info}{buffer\_info}}(ptr, sizeof(T), \mbox{\hyperlink{structformat__descriptor}{format\_descriptor}}<T>::format(), size, readonly) \{ \}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{51     \mbox{\hyperlink{structbuffer__info_a0287798bb2f50c8c19bbe5ee3e913cb6}{buffer\_info}}(\textcolor{keyword}{const} T *ptr, \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} size, \textcolor{keywordtype}{bool} readonly=\textcolor{keyword}{true})}
+\DoxyCodeLine{52     : \mbox{\hyperlink{structbuffer__info}{buffer\_info}}(const\_cast<T*>(ptr), sizeof(T), \mbox{\hyperlink{structformat__descriptor}{format\_descriptor}}<T>::format(), size, readonly) \{ \}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54     \textcolor{keyword}{explicit} \mbox{\hyperlink{structbuffer__info_a18bf6023b6d4bb685d345d5acb9b71ca}{buffer\_info}}(Py\_buffer *view, \textcolor{keywordtype}{bool} ownview = \textcolor{keyword}{true})}
+\DoxyCodeLine{55     : \mbox{\hyperlink{structbuffer__info}{buffer\_info}}(view-\/>buf, view-\/>itemsize, view-\/>format, view-\/>ndim,}
+\DoxyCodeLine{56             \{view-\/>shape, view-\/>shape + view-\/>ndim\}, \{view-\/>strides, view-\/>strides + view-\/>ndim\}, view-\/>readonly) \{}
+\DoxyCodeLine{57         this-\/>view = view;}
+\DoxyCodeLine{58         this-\/>ownview = ownview;}
+\DoxyCodeLine{59     \}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61     \mbox{\hyperlink{structbuffer__info_a7c5a7e3878ecda87f0e60448b2bf7d1e}{buffer\_info}}(\textcolor{keyword}{const} \mbox{\hyperlink{structbuffer__info}{buffer\_info}} \&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{62     \mbox{\hyperlink{structbuffer__info}{buffer\_info}}\& \mbox{\hyperlink{structbuffer__info_a67f696cde4c6032f128ca30b5ab8779d}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{structbuffer__info}{buffer\_info}} \&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64     \mbox{\hyperlink{structbuffer__info_a6ea2c0767021b4dc20c6116b6989c3aa}{buffer\_info}}(\mbox{\hyperlink{structbuffer__info}{buffer\_info}} \&\&other) \{}
+\DoxyCodeLine{65         (*this) = std::move(other);}
+\DoxyCodeLine{66     \}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68     \mbox{\hyperlink{structbuffer__info}{buffer\_info}}\& \mbox{\hyperlink{structbuffer__info_ab756d6e32ff37fb61ca7c72bb43f2df4}{operator=}}(\mbox{\hyperlink{structbuffer__info}{buffer\_info}} \&\&rhs) \{}
+\DoxyCodeLine{69         ptr = rhs.\mbox{\hyperlink{structbuffer__info_a2976ad4b157156ebbcffe667888e2d28}{ptr}};}
+\DoxyCodeLine{70         itemsize = rhs.itemsize;}
+\DoxyCodeLine{71         size = rhs.size;}
+\DoxyCodeLine{72         format = std::move(rhs.format);}
+\DoxyCodeLine{73         ndim = rhs.ndim;}
+\DoxyCodeLine{74         shape = std::move(rhs.shape);}
+\DoxyCodeLine{75         strides = std::move(rhs.strides);}
+\DoxyCodeLine{76         \mbox{\hyperlink{gemm_8c_a1c82d0dbfe1c362b02510494287bdffa}{std::swap}}(view, rhs.view);}
+\DoxyCodeLine{77         \mbox{\hyperlink{gemm_8c_a1c82d0dbfe1c362b02510494287bdffa}{std::swap}}(ownview, rhs.ownview);}
+\DoxyCodeLine{78         readonly = rhs.readonly;}
+\DoxyCodeLine{79         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{80     \}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82     \mbox{\hyperlink{structbuffer__info_af1f9a46bb7b88c2ff00001b68d21cded}{\string~buffer\_info}}() \{}
+\DoxyCodeLine{83         \textcolor{keywordflow}{if} (view \&\& ownview) \{ PyBuffer\_Release(view); \textcolor{keyword}{delete} view; \}}
+\DoxyCodeLine{84     \}}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86 \textcolor{keyword}{private}:}
+\DoxyCodeLine{87     \textcolor{keyword}{struct }\mbox{\hyperlink{structbuffer__info_1_1private__ctr__tag}{private\_ctr\_tag}} \{ \};}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89     \mbox{\hyperlink{structbuffer__info_ace43580d635d587d7475831fc74394db}{buffer\_info}}(\mbox{\hyperlink{structbuffer__info_1_1private__ctr__tag}{private\_ctr\_tag}}, \textcolor{keywordtype}{void} *ptr, \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} itemsize, \textcolor{keyword}{const} std::string \&format, \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} ndim,}
+\DoxyCodeLine{90                 detail::any\_container<ssize\_t> \&\&shape\_in, detail::any\_container<ssize\_t> \&\&strides\_in, \textcolor{keywordtype}{bool} readonly)}
+\DoxyCodeLine{91     : \mbox{\hyperlink{structbuffer__info}{buffer\_info}}(ptr, itemsize, format, ndim, \mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{cast_8h_aa26cb17b5f2f55f99e792e7f6339f12e}{move}}(shape\_in), \mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{cast_8h_aa26cb17b5f2f55f99e792e7f6339f12e}{move}}(strides\_in), readonly) \{ \}}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93     Py\_buffer *view = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{94     \textcolor{keywordtype}{bool} ownview = \textcolor{keyword}{false};}
+\DoxyCodeLine{95 \};}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99 template <typename T, typename SFINAE = \textcolor{keywordtype}{void}> struct \mbox{\hyperlink{structcompare__buffer__info}{compare\_buffer\_info}} \{}
+\DoxyCodeLine{100     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} \mbox{\hyperlink{structcompare__buffer__info_a3227161502cf6f643bdb0f99963909bc}{compare}}(\textcolor{keyword}{const} \mbox{\hyperlink{structbuffer__info}{buffer\_info}}\& b) \{}
+\DoxyCodeLine{101         \textcolor{keywordflow}{return} b.\mbox{\hyperlink{structbuffer__info_af5d89b84be8905b695a23b914e92bbda}{format}} == \mbox{\hyperlink{structformat__descriptor}{format\_descriptor<T>::format}}() \&\& b.\mbox{\hyperlink{structbuffer__info_a8a95447f854c217a3b76168627900139}{itemsize}} == (\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}) \textcolor{keyword}{sizeof}(T);}
+\DoxyCodeLine{102     \}}
+\DoxyCodeLine{103 \};}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{struct }\mbox{\hyperlink{structcompare__buffer__info}{compare\_buffer\_info}}<T, detail::\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<std::is\_integral<T>::value>> \{}
+\DoxyCodeLine{106     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} \mbox{\hyperlink{structcompare__buffer__info_3_01_t_00_01detail_1_1enable__if__t_3_01std_1_1is__integral_3_01_t_01_4_1_1value_01_4_01_4_a60fda70f2ae6e5cefd6854592482d4f2}{compare}}(\textcolor{keyword}{const} \mbox{\hyperlink{structbuffer__info}{buffer\_info}}\& b) \{}
+\DoxyCodeLine{107         \textcolor{keywordflow}{return} (\textcolor{keywordtype}{size\_t}) b.\mbox{\hyperlink{structbuffer__info_a8a95447f854c217a3b76168627900139}{itemsize}} == \textcolor{keyword}{sizeof}(T) \&\& (b.\mbox{\hyperlink{structbuffer__info_af5d89b84be8905b695a23b914e92bbda}{format}} == \mbox{\hyperlink{structformat__descriptor}{format\_descriptor<T>::value}} ||}
+\DoxyCodeLine{108             ((\textcolor{keyword}{sizeof}(T) == \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{long})) \&\& b.\mbox{\hyperlink{structbuffer__info_af5d89b84be8905b695a23b914e92bbda}{format}} == (std::is\_unsigned<T>::value ? \textcolor{stringliteral}{"{}L"{}} : \textcolor{stringliteral}{"{}l"{}})) ||}
+\DoxyCodeLine{109             ((\textcolor{keyword}{sizeof}(T) == \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{size\_t})) \&\& b.\mbox{\hyperlink{structbuffer__info_af5d89b84be8905b695a23b914e92bbda}{format}} == (std::is\_unsigned<T>::value ? \textcolor{stringliteral}{"{}N"{}} : \textcolor{stringliteral}{"{}n"{}})));}
+\DoxyCodeLine{110     \}}
+\DoxyCodeLine{111 \};}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{114 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+
+\end{DoxyCode}

@@ -1,0 +1,295 @@
+\hypertarget{stl__bind_8h}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/stl\+\_\+bind.h 文件参考}
+\label{stl__bind_8h}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/stl\_bind.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/stl\_bind.h}}
+{\ttfamily \#include \char`\"{}detail/common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}operators.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+stl\+\_\+bind.\+h 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{stl__bind_8h__incl}
+\end{center}
+\end{figure}
+此图展示该文件直接或间接的被哪些文件引用了\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{stl__bind_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structcontainer__traits}{container\+\_\+traits$<$ T $>$}}
+\item 
+struct \mbox{\hyperlink{structis__comparable}{is\+\_\+comparable$<$ T, SFINAE $>$}}
+\item 
+struct \mbox{\hyperlink{structis__comparable_3_01_t_00_01enable__if__t_3_01container__traits_3_01_t_01_4_1_1is__element_81dba1096c4a7c2c4f27f8f67bb7d966}{is\+\_\+comparable$<$ T, enable\+\_\+if\+\_\+t$<$ container\+\_\+traits$<$ T $>$\+::is\+\_\+element \&\&container\+\_\+traits$<$ T $>$\+::is\+\_\+comparable $>$ $>$}}
+\item 
+struct \mbox{\hyperlink{structis__comparable_3_01_t_00_01enable__if__t_3_01container__traits_3_01_t_01_4_1_1is__vector_01_4_01_4}{is\+\_\+comparable$<$ T, enable\+\_\+if\+\_\+t$<$ container\+\_\+traits$<$ T $>$\+::is\+\_\+vector $>$ $>$}}
+\item 
+struct \mbox{\hyperlink{structis__comparable_3_01_t_00_01enable__if__t_3_01container__traits_3_01_t_01_4_1_1is__pair_01_4_01_4}{is\+\_\+comparable$<$ T, enable\+\_\+if\+\_\+t$<$ container\+\_\+traits$<$ T $>$\+::is\+\_\+pair $>$ $>$}}
+\item 
+struct \mbox{\hyperlink{structvector__has__data__and__format}{vector\+\_\+has\+\_\+data\+\_\+and\+\_\+format$<$ Vector, typename $>$}}
+\item 
+struct \mbox{\hyperlink{structvector__has__data__and__format_3_01_vector_00_01enable__if__t_3_01std_1_1is__same_3_01decl747d65b4a7fb391eecda178e3ef74ddd}{vector\+\_\+has\+\_\+data\+\_\+and\+\_\+format$<$ Vector, enable\+\_\+if\+\_\+t$<$ std\+::is\+\_\+same$<$ decltype(format\+\_\+descriptor$<$ typename Vector\+::value\+\_\+type $>$\+::format(), std\+::declval$<$ Vector $>$().\+data()), typename Vector\+::value\+\_\+type $\ast$ $>$\+::value $>$ $>$}}
+\end{DoxyCompactItemize}
+\doxysubsection*{类型定义}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Vector $>$ }\\using \mbox{\hyperlink{stl__bind_8h_a420b251394c21cbb2018fd306766b27c}{vector\+\_\+needs\+\_\+copy}} = \mbox{\hyperlink{structnegation}{negation}}$<$ std\+::is\+\_\+same$<$ decltype(std\+::declval$<$ Vector $>$()\mbox{[}typename Vector\+::size\+\_\+type()\mbox{]}), typename Vector\+::value\+\_\+type \& $>$ $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename , typename , typename... Args$>$ }\\void \mbox{\hyperlink{stl__bind_8h_a47e3a662b602db9d3b8efe78cf642ed5}{vector\+\_\+if\+\_\+copy\+\_\+constructible}} (const Args \&...)
+\item 
+{\footnotesize template$<$typename , typename , typename... Args$>$ }\\void \mbox{\hyperlink{stl__bind_8h_a3321d31f31f31ce4f15df2a5ca0f3c5b}{vector\+\_\+if\+\_\+equal\+\_\+operator}} (const Args \&...)
+\item 
+{\footnotesize template$<$typename , typename , typename... Args$>$ }\\void \mbox{\hyperlink{stl__bind_8h_ae934bc2550663d06f547d0aecdc133e5}{vector\+\_\+if\+\_\+insertion\+\_\+operator}} (const Args \&...)
+\item 
+{\footnotesize template$<$typename , typename , typename... Args$>$ }\\void \mbox{\hyperlink{stl__bind_8h_a7b76294fb8225f2708a0ee188f80dc1f}{vector\+\_\+modifiers}} (const Args \&...)
+\item 
+{\footnotesize template$<$typename Vector , typename Class\+\_\+ $>$ }\\void \mbox{\hyperlink{stl__bind_8h_a956bf0b1b7e6b59aa225638cef0ba6ae}{vector\+\_\+if\+\_\+copy\+\_\+constructible}} (\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$ \mbox{\hyperlink{structis__copy__constructible}{is\+\_\+copy\+\_\+constructible}}$<$ Vector $>$\+::value, Class\+\_\+ $>$ \&cl)
+\item 
+{\footnotesize template$<$typename Vector , typename Class\+\_\+ $>$ }\\void \mbox{\hyperlink{stl__bind_8h_ab89a5d4428acf05fd487fe1202f5e853}{vector\+\_\+if\+\_\+equal\+\_\+operator}} (\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$ \mbox{\hyperlink{structis__comparable}{is\+\_\+comparable}}$<$ Vector $>$\+::value, Class\+\_\+ $>$ \&cl)
+\item 
+{\footnotesize template$<$typename Vector , typename Class\+\_\+ $>$ }\\void \mbox{\hyperlink{stl__bind_8h_af3b7e310c0665322f8aa0a8ed829d314}{vector\+\_\+modifiers}} (\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$ \mbox{\hyperlink{structis__copy__constructible}{is\+\_\+copy\+\_\+constructible}}$<$ typename Vector\+::value\+\_\+type $>$\+::value, Class\+\_\+ $>$ \&cl)
+\item 
+{\footnotesize template$<$typename Vector , typename Class\+\_\+ $>$ }\\void \mbox{\hyperlink{stl__bind_8h_a3ca2fe5533b984a4dd055f2ba590f121}{vector\+\_\+accessor}} (\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$!\mbox{\hyperlink{stl__bind_8h_a420b251394c21cbb2018fd306766b27c}{vector\+\_\+needs\+\_\+copy}}$<$ Vector $>$\+::value, Class\+\_\+ $>$ \&cl)
+\item 
+{\footnotesize template$<$typename Vector , typename Class\+\_\+ $>$ }\\void \mbox{\hyperlink{stl__bind_8h_aafc8a2061379e075fd9e0c3a6dc5c194}{vector\+\_\+accessor}} (\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$ \mbox{\hyperlink{stl__bind_8h_a420b251394c21cbb2018fd306766b27c}{vector\+\_\+needs\+\_\+copy}}$<$ Vector $>$\+::value, Class\+\_\+ $>$ \&cl)
+\item 
+{\footnotesize template$<$typename Vector , typename Class\+\_\+ $>$ }\\auto \mbox{\hyperlink{stl__bind_8h_a824c790c915a6a3f429cbbe0ec8bb10f}{vector\+\_\+if\+\_\+insertion\+\_\+operator}} (Class\+\_\+ \&cl, std\+::string const \&\mbox{\hyperlink{structname}{name}}) -\/$>$ decltype(std\+::declval$<$ std\+::ostream \& $>$()$<$$<$ std\+::declval$<$ typename Vector\+::value\+\_\+type $>$(), void())
+\item 
+{\footnotesize template$<$typename Vector , typename Class\+\_\+ , typename... Args$>$ }\\\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$ \mbox{\hyperlink{detail_2common_8h_a9fc2947c6f247b5bf1696117d6a46f5c}{detail\+::any\+\_\+of}}$<$ std\+::is\+\_\+same$<$ Args, \mbox{\hyperlink{structbuffer__protocol}{buffer\+\_\+protocol}} $>$... $>$\+::value $>$ \mbox{\hyperlink{stl__bind_8h_a2b310c000d300d9621c1c4889b60f5f7}{vector\+\_\+buffer}} (Class\+\_\+ \&cl)
+\item 
+{\footnotesize template$<$typename Vector , typename Class\+\_\+ , typename... Args$>$ }\\\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$!\mbox{\hyperlink{detail_2common_8h_a9fc2947c6f247b5bf1696117d6a46f5c}{detail\+::any\+\_\+of}}$<$ std\+::is\+\_\+same$<$ Args, \mbox{\hyperlink{structbuffer__protocol}{buffer\+\_\+protocol}} $>$... $>$\+::value $>$ \mbox{\hyperlink{stl__bind_8h_a696b15f8c72fb4c08cd26429db9cabe8}{vector\+\_\+buffer}} (Class\+\_\+ \&)
+\item 
+{\footnotesize template$<$typename Vector , typename holder\+\_\+type  = std\+::unique\+\_\+ptr$<$\+Vector$>$, typename... Args$>$ }\\\mbox{\hyperlink{classclass__}{class\+\_\+}}$<$ Vector, holder\+\_\+type $>$ \mbox{\hyperlink{stl__bind_8h_a2a748f396f5f33ad5b64e3b3b43f548a}{bind\+\_\+vector}} (\mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structscope}{scope}}, std\+::string const \&\mbox{\hyperlink{structname}{name}}, Args \&\&... \mbox{\hyperlink{classargs}{args}})
+\item 
+{\footnotesize template$<$typename , typename , typename... Args$>$ }\\void \mbox{\hyperlink{stl__bind_8h_aef691c4b89c8302d78bc4d749981d3a9}{map\+\_\+if\+\_\+insertion\+\_\+operator}} (const Args \&...)
+\item 
+{\footnotesize template$<$typename , typename , typename... Args$>$ }\\void \mbox{\hyperlink{stl__bind_8h_a4c7c4c2d3781e3d482b1ba30ff3e338e}{map\+\_\+assignment}} (const Args \&...)
+\item 
+{\footnotesize template$<$typename Map , typename Class\+\_\+ $>$ }\\void \mbox{\hyperlink{stl__bind_8h_a111f69b36ef2517670748af28e6ab550}{map\+\_\+assignment}} (\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$ \mbox{\hyperlink{structis__copy__assignable}{is\+\_\+copy\+\_\+assignable}}$<$ typename Map\+::mapped\+\_\+type $>$\+::value, Class\+\_\+ $>$ \&cl)
+\item 
+{\footnotesize template$<$typename Map , typename Class\+\_\+ $>$ }\\void \mbox{\hyperlink{stl__bind_8h_aeff6803a15d0b1f8ac27906d57253788}{map\+\_\+assignment}} (\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$ !\mbox{\hyperlink{structis__copy__assignable}{is\+\_\+copy\+\_\+assignable}}$<$ typename Map\+::mapped\+\_\+type $>$\+::value \&\&\mbox{\hyperlink{structis__copy__constructible}{is\+\_\+copy\+\_\+constructible}}$<$ typename Map\+::mapped\+\_\+type $>$\+::value, Class\+\_\+ $>$ \&cl)
+\item 
+{\footnotesize template$<$typename Map , typename Class\+\_\+ $>$ }\\auto \mbox{\hyperlink{stl__bind_8h_ab6c7f6c342a666e0518f296af38cc61a}{map\+\_\+if\+\_\+insertion\+\_\+operator}} (Class\+\_\+ \&cl, std\+::string const \&\mbox{\hyperlink{structname}{name}}) -\/$>$ decltype(std\+::declval$<$ std\+::ostream \& $>$()$<$$<$ std\+::declval$<$ typename Map\+::key\+\_\+type $>$()$<$$<$ std\+::declval$<$ typename Map\+::mapped\+\_\+type $>$(), void())
+\item 
+{\footnotesize template$<$typename Map , typename holder\+\_\+type  = std\+::unique\+\_\+ptr$<$\+Map$>$, typename... Args$>$ }\\\mbox{\hyperlink{classclass__}{class\+\_\+}}$<$ Map, holder\+\_\+type $>$ \mbox{\hyperlink{stl__bind_8h_a999075e2fc70681f89a6e0f2bbd9b8e0}{bind\+\_\+map}} (\mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structscope}{scope}}, const std\+::string \&\mbox{\hyperlink{structname}{name}}, Args \&\&... \mbox{\hyperlink{classargs}{args}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{类型定义说明}
+\mbox{\Hypertarget{stl__bind_8h_a420b251394c21cbb2018fd306766b27c}\label{stl__bind_8h_a420b251394c21cbb2018fd306766b27c}} 
+\index{stl\_bind.h@{stl\_bind.h}!vector\_needs\_copy@{vector\_needs\_copy}}
+\index{vector\_needs\_copy@{vector\_needs\_copy}!stl\_bind.h@{stl\_bind.h}}
+\doxysubsubsection{\texorpdfstring{vector\_needs\_copy}{vector\_needs\_copy}}
+{\footnotesize\ttfamily template$<$typename Vector $>$ \\
+using \mbox{\hyperlink{stl__bind_8h_a420b251394c21cbb2018fd306766b27c}{vector\+\_\+needs\+\_\+copy}} =  \mbox{\hyperlink{structnegation}{negation}}$<$ std\+::is\+\_\+same$<$decltype(std\+::declval$<$Vector$>$()\mbox{[}typename Vector\+::size\+\_\+type()\mbox{]}), typename Vector\+::value\+\_\+type \&$>$ $>$}
+
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{stl__bind_8h_a999075e2fc70681f89a6e0f2bbd9b8e0}\label{stl__bind_8h_a999075e2fc70681f89a6e0f2bbd9b8e0}} 
+\index{stl\_bind.h@{stl\_bind.h}!bind\_map@{bind\_map}}
+\index{bind\_map@{bind\_map}!stl\_bind.h@{stl\_bind.h}}
+\doxysubsubsection{\texorpdfstring{bind\_map()}{bind\_map()}}
+{\footnotesize\ttfamily template$<$typename Map , typename holder\+\_\+type  = std\+::unique\+\_\+ptr$<$\+Map$>$, typename... Args$>$ \\
+\mbox{\hyperlink{classclass__}{class\+\_\+}}$<$ Map, holder\+\_\+type $>$ bind\+\_\+map (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhandle}{handle}}}]{scope,  }\item[{const std\+::string \&}]{name,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{stl__bind_8h_a999075e2fc70681f89a6e0f2bbd9b8e0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{stl__bind_8h_a2a748f396f5f33ad5b64e3b3b43f548a}\label{stl__bind_8h_a2a748f396f5f33ad5b64e3b3b43f548a}} 
+\index{stl\_bind.h@{stl\_bind.h}!bind\_vector@{bind\_vector}}
+\index{bind\_vector@{bind\_vector}!stl\_bind.h@{stl\_bind.h}}
+\doxysubsubsection{\texorpdfstring{bind\_vector()}{bind\_vector()}}
+{\footnotesize\ttfamily template$<$typename Vector , typename holder\+\_\+type  = std\+::unique\+\_\+ptr$<$\+Vector$>$, typename... Args$>$ \\
+\mbox{\hyperlink{classclass__}{class\+\_\+}}$<$ Vector, holder\+\_\+type $>$ bind\+\_\+vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhandle}{handle}}}]{scope,  }\item[{std\+::string const \&}]{name,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{stl__bind_8h_a2a748f396f5f33ad5b64e3b3b43f548a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{stl__bind_8h_a4c7c4c2d3781e3d482b1ba30ff3e338e}\label{stl__bind_8h_a4c7c4c2d3781e3d482b1ba30ff3e338e}} 
+\index{stl\_bind.h@{stl\_bind.h}!map\_assignment@{map\_assignment}}
+\index{map\_assignment@{map\_assignment}!stl\_bind.h@{stl\_bind.h}}
+\doxysubsubsection{\texorpdfstring{map\_assignment()}{map\_assignment()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename , typename , typename... Args$>$ \\
+void map\+\_\+assignment (\begin{DoxyParamCaption}\item[{const Args \&}]{... }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stl__bind_8h_aeff6803a15d0b1f8ac27906d57253788}\label{stl__bind_8h_aeff6803a15d0b1f8ac27906d57253788}} 
+\index{stl\_bind.h@{stl\_bind.h}!map\_assignment@{map\_assignment}}
+\index{map\_assignment@{map\_assignment}!stl\_bind.h@{stl\_bind.h}}
+\doxysubsubsection{\texorpdfstring{map\_assignment()}{map\_assignment()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename Map , typename Class\+\_\+ $>$ \\
+void map\+\_\+assignment (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$ !\mbox{\hyperlink{structis__copy__assignable}{is\+\_\+copy\+\_\+assignable}}$<$ typename Map\+::mapped\+\_\+type $>$\+::value \&\&\mbox{\hyperlink{structis__copy__constructible}{is\+\_\+copy\+\_\+constructible}}$<$ typename Map\+::mapped\+\_\+type $>$\+::value, Class\+\_\+ $>$ \&}]{cl }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=265pt]{stl__bind_8h_aeff6803a15d0b1f8ac27906d57253788_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{stl__bind_8h_a111f69b36ef2517670748af28e6ab550}\label{stl__bind_8h_a111f69b36ef2517670748af28e6ab550}} 
+\index{stl\_bind.h@{stl\_bind.h}!map\_assignment@{map\_assignment}}
+\index{map\_assignment@{map\_assignment}!stl\_bind.h@{stl\_bind.h}}
+\doxysubsubsection{\texorpdfstring{map\_assignment()}{map\_assignment()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename Map , typename Class\+\_\+ $>$ \\
+void map\+\_\+assignment (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$ \mbox{\hyperlink{structis__copy__assignable}{is\+\_\+copy\+\_\+assignable}}$<$ typename Map\+::mapped\+\_\+type $>$\+::value, Class\+\_\+ $>$ \&}]{cl }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stl__bind_8h_ab6c7f6c342a666e0518f296af38cc61a}\label{stl__bind_8h_ab6c7f6c342a666e0518f296af38cc61a}} 
+\index{stl\_bind.h@{stl\_bind.h}!map\_if\_insertion\_operator@{map\_if\_insertion\_operator}}
+\index{map\_if\_insertion\_operator@{map\_if\_insertion\_operator}!stl\_bind.h@{stl\_bind.h}}
+\doxysubsubsection{\texorpdfstring{map\_if\_insertion\_operator()}{map\_if\_insertion\_operator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Map , typename Class\+\_\+ $>$ \\
+auto map\+\_\+if\+\_\+insertion\+\_\+operator (\begin{DoxyParamCaption}\item[{Class\+\_\+ \&}]{cl,  }\item[{std\+::string const \&}]{name }\end{DoxyParamCaption}) -\/$>$ decltype(std\+::declval$<$std\+::ostream\&$>$() $<$$<$ std\+::declval$<$typename Map\+::key\+\_\+type$>$() $<$$<$ std\+::declval$<$typename Map\+::mapped\+\_\+type$>$(), void()) }
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=273pt]{stl__bind_8h_ab6c7f6c342a666e0518f296af38cc61a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{stl__bind_8h_aef691c4b89c8302d78bc4d749981d3a9}\label{stl__bind_8h_aef691c4b89c8302d78bc4d749981d3a9}} 
+\index{stl\_bind.h@{stl\_bind.h}!map\_if\_insertion\_operator@{map\_if\_insertion\_operator}}
+\index{map\_if\_insertion\_operator@{map\_if\_insertion\_operator}!stl\_bind.h@{stl\_bind.h}}
+\doxysubsubsection{\texorpdfstring{map\_if\_insertion\_operator()}{map\_if\_insertion\_operator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename , typename , typename... Args$>$ \\
+void map\+\_\+if\+\_\+insertion\+\_\+operator (\begin{DoxyParamCaption}\item[{const Args \&}]{... }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stl__bind_8h_aafc8a2061379e075fd9e0c3a6dc5c194}\label{stl__bind_8h_aafc8a2061379e075fd9e0c3a6dc5c194}} 
+\index{stl\_bind.h@{stl\_bind.h}!vector\_accessor@{vector\_accessor}}
+\index{vector\_accessor@{vector\_accessor}!stl\_bind.h@{stl\_bind.h}}
+\doxysubsubsection{\texorpdfstring{vector\_accessor()}{vector\_accessor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Vector , typename Class\+\_\+ $>$ \\
+void vector\+\_\+accessor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$ \mbox{\hyperlink{stl__bind_8h_a420b251394c21cbb2018fd306766b27c}{vector\+\_\+needs\+\_\+copy}}$<$ Vector $>$\+::value, Class\+\_\+ $>$ \&}]{cl }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{stl__bind_8h_aafc8a2061379e075fd9e0c3a6dc5c194_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{stl__bind_8h_a3ca2fe5533b984a4dd055f2ba590f121}\label{stl__bind_8h_a3ca2fe5533b984a4dd055f2ba590f121}} 
+\index{stl\_bind.h@{stl\_bind.h}!vector\_accessor@{vector\_accessor}}
+\index{vector\_accessor@{vector\_accessor}!stl\_bind.h@{stl\_bind.h}}
+\doxysubsubsection{\texorpdfstring{vector\_accessor()}{vector\_accessor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Vector , typename Class\+\_\+ $>$ \\
+void vector\+\_\+accessor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$!\mbox{\hyperlink{stl__bind_8h_a420b251394c21cbb2018fd306766b27c}{vector\+\_\+needs\+\_\+copy}}$<$ Vector $>$\+::value, Class\+\_\+ $>$ \&}]{cl }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{stl__bind_8h_a3ca2fe5533b984a4dd055f2ba590f121_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{stl__bind_8h_a696b15f8c72fb4c08cd26429db9cabe8}\label{stl__bind_8h_a696b15f8c72fb4c08cd26429db9cabe8}} 
+\index{stl\_bind.h@{stl\_bind.h}!vector\_buffer@{vector\_buffer}}
+\index{vector\_buffer@{vector\_buffer}!stl\_bind.h@{stl\_bind.h}}
+\doxysubsubsection{\texorpdfstring{vector\_buffer()}{vector\_buffer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Vector , typename Class\+\_\+ , typename... Args$>$ \\
+\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$!\mbox{\hyperlink{detail_2common_8h_a9fc2947c6f247b5bf1696117d6a46f5c}{detail\+::any\+\_\+of}}$<$ std\+::is\+\_\+same$<$ Args, \mbox{\hyperlink{structbuffer__protocol}{buffer\+\_\+protocol}} $>$... $>$\+::value $>$ vector\+\_\+buffer (\begin{DoxyParamCaption}\item[{Class\+\_\+ \&}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stl__bind_8h_a2b310c000d300d9621c1c4889b60f5f7}\label{stl__bind_8h_a2b310c000d300d9621c1c4889b60f5f7}} 
+\index{stl\_bind.h@{stl\_bind.h}!vector\_buffer@{vector\_buffer}}
+\index{vector\_buffer@{vector\_buffer}!stl\_bind.h@{stl\_bind.h}}
+\doxysubsubsection{\texorpdfstring{vector\_buffer()}{vector\_buffer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Vector , typename Class\+\_\+ , typename... Args$>$ \\
+\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$ \mbox{\hyperlink{detail_2common_8h_a9fc2947c6f247b5bf1696117d6a46f5c}{detail\+::any\+\_\+of}}$<$ std\+::is\+\_\+same$<$ Args, \mbox{\hyperlink{structbuffer__protocol}{buffer\+\_\+protocol}} $>$... $>$\+::value $>$ vector\+\_\+buffer (\begin{DoxyParamCaption}\item[{Class\+\_\+ \&}]{cl }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=265pt]{stl__bind_8h_a2b310c000d300d9621c1c4889b60f5f7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{stl__bind_8h_a47e3a662b602db9d3b8efe78cf642ed5}\label{stl__bind_8h_a47e3a662b602db9d3b8efe78cf642ed5}} 
+\index{stl\_bind.h@{stl\_bind.h}!vector\_if\_copy\_constructible@{vector\_if\_copy\_constructible}}
+\index{vector\_if\_copy\_constructible@{vector\_if\_copy\_constructible}!stl\_bind.h@{stl\_bind.h}}
+\doxysubsubsection{\texorpdfstring{vector\_if\_copy\_constructible()}{vector\_if\_copy\_constructible()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename , typename , typename... Args$>$ \\
+void vector\+\_\+if\+\_\+copy\+\_\+constructible (\begin{DoxyParamCaption}\item[{const Args \&}]{... }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stl__bind_8h_a956bf0b1b7e6b59aa225638cef0ba6ae}\label{stl__bind_8h_a956bf0b1b7e6b59aa225638cef0ba6ae}} 
+\index{stl\_bind.h@{stl\_bind.h}!vector\_if\_copy\_constructible@{vector\_if\_copy\_constructible}}
+\index{vector\_if\_copy\_constructible@{vector\_if\_copy\_constructible}!stl\_bind.h@{stl\_bind.h}}
+\doxysubsubsection{\texorpdfstring{vector\_if\_copy\_constructible()}{vector\_if\_copy\_constructible()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Vector , typename Class\+\_\+ $>$ \\
+void vector\+\_\+if\+\_\+copy\+\_\+constructible (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$ \mbox{\hyperlink{structis__copy__constructible}{is\+\_\+copy\+\_\+constructible}}$<$ Vector $>$\+::value, Class\+\_\+ $>$ \&}]{cl }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stl__bind_8h_a3321d31f31f31ce4f15df2a5ca0f3c5b}\label{stl__bind_8h_a3321d31f31f31ce4f15df2a5ca0f3c5b}} 
+\index{stl\_bind.h@{stl\_bind.h}!vector\_if\_equal\_operator@{vector\_if\_equal\_operator}}
+\index{vector\_if\_equal\_operator@{vector\_if\_equal\_operator}!stl\_bind.h@{stl\_bind.h}}
+\doxysubsubsection{\texorpdfstring{vector\_if\_equal\_operator()}{vector\_if\_equal\_operator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename , typename , typename... Args$>$ \\
+void vector\+\_\+if\+\_\+equal\+\_\+operator (\begin{DoxyParamCaption}\item[{const Args \&}]{... }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stl__bind_8h_ab89a5d4428acf05fd487fe1202f5e853}\label{stl__bind_8h_ab89a5d4428acf05fd487fe1202f5e853}} 
+\index{stl\_bind.h@{stl\_bind.h}!vector\_if\_equal\_operator@{vector\_if\_equal\_operator}}
+\index{vector\_if\_equal\_operator@{vector\_if\_equal\_operator}!stl\_bind.h@{stl\_bind.h}}
+\doxysubsubsection{\texorpdfstring{vector\_if\_equal\_operator()}{vector\_if\_equal\_operator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Vector , typename Class\+\_\+ $>$ \\
+void vector\+\_\+if\+\_\+equal\+\_\+operator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$ \mbox{\hyperlink{structis__comparable}{is\+\_\+comparable}}$<$ Vector $>$\+::value, Class\+\_\+ $>$ \&}]{cl }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stl__bind_8h_a824c790c915a6a3f429cbbe0ec8bb10f}\label{stl__bind_8h_a824c790c915a6a3f429cbbe0ec8bb10f}} 
+\index{stl\_bind.h@{stl\_bind.h}!vector\_if\_insertion\_operator@{vector\_if\_insertion\_operator}}
+\index{vector\_if\_insertion\_operator@{vector\_if\_insertion\_operator}!stl\_bind.h@{stl\_bind.h}}
+\doxysubsubsection{\texorpdfstring{vector\_if\_insertion\_operator()}{vector\_if\_insertion\_operator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Vector , typename Class\+\_\+ $>$ \\
+auto vector\+\_\+if\+\_\+insertion\+\_\+operator (\begin{DoxyParamCaption}\item[{Class\+\_\+ \&}]{cl,  }\item[{std\+::string const \&}]{name }\end{DoxyParamCaption}) -\/$>$ decltype(std\+::declval$<$std\+::ostream\&$>$() $<$$<$ std\+::declval$<$typename Vector\+::value\+\_\+type$>$(), void()) }
+
+\mbox{\Hypertarget{stl__bind_8h_ae934bc2550663d06f547d0aecdc133e5}\label{stl__bind_8h_ae934bc2550663d06f547d0aecdc133e5}} 
+\index{stl\_bind.h@{stl\_bind.h}!vector\_if\_insertion\_operator@{vector\_if\_insertion\_operator}}
+\index{vector\_if\_insertion\_operator@{vector\_if\_insertion\_operator}!stl\_bind.h@{stl\_bind.h}}
+\doxysubsubsection{\texorpdfstring{vector\_if\_insertion\_operator()}{vector\_if\_insertion\_operator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename , typename , typename... Args$>$ \\
+void vector\+\_\+if\+\_\+insertion\+\_\+operator (\begin{DoxyParamCaption}\item[{const Args \&}]{... }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stl__bind_8h_a7b76294fb8225f2708a0ee188f80dc1f}\label{stl__bind_8h_a7b76294fb8225f2708a0ee188f80dc1f}} 
+\index{stl\_bind.h@{stl\_bind.h}!vector\_modifiers@{vector\_modifiers}}
+\index{vector\_modifiers@{vector\_modifiers}!stl\_bind.h@{stl\_bind.h}}
+\doxysubsubsection{\texorpdfstring{vector\_modifiers()}{vector\_modifiers()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename , typename , typename... Args$>$ \\
+void vector\+\_\+modifiers (\begin{DoxyParamCaption}\item[{const Args \&}]{... }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{stl__bind_8h_af3b7e310c0665322f8aa0a8ed829d314}\label{stl__bind_8h_af3b7e310c0665322f8aa0a8ed829d314}} 
+\index{stl\_bind.h@{stl\_bind.h}!vector\_modifiers@{vector\_modifiers}}
+\index{vector\_modifiers@{vector\_modifiers}!stl\_bind.h@{stl\_bind.h}}
+\doxysubsubsection{\texorpdfstring{vector\_modifiers()}{vector\_modifiers()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Vector , typename Class\+\_\+ $>$ \\
+void vector\+\_\+modifiers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\+\_\+if\+\_\+t}}$<$ \mbox{\hyperlink{structis__copy__constructible}{is\+\_\+copy\+\_\+constructible}}$<$ typename Vector\+::value\+\_\+type $>$\+::value, Class\+\_\+ $>$ \&}]{cl }\end{DoxyParamCaption})}
+
+Slicing protocol函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{stl__bind_8h_af3b7e310c0665322f8aa0a8ed829d314_cgraph}
+\end{center}
+\end{figure}

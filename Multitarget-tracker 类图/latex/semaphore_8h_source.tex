@@ -1,0 +1,175 @@
+\hypertarget{semaphore_8h_source}{}\doxysection{semaphore.\+h}
+\label{semaphore_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/3rdparty/include/semaphore.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/3rdparty/include/semaphore.h}}
+\mbox{\hyperlink{semaphore_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * Module: semaphore.h}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Purpose:}}
+\DoxyCodeLine{5 \textcolor{comment}{ *  Semaphores aren't actually part of the PThreads standard.}}
+\DoxyCodeLine{6 \textcolor{comment}{ *  They are defined by the POSIX Standard:}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ *      POSIX 1003.1b-\/1993  (POSIX.1b)}}
+\DoxyCodeLine{9 \textcolor{comment}{ *}}
+\DoxyCodeLine{10 \textcolor{comment}{ * -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{11 \textcolor{comment}{ *}}
+\DoxyCodeLine{12 \textcolor{comment}{ *      Pthreads-\/win32 -\/ POSIX Threads Library for Win32}}
+\DoxyCodeLine{13 \textcolor{comment}{ *      Copyright(C) 1998 John E. Bossom}}
+\DoxyCodeLine{14 \textcolor{comment}{ *      Copyright(C) 1999,2005 Pthreads-\/win32 contributors}}
+\DoxyCodeLine{15 \textcolor{comment}{ * }}
+\DoxyCodeLine{16 \textcolor{comment}{ *      Contact Email: rpj@callisto.canberra.edu.au}}
+\DoxyCodeLine{17 \textcolor{comment}{ * }}
+\DoxyCodeLine{18 \textcolor{comment}{ *      The current list of contributors is contained}}
+\DoxyCodeLine{19 \textcolor{comment}{ *      in the file CONTRIBUTORS included with the source}}
+\DoxyCodeLine{20 \textcolor{comment}{ *      code distribution. The list can also be seen at the}}
+\DoxyCodeLine{21 \textcolor{comment}{ *      following World Wide Web location:}}
+\DoxyCodeLine{22 \textcolor{comment}{ *      http://sources.redhat.com/pthreads-\/win32/contributors.html}}
+\DoxyCodeLine{23 \textcolor{comment}{ * }}
+\DoxyCodeLine{24 \textcolor{comment}{ *      This library is free software; you can redistribute it and/or}}
+\DoxyCodeLine{25 \textcolor{comment}{ *      modify it under the terms of the GNU Lesser General Public}}
+\DoxyCodeLine{26 \textcolor{comment}{ *      License as published by the Free Software Foundation; either}}
+\DoxyCodeLine{27 \textcolor{comment}{ *      version 2 of the License, or (at your option) any later version.}}
+\DoxyCodeLine{28 \textcolor{comment}{ * }}
+\DoxyCodeLine{29 \textcolor{comment}{ *      This library is distributed in the hope that it will be useful,}}
+\DoxyCodeLine{30 \textcolor{comment}{ *      but WITHOUT ANY WARRANTY; without even the implied warranty of}}
+\DoxyCodeLine{31 \textcolor{comment}{ *      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU}}
+\DoxyCodeLine{32 \textcolor{comment}{ *      Lesser General Public License for more details.}}
+\DoxyCodeLine{33 \textcolor{comment}{ * }}
+\DoxyCodeLine{34 \textcolor{comment}{ *      You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{35 \textcolor{comment}{ *      License along with this library in the file COPYING.LIB;}}
+\DoxyCodeLine{36 \textcolor{comment}{ *      if not, write to the Free Software Foundation, Inc.,}}
+\DoxyCodeLine{37 \textcolor{comment}{ *      59 Temple Place -\/ Suite 330, Boston, MA 02111-\/1307, USA}}
+\DoxyCodeLine{38 \textcolor{comment}{ */}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#if !defined( SEMAPHORE\_H )}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#define SEMAPHORE\_H}}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#undef PTW32\_SEMAPHORE\_LEVEL}}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#if defined(\_POSIX\_SOURCE)}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#define PTW32\_SEMAPHORE\_LEVEL 0}}
+\DoxyCodeLine{46 \textcolor{comment}{/* Early POSIX */}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#if defined(\_POSIX\_C\_SOURCE) \&\& \_POSIX\_C\_SOURCE >= 199309}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#undef PTW32\_SEMAPHORE\_LEVEL}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#define PTW32\_SEMAPHORE\_LEVEL 1}}
+\DoxyCodeLine{52 \textcolor{comment}{/* Include 1b, 1c and 1d */}}
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#if defined(INCLUDE\_NP)}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#undef PTW32\_SEMAPHORE\_LEVEL}}
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#define PTW32\_SEMAPHORE\_LEVEL 2}}
+\DoxyCodeLine{58 \textcolor{comment}{/* Include Non-\/Portable extensions */}}
+\DoxyCodeLine{59 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{preprocessor}{\#define PTW32\_SEMAPHORE\_LEVEL\_MAX 3}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#if !defined(PTW32\_SEMAPHORE\_LEVEL)}}
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#define PTW32\_SEMAPHORE\_LEVEL PTW32\_SEMAPHORE\_LEVEL\_MAX}}
+\DoxyCodeLine{65 \textcolor{comment}{/* Include everything */}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#if defined(\_\_GNUC\_\_) \&\& ! defined (\_\_declspec)}}
+\DoxyCodeLine{69 \textcolor{preprocessor}{\# error Please upgrade your GNU compiler to one that supports \_\_declspec.}}
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72 \textcolor{comment}{/*}}
+\DoxyCodeLine{73 \textcolor{comment}{ * When building the library, you should define PTW32\_BUILD so that}}
+\DoxyCodeLine{74 \textcolor{comment}{ * the variables/functions are exported correctly. When using the library,}}
+\DoxyCodeLine{75 \textcolor{comment}{ * do NOT define PTW32\_BUILD, and then the variables/functions will}}
+\DoxyCodeLine{76 \textcolor{comment}{ * be imported correctly.}}
+\DoxyCodeLine{77 \textcolor{comment}{ */}}
+\DoxyCodeLine{78 \textcolor{preprocessor}{\#if !defined(PTW32\_STATIC\_LIB)}}
+\DoxyCodeLine{79 \textcolor{preprocessor}{\#  if defined(PTW32\_BUILD)}}
+\DoxyCodeLine{80 \textcolor{preprocessor}{\#    define PTW32\_DLLPORT \_\_declspec (dllexport)}}
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#  else}}
+\DoxyCodeLine{82 \textcolor{preprocessor}{\#    define PTW32\_DLLPORT \_\_declspec (dllimport)}}
+\DoxyCodeLine{83 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{84 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{85 \textcolor{preprocessor}{\#  define PTW32\_DLLPORT}}
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88 \textcolor{comment}{/*}}
+\DoxyCodeLine{89 \textcolor{comment}{ * This is a duplicate of what is in the autoconf config.h,}}
+\DoxyCodeLine{90 \textcolor{comment}{ * which is only used when building the pthread-\/win32 libraries.}}
+\DoxyCodeLine{91 \textcolor{comment}{ */}}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93 \textcolor{preprocessor}{\#if !defined(PTW32\_CONFIG\_H)}}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#  if defined(WINCE)}}
+\DoxyCodeLine{95 \textcolor{preprocessor}{\#    define NEED\_ERRNO}}
+\DoxyCodeLine{96 \textcolor{preprocessor}{\#    define NEED\_SEM}}
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{98 \textcolor{preprocessor}{\#  if defined(\_\_MINGW64\_\_)}}
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#    define HAVE\_STRUCT\_TIMESPEC}}
+\DoxyCodeLine{100 \textcolor{preprocessor}{\#    define HAVE\_MODE\_T}}
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#  elif defined(\_UWIN) || defined(\_\_MINGW32\_\_)}}
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#    define HAVE\_MODE\_T}}
+\DoxyCodeLine{103 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{104 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106 \textcolor{comment}{/*}}
+\DoxyCodeLine{107 \textcolor{comment}{ *}}
+\DoxyCodeLine{108 \textcolor{comment}{ */}}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110 \textcolor{preprocessor}{\#if PTW32\_SEMAPHORE\_LEVEL >= PTW32\_SEMAPHORE\_LEVEL\_MAX}}
+\DoxyCodeLine{111 \textcolor{preprocessor}{\#if defined(NEED\_ERRNO)}}
+\DoxyCodeLine{112 \textcolor{preprocessor}{\#include "{}need\_errno.h"{}}}
+\DoxyCodeLine{113 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{114 \textcolor{preprocessor}{\#include <errno.h>}}
+\DoxyCodeLine{115 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{116 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* PTW32\_SEMAPHORE\_LEVEL >= PTW32\_SEMAPHORE\_LEVEL\_MAX */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118 \textcolor{preprocessor}{\#define \_POSIX\_SEMAPHORES}}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120 \textcolor{preprocessor}{\#if defined(\_\_cplusplus)}}
+\DoxyCodeLine{121 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}}}
+\DoxyCodeLine{122 \{}
+\DoxyCodeLine{123 \textcolor{preprocessor}{\#endif              }\textcolor{comment}{/* \_\_cplusplus */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125 \textcolor{preprocessor}{\#if !defined(HAVE\_MODE\_T)}}
+\DoxyCodeLine{126 \textcolor{keyword}{typedef} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{semaphore_8h_adb8322e115035a284aab704909e63d00}{mode\_t}};}
+\DoxyCodeLine{127 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }sem\_t\_ * \mbox{\hyperlink{semaphore_8h_a79b634e976e9b4960b4d576fb7c7f530}{sem\_t}};}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132 \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \_\_cdecl \mbox{\hyperlink{semaphore_8h_abb4f413b534bbbf842bd88007da51642}{sem\_init}} (\mbox{\hyperlink{semaphore_8h_a79b634e976e9b4960b4d576fb7c7f530}{sem\_t}} * sem,}
+\DoxyCodeLine{133                 \textcolor{keywordtype}{int} pshared,}
+\DoxyCodeLine{134                 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} value);}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136 \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \_\_cdecl \mbox{\hyperlink{semaphore_8h_a7ac1fade1b60e5df3bcefb138b28f697}{sem\_destroy}} (\mbox{\hyperlink{semaphore_8h_a79b634e976e9b4960b4d576fb7c7f530}{sem\_t}} * sem);}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138 \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \_\_cdecl \mbox{\hyperlink{semaphore_8h_a747b0ff13161bf5a3ed620ba0d6f5caf}{sem\_trywait}} (\mbox{\hyperlink{semaphore_8h_a79b634e976e9b4960b4d576fb7c7f530}{sem\_t}} * sem);}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140 \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \_\_cdecl \mbox{\hyperlink{semaphore_8h_a633241e4d6395204a0ed83488632f591}{sem\_wait}} (\mbox{\hyperlink{semaphore_8h_a79b634e976e9b4960b4d576fb7c7f530}{sem\_t}} * sem);}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142 \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \_\_cdecl \mbox{\hyperlink{semaphore_8h_a9ab13cfa0ee179a3045d6ba531921d32}{sem\_timedwait}} (\mbox{\hyperlink{semaphore_8h_a79b634e976e9b4960b4d576fb7c7f530}{sem\_t}} * sem,}
+\DoxyCodeLine{143                  \textcolor{keyword}{const} \textcolor{keyword}{struct} \mbox{\hyperlink{structtimespec}{timespec}} * abstime);}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145 \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \_\_cdecl \mbox{\hyperlink{semaphore_8h_a090fb4c7b2be56cb643988a6ac73d1c6}{sem\_post}} (\mbox{\hyperlink{semaphore_8h_a79b634e976e9b4960b4d576fb7c7f530}{sem\_t}} * sem);}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147 \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \_\_cdecl \mbox{\hyperlink{semaphore_8h_a5f6990d5e434765c87a43616db9b33c6}{sem\_post\_multiple}} (\mbox{\hyperlink{semaphore_8h_a79b634e976e9b4960b4d576fb7c7f530}{sem\_t}} * sem,}
+\DoxyCodeLine{148                      \textcolor{keywordtype}{int} count);}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{150 \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \_\_cdecl \mbox{\hyperlink{semaphore_8h_a092aefb5a30d7f653391e785fc36b1d2}{sem\_open}} (\textcolor{keyword}{const} \textcolor{keywordtype}{char} * \mbox{\hyperlink{structname}{name}},}
+\DoxyCodeLine{151                 \textcolor{keywordtype}{int} oflag,}
+\DoxyCodeLine{152                 \mbox{\hyperlink{semaphore_8h_adb8322e115035a284aab704909e63d00}{mode\_t}} mode,}
+\DoxyCodeLine{153                 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} value);}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155 \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \_\_cdecl \mbox{\hyperlink{semaphore_8h_a1386f5821e5ffdf2a228d2c5c26808bb}{sem\_close}} (\mbox{\hyperlink{semaphore_8h_a79b634e976e9b4960b4d576fb7c7f530}{sem\_t}} * sem);}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157 \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \_\_cdecl \mbox{\hyperlink{semaphore_8h_a65948e76f341707a901a21d8ff8d108a}{sem\_unlink}} (\textcolor{keyword}{const} \textcolor{keywordtype}{char} * \mbox{\hyperlink{structname}{name}});}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159 \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \_\_cdecl \mbox{\hyperlink{semaphore_8h_a25b47e72602db7e2635522b1644c5994}{sem\_getvalue}} (\mbox{\hyperlink{semaphore_8h_a79b634e976e9b4960b4d576fb7c7f530}{sem\_t}} * sem,}
+\DoxyCodeLine{160                 \textcolor{keywordtype}{int} * sval);}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162 \textcolor{preprocessor}{\#if defined(\_\_cplusplus)}}
+\DoxyCodeLine{163 \}               \textcolor{comment}{/* End of extern "{}C"{} */}}
+\DoxyCodeLine{164 \textcolor{preprocessor}{\#endif              }\textcolor{comment}{/* \_\_cplusplus */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166 \textcolor{preprocessor}{\#undef PTW32\_SEMAPHORE\_LEVEL}}
+\DoxyCodeLine{167 \textcolor{preprocessor}{\#undef PTW32\_SEMAPHORE\_LEVEL\_MAX}}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{169 \textcolor{preprocessor}{\#endif              }\textcolor{comment}{/* !SEMAPHORE\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

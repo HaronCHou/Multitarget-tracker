@@ -1,0 +1,131 @@
+\hypertarget{data_8h_source}{}\doxysection{data.\+h}
+\label{data_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/data.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/data.h}}
+\mbox{\hyperlink{data_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef DATA\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define DATA\_H}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{pthread_8h}{pthread.h}}>}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{darknet_8h}{darknet.h}}"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{darknet_8h}{darknet.h}}"{}}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{matrix_8h}{matrix.h}}"{}}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{list_8h}{list.h}}"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{image_8h}{image.h}}"{}}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{11 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{tree_8h}{tree.h}}"{}}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{float} \mbox{\hyperlink{data_8h_abdbfb59b4fa97ae5a30ded28e8defd39}{distance\_from\_edge}}(\textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}})}
+\DoxyCodeLine{16 \{}
+\DoxyCodeLine{17     \textcolor{keywordtype}{int} dx = (\mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}}/2) -\/ \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}};}
+\DoxyCodeLine{18     \textcolor{keywordflow}{if} (dx < 0) dx = -\/dx;}
+\DoxyCodeLine{19     dx = (\mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}}/2) + 1 -\/ dx;}
+\DoxyCodeLine{20     dx *= 2;}
+\DoxyCodeLine{21     \textcolor{keywordtype}{float} \mbox{\hyperlink{matrix_8c_afd6b64cdf07c11e9670ac4ff6196216d}{dist}} = (float)dx/\mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}};}
+\DoxyCodeLine{22     \textcolor{keywordflow}{if} (\mbox{\hyperlink{matrix_8c_afd6b64cdf07c11e9670ac4ff6196216d}{dist}} > 1) \mbox{\hyperlink{matrix_8c_afd6b64cdf07c11e9670ac4ff6196216d}{dist}} = 1;}
+\DoxyCodeLine{23     \textcolor{keywordflow}{return} \mbox{\hyperlink{matrix_8c_afd6b64cdf07c11e9670ac4ff6196216d}{dist}};}
+\DoxyCodeLine{24 \}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{comment}{//typedef struct\{}}
+\DoxyCodeLine{27 \textcolor{comment}{//    int w, h;}}
+\DoxyCodeLine{28 \textcolor{comment}{//    matrix X;}}
+\DoxyCodeLine{29 \textcolor{comment}{//    matrix y;}}
+\DoxyCodeLine{30 \textcolor{comment}{//    int shallow;}}
+\DoxyCodeLine{31 \textcolor{comment}{//    int *num\_boxes;}}
+\DoxyCodeLine{32 \textcolor{comment}{//    box **boxes;}}
+\DoxyCodeLine{33 \textcolor{comment}{//\} data;}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{comment}{//typedef enum \{}}
+\DoxyCodeLine{36 \textcolor{comment}{//    CLASSIFICATION\_DATA, DETECTION\_DATA, CAPTCHA\_DATA, REGION\_DATA, IMAGE\_DATA, LETTERBOX\_DATA, COMPARE\_DATA, WRITING\_DATA, SWAG\_DATA, TAG\_DATA, OLD\_CLASSIFICATION\_DATA, STUDY\_DATA, DET\_DATA, SUPER\_DATA}}
+\DoxyCodeLine{37 \textcolor{comment}{//\} data\_type;}}
+\DoxyCodeLine{38 \textcolor{comment}{/*}}
+\DoxyCodeLine{39 \textcolor{comment}{typedef struct load\_args\{}}
+\DoxyCodeLine{40 \textcolor{comment}{    int threads;}}
+\DoxyCodeLine{41 \textcolor{comment}{    char **paths;}}
+\DoxyCodeLine{42 \textcolor{comment}{    char *path;}}
+\DoxyCodeLine{43 \textcolor{comment}{    int n;}}
+\DoxyCodeLine{44 \textcolor{comment}{    int m;}}
+\DoxyCodeLine{45 \textcolor{comment}{    char **labels;}}
+\DoxyCodeLine{46 \textcolor{comment}{    int h;}}
+\DoxyCodeLine{47 \textcolor{comment}{    int w;}}
+\DoxyCodeLine{48 \textcolor{comment}{    int c; // color depth}}
+\DoxyCodeLine{49 \textcolor{comment}{    int out\_w;}}
+\DoxyCodeLine{50 \textcolor{comment}{    int out\_h;}}
+\DoxyCodeLine{51 \textcolor{comment}{    int nh;}}
+\DoxyCodeLine{52 \textcolor{comment}{    int nw;}}
+\DoxyCodeLine{53 \textcolor{comment}{    int num\_boxes;}}
+\DoxyCodeLine{54 \textcolor{comment}{    int min, max, size;}}
+\DoxyCodeLine{55 \textcolor{comment}{    int classes;}}
+\DoxyCodeLine{56 \textcolor{comment}{    int background;}}
+\DoxyCodeLine{57 \textcolor{comment}{    int scale;}}
+\DoxyCodeLine{58 \textcolor{comment}{    int small\_object;}}
+\DoxyCodeLine{59 \textcolor{comment}{    float jitter;}}
+\DoxyCodeLine{60 \textcolor{comment}{    int flip;}}
+\DoxyCodeLine{61 \textcolor{comment}{    float angle;}}
+\DoxyCodeLine{62 \textcolor{comment}{    float aspect;}}
+\DoxyCodeLine{63 \textcolor{comment}{    float saturation;}}
+\DoxyCodeLine{64 \textcolor{comment}{    float exposure;}}
+\DoxyCodeLine{65 \textcolor{comment}{    float hue;}}
+\DoxyCodeLine{66 \textcolor{comment}{    data *d;}}
+\DoxyCodeLine{67 \textcolor{comment}{    image *im;}}
+\DoxyCodeLine{68 \textcolor{comment}{    image *resized;}}
+\DoxyCodeLine{69 \textcolor{comment}{    data\_type type;}}
+\DoxyCodeLine{70 \textcolor{comment}{    tree *hierarchy;}}
+\DoxyCodeLine{71 \textcolor{comment}{\} load\_args;}}
+\DoxyCodeLine{72 \textcolor{comment}{}}
+\DoxyCodeLine{73 \textcolor{comment}{typedef struct\{}}
+\DoxyCodeLine{74 \textcolor{comment}{    int id;}}
+\DoxyCodeLine{75 \textcolor{comment}{    float x,y,w,h;}}
+\DoxyCodeLine{76 \textcolor{comment}{    float left, right, top, bottom;}}
+\DoxyCodeLine{77 \textcolor{comment}{\} box\_label;}}
+\DoxyCodeLine{78 \textcolor{comment}{}}
+\DoxyCodeLine{79 \textcolor{comment}{void free\_data(data d);}}
+\DoxyCodeLine{80 \textcolor{comment}{}}
+\DoxyCodeLine{81 \textcolor{comment}{pthread\_t load\_data(load\_args args);}}
+\DoxyCodeLine{82 \textcolor{comment}{}}
+\DoxyCodeLine{83 \textcolor{comment}{pthread\_t load\_data\_in\_thread(load\_args args);}}
+\DoxyCodeLine{84 \textcolor{comment}{*/}}
+\DoxyCodeLine{85 \textcolor{keywordtype}{void} \mbox{\hyperlink{data_8h_acf22fe41fdd547c8e14f36b236a812e0}{print\_letters}}(\textcolor{keywordtype}{float} *pred, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{86 \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{data_8h_aef1c432b8082eca32f06d6369dc80f64}{load\_data\_captcha}}(\textcolor{keywordtype}{char} **paths, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} m, \textcolor{keywordtype}{int} k, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h);}
+\DoxyCodeLine{87 \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{data_8h_a62f386d1561d87d9c754c0e8f07aa3ff}{load\_data\_captcha\_encode}}(\textcolor{keywordtype}{char} **paths, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} m, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h);}
+\DoxyCodeLine{88 \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{data_8h_a2d65bb024ba143cf988a3c4b5494a90e}{load\_data\_old}}(\textcolor{keywordtype}{char} **paths, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} m, \textcolor{keywordtype}{char} **labels, \textcolor{keywordtype}{int} k, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h);}
+\DoxyCodeLine{89 \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{data_8h_a6a93ae85445213e98811e246f87dc13a}{load\_data\_detection}}(\textcolor{keywordtype}{int} n, \textcolor{keywordtype}{char} **paths, \textcolor{keywordtype}{int} m, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h, \textcolor{keywordtype}{int} c, \textcolor{keywordtype}{int} boxes, \textcolor{keywordtype}{int} truth\_size, \textcolor{keywordtype}{int} classes, \textcolor{keywordtype}{int} use\_flip, \textcolor{keywordtype}{int} gaussian\_noise, \textcolor{keywordtype}{int} use\_blur, \textcolor{keywordtype}{int} use\_mixup,}
+\DoxyCodeLine{90     \textcolor{keywordtype}{float} jitter, \textcolor{keywordtype}{float} resize, \textcolor{keywordtype}{float} hue, \textcolor{keywordtype}{float} saturation, \textcolor{keywordtype}{float} exposure, \textcolor{keywordtype}{int} mini\_batch, \textcolor{keywordtype}{int} track, \textcolor{keywordtype}{int} augment\_speed, \textcolor{keywordtype}{int} letter\_box, \textcolor{keywordtype}{int} mosaic\_bound, \textcolor{keywordtype}{int} contrastive, \textcolor{keywordtype}{int} contrastive\_jit\_flip, \textcolor{keywordtype}{int} contrastive\_color, \textcolor{keywordtype}{int} show\_imgs);}
+\DoxyCodeLine{91 \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{data_8h_ab04f91da2d033ddcb719d9a5021557f8}{load\_data\_tag}}(\textcolor{keywordtype}{char} **paths, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} m, \textcolor{keywordtype}{int} k, \textcolor{keywordtype}{int} use\_flip, \textcolor{keywordtype}{int} \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{min}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h, \textcolor{keywordtype}{float} angle, \textcolor{keywordtype}{float} aspect, \textcolor{keywordtype}{float} hue, \textcolor{keywordtype}{float} saturation, \textcolor{keywordtype}{float} exposure);}
+\DoxyCodeLine{92 \mbox{\hyperlink{structmatrix}{matrix}} \mbox{\hyperlink{data_8h_a65936bd0c2b9115036c9e6bcdb999522}{load\_image\_augment\_paths}}(\textcolor{keywordtype}{char} **paths, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} use\_flip, \textcolor{keywordtype}{int} \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{min}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h, \textcolor{keywordtype}{float} angle, \textcolor{keywordtype}{float} aspect, \textcolor{keywordtype}{float} hue, \textcolor{keywordtype}{float} saturation, \textcolor{keywordtype}{float} exposure, \textcolor{keywordtype}{int} dontuse\_opencv, \textcolor{keywordtype}{int} contrastive);}
+\DoxyCodeLine{93 \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{data_8h_a3994c72c392eae1b1c405d439de76e22}{load\_data\_super}}(\textcolor{keywordtype}{char} **paths, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} m, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h, \textcolor{keywordtype}{int} scale);}
+\DoxyCodeLine{94 \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{data_8h_a2a69a406d33022388f5ea579009c6fee}{load\_data\_augment}}(\textcolor{keywordtype}{char} **paths, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} m, \textcolor{keywordtype}{char} **labels, \textcolor{keywordtype}{int} k, \mbox{\hyperlink{structtree}{tree}} *hierarchy, \textcolor{keywordtype}{int} use\_flip, \textcolor{keywordtype}{int} \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{min}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h, \textcolor{keywordtype}{float} angle,}
+\DoxyCodeLine{95     \textcolor{keywordtype}{float} aspect, \textcolor{keywordtype}{float} hue, \textcolor{keywordtype}{float} saturation, \textcolor{keywordtype}{float} exposure, \textcolor{keywordtype}{int} use\_mixup, \textcolor{keywordtype}{int} use\_blur, \textcolor{keywordtype}{int} show\_imgs, \textcolor{keywordtype}{float} label\_smooth\_eps, \textcolor{keywordtype}{int} dontuse\_opencv, \textcolor{keywordtype}{int} contrastive);}
+\DoxyCodeLine{96 \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{data_8h_af32b828afa01bcaac3fa78bb56ec3b6a}{load\_go}}(\textcolor{keywordtype}{char} *filename);}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98 \mbox{\hyperlink{structbox__label}{box\_label}} *\mbox{\hyperlink{data_8h_a9cbd4f49ec02f60d24314f279ac165d6}{read\_boxes}}(\textcolor{keywordtype}{char} *filename, \textcolor{keywordtype}{int} *n);}
+\DoxyCodeLine{99 \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{data_8h_a7029154d147a2359400982ded034d539}{load\_cifar10\_data}}(\textcolor{keywordtype}{char} *filename);}
+\DoxyCodeLine{100 \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{data_8h_a15d8a732600fb0730bf2f5d204f3e608}{load\_all\_cifar10}}();}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102 \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{data_8h_afe091cc7ae2ab63ee2a2d6e8d89202f8}{load\_data\_writing}}(\textcolor{keywordtype}{char} **paths, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} m, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h, \textcolor{keywordtype}{int} out\_w, \textcolor{keywordtype}{int} out\_h);}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \mbox{\hyperlink{structlist}{list}} *\mbox{\hyperlink{data_8h_a62bbddf9091f61895ee1d41e9b99ac1c}{get\_paths}}(\textcolor{keywordtype}{char} *filename);}
+\DoxyCodeLine{105 \textcolor{keywordtype}{char} **\mbox{\hyperlink{data_8h_a95ed1111da983feb31de85aa0cc5a32b}{get\_labels}}(\textcolor{keywordtype}{char} *filename);}
+\DoxyCodeLine{106 \textcolor{keywordtype}{char} **\mbox{\hyperlink{data_8h_a08f9b19418dc79320f93a20b483960e9}{get\_labels\_custom}}(\textcolor{keywordtype}{char} *filename, \textcolor{keywordtype}{int} *size);}
+\DoxyCodeLine{107 \textcolor{keywordtype}{void} \mbox{\hyperlink{data_8h_ac842a292f2eb715758b39d469bc47626}{get\_random\_batch}}(\mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{float} *X, \textcolor{keywordtype}{float} *\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}});}
+\DoxyCodeLine{108 \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{data_8h_aa0c8acf66fbe38a9974f7f1a77f7dc77}{get\_data\_part}}(\mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}, \textcolor{keywordtype}{int} part, \textcolor{keywordtype}{int} total);}
+\DoxyCodeLine{109 \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{data_8h_ae73aa542052eed74b8248bc0df0136ea}{get\_random\_data}}(\mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}, \textcolor{keywordtype}{int} num);}
+\DoxyCodeLine{110 \textcolor{keywordtype}{void} \mbox{\hyperlink{data_8h_a338d58d41be3703ef4ce443e5bb4e52f}{get\_next\_batch}}(\mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} offset, \textcolor{keywordtype}{float} *X, \textcolor{keywordtype}{float} *\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}});}
+\DoxyCodeLine{111 \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{data_8h_ae288bc38519deb719f39a38b92b3d99c}{load\_categorical\_data\_csv}}(\textcolor{keywordtype}{char} *filename, \textcolor{keywordtype}{int} target, \textcolor{keywordtype}{int} k);}
+\DoxyCodeLine{112 \textcolor{keywordtype}{void} \mbox{\hyperlink{data_8h_a8bb2e4f18bee940f1b3e76ada4bf7e09}{normalize\_data\_rows}}(\mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}});}
+\DoxyCodeLine{113 \textcolor{keywordtype}{void} \mbox{\hyperlink{data_8h_acbb4f5fcc08c77620c177ea1b0cfc667}{scale\_data\_rows}}(\mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}, \textcolor{keywordtype}{float} s);}
+\DoxyCodeLine{114 \textcolor{keywordtype}{void} \mbox{\hyperlink{data_8h_af343853074dfe80d14a052effdba825b}{translate\_data\_rows}}(\mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}, \textcolor{keywordtype}{float} s);}
+\DoxyCodeLine{115 \textcolor{keywordtype}{void} \mbox{\hyperlink{data_8h_a99c2d667a09e1234c18e14cac198a273}{randomize\_data}}(\mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}});}
+\DoxyCodeLine{116 \mbox{\hyperlink{structdata}{data}} *\mbox{\hyperlink{data_8h_a3b81e4c2dbabf9c6c6efd40bdd89b041}{split\_data}}(\mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}, \textcolor{keywordtype}{int} part, \textcolor{keywordtype}{int} total);}
+\DoxyCodeLine{117 \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{data_8h_aa9c8a2657c930195dd492ed99a7a0bb2}{concat\_data}}(\mbox{\hyperlink{structdata}{data}} d1, \mbox{\hyperlink{structdata}{data}} d2);}
+\DoxyCodeLine{118 \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{data_8h_a4eca1b9b01ae2ff7a98094f7fa3661db}{concat\_datas}}(\mbox{\hyperlink{structdata}{data}} *\mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{119 \textcolor{keywordtype}{void} \mbox{\hyperlink{data_8h_a9aafc84188318df7ba98955af6390114}{fill\_truth}}(\textcolor{keywordtype}{char} *\mbox{\hyperlink{gml2nestedsql_8cpp_a10cdd7e2573589f34f8a03983f8cd8f8}{path}}, \textcolor{keywordtype}{char} **labels, \textcolor{keywordtype}{int} k, \textcolor{keywordtype}{float} *truth);}
+\DoxyCodeLine{120 \textcolor{keywordtype}{void} \mbox{\hyperlink{data_8h_aa2fd26937e9ff77ce0c727ca7350462b}{fill\_truth\_smooth}}(\textcolor{keywordtype}{char} *\mbox{\hyperlink{gml2nestedsql_8cpp_a10cdd7e2573589f34f8a03983f8cd8f8}{path}}, \textcolor{keywordtype}{char} **labels, \textcolor{keywordtype}{int} k, \textcolor{keywordtype}{float} *truth, \textcolor{keywordtype}{float} label\_smooth\_eps);}
+\DoxyCodeLine{121 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{122 \}}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{125 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

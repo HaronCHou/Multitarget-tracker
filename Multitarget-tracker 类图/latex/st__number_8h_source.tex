@@ -1,0 +1,213 @@
+\hypertarget{st__number_8h_source}{}\doxysection{st\+\_\+number.\+h}
+\label{st__number_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/st\_number.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/st\_number.h}}
+\mbox{\hyperlink{st__number_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* This software is distributed under the GNU Lesser General Public License */}}
+\DoxyCodeLine{2 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{//   st\_number.h}}
+\DoxyCodeLine{5 \textcolor{comment}{//}}
+\DoxyCodeLine{6 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{// \$Id: st\_number.h,v 1.17 2002/12/20 08:26:08 chris Exp \$}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#ifndef GTL\_ST\_NUMBER\_H}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define GTL\_ST\_NUMBER\_H}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{_g_t_l_8h}{GTL/GTL.h}}>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{graph_8h}{GTL/graph.h}}>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{node__map_8h}{GTL/node\_map.h}}>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{edge__map_8h}{GTL/edge\_map.h}}>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{algorithm_8h}{GTL/algorithm.h}}>}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <list>}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include <utility>}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \mbox{\hyperlink{_g_t_l_8h_a2d9f24096ac60918452dd51f32b64aa9}{\_\_GTL\_BEGIN\_NAMESPACE}}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{26 \textcolor{keyword}{class }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{classpathfinder}{pathfinder}} }
+\DoxyCodeLine{27 \{}
+\DoxyCodeLine{28 \textcolor{keyword}{public}:}
+\DoxyCodeLine{29     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ CONSTRUCTOR}}
+\DoxyCodeLine{30     }
+\DoxyCodeLine{34     \mbox{\hyperlink{classpathfinder}{pathfinder}}(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G, GTL::edge st, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} s);    }
+\DoxyCodeLine{35     }
+\DoxyCodeLine{39     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classpathfinder_a3e595928f8f00bb7b9639f82684f8f05}{is\_valid}}()}
+\DoxyCodeLine{40     \{}
+\DoxyCodeLine{41     \textcolor{keywordflow}{return} is\_biconn;}
+\DoxyCodeLine{42     \}}
+\DoxyCodeLine{43     }
+\DoxyCodeLine{44     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ ITERATOR}}
+\DoxyCodeLine{45     }
+\DoxyCodeLine{49     \textcolor{keyword}{class }\mbox{\hyperlink{classpathfinder_1_1const__iterator}{const\_iterator}} }
+\DoxyCodeLine{50     \{}
+\DoxyCodeLine{51     \textcolor{keyword}{public}:}
+\DoxyCodeLine{55     \mbox{\hyperlink{classpathfinder_1_1const__iterator_a8766a7016c300cbbe9c5f8fa61ec44d1}{const\_iterator}}(\mbox{\hyperlink{classpathfinder}{pathfinder}}\& \_pf) : pf (\_pf)}
+\DoxyCodeLine{56     \{}
+\DoxyCodeLine{57     \}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{62     \mbox{\hyperlink{classpathfinder_1_1const__iterator}{const\_iterator}}(\mbox{\hyperlink{classpathfinder}{pathfinder}}\& \_pf, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} n);  }
+\DoxyCodeLine{63         }
+\DoxyCodeLine{67     \mbox{\hyperlink{classpathfinder_1_1const__iterator}{const\_iterator}}\& operator++();}
+\DoxyCodeLine{71     \mbox{\hyperlink{classpathfinder_1_1const__iterator}{const\_iterator}} operator++(\textcolor{keywordtype}{int});}
+\DoxyCodeLine{75     \textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& \mbox{\hyperlink{classpathfinder_1_1const__iterator_aff0acd8252d64664dfa28b5126eafd79}{operator*}}()\textcolor{keyword}{ const }}
+\DoxyCodeLine{76 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{77         \textcolor{keywordflow}{return} curr;}
+\DoxyCodeLine{78     \}}
+\DoxyCodeLine{79         }
+\DoxyCodeLine{83     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classpathfinder_1_1const__iterator_aa4ed66f83b966672c7beb112d1266459}{operator==}}(\textcolor{keyword}{const} \mbox{\hyperlink{classpathfinder_1_1const__iterator}{const\_iterator}}\& it) }
+\DoxyCodeLine{84     \{}
+\DoxyCodeLine{85         \textcolor{keywordflow}{return} curr == it.\mbox{\hyperlink{classpathfinder_1_1const__iterator_a76b08ac8c5b5055b95cc37d5a14d54e4}{curr}};}
+\DoxyCodeLine{86     \}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{91     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classpathfinder_1_1const__iterator_a350c813ed1fbaa12cb90e459819894d0}{operator!=}}(\textcolor{keyword}{const} \mbox{\hyperlink{classpathfinder_1_1const__iterator}{const\_iterator}}\& it)}
+\DoxyCodeLine{92     \{}
+\DoxyCodeLine{93         \textcolor{keywordflow}{return} curr != it.\mbox{\hyperlink{classpathfinder_1_1const__iterator_a76b08ac8c5b5055b95cc37d5a14d54e4}{curr}};}
+\DoxyCodeLine{94     \}}
+\DoxyCodeLine{95     \textcolor{keyword}{private}:}
+\DoxyCodeLine{99     \textcolor{keyword}{enum} \mbox{\hyperlink{classpathfinder_1_1const__iterator_a0f4ffc8bec85488c37e68ddb247e6e47}{iteration\_state}} \{END, UP, DOWN\};}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{104     \mbox{\hyperlink{classpathfinder_1_1const__iterator_a0f4ffc8bec85488c37e68ddb247e6e47}{iteration\_state}} state = END;}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{109     \mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classpathfinder_1_1const__iterator_a76b08ac8c5b5055b95cc37d5a14d54e4}{curr}};}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{114     \mbox{\hyperlink{classpathfinder}{pathfinder}}\& \mbox{\hyperlink{classpathfinder_1_1const__iterator_a913c0268881f3da2ae1b95165a21a85d}{pf}};}
+\DoxyCodeLine{115     \};}
+\DoxyCodeLine{116     }
+\DoxyCodeLine{120     \mbox{\hyperlink{classpathfinder_1_1const__iterator}{const\_iterator}} \mbox{\hyperlink{classpathfinder_a21c1f5d1451e3802db33ef5c6d509377}{path}}(\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} n)}
+\DoxyCodeLine{121     \{}
+\DoxyCodeLine{122     \textcolor{keywordflow}{return} \mbox{\hyperlink{classpathfinder_1_1const__iterator}{const\_iterator}}(*\textcolor{keyword}{this}, n);}
+\DoxyCodeLine{123     \}}
+\DoxyCodeLine{124     }
+\DoxyCodeLine{128     \mbox{\hyperlink{classpathfinder_1_1const__iterator}{const\_iterator}} \mbox{\hyperlink{classpathfinder_a2421f20a6252a46fbc1955322b0f9c55}{end}}()}
+\DoxyCodeLine{129     \{}
+\DoxyCodeLine{130     \textcolor{keywordflow}{return} \mbox{\hyperlink{classpathfinder_1_1const__iterator}{const\_iterator}} (*\textcolor{keyword}{this});}
+\DoxyCodeLine{131     \}}
+\DoxyCodeLine{132     }
+\DoxyCodeLine{133 \textcolor{keyword}{private}:}
+\DoxyCodeLine{134     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ FUNCTIONS}}
+\DoxyCodeLine{135         }
+\DoxyCodeLine{139     \textcolor{keywordtype}{void} dfs\_sub (\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\&);}
+\DoxyCodeLine{140         }
+\DoxyCodeLine{141     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ MEMBERS }}
+\DoxyCodeLine{142         }
+\DoxyCodeLine{146     \mbox{\hyperlink{classnode__map}{node\_map<int>}} \mbox{\hyperlink{classpathfinder_a2527fd584445c86f83779ba5060d2dc1}{dfs\_num}};}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{151     \mbox{\hyperlink{classnode__map}{node\_map<int>}} \mbox{\hyperlink{classpathfinder_a2efd9a97c255dd929da79917a2f309c4}{low\_num}};}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{156     \mbox{\hyperlink{classnode__map}{node\_map<edges\_t>}} \mbox{\hyperlink{classpathfinder_a9ca3a1ca67cf63e616021c95252c416e}{tree}};}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{161     \mbox{\hyperlink{classnode__map}{node\_map<edges\_t>}} \mbox{\hyperlink{classpathfinder_adb88fb1673843aed6d6df4c84151ad9d}{back}};}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{166     \mbox{\hyperlink{classnode__map}{node\_map<edges\_t>}} \mbox{\hyperlink{classpathfinder_ac3284a1375004a3fd54b493e1753f831}{forward}};}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{171     \mbox{\hyperlink{classnode__map}{node\_map<edges\_t::iterator>}} \mbox{\hyperlink{classpathfinder_aff928e42c735225a49ef5cb5651b7926}{to\_low}};}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{176     \mbox{\hyperlink{classnode__map}{node\_map<edges\_t::iterator>}} \mbox{\hyperlink{classpathfinder_aee22f61439f3ab6328aff6c01f2fc048}{to\_father}};}
+\DoxyCodeLine{177         }
+\DoxyCodeLine{181     \textcolor{keyword}{typedef} std::pair<edges\_t::iterator, edges\_t::iterator> \mbox{\hyperlink{classpathfinder_ab67a913c0454f15ae9151842fe1796e0}{pos\_pair}};}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{186     \mbox{\hyperlink{classedge__map}{edge\_map<pos\_pair>}} \mbox{\hyperlink{classpathfinder_a80eefe88a11e785dab8fda3ab01b9582}{pos}};}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{191     \mbox{\hyperlink{classnode__map}{node\_map<int>}} \mbox{\hyperlink{classpathfinder_a56f89e20fad902b7719c4ef552d4589f}{used}};}
+\DoxyCodeLine{192         }
+\DoxyCodeLine{196     \textcolor{keywordtype}{int} \mbox{\hyperlink{classpathfinder_ab96daa96582d0340dd9387b0947e6d53}{act\_dfs\_num}};}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{201     \textcolor{keywordtype}{int} \mbox{\hyperlink{classpathfinder_ad7cd7b0ad0cde942093bac01bb88a55e}{new\_nodes}};}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{206     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classpathfinder_a6dbc5640069e0b823c75733815bc4bd7}{is\_biconn}};}
+\DoxyCodeLine{207         }
+\DoxyCodeLine{212     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{classpathfinder_1_1const__iterator}{const\_iterator}};}
+\DoxyCodeLine{213 \};}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{233 \textcolor{keyword}{class }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{classst__number}{st\_number}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classalgorithm}{algorithm}} }
+\DoxyCodeLine{234 \{}
+\DoxyCodeLine{235 \textcolor{keyword}{public}:}
+\DoxyCodeLine{243     \mbox{\hyperlink{classst__number_a07532323fbcc643dfc419809385b64a7}{st\_number}}() : \mbox{\hyperlink{classalgorithm}{algorithm}}()}
+\DoxyCodeLine{244     \{}
+\DoxyCodeLine{245     \}}
+\DoxyCodeLine{246 }
+\DoxyCodeLine{250     \textcolor{keyword}{virtual} \mbox{\hyperlink{classst__number_a4f3a2a6ceab39d106c920ee3546c259d}{\string~st\_number}}()}
+\DoxyCodeLine{251     \{}
+\DoxyCodeLine{252     \}}
+\DoxyCodeLine{253     }
+\DoxyCodeLine{259     \textcolor{keywordtype}{void} \mbox{\hyperlink{classst__number_a046e3418f9777889d771a981bfcd069b}{st\_edge}}(GTL::edge e)}
+\DoxyCodeLine{260     \{}
+\DoxyCodeLine{261     st = e;}
+\DoxyCodeLine{262     \}}
+\DoxyCodeLine{263 }
+\DoxyCodeLine{269     \mbox{\hyperlink{classedge}{edge}} \mbox{\hyperlink{classst__number_a8938bab7883ff4194d1a7b4c6d8fb471}{st\_edge}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{270 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{271     \textcolor{keywordflow}{return} st;}
+\DoxyCodeLine{272     \}}
+\DoxyCodeLine{273 }
+\DoxyCodeLine{283     \textcolor{keywordtype}{void} \mbox{\hyperlink{classst__number_a21c3d44b28f499de1d24bfca78d03bf1}{s\_node}}(\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} n) }
+\DoxyCodeLine{284     \{}
+\DoxyCodeLine{285     s = n;}
+\DoxyCodeLine{286     \}}
+\DoxyCodeLine{287 }
+\DoxyCodeLine{293     \mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classst__number_aba061fba83eb63b7a23dd685e1db663c}{s\_node}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{294 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{295     \textcolor{keywordflow}{return} s;}
+\DoxyCodeLine{296     \}}
+\DoxyCodeLine{297 }
+\DoxyCodeLine{305     \textcolor{keywordtype}{int}\& \mbox{\hyperlink{classst__number_af426c35fbe23f6bd414e673e057a010b}{operator[]}}(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n)}
+\DoxyCodeLine{306     \{}
+\DoxyCodeLine{307     \textcolor{keywordflow}{return} st\_num[n];}
+\DoxyCodeLine{308     \}}
+\DoxyCodeLine{309     }
+\DoxyCodeLine{313     \textcolor{keyword}{typedef} nodes\_t::iterator \mbox{\hyperlink{classst__number_a3aa3701636f69a567c5f6a676afafd39}{iterator}};}
+\DoxyCodeLine{314 }
+\DoxyCodeLine{318     \textcolor{keyword}{typedef} nodes\_t::reverse\_iterator \mbox{\hyperlink{classst__number_a7db0e7ac82d781b75e1712c1fe5c055e}{reverse\_iterator}};}
+\DoxyCodeLine{319     }
+\DoxyCodeLine{326     \mbox{\hyperlink{classiterator}{iterator}} \mbox{\hyperlink{classst__number_a1eddb2577b16109d22cde98a8ffde057}{begin}}()}
+\DoxyCodeLine{327     \{}
+\DoxyCodeLine{328     \textcolor{keywordflow}{return} st\_ord.begin();}
+\DoxyCodeLine{329     \}   }
+\DoxyCodeLine{330 }
+\DoxyCodeLine{336     \mbox{\hyperlink{classiterator}{iterator}} \mbox{\hyperlink{classst__number_a3912b83a8cbddcb1fc804d20be528d52}{end}}()}
+\DoxyCodeLine{337     \{}
+\DoxyCodeLine{338     \textcolor{keywordflow}{return} st\_ord.end();}
+\DoxyCodeLine{339     \}}
+\DoxyCodeLine{340     }
+\DoxyCodeLine{348     \mbox{\hyperlink{classst__number_a7db0e7ac82d781b75e1712c1fe5c055e}{reverse\_iterator}} \mbox{\hyperlink{classst__number_a56f2c67e9b49362947fe0c99278f6d31}{rbegin}}()}
+\DoxyCodeLine{349     \{}
+\DoxyCodeLine{350     \textcolor{keywordflow}{return} st\_ord.rbegin();}
+\DoxyCodeLine{351     \}}
+\DoxyCodeLine{352     }
+\DoxyCodeLine{359     \mbox{\hyperlink{classst__number_a7db0e7ac82d781b75e1712c1fe5c055e}{reverse\_iterator}} \mbox{\hyperlink{classst__number_a4c5fdce6ab2be7ee9ddbb09e8d5c8560}{rend}}()}
+\DoxyCodeLine{360     \{}
+\DoxyCodeLine{361     \textcolor{keywordflow}{return} st\_ord.rend();}
+\DoxyCodeLine{362     \}}
+\DoxyCodeLine{363     }
+\DoxyCodeLine{364 }
+\DoxyCodeLine{380     \textcolor{keywordtype}{int} check(GTL::graph\& G);}
+\DoxyCodeLine{381 }
+\DoxyCodeLine{382 }
+\DoxyCodeLine{395     \textcolor{keywordtype}{int} run(GTL::graph\& G);}
+\DoxyCodeLine{396 }
+\DoxyCodeLine{397 }
+\DoxyCodeLine{405     \textcolor{keywordtype}{void} \mbox{\hyperlink{classst__number_ae6f86706b8ae3495d3794b8c684fff0f}{reset}}()}
+\DoxyCodeLine{406     \{}
+\DoxyCodeLine{407     st\_ord.erase (st\_ord.begin(), st\_ord.end());}
+\DoxyCodeLine{408     \}}
+\DoxyCodeLine{409 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{413     \mbox{\hyperlink{classedge}{edge}} \mbox{\hyperlink{classst__number_a58fe3a128f0d06ce17742b62d8eff1a8}{st}};}
+\DoxyCodeLine{414 }
+\DoxyCodeLine{418     \mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classst__number_a1ada73c04f88b70b2392aa9ab0d1a6b0}{s}};}
+\DoxyCodeLine{419 }
+\DoxyCodeLine{423     \mbox{\hyperlink{classpathfinder}{pathfinder}}* pf = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{424 }
+\DoxyCodeLine{428     \mbox{\hyperlink{edge_8h_a22ac17689106ba21a84e7bc54d1199d6}{nodes\_t}} \mbox{\hyperlink{classst__number_af2160b5e111fe3730b4f9f3f3d09f98f}{st\_ord}};}
+\DoxyCodeLine{429 }
+\DoxyCodeLine{433     \mbox{\hyperlink{classnode__map}{node\_map<int>}} \mbox{\hyperlink{classst__number_ac3443aa6c9d11b990357d8ac1342cabc}{st\_num}};}
+\DoxyCodeLine{434 \};}
+\DoxyCodeLine{435 }
+\DoxyCodeLine{436 \mbox{\hyperlink{_g_t_l_8h_a46af2b3ec266ac2f9d36fa7222358017}{\_\_GTL\_END\_NAMESPACE}}}
+\DoxyCodeLine{437 }
+\DoxyCodeLine{438 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GTL\_ST\_NUMBER\_H}}
+\DoxyCodeLine{439 }
+\DoxyCodeLine{440 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{441 \textcolor{comment}{//   end of file}}
+\DoxyCodeLine{442 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+
+\end{DoxyCode}

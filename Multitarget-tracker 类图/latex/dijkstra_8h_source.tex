@@ -1,0 +1,110 @@
+\hypertarget{dijkstra_8h_source}{}\doxysection{dijkstra.\+h}
+\label{dijkstra_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/dijkstra.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/dijkstra.h}}
+\mbox{\hyperlink{dijkstra_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* This software is distributed under the GNU Lesser General Public License */}}
+\DoxyCodeLine{2 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{//   dijkstra.h}}
+\DoxyCodeLine{5 \textcolor{comment}{//}}
+\DoxyCodeLine{6 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{// \$Id: dijkstra.h,v 1.8 2003/02/25 09:18:19 chris Exp \$}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#ifndef GTL\_DIJKSTRA\_H}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define GTL\_DIJKSTRA\_H}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{_g_t_l_8h}{GTL/GTL.h}}>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{graph_8h}{GTL/graph.h}}>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{node__map_8h}{GTL/node\_map.h}}>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{edge__map_8h}{GTL/edge\_map.h}}>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{algorithm_8h}{GTL/algorithm.h}}>}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \mbox{\hyperlink{_g_t_l_8h_a2d9f24096ac60918452dd51f32b64aa9}{\_\_GTL\_BEGIN\_NAMESPACE}}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{30 \textcolor{keyword}{class }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{classdijkstra}{dijkstra}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classalgorithm}{algorithm}}}
+\DoxyCodeLine{31 \{}
+\DoxyCodeLine{32 \textcolor{keyword}{public}:}
+\DoxyCodeLine{36     \textcolor{keyword}{typedef} nodes\_t::const\_iterator \mbox{\hyperlink{classdijkstra_a2ba040b6e45343a2c3675788968d9113}{shortest\_path\_node\_iterator}};}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{41     \textcolor{keyword}{typedef} edges\_t::const\_iterator \mbox{\hyperlink{classdijkstra_afb9a918f95b13aefcef331896fe3b41c}{shortest\_path\_edge\_iterator}};}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{46     \textcolor{keyword}{enum} \mbox{\hyperlink{classdijkstra_a2bdd8d3b57860b5715d01e65664e810f}{node\_color}} \{white, grey, black\};}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{55     \mbox{\hyperlink{classdijkstra}{dijkstra}}();}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{62     \textcolor{keyword}{virtual} \mbox{\hyperlink{classdijkstra}{\string~dijkstra}}();}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{73     \textcolor{keywordtype}{void} source(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n);}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{84     \textcolor{keywordtype}{void} target(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n);}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{93     \textcolor{keywordtype}{void} weights(\textcolor{keyword}{const} \mbox{\hyperlink{classedge__map}{edge\_map<double>}}\& weight);}
+\DoxyCodeLine{94     }
+\DoxyCodeLine{106     \textcolor{keywordtype}{void} store\_preds(\textcolor{keywordtype}{bool} \mbox{\hyperlink{classset}{set}});}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{126     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{classalgorithm_a528100c0e54d446fab1e329a53935364}{check}}(GTL::graph\& G);}
+\DoxyCodeLine{127         }
+\DoxyCodeLine{142     \textcolor{keywordtype}{int} \mbox{\hyperlink{classalgorithm_a4baee48c513c5802975743152c33f34c}{run}}(GTL::graph\& G);}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{149     \mbox{\hyperlink{structnode}{node}} source() \textcolor{keyword}{const};}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{156     \mbox{\hyperlink{structnode}{node}} target() \textcolor{keyword}{const};}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{165     \textcolor{keywordtype}{bool} store\_preds() \textcolor{keyword}{const};}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{174     \textcolor{keywordtype}{bool} reached(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n) \textcolor{keyword}{const};}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{183     \textcolor{keywordtype}{double} distance(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n) \textcolor{keyword}{const};}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{202     \mbox{\hyperlink{structnode}{node}} predecessor\_node(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n) \textcolor{keyword}{const};}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{221     \mbox{\hyperlink{classedge}{edge}} predecessor\_edge(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n) \textcolor{keyword}{const};}
+\DoxyCodeLine{222 }
+\DoxyCodeLine{237     shortest\_path\_node\_iterator shortest\_path\_nodes\_begin(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& dest);}
+\DoxyCodeLine{238 }
+\DoxyCodeLine{253     shortest\_path\_node\_iterator shortest\_path\_nodes\_end(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& dest);}
+\DoxyCodeLine{254 }
+\DoxyCodeLine{269     shortest\_path\_edge\_iterator shortest\_path\_edges\_begin(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& dest);}
+\DoxyCodeLine{270 }
+\DoxyCodeLine{285     shortest\_path\_edge\_iterator shortest\_path\_edges\_end(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& dest);}
+\DoxyCodeLine{286 }
+\DoxyCodeLine{297     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classalgorithm_a21aba63d066ae7897de6ca7d8425c408}{reset}}();}
+\DoxyCodeLine{298 \textcolor{keyword}{private}:}
+\DoxyCodeLine{305     \mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classdijkstra_a721bfb648626a1be2b9d276d85ebdb9d}{s}};}
+\DoxyCodeLine{306 }
+\DoxyCodeLine{313     \mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classdijkstra_a6c42e614aabfbef25b5acfb543fbe1d1}{t}};}
+\DoxyCodeLine{314 }
+\DoxyCodeLine{321     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classdijkstra_ad60e0abd80def985afa753b7dadef771}{weights\_set}};}
+\DoxyCodeLine{322 }
+\DoxyCodeLine{329     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classdijkstra_aaba530e703b5d4005b3c01fa1a11182d}{preds\_set}};}
+\DoxyCodeLine{330 }
+\DoxyCodeLine{337     \mbox{\hyperlink{classedge__map}{edge\_map<double>}} \mbox{\hyperlink{classdijkstra_ac077e6b471b7178d7aef78e54c6a07cf}{weight}};}
+\DoxyCodeLine{338 }
+\DoxyCodeLine{346     \mbox{\hyperlink{classnode__map}{node\_map<edge>}} \mbox{\hyperlink{classdijkstra_a662d982b45b2992ecf7b7f7e6696f9f9}{pred}};}
+\DoxyCodeLine{347 }
+\DoxyCodeLine{353     \mbox{\hyperlink{classnode__map}{node\_map<int>}} \mbox{\hyperlink{classdijkstra_a407f98e26ca2cfb8c9ddecf4f8babdcc}{mark}};}
+\DoxyCodeLine{354 }
+\DoxyCodeLine{362     \mbox{\hyperlink{classnode__map}{node\_map<double>}} \mbox{\hyperlink{classdijkstra_a154cafdd5511db8f61770348ef117cda}{dist}};}
+\DoxyCodeLine{363 }
+\DoxyCodeLine{374     \mbox{\hyperlink{classnode__map}{node\_map<nodes\_t>}} \mbox{\hyperlink{classdijkstra_a67b45d0af528737830ea559ee42c4685}{shortest\_path\_node\_list}};}
+\DoxyCodeLine{375 }
+\DoxyCodeLine{386     \mbox{\hyperlink{classnode__map}{node\_map<edges\_t>}} \mbox{\hyperlink{classdijkstra_a4c647f083ee4d12327e5c1ea3bf2e7c2}{shortest\_path\_edge\_list}};}
+\DoxyCodeLine{387 }
+\DoxyCodeLine{392     \textcolor{keywordtype}{void} reset\_algorithm();}
+\DoxyCodeLine{393     }
+\DoxyCodeLine{398     \textcolor{keywordtype}{void} \mbox{\hyperlink{yolo__v2__class_8cpp_adcf7f587fe7c5bfdcbe67ffa797763be}{init}}(GTL::graph\& G);}
+\DoxyCodeLine{399 }
+\DoxyCodeLine{405     \textcolor{keywordtype}{void} fill\_node\_list(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& t);}
+\DoxyCodeLine{406 }
+\DoxyCodeLine{412     \textcolor{keywordtype}{void} fill\_edge\_list(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& t);}
+\DoxyCodeLine{413 \};}
+\DoxyCodeLine{414 }
+\DoxyCodeLine{415 \mbox{\hyperlink{_g_t_l_8h_a46af2b3ec266ac2f9d36fa7222358017}{\_\_GTL\_END\_NAMESPACE}}}
+\DoxyCodeLine{416 }
+\DoxyCodeLine{417 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GTL\_DIJKSTRA\_H}}
+\DoxyCodeLine{418 }
+\DoxyCodeLine{419 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{420 \textcolor{comment}{//   end of file}}
+\DoxyCodeLine{421 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+
+\end{DoxyCode}

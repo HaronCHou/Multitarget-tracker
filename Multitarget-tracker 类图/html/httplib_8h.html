@@ -1,0 +1,550 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: D:/zhr_files/Multitarget-tracker-master/src/Detector/darknet/src/httplib.h 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">My Project
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_4c3458e0ccdb4c3720723c1caa1aaa1c.html">zhr_files</a></li><li class="navelem"><a class="el" href="dir_5a8d4bff745a16410b5074d3583a347e.html">Multitarget-tracker-master</a></li><li class="navelem"><a class="el" href="dir_46a27ab0460a6f8f8d12d2f44f38bf6b.html">src</a></li><li class="navelem"><a class="el" href="dir_458a7b7bb24e4af0790226fff519699f.html">Detector</a></li><li class="navelem"><a class="el" href="dir_30d5c7ca63d0957fa3fc1828f81516c9.html">darknet</a></li><li class="navelem"><a class="el" href="dir_87c8877901facfda8fbda37bca313156.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">类</a> &#124;
+<a href="#namespaces">命名空间</a> &#124;
+<a href="#define-members">宏定义</a> &#124;
+<a href="#typedef-members">类型定义</a> &#124;
+<a href="#enum-members">枚举</a> &#124;
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle"><div class="title">httplib.h 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;arpa/inet.h&gt;</code><br />
+<code>#include &lt;cstring&gt;</code><br />
+<code>#include &lt;netdb.h&gt;</code><br />
+<code>#include &lt;netinet/in.h&gt;</code><br />
+<code>#include &lt;<a class="el" href="pthread_8h_source.html">pthread.h</a>&gt;</code><br />
+<code>#include &lt;csignal&gt;</code><br />
+<code>#include &lt;sys/select.h&gt;</code><br />
+<code>#include &lt;sys/socket.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;array&gt;</code><br />
+<code>#include &lt;atomic&gt;</code><br />
+<code>#include &lt;cassert&gt;</code><br />
+<code>#include &lt;condition_variable&gt;</code><br />
+<code>#include &lt;errno.h&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &lt;fstream&gt;</code><br />
+<code>#include &lt;functional&gt;</code><br />
+<code>#include &lt;list&gt;</code><br />
+<code>#include &lt;map&gt;</code><br />
+<code>#include &lt;memory&gt;</code><br />
+<code>#include &lt;mutex&gt;</code><br />
+<code>#include &lt;random&gt;</code><br />
+<code>#include &lt;regex&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
+<code>#include &lt;thread&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+httplib.h 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="httplib_8h__incl.png" border="0" usemap="#a_d_1_2zhr__files_2_multitarget-tracker-master_2src_2_detector_2darknet_2src_2httplib_8h" alt=""/></div>
+<map name="a_d_1_2zhr__files_2_multitarget-tracker-master_2src_2_detector_2darknet_2src_2httplib_8h" id="a_d_1_2zhr__files_2_multitarget-tracker-master_2src_2_detector_2darknet_2src_2httplib_8h">
+<area shape="rect" title=" " alt="" coords="1129,5,1314,61"/>
+<area shape="rect" title=" " alt="" coords="5,109,88,136"/>
+<area shape="rect" title=" " alt="" coords="112,109,173,136"/>
+<area shape="rect" title=" " alt="" coords="198,109,263,136"/>
+<area shape="rect" title=" " alt="" coords="287,109,374,136"/>
+<area shape="rect" href="pthread_8h.html" title=" " alt="" coords="398,109,474,136"/>
+<area shape="rect" title=" " alt="" coords="409,259,471,285"/>
+<area shape="rect" title=" " alt="" coords="550,109,613,136"/>
+<area shape="rect" title=" " alt="" coords="637,109,731,136"/>
+<area shape="rect" title=" " alt="" coords="755,109,853,136"/>
+<area shape="rect" title=" " alt="" coords="877,109,945,136"/>
+<area shape="rect" title=" " alt="" coords="969,109,1020,136"/>
+<area shape="rect" title=" " alt="" coords="1044,109,1105,136"/>
+<area shape="rect" title=" " alt="" coords="1130,109,1195,136"/>
+<area shape="rect" title=" " alt="" coords="1219,109,1343,136"/>
+<area shape="rect" title=" " alt="" coords="1367,109,1425,136"/>
+<area shape="rect" title=" " alt="" coords="1449,109,1514,136"/>
+<area shape="rect" title=" " alt="" coords="1539,109,1616,136"/>
+<area shape="rect" title=" " alt="" coords="1641,109,1679,136"/>
+<area shape="rect" title=" " alt="" coords="1703,109,1750,136"/>
+<area shape="rect" title=" " alt="" coords="1775,109,1844,136"/>
+<area shape="rect" title=" " alt="" coords="1868,109,1927,136"/>
+<area shape="rect" title=" " alt="" coords="1951,109,2017,136"/>
+<area shape="rect" title=" " alt="" coords="2041,109,2095,136"/>
+<area shape="rect" title=" " alt="" coords="2119,109,2174,136"/>
+<area shape="rect" title=" " alt="" coords="2199,109,2279,136"/>
+<area shape="rect" title=" " alt="" coords="2303,109,2361,136"/>
+<area shape="rect" title=" " alt="" coords="184,184,243,211"/>
+<area shape="rect" title=" " alt="" coords="267,184,331,211"/>
+<area shape="rect" href="sched_8h.html" title=" " alt="" coords="406,184,474,211"/>
+</map>
+</div>
+</div>
+<p><a href="httplib_8h_source.html">浏览源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhttplib_1_1detail_1_1ci.html">httplib::detail::ci</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhttplib_1_1_multipart_file.html">httplib::MultipartFile</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhttplib_1_1_multipart_form_data.html">httplib::MultipartFormData</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhttplib_1_1_request.html">httplib::Request</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhttplib_1_1_response.html">httplib::Response</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhttplib_1_1_stream.html">httplib::Stream</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhttplib_1_1_socket_stream.html">httplib::SocketStream</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhttplib_1_1_buffer_stream.html">httplib::BufferStream</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhttplib_1_1_task_queue.html">httplib::TaskQueue</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhttplib_1_1_thread_pool.html">httplib::ThreadPool</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structhttplib_1_1_thread_pool_1_1worker.html">httplib::ThreadPool::worker</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhttplib_1_1_server.html">httplib::Server</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhttplib_1_1_client.html">httplib::Client</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhttplib_1_1detail_1_1stream__line__reader.html">httplib::detail::stream_line_reader</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+命名空间</h2></td></tr>
+<tr class="memitem:namespacehttplib"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib.html">httplib</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacehttplib_1_1detail"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html">httplib::detail</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+宏定义</h2></td></tr>
+<tr class="memitem:a9290820a34ffe59a772df48b954fc4ac"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="httplib_8h.html#a9290820a34ffe59a772df48b954fc4ac">CPPHTTPLIB_KEEPALIVE_TIMEOUT_SECOND</a>&#160;&#160;&#160;5</td></tr>
+<tr class="separator:a9290820a34ffe59a772df48b954fc4ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a072f5426d033b6e9128a2f60e7952c8a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="httplib_8h.html#a072f5426d033b6e9128a2f60e7952c8a">CPPHTTPLIB_KEEPALIVE_TIMEOUT_USECOND</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a072f5426d033b6e9128a2f60e7952c8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56599ecd6d67e12d9c71138ea69fc179"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="httplib_8h.html#a56599ecd6d67e12d9c71138ea69fc179">CPPHTTPLIB_KEEPALIVE_MAX_COUNT</a>&#160;&#160;&#160;5</td></tr>
+<tr class="separator:a56599ecd6d67e12d9c71138ea69fc179"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8035d2917b3f56dd72e2814fead9996f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="httplib_8h.html#a8035d2917b3f56dd72e2814fead9996f">CPPHTTPLIB_READ_TIMEOUT_SECOND</a>&#160;&#160;&#160;5</td></tr>
+<tr class="separator:a8035d2917b3f56dd72e2814fead9996f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96e2c87531cb0878689d9bb1048923b2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="httplib_8h.html#a96e2c87531cb0878689d9bb1048923b2">CPPHTTPLIB_READ_TIMEOUT_USECOND</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a96e2c87531cb0878689d9bb1048923b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac260f5899a74e107b13c6c170d0ccc5a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="httplib_8h.html#ac260f5899a74e107b13c6c170d0ccc5a">CPPHTTPLIB_REQUEST_URI_MAX_LENGTH</a>&#160;&#160;&#160;8192</td></tr>
+<tr class="separator:ac260f5899a74e107b13c6c170d0ccc5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3460b45576005d416bf69a708243d8d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="httplib_8h.html#ad3460b45576005d416bf69a708243d8d">CPPHTTPLIB_REDIRECT_MAX_COUNT</a>&#160;&#160;&#160;20</td></tr>
+<tr class="separator:ad3460b45576005d416bf69a708243d8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20a3df3819479bbd53093ce5e6ef86d6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="httplib_8h.html#a20a3df3819479bbd53093ce5e6ef86d6">CPPHTTPLIB_PAYLOAD_MAX_LENGTH</a>&#160;&#160;&#160;(std::numeric_limits&lt;<a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&gt;<a class="el" href="ldes_2fhog_8cpp.html#affe776513b24d84b39af8ab0930fef7f">::max</a>)()</td></tr>
+<tr class="separator:a20a3df3819479bbd53093ce5e6ef86d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab16643d4a546f8214c9b82c6521ae30d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="httplib_8h.html#ab16643d4a546f8214c9b82c6521ae30d">CPPHTTPLIB_RECV_BUFSIZ</a>&#160;&#160;&#160;<a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>(4096u)</td></tr>
+<tr class="separator:ab16643d4a546f8214c9b82c6521ae30d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9acf66afe9b1400253ed6ebf445928bd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="httplib_8h.html#a9acf66afe9b1400253ed6ebf445928bd">CPPHTTPLIB_THREAD_POOL_COUNT</a>&#160;&#160;&#160;8</td></tr>
+<tr class="separator:a9acf66afe9b1400253ed6ebf445928bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26769957ec1a2beaf223f33b66ee64ab"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="httplib_8h.html#a26769957ec1a2beaf223f33b66ee64ab">INVALID_SOCKET</a>&#160;&#160;&#160;-1</td></tr>
+<tr class="separator:a26769957ec1a2beaf223f33b66ee64ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+类型定义</h2></td></tr>
+<tr class="memitem:a84d69664998f9fc285147c6d1382a6fb"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="httplib_8h.html#a84d69664998f9fc285147c6d1382a6fb">socket_t</a> = int</td></tr>
+<tr class="separator:a84d69664998f9fc285147c6d1382a6fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fb30cf4bb44485bee38481e46ab8dc5"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib.html#a6fb30cf4bb44485bee38481e46ab8dc5">httplib::Headers</a> = std::multimap&lt; std::string, std::string, detail::ci &gt;</td></tr>
+<tr class="separator:a6fb30cf4bb44485bee38481e46ab8dc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51ce06867e711ba5095eff9d606e802e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib.html#a51ce06867e711ba5095eff9d606e802e">httplib::Params</a> = std::multimap&lt; std::string, std::string &gt;</td></tr>
+<tr class="separator:a51ce06867e711ba5095eff9d606e802e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33c72941ad79dac75b23f0d6b5f02571"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib.html#a33c72941ad79dac75b23f0d6b5f02571">httplib::Match</a> = std::smatch</td></tr>
+<tr class="separator:a33c72941ad79dac75b23f0d6b5f02571"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bfddf16d54a7ce2a574a9d4d3b60b39"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib.html#a6bfddf16d54a7ce2a574a9d4d3b60b39">httplib::DataSink</a> = std::function&lt; void(const char *<a class="el" href="structdata.html">data</a>, <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> data_len)&gt;</td></tr>
+<tr class="separator:a6bfddf16d54a7ce2a574a9d4d3b60b39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d10683b0d01cae237d30c058a9c1d27"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib.html#a8d10683b0d01cae237d30c058a9c1d27">httplib::Done</a> = std::function&lt; void()&gt;</td></tr>
+<tr class="separator:a8d10683b0d01cae237d30c058a9c1d27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2a1d5953b754d95d8095d4d3d406871"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib.html#ac2a1d5953b754d95d8095d4d3d406871">httplib::ContentProvider</a> = std::function&lt; void(<a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> offset, <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> length, DataSink sink)&gt;</td></tr>
+<tr class="separator:ac2a1d5953b754d95d8095d4d3d406871"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a967ba317a68ed6bbfdefca7542e5da1c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib.html#a967ba317a68ed6bbfdefca7542e5da1c">httplib::ContentProviderWithCloser</a> = std::function&lt; void(<a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> offset, <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> length, DataSink sink, Done done)&gt;</td></tr>
+<tr class="separator:a967ba317a68ed6bbfdefca7542e5da1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7425937de0bafb891b0b7cae87dc368"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib.html#ad7425937de0bafb891b0b7cae87dc368">httplib::ContentReceiver</a> = std::function&lt; bool(const char *<a class="el" href="structdata.html">data</a>, <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> data_length)&gt;</td></tr>
+<tr class="separator:ad7425937de0bafb891b0b7cae87dc368"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9e4a4a8eed966ddf8df83b1a07620ba"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib.html#ae9e4a4a8eed966ddf8df83b1a07620ba">httplib::ContentReader</a> = std::function&lt; bool(ContentReceiver receiver)&gt;</td></tr>
+<tr class="separator:ae9e4a4a8eed966ddf8df83b1a07620ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac816c86c4eb6af0ee03fb35059631b3c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib.html#ac816c86c4eb6af0ee03fb35059631b3c">httplib::Progress</a> = std::function&lt; bool(uint64_t current, uint64_t total)&gt;</td></tr>
+<tr class="separator:ac816c86c4eb6af0ee03fb35059631b3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad81ce13409edba1589c0b076b2dfab74"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib.html#ad81ce13409edba1589c0b076b2dfab74">httplib::ResponseHandler</a> = std::function&lt; bool(const Response &amp;response)&gt;</td></tr>
+<tr class="separator:ad81ce13409edba1589c0b076b2dfab74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad71e4ea03b2aecdc5b2b52639dd55b27"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib.html#ad71e4ea03b2aecdc5b2b52639dd55b27">httplib::MultipartFiles</a> = std::multimap&lt; std::string, MultipartFile &gt;</td></tr>
+<tr class="separator:ad71e4ea03b2aecdc5b2b52639dd55b27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa11ee6a4c1dff67ab2a75631d9c43705"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib.html#aa11ee6a4c1dff67ab2a75631d9c43705">httplib::MultipartFormDataItems</a> = std::vector&lt; MultipartFormData &gt;</td></tr>
+<tr class="separator:aa11ee6a4c1dff67ab2a75631d9c43705"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47159528bf61f6bd74065b3fcec21697"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib.html#a47159528bf61f6bd74065b3fcec21697">httplib::Range</a> = std::pair&lt; <a class="el" href="detail_2common_8h.html#ac430d16fc097b3bf0a7469cfd09decda">ssize_t</a>, <a class="el" href="detail_2common_8h.html#ac430d16fc097b3bf0a7469cfd09decda">ssize_t</a> &gt;</td></tr>
+<tr class="separator:a47159528bf61f6bd74065b3fcec21697"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3395bd4008ea82b092537f3084dddf5e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib.html#a3395bd4008ea82b092537f3084dddf5e">httplib::Ranges</a> = std::vector&lt; Range &gt;</td></tr>
+<tr class="separator:a3395bd4008ea82b092537f3084dddf5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+枚举</h2></td></tr>
+<tr class="memitem:a06503c09e08929a1a1a98f3c8d7bd7d5"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib.html#a06503c09e08929a1a1a98f3c8d7bd7d5">httplib::HttpVersion</a> { <a class="el" href="namespacehttplib.html#a06503c09e08929a1a1a98f3c8d7bd7d5a09d7da9ea375f1827517b45b61cfc6b8">httplib::v1_0</a> = 0
+, <a class="el" href="namespacehttplib.html#a06503c09e08929a1a1a98f3c8d7bd7d5a4f397565e46919bce9d36b3c6a9cafc0">httplib::v1_1</a>
+ }</td></tr>
+<tr class="separator:a06503c09e08929a1a1a98f3c8d7bd7d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:aa56e9beb60c21e4769297249a0056adc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib.html#aa56e9beb60c21e4769297249a0056adc">httplib::Get</a> (std::vector&lt; Request &gt; &amp;requests, const char *<a class="el" href="gml2nestedsql_8cpp.html#a10cdd7e2573589f34f8a03983f8cd8f8">path</a>, const Headers &amp;headers)</td></tr>
+<tr class="separator:aa56e9beb60c21e4769297249a0056adc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6b646cfa9902c1b961a0bb2c41358a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib.html#ad6b646cfa9902c1b961a0bb2c41358a8">httplib::Get</a> (std::vector&lt; Request &gt; &amp;requests, const char *<a class="el" href="gml2nestedsql_8cpp.html#a10cdd7e2573589f34f8a03983f8cd8f8">path</a>)</td></tr>
+<tr class="separator:ad6b646cfa9902c1b961a0bb2c41358a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23971613b10b9fe944863dea36ae36c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib.html#a23971613b10b9fe944863dea36ae36c1">httplib::Post</a> (std::vector&lt; Request &gt; &amp;requests, const char *<a class="el" href="gml2nestedsql_8cpp.html#a10cdd7e2573589f34f8a03983f8cd8f8">path</a>, const Headers &amp;headers, const std::string &amp;body, const char *content_type)</td></tr>
+<tr class="separator:a23971613b10b9fe944863dea36ae36c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cdc93412987024980664d868d5d3fbb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib.html#a9cdc93412987024980664d868d5d3fbb">httplib::Post</a> (std::vector&lt; Request &gt; &amp;requests, const char *<a class="el" href="gml2nestedsql_8cpp.html#a10cdd7e2573589f34f8a03983f8cd8f8">path</a>, const std::string &amp;body, const char *content_type)</td></tr>
+<tr class="separator:a9cdc93412987024980664d868d5d3fbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a74a4e9cde826f1a91894f63ddb2d9a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a4a74a4e9cde826f1a91894f63ddb2d9a">httplib::detail::is_hex</a> (char c, int &amp;v)</td></tr>
+<tr class="separator:a4a74a4e9cde826f1a91894f63ddb2d9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62592aa626f8ab0e3af59e681a28ac1b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a62592aa626f8ab0e3af59e681a28ac1b">httplib::detail::from_hex_to_i</a> (const std::string &amp;s, <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> i, <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> cnt, int &amp;val)</td></tr>
+<tr class="separator:a62592aa626f8ab0e3af59e681a28ac1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac08f80eff074b5a4adcb6e160a1380a5"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#ac08f80eff074b5a4adcb6e160a1380a5">httplib::detail::from_i_to_hex</a> (<a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> n)</td></tr>
+<tr class="separator:ac08f80eff074b5a4adcb6e160a1380a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a011d617356300d12aeb93d2dda1560b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a011d617356300d12aeb93d2dda1560b9">httplib::detail::to_utf8</a> (int code, char *buff)</td></tr>
+<tr class="separator:a011d617356300d12aeb93d2dda1560b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a455e8db9d2cc4c24565af6d9b884eeaf"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a455e8db9d2cc4c24565af6d9b884eeaf">httplib::detail::base64_encode</a> (const std::string &amp;in)</td></tr>
+<tr class="separator:a455e8db9d2cc4c24565af6d9b884eeaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d432e56b6e9cdb1d3a47477d3b3684e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a5d432e56b6e9cdb1d3a47477d3b3684e">httplib::detail::is_file</a> (const std::string &amp;<a class="el" href="gml2nestedsql_8cpp.html#a10cdd7e2573589f34f8a03983f8cd8f8">path</a>)</td></tr>
+<tr class="separator:a5d432e56b6e9cdb1d3a47477d3b3684e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1f56433b3a10b13b2f914de33bd6e31"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#af1f56433b3a10b13b2f914de33bd6e31">httplib::detail::is_dir</a> (const std::string &amp;<a class="el" href="gml2nestedsql_8cpp.html#a10cdd7e2573589f34f8a03983f8cd8f8">path</a>)</td></tr>
+<tr class="separator:af1f56433b3a10b13b2f914de33bd6e31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a955ed1d5e52f6e2513d06d969ceeb668"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a955ed1d5e52f6e2513d06d969ceeb668">httplib::detail::is_valid_path</a> (const std::string &amp;<a class="el" href="gml2nestedsql_8cpp.html#a10cdd7e2573589f34f8a03983f8cd8f8">path</a>)</td></tr>
+<tr class="separator:a955ed1d5e52f6e2513d06d969ceeb668"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a606532e60127124a0258fa9d37db21c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a606532e60127124a0258fa9d37db21c0">httplib::detail::read_file</a> (const std::string &amp;<a class="el" href="gml2nestedsql_8cpp.html#a10cdd7e2573589f34f8a03983f8cd8f8">path</a>, std::string &amp;out)</td></tr>
+<tr class="separator:a606532e60127124a0258fa9d37db21c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a810a6c09469427bb1729f084db0d92d3"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a810a6c09469427bb1729f084db0d92d3">httplib::detail::file_extension</a> (const std::string &amp;<a class="el" href="gml2nestedsql_8cpp.html#a10cdd7e2573589f34f8a03983f8cd8f8">path</a>)</td></tr>
+<tr class="separator:a810a6c09469427bb1729f084db0d92d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a371bab3d3c19d72d416526aed1baf852"><td class="memTemplParams" colspan="2">template&lt;class Fn &gt; </td></tr>
+<tr class="memitem:a371bab3d3c19d72d416526aed1baf852"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a371bab3d3c19d72d416526aed1baf852">httplib::detail::split</a> (const char *b, const char *e, char d, Fn fn)</td></tr>
+<tr class="separator:a371bab3d3c19d72d416526aed1baf852"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab97ddef67a99aee8ed2aec5e20d90286"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#ab97ddef67a99aee8ed2aec5e20d90286">httplib::detail::close_socket</a> (<a class="el" href="httplib_8h.html#a84d69664998f9fc285147c6d1382a6fb">socket_t</a> sock)</td></tr>
+<tr class="separator:ab97ddef67a99aee8ed2aec5e20d90286"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2617665f32c4f83fc345d454379aba0e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a2617665f32c4f83fc345d454379aba0e">httplib::detail::select_read</a> (<a class="el" href="httplib_8h.html#a84d69664998f9fc285147c6d1382a6fb">socket_t</a> sock, time_t <a class="el" href="utils_8h.html#a375f4de29b8973c3e1b63bf49a5eb00e">sec</a>, time_t usec)</td></tr>
+<tr class="separator:a2617665f32c4f83fc345d454379aba0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5362f1f9049aebd262a98e69fc66ac6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#ac5362f1f9049aebd262a98e69fc66ac6">httplib::detail::wait_until_socket_is_ready</a> (<a class="el" href="httplib_8h.html#a84d69664998f9fc285147c6d1382a6fb">socket_t</a> sock, time_t <a class="el" href="utils_8h.html#a375f4de29b8973c3e1b63bf49a5eb00e">sec</a>, time_t usec)</td></tr>
+<tr class="separator:ac5362f1f9049aebd262a98e69fc66ac6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af390a1c59ecd2abd50eecc0db9ffa23c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:af390a1c59ecd2abd50eecc0db9ffa23c"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#af390a1c59ecd2abd50eecc0db9ffa23c">httplib::detail::process_and_close_socket</a> (bool is_client_request, <a class="el" href="httplib_8h.html#a84d69664998f9fc285147c6d1382a6fb">socket_t</a> sock, <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> keep_alive_max_count, time_t read_timeout_sec, time_t read_timeout_usec, T callback)</td></tr>
+<tr class="separator:af390a1c59ecd2abd50eecc0db9ffa23c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fe756f70ad6d331f8269d1504ecc296"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a6fe756f70ad6d331f8269d1504ecc296">httplib::detail::shutdown_socket</a> (<a class="el" href="httplib_8h.html#a84d69664998f9fc285147c6d1382a6fb">socket_t</a> sock)</td></tr>
+<tr class="separator:a6fe756f70ad6d331f8269d1504ecc296"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d57e6df77bc294208c2026ee4cbfc0b"><td class="memTemplParams" colspan="2">template&lt;typename Fn &gt; </td></tr>
+<tr class="memitem:a9d57e6df77bc294208c2026ee4cbfc0b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="httplib_8h.html#a84d69664998f9fc285147c6d1382a6fb">socket_t</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a9d57e6df77bc294208c2026ee4cbfc0b">httplib::detail::create_socket</a> (const char *host, int port, Fn fn, int socket_flags=0)</td></tr>
+<tr class="separator:a9d57e6df77bc294208c2026ee4cbfc0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a697035fa14dcfff9fb4705d6cffea733"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a697035fa14dcfff9fb4705d6cffea733">httplib::detail::set_nonblocking</a> (<a class="el" href="httplib_8h.html#a84d69664998f9fc285147c6d1382a6fb">socket_t</a> sock, bool nonblocking)</td></tr>
+<tr class="separator:a697035fa14dcfff9fb4705d6cffea733"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefb0b64a836468f95269d11943464a29"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#aefb0b64a836468f95269d11943464a29">httplib::detail::is_connection_error</a> ()</td></tr>
+<tr class="separator:aefb0b64a836468f95269d11943464a29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65d52389dccd1eafb6d33cb0f0380e70"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a65d52389dccd1eafb6d33cb0f0380e70">httplib::detail::get_remote_addr</a> (<a class="el" href="httplib_8h.html#a84d69664998f9fc285147c6d1382a6fb">socket_t</a> sock)</td></tr>
+<tr class="separator:a65d52389dccd1eafb6d33cb0f0380e70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10f77d4a44936a4c13f4486e8dcf4a5e"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a10f77d4a44936a4c13f4486e8dcf4a5e">httplib::detail::find_content_type</a> (const std::string &amp;<a class="el" href="gml2nestedsql_8cpp.html#a10cdd7e2573589f34f8a03983f8cd8f8">path</a>)</td></tr>
+<tr class="separator:a10f77d4a44936a4c13f4486e8dcf4a5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53ecc5e40689fc4b7c2f5ed456260128"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a53ecc5e40689fc4b7c2f5ed456260128">httplib::detail::status_message</a> (int status)</td></tr>
+<tr class="separator:a53ecc5e40689fc4b7c2f5ed456260128"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a290756a21ec7646b70a02103cd61d061"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a290756a21ec7646b70a02103cd61d061">httplib::detail::has_header</a> (const Headers &amp;headers, const char *key)</td></tr>
+<tr class="separator:a290756a21ec7646b70a02103cd61d061"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef894f1e166e16c38e91b750b805b619"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#aef894f1e166e16c38e91b750b805b619">httplib::detail::get_header_value</a> (const Headers &amp;headers, const char *key, <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> id=0, const char *def=nullptr)</td></tr>
+<tr class="separator:aef894f1e166e16c38e91b750b805b619"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0811e8332f5b8b7a70376ff50d8ad138"><td class="memItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a0811e8332f5b8b7a70376ff50d8ad138">httplib::detail::get_header_value_uint64</a> (const Headers &amp;headers, const char *key, int def=0)</td></tr>
+<tr class="separator:a0811e8332f5b8b7a70376ff50d8ad138"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb8db950848e27227eb130f609b293cf"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#aeb8db950848e27227eb130f609b293cf">httplib::detail::read_headers</a> (Stream &amp;strm, Headers &amp;headers)</td></tr>
+<tr class="separator:aeb8db950848e27227eb130f609b293cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71ab61c2bc6fac162f26c95844373a59"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a71ab61c2bc6fac162f26c95844373a59">httplib::detail::read_content_with_length</a> (Stream &amp;strm, uint64_t <a class="el" href="group__python__builtins.html#gaeff368081ac50b8fe2cc0230d96e3acb">len</a>, Progress progress, ContentReceiver out)</td></tr>
+<tr class="separator:a71ab61c2bc6fac162f26c95844373a59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a2e37dcda3bd290ec3fe49c6d7b6e95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a1a2e37dcda3bd290ec3fe49c6d7b6e95">httplib::detail::skip_content_with_length</a> (Stream &amp;strm, uint64_t <a class="el" href="group__python__builtins.html#gaeff368081ac50b8fe2cc0230d96e3acb">len</a>)</td></tr>
+<tr class="separator:a1a2e37dcda3bd290ec3fe49c6d7b6e95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b1cdbb3248dd54034f47a4ba99511d4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a7b1cdbb3248dd54034f47a4ba99511d4">httplib::detail::read_content_without_length</a> (Stream &amp;strm, ContentReceiver out)</td></tr>
+<tr class="separator:a7b1cdbb3248dd54034f47a4ba99511d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8cd5edf5b3a7384913e49149bd18b9a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#af8cd5edf5b3a7384913e49149bd18b9a">httplib::detail::read_content_chunked</a> (Stream &amp;strm, ContentReceiver out)</td></tr>
+<tr class="separator:af8cd5edf5b3a7384913e49149bd18b9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd6e246430f90f7881c9475acb026d00"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#abd6e246430f90f7881c9475acb026d00">httplib::detail::is_chunked_transfer_encoding</a> (const Headers &amp;headers)</td></tr>
+<tr class="separator:abd6e246430f90f7881c9475acb026d00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb0e1d279402ffaff3af8000573d4f84"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aeb0e1d279402ffaff3af8000573d4f84"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#aeb0e1d279402ffaff3af8000573d4f84">httplib::detail::read_content</a> (Stream &amp;strm, T &amp;<a class="el" href="utils_8c.html#a676e0da0ef83bbbdf42538e54b97506b">x</a>, <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> payload_max_length, int &amp;status, Progress progress, ContentReceiver receiver)</td></tr>
+<tr class="separator:aeb0e1d279402ffaff3af8000573d4f84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0158e219d1fb64b9227d72e345b483ae"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a0158e219d1fb64b9227d72e345b483ae"><td class="memTemplItemLeft" align="right" valign="top">int&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a0158e219d1fb64b9227d72e345b483ae">httplib::detail::write_headers</a> (Stream &amp;strm, const T &amp;<a class="el" href="ndarray__converter_8cpp.html#a74d46cdd5cb355d922d75d4156cc1524">info</a>, const Headers &amp;headers)</td></tr>
+<tr class="separator:a0158e219d1fb64b9227d72e345b483ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0031e9b8c67bb9f8abe29a4a7399b507"><td class="memItemLeft" align="right" valign="top"><a class="el" href="detail_2common_8h.html#ac430d16fc097b3bf0a7469cfd09decda">ssize_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a0031e9b8c67bb9f8abe29a4a7399b507">httplib::detail::write_content</a> (Stream &amp;strm, ContentProviderWithCloser content_provider, <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> offset, <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> length)</td></tr>
+<tr class="separator:a0031e9b8c67bb9f8abe29a4a7399b507"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a016473f0a39c329961540fdbf6ba09de"><td class="memItemLeft" align="right" valign="top"><a class="el" href="detail_2common_8h.html#ac430d16fc097b3bf0a7469cfd09decda">ssize_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a016473f0a39c329961540fdbf6ba09de">httplib::detail::write_content_chunked</a> (Stream &amp;strm, ContentProviderWithCloser content_provider)</td></tr>
+<tr class="separator:a016473f0a39c329961540fdbf6ba09de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a584fac4627f3c5112565b440090c0103"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a584fac4627f3c5112565b440090c0103"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a584fac4627f3c5112565b440090c0103">httplib::detail::redirect</a> (T &amp;cli, const Request &amp;req, Response &amp;res, const std::string &amp;<a class="el" href="gml2nestedsql_8cpp.html#a10cdd7e2573589f34f8a03983f8cd8f8">path</a>)</td></tr>
+<tr class="separator:a584fac4627f3c5112565b440090c0103"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af303bae3a748ade0f39ac8098fa50733"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#af303bae3a748ade0f39ac8098fa50733">httplib::detail::encode_url</a> (const std::string &amp;s)</td></tr>
+<tr class="separator:af303bae3a748ade0f39ac8098fa50733"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a157e3058faf96822a999e25e49d2f0c8"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a157e3058faf96822a999e25e49d2f0c8">httplib::detail::decode_url</a> (const std::string &amp;s)</td></tr>
+<tr class="separator:a157e3058faf96822a999e25e49d2f0c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd471412f59b3f94884fcb9e7986a480"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#acd471412f59b3f94884fcb9e7986a480">httplib::detail::parse_query_text</a> (const std::string &amp;s, Params &amp;params)</td></tr>
+<tr class="separator:acd471412f59b3f94884fcb9e7986a480"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab575e708f5bc8388244b79a7bb020547"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#ab575e708f5bc8388244b79a7bb020547">httplib::detail::parse_multipart_boundary</a> (const std::string &amp;content_type, std::string &amp;boundary)</td></tr>
+<tr class="separator:ab575e708f5bc8388244b79a7bb020547"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a681e947baed0e9a30c035c9ad1d314c1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a681e947baed0e9a30c035c9ad1d314c1">httplib::detail::parse_multipart_formdata</a> (const std::string &amp;boundary, const std::string &amp;body, MultipartFiles &amp;files)</td></tr>
+<tr class="separator:a681e947baed0e9a30c035c9ad1d314c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4101f2d385e30a6c88e24b6a9058113"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#ad4101f2d385e30a6c88e24b6a9058113">httplib::detail::parse_range_header</a> (const std::string &amp;s, Ranges &amp;ranges)</td></tr>
+<tr class="separator:ad4101f2d385e30a6c88e24b6a9058113"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4e9ff501e78d30711d3f03bf8ccf932"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#ab4e9ff501e78d30711d3f03bf8ccf932">httplib::detail::to_lower</a> (const char *beg, const char *end)</td></tr>
+<tr class="separator:ab4e9ff501e78d30711d3f03bf8ccf932"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae144d55905f9808c3abae6e20bd9367a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#ae144d55905f9808c3abae6e20bd9367a">httplib::detail::make_multipart_data_boundary</a> ()</td></tr>
+<tr class="separator:ae144d55905f9808c3abae6e20bd9367a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d4a39719cfb2efb172a2c89e154c220"><td class="memItemLeft" align="right" valign="top">std::pair&lt; <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>, <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a2d4a39719cfb2efb172a2c89e154c220">httplib::detail::get_range_offset_and_length</a> (const Request &amp;req, <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> content_length, <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> index)</td></tr>
+<tr class="separator:a2d4a39719cfb2efb172a2c89e154c220"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe8b95159ae97fefd882a9990ff9291d"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#abe8b95159ae97fefd882a9990ff9291d">httplib::detail::make_content_range_header_field</a> (<a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> offset, <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> length, <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> content_length)</td></tr>
+<tr class="separator:abe8b95159ae97fefd882a9990ff9291d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89ddf0a3f7bf1b5a3a7f5547f20db6f5"><td class="memTemplParams" colspan="2">template&lt;typename SToken , typename CToken , typename Content &gt; </td></tr>
+<tr class="memitem:a89ddf0a3f7bf1b5a3a7f5547f20db6f5"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a89ddf0a3f7bf1b5a3a7f5547f20db6f5">httplib::detail::process_multipart_ranges_data</a> (const Request &amp;req, Response &amp;res, const std::string &amp;boundary, const std::string &amp;content_type, SToken stoken, CToken ctoken, Content content)</td></tr>
+<tr class="separator:a89ddf0a3f7bf1b5a3a7f5547f20db6f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78adaecc616958150794b2949dc5b072"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#a78adaecc616958150794b2949dc5b072">httplib::detail::make_multipart_ranges_data</a> (const Request &amp;req, Response &amp;res, const std::string &amp;boundary, const std::string &amp;content_type)</td></tr>
+<tr class="separator:a78adaecc616958150794b2949dc5b072"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adaa15da1e9aaa661e44dc5ef9688180e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#adaa15da1e9aaa661e44dc5ef9688180e">httplib::detail::get_multipart_ranges_data_length</a> (const Request &amp;req, Response &amp;res, const std::string &amp;boundary, const std::string &amp;content_type)</td></tr>
+<tr class="separator:adaa15da1e9aaa661e44dc5ef9688180e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8cade6bbadee54e6f02f0f649b619a1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#aa8cade6bbadee54e6f02f0f649b619a1">httplib::detail::write_multipart_ranges_data</a> (Stream &amp;strm, const Request &amp;req, Response &amp;res, const std::string &amp;boundary, const std::string &amp;content_type)</td></tr>
+<tr class="separator:aa8cade6bbadee54e6f02f0f649b619a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb79e1ea397a5aa249efe2a43d20790d"><td class="memItemLeft" align="right" valign="top">std::pair&lt; <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>, <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib_1_1detail.html#afb79e1ea397a5aa249efe2a43d20790d">httplib::detail::get_range_offset_and_length</a> (const Request &amp;req, const Response &amp;res, <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> index)</td></tr>
+<tr class="separator:afb79e1ea397a5aa249efe2a43d20790d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01bfe9dba7c203f1bb22ec29e2f3ede8"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib.html#a01bfe9dba7c203f1bb22ec29e2f3ede8">httplib::make_range_header</a> (Ranges ranges)</td></tr>
+<tr class="separator:a01bfe9dba7c203f1bb22ec29e2f3ede8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a625889bc274102909353f181d3d57291"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttplib.html#a625889bc274102909353f181d3d57291">httplib::make_basic_authentication_header</a> (const std::string &amp;username, const std::string &amp;password)</td></tr>
+<tr class="separator:a625889bc274102909353f181d3d57291"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">宏定义说明</h2>
+<a id="a56599ecd6d67e12d9c71138ea69fc179" name="a56599ecd6d67e12d9c71138ea69fc179"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56599ecd6d67e12d9c71138ea69fc179">&#9670;&nbsp;</a></span>CPPHTTPLIB_KEEPALIVE_MAX_COUNT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CPPHTTPLIB_KEEPALIVE_MAX_COUNT&#160;&#160;&#160;5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9290820a34ffe59a772df48b954fc4ac" name="a9290820a34ffe59a772df48b954fc4ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9290820a34ffe59a772df48b954fc4ac">&#9670;&nbsp;</a></span>CPPHTTPLIB_KEEPALIVE_TIMEOUT_SECOND</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CPPHTTPLIB_KEEPALIVE_TIMEOUT_SECOND&#160;&#160;&#160;5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a072f5426d033b6e9128a2f60e7952c8a" name="a072f5426d033b6e9128a2f60e7952c8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a072f5426d033b6e9128a2f60e7952c8a">&#9670;&nbsp;</a></span>CPPHTTPLIB_KEEPALIVE_TIMEOUT_USECOND</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CPPHTTPLIB_KEEPALIVE_TIMEOUT_USECOND&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a20a3df3819479bbd53093ce5e6ef86d6" name="a20a3df3819479bbd53093ce5e6ef86d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20a3df3819479bbd53093ce5e6ef86d6">&#9670;&nbsp;</a></span>CPPHTTPLIB_PAYLOAD_MAX_LENGTH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CPPHTTPLIB_PAYLOAD_MAX_LENGTH&#160;&#160;&#160;(std::numeric_limits&lt;<a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&gt;<a class="el" href="ldes_2fhog_8cpp.html#affe776513b24d84b39af8ab0930fef7f">::max</a>)()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8035d2917b3f56dd72e2814fead9996f" name="a8035d2917b3f56dd72e2814fead9996f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8035d2917b3f56dd72e2814fead9996f">&#9670;&nbsp;</a></span>CPPHTTPLIB_READ_TIMEOUT_SECOND</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CPPHTTPLIB_READ_TIMEOUT_SECOND&#160;&#160;&#160;5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a96e2c87531cb0878689d9bb1048923b2" name="a96e2c87531cb0878689d9bb1048923b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96e2c87531cb0878689d9bb1048923b2">&#9670;&nbsp;</a></span>CPPHTTPLIB_READ_TIMEOUT_USECOND</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CPPHTTPLIB_READ_TIMEOUT_USECOND&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab16643d4a546f8214c9b82c6521ae30d" name="ab16643d4a546f8214c9b82c6521ae30d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab16643d4a546f8214c9b82c6521ae30d">&#9670;&nbsp;</a></span>CPPHTTPLIB_RECV_BUFSIZ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CPPHTTPLIB_RECV_BUFSIZ&#160;&#160;&#160;<a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>(4096u)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad3460b45576005d416bf69a708243d8d" name="ad3460b45576005d416bf69a708243d8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3460b45576005d416bf69a708243d8d">&#9670;&nbsp;</a></span>CPPHTTPLIB_REDIRECT_MAX_COUNT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CPPHTTPLIB_REDIRECT_MAX_COUNT&#160;&#160;&#160;20</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac260f5899a74e107b13c6c170d0ccc5a" name="ac260f5899a74e107b13c6c170d0ccc5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac260f5899a74e107b13c6c170d0ccc5a">&#9670;&nbsp;</a></span>CPPHTTPLIB_REQUEST_URI_MAX_LENGTH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CPPHTTPLIB_REQUEST_URI_MAX_LENGTH&#160;&#160;&#160;8192</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9acf66afe9b1400253ed6ebf445928bd" name="a9acf66afe9b1400253ed6ebf445928bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9acf66afe9b1400253ed6ebf445928bd">&#9670;&nbsp;</a></span>CPPHTTPLIB_THREAD_POOL_COUNT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CPPHTTPLIB_THREAD_POOL_COUNT&#160;&#160;&#160;8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a26769957ec1a2beaf223f33b66ee64ab" name="a26769957ec1a2beaf223f33b66ee64ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26769957ec1a2beaf223f33b66ee64ab">&#9670;&nbsp;</a></span>INVALID_SOCKET</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define INVALID_SOCKET&#160;&#160;&#160;-1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">类型定义说明</h2>
+<a id="a84d69664998f9fc285147c6d1382a6fb" name="a84d69664998f9fc285147c6d1382a6fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84d69664998f9fc285147c6d1382a6fb">&#9670;&nbsp;</a></span>socket_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="httplib_8h.html#a84d69664998f9fc285147c6d1382a6fb">socket_t</a> =  int</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>

@@ -1,0 +1,44 @@
+\hypertarget{gettimeofday_8h_source}{}\doxysection{gettimeofday.\+h}
+\label{gettimeofday_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/gettimeofday.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/gettimeofday.h}}
+\mbox{\hyperlink{gettimeofday_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifdef \_MSC\_VER}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define WIN32\_LEAN\_AND\_MEAN}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <windows.h>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <winsock2.h>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <stdint.h>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <time.h>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{darknet_8h}{darknet.h}}"{}}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#define CLOCK\_REALTIME (1)}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define BILLION (1E9)}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#ifndef timersub}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#define timersub(a, b, result)                       \(\backslash\)}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{  do \{                                               \(\backslash\)}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{    (result)-\/>tv\_sec = (a)-\/>tv\_sec -\/ (b)-\/>tv\_sec;    \(\backslash\)}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{    (result)-\/>tv\_usec = (a)-\/>tv\_usec -\/ (b)-\/>tv\_usec; \(\backslash\)}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{    if ((result)-\/>tv\_usec < 0) \{                     \(\backslash\)}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{      -\/-\/(result)-\/>tv\_sec;                            \(\backslash\)}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{      (result)-\/>tv\_usec += 1000000;                  \(\backslash\)}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{    \}                                                \(\backslash\)}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{  \} while (0)}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// timersub}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{25 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{keyword}{static} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} g\_first\_time = 1;}
+\DoxyCodeLine{29 \textcolor{keyword}{static} LARGE\_INTEGER g\_counts\_per\_sec;}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{keywordtype}{int} gettimeofday(\textcolor{keyword}{struct} timeval*, \textcolor{keyword}{struct} timezone*);}
+\DoxyCodeLine{32 \textcolor{keywordtype}{int} clock\_gettime(\textcolor{keywordtype}{int}, \textcolor{keyword}{struct} \mbox{\hyperlink{structtimespec}{timespec}}*);}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{35 \}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

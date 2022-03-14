@@ -1,0 +1,540 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: D:/zhr_files/Multitarget-tracker-master/src/Tracker/graph/GTL/include/GTL/pq_node.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">My Project
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_4c3458e0ccdb4c3720723c1caa1aaa1c.html">zhr_files</a></li><li class="navelem"><a class="el" href="dir_5a8d4bff745a16410b5074d3583a347e.html">Multitarget-tracker-master</a></li><li class="navelem"><a class="el" href="dir_46a27ab0460a6f8f8d12d2f44f38bf6b.html">src</a></li><li class="navelem"><a class="el" href="dir_49af9105677bf904e08b5b3082398310.html">Tracker</a></li><li class="navelem"><a class="el" href="dir_87284c152d3371e6094144b73a6f8795.html">graph</a></li><li class="navelem"><a class="el" href="dir_7b6594d99a601eace4ef3dd5f19e8e4e.html">GTL</a></li><li class="navelem"><a class="el" href="dir_5817f932378c35085430476a75d7fee1.html">include</a></li><li class="navelem"><a class="el" href="dir_64afc982368f096bd63542337c389cd0.html">GTL</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">pq_node.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="pq__node_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/* This software is distributed under the GNU Lesser General Public License */</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">//==========================================================================</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//   pq_node.h</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//==========================================================================</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">// $Id: pq_node.h,v 1.15 2003/04/03 11:48:26 raitner Exp $</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#ifndef PQ_NODE_H</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#define PQ_NODE_H</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;<a class="code" href="_g_t_l_8h.html">GTL/GTL.h</a>&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;<a class="code" href="symlist_8h.html">GTL/symlist.h</a>&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;<a class="code" href="graph_8h.html">GTL/graph.h</a>&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;list&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><a class="code hl_define" href="_g_t_l_8h.html#a2d9f24096ac60918452dd51f32b64aa9">__GTL_BEGIN_NAMESPACE</a></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">class </span><a class="code hl_class" href="classpq__tree.html">pq_tree</a>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">class </span><a class="code hl_class" href="classp__node.html">p_node</a>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">class </span><a class="code hl_class" href="classq__node.html">q_node</a>; </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">class </span><a class="code hl_class" href="classpq__leaf.html">pq_leaf</a>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">class </span><a class="code hl_class" href="classdirection__indicator.html">direction_indicator</a>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classpq__node.html">   30</a></span><span class="keyword">class </span><a class="code hl_define" href="_g_t_l_8h.html#a014cd1e9b3e67a78ae433eda95c8fd25">GTL_EXTERN</a> <a class="code hl_class" href="classpq__node.html">pq_node</a> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>{</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classpq__node.html#a34898c9eb1527787c07e8ebefd6bfba5">   36</a></span>    <span class="keyword">typedef</span> <a class="code hl_class" href="classsymlist.html">symlist&lt;pq_node*&gt;::iterator</a> <a class="code hl_typedef" href="classpq__node.html#a34898c9eb1527787c07e8ebefd6bfba5">iterator</a>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classpq__node.html#a96827bdca8bf81d20213405dd27f8fa6a5afa3e7100ee720a1569cfff090a210d">   41</a></span>    <span class="keyword">enum</span> <a class="code hl_enumeration" href="classpq__node.html#a96827bdca8bf81d20213405dd27f8fa6">PQ_KIND</a> {P_NODE, Q_NODE, LEAF, DIR};</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classpq__node.html#a6236b20cd5f6cc02cb5f637ed34c96d9a70312622ded9f04f068838ec195fc53c">   46</a></span>    <span class="keyword">enum</span> <a class="code hl_enumeration" href="classpq__node.html#a6236b20cd5f6cc02cb5f637ed34c96d9">PQ_MARK</a> {UNMARKED, QUEUED, <a class="code hl_enumvalue" href="classpq__node.html#a6236b20cd5f6cc02cb5f637ed34c96d9a70312622ded9f04f068838ec195fc53c">BLOCKED</a>, UNBLOCKED};</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classpq__node.html#ad521c84741d9095288f879339e314ae7">   51</a></span>    <a class="code hl_function" href="classpq__node.html#ad521c84741d9095288f879339e314ae7">pq_node</a> (<a class="code hl_typedef" href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">GTL::node</a> n_, <span class="keywordtype">int</span> id_) :  pert_children(0),</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                  pert_leaves(0),</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                  mark (UNMARKED),</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                  n (n_),</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>                  id (id_)</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    {</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keyword">virtual</span> <a class="code hl_class" href="classpq__node.html">~pq_node</a> ();</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classpq__node.html#aa9873c0cfad88bc4404857ce57d422e4">   68</a></span>    <span class="keyword">virtual</span> <a class="code hl_enumeration" href="classpq__node.html#a96827bdca8bf81d20213405dd27f8fa6">PQ_KIND</a> <a class="code hl_function" href="classpq__node.html#aa9873c0cfad88bc4404857ce57d422e4">kind</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="classpq__node.html#aa6830ab47a280f41fe61b7d2f8b508bb">   74</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classpq__node.html#aa6830ab47a280f41fe61b7d2f8b508bb">partial</a>(<a class="code hl_class" href="classiterator.html">iterator</a>)</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    }</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classpq__node.html#af1ba861293e4493dba7cc2c9332fee76">   82</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classpq__node.html#af1ba861293e4493dba7cc2c9332fee76">full</a>(<a class="code hl_class" href="classiterator.html">iterator</a>)</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    }</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="classpq__node.html#aab7bddb053b6b25b90be00cba7de97f9">   90</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classpq__node.html#aab7bddb053b6b25b90be00cba7de97f9">write</a>(std::ostream&amp;, <span class="keywordtype">int</span>) = 0;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="classpq__node.html#a13100e0b030cc047f382d9ddf6a44f4a">   96</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classpq__node.html#a13100e0b030cc047f382d9ddf6a44f4a">clear</a>()</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    mark = UNMARKED;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    pert_leaves = 0;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    pert_children = 0;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    }</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="comment">// type-casts </span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="classpq__node.html#af838df17af1f9e0492c74da3dcd64a04">  109</a></span>    <span class="keyword">virtual</span> <a class="code hl_class" href="classp__node.html">p_node</a>* <a class="code hl_function" href="classpq__node.html#af838df17af1f9e0492c74da3dcd64a04">P</a>() = 0;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="classpq__node.html#adc0dd21636d7fdb580aaeb407ab4f12c">  115</a></span>    <span class="keyword">virtual</span> <a class="code hl_class" href="classq__node.html">q_node</a>* <a class="code hl_function" href="classpq__node.html#adc0dd21636d7fdb580aaeb407ab4f12c">Q</a>() = 0;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="classpq__node.html#a130d55bb597cbc47cfb6d9c9cd0ef06a">  121</a></span>    <span class="keyword">virtual</span> <a class="code hl_class" href="classdirection__indicator.html">direction_indicator</a>* <a class="code hl_function" href="classpq__node.html#a130d55bb597cbc47cfb6d9c9cd0ef06a">D</a>() = 0;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno"><a class="line" href="classpq__node.html#a565c52c174b753c7f676362acf566a33">  127</a></span>    <span class="keyword">virtual</span> <a class="code hl_class" href="classpq__leaf.html">pq_leaf</a>* <a class="code hl_function" href="classpq__node.html#a565c52c174b753c7f676362acf566a33">L</a>() = 0;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="comment">// Data used in reductions</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno"><a class="line" href="classpq__node.html#a8d8fb7b3059e7aeecf62eeed34076afb">  140</a></span>    <span class="keywordtype">int</span> pert_children = 0;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="classpq__node.html#a3fb78609f93f41efd6826ed3169fc312">  148</a></span>    <span class="keywordtype">int</span> pert_leaves = 0;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno"><a class="line" href="classpq__node.html#a058dda3d1197dfd2b343d1983d305d79">  158</a></span>    <span class="keywordtype">bool</span> is_endmost = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno"><a class="line" href="classpq__node.html#a3e7c886498c76c633f057fb42ff9c435">  166</a></span>    <a class="code hl_class" href="classpq__node.html">pq_node</a>* father = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno"><a class="line" href="classpq__node.html#aee913582a7b268ce2570bee8a8367c50">  180</a></span>    <a class="code hl_enumeration" href="classpq__node.html#a6236b20cd5f6cc02cb5f637ed34c96d9">PQ_MARK</a> <a class="code hl_variable" href="classpq__node.html#aee913582a7b268ce2570bee8a8367c50">mark</a>;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno"><a class="line" href="classpq__node.html#a2cc030cfa4560872acea8b50ebd0542b">  186</a></span>    <a class="code hl_class" href="classsymlist.html">symlist&lt;pq_node*&gt;</a> <a class="code hl_variable" href="classpq__node.html#a2cc030cfa4560872acea8b50ebd0542b">sons</a>;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno"><a class="line" href="classpq__node.html#a5e8a5defa0fec4ff2e82fabee97296b4">  192</a></span>    <a class="code hl_class" href="classiterator.html">iterator</a> <a class="code hl_variable" href="classpq__node.html#a5e8a5defa0fec4ff2e82fabee97296b4">pos</a>;</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno"><a class="line" href="classpq__node.html#a71cc9bb3c11aac468ff77d64643c38dc">  202</a></span>    std::list&lt;pq_node*&gt;::iterator <a class="code hl_variable" href="classpq__node.html#a71cc9bb3c11aac468ff77d64643c38dc">lpos</a>;</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    <span class="comment">// Application specific data (should become template parameter)</span></div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno"><a class="line" href="classpq__node.html#a4997fd09a95d9a659b99cea04197740a">  212</a></span>    <a class="code hl_class" href="structnode.html">node</a> <a class="code hl_variable" href="classpq__node.html#a4997fd09a95d9a659b99cea04197740a">n</a>;</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno"><a class="line" href="classpq__node.html#ad0034c1f93c3c77edb6d3a03f25aba06">  217</a></span>    <span class="keywordtype">int</span> <span class="keywordtype">id</span> = 0;</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno"><a class="line" href="classpq__node.html#ae6d5a236397b9a57159487eac7ec168d">  222</a></span>    <a class="code hl_class" href="structnode.html">node</a> <a class="code hl_variable" href="classpq__node.html#ae6d5a236397b9a57159487eac7ec168d">up</a>;</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno"><a class="line" href="classpq__node.html#a5a7bcdde1f57191a77a6a14994b38a50">  227</a></span>    <span class="keywordtype">int</span> up_id = 0;</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span> </div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    <span class="comment">// Friends</span></div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno"><a class="line" href="classpq__node.html#ab10214fc73d6d72fa7ac390344a4fa46">  237</a></span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classq__node.html">q_node</a>;</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno"><a class="line" href="classpq__node.html#a97e0a0034637eb5933f88c413aa715c6">  243</a></span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classp__node.html">p_node</a>;</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span> </div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno"><a class="line" href="classpq__node.html#a0a5be4bb438c891059fae98f607f2a9c">  249</a></span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classpq__tree.html">pq_tree</a>;</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span> </div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno"><a class="line" href="classpq__node.html#ab6a02224dbc06343d95919289aec77c8">  255</a></span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classplanarity.html">planarity</a>;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    <a class="code hl_define" href="_g_t_l_8h.html#a014cd1e9b3e67a78ae433eda95c8fd25">GTL_EXTERN</a> <span class="keyword">friend</span> std::ostream&amp; <a class="code hl_function" href="edge_8cpp.html#acdb629fb6ead9586f586235139d7e160">operator&lt;&lt;</a>(std::ostream&amp;, <span class="keyword">const</span> <a class="code hl_class" href="classpq__tree.html">pq_tree</a>&amp;);</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>};</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span> </div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span> </div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno"><a class="line" href="classp__node.html">  268</a></span><span class="keyword">class </span><a class="code hl_define" href="_g_t_l_8h.html#a014cd1e9b3e67a78ae433eda95c8fd25">GTL_EXTERN</a> <a class="code hl_class" href="classp__node.html">p_node</a> final : <span class="keyword">public</span> <a class="code hl_class" href="classpq__node.html">pq_node</a> </div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>{</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    <a class="code hl_class" href="classp__node.html">p_node</a>(<a class="code hl_typedef" href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">GTL::node</a>, <span class="keywordtype">int</span>);</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span> </div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    <a class="code hl_class" href="classp__node.html">p_node</a>(<a class="code hl_typedef" href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">GTL::node</a>, <span class="keywordtype">int</span>, <a class="code hl_class" href="classsymlist.html">symlist&lt;pq_node*&gt;</a>&amp;);</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    </div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    <span class="comment">// pq_node interface</span></div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    <span class="comment">// </span></div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="darknet_8c.html#a4663de4fa674346c82a366077969fd4b">partial</a>(<a class="code hl_class" href="classiterator.html">iterator</a>);</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span> </div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>    <span class="keywordtype">void</span> full(<a class="code hl_class" href="classiterator.html">iterator</a>);</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span> </div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno"><a class="line" href="classp__node.html#a58cceed9fc9d92f36ec3fb6425d99cec">  299</a></span>    <a class="code hl_enumeration" href="classpq__node.html#a96827bdca8bf81d20213405dd27f8fa6">PQ_KIND</a> <a class="code hl_function" href="classp__node.html#a58cceed9fc9d92f36ec3fb6425d99cec">kind</a> ()<span class="keyword"> const </span></div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>    <span class="keywordflow">return</span> P_NODE;</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    }</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span> </div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacenvinfer1.html#a8455d49d12f876ef3c07a5df62bbe17c">write</a>(std::ostream&amp;, <span class="keywordtype">int</span>);</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span> </div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>    <span class="keywordtype">void</span> clear ();</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span> </div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    <span class="comment">// type-casts</span></div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span> </div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno"><a class="line" href="classp__node.html#a24e5b38cd4ffa7b2615110ec71403a2d">  321</a></span>    <a class="code hl_class" href="classp__node.html">p_node</a>* <a class="code hl_function" href="classp__node.html#a24e5b38cd4ffa7b2615110ec71403a2d">P</a>()</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    {</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    <span class="keywordflow">return</span> <span class="keyword">this</span>;</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>    }</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span> </div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno"><a class="line" href="classp__node.html#a498bbcd0e8124240b833b4e9c5e61b21">  330</a></span>    <a class="code hl_class" href="classq__node.html">q_node</a>* <a class="code hl_function" href="classp__node.html#a498bbcd0e8124240b833b4e9c5e61b21">Q</a>()</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>    {</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    assert(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>    }</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span> </div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno"><a class="line" href="classp__node.html#a5580eada77004502c41425d278ee27b6">  340</a></span>    <a class="code hl_class" href="classdirection__indicator.html">direction_indicator</a>* <a class="code hl_function" href="classp__node.html#a5580eada77004502c41425d278ee27b6">D</a>()</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>    {</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>    assert(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    }</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span> </div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno"><a class="line" href="classp__node.html#a674160253f80c3db19e287a1be85b02b">  350</a></span>    <a class="code hl_class" href="classpq__leaf.html">pq_leaf</a>* <a class="code hl_function" href="classp__node.html#a674160253f80c3db19e287a1be85b02b">L</a>()</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>    {</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>    assert(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>    }</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span> </div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>    <span class="comment">// Additional</span></div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span> </div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno"><a class="line" href="classp__node.html#a09658fb7a7212e51b877444e4cee4378">  365</a></span>    <a class="code hl_class" href="classsymlist.html">symlist&lt;pq_node*&gt;</a> <a class="code hl_variable" href="classp__node.html#a09658fb7a7212e51b877444e4cee4378">full_sons</a>;</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span> </div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno"><a class="line" href="classp__node.html#a8acc45be68133af1b6a2823875729798">  372</a></span>    <a class="code hl_class" href="classsymlist.html">symlist&lt;pq_node*&gt;</a> <a class="code hl_variable" href="classp__node.html#a8acc45be68133af1b6a2823875729798">partial_sons</a>;</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span> </div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno"><a class="line" href="classp__node.html#a74d5be4f6767bda5b5803dc2f0987b74">  378</a></span>    <span class="keywordtype">int</span> child_count = 0;</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span> </div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno"><a class="line" href="classp__node.html#a9ac93f9a0f474dcc74312e820fde73b6">  384</a></span>    <span class="keywordtype">int</span> partial_count = 0;</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span> </div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno"><a class="line" href="classp__node.html#a67a7570ace6b26d3bcbff7cf71c85cb0">  390</a></span>    <span class="keywordtype">int</span> full_count = 0;</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span> </div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>    <span class="comment">// Friends </span></div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span> </div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno"><a class="line" href="classp__node.html#ab6a02224dbc06343d95919289aec77c8">  400</a></span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classplanarity.html">planarity</a>;</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span> </div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno"><a class="line" href="classp__node.html#a0a5be4bb438c891059fae98f607f2a9c">  406</a></span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classpq__tree.html">pq_tree</a>;</div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span> </div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>    <a class="code hl_define" href="_g_t_l_8h.html#a014cd1e9b3e67a78ae433eda95c8fd25">GTL_EXTERN</a> <span class="keyword">friend</span> std::ostream&amp; <a class="code hl_function" href="edge_8cpp.html#acdb629fb6ead9586f586235139d7e160">operator&lt;&lt;</a>(std::ostream&amp;, <span class="keyword">const</span> <a class="code hl_class" href="classpq__tree.html">pq_tree</a>&amp;);</div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>};</div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span> </div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span> </div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno"><a class="line" href="classq__node.html">  419</a></span><span class="keyword">class </span><a class="code hl_define" href="_g_t_l_8h.html#a014cd1e9b3e67a78ae433eda95c8fd25">GTL_EXTERN</a> <a class="code hl_class" href="classq__node.html">q_node</a> final : <span class="keyword">public</span> <a class="code hl_class" href="classpq__node.html">pq_node</a> </div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>{</div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>    <a class="code hl_class" href="classq__node.html">q_node</a> (<a class="code hl_typedef" href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">GTL::node</a>, <span class="keywordtype">int</span>);</div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span> </div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>    <span class="comment">// pq_node interface</span></div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>    <span class="comment">// </span></div>
+<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span> </div>
+<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="darknet_8c.html#a4663de4fa674346c82a366077969fd4b">partial</a>(<a class="code hl_class" href="classiterator.html">iterator</a>);</div>
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span> </div>
+<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>    <span class="keywordtype">void</span> full(<a class="code hl_class" href="classiterator.html">iterator</a>);</div>
+<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span> </div>
+<div class="line"><a id="l00445" name="l00445"></a><span class="lineno"><a class="line" href="classq__node.html#afcacf644da450a075d01b76803aa5da0">  445</a></span>    <a class="code hl_enumeration" href="classpq__node.html#a96827bdca8bf81d20213405dd27f8fa6">PQ_KIND</a> <a class="code hl_function" href="classq__node.html#afcacf644da450a075d01b76803aa5da0">kind</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>    <span class="keywordflow">return</span> Q_NODE;</div>
+<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>    }</div>
+<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span> </div>
+<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacenvinfer1.html#a8455d49d12f876ef3c07a5df62bbe17c">write</a>(std::ostream&amp;, <span class="keywordtype">int</span>);</div>
+<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span> </div>
+<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span>    <span class="keywordtype">void</span> clear();</div>
+<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span> </div>
+<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span>    <span class="comment">// type-casts</span></div>
+<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span> </div>
+<div class="line"><a id="l00467" name="l00467"></a><span class="lineno"><a class="line" href="classq__node.html#a8cd3c283fc6717288af6256413f52d1b">  467</a></span>    <a class="code hl_class" href="classp__node.html">p_node</a>* <a class="code hl_function" href="classq__node.html#a8cd3c283fc6717288af6256413f52d1b">P</a>()</div>
+<div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span>    {</div>
+<div class="line"><a id="l00469" name="l00469"></a><span class="lineno">  469</span>    assert (<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00471" name="l00471"></a><span class="lineno">  471</span>    }</div>
+<div class="line"><a id="l00472" name="l00472"></a><span class="lineno">  472</span> </div>
+<div class="line"><a id="l00477" name="l00477"></a><span class="lineno"><a class="line" href="classq__node.html#a97d0d7e765001f163a7c14c8dc744786">  477</a></span>    <a class="code hl_class" href="classq__node.html">q_node</a>* <a class="code hl_function" href="classq__node.html#a97d0d7e765001f163a7c14c8dc744786">Q</a>()</div>
+<div class="line"><a id="l00478" name="l00478"></a><span class="lineno">  478</span>    {</div>
+<div class="line"><a id="l00479" name="l00479"></a><span class="lineno">  479</span>    <span class="keywordflow">return</span> <span class="keyword">this</span>;</div>
+<div class="line"><a id="l00480" name="l00480"></a><span class="lineno">  480</span>    }</div>
+<div class="line"><a id="l00481" name="l00481"></a><span class="lineno">  481</span> </div>
+<div class="line"><a id="l00486" name="l00486"></a><span class="lineno"><a class="line" href="classq__node.html#a9b4dfdf5e54133ac6b252e9168ddeaa8">  486</a></span>    <a class="code hl_class" href="classdirection__indicator.html">direction_indicator</a>* <a class="code hl_function" href="classq__node.html#a9b4dfdf5e54133ac6b252e9168ddeaa8">D</a>()</div>
+<div class="line"><a id="l00487" name="l00487"></a><span class="lineno">  487</span>    {</div>
+<div class="line"><a id="l00488" name="l00488"></a><span class="lineno">  488</span>    assert (<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00489" name="l00489"></a><span class="lineno">  489</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00490" name="l00490"></a><span class="lineno">  490</span>    }</div>
+<div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span> </div>
+<div class="line"><a id="l00496" name="l00496"></a><span class="lineno"><a class="line" href="classq__node.html#ace87caa930b28182faeb82c748003d86">  496</a></span>    <a class="code hl_class" href="classpq__leaf.html">pq_leaf</a>* <a class="code hl_function" href="classq__node.html#ace87caa930b28182faeb82c748003d86">L</a>()</div>
+<div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>    {</div>
+<div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span>    assert (<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00500" name="l00500"></a><span class="lineno">  500</span>    }</div>
+<div class="line"><a id="l00501" name="l00501"></a><span class="lineno">  501</span> </div>
+<div class="line"><a id="l00502" name="l00502"></a><span class="lineno">  502</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00503" name="l00503"></a><span class="lineno">  503</span>    <span class="comment">// Additional</span></div>
+<div class="line"><a id="l00504" name="l00504"></a><span class="lineno">  504</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00505" name="l00505"></a><span class="lineno">  505</span> </div>
+<div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span>    <span class="keywordtype">void</span> pertinent(<a class="code hl_class" href="classiterator.html">iterator</a>);</div>
+<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span>    </div>
+<div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span>    <a class="code hl_class" href="classq__node.html">q_node</a>* merge (<a class="code hl_class" href="classiterator.html">iterator</a>);</div>
+<div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span>    </div>
+<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span>    <span class="keywordtype">void</span> turn (); </div>
+<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span> </div>
+<div class="line"><a id="l00532" name="l00532"></a><span class="lineno"><a class="line" href="classq__node.html#ac636443853e4074a0e6c441d7bcb249a">  532</a></span>    <a class="code hl_class" href="classiterator.html">iterator</a> <a class="code hl_variable" href="classq__node.html#ac636443853e4074a0e6c441d7bcb249a">pert_begin</a>;    </div>
+<div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span> </div>
+<div class="line"><a id="l00538" name="l00538"></a><span class="lineno"><a class="line" href="classq__node.html#a7a331cc1f5d9f7b4b77b7b25b4976c3b">  538</a></span>    <a class="code hl_class" href="classiterator.html">iterator</a> <a class="code hl_variable" href="classq__node.html#a7a331cc1f5d9f7b4b77b7b25b4976c3b">pert_end</a>;</div>
+<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span> </div>
+<div class="line"><a id="l00546" name="l00546"></a><span class="lineno"><a class="line" href="classq__node.html#a208c9c95b39a077c27504f7c1e534a52">  546</a></span>    <a class="code hl_class" href="classiterator.html">iterator</a> partial_pos[3];</div>
+<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span> </div>
+<div class="line"><a id="l00555" name="l00555"></a><span class="lineno"><a class="line" href="classq__node.html#a4677d97776d1d541a460fd9eac62cc07">  555</a></span>    <span class="keywordtype">bool</span> pert_cons = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span> </div>
+<div class="line"><a id="l00561" name="l00561"></a><span class="lineno"><a class="line" href="classq__node.html#a7ba602eae7be6811ac965bf95521a513">  561</a></span>    <span class="keywordtype">int</span> partial_count = 0;</div>
+<div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span> </div>
+<div class="line"><a id="l00567" name="l00567"></a><span class="lineno"><a class="line" href="classq__node.html#a175c1bf47a3914c67bed4763b64e2574">  567</a></span>    <span class="keywordtype">int</span> full_count = 0;</div>
+<div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span>    </div>
+<div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span>    <span class="comment">// Friends </span></div>
+<div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span> </div>
+<div class="line"><a id="l00577" name="l00577"></a><span class="lineno"><a class="line" href="classq__node.html#ab6a02224dbc06343d95919289aec77c8">  577</a></span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classplanarity.html">planarity</a>;</div>
+<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span> </div>
+<div class="line"><a id="l00583" name="l00583"></a><span class="lineno"><a class="line" href="classq__node.html#a0a5be4bb438c891059fae98f607f2a9c">  583</a></span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classpq__tree.html">pq_tree</a>;</div>
+<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>};</div>
+<div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span> </div>
+<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span> </div>
+<div class="line"><a id="l00590" name="l00590"></a><span class="lineno"><a class="line" href="classpq__leaf.html">  590</a></span><span class="keyword">class </span><a class="code hl_define" href="_g_t_l_8h.html#a014cd1e9b3e67a78ae433eda95c8fd25">GTL_EXTERN</a> <a class="code hl_class" href="classpq__leaf.html">pq_leaf</a> final : <span class="keyword">public</span> <a class="code hl_class" href="classpq__node.html">pq_node</a> </div>
+<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>{</div>
+<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>    <a class="code hl_class" href="classpq__leaf.html">pq_leaf</a> (<span class="keywordtype">int</span>, <span class="keywordtype">int</span>, GTL::edge, <a class="code hl_typedef" href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">GTL::node</a>);</div>
+<div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00602" name="l00602"></a><span class="lineno"><a class="line" href="classpq__leaf.html#a31c4b7512aae53901bb20308fe3a8834">  602</a></span>    <a class="code hl_enumeration" href="classpq__node.html#a96827bdca8bf81d20213405dd27f8fa6">PQ_KIND</a> <a class="code hl_function" href="classpq__leaf.html#a31c4b7512aae53901bb20308fe3a8834">kind</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00603" name="l00603"></a><span class="lineno">  603</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00604" name="l00604"></a><span class="lineno">  604</span>    <span class="keywordflow">return</span> LEAF;</div>
+<div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span>    }</div>
+<div class="line"><a id="l00606" name="l00606"></a><span class="lineno">  606</span> </div>
+<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacenvinfer1.html#a8455d49d12f876ef3c07a5df62bbe17c">write</a>(std::ostream&amp;, <span class="keywordtype">int</span>);</div>
+<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span> </div>
+<div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span>    <span class="comment">// type-casts</span></div>
+<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span> </div>
+<div class="line"><a id="l00619" name="l00619"></a><span class="lineno"><a class="line" href="classpq__leaf.html#ac9453114e85e14b52cb2fc62ee117398">  619</a></span>    <a class="code hl_class" href="classp__node.html">p_node</a>* <a class="code hl_function" href="classpq__leaf.html#ac9453114e85e14b52cb2fc62ee117398">P</a>()</div>
+<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span>    {</div>
+<div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span>    assert(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span>    }</div>
+<div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span> </div>
+<div class="line"><a id="l00629" name="l00629"></a><span class="lineno"><a class="line" href="classpq__leaf.html#af095768adb826b3bbf4bc0080c58e67a">  629</a></span>    <a class="code hl_class" href="classq__node.html">q_node</a>* <a class="code hl_function" href="classpq__leaf.html#af095768adb826b3bbf4bc0080c58e67a">Q</a>()</div>
+<div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span>    {</div>
+<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>    assert(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>    }</div>
+<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span> </div>
+<div class="line"><a id="l00639" name="l00639"></a><span class="lineno"><a class="line" href="classpq__leaf.html#a644b19eb7d26967ad9bf4c3994c984df">  639</a></span>    <a class="code hl_class" href="classdirection__indicator.html">direction_indicator</a>* <a class="code hl_function" href="classpq__leaf.html#a644b19eb7d26967ad9bf4c3994c984df">D</a>()</div>
+<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span>    {</div>
+<div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span>    assert(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span>    }</div>
+<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span> </div>
+<div class="line"><a id="l00649" name="l00649"></a><span class="lineno"><a class="line" href="classpq__leaf.html#afb7bdabcf7e7b18e29fbd72db35f53b6">  649</a></span>    <a class="code hl_class" href="classpq__leaf.html">pq_leaf</a>* <a class="code hl_function" href="classpq__leaf.html#afb7bdabcf7e7b18e29fbd72db35f53b6">L</a>()</div>
+<div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span>    {</div>
+<div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span>    <span class="keywordflow">return</span> <span class="keyword">this</span>;</div>
+<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>    }</div>
+<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>    </div>
+<div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span>    <span class="comment">// Additional</span></div>
+<div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span> </div>
+<div class="line"><a id="l00661" name="l00661"></a><span class="lineno"><a class="line" href="classpq__leaf.html#a4f4e0c05ee8e704fb1be7b04bae11b43">  661</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classpq__leaf.html#a4f4e0c05ee8e704fb1be7b04bae11b43">other_id</a>;</div>
+<div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span> </div>
+<div class="line"><a id="l00666" name="l00666"></a><span class="lineno"><a class="line" href="classpq__leaf.html#a9edebd6049b8633158d7f1db3c33ee7c">  666</a></span>    <a class="code hl_class" href="classedge.html">edge</a> <a class="code hl_variable" href="classpq__leaf.html#a9edebd6049b8633158d7f1db3c33ee7c">e</a>;</div>
+<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span> </div>
+<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>    <span class="comment">// Friends </span></div>
+<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span> </div>
+<div class="line"><a id="l00676" name="l00676"></a><span class="lineno"><a class="line" href="classpq__leaf.html#ab6a02224dbc06343d95919289aec77c8">  676</a></span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classplanarity.html">planarity</a>;</div>
+<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span> </div>
+<div class="line"><a id="l00682" name="l00682"></a><span class="lineno"><a class="line" href="classpq__leaf.html#a0a5be4bb438c891059fae98f607f2a9c">  682</a></span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classpq__tree.html">pq_tree</a>;</div>
+<div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span>};</div>
+<div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span> </div>
+<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span> </div>
+<div class="line"><a id="l00689" name="l00689"></a><span class="lineno"><a class="line" href="classdirection__indicator.html">  689</a></span><span class="keyword">class </span><a class="code hl_define" href="_g_t_l_8h.html#a014cd1e9b3e67a78ae433eda95c8fd25">GTL_EXTERN</a> <a class="code hl_class" href="classdirection__indicator.html">direction_indicator</a> final : <span class="keyword">public</span> <a class="code hl_class" href="classpq__node.html">pq_node</a> </div>
+<div class="line"><a id="l00690" name="l00690"></a><span class="lineno">  690</span>{</div>
+<div class="line"><a id="l00691" name="l00691"></a><span class="lineno">  691</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00695" name="l00695"></a><span class="lineno"><a class="line" href="classdirection__indicator.html#a6fd861eb14b2c717efd113f7acc3249c">  695</a></span>    <a class="code hl_function" href="classdirection__indicator.html#a6fd861eb14b2c717efd113f7acc3249c">direction_indicator</a> (<a class="code hl_typedef" href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">GTL::node</a> n_, <span class="keywordtype">int</span> id_) : <a class="code hl_class" href="classpq__node.html">pq_node</a> (n_, id_) { };</div>
+<div class="line"><a id="l00696" name="l00696"></a><span class="lineno">  696</span> </div>
+<div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span>    <span class="comment">// pq_node interface</span></div>
+<div class="line"><a id="l00699" name="l00699"></a><span class="lineno">  699</span>    <span class="comment">// </span></div>
+<div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span>    </div>
+<div class="line"><a id="l00705" name="l00705"></a><span class="lineno"><a class="line" href="classdirection__indicator.html#ab0ffeb761ec0d157b4c6ba13ece96d9b">  705</a></span>    <a class="code hl_enumeration" href="classpq__node.html#a96827bdca8bf81d20213405dd27f8fa6">PQ_KIND</a> <a class="code hl_function" href="classdirection__indicator.html#ab0ffeb761ec0d157b4c6ba13ece96d9b">kind</a>()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00706" name="l00706"></a><span class="lineno">  706</span><span class="keyword">    </span>{</div>
+<div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span>    <span class="keywordflow">return</span> DIR;</div>
+<div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span>    }</div>
+<div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span> </div>
+<div class="line"><a id="l00714" name="l00714"></a><span class="lineno">  714</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacenvinfer1.html#a8455d49d12f876ef3c07a5df62bbe17c">write</a>(std::ostream&amp; os, <span class="keywordtype">int</span>);</div>
+<div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span> </div>
+<div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span>    <span class="comment">// type-casts </span></div>
+<div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span> </div>
+<div class="line"><a id="l00722" name="l00722"></a><span class="lineno"><a class="line" href="classdirection__indicator.html#a7b56706775dc080f81d94548f3f7264b">  722</a></span>    <a class="code hl_class" href="classp__node.html">p_node</a>* <a class="code hl_function" href="classdirection__indicator.html#a7b56706775dc080f81d94548f3f7264b">P</a>()</div>
+<div class="line"><a id="l00723" name="l00723"></a><span class="lineno">  723</span>    {</div>
+<div class="line"><a id="l00724" name="l00724"></a><span class="lineno">  724</span>    assert(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00726" name="l00726"></a><span class="lineno">  726</span>    }</div>
+<div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span> </div>
+<div class="line"><a id="l00732" name="l00732"></a><span class="lineno"><a class="line" href="classdirection__indicator.html#ab793b7a888594e18e53f47d48731a3db">  732</a></span>    <a class="code hl_class" href="classq__node.html">q_node</a>* <a class="code hl_function" href="classdirection__indicator.html#ab793b7a888594e18e53f47d48731a3db">Q</a>()</div>
+<div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span>    {</div>
+<div class="line"><a id="l00734" name="l00734"></a><span class="lineno">  734</span>    assert(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00735" name="l00735"></a><span class="lineno">  735</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00736" name="l00736"></a><span class="lineno">  736</span>    }</div>
+<div class="line"><a id="l00737" name="l00737"></a><span class="lineno">  737</span> </div>
+<div class="line"><a id="l00742" name="l00742"></a><span class="lineno"><a class="line" href="classdirection__indicator.html#aee879cc877e027719f532ef513b222e3">  742</a></span>    <a class="code hl_class" href="classdirection__indicator.html">direction_indicator</a>* <a class="code hl_function" href="classdirection__indicator.html#aee879cc877e027719f532ef513b222e3">D</a>()</div>
+<div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span>    {</div>
+<div class="line"><a id="l00744" name="l00744"></a><span class="lineno">  744</span>    <span class="keywordflow">return</span> <span class="keyword">this</span>;</div>
+<div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span>    }</div>
+<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span> </div>
+<div class="line"><a id="l00751" name="l00751"></a><span class="lineno"><a class="line" href="classdirection__indicator.html#a1cce361c1069cc682230effde0703276">  751</a></span>    <a class="code hl_class" href="classpq__leaf.html">pq_leaf</a>* <a class="code hl_function" href="classdirection__indicator.html#a1cce361c1069cc682230effde0703276">L</a>()</div>
+<div class="line"><a id="l00752" name="l00752"></a><span class="lineno">  752</span>    {</div>
+<div class="line"><a id="l00753" name="l00753"></a><span class="lineno">  753</span>    assert(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00754" name="l00754"></a><span class="lineno">  754</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00755" name="l00755"></a><span class="lineno">  755</span>    }</div>
+<div class="line"><a id="l00756" name="l00756"></a><span class="lineno">  756</span>    </div>
+<div class="line"><a id="l00757" name="l00757"></a><span class="lineno">  757</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00758" name="l00758"></a><span class="lineno">  758</span>    <span class="comment">// Additional</span></div>
+<div class="line"><a id="l00759" name="l00759"></a><span class="lineno">  759</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00760" name="l00760"></a><span class="lineno">  760</span> </div>
+<div class="line"><a id="l00764" name="l00764"></a><span class="lineno"><a class="line" href="classdirection__indicator.html#a16b023545435b012abc433a0b43dc35f">  764</a></span>    <span class="keywordtype">bool</span> direction = <span class="keyword">false</span>; </div>
+<div class="line"><a id="l00765" name="l00765"></a><span class="lineno">  765</span> </div>
+<div class="line"><a id="l00766" name="l00766"></a><span class="lineno">  766</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00767" name="l00767"></a><span class="lineno">  767</span>    <span class="comment">// Friends </span></div>
+<div class="line"><a id="l00768" name="l00768"></a><span class="lineno">  768</span>    <span class="comment">//</span></div>
+<div class="line"><a id="l00769" name="l00769"></a><span class="lineno">  769</span> </div>
+<div class="line"><a id="l00774" name="l00774"></a><span class="lineno"><a class="line" href="classdirection__indicator.html#ab6a02224dbc06343d95919289aec77c8">  774</a></span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classplanarity.html">planarity</a>;</div>
+<div class="line"><a id="l00775" name="l00775"></a><span class="lineno">  775</span> </div>
+<div class="line"><a id="l00780" name="l00780"></a><span class="lineno"><a class="line" href="classdirection__indicator.html#a0a5be4bb438c891059fae98f607f2a9c">  780</a></span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classpq__tree.html">pq_tree</a>;</div>
+<div class="line"><a id="l00781" name="l00781"></a><span class="lineno">  781</span>};</div>
+<div class="line"><a id="l00782" name="l00782"></a><span class="lineno">  782</span> </div>
+<div class="line"><a id="l00783" name="l00783"></a><span class="lineno">  783</span><a class="code hl_define" href="_g_t_l_8h.html#a46af2b3ec266ac2f9d36fa7222358017">__GTL_END_NAMESPACE</a></div>
+<div class="line"><a id="l00784" name="l00784"></a><span class="lineno">  784</span> </div>
+<div class="line"><a id="l00785" name="l00785"></a><span class="lineno">  785</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00786" name="l00786"></a><span class="lineno">  786</span> </div>
+<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span><span class="comment">//--------------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00788" name="l00788"></a><span class="lineno">  788</span><span class="comment">//   end of file</span></div>
+<div class="line"><a id="l00789" name="l00789"></a><span class="lineno">  789</span><span class="comment">//--------------------------------------------------------------------------</span></div>
+<div class="ttc" id="a_g_t_l_8h_html"><div class="ttname"><a href="_g_t_l_8h.html">GTL.h</a></div></div>
+<div class="ttc" id="a_g_t_l_8h_html_a014cd1e9b3e67a78ae433eda95c8fd25"><div class="ttname"><a href="_g_t_l_8h.html#a014cd1e9b3e67a78ae433eda95c8fd25">GTL_EXTERN</a></div><div class="ttdeci">#define GTL_EXTERN</div><div class="ttdef"><b>Definition:</b> GTL.h:109</div></div>
+<div class="ttc" id="a_g_t_l_8h_html_a2d9f24096ac60918452dd51f32b64aa9"><div class="ttname"><a href="_g_t_l_8h.html#a2d9f24096ac60918452dd51f32b64aa9">__GTL_BEGIN_NAMESPACE</a></div><div class="ttdeci">#define __GTL_BEGIN_NAMESPACE</div><div class="ttdef"><b>Definition:</b> GTL.h:119</div></div>
+<div class="ttc" id="a_g_t_l_8h_html_a46af2b3ec266ac2f9d36fa7222358017"><div class="ttname"><a href="_g_t_l_8h.html#a46af2b3ec266ac2f9d36fa7222358017">__GTL_END_NAMESPACE</a></div><div class="ttdeci">#define __GTL_END_NAMESPACE</div><div class="ttdef"><b>Definition:</b> GTL.h:120</div></div>
+<div class="ttc" id="aclassdirection__indicator_html"><div class="ttname"><a href="classdirection__indicator.html">direction_indicator</a></div><div class="ttdef"><b>Definition:</b> pq_node.h:690</div></div>
+<div class="ttc" id="aclassdirection__indicator_html_a1cce361c1069cc682230effde0703276"><div class="ttname"><a href="classdirection__indicator.html#a1cce361c1069cc682230effde0703276">direction_indicator::L</a></div><div class="ttdeci">pq_leaf * L()</div><div class="ttdef"><b>Definition:</b> pq_node.h:751</div></div>
+<div class="ttc" id="aclassdirection__indicator_html_a6fd861eb14b2c717efd113f7acc3249c"><div class="ttname"><a href="classdirection__indicator.html#a6fd861eb14b2c717efd113f7acc3249c">direction_indicator::direction_indicator</a></div><div class="ttdeci">direction_indicator(GTL::node n_, int id_)</div><div class="ttdef"><b>Definition:</b> pq_node.h:695</div></div>
+<div class="ttc" id="aclassdirection__indicator_html_a7b56706775dc080f81d94548f3f7264b"><div class="ttname"><a href="classdirection__indicator.html#a7b56706775dc080f81d94548f3f7264b">direction_indicator::P</a></div><div class="ttdeci">p_node * P()</div><div class="ttdef"><b>Definition:</b> pq_node.h:722</div></div>
+<div class="ttc" id="aclassdirection__indicator_html_ab0ffeb761ec0d157b4c6ba13ece96d9b"><div class="ttname"><a href="classdirection__indicator.html#ab0ffeb761ec0d157b4c6ba13ece96d9b">direction_indicator::kind</a></div><div class="ttdeci">PQ_KIND kind() const</div><div class="ttdef"><b>Definition:</b> pq_node.h:705</div></div>
+<div class="ttc" id="aclassdirection__indicator_html_ab793b7a888594e18e53f47d48731a3db"><div class="ttname"><a href="classdirection__indicator.html#ab793b7a888594e18e53f47d48731a3db">direction_indicator::Q</a></div><div class="ttdeci">q_node * Q()</div><div class="ttdef"><b>Definition:</b> pq_node.h:732</div></div>
+<div class="ttc" id="aclassdirection__indicator_html_aee879cc877e027719f532ef513b222e3"><div class="ttname"><a href="classdirection__indicator.html#aee879cc877e027719f532ef513b222e3">direction_indicator::D</a></div><div class="ttdeci">direction_indicator * D()</div><div class="ttdef"><b>Definition:</b> pq_node.h:742</div></div>
+<div class="ttc" id="aclassedge_html"><div class="ttname"><a href="classedge.html">edge</a></div><div class="ttdoc">An edge in a graph</div><div class="ttdef"><b>Definition:</b> edge.h:37</div></div>
+<div class="ttc" id="aclassiterator_html"><div class="ttname"><a href="classiterator.html">iterator</a></div><div class="ttdef"><b>Definition:</b> pytypes.h:822</div></div>
+<div class="ttc" id="aclassp__node_html"><div class="ttname"><a href="classp__node.html">p_node</a></div><div class="ttdef"><b>Definition:</b> pq_node.h:269</div></div>
+<div class="ttc" id="aclassp__node_html_a09658fb7a7212e51b877444e4cee4378"><div class="ttname"><a href="classp__node.html#a09658fb7a7212e51b877444e4cee4378">p_node::full_sons</a></div><div class="ttdeci">symlist&lt; pq_node * &gt; full_sons</div><div class="ttdef"><b>Definition:</b> pq_node.h:365</div></div>
+<div class="ttc" id="aclassp__node_html_a24e5b38cd4ffa7b2615110ec71403a2d"><div class="ttname"><a href="classp__node.html#a24e5b38cd4ffa7b2615110ec71403a2d">p_node::P</a></div><div class="ttdeci">p_node * P()</div><div class="ttdef"><b>Definition:</b> pq_node.h:321</div></div>
+<div class="ttc" id="aclassp__node_html_a498bbcd0e8124240b833b4e9c5e61b21"><div class="ttname"><a href="classp__node.html#a498bbcd0e8124240b833b4e9c5e61b21">p_node::Q</a></div><div class="ttdeci">q_node * Q()</div><div class="ttdef"><b>Definition:</b> pq_node.h:330</div></div>
+<div class="ttc" id="aclassp__node_html_a5580eada77004502c41425d278ee27b6"><div class="ttname"><a href="classp__node.html#a5580eada77004502c41425d278ee27b6">p_node::D</a></div><div class="ttdeci">direction_indicator * D()</div><div class="ttdef"><b>Definition:</b> pq_node.h:340</div></div>
+<div class="ttc" id="aclassp__node_html_a58cceed9fc9d92f36ec3fb6425d99cec"><div class="ttname"><a href="classp__node.html#a58cceed9fc9d92f36ec3fb6425d99cec">p_node::kind</a></div><div class="ttdeci">PQ_KIND kind() const</div><div class="ttdef"><b>Definition:</b> pq_node.h:299</div></div>
+<div class="ttc" id="aclassp__node_html_a674160253f80c3db19e287a1be85b02b"><div class="ttname"><a href="classp__node.html#a674160253f80c3db19e287a1be85b02b">p_node::L</a></div><div class="ttdeci">pq_leaf * L()</div><div class="ttdef"><b>Definition:</b> pq_node.h:350</div></div>
+<div class="ttc" id="aclassp__node_html_a8acc45be68133af1b6a2823875729798"><div class="ttname"><a href="classp__node.html#a8acc45be68133af1b6a2823875729798">p_node::partial_sons</a></div><div class="ttdeci">symlist&lt; pq_node * &gt; partial_sons</div><div class="ttdef"><b>Definition:</b> pq_node.h:372</div></div>
+<div class="ttc" id="aclassplanarity_html"><div class="ttname"><a href="classplanarity.html">planarity</a></div><div class="ttdoc">Tests if a graph can be drawn on a plane without any edge crossings</div><div class="ttdef"><b>Definition:</b> planarity.h:48</div></div>
+<div class="ttc" id="aclasspq__leaf_html"><div class="ttname"><a href="classpq__leaf.html">pq_leaf</a></div><div class="ttdef"><b>Definition:</b> pq_node.h:591</div></div>
+<div class="ttc" id="aclasspq__leaf_html_a31c4b7512aae53901bb20308fe3a8834"><div class="ttname"><a href="classpq__leaf.html#a31c4b7512aae53901bb20308fe3a8834">pq_leaf::kind</a></div><div class="ttdeci">PQ_KIND kind() const</div><div class="ttdef"><b>Definition:</b> pq_node.h:602</div></div>
+<div class="ttc" id="aclasspq__leaf_html_a4f4e0c05ee8e704fb1be7b04bae11b43"><div class="ttname"><a href="classpq__leaf.html#a4f4e0c05ee8e704fb1be7b04bae11b43">pq_leaf::other_id</a></div><div class="ttdeci">int other_id</div><div class="ttdef"><b>Definition:</b> pq_node.h:661</div></div>
+<div class="ttc" id="aclasspq__leaf_html_a644b19eb7d26967ad9bf4c3994c984df"><div class="ttname"><a href="classpq__leaf.html#a644b19eb7d26967ad9bf4c3994c984df">pq_leaf::D</a></div><div class="ttdeci">direction_indicator * D()</div><div class="ttdef"><b>Definition:</b> pq_node.h:639</div></div>
+<div class="ttc" id="aclasspq__leaf_html_a9edebd6049b8633158d7f1db3c33ee7c"><div class="ttname"><a href="classpq__leaf.html#a9edebd6049b8633158d7f1db3c33ee7c">pq_leaf::e</a></div><div class="ttdeci">edge e</div><div class="ttdef"><b>Definition:</b> pq_node.h:666</div></div>
+<div class="ttc" id="aclasspq__leaf_html_ac9453114e85e14b52cb2fc62ee117398"><div class="ttname"><a href="classpq__leaf.html#ac9453114e85e14b52cb2fc62ee117398">pq_leaf::P</a></div><div class="ttdeci">p_node * P()</div><div class="ttdef"><b>Definition:</b> pq_node.h:619</div></div>
+<div class="ttc" id="aclasspq__leaf_html_af095768adb826b3bbf4bc0080c58e67a"><div class="ttname"><a href="classpq__leaf.html#af095768adb826b3bbf4bc0080c58e67a">pq_leaf::Q</a></div><div class="ttdeci">q_node * Q()</div><div class="ttdef"><b>Definition:</b> pq_node.h:629</div></div>
+<div class="ttc" id="aclasspq__leaf_html_afb7bdabcf7e7b18e29fbd72db35f53b6"><div class="ttname"><a href="classpq__leaf.html#afb7bdabcf7e7b18e29fbd72db35f53b6">pq_leaf::L</a></div><div class="ttdeci">pq_leaf * L()</div><div class="ttdef"><b>Definition:</b> pq_node.h:649</div></div>
+<div class="ttc" id="aclasspq__node_html"><div class="ttname"><a href="classpq__node.html">pq_node</a></div><div class="ttdef"><b>Definition:</b> pq_node.h:31</div></div>
+<div class="ttc" id="aclasspq__node_html_a130d55bb597cbc47cfb6d9c9cd0ef06a"><div class="ttname"><a href="classpq__node.html#a130d55bb597cbc47cfb6d9c9cd0ef06a">pq_node::D</a></div><div class="ttdeci">virtual direction_indicator * D()=0</div></div>
+<div class="ttc" id="aclasspq__node_html_a13100e0b030cc047f382d9ddf6a44f4a"><div class="ttname"><a href="classpq__node.html#a13100e0b030cc047f382d9ddf6a44f4a">pq_node::clear</a></div><div class="ttdeci">virtual void clear()</div><div class="ttdef"><b>Definition:</b> pq_node.h:96</div></div>
+<div class="ttc" id="aclasspq__node_html_a2cc030cfa4560872acea8b50ebd0542b"><div class="ttname"><a href="classpq__node.html#a2cc030cfa4560872acea8b50ebd0542b">pq_node::sons</a></div><div class="ttdeci">symlist&lt; pq_node * &gt; sons</div><div class="ttdef"><b>Definition:</b> pq_node.h:186</div></div>
+<div class="ttc" id="aclasspq__node_html_a34898c9eb1527787c07e8ebefd6bfba5"><div class="ttname"><a href="classpq__node.html#a34898c9eb1527787c07e8ebefd6bfba5">pq_node::iterator</a></div><div class="ttdeci">symlist&lt; pq_node * &gt;::iterator iterator</div><div class="ttdef"><b>Definition:</b> pq_node.h:36</div></div>
+<div class="ttc" id="aclasspq__node_html_a4997fd09a95d9a659b99cea04197740a"><div class="ttname"><a href="classpq__node.html#a4997fd09a95d9a659b99cea04197740a">pq_node::n</a></div><div class="ttdeci">node n</div><div class="ttdef"><b>Definition:</b> pq_node.h:212</div></div>
+<div class="ttc" id="aclasspq__node_html_a565c52c174b753c7f676362acf566a33"><div class="ttname"><a href="classpq__node.html#a565c52c174b753c7f676362acf566a33">pq_node::L</a></div><div class="ttdeci">virtual pq_leaf * L()=0</div></div>
+<div class="ttc" id="aclasspq__node_html_a5e8a5defa0fec4ff2e82fabee97296b4"><div class="ttname"><a href="classpq__node.html#a5e8a5defa0fec4ff2e82fabee97296b4">pq_node::pos</a></div><div class="ttdeci">iterator pos</div><div class="ttdef"><b>Definition:</b> pq_node.h:192</div></div>
+<div class="ttc" id="aclasspq__node_html_a6236b20cd5f6cc02cb5f637ed34c96d9"><div class="ttname"><a href="classpq__node.html#a6236b20cd5f6cc02cb5f637ed34c96d9">pq_node::PQ_MARK</a></div><div class="ttdeci">PQ_MARK</div><div class="ttdef"><b>Definition:</b> pq_node.h:46</div></div>
+<div class="ttc" id="aclasspq__node_html_a6236b20cd5f6cc02cb5f637ed34c96d9a70312622ded9f04f068838ec195fc53c"><div class="ttname"><a href="classpq__node.html#a6236b20cd5f6cc02cb5f637ed34c96d9a70312622ded9f04f068838ec195fc53c">pq_node::BLOCKED</a></div><div class="ttdeci">@ BLOCKED</div><div class="ttdef"><b>Definition:</b> pq_node.h:46</div></div>
+<div class="ttc" id="aclasspq__node_html_a71cc9bb3c11aac468ff77d64643c38dc"><div class="ttname"><a href="classpq__node.html#a71cc9bb3c11aac468ff77d64643c38dc">pq_node::lpos</a></div><div class="ttdeci">std::list&lt; pq_node * &gt;::iterator lpos</div><div class="ttdef"><b>Definition:</b> pq_node.h:202</div></div>
+<div class="ttc" id="aclasspq__node_html_a96827bdca8bf81d20213405dd27f8fa6"><div class="ttname"><a href="classpq__node.html#a96827bdca8bf81d20213405dd27f8fa6">pq_node::PQ_KIND</a></div><div class="ttdeci">PQ_KIND</div><div class="ttdef"><b>Definition:</b> pq_node.h:41</div></div>
+<div class="ttc" id="aclasspq__node_html_aa6830ab47a280f41fe61b7d2f8b508bb"><div class="ttname"><a href="classpq__node.html#aa6830ab47a280f41fe61b7d2f8b508bb">pq_node::partial</a></div><div class="ttdeci">virtual void partial(iterator)</div><div class="ttdef"><b>Definition:</b> pq_node.h:74</div></div>
+<div class="ttc" id="aclasspq__node_html_aa9873c0cfad88bc4404857ce57d422e4"><div class="ttname"><a href="classpq__node.html#aa9873c0cfad88bc4404857ce57d422e4">pq_node::kind</a></div><div class="ttdeci">virtual PQ_KIND kind() const =0</div></div>
+<div class="ttc" id="aclasspq__node_html_aab7bddb053b6b25b90be00cba7de97f9"><div class="ttname"><a href="classpq__node.html#aab7bddb053b6b25b90be00cba7de97f9">pq_node::write</a></div><div class="ttdeci">virtual void write(std::ostream &amp;, int)=0</div></div>
+<div class="ttc" id="aclasspq__node_html_ad521c84741d9095288f879339e314ae7"><div class="ttname"><a href="classpq__node.html#ad521c84741d9095288f879339e314ae7">pq_node::pq_node</a></div><div class="ttdeci">pq_node(GTL::node n_, int id_)</div><div class="ttdef"><b>Definition:</b> pq_node.h:51</div></div>
+<div class="ttc" id="aclasspq__node_html_adc0dd21636d7fdb580aaeb407ab4f12c"><div class="ttname"><a href="classpq__node.html#adc0dd21636d7fdb580aaeb407ab4f12c">pq_node::Q</a></div><div class="ttdeci">virtual q_node * Q()=0</div></div>
+<div class="ttc" id="aclasspq__node_html_ae6d5a236397b9a57159487eac7ec168d"><div class="ttname"><a href="classpq__node.html#ae6d5a236397b9a57159487eac7ec168d">pq_node::up</a></div><div class="ttdeci">node up</div><div class="ttdef"><b>Definition:</b> pq_node.h:222</div></div>
+<div class="ttc" id="aclasspq__node_html_aee913582a7b268ce2570bee8a8367c50"><div class="ttname"><a href="classpq__node.html#aee913582a7b268ce2570bee8a8367c50">pq_node::mark</a></div><div class="ttdeci">PQ_MARK mark</div><div class="ttdef"><b>Definition:</b> pq_node.h:180</div></div>
+<div class="ttc" id="aclasspq__node_html_af1ba861293e4493dba7cc2c9332fee76"><div class="ttname"><a href="classpq__node.html#af1ba861293e4493dba7cc2c9332fee76">pq_node::full</a></div><div class="ttdeci">virtual void full(iterator)</div><div class="ttdef"><b>Definition:</b> pq_node.h:82</div></div>
+<div class="ttc" id="aclasspq__node_html_af838df17af1f9e0492c74da3dcd64a04"><div class="ttname"><a href="classpq__node.html#af838df17af1f9e0492c74da3dcd64a04">pq_node::P</a></div><div class="ttdeci">virtual p_node * P()=0</div></div>
+<div class="ttc" id="aclasspq__tree_html"><div class="ttname"><a href="classpq__tree.html">pq_tree</a></div><div class="ttdoc">PQ-Trees.</div><div class="ttdef"><b>Definition:</b> pq_tree.h:30</div></div>
+<div class="ttc" id="aclassq__node_html"><div class="ttname"><a href="classq__node.html">q_node</a></div><div class="ttdef"><b>Definition:</b> pq_node.h:420</div></div>
+<div class="ttc" id="aclassq__node_html_a7a331cc1f5d9f7b4b77b7b25b4976c3b"><div class="ttname"><a href="classq__node.html#a7a331cc1f5d9f7b4b77b7b25b4976c3b">q_node::pert_end</a></div><div class="ttdeci">iterator pert_end</div><div class="ttdef"><b>Definition:</b> pq_node.h:538</div></div>
+<div class="ttc" id="aclassq__node_html_a8cd3c283fc6717288af6256413f52d1b"><div class="ttname"><a href="classq__node.html#a8cd3c283fc6717288af6256413f52d1b">q_node::P</a></div><div class="ttdeci">p_node * P()</div><div class="ttdef"><b>Definition:</b> pq_node.h:467</div></div>
+<div class="ttc" id="aclassq__node_html_a97d0d7e765001f163a7c14c8dc744786"><div class="ttname"><a href="classq__node.html#a97d0d7e765001f163a7c14c8dc744786">q_node::Q</a></div><div class="ttdeci">q_node * Q()</div><div class="ttdef"><b>Definition:</b> pq_node.h:477</div></div>
+<div class="ttc" id="aclassq__node_html_a9b4dfdf5e54133ac6b252e9168ddeaa8"><div class="ttname"><a href="classq__node.html#a9b4dfdf5e54133ac6b252e9168ddeaa8">q_node::D</a></div><div class="ttdeci">direction_indicator * D()</div><div class="ttdef"><b>Definition:</b> pq_node.h:486</div></div>
+<div class="ttc" id="aclassq__node_html_ac636443853e4074a0e6c441d7bcb249a"><div class="ttname"><a href="classq__node.html#ac636443853e4074a0e6c441d7bcb249a">q_node::pert_begin</a></div><div class="ttdeci">iterator pert_begin</div><div class="ttdef"><b>Definition:</b> pq_node.h:532</div></div>
+<div class="ttc" id="aclassq__node_html_ace87caa930b28182faeb82c748003d86"><div class="ttname"><a href="classq__node.html#ace87caa930b28182faeb82c748003d86">q_node::L</a></div><div class="ttdeci">pq_leaf * L()</div><div class="ttdef"><b>Definition:</b> pq_node.h:496</div></div>
+<div class="ttc" id="aclassq__node_html_afcacf644da450a075d01b76803aa5da0"><div class="ttname"><a href="classq__node.html#afcacf644da450a075d01b76803aa5da0">q_node::kind</a></div><div class="ttdeci">PQ_KIND kind() const</div><div class="ttdef"><b>Definition:</b> pq_node.h:445</div></div>
+<div class="ttc" id="aclasssymlist_html"><div class="ttname"><a href="classsymlist.html">symlist</a></div><div class="ttdoc">List which can be reversed in .</div><div class="ttdef"><b>Definition:</b> symlist.h:208</div></div>
+<div class="ttc" id="adarknet_8c_html_a4663de4fa674346c82a366077969fd4b"><div class="ttname"><a href="darknet_8c.html#a4663de4fa674346c82a366077969fd4b">partial</a></div><div class="ttdeci">void partial(char *cfgfile, char *weightfile, char *outfile, int max)</div><div class="ttdef"><b>Definition:</b> darknet.c:172</div></div>
+<div class="ttc" id="aedge_8cpp_html_acdb629fb6ead9586f586235139d7e160"><div class="ttname"><a href="edge_8cpp.html#acdb629fb6ead9586f586235139d7e160">operator&lt;&lt;</a></div><div class="ttdeci">GTL_EXTERN std::ostream &amp; operator&lt;&lt;(std::ostream &amp;os, const edge &amp;e)</div><div class="ttdef"><b>Definition:</b> edge.cpp:25</div></div>
+<div class="ttc" id="agraph_8h_html"><div class="ttname"><a href="graph_8h.html">graph.h</a></div></div>
+<div class="ttc" id="alist_8h_html_af4aeda155dbe167f1c1cf38cb65bf324"><div class="ttname"><a href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">node</a></div><div class="ttdeci">struct node node</div><div class="ttdef"><b>Definition:</b> edge.h:133</div></div>
+<div class="ttc" id="anamespacenvinfer1_html_a8455d49d12f876ef3c07a5df62bbe17c"><div class="ttname"><a href="namespacenvinfer1.html#a8455d49d12f876ef3c07a5df62bbe17c">nvinfer1::write</a></div><div class="ttdeci">void write(char *&amp;buffer, const T &amp;val)</div><div class="ttdef"><b>Definition:</b> detect.h:11</div></div>
+<div class="ttc" id="astructnode_html"><div class="ttname"><a href="structnode.html">node</a></div><div class="ttdoc">A node in a graph</div><div class="ttdef"><b>Definition:</b> list.h:4</div></div>
+<div class="ttc" id="asymlist_8h_html"><div class="ttname"><a href="symlist_8h.html">symlist.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>

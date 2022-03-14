@@ -1,0 +1,62 @@
+\hypertarget{darkunistd_8h_source}{}\doxysection{darkunistd.\+h}
+\label{darkunistd_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/darkunistd.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/darkunistd.h}}
+\mbox{\hyperlink{darkunistd_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifdef \_WIN32}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#ifndef \_UNISTD\_H}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#define \_UNISTD\_H    1}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{comment}{/* This file intended to serve as a drop-\/in replacement for}}
+\DoxyCodeLine{6 \textcolor{comment}{*  unistd.h on Windows}}
+\DoxyCodeLine{7 \textcolor{comment}{*  Please add functionality as needed}}
+\DoxyCodeLine{8 \textcolor{comment}{*/}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <winsock2.h>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <direct.h>} \textcolor{comment}{/* for \_getcwd() and \_chdir() */}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{getopt_8h}{getopt.h}}"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <io.h>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <process.h>} \textcolor{comment}{/* for getpid() and the exec..() family */}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#define srandom srand}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define random rand}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{comment}{/* Values for the second argument to access.}}
+\DoxyCodeLine{21 \textcolor{comment}{These may be OR'd together.  */}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#define R\_OK    4       }\textcolor{comment}{/* Test for read permission.  */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#define W\_OK    2       }\textcolor{comment}{/* Test for write permission.  */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#define X\_OK R\_OK       }\textcolor{comment}{/* execute permission -\/ unsupported in Windows, */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#define F\_OK    0       }\textcolor{comment}{/* Test for existence.  */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#define access \_access}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#define dup2 \_dup2}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#define execve \_execve}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#define ftruncate \_chsize}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#define unlink \_unlink}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#define fileno \_fileno}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#define getcwd \_getcwd}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#define chdir \_chdir}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#define isatty \_isatty}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#define lseek \_lseek}}
+\DoxyCodeLine{37 \textcolor{comment}{/* read, write, and close are NOT being \#defined here, because while there are file handle specific versions for Windows, they probably don't work for sockets. You need to look at your app and consider whether to call e.g. closesocket(). */}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#define ssize\_t int}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#define STDIN\_FILENO 0}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#define STDOUT\_FILENO 1}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#define STDERR\_FILENO 2}}
+\DoxyCodeLine{44 \textcolor{comment}{/* should be in some equivalent to <sys/types.h> */}}
+\DoxyCodeLine{45 \textcolor{comment}{//typedef \_\_int8            int8\_t;}}
+\DoxyCodeLine{46 \textcolor{comment}{//typedef \_\_int16           int16\_t;}}
+\DoxyCodeLine{47 \textcolor{comment}{//typedef \_\_int32           int32\_t;}}
+\DoxyCodeLine{48 \textcolor{comment}{//typedef \_\_int64           int64\_t;}}
+\DoxyCodeLine{49 \textcolor{comment}{//typedef unsigned \_\_int8   uint8\_t;}}
+\DoxyCodeLine{50 \textcolor{comment}{//typedef unsigned \_\_int16  uint16\_t;}}
+\DoxyCodeLine{51 \textcolor{comment}{//typedef unsigned \_\_int32  uint32\_t;}}
+\DoxyCodeLine{52 \textcolor{comment}{//typedef unsigned \_\_int64  uint64\_t;}}
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* \_UNISTD\_H  */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#include <unistd.h>}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* \_WIN32  */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

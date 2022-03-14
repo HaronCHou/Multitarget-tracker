@@ -1,0 +1,446 @@
+\hypertarget{class_background_subtractor_l_b_s_p}{}\doxysection{Background\+Subtractor\+LBSP类 参考}
+\label{class_background_subtractor_l_b_s_p}\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+
+
+{\ttfamily \#include $<$Background\+Subtractor\+LBSP.\+h$>$}
+
+
+
+类 Background\+Subtractor\+LBSP 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_background_subtractor_l_b_s_p__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Background\+Subtractor\+LBSP 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_background_subtractor_l_b_s_p__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_background_subtractor_l_b_s_p_1_1_px_info_base}{Px\+Info\+Base}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_background_subtractor_l_b_s_p_a5f7f42ea5c9697479cbe237b49ca6ae9}{Background\+Subtractor\+LBSP}} (float f\+Rel\+LBSPThreshold, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} n\+LBSPThreshold\+Offset=0)
+\begin{DoxyCompactList}\small\item\em full constructor \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_background_subtractor_l_b_s_p_ab1ccd653c0d227cedd18b08278c6ea8b}{$\sim$\+Background\+Subtractor\+LBSP}} ()=default
+\begin{DoxyCompactList}\small\item\em default destructor \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_background_subtractor_l_b_s_p_ac6b854f94414497b143375d4a0ae8b6f}{initialize}} (const cv\+::\+Mat \&o\+Init\+Img)
+\begin{DoxyCompactList}\small\item\em (re)initiaization method; needs to be called before starting background subtraction \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a3644bc10ec3beda6fad22c633fe0f8fb}{initialize}} (const cv\+::\+Mat \&o\+Init\+Img, const cv\+::\+Mat \&o\+ROI)=0
+\begin{DoxyCompactList}\small\item\em (re)initiaization method; needs to be called before starting background subtraction \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a4771cac59b7ac865d6ec25cbf049948e}{operator()}} (cv\+::\+Input\+Array \mbox{\hyperlink{structimage}{image}}, cv\+::\+Output\+Array fgmask, double learning\+Rate=0)=0
+\begin{DoxyCompactList}\small\item\em primary model update function; the learning param is used to override the internal learning speed (ignored when \texorpdfstring{$<$}{<}= 0) \end{DoxyCompactList}\item 
+virtual cv\+::\+Mat \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a9843f87f8adcd0e85274303f9210b883}{get\+ROICopy}} () const
+\begin{DoxyCompactList}\small\item\em unused, always returns nullptr \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a34dc38d3d925d46d289c750786f232dc}{set\+ROI}} (cv\+::\+Mat \&o\+ROI)
+\begin{DoxyCompactList}\small\item\em sets the ROI to be used for descriptor extraction (note\+: this function will reinit the model and return the usable ROI) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a31b8474f8b4ffa6ef08ec682cfcef9b0}{set\+Automatic\+Model\+Reset}} (bool)
+\begin{DoxyCompactList}\small\item\em turns automatic model reset on or off \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public 属性}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a49771cd7b2c8354cde3da6e593d3febe}{n\+Debug\+CoordX}}
+\item 
+int \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a8e1451fd90eb4459aa84ea5e7133268a}{n\+Debug\+CoordY}}
+\item 
+std\+::string \mbox{\hyperlink{class_background_subtractor_l_b_s_p_ada55b4a5eec8c82d0e05b0f9f1600ecb}{s\+Debug\+Name}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected 属性}
+\begin{DoxyCompactItemize}
+\item 
+cv\+::\+Mat \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a53fe98bd2489d95de5292467145901e9}{m\+\_\+o\+ROI}}
+\begin{DoxyCompactList}\small\item\em background model ROI used for \mbox{\hyperlink{class_l_b_s_p}{LBSP}} descriptor extraction (specific to the input image size) \end{DoxyCompactList}\item 
+cv\+::\+Size \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a732d5e6ae35fb0e858cadb3af5ce08a2}{m\+\_\+o\+Img\+Size}}
+\begin{DoxyCompactList}\small\item\em input image size \end{DoxyCompactList}\item 
+\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_ab3467ebee2c5d1249061ccd704cc0584}{m\+\_\+n\+Img\+Channels}}
+\begin{DoxyCompactList}\small\item\em input image channel size \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a7d2f52ecd5ff56e42da86f97e0ad93b5}{m\+\_\+n\+Img\+Type}}
+\begin{DoxyCompactList}\small\item\em input image type \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a209eb6aaa34e8ad8e565e79f85404e24}{m\+\_\+n\+LBSPThreshold\+Offset}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_l_b_s_p}{LBSP}} internal threshold offset value, used to reduce texture noise in dark regions \end{DoxyCompactList}\item 
+const float \mbox{\hyperlink{class_background_subtractor_l_b_s_p_ad759c645b14e9b16bf3940cae862df32}{m\+\_\+f\+Rel\+LBSPThreshold}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_l_b_s_p}{LBSP}} relative internal threshold (kept here since we don\textquotesingle{}t keep an \mbox{\hyperlink{class_l_b_s_p}{LBSP}} object) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a9d1e247267afbddb7032bdcabd67d931}{m\+\_\+n\+Tot\+Px\+Count}}
+\begin{DoxyCompactList}\small\item\em total number of pixels (depends on the input frame size) \& total number of relevant pixels \end{DoxyCompactList}\item 
+\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_ac3b54f4d2dfa3a576475214f26501d85}{m\+\_\+n\+Tot\+Relevant\+Px\+Count}}
+\item 
+\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a8a2350cad84f19c68ef61b7aaf91c43f}{m\+\_\+n\+Frame\+Index}}
+\begin{DoxyCompactList}\small\item\em current frame index, frame count since last model reset \& model reset cooldown counters \end{DoxyCompactList}\item 
+\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_ab56bf775dfdf0579e834e45210c3a92a}{m\+\_\+n\+Frames\+Since\+Last\+Reset}}
+\item 
+\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a5ea18d388afacf8285c46ba0f754e7ee}{m\+\_\+n\+Model\+Reset\+Cooldown}}
+\item 
+\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_aefe69d94f08b2c4ba73ad1d254ad9153}{m\+\_\+an\+LBSPThreshold\+\_\+8bit\+LUT}} \mbox{[}UCHAR\+\_\+\+MAX+1\mbox{]}
+\begin{DoxyCompactList}\small\item\em pre-\/allocated internal \mbox{\hyperlink{class_l_b_s_p}{LBSP}} threshold values LUT for all possible 8-\/bit intensities \end{DoxyCompactList}\item 
+\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} $\ast$ \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a06b4f0d3f24fa08bccd3c9eca085713e}{m\+\_\+a\+Px\+Idx\+LUT}}
+\begin{DoxyCompactList}\small\item\em internal pixel index LUT for all relevant analysis regions (based on the provided ROI) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_background_subtractor_l_b_s_p_1_1_px_info_base}{Px\+Info\+Base}} $\ast$ \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a74e73d4832ccdef652d93756582024db}{m\+\_\+a\+Px\+Info\+LUT}}
+\begin{DoxyCompactList}\small\item\em internal pixel info LUT for all possible pixel indexes \end{DoxyCompactList}\item 
+const int \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a2585fe6e41e10af6da3e325dc20fe7f1}{m\+\_\+n\+Default\+Median\+Blur\+Kernel\+Size}}
+\begin{DoxyCompactList}\small\item\em default kernel size for median blur post-\/proc filtering \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a55cea104a0924fd50d5bed0912828a7e}{m\+\_\+b\+Initialized}} = false
+\begin{DoxyCompactList}\small\item\em specifies whether the algorithm is fully initialized or not \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a9d260f4e42e3fc79fb21af950ca9087a}{m\+\_\+b\+Auto\+Model\+Reset\+Enabled}}
+\begin{DoxyCompactList}\small\item\em specifies whether automatic model resets are enabled or not \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a5b1ec2694ae59661bb146ad0d4d49811}{m\+\_\+b\+Using\+Moving\+Camera}}
+\begin{DoxyCompactList}\small\item\em specifies whether the camera is considered moving or not \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{class_background_subtractor_l_b_s_p_ab1dc003792ab1d0b881a6fd10e0e29b3}{m\+\_\+o\+Last\+Color\+Frame}}
+\begin{DoxyCompactList}\small\item\em copy of latest pixel intensities (used when refreshing model) \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a9c637c0b87cac495887295690d83ba13}{m\+\_\+o\+Last\+Desc\+Frame}}
+\begin{DoxyCompactList}\small\item\em copy of latest descriptors (used when refreshing model) \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{class_background_subtractor_l_b_s_p_adb6dc0af596c5592c91f9d8faa5c8a4b}{m\+\_\+o\+Last\+FGMask}}
+\begin{DoxyCompactList}\small\item\em the foreground mask generated by the method at \mbox{[}t-\/1\mbox{]} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+Local Binary Similarity Pattern (\mbox{\hyperlink{class_l_b_s_p}{LBSP}})-\/based change detection algorithm (abstract version/base class).
+
+For more details on the different parameters, see P.-\/L. St-\/\+Charles and G.-\/A. Bilodeau, \char`\"{}\+Improving Background \+Subtraction using Local Binary Similarity Patterns\char`\"{}, in WACV 2014, or G.-\/A. Bilodeau et al, \char`\"{}\+Change Detection in Feature Space Using Local Binary Similarity Patterns\char`\"{}, in CRV 2013.
+
+This algorithm is currently NOT thread-\/safe. 
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_a5f7f42ea5c9697479cbe237b49ca6ae9}\label{class_background_subtractor_l_b_s_p_a5f7f42ea5c9697479cbe237b49ca6ae9}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{BackgroundSubtractorLBSP()}{BackgroundSubtractorLBSP()}}
+{\footnotesize\ttfamily Background\+Subtractor\+LBSP\+::\+Background\+Subtractor\+LBSP (\begin{DoxyParamCaption}\item[{float}]{f\+Rel\+LBSPThreshold,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{n\+LBSPThreshold\+Offset = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+full constructor 
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_ab1ccd653c0d227cedd18b08278c6ea8b}\label{class_background_subtractor_l_b_s_p_ab1ccd653c0d227cedd18b08278c6ea8b}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!````~BackgroundSubtractorLBSP@{$\sim$BackgroundSubtractorLBSP}}
+\index{````~BackgroundSubtractorLBSP@{$\sim$BackgroundSubtractorLBSP}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{$\sim$BackgroundSubtractorLBSP()}{~BackgroundSubtractorLBSP()}}
+{\footnotesize\ttfamily virtual Background\+Subtractor\+LBSP\+::$\sim$\+Background\+Subtractor\+LBSP (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+default destructor 
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_a9843f87f8adcd0e85274303f9210b883}\label{class_background_subtractor_l_b_s_p_a9843f87f8adcd0e85274303f9210b883}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!getROICopy@{getROICopy}}
+\index{getROICopy@{getROICopy}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{getROICopy()}{getROICopy()}}
+{\footnotesize\ttfamily cv\+::\+Mat Background\+Subtractor\+LBSP\+::get\+ROICopy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+unused, always returns nullptr 
+
+returns a copy of the ROI used for descriptor extraction \mbox{\Hypertarget{class_background_subtractor_l_b_s_p_ac6b854f94414497b143375d4a0ae8b6f}\label{class_background_subtractor_l_b_s_p_ac6b854f94414497b143375d4a0ae8b6f}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!initialize@{initialize}}
+\index{initialize@{initialize}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{initialize()}{initialize()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Background\+Subtractor\+LBSP\+::initialize (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{o\+Init\+Img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+(re)initiaization method; needs to be called before starting background subtraction 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=219pt]{class_background_subtractor_l_b_s_p_ac6b854f94414497b143375d4a0ae8b6f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_a3644bc10ec3beda6fad22c633fe0f8fb}\label{class_background_subtractor_l_b_s_p_a3644bc10ec3beda6fad22c633fe0f8fb}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!initialize@{initialize}}
+\index{initialize@{initialize}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{initialize()}{initialize()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual void Background\+Subtractor\+LBSP\+::initialize (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{o\+Init\+Img,  }\item[{const cv\+::\+Mat \&}]{o\+ROI }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+(re)initiaization method; needs to be called before starting background subtraction 
+
+
+
+在 \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_a452bea31dcbd2e10efc701cc2cd25776}{Background\+Subtractor\+LOBSTER}} , 以及 \mbox{\hyperlink{class_background_subtractor_su_b_s_e_n_s_e_ac84aa66030b04a72435ef473cf0e6a3f}{Background\+Subtractor\+Su\+BSENSE}} 内被实现.
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_a4771cac59b7ac865d6ec25cbf049948e}\label{class_background_subtractor_l_b_s_p_a4771cac59b7ac865d6ec25cbf049948e}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!operator()@{operator()}}
+\index{operator()@{operator()}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily virtual void Background\+Subtractor\+LBSP\+::operator() (\begin{DoxyParamCaption}\item[{cv\+::\+Input\+Array}]{image,  }\item[{cv\+::\+Output\+Array}]{fgmask,  }\item[{double}]{learning\+Rate = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+primary model update function; the learning param is used to override the internal learning speed (ignored when \texorpdfstring{$<$}{<}= 0) 
+
+
+
+在 \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_a0c0faf2754a7a74a6ae56cea47207070}{Background\+Subtractor\+LOBSTER}} , 以及 \mbox{\hyperlink{class_background_subtractor_su_b_s_e_n_s_e_aaa60e2883c2b2cf130820b10104a653b}{Background\+Subtractor\+Su\+BSENSE}} 内被实现.
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_a31b8474f8b4ffa6ef08ec682cfcef9b0}\label{class_background_subtractor_l_b_s_p_a31b8474f8b4ffa6ef08ec682cfcef9b0}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!setAutomaticModelReset@{setAutomaticModelReset}}
+\index{setAutomaticModelReset@{setAutomaticModelReset}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{setAutomaticModelReset()}{setAutomaticModelReset()}}
+{\footnotesize\ttfamily void Background\+Subtractor\+LBSP\+::set\+Automatic\+Model\+Reset (\begin{DoxyParamCaption}\item[{bool}]{b\+Val }\end{DoxyParamCaption})}
+
+
+
+turns automatic model reset on or off 
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_a34dc38d3d925d46d289c750786f232dc}\label{class_background_subtractor_l_b_s_p_a34dc38d3d925d46d289c750786f232dc}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!setROI@{setROI}}
+\index{setROI@{setROI}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{setROI()}{setROI()}}
+{\footnotesize\ttfamily void Background\+Subtractor\+LBSP\+::set\+ROI (\begin{DoxyParamCaption}\item[{cv\+::\+Mat \&}]{o\+ROI }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+sets the ROI to be used for descriptor extraction (note\+: this function will reinit the model and return the usable ROI) 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_background_subtractor_l_b_s_p_a34dc38d3d925d46d289c750786f232dc_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_aefe69d94f08b2c4ba73ad1d254ad9153}\label{class_background_subtractor_l_b_s_p_aefe69d94f08b2c4ba73ad1d254ad9153}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!m\_anLBSPThreshold\_8bitLUT@{m\_anLBSPThreshold\_8bitLUT}}
+\index{m\_anLBSPThreshold\_8bitLUT@{m\_anLBSPThreshold\_8bitLUT}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{m\_anLBSPThreshold\_8bitLUT}{m\_anLBSPThreshold\_8bitLUT}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} Background\+Subtractor\+LBSP\+::m\+\_\+an\+LBSPThreshold\+\_\+8bit\+LUT\mbox{[}UCHAR\+\_\+\+MAX+1\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+pre-\/allocated internal \mbox{\hyperlink{class_l_b_s_p}{LBSP}} threshold values LUT for all possible 8-\/bit intensities 
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_a06b4f0d3f24fa08bccd3c9eca085713e}\label{class_background_subtractor_l_b_s_p_a06b4f0d3f24fa08bccd3c9eca085713e}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!m\_aPxIdxLUT@{m\_aPxIdxLUT}}
+\index{m\_aPxIdxLUT@{m\_aPxIdxLUT}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{m\_aPxIdxLUT}{m\_aPxIdxLUT}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}$\ast$ Background\+Subtractor\+LBSP\+::m\+\_\+a\+Px\+Idx\+LUT\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+internal pixel index LUT for all relevant analysis regions (based on the provided ROI) 
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_a74e73d4832ccdef652d93756582024db}\label{class_background_subtractor_l_b_s_p_a74e73d4832ccdef652d93756582024db}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!m\_aPxInfoLUT@{m\_aPxInfoLUT}}
+\index{m\_aPxInfoLUT@{m\_aPxInfoLUT}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{m\_aPxInfoLUT}{m\_aPxInfoLUT}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_background_subtractor_l_b_s_p_1_1_px_info_base}{Px\+Info\+Base}}$\ast$ Background\+Subtractor\+LBSP\+::m\+\_\+a\+Px\+Info\+LUT\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+internal pixel info LUT for all possible pixel indexes 
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_a9d260f4e42e3fc79fb21af950ca9087a}\label{class_background_subtractor_l_b_s_p_a9d260f4e42e3fc79fb21af950ca9087a}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!m\_bAutoModelResetEnabled@{m\_bAutoModelResetEnabled}}
+\index{m\_bAutoModelResetEnabled@{m\_bAutoModelResetEnabled}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{m\_bAutoModelResetEnabled}{m\_bAutoModelResetEnabled}}
+{\footnotesize\ttfamily bool Background\+Subtractor\+LBSP\+::m\+\_\+b\+Auto\+Model\+Reset\+Enabled\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+specifies whether automatic model resets are enabled or not 
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_a55cea104a0924fd50d5bed0912828a7e}\label{class_background_subtractor_l_b_s_p_a55cea104a0924fd50d5bed0912828a7e}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!m\_bInitialized@{m\_bInitialized}}
+\index{m\_bInitialized@{m\_bInitialized}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{m\_bInitialized}{m\_bInitialized}}
+{\footnotesize\ttfamily bool Background\+Subtractor\+LBSP\+::m\+\_\+b\+Initialized = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+specifies whether the algorithm is fully initialized or not 
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_a5b1ec2694ae59661bb146ad0d4d49811}\label{class_background_subtractor_l_b_s_p_a5b1ec2694ae59661bb146ad0d4d49811}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!m\_bUsingMovingCamera@{m\_bUsingMovingCamera}}
+\index{m\_bUsingMovingCamera@{m\_bUsingMovingCamera}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{m\_bUsingMovingCamera}{m\_bUsingMovingCamera}}
+{\footnotesize\ttfamily bool Background\+Subtractor\+LBSP\+::m\+\_\+b\+Using\+Moving\+Camera\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+specifies whether the camera is considered moving or not 
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_ad759c645b14e9b16bf3940cae862df32}\label{class_background_subtractor_l_b_s_p_ad759c645b14e9b16bf3940cae862df32}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!m\_fRelLBSPThreshold@{m\_fRelLBSPThreshold}}
+\index{m\_fRelLBSPThreshold@{m\_fRelLBSPThreshold}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{m\_fRelLBSPThreshold}{m\_fRelLBSPThreshold}}
+{\footnotesize\ttfamily const float Background\+Subtractor\+LBSP\+::m\+\_\+f\+Rel\+LBSPThreshold\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\mbox{\hyperlink{class_l_b_s_p}{LBSP}} relative internal threshold (kept here since we don\textquotesingle{}t keep an \mbox{\hyperlink{class_l_b_s_p}{LBSP}} object) 
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_a2585fe6e41e10af6da3e325dc20fe7f1}\label{class_background_subtractor_l_b_s_p_a2585fe6e41e10af6da3e325dc20fe7f1}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!m\_nDefaultMedianBlurKernelSize@{m\_nDefaultMedianBlurKernelSize}}
+\index{m\_nDefaultMedianBlurKernelSize@{m\_nDefaultMedianBlurKernelSize}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{m\_nDefaultMedianBlurKernelSize}{m\_nDefaultMedianBlurKernelSize}}
+{\footnotesize\ttfamily const int Background\+Subtractor\+LBSP\+::m\+\_\+n\+Default\+Median\+Blur\+Kernel\+Size\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+default kernel size for median blur post-\/proc filtering 
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_a8a2350cad84f19c68ef61b7aaf91c43f}\label{class_background_subtractor_l_b_s_p_a8a2350cad84f19c68ef61b7aaf91c43f}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!m\_nFrameIndex@{m\_nFrameIndex}}
+\index{m\_nFrameIndex@{m\_nFrameIndex}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{m\_nFrameIndex}{m\_nFrameIndex}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} Background\+Subtractor\+LBSP\+::m\+\_\+n\+Frame\+Index\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+current frame index, frame count since last model reset \& model reset cooldown counters 
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_ab56bf775dfdf0579e834e45210c3a92a}\label{class_background_subtractor_l_b_s_p_ab56bf775dfdf0579e834e45210c3a92a}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!m\_nFramesSinceLastReset@{m\_nFramesSinceLastReset}}
+\index{m\_nFramesSinceLastReset@{m\_nFramesSinceLastReset}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{m\_nFramesSinceLastReset}{m\_nFramesSinceLastReset}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} Background\+Subtractor\+LBSP\+::m\+\_\+n\+Frames\+Since\+Last\+Reset\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_ab3467ebee2c5d1249061ccd704cc0584}\label{class_background_subtractor_l_b_s_p_ab3467ebee2c5d1249061ccd704cc0584}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!m\_nImgChannels@{m\_nImgChannels}}
+\index{m\_nImgChannels@{m\_nImgChannels}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{m\_nImgChannels}{m\_nImgChannels}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} Background\+Subtractor\+LBSP\+::m\+\_\+n\+Img\+Channels\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+input image channel size 
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_a7d2f52ecd5ff56e42da86f97e0ad93b5}\label{class_background_subtractor_l_b_s_p_a7d2f52ecd5ff56e42da86f97e0ad93b5}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!m\_nImgType@{m\_nImgType}}
+\index{m\_nImgType@{m\_nImgType}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{m\_nImgType}{m\_nImgType}}
+{\footnotesize\ttfamily int Background\+Subtractor\+LBSP\+::m\+\_\+n\+Img\+Type\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+input image type 
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_a209eb6aaa34e8ad8e565e79f85404e24}\label{class_background_subtractor_l_b_s_p_a209eb6aaa34e8ad8e565e79f85404e24}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!m\_nLBSPThresholdOffset@{m\_nLBSPThresholdOffset}}
+\index{m\_nLBSPThresholdOffset@{m\_nLBSPThresholdOffset}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{m\_nLBSPThresholdOffset}{m\_nLBSPThresholdOffset}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} Background\+Subtractor\+LBSP\+::m\+\_\+n\+LBSPThreshold\+Offset\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\mbox{\hyperlink{class_l_b_s_p}{LBSP}} internal threshold offset value, used to reduce texture noise in dark regions 
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_a5ea18d388afacf8285c46ba0f754e7ee}\label{class_background_subtractor_l_b_s_p_a5ea18d388afacf8285c46ba0f754e7ee}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!m\_nModelResetCooldown@{m\_nModelResetCooldown}}
+\index{m\_nModelResetCooldown@{m\_nModelResetCooldown}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{m\_nModelResetCooldown}{m\_nModelResetCooldown}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} Background\+Subtractor\+LBSP\+::m\+\_\+n\+Model\+Reset\+Cooldown\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_a9d1e247267afbddb7032bdcabd67d931}\label{class_background_subtractor_l_b_s_p_a9d1e247267afbddb7032bdcabd67d931}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!m\_nTotPxCount@{m\_nTotPxCount}}
+\index{m\_nTotPxCount@{m\_nTotPxCount}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{m\_nTotPxCount}{m\_nTotPxCount}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} Background\+Subtractor\+LBSP\+::m\+\_\+n\+Tot\+Px\+Count\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+total number of pixels (depends on the input frame size) \& total number of relevant pixels 
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_ac3b54f4d2dfa3a576475214f26501d85}\label{class_background_subtractor_l_b_s_p_ac3b54f4d2dfa3a576475214f26501d85}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!m\_nTotRelevantPxCount@{m\_nTotRelevantPxCount}}
+\index{m\_nTotRelevantPxCount@{m\_nTotRelevantPxCount}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{m\_nTotRelevantPxCount}{m\_nTotRelevantPxCount}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} Background\+Subtractor\+LBSP\+::m\+\_\+n\+Tot\+Relevant\+Px\+Count\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_a732d5e6ae35fb0e858cadb3af5ce08a2}\label{class_background_subtractor_l_b_s_p_a732d5e6ae35fb0e858cadb3af5ce08a2}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!m\_oImgSize@{m\_oImgSize}}
+\index{m\_oImgSize@{m\_oImgSize}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{m\_oImgSize}{m\_oImgSize}}
+{\footnotesize\ttfamily cv\+::\+Size Background\+Subtractor\+LBSP\+::m\+\_\+o\+Img\+Size\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+input image size 
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_ab1dc003792ab1d0b881a6fd10e0e29b3}\label{class_background_subtractor_l_b_s_p_ab1dc003792ab1d0b881a6fd10e0e29b3}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!m\_oLastColorFrame@{m\_oLastColorFrame}}
+\index{m\_oLastColorFrame@{m\_oLastColorFrame}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{m\_oLastColorFrame}{m\_oLastColorFrame}}
+{\footnotesize\ttfamily cv\+::\+Mat Background\+Subtractor\+LBSP\+::m\+\_\+o\+Last\+Color\+Frame\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+copy of latest pixel intensities (used when refreshing model) 
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_a9c637c0b87cac495887295690d83ba13}\label{class_background_subtractor_l_b_s_p_a9c637c0b87cac495887295690d83ba13}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!m\_oLastDescFrame@{m\_oLastDescFrame}}
+\index{m\_oLastDescFrame@{m\_oLastDescFrame}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{m\_oLastDescFrame}{m\_oLastDescFrame}}
+{\footnotesize\ttfamily cv\+::\+Mat Background\+Subtractor\+LBSP\+::m\+\_\+o\+Last\+Desc\+Frame\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+copy of latest descriptors (used when refreshing model) 
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_adb6dc0af596c5592c91f9d8faa5c8a4b}\label{class_background_subtractor_l_b_s_p_adb6dc0af596c5592c91f9d8faa5c8a4b}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!m\_oLastFGMask@{m\_oLastFGMask}}
+\index{m\_oLastFGMask@{m\_oLastFGMask}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{m\_oLastFGMask}{m\_oLastFGMask}}
+{\footnotesize\ttfamily cv\+::\+Mat Background\+Subtractor\+LBSP\+::m\+\_\+o\+Last\+FGMask\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+the foreground mask generated by the method at \mbox{[}t-\/1\mbox{]} 
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_a53fe98bd2489d95de5292467145901e9}\label{class_background_subtractor_l_b_s_p_a53fe98bd2489d95de5292467145901e9}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!m\_oROI@{m\_oROI}}
+\index{m\_oROI@{m\_oROI}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{m\_oROI}{m\_oROI}}
+{\footnotesize\ttfamily cv\+::\+Mat Background\+Subtractor\+LBSP\+::m\+\_\+o\+ROI\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+background model ROI used for \mbox{\hyperlink{class_l_b_s_p}{LBSP}} descriptor extraction (specific to the input image size) 
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_a49771cd7b2c8354cde3da6e593d3febe}\label{class_background_subtractor_l_b_s_p_a49771cd7b2c8354cde3da6e593d3febe}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!nDebugCoordX@{nDebugCoordX}}
+\index{nDebugCoordX@{nDebugCoordX}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{nDebugCoordX}{nDebugCoordX}}
+{\footnotesize\ttfamily int Background\+Subtractor\+LBSP\+::n\+Debug\+CoordX}
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_a8e1451fd90eb4459aa84ea5e7133268a}\label{class_background_subtractor_l_b_s_p_a8e1451fd90eb4459aa84ea5e7133268a}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!nDebugCoordY@{nDebugCoordY}}
+\index{nDebugCoordY@{nDebugCoordY}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{nDebugCoordY}{nDebugCoordY}}
+{\footnotesize\ttfamily int Background\+Subtractor\+LBSP\+::n\+Debug\+CoordY}
+
+\mbox{\Hypertarget{class_background_subtractor_l_b_s_p_ada55b4a5eec8c82d0e05b0f9f1600ecb}\label{class_background_subtractor_l_b_s_p_ada55b4a5eec8c82d0e05b0f9f1600ecb}} 
+\index{BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}!sDebugName@{sDebugName}}
+\index{sDebugName@{sDebugName}!BackgroundSubtractorLBSP@{BackgroundSubtractorLBSP}}
+\doxysubsubsection{\texorpdfstring{sDebugName}{sDebugName}}
+{\footnotesize\ttfamily std\+::string Background\+Subtractor\+LBSP\+::s\+Debug\+Name}
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/\+Subsense/\mbox{\hyperlink{_background_subtractor_l_b_s_p_8h}{Background\+Subtractor\+LBSP.\+h}}\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/\+Subsense/\mbox{\hyperlink{_background_subtractor_l_b_s_p_8cpp}{Background\+Subtractor\+LBSP.\+cpp}}\end{DoxyCompactItemize}

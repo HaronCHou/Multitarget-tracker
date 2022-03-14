@@ -1,0 +1,417 @@
+\hypertarget{class_l_b_s_p}{}\doxysection{LBSP类 参考}
+\label{class_l_b_s_p}\index{LBSP@{LBSP}}
+
+
+{\ttfamily \#include $<$LBSP.\+h$>$}
+
+
+
+类 LBSP 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{class_l_b_s_p__inherit__graph}
+\end{center}
+\end{figure}
+
+
+LBSP 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{class_l_b_s_p__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_l_b_s_p_ae8297d81cf95b0e5333bf2e88b396a23}{LBSP}} (\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} n\+Threshold)
+\begin{DoxyCompactList}\small\item\em constructor 1, threshold = absolute intensity \textquotesingle{}similarity\textquotesingle{} threshold used when computing comparisons \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_l_b_s_p_ab702ec2748fc5bac6e258370a089c270}{LBSP}} (float f\+Rel\+Threshold, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} n\+Threshold\+Offset=0)
+\begin{DoxyCompactList}\small\item\em constructor 2, threshold = relative intensity \textquotesingle{}similarity\textquotesingle{} threshold used when computing comparisons \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_l_b_s_p_aa6c4b51bfee06724c02695942c121c57}{$\sim$\+LBSP}} ()=default
+\begin{DoxyCompactList}\small\item\em default destructor \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_l_b_s_p_abd44c9e34e9a3b10ca1f08e32cc7f2fa}{read}} (const cv\+::\+File\+Node \&)
+\begin{DoxyCompactList}\small\item\em loads extractor params from the specified file node @@ not impl \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_l_b_s_p_a8a669d927653d7ba62c4097b306e0d5a}{write}} (cv\+::\+File\+Storage \&) const
+\begin{DoxyCompactList}\small\item\em writes extractor params to the specified file storage @@ not impl \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_l_b_s_p_a0d35c4022d72d62e90b44507f7a979bf}{set\+Reference}} (const cv\+::\+Mat \&)
+\begin{DoxyCompactList}\small\item\em sets the \textquotesingle{}reference\textquotesingle{} image to be used for inter-\/frame comparisons (note\+: if no image is set or if the image is empty, the algorithm will default back to intra-\/frame comparisons) \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_l_b_s_p_afc7aa065fa562edd2b16b766910e7806}{descriptor\+Size}} () const
+\begin{DoxyCompactList}\small\item\em returns the current descriptor size, in bytes \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_l_b_s_p_a36803a3126c171c945dcb35a1d43f421}{descriptor\+Type}} () const
+\begin{DoxyCompactList}\small\item\em returns the current descriptor data type \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_l_b_s_p_a1f75012723a8990ea7b9f74d3293dbe6}{is\+Using\+Rel\+Threshold}} () const
+\begin{DoxyCompactList}\small\item\em returns whether this extractor is using a relative threshold or not \end{DoxyCompactList}\item 
+virtual float \mbox{\hyperlink{class_l_b_s_p_acf999adf45d5e425d28b00ace6c928a4}{get\+Rel\+Threshold}} () const
+\begin{DoxyCompactList}\small\item\em returns the current relative threshold used for comparisons (-\/1 = invalid/not used) \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{class_l_b_s_p_a6412e6797415eaf34def8ec7a92dc7ab}{get\+Abs\+Threshold}} () const
+\begin{DoxyCompactList}\small\item\em returns the current absolute threshold used for comparisons (-\/1 = invalid/not used) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_l_b_s_p_ab61148341758dbc004660761bca04f84}{compute2}} (const cv\+::\+Mat \&o\+Image, std\+::vector$<$ cv\+::\+Key\+Point $>$ \&vo\+Keypoints, cv\+::\+Mat \&o\+Descriptors) const
+\begin{DoxyCompactList}\small\item\em similar to Descriptor\+Extractor\+::compute(const cv\+::\+Mat\& image, ...), but in this case, the descriptors matrix has the same shape as the input matrix (possibly slower, but the result can be displayed) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_l_b_s_p_af02407f0a1657cd3e2b955aa250d064e}{compute2}} (const std\+::vector$<$ cv\+::\+Mat $>$ \&vo\+Image\+Collection, std\+::vector$<$ std\+::vector$<$ cv\+::\+Key\+Point $>$ $>$ \&vvo\+Point\+Collection, std\+::vector$<$ cv\+::\+Mat $>$ \&vo\+Desc\+Collection) const
+\begin{DoxyCompactList}\small\item\em batch version of LBSP\+::compute2(const cv\+::\+Mat\& image, ...), also similar to Descriptor\+Extractor\+::compute(const std\+::vector$<$cv\+::\+Mat$>$\& image\+Collection, ...) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{静态 Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_l_b_s_p_a4a5f635868b6b81ba53df2692ee3dfd8}{compute\+Grayscale\+Descriptor}} (const cv\+::\+Mat \&o\+Input\+Img, const uchar \+\_\+ref, const int \+\_\+x, const int \+\_\+y, const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \+\_\+t, ushort \&\+\_\+res)
+\begin{DoxyCompactList}\small\item\em utility function, shortcut/lightweight/direct single-\/point \mbox{\hyperlink{class_l_b_s_p}{LBSP}} computation function for extra flexibility (1-\/channel version) \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_l_b_s_p_a27a44cb6f6e3015ee26047bd3d84f892}{compute\+RGBDescriptor}} (const cv\+::\+Mat \&o\+Input\+Img, const uchar $\ast$const \+\_\+ref, const int \+\_\+x, const int \+\_\+y, const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} $\ast$const \+\_\+t, ushort $\ast$\+\_\+res)
+\begin{DoxyCompactList}\small\item\em utility function, shortcut/lightweight/direct single-\/point \mbox{\hyperlink{class_l_b_s_p}{LBSP}} computation function for extra flexibility (3-\/channels version) \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_l_b_s_p_a806e1de0fdf2a59acb9fa1303b62b102}{compute\+RGBDescriptor}} (const cv\+::\+Mat \&o\+Input\+Img, const uchar $\ast$const \+\_\+ref, const int \+\_\+x, const int \+\_\+y, const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \+\_\+t, ushort $\ast$\+\_\+res)
+\begin{DoxyCompactList}\small\item\em utility function, shortcut/lightweight/direct single-\/point \mbox{\hyperlink{class_l_b_s_p}{LBSP}} computation function for extra flexibility (3-\/channels version) \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_l_b_s_p_a35f2abfacc0d540810d678ff5e8cd619}{compute\+Single\+RGBDescriptor}} (const cv\+::\+Mat \&o\+Input\+Img, const uchar \+\_\+ref, const int \+\_\+x, const int \+\_\+y, const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \+\_\+c, const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \+\_\+t, ushort \&\+\_\+res)
+\begin{DoxyCompactList}\small\item\em utility function, shortcut/lightweight/direct single-\/point \mbox{\hyperlink{class_l_b_s_p}{LBSP}} computation function for extra flexibility (1-\/channel-\/\+RGB version) \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_l_b_s_p_a555e2f241fbdac2ebb1eab31482f5f05}{reshape\+Desc}} (cv\+::\+Size o\+Size, const std\+::vector$<$ cv\+::\+Key\+Point $>$ \&vo\+Keypoints, const cv\+::\+Mat \&o\+Descriptors, cv\+::\+Mat \&o\+Output)
+\begin{DoxyCompactList}\small\item\em utility function, used to reshape a descriptors matrix to its input image size via their keypoint locations \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_l_b_s_p_a5d390a2a6f3d94a4edadae3718daf884}{calc\+Desc\+Img\+Diff}} (const cv\+::\+Mat \&o\+Desc1, const cv\+::\+Mat \&o\+Desc2, cv\+::\+Mat \&o\+Output, bool b\+Force\+Merge\+Channels=false)
+\begin{DoxyCompactList}\small\item\em utility function, used to illustrate the difference between two descriptor images \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_l_b_s_p_ae5efff966783470187b0a7b7cde63469}{validate\+Key\+Points}} (std\+::vector$<$ cv\+::\+Key\+Point $>$ \&vo\+Keypoints, cv\+::\+Size o\+Img\+Size)
+\begin{DoxyCompactList}\small\item\em utility function, used to filter out bad keypoints that would trigger out of bounds error because they\textquotesingle{}re too close to the image border \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_l_b_s_p_ad97557be4bc6cfd7b0fa4b01ab8f8c55}{validate\+ROI}} (cv\+::\+Mat \&o\+ROI)
+\begin{DoxyCompactList}\small\item\em utility function, used to filter out bad pixels in a ROI that would trigger out of bounds error because they\textquotesingle{}re too close to the image border \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{静态 Public 属性}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{class_l_b_s_p_a1cfa21e58b330ecfbf3dba5b7772176d}{PATCH\+\_\+\+SIZE}} = 5
+\begin{DoxyCompactList}\small\item\em utility, specifies the pixel size of the pattern used (width and height) \end{DoxyCompactList}\item 
+static constexpr \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{class_l_b_s_p_a452b6c5a8b8aad43128493de145cbc23}{DESC\+\_\+\+SIZE}} = 2
+\begin{DoxyCompactList}\small\item\em utility, specifies the number of bytes per descriptor (should be the same as calling \textquotesingle{}\mbox{\hyperlink{class_l_b_s_p_afc7aa065fa562edd2b16b766910e7806}{descriptor\+Size()}}\textquotesingle{}) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_l_b_s_p_a1a9b0613104169b3cdf567f7625c7fc4}{compute\+Impl}} (const cv\+::\+Mat \&o\+Image, std\+::vector$<$ cv\+::\+Key\+Point $>$ \&vo\+Keypoints, cv\+::\+Mat \&o\+Descriptors) const
+\begin{DoxyCompactList}\small\item\em classic \textquotesingle{}compute\textquotesingle{} implementation, based on the regular Descriptor\+Extractor\+::compute\+Impl arguments \& expected output \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected 属性}
+\begin{DoxyCompactItemize}
+\item 
+const bool \mbox{\hyperlink{class_l_b_s_p_a5f49537c70502b73f32038218a4f8371}{m\+\_\+b\+Only\+Using\+Abs\+Threshold}}
+\item 
+const float \mbox{\hyperlink{class_l_b_s_p_a99fbb83c842782bb5621a43efb7580d5}{m\+\_\+f\+Rel\+Threshold}}
+\item 
+const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{class_l_b_s_p_aa1c90eb308a5ff277df09c4da186693a}{m\+\_\+n\+Threshold}}
+\item 
+cv\+::\+Mat \mbox{\hyperlink{class_l_b_s_p_a8c5ccb37124c8fa457db0ba9dbe28c18}{m\+\_\+o\+Ref\+Image}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+Local Binary Similarity Pattern (\mbox{\hyperlink{class_l_b_s_p}{LBSP}}) feature extractor
+
+Note 1\+: both grayscale and RGB/\+BGR images may be used with this extractor. Note 2\+: using LBSP\+::compute2(...) is logically equivalent to using LBSP\+::compute(...) followed by LBSP\+::reshape\+Desc(...).
+
+For more details on the different parameters, see G.-\/A. Bilodeau et al, \char`\"{}\+Change Detection in Feature Space Using Local \+Binary Similarity Patterns\char`\"{}, in CRV 2013.
+
+This algorithm is currently NOT thread-\/safe. 
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{class_l_b_s_p_ae8297d81cf95b0e5333bf2e88b396a23}\label{class_l_b_s_p_ae8297d81cf95b0e5333bf2e88b396a23}} 
+\index{LBSP@{LBSP}!LBSP@{LBSP}}
+\index{LBSP@{LBSP}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{LBSP()}{LBSP()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily LBSP\+::\+LBSP (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{n\+Threshold }\end{DoxyParamCaption})}
+
+
+
+constructor 1, threshold = absolute intensity \textquotesingle{}similarity\textquotesingle{} threshold used when computing comparisons 
+
+\mbox{\Hypertarget{class_l_b_s_p_ab702ec2748fc5bac6e258370a089c270}\label{class_l_b_s_p_ab702ec2748fc5bac6e258370a089c270}} 
+\index{LBSP@{LBSP}!LBSP@{LBSP}}
+\index{LBSP@{LBSP}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{LBSP()}{LBSP()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily LBSP\+::\+LBSP (\begin{DoxyParamCaption}\item[{float}]{f\+Rel\+Threshold,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{n\+Threshold\+Offset = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+constructor 2, threshold = relative intensity \textquotesingle{}similarity\textquotesingle{} threshold used when computing comparisons 
+
+\mbox{\Hypertarget{class_l_b_s_p_aa6c4b51bfee06724c02695942c121c57}\label{class_l_b_s_p_aa6c4b51bfee06724c02695942c121c57}} 
+\index{LBSP@{LBSP}!````~LBSP@{$\sim$LBSP}}
+\index{````~LBSP@{$\sim$LBSP}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{$\sim$LBSP()}{~LBSP()}}
+{\footnotesize\ttfamily virtual LBSP\+::$\sim$\+LBSP (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+default destructor 
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{class_l_b_s_p_a5d390a2a6f3d94a4edadae3718daf884}\label{class_l_b_s_p_a5d390a2a6f3d94a4edadae3718daf884}} 
+\index{LBSP@{LBSP}!calcDescImgDiff@{calcDescImgDiff}}
+\index{calcDescImgDiff@{calcDescImgDiff}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{calcDescImgDiff()}{calcDescImgDiff()}}
+{\footnotesize\ttfamily void LBSP\+::calc\+Desc\+Img\+Diff (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{o\+Desc1,  }\item[{const cv\+::\+Mat \&}]{o\+Desc2,  }\item[{cv\+::\+Mat \&}]{o\+Output,  }\item[{bool}]{b\+Force\+Merge\+Channels = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+utility function, used to illustrate the difference between two descriptor images 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_l_b_s_p_a5d390a2a6f3d94a4edadae3718daf884_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_l_b_s_p_ab61148341758dbc004660761bca04f84}\label{class_l_b_s_p_ab61148341758dbc004660761bca04f84}} 
+\index{LBSP@{LBSP}!compute2@{compute2}}
+\index{compute2@{compute2}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{compute2()}{compute2()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void LBSP\+::compute2 (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{o\+Image,  }\item[{std\+::vector$<$ cv\+::\+Key\+Point $>$ \&}]{vo\+Keypoints,  }\item[{cv\+::\+Mat \&}]{o\+Descriptors }\end{DoxyParamCaption}) const}
+
+
+
+similar to Descriptor\+Extractor\+::compute(const cv\+::\+Mat\& image, ...), but in this case, the descriptors matrix has the same shape as the input matrix (possibly slower, but the result can be displayed) 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=308pt]{class_l_b_s_p_ab61148341758dbc004660761bca04f84_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_l_b_s_p_af02407f0a1657cd3e2b955aa250d064e}\label{class_l_b_s_p_af02407f0a1657cd3e2b955aa250d064e}} 
+\index{LBSP@{LBSP}!compute2@{compute2}}
+\index{compute2@{compute2}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{compute2()}{compute2()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void LBSP\+::compute2 (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ cv\+::\+Mat $>$ \&}]{vo\+Image\+Collection,  }\item[{std\+::vector$<$ std\+::vector$<$ cv\+::\+Key\+Point $>$ $>$ \&}]{vvo\+Point\+Collection,  }\item[{std\+::vector$<$ cv\+::\+Mat $>$ \&}]{vo\+Desc\+Collection }\end{DoxyParamCaption}) const}
+
+
+
+batch version of LBSP\+::compute2(const cv\+::\+Mat\& image, ...), also similar to Descriptor\+Extractor\+::compute(const std\+::vector$<$cv\+::\+Mat$>$\& image\+Collection, ...) 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_l_b_s_p_af02407f0a1657cd3e2b955aa250d064e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_l_b_s_p_a4a5f635868b6b81ba53df2692ee3dfd8}\label{class_l_b_s_p_a4a5f635868b6b81ba53df2692ee3dfd8}} 
+\index{LBSP@{LBSP}!computeGrayscaleDescriptor@{computeGrayscaleDescriptor}}
+\index{computeGrayscaleDescriptor@{computeGrayscaleDescriptor}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{computeGrayscaleDescriptor()}{computeGrayscaleDescriptor()}}
+{\footnotesize\ttfamily static void LBSP\+::compute\+Grayscale\+Descriptor (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{o\+Input\+Img,  }\item[{const uchar}]{\+\_\+ref,  }\item[{const int}]{\+\_\+x,  }\item[{const int}]{\+\_\+y,  }\item[{const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{\+\_\+t,  }\item[{ushort \&}]{\+\_\+res }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+utility function, shortcut/lightweight/direct single-\/point \mbox{\hyperlink{class_l_b_s_p}{LBSP}} computation function for extra flexibility (1-\/channel version) 
+
+\mbox{\Hypertarget{class_l_b_s_p_a1a9b0613104169b3cdf567f7625c7fc4}\label{class_l_b_s_p_a1a9b0613104169b3cdf567f7625c7fc4}} 
+\index{LBSP@{LBSP}!computeImpl@{computeImpl}}
+\index{computeImpl@{computeImpl}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{computeImpl()}{computeImpl()}}
+{\footnotesize\ttfamily void LBSP\+::compute\+Impl (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{o\+Image,  }\item[{std\+::vector$<$ cv\+::\+Key\+Point $>$ \&}]{vo\+Keypoints,  }\item[{cv\+::\+Mat \&}]{o\+Descriptors }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+classic \textquotesingle{}compute\textquotesingle{} implementation, based on the regular Descriptor\+Extractor\+::compute\+Impl arguments \& expected output 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=315pt]{class_l_b_s_p_a1a9b0613104169b3cdf567f7625c7fc4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_l_b_s_p_a27a44cb6f6e3015ee26047bd3d84f892}\label{class_l_b_s_p_a27a44cb6f6e3015ee26047bd3d84f892}} 
+\index{LBSP@{LBSP}!computeRGBDescriptor@{computeRGBDescriptor}}
+\index{computeRGBDescriptor@{computeRGBDescriptor}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{computeRGBDescriptor()}{computeRGBDescriptor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static void LBSP\+::compute\+RGBDescriptor (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{o\+Input\+Img,  }\item[{const uchar $\ast$const}]{\+\_\+ref,  }\item[{const int}]{\+\_\+x,  }\item[{const int}]{\+\_\+y,  }\item[{const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} $\ast$const}]{\+\_\+t,  }\item[{ushort $\ast$}]{\+\_\+res }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+utility function, shortcut/lightweight/direct single-\/point \mbox{\hyperlink{class_l_b_s_p}{LBSP}} computation function for extra flexibility (3-\/channels version) 
+
+\mbox{\Hypertarget{class_l_b_s_p_a806e1de0fdf2a59acb9fa1303b62b102}\label{class_l_b_s_p_a806e1de0fdf2a59acb9fa1303b62b102}} 
+\index{LBSP@{LBSP}!computeRGBDescriptor@{computeRGBDescriptor}}
+\index{computeRGBDescriptor@{computeRGBDescriptor}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{computeRGBDescriptor()}{computeRGBDescriptor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static void LBSP\+::compute\+RGBDescriptor (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{o\+Input\+Img,  }\item[{const uchar $\ast$const}]{\+\_\+ref,  }\item[{const int}]{\+\_\+x,  }\item[{const int}]{\+\_\+y,  }\item[{const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{\+\_\+t,  }\item[{ushort $\ast$}]{\+\_\+res }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+utility function, shortcut/lightweight/direct single-\/point \mbox{\hyperlink{class_l_b_s_p}{LBSP}} computation function for extra flexibility (3-\/channels version) 
+
+\mbox{\Hypertarget{class_l_b_s_p_a35f2abfacc0d540810d678ff5e8cd619}\label{class_l_b_s_p_a35f2abfacc0d540810d678ff5e8cd619}} 
+\index{LBSP@{LBSP}!computeSingleRGBDescriptor@{computeSingleRGBDescriptor}}
+\index{computeSingleRGBDescriptor@{computeSingleRGBDescriptor}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{computeSingleRGBDescriptor()}{computeSingleRGBDescriptor()}}
+{\footnotesize\ttfamily static void LBSP\+::compute\+Single\+RGBDescriptor (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{o\+Input\+Img,  }\item[{const uchar}]{\+\_\+ref,  }\item[{const int}]{\+\_\+x,  }\item[{const int}]{\+\_\+y,  }\item[{const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{\+\_\+c,  }\item[{const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{\+\_\+t,  }\item[{ushort \&}]{\+\_\+res }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+utility function, shortcut/lightweight/direct single-\/point \mbox{\hyperlink{class_l_b_s_p}{LBSP}} computation function for extra flexibility (1-\/channel-\/\+RGB version) 
+
+\mbox{\Hypertarget{class_l_b_s_p_afc7aa065fa562edd2b16b766910e7806}\label{class_l_b_s_p_afc7aa065fa562edd2b16b766910e7806}} 
+\index{LBSP@{LBSP}!descriptorSize@{descriptorSize}}
+\index{descriptorSize@{descriptorSize}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{descriptorSize()}{descriptorSize()}}
+{\footnotesize\ttfamily int LBSP\+::descriptor\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+returns the current descriptor size, in bytes 
+
+\mbox{\Hypertarget{class_l_b_s_p_a36803a3126c171c945dcb35a1d43f421}\label{class_l_b_s_p_a36803a3126c171c945dcb35a1d43f421}} 
+\index{LBSP@{LBSP}!descriptorType@{descriptorType}}
+\index{descriptorType@{descriptorType}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{descriptorType()}{descriptorType()}}
+{\footnotesize\ttfamily int LBSP\+::descriptor\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+returns the current descriptor data type 
+
+\mbox{\Hypertarget{class_l_b_s_p_a6412e6797415eaf34def8ec7a92dc7ab}\label{class_l_b_s_p_a6412e6797415eaf34def8ec7a92dc7ab}} 
+\index{LBSP@{LBSP}!getAbsThreshold@{getAbsThreshold}}
+\index{getAbsThreshold@{getAbsThreshold}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{getAbsThreshold()}{getAbsThreshold()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} LBSP\+::get\+Abs\+Threshold (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+returns the current absolute threshold used for comparisons (-\/1 = invalid/not used) 
+
+\mbox{\Hypertarget{class_l_b_s_p_acf999adf45d5e425d28b00ace6c928a4}\label{class_l_b_s_p_acf999adf45d5e425d28b00ace6c928a4}} 
+\index{LBSP@{LBSP}!getRelThreshold@{getRelThreshold}}
+\index{getRelThreshold@{getRelThreshold}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{getRelThreshold()}{getRelThreshold()}}
+{\footnotesize\ttfamily float LBSP\+::get\+Rel\+Threshold (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+returns the current relative threshold used for comparisons (-\/1 = invalid/not used) 
+
+\mbox{\Hypertarget{class_l_b_s_p_a1f75012723a8990ea7b9f74d3293dbe6}\label{class_l_b_s_p_a1f75012723a8990ea7b9f74d3293dbe6}} 
+\index{LBSP@{LBSP}!isUsingRelThreshold@{isUsingRelThreshold}}
+\index{isUsingRelThreshold@{isUsingRelThreshold}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{isUsingRelThreshold()}{isUsingRelThreshold()}}
+{\footnotesize\ttfamily bool LBSP\+::is\+Using\+Rel\+Threshold (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+returns whether this extractor is using a relative threshold or not 
+
+\mbox{\Hypertarget{class_l_b_s_p_abd44c9e34e9a3b10ca1f08e32cc7f2fa}\label{class_l_b_s_p_abd44c9e34e9a3b10ca1f08e32cc7f2fa}} 
+\index{LBSP@{LBSP}!read@{read}}
+\index{read@{read}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily void LBSP\+::read (\begin{DoxyParamCaption}\item[{const cv\+::\+File\+Node \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+loads extractor params from the specified file node @@ not impl 
+
+\mbox{\Hypertarget{class_l_b_s_p_a555e2f241fbdac2ebb1eab31482f5f05}\label{class_l_b_s_p_a555e2f241fbdac2ebb1eab31482f5f05}} 
+\index{LBSP@{LBSP}!reshapeDesc@{reshapeDesc}}
+\index{reshapeDesc@{reshapeDesc}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{reshapeDesc()}{reshapeDesc()}}
+{\footnotesize\ttfamily void LBSP\+::reshape\+Desc (\begin{DoxyParamCaption}\item[{cv\+::\+Size}]{o\+Size,  }\item[{const std\+::vector$<$ cv\+::\+Key\+Point $>$ \&}]{vo\+Keypoints,  }\item[{const cv\+::\+Mat \&}]{o\+Descriptors,  }\item[{cv\+::\+Mat \&}]{o\+Output }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+utility function, used to reshape a descriptors matrix to its input image size via their keypoint locations 
+
+\mbox{\Hypertarget{class_l_b_s_p_a0d35c4022d72d62e90b44507f7a979bf}\label{class_l_b_s_p_a0d35c4022d72d62e90b44507f7a979bf}} 
+\index{LBSP@{LBSP}!setReference@{setReference}}
+\index{setReference@{setReference}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{setReference()}{setReference()}}
+{\footnotesize\ttfamily void LBSP\+::set\+Reference (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+sets the \textquotesingle{}reference\textquotesingle{} image to be used for inter-\/frame comparisons (note\+: if no image is set or if the image is empty, the algorithm will default back to intra-\/frame comparisons) 
+
+\mbox{\Hypertarget{class_l_b_s_p_ae5efff966783470187b0a7b7cde63469}\label{class_l_b_s_p_ae5efff966783470187b0a7b7cde63469}} 
+\index{LBSP@{LBSP}!validateKeyPoints@{validateKeyPoints}}
+\index{validateKeyPoints@{validateKeyPoints}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{validateKeyPoints()}{validateKeyPoints()}}
+{\footnotesize\ttfamily void LBSP\+::validate\+Key\+Points (\begin{DoxyParamCaption}\item[{std\+::vector$<$ cv\+::\+Key\+Point $>$ \&}]{vo\+Keypoints,  }\item[{cv\+::\+Size}]{o\+Img\+Size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+utility function, used to filter out bad keypoints that would trigger out of bounds error because they\textquotesingle{}re too close to the image border 
+
+\mbox{\Hypertarget{class_l_b_s_p_ad97557be4bc6cfd7b0fa4b01ab8f8c55}\label{class_l_b_s_p_ad97557be4bc6cfd7b0fa4b01ab8f8c55}} 
+\index{LBSP@{LBSP}!validateROI@{validateROI}}
+\index{validateROI@{validateROI}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{validateROI()}{validateROI()}}
+{\footnotesize\ttfamily void LBSP\+::validate\+ROI (\begin{DoxyParamCaption}\item[{cv\+::\+Mat \&}]{o\+ROI }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+utility function, used to filter out bad pixels in a ROI that would trigger out of bounds error because they\textquotesingle{}re too close to the image border 
+
+\mbox{\Hypertarget{class_l_b_s_p_a8a669d927653d7ba62c4097b306e0d5a}\label{class_l_b_s_p_a8a669d927653d7ba62c4097b306e0d5a}} 
+\index{LBSP@{LBSP}!write@{write}}
+\index{write@{write}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily void LBSP\+::write (\begin{DoxyParamCaption}\item[{cv\+::\+File\+Storage \&}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+writes extractor params to the specified file storage @@ not impl 
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{class_l_b_s_p_a452b6c5a8b8aad43128493de145cbc23}\label{class_l_b_s_p_a452b6c5a8b8aad43128493de145cbc23}} 
+\index{LBSP@{LBSP}!DESC\_SIZE@{DESC\_SIZE}}
+\index{DESC\_SIZE@{DESC\_SIZE}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{DESC\_SIZE}{DESC\_SIZE}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} LBSP\+::\+DESC\+\_\+\+SIZE = 2\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+utility, specifies the number of bytes per descriptor (should be the same as calling \textquotesingle{}\mbox{\hyperlink{class_l_b_s_p_afc7aa065fa562edd2b16b766910e7806}{descriptor\+Size()}}\textquotesingle{}) 
+
+\mbox{\Hypertarget{class_l_b_s_p_a5f49537c70502b73f32038218a4f8371}\label{class_l_b_s_p_a5f49537c70502b73f32038218a4f8371}} 
+\index{LBSP@{LBSP}!m\_bOnlyUsingAbsThreshold@{m\_bOnlyUsingAbsThreshold}}
+\index{m\_bOnlyUsingAbsThreshold@{m\_bOnlyUsingAbsThreshold}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{m\_bOnlyUsingAbsThreshold}{m\_bOnlyUsingAbsThreshold}}
+{\footnotesize\ttfamily const bool LBSP\+::m\+\_\+b\+Only\+Using\+Abs\+Threshold\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_b_s_p_a99fbb83c842782bb5621a43efb7580d5}\label{class_l_b_s_p_a99fbb83c842782bb5621a43efb7580d5}} 
+\index{LBSP@{LBSP}!m\_fRelThreshold@{m\_fRelThreshold}}
+\index{m\_fRelThreshold@{m\_fRelThreshold}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{m\_fRelThreshold}{m\_fRelThreshold}}
+{\footnotesize\ttfamily const float LBSP\+::m\+\_\+f\+Rel\+Threshold\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_b_s_p_aa1c90eb308a5ff277df09c4da186693a}\label{class_l_b_s_p_aa1c90eb308a5ff277df09c4da186693a}} 
+\index{LBSP@{LBSP}!m\_nThreshold@{m\_nThreshold}}
+\index{m\_nThreshold@{m\_nThreshold}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{m\_nThreshold}{m\_nThreshold}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} LBSP\+::m\+\_\+n\+Threshold\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_b_s_p_a8c5ccb37124c8fa457db0ba9dbe28c18}\label{class_l_b_s_p_a8c5ccb37124c8fa457db0ba9dbe28c18}} 
+\index{LBSP@{LBSP}!m\_oRefImage@{m\_oRefImage}}
+\index{m\_oRefImage@{m\_oRefImage}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{m\_oRefImage}{m\_oRefImage}}
+{\footnotesize\ttfamily cv\+::\+Mat LBSP\+::m\+\_\+o\+Ref\+Image\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_b_s_p_a1cfa21e58b330ecfbf3dba5b7772176d}\label{class_l_b_s_p_a1cfa21e58b330ecfbf3dba5b7772176d}} 
+\index{LBSP@{LBSP}!PATCH\_SIZE@{PATCH\_SIZE}}
+\index{PATCH\_SIZE@{PATCH\_SIZE}!LBSP@{LBSP}}
+\doxysubsubsection{\texorpdfstring{PATCH\_SIZE}{PATCH\_SIZE}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} LBSP\+::\+PATCH\+\_\+\+SIZE = 5\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+utility, specifies the pixel size of the pattern used (width and height) 
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/\+Subsense/\mbox{\hyperlink{_l_b_s_p_8h}{LBSP.\+h}}\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/\+Subsense/\mbox{\hyperlink{_l_b_s_p_8cpp}{LBSP.\+cpp}}\end{DoxyCompactItemize}

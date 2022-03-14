@@ -1,0 +1,551 @@
+\hypertarget{trt__utils_8h}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/tensorrt\+\_\+yolo/trt\+\_\+utils.h 文件参考}
+\label{trt__utils_8h}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/trt\_utils.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/trt\_utils.h}}
+{\ttfamily \#include $<$opencv2/opencv.\+hpp$>$}\newline
+{\ttfamily \#include $<$opencv2/core/core.\+hpp$>$}\newline
+{\ttfamily \#include $<$opencv2/dnn/dnn.\+hpp$>$}\newline
+{\ttfamily \#include $<$opencv2/highgui/highgui.\+hpp$>$}\newline
+{\ttfamily \#include $<$opencv2/imgproc/imgproc.\+hpp$>$}\newline
+{\ttfamily \#include \char`\"{}mish.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}chunk.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}hardswish.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$set$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include \char`\"{}Nv\+Infer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}ds\+\_\+image.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}plugin\+\_\+factory.\+h\char`\"{}}\newline
+trt\+\_\+utils.\+h 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{trt__utils_8h__incl}
+\end{center}
+\end{figure}
+此图展示该文件直接或间接的被哪些文件引用了\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{trt__utils_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_b_box}{BBox}}
+\item 
+struct \mbox{\hyperlink{struct_b_box_info}{BBox\+Info}}
+\item 
+class \mbox{\hyperlink{class_logger}{Logger}}
+\begin{DoxyCompactList}\small\item\em Class which manages logging of Tensor\+RT tools and samples \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{trt__utils_8h_aeb0f94d2500292926bc8416c9a904297}{blob\+From\+Ds\+Images}} (const std\+::vector$<$ \mbox{\hyperlink{class_ds_image}{Ds\+Image}} $>$ \&input\+Images, cv\+::\+Mat \&blob, const int \&inputH, const int \&inputW)
+\item 
+std\+::string \mbox{\hyperlink{trt__utils_8h_a9de43e600ebc3a0f919582b007c25322}{trim}} (std\+::string s)
+\item 
+std\+::string \mbox{\hyperlink{trt__utils_8h_abbdafbe11cc77edd6d4c99a1fda70d2c}{triml}} (std\+::string s, const char $\ast$t)
+\item 
+std\+::string \mbox{\hyperlink{trt__utils_8h_a0154026299e5fc73737172009e714d50}{trimr}} (std\+::string s, const char $\ast$t)
+\item 
+float \mbox{\hyperlink{trt__utils_8h_abfab750429265ecfdced0e67e7120325}{clamp}} (const float val, const float min\+Val, const float max\+Val)
+\item 
+bool \mbox{\hyperlink{trt__utils_8h_ae785e7485fbc6c3df50ff300588f61a9}{file\+Exists}} (const std\+::string file\+Name, bool verbose=true)
+\item 
+\mbox{\hyperlink{struct_b_box}{BBox}} \mbox{\hyperlink{trt__utils_8h_afcb46afd4bada782cab0f1962502bb03}{convert\+BBox\+Net\+Res}} (const float \&bx, const float \&by, const float \&bw, const float \&bh, const uint32\+\_\+t \&stride, const uint32\+\_\+t \&netW, const uint32\+\_\+t \&netH)
+\item 
+void \mbox{\hyperlink{trt__utils_8h_a1ffb8af5e042500c5b1914f5d62d9969}{convert\+BBox\+Img\+Res}} (const float scaling\+Factor, const float x\+Offset, const float y\+Offset, \mbox{\hyperlink{struct_b_box}{BBox}} \&bbox)
+\item 
+void \mbox{\hyperlink{trt__utils_8h_aa4c60f96db695abc26779437f79435ab}{print\+Predictions}} (const \mbox{\hyperlink{struct_b_box_info}{BBox\+Info}} \&\mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}, const std\+::string \&class\+Name)
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{trt__utils_8h_a5008482093197b2c41c92e4f4c1a0a73}{load\+List\+From\+Text\+File}} (const std\+::string filename)
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{trt__utils_8h_ab7f84a69c05af87778a897de4e4b55cd}{load\+Image\+List}} (const std\+::string filename, const std\+::string prefix)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_b_box_info}{BBox\+Info}} $>$ \mbox{\hyperlink{trt__utils_8h_ae0ec7d082a29313605238e01ec1f646d}{diou\+\_\+nms}} (const float num\+Thresh, std\+::vector$<$ \mbox{\hyperlink{struct_b_box_info}{BBox\+Info}} $>$ binfo)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_b_box_info}{BBox\+Info}} $>$ \mbox{\hyperlink{trt__utils_8h_a6a32da7bd6620d4ba5d17910fbd3fc3e}{nms\+All\+Classes}} (const float nms\+Thresh, std\+::vector$<$ \mbox{\hyperlink{struct_b_box_info}{BBox\+Info}} $>$ \&binfo, const uint32\+\_\+t num\+Classes, const std\+::string \&model\+\_\+type)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_b_box_info}{BBox\+Info}} $>$ \mbox{\hyperlink{trt__utils_8h_a45e762481b9e65f8387491193bcd2d62}{non\+Maximum\+Suppression}} (const float nms\+Thresh, std\+::vector$<$ \mbox{\hyperlink{struct_b_box_info}{BBox\+Info}} $>$ binfo)
+\item 
+nvinfer1\+::\+ICuda\+Engine $\ast$ \mbox{\hyperlink{trt__utils_8h_ae8eb0fe94034053ae9ebb52e614d4739}{load\+TRTEngine}} (const std\+::string plan\+File\+Path, \mbox{\hyperlink{class_logger}{Logger}} \&logger)
+\item 
+std\+::vector$<$ float $>$ \mbox{\hyperlink{trt__utils_8h_a77ed00049c38105c28e06119722dc061}{load\+Weights}} (const std\+::string weights\+File\+Path, const std\+::string \&network\+Type)
+\item 
+std\+::string \mbox{\hyperlink{trt__utils_8h_aed750fa89d08b75ff9a692b191bf4715}{dims\+To\+String}} (const nvinfer1\+::\+Dims d)
+\item 
+void \mbox{\hyperlink{trt__utils_8h_aff66fa220f3baee9755337748eaecfdc}{display\+Dim\+Type}} (const nvinfer1\+::\+Dims d)
+\item 
+int \mbox{\hyperlink{trt__utils_8h_a7bff9bcbf45a029f18e9a99610cc9249}{get\+Num\+Channels}} (nvinfer1\+::\+ITensor $\ast$t)
+\item 
+uint64\+\_\+t \mbox{\hyperlink{trt__utils_8h_a9de629449e53b871ddc700c43c111e06}{get3\+DTensor\+Volume}} (nvinfer1\+::\+Dims input\+Dims)
+\item 
+nvinfer1\+::\+ILayer $\ast$ \mbox{\hyperlink{trt__utils_8h_a62b1daf2ac3defa199e502199ea9f7cb}{net\+Add\+Maxpool}} (int layer\+Idx, std\+::map$<$ std\+::string, std\+::string $>$ \&block, nvinfer1\+::\+ITensor $\ast$input, nvinfer1\+::\+INetwork\+Definition $\ast$\mbox{\hyperlink{structnetwork}{network}})
+\item 
+nvinfer1\+::\+ILayer $\ast$ \mbox{\hyperlink{trt__utils_8h_a5eb9a5f6fe24782a6c3ec767dc1c1efb}{net\+Add\+Conv\+Linear}} (int layer\+Idx, std\+::map$<$ std\+::string, std\+::string $>$ \&block, std\+::vector$<$ float $>$ \&weights, std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&trt\+Weights, int \&weight\+Ptr, int \&input\+Channels, nvinfer1\+::\+ITensor $\ast$input, nvinfer1\+::\+INetwork\+Definition $\ast$\mbox{\hyperlink{structnetwork}{network}})
+\item 
+nvinfer1\+::\+ILayer $\ast$ \mbox{\hyperlink{trt__utils_8h_a2b0587f7147a5e01bcbeb04946542f12}{net\+\_\+conv\+\_\+bn\+\_\+mish}} (int layer\+Idx, std\+::map$<$ std\+::string, std\+::string $>$ \&block, std\+::vector$<$ float $>$ \&weights, std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&trt\+Weights, int \&weight\+Ptr, int \&input\+Channels, nvinfer1\+::\+ITensor $\ast$input, nvinfer1\+::\+INetwork\+Definition $\ast$\mbox{\hyperlink{structnetwork}{network}})
+\item 
+nvinfer1\+::\+ILayer $\ast$ \mbox{\hyperlink{trt__utils_8h_aa9d863781c46745dbd718cc6ff9068b0}{net\+Add\+Conv\+BNLeaky}} (int layer\+Idx, std\+::map$<$ std\+::string, std\+::string $>$ \&block, std\+::vector$<$ float $>$ \&weights, std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&trt\+Weights, int \&weight\+Ptr, int \&input\+Channels, nvinfer1\+::\+ITensor $\ast$input, nvinfer1\+::\+INetwork\+Definition $\ast$\mbox{\hyperlink{structnetwork}{network}})
+\item 
+nvinfer1\+::\+ILayer $\ast$ \mbox{\hyperlink{trt__utils_8h_afa21b244a61df4b22aa84632fb1479bd}{net\+Add\+Upsample}} (int layer\+Idx, std\+::map$<$ std\+::string, std\+::string $>$ \&block, std\+::vector$<$ float $>$ \&weights, std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&trt\+Weights, int \&input\+Channels, nvinfer1\+::\+ITensor $\ast$input, nvinfer1\+::\+INetwork\+Definition $\ast$\mbox{\hyperlink{structnetwork}{network}})
+\item 
+void \mbox{\hyperlink{trt__utils_8h_ae8916d83be16511bbe571ea56c040b5a}{print\+Layer\+Info}} (std\+::string layer\+Index, std\+::string layer\+Name, std\+::string layer\+Input, std\+::string layer\+Output, std\+::string weight\+Ptr)
+\item 
+nvinfer1\+::\+ILayer $\ast$ \mbox{\hyperlink{trt__utils_8h_a1a359d8589c73e577d53e25f9b215bf8}{layer\+\_\+split}} (const int n\+\_\+layer\+\_\+index\+\_\+, nvinfer1\+::\+ITensor $\ast$input\+\_\+, nvinfer1\+::\+INetwork\+Definition $\ast$\mbox{\hyperlink{structnetwork}{network}})
+\item 
+std\+::vector$<$ int $>$ \mbox{\hyperlink{trt__utils_8h_a92fa92cf8203fd79df2242436943502e}{parse\+\_\+int\+\_\+list}} (const std\+::string s\+\_\+args\+\_\+)
+\item 
+nvinfer1\+::\+ILayer $\ast$ \mbox{\hyperlink{trt__utils_8h_a3ab89a0c81092b4ef6ce96143240046e}{layer\+\_\+focus}} (std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&trt\+Weights\+\_\+, std\+::string s\+\_\+model\+\_\+name\+\_\+, std\+::map$<$ std\+::string, std\+::vector$<$ float $>$ $>$ \&map\+\_\+wts\+\_\+, nvinfer1\+::\+ITensor $\ast$input, const int out\+\_\+channels\+\_\+, const int kernel\+\_\+size\+\_\+, std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&trt\+Weights, nvinfer1\+::\+INetwork\+Definition $\ast$\mbox{\hyperlink{structnetwork}{network}})
+\item 
+nvinfer1\+::\+ILayer $\ast$ \mbox{\hyperlink{trt__utils_8h_ada50d58a8ecef3548376803281f6565c}{layer\+\_\+conv\+\_\+bn\+\_\+act}} (std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&trt\+Weights\+\_\+, const std\+::string s\+\_\+layer\+\_\+name\+\_\+, std\+::map$<$ std\+::string, std\+::vector$<$ float $>$ $>$ \&vec\+\_\+wts\+\_\+, nvinfer1\+::\+ITensor $\ast$input\+\_\+, nvinfer1\+::\+INetwork\+Definition $\ast$network\+\_\+, const int n\+\_\+filters\+\_\+, const int n\+\_\+kernel\+\_\+size\+\_\+=3, const int n\+\_\+stride\+\_\+=1, const int group\+\_\+=1, const bool b\+\_\+padding\+\_\+=true, const bool b\+\_\+bn\+\_\+=true, const std\+::string s\+\_\+act\+\_\+=\char`\"{}silu\char`\"{})
+\item 
+nvinfer1\+::\+ILayer $\ast$ \mbox{\hyperlink{trt__utils_8h_ae3aa46de667dd2361caf32ea9760e1cb}{layer\+\_\+act}} (nvinfer1\+::\+ITensor $\ast$input\+\_\+, nvinfer1\+::\+INetwork\+Definition $\ast$network\+\_\+, const std\+::string s\+\_\+act\+\_\+=\char`\"{}silu\char`\"{})
+\item 
+nvinfer1\+::\+ILayer $\ast$ \mbox{\hyperlink{trt__utils_8h_a9455dd90e3da264919bb6ede2085571e}{C3}} (std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&trt\+Weights\+\_\+, std\+::string s\+\_\+model\+\_\+name\+\_\+, std\+::map$<$ std\+::string, std\+::vector$<$ float $>$ $>$ \&map\+\_\+wts\+\_\+, nvinfer1\+::\+INetwork\+Definition $\ast$network\+\_\+, nvinfer1\+::\+ITensor $\ast$input\+\_\+, const int c2\+\_\+, const int n\+\_\+depth\+\_\+=1, const bool b\+\_\+short\+\_\+cut\+\_\+=true, const int group\+\_\+=1, const float e\+\_\+=0.\+5)
+\item 
+nvinfer1\+::\+ILayer $\ast$ \mbox{\hyperlink{trt__utils_8h_a76fd0d87e61ab0e7bb68032caf9cfde4}{layer\+\_\+bottleneck\+\_\+csp}} (std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&trt\+Weights\+\_\+, std\+::string s\+\_\+model\+\_\+name\+\_\+, std\+::map$<$ std\+::string, std\+::vector$<$ float $>$ $>$ \&map\+\_\+wts\+\_\+, nvinfer1\+::\+INetwork\+Definition $\ast$network\+\_\+, nvinfer1\+::\+ITensor $\ast$input\+\_\+, const int c2\+\_\+, const int n\+\_\+depth\+\_\+=1, const bool b\+\_\+short\+\_\+cut\+\_\+=true, const int group\+\_\+=1, const float e\+\_\+=0.\+5)
+\item 
+nvinfer1\+::\+ILayer $\ast$ \mbox{\hyperlink{trt__utils_8h_a1adb16a0d6e7d1c22d9f73fb74732d09}{layer\+\_\+spp}} (std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&trt\+Weights\+\_\+, std\+::string s\+\_\+model\+\_\+name\+\_\+, std\+::map$<$ std\+::string, std\+::vector$<$ float $>$ $>$ \&map\+\_\+wts\+\_\+, nvinfer1\+::\+INetwork\+Definition $\ast$network\+\_\+, nvinfer1\+::\+ITensor $\ast$input\+\_\+, const int c2\+\_\+, const std\+::vector$<$ int $>$ \&vec\+\_\+args\+\_\+)
+\item 
+nvinfer1\+::\+ILayer $\ast$ \mbox{\hyperlink{trt__utils_8h_a11405f4d7148539c986372291d834b02}{layer\+\_\+sppf}} (std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&trt\+Weights\+\_\+, std\+::string s\+\_\+model\+\_\+name\+\_\+, std\+::map$<$ std\+::string, std\+::vector$<$ float $>$ $>$ \&map\+\_\+wts\+\_\+, nvinfer1\+::\+INetwork\+Definition $\ast$network\+\_\+, nvinfer1\+::\+ITensor $\ast$input\+\_\+, const int c2\+\_\+, int k\+\_\+)
+\item 
+nvinfer1\+::\+ILayer $\ast$ \mbox{\hyperlink{trt__utils_8h_ab2b50679d0e2f13ea1855357a85ef94f}{layer\+\_\+upsample}} (std\+::string s\+\_\+model\+\_\+name\+\_\+, std\+::map$<$ std\+::string, std\+::vector$<$ float $>$ $>$ \&map\+\_\+wts\+\_\+, nvinfer1\+::\+INetwork\+Definition $\ast$network\+\_\+, nvinfer1\+::\+ITensor $\ast$input\+\_\+, const int n\+\_\+scale\+\_\+)
+\item 
+nvinfer1\+::\+ILayer $\ast$ \mbox{\hyperlink{trt__utils_8h_a42e263a5c641d27c06dc5edeca3fcc1e}{layer\+\_\+conv}} (std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&trt\+Weights\+\_\+, const std\+::string s\+\_\+layer\+\_\+name\+\_\+, std\+::map$<$ std\+::string, std\+::vector$<$ float $>$ $>$ \&vec\+\_\+wts\+\_\+, nvinfer1\+::\+ITensor $\ast$input\+\_\+, nvinfer1\+::\+INetwork\+Definition $\ast$network\+\_\+, const int n\+\_\+filters\+\_\+, const int n\+\_\+kernel\+\_\+size\+\_\+, const int n\+\_\+stride\+\_\+=1, const bool b\+\_\+bias\+\_\+=false, const int group\+\_\+=1, const bool b\+\_\+padding\+\_\+=true)
+\item 
+std\+::vector$<$ int $>$ \mbox{\hyperlink{trt__utils_8h_a7154a8b2287fe450e29b0b3c9184af3c}{dims2chw}} (const nvinfer1\+::\+Dims d)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{trt__utils_8h_aeb0f94d2500292926bc8416c9a904297}\label{trt__utils_8h_aeb0f94d2500292926bc8416c9a904297}} 
+\index{trt\_utils.h@{trt\_utils.h}!blobFromDsImages@{blobFromDsImages}}
+\index{blobFromDsImages@{blobFromDsImages}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{blobFromDsImages()}{blobFromDsImages()}}
+{\footnotesize\ttfamily void blob\+From\+Ds\+Images (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{class_ds_image}{Ds\+Image}} $>$ \&}]{input\+Images,  }\item[{cv\+::\+Mat \&}]{blob,  }\item[{const int \&}]{inputH,  }\item[{const int \&}]{inputW }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{trt__utils_8h_a9455dd90e3da264919bb6ede2085571e}\label{trt__utils_8h_a9455dd90e3da264919bb6ede2085571e}} 
+\index{trt\_utils.h@{trt\_utils.h}!C3@{C3}}
+\index{C3@{C3}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{C3()}{C3()}}
+{\footnotesize\ttfamily nvinfer1\+::\+ILayer $\ast$ C3 (\begin{DoxyParamCaption}\item[{std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&}]{trt\+Weights\+\_\+,  }\item[{std\+::string}]{s\+\_\+model\+\_\+name\+\_\+,  }\item[{std\+::map$<$ std\+::string, std\+::vector$<$ float $>$ $>$ \&}]{map\+\_\+wts\+\_\+,  }\item[{nvinfer1\+::\+INetwork\+Definition $\ast$}]{network\+\_\+,  }\item[{nvinfer1\+::\+ITensor $\ast$}]{input\+\_\+,  }\item[{const int}]{c2\+\_\+,  }\item[{const int}]{n\+\_\+depth\+\_\+ = {\ttfamily 1},  }\item[{const bool}]{b\+\_\+short\+\_\+cut\+\_\+ = {\ttfamily true},  }\item[{const int}]{group\+\_\+ = {\ttfamily 1},  }\item[{const float}]{e\+\_\+ = {\ttfamily 0.5} }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{trt__utils_8h_a9455dd90e3da264919bb6ede2085571e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_abfab750429265ecfdced0e67e7120325}\label{trt__utils_8h_abfab750429265ecfdced0e67e7120325}} 
+\index{trt\_utils.h@{trt\_utils.h}!clamp@{clamp}}
+\index{clamp@{clamp}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{clamp()}{clamp()}}
+{\footnotesize\ttfamily float clamp (\begin{DoxyParamCaption}\item[{const float}]{val,  }\item[{const float}]{min\+Val,  }\item[{const float}]{max\+Val }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{trt__utils_8h_a1ffb8af5e042500c5b1914f5d62d9969}\label{trt__utils_8h_a1ffb8af5e042500c5b1914f5d62d9969}} 
+\index{trt\_utils.h@{trt\_utils.h}!convertBBoxImgRes@{convertBBoxImgRes}}
+\index{convertBBoxImgRes@{convertBBoxImgRes}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{convertBBoxImgRes()}{convertBBoxImgRes()}}
+{\footnotesize\ttfamily void convert\+BBox\+Img\+Res (\begin{DoxyParamCaption}\item[{const float}]{scaling\+Factor,  }\item[{const float}]{x\+Offset,  }\item[{const float}]{y\+Offset,  }\item[{\mbox{\hyperlink{struct_b_box}{BBox}} \&}]{bbox }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{trt__utils_8h_afcb46afd4bada782cab0f1962502bb03}\label{trt__utils_8h_afcb46afd4bada782cab0f1962502bb03}} 
+\index{trt\_utils.h@{trt\_utils.h}!convertBBoxNetRes@{convertBBoxNetRes}}
+\index{convertBBoxNetRes@{convertBBoxNetRes}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{convertBBoxNetRes()}{convertBBoxNetRes()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_b_box}{BBox}} convert\+BBox\+Net\+Res (\begin{DoxyParamCaption}\item[{const float \&}]{bx,  }\item[{const float \&}]{by,  }\item[{const float \&}]{bw,  }\item[{const float \&}]{bh,  }\item[{const uint32\+\_\+t \&}]{stride,  }\item[{const uint32\+\_\+t \&}]{netW,  }\item[{const uint32\+\_\+t \&}]{netH }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=263pt]{trt__utils_8h_afcb46afd4bada782cab0f1962502bb03_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_a7154a8b2287fe450e29b0b3c9184af3c}\label{trt__utils_8h_a7154a8b2287fe450e29b0b3c9184af3c}} 
+\index{trt\_utils.h@{trt\_utils.h}!dims2chw@{dims2chw}}
+\index{dims2chw@{dims2chw}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{dims2chw()}{dims2chw()}}
+{\footnotesize\ttfamily std\+::vector$<$ int $>$ dims2chw (\begin{DoxyParamCaption}\item[{const nvinfer1\+::\+Dims}]{d }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{trt__utils_8h_a7154a8b2287fe450e29b0b3c9184af3c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_aed750fa89d08b75ff9a692b191bf4715}\label{trt__utils_8h_aed750fa89d08b75ff9a692b191bf4715}} 
+\index{trt\_utils.h@{trt\_utils.h}!dimsToString@{dimsToString}}
+\index{dimsToString@{dimsToString}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{dimsToString()}{dimsToString()}}
+{\footnotesize\ttfamily std\+::string dims\+To\+String (\begin{DoxyParamCaption}\item[{const nvinfer1\+::\+Dims}]{d }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{trt__utils_8h_aed750fa89d08b75ff9a692b191bf4715_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_ae0ec7d082a29313605238e01ec1f646d}\label{trt__utils_8h_ae0ec7d082a29313605238e01ec1f646d}} 
+\index{trt\_utils.h@{trt\_utils.h}!diou\_nms@{diou\_nms}}
+\index{diou\_nms@{diou\_nms}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{diou\_nms()}{diou\_nms()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{struct_b_box_info}{BBox\+Info}} $>$ diou\+\_\+nms (\begin{DoxyParamCaption}\item[{const float}]{num\+Thresh,  }\item[{std\+::vector$<$ \mbox{\hyperlink{struct_b_box_info}{BBox\+Info}} $>$}]{binfo }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{trt__utils_8h_ae0ec7d082a29313605238e01ec1f646d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_aff66fa220f3baee9755337748eaecfdc}\label{trt__utils_8h_aff66fa220f3baee9755337748eaecfdc}} 
+\index{trt\_utils.h@{trt\_utils.h}!displayDimType@{displayDimType}}
+\index{displayDimType@{displayDimType}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{displayDimType()}{displayDimType()}}
+{\footnotesize\ttfamily void display\+Dim\+Type (\begin{DoxyParamCaption}\item[{const nvinfer1\+::\+Dims}]{d }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{trt__utils_8h_aff66fa220f3baee9755337748eaecfdc_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_ae785e7485fbc6c3df50ff300588f61a9}\label{trt__utils_8h_ae785e7485fbc6c3df50ff300588f61a9}} 
+\index{trt\_utils.h@{trt\_utils.h}!fileExists@{fileExists}}
+\index{fileExists@{fileExists}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{fileExists()}{fileExists()}}
+{\footnotesize\ttfamily bool file\+Exists (\begin{DoxyParamCaption}\item[{const std\+::string}]{file\+Name,  }\item[{bool}]{verbose = {\ttfamily true} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{trt__utils_8h_a9de629449e53b871ddc700c43c111e06}\label{trt__utils_8h_a9de629449e53b871ddc700c43c111e06}} 
+\index{trt\_utils.h@{trt\_utils.h}!get3DTensorVolume@{get3DTensorVolume}}
+\index{get3DTensorVolume@{get3DTensorVolume}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{get3DTensorVolume()}{get3DTensorVolume()}}
+{\footnotesize\ttfamily uint64\+\_\+t get3\+DTensor\+Volume (\begin{DoxyParamCaption}\item[{nvinfer1\+::\+Dims}]{input\+Dims }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{trt__utils_8h_a7bff9bcbf45a029f18e9a99610cc9249}\label{trt__utils_8h_a7bff9bcbf45a029f18e9a99610cc9249}} 
+\index{trt\_utils.h@{trt\_utils.h}!getNumChannels@{getNumChannels}}
+\index{getNumChannels@{getNumChannels}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{getNumChannels()}{getNumChannels()}}
+{\footnotesize\ttfamily int get\+Num\+Channels (\begin{DoxyParamCaption}\item[{nvinfer1\+::\+ITensor $\ast$}]{t }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=261pt]{trt__utils_8h_a7bff9bcbf45a029f18e9a99610cc9249_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_ae3aa46de667dd2361caf32ea9760e1cb}\label{trt__utils_8h_ae3aa46de667dd2361caf32ea9760e1cb}} 
+\index{trt\_utils.h@{trt\_utils.h}!layer\_act@{layer\_act}}
+\index{layer\_act@{layer\_act}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{layer\_act()}{layer\_act()}}
+{\footnotesize\ttfamily nvinfer1\+::\+ILayer $\ast$ layer\+\_\+act (\begin{DoxyParamCaption}\item[{nvinfer1\+::\+ITensor $\ast$}]{input\+\_\+,  }\item[{nvinfer1\+::\+INetwork\+Definition $\ast$}]{network\+\_\+,  }\item[{const std\+::string}]{s\+\_\+act\+\_\+ = {\ttfamily \char`\"{}silu\char`\"{}} }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{trt__utils_8h_a76fd0d87e61ab0e7bb68032caf9cfde4}\label{trt__utils_8h_a76fd0d87e61ab0e7bb68032caf9cfde4}} 
+\index{trt\_utils.h@{trt\_utils.h}!layer\_bottleneck\_csp@{layer\_bottleneck\_csp}}
+\index{layer\_bottleneck\_csp@{layer\_bottleneck\_csp}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{layer\_bottleneck\_csp()}{layer\_bottleneck\_csp()}}
+{\footnotesize\ttfamily nvinfer1\+::\+ILayer $\ast$ layer\+\_\+bottleneck\+\_\+csp (\begin{DoxyParamCaption}\item[{std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&}]{trt\+Weights\+\_\+,  }\item[{std\+::string}]{s\+\_\+model\+\_\+name\+\_\+,  }\item[{std\+::map$<$ std\+::string, std\+::vector$<$ float $>$ $>$ \&}]{map\+\_\+wts\+\_\+,  }\item[{nvinfer1\+::\+INetwork\+Definition $\ast$}]{network\+\_\+,  }\item[{nvinfer1\+::\+ITensor $\ast$}]{input\+\_\+,  }\item[{const int}]{c2\+\_\+,  }\item[{const int}]{n\+\_\+depth\+\_\+ = {\ttfamily 1},  }\item[{const bool}]{b\+\_\+short\+\_\+cut\+\_\+ = {\ttfamily true},  }\item[{const int}]{group\+\_\+ = {\ttfamily 1},  }\item[{const float}]{e\+\_\+ = {\ttfamily 0.5} }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{trt__utils_8h_a76fd0d87e61ab0e7bb68032caf9cfde4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_a42e263a5c641d27c06dc5edeca3fcc1e}\label{trt__utils_8h_a42e263a5c641d27c06dc5edeca3fcc1e}} 
+\index{trt\_utils.h@{trt\_utils.h}!layer\_conv@{layer\_conv}}
+\index{layer\_conv@{layer\_conv}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{layer\_conv()}{layer\_conv()}}
+{\footnotesize\ttfamily nvinfer1\+::\+ILayer $\ast$ layer\+\_\+conv (\begin{DoxyParamCaption}\item[{std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&}]{trt\+Weights\+\_\+,  }\item[{const std\+::string}]{s\+\_\+layer\+\_\+name\+\_\+,  }\item[{std\+::map$<$ std\+::string, std\+::vector$<$ float $>$ $>$ \&}]{vec\+\_\+wts\+\_\+,  }\item[{nvinfer1\+::\+ITensor $\ast$}]{input\+\_\+,  }\item[{nvinfer1\+::\+INetwork\+Definition $\ast$}]{network\+\_\+,  }\item[{const int}]{n\+\_\+filters\+\_\+,  }\item[{const int}]{n\+\_\+kernel\+\_\+size\+\_\+,  }\item[{const int}]{n\+\_\+stride\+\_\+ = {\ttfamily 1},  }\item[{const bool}]{b\+\_\+bias\+\_\+ = {\ttfamily false},  }\item[{const int}]{group\+\_\+ = {\ttfamily 1},  }\item[{const bool}]{b\+\_\+padding\+\_\+ = {\ttfamily true} }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=328pt]{trt__utils_8h_a42e263a5c641d27c06dc5edeca3fcc1e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_ada50d58a8ecef3548376803281f6565c}\label{trt__utils_8h_ada50d58a8ecef3548376803281f6565c}} 
+\index{trt\_utils.h@{trt\_utils.h}!layer\_conv\_bn\_act@{layer\_conv\_bn\_act}}
+\index{layer\_conv\_bn\_act@{layer\_conv\_bn\_act}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{layer\_conv\_bn\_act()}{layer\_conv\_bn\_act()}}
+{\footnotesize\ttfamily nvinfer1\+::\+ILayer $\ast$ layer\+\_\+conv\+\_\+bn\+\_\+act (\begin{DoxyParamCaption}\item[{std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&}]{trt\+Weights\+\_\+,  }\item[{const std\+::string}]{s\+\_\+layer\+\_\+name\+\_\+,  }\item[{std\+::map$<$ std\+::string, std\+::vector$<$ float $>$ $>$ \&}]{vec\+\_\+wts\+\_\+,  }\item[{nvinfer1\+::\+ITensor $\ast$}]{input\+\_\+,  }\item[{nvinfer1\+::\+INetwork\+Definition $\ast$}]{network\+\_\+,  }\item[{const int}]{n\+\_\+filters\+\_\+,  }\item[{const int}]{n\+\_\+kernel\+\_\+size\+\_\+ = {\ttfamily 3},  }\item[{const int}]{n\+\_\+stride\+\_\+ = {\ttfamily 1},  }\item[{const int}]{group\+\_\+ = {\ttfamily 1},  }\item[{const bool}]{b\+\_\+padding\+\_\+ = {\ttfamily true},  }\item[{const bool}]{b\+\_\+bn\+\_\+ = {\ttfamily true},  }\item[{const std\+::string}]{s\+\_\+act\+\_\+ = {\ttfamily \char`\"{}silu\char`\"{}} }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{trt__utils_8h_ada50d58a8ecef3548376803281f6565c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_a3ab89a0c81092b4ef6ce96143240046e}\label{trt__utils_8h_a3ab89a0c81092b4ef6ce96143240046e}} 
+\index{trt\_utils.h@{trt\_utils.h}!layer\_focus@{layer\_focus}}
+\index{layer\_focus@{layer\_focus}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{layer\_focus()}{layer\_focus()}}
+{\footnotesize\ttfamily nvinfer1\+::\+ILayer $\ast$ layer\+\_\+focus (\begin{DoxyParamCaption}\item[{std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&}]{trt\+Weights\+\_\+,  }\item[{std\+::string}]{s\+\_\+model\+\_\+name\+\_\+,  }\item[{std\+::map$<$ std\+::string, std\+::vector$<$ float $>$ $>$ \&}]{map\+\_\+wts\+\_\+,  }\item[{nvinfer1\+::\+ITensor $\ast$}]{input,  }\item[{const int}]{out\+\_\+channels\+\_\+,  }\item[{const int}]{kernel\+\_\+size\+\_\+,  }\item[{std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&}]{trt\+Weights,  }\item[{nvinfer1\+::\+INetwork\+Definition $\ast$}]{network }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{trt__utils_8h_a3ab89a0c81092b4ef6ce96143240046e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_a1a359d8589c73e577d53e25f9b215bf8}\label{trt__utils_8h_a1a359d8589c73e577d53e25f9b215bf8}} 
+\index{trt\_utils.h@{trt\_utils.h}!layer\_split@{layer\_split}}
+\index{layer\_split@{layer\_split}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{layer\_split()}{layer\_split()}}
+{\footnotesize\ttfamily nvinfer1\+::\+ILayer $\ast$ layer\+\_\+split (\begin{DoxyParamCaption}\item[{const int}]{n\+\_\+layer\+\_\+index\+\_\+,  }\item[{nvinfer1\+::\+ITensor $\ast$}]{input\+\_\+,  }\item[{nvinfer1\+::\+INetwork\+Definition $\ast$}]{network }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{trt__utils_8h_a1a359d8589c73e577d53e25f9b215bf8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_a1adb16a0d6e7d1c22d9f73fb74732d09}\label{trt__utils_8h_a1adb16a0d6e7d1c22d9f73fb74732d09}} 
+\index{trt\_utils.h@{trt\_utils.h}!layer\_spp@{layer\_spp}}
+\index{layer\_spp@{layer\_spp}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{layer\_spp()}{layer\_spp()}}
+{\footnotesize\ttfamily nvinfer1\+::\+ILayer $\ast$ layer\+\_\+spp (\begin{DoxyParamCaption}\item[{std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&}]{trt\+Weights\+\_\+,  }\item[{std\+::string}]{s\+\_\+model\+\_\+name\+\_\+,  }\item[{std\+::map$<$ std\+::string, std\+::vector$<$ float $>$ $>$ \&}]{map\+\_\+wts\+\_\+,  }\item[{nvinfer1\+::\+INetwork\+Definition $\ast$}]{network\+\_\+,  }\item[{nvinfer1\+::\+ITensor $\ast$}]{input\+\_\+,  }\item[{const int}]{c2\+\_\+,  }\item[{const std\+::vector$<$ int $>$ \&}]{vec\+\_\+args\+\_\+ }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{trt__utils_8h_a1adb16a0d6e7d1c22d9f73fb74732d09_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_a11405f4d7148539c986372291d834b02}\label{trt__utils_8h_a11405f4d7148539c986372291d834b02}} 
+\index{trt\_utils.h@{trt\_utils.h}!layer\_sppf@{layer\_sppf}}
+\index{layer\_sppf@{layer\_sppf}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{layer\_sppf()}{layer\_sppf()}}
+{\footnotesize\ttfamily nvinfer1\+::\+ILayer $\ast$ layer\+\_\+sppf (\begin{DoxyParamCaption}\item[{std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&}]{trt\+Weights\+\_\+,  }\item[{std\+::string}]{s\+\_\+model\+\_\+name\+\_\+,  }\item[{std\+::map$<$ std\+::string, std\+::vector$<$ float $>$ $>$ \&}]{map\+\_\+wts\+\_\+,  }\item[{nvinfer1\+::\+INetwork\+Definition $\ast$}]{network\+\_\+,  }\item[{nvinfer1\+::\+ITensor $\ast$}]{input\+\_\+,  }\item[{const int}]{c2\+\_\+,  }\item[{int}]{k\+\_\+ }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{trt__utils_8h_a11405f4d7148539c986372291d834b02_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_ab2b50679d0e2f13ea1855357a85ef94f}\label{trt__utils_8h_ab2b50679d0e2f13ea1855357a85ef94f}} 
+\index{trt\_utils.h@{trt\_utils.h}!layer\_upsample@{layer\_upsample}}
+\index{layer\_upsample@{layer\_upsample}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{layer\_upsample()}{layer\_upsample()}}
+{\footnotesize\ttfamily nvinfer1\+::\+ILayer $\ast$ layer\+\_\+upsample (\begin{DoxyParamCaption}\item[{std\+::string}]{s\+\_\+model\+\_\+name\+\_\+,  }\item[{std\+::map$<$ std\+::string, std\+::vector$<$ float $>$ $>$ \&}]{map\+\_\+wts\+\_\+,  }\item[{nvinfer1\+::\+INetwork\+Definition $\ast$}]{network\+\_\+,  }\item[{nvinfer1\+::\+ITensor $\ast$}]{input\+\_\+,  }\item[{const int}]{n\+\_\+scale\+\_\+ }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{trt__utils_8h_ab2b50679d0e2f13ea1855357a85ef94f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_ab7f84a69c05af87778a897de4e4b55cd}\label{trt__utils_8h_ab7f84a69c05af87778a897de4e4b55cd}} 
+\index{trt\_utils.h@{trt\_utils.h}!loadImageList@{loadImageList}}
+\index{loadImageList@{loadImageList}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{loadImageList()}{loadImageList()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ load\+Image\+List (\begin{DoxyParamCaption}\item[{const std\+::string}]{filename,  }\item[{const std\+::string}]{prefix }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{trt__utils_8h_ab7f84a69c05af87778a897de4e4b55cd_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_a5008482093197b2c41c92e4f4c1a0a73}\label{trt__utils_8h_a5008482093197b2c41c92e4f4c1a0a73}} 
+\index{trt\_utils.h@{trt\_utils.h}!loadListFromTextFile@{loadListFromTextFile}}
+\index{loadListFromTextFile@{loadListFromTextFile}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{loadListFromTextFile()}{loadListFromTextFile()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ load\+List\+From\+Text\+File (\begin{DoxyParamCaption}\item[{const std\+::string}]{filename }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{trt__utils_8h_a5008482093197b2c41c92e4f4c1a0a73_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_ae8eb0fe94034053ae9ebb52e614d4739}\label{trt__utils_8h_ae8eb0fe94034053ae9ebb52e614d4739}} 
+\index{trt\_utils.h@{trt\_utils.h}!loadTRTEngine@{loadTRTEngine}}
+\index{loadTRTEngine@{loadTRTEngine}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{loadTRTEngine()}{loadTRTEngine()}}
+{\footnotesize\ttfamily nvinfer1\+::\+ICuda\+Engine $\ast$ load\+TRTEngine (\begin{DoxyParamCaption}\item[{const std\+::string}]{plan\+File\+Path,  }\item[{\mbox{\hyperlink{class_logger}{Logger}} \&}]{logger }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=254pt]{trt__utils_8h_ae8eb0fe94034053ae9ebb52e614d4739_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_a77ed00049c38105c28e06119722dc061}\label{trt__utils_8h_a77ed00049c38105c28e06119722dc061}} 
+\index{trt\_utils.h@{trt\_utils.h}!loadWeights@{loadWeights}}
+\index{loadWeights@{loadWeights}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{loadWeights()}{loadWeights()}}
+{\footnotesize\ttfamily std\+::vector$<$ float $>$ load\+Weights (\begin{DoxyParamCaption}\item[{const std\+::string}]{weights\+File\+Path,  }\item[{const std\+::string \&}]{network\+Type }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{trt__utils_8h_a77ed00049c38105c28e06119722dc061_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_a2b0587f7147a5e01bcbeb04946542f12}\label{trt__utils_8h_a2b0587f7147a5e01bcbeb04946542f12}} 
+\index{trt\_utils.h@{trt\_utils.h}!net\_conv\_bn\_mish@{net\_conv\_bn\_mish}}
+\index{net\_conv\_bn\_mish@{net\_conv\_bn\_mish}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{net\_conv\_bn\_mish()}{net\_conv\_bn\_mish()}}
+{\footnotesize\ttfamily nvinfer1\+::\+ILayer $\ast$ net\+\_\+conv\+\_\+bn\+\_\+mish (\begin{DoxyParamCaption}\item[{int}]{layer\+Idx,  }\item[{std\+::map$<$ std\+::string, std\+::string $>$ \&}]{block,  }\item[{std\+::vector$<$ float $>$ \&}]{weights,  }\item[{std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&}]{trt\+Weights,  }\item[{int \&}]{weight\+Ptr,  }\item[{int \&}]{input\+Channels,  }\item[{nvinfer1\+::\+ITensor $\ast$}]{input,  }\item[{nvinfer1\+::\+INetwork\+Definition $\ast$}]{network }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{trt__utils_8h_a2b0587f7147a5e01bcbeb04946542f12_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_aa9d863781c46745dbd718cc6ff9068b0}\label{trt__utils_8h_aa9d863781c46745dbd718cc6ff9068b0}} 
+\index{trt\_utils.h@{trt\_utils.h}!netAddConvBNLeaky@{netAddConvBNLeaky}}
+\index{netAddConvBNLeaky@{netAddConvBNLeaky}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{netAddConvBNLeaky()}{netAddConvBNLeaky()}}
+{\footnotesize\ttfamily nvinfer1\+::\+ILayer $\ast$ net\+Add\+Conv\+BNLeaky (\begin{DoxyParamCaption}\item[{int}]{layer\+Idx,  }\item[{std\+::map$<$ std\+::string, std\+::string $>$ \&}]{block,  }\item[{std\+::vector$<$ float $>$ \&}]{weights,  }\item[{std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&}]{trt\+Weights,  }\item[{int \&}]{weight\+Ptr,  }\item[{int \&}]{input\+Channels,  }\item[{nvinfer1\+::\+ITensor $\ast$}]{input,  }\item[{nvinfer1\+::\+INetwork\+Definition $\ast$}]{network }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{trt__utils_8h_a5eb9a5f6fe24782a6c3ec767dc1c1efb}\label{trt__utils_8h_a5eb9a5f6fe24782a6c3ec767dc1c1efb}} 
+\index{trt\_utils.h@{trt\_utils.h}!netAddConvLinear@{netAddConvLinear}}
+\index{netAddConvLinear@{netAddConvLinear}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{netAddConvLinear()}{netAddConvLinear()}}
+{\footnotesize\ttfamily nvinfer1\+::\+ILayer $\ast$ net\+Add\+Conv\+Linear (\begin{DoxyParamCaption}\item[{int}]{layer\+Idx,  }\item[{std\+::map$<$ std\+::string, std\+::string $>$ \&}]{block,  }\item[{std\+::vector$<$ float $>$ \&}]{weights,  }\item[{std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&}]{trt\+Weights,  }\item[{int \&}]{weight\+Ptr,  }\item[{int \&}]{input\+Channels,  }\item[{nvinfer1\+::\+ITensor $\ast$}]{input,  }\item[{nvinfer1\+::\+INetwork\+Definition $\ast$}]{network }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{trt__utils_8h_a62b1daf2ac3defa199e502199ea9f7cb}\label{trt__utils_8h_a62b1daf2ac3defa199e502199ea9f7cb}} 
+\index{trt\_utils.h@{trt\_utils.h}!netAddMaxpool@{netAddMaxpool}}
+\index{netAddMaxpool@{netAddMaxpool}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{netAddMaxpool()}{netAddMaxpool()}}
+{\footnotesize\ttfamily nvinfer1\+::\+ILayer $\ast$ net\+Add\+Maxpool (\begin{DoxyParamCaption}\item[{int}]{layer\+Idx,  }\item[{std\+::map$<$ std\+::string, std\+::string $>$ \&}]{block,  }\item[{nvinfer1\+::\+ITensor $\ast$}]{input,  }\item[{nvinfer1\+::\+INetwork\+Definition $\ast$}]{network }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{trt__utils_8h_afa21b244a61df4b22aa84632fb1479bd}\label{trt__utils_8h_afa21b244a61df4b22aa84632fb1479bd}} 
+\index{trt\_utils.h@{trt\_utils.h}!netAddUpsample@{netAddUpsample}}
+\index{netAddUpsample@{netAddUpsample}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{netAddUpsample()}{netAddUpsample()}}
+{\footnotesize\ttfamily nvinfer1\+::\+ILayer $\ast$ net\+Add\+Upsample (\begin{DoxyParamCaption}\item[{int}]{layer\+Idx,  }\item[{std\+::map$<$ std\+::string, std\+::string $>$ \&}]{block,  }\item[{std\+::vector$<$ float $>$ \&}]{weights,  }\item[{std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&}]{trt\+Weights,  }\item[{int \&}]{input\+Channels,  }\item[{nvinfer1\+::\+ITensor $\ast$}]{input,  }\item[{nvinfer1\+::\+INetwork\+Definition $\ast$}]{network }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=269pt]{trt__utils_8h_afa21b244a61df4b22aa84632fb1479bd_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_a6a32da7bd6620d4ba5d17910fbd3fc3e}\label{trt__utils_8h_a6a32da7bd6620d4ba5d17910fbd3fc3e}} 
+\index{trt\_utils.h@{trt\_utils.h}!nmsAllClasses@{nmsAllClasses}}
+\index{nmsAllClasses@{nmsAllClasses}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{nmsAllClasses()}{nmsAllClasses()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{struct_b_box_info}{BBox\+Info}} $>$ nms\+All\+Classes (\begin{DoxyParamCaption}\item[{const float}]{nms\+Thresh,  }\item[{std\+::vector$<$ \mbox{\hyperlink{struct_b_box_info}{BBox\+Info}} $>$ \&}]{binfo,  }\item[{const uint32\+\_\+t}]{num\+Classes,  }\item[{const std\+::string \&}]{model\+\_\+type }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{trt__utils_8h_a6a32da7bd6620d4ba5d17910fbd3fc3e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_a45e762481b9e65f8387491193bcd2d62}\label{trt__utils_8h_a45e762481b9e65f8387491193bcd2d62}} 
+\index{trt\_utils.h@{trt\_utils.h}!nonMaximumSuppression@{nonMaximumSuppression}}
+\index{nonMaximumSuppression@{nonMaximumSuppression}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{nonMaximumSuppression()}{nonMaximumSuppression()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{struct_b_box_info}{BBox\+Info}} $>$ non\+Maximum\+Suppression (\begin{DoxyParamCaption}\item[{const float}]{nms\+Thresh,  }\item[{std\+::vector$<$ \mbox{\hyperlink{struct_b_box_info}{BBox\+Info}} $>$}]{binfo }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=292pt]{trt__utils_8h_a45e762481b9e65f8387491193bcd2d62_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_a92fa92cf8203fd79df2242436943502e}\label{trt__utils_8h_a92fa92cf8203fd79df2242436943502e}} 
+\index{trt\_utils.h@{trt\_utils.h}!parse\_int\_list@{parse\_int\_list}}
+\index{parse\_int\_list@{parse\_int\_list}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{parse\_int\_list()}{parse\_int\_list()}}
+{\footnotesize\ttfamily std\+::vector$<$ int $>$ parse\+\_\+int\+\_\+list (\begin{DoxyParamCaption}\item[{const std\+::string}]{s\+\_\+args\+\_\+ }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=313pt]{trt__utils_8h_a92fa92cf8203fd79df2242436943502e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_ae8916d83be16511bbe571ea56c040b5a}\label{trt__utils_8h_ae8916d83be16511bbe571ea56c040b5a}} 
+\index{trt\_utils.h@{trt\_utils.h}!printLayerInfo@{printLayerInfo}}
+\index{printLayerInfo@{printLayerInfo}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{printLayerInfo()}{printLayerInfo()}}
+{\footnotesize\ttfamily void print\+Layer\+Info (\begin{DoxyParamCaption}\item[{std\+::string}]{layer\+Index,  }\item[{std\+::string}]{layer\+Name,  }\item[{std\+::string}]{layer\+Input,  }\item[{std\+::string}]{layer\+Output,  }\item[{std\+::string}]{weight\+Ptr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{trt__utils_8h_aa4c60f96db695abc26779437f79435ab}\label{trt__utils_8h_aa4c60f96db695abc26779437f79435ab}} 
+\index{trt\_utils.h@{trt\_utils.h}!printPredictions@{printPredictions}}
+\index{printPredictions@{printPredictions}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{printPredictions()}{printPredictions()}}
+{\footnotesize\ttfamily void print\+Predictions (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_b_box_info}{BBox\+Info}} \&}]{info,  }\item[{const std\+::string \&}]{class\+Name }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{trt__utils_8h_a9de43e600ebc3a0f919582b007c25322}\label{trt__utils_8h_a9de43e600ebc3a0f919582b007c25322}} 
+\index{trt\_utils.h@{trt\_utils.h}!trim@{trim}}
+\index{trim@{trim}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{trim()}{trim()}}
+{\footnotesize\ttfamily std\+::string trim (\begin{DoxyParamCaption}\item[{std\+::string}]{s }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=203pt]{trt__utils_8h_a9de43e600ebc3a0f919582b007c25322_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{trt__utils_8h_abbdafbe11cc77edd6d4c99a1fda70d2c}\label{trt__utils_8h_abbdafbe11cc77edd6d4c99a1fda70d2c}} 
+\index{trt\_utils.h@{trt\_utils.h}!triml@{triml}}
+\index{triml@{triml}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{triml()}{triml()}}
+{\footnotesize\ttfamily std\+::string triml (\begin{DoxyParamCaption}\item[{std\+::string}]{s,  }\item[{const char $\ast$}]{t }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{trt__utils_8h_a0154026299e5fc73737172009e714d50}\label{trt__utils_8h_a0154026299e5fc73737172009e714d50}} 
+\index{trt\_utils.h@{trt\_utils.h}!trimr@{trimr}}
+\index{trimr@{trimr}!trt\_utils.h@{trt\_utils.h}}
+\doxysubsubsection{\texorpdfstring{trimr()}{trimr()}}
+{\footnotesize\ttfamily std\+::string trimr (\begin{DoxyParamCaption}\item[{std\+::string}]{s,  }\item[{const char $\ast$}]{t }\end{DoxyParamCaption})}
+

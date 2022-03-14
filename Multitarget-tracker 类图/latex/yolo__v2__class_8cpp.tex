@@ -1,0 +1,154 @@
+\hypertarget{yolo__v2__class_8cpp}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/yolo\+\_\+v2\+\_\+class.cpp 文件参考}
+\label{yolo__v2__class_8cpp}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/yolo\_v2\_class.cpp@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/yolo\_v2\_class.cpp}}
+{\ttfamily \#include \char`\"{}darknet.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}yolo\+\_\+v2\+\_\+class.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}network.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}detection\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}region\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cost\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}parser.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}box.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}image.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}demo.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}option\+\_\+list.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stb\+\_\+image.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+yolo\+\_\+v2\+\_\+class.\+cpp 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{yolo__v2__class_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structdetector__gpu__t}{detector\+\_\+gpu\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsection*{宏定义}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{yolo__v2__class_8cpp_a0487542dffb3cfb21f4504552bbfedf9}{NFRAMES}}~3
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{yolo__v2__class_8cpp_adcf7f587fe7c5bfdcbe67ffa797763be}{init}} (const char $\ast$configuration\+Filename, const char $\ast$weights\+Filename, int gpu, int batch\+\_\+size)
+\item 
+int \mbox{\hyperlink{yolo__v2__class_8cpp_ae40001b35e673e901849750a0605a662}{detect\+\_\+image}} (const char $\ast$filename, \mbox{\hyperlink{structbbox__t__container}{bbox\+\_\+t\+\_\+container}} \&container)
+\item 
+int \mbox{\hyperlink{yolo__v2__class_8cpp_a39804117f003d36f82ae4c01810c2525}{detect\+\_\+mat}} (const uint8\+\_\+t $\ast$\mbox{\hyperlink{structdata}{data}}, const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} data\+\_\+length, \mbox{\hyperlink{structbbox__t__container}{bbox\+\_\+t\+\_\+container}} \&container)
+\item 
+int \mbox{\hyperlink{yolo__v2__class_8cpp_ab95f447523f87d02262e9d3e21c07fa6}{dispose}} ()
+\item 
+int \mbox{\hyperlink{yolo__v2__class_8cpp_aefd69d912f2ee324e479371517bf5a28}{get\+\_\+device\+\_\+count}} ()
+\item 
+bool \mbox{\hyperlink{yolo__v2__class_8cpp_a906988c7d0f38488cf55d5d8e4c8b6c5}{built\+\_\+with\+\_\+cuda}} ()
+\item 
+bool \mbox{\hyperlink{yolo__v2__class_8cpp_a12448fe36091f554ac5bd6709bff8cd7}{built\+\_\+with\+\_\+cudnn}} ()
+\item 
+bool \mbox{\hyperlink{yolo__v2__class_8cpp_af149cee322dfe693e3664899cb45bedb}{built\+\_\+with\+\_\+opencv}} ()
+\item 
+int \mbox{\hyperlink{yolo__v2__class_8cpp_a79996b203dcc83f426104b0b4391e433}{get\+\_\+device\+\_\+name}} (int gpu, char $\ast$device\+Name)
+\item 
+static \mbox{\hyperlink{structimage}{image}} \mbox{\hyperlink{yolo__v2__class_8cpp_a7695c70a008932b492fac3ff0cd3bcd9}{load\+\_\+image\+\_\+stb}} (char $\ast$filename, int channels)
+\end{DoxyCompactItemize}
+\doxysubsection*{变量}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unique\+\_\+ptr$<$ Detector $>$ \mbox{\hyperlink{yolo__v2__class_8cpp_a432e43b8a212dccde2de1c936e36bde4}{detector}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{宏定义说明}
+\mbox{\Hypertarget{yolo__v2__class_8cpp_a0487542dffb3cfb21f4504552bbfedf9}\label{yolo__v2__class_8cpp_a0487542dffb3cfb21f4504552bbfedf9}} 
+\index{yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}!NFRAMES@{NFRAMES}}
+\index{NFRAMES@{NFRAMES}!yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}}
+\doxysubsubsection{\texorpdfstring{NFRAMES}{NFRAMES}}
+{\footnotesize\ttfamily \#define NFRAMES~3}
+
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{yolo__v2__class_8cpp_a906988c7d0f38488cf55d5d8e4c8b6c5}\label{yolo__v2__class_8cpp_a906988c7d0f38488cf55d5d8e4c8b6c5}} 
+\index{yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}!built\_with\_cuda@{built\_with\_cuda}}
+\index{built\_with\_cuda@{built\_with\_cuda}!yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}}
+\doxysubsubsection{\texorpdfstring{built\_with\_cuda()}{built\_with\_cuda()}}
+{\footnotesize\ttfamily bool built\+\_\+with\+\_\+cuda (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{yolo__v2__class_8cpp_a12448fe36091f554ac5bd6709bff8cd7}\label{yolo__v2__class_8cpp_a12448fe36091f554ac5bd6709bff8cd7}} 
+\index{yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}!built\_with\_cudnn@{built\_with\_cudnn}}
+\index{built\_with\_cudnn@{built\_with\_cudnn}!yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}}
+\doxysubsubsection{\texorpdfstring{built\_with\_cudnn()}{built\_with\_cudnn()}}
+{\footnotesize\ttfamily bool built\+\_\+with\+\_\+cudnn (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{yolo__v2__class_8cpp_af149cee322dfe693e3664899cb45bedb}\label{yolo__v2__class_8cpp_af149cee322dfe693e3664899cb45bedb}} 
+\index{yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}!built\_with\_opencv@{built\_with\_opencv}}
+\index{built\_with\_opencv@{built\_with\_opencv}!yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}}
+\doxysubsubsection{\texorpdfstring{built\_with\_opencv()}{built\_with\_opencv()}}
+{\footnotesize\ttfamily bool built\+\_\+with\+\_\+opencv (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{yolo__v2__class_8cpp_ae40001b35e673e901849750a0605a662}\label{yolo__v2__class_8cpp_ae40001b35e673e901849750a0605a662}} 
+\index{yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}!detect\_image@{detect\_image}}
+\index{detect\_image@{detect\_image}!yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}}
+\doxysubsubsection{\texorpdfstring{detect\_image()}{detect\_image()}}
+{\footnotesize\ttfamily int detect\+\_\+image (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename,  }\item[{\mbox{\hyperlink{structbbox__t__container}{bbox\+\_\+t\+\_\+container}} \&}]{container }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{yolo__v2__class_8cpp_a39804117f003d36f82ae4c01810c2525}\label{yolo__v2__class_8cpp_a39804117f003d36f82ae4c01810c2525}} 
+\index{yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}!detect\_mat@{detect\_mat}}
+\index{detect\_mat@{detect\_mat}!yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}}
+\doxysubsubsection{\texorpdfstring{detect\_mat()}{detect\_mat()}}
+{\footnotesize\ttfamily int detect\+\_\+mat (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{data,  }\item[{const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{data\+\_\+length,  }\item[{\mbox{\hyperlink{structbbox__t__container}{bbox\+\_\+t\+\_\+container}} \&}]{container }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{yolo__v2__class_8cpp_ab95f447523f87d02262e9d3e21c07fa6}\label{yolo__v2__class_8cpp_ab95f447523f87d02262e9d3e21c07fa6}} 
+\index{yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}!dispose@{dispose}}
+\index{dispose@{dispose}!yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}}
+\doxysubsubsection{\texorpdfstring{dispose()}{dispose()}}
+{\footnotesize\ttfamily int dispose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{yolo__v2__class_8cpp_aefd69d912f2ee324e479371517bf5a28}\label{yolo__v2__class_8cpp_aefd69d912f2ee324e479371517bf5a28}} 
+\index{yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}!get\_device\_count@{get\_device\_count}}
+\index{get\_device\_count@{get\_device\_count}!yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}}
+\doxysubsubsection{\texorpdfstring{get\_device\_count()}{get\_device\_count()}}
+{\footnotesize\ttfamily int get\+\_\+device\+\_\+count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{yolo__v2__class_8cpp_a79996b203dcc83f426104b0b4391e433}\label{yolo__v2__class_8cpp_a79996b203dcc83f426104b0b4391e433}} 
+\index{yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}!get\_device\_name@{get\_device\_name}}
+\index{get\_device\_name@{get\_device\_name}!yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}}
+\doxysubsubsection{\texorpdfstring{get\_device\_name()}{get\_device\_name()}}
+{\footnotesize\ttfamily int get\+\_\+device\+\_\+name (\begin{DoxyParamCaption}\item[{int}]{gpu,  }\item[{char $\ast$}]{device\+Name }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{yolo__v2__class_8cpp_adcf7f587fe7c5bfdcbe67ffa797763be}\label{yolo__v2__class_8cpp_adcf7f587fe7c5bfdcbe67ffa797763be}} 
+\index{yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}!init@{init}}
+\index{init@{init}!yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily int init (\begin{DoxyParamCaption}\item[{const char $\ast$}]{configuration\+Filename,  }\item[{const char $\ast$}]{weights\+Filename,  }\item[{int}]{gpu,  }\item[{int}]{batch\+\_\+size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{yolo__v2__class_8cpp_a7695c70a008932b492fac3ff0cd3bcd9}\label{yolo__v2__class_8cpp_a7695c70a008932b492fac3ff0cd3bcd9}} 
+\index{yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}!load\_image\_stb@{load\_image\_stb}}
+\index{load\_image\_stb@{load\_image\_stb}!yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}}
+\doxysubsubsection{\texorpdfstring{load\_image\_stb()}{load\_image\_stb()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{structimage}{image}} load\+\_\+image\+\_\+stb (\begin{DoxyParamCaption}\item[{char $\ast$}]{filename,  }\item[{int}]{channels }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{yolo__v2__class_8cpp_a7695c70a008932b492fac3ff0cd3bcd9_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{变量说明}
+\mbox{\Hypertarget{yolo__v2__class_8cpp_a432e43b8a212dccde2de1c936e36bde4}\label{yolo__v2__class_8cpp_a432e43b8a212dccde2de1c936e36bde4}} 
+\index{yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}!detector@{detector}}
+\index{detector@{detector}!yolo\_v2\_class.cpp@{yolo\_v2\_class.cpp}}
+\doxysubsubsection{\texorpdfstring{detector}{detector}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$Detector$>$ detector\hspace{0.3cm}{\ttfamily [static]}}
+

@@ -1,0 +1,1057 @@
+\hypertarget{yolo__v2__class_8hpp_source}{}\doxysection{yolo\+\_\+v2\+\_\+class.\+hpp}
+\label{yolo__v2__class_8hpp_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/include/yolo\_v2\_class.hpp@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/include/yolo\_v2\_class.hpp}}
+\mbox{\hyperlink{yolo__v2__class_8hpp}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef YOLO\_V2\_CLASS\_HPP}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define YOLO\_V2\_CLASS\_HPP}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#ifndef LIB\_API}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifdef LIB\_EXPORTS}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#if defined(\_MSC\_VER)}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#define LIB\_API \_\_declspec(dllexport)}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#define LIB\_API \_\_attribute\_\_((visibility("{}default"{}})))}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#if defined(\_MSC\_VER)}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#define LIB\_API}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#define LIB\_API}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#define C\_SHARP\_MAX\_OBJECTS 1000}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{keyword}{struct }\mbox{\hyperlink{structbbox__t}{bbox\_t}} \{}
+\DoxyCodeLine{23     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{structbbox__t_afe740d8071d60bfb147b55e0c36a2832}{x}}, \mbox{\hyperlink{structbbox__t_a3d7bd44bf4c3e7e8d544eeff495699d0}{y}}, \mbox{\hyperlink{structbbox__t_a8fd711b6f086ce712d5f17b3ef895f8f}{w}}, \mbox{\hyperlink{structbbox__t_ae57f294a4f7c522f0c98dda04e6efd3e}{h}};       \textcolor{comment}{// (x,y) -\/ top-\/left corner, (w, h) -\/ width \& height of bounded box}}
+\DoxyCodeLine{24     \textcolor{keywordtype}{float} \mbox{\hyperlink{structbbox__t_abf617bd72d261b2eb1a54ccd8c9ae54e}{prob}};                    \textcolor{comment}{// confidence -\/ probability that the object was found correctly}}
+\DoxyCodeLine{25     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{structbbox__t_a5963b8f26100b7d3a8b47883f4ad25da}{obj\_id}};           \textcolor{comment}{// class of object -\/ from range [0, classes-\/1]}}
+\DoxyCodeLine{26     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{structbbox__t_a6377c5fc0cef3f108f240172ed5a0336}{track\_id}};         \textcolor{comment}{// tracking id for video (0 -\/ untracked, 1 -\/ inf -\/ tracked object)}}
+\DoxyCodeLine{27     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{structbbox__t_a778687c7c816ba8fa3873b78012124ba}{frames\_counter}};   \textcolor{comment}{// counter of frames on which the object was detected}}
+\DoxyCodeLine{28     \textcolor{keywordtype}{float} \mbox{\hyperlink{structbbox__t_a5d71452307cda2143b909a506f534918}{x\_3d}}, \mbox{\hyperlink{structbbox__t_a666d0b62e485e51e648d5ce465ae0d41}{y\_3d}}, \mbox{\hyperlink{structbbox__t_a2eb63898e29b5662b6d6b5d724cf98f8}{z\_3d}};        \textcolor{comment}{// center of object (in Meters) if ZED 3D Camera is used}}
+\DoxyCodeLine{29 \};}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{keyword}{struct }\mbox{\hyperlink{structimage__t}{image\_t}} \{}
+\DoxyCodeLine{32     \textcolor{keywordtype}{int} \mbox{\hyperlink{structimage__t_abbb86e30994bee965956df22508d92ed}{h}};                        \textcolor{comment}{// height}}
+\DoxyCodeLine{33     \textcolor{keywordtype}{int} \mbox{\hyperlink{structimage__t_a8d3ffd124f9e93ad425418ea0e2b6aaf}{w}};                        \textcolor{comment}{// width}}
+\DoxyCodeLine{34     \textcolor{keywordtype}{int} \mbox{\hyperlink{structimage__t_aa96c387a1f244f3701ccfa9c329494bc}{c}};                        \textcolor{comment}{// number of chanels (3 -\/ for RGB)}}
+\DoxyCodeLine{35     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structimage__t_a9d5e257a8693096bca3a423ec1e69ee5}{data}};                  \textcolor{comment}{// pointer to the image data}}
+\DoxyCodeLine{36 \};}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{keyword}{struct }\mbox{\hyperlink{structbbox__t__container}{bbox\_t\_container}} \{}
+\DoxyCodeLine{39     \mbox{\hyperlink{structbbox__t}{bbox\_t}} \mbox{\hyperlink{structbbox__t__container_a268bcec9b819f2c8f602040ff1a0780b}{candidates}}[\mbox{\hyperlink{yolo__v2__class_8hpp_add04bfcf65a023535faaf7c2efd1874e}{C\_SHARP\_MAX\_OBJECTS}}];}
+\DoxyCodeLine{40 \};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#include <deque>}}
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#include <sstream>}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#include <cmath>}}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#ifdef OPENCV}}
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#include <opencv2/opencv.hpp>}            \textcolor{comment}{// C++}}
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#include <opencv2/highgui/highgui\_c.h>}   \textcolor{comment}{// C}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#include <opencv2/imgproc/imgproc\_c.h>}   \textcolor{comment}{// C}}
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \mbox{\hyperlink{yolo__v2__class_8hpp_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{int} \mbox{\hyperlink{yolo__v2__class_8cpp_adcf7f587fe7c5bfdcbe67ffa797763be}{init}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *configurationFilename, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *weightsFilename, \textcolor{keywordtype}{int} gpu, \textcolor{keywordtype}{int} batch\_size);}
+\DoxyCodeLine{60 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \mbox{\hyperlink{yolo__v2__class_8hpp_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{int} \mbox{\hyperlink{yolo__v2__class_8cpp_ae40001b35e673e901849750a0605a662}{detect\_image}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *filename, \mbox{\hyperlink{structbbox__t__container}{bbox\_t\_container}} \&container);}
+\DoxyCodeLine{61 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \mbox{\hyperlink{yolo__v2__class_8hpp_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{int} \mbox{\hyperlink{yolo__v2__class_8cpp_a39804117f003d36f82ae4c01810c2525}{detect\_mat}}(\textcolor{keyword}{const} uint8\_t* \mbox{\hyperlink{structdata}{data}}, \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} data\_length, \mbox{\hyperlink{structbbox__t__container}{bbox\_t\_container}} \&container);}
+\DoxyCodeLine{62 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \mbox{\hyperlink{yolo__v2__class_8hpp_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{int} \mbox{\hyperlink{yolo__v2__class_8cpp_ab95f447523f87d02262e9d3e21c07fa6}{dispose}}();}
+\DoxyCodeLine{63 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \mbox{\hyperlink{yolo__v2__class_8hpp_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{int} \mbox{\hyperlink{yolo__v2__class_8cpp_aefd69d912f2ee324e479371517bf5a28}{get\_device\_count}}();}
+\DoxyCodeLine{64 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \mbox{\hyperlink{yolo__v2__class_8hpp_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{int} \mbox{\hyperlink{yolo__v2__class_8cpp_a79996b203dcc83f426104b0b4391e433}{get\_device\_name}}(\textcolor{keywordtype}{int} gpu, \textcolor{keywordtype}{char}* deviceName);}
+\DoxyCodeLine{65 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \mbox{\hyperlink{yolo__v2__class_8hpp_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{yolo__v2__class_8cpp_a906988c7d0f38488cf55d5d8e4c8b6c5}{built\_with\_cuda}}();}
+\DoxyCodeLine{66 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \mbox{\hyperlink{yolo__v2__class_8hpp_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{yolo__v2__class_8cpp_a12448fe36091f554ac5bd6709bff8cd7}{built\_with\_cudnn}}();}
+\DoxyCodeLine{67 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \mbox{\hyperlink{yolo__v2__class_8hpp_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{bool} \mbox{\hyperlink{yolo__v2__class_8cpp_af149cee322dfe693e3664899cb45bedb}{built\_with\_opencv}}();}
+\DoxyCodeLine{68 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \mbox{\hyperlink{yolo__v2__class_8hpp_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_af1afd3ad58232642bc4aa574b6c5ea3a}{send\_json\_custom}}(\textcolor{keywordtype}{char} \textcolor{keyword}{const}* send\_buf, \textcolor{keywordtype}{int} port, \textcolor{keywordtype}{int} timeout);}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70 \textcolor{keyword}{class }Detector \{}
+\DoxyCodeLine{71     std::shared\_ptr<void> detector\_gpu\_ptr;}
+\DoxyCodeLine{72     std::deque<std::vector<bbox\_t>> prev\_bbox\_vec\_deque;}
+\DoxyCodeLine{73     std::string \_cfg\_filename, \_weight\_filename;}
+\DoxyCodeLine{74 \textcolor{keyword}{public}:}
+\DoxyCodeLine{75     \textcolor{keyword}{const} \textcolor{keywordtype}{int} cur\_gpu\_id = 0;}
+\DoxyCodeLine{76     \textcolor{keywordtype}{float} \mbox{\hyperlink{nms_8h_a172e28c9d820b35a79650a1337c6f80c}{nms}} = .4f;}
+\DoxyCodeLine{77     \textcolor{keywordtype}{bool} wait\_stream;}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79     \mbox{\hyperlink{yolo__v2__class_8hpp_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} Detector(std::string cfg\_filename, std::string weight\_filename, \textcolor{keywordtype}{int} gpu\_id, \textcolor{keywordtype}{int} batch\_size);}
+\DoxyCodeLine{80     \mbox{\hyperlink{yolo__v2__class_8hpp_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \string~Detector();}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82     \mbox{\hyperlink{yolo__v2__class_8hpp_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} std::vector<bbox\_t> detect(std::string image\_filename, \textcolor{keywordtype}{float} thresh = 0.2, \textcolor{keywordtype}{bool} use\_mean = \textcolor{keyword}{false});}
+\DoxyCodeLine{83     \mbox{\hyperlink{yolo__v2__class_8hpp_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} std::vector<bbox\_t> detect(\mbox{\hyperlink{structimage__t}{image\_t}} img, \textcolor{keywordtype}{float} thresh = 0.2, \textcolor{keywordtype}{bool} use\_mean = \textcolor{keyword}{false});}
+\DoxyCodeLine{84     \mbox{\hyperlink{yolo__v2__class_8hpp_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} std::vector<std::vector<bbox\_t>> detectBatch(\mbox{\hyperlink{structimage__t}{image\_t}} img, \textcolor{keywordtype}{int} batch\_size, \textcolor{keywordtype}{int} width, \textcolor{keywordtype}{int} height, \textcolor{keywordtype}{float} thresh, \textcolor{keywordtype}{bool} make\_nms = \textcolor{keyword}{true});}
+\DoxyCodeLine{85     \textcolor{keyword}{static} \mbox{\hyperlink{yolo__v2__class_8hpp_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \mbox{\hyperlink{structimage__t}{image\_t}} \mbox{\hyperlink{image_8c_a4eec265642aa18081a3e8795c5a78afb}{load\_image}}(std::string image\_filename);}
+\DoxyCodeLine{86     \textcolor{keyword}{static} \mbox{\hyperlink{yolo__v2__class_8hpp_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a523a669a46659bed0f2e824609f93853}{free\_image}}(\mbox{\hyperlink{structimage__t}{image\_t}} m);}
+\DoxyCodeLine{87     \mbox{\hyperlink{yolo__v2__class_8hpp_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{int} get\_net\_width() \textcolor{keyword}{const};}
+\DoxyCodeLine{88     \mbox{\hyperlink{yolo__v2__class_8hpp_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{int} get\_net\_height() \textcolor{keyword}{const};}
+\DoxyCodeLine{89     \mbox{\hyperlink{yolo__v2__class_8hpp_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{int} get\_net\_color\_depth() \textcolor{keyword}{const};}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91     \mbox{\hyperlink{yolo__v2__class_8hpp_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} std::vector<bbox\_t> tracking\_id(std::vector<bbox\_t> cur\_bbox\_vec, \textcolor{keywordtype}{bool} \textcolor{keyword}{const} change\_history = \textcolor{keyword}{true},}
+\DoxyCodeLine{92                                                 \textcolor{keywordtype}{int} \textcolor{keyword}{const} frames\_story = 5, \textcolor{keywordtype}{int} \textcolor{keyword}{const} max\_dist = 40);}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94     \mbox{\hyperlink{yolo__v2__class_8hpp_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} *get\_cuda\_context();}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96     \textcolor{comment}{//LIB\_API bool send\_json\_http(std::vector<bbox\_t> cur\_bbox\_vec, std::vector<std::string> obj\_names, int frame\_id,}}
+\DoxyCodeLine{97     \textcolor{comment}{//    std::string filename = std::string(), int timeout = 400000, int port = 8070);}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99     std::vector<bbox\_t> detect\_resized(\mbox{\hyperlink{structimage__t}{image\_t}} img, \textcolor{keywordtype}{int} init\_w, \textcolor{keywordtype}{int} init\_h, \textcolor{keywordtype}{float} thresh = 0.2, \textcolor{keywordtype}{bool} use\_mean = \textcolor{keyword}{false})}
+\DoxyCodeLine{100     \{}
+\DoxyCodeLine{101         \textcolor{keywordflow}{if} (img.\mbox{\hyperlink{structimage__t_a9d5e257a8693096bca3a423ec1e69ee5}{data}} == NULL)}
+\DoxyCodeLine{102             \textcolor{keywordflow}{throw} std::runtime\_error(\textcolor{stringliteral}{"{}Image is empty"{}});}
+\DoxyCodeLine{103         \textcolor{keyword}{auto} detection\_boxes = detect(img, thresh, use\_mean);}
+\DoxyCodeLine{104         \textcolor{keywordtype}{float} wk = (float)init\_w / img.\mbox{\hyperlink{structimage__t_a8d3ffd124f9e93ad425418ea0e2b6aaf}{w}}, hk = (\textcolor{keywordtype}{float})init\_h / img.\mbox{\hyperlink{structimage__t_abbb86e30994bee965956df22508d92ed}{h}};}
+\DoxyCodeLine{105         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&i : detection\_boxes) i.x *= wk, i.w *= wk, i.y *= hk, i.h *= hk;}
+\DoxyCodeLine{106         \textcolor{keywordflow}{return} detection\_boxes;}
+\DoxyCodeLine{107     \}}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109 \textcolor{preprocessor}{\#ifdef OPENCV}}
+\DoxyCodeLine{110     std::vector<bbox\_t> detect(cv::Mat mat, \textcolor{keywordtype}{float} thresh = 0.2, \textcolor{keywordtype}{bool} use\_mean = \textcolor{keyword}{false})}
+\DoxyCodeLine{111     \{}
+\DoxyCodeLine{112         \textcolor{keywordflow}{if}(mat.data == NULL)}
+\DoxyCodeLine{113             \textcolor{keywordflow}{throw} std::runtime\_error(\textcolor{stringliteral}{"{}Image is empty"{}});}
+\DoxyCodeLine{114         \textcolor{keyword}{auto} image\_ptr = mat\_to\_image\_resize(mat);}
+\DoxyCodeLine{115         \textcolor{keywordflow}{return} detect\_resized(*image\_ptr, mat.cols, mat.rows, thresh, use\_mean);}
+\DoxyCodeLine{116     \}}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118     std::shared\_ptr<image\_t> mat\_to\_image\_resize(cv::Mat mat)\textcolor{keyword}{ const}}
+\DoxyCodeLine{119 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{120         \textcolor{keywordflow}{if} (mat.data == NULL) \textcolor{keywordflow}{return} std::shared\_ptr<image\_t>(NULL);}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122         cv::Size network\_size = cv::Size(get\_net\_width(), get\_net\_height());}
+\DoxyCodeLine{123         cv::Mat det\_mat;}
+\DoxyCodeLine{124         \textcolor{keywordflow}{if} (mat.size() != network\_size)}
+\DoxyCodeLine{125             cv::resize(mat, det\_mat, network\_size);}
+\DoxyCodeLine{126         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{127             det\_mat = mat;  \textcolor{comment}{// only reference is copied}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129         \textcolor{keywordflow}{return} mat\_to\_image(det\_mat);}
+\DoxyCodeLine{130     \}}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132     \textcolor{keyword}{static} std::shared\_ptr<image\_t> mat\_to\_image(cv::Mat img\_src)}
+\DoxyCodeLine{133     \{}
+\DoxyCodeLine{134         cv::Mat img;}
+\DoxyCodeLine{135         \textcolor{keywordflow}{if} (img\_src.channels() == 4) cv::cvtColor(img\_src, img, cv::COLOR\_RGBA2BGR);}
+\DoxyCodeLine{136         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (img\_src.channels() == 3) cv::cvtColor(img\_src, img, cv::COLOR\_RGB2BGR);}
+\DoxyCodeLine{137         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (img\_src.channels() == 1) cv::cvtColor(img\_src, img, cv::COLOR\_GRAY2BGR);}
+\DoxyCodeLine{138         \textcolor{keywordflow}{else} std::cerr << \textcolor{stringliteral}{"{} Warning: img\_src.channels() is not 1, 3 or 4. It is = "{}} << img\_src.channels() << std::endl;}
+\DoxyCodeLine{139         std::shared\_ptr<image\_t> image\_ptr(\textcolor{keyword}{new} \mbox{\hyperlink{structimage__t}{image\_t}}, [](\mbox{\hyperlink{structimage__t}{image\_t}} *img) \{ \mbox{\hyperlink{darknet_8h_a523a669a46659bed0f2e824609f93853}{free\_image}}(*img); \textcolor{keyword}{delete} img; \});}
+\DoxyCodeLine{140         *image\_ptr = mat\_to\_image\_custom(img);}
+\DoxyCodeLine{141         \textcolor{keywordflow}{return} image\_ptr;}
+\DoxyCodeLine{142     \}}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144 \textcolor{keyword}{private}:}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146     \textcolor{keyword}{static} \mbox{\hyperlink{structimage__t}{image\_t}} mat\_to\_image\_custom(cv::Mat mat)}
+\DoxyCodeLine{147     \{}
+\DoxyCodeLine{148         \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}} = mat.cols;}
+\DoxyCodeLine{149         \textcolor{keywordtype}{int} h = mat.rows;}
+\DoxyCodeLine{150         \textcolor{keywordtype}{int} c = mat.channels();}
+\DoxyCodeLine{151         \mbox{\hyperlink{structimage__t}{image\_t}} im = make\_image\_custom(\mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, h, c);}
+\DoxyCodeLine{152         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *\mbox{\hyperlink{structdata}{data}} = (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *)mat.data;}
+\DoxyCodeLine{153         \textcolor{keywordtype}{int} step = mat.step;}
+\DoxyCodeLine{154         for (\textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}} = 0; \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}} < h; ++\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}) \{}
+\DoxyCodeLine{155             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k = 0; k < c; ++k) \{}
+\DoxyCodeLine{156                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}} = 0; \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}} < \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}; ++\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}) \{}
+\DoxyCodeLine{157                     im.\mbox{\hyperlink{structimage__t_a9d5e257a8693096bca3a423ec1e69ee5}{data}}[k*\mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}*h + \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}*\mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}} + \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}] = \mbox{\hyperlink{structdata}{data}}[\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}*step + \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}*c + k] / 255.0f;}
+\DoxyCodeLine{158                 \}}
+\DoxyCodeLine{159             \}}
+\DoxyCodeLine{160         \}}
+\DoxyCodeLine{161         \textcolor{keywordflow}{return} im;}
+\DoxyCodeLine{162     \}}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164     \textcolor{keyword}{static} \mbox{\hyperlink{structimage__t}{image\_t}} \mbox{\hyperlink{image_8c_a28bb9f835989b2f7e908386421c52837}{make\_empty\_image}}(\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h, \textcolor{keywordtype}{int} c)}
+\DoxyCodeLine{165     \{}
+\DoxyCodeLine{166         \mbox{\hyperlink{structimage__t}{image\_t}} out;}
+\DoxyCodeLine{167         out.\mbox{\hyperlink{structimage__t_a9d5e257a8693096bca3a423ec1e69ee5}{data}} = 0;}
+\DoxyCodeLine{168         out.\mbox{\hyperlink{structimage__t_abbb86e30994bee965956df22508d92ed}{h}} = h;}
+\DoxyCodeLine{169         out.\mbox{\hyperlink{structimage__t_a8d3ffd124f9e93ad425418ea0e2b6aaf}{w}} = \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}};}
+\DoxyCodeLine{170         out.\mbox{\hyperlink{structimage__t_aa96c387a1f244f3701ccfa9c329494bc}{c}} = c;}
+\DoxyCodeLine{171         \textcolor{keywordflow}{return} out;}
+\DoxyCodeLine{172     \}}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174     \textcolor{keyword}{static} \mbox{\hyperlink{structimage__t}{image\_t}} make\_image\_custom(\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h, \textcolor{keywordtype}{int} c)}
+\DoxyCodeLine{175     \{}
+\DoxyCodeLine{176         \mbox{\hyperlink{structimage__t}{image\_t}} out = \mbox{\hyperlink{image_8c_a28bb9f835989b2f7e908386421c52837}{make\_empty\_image}}(\mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, h, c);}
+\DoxyCodeLine{177         out.\mbox{\hyperlink{structimage__t_a9d5e257a8693096bca3a423ec1e69ee5}{data}} = (\textcolor{keywordtype}{float} *)calloc(h*\mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}*c, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{float}));}
+\DoxyCodeLine{178         \textcolor{keywordflow}{return} out;}
+\DoxyCodeLine{179     \}}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181 \textcolor{preprocessor}{\#endif    }\textcolor{comment}{// OPENCV}}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{183 \textcolor{keyword}{public}:}
+\DoxyCodeLine{184 }
+\DoxyCodeLine{185     \textcolor{keywordtype}{bool} send\_json\_http(std::vector<bbox\_t> cur\_bbox\_vec, std::vector<std::string> obj\_names, \textcolor{keywordtype}{int} frame\_id,}
+\DoxyCodeLine{186         std::string filename = std::string(), \textcolor{keywordtype}{int} timeout = 400000, \textcolor{keywordtype}{int} port = 8070)}
+\DoxyCodeLine{187     \{}
+\DoxyCodeLine{188         std::string send\_str;}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{190         \textcolor{keywordtype}{char} *tmp\_buf = (\textcolor{keywordtype}{char} *)calloc(1024, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}));}
+\DoxyCodeLine{191         \textcolor{keywordflow}{if} (!filename.empty()) \{}
+\DoxyCodeLine{192             sprintf(tmp\_buf, \textcolor{stringliteral}{"{}\{\(\backslash\)n \(\backslash\)"{}frame\_id\(\backslash\)"{}:\%d, \(\backslash\)n \(\backslash\)"{}filename\(\backslash\)"{}:\(\backslash\)"{}\%s\(\backslash\)"{}, \(\backslash\)n \(\backslash\)"{}objects\(\backslash\)"{}: [ \(\backslash\)n"{}}, frame\_id, filename.c\_str());}
+\DoxyCodeLine{193         \}}
+\DoxyCodeLine{194         \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{195             sprintf(tmp\_buf, \textcolor{stringliteral}{"{}\{\(\backslash\)n \(\backslash\)"{}frame\_id\(\backslash\)"{}:\%d, \(\backslash\)n \(\backslash\)"{}objects\(\backslash\)"{}: [ \(\backslash\)n"{}}, frame\_id);}
+\DoxyCodeLine{196         \}}
+\DoxyCodeLine{197         send\_str = tmp\_buf;}
+\DoxyCodeLine{198         free(tmp\_buf);}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{200         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \& i : cur\_bbox\_vec) \{}
+\DoxyCodeLine{201             \textcolor{keywordtype}{char} *buf = (\textcolor{keywordtype}{char} *)calloc(2048, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}));}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203             sprintf(buf, \textcolor{stringliteral}{"{}  \{\(\backslash\)"{}class\_id\(\backslash\)"{}:\%d, \(\backslash\)"{}name\(\backslash\)"{}:\(\backslash\)"{}\%s\(\backslash\)"{}, \(\backslash\)"{}absolute\_coordinates\(\backslash\)"{}:\{\(\backslash\)"{}center\_x\(\backslash\)"{}:\%d, \(\backslash\)"{}center\_y\(\backslash\)"{}:\%d, \(\backslash\)"{}width\(\backslash\)"{}:\%d, \(\backslash\)"{}height\(\backslash\)"{}:\%d\}, \(\backslash\)"{}confidence\(\backslash\)"{}:\%f"{}},}
+\DoxyCodeLine{204                 i.obj\_id, obj\_names[i.obj\_id].c\_str(), i.x, i.y, i.w, i.h, i.prob);}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{206             \textcolor{comment}{//sprintf(buf, "{}  \{\(\backslash\)"{}class\_id\(\backslash\)"{}:\%d, \(\backslash\)"{}name\(\backslash\)"{}:\(\backslash\)"{}\%s\(\backslash\)"{}, \(\backslash\)"{}relative\_coordinates\(\backslash\)"{}:\{\(\backslash\)"{}center\_x\(\backslash\)"{}:\%f, \(\backslash\)"{}center\_y\(\backslash\)"{}:\%f, \(\backslash\)"{}width\(\backslash\)"{}:\%f, \(\backslash\)"{}height\(\backslash\)"{}:\%f\}, \(\backslash\)"{}confidence\(\backslash\)"{}:\%f"{},}}
+\DoxyCodeLine{207             \textcolor{comment}{//    i.obj\_id, obj\_names[i.obj\_id], i.x, i.y, i.w, i.h, i.prob);}}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{209             send\_str += buf;}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{211             \textcolor{keywordflow}{if} (!std::isnan(i.z\_3d)) \{}
+\DoxyCodeLine{212                 sprintf(buf, \textcolor{stringliteral}{"{}\(\backslash\)n    , \(\backslash\)"{}coordinates\_in\_meters\(\backslash\)"{}:\{\(\backslash\)"{}x\_3d\(\backslash\)"{}:\%.2f, \(\backslash\)"{}y\_3d\(\backslash\)"{}:\%.2f, \(\backslash\)"{}z\_3d\(\backslash\)"{}:\%.2f\}"{}},}
+\DoxyCodeLine{213                     i.x\_3d, i.y\_3d, i.z\_3d);}
+\DoxyCodeLine{214                 send\_str += buf;}
+\DoxyCodeLine{215             \}}
+\DoxyCodeLine{216 }
+\DoxyCodeLine{217             send\_str += \textcolor{stringliteral}{"{}\}\(\backslash\)n"{}};}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219             free(buf);}
+\DoxyCodeLine{220         \}}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{222         \textcolor{comment}{//send\_str +=  "{}\(\backslash\)n ] \(\backslash\)n\}, \(\backslash\)n"{};}}
+\DoxyCodeLine{223         send\_str += \textcolor{stringliteral}{"{}\(\backslash\)n ] \(\backslash\)n\}"{}};}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{225         \mbox{\hyperlink{darknet_8h_af1afd3ad58232642bc4aa574b6c5ea3a}{send\_json\_custom}}(send\_str.c\_str(), port, timeout);}
+\DoxyCodeLine{226         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{227     \}}
+\DoxyCodeLine{228 \};}
+\DoxyCodeLine{229 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{230 }
+\DoxyCodeLine{231 }
+\DoxyCodeLine{232 \textcolor{preprocessor}{\#if defined(TRACK\_OPTFLOW) \&\& defined(OPENCV) \&\& defined(GPU)}}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{234 \textcolor{preprocessor}{\#include <opencv2/cudaoptflow.hpp>}}
+\DoxyCodeLine{235 \textcolor{preprocessor}{\#include <opencv2/cudaimgproc.hpp>}}
+\DoxyCodeLine{236 \textcolor{preprocessor}{\#include <opencv2/cudaarithm.hpp>}}
+\DoxyCodeLine{237 \textcolor{preprocessor}{\#include <opencv2/core/cuda.hpp>}}
+\DoxyCodeLine{238 }
+\DoxyCodeLine{239 \textcolor{keyword}{class }Tracker\_optflow \{}
+\DoxyCodeLine{240 \textcolor{keyword}{public}:}
+\DoxyCodeLine{241     \textcolor{keyword}{const} \textcolor{keywordtype}{int} gpu\_count;}
+\DoxyCodeLine{242     \textcolor{keyword}{const} \textcolor{keywordtype}{int} gpu\_id;}
+\DoxyCodeLine{243     \textcolor{keyword}{const} \textcolor{keywordtype}{int} flow\_error;}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{245 }
+\DoxyCodeLine{246     Tracker\_optflow(\textcolor{keywordtype}{int} \_gpu\_id = 0, \textcolor{keywordtype}{int} win\_size = 15, \textcolor{keywordtype}{int} max\_level = 3, \textcolor{keywordtype}{int} iterations = 8000, \textcolor{keywordtype}{int} \_flow\_error = -\/1) :}
+\DoxyCodeLine{247         gpu\_count(cv::cuda::getCudaEnabledDeviceCount()), gpu\_id(\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{min}}(\_gpu\_id, gpu\_count-\/1)),}
+\DoxyCodeLine{248         flow\_error((\_flow\_error > 0)? \_flow\_error:(win\_size*4))}
+\DoxyCodeLine{249     \{}
+\DoxyCodeLine{250         \textcolor{keywordtype}{int} \textcolor{keyword}{const} old\_gpu\_id = cv::cuda::getDevice();}
+\DoxyCodeLine{251         cv::cuda::setDevice(gpu\_id);}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{253         stream = cv::cuda::Stream();}
+\DoxyCodeLine{254 }
+\DoxyCodeLine{255         sync\_PyrLKOpticalFlow\_gpu = cv::cuda::SparsePyrLKOpticalFlow::create();}
+\DoxyCodeLine{256         sync\_PyrLKOpticalFlow\_gpu-\/>setWinSize(cv::Size(win\_size, win\_size));    \textcolor{comment}{// 9, 15, 21, 31}}
+\DoxyCodeLine{257         sync\_PyrLKOpticalFlow\_gpu-\/>setMaxLevel(max\_level);        \textcolor{comment}{// +-\/ 3 pt}}
+\DoxyCodeLine{258         sync\_PyrLKOpticalFlow\_gpu-\/>setNumIters(iterations);    \textcolor{comment}{// 2000, def: 30}}
+\DoxyCodeLine{259 }
+\DoxyCodeLine{260         cv::cuda::setDevice(old\_gpu\_id);}
+\DoxyCodeLine{261     \}}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263     \textcolor{comment}{// just to avoid extra allocations}}
+\DoxyCodeLine{264     cv::cuda::GpuMat src\_mat\_gpu;}
+\DoxyCodeLine{265     cv::cuda::GpuMat dst\_mat\_gpu, dst\_grey\_gpu;}
+\DoxyCodeLine{266     cv::cuda::GpuMat prev\_pts\_flow\_gpu, cur\_pts\_flow\_gpu;}
+\DoxyCodeLine{267     cv::cuda::GpuMat status\_gpu, err\_gpu;}
+\DoxyCodeLine{268 }
+\DoxyCodeLine{269     cv::cuda::GpuMat src\_grey\_gpu;    \textcolor{comment}{// used in both functions}}
+\DoxyCodeLine{270     cv::Ptr<cv::cuda::SparsePyrLKOpticalFlow> sync\_PyrLKOpticalFlow\_gpu;}
+\DoxyCodeLine{271     cv::cuda::Stream stream;}
+\DoxyCodeLine{272 }
+\DoxyCodeLine{273     std::vector<bbox\_t> cur\_bbox\_vec;}
+\DoxyCodeLine{274     std::vector<bool> good\_bbox\_vec\_flags;}
+\DoxyCodeLine{275     cv::Mat prev\_pts\_flow\_cpu;}
+\DoxyCodeLine{276 }
+\DoxyCodeLine{277     \textcolor{keywordtype}{void} update\_cur\_bbox\_vec(std::vector<bbox\_t> \_cur\_bbox\_vec)}
+\DoxyCodeLine{278     \{}
+\DoxyCodeLine{279         cur\_bbox\_vec = \_cur\_bbox\_vec;}
+\DoxyCodeLine{280         good\_bbox\_vec\_flags = std::vector<bool>(cur\_bbox\_vec.size(), \textcolor{keyword}{true});}
+\DoxyCodeLine{281         cv::Mat prev\_pts, cur\_pts\_flow\_cpu;}
+\DoxyCodeLine{282 }
+\DoxyCodeLine{283         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&i : cur\_bbox\_vec) \{}
+\DoxyCodeLine{284             \textcolor{keywordtype}{float} x\_center = (i.x + i.w / 2.0F);}
+\DoxyCodeLine{285             \textcolor{keywordtype}{float} y\_center = (i.y + i.h / 2.0F);}
+\DoxyCodeLine{286             prev\_pts.push\_back(cv::Point2f(x\_center, y\_center));}
+\DoxyCodeLine{287         \}}
+\DoxyCodeLine{288 }
+\DoxyCodeLine{289         \textcolor{keywordflow}{if} (prev\_pts.rows == 0)}
+\DoxyCodeLine{290             prev\_pts\_flow\_cpu = cv::Mat();}
+\DoxyCodeLine{291         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{292             cv::transpose(prev\_pts, prev\_pts\_flow\_cpu);}
+\DoxyCodeLine{293 }
+\DoxyCodeLine{294         \textcolor{keywordflow}{if} (prev\_pts\_flow\_gpu.cols < prev\_pts\_flow\_cpu.cols) \{}
+\DoxyCodeLine{295             prev\_pts\_flow\_gpu = cv::cuda::GpuMat(prev\_pts\_flow\_cpu.size(), prev\_pts\_flow\_cpu.type());}
+\DoxyCodeLine{296             cur\_pts\_flow\_gpu = cv::cuda::GpuMat(prev\_pts\_flow\_cpu.size(), prev\_pts\_flow\_cpu.type());}
+\DoxyCodeLine{297 }
+\DoxyCodeLine{298             status\_gpu = cv::cuda::GpuMat(prev\_pts\_flow\_cpu.size(), CV\_8UC1);}
+\DoxyCodeLine{299             err\_gpu = cv::cuda::GpuMat(prev\_pts\_flow\_cpu.size(), CV\_32FC1);}
+\DoxyCodeLine{300         \}}
+\DoxyCodeLine{301 }
+\DoxyCodeLine{302         prev\_pts\_flow\_gpu.upload(cv::Mat(prev\_pts\_flow\_cpu), stream);}
+\DoxyCodeLine{303     \}}
+\DoxyCodeLine{304 }
+\DoxyCodeLine{305 }
+\DoxyCodeLine{306     \textcolor{keywordtype}{void} update\_tracking\_flow(cv::Mat src\_mat, std::vector<bbox\_t> \_cur\_bbox\_vec)}
+\DoxyCodeLine{307     \{}
+\DoxyCodeLine{308         \textcolor{keywordtype}{int} \textcolor{keyword}{const} old\_gpu\_id = cv::cuda::getDevice();}
+\DoxyCodeLine{309         \textcolor{keywordflow}{if} (old\_gpu\_id != gpu\_id)}
+\DoxyCodeLine{310             cv::cuda::setDevice(gpu\_id);}
+\DoxyCodeLine{311 }
+\DoxyCodeLine{312         \textcolor{keywordflow}{if} (src\_mat.channels() == 1 || src\_mat.channels() == 3 || src\_mat.channels() == 4) \{}
+\DoxyCodeLine{313             \textcolor{keywordflow}{if} (src\_mat\_gpu.cols == 0) \{}
+\DoxyCodeLine{314                 src\_mat\_gpu = cv::cuda::GpuMat(src\_mat.size(), src\_mat.type());}
+\DoxyCodeLine{315                 src\_grey\_gpu = cv::cuda::GpuMat(src\_mat.size(), CV\_8UC1);}
+\DoxyCodeLine{316             \}}
+\DoxyCodeLine{317 }
+\DoxyCodeLine{318             \textcolor{keywordflow}{if} (src\_mat.channels() == 1) \{}
+\DoxyCodeLine{319                 src\_mat\_gpu.upload(src\_mat, stream);}
+\DoxyCodeLine{320                 src\_mat\_gpu.copyTo(src\_grey\_gpu);}
+\DoxyCodeLine{321             \}}
+\DoxyCodeLine{322             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (src\_mat.channels() == 3) \{}
+\DoxyCodeLine{323                 src\_mat\_gpu.upload(src\_mat, stream);}
+\DoxyCodeLine{324                 cv::cuda::cvtColor(src\_mat\_gpu, src\_grey\_gpu, CV\_BGR2GRAY, 1, stream);}
+\DoxyCodeLine{325             \}}
+\DoxyCodeLine{326             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (src\_mat.channels() == 4) \{}
+\DoxyCodeLine{327                 src\_mat\_gpu.upload(src\_mat, stream);}
+\DoxyCodeLine{328                 cv::cuda::cvtColor(src\_mat\_gpu, src\_grey\_gpu, CV\_BGRA2GRAY, 1, stream);}
+\DoxyCodeLine{329             \}}
+\DoxyCodeLine{330             \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{331                 std::cerr << \textcolor{stringliteral}{"{} Warning: src\_mat.channels() is not: 1, 3 or 4. It is = "{}} << src\_mat.channels() << \textcolor{stringliteral}{"{} \(\backslash\)n"{}};}
+\DoxyCodeLine{332                 \textcolor{keywordflow}{return};}
+\DoxyCodeLine{333             \}}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{335         \}}
+\DoxyCodeLine{336         update\_cur\_bbox\_vec(\_cur\_bbox\_vec);}
+\DoxyCodeLine{337 }
+\DoxyCodeLine{338         \textcolor{keywordflow}{if} (old\_gpu\_id != gpu\_id)}
+\DoxyCodeLine{339             cv::cuda::setDevice(old\_gpu\_id);}
+\DoxyCodeLine{340     \}}
+\DoxyCodeLine{341 }
+\DoxyCodeLine{342 }
+\DoxyCodeLine{343     std::vector<bbox\_t> tracking\_flow(cv::Mat dst\_mat, \textcolor{keywordtype}{bool} check\_error = \textcolor{keyword}{true})}
+\DoxyCodeLine{344     \{}
+\DoxyCodeLine{345         \textcolor{keywordflow}{if} (sync\_PyrLKOpticalFlow\_gpu.empty()) \{}
+\DoxyCodeLine{346             std::cout << \textcolor{stringliteral}{"{}sync\_PyrLKOpticalFlow\_gpu isn't initialized \(\backslash\)n"{}};}
+\DoxyCodeLine{347             \textcolor{keywordflow}{return} cur\_bbox\_vec;}
+\DoxyCodeLine{348         \}}
+\DoxyCodeLine{349 }
+\DoxyCodeLine{350         \textcolor{keywordtype}{int} \textcolor{keyword}{const} old\_gpu\_id = cv::cuda::getDevice();}
+\DoxyCodeLine{351         \textcolor{keywordflow}{if}(old\_gpu\_id != gpu\_id)}
+\DoxyCodeLine{352             cv::cuda::setDevice(gpu\_id);}
+\DoxyCodeLine{353 }
+\DoxyCodeLine{354         \textcolor{keywordflow}{if} (dst\_mat\_gpu.cols == 0) \{}
+\DoxyCodeLine{355             dst\_mat\_gpu = cv::cuda::GpuMat(dst\_mat.size(), dst\_mat.type());}
+\DoxyCodeLine{356             dst\_grey\_gpu = cv::cuda::GpuMat(dst\_mat.size(), CV\_8UC1);}
+\DoxyCodeLine{357         \}}
+\DoxyCodeLine{358 }
+\DoxyCodeLine{359         \textcolor{comment}{//dst\_grey\_gpu.upload(dst\_mat, stream);    // use BGR}}
+\DoxyCodeLine{360         dst\_mat\_gpu.upload(dst\_mat, stream);}
+\DoxyCodeLine{361         cv::cuda::cvtColor(dst\_mat\_gpu, dst\_grey\_gpu, CV\_BGR2GRAY, 1, stream);}
+\DoxyCodeLine{362 }
+\DoxyCodeLine{363         \textcolor{keywordflow}{if} (src\_grey\_gpu.rows != dst\_grey\_gpu.rows || src\_grey\_gpu.cols != dst\_grey\_gpu.cols) \{}
+\DoxyCodeLine{364             stream.waitForCompletion();}
+\DoxyCodeLine{365             src\_grey\_gpu = dst\_grey\_gpu.clone();}
+\DoxyCodeLine{366             cv::cuda::setDevice(old\_gpu\_id);}
+\DoxyCodeLine{367             \textcolor{keywordflow}{return} cur\_bbox\_vec;}
+\DoxyCodeLine{368         \}}
+\DoxyCodeLine{369 }
+\DoxyCodeLine{371         sync\_PyrLKOpticalFlow\_gpu-\/>calc(src\_grey\_gpu, dst\_grey\_gpu, prev\_pts\_flow\_gpu, cur\_pts\_flow\_gpu, status\_gpu, err\_gpu, stream);    \textcolor{comment}{// OpenCV 3.x}}
+\DoxyCodeLine{372 }
+\DoxyCodeLine{373         cv::Mat cur\_pts\_flow\_cpu;}
+\DoxyCodeLine{374         cur\_pts\_flow\_gpu.download(cur\_pts\_flow\_cpu, stream);}
+\DoxyCodeLine{375 }
+\DoxyCodeLine{376         dst\_grey\_gpu.copyTo(src\_grey\_gpu, stream);}
+\DoxyCodeLine{377 }
+\DoxyCodeLine{378         cv::Mat err\_cpu, status\_cpu;}
+\DoxyCodeLine{379         err\_gpu.download(err\_cpu, stream);}
+\DoxyCodeLine{380         status\_gpu.download(status\_cpu, stream);}
+\DoxyCodeLine{381 }
+\DoxyCodeLine{382         stream.waitForCompletion();}
+\DoxyCodeLine{383 }
+\DoxyCodeLine{384         std::vector<bbox\_t> result\_bbox\_vec;}
+\DoxyCodeLine{385 }
+\DoxyCodeLine{386         \textcolor{keywordflow}{if} (err\_cpu.cols == cur\_bbox\_vec.size() \&\& status\_cpu.cols == cur\_bbox\_vec.size())}
+\DoxyCodeLine{387         \{}
+\DoxyCodeLine{388             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < cur\_bbox\_vec.size(); ++i)}
+\DoxyCodeLine{389             \{}
+\DoxyCodeLine{390                 cv::Point2f cur\_key\_pt = cur\_pts\_flow\_cpu.at<cv::Point2f>(0, i);}
+\DoxyCodeLine{391                 cv::Point2f prev\_key\_pt = prev\_pts\_flow\_cpu.at<cv::Point2f>(0, i);}
+\DoxyCodeLine{392 }
+\DoxyCodeLine{393                 \textcolor{keywordtype}{float} moved\_x = cur\_key\_pt.x -\/ prev\_key\_pt.x;}
+\DoxyCodeLine{394                 \textcolor{keywordtype}{float} moved\_y = cur\_key\_pt.y -\/ prev\_key\_pt.y;}
+\DoxyCodeLine{395 }
+\DoxyCodeLine{396                 \textcolor{keywordflow}{if} (abs(moved\_x) < 100 \&\& abs(moved\_y) < 100 \&\& good\_bbox\_vec\_flags[i])}
+\DoxyCodeLine{397                     \textcolor{keywordflow}{if} (err\_cpu.at<\textcolor{keywordtype}{float}>(0, i) < flow\_error \&\& status\_cpu.at<\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}>(0, i) != 0 \&\&}
+\DoxyCodeLine{398                         ((\textcolor{keywordtype}{float})cur\_bbox\_vec[i].x + moved\_x) > 0 \&\& ((\textcolor{keywordtype}{float})cur\_bbox\_vec[i].y + moved\_y) > 0)}
+\DoxyCodeLine{399                     \{}
+\DoxyCodeLine{400                         cur\_bbox\_vec[i].x += moved\_x + 0.5;}
+\DoxyCodeLine{401                         cur\_bbox\_vec[i].y += moved\_y + 0.5;}
+\DoxyCodeLine{402                         result\_bbox\_vec.push\_back(cur\_bbox\_vec[i]);}
+\DoxyCodeLine{403                     \}}
+\DoxyCodeLine{404                     \textcolor{keywordflow}{else} good\_bbox\_vec\_flags[i] = \textcolor{keyword}{false};}
+\DoxyCodeLine{405                 \textcolor{keywordflow}{else} good\_bbox\_vec\_flags[i] = \textcolor{keyword}{false};}
+\DoxyCodeLine{406 }
+\DoxyCodeLine{407                 \textcolor{comment}{//if(!check\_error \&\& !good\_bbox\_vec\_flags[i]) result\_bbox\_vec.push\_back(cur\_bbox\_vec[i]);}}
+\DoxyCodeLine{408             \}}
+\DoxyCodeLine{409         \}}
+\DoxyCodeLine{410 }
+\DoxyCodeLine{411         cur\_pts\_flow\_gpu.swap(prev\_pts\_flow\_gpu);}
+\DoxyCodeLine{412         cur\_pts\_flow\_cpu.copyTo(prev\_pts\_flow\_cpu);}
+\DoxyCodeLine{413 }
+\DoxyCodeLine{414         \textcolor{keywordflow}{if} (old\_gpu\_id != gpu\_id)}
+\DoxyCodeLine{415             cv::cuda::setDevice(old\_gpu\_id);}
+\DoxyCodeLine{416 }
+\DoxyCodeLine{417         \textcolor{keywordflow}{return} result\_bbox\_vec;}
+\DoxyCodeLine{418     \}}
+\DoxyCodeLine{419 }
+\DoxyCodeLine{420 \};}
+\DoxyCodeLine{421 }
+\DoxyCodeLine{422 \textcolor{preprocessor}{\#elif defined(TRACK\_OPTFLOW) \&\& defined(OPENCV)}}
+\DoxyCodeLine{423 }
+\DoxyCodeLine{424 \textcolor{comment}{//\#include <opencv2/optflow.hpp>}}
+\DoxyCodeLine{425 \textcolor{preprocessor}{\#include <opencv2/video/tracking.hpp>}}
+\DoxyCodeLine{426 }
+\DoxyCodeLine{427 \textcolor{keyword}{class }Tracker\_optflow \{}
+\DoxyCodeLine{428 \textcolor{keyword}{public}:}
+\DoxyCodeLine{429     \textcolor{keyword}{const} \textcolor{keywordtype}{int} flow\_error;}
+\DoxyCodeLine{430 }
+\DoxyCodeLine{431 }
+\DoxyCodeLine{432     Tracker\_optflow(\textcolor{keywordtype}{int} win\_size = 15, \textcolor{keywordtype}{int} max\_level = 3, \textcolor{keywordtype}{int} iterations = 8000, \textcolor{keywordtype}{int} \_flow\_error = -\/1) :}
+\DoxyCodeLine{433         flow\_error((\_flow\_error > 0)? \_flow\_error:(win\_size*4))}
+\DoxyCodeLine{434     \{}
+\DoxyCodeLine{435         sync\_PyrLKOpticalFlow = cv::SparsePyrLKOpticalFlow::create();}
+\DoxyCodeLine{436         sync\_PyrLKOpticalFlow-\/>setWinSize(cv::Size(win\_size, win\_size));    \textcolor{comment}{// 9, 15, 21, 31}}
+\DoxyCodeLine{437         sync\_PyrLKOpticalFlow-\/>setMaxLevel(max\_level);        \textcolor{comment}{// +-\/ 3 pt}}
+\DoxyCodeLine{438 }
+\DoxyCodeLine{439     \}}
+\DoxyCodeLine{440 }
+\DoxyCodeLine{441     \textcolor{comment}{// just to avoid extra allocations}}
+\DoxyCodeLine{442     cv::Mat dst\_grey;}
+\DoxyCodeLine{443     cv::Mat prev\_pts\_flow, cur\_pts\_flow;}
+\DoxyCodeLine{444     cv::Mat status, err;}
+\DoxyCodeLine{445 }
+\DoxyCodeLine{446     cv::Mat src\_grey;    \textcolor{comment}{// used in both functions}}
+\DoxyCodeLine{447     cv::Ptr<cv::SparsePyrLKOpticalFlow> sync\_PyrLKOpticalFlow;}
+\DoxyCodeLine{448 }
+\DoxyCodeLine{449     std::vector<bbox\_t> cur\_bbox\_vec;}
+\DoxyCodeLine{450     std::vector<bool> good\_bbox\_vec\_flags;}
+\DoxyCodeLine{451 }
+\DoxyCodeLine{452     \textcolor{keywordtype}{void} update\_cur\_bbox\_vec(std::vector<bbox\_t> \_cur\_bbox\_vec)}
+\DoxyCodeLine{453     \{}
+\DoxyCodeLine{454         cur\_bbox\_vec = \_cur\_bbox\_vec;}
+\DoxyCodeLine{455         good\_bbox\_vec\_flags = std::vector<bool>(cur\_bbox\_vec.size(), \textcolor{keyword}{true});}
+\DoxyCodeLine{456         cv::Mat prev\_pts, cur\_pts\_flow;}
+\DoxyCodeLine{457 }
+\DoxyCodeLine{458         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&i : cur\_bbox\_vec) \{}
+\DoxyCodeLine{459             \textcolor{keywordtype}{float} x\_center = (i.x + i.w / 2.0F);}
+\DoxyCodeLine{460             \textcolor{keywordtype}{float} y\_center = (i.y + i.h / 2.0F);}
+\DoxyCodeLine{461             prev\_pts.push\_back(cv::Point2f(x\_center, y\_center));}
+\DoxyCodeLine{462         \}}
+\DoxyCodeLine{463 }
+\DoxyCodeLine{464         \textcolor{keywordflow}{if} (prev\_pts.rows == 0)}
+\DoxyCodeLine{465             prev\_pts\_flow = cv::Mat();}
+\DoxyCodeLine{466         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{467             cv::transpose(prev\_pts, prev\_pts\_flow);}
+\DoxyCodeLine{468     \}}
+\DoxyCodeLine{469 }
+\DoxyCodeLine{470 }
+\DoxyCodeLine{471     \textcolor{keywordtype}{void} update\_tracking\_flow(cv::Mat new\_src\_mat, std::vector<bbox\_t> \_cur\_bbox\_vec)}
+\DoxyCodeLine{472     \{}
+\DoxyCodeLine{473         \textcolor{keywordflow}{if} (new\_src\_mat.channels() == 1) \{}
+\DoxyCodeLine{474             src\_grey = new\_src\_mat.clone();}
+\DoxyCodeLine{475         \}}
+\DoxyCodeLine{476         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (new\_src\_mat.channels() == 3) \{}
+\DoxyCodeLine{477             cv::cvtColor(new\_src\_mat, src\_grey, CV\_BGR2GRAY, 1);}
+\DoxyCodeLine{478         \}}
+\DoxyCodeLine{479         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (new\_src\_mat.channels() == 4) \{}
+\DoxyCodeLine{480             cv::cvtColor(new\_src\_mat, src\_grey, CV\_BGRA2GRAY, 1);}
+\DoxyCodeLine{481         \}}
+\DoxyCodeLine{482         \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{483             std::cerr << \textcolor{stringliteral}{"{} Warning: new\_src\_mat.channels() is not: 1, 3 or 4. It is = "{}} << new\_src\_mat.channels() << \textcolor{stringliteral}{"{} \(\backslash\)n"{}};}
+\DoxyCodeLine{484             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{485         \}}
+\DoxyCodeLine{486         update\_cur\_bbox\_vec(\_cur\_bbox\_vec);}
+\DoxyCodeLine{487     \}}
+\DoxyCodeLine{488 }
+\DoxyCodeLine{489 }
+\DoxyCodeLine{490     std::vector<bbox\_t> tracking\_flow(cv::Mat new\_dst\_mat, \textcolor{keywordtype}{bool} check\_error = \textcolor{keyword}{true})}
+\DoxyCodeLine{491     \{}
+\DoxyCodeLine{492         \textcolor{keywordflow}{if} (sync\_PyrLKOpticalFlow.empty()) \{}
+\DoxyCodeLine{493             std::cout << \textcolor{stringliteral}{"{}sync\_PyrLKOpticalFlow isn't initialized \(\backslash\)n"{}};}
+\DoxyCodeLine{494             \textcolor{keywordflow}{return} cur\_bbox\_vec;}
+\DoxyCodeLine{495         \}}
+\DoxyCodeLine{496 }
+\DoxyCodeLine{497         cv::cvtColor(new\_dst\_mat, dst\_grey, CV\_BGR2GRAY, 1);}
+\DoxyCodeLine{498 }
+\DoxyCodeLine{499         \textcolor{keywordflow}{if} (src\_grey.rows != dst\_grey.rows || src\_grey.cols != dst\_grey.cols) \{}
+\DoxyCodeLine{500             src\_grey = dst\_grey.clone();}
+\DoxyCodeLine{501             \textcolor{comment}{//std::cerr << "{} Warning: src\_grey.rows != dst\_grey.rows || src\_grey.cols != dst\_grey.cols \(\backslash\)n"{};}}
+\DoxyCodeLine{502             \textcolor{keywordflow}{return} cur\_bbox\_vec;}
+\DoxyCodeLine{503         \}}
+\DoxyCodeLine{504 }
+\DoxyCodeLine{505         \textcolor{keywordflow}{if} (prev\_pts\_flow.cols < 1) \{}
+\DoxyCodeLine{506             \textcolor{keywordflow}{return} cur\_bbox\_vec;}
+\DoxyCodeLine{507         \}}
+\DoxyCodeLine{508 }
+\DoxyCodeLine{510         sync\_PyrLKOpticalFlow-\/>calc(src\_grey, dst\_grey, prev\_pts\_flow, cur\_pts\_flow, status, err);    \textcolor{comment}{// OpenCV 3.x}}
+\DoxyCodeLine{511 }
+\DoxyCodeLine{512         dst\_grey.copyTo(src\_grey);}
+\DoxyCodeLine{513 }
+\DoxyCodeLine{514         std::vector<bbox\_t> result\_bbox\_vec;}
+\DoxyCodeLine{515 }
+\DoxyCodeLine{516         \textcolor{keywordflow}{if} (err.rows == cur\_bbox\_vec.size() \&\& status.rows == cur\_bbox\_vec.size())}
+\DoxyCodeLine{517         \{}
+\DoxyCodeLine{518             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < cur\_bbox\_vec.size(); ++i)}
+\DoxyCodeLine{519             \{}
+\DoxyCodeLine{520                 cv::Point2f cur\_key\_pt = cur\_pts\_flow.at<cv::Point2f>(0, i);}
+\DoxyCodeLine{521                 cv::Point2f prev\_key\_pt = prev\_pts\_flow.at<cv::Point2f>(0, i);}
+\DoxyCodeLine{522 }
+\DoxyCodeLine{523                 \textcolor{keywordtype}{float} moved\_x = cur\_key\_pt.x -\/ prev\_key\_pt.x;}
+\DoxyCodeLine{524                 \textcolor{keywordtype}{float} moved\_y = cur\_key\_pt.y -\/ prev\_key\_pt.y;}
+\DoxyCodeLine{525 }
+\DoxyCodeLine{526                 \textcolor{keywordflow}{if} (abs(moved\_x) < 100 \&\& abs(moved\_y) < 100 \&\& good\_bbox\_vec\_flags[i])}
+\DoxyCodeLine{527                     \textcolor{keywordflow}{if} (err.at<\textcolor{keywordtype}{float}>(0, i) < flow\_error \&\& status.at<\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}>(0, i) != 0 \&\&}
+\DoxyCodeLine{528                         ((\textcolor{keywordtype}{float})cur\_bbox\_vec[i].x + moved\_x) > 0 \&\& ((\textcolor{keywordtype}{float})cur\_bbox\_vec[i].y + moved\_y) > 0)}
+\DoxyCodeLine{529                     \{}
+\DoxyCodeLine{530                         cur\_bbox\_vec[i].x += moved\_x + 0.5;}
+\DoxyCodeLine{531                         cur\_bbox\_vec[i].y += moved\_y + 0.5;}
+\DoxyCodeLine{532                         result\_bbox\_vec.push\_back(cur\_bbox\_vec[i]);}
+\DoxyCodeLine{533                     \}}
+\DoxyCodeLine{534                     \textcolor{keywordflow}{else} good\_bbox\_vec\_flags[i] = \textcolor{keyword}{false};}
+\DoxyCodeLine{535                 \textcolor{keywordflow}{else} good\_bbox\_vec\_flags[i] = \textcolor{keyword}{false};}
+\DoxyCodeLine{536 }
+\DoxyCodeLine{537                 \textcolor{comment}{//if(!check\_error \&\& !good\_bbox\_vec\_flags[i]) result\_bbox\_vec.push\_back(cur\_bbox\_vec[i]);}}
+\DoxyCodeLine{538             \}}
+\DoxyCodeLine{539         \}}
+\DoxyCodeLine{540 }
+\DoxyCodeLine{541         prev\_pts\_flow = cur\_pts\_flow.clone();}
+\DoxyCodeLine{542 }
+\DoxyCodeLine{543         \textcolor{keywordflow}{return} result\_bbox\_vec;}
+\DoxyCodeLine{544     \}}
+\DoxyCodeLine{545 }
+\DoxyCodeLine{546 \};}
+\DoxyCodeLine{547 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{548 }
+\DoxyCodeLine{549 \textcolor{keyword}{class }Tracker\_optflow \{\};}
+\DoxyCodeLine{550 }
+\DoxyCodeLine{551 \textcolor{preprocessor}{\#endif    }\textcolor{comment}{// defined(TRACK\_OPTFLOW) \&\& defined(OPENCV)}}
+\DoxyCodeLine{552 }
+\DoxyCodeLine{553 }
+\DoxyCodeLine{554 \textcolor{preprocessor}{\#ifdef OPENCV}}
+\DoxyCodeLine{555 }
+\DoxyCodeLine{556 \textcolor{keyword}{static} cv::Scalar obj\_id\_to\_color(\textcolor{keywordtype}{int} obj\_id) \{}
+\DoxyCodeLine{557     \textcolor{keywordtype}{int} \textcolor{keyword}{const} \mbox{\hyperlink{image_8c_a152d20c4917c0dd67a9b5694afcc4926}{colors}}[6][3] = \{ \{ 1,0,1 \},\{ 0,0,1 \},\{ 0,1,1 \},\{ 0,1,0 \},\{ 1,1,0 \},\{ 1,0,0 \} \};}
+\DoxyCodeLine{558     \textcolor{keywordtype}{int} \textcolor{keyword}{const} offset = obj\_id * 123457 \% 6;}
+\DoxyCodeLine{559     \textcolor{keywordtype}{int} \textcolor{keyword}{const} color\_scale = 150 + (obj\_id * 123457) \% 100;}
+\DoxyCodeLine{560     cv::Scalar color(\mbox{\hyperlink{image_8c_a152d20c4917c0dd67a9b5694afcc4926}{colors}}[offset][0], \mbox{\hyperlink{image_8c_a152d20c4917c0dd67a9b5694afcc4926}{colors}}[offset][1], \mbox{\hyperlink{image_8c_a152d20c4917c0dd67a9b5694afcc4926}{colors}}[offset][2]);}
+\DoxyCodeLine{561     color *= color\_scale;}
+\DoxyCodeLine{562     \textcolor{keywordflow}{return} color;}
+\DoxyCodeLine{563 \}}
+\DoxyCodeLine{564 }
+\DoxyCodeLine{565 \textcolor{keyword}{class }preview\_boxes\_t \{}
+\DoxyCodeLine{566     \textcolor{keyword}{enum} \{ frames\_history = 30 \};    \textcolor{comment}{// how long to keep the history saved}}
+\DoxyCodeLine{567 }
+\DoxyCodeLine{568     \textcolor{keyword}{struct }preview\_box\_track\_t \{}
+\DoxyCodeLine{569         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} track\_id, obj\_id, last\_showed\_frames\_ago;}
+\DoxyCodeLine{570         \textcolor{keywordtype}{bool} current\_detection;}
+\DoxyCodeLine{571         \mbox{\hyperlink{structbbox__t}{bbox\_t}} bbox;}
+\DoxyCodeLine{572         cv::Mat mat\_obj, mat\_resized\_obj;}
+\DoxyCodeLine{573         preview\_box\_track\_t() : track\_id(0), obj\_id(0), last\_showed\_frames\_ago(frames\_history), current\_detection(false) \{\}}
+\DoxyCodeLine{574     \};}
+\DoxyCodeLine{575     std::vector<preview\_box\_track\_t> preview\_box\_track\_id;}
+\DoxyCodeLine{576     \textcolor{keywordtype}{size\_t} \textcolor{keyword}{const} preview\_box\_size, bottom\_offset;}
+\DoxyCodeLine{577     \textcolor{keywordtype}{bool} \textcolor{keyword}{const} one\_off\_detections;}
+\DoxyCodeLine{578 \textcolor{keyword}{public}:}
+\DoxyCodeLine{579     preview\_boxes\_t(\textcolor{keywordtype}{size\_t} \_preview\_box\_size = 100, \textcolor{keywordtype}{size\_t} \_bottom\_offset = 100, \textcolor{keywordtype}{bool} \_one\_off\_detections = \textcolor{keyword}{false}) :}
+\DoxyCodeLine{580         preview\_box\_size(\_preview\_box\_size), bottom\_offset(\_bottom\_offset), one\_off\_detections(\_one\_off\_detections)}
+\DoxyCodeLine{581     \{\}}
+\DoxyCodeLine{582 }
+\DoxyCodeLine{583     \textcolor{keywordtype}{void} \mbox{\hyperlink{classset}{set}}(cv::Mat src\_mat, std::vector<bbox\_t> result\_vec)}
+\DoxyCodeLine{584     \{}
+\DoxyCodeLine{585         \textcolor{keywordtype}{size\_t} \textcolor{keyword}{const} count\_preview\_boxes = src\_mat.cols / preview\_box\_size;}
+\DoxyCodeLine{586         \textcolor{keywordflow}{if} (preview\_box\_track\_id.size() != count\_preview\_boxes) preview\_box\_track\_id.resize(count\_preview\_boxes);}
+\DoxyCodeLine{587 }
+\DoxyCodeLine{588         \textcolor{comment}{// increment frames history}}
+\DoxyCodeLine{589         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&i : preview\_box\_track\_id)}
+\DoxyCodeLine{590             i.last\_showed\_frames\_ago = \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{std::min}}((\textcolor{keywordtype}{unsigned})frames\_history, i.last\_showed\_frames\_ago + 1);}
+\DoxyCodeLine{591 }
+\DoxyCodeLine{592         \textcolor{comment}{// occupy empty boxes}}
+\DoxyCodeLine{593         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&k : result\_vec) \{}
+\DoxyCodeLine{594             \textcolor{keywordtype}{bool} found = \textcolor{keyword}{false};}
+\DoxyCodeLine{595             \textcolor{comment}{// find the same (track\_id)}}
+\DoxyCodeLine{596             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&i : preview\_box\_track\_id) \{}
+\DoxyCodeLine{597                 \textcolor{keywordflow}{if} (i.track\_id == k.track\_id) \{}
+\DoxyCodeLine{598                     \textcolor{keywordflow}{if} (!one\_off\_detections) i.last\_showed\_frames\_ago = 0; \textcolor{comment}{// for tracked objects}}
+\DoxyCodeLine{599                     found = \textcolor{keyword}{true};}
+\DoxyCodeLine{600                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{601                 \}}
+\DoxyCodeLine{602             \}}
+\DoxyCodeLine{603             \textcolor{keywordflow}{if} (!found) \{}
+\DoxyCodeLine{604                 \textcolor{comment}{// find empty box}}
+\DoxyCodeLine{605                 \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&i : preview\_box\_track\_id) \{}
+\DoxyCodeLine{606                     \textcolor{keywordflow}{if} (i.last\_showed\_frames\_ago == frames\_history) \{}
+\DoxyCodeLine{607                         \textcolor{keywordflow}{if} (!one\_off\_detections \&\& k.frames\_counter == 0) \textcolor{keywordflow}{break}; \textcolor{comment}{// don't show if obj isn't tracked yet}}
+\DoxyCodeLine{608                         i.track\_id = k.track\_id;}
+\DoxyCodeLine{609                         i.obj\_id = k.obj\_id;}
+\DoxyCodeLine{610                         i.bbox = k;}
+\DoxyCodeLine{611                         i.last\_showed\_frames\_ago = 0;}
+\DoxyCodeLine{612                         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{613                     \}}
+\DoxyCodeLine{614                 \}}
+\DoxyCodeLine{615             \}}
+\DoxyCodeLine{616         \}}
+\DoxyCodeLine{617 }
+\DoxyCodeLine{618         \textcolor{comment}{// draw preview box (from old or current frame)}}
+\DoxyCodeLine{619         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < preview\_box\_track\_id.size(); ++i)}
+\DoxyCodeLine{620         \{}
+\DoxyCodeLine{621             \textcolor{comment}{// get object image}}
+\DoxyCodeLine{622             cv::Mat dst = preview\_box\_track\_id[i].mat\_resized\_obj;}
+\DoxyCodeLine{623             preview\_box\_track\_id[i].current\_detection = \textcolor{keyword}{false};}
+\DoxyCodeLine{624 }
+\DoxyCodeLine{625             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&k : result\_vec) \{}
+\DoxyCodeLine{626                 \textcolor{keywordflow}{if} (preview\_box\_track\_id[i].track\_id == k.track\_id) \{}
+\DoxyCodeLine{627                     \textcolor{keywordflow}{if} (one\_off\_detections \&\& preview\_box\_track\_id[i].last\_showed\_frames\_ago > 0) \{}
+\DoxyCodeLine{628                         preview\_box\_track\_id[i].last\_showed\_frames\_ago = frames\_history; \textcolor{keywordflow}{break};}
+\DoxyCodeLine{629                     \}}
+\DoxyCodeLine{630                     \mbox{\hyperlink{structbbox__t}{bbox\_t}} b = k;}
+\DoxyCodeLine{631                     cv::Rect \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}}(b.\mbox{\hyperlink{structbbox__t_afe740d8071d60bfb147b55e0c36a2832}{x}}, b.\mbox{\hyperlink{structbbox__t_a3d7bd44bf4c3e7e8d544eeff495699d0}{y}}, b.\mbox{\hyperlink{structbbox__t_a8fd711b6f086ce712d5f17b3ef895f8f}{w}}, b.\mbox{\hyperlink{structbbox__t_ae57f294a4f7c522f0c98dda04e6efd3e}{h}});}
+\DoxyCodeLine{632                     cv::Rect img\_rect(cv::Point2i(0, 0), src\_mat.size());}
+\DoxyCodeLine{633                     cv::Rect rect\_roi = \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}} \& img\_rect;}
+\DoxyCodeLine{634                     \textcolor{keywordflow}{if} (rect\_roi.width > 1 || rect\_roi.height > 1) \{}
+\DoxyCodeLine{635                         cv::Mat roi = src\_mat(rect\_roi);}
+\DoxyCodeLine{636                         cv::resize(roi, dst, cv::Size(preview\_box\_size, preview\_box\_size), cv::INTER\_NEAREST);}
+\DoxyCodeLine{637                         preview\_box\_track\_id[i].mat\_obj = roi.clone();}
+\DoxyCodeLine{638                         preview\_box\_track\_id[i].mat\_resized\_obj = dst.clone();}
+\DoxyCodeLine{639                         preview\_box\_track\_id[i].current\_detection = \textcolor{keyword}{true};}
+\DoxyCodeLine{640                         preview\_box\_track\_id[i].bbox = k;}
+\DoxyCodeLine{641                     \}}
+\DoxyCodeLine{642                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{643                 \}}
+\DoxyCodeLine{644             \}}
+\DoxyCodeLine{645         \}}
+\DoxyCodeLine{646     \}}
+\DoxyCodeLine{647 }
+\DoxyCodeLine{648 }
+\DoxyCodeLine{649     \textcolor{keywordtype}{void} draw(cv::Mat draw\_mat, \textcolor{keywordtype}{bool} show\_small\_boxes = \textcolor{keyword}{false})}
+\DoxyCodeLine{650     \{}
+\DoxyCodeLine{651         \textcolor{comment}{// draw preview box (from old or current frame)}}
+\DoxyCodeLine{652         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < preview\_box\_track\_id.size(); ++i)}
+\DoxyCodeLine{653         \{}
+\DoxyCodeLine{654             \textcolor{keyword}{auto} \&prev\_box = preview\_box\_track\_id[i];}
+\DoxyCodeLine{655 }
+\DoxyCodeLine{656             \textcolor{comment}{// draw object image}}
+\DoxyCodeLine{657             cv::Mat dst = prev\_box.mat\_resized\_obj;}
+\DoxyCodeLine{658             \textcolor{keywordflow}{if} (prev\_box.last\_showed\_frames\_ago < frames\_history \&\&}
+\DoxyCodeLine{659                 dst.size() == cv::Size(preview\_box\_size, preview\_box\_size))}
+\DoxyCodeLine{660             \{}
+\DoxyCodeLine{661                 cv::Rect dst\_rect\_roi(cv::Point2i(i * preview\_box\_size, draw\_mat.rows -\/ bottom\_offset), dst.size());}
+\DoxyCodeLine{662                 cv::Mat dst\_roi = draw\_mat(dst\_rect\_roi);}
+\DoxyCodeLine{663                 dst.copyTo(dst\_roi);}
+\DoxyCodeLine{664 }
+\DoxyCodeLine{665                 cv::Scalar color = obj\_id\_to\_color(prev\_box.obj\_id);}
+\DoxyCodeLine{666                 \textcolor{keywordtype}{int} thickness = (prev\_box.current\_detection) ? 5 : 1;}
+\DoxyCodeLine{667                 cv::rectangle(draw\_mat, dst\_rect\_roi, color, thickness);}
+\DoxyCodeLine{668 }
+\DoxyCodeLine{669                 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \textcolor{keyword}{const} track\_id = prev\_box.track\_id;}
+\DoxyCodeLine{670                 std::string track\_id\_str = (track\_id > 0) ? std::to\_string(track\_id) : \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{671                 putText(draw\_mat, track\_id\_str, dst\_rect\_roi.tl() -\/ cv::Point2i(-\/4, 5), cv::FONT\_HERSHEY\_COMPLEX\_SMALL, 0.9, cv::Scalar(0, 0, 0), 2);}
+\DoxyCodeLine{672 }
+\DoxyCodeLine{673                 std::string size\_str = std::to\_string(prev\_box.bbox.w) + \textcolor{stringliteral}{"{}x"{}} + std::to\_string(prev\_box.bbox.h);}
+\DoxyCodeLine{674                 putText(draw\_mat, size\_str, dst\_rect\_roi.tl() + cv::Point2i(0, 12), cv::FONT\_HERSHEY\_COMPLEX\_SMALL, 0.8, cv::Scalar(0, 0, 0), 1);}
+\DoxyCodeLine{675 }
+\DoxyCodeLine{676                 \textcolor{keywordflow}{if} (!one\_off\_detections \&\& prev\_box.current\_detection) \{}
+\DoxyCodeLine{677                     cv::line(draw\_mat, dst\_rect\_roi.tl() + cv::Point2i(preview\_box\_size, 0),}
+\DoxyCodeLine{678                         cv::Point2i(prev\_box.bbox.x, prev\_box.bbox.y + prev\_box.bbox.h),}
+\DoxyCodeLine{679                         color);}
+\DoxyCodeLine{680                 \}}
+\DoxyCodeLine{681 }
+\DoxyCodeLine{682                 \textcolor{keywordflow}{if} (one\_off\_detections \&\& show\_small\_boxes) \{}
+\DoxyCodeLine{683                     cv::Rect src\_rect\_roi(cv::Point2i(prev\_box.bbox.x, prev\_box.bbox.y),}
+\DoxyCodeLine{684                         cv::Size(prev\_box.bbox.w, prev\_box.bbox.h));}
+\DoxyCodeLine{685                     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \textcolor{keyword}{const} color\_history = (255 * prev\_box.last\_showed\_frames\_ago) / frames\_history;}
+\DoxyCodeLine{686                     color = cv::Scalar(255 -\/ 3 * color\_history, 255 -\/ 2 * color\_history, 255 -\/ 1 * color\_history);}
+\DoxyCodeLine{687                     \textcolor{keywordflow}{if} (prev\_box.mat\_obj.size() == src\_rect\_roi.size()) \{}
+\DoxyCodeLine{688                         prev\_box.mat\_obj.copyTo(draw\_mat(src\_rect\_roi));}
+\DoxyCodeLine{689                     \}}
+\DoxyCodeLine{690                     cv::rectangle(draw\_mat, src\_rect\_roi, color, thickness);}
+\DoxyCodeLine{691                     putText(draw\_mat, track\_id\_str, src\_rect\_roi.tl() -\/ cv::Point2i(0, 10), cv::FONT\_HERSHEY\_COMPLEX\_SMALL, 0.8, cv::Scalar(0, 0, 0), 1);}
+\DoxyCodeLine{692                 \}}
+\DoxyCodeLine{693             \}}
+\DoxyCodeLine{694         \}}
+\DoxyCodeLine{695     \}}
+\DoxyCodeLine{696 \};}
+\DoxyCodeLine{697 }
+\DoxyCodeLine{698 }
+\DoxyCodeLine{699 \textcolor{keyword}{class }track\_kalman\_t}
+\DoxyCodeLine{700 \{}
+\DoxyCodeLine{701     \textcolor{keywordtype}{int} track\_id\_counter;}
+\DoxyCodeLine{702     std::chrono::steady\_clock::time\_point global\_last\_time;}
+\DoxyCodeLine{703     \textcolor{keywordtype}{float} dT;}
+\DoxyCodeLine{704 }
+\DoxyCodeLine{705 \textcolor{keyword}{public}:}
+\DoxyCodeLine{706     \textcolor{keywordtype}{int} max\_objects;    \textcolor{comment}{// max objects for tracking}}
+\DoxyCodeLine{707     \textcolor{keywordtype}{int} min\_frames;     \textcolor{comment}{// min frames to consider an object as detected}}
+\DoxyCodeLine{708     \textcolor{keyword}{const} \textcolor{keywordtype}{float} max\_dist;   \textcolor{comment}{// max distance (in px) to track with the same ID}}
+\DoxyCodeLine{709     cv::Size img\_size;  \textcolor{comment}{// max value of x,y,w,h}}
+\DoxyCodeLine{710 }
+\DoxyCodeLine{711     \textcolor{keyword}{struct }tst\_t \{}
+\DoxyCodeLine{712         \textcolor{keywordtype}{int} track\_id;}
+\DoxyCodeLine{713         \textcolor{keywordtype}{int} state\_id;}
+\DoxyCodeLine{714         std::chrono::steady\_clock::time\_point last\_time;}
+\DoxyCodeLine{715         \textcolor{keywordtype}{int} detection\_count;}
+\DoxyCodeLine{716         tst\_t() : track\_id(-\/1), state\_id(-\/1) \{\}}
+\DoxyCodeLine{717     \};}
+\DoxyCodeLine{718     std::vector<tst\_t> track\_id\_state\_id\_time;}
+\DoxyCodeLine{719     std::vector<bbox\_t> result\_vec\_pred;}
+\DoxyCodeLine{720 }
+\DoxyCodeLine{721     \textcolor{keyword}{struct }one\_kalman\_t;}
+\DoxyCodeLine{722     std::vector<one\_kalman\_t> kalman\_vec;}
+\DoxyCodeLine{723 }
+\DoxyCodeLine{724     \textcolor{keyword}{struct }one\_kalman\_t}
+\DoxyCodeLine{725     \{}
+\DoxyCodeLine{726         cv::KalmanFilter kf;}
+\DoxyCodeLine{727         cv::Mat state;}
+\DoxyCodeLine{728         cv::Mat meas;}
+\DoxyCodeLine{729         \textcolor{keywordtype}{int} measSize, stateSize, contrSize;}
+\DoxyCodeLine{730 }
+\DoxyCodeLine{731         \textcolor{keywordtype}{void} set\_delta\_time(\textcolor{keywordtype}{float} dT) \{}
+\DoxyCodeLine{732             kf.transitionMatrix.at<\textcolor{keywordtype}{float}>(2) = dT;}
+\DoxyCodeLine{733             kf.transitionMatrix.at<\textcolor{keywordtype}{float}>(9) = dT;}
+\DoxyCodeLine{734         \}}
+\DoxyCodeLine{735 }
+\DoxyCodeLine{736         \textcolor{keywordtype}{void} \mbox{\hyperlink{classset}{set}}(\mbox{\hyperlink{structbbox__t}{bbox\_t}} \mbox{\hyperlink{structbox}{box}})}
+\DoxyCodeLine{737         \{}
+\DoxyCodeLine{738             initialize\_kalman();}
+\DoxyCodeLine{739 }
+\DoxyCodeLine{740             kf.errorCovPre.at<\textcolor{keywordtype}{float}>(0) = 1; \textcolor{comment}{// px}}
+\DoxyCodeLine{741             kf.errorCovPre.at<\textcolor{keywordtype}{float}>(7) = 1; \textcolor{comment}{// px}}
+\DoxyCodeLine{742             kf.errorCovPre.at<\textcolor{keywordtype}{float}>(14) = 1;}
+\DoxyCodeLine{743             kf.errorCovPre.at<\textcolor{keywordtype}{float}>(21) = 1;}
+\DoxyCodeLine{744             kf.errorCovPre.at<\textcolor{keywordtype}{float}>(28) = 1; \textcolor{comment}{// px}}
+\DoxyCodeLine{745             kf.errorCovPre.at<\textcolor{keywordtype}{float}>(35) = 1; \textcolor{comment}{// px}}
+\DoxyCodeLine{746 }
+\DoxyCodeLine{747             state.at<\textcolor{keywordtype}{float}>(0) = \mbox{\hyperlink{structbox}{box}}.\mbox{\hyperlink{structbox_a26adb5cfaf492245aba926b2f212b712}{x}};}
+\DoxyCodeLine{748             state.at<\textcolor{keywordtype}{float}>(1) = \mbox{\hyperlink{structbox}{box}}.\mbox{\hyperlink{structbox_ab25e5389fd474ccd83c7dfcf0b1f9957}{y}};}
+\DoxyCodeLine{749             state.at<\textcolor{keywordtype}{float}>(2) = 0;}
+\DoxyCodeLine{750             state.at<\textcolor{keywordtype}{float}>(3) = 0;}
+\DoxyCodeLine{751             state.at<\textcolor{keywordtype}{float}>(4) = \mbox{\hyperlink{structbox}{box}}.\mbox{\hyperlink{structbox_abd9b0191e52f22befa76bcf37b9e6477}{w}};}
+\DoxyCodeLine{752             state.at<\textcolor{keywordtype}{float}>(5) = \mbox{\hyperlink{structbox}{box}}.\mbox{\hyperlink{structbox_a56959fa604cfb411d0c001be7c444d05}{h}};}
+\DoxyCodeLine{753             \textcolor{comment}{// <<<< Initialization}}
+\DoxyCodeLine{754 }
+\DoxyCodeLine{755             kf.statePost = state;}
+\DoxyCodeLine{756         \}}
+\DoxyCodeLine{757 }
+\DoxyCodeLine{758         \textcolor{comment}{// Kalman.correct() calculates: statePost = statePre + gain * (z(k)-\/measurementMatrix*statePre);}}
+\DoxyCodeLine{759         \textcolor{comment}{// corrected state (x(k)): x(k)=x'(k)+K(k)*(z(k)-\/H*x'(k))}}
+\DoxyCodeLine{760         \textcolor{keywordtype}{void} correct(\mbox{\hyperlink{structbbox__t}{bbox\_t}} \mbox{\hyperlink{structbox}{box}}) \{}
+\DoxyCodeLine{761             meas.at<\textcolor{keywordtype}{float}>(0) = \mbox{\hyperlink{structbox}{box}}.\mbox{\hyperlink{structbox_a26adb5cfaf492245aba926b2f212b712}{x}};}
+\DoxyCodeLine{762             meas.at<\textcolor{keywordtype}{float}>(1) = \mbox{\hyperlink{structbox}{box}}.\mbox{\hyperlink{structbox_ab25e5389fd474ccd83c7dfcf0b1f9957}{y}};}
+\DoxyCodeLine{763             meas.at<\textcolor{keywordtype}{float}>(2) = \mbox{\hyperlink{structbox}{box}}.\mbox{\hyperlink{structbox_abd9b0191e52f22befa76bcf37b9e6477}{w}};}
+\DoxyCodeLine{764             meas.at<\textcolor{keywordtype}{float}>(3) = \mbox{\hyperlink{structbox}{box}}.\mbox{\hyperlink{structbox_a56959fa604cfb411d0c001be7c444d05}{h}};}
+\DoxyCodeLine{765 }
+\DoxyCodeLine{766             kf.correct(meas);}
+\DoxyCodeLine{767 }
+\DoxyCodeLine{768             \mbox{\hyperlink{structbbox__t}{bbox\_t}} new\_box = predict();}
+\DoxyCodeLine{769             \textcolor{keywordflow}{if} (new\_box.\mbox{\hyperlink{structbbox__t_a8fd711b6f086ce712d5f17b3ef895f8f}{w}} == 0 || new\_box.\mbox{\hyperlink{structbbox__t_ae57f294a4f7c522f0c98dda04e6efd3e}{h}} == 0) \{}
+\DoxyCodeLine{770                 \mbox{\hyperlink{classset}{set}}(\mbox{\hyperlink{structbox}{box}});}
+\DoxyCodeLine{771                 \textcolor{comment}{//std::cerr << "{} force set(): track\_id = "{} << box.track\_id <<}}
+\DoxyCodeLine{772                 \textcolor{comment}{//    "{}, x = "{} << box.x << "{}, y = "{} << box.y << "{}, w = "{} << box.w << "{}, h = "{} << box.h << std::endl;}}
+\DoxyCodeLine{773             \}}
+\DoxyCodeLine{774         \}}
+\DoxyCodeLine{775 }
+\DoxyCodeLine{776         \textcolor{comment}{// Kalman.predict() calculates: statePre = TransitionMatrix * statePost;}}
+\DoxyCodeLine{777         \textcolor{comment}{// predicted state (x'(k)): x(k)=A*x(k-\/1)+B*u(k)}}
+\DoxyCodeLine{778         \mbox{\hyperlink{structbbox__t}{bbox\_t}} predict() \{}
+\DoxyCodeLine{779             \mbox{\hyperlink{structbbox__t}{bbox\_t}} \mbox{\hyperlink{darknet_8h_a35be482f569ea334a35ba069ce601a7a}{box}};}
+\DoxyCodeLine{780             state = kf.predict();}
+\DoxyCodeLine{781 }
+\DoxyCodeLine{782             \mbox{\hyperlink{structbox}{box}}.\mbox{\hyperlink{structbox_a26adb5cfaf492245aba926b2f212b712}{x}} = state.at<\textcolor{keywordtype}{float}>(0);}
+\DoxyCodeLine{783             \mbox{\hyperlink{structbox}{box}}.\mbox{\hyperlink{structbox_ab25e5389fd474ccd83c7dfcf0b1f9957}{y}} = state.at<\textcolor{keywordtype}{float}>(1);}
+\DoxyCodeLine{784             \mbox{\hyperlink{structbox}{box}}.\mbox{\hyperlink{structbox_abd9b0191e52f22befa76bcf37b9e6477}{w}} = state.at<\textcolor{keywordtype}{float}>(4);}
+\DoxyCodeLine{785             \mbox{\hyperlink{structbox}{box}}.\mbox{\hyperlink{structbox_a56959fa604cfb411d0c001be7c444d05}{h}} = state.at<\textcolor{keywordtype}{float}>(5);}
+\DoxyCodeLine{786             \textcolor{keywordflow}{return} \mbox{\hyperlink{darknet_8h_a35be482f569ea334a35ba069ce601a7a}{box}};}
+\DoxyCodeLine{787         \}}
+\DoxyCodeLine{788 }
+\DoxyCodeLine{789         \textcolor{keywordtype}{void} initialize\_kalman()}
+\DoxyCodeLine{790         \{}
+\DoxyCodeLine{791             kf = cv::KalmanFilter(stateSize, measSize, contrSize, CV\_32F);}
+\DoxyCodeLine{792 }
+\DoxyCodeLine{793             \textcolor{comment}{// Transition State Matrix A}}
+\DoxyCodeLine{794             \textcolor{comment}{// Note: set dT at each processing step!}}
+\DoxyCodeLine{795             \textcolor{comment}{// [ 1 0 dT 0  0 0 ]}}
+\DoxyCodeLine{796             \textcolor{comment}{// [ 0 1 0  dT 0 0 ]}}
+\DoxyCodeLine{797             \textcolor{comment}{// [ 0 0 1  0  0 0 ]}}
+\DoxyCodeLine{798             \textcolor{comment}{// [ 0 0 0  1  0 0 ]}}
+\DoxyCodeLine{799             \textcolor{comment}{// [ 0 0 0  0  1 0 ]}}
+\DoxyCodeLine{800             \textcolor{comment}{// [ 0 0 0  0  0 1 ]}}
+\DoxyCodeLine{801             cv::setIdentity(kf.transitionMatrix);}
+\DoxyCodeLine{802 }
+\DoxyCodeLine{803             \textcolor{comment}{// Measure Matrix H}}
+\DoxyCodeLine{804             \textcolor{comment}{// [ 1 0 0 0 0 0 ]}}
+\DoxyCodeLine{805             \textcolor{comment}{// [ 0 1 0 0 0 0 ]}}
+\DoxyCodeLine{806             \textcolor{comment}{// [ 0 0 0 0 1 0 ]}}
+\DoxyCodeLine{807             \textcolor{comment}{// [ 0 0 0 0 0 1 ]}}
+\DoxyCodeLine{808             kf.measurementMatrix = cv::Mat::zeros(measSize, stateSize, CV\_32F);}
+\DoxyCodeLine{809             kf.measurementMatrix.at<\textcolor{keywordtype}{float}>(0) = 1.0f;}
+\DoxyCodeLine{810             kf.measurementMatrix.at<\textcolor{keywordtype}{float}>(7) = 1.0f;}
+\DoxyCodeLine{811             kf.measurementMatrix.at<\textcolor{keywordtype}{float}>(16) = 1.0f;}
+\DoxyCodeLine{812             kf.measurementMatrix.at<\textcolor{keywordtype}{float}>(23) = 1.0f;}
+\DoxyCodeLine{813 }
+\DoxyCodeLine{814             \textcolor{comment}{// Process Noise Covariance Matrix Q -\/ result smoother with lower values (1e-\/2)}}
+\DoxyCodeLine{815             \textcolor{comment}{// [ Ex   0   0     0     0    0  ]}}
+\DoxyCodeLine{816             \textcolor{comment}{// [ 0    Ey  0     0     0    0  ]}}
+\DoxyCodeLine{817             \textcolor{comment}{// [ 0    0   Ev\_x  0     0    0  ]}}
+\DoxyCodeLine{818             \textcolor{comment}{// [ 0    0   0     Ev\_y  0    0  ]}}
+\DoxyCodeLine{819             \textcolor{comment}{// [ 0    0   0     0     Ew   0  ]}}
+\DoxyCodeLine{820             \textcolor{comment}{// [ 0    0   0     0     0    Eh ]}}
+\DoxyCodeLine{821             \textcolor{comment}{//cv::setIdentity(kf.processNoiseCov, cv::Scalar(1e-\/3));}}
+\DoxyCodeLine{822             kf.processNoiseCov.at<\textcolor{keywordtype}{float}>(0) = 1e-\/2;}
+\DoxyCodeLine{823             kf.processNoiseCov.at<\textcolor{keywordtype}{float}>(7) = 1e-\/2;}
+\DoxyCodeLine{824             kf.processNoiseCov.at<\textcolor{keywordtype}{float}>(14) = 1e-\/2;\textcolor{comment}{// 5.0f;}}
+\DoxyCodeLine{825             kf.processNoiseCov.at<\textcolor{keywordtype}{float}>(21) = 1e-\/2;\textcolor{comment}{// 5.0f;}}
+\DoxyCodeLine{826             kf.processNoiseCov.at<\textcolor{keywordtype}{float}>(28) = 5e-\/3;}
+\DoxyCodeLine{827             kf.processNoiseCov.at<\textcolor{keywordtype}{float}>(35) = 5e-\/3;}
+\DoxyCodeLine{828 }
+\DoxyCodeLine{829             \textcolor{comment}{// Measures Noise Covariance Matrix R -\/ result smoother with higher values (1e-\/1)}}
+\DoxyCodeLine{830             cv::setIdentity(kf.measurementNoiseCov, cv::Scalar(1e-\/1));}
+\DoxyCodeLine{831 }
+\DoxyCodeLine{832             \textcolor{comment}{//cv::setIdentity(kf.errorCovPost, cv::Scalar::all(1e-\/2));}}
+\DoxyCodeLine{833             \textcolor{comment}{// <<<< Kalman Filter}}
+\DoxyCodeLine{834 }
+\DoxyCodeLine{835             set\_delta\_time(0);}
+\DoxyCodeLine{836         \}}
+\DoxyCodeLine{837 }
+\DoxyCodeLine{838 }
+\DoxyCodeLine{839         one\_kalman\_t(\textcolor{keywordtype}{int} \_stateSize = 6, \textcolor{keywordtype}{int} \_measSize = 4, \textcolor{keywordtype}{int} \_contrSize = 0) :}
+\DoxyCodeLine{840             kf(\_stateSize, \_measSize, \_contrSize, CV\_32F), measSize(\_measSize), stateSize(\_stateSize), contrSize(\_contrSize)}
+\DoxyCodeLine{841         \{}
+\DoxyCodeLine{842             state = cv::Mat(stateSize, 1, CV\_32F);  \textcolor{comment}{// [x,y,v\_x,v\_y,w,h]}}
+\DoxyCodeLine{843             meas = cv::Mat(measSize, 1, CV\_32F);    \textcolor{comment}{// [z\_x,z\_y,z\_w,z\_h]}}
+\DoxyCodeLine{844             \textcolor{comment}{//cv::Mat procNoise(stateSize, 1, type)}}
+\DoxyCodeLine{845             \textcolor{comment}{// [E\_x,E\_y,E\_v\_x,E\_v\_y,E\_w,E\_h]}}
+\DoxyCodeLine{846 }
+\DoxyCodeLine{847             initialize\_kalman();}
+\DoxyCodeLine{848         \}}
+\DoxyCodeLine{849     \};}
+\DoxyCodeLine{850     \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{851 }
+\DoxyCodeLine{852 }
+\DoxyCodeLine{853 }
+\DoxyCodeLine{854     track\_kalman\_t(\textcolor{keywordtype}{int} \_max\_objects = 1000, \textcolor{keywordtype}{int} \_min\_frames = 3, \textcolor{keywordtype}{float} \_max\_dist = 40, cv::Size \_img\_size = cv::Size(10000, 10000)) :}
+\DoxyCodeLine{855         track\_id\_counter(0), max\_objects(\_max\_objects), min\_frames(\_min\_frames), max\_dist(\_max\_dist), img\_size(\_img\_size)}
+\DoxyCodeLine{856     \{}
+\DoxyCodeLine{857         kalman\_vec.resize(max\_objects);}
+\DoxyCodeLine{858         track\_id\_state\_id\_time.resize(max\_objects);}
+\DoxyCodeLine{859         result\_vec\_pred.resize(max\_objects);}
+\DoxyCodeLine{860     \}}
+\DoxyCodeLine{861 }
+\DoxyCodeLine{862     \textcolor{keywordtype}{float} calc\_dt() \{}
+\DoxyCodeLine{863         dT = std::chrono::duration<double>(std::chrono::steady\_clock::now() -\/ global\_last\_time).count();}
+\DoxyCodeLine{864         \textcolor{keywordflow}{return} dT;}
+\DoxyCodeLine{865     \}}
+\DoxyCodeLine{866 }
+\DoxyCodeLine{867     \textcolor{keyword}{static} \textcolor{keywordtype}{float} get\_distance(\textcolor{keywordtype}{float} src\_x, \textcolor{keywordtype}{float} src\_y, \textcolor{keywordtype}{float} dst\_x, \textcolor{keywordtype}{float} dst\_y) \{}
+\DoxyCodeLine{868         \textcolor{keywordflow}{return} sqrtf((src\_x -\/ dst\_x)*(src\_x -\/ dst\_x) + (src\_y -\/ dst\_y)*(src\_y -\/ dst\_y));}
+\DoxyCodeLine{869     \}}
+\DoxyCodeLine{870 }
+\DoxyCodeLine{871     \textcolor{keywordtype}{void} clear\_old\_states() \{}
+\DoxyCodeLine{872         \textcolor{comment}{// clear old bboxes}}
+\DoxyCodeLine{873         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} state\_id = 0; state\_id < track\_id\_state\_id\_time.size(); ++state\_id)}
+\DoxyCodeLine{874         \{}
+\DoxyCodeLine{875             \textcolor{keywordtype}{float} time\_sec = std::chrono::duration<double>(std::chrono::steady\_clock::now() -\/ track\_id\_state\_id\_time[state\_id].last\_time).count();}
+\DoxyCodeLine{876             \textcolor{keywordtype}{float} time\_wait = 0.5;    \textcolor{comment}{// 0.5 second}}
+\DoxyCodeLine{877             \textcolor{keywordflow}{if} (track\_id\_state\_id\_time[state\_id].track\_id > -\/1)}
+\DoxyCodeLine{878             \{}
+\DoxyCodeLine{879                 \textcolor{keywordflow}{if} ((result\_vec\_pred[state\_id].\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}} > img\_size.width) ||}
+\DoxyCodeLine{880                     (result\_vec\_pred[state\_id].y > img\_size.height))}
+\DoxyCodeLine{881                 \{}
+\DoxyCodeLine{882                     track\_id\_state\_id\_time[state\_id].track\_id = -\/1;}
+\DoxyCodeLine{883                 \}}
+\DoxyCodeLine{884 }
+\DoxyCodeLine{885                 \textcolor{keywordflow}{if} (time\_sec >= time\_wait || track\_id\_state\_id\_time[state\_id].detection\_count < 0) \{}
+\DoxyCodeLine{886                     \textcolor{comment}{//std::cerr << "{} remove track\_id = "{} << track\_id\_state\_id\_time[state\_id].track\_id << "{}, state\_id = "{} << state\_id << std::endl;}}
+\DoxyCodeLine{887                     track\_id\_state\_id\_time[state\_id].track\_id = -\/1; \textcolor{comment}{// remove bbox}}
+\DoxyCodeLine{888                 \}}
+\DoxyCodeLine{889             \}}
+\DoxyCodeLine{890         \}}
+\DoxyCodeLine{891     \}}
+\DoxyCodeLine{892 }
+\DoxyCodeLine{893     tst\_t get\_state\_id(\mbox{\hyperlink{structbbox__t}{bbox\_t}} find\_box, std::vector<bool> \&busy\_vec)}
+\DoxyCodeLine{894     \{}
+\DoxyCodeLine{895         tst\_t tst;}
+\DoxyCodeLine{896         tst.state\_id = -\/1;}
+\DoxyCodeLine{897 }
+\DoxyCodeLine{898         \textcolor{keywordtype}{float} min\_dist = \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{std::numeric\_limits<float>::max}}();}
+\DoxyCodeLine{899 }
+\DoxyCodeLine{900         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < max\_objects; ++i)}
+\DoxyCodeLine{901         \{}
+\DoxyCodeLine{902             \textcolor{keywordflow}{if} (track\_id\_state\_id\_time[i].track\_id > -\/1 \&\& result\_vec\_pred[i].obj\_id == find\_box.\mbox{\hyperlink{structbbox__t_a5963b8f26100b7d3a8b47883f4ad25da}{obj\_id}} \&\& busy\_vec[i] == \textcolor{keyword}{false})}
+\DoxyCodeLine{903             \{}
+\DoxyCodeLine{904                 \mbox{\hyperlink{structbbox__t}{bbox\_t}} pred\_box = result\_vec\_pred[i];}
+\DoxyCodeLine{905 }
+\DoxyCodeLine{906                 \textcolor{keywordtype}{float} \mbox{\hyperlink{matrix_8c_afd6b64cdf07c11e9670ac4ff6196216d}{dist}} = get\_distance(pred\_box.\mbox{\hyperlink{structbbox__t_afe740d8071d60bfb147b55e0c36a2832}{x}}, pred\_box.\mbox{\hyperlink{structbbox__t_a3d7bd44bf4c3e7e8d544eeff495699d0}{y}}, find\_box.\mbox{\hyperlink{structbbox__t_afe740d8071d60bfb147b55e0c36a2832}{x}}, find\_box.\mbox{\hyperlink{structbbox__t_a3d7bd44bf4c3e7e8d544eeff495699d0}{y}});}
+\DoxyCodeLine{907 }
+\DoxyCodeLine{908                 \textcolor{keywordtype}{float} movement\_dist = \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{std::max}}(max\_dist, \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{std::max}}(pred\_box.\mbox{\hyperlink{structbbox__t_a8fd711b6f086ce712d5f17b3ef895f8f}{w}}, pred\_box.\mbox{\hyperlink{structbbox__t_ae57f294a4f7c522f0c98dda04e6efd3e}{h}})) );}
+\DoxyCodeLine{909 }
+\DoxyCodeLine{910                 \textcolor{keywordflow}{if} ((\mbox{\hyperlink{matrix_8c_afd6b64cdf07c11e9670ac4ff6196216d}{dist}} < movement\_dist) \&\& (\mbox{\hyperlink{matrix_8c_afd6b64cdf07c11e9670ac4ff6196216d}{dist}} < min\_dist)) \{}
+\DoxyCodeLine{911                     min\_dist = \mbox{\hyperlink{matrix_8c_afd6b64cdf07c11e9670ac4ff6196216d}{dist}};}
+\DoxyCodeLine{912                     tst.state\_id = i;}
+\DoxyCodeLine{913                 \}}
+\DoxyCodeLine{914             \}}
+\DoxyCodeLine{915         \}}
+\DoxyCodeLine{916 }
+\DoxyCodeLine{917         \textcolor{keywordflow}{if} (tst.state\_id > -\/1) \{}
+\DoxyCodeLine{918             track\_id\_state\_id\_time[tst.state\_id].last\_time = std::chrono::steady\_clock::now();}
+\DoxyCodeLine{919             track\_id\_state\_id\_time[tst.state\_id].detection\_count = \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{std::max}}(track\_id\_state\_id\_time[tst.state\_id].detection\_count + 2, 10);}
+\DoxyCodeLine{920             tst = track\_id\_state\_id\_time[tst.state\_id];}
+\DoxyCodeLine{921             busy\_vec[tst.state\_id] = \textcolor{keyword}{true};}
+\DoxyCodeLine{922         \}}
+\DoxyCodeLine{923         \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{924             \textcolor{comment}{//std::cerr << "{} Didn't find: obj\_id = "{} << find\_box.obj\_id << "{}, x = "{} << find\_box.x << "{}, y = "{} << find\_box.y <<}}
+\DoxyCodeLine{925             \textcolor{comment}{//    "{}, track\_id\_counter = "{} << track\_id\_counter << std::endl;}}
+\DoxyCodeLine{926         \}}
+\DoxyCodeLine{927 }
+\DoxyCodeLine{928         \textcolor{keywordflow}{return} tst;}
+\DoxyCodeLine{929     \}}
+\DoxyCodeLine{930 }
+\DoxyCodeLine{931     tst\_t new\_state\_id(std::vector<bool> \&busy\_vec)}
+\DoxyCodeLine{932     \{}
+\DoxyCodeLine{933         tst\_t tst;}
+\DoxyCodeLine{934         \textcolor{comment}{// find empty cell to add new track\_id}}
+\DoxyCodeLine{935         \textcolor{keyword}{auto} it = std::find\_if(track\_id\_state\_id\_time.begin(), track\_id\_state\_id\_time.end(), [\&](tst\_t \&v) \{ return v.track\_id == -\/1; \});}
+\DoxyCodeLine{936         \textcolor{keywordflow}{if} (it != track\_id\_state\_id\_time.end()) \{}
+\DoxyCodeLine{937             it-\/>state\_id = it -\/ track\_id\_state\_id\_time.begin();}
+\DoxyCodeLine{938             \textcolor{comment}{//it-\/>track\_id = track\_id\_counter++;}}
+\DoxyCodeLine{939             it-\/>track\_id = 0;}
+\DoxyCodeLine{940             it-\/>last\_time = std::chrono::steady\_clock::now();}
+\DoxyCodeLine{941             it-\/>detection\_count = 1;}
+\DoxyCodeLine{942             tst = *it;}
+\DoxyCodeLine{943             busy\_vec[it-\/>state\_id] = \textcolor{keyword}{true};}
+\DoxyCodeLine{944         \}}
+\DoxyCodeLine{945 }
+\DoxyCodeLine{946         \textcolor{keywordflow}{return} tst;}
+\DoxyCodeLine{947     \}}
+\DoxyCodeLine{948 }
+\DoxyCodeLine{949     std::vector<tst\_t> find\_state\_ids(std::vector<bbox\_t> result\_vec)}
+\DoxyCodeLine{950     \{}
+\DoxyCodeLine{951         std::vector<tst\_t> tst\_vec(result\_vec.size());}
+\DoxyCodeLine{952 }
+\DoxyCodeLine{953         std::vector<bool> busy\_vec(max\_objects, \textcolor{keyword}{false});}
+\DoxyCodeLine{954 }
+\DoxyCodeLine{955         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < result\_vec.size(); ++i)}
+\DoxyCodeLine{956         \{}
+\DoxyCodeLine{957             tst\_t tst = get\_state\_id(result\_vec[i], busy\_vec);}
+\DoxyCodeLine{958             \textcolor{keywordtype}{int} state\_id = tst.state\_id;}
+\DoxyCodeLine{959             \textcolor{keywordtype}{int} track\_id = tst.track\_id;}
+\DoxyCodeLine{960 }
+\DoxyCodeLine{961             \textcolor{comment}{// if new state\_id}}
+\DoxyCodeLine{962             \textcolor{keywordflow}{if} (state\_id < 0) \{}
+\DoxyCodeLine{963                 tst = new\_state\_id(busy\_vec);}
+\DoxyCodeLine{964                 state\_id = tst.state\_id;}
+\DoxyCodeLine{965                 track\_id = tst.track\_id;}
+\DoxyCodeLine{966                 \textcolor{keywordflow}{if} (state\_id > -\/1) \{}
+\DoxyCodeLine{967                     kalman\_vec[state\_id].set(result\_vec[i]);}
+\DoxyCodeLine{968                     \textcolor{comment}{//std::cerr << "{} post: "{};}}
+\DoxyCodeLine{969                 \}}
+\DoxyCodeLine{970             \}}
+\DoxyCodeLine{971 }
+\DoxyCodeLine{972             \textcolor{comment}{//std::cerr << "{} track\_id = "{} << track\_id << "{}, state\_id = "{} << state\_id <<}}
+\DoxyCodeLine{973             \textcolor{comment}{//    "{}, x = "{} << result\_vec[i].x << "{}, det\_count = "{} << tst.detection\_count << std::endl;}}
+\DoxyCodeLine{974 }
+\DoxyCodeLine{975             \textcolor{keywordflow}{if} (state\_id > -\/1) \{}
+\DoxyCodeLine{976                 tst\_vec[i] = tst;}
+\DoxyCodeLine{977                 result\_vec\_pred[state\_id] = result\_vec[i];}
+\DoxyCodeLine{978                 result\_vec\_pred[state\_id].track\_id = track\_id;}
+\DoxyCodeLine{979             \}}
+\DoxyCodeLine{980         \}}
+\DoxyCodeLine{981 }
+\DoxyCodeLine{982         \textcolor{keywordflow}{return} tst\_vec;}
+\DoxyCodeLine{983     \}}
+\DoxyCodeLine{984 }
+\DoxyCodeLine{985     std::vector<bbox\_t> predict()}
+\DoxyCodeLine{986     \{}
+\DoxyCodeLine{987         clear\_old\_states();}
+\DoxyCodeLine{988         std::vector<bbox\_t> result\_vec;}
+\DoxyCodeLine{989 }
+\DoxyCodeLine{990         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < max\_objects; ++i)}
+\DoxyCodeLine{991         \{}
+\DoxyCodeLine{992             tst\_t tst = track\_id\_state\_id\_time[i];}
+\DoxyCodeLine{993             \textcolor{keywordflow}{if} (tst.track\_id > -\/1) \{}
+\DoxyCodeLine{994                 \mbox{\hyperlink{structbbox__t}{bbox\_t}} \mbox{\hyperlink{structbox}{box}} = kalman\_vec[i].predict();}
+\DoxyCodeLine{995 }
+\DoxyCodeLine{996                 result\_vec\_pred[i].\mbox{\hyperlink{structbox_a26adb5cfaf492245aba926b2f212b712}{x}} = \mbox{\hyperlink{structbox}{box}}.\mbox{\hyperlink{structbox_a26adb5cfaf492245aba926b2f212b712}{x}};}
+\DoxyCodeLine{997                 result\_vec\_pred[i].y = \mbox{\hyperlink{structbox}{box}}.\mbox{\hyperlink{structbox_ab25e5389fd474ccd83c7dfcf0b1f9957}{y}};}
+\DoxyCodeLine{998                 result\_vec\_pred[i].w = \mbox{\hyperlink{structbox}{box}}.\mbox{\hyperlink{structbox_abd9b0191e52f22befa76bcf37b9e6477}{w}};}
+\DoxyCodeLine{999                 result\_vec\_pred[i].h = \mbox{\hyperlink{structbox}{box}}.\mbox{\hyperlink{structbox_a56959fa604cfb411d0c001be7c444d05}{h}};}
+\DoxyCodeLine{1000 }
+\DoxyCodeLine{1001                 \textcolor{keywordflow}{if} (tst.detection\_count >= min\_frames)}
+\DoxyCodeLine{1002                 \{}
+\DoxyCodeLine{1003                     \textcolor{keywordflow}{if} (track\_id\_state\_id\_time[i].track\_id == 0) \{}
+\DoxyCodeLine{1004                         track\_id\_state\_id\_time[i].track\_id = ++track\_id\_counter;}
+\DoxyCodeLine{1005                         result\_vec\_pred[i].track\_id = track\_id\_counter;}
+\DoxyCodeLine{1006                     \}}
+\DoxyCodeLine{1007 }
+\DoxyCodeLine{1008                     result\_vec.push\_back(result\_vec\_pred[i]);}
+\DoxyCodeLine{1009                 \}}
+\DoxyCodeLine{1010             \}}
+\DoxyCodeLine{1011         \}}
+\DoxyCodeLine{1012         \textcolor{comment}{//std::cerr << "{}         result\_vec.size() = "{} << result\_vec.size() << std::endl;}}
+\DoxyCodeLine{1013 }
+\DoxyCodeLine{1014         \textcolor{comment}{//global\_last\_time = std::chrono::steady\_clock::now();}}
+\DoxyCodeLine{1015 }
+\DoxyCodeLine{1016         \textcolor{keywordflow}{return} result\_vec;}
+\DoxyCodeLine{1017     \}}
+\DoxyCodeLine{1018 }
+\DoxyCodeLine{1019 }
+\DoxyCodeLine{1020     std::vector<bbox\_t> correct(std::vector<bbox\_t> result\_vec)}
+\DoxyCodeLine{1021     \{}
+\DoxyCodeLine{1022         calc\_dt();}
+\DoxyCodeLine{1023         clear\_old\_states();}
+\DoxyCodeLine{1024 }
+\DoxyCodeLine{1025         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < max\_objects; ++i)}
+\DoxyCodeLine{1026             track\_id\_state\_id\_time[i].detection\_count-\/-\/;}
+\DoxyCodeLine{1027 }
+\DoxyCodeLine{1028         std::vector<tst\_t> tst\_vec = find\_state\_ids(result\_vec);}
+\DoxyCodeLine{1029 }
+\DoxyCodeLine{1030         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < tst\_vec.size(); ++i) \{}
+\DoxyCodeLine{1031             tst\_t tst = tst\_vec[i];}
+\DoxyCodeLine{1032             \textcolor{keywordtype}{int} state\_id = tst.state\_id;}
+\DoxyCodeLine{1033             \textcolor{keywordflow}{if} (state\_id > -\/1)}
+\DoxyCodeLine{1034             \{}
+\DoxyCodeLine{1035                 kalman\_vec[state\_id].set\_delta\_time(dT);}
+\DoxyCodeLine{1036                 kalman\_vec[state\_id].correct(result\_vec\_pred[state\_id]);}
+\DoxyCodeLine{1037             \}}
+\DoxyCodeLine{1038         \}}
+\DoxyCodeLine{1039 }
+\DoxyCodeLine{1040         result\_vec = predict();}
+\DoxyCodeLine{1041 }
+\DoxyCodeLine{1042         global\_last\_time = std::chrono::steady\_clock::now();}
+\DoxyCodeLine{1043 }
+\DoxyCodeLine{1044         \textcolor{keywordflow}{return} result\_vec;}
+\DoxyCodeLine{1045     \}}
+\DoxyCodeLine{1046 }
+\DoxyCodeLine{1047 \};}
+\DoxyCodeLine{1048 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{1049 \textcolor{preprocessor}{\#endif    }\textcolor{comment}{// OPENCV}}
+\DoxyCodeLine{1050 }
+\DoxyCodeLine{1051 \textcolor{preprocessor}{\#endif    }\textcolor{comment}{// \_\_cplusplus}}
+\DoxyCodeLine{1052 }
+\DoxyCodeLine{1053 \textcolor{preprocessor}{\#endif    }\textcolor{comment}{// YOLO\_V2\_CLASS\_HPP}}
+
+\end{DoxyCode}

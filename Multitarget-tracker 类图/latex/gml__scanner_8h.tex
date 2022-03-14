@@ -1,0 +1,219 @@
+\hypertarget{gml__scanner_8h}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Tracker/graph/\+GTL/include/\+GTL/gml\+\_\+scanner.h 文件参考}
+\label{gml__scanner_8h}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/gml\_scanner.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/gml\_scanner.h}}
+{\ttfamily \#include $<$GTL/\+GTL.\+h$>$}\newline
+{\ttfamily \#include $<$cstdio$>$}\newline
+gml\+\_\+scanner.\+h 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{gml__scanner_8h__incl}
+\end{center}
+\end{figure}
+此图展示该文件直接或间接的被哪些文件引用了\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gml__scanner_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_g_m_l__error}{GML\+\_\+error}}
+\begin{DoxyCompactList}\small\item\em Reason and position of an error in a GML file. \end{DoxyCompactList}\item 
+union \mbox{\hyperlink{union_g_m_l__tok__val}{GML\+\_\+tok\+\_\+val}}
+\item 
+struct \mbox{\hyperlink{struct_g_m_l__token}{GML\+\_\+token}}
+\end{DoxyCompactItemize}
+\doxysubsection*{宏定义}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{gml__scanner_8h_a40958a1382463445e451148e3a93e049}{INITIAL\+\_\+\+SIZE}}~1024
+\end{DoxyCompactItemize}
+\doxysubsection*{枚举}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77f}{GML\+\_\+value}} \{ \newline
+\mbox{\hyperlink{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77facbdebde5753a69fe5b0f2975de60c82b}{GML\+\_\+\+KEY}}
+, \mbox{\hyperlink{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77fa9c67cc9c0b45542b05cfe2097996541d}{GML\+\_\+\+INT}}
+, \mbox{\hyperlink{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77fa2240c7d602fb38d5687a4dc58ed05af9}{GML\+\_\+\+DOUBLE}}
+, \mbox{\hyperlink{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77faf0bce82a1ff34fb53cf52efeda5100ab}{GML\+\_\+\+STRING}}
+, \newline
+\mbox{\hyperlink{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77fa71d26e40c555ad03a41ba81ca08e07a1}{GML\+\_\+\+L\+\_\+\+BRACKET}}
+, \mbox{\hyperlink{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77fae1092eec290bb6f22f39c7fb24455fa2}{GML\+\_\+\+R\+\_\+\+BRACKET}}
+, \mbox{\hyperlink{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77fadcfebc4372f2199ae1e2bea95b2fa88f}{GML\+\_\+\+END}}
+, \mbox{\hyperlink{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77fa0f6c57e598f6d261bd378b1f21d22172}{GML\+\_\+\+LIST}}
+, \newline
+\mbox{\hyperlink{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77fa1aa37fc8a21c9a2efd78847f040ba8d6}{GML\+\_\+\+ERROR}}
+ \}
+\item 
+enum \mbox{\hyperlink{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790c}{GML\+\_\+error\+\_\+value}} \{ \newline
+\mbox{\hyperlink{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790ca33fd90c64697b7678a9124017eadadf8}{GML\+\_\+\+UNEXPECTED}}
+, \mbox{\hyperlink{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790ca3fbf275b928b652ece2645e90bb5557f}{GML\+\_\+\+SYNTAX}}
+, \mbox{\hyperlink{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790ca3af6ee9ba1b3704ced7c81a576c3eae8}{GML\+\_\+\+PREMATURE\+\_\+\+EOF}}
+, \mbox{\hyperlink{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790ca221df19cbc1f2fea1a52cb139a359e0c}{GML\+\_\+\+TOO\+\_\+\+MANY\+\_\+\+DIGITS}}
+, \newline
+\mbox{\hyperlink{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790caa03c5ab19de88ed1a1a2d85edf075164}{GML\+\_\+\+OPEN\+\_\+\+BRACKET}}
+, \mbox{\hyperlink{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790ca83553a234a3a319eb4db0ec4b3aef05d}{GML\+\_\+\+TOO\+\_\+\+MANY\+\_\+\+BRACKETS}}
+, \mbox{\hyperlink{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790ca724a94ac9d394a24aa1f80fb602ecaf2}{GML\+\_\+\+OK}}
+, \mbox{\hyperlink{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790ca6e236398ad4be2c96f938e0f2329c7ca}{GML\+\_\+\+FILE\+\_\+\+NOT\+\_\+\+FOUND}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\+\_\+\+EXTERN}} void \mbox{\hyperlink{gml__scanner_8h_af3b444abb87b2d5e5c65e3cca251ddc4}{GML\+\_\+init}} ()
+\item 
+\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\+\_\+\+EXTERN}} struct \mbox{\hyperlink{struct_g_m_l__token}{GML\+\_\+token}} \mbox{\hyperlink{gml__scanner_8h_a03cd9d9104363d98d90e61ec2fad5721}{GML\+\_\+scanner}} (FILE $\ast$)
+\end{DoxyCompactItemize}
+\doxysubsection*{变量}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\+\_\+\+EXTERN}} unsigned int \mbox{\hyperlink{gml__scanner_8h_aaa524d3c642fd5f968b1164df9094ac6}{GML\+\_\+line}}
+\item 
+\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\+\_\+\+EXTERN}} unsigned int \mbox{\hyperlink{gml__scanner_8h_a40468353f878192847755525fa870cb5}{GML\+\_\+column}}
+\item 
+\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\+\_\+\+EXTERN}} const char $\ast$ \mbox{\hyperlink{gml__scanner_8h_a1b10338eaa8fbc16ce06d123f7bb6ce1}{GML\+\_\+table}} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{宏定义说明}
+\mbox{\Hypertarget{gml__scanner_8h_a40958a1382463445e451148e3a93e049}\label{gml__scanner_8h_a40958a1382463445e451148e3a93e049}} 
+\index{gml\_scanner.h@{gml\_scanner.h}!INITIAL\_SIZE@{INITIAL\_SIZE}}
+\index{INITIAL\_SIZE@{INITIAL\_SIZE}!gml\_scanner.h@{gml\_scanner.h}}
+\doxysubsubsection{\texorpdfstring{INITIAL\_SIZE}{INITIAL\_SIZE}}
+{\footnotesize\ttfamily \#define INITIAL\+\_\+\+SIZE~1024}
+
+
+
+\doxysubsection{枚举类型说明}
+\mbox{\Hypertarget{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790c}\label{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790c}} 
+\index{gml\_scanner.h@{gml\_scanner.h}!GML\_error\_value@{GML\_error\_value}}
+\index{GML\_error\_value@{GML\_error\_value}!gml\_scanner.h@{gml\_scanner.h}}
+\doxysubsubsection{\texorpdfstring{GML\_error\_value}{GML\_error\_value}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790c}{GML\+\_\+error\+\_\+value}}}
+
+Possible errors while parsing a GML file. \begin{DoxyEnumFields}{枚举值}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GML\_UNEXPECTED@{GML\_UNEXPECTED}!gml\_scanner.h@{gml\_scanner.h}}\index{gml\_scanner.h@{gml\_scanner.h}!GML\_UNEXPECTED@{GML\_UNEXPECTED}}}\mbox{\Hypertarget{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790ca33fd90c64697b7678a9124017eadadf8}\label{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790ca33fd90c64697b7678a9124017eadadf8}} 
+GML\+\_\+\+UNEXPECTED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GML\_SYNTAX@{GML\_SYNTAX}!gml\_scanner.h@{gml\_scanner.h}}\index{gml\_scanner.h@{gml\_scanner.h}!GML\_SYNTAX@{GML\_SYNTAX}}}\mbox{\Hypertarget{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790ca3fbf275b928b652ece2645e90bb5557f}\label{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790ca3fbf275b928b652ece2645e90bb5557f}} 
+GML\+\_\+\+SYNTAX&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GML\_PREMATURE\_EOF@{GML\_PREMATURE\_EOF}!gml\_scanner.h@{gml\_scanner.h}}\index{gml\_scanner.h@{gml\_scanner.h}!GML\_PREMATURE\_EOF@{GML\_PREMATURE\_EOF}}}\mbox{\Hypertarget{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790ca3af6ee9ba1b3704ced7c81a576c3eae8}\label{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790ca3af6ee9ba1b3704ced7c81a576c3eae8}} 
+GML\+\_\+\+PREMATURE\+\_\+\+EOF&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GML\_TOO\_MANY\_DIGITS@{GML\_TOO\_MANY\_DIGITS}!gml\_scanner.h@{gml\_scanner.h}}\index{gml\_scanner.h@{gml\_scanner.h}!GML\_TOO\_MANY\_DIGITS@{GML\_TOO\_MANY\_DIGITS}}}\mbox{\Hypertarget{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790ca221df19cbc1f2fea1a52cb139a359e0c}\label{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790ca221df19cbc1f2fea1a52cb139a359e0c}} 
+GML\+\_\+\+TOO\+\_\+\+MANY\+\_\+\+DIGITS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GML\_OPEN\_BRACKET@{GML\_OPEN\_BRACKET}!gml\_scanner.h@{gml\_scanner.h}}\index{gml\_scanner.h@{gml\_scanner.h}!GML\_OPEN\_BRACKET@{GML\_OPEN\_BRACKET}}}\mbox{\Hypertarget{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790caa03c5ab19de88ed1a1a2d85edf075164}\label{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790caa03c5ab19de88ed1a1a2d85edf075164}} 
+GML\+\_\+\+OPEN\+\_\+\+BRACKET&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GML\_TOO\_MANY\_BRACKETS@{GML\_TOO\_MANY\_BRACKETS}!gml\_scanner.h@{gml\_scanner.h}}\index{gml\_scanner.h@{gml\_scanner.h}!GML\_TOO\_MANY\_BRACKETS@{GML\_TOO\_MANY\_BRACKETS}}}\mbox{\Hypertarget{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790ca83553a234a3a319eb4db0ec4b3aef05d}\label{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790ca83553a234a3a319eb4db0ec4b3aef05d}} 
+GML\+\_\+\+TOO\+\_\+\+MANY\+\_\+\+BRACKETS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GML\_OK@{GML\_OK}!gml\_scanner.h@{gml\_scanner.h}}\index{gml\_scanner.h@{gml\_scanner.h}!GML\_OK@{GML\_OK}}}\mbox{\Hypertarget{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790ca724a94ac9d394a24aa1f80fb602ecaf2}\label{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790ca724a94ac9d394a24aa1f80fb602ecaf2}} 
+GML\+\_\+\+OK&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GML\_FILE\_NOT\_FOUND@{GML\_FILE\_NOT\_FOUND}!gml\_scanner.h@{gml\_scanner.h}}\index{gml\_scanner.h@{gml\_scanner.h}!GML\_FILE\_NOT\_FOUND@{GML\_FILE\_NOT\_FOUND}}}\mbox{\Hypertarget{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790ca6e236398ad4be2c96f938e0f2329c7ca}\label{gml__scanner_8h_aabc90afcb30e75bca3bd9969ce74790ca6e236398ad4be2c96f938e0f2329c7ca}} 
+GML\+\_\+\+FILE\+\_\+\+NOT\+\_\+\+FOUND&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77f}\label{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77f}} 
+\index{gml\_scanner.h@{gml\_scanner.h}!GML\_value@{GML\_value}}
+\index{GML\_value@{GML\_value}!gml\_scanner.h@{gml\_scanner.h}}
+\doxysubsubsection{\texorpdfstring{GML\_value}{GML\_value}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77f}{GML\+\_\+value}}}
+
+\begin{DoxyEnumFields}{枚举值}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GML\_KEY@{GML\_KEY}!gml\_scanner.h@{gml\_scanner.h}}\index{gml\_scanner.h@{gml\_scanner.h}!GML\_KEY@{GML\_KEY}}}\mbox{\Hypertarget{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77facbdebde5753a69fe5b0f2975de60c82b}\label{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77facbdebde5753a69fe5b0f2975de60c82b}} 
+GML\+\_\+\+KEY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GML\_INT@{GML\_INT}!gml\_scanner.h@{gml\_scanner.h}}\index{gml\_scanner.h@{gml\_scanner.h}!GML\_INT@{GML\_INT}}}\mbox{\Hypertarget{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77fa9c67cc9c0b45542b05cfe2097996541d}\label{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77fa9c67cc9c0b45542b05cfe2097996541d}} 
+GML\+\_\+\+INT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GML\_DOUBLE@{GML\_DOUBLE}!gml\_scanner.h@{gml\_scanner.h}}\index{gml\_scanner.h@{gml\_scanner.h}!GML\_DOUBLE@{GML\_DOUBLE}}}\mbox{\Hypertarget{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77fa2240c7d602fb38d5687a4dc58ed05af9}\label{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77fa2240c7d602fb38d5687a4dc58ed05af9}} 
+GML\+\_\+\+DOUBLE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GML\_STRING@{GML\_STRING}!gml\_scanner.h@{gml\_scanner.h}}\index{gml\_scanner.h@{gml\_scanner.h}!GML\_STRING@{GML\_STRING}}}\mbox{\Hypertarget{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77faf0bce82a1ff34fb53cf52efeda5100ab}\label{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77faf0bce82a1ff34fb53cf52efeda5100ab}} 
+GML\+\_\+\+STRING&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GML\_L\_BRACKET@{GML\_L\_BRACKET}!gml\_scanner.h@{gml\_scanner.h}}\index{gml\_scanner.h@{gml\_scanner.h}!GML\_L\_BRACKET@{GML\_L\_BRACKET}}}\mbox{\Hypertarget{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77fa71d26e40c555ad03a41ba81ca08e07a1}\label{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77fa71d26e40c555ad03a41ba81ca08e07a1}} 
+GML\+\_\+\+L\+\_\+\+BRACKET&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GML\_R\_BRACKET@{GML\_R\_BRACKET}!gml\_scanner.h@{gml\_scanner.h}}\index{gml\_scanner.h@{gml\_scanner.h}!GML\_R\_BRACKET@{GML\_R\_BRACKET}}}\mbox{\Hypertarget{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77fae1092eec290bb6f22f39c7fb24455fa2}\label{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77fae1092eec290bb6f22f39c7fb24455fa2}} 
+GML\+\_\+\+R\+\_\+\+BRACKET&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GML\_END@{GML\_END}!gml\_scanner.h@{gml\_scanner.h}}\index{gml\_scanner.h@{gml\_scanner.h}!GML\_END@{GML\_END}}}\mbox{\Hypertarget{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77fadcfebc4372f2199ae1e2bea95b2fa88f}\label{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77fadcfebc4372f2199ae1e2bea95b2fa88f}} 
+GML\+\_\+\+END&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GML\_LIST@{GML\_LIST}!gml\_scanner.h@{gml\_scanner.h}}\index{gml\_scanner.h@{gml\_scanner.h}!GML\_LIST@{GML\_LIST}}}\mbox{\Hypertarget{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77fa0f6c57e598f6d261bd378b1f21d22172}\label{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77fa0f6c57e598f6d261bd378b1f21d22172}} 
+GML\+\_\+\+LIST&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GML\_ERROR@{GML\_ERROR}!gml\_scanner.h@{gml\_scanner.h}}\index{gml\_scanner.h@{gml\_scanner.h}!GML\_ERROR@{GML\_ERROR}}}\mbox{\Hypertarget{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77fa1aa37fc8a21c9a2efd78847f040ba8d6}\label{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77fa1aa37fc8a21c9a2efd78847f040ba8d6}} 
+GML\+\_\+\+ERROR&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{gml__scanner_8h_af3b444abb87b2d5e5c65e3cca251ddc4}\label{gml__scanner_8h_af3b444abb87b2d5e5c65e3cca251ddc4}} 
+\index{gml\_scanner.h@{gml\_scanner.h}!GML\_init@{GML\_init}}
+\index{GML\_init@{GML\_init}!gml\_scanner.h@{gml\_scanner.h}}
+\doxysubsubsection{\texorpdfstring{GML\_init()}{GML\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\+\_\+\+EXTERN}} void GML\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{gml__scanner_8h_a03cd9d9104363d98d90e61ec2fad5721}\label{gml__scanner_8h_a03cd9d9104363d98d90e61ec2fad5721}} 
+\index{gml\_scanner.h@{gml\_scanner.h}!GML\_scanner@{GML\_scanner}}
+\index{GML\_scanner@{GML\_scanner}!gml\_scanner.h@{gml\_scanner.h}}
+\doxysubsubsection{\texorpdfstring{GML\_scanner()}{GML\_scanner()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\+\_\+\+EXTERN}} struct \mbox{\hyperlink{struct_g_m_l__token}{GML\+\_\+token}} GML\+\_\+scanner (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{source }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{gml__scanner_8h_a03cd9d9104363d98d90e61ec2fad5721_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{变量说明}
+\mbox{\Hypertarget{gml__scanner_8h_a40468353f878192847755525fa870cb5}\label{gml__scanner_8h_a40468353f878192847755525fa870cb5}} 
+\index{gml\_scanner.h@{gml\_scanner.h}!GML\_column@{GML\_column}}
+\index{GML\_column@{GML\_column}!gml\_scanner.h@{gml\_scanner.h}}
+\doxysubsubsection{\texorpdfstring{GML\_column}{GML\_column}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\+\_\+\+EXTERN}} unsigned int GML\+\_\+column\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{gml__scanner_8h_aaa524d3c642fd5f968b1164df9094ac6}\label{gml__scanner_8h_aaa524d3c642fd5f968b1164df9094ac6}} 
+\index{gml\_scanner.h@{gml\_scanner.h}!GML\_line@{GML\_line}}
+\index{GML\_line@{GML\_line}!gml\_scanner.h@{gml\_scanner.h}}
+\doxysubsubsection{\texorpdfstring{GML\_line}{GML\_line}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\+\_\+\+EXTERN}} unsigned int GML\+\_\+line\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\Hypertarget{gml__scanner_8h_a1b10338eaa8fbc16ce06d123f7bb6ce1}\label{gml__scanner_8h_a1b10338eaa8fbc16ce06d123f7bb6ce1}} 
+\index{gml\_scanner.h@{gml\_scanner.h}!GML\_table@{GML\_table}}
+\index{GML\_table@{GML\_table}!gml\_scanner.h@{gml\_scanner.h}}
+\doxysubsubsection{\texorpdfstring{GML\_table}{GML\_table}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\+\_\+\+EXTERN}} const char$\ast$ GML\+\_\+table\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [extern]}}
+

@@ -1,0 +1,709 @@
+\hypertarget{class_yolo}{}\doxysection{Yolo类 参考}
+\label{class_yolo}\index{Yolo@{Yolo}}
+
+
+{\ttfamily \#include $<$yolo.\+h$>$}
+
+
+
+类 Yolo 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=326pt]{class_yolo__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Yolo 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=314pt]{class_yolo__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{class_yolo_ac74b54e0bf0195a4eb2f52d200414c2f}{get\+Network\+Type}} () const
+\item 
+float \mbox{\hyperlink{class_yolo_abe022167c42e29eb67533c48a21a7504}{get\+NMSThresh}} () const
+\item 
+std\+::string \mbox{\hyperlink{class_yolo_a320fe487a0de8f990dd615f45beeba47}{get\+Class\+Name}} (const int \&label) const
+\item 
+int \mbox{\hyperlink{class_yolo_a692fe73def5b9cdc91edef940aeedfb4}{get\+Class\+Id}} (const int \&label) const
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_yolo_ae9f7e8c255ae85c5c5d89de1dc56e210}{get\+InputH}} () const
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_yolo_ad45bfd062610caa20abcb8c876c1b8de}{get\+InputW}} () const
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_yolo_ae5ea82e11cab8b1ee6c90edf6c910867}{get\+Num\+Classes}} () const
+\item 
+bool \mbox{\hyperlink{class_yolo_a1c012d4c809e24d28ee4909ac11f2728}{is\+Print\+Predictions}} () const
+\item 
+bool \mbox{\hyperlink{class_yolo_a5884fa545defe25d0c541710707a10ae}{is\+Print\+Perf\+Info}} () const
+\item 
+void \mbox{\hyperlink{class_yolo_a877e0bdcb04b2d0bb4dec6f6f050b22e}{do\+Inference}} (const unsigned char $\ast$input, const uint32\+\_\+t batch\+Size)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_b_box_info}{BBox\+Info}} $>$ \mbox{\hyperlink{class_yolo_a1bf78ff6aceb1c5ad760e418c2cb41c1}{decode\+Detections}} (const int \&image\+Idx, const int \&imageH, const int \&imageW)
+\item 
+virtual \mbox{\hyperlink{class_yolo_ad52ebc48ff2d75412a9864662cd5283a}{$\sim$\+Yolo}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_yolo_ad05b19a83c9e97425962dcbe25c6e441}{Yolo}} (const \mbox{\hyperlink{struct_network_info}{Network\+Info}} \&network\+Info, const \mbox{\hyperlink{struct_infer_params}{Infer\+Params}} \&infer\+Params)
+\item 
+virtual std\+::vector$<$ \mbox{\hyperlink{struct_b_box_info}{BBox\+Info}} $>$ \mbox{\hyperlink{class_yolo_a55f9b51e70070369be1cc6634a33541f}{decode\+Tensor}} (const int image\+Idx, const int imageH, const int imageW, const \mbox{\hyperlink{struct_tensor_info}{Tensor\+Info}} \&tensor)=0
+\item 
+void \mbox{\hyperlink{class_yolo_aba309ea9880cddbaf2a15e0aca41b501}{add\+BBox\+Proposal}} (const float bx, const float by, const float bw, const float bh, const uint32\+\_\+t stride, const float scaling\+Factor, const float, const float, const int max\+Index, const float max\+Prob, const uint32\+\_\+t image\+\_\+w, const uint32\+\_\+t image\+\_\+h, std\+::vector$<$ \mbox{\hyperlink{struct_b_box_info}{BBox\+Info}} $>$ \&binfo)
+\item 
+void \mbox{\hyperlink{class_yolo_abde6193c1a411eac3b6d8a120253c8ce}{calcuate\+\_\+letterbox\+\_\+message}} (const int \mbox{\hyperlink{class_yolo_ab80d1f74b268395e80cf3d2335fc7456}{m\+\_\+\+InputH}}, const int \mbox{\hyperlink{class_yolo_ae40a79ad2059e97ea361ea02e471e01c}{m\+\_\+\+InputW}}, const int imageH, const int imageW, float \&sh, float \&sw, int \&x\+Offset, int \&y\+Offset)
+\item 
+\mbox{\hyperlink{struct_b_box}{BBox}} \mbox{\hyperlink{class_yolo_a06dbe20b7a3b0aa500d18fcf8d5ce2f4}{convert\+\_\+bbox\+\_\+res}} (const float \&bx, const float \&by, const float \&bw, const float \&bh, const uint32\+\_\+t \&stride\+\_\+h\+\_\+, const uint32\+\_\+t \&stride\+\_\+w\+\_\+, const uint32\+\_\+t \&netW, const uint32\+\_\+t \&netH)
+\item 
+void \mbox{\hyperlink{class_yolo_a41396ffe525ce6d57aa2771851fff33a}{cvt\+\_\+box}} (const float sh, const float sw, const float x\+Offset, const float y\+Offset, \mbox{\hyperlink{struct_b_box}{BBox}} \&bbox)
+\item 
+void \mbox{\hyperlink{class_yolo_ab214f84f23f1fdb6229287c05d30ec8a}{add\+\_\+bbox\+\_\+proposal}} (const float bx, const float by, const float bw, const float bh, const uint32\+\_\+t stride\+\_\+h\+\_\+, const uint32\+\_\+t stride\+\_\+w\+\_\+, const float scaleH, const float scaleW, const float xoffset\+\_\+, const float yoffset, const int max\+Index, const float max\+Prob, const uint32\+\_\+t image\+\_\+w, const uint32\+\_\+t image\+\_\+h, std\+::vector$<$ \mbox{\hyperlink{struct_b_box_info}{BBox\+Info}} $>$ \&binfo)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected 属性}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{class_yolo_ac4edb54c9faab2e36d452231db756585}{m\+\_\+\+Engine\+Path}}
+\item 
+const std\+::string \mbox{\hyperlink{class_yolo_a1997abb8c69881104f8024f21b405e64}{m\+\_\+\+Network\+Type}}
+\item 
+const std\+::string \mbox{\hyperlink{class_yolo_ab375f3e65216527a44c692ab257e87b1}{m\+\_\+\+Config\+File\+Path}}
+\item 
+const std\+::string \mbox{\hyperlink{class_yolo_a9012ad978f627c5e8529884d2cfbef6d}{m\+\_\+\+Wts\+File\+Path}}
+\item 
+const std\+::string \mbox{\hyperlink{class_yolo_af4d72cff11a8203625e64cf78374febb}{m\+\_\+\+Labels\+File\+Path}}
+\item 
+const std\+::string \mbox{\hyperlink{class_yolo_a3f9cac2f03fdc794e076aaebb80a6303}{m\+\_\+\+Precision}}
+\item 
+const std\+::string \mbox{\hyperlink{class_yolo_a93179f2080a49ec839b4fa2691f1b58d}{m\+\_\+\+Device\+Type}}
+\item 
+const std\+::string \mbox{\hyperlink{class_yolo_a718d2ce812fbcd13bcf9d5c28d9b1693}{m\+\_\+\+Calib\+Images}}
+\item 
+const std\+::string \mbox{\hyperlink{class_yolo_a08edefdd73f25e06c94a9e00a2987427}{m\+\_\+\+Calib\+Images\+File\+Path}}
+\item 
+std\+::string \mbox{\hyperlink{class_yolo_ad68f6fe71f9fe34b0f1c3c13400b3b3c}{m\+\_\+\+Calib\+Table\+File\+Path}}
+\item 
+const std\+::string \mbox{\hyperlink{class_yolo_afef5bb498c4127085dcff52e3c72076d}{m\+\_\+\+Input\+Blob\+Name}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_tensor_info}{Tensor\+Info}} $>$ \mbox{\hyperlink{class_yolo_a8138e3123847a3d1bfdfb31053140904}{m\+\_\+\+Output\+Tensors}}
+\item 
+std\+::vector$<$ std\+::map$<$ std\+::string, std\+::string $>$ $>$ \mbox{\hyperlink{class_yolo_a3c83e460e0701b8c7d7bdb76508fcf88}{m\+\_\+config\+Blocks}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_yolo_ab80d1f74b268395e80cf3d2335fc7456}{m\+\_\+\+InputH}} = 0
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_yolo_ae40a79ad2059e97ea361ea02e471e01c}{m\+\_\+\+InputW}} = 0
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_yolo_af37e7add02732d46e4a392ff8e853c79}{m\+\_\+\+InputC}} = 0
+\item 
+uint64\+\_\+t \mbox{\hyperlink{class_yolo_aa6bcc37635605bbe4e10aa916dfc7d09}{m\+\_\+\+Input\+Size}} = 0
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_yolo_ab6543c87a2e97d3ca443e94c61fef669}{\+\_\+n\+\_\+classes}} = 0
+\item 
+float \mbox{\hyperlink{class_yolo_aa86d79ce4c89e9627f47c747e0316a8f}{\+\_\+f\+\_\+depth\+\_\+multiple}} = 0
+\item 
+float \mbox{\hyperlink{class_yolo_a8e3276dfd756b40f42c7c4970eaf7ed0}{\+\_\+f\+\_\+width\+\_\+multiple}} = 0
+\item 
+const float \mbox{\hyperlink{class_yolo_a8b5cac0cc594d4caf9987d21ed55d517}{m\+\_\+\+Prob\+Thresh}}
+\item 
+const float \mbox{\hyperlink{class_yolo_a045c7878438d05d1d03d36f38a20a5db}{m\+\_\+\+NMSThresh}}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{class_yolo_ae8da3d3afb43122857be32490baa555e}{m\+\_\+\+Class\+Names}}
+\item 
+const std\+::vector$<$ int $>$ \mbox{\hyperlink{class_yolo_a1c2307886c7943b5bf720c987cc56ee3}{m\+\_\+\+Class\+Ids}}
+\item 
+const bool \mbox{\hyperlink{class_yolo_a38ac6ee9745e005f21c8ed6324dd338c}{m\+\_\+\+Print\+Perf\+Info}}
+\item 
+const bool \mbox{\hyperlink{class_yolo_a37a5014665e5cb853d4a6436c87dc8af}{m\+\_\+\+Print\+Predictions}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{class_yolo_a6129118d6068b4ffb3a1070f65a776ba}{m\+\_\+\+Batch\+Size}} = 1
+\item 
+nvinfer1\+::\+INetwork\+Definition $\ast$ \mbox{\hyperlink{class_yolo_a3ac3b362ef07b9871952d9d8af59730c}{m\+\_\+\+Network}}
+\item 
+nvinfer1\+::\+IBuilder $\ast$ \mbox{\hyperlink{class_yolo_a1564609a7c4665b6c36cdaa0c3e55078}{m\+\_\+\+Builder}}
+\item 
+nvinfer1\+::\+IHost\+Memory $\ast$ \mbox{\hyperlink{class_yolo_ad4910a8a89dc73122eb0a2863f78f71b}{m\+\_\+\+Model\+Stream}}
+\item 
+nvinfer1\+::\+ICuda\+Engine $\ast$ \mbox{\hyperlink{class_yolo_aa9de3ee83d1a96defc82eb0fab3d1ca1}{m\+\_\+\+Engine}}
+\item 
+nvinfer1\+::\+IExecution\+Context $\ast$ \mbox{\hyperlink{class_yolo_a860e15d518635c5813cb35aa17bd75fb}{m\+\_\+\+Context}}
+\item 
+std\+::vector$<$ void $\ast$ $>$ \mbox{\hyperlink{class_yolo_a2fe7429c4f41e4e808d0884dd57ba5cd}{m\+\_\+\+Device\+Buffers}}
+\item 
+int \mbox{\hyperlink{class_yolo_a177191dc732f2253add53739931cea3d}{m\+\_\+\+Input\+Binding\+Index}}
+\item 
+cuda\+Stream\+\_\+t \mbox{\hyperlink{class_yolo_ab4ef543b344278b3e1e5c699c5646c5c}{m\+\_\+\+Cuda\+Stream}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_yolo_a90b44fb96fef386c2bc26302fce30feb}{create\+YOLOEngine}} (const nvinfer1\+::\+Data\+Type data\+Type=nvinfer1\+::\+Data\+Type\+::k\+FLOAT, \mbox{\hyperlink{class_int8_entropy_calibrator}{Int8\+Entropy\+Calibrator}} $\ast$calibrator=nullptr)
+\item 
+void \mbox{\hyperlink{class_yolo_ab89a8421a0d55d8c43878a36732697ad}{create\+\_\+engine\+\_\+yolov5}} (const nvinfer1\+::\+Data\+Type data\+Type=nvinfer1\+::\+Data\+Type\+::k\+FLOAT, \mbox{\hyperlink{class_int8_entropy_calibrator}{Int8\+Entropy\+Calibrator}} $\ast$calibrator=nullptr)
+\item 
+std\+::vector$<$ std\+::map$<$ std\+::string, std\+::string $>$ $>$ \mbox{\hyperlink{class_yolo_a14c712e624e28956fb5aa14549f8a7d0}{parse\+Config\+File}} (const std\+::string cfg\+File\+Path)
+\item 
+void \mbox{\hyperlink{class_yolo_a0a614e4d70ccff23a5e72f4accc3ee7b}{parse\+Config\+Blocks}} ()
+\item 
+void \mbox{\hyperlink{class_yolo_a6515048e54c679dbe39be2bccf649f88}{parse\+\_\+cfg\+\_\+blocks\+\_\+v5}} (const std\+::vector$<$ std\+::map$<$ std\+::string, std\+::string $>$ $>$ \&vec\+\_\+block\+\_\+)
+\item 
+void \mbox{\hyperlink{class_yolo_ad69c0613d1f3895e9cf5836b17e039f0}{allocate\+Buffers}} ()
+\item 
+bool \mbox{\hyperlink{class_yolo_ac91851a72602bd0f747b8e72d5a79548}{verify\+Yolo\+Engine}} ()
+\item 
+void \mbox{\hyperlink{class_yolo_ac3a0c489c771d06d2dc7aa80822192f9}{destroy\+Network\+Utils}} (std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&trt\+Weights)
+\item 
+void \mbox{\hyperlink{class_yolo_a6fe75a481a3a5aabdc42a983e01d4a5c}{write\+Plan\+File\+To\+Disk}} ()
+\item 
+void \mbox{\hyperlink{class_yolo_a4ff4c6d45f7f5f53266133566ca9ffcc}{load\+\_\+weights\+\_\+v5}} (const std\+::string s\+\_\+weights\+\_\+path\+\_\+, std\+::map$<$ std\+::string, std\+::vector$<$ float $>$ $>$ \&vec\+\_\+wts\+\_\+)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_logger}{Logger}} \mbox{\hyperlink{class_yolo_ae61691ddde17095234646a5621e736fa}{m\+\_\+\+Logger}}
+\item 
+\mbox{\hyperlink{class_timer}{Timer}} \mbox{\hyperlink{class_yolo_a9fe4b4f349ddd02b0ff06a4970dbeee4}{\+\_\+timer}}
+\item 
+int \mbox{\hyperlink{class_yolo_af3338da42a194d869513332f9c7a6afb}{\+\_\+n\+\_\+yolo\+\_\+ind}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{class_yolo_ad52ebc48ff2d75412a9864662cd5283a}\label{class_yolo_ad52ebc48ff2d75412a9864662cd5283a}} 
+\index{Yolo@{Yolo}!````~Yolo@{$\sim$Yolo}}
+\index{````~Yolo@{$\sim$Yolo}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{$\sim$Yolo()}{~Yolo()}}
+{\footnotesize\ttfamily Yolo\+::$\sim$\+Yolo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_yolo_ad05b19a83c9e97425962dcbe25c6e441}\label{class_yolo_ad05b19a83c9e97425962dcbe25c6e441}} 
+\index{Yolo@{Yolo}!Yolo@{Yolo}}
+\index{Yolo@{Yolo}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{Yolo()}{Yolo()}}
+{\footnotesize\ttfamily Yolo\+::\+Yolo (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_network_info}{Network\+Info}} \&}]{network\+Info,  }\item[{const \mbox{\hyperlink{struct_infer_params}{Infer\+Params}} \&}]{infer\+Params }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_yolo_ad05b19a83c9e97425962dcbe25c6e441_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{class_yolo_ab214f84f23f1fdb6229287c05d30ec8a}\label{class_yolo_ab214f84f23f1fdb6229287c05d30ec8a}} 
+\index{Yolo@{Yolo}!add\_bbox\_proposal@{add\_bbox\_proposal}}
+\index{add\_bbox\_proposal@{add\_bbox\_proposal}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{add\_bbox\_proposal()}{add\_bbox\_proposal()}}
+{\footnotesize\ttfamily void Yolo\+::add\+\_\+bbox\+\_\+proposal (\begin{DoxyParamCaption}\item[{const float}]{bx,  }\item[{const float}]{by,  }\item[{const float}]{bw,  }\item[{const float}]{bh,  }\item[{const uint32\+\_\+t}]{stride\+\_\+h\+\_\+,  }\item[{const uint32\+\_\+t}]{stride\+\_\+w\+\_\+,  }\item[{const float}]{scaleH,  }\item[{const float}]{scaleW,  }\item[{const float}]{xoffset\+\_\+,  }\item[{const float}]{yoffset,  }\item[{const int}]{max\+Index,  }\item[{const float}]{max\+Prob,  }\item[{const uint32\+\_\+t}]{image\+\_\+w,  }\item[{const uint32\+\_\+t}]{image\+\_\+h,  }\item[{std\+::vector$<$ \mbox{\hyperlink{struct_b_box_info}{BBox\+Info}} $>$ \&}]{binfo }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_yolo_ab214f84f23f1fdb6229287c05d30ec8a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_yolo_aba309ea9880cddbaf2a15e0aca41b501}\label{class_yolo_aba309ea9880cddbaf2a15e0aca41b501}} 
+\index{Yolo@{Yolo}!addBBoxProposal@{addBBoxProposal}}
+\index{addBBoxProposal@{addBBoxProposal}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{addBBoxProposal()}{addBBoxProposal()}}
+{\footnotesize\ttfamily void Yolo\+::add\+BBox\+Proposal (\begin{DoxyParamCaption}\item[{const float}]{bx,  }\item[{const float}]{by,  }\item[{const float}]{bw,  }\item[{const float}]{bh,  }\item[{const uint32\+\_\+t}]{stride,  }\item[{const float}]{scaling\+Factor,  }\item[{const float}]{,  }\item[{const float}]{,  }\item[{const int}]{max\+Index,  }\item[{const float}]{max\+Prob,  }\item[{const uint32\+\_\+t}]{image\+\_\+w,  }\item[{const uint32\+\_\+t}]{image\+\_\+h,  }\item[{std\+::vector$<$ \mbox{\hyperlink{struct_b_box_info}{BBox\+Info}} $>$ \&}]{binfo }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_yolo_aba309ea9880cddbaf2a15e0aca41b501_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_yolo_ad69c0613d1f3895e9cf5836b17e039f0}\label{class_yolo_ad69c0613d1f3895e9cf5836b17e039f0}} 
+\index{Yolo@{Yolo}!allocateBuffers@{allocateBuffers}}
+\index{allocateBuffers@{allocateBuffers}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{allocateBuffers()}{allocateBuffers()}}
+{\footnotesize\ttfamily void Yolo\+::allocate\+Buffers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_yolo_abde6193c1a411eac3b6d8a120253c8ce}\label{class_yolo_abde6193c1a411eac3b6d8a120253c8ce}} 
+\index{Yolo@{Yolo}!calcuate\_letterbox\_message@{calcuate\_letterbox\_message}}
+\index{calcuate\_letterbox\_message@{calcuate\_letterbox\_message}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{calcuate\_letterbox\_message()}{calcuate\_letterbox\_message()}}
+{\footnotesize\ttfamily void Yolo\+::calcuate\+\_\+letterbox\+\_\+message (\begin{DoxyParamCaption}\item[{const int}]{m\+\_\+\+InputH,  }\item[{const int}]{m\+\_\+\+InputW,  }\item[{const int}]{imageH,  }\item[{const int}]{imageW,  }\item[{float \&}]{sh,  }\item[{float \&}]{sw,  }\item[{int \&}]{x\+Offset,  }\item[{int \&}]{y\+Offset }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=296pt]{class_yolo_abde6193c1a411eac3b6d8a120253c8ce_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_yolo_a06dbe20b7a3b0aa500d18fcf8d5ce2f4}\label{class_yolo_a06dbe20b7a3b0aa500d18fcf8d5ce2f4}} 
+\index{Yolo@{Yolo}!convert\_bbox\_res@{convert\_bbox\_res}}
+\index{convert\_bbox\_res@{convert\_bbox\_res}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{convert\_bbox\_res()}{convert\_bbox\_res()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_b_box}{BBox}} Yolo\+::convert\+\_\+bbox\+\_\+res (\begin{DoxyParamCaption}\item[{const float \&}]{bx,  }\item[{const float \&}]{by,  }\item[{const float \&}]{bw,  }\item[{const float \&}]{bh,  }\item[{const uint32\+\_\+t \&}]{stride\+\_\+h\+\_\+,  }\item[{const uint32\+\_\+t \&}]{stride\+\_\+w\+\_\+,  }\item[{const uint32\+\_\+t \&}]{netW,  }\item[{const uint32\+\_\+t \&}]{netH }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=277pt]{class_yolo_a06dbe20b7a3b0aa500d18fcf8d5ce2f4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_yolo_ab89a8421a0d55d8c43878a36732697ad}\label{class_yolo_ab89a8421a0d55d8c43878a36732697ad}} 
+\index{Yolo@{Yolo}!create\_engine\_yolov5@{create\_engine\_yolov5}}
+\index{create\_engine\_yolov5@{create\_engine\_yolov5}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{create\_engine\_yolov5()}{create\_engine\_yolov5()}}
+{\footnotesize\ttfamily void Yolo\+::create\+\_\+engine\+\_\+yolov5 (\begin{DoxyParamCaption}\item[{const nvinfer1\+::\+Data\+Type}]{data\+Type = {\ttfamily nvinfer1\+:\+:DataType\+:\+:kFLOAT},  }\item[{\mbox{\hyperlink{class_int8_entropy_calibrator}{Int8\+Entropy\+Calibrator}} $\ast$}]{calibrator = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_yolo_ab89a8421a0d55d8c43878a36732697ad_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_yolo_a90b44fb96fef386c2bc26302fce30feb}\label{class_yolo_a90b44fb96fef386c2bc26302fce30feb}} 
+\index{Yolo@{Yolo}!createYOLOEngine@{createYOLOEngine}}
+\index{createYOLOEngine@{createYOLOEngine}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{createYOLOEngine()}{createYOLOEngine()}}
+{\footnotesize\ttfamily void Yolo\+::create\+YOLOEngine (\begin{DoxyParamCaption}\item[{const nvinfer1\+::\+Data\+Type}]{data\+Type = {\ttfamily nvinfer1\+:\+:DataType\+:\+:kFLOAT},  }\item[{\mbox{\hyperlink{class_int8_entropy_calibrator}{Int8\+Entropy\+Calibrator}} $\ast$}]{calibrator = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_yolo_a90b44fb96fef386c2bc26302fce30feb_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_yolo_a41396ffe525ce6d57aa2771851fff33a}\label{class_yolo_a41396ffe525ce6d57aa2771851fff33a}} 
+\index{Yolo@{Yolo}!cvt\_box@{cvt\_box}}
+\index{cvt\_box@{cvt\_box}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{cvt\_box()}{cvt\_box()}}
+{\footnotesize\ttfamily void Yolo\+::cvt\+\_\+box (\begin{DoxyParamCaption}\item[{const float}]{sh,  }\item[{const float}]{sw,  }\item[{const float}]{x\+Offset,  }\item[{const float}]{y\+Offset,  }\item[{\mbox{\hyperlink{struct_b_box}{BBox}} \&}]{bbox }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_a1bf78ff6aceb1c5ad760e418c2cb41c1}\label{class_yolo_a1bf78ff6aceb1c5ad760e418c2cb41c1}} 
+\index{Yolo@{Yolo}!decodeDetections@{decodeDetections}}
+\index{decodeDetections@{decodeDetections}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{decodeDetections()}{decodeDetections()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{struct_b_box_info}{BBox\+Info}} $>$ Yolo\+::decode\+Detections (\begin{DoxyParamCaption}\item[{const int \&}]{image\+Idx,  }\item[{const int \&}]{imageH,  }\item[{const int \&}]{imageW }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=339pt]{class_yolo_a1bf78ff6aceb1c5ad760e418c2cb41c1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_yolo_a55f9b51e70070369be1cc6634a33541f}\label{class_yolo_a55f9b51e70070369be1cc6634a33541f}} 
+\index{Yolo@{Yolo}!decodeTensor@{decodeTensor}}
+\index{decodeTensor@{decodeTensor}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{decodeTensor()}{decodeTensor()}}
+{\footnotesize\ttfamily virtual std\+::vector$<$ \mbox{\hyperlink{struct_b_box_info}{BBox\+Info}} $>$ Yolo\+::decode\+Tensor (\begin{DoxyParamCaption}\item[{const int}]{image\+Idx,  }\item[{const int}]{imageH,  }\item[{const int}]{imageW,  }\item[{const \mbox{\hyperlink{struct_tensor_info}{Tensor\+Info}} \&}]{tensor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+在 \mbox{\hyperlink{class_yolo_v2_ab55073cbdbf16e1b8cf635050719c9e6}{Yolo\+V2}}, \mbox{\hyperlink{class_yolo_v3_a7ff12fc0fb0ce59bb17b66788a130f3d}{Yolo\+V3}}, \mbox{\hyperlink{class_yolo_v4_a2008b8b67a22ca56be32640abefec479}{Yolo\+V4}} , 以及 \mbox{\hyperlink{class_yolo_v5_a5c1e9111025b96dc5dc7f0c606db239f}{Yolo\+V5}} 内被实现.
+
+\mbox{\Hypertarget{class_yolo_ac3a0c489c771d06d2dc7aa80822192f9}\label{class_yolo_ac3a0c489c771d06d2dc7aa80822192f9}} 
+\index{Yolo@{Yolo}!destroyNetworkUtils@{destroyNetworkUtils}}
+\index{destroyNetworkUtils@{destroyNetworkUtils}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{destroyNetworkUtils()}{destroyNetworkUtils()}}
+{\footnotesize\ttfamily void Yolo\+::destroy\+Network\+Utils (\begin{DoxyParamCaption}\item[{std\+::vector$<$ nvinfer1\+::\+Weights $>$ \&}]{trt\+Weights }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_yolo_a877e0bdcb04b2d0bb4dec6f6f050b22e}\label{class_yolo_a877e0bdcb04b2d0bb4dec6f6f050b22e}} 
+\index{Yolo@{Yolo}!doInference@{doInference}}
+\index{doInference@{doInference}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{doInference()}{doInference()}}
+{\footnotesize\ttfamily void Yolo\+::do\+Inference (\begin{DoxyParamCaption}\item[{const unsigned char $\ast$}]{input,  }\item[{const uint32\+\_\+t}]{batch\+Size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_yolo_a692fe73def5b9cdc91edef940aeedfb4}\label{class_yolo_a692fe73def5b9cdc91edef940aeedfb4}} 
+\index{Yolo@{Yolo}!getClassId@{getClassId}}
+\index{getClassId@{getClassId}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{getClassId()}{getClassId()}}
+{\footnotesize\ttfamily int Yolo\+::get\+Class\+Id (\begin{DoxyParamCaption}\item[{const int \&}]{label }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_yolo_a320fe487a0de8f990dd615f45beeba47}\label{class_yolo_a320fe487a0de8f990dd615f45beeba47}} 
+\index{Yolo@{Yolo}!getClassName@{getClassName}}
+\index{getClassName@{getClassName}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{getClassName()}{getClassName()}}
+{\footnotesize\ttfamily std\+::string Yolo\+::get\+Class\+Name (\begin{DoxyParamCaption}\item[{const int \&}]{label }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_yolo_ae9f7e8c255ae85c5c5d89de1dc56e210}\label{class_yolo_ae9f7e8c255ae85c5c5d89de1dc56e210}} 
+\index{Yolo@{Yolo}!getInputH@{getInputH}}
+\index{getInputH@{getInputH}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{getInputH()}{getInputH()}}
+{\footnotesize\ttfamily uint32\+\_\+t Yolo\+::get\+InputH (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_yolo_ad45bfd062610caa20abcb8c876c1b8de}\label{class_yolo_ad45bfd062610caa20abcb8c876c1b8de}} 
+\index{Yolo@{Yolo}!getInputW@{getInputW}}
+\index{getInputW@{getInputW}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{getInputW()}{getInputW()}}
+{\footnotesize\ttfamily uint32\+\_\+t Yolo\+::get\+InputW (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_yolo_ac74b54e0bf0195a4eb2f52d200414c2f}\label{class_yolo_ac74b54e0bf0195a4eb2f52d200414c2f}} 
+\index{Yolo@{Yolo}!getNetworkType@{getNetworkType}}
+\index{getNetworkType@{getNetworkType}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{getNetworkType()}{getNetworkType()}}
+{\footnotesize\ttfamily std\+::string Yolo\+::get\+Network\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_yolo_abe022167c42e29eb67533c48a21a7504}\label{class_yolo_abe022167c42e29eb67533c48a21a7504}} 
+\index{Yolo@{Yolo}!getNMSThresh@{getNMSThresh}}
+\index{getNMSThresh@{getNMSThresh}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{getNMSThresh()}{getNMSThresh()}}
+{\footnotesize\ttfamily float Yolo\+::get\+NMSThresh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_yolo_ae5ea82e11cab8b1ee6c90edf6c910867}\label{class_yolo_ae5ea82e11cab8b1ee6c90edf6c910867}} 
+\index{Yolo@{Yolo}!getNumClasses@{getNumClasses}}
+\index{getNumClasses@{getNumClasses}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{getNumClasses()}{getNumClasses()}}
+{\footnotesize\ttfamily uint32\+\_\+t Yolo\+::get\+Num\+Classes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_yolo_a5884fa545defe25d0c541710707a10ae}\label{class_yolo_a5884fa545defe25d0c541710707a10ae}} 
+\index{Yolo@{Yolo}!isPrintPerfInfo@{isPrintPerfInfo}}
+\index{isPrintPerfInfo@{isPrintPerfInfo}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{isPrintPerfInfo()}{isPrintPerfInfo()}}
+{\footnotesize\ttfamily bool Yolo\+::is\+Print\+Perf\+Info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_yolo_a1c012d4c809e24d28ee4909ac11f2728}\label{class_yolo_a1c012d4c809e24d28ee4909ac11f2728}} 
+\index{Yolo@{Yolo}!isPrintPredictions@{isPrintPredictions}}
+\index{isPrintPredictions@{isPrintPredictions}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{isPrintPredictions()}{isPrintPredictions()}}
+{\footnotesize\ttfamily bool Yolo\+::is\+Print\+Predictions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_yolo_a4ff4c6d45f7f5f53266133566ca9ffcc}\label{class_yolo_a4ff4c6d45f7f5f53266133566ca9ffcc}} 
+\index{Yolo@{Yolo}!load\_weights\_v5@{load\_weights\_v5}}
+\index{load\_weights\_v5@{load\_weights\_v5}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{load\_weights\_v5()}{load\_weights\_v5()}}
+{\footnotesize\ttfamily void Yolo\+::load\+\_\+weights\+\_\+v5 (\begin{DoxyParamCaption}\item[{const std\+::string}]{s\+\_\+weights\+\_\+path\+\_\+,  }\item[{std\+::map$<$ std\+::string, std\+::vector$<$ float $>$ $>$ \&}]{vec\+\_\+wts\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=285pt]{class_yolo_a4ff4c6d45f7f5f53266133566ca9ffcc_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_yolo_a6515048e54c679dbe39be2bccf649f88}\label{class_yolo_a6515048e54c679dbe39be2bccf649f88}} 
+\index{Yolo@{Yolo}!parse\_cfg\_blocks\_v5@{parse\_cfg\_blocks\_v5}}
+\index{parse\_cfg\_blocks\_v5@{parse\_cfg\_blocks\_v5}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{parse\_cfg\_blocks\_v5()}{parse\_cfg\_blocks\_v5()}}
+{\footnotesize\ttfamily void Yolo\+::parse\+\_\+cfg\+\_\+blocks\+\_\+v5 (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::map$<$ std\+::string, std\+::string $>$ $>$ \&}]{vec\+\_\+block\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=281pt]{class_yolo_a6515048e54c679dbe39be2bccf649f88_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_yolo_a0a614e4d70ccff23a5e72f4accc3ee7b}\label{class_yolo_a0a614e4d70ccff23a5e72f4accc3ee7b}} 
+\index{Yolo@{Yolo}!parseConfigBlocks@{parseConfigBlocks}}
+\index{parseConfigBlocks@{parseConfigBlocks}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{parseConfigBlocks()}{parseConfigBlocks()}}
+{\footnotesize\ttfamily void Yolo\+::parse\+Config\+Blocks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=272pt]{class_yolo_a0a614e4d70ccff23a5e72f4accc3ee7b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_yolo_a14c712e624e28956fb5aa14549f8a7d0}\label{class_yolo_a14c712e624e28956fb5aa14549f8a7d0}} 
+\index{Yolo@{Yolo}!parseConfigFile@{parseConfigFile}}
+\index{parseConfigFile@{parseConfigFile}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{parseConfigFile()}{parseConfigFile()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::map$<$ std\+::string, std\+::string $>$ $>$ Yolo\+::parse\+Config\+File (\begin{DoxyParamCaption}\item[{const std\+::string}]{cfg\+File\+Path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=281pt]{class_yolo_a14c712e624e28956fb5aa14549f8a7d0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_yolo_ac91851a72602bd0f747b8e72d5a79548}\label{class_yolo_ac91851a72602bd0f747b8e72d5a79548}} 
+\index{Yolo@{Yolo}!verifyYoloEngine@{verifyYoloEngine}}
+\index{verifyYoloEngine@{verifyYoloEngine}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{verifyYoloEngine()}{verifyYoloEngine()}}
+{\footnotesize\ttfamily bool Yolo\+::verify\+Yolo\+Engine (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=333pt]{class_yolo_ac91851a72602bd0f747b8e72d5a79548_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_yolo_a6fe75a481a3a5aabdc42a983e01d4a5c}\label{class_yolo_a6fe75a481a3a5aabdc42a983e01d4a5c}} 
+\index{Yolo@{Yolo}!writePlanFileToDisk@{writePlanFileToDisk}}
+\index{writePlanFileToDisk@{writePlanFileToDisk}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{writePlanFileToDisk()}{writePlanFileToDisk()}}
+{\footnotesize\ttfamily void Yolo\+::write\+Plan\+File\+To\+Disk (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{class_yolo_aa86d79ce4c89e9627f47c747e0316a8f}\label{class_yolo_aa86d79ce4c89e9627f47c747e0316a8f}} 
+\index{Yolo@{Yolo}!\_f\_depth\_multiple@{\_f\_depth\_multiple}}
+\index{\_f\_depth\_multiple@{\_f\_depth\_multiple}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{\_f\_depth\_multiple}{\_f\_depth\_multiple}}
+{\footnotesize\ttfamily float Yolo\+::\+\_\+f\+\_\+depth\+\_\+multiple = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_a8e3276dfd756b40f42c7c4970eaf7ed0}\label{class_yolo_a8e3276dfd756b40f42c7c4970eaf7ed0}} 
+\index{Yolo@{Yolo}!\_f\_width\_multiple@{\_f\_width\_multiple}}
+\index{\_f\_width\_multiple@{\_f\_width\_multiple}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{\_f\_width\_multiple}{\_f\_width\_multiple}}
+{\footnotesize\ttfamily float Yolo\+::\+\_\+f\+\_\+width\+\_\+multiple = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_ab6543c87a2e97d3ca443e94c61fef669}\label{class_yolo_ab6543c87a2e97d3ca443e94c61fef669}} 
+\index{Yolo@{Yolo}!\_n\_classes@{\_n\_classes}}
+\index{\_n\_classes@{\_n\_classes}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{\_n\_classes}{\_n\_classes}}
+{\footnotesize\ttfamily uint32\+\_\+t Yolo\+::\+\_\+n\+\_\+classes = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_af3338da42a194d869513332f9c7a6afb}\label{class_yolo_af3338da42a194d869513332f9c7a6afb}} 
+\index{Yolo@{Yolo}!\_n\_yolo\_ind@{\_n\_yolo\_ind}}
+\index{\_n\_yolo\_ind@{\_n\_yolo\_ind}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{\_n\_yolo\_ind}{\_n\_yolo\_ind}}
+{\footnotesize\ttfamily int Yolo\+::\+\_\+n\+\_\+yolo\+\_\+ind = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_yolo_a9fe4b4f349ddd02b0ff06a4970dbeee4}\label{class_yolo_a9fe4b4f349ddd02b0ff06a4970dbeee4}} 
+\index{Yolo@{Yolo}!\_timer@{\_timer}}
+\index{\_timer@{\_timer}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{\_timer}{\_timer}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_timer}{Timer}} Yolo\+::\+\_\+timer\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_yolo_a6129118d6068b4ffb3a1070f65a776ba}\label{class_yolo_a6129118d6068b4ffb3a1070f65a776ba}} 
+\index{Yolo@{Yolo}!m\_BatchSize@{m\_BatchSize}}
+\index{m\_BatchSize@{m\_BatchSize}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_BatchSize}{m\_BatchSize}}
+{\footnotesize\ttfamily uint32\+\_\+t Yolo\+::m\+\_\+\+Batch\+Size = 1\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_a1564609a7c4665b6c36cdaa0c3e55078}\label{class_yolo_a1564609a7c4665b6c36cdaa0c3e55078}} 
+\index{Yolo@{Yolo}!m\_Builder@{m\_Builder}}
+\index{m\_Builder@{m\_Builder}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_Builder}{m\_Builder}}
+{\footnotesize\ttfamily nvinfer1\+::\+IBuilder$\ast$ Yolo\+::m\+\_\+\+Builder\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_a718d2ce812fbcd13bcf9d5c28d9b1693}\label{class_yolo_a718d2ce812fbcd13bcf9d5c28d9b1693}} 
+\index{Yolo@{Yolo}!m\_CalibImages@{m\_CalibImages}}
+\index{m\_CalibImages@{m\_CalibImages}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_CalibImages}{m\_CalibImages}}
+{\footnotesize\ttfamily const std\+::string Yolo\+::m\+\_\+\+Calib\+Images\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_a08edefdd73f25e06c94a9e00a2987427}\label{class_yolo_a08edefdd73f25e06c94a9e00a2987427}} 
+\index{Yolo@{Yolo}!m\_CalibImagesFilePath@{m\_CalibImagesFilePath}}
+\index{m\_CalibImagesFilePath@{m\_CalibImagesFilePath}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_CalibImagesFilePath}{m\_CalibImagesFilePath}}
+{\footnotesize\ttfamily const std\+::string Yolo\+::m\+\_\+\+Calib\+Images\+File\+Path\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_ad68f6fe71f9fe34b0f1c3c13400b3b3c}\label{class_yolo_ad68f6fe71f9fe34b0f1c3c13400b3b3c}} 
+\index{Yolo@{Yolo}!m\_CalibTableFilePath@{m\_CalibTableFilePath}}
+\index{m\_CalibTableFilePath@{m\_CalibTableFilePath}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_CalibTableFilePath}{m\_CalibTableFilePath}}
+{\footnotesize\ttfamily std\+::string Yolo\+::m\+\_\+\+Calib\+Table\+File\+Path\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_a1c2307886c7943b5bf720c987cc56ee3}\label{class_yolo_a1c2307886c7943b5bf720c987cc56ee3}} 
+\index{Yolo@{Yolo}!m\_ClassIds@{m\_ClassIds}}
+\index{m\_ClassIds@{m\_ClassIds}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_ClassIds}{m\_ClassIds}}
+{\footnotesize\ttfamily const std\+::vector$<$int$>$ Yolo\+::m\+\_\+\+Class\+Ids\hspace{0.3cm}{\ttfamily [protected]}}
+
+{\bfseries 初始值\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{        1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21,}
+\DoxyCodeLine{        22, 23, 24, 25, 27, 28, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44,}
+\DoxyCodeLine{        46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65,}
+\DoxyCodeLine{        67, 70, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 84, 85, 86, 87, 88, 89, 90\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{class_yolo_ae8da3d3afb43122857be32490baa555e}\label{class_yolo_ae8da3d3afb43122857be32490baa555e}} 
+\index{Yolo@{Yolo}!m\_ClassNames@{m\_ClassNames}}
+\index{m\_ClassNames@{m\_ClassNames}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_ClassNames}{m\_ClassNames}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ Yolo\+::m\+\_\+\+Class\+Names\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_a3c83e460e0701b8c7d7bdb76508fcf88}\label{class_yolo_a3c83e460e0701b8c7d7bdb76508fcf88}} 
+\index{Yolo@{Yolo}!m\_configBlocks@{m\_configBlocks}}
+\index{m\_configBlocks@{m\_configBlocks}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_configBlocks}{m\_configBlocks}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::map$<$std\+::string, std\+::string$>$ $>$ Yolo\+::m\+\_\+config\+Blocks\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_ab375f3e65216527a44c692ab257e87b1}\label{class_yolo_ab375f3e65216527a44c692ab257e87b1}} 
+\index{Yolo@{Yolo}!m\_ConfigFilePath@{m\_ConfigFilePath}}
+\index{m\_ConfigFilePath@{m\_ConfigFilePath}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_ConfigFilePath}{m\_ConfigFilePath}}
+{\footnotesize\ttfamily const std\+::string Yolo\+::m\+\_\+\+Config\+File\+Path\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_a860e15d518635c5813cb35aa17bd75fb}\label{class_yolo_a860e15d518635c5813cb35aa17bd75fb}} 
+\index{Yolo@{Yolo}!m\_Context@{m\_Context}}
+\index{m\_Context@{m\_Context}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_Context}{m\_Context}}
+{\footnotesize\ttfamily nvinfer1\+::\+IExecution\+Context$\ast$ Yolo\+::m\+\_\+\+Context\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_ab4ef543b344278b3e1e5c699c5646c5c}\label{class_yolo_ab4ef543b344278b3e1e5c699c5646c5c}} 
+\index{Yolo@{Yolo}!m\_CudaStream@{m\_CudaStream}}
+\index{m\_CudaStream@{m\_CudaStream}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_CudaStream}{m\_CudaStream}}
+{\footnotesize\ttfamily cuda\+Stream\+\_\+t Yolo\+::m\+\_\+\+Cuda\+Stream\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_a2fe7429c4f41e4e808d0884dd57ba5cd}\label{class_yolo_a2fe7429c4f41e4e808d0884dd57ba5cd}} 
+\index{Yolo@{Yolo}!m\_DeviceBuffers@{m\_DeviceBuffers}}
+\index{m\_DeviceBuffers@{m\_DeviceBuffers}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_DeviceBuffers}{m\_DeviceBuffers}}
+{\footnotesize\ttfamily std\+::vector$<$void$\ast$$>$ Yolo\+::m\+\_\+\+Device\+Buffers\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_a93179f2080a49ec839b4fa2691f1b58d}\label{class_yolo_a93179f2080a49ec839b4fa2691f1b58d}} 
+\index{Yolo@{Yolo}!m\_DeviceType@{m\_DeviceType}}
+\index{m\_DeviceType@{m\_DeviceType}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_DeviceType}{m\_DeviceType}}
+{\footnotesize\ttfamily const std\+::string Yolo\+::m\+\_\+\+Device\+Type\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_aa9de3ee83d1a96defc82eb0fab3d1ca1}\label{class_yolo_aa9de3ee83d1a96defc82eb0fab3d1ca1}} 
+\index{Yolo@{Yolo}!m\_Engine@{m\_Engine}}
+\index{m\_Engine@{m\_Engine}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_Engine}{m\_Engine}}
+{\footnotesize\ttfamily nvinfer1\+::\+ICuda\+Engine$\ast$ Yolo\+::m\+\_\+\+Engine\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_ac4edb54c9faab2e36d452231db756585}\label{class_yolo_ac4edb54c9faab2e36d452231db756585}} 
+\index{Yolo@{Yolo}!m\_EnginePath@{m\_EnginePath}}
+\index{m\_EnginePath@{m\_EnginePath}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_EnginePath}{m\_EnginePath}}
+{\footnotesize\ttfamily std\+::string Yolo\+::m\+\_\+\+Engine\+Path\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_a177191dc732f2253add53739931cea3d}\label{class_yolo_a177191dc732f2253add53739931cea3d}} 
+\index{Yolo@{Yolo}!m\_InputBindingIndex@{m\_InputBindingIndex}}
+\index{m\_InputBindingIndex@{m\_InputBindingIndex}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_InputBindingIndex}{m\_InputBindingIndex}}
+{\footnotesize\ttfamily int Yolo\+::m\+\_\+\+Input\+Binding\+Index\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_afef5bb498c4127085dcff52e3c72076d}\label{class_yolo_afef5bb498c4127085dcff52e3c72076d}} 
+\index{Yolo@{Yolo}!m\_InputBlobName@{m\_InputBlobName}}
+\index{m\_InputBlobName@{m\_InputBlobName}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_InputBlobName}{m\_InputBlobName}}
+{\footnotesize\ttfamily const std\+::string Yolo\+::m\+\_\+\+Input\+Blob\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_af37e7add02732d46e4a392ff8e853c79}\label{class_yolo_af37e7add02732d46e4a392ff8e853c79}} 
+\index{Yolo@{Yolo}!m\_InputC@{m\_InputC}}
+\index{m\_InputC@{m\_InputC}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_InputC}{m\_InputC}}
+{\footnotesize\ttfamily uint32\+\_\+t Yolo\+::m\+\_\+\+InputC = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_ab80d1f74b268395e80cf3d2335fc7456}\label{class_yolo_ab80d1f74b268395e80cf3d2335fc7456}} 
+\index{Yolo@{Yolo}!m\_InputH@{m\_InputH}}
+\index{m\_InputH@{m\_InputH}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_InputH}{m\_InputH}}
+{\footnotesize\ttfamily uint32\+\_\+t Yolo\+::m\+\_\+\+InputH = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_aa6bcc37635605bbe4e10aa916dfc7d09}\label{class_yolo_aa6bcc37635605bbe4e10aa916dfc7d09}} 
+\index{Yolo@{Yolo}!m\_InputSize@{m\_InputSize}}
+\index{m\_InputSize@{m\_InputSize}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_InputSize}{m\_InputSize}}
+{\footnotesize\ttfamily uint64\+\_\+t Yolo\+::m\+\_\+\+Input\+Size = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_ae40a79ad2059e97ea361ea02e471e01c}\label{class_yolo_ae40a79ad2059e97ea361ea02e471e01c}} 
+\index{Yolo@{Yolo}!m\_InputW@{m\_InputW}}
+\index{m\_InputW@{m\_InputW}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_InputW}{m\_InputW}}
+{\footnotesize\ttfamily uint32\+\_\+t Yolo\+::m\+\_\+\+InputW = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_af4d72cff11a8203625e64cf78374febb}\label{class_yolo_af4d72cff11a8203625e64cf78374febb}} 
+\index{Yolo@{Yolo}!m\_LabelsFilePath@{m\_LabelsFilePath}}
+\index{m\_LabelsFilePath@{m\_LabelsFilePath}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_LabelsFilePath}{m\_LabelsFilePath}}
+{\footnotesize\ttfamily const std\+::string Yolo\+::m\+\_\+\+Labels\+File\+Path\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_ae61691ddde17095234646a5621e736fa}\label{class_yolo_ae61691ddde17095234646a5621e736fa}} 
+\index{Yolo@{Yolo}!m\_Logger@{m\_Logger}}
+\index{m\_Logger@{m\_Logger}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_Logger}{m\_Logger}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_logger}{Logger}} Yolo\+::m\+\_\+\+Logger\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_yolo_ad4910a8a89dc73122eb0a2863f78f71b}\label{class_yolo_ad4910a8a89dc73122eb0a2863f78f71b}} 
+\index{Yolo@{Yolo}!m\_ModelStream@{m\_ModelStream}}
+\index{m\_ModelStream@{m\_ModelStream}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_ModelStream}{m\_ModelStream}}
+{\footnotesize\ttfamily nvinfer1\+::\+IHost\+Memory$\ast$ Yolo\+::m\+\_\+\+Model\+Stream\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_a3ac3b362ef07b9871952d9d8af59730c}\label{class_yolo_a3ac3b362ef07b9871952d9d8af59730c}} 
+\index{Yolo@{Yolo}!m\_Network@{m\_Network}}
+\index{m\_Network@{m\_Network}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_Network}{m\_Network}}
+{\footnotesize\ttfamily nvinfer1\+::\+INetwork\+Definition$\ast$ Yolo\+::m\+\_\+\+Network\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_a1997abb8c69881104f8024f21b405e64}\label{class_yolo_a1997abb8c69881104f8024f21b405e64}} 
+\index{Yolo@{Yolo}!m\_NetworkType@{m\_NetworkType}}
+\index{m\_NetworkType@{m\_NetworkType}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_NetworkType}{m\_NetworkType}}
+{\footnotesize\ttfamily const std\+::string Yolo\+::m\+\_\+\+Network\+Type\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_a045c7878438d05d1d03d36f38a20a5db}\label{class_yolo_a045c7878438d05d1d03d36f38a20a5db}} 
+\index{Yolo@{Yolo}!m\_NMSThresh@{m\_NMSThresh}}
+\index{m\_NMSThresh@{m\_NMSThresh}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_NMSThresh}{m\_NMSThresh}}
+{\footnotesize\ttfamily const float Yolo\+::m\+\_\+\+NMSThresh\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_a8138e3123847a3d1bfdfb31053140904}\label{class_yolo_a8138e3123847a3d1bfdfb31053140904}} 
+\index{Yolo@{Yolo}!m\_OutputTensors@{m\_OutputTensors}}
+\index{m\_OutputTensors@{m\_OutputTensors}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_OutputTensors}{m\_OutputTensors}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{struct_tensor_info}{Tensor\+Info}}$>$ Yolo\+::m\+\_\+\+Output\+Tensors\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_a3f9cac2f03fdc794e076aaebb80a6303}\label{class_yolo_a3f9cac2f03fdc794e076aaebb80a6303}} 
+\index{Yolo@{Yolo}!m\_Precision@{m\_Precision}}
+\index{m\_Precision@{m\_Precision}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_Precision}{m\_Precision}}
+{\footnotesize\ttfamily const std\+::string Yolo\+::m\+\_\+\+Precision\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_a38ac6ee9745e005f21c8ed6324dd338c}\label{class_yolo_a38ac6ee9745e005f21c8ed6324dd338c}} 
+\index{Yolo@{Yolo}!m\_PrintPerfInfo@{m\_PrintPerfInfo}}
+\index{m\_PrintPerfInfo@{m\_PrintPerfInfo}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_PrintPerfInfo}{m\_PrintPerfInfo}}
+{\footnotesize\ttfamily const bool Yolo\+::m\+\_\+\+Print\+Perf\+Info\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_a37a5014665e5cb853d4a6436c87dc8af}\label{class_yolo_a37a5014665e5cb853d4a6436c87dc8af}} 
+\index{Yolo@{Yolo}!m\_PrintPredictions@{m\_PrintPredictions}}
+\index{m\_PrintPredictions@{m\_PrintPredictions}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_PrintPredictions}{m\_PrintPredictions}}
+{\footnotesize\ttfamily const bool Yolo\+::m\+\_\+\+Print\+Predictions\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_a8b5cac0cc594d4caf9987d21ed55d517}\label{class_yolo_a8b5cac0cc594d4caf9987d21ed55d517}} 
+\index{Yolo@{Yolo}!m\_ProbThresh@{m\_ProbThresh}}
+\index{m\_ProbThresh@{m\_ProbThresh}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_ProbThresh}{m\_ProbThresh}}
+{\footnotesize\ttfamily const float Yolo\+::m\+\_\+\+Prob\+Thresh\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_yolo_a9012ad978f627c5e8529884d2cfbef6d}\label{class_yolo_a9012ad978f627c5e8529884d2cfbef6d}} 
+\index{Yolo@{Yolo}!m\_WtsFilePath@{m\_WtsFilePath}}
+\index{m\_WtsFilePath@{m\_WtsFilePath}!Yolo@{Yolo}}
+\doxysubsubsection{\texorpdfstring{m\_WtsFilePath}{m\_WtsFilePath}}
+{\footnotesize\ttfamily const std\+::string Yolo\+::m\+\_\+\+Wts\+File\+Path\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/tensorrt\+\_\+yolo/\mbox{\hyperlink{yolo_8h}{yolo.\+h}}\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/tensorrt\+\_\+yolo/\mbox{\hyperlink{yolo_8cpp}{yolo.\+cpp}}\end{DoxyCompactItemize}

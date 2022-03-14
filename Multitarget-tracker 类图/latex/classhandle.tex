@@ -1,0 +1,176 @@
+\hypertarget{classhandle}{}\doxysection{handle类 参考}
+\label{classhandle}\index{handle@{handle}}
+
+
+{\ttfamily \#include $<$pytypes.\+h$>$}
+
+
+
+类 handle 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classhandle__inherit__graph}
+\end{center}
+\end{figure}
+
+
+handle 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{classhandle__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhandle_a53ba30cccfb1cabee421fd4ea555cf44}{handle}} ()=default
+\begin{DoxyCompactList}\small\item\em The default constructor creates a handle with a {\ttfamily nullptr}-\/valued pointer \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classhandle_a99eb912e1b9b823bc447980a16772584}{handle}} (Py\+Object $\ast$\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}})
+\begin{DoxyCompactList}\small\item\em Creates a {\ttfamily handle} from the given raw Python object pointer \end{DoxyCompactList}\item 
+Py\+Object $\ast$ \mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}} () const
+\begin{DoxyCompactList}\small\item\em Return the underlying {\ttfamily Py\+Object $\ast$} pointer \end{DoxyCompactList}\item 
+Py\+Object $\ast$\& \mbox{\hyperlink{classhandle_af314d063eb29074fcc64595d85b12cec}{ptr}} ()
+\item 
+const \mbox{\hyperlink{classhandle}{handle}} \& \mbox{\hyperlink{classhandle_a1a13c72238d8df4d42c1656e446fbfcb}{inc\+\_\+ref}} () const \&
+\item 
+const \mbox{\hyperlink{classhandle}{handle}} \& \mbox{\hyperlink{classhandle_a4bd9642229b0b331172c37b02aa73eda}{dec\+\_\+ref}} () const \&
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{classhandle_a8158ff37b59a73d48140ab4d718316b9}{cast}} () const
+\item 
+\mbox{\hyperlink{classhandle_a2c60694c460b2227f2a00c7b873d7436}{operator bool}} () const
+\begin{DoxyCompactList}\small\item\em Return {\ttfamily true} when the {\ttfamily handle} wraps a valid Python object \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classhandle_a7173e778869746c1c7a071e561c79974}{operator==}} (const \mbox{\hyperlink{classhandle}{handle}} \&h) const
+\item 
+bool \mbox{\hyperlink{classhandle_a71ecf002785a489fbe1db0aa6fb05bc5}{operator!=}} (const \mbox{\hyperlink{classhandle}{handle}} \&h) const
+\item 
+bool \mbox{\hyperlink{classhandle_a48e44d8de9e6c178fa698fb19efe113d}{check}} () const
+\item 
+template$<$$>$ void \mbox{\hyperlink{classhandle_aefa5deb13fb8fe6df3ed0f222863ee7e}{cast}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected 属性}
+\begin{DoxyCompactItemize}
+\item 
+Py\+Object $\ast$ \mbox{\hyperlink{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}{m\+\_\+ptr}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+\textbackslash{}rst Holds a reference to a Python object (no reference counting)
+
+The {\ttfamily handle} class is a thin wrapper around an arbitrary Python object (i.\+e. a {\ttfamily Py\+Object $\ast$} in Python\textquotesingle{}s C API). It does not perform any automatic reference counting and merely provides a basic C++ interface to various Python API functions.
+
+.. seealso\+:\+: The {\ttfamily object} class inherits from {\ttfamily handle} and adds automatic reference counting features. \textbackslash{}endrst 
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classhandle_a53ba30cccfb1cabee421fd4ea555cf44}\label{classhandle_a53ba30cccfb1cabee421fd4ea555cf44}} 
+\index{handle@{handle}!handle@{handle}}
+\index{handle@{handle}!handle@{handle}}
+\doxysubsubsection{\texorpdfstring{handle()}{handle()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily handle\+::handle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+The default constructor creates a handle with a {\ttfamily nullptr}-\/valued pointer 
+
+\mbox{\Hypertarget{classhandle_a99eb912e1b9b823bc447980a16772584}\label{classhandle_a99eb912e1b9b823bc447980a16772584}} 
+\index{handle@{handle}!handle@{handle}}
+\index{handle@{handle}!handle@{handle}}
+\doxysubsubsection{\texorpdfstring{handle()}{handle()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily handle\+::handle (\begin{DoxyParamCaption}\item[{Py\+Object $\ast$}]{ptr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a {\ttfamily handle} from the given raw Python object pointer 
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classhandle_aefa5deb13fb8fe6df3ed0f222863ee7e}\label{classhandle_aefa5deb13fb8fe6df3ed0f222863ee7e}} 
+\index{handle@{handle}!cast@{cast}}
+\index{cast@{cast}!handle@{handle}}
+\doxysubsubsection{\texorpdfstring{cast()}{cast()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$$>$ \\
+void handle\+::cast (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classhandle_a8158ff37b59a73d48140ab4d718316b9}\label{classhandle_a8158ff37b59a73d48140ab4d718316b9}} 
+\index{handle@{handle}!cast@{cast}}
+\index{cast@{cast}!handle@{handle}}
+\doxysubsubsection{\texorpdfstring{cast()}{cast()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T handle\+::cast}
+
+\textbackslash{}rst Attempt to cast the Python object into the given C++ type. A {\ttfamily cast\+\_\+error} will be throw upon failure. \textbackslash{}endrst \mbox{\Hypertarget{classhandle_a48e44d8de9e6c178fa698fb19efe113d}\label{classhandle_a48e44d8de9e6c178fa698fb19efe113d}} 
+\index{handle@{handle}!check@{check}}
+\index{check@{check}!handle@{handle}}
+\doxysubsubsection{\texorpdfstring{check()}{check()}}
+{\footnotesize\ttfamily bool handle\+::check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classhandle_a4bd9642229b0b331172c37b02aa73eda}\label{classhandle_a4bd9642229b0b331172c37b02aa73eda}} 
+\index{handle@{handle}!dec\_ref@{dec\_ref}}
+\index{dec\_ref@{dec\_ref}!handle@{handle}}
+\doxysubsubsection{\texorpdfstring{dec\_ref()}{dec\_ref()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classhandle}{handle}} \& handle\+::dec\+\_\+ref (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const \&\hspace{0.3cm}{\ttfamily [inline]}}
+
+\textbackslash{}rst Manually decrease the reference count of the Python object. Usually, it is preferable to use the {\ttfamily object} class which derives from {\ttfamily handle} and calls this function automatically. Returns a reference to itself. \textbackslash{}endrst \mbox{\Hypertarget{classhandle_a1a13c72238d8df4d42c1656e446fbfcb}\label{classhandle_a1a13c72238d8df4d42c1656e446fbfcb}} 
+\index{handle@{handle}!inc\_ref@{inc\_ref}}
+\index{inc\_ref@{inc\_ref}!handle@{handle}}
+\doxysubsubsection{\texorpdfstring{inc\_ref()}{inc\_ref()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classhandle}{handle}} \& handle\+::inc\+\_\+ref (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const \&\hspace{0.3cm}{\ttfamily [inline]}}
+
+\textbackslash{}rst Manually increase the reference count of the Python object. Usually, it is preferable to use the {\ttfamily object} class which derives from {\ttfamily handle} and calls this function automatically. Returns a reference to itself. \textbackslash{}endrst \mbox{\Hypertarget{classhandle_a2c60694c460b2227f2a00c7b873d7436}\label{classhandle_a2c60694c460b2227f2a00c7b873d7436}} 
+\index{handle@{handle}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!handle@{handle}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily handle\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Return {\ttfamily true} when the {\ttfamily handle} wraps a valid Python object 
+
+\mbox{\Hypertarget{classhandle_a71ecf002785a489fbe1db0aa6fb05bc5}\label{classhandle_a71ecf002785a489fbe1db0aa6fb05bc5}} 
+\index{handle@{handle}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!handle@{handle}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool handle\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhandle}{handle}} \&}]{h }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classhandle_a7173e778869746c1c7a071e561c79974}\label{classhandle_a7173e778869746c1c7a071e561c79974}} 
+\index{handle@{handle}!operator==@{operator==}}
+\index{operator==@{operator==}!handle@{handle}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool handle\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhandle}{handle}} \&}]{h }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\textbackslash{}rst Deprecated\+: Check that the underlying pointers are the same. Equivalent to {\ttfamily obj1 is obj2} in Python. \textbackslash{}endrst \mbox{\Hypertarget{classhandle_af314d063eb29074fcc64595d85b12cec}\label{classhandle_af314d063eb29074fcc64595d85b12cec}} 
+\index{handle@{handle}!ptr@{ptr}}
+\index{ptr@{ptr}!handle@{handle}}
+\doxysubsubsection{\texorpdfstring{ptr()}{ptr()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Py\+Object $\ast$\& handle\+::ptr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classhandle_aa58c40063166c7cedefdc4db2d6fa608}\label{classhandle_aa58c40063166c7cedefdc4db2d6fa608}} 
+\index{handle@{handle}!ptr@{ptr}}
+\index{ptr@{ptr}!handle@{handle}}
+\doxysubsubsection{\texorpdfstring{ptr()}{ptr()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Py\+Object $\ast$ handle\+::ptr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the underlying {\ttfamily Py\+Object $\ast$} pointer 
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}\label{classhandle_a1e9241eea11b47aa15559ccf6fb229f6}} 
+\index{handle@{handle}!m\_ptr@{m\_ptr}}
+\index{m\_ptr@{m\_ptr}!handle@{handle}}
+\doxysubsubsection{\texorpdfstring{m\_ptr}{m\_ptr}}
+{\footnotesize\ttfamily Py\+Object$\ast$ handle\+::m\+\_\+ptr = nullptr\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/\mbox{\hyperlink{pytypes_8h}{pytypes.\+h}}\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/\mbox{\hyperlink{cast_8h}{cast.\+h}}\end{DoxyCompactItemize}

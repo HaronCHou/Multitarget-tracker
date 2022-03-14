@@ -1,0 +1,675 @@
+\hypertarget{detail_2common_8h_source}{}\doxysection{common.\+h}
+\label{detail_2common_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/detail/common.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/detail/common.h}}
+\mbox{\hyperlink{detail_2common_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{    pybind11/detail/common.h -\/-\/ Basic macros}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{    Copyright (c) 2016 Wenzel Jakob <wenzel.jakob@epfl.ch>}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{    All rights reserved. Use of this source code is governed by a}}
+\DoxyCodeLine{7 \textcolor{comment}{    BSD-\/style license that can be found in the LICENSE file.}}
+\DoxyCodeLine{8 \textcolor{comment}{*/}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#if !defined(NAMESPACE\_BEGIN)}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#  define NAMESPACE\_BEGIN(name) namespace name \{}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#if !defined(NAMESPACE\_END)}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#  define NAMESPACE\_END(name) \}}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{comment}{// Robust support for some features and loading modules compiled against different pybind versions}}
+\DoxyCodeLine{20 \textcolor{comment}{// requires forcing hidden visibility on pybind code, so we enforce this by setting the attribute on}}
+\DoxyCodeLine{21 \textcolor{comment}{// the main `pybind11` namespace.}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#if !defined(PYBIND11\_NAMESPACE)}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#  ifdef \_\_GNUG\_\_}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#    define PYBIND11\_NAMESPACE pybind11 \_\_attribute\_\_((visibility("{}hidden"{}})))}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#  else}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#    define PYBIND11\_NAMESPACE pybind11}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#if !(defined(\_MSC\_VER) \&\& \_\_cplusplus == 199711L) \&\& !defined(\_\_INTEL\_COMPILER)}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#  if \_\_cplusplus >= 201402L}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#    define PYBIND11\_CPP14}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#    if \_\_cplusplus >= 201703L}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#      define PYBIND11\_CPP17}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#    endif}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#elif defined(\_MSC\_VER) \&\& \_\_cplusplus == 199711L}}
+\DoxyCodeLine{38 \textcolor{comment}{// MSVC sets \_MSVC\_LANG rather than \_\_cplusplus (supposedly until the standard is fully implemented)}}
+\DoxyCodeLine{39 \textcolor{comment}{// Unless you use the /Zc:\_\_cplusplus flag on Visual Studio 2017 15.7 Preview 3 or newer}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#  if \_MSVC\_LANG >= 201402L}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#    define PYBIND11\_CPP14}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#    if \_MSVC\_LANG > 201402L \&\& \_MSC\_VER >= 1910}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#      define PYBIND11\_CPP17}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#    endif}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 \textcolor{comment}{// Compiler version assertions}}
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#if defined(\_\_INTEL\_COMPILER)}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#  if \_\_INTEL\_COMPILER < 1700}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#    error pybind11 requires Intel C++ compiler v17 or newer}}
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#elif defined(\_\_clang\_\_) \&\& !defined(\_\_apple\_build\_version\_\_)}}
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#  if \_\_clang\_major\_\_ < 3 || (\_\_clang\_major\_\_ == 3 \&\& \_\_clang\_minor\_\_ < 3)}}
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#    error pybind11 requires clang 3.3 or newer}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#elif defined(\_\_clang\_\_)}}
+\DoxyCodeLine{58 \textcolor{comment}{// Apple changes clang version macros to its Xcode version; the first Xcode release based on}}
+\DoxyCodeLine{59 \textcolor{comment}{// (upstream) clang 3.3 was Xcode 5:}}
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#  if \_\_clang\_major\_\_ < 5}}
+\DoxyCodeLine{61 \textcolor{preprocessor}{\#    error pybind11 requires Xcode/clang 5.0 or newer}}
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#elif defined(\_\_GNUG\_\_)}}
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#  if \_\_GNUC\_\_ < 4 || (\_\_GNUC\_\_ == 4 \&\& \_\_GNUC\_MINOR\_\_ < 8)}}
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#    error pybind11 requires gcc 4.8 or newer}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{67 \textcolor{preprocessor}{\#elif defined(\_MSC\_VER)}}
+\DoxyCodeLine{68 \textcolor{comment}{// Pybind hits various compiler bugs in 2015u2 and earlier, and also makes use of some stl features}}
+\DoxyCodeLine{69 \textcolor{comment}{// (e.g. std::negation) added in 2015u3:}}
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#  if \_MSC\_FULL\_VER < 190024210}}
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#    error pybind11 requires MSVC 2015 update 3 or newer}}
+\DoxyCodeLine{72 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{73 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75 \textcolor{preprocessor}{\#if !defined(PYBIND11\_EXPORT)}}
+\DoxyCodeLine{76 \textcolor{preprocessor}{\#  if defined(WIN32) || defined(\_WIN32)}}
+\DoxyCodeLine{77 \textcolor{preprocessor}{\#    define PYBIND11\_EXPORT \_\_declspec(dllexport)}}
+\DoxyCodeLine{78 \textcolor{preprocessor}{\#  else}}
+\DoxyCodeLine{79 \textcolor{preprocessor}{\#    define PYBIND11\_EXPORT \_\_attribute\_\_ ((visibility("{}default"{}})))}
+\DoxyCodeLine{80 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83 \textcolor{preprocessor}{\#if defined(\_MSC\_VER)}}
+\DoxyCodeLine{84 \textcolor{preprocessor}{\#  define PYBIND11\_NOINLINE \_\_declspec(noinline)}}
+\DoxyCodeLine{85 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#  define PYBIND11\_NOINLINE \_\_attribute\_\_ ((noinline))}}
+\DoxyCodeLine{87 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89 \textcolor{preprocessor}{\#if defined(PYBIND11\_CPP14)}}
+\DoxyCodeLine{90 \textcolor{preprocessor}{\#  define PYBIND11\_DEPRECATED(reason) [[deprecated(reason)]]}}
+\DoxyCodeLine{91 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{92 \textcolor{preprocessor}{\#  define PYBIND11\_DEPRECATED(reason) \_\_attribute\_\_((deprecated(reason)))}}
+\DoxyCodeLine{93 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95 \textcolor{preprocessor}{\#define PYBIND11\_VERSION\_MAJOR 2}}
+\DoxyCodeLine{96 \textcolor{preprocessor}{\#define PYBIND11\_VERSION\_MINOR 5}}
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#define PYBIND11\_VERSION\_PATCH 0}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{100 \textcolor{preprocessor}{\#if defined(\_MSC\_VER)}}
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#  if (PY\_MAJOR\_VERSION == 3 \&\& PY\_MINOR\_VERSION < 4)}}
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#    define HAVE\_ROUND 1}}
+\DoxyCodeLine{103 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{104 \textcolor{preprocessor}{\#  pragma warning(push)}}
+\DoxyCodeLine{105 \textcolor{preprocessor}{\#  pragma warning(disable: 4510 4610 4512 4005)}}
+\DoxyCodeLine{106 \textcolor{preprocessor}{\#  if defined(\_DEBUG) \&\& !defined(Py\_DEBUG)}}
+\DoxyCodeLine{107 \textcolor{preprocessor}{\#    define PYBIND11\_DEBUG\_MARKER}}
+\DoxyCodeLine{108 \textcolor{preprocessor}{\#    undef \_DEBUG}}
+\DoxyCodeLine{109 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{110 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112 \textcolor{preprocessor}{\#include <Python.h>}}
+\DoxyCodeLine{113 \textcolor{preprocessor}{\#include <frameobject.h>}}
+\DoxyCodeLine{114 \textcolor{preprocessor}{\#include <pythread.h>}}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116 \textcolor{comment}{/* Python \#defines overrides on all sorts of core functions, which}}
+\DoxyCodeLine{117 \textcolor{comment}{   tends to weak havok in C++ codebases that expect these to work}}
+\DoxyCodeLine{118 \textcolor{comment}{   like regular functions (potentially with several overloads) */}}
+\DoxyCodeLine{119 \textcolor{preprocessor}{\#if defined(isalnum)}}
+\DoxyCodeLine{120 \textcolor{preprocessor}{\#  undef isalnum}}
+\DoxyCodeLine{121 \textcolor{preprocessor}{\#  undef isalpha}}
+\DoxyCodeLine{122 \textcolor{preprocessor}{\#  undef islower}}
+\DoxyCodeLine{123 \textcolor{preprocessor}{\#  undef isspace}}
+\DoxyCodeLine{124 \textcolor{preprocessor}{\#  undef isupper}}
+\DoxyCodeLine{125 \textcolor{preprocessor}{\#  undef tolower}}
+\DoxyCodeLine{126 \textcolor{preprocessor}{\#  undef toupper}}
+\DoxyCodeLine{127 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129 \textcolor{preprocessor}{\#if defined(copysign)}}
+\DoxyCodeLine{130 \textcolor{preprocessor}{\#  undef copysign}}
+\DoxyCodeLine{131 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133 \textcolor{preprocessor}{\#if defined(\_MSC\_VER)}}
+\DoxyCodeLine{134 \textcolor{preprocessor}{\#  if defined(PYBIND11\_DEBUG\_MARKER)}}
+\DoxyCodeLine{135 \textcolor{preprocessor}{\#    define \_DEBUG}}
+\DoxyCodeLine{136 \textcolor{preprocessor}{\#    undef PYBIND11\_DEBUG\_MARKER}}
+\DoxyCodeLine{137 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{138 \textcolor{preprocessor}{\#  pragma warning(pop)}}
+\DoxyCodeLine{139 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141 \textcolor{preprocessor}{\#include <cstddef>}}
+\DoxyCodeLine{142 \textcolor{preprocessor}{\#include <cstring>}}
+\DoxyCodeLine{143 \textcolor{preprocessor}{\#include <forward\_list>}}
+\DoxyCodeLine{144 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{145 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{146 \textcolor{preprocessor}{\#include <stdexcept>}}
+\DoxyCodeLine{147 \textcolor{preprocessor}{\#include <unordered\_set>}}
+\DoxyCodeLine{148 \textcolor{preprocessor}{\#include <unordered\_map>}}
+\DoxyCodeLine{149 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{150 \textcolor{preprocessor}{\#include <typeindex>}}
+\DoxyCodeLine{151 \textcolor{preprocessor}{\#include <type\_traits>}}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153 \textcolor{preprocessor}{\#if PY\_MAJOR\_VERSION >= 3 }}
+\DoxyCodeLine{154 \textcolor{preprocessor}{\#define PYBIND11\_INSTANCE\_METHOD\_NEW(ptr, class\_) PyInstanceMethod\_New(ptr)}}
+\DoxyCodeLine{155 \textcolor{preprocessor}{\#define PYBIND11\_INSTANCE\_METHOD\_CHECK PyInstanceMethod\_Check}}
+\DoxyCodeLine{156 \textcolor{preprocessor}{\#define PYBIND11\_INSTANCE\_METHOD\_GET\_FUNCTION PyInstanceMethod\_GET\_FUNCTION}}
+\DoxyCodeLine{157 \textcolor{preprocessor}{\#define PYBIND11\_BYTES\_CHECK PyBytes\_Check}}
+\DoxyCodeLine{158 \textcolor{preprocessor}{\#define PYBIND11\_BYTES\_FROM\_STRING PyBytes\_FromString}}
+\DoxyCodeLine{159 \textcolor{preprocessor}{\#define PYBIND11\_BYTES\_FROM\_STRING\_AND\_SIZE PyBytes\_FromStringAndSize}}
+\DoxyCodeLine{160 \textcolor{preprocessor}{\#define PYBIND11\_BYTES\_AS\_STRING\_AND\_SIZE PyBytes\_AsStringAndSize}}
+\DoxyCodeLine{161 \textcolor{preprocessor}{\#define PYBIND11\_BYTES\_AS\_STRING PyBytes\_AsString}}
+\DoxyCodeLine{162 \textcolor{preprocessor}{\#define PYBIND11\_BYTES\_SIZE PyBytes\_Size}}
+\DoxyCodeLine{163 \textcolor{preprocessor}{\#define PYBIND11\_LONG\_CHECK(o) PyLong\_Check(o)}}
+\DoxyCodeLine{164 \textcolor{preprocessor}{\#define PYBIND11\_LONG\_AS\_LONGLONG(o) PyLong\_AsLongLong(o)}}
+\DoxyCodeLine{165 \textcolor{preprocessor}{\#define PYBIND11\_LONG\_FROM\_SIGNED(o) PyLong\_FromSsize\_t((ssize\_t) o)}}
+\DoxyCodeLine{166 \textcolor{preprocessor}{\#define PYBIND11\_LONG\_FROM\_UNSIGNED(o) PyLong\_FromSize\_t((size\_t) o)}}
+\DoxyCodeLine{167 \textcolor{preprocessor}{\#define PYBIND11\_BYTES\_NAME "{}bytes"{}}}
+\DoxyCodeLine{168 \textcolor{preprocessor}{\#define PYBIND11\_STRING\_NAME "{}str"{}}}
+\DoxyCodeLine{169 \textcolor{preprocessor}{\#define PYBIND11\_SLICE\_OBJECT PyObject}}
+\DoxyCodeLine{170 \textcolor{preprocessor}{\#define PYBIND11\_FROM\_STRING PyUnicode\_FromString}}
+\DoxyCodeLine{171 \textcolor{preprocessor}{\#define PYBIND11\_STR\_TYPE ::pybind11::str}}
+\DoxyCodeLine{172 \textcolor{preprocessor}{\#define PYBIND11\_BOOL\_ATTR "{}\_\_bool\_\_"{}}}
+\DoxyCodeLine{173 \textcolor{preprocessor}{\#define PYBIND11\_NB\_BOOL(ptr) ((ptr)-\/>nb\_bool)}}
+\DoxyCodeLine{174 \textcolor{comment}{// Providing a separate declaration to make Clang's -\/Wmissing-\/prototypes happy}}
+\DoxyCodeLine{175 \textcolor{preprocessor}{\#define PYBIND11\_PLUGIN\_IMPL(name) \(\backslash\)}}
+\DoxyCodeLine{176 \textcolor{preprocessor}{    extern "{}C"{}} PYBIND11\_EXPORT PyObject *PyInit\_\#\#name();   \(\backslash\)}
+\DoxyCodeLine{177     extern "{}C"{} PYBIND11\_EXPORT PyObject *PyInit\_\#\#name()}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{180 \textcolor{preprocessor}{\#define PYBIND11\_INSTANCE\_METHOD\_NEW(ptr, class\_) PyMethod\_New(ptr, nullptr, class\_)}}
+\DoxyCodeLine{181 \textcolor{preprocessor}{\#define PYBIND11\_INSTANCE\_METHOD\_CHECK PyMethod\_Check}}
+\DoxyCodeLine{182 \textcolor{preprocessor}{\#define PYBIND11\_INSTANCE\_METHOD\_GET\_FUNCTION PyMethod\_GET\_FUNCTION}}
+\DoxyCodeLine{183 \textcolor{preprocessor}{\#define PYBIND11\_BYTES\_CHECK PyString\_Check}}
+\DoxyCodeLine{184 \textcolor{preprocessor}{\#define PYBIND11\_BYTES\_FROM\_STRING PyString\_FromString}}
+\DoxyCodeLine{185 \textcolor{preprocessor}{\#define PYBIND11\_BYTES\_FROM\_STRING\_AND\_SIZE PyString\_FromStringAndSize}}
+\DoxyCodeLine{186 \textcolor{preprocessor}{\#define PYBIND11\_BYTES\_AS\_STRING\_AND\_SIZE PyString\_AsStringAndSize}}
+\DoxyCodeLine{187 \textcolor{preprocessor}{\#define PYBIND11\_BYTES\_AS\_STRING PyString\_AsString}}
+\DoxyCodeLine{188 \textcolor{preprocessor}{\#define PYBIND11\_BYTES\_SIZE PyString\_Size}}
+\DoxyCodeLine{189 \textcolor{preprocessor}{\#define PYBIND11\_LONG\_CHECK(o) (PyInt\_Check(o) || PyLong\_Check(o))}}
+\DoxyCodeLine{190 \textcolor{preprocessor}{\#define PYBIND11\_LONG\_AS\_LONGLONG(o) (PyInt\_Check(o) ? (long long) PyLong\_AsLong(o) : PyLong\_AsLongLong(o))}}
+\DoxyCodeLine{191 \textcolor{preprocessor}{\#define PYBIND11\_LONG\_FROM\_SIGNED(o) PyInt\_FromSsize\_t((ssize\_t) o) }\textcolor{comment}{// Returns long if needed.}}
+\DoxyCodeLine{192 \textcolor{preprocessor}{\#define PYBIND11\_LONG\_FROM\_UNSIGNED(o) PyInt\_FromSize\_t((size\_t) o) }\textcolor{comment}{// Returns long if needed.}}
+\DoxyCodeLine{193 \textcolor{preprocessor}{\#define PYBIND11\_BYTES\_NAME "{}str"{}}}
+\DoxyCodeLine{194 \textcolor{preprocessor}{\#define PYBIND11\_STRING\_NAME "{}unicode"{}}}
+\DoxyCodeLine{195 \textcolor{preprocessor}{\#define PYBIND11\_SLICE\_OBJECT PySliceObject}}
+\DoxyCodeLine{196 \textcolor{preprocessor}{\#define PYBIND11\_FROM\_STRING PyString\_FromString}}
+\DoxyCodeLine{197 \textcolor{preprocessor}{\#define PYBIND11\_STR\_TYPE ::pybind11::bytes}}
+\DoxyCodeLine{198 \textcolor{preprocessor}{\#define PYBIND11\_BOOL\_ATTR "{}\_\_nonzero\_\_"{}}}
+\DoxyCodeLine{199 \textcolor{preprocessor}{\#define PYBIND11\_NB\_BOOL(ptr) ((ptr)-\/>nb\_nonzero)}}
+\DoxyCodeLine{200 \textcolor{comment}{// Providing a separate PyInit decl to make Clang's -\/Wmissing-\/prototypes happy}}
+\DoxyCodeLine{201 \textcolor{preprocessor}{\#define PYBIND11\_PLUGIN\_IMPL(name) \(\backslash\)}}
+\DoxyCodeLine{202 \textcolor{preprocessor}{    static PyObject *pybind11\_init\_wrapper();               \(\backslash\)}}
+\DoxyCodeLine{203 \textcolor{preprocessor}{    extern "{}C"{}} PYBIND11\_EXPORT void init\#\#name();           \(\backslash\)}
+\DoxyCodeLine{204     extern "{}C"{} PYBIND11\_EXPORT void init\#\#name() \{          \(\backslash\)}
+\DoxyCodeLine{205         (void)pybind11\_init\_wrapper();                      \(\backslash\)}
+\DoxyCodeLine{206     \}                                                       \(\backslash\)}
+\DoxyCodeLine{207     PyObject *pybind11\_init\_wrapper()}
+\DoxyCodeLine{208 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210 \textcolor{preprocessor}{\#if PY\_VERSION\_HEX >= 0x03050000 \&\& PY\_VERSION\_HEX < 0x03050200}}
+\DoxyCodeLine{211 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{212     \textcolor{keyword}{struct }\_Py\_atomic\_address \{ \textcolor{keywordtype}{void} *value; \};}
+\DoxyCodeLine{213     PyAPI\_DATA(\_Py\_atomic\_address) \_PyThreadState\_Current;}
+\DoxyCodeLine{214 \}}
+\DoxyCodeLine{215 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{216 }
+\DoxyCodeLine{217 \textcolor{preprocessor}{\#define PYBIND11\_TRY\_NEXT\_OVERLOAD ((PyObject *) 1) }\textcolor{comment}{// special failure return code}}
+\DoxyCodeLine{218 \textcolor{preprocessor}{\#define PYBIND11\_STRINGIFY(x) \#x}}
+\DoxyCodeLine{219 \textcolor{preprocessor}{\#define PYBIND11\_TOSTRING(x) PYBIND11\_STRINGIFY(x)}}
+\DoxyCodeLine{220 \textcolor{preprocessor}{\#define PYBIND11\_CONCAT(first, second) first\#\#second}}
+\DoxyCodeLine{221 \textcolor{preprocessor}{\#define PYBIND11\_ENSURE\_INTERNALS\_READY \(\backslash\)}}
+\DoxyCodeLine{222 \textcolor{preprocessor}{    pybind11::detail::get\_internals();}}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{224 \textcolor{preprocessor}{\#define PYBIND11\_CHECK\_PYTHON\_VERSION \(\backslash\)}}
+\DoxyCodeLine{225 \textcolor{preprocessor}{    \{                                                                          \(\backslash\)}}
+\DoxyCodeLine{226 \textcolor{preprocessor}{        const char *compiled\_ver = PYBIND11\_TOSTRING(PY\_MAJOR\_VERSION)         \(\backslash\)}}
+\DoxyCodeLine{227 \textcolor{preprocessor}{            "{}."{}} PYBIND11\_TOSTRING(PY\_MINOR\_VERSION);                           \(\backslash\)}
+\DoxyCodeLine{228         const char *runtime\_ver = Py\_GetVersion();                             \(\backslash\)}
+\DoxyCodeLine{229         size\_t len = std::strlen(compiled\_ver);                                \(\backslash\)}
+\DoxyCodeLine{230         if (std::strncmp(runtime\_ver, compiled\_ver, len) != 0                  \(\backslash\)}
+\DoxyCodeLine{231                 || (runtime\_ver[len] >= '0' \&\& runtime\_ver[len] <= '9')) \{     \(\backslash\)}
+\DoxyCodeLine{232             PyErr\_Format(PyExc\_ImportError,                                    \(\backslash\)}
+\DoxyCodeLine{233                 "{}Python version mismatch: module was compiled for Python \%s, "{} \(\backslash\)}
+\DoxyCodeLine{234                 "{}but the interpreter version is incompatible: \%s."{},            \(\backslash\)}
+\DoxyCodeLine{235                 compiled\_ver, runtime\_ver);                                    \(\backslash\)}
+\DoxyCodeLine{236             return nullptr;                                                    \(\backslash\)}
+\DoxyCodeLine{237         \}                                                                      \(\backslash\)}
+\DoxyCodeLine{238     \}}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{240 \textcolor{preprocessor}{\#define PYBIND11\_CATCH\_INIT\_EXCEPTIONS \(\backslash\)}}
+\DoxyCodeLine{241 \textcolor{preprocessor}{        catch (pybind11::error\_already\_set \&e) \{                               \(\backslash\)}}
+\DoxyCodeLine{242 \textcolor{preprocessor}{            PyErr\_SetString(PyExc\_ImportError, e.what());                      \(\backslash\)}}
+\DoxyCodeLine{243 \textcolor{preprocessor}{            return nullptr;                                                    \(\backslash\)}}
+\DoxyCodeLine{244 \textcolor{preprocessor}{        \} catch (const std::exception \&e) \{                                    \(\backslash\)}}
+\DoxyCodeLine{245 \textcolor{preprocessor}{            PyErr\_SetString(PyExc\_ImportError, e.what());                      \(\backslash\)}}
+\DoxyCodeLine{246 \textcolor{preprocessor}{            return nullptr;                                                    \(\backslash\)}}
+\DoxyCodeLine{247 \textcolor{preprocessor}{        \}                                                                      \(\backslash\)}}
+\DoxyCodeLine{248 \textcolor{preprocessor}{}}
+\DoxyCodeLine{261 \textcolor{preprocessor}{}}
+\DoxyCodeLine{264 \textcolor{preprocessor}{\#define PYBIND11\_PLUGIN(name)                                                  \(\backslash\)}}
+\DoxyCodeLine{265 \textcolor{preprocessor}{    PYBIND11\_DEPRECATED("{}PYBIND11\_PLUGIN is deprecated, use PYBIND11\_MODULE"{}})  \(\backslash\)}
+\DoxyCodeLine{266     static PyObject *pybind11\_init();                                          \(\backslash\)}
+\DoxyCodeLine{267     PYBIND11\_PLUGIN\_IMPL(name) \{                                               \(\backslash\)}
+\DoxyCodeLine{268         PYBIND11\_CHECK\_PYTHON\_VERSION                                          \(\backslash\)}
+\DoxyCodeLine{269         PYBIND11\_ENSURE\_INTERNALS\_READY                                        \(\backslash\)}
+\DoxyCodeLine{270         try \{                                                                  \(\backslash\)}
+\DoxyCodeLine{271             return pybind11\_init();                                            \(\backslash\)}
+\DoxyCodeLine{272         \} PYBIND11\_CATCH\_INIT\_EXCEPTIONS                                       \(\backslash\)}
+\DoxyCodeLine{273     \}                                                                          \(\backslash\)}
+\DoxyCodeLine{274     PyObject *pybind11\_init()}
+\DoxyCodeLine{275 }
+\DoxyCodeLine{293 \textcolor{preprocessor}{\#define PYBIND11\_MODULE(name, variable)                                        \(\backslash\)}}
+\DoxyCodeLine{294 \textcolor{preprocessor}{    static void PYBIND11\_CONCAT(pybind11\_init\_, name)(pybind11::module \&);     \(\backslash\)}}
+\DoxyCodeLine{295 \textcolor{preprocessor}{    PYBIND11\_PLUGIN\_IMPL(name) \{                                               \(\backslash\)}}
+\DoxyCodeLine{296 \textcolor{preprocessor}{        PYBIND11\_CHECK\_PYTHON\_VERSION                                          \(\backslash\)}}
+\DoxyCodeLine{297 \textcolor{preprocessor}{        PYBIND11\_ENSURE\_INTERNALS\_READY                                        \(\backslash\)}}
+\DoxyCodeLine{298 \textcolor{preprocessor}{        auto m = pybind11::module(PYBIND11\_TOSTRING(name));                    \(\backslash\)}}
+\DoxyCodeLine{299 \textcolor{preprocessor}{        try \{                                                                  \(\backslash\)}}
+\DoxyCodeLine{300 \textcolor{preprocessor}{            PYBIND11\_CONCAT(pybind11\_init\_, name)(m);                          \(\backslash\)}}
+\DoxyCodeLine{301 \textcolor{preprocessor}{            return m.ptr();                                                    \(\backslash\)}}
+\DoxyCodeLine{302 \textcolor{preprocessor}{        \} PYBIND11\_CATCH\_INIT\_EXCEPTIONS                                       \(\backslash\)}}
+\DoxyCodeLine{303 \textcolor{preprocessor}{    \}                                                                          \(\backslash\)}}
+\DoxyCodeLine{304 \textcolor{preprocessor}{    void PYBIND11\_CONCAT(pybind11\_init\_, name)(pybind11::module \&variable)}}
+\DoxyCodeLine{305 }
+\DoxyCodeLine{306 }
+\DoxyCodeLine{307 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+\DoxyCodeLine{308 }
+\DoxyCodeLine{309 using \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} = Py\_ssize\_t;}
+\DoxyCodeLine{310 using \textcolor{keywordtype}{size\_t}  = \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{size\_t};}
+\DoxyCodeLine{311 }
+\DoxyCodeLine{313 enum class \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} : uint8\_t \{}
+\DoxyCodeLine{319     \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a2bd9c0ed00116be1258e0cc66617d7c8}{automatic}} = 0,}
+\DoxyCodeLine{320 }
+\DoxyCodeLine{325     \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a1c1628c22d69b3b9bac4b5c3674852e3}{automatic\_reference}},}
+\DoxyCodeLine{326 }
+\DoxyCodeLine{331     \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a5dc4bb19391b04351f49572019c628c0}{take\_ownership}},}
+\DoxyCodeLine{332 }
+\DoxyCodeLine{336     \mbox{\hyperlink{matrix_8c_a3e4d6f00c3d5fcdc71b96bef42cbcf5e}{copy}},}
+\DoxyCodeLine{337 }
+\DoxyCodeLine{342     \mbox{\hyperlink{cast_8h_aa26cb17b5f2f55f99e792e7f6339f12e}{move}},}
+\DoxyCodeLine{343 }
+\DoxyCodeLine{349     \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841ab8af13ea9c8fe890c9979a1fa8dbde22}{reference}},}
+\DoxyCodeLine{350 }
+\DoxyCodeLine{361     \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841aa39bc0596cb125c1605a78fbd287df7f}{reference\_internal}}}
+\DoxyCodeLine{362 \};}
+\DoxyCodeLine{363 }
+\DoxyCodeLine{364 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{365 }
+\DoxyCodeLine{366 inline static constexpr \textcolor{keywordtype}{int} \mbox{\hyperlink{detail_2common_8h_a7e6056fe5e08a5a51eecd1fffca2a4d8}{log2}}(\textcolor{keywordtype}{size\_t} n, \textcolor{keywordtype}{int} k = 0) \{ \textcolor{keywordflow}{return} (n <= 1) ? k : \mbox{\hyperlink{detail_2common_8h_a7e6056fe5e08a5a51eecd1fffca2a4d8}{log2}}(n >> 1, k + 1); \}}
+\DoxyCodeLine{367 }
+\DoxyCodeLine{368 \textcolor{comment}{// Returns the size as a multiple of sizeof(void *), rounded up.}}
+\DoxyCodeLine{369 \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{detail_2common_8h_a1a767b0d9e7dcc29e74c67c50bfb1ea9}{size\_in\_ptrs}}(\textcolor{keywordtype}{size\_t} s) \{ \textcolor{keywordflow}{return} 1 + ((s -\/ 1) >> \mbox{\hyperlink{detail_2common_8h_a7e6056fe5e08a5a51eecd1fffca2a4d8}{log2}}(\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{void} *))); \}}
+\DoxyCodeLine{370 }
+\DoxyCodeLine{377 \textcolor{keyword}{constexpr} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{detail_2common_8h_a24241089c1b051b143781ff5a6193a76}{instance\_simple\_holder\_in\_ptrs}}() \{}
+\DoxyCodeLine{378     \textcolor{keyword}{static\_assert}(\textcolor{keyword}{sizeof}(std::shared\_ptr<int>) >= \textcolor{keyword}{sizeof}(std::unique\_ptr<int>),}
+\DoxyCodeLine{379             \textcolor{stringliteral}{"{}pybind assumes std::shared\_ptrs are at least as big as std::unique\_ptrs"{}});}
+\DoxyCodeLine{380     \textcolor{keywordflow}{return} \mbox{\hyperlink{detail_2common_8h_a1a767b0d9e7dcc29e74c67c50bfb1ea9}{size\_in\_ptrs}}(\textcolor{keyword}{sizeof}(std::shared\_ptr<int>));}
+\DoxyCodeLine{381 \}}
+\DoxyCodeLine{382 }
+\DoxyCodeLine{383 \textcolor{comment}{// Forward declarations}}
+\DoxyCodeLine{384 \textcolor{keyword}{struct }\mbox{\hyperlink{structtype__info}{type\_info}};}
+\DoxyCodeLine{385 \textcolor{keyword}{struct }\mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}};}
+\DoxyCodeLine{386 }
+\DoxyCodeLine{387 \textcolor{keyword}{struct }\mbox{\hyperlink{structnonsimple__values__and__holders}{nonsimple\_values\_and\_holders}} \{}
+\DoxyCodeLine{388     \textcolor{keywordtype}{void} **\mbox{\hyperlink{structnonsimple__values__and__holders_a8d235fb047647ad18ef2b7d36b7c3e1f}{values\_and\_holders}};}
+\DoxyCodeLine{389     uint8\_t *\mbox{\hyperlink{structnonsimple__values__and__holders_a6750e4f4c8064a8a2f31d14094d44a53}{status}};}
+\DoxyCodeLine{390 \};}
+\DoxyCodeLine{391 }
+\DoxyCodeLine{393 \textcolor{keyword}{struct }\mbox{\hyperlink{structinstance}{instance}} \{}
+\DoxyCodeLine{394     PyObject\_HEAD}
+\DoxyCodeLine{396     \textcolor{keyword}{union }\{}
+\DoxyCodeLine{397         \textcolor{keywordtype}{void} *\mbox{\hyperlink{structinstance_a41170a51b771a937d421d60d97d50e48}{simple\_value\_holder}}[1 + \mbox{\hyperlink{detail_2common_8h_a24241089c1b051b143781ff5a6193a76}{instance\_simple\_holder\_in\_ptrs}}()];}
+\DoxyCodeLine{398         \mbox{\hyperlink{structnonsimple__values__and__holders}{nonsimple\_values\_and\_holders}} \mbox{\hyperlink{structinstance_a0a744abc33ad85e3df4d4aa69093f38f}{nonsimple}};}
+\DoxyCodeLine{399     \};}
+\DoxyCodeLine{401     PyObject *\mbox{\hyperlink{structinstance_a23dd4c6144dbfa8ed0ba6d2a7a964998}{weakrefs}};}
+\DoxyCodeLine{403     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structinstance_a69b3e638c182ecbbaaa5625ce3c36e99}{owned}} : 1;}
+\DoxyCodeLine{427     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structinstance_a1e23897fd281cdd5cecd2d36b5d7a26d}{simple\_layout}} : 1;}
+\DoxyCodeLine{429     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structinstance_a70b19567d7738df6679e1599e7d3ff75}{simple\_holder\_constructed}} : 1;}
+\DoxyCodeLine{431     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structinstance_a464df414f8c21853c43be0ab4ccf8e93}{simple\_instance\_registered}} : 1;}
+\DoxyCodeLine{433     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structinstance_a30d2da1bf481e5628e3f20a84a4bcd1a}{has\_patients}} : 1;}
+\DoxyCodeLine{434 }
+\DoxyCodeLine{436     \textcolor{keywordtype}{void} \mbox{\hyperlink{structinstance_addb02b48487bafc757c28d40d1d6a995}{allocate\_layout}}();}
+\DoxyCodeLine{437 }
+\DoxyCodeLine{439     \textcolor{keywordtype}{void} \mbox{\hyperlink{structinstance_a0e6db8a0edd9f4d440a4b31fb1f59d19}{deallocate\_layout}}();}
+\DoxyCodeLine{440 }
+\DoxyCodeLine{444     \mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}} \mbox{\hyperlink{structinstance_a33fb0acd9a08898baf6dfefc54477821}{get\_value\_and\_holder}}(\textcolor{keyword}{const} \mbox{\hyperlink{structtype__info}{type\_info}} *find\_type = \textcolor{keyword}{nullptr}, \textcolor{keywordtype}{bool} throw\_if\_missing = \textcolor{keyword}{true});}
+\DoxyCodeLine{445 }
+\DoxyCodeLine{447     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} uint8\_t \mbox{\hyperlink{structinstance_a2d8ccf4b4d7dcb8083cee8cc030ec871}{status\_holder\_constructed}}  = 1;}
+\DoxyCodeLine{448     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} uint8\_t \mbox{\hyperlink{structinstance_a48612cbb682f9b16cbaeba60f1bca052}{status\_instance\_registered}} = 2;}
+\DoxyCodeLine{449 \};}
+\DoxyCodeLine{450 }
+\DoxyCodeLine{451 \textcolor{keyword}{static\_assert}(std::is\_standard\_layout<instance>::value, \textcolor{stringliteral}{"{}Internal error: `pybind11::detail::instance` is not standard layout!"{}});}
+\DoxyCodeLine{452 }
+\DoxyCodeLine{454 \textcolor{preprocessor}{\#if defined(PYBIND11\_CPP14) \&\& (!defined(\_MSC\_VER) || \_MSC\_VER >= 1910)}}
+\DoxyCodeLine{455 \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{std::enable\_if\_t}};}
+\DoxyCodeLine{456 \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_acdb0eff728aec08ed6fff07d2885ea9d}{std::conditional\_t}};}
+\DoxyCodeLine{457 \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_a92dc8767e0b0b9b6022f61cb5b52278f}{std::remove\_cv\_t}};}
+\DoxyCodeLine{458 \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_a3a08cea569e6926ac8d7d74dd7178b5f}{std::remove\_reference\_t}};}
+\DoxyCodeLine{459 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{460 \textcolor{keyword}{template} <\textcolor{keywordtype}{bool} B, \textcolor{keyword}{typename} T = \textcolor{keywordtype}{void}> \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}} = \textcolor{keyword}{typename} std::enable\_if<B, T>::type;}
+\DoxyCodeLine{461 \textcolor{keyword}{template} <\textcolor{keywordtype}{bool} B, \textcolor{keyword}{typename} T, \textcolor{keyword}{typename} F> \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_acdb0eff728aec08ed6fff07d2885ea9d}{conditional\_t}} = \textcolor{keyword}{typename} std::conditional<B, T, F>::type;}
+\DoxyCodeLine{462 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_a92dc8767e0b0b9b6022f61cb5b52278f}{remove\_cv\_t}} = \textcolor{keyword}{typename} std::remove\_cv<T>::type;}
+\DoxyCodeLine{463 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_a3a08cea569e6926ac8d7d74dd7178b5f}{remove\_reference\_t}} = \textcolor{keyword}{typename} std::remove\_reference<T>::type;}
+\DoxyCodeLine{464 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{465 }
+\DoxyCodeLine{467 \textcolor{preprocessor}{\#if defined(PYBIND11\_CPP14)}}
+\DoxyCodeLine{468 \textcolor{keyword}{using} std::index\_sequence;}
+\DoxyCodeLine{469 \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_ab5e942a7ee11e93c8b5ed281c28261b2}{std::make\_index\_sequence}};}
+\DoxyCodeLine{470 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{471 \textcolor{keyword}{template}<\textcolor{keywordtype}{size\_t} ...> \textcolor{keyword}{struct }\mbox{\hyperlink{structindex__sequence}{index\_sequence}}  \{ \};}
+\DoxyCodeLine{472 \textcolor{keyword}{template}<\textcolor{keywordtype}{size\_t} N, \textcolor{keywordtype}{size\_t} ...S> \textcolor{keyword}{struct }\mbox{\hyperlink{structmake__index__sequence__impl}{make\_index\_sequence\_impl}} : \mbox{\hyperlink{structmake__index__sequence__impl}{make\_index\_sequence\_impl}} <N -\/ 1, N -\/ 1, S...> \{ \};}
+\DoxyCodeLine{473 \textcolor{keyword}{template}<\textcolor{keywordtype}{size\_t} ...S> \textcolor{keyword}{struct }\mbox{\hyperlink{structmake__index__sequence__impl}{make\_index\_sequence\_impl}} <0, S...> \{ \textcolor{keyword}{typedef} \mbox{\hyperlink{structindex__sequence}{index\_sequence}}<S...> \mbox{\hyperlink{structmake__index__sequence__impl_3_010_00_01_s_8_8_8_01_4_aeacc616df5726d8e90eafeac0b19bd6d}{type}}; \};}
+\DoxyCodeLine{474 \textcolor{keyword}{template}<\textcolor{keywordtype}{size\_t} N> \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_ab5e942a7ee11e93c8b5ed281c28261b2}{make\_index\_sequence}} = \textcolor{keyword}{typename} \mbox{\hyperlink{structmake__index__sequence__impl}{make\_index\_sequence\_impl<N>::type}};}
+\DoxyCodeLine{475 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{476 }
+\DoxyCodeLine{478 \textcolor{keyword}{template} <\textcolor{keyword}{typename} ISeq, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\_t}}, \textcolor{keywordtype}{bool}...> \textcolor{keyword}{struct }\mbox{\hyperlink{structselect__indices__impl}{select\_indices\_impl}} \{ \textcolor{keyword}{using} \mbox{\hyperlink{structselect__indices__impl_a257bb6e0d732031707917925f457fa16}{type}} = ISeq; \};}
+\DoxyCodeLine{479 \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t}... IPrev, \textcolor{keywordtype}{size\_t} I, \textcolor{keywordtype}{bool} B, \textcolor{keywordtype}{bool}... Bs> \textcolor{keyword}{struct }\mbox{\hyperlink{structselect__indices__impl}{select\_indices\_impl}}<\mbox{\hyperlink{structindex__sequence}{index\_sequence}}<IPrev...>, I, B, Bs...>}
+\DoxyCodeLine{480     : \mbox{\hyperlink{structselect__indices__impl}{select\_indices\_impl}}<conditional\_t<B, index\_sequence<IPrev..., I>, index\_sequence<IPrev...>>, I + 1, Bs...> \{\};}
+\DoxyCodeLine{481 \textcolor{keyword}{template} <\textcolor{keywordtype}{bool}... Bs> \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_af3331027e7c99eb207fba4460549981d}{select\_indices}} = \textcolor{keyword}{typename} \mbox{\hyperlink{structselect__indices__impl}{select\_indices\_impl<index\_sequence<>}}, 0, Bs...>::type;}
+\DoxyCodeLine{482 }
+\DoxyCodeLine{484 \textcolor{keyword}{template} <\textcolor{keywordtype}{bool} B> \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_a0d337b508cc2fb5a92d8e72db201e53b}{bool\_constant}} = std::integral\_constant<bool, B>;}
+\DoxyCodeLine{485 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{struct }\mbox{\hyperlink{structnegation}{negation}} : \mbox{\hyperlink{detail_2common_8h_a0d337b508cc2fb5a92d8e72db201e53b}{bool\_constant}}<!T::value> \{ \};}
+\DoxyCodeLine{486 }
+\DoxyCodeLine{487 \textcolor{keyword}{template} <\textcolor{keyword}{typename}...> \textcolor{keyword}{struct }\mbox{\hyperlink{structvoid__t__impl}{void\_t\_impl}} \{ \textcolor{keyword}{using} \mbox{\hyperlink{structvoid__t__impl_a90240510fc2b3785df49dec99bbe43e2}{type}} = void; \};}
+\DoxyCodeLine{488 \textcolor{keyword}{template} <\textcolor{keyword}{typename}... Ts> \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_ac5ff2a64cfcadadd23f8559c46cfcbda}{void\_t}} = \textcolor{keyword}{typename} \mbox{\hyperlink{structvoid__t__impl}{void\_t\_impl}}<Ts...>::type;}
+\DoxyCodeLine{489 }
+\DoxyCodeLine{491 \textcolor{preprocessor}{\#if defined(\_\_cpp\_fold\_expressions) \&\& !(defined(\_MSC\_VER) \&\& (\_MSC\_VER < 1916))}}
+\DoxyCodeLine{492 \textcolor{keyword}{template} <\textcolor{keyword}{class}... Ts> \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_a4f440ffd11216b5a0aa72d2842546340}{all\_of}} = \mbox{\hyperlink{detail_2common_8h_a0d337b508cc2fb5a92d8e72db201e53b}{bool\_constant}}<(Ts::value \&\& ...)>;}
+\DoxyCodeLine{493 \textcolor{keyword}{template} <\textcolor{keyword}{class}... Ts> \textcolor{keyword}{using} \mbox{\hyperlink{structnegation}{any\_of}} = \mbox{\hyperlink{detail_2common_8h_a0d337b508cc2fb5a92d8e72db201e53b}{bool\_constant}}<(Ts::value || ...)>;}
+\DoxyCodeLine{494 \textcolor{preprocessor}{\#elif !defined(\_MSC\_VER)}}
+\DoxyCodeLine{495 \textcolor{keyword}{template} <\textcolor{keywordtype}{bool}...> \textcolor{keyword}{struct }\mbox{\hyperlink{structbools}{bools}} \{\};}
+\DoxyCodeLine{496 \textcolor{keyword}{template} <\textcolor{keyword}{class}... Ts> \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_a4f440ffd11216b5a0aa72d2842546340}{all\_of}} = std::is\_same<}
+\DoxyCodeLine{497     \mbox{\hyperlink{structbools}{bools}}<Ts::value..., \textcolor{keyword}{true}>,}
+\DoxyCodeLine{498     \mbox{\hyperlink{structbools}{bools}}<\textcolor{keyword}{true}, Ts::value...>>;}
+\DoxyCodeLine{499 \textcolor{keyword}{template} <\textcolor{keyword}{class}... Ts> \textcolor{keyword}{using} \mbox{\hyperlink{structnegation}{any\_of}} = \mbox{\hyperlink{structnegation}{negation<all\_of<negation<Ts>}}...>>;}
+\DoxyCodeLine{500 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{501 \textcolor{comment}{// MSVC has trouble with the above, but supports std::conjunction, which we can use instead (albeit}}
+\DoxyCodeLine{502 \textcolor{comment}{// at a slight loss of compilation efficiency).}}
+\DoxyCodeLine{503 \textcolor{keyword}{template} <\textcolor{keyword}{class}... Ts> \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_a4f440ffd11216b5a0aa72d2842546340}{all\_of}} = std::conjunction<Ts...>;}
+\DoxyCodeLine{504 \textcolor{keyword}{template} <\textcolor{keyword}{class}... Ts> \textcolor{keyword}{using} \mbox{\hyperlink{structnegation}{any\_of}} = std::disjunction<Ts...>;}
+\DoxyCodeLine{505 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{506 \textcolor{keyword}{template} <\textcolor{keyword}{class}... Ts> \textcolor{keyword}{using} \mbox{\hyperlink{structnegation}{none\_of}} = \mbox{\hyperlink{structnegation}{negation}}<\mbox{\hyperlink{structnegation}{any\_of}}<Ts...>>;}
+\DoxyCodeLine{507 }
+\DoxyCodeLine{508 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keyword}{template}<\textcolor{keyword}{class}> \textcolor{keyword}{class}... Predicates> \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_a426a0446ff0713f3c3a180a2f82ff463}{satisfies\_all\_of}} = \mbox{\hyperlink{detail_2common_8h_a4f440ffd11216b5a0aa72d2842546340}{all\_of<Predicates<T>}}...>;}
+\DoxyCodeLine{509 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keyword}{template}<\textcolor{keyword}{class}> \textcolor{keyword}{class}... Predicates> \textcolor{keyword}{using} \mbox{\hyperlink{structnegation}{satisfies\_any\_of}} = \mbox{\hyperlink{structnegation}{any\_of<Predicates<T>}}...>;}
+\DoxyCodeLine{510 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keyword}{template}<\textcolor{keyword}{class}> \textcolor{keyword}{class}... Predicates> \textcolor{keyword}{using} \mbox{\hyperlink{structnegation}{satisfies\_none\_of}} = \mbox{\hyperlink{structnegation}{none\_of<Predicates<T>}}...>;}
+\DoxyCodeLine{511 }
+\DoxyCodeLine{513 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{struct }\mbox{\hyperlink{structremove__class}{remove\_class}} \{ \};}
+\DoxyCodeLine{514 \textcolor{keyword}{template} <\textcolor{keyword}{typename} C, \textcolor{keyword}{typename} R, \textcolor{keyword}{typename}... A> \textcolor{keyword}{struct }\mbox{\hyperlink{structremove__class}{remove\_class}}<R (C::*)(A...)> \{ \textcolor{keyword}{typedef} R \mbox{\hyperlink{structremove__class_3_01_r_07_c_1_1_5_08_07_a_8_8_8_08_4_a523af5b571ef45044ed8c4df7bf4a4c7}{type}}(A...); \};}
+\DoxyCodeLine{515 \textcolor{keyword}{template} <\textcolor{keyword}{typename} C, \textcolor{keyword}{typename} R, \textcolor{keyword}{typename}... A> \textcolor{keyword}{struct }\mbox{\hyperlink{structremove__class}{remove\_class}}<R (C::*)(A...) const> \{ \textcolor{keyword}{typedef} R \mbox{\hyperlink{structremove__class_3_01_r_07_c_1_1_5_08_07_a_8_8_8_08_01const_01_4_a20fc37feb3ec89319bfdaf004273ee2d}{type}}(A...); \};}
+\DoxyCodeLine{516 }
+\DoxyCodeLine{518 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{struct }\mbox{\hyperlink{structintrinsic__type}{intrinsic\_type}}                       \{ \textcolor{keyword}{typedef} T \mbox{\hyperlink{structintrinsic__type_ab90beb94ea8a923b5435bf0011bc926f}{type}}; \};}
+\DoxyCodeLine{519 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{struct }\mbox{\hyperlink{structintrinsic__type}{intrinsic\_type}}<const T>              \{ \textcolor{keyword}{typedef} \textcolor{keyword}{typename} \mbox{\hyperlink{structintrinsic__type_ab90beb94ea8a923b5435bf0011bc926f}{intrinsic\_type<T>::type}} \mbox{\hyperlink{structintrinsic__type_3_01const_01_t_01_4_a977cbccc3da541d467acda18abd63a74}{type}}; \};}
+\DoxyCodeLine{520 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{struct }\mbox{\hyperlink{structintrinsic__type}{intrinsic\_type}}<T*>                   \{ \textcolor{keyword}{typedef} \textcolor{keyword}{typename} \mbox{\hyperlink{structintrinsic__type_ab90beb94ea8a923b5435bf0011bc926f}{intrinsic\_type<T>::type}} \mbox{\hyperlink{structintrinsic__type_3_01_t_01_5_01_4_acbb73521557b43fd38e099972cf37a7e}{type}}; \};}
+\DoxyCodeLine{521 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{struct }\mbox{\hyperlink{structintrinsic__type}{intrinsic\_type}}<T\&>                   \{ \textcolor{keyword}{typedef} \textcolor{keyword}{typename} \mbox{\hyperlink{structintrinsic__type_ab90beb94ea8a923b5435bf0011bc926f}{intrinsic\_type<T>::type}} \mbox{\hyperlink{structintrinsic__type_3_01_t_01_6_01_4_a90278c08b44740ba70c14cc7ae7f8954}{type}}; \};}
+\DoxyCodeLine{522 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{struct }\mbox{\hyperlink{structintrinsic__type}{intrinsic\_type}}<T\&\&>                  \{ \textcolor{keyword}{typedef} \textcolor{keyword}{typename} \mbox{\hyperlink{structintrinsic__type_ab90beb94ea8a923b5435bf0011bc926f}{intrinsic\_type<T>::type}} \mbox{\hyperlink{structintrinsic__type_3_01_t_01_6_6_01_4_a75c466ec3acf285f085eb64d8f063510}{type}}; \};}
+\DoxyCodeLine{523 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T, \textcolor{keywordtype}{size\_t} N> \textcolor{keyword}{struct }\mbox{\hyperlink{structintrinsic__type}{intrinsic\_type}}<const T[N]> \{ \textcolor{keyword}{typedef} \textcolor{keyword}{typename} \mbox{\hyperlink{structintrinsic__type_ab90beb94ea8a923b5435bf0011bc926f}{intrinsic\_type<T>::type}} \mbox{\hyperlink{structintrinsic__type_3_01const_01_t_0f_n_0e_4_a7b6f6511109ee2c22f02ca0fd976b3cc}{type}}; \};}
+\DoxyCodeLine{524 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T, \textcolor{keywordtype}{size\_t} N> \textcolor{keyword}{struct }\mbox{\hyperlink{structintrinsic__type}{intrinsic\_type}}<T[N]>       \{ \textcolor{keyword}{typedef} \textcolor{keyword}{typename} \mbox{\hyperlink{structintrinsic__type_ab90beb94ea8a923b5435bf0011bc926f}{intrinsic\_type<T>::type}} \mbox{\hyperlink{structintrinsic__type_3_01_t_0f_n_0e_4_a1293e367b8af022bba0150ff1b991c7b}{type}}; \};}
+\DoxyCodeLine{525 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_a3e4beb3f4b7338384c98d70aa1ee9780}{intrinsic\_t}} = \textcolor{keyword}{typename} \mbox{\hyperlink{structintrinsic__type_ab90beb94ea8a923b5435bf0011bc926f}{intrinsic\_type<T>::type}};}
+\DoxyCodeLine{526 }
+\DoxyCodeLine{528 \textcolor{keyword}{struct }\mbox{\hyperlink{structvoid__type}{void\_type}} \{ \};}
+\DoxyCodeLine{529 }
+\DoxyCodeLine{531 \textcolor{keyword}{template} <\textcolor{keyword}{typename}...> \textcolor{keyword}{struct }\mbox{\hyperlink{structtype__list}{type\_list}} \{ \};}
+\DoxyCodeLine{532 }
+\DoxyCodeLine{534 \textcolor{preprocessor}{\#ifdef \_\_cpp\_fold\_expressions}}
+\DoxyCodeLine{535 \textcolor{keyword}{template} <\textcolor{keyword}{typename}... Ts> \textcolor{keyword}{constexpr} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{detail_2common_8h_a8b3721f762a0f4ae4319f682c8fa7026}{constexpr\_sum}}(Ts... ns) \{ \textcolor{keywordflow}{return} (0 + ... + \textcolor{keywordtype}{size\_t}\{ns\}); \}}
+\DoxyCodeLine{536 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{537 \textcolor{keyword}{constexpr} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{detail_2common_8h_a8b3721f762a0f4ae4319f682c8fa7026}{constexpr\_sum}}() \{ \textcolor{keywordflow}{return} 0; \}}
+\DoxyCodeLine{538 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T, \textcolor{keyword}{typename}... Ts>}
+\DoxyCodeLine{539 \textcolor{keyword}{constexpr} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{detail_2common_8h_a8b3721f762a0f4ae4319f682c8fa7026}{constexpr\_sum}}(T n, Ts... ns) \{ \textcolor{keywordflow}{return} \textcolor{keywordtype}{size\_t}\{n\} + \mbox{\hyperlink{detail_2common_8h_a8b3721f762a0f4ae4319f682c8fa7026}{constexpr\_sum}}(ns...); \}}
+\DoxyCodeLine{540 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{541 }
+\DoxyCodeLine{542 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(constexpr\_impl)}
+\DoxyCodeLine{544 constexpr \textcolor{keywordtype}{int} \mbox{\hyperlink{detail_2common_8h_a71226eea81f24762754f1413e2ead78f}{first}}(\textcolor{keywordtype}{int} i) \{ \textcolor{keywordflow}{return} i; \}}
+\DoxyCodeLine{545 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T, \textcolor{keyword}{typename}... Ts>}
+\DoxyCodeLine{546 \textcolor{keyword}{constexpr} \textcolor{keywordtype}{int} \mbox{\hyperlink{detail_2common_8h_a71226eea81f24762754f1413e2ead78f}{first}}(\textcolor{keywordtype}{int} i, T v, Ts... vs) \{ \textcolor{keywordflow}{return} v ? i : \mbox{\hyperlink{detail_2common_8h_a71226eea81f24762754f1413e2ead78f}{first}}(i + 1, vs...); \}}
+\DoxyCodeLine{547 }
+\DoxyCodeLine{548 \textcolor{keyword}{constexpr} \textcolor{keywordtype}{int} \mbox{\hyperlink{detail_2common_8h_a16195acbb4bd947bbd0f805af9f2670b}{last}}(\textcolor{keywordtype}{int} \textcolor{comment}{/*i*/}, \textcolor{keywordtype}{int} result) \{ \textcolor{keywordflow}{return} result; \}}
+\DoxyCodeLine{549 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T, \textcolor{keyword}{typename}... Ts>}
+\DoxyCodeLine{550 \textcolor{keyword}{constexpr} \textcolor{keywordtype}{int} \mbox{\hyperlink{detail_2common_8h_a16195acbb4bd947bbd0f805af9f2670b}{last}}(\textcolor{keywordtype}{int} i, \textcolor{keywordtype}{int} result, T v, Ts... vs) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{detail_2common_8h_a16195acbb4bd947bbd0f805af9f2670b}{last}}(i + 1, v ? i : result, vs...); \}}
+\DoxyCodeLine{551 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(constexpr\_impl)}
+\DoxyCodeLine{552 }
+\DoxyCodeLine{553 }
+\DoxyCodeLine{555 \textcolor{keyword}{template} <\textcolor{keyword}{template}<\textcolor{keyword}{typename}> \textcolor{keyword}{class }Predicate, \textcolor{keyword}{typename}... Ts>}
+\DoxyCodeLine{556 \textcolor{keyword}{constexpr} \textcolor{keywordtype}{int} \mbox{\hyperlink{detail_2common_8h_a3b338d68ac276f1ac405ef556cca63ad}{constexpr\_first}}() \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{detail_2common_8h_a71226eea81f24762754f1413e2ead78f}{constexpr\_impl::first}}(0, Predicate<Ts>::value...); \}}
+\DoxyCodeLine{557 }
+\DoxyCodeLine{559 \textcolor{keyword}{template} <\textcolor{keyword}{template}<\textcolor{keyword}{typename}> \textcolor{keyword}{class }Predicate, \textcolor{keyword}{typename}... Ts>}
+\DoxyCodeLine{560 \textcolor{keyword}{constexpr} \textcolor{keywordtype}{int} \mbox{\hyperlink{detail_2common_8h_ad913eba4f4746e260df45f1f5d74844f}{constexpr\_last}}() \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{detail_2common_8h_a16195acbb4bd947bbd0f805af9f2670b}{constexpr\_impl::last}}(0, -\/1, Predicate<Ts>::value...); \}}
+\DoxyCodeLine{561 }
+\DoxyCodeLine{563 \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t} N, \textcolor{keyword}{typename} T, \textcolor{keyword}{typename}... Ts>}
+\DoxyCodeLine{564 \textcolor{keyword}{struct }\mbox{\hyperlink{structpack__element}{pack\_element}} \{ \textcolor{keyword}{using} \mbox{\hyperlink{structpack__element_a977333130c98c1ac63a8c0a72de74cfa}{type}} = \textcolor{keyword}{typename} \mbox{\hyperlink{structpack__element}{pack\_element}}<N -\/ 1, Ts...>\mbox{\hyperlink{structpack__element_a977333130c98c1ac63a8c0a72de74cfa}{::type}}; \};}
+\DoxyCodeLine{565 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T, \textcolor{keyword}{typename}... Ts>}
+\DoxyCodeLine{566 \textcolor{keyword}{struct }\mbox{\hyperlink{structpack__element}{pack\_element}}<0, T, Ts...> \{ \textcolor{keyword}{using} \mbox{\hyperlink{structpack__element_3_010_00_01_t_00_01_ts_8_8_8_01_4_af446bf84374bd0377d1d3e8178a7a62a}{type}} = T; \};}
+\DoxyCodeLine{567 }
+\DoxyCodeLine{570 \textcolor{keyword}{template} <\textcolor{keyword}{template}<\textcolor{keyword}{typename}> \textcolor{keyword}{class }Predicate, \textcolor{keyword}{typename} Default, \textcolor{keyword}{typename}... Ts>}
+\DoxyCodeLine{571 \textcolor{keyword}{struct }\mbox{\hyperlink{structexactly__one}{exactly\_one}} \{}
+\DoxyCodeLine{572     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structexactly__one_a2e88399d33d5e51e1b27f785259f408c}{found}} = \mbox{\hyperlink{detail_2common_8h_a8b3721f762a0f4ae4319f682c8fa7026}{constexpr\_sum}}(Predicate<Ts>::value...);}
+\DoxyCodeLine{573     \textcolor{keyword}{static\_assert}(\mbox{\hyperlink{structexactly__one_a2e88399d33d5e51e1b27f785259f408c}{found}} <= 1, \textcolor{stringliteral}{"{}Found more than one type matching the predicate"{}});}
+\DoxyCodeLine{574 }
+\DoxyCodeLine{575     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structexactly__one_af0f0e1092da1fbf5d87040bb9428e613}{index}} = \mbox{\hyperlink{structexactly__one_a2e88399d33d5e51e1b27f785259f408c}{found}} ? \mbox{\hyperlink{detail_2common_8h_a3b338d68ac276f1ac405ef556cca63ad}{constexpr\_first}}<Predicate, Ts...>() : 0;}
+\DoxyCodeLine{576     \textcolor{keyword}{using} \mbox{\hyperlink{structexactly__one_ae80ab0a0e6f21d11a9a8b821cc2e352e}{type}} = \mbox{\hyperlink{detail_2common_8h_acdb0eff728aec08ed6fff07d2885ea9d}{conditional\_t}}<\mbox{\hyperlink{structexactly__one_a2e88399d33d5e51e1b27f785259f408c}{found}}, \textcolor{keyword}{typename} \mbox{\hyperlink{structpack__element}{pack\_element}}<\mbox{\hyperlink{structexactly__one_af0f0e1092da1fbf5d87040bb9428e613}{index}}, Ts...>\mbox{\hyperlink{structexactly__one_ae80ab0a0e6f21d11a9a8b821cc2e352e}{::type}}, Default>;}
+\DoxyCodeLine{577 \};}
+\DoxyCodeLine{578 \textcolor{keyword}{template} <\textcolor{keyword}{template}<\textcolor{keyword}{typename}> \textcolor{keyword}{class }P, \textcolor{keyword}{typename} Default>}
+\DoxyCodeLine{579 \textcolor{keyword}{struct }\mbox{\hyperlink{structexactly__one}{exactly\_one}}<P, Default> \{ \textcolor{keyword}{using} \mbox{\hyperlink{structexactly__one_3_01_p_00_01_default_01_4_a4cd8cb6e1e88ee35a595632dc97aadbf}{type}} = Default; \};}
+\DoxyCodeLine{580 }
+\DoxyCodeLine{581 \textcolor{keyword}{template} <\textcolor{keyword}{template}<\textcolor{keyword}{typename}> \textcolor{keyword}{class }Predicate, \textcolor{keyword}{typename} Default, \textcolor{keyword}{typename}... Ts>}
+\DoxyCodeLine{582 \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_a9ec2c72f4073efb0fb0bd007b0616f0a}{exactly\_one\_t}} = \textcolor{keyword}{typename} \mbox{\hyperlink{structexactly__one}{exactly\_one}}<Predicate, Default, Ts...>::type;}
+\DoxyCodeLine{583 }
+\DoxyCodeLine{585 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T, \textcolor{keyword}{typename}... \textcolor{comment}{/*Us*/}> \textcolor{keyword}{struct }\mbox{\hyperlink{structdeferred__type}{deferred\_type}} \{ \textcolor{keyword}{using} \mbox{\hyperlink{structdeferred__type_a1a0932117634b35e4d08eeeb00a6a190}{type}} = T; \};}
+\DoxyCodeLine{586 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T, \textcolor{keyword}{typename}... Us> \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_a0a48a85e1319daba85b2a061aeef6f8c}{deferred\_t}} = \textcolor{keyword}{typename} \mbox{\hyperlink{structdeferred__type}{deferred\_type}}<T, Us...>::type;}
+\DoxyCodeLine{587 }
+\DoxyCodeLine{590 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Base, \textcolor{keyword}{typename} Derived> \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_a2f45dc51b95131437565319aeb667206}{is\_strict\_base\_of}} = \mbox{\hyperlink{detail_2common_8h_a0d337b508cc2fb5a92d8e72db201e53b}{bool\_constant}}<}
+\DoxyCodeLine{591     std::is\_base\_of<Base, Derived>::value \&\& !std::is\_same<Base, Derived>::value>;}
+\DoxyCodeLine{592 }
+\DoxyCodeLine{595 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Base, \textcolor{keyword}{typename} Derived> \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_aa98fb0ebcb49a8544b95b8ef691ad425}{is\_accessible\_base\_of}} = \mbox{\hyperlink{detail_2common_8h_a0d337b508cc2fb5a92d8e72db201e53b}{bool\_constant}}<}
+\DoxyCodeLine{596     std::is\_base\_of<Base, Derived>::value \&\& std::is\_convertible<Derived *, Base *>::value>;}
+\DoxyCodeLine{597 }
+\DoxyCodeLine{598 \textcolor{keyword}{template} <\textcolor{keyword}{template}<\textcolor{keyword}{typename}...> \textcolor{keyword}{class }Base>}
+\DoxyCodeLine{599 \textcolor{keyword}{struct }\mbox{\hyperlink{structis__template__base__of__impl}{is\_template\_base\_of\_impl}} \{}
+\DoxyCodeLine{600     \textcolor{keyword}{template} <\textcolor{keyword}{typename}... Us> \textcolor{keyword}{static} std::true\_type \mbox{\hyperlink{structis__template__base__of__impl_abdd050106f967915ac33b745dfd0e955}{check}}(Base<Us...> *);}
+\DoxyCodeLine{601     \textcolor{keyword}{static} std::false\_type \mbox{\hyperlink{structis__template__base__of__impl_a1223262875fc83b72c685b57747e9641}{check}}(...);}
+\DoxyCodeLine{602 \};}
+\DoxyCodeLine{603 }
+\DoxyCodeLine{606 \textcolor{keyword}{template} <\textcolor{keyword}{template}<\textcolor{keyword}{typename}...> \textcolor{keyword}{class }Base, \textcolor{keyword}{typename} T>}
+\DoxyCodeLine{607 \textcolor{preprocessor}{\#if !defined(\_MSC\_VER)}}
+\DoxyCodeLine{608 \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_a3e21897d302612ea06a937769b92b71c}{is\_template\_base\_of}} = \textcolor{keyword}{decltype}(\mbox{\hyperlink{structis__template__base__of__impl_abdd050106f967915ac33b745dfd0e955}{is\_template\_base\_of\_impl<Base>::check}}((\mbox{\hyperlink{detail_2common_8h_a3e4beb3f4b7338384c98d70aa1ee9780}{intrinsic\_t<T>}}*)\textcolor{keyword}{nullptr}));}
+\DoxyCodeLine{609 \textcolor{preprocessor}{\#else }\textcolor{comment}{// MSVC2015 has trouble with decltype in template aliases}}
+\DoxyCodeLine{610 \textcolor{keyword}{struct }\mbox{\hyperlink{detail_2common_8h_a3e21897d302612ea06a937769b92b71c}{is\_template\_base\_of}} : decltype(is\_template\_base\_of\_impl<Base>::check((intrinsic\_t<T>*)nullptr)) \{ \};}
+\DoxyCodeLine{611 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{612 }
+\DoxyCodeLine{615 \textcolor{keyword}{template} <\textcolor{keyword}{template}<\textcolor{keyword}{typename}...> \textcolor{keyword}{class }Class, \textcolor{keyword}{typename} T>}
+\DoxyCodeLine{616 \textcolor{keyword}{struct }\mbox{\hyperlink{structis__instantiation}{is\_instantiation}} : std::false\_type \{ \};}
+\DoxyCodeLine{617 \textcolor{keyword}{template} <\textcolor{keyword}{template}<\textcolor{keyword}{typename}...> \textcolor{keyword}{class }Class, \textcolor{keyword}{typename}... Us>}
+\DoxyCodeLine{618 \textcolor{keyword}{struct }\mbox{\hyperlink{structis__instantiation}{is\_instantiation}}<Class, Class<Us...>> : std::true\_type \{ \};}
+\DoxyCodeLine{619 }
+\DoxyCodeLine{621 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{using} \mbox{\hyperlink{structis__instantiation}{is\_shared\_ptr}} = \mbox{\hyperlink{structis__instantiation}{is\_instantiation<std::shared\_ptr, T>}};}
+\DoxyCodeLine{622 }
+\DoxyCodeLine{624 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T, \textcolor{keyword}{typename} = \textcolor{keywordtype}{void}> \textcolor{keyword}{struct }\mbox{\hyperlink{structis__input__iterator}{is\_input\_iterator}} : std::false\_type \{\};}
+\DoxyCodeLine{625 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{626 \textcolor{keyword}{struct }\mbox{\hyperlink{structis__input__iterator}{is\_input\_iterator}}<T, \mbox{\hyperlink{detail_2common_8h_ac5ff2a64cfcadadd23f8559c46cfcbda}{void\_t}}<decltype(*std::declval<T \&>()), \textcolor{keyword}{decltype}(++std::declval<T \&>())>>}
+\DoxyCodeLine{627     : std::true\_type \{\};}
+\DoxyCodeLine{628 }
+\DoxyCodeLine{629 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_a4b1f7290559910fb316da20cb0ce8600}{is\_function\_pointer}} = \mbox{\hyperlink{detail_2common_8h_a0d337b508cc2fb5a92d8e72db201e53b}{bool\_constant}}<}
+\DoxyCodeLine{630     std::is\_pointer<T>::value \&\& std::is\_function<typename std::remove\_pointer<T>::type>::value>;}
+\DoxyCodeLine{631 }
+\DoxyCodeLine{632 \textcolor{keyword}{template} <\textcolor{keyword}{typename} F> \textcolor{keyword}{struct }\mbox{\hyperlink{structstrip__function__object}{strip\_function\_object}} \{}
+\DoxyCodeLine{633     \textcolor{keyword}{using} \mbox{\hyperlink{structstrip__function__object_a2c2099889eda598b98649c7f33b35302}{type}} = \textcolor{keyword}{typename} \mbox{\hyperlink{structremove__class}{remove\_class}}<\textcolor{keyword}{decltype}(\&F::operator())>\mbox{\hyperlink{structstrip__function__object_a2c2099889eda598b98649c7f33b35302}{::type}};}
+\DoxyCodeLine{634 \};}
+\DoxyCodeLine{635 }
+\DoxyCodeLine{636 \textcolor{comment}{// Extracts the function signature from a function, function pointer or lambda.}}
+\DoxyCodeLine{637 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Function, \textcolor{keyword}{typename} F = remove\_reference\_t<Function>>}
+\DoxyCodeLine{638 \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_a47a77879d0f77f38496dad6d78d88972}{function\_signature\_t}} = \mbox{\hyperlink{detail_2common_8h_acdb0eff728aec08ed6fff07d2885ea9d}{conditional\_t}}<}
+\DoxyCodeLine{639     std::is\_function<F>::value,}
+\DoxyCodeLine{640     F,}
+\DoxyCodeLine{641     \textcolor{keyword}{typename} \mbox{\hyperlink{detail_2common_8h_acdb0eff728aec08ed6fff07d2885ea9d}{conditional\_t}}<}
+\DoxyCodeLine{642         std::is\_pointer<F>::value || std::is\_member\_pointer<F>::value,}
+\DoxyCodeLine{643         std::remove\_pointer<F>,}
+\DoxyCodeLine{644         \mbox{\hyperlink{structstrip__function__object}{strip\_function\_object<F>}}}
+\DoxyCodeLine{645     >::type}
+\DoxyCodeLine{646 >;}
+\DoxyCodeLine{647 }
+\DoxyCodeLine{651 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{using} \mbox{\hyperlink{structnegation}{is\_lambda}} = \mbox{\hyperlink{structnegation}{satisfies\_none\_of<remove\_reference\_t<T>}},}
+\DoxyCodeLine{652         std::is\_function, std::is\_pointer, std::is\_member\_pointer>;}
+\DoxyCodeLine{653 }
+\DoxyCodeLine{655 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{detail_2common_8h_af6b5c51d50749b03f7c802c18e72f764}{ignore\_unused}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int} *) \{ \}}
+\DoxyCodeLine{656 }
+\DoxyCodeLine{658 \textcolor{preprocessor}{\#ifdef \_\_cpp\_fold\_expressions}}
+\DoxyCodeLine{659 \textcolor{preprocessor}{\#define PYBIND11\_EXPAND\_SIDE\_EFFECTS(PATTERN) (((PATTERN), void()), ...)}}
+\DoxyCodeLine{660 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{661 \textcolor{keyword}{using} \mbox{\hyperlink{detail_2common_8h_af2eb988300442a6c4962c87979bcc402}{expand\_side\_effects}} = \textcolor{keywordtype}{bool}[];}
+\DoxyCodeLine{662 \textcolor{preprocessor}{\#define PYBIND11\_EXPAND\_SIDE\_EFFECTS(PATTERN) pybind11::detail::expand\_side\_effects\{ ((PATTERN), void(), false)..., false \}}}
+\DoxyCodeLine{663 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{664 }
+\DoxyCodeLine{665 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{666 }
+\DoxyCodeLine{667 }
+\DoxyCodeLine{668 class \mbox{\hyperlink{classbuiltin__exception}{builtin\_exception}} : public \mbox{\hyperlink{namespacestd}{std}}::runtime\_error \{}
+\DoxyCodeLine{669 \textcolor{keyword}{public}:}
+\DoxyCodeLine{670     \textcolor{keyword}{using} std::runtime\_error::runtime\_error;}
+\DoxyCodeLine{672     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classbuiltin__exception_a1a12a564ae0fd4687e2f491c36d1133b}{set\_error}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{673 \};}
+\DoxyCodeLine{674 }
+\DoxyCodeLine{675 \textcolor{preprocessor}{\#define PYBIND11\_RUNTIME\_EXCEPTION(name, type) \(\backslash\)}}
+\DoxyCodeLine{676 \textcolor{preprocessor}{    class name : public builtin\_exception \{ public: \(\backslash\)}}
+\DoxyCodeLine{677 \textcolor{preprocessor}{        using builtin\_exception::builtin\_exception; \(\backslash\)}}
+\DoxyCodeLine{678 \textcolor{preprocessor}{        name() : name("{}"{}}) \{ \} \(\backslash\)}
+\DoxyCodeLine{679         void set\_error() const override \{ PyErr\_SetString(type, what()); \} \(\backslash\)}
+\DoxyCodeLine{680     \};}
+\DoxyCodeLine{681 }
+\DoxyCodeLine{682 \mbox{\hyperlink{detail_2common_8h_a905970a65fc4f349773eff84c9980e3a}{PYBIND11\_RUNTIME\_EXCEPTION}}(stop\_iteration, PyExc\_StopIteration)}
+\DoxyCodeLine{683 \mbox{\hyperlink{detail_2common_8h_a905970a65fc4f349773eff84c9980e3a}{PYBIND11\_RUNTIME\_EXCEPTION}}(index\_error, PyExc\_IndexError)}
+\DoxyCodeLine{684 \mbox{\hyperlink{detail_2common_8h_a905970a65fc4f349773eff84c9980e3a}{PYBIND11\_RUNTIME\_EXCEPTION}}(key\_error, PyExc\_KeyError)}
+\DoxyCodeLine{685 \mbox{\hyperlink{detail_2common_8h_a905970a65fc4f349773eff84c9980e3a}{PYBIND11\_RUNTIME\_EXCEPTION}}(value\_error, PyExc\_ValueError)}
+\DoxyCodeLine{686 \mbox{\hyperlink{detail_2common_8h_a905970a65fc4f349773eff84c9980e3a}{PYBIND11\_RUNTIME\_EXCEPTION}}(type\_error, PyExc\_TypeError)}
+\DoxyCodeLine{687 \mbox{\hyperlink{detail_2common_8h_a905970a65fc4f349773eff84c9980e3a}{PYBIND11\_RUNTIME\_EXCEPTION}}(buffer\_error, PyExc\_BufferError)}
+\DoxyCodeLine{688 \mbox{\hyperlink{detail_2common_8h_a905970a65fc4f349773eff84c9980e3a}{PYBIND11\_RUNTIME\_EXCEPTION}}(import\_error, PyExc\_ImportError)}
+\DoxyCodeLine{689 \mbox{\hyperlink{detail_2common_8h_a905970a65fc4f349773eff84c9980e3a}{PYBIND11\_RUNTIME\_EXCEPTION}}(cast\_error, PyExc\_RuntimeError) }
+\DoxyCodeLine{690 \mbox{\hyperlink{detail_2common_8h_a905970a65fc4f349773eff84c9980e3a}{PYBIND11\_RUNTIME\_EXCEPTION}}(reference\_cast\_error, PyExc\_RuntimeError) }
+\DoxyCodeLine{691 }
+\DoxyCodeLine{692 [[noreturn]] \mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\_NOINLINE}} inline \textcolor{keywordtype}{void} \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(const \textcolor{keywordtype}{char} *reason) \{ \textcolor{keywordflow}{throw} std::runtime\_error(reason); \}}
+\DoxyCodeLine{693 [[noreturn]] \mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\_NOINLINE}} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{keyword}{const} std::string \&reason) \{ \textcolor{keywordflow}{throw} std::runtime\_error(reason); \}}
+\DoxyCodeLine{694 }
+\DoxyCodeLine{695 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T, \textcolor{keyword}{typename} SFINAE = \textcolor{keywordtype}{void}> \textcolor{keyword}{struct }\mbox{\hyperlink{structformat__descriptor}{format\_descriptor}} \{ \};}
+\DoxyCodeLine{696 }
+\DoxyCodeLine{697 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{698 \textcolor{comment}{// Returns the index of the given type in the type char array below, and in the list in numpy.h}}
+\DoxyCodeLine{699 \textcolor{comment}{// The order here is: bool; 8 ints ((signed,unsigned)x(8,16,32,64)bits); float,double,long double;}}
+\DoxyCodeLine{700 \textcolor{comment}{// complex float,double,long double.  Note that the long double types only participate when long}}
+\DoxyCodeLine{701 \textcolor{comment}{// double is actually longer than double (it isn't under MSVC).}}
+\DoxyCodeLine{702 \textcolor{comment}{// NB: not only the string below but also complex.h and numpy.h rely on this order.}}
+\DoxyCodeLine{703 template <typename T, typename SFINAE = \textcolor{keywordtype}{void}> struct \mbox{\hyperlink{structis__fmt__numeric}{is\_fmt\_numeric}} \{ \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{bool} value = \textcolor{keyword}{false}; \};}
+\DoxyCodeLine{704 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{struct }\mbox{\hyperlink{structis__fmt__numeric}{is\_fmt\_numeric}}<T, \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<\mbox{\hyperlink{namespacestd}{std}}::is\_arithmetic<T>\mbox{\hyperlink{structis__fmt__numeric_a2c75cb80b6eef5fa9f0b7fc186668c8c}{::value}}>> \{}
+\DoxyCodeLine{705     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{bool} \mbox{\hyperlink{structis__fmt__numeric_a2c75cb80b6eef5fa9f0b7fc186668c8c}{value}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{706     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{int} index = std::is\_same<T, bool>::value ? 0 : 1 + (}
+\DoxyCodeLine{707         std::is\_integral<T>::value ? \mbox{\hyperlink{detail_2common_8h_a7e6056fe5e08a5a51eecd1fffca2a4d8}{detail::log2}}(\textcolor{keyword}{sizeof}(T))*2 + std::is\_unsigned<T>::value : 8 + (}
+\DoxyCodeLine{708         std::is\_same<T, double>::value ? 1 : std::is\_same<T, long double>::value ? 2 : 0));}
+\DoxyCodeLine{709 \};}
+\DoxyCodeLine{710 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{711 }
+\DoxyCodeLine{712 template <typename T> struct \mbox{\hyperlink{structformat__descriptor}{format\_descriptor}}<T, detail::\mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<\mbox{\hyperlink{namespacestd}{std}}::is\_arithmetic<T>::value>> \{}
+\DoxyCodeLine{713     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{const} \textcolor{keywordtype}{char} c = \textcolor{stringliteral}{"{}?bBhHiIqQfdg"{}}[detail::is\_fmt\_numeric<T>::index];}
+\DoxyCodeLine{714     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{const} \textcolor{keywordtype}{char} value[2] = \{ c, \textcolor{charliteral}{'\(\backslash\)0'} \};}
+\DoxyCodeLine{715     \textcolor{keyword}{static} std::string \mbox{\hyperlink{structformat__descriptor_3_01_t_00_01detail_1_1enable__if__t_3_01std_1_1is__arithmetic_3_01_t_01_4_1_1value_01_4_01_4_aae010efadae20ac375d9800074c80d3b}{format}}() \{ \textcolor{keywordflow}{return} std::string(1, c); \}}
+\DoxyCodeLine{716 \};}
+\DoxyCodeLine{717 }
+\DoxyCodeLine{718 \textcolor{preprocessor}{\#if !defined(PYBIND11\_CPP17)}}
+\DoxyCodeLine{719 }
+\DoxyCodeLine{720 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{constexpr} \textcolor{keyword}{const} \textcolor{keywordtype}{char} \mbox{\hyperlink{structformat__descriptor}{format\_descriptor}}<}
+\DoxyCodeLine{721     T, detail::enable\_if\_t<std::is\_arithmetic<T>::value>>::value[2];}
+\DoxyCodeLine{722 }
+\DoxyCodeLine{723 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{724 }
+\DoxyCodeLine{726 \textcolor{keyword}{struct }\mbox{\hyperlink{structerror__scope}{error\_scope}} \{}
+\DoxyCodeLine{727     PyObject *\mbox{\hyperlink{structerror__scope_a79197309ef17cd8e22f6d1ab931126d9}{type}}, *\mbox{\hyperlink{structerror__scope_a191a65d0531431b7eba0886cd4702c88}{value}}, *\mbox{\hyperlink{structerror__scope_abdf5b7a557de4eae94a9b5d30ae7de00}{trace}};}
+\DoxyCodeLine{728     \mbox{\hyperlink{structerror__scope_a29ada2ba40991dc044d0cb4a80f5d778}{error\_scope}}() \{ PyErr\_Fetch(\&\mbox{\hyperlink{structerror__scope_a79197309ef17cd8e22f6d1ab931126d9}{type}}, \&\mbox{\hyperlink{structerror__scope_a191a65d0531431b7eba0886cd4702c88}{value}}, \&\mbox{\hyperlink{structerror__scope_abdf5b7a557de4eae94a9b5d30ae7de00}{trace}}); \}}
+\DoxyCodeLine{729     \mbox{\hyperlink{structerror__scope_adf7d91c85c84bb66dbb58a228e2c3d3e}{\string~error\_scope}}() \{ PyErr\_Restore(\mbox{\hyperlink{structerror__scope_a79197309ef17cd8e22f6d1ab931126d9}{type}}, \mbox{\hyperlink{structerror__scope_a191a65d0531431b7eba0886cd4702c88}{value}}, \mbox{\hyperlink{structerror__scope_abdf5b7a557de4eae94a9b5d30ae7de00}{trace}}); \}}
+\DoxyCodeLine{730 \};}
+\DoxyCodeLine{731 }
+\DoxyCodeLine{733 \textcolor{keyword}{struct }\mbox{\hyperlink{structnodelete}{nodelete}} \{ \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keywordtype}{void} \mbox{\hyperlink{structnodelete_a5f0dacc05c69366422b90b61fd47b6a5}{operator()}}(T*) \{ \} \};}
+\DoxyCodeLine{734 }
+\DoxyCodeLine{735 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{736 \textcolor{keyword}{template} <\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{737 \textcolor{keyword}{struct }\mbox{\hyperlink{structoverload__cast__impl}{overload\_cast\_impl}} \{}
+\DoxyCodeLine{738     \textcolor{keyword}{constexpr} \mbox{\hyperlink{structoverload__cast__impl_ad8d51b2e54436d1d6f5228ae69aeb274}{overload\_cast\_impl}}() \{\} \textcolor{comment}{// MSVC 2015 needs this}}
+\DoxyCodeLine{739 }
+\DoxyCodeLine{740     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Return>}
+\DoxyCodeLine{741     \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structoverload__cast__impl_a02c79d9e6158835bec33065d5ca06789}{operator()}}(Return (*pf)(Args...)) const noexcept}
+\DoxyCodeLine{742                               -\/> decltype(pf) \{ \textcolor{keywordflow}{return} pf; \}}
+\DoxyCodeLine{743 }
+\DoxyCodeLine{744     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Return, \textcolor{keyword}{typename} Class>}
+\DoxyCodeLine{745     \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structoverload__cast__impl_a228090216f1f7c0ae472f8b0247d65e4}{operator()}}(Return (Class::*pmf)(Args...), std::false\_type = \{\}) const noexcept}
+\DoxyCodeLine{746                               -\/> decltype(pmf) \{ \textcolor{keywordflow}{return} pmf; \}}
+\DoxyCodeLine{747 }
+\DoxyCodeLine{748     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Return, \textcolor{keyword}{typename} Class>}
+\DoxyCodeLine{749     \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structoverload__cast__impl_a81b4bca7f6837ceac50dde91d3e7e3de}{operator()}}(Return (Class::*pmf)(Args...) \textcolor{keyword}{const}, std::true\_type) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{750                               -\/> \textcolor{keyword}{decltype}(pmf) \{ \textcolor{keywordflow}{return} pmf; \}}
+\DoxyCodeLine{751 \};}
+\DoxyCodeLine{752 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{753 }
+\DoxyCodeLine{754 \textcolor{comment}{// overload\_cast requires variable templates: C++14}}
+\DoxyCodeLine{755 \textcolor{preprocessor}{\#if defined(PYBIND11\_CPP14)}}
+\DoxyCodeLine{756 \textcolor{preprocessor}{\#define PYBIND11\_OVERLOAD\_CAST 1}}
+\DoxyCodeLine{760 \textcolor{keyword}{template} <\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{761 \textcolor{keyword}{static} \textcolor{keyword}{constexpr} detail::overload\_cast\_impl<Args...> \mbox{\hyperlink{structoverload__cast}{overload\_cast}} = \{\};}
+\DoxyCodeLine{762 \textcolor{comment}{// MSVC 2015 only accepts this particular initialization syntax for this variable template.}}
+\DoxyCodeLine{763 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{764 }
+\DoxyCodeLine{768 \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{detail_2common_8h_a747a384078447ed29202ccc33a859375}{const\_}} = std::true\_type\{\};}
+\DoxyCodeLine{769 }
+\DoxyCodeLine{770 \textcolor{preprocessor}{\#if !defined(PYBIND11\_CPP14) }\textcolor{comment}{// no overload\_cast: providing something that static\_assert-\/fails:}}
+\DoxyCodeLine{771 \textcolor{keyword}{template} <\textcolor{keyword}{typename}... Args> \textcolor{keyword}{struct }\mbox{\hyperlink{structoverload__cast}{overload\_cast}} \{}
+\DoxyCodeLine{772     \textcolor{keyword}{static\_assert}(\mbox{\hyperlink{detail_2common_8h_a0a48a85e1319daba85b2a061aeef6f8c}{detail::deferred\_t}}<std::false\_type, Args...>::value,}
+\DoxyCodeLine{773                   \textcolor{stringliteral}{"{}pybind11::overload\_cast<...> requires compiling in C++14 mode"{}});}
+\DoxyCodeLine{774 \};}
+\DoxyCodeLine{775 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// overload\_cast}}
+\DoxyCodeLine{776 }
+\DoxyCodeLine{777 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{778 }
+\DoxyCodeLine{779 \textcolor{comment}{// Adaptor for converting arbitrary container arguments into a vector; implicitly convertible from}}
+\DoxyCodeLine{780 \textcolor{comment}{// any standard container (or C-\/style array) supporting std::begin/std::end, any singleton}}
+\DoxyCodeLine{781 \textcolor{comment}{// arithmetic type (if T is arithmetic), or explicitly constructible from an iterator pair.}}
+\DoxyCodeLine{782 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{783 \textcolor{keyword}{class }\mbox{\hyperlink{classany__container}{any\_container}} \{}
+\DoxyCodeLine{784     std::vector<T> \mbox{\hyperlink{classany__container_a16795a6f1158467d3eb8fc44547c17df}{v}};}
+\DoxyCodeLine{785 \textcolor{keyword}{public}:}
+\DoxyCodeLine{786     \mbox{\hyperlink{classany__container_ada7ea5cc76b0faf62d22d9bd3deca147}{any\_container}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{787 }
+\DoxyCodeLine{788     \textcolor{comment}{// Can construct from a pair of iterators}}
+\DoxyCodeLine{789     template <typename It, typename = enable\_if\_t<is\_input\_iterator<It>::value>>}
+\DoxyCodeLine{790     \mbox{\hyperlink{classany__container_a16c36f2f2714692d2112d66cf539f882}{any\_container}}(It \mbox{\hyperlink{detail_2common_8h_a71226eea81f24762754f1413e2ead78f}{first}}, It \mbox{\hyperlink{detail_2common_8h_a16195acbb4bd947bbd0f805af9f2670b}{last}}) : \mbox{\hyperlink{classany__container_a16795a6f1158467d3eb8fc44547c17df}{v}}(\mbox{\hyperlink{detail_2common_8h_a71226eea81f24762754f1413e2ead78f}{first}}, \mbox{\hyperlink{detail_2common_8h_a16195acbb4bd947bbd0f805af9f2670b}{last}}) \{ \}}
+\DoxyCodeLine{791 }
+\DoxyCodeLine{792     \textcolor{comment}{// Implicit conversion constructor from any arbitrary container type with values convertible to T}}
+\DoxyCodeLine{793     template <typename Container, typename = enable\_if\_t<std::is\_convertible<decltype(*std::begin(std::declval<const Container \&>())), T>::value>>}
+\DoxyCodeLine{794     \mbox{\hyperlink{classany__container_a27ee39fdc807df0db3dce64b265864aa}{any\_container}}(\textcolor{keyword}{const} Container \&c) : \mbox{\hyperlink{classany__container}{any\_container}}(\mbox{\hyperlink{namespacestd}{std}}::begin(c), \mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}}(c)) \{ \}}
+\DoxyCodeLine{795 }
+\DoxyCodeLine{796     \textcolor{comment}{// initializer\_list's aren't deducible, so don't get matched by the above template; we need this}}
+\DoxyCodeLine{797     \textcolor{comment}{// to explicitly allow implicit conversion from one:}}
+\DoxyCodeLine{798     template <typename TIn, typename = enable\_if\_t<std::is\_convertible<TIn, T>::value>>}
+\DoxyCodeLine{799     \mbox{\hyperlink{classany__container_a7bc3471a016f7dafe3878fa66497ad26}{any\_container}}(\textcolor{keyword}{const} std::initializer\_list<TIn> \&c) : \mbox{\hyperlink{classany__container}{any\_container}}(c.begin(), c.\mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{end}}()) \{ \}}
+\DoxyCodeLine{800 }
+\DoxyCodeLine{801     \textcolor{comment}{// Avoid copying if given an rvalue vector of the correct type.}}
+\DoxyCodeLine{802     \mbox{\hyperlink{classany__container_a6a530db0c5ae047d9d7fcea35426b278}{any\_container}}(std::vector<T> \&\&\mbox{\hyperlink{classany__container_a16795a6f1158467d3eb8fc44547c17df}{v}}) : \mbox{\hyperlink{classany__container_a16795a6f1158467d3eb8fc44547c17df}{v}}(\mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a3734a903022249b3010be1897042568e}{move}}(\mbox{\hyperlink{classany__container_a16795a6f1158467d3eb8fc44547c17df}{v}})) \{ \}}
+\DoxyCodeLine{803 }
+\DoxyCodeLine{804     \textcolor{comment}{// Moves the vector out of an rvalue any\_container}}
+\DoxyCodeLine{805     \textcolor{keyword}{operator} std::vector<T> \&\&() \&\& \{ \textcolor{keywordflow}{return} std::move(\mbox{\hyperlink{classany__container_a16795a6f1158467d3eb8fc44547c17df}{v}}); \}}
+\DoxyCodeLine{806 }
+\DoxyCodeLine{807     \textcolor{comment}{// Dereferencing obtains a reference to the underlying vector}}
+\DoxyCodeLine{808     std::vector<T> \&\mbox{\hyperlink{classany__container_a4442018fbb55a33523a14abd6f7273d2}{operator*}}() \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classany__container_a16795a6f1158467d3eb8fc44547c17df}{v}}; \}}
+\DoxyCodeLine{809     \textcolor{keyword}{const} std::vector<T> \&\mbox{\hyperlink{classany__container_aaac48cabec45f1b212d56c74658e1637}{operator*}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classany__container_a16795a6f1158467d3eb8fc44547c17df}{v}}; \}}
+\DoxyCodeLine{810 }
+\DoxyCodeLine{811     \textcolor{comment}{// -\/> lets you call methods on the underlying vector}}
+\DoxyCodeLine{812     std::vector<T> *\mbox{\hyperlink{classany__container_a1fdee859908331be0efe098aa438be8c}{operator-\/>}}() \{ \textcolor{keywordflow}{return} \&\mbox{\hyperlink{classany__container_a16795a6f1158467d3eb8fc44547c17df}{v}}; \}}
+\DoxyCodeLine{813     \textcolor{keyword}{const} std::vector<T> *\mbox{\hyperlink{classany__container_aaf31d823682a859e81c9d21ec2f78f1d}{operator-\/>}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \&\mbox{\hyperlink{classany__container_a16795a6f1158467d3eb8fc44547c17df}{v}}; \}}
+\DoxyCodeLine{814 \};}
+\DoxyCodeLine{815 }
+\DoxyCodeLine{816 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{817 }
+\DoxyCodeLine{818 }
+\DoxyCodeLine{819 }
+\DoxyCodeLine{820 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+
+\end{DoxyCode}

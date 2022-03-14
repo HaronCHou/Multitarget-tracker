@@ -1,0 +1,391 @@
+\hypertarget{staple_2fhog_8cpp}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Tracker/staple/fhog.cpp 文件参考}
+\label{staple_2fhog_8cpp}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/staple/fhog.cpp@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/staple/fhog.cpp}}
+{\ttfamily \#include $<$cstring$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include \char`\"{}fhog.\+h\char`\"{}}\newline
+fhog.\+cpp 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{staple_2fhog_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{宏定义}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{staple_2fhog_8cpp_a598a3330b3c21701223ee0ca14316eca}{PI}}~3.\+14159265\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}}
+\item 
+\#define \mbox{\hyperlink{staple_2fhog_8cpp_a68ad3d16d4221d3e92c107a8bc078bdf}{GRADY}}(r)~$\ast$Gy++=($\ast$In++-\/$\ast$Ip++)$\ast$r;
+\item 
+\#define \mbox{\hyperlink{staple_2fhog_8cpp_a9792affcc6387f06716a3d49d33b633f}{GH}}~H1\mbox{[}O0\mbox{[}\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}\mbox{]}\mbox{]}+=M0\mbox{[}\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}\mbox{]}; \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}++;
+\item 
+\#define \mbox{\hyperlink{staple_2fhog_8cpp_a9792affcc6387f06716a3d49d33b633f}{GH}}~H1\mbox{[}O0\mbox{[}\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}\mbox{]}\mbox{]}+=M0\mbox{[}\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}\mbox{]}; H1\mbox{[}O1\mbox{[}\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}\mbox{]}\mbox{]}+=M1\mbox{[}\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}\mbox{]}; \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}++;
+\item 
+\#define \mbox{\hyperlink{staple_2fhog_8cpp_a6da44289af7efcd6a6d6373ab28feff3}{GHinit}}
+\item 
+\#define \mbox{\hyperlink{staple_2fhog_8cpp_a179a2f4770d1091f04968064094bcd78}{GH}}(H,  ma,  mb)~H1=H; \mbox{\hyperlink{namespacesse_a88031822db754fa72272a28df25a05d5}{sse\+::\+STRu}}($\ast$H1,\mbox{\hyperlink{namespacesse_a26eead4ac0507f570ff81635ce92a058}{sse\+::\+ADD}}(\mbox{\hyperlink{namespacesse_a8818ad00a3744a62b18d591c272d0885}{sse\+::\+LDu}}($\ast$H1),\mbox{\hyperlink{namespacesse_a9ea787713116d278fa43c77d3b2e1291}{sse\+::\+MUL}}(ma,mb)));
+\item 
+\#define \mbox{\hyperlink{staple_2fhog_8cpp_a472feecfd5f88f9b0ceb1a25bf9b67bf}{GETT}}(blk)~t=\mbox{\hyperlink{rings_8cpp_aad2cc6a2ec44dae25504cc8f1c2cff5c}{R1}}\mbox{[}\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}\mbox{]}$\ast$N1\mbox{[}\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}-\/(blk)\mbox{]}; if(t$>$clip) t=clip; c++;
+\item 
+\#define \mbox{\hyperlink{staple_2fhog_8cpp_a19b7f1b22403d61234a92decaeb6953a}{CHANNELS}}~28
+\item 
+\#define \mbox{\hyperlink{staple_2fhog_8cpp_a19b7f1b22403d61234a92decaeb6953a}{CHANNELS}}~31
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ \mbox{\hyperlink{staple_2fhog_8cpp_ae73e42e0af5530ceaa7a4c223827b74a}{al\+Malloc}} (\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} size, int alignment)
+\item 
+void \mbox{\hyperlink{staple_2fhog_8cpp_afb929cc1f504cea7c015e913debcfd52}{al\+Free}} (void $\ast$aligned)
+\item 
+void \mbox{\hyperlink{staple_2fhog_8cpp_a210e84661b0cc3e5226dde1c8b08e5f9}{grad1}} (float $\ast$I, float $\ast$Gx, float $\ast$Gy, int h, int w, int \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}})
+\item 
+void \mbox{\hyperlink{staple_2fhog_8cpp_a693f6b0160396d8a6d275425cf26aa4d}{grad2}} (float $\ast$I, float $\ast$Gx, float $\ast$Gy, int h, int w, int d)
+\item 
+float $\ast$ \mbox{\hyperlink{staple_2fhog_8cpp_a4c99ae320855620aaece5247b2d92ddd}{acos\+Table}} ()
+\item 
+void \mbox{\hyperlink{staple_2fhog_8cpp_a75833008df7734fe9d80b07983503a4f}{grad\+Mag}} (float $\ast$I, float $\ast$M, float $\ast$O, int h, int w, int d, bool full)
+\item 
+void \mbox{\hyperlink{staple_2fhog_8cpp_a839825e4c723fd7917af0a3a761763bf}{grad\+Mag\+Norm}} (float $\ast$M, float $\ast$S, int h, int w, float norm)
+\item 
+void \mbox{\hyperlink{staple_2fhog_8cpp_aa2ed8fb42e7ca2ca47a722f2e4620186}{grad\+Quantize}} (float $\ast$O, float $\ast$M, int $\ast$O0, int $\ast$O1, float $\ast$M0, float $\ast$M1, int nb, int n, float norm, int n\+Orients, bool full, bool interpolate)
+\item 
+void \mbox{\hyperlink{staple_2fhog_8cpp_a490773d8898cb6fe62332794b11f755a}{grad\+Hist}} (float $\ast$M, float $\ast$O, float $\ast$H, int h, int w, int bin, int n\+Orients, int soft\+Bin, bool full)
+\item 
+float $\ast$ \mbox{\hyperlink{staple_2fhog_8cpp_a00dabc5c239b6d877dbbbab753d271ab}{hog\+Norm\+Matrix}} (float $\ast$H, int n\+Orients, int hb, int wb, int bin)
+\item 
+void \mbox{\hyperlink{staple_2fhog_8cpp_a16f996bbbef2a23d8b32f0f05677881b}{hog\+Channels}} (float $\ast$H, const float $\ast$R, const float $\ast$N, int hb, int wb, int n\+Orients, float clip, int type)
+\item 
+void \mbox{\hyperlink{staple_2fhog_8cpp_a99b7ff64d7872f9ed9fca0417078918a}{hog}} (float $\ast$M, float $\ast$O, float $\ast$H, int h, int w, int bin\+Size, int n\+Orients, int soft\+Bin, bool full, float clip)
+\item 
+void \mbox{\hyperlink{staple_2fhog_8cpp_af278de47424cf2ac4729892226225d6a}{fhog}} (float $\ast$M, float $\ast$O, float $\ast$H, int h, int w, int bin\+Size, int n\+Orients, int soft\+Bin, float clip)
+\item 
+float $\ast$ \mbox{\hyperlink{staple_2fhog_8cpp_a2c6bfbda9fbeb6204594493b64b512f5}{crop\+\_\+H}} (float $\ast$H, int $\ast$h\+\_\+height, int $\ast$h\+\_\+width, int \mbox{\hyperlink{gml2nestedsql_8cpp_af81a36ce49771f5a6ccdc7b43e648f7f}{depth}}, int dh, int dw)
+\item 
+float $\ast$ \mbox{\hyperlink{staple_2fhog_8cpp_a0ac46eb50ae78e78b2b0a5f6490dacbc}{fhog}} (float $\ast$M, float $\ast$O, int height, int width, int, int $\ast$h, int $\ast$w, int $\ast$d, int bin\+Size, int n\+Orients, float clip, bool crop)
+\item 
+void \mbox{\hyperlink{staple_2fhog_8cpp_a0b11f8ec09067a3bf6fe03a67c83c19b}{fhog}} (cv\+::\+Mat\+ND \&fhog\+\_\+feature, const cv\+::\+Mat \&input, int bin\+Size, int n\+Orients, float clip, bool crop)
+\item 
+void \mbox{\hyperlink{staple_2fhog_8cpp_a9c3ad6dfddafda82e7613f7347e9560b}{fhog28}} (cv\+::\+Mat\+ND \&fhog\+\_\+feature, const cv\+::\+Mat \&input, int bin\+Size, int n\+Orients, float clip, bool crop)
+\item 
+void \mbox{\hyperlink{staple_2fhog_8cpp_ad8714dd9d4c602b2703659b885ee606a}{fhog31}} (cv\+::\+Mat\+ND \&fhog\+\_\+feature, const cv\+::\+Mat \&input, int bin\+Size, int n\+Orients, float clip, bool crop)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{宏定义说明}
+\mbox{\Hypertarget{staple_2fhog_8cpp_a19b7f1b22403d61234a92decaeb6953a}\label{staple_2fhog_8cpp_a19b7f1b22403d61234a92decaeb6953a}} 
+\index{fhog.cpp@{fhog.cpp}!CHANNELS@{CHANNELS}}
+\index{CHANNELS@{CHANNELS}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{CHANNELS}{CHANNELS}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define CHANNELS~28}
+
+\mbox{\Hypertarget{staple_2fhog_8cpp_a19b7f1b22403d61234a92decaeb6953a}\label{staple_2fhog_8cpp_a19b7f1b22403d61234a92decaeb6953a}} 
+\index{fhog.cpp@{fhog.cpp}!CHANNELS@{CHANNELS}}
+\index{CHANNELS@{CHANNELS}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{CHANNELS}{CHANNELS}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define CHANNELS~31}
+
+\mbox{\Hypertarget{staple_2fhog_8cpp_a472feecfd5f88f9b0ceb1a25bf9b67bf}\label{staple_2fhog_8cpp_a472feecfd5f88f9b0ceb1a25bf9b67bf}} 
+\index{fhog.cpp@{fhog.cpp}!GETT@{GETT}}
+\index{GETT@{GETT}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{GETT}{GETT}}
+{\footnotesize\ttfamily \#define GETT(\begin{DoxyParamCaption}\item[{}]{blk }\end{DoxyParamCaption})~t=\mbox{\hyperlink{rings_8cpp_aad2cc6a2ec44dae25504cc8f1c2cff5c}{R1}}\mbox{[}\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}\mbox{]}$\ast$N1\mbox{[}\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}-\/(blk)\mbox{]}; if(t$>$clip) t=clip; c++;}
+
+\mbox{\Hypertarget{staple_2fhog_8cpp_a9792affcc6387f06716a3d49d33b633f}\label{staple_2fhog_8cpp_a9792affcc6387f06716a3d49d33b633f}} 
+\index{fhog.cpp@{fhog.cpp}!GH@{GH}}
+\index{GH@{GH}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{GH}{GH}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \#define GH~H1\mbox{[}O0\mbox{[}\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}\mbox{]}\mbox{]}+=M0\mbox{[}\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}\mbox{]}; \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}++;}
+
+\mbox{\Hypertarget{staple_2fhog_8cpp_a9792affcc6387f06716a3d49d33b633f}\label{staple_2fhog_8cpp_a9792affcc6387f06716a3d49d33b633f}} 
+\index{fhog.cpp@{fhog.cpp}!GH@{GH}}
+\index{GH@{GH}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{GH}{GH}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \#define GH~H1\mbox{[}O0\mbox{[}\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}\mbox{]}\mbox{]}+=M0\mbox{[}\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}\mbox{]}; H1\mbox{[}O1\mbox{[}\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}\mbox{]}\mbox{]}+=M1\mbox{[}\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}\mbox{]}; \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}++;}
+
+\mbox{\Hypertarget{staple_2fhog_8cpp_a179a2f4770d1091f04968064094bcd78}\label{staple_2fhog_8cpp_a179a2f4770d1091f04968064094bcd78}} 
+\index{fhog.cpp@{fhog.cpp}!GH@{GH}}
+\index{GH@{GH}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{GH}{GH}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \#define GH(\begin{DoxyParamCaption}\item[{}]{H,  }\item[{}]{ma,  }\item[{}]{mb }\end{DoxyParamCaption})~H1=H; \mbox{\hyperlink{namespacesse_a88031822db754fa72272a28df25a05d5}{sse\+::\+STRu}}($\ast$H1,\mbox{\hyperlink{namespacesse_a26eead4ac0507f570ff81635ce92a058}{sse\+::\+ADD}}(\mbox{\hyperlink{namespacesse_a8818ad00a3744a62b18d591c272d0885}{sse\+::\+LDu}}($\ast$H1),\mbox{\hyperlink{namespacesse_a9ea787713116d278fa43c77d3b2e1291}{sse\+::\+MUL}}(ma,mb)));}
+
+\mbox{\Hypertarget{staple_2fhog_8cpp_a6da44289af7efcd6a6d6373ab28feff3}\label{staple_2fhog_8cpp_a6da44289af7efcd6a6d6373ab28feff3}} 
+\index{fhog.cpp@{fhog.cpp}!GHinit@{GHinit}}
+\index{GHinit@{GHinit}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{GHinit}{GHinit}}
+{\footnotesize\ttfamily \#define GHinit}
+
+{\bfseries 值\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    yd=yb-\/yb0; yb+=sInv; H0=H+xb0*hb+yb0; xyd=xd*yd; \(\backslash\)}
+\DoxyCodeLine{    ms[0]=1-\/xd-\/yd+xyd; ms[1]=yd-\/xyd; ms[2]=xd-\/xyd; ms[3]=xyd;}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{staple_2fhog_8cpp_a68ad3d16d4221d3e92c107a8bc078bdf}\label{staple_2fhog_8cpp_a68ad3d16d4221d3e92c107a8bc078bdf}} 
+\index{fhog.cpp@{fhog.cpp}!GRADY@{GRADY}}
+\index{GRADY@{GRADY}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{GRADY}{GRADY}}
+{\footnotesize\ttfamily \#define GRADY(\begin{DoxyParamCaption}\item[{}]{r }\end{DoxyParamCaption})~$\ast$Gy++=($\ast$In++-\/$\ast$Ip++)$\ast$r;}
+
+\mbox{\Hypertarget{staple_2fhog_8cpp_a598a3330b3c21701223ee0ca14316eca}\label{staple_2fhog_8cpp_a598a3330b3c21701223ee0ca14316eca}} 
+\index{fhog.cpp@{fhog.cpp}!PI@{PI}}
+\index{PI@{PI}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{PI}{PI}}
+{\footnotesize\ttfamily \#define PI~3.\+14159265\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}}}
+
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{staple_2fhog_8cpp_a4c99ae320855620aaece5247b2d92ddd}\label{staple_2fhog_8cpp_a4c99ae320855620aaece5247b2d92ddd}} 
+\index{fhog.cpp@{fhog.cpp}!acosTable@{acosTable}}
+\index{acosTable@{acosTable}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{acosTable()}{acosTable()}}
+{\footnotesize\ttfamily float $\ast$ acos\+Table (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=206pt]{staple_2fhog_8cpp_a4c99ae320855620aaece5247b2d92ddd_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{staple_2fhog_8cpp_afb929cc1f504cea7c015e913debcfd52}\label{staple_2fhog_8cpp_afb929cc1f504cea7c015e913debcfd52}} 
+\index{fhog.cpp@{fhog.cpp}!alFree@{alFree}}
+\index{alFree@{alFree}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{alFree()}{alFree()}}
+{\footnotesize\ttfamily void al\+Free (\begin{DoxyParamCaption}\item[{void $\ast$}]{aligned }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=206pt]{staple_2fhog_8cpp_afb929cc1f504cea7c015e913debcfd52_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{staple_2fhog_8cpp_ae73e42e0af5530ceaa7a4c223827b74a}\label{staple_2fhog_8cpp_ae73e42e0af5530ceaa7a4c223827b74a}} 
+\index{fhog.cpp@{fhog.cpp}!alMalloc@{alMalloc}}
+\index{alMalloc@{alMalloc}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{alMalloc()}{alMalloc()}}
+{\footnotesize\ttfamily void $\ast$ al\+Malloc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{size,  }\item[{int}]{alignment }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=224pt]{staple_2fhog_8cpp_ae73e42e0af5530ceaa7a4c223827b74a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{staple_2fhog_8cpp_a2c6bfbda9fbeb6204594493b64b512f5}\label{staple_2fhog_8cpp_a2c6bfbda9fbeb6204594493b64b512f5}} 
+\index{fhog.cpp@{fhog.cpp}!crop\_H@{crop\_H}}
+\index{crop\_H@{crop\_H}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{crop\_H()}{crop\_H()}}
+{\footnotesize\ttfamily float $\ast$ crop\+\_\+H (\begin{DoxyParamCaption}\item[{float $\ast$}]{H,  }\item[{int $\ast$}]{h\+\_\+height,  }\item[{int $\ast$}]{h\+\_\+width,  }\item[{int}]{depth,  }\item[{int}]{dh,  }\item[{int}]{dw }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=127pt]{staple_2fhog_8cpp_a2c6bfbda9fbeb6204594493b64b512f5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{staple_2fhog_8cpp_a0b11f8ec09067a3bf6fe03a67c83c19b}\label{staple_2fhog_8cpp_a0b11f8ec09067a3bf6fe03a67c83c19b}} 
+\index{fhog.cpp@{fhog.cpp}!fhog@{fhog}}
+\index{fhog@{fhog}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{fhog()}{fhog()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily void fhog (\begin{DoxyParamCaption}\item[{cv\+::\+Mat\+ND \&}]{fhog\+\_\+feature,  }\item[{const cv\+::\+Mat \&}]{input,  }\item[{int}]{bin\+Size,  }\item[{int}]{n\+Orients,  }\item[{float}]{clip,  }\item[{bool}]{crop }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{staple_2fhog_8cpp_a0b11f8ec09067a3bf6fe03a67c83c19b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{staple_2fhog_8cpp_af278de47424cf2ac4729892226225d6a}\label{staple_2fhog_8cpp_af278de47424cf2ac4729892226225d6a}} 
+\index{fhog.cpp@{fhog.cpp}!fhog@{fhog}}
+\index{fhog@{fhog}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{fhog()}{fhog()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily void fhog (\begin{DoxyParamCaption}\item[{float $\ast$}]{M,  }\item[{float $\ast$}]{O,  }\item[{float $\ast$}]{H,  }\item[{int}]{h,  }\item[{int}]{w,  }\item[{int}]{bin\+Size,  }\item[{int}]{n\+Orients,  }\item[{int}]{soft\+Bin,  }\item[{float}]{clip }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{staple_2fhog_8cpp_af278de47424cf2ac4729892226225d6a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{staple_2fhog_8cpp_a0ac46eb50ae78e78b2b0a5f6490dacbc}\label{staple_2fhog_8cpp_a0ac46eb50ae78e78b2b0a5f6490dacbc}} 
+\index{fhog.cpp@{fhog.cpp}!fhog@{fhog}}
+\index{fhog@{fhog}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{fhog()}{fhog()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily float $\ast$ fhog (\begin{DoxyParamCaption}\item[{float $\ast$}]{M,  }\item[{float $\ast$}]{O,  }\item[{int}]{height,  }\item[{int}]{width,  }\item[{int}]{,  }\item[{int $\ast$}]{h,  }\item[{int $\ast$}]{w,  }\item[{int $\ast$}]{d,  }\item[{int}]{bin\+Size,  }\item[{int}]{n\+Orients,  }\item[{float}]{clip,  }\item[{bool}]{crop }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{staple_2fhog_8cpp_a0ac46eb50ae78e78b2b0a5f6490dacbc_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{staple_2fhog_8cpp_a9c3ad6dfddafda82e7613f7347e9560b}\label{staple_2fhog_8cpp_a9c3ad6dfddafda82e7613f7347e9560b}} 
+\index{fhog.cpp@{fhog.cpp}!fhog28@{fhog28}}
+\index{fhog28@{fhog28}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{fhog28()}{fhog28()}}
+{\footnotesize\ttfamily void fhog28 (\begin{DoxyParamCaption}\item[{cv\+::\+Mat\+ND \&}]{fhog\+\_\+feature,  }\item[{const cv\+::\+Mat \&}]{input,  }\item[{int}]{bin\+Size,  }\item[{int}]{n\+Orients,  }\item[{float}]{clip,  }\item[{bool}]{crop }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{staple_2fhog_8cpp_a9c3ad6dfddafda82e7613f7347e9560b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{staple_2fhog_8cpp_ad8714dd9d4c602b2703659b885ee606a}\label{staple_2fhog_8cpp_ad8714dd9d4c602b2703659b885ee606a}} 
+\index{fhog.cpp@{fhog.cpp}!fhog31@{fhog31}}
+\index{fhog31@{fhog31}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{fhog31()}{fhog31()}}
+{\footnotesize\ttfamily void fhog31 (\begin{DoxyParamCaption}\item[{cv\+::\+Mat\+ND \&}]{fhog\+\_\+feature,  }\item[{const cv\+::\+Mat \&}]{input,  }\item[{int}]{bin\+Size,  }\item[{int}]{n\+Orients,  }\item[{float}]{clip,  }\item[{bool}]{crop }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{staple_2fhog_8cpp_ad8714dd9d4c602b2703659b885ee606a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{staple_2fhog_8cpp_a210e84661b0cc3e5226dde1c8b08e5f9}\label{staple_2fhog_8cpp_a210e84661b0cc3e5226dde1c8b08e5f9}} 
+\index{fhog.cpp@{fhog.cpp}!grad1@{grad1}}
+\index{grad1@{grad1}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{grad1()}{grad1()}}
+{\footnotesize\ttfamily void grad1 (\begin{DoxyParamCaption}\item[{float $\ast$}]{I,  }\item[{float $\ast$}]{Gx,  }\item[{float $\ast$}]{Gy,  }\item[{int}]{h,  }\item[{int}]{w,  }\item[{int}]{x }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=219pt]{staple_2fhog_8cpp_a210e84661b0cc3e5226dde1c8b08e5f9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{staple_2fhog_8cpp_a693f6b0160396d8a6d275425cf26aa4d}\label{staple_2fhog_8cpp_a693f6b0160396d8a6d275425cf26aa4d}} 
+\index{fhog.cpp@{fhog.cpp}!grad2@{grad2}}
+\index{grad2@{grad2}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{grad2()}{grad2()}}
+{\footnotesize\ttfamily void grad2 (\begin{DoxyParamCaption}\item[{float $\ast$}]{I,  }\item[{float $\ast$}]{Gx,  }\item[{float $\ast$}]{Gy,  }\item[{int}]{h,  }\item[{int}]{w,  }\item[{int}]{d }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=309pt]{staple_2fhog_8cpp_a693f6b0160396d8a6d275425cf26aa4d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{staple_2fhog_8cpp_a490773d8898cb6fe62332794b11f755a}\label{staple_2fhog_8cpp_a490773d8898cb6fe62332794b11f755a}} 
+\index{fhog.cpp@{fhog.cpp}!gradHist@{gradHist}}
+\index{gradHist@{gradHist}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{gradHist()}{gradHist()}}
+{\footnotesize\ttfamily void grad\+Hist (\begin{DoxyParamCaption}\item[{float $\ast$}]{M,  }\item[{float $\ast$}]{O,  }\item[{float $\ast$}]{H,  }\item[{int}]{h,  }\item[{int}]{w,  }\item[{int}]{bin,  }\item[{int}]{n\+Orients,  }\item[{int}]{soft\+Bin,  }\item[{bool}]{full }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{staple_2fhog_8cpp_a490773d8898cb6fe62332794b11f755a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{staple_2fhog_8cpp_a75833008df7734fe9d80b07983503a4f}\label{staple_2fhog_8cpp_a75833008df7734fe9d80b07983503a4f}} 
+\index{fhog.cpp@{fhog.cpp}!gradMag@{gradMag}}
+\index{gradMag@{gradMag}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{gradMag()}{gradMag()}}
+{\footnotesize\ttfamily void grad\+Mag (\begin{DoxyParamCaption}\item[{float $\ast$}]{I,  }\item[{float $\ast$}]{M,  }\item[{float $\ast$}]{O,  }\item[{int}]{h,  }\item[{int}]{w,  }\item[{int}]{d,  }\item[{bool}]{full }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{staple_2fhog_8cpp_a75833008df7734fe9d80b07983503a4f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{staple_2fhog_8cpp_a839825e4c723fd7917af0a3a761763bf}\label{staple_2fhog_8cpp_a839825e4c723fd7917af0a3a761763bf}} 
+\index{fhog.cpp@{fhog.cpp}!gradMagNorm@{gradMagNorm}}
+\index{gradMagNorm@{gradMagNorm}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{gradMagNorm()}{gradMagNorm()}}
+{\footnotesize\ttfamily void grad\+Mag\+Norm (\begin{DoxyParamCaption}\item[{float $\ast$}]{M,  }\item[{float $\ast$}]{S,  }\item[{int}]{h,  }\item[{int}]{w,  }\item[{float}]{norm }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=255pt]{staple_2fhog_8cpp_a839825e4c723fd7917af0a3a761763bf_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{staple_2fhog_8cpp_aa2ed8fb42e7ca2ca47a722f2e4620186}\label{staple_2fhog_8cpp_aa2ed8fb42e7ca2ca47a722f2e4620186}} 
+\index{fhog.cpp@{fhog.cpp}!gradQuantize@{gradQuantize}}
+\index{gradQuantize@{gradQuantize}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{gradQuantize()}{gradQuantize()}}
+{\footnotesize\ttfamily void grad\+Quantize (\begin{DoxyParamCaption}\item[{float $\ast$}]{O,  }\item[{float $\ast$}]{M,  }\item[{int $\ast$}]{O0,  }\item[{int $\ast$}]{O1,  }\item[{float $\ast$}]{M0,  }\item[{float $\ast$}]{M1,  }\item[{int}]{nb,  }\item[{int}]{n,  }\item[{float}]{norm,  }\item[{int}]{n\+Orients,  }\item[{bool}]{full,  }\item[{bool}]{interpolate }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=263pt]{staple_2fhog_8cpp_aa2ed8fb42e7ca2ca47a722f2e4620186_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{staple_2fhog_8cpp_a99b7ff64d7872f9ed9fca0417078918a}\label{staple_2fhog_8cpp_a99b7ff64d7872f9ed9fca0417078918a}} 
+\index{fhog.cpp@{fhog.cpp}!hog@{hog}}
+\index{hog@{hog}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{hog()}{hog()}}
+{\footnotesize\ttfamily void hog (\begin{DoxyParamCaption}\item[{float $\ast$}]{M,  }\item[{float $\ast$}]{O,  }\item[{float $\ast$}]{H,  }\item[{int}]{h,  }\item[{int}]{w,  }\item[{int}]{bin\+Size,  }\item[{int}]{n\+Orients,  }\item[{int}]{soft\+Bin,  }\item[{bool}]{full,  }\item[{float}]{clip }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{staple_2fhog_8cpp_a99b7ff64d7872f9ed9fca0417078918a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{staple_2fhog_8cpp_a16f996bbbef2a23d8b32f0f05677881b}\label{staple_2fhog_8cpp_a16f996bbbef2a23d8b32f0f05677881b}} 
+\index{fhog.cpp@{fhog.cpp}!hogChannels@{hogChannels}}
+\index{hogChannels@{hogChannels}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{hogChannels()}{hogChannels()}}
+{\footnotesize\ttfamily void hog\+Channels (\begin{DoxyParamCaption}\item[{float $\ast$}]{H,  }\item[{const float $\ast$}]{R,  }\item[{const float $\ast$}]{N,  }\item[{int}]{hb,  }\item[{int}]{wb,  }\item[{int}]{n\+Orients,  }\item[{float}]{clip,  }\item[{int}]{type }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=247pt]{staple_2fhog_8cpp_a16f996bbbef2a23d8b32f0f05677881b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{staple_2fhog_8cpp_a00dabc5c239b6d877dbbbab753d271ab}\label{staple_2fhog_8cpp_a00dabc5c239b6d877dbbbab753d271ab}} 
+\index{fhog.cpp@{fhog.cpp}!hogNormMatrix@{hogNormMatrix}}
+\index{hogNormMatrix@{hogNormMatrix}!fhog.cpp@{fhog.cpp}}
+\doxysubsubsection{\texorpdfstring{hogNormMatrix()}{hogNormMatrix()}}
+{\footnotesize\ttfamily float $\ast$ hog\+Norm\+Matrix (\begin{DoxyParamCaption}\item[{float $\ast$}]{H,  }\item[{int}]{n\+Orients,  }\item[{int}]{hb,  }\item[{int}]{wb,  }\item[{int}]{bin }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=252pt]{staple_2fhog_8cpp_a00dabc5c239b6d877dbbbab753d271ab_cgraph}
+\end{center}
+\end{figure}

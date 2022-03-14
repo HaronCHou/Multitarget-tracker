@@ -1,0 +1,64 @@
+\hypertarget{mwbmatching_8h_source}{}\doxysection{mwbmatching.\+h}
+\label{mwbmatching_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/mwbmatching.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/mwbmatching.h}}
+\mbox{\hyperlink{mwbmatching_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// \$Id: mwbmatching.h,v 1.3 2007/10/28 08:47:21 rdmp1c Exp \$}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#ifndef MWBMATCHING\_H}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#define MWBMATCHING\_H}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{algorithm_8h}{GTL/algorithm.h}}>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{fheap_8h}{fheap.h}}"{}}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{class }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{classmwbmatching}{mwbmatching}} final : \textcolor{keyword}{public} GTL::algorithm}
+\DoxyCodeLine{11 \{}
+\DoxyCodeLine{12 \textcolor{keyword}{public}:}
+\DoxyCodeLine{13     \mbox{\hyperlink{classmwbmatching}{mwbmatching}} ();}
+\DoxyCodeLine{14     \textcolor{keyword}{virtual} \mbox{\hyperlink{classmwbmatching_a7bf84e4f86931f08c52f39be843497f1}{\string~mwbmatching}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{15     }
+\DoxyCodeLine{21     \textcolor{keywordtype}{void} set\_vars(\textcolor{keyword}{const} GTL::edge\_map<int>\& edge\_weight);}
+\DoxyCodeLine{22     }
+\DoxyCodeLine{31     \textcolor{keywordtype}{int} run (GTL::graph\& G);}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 }
+\DoxyCodeLine{42     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} check (GTL::graph\& G);}
+\DoxyCodeLine{43     }
+\DoxyCodeLine{49     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classmwbmatching_acb2171f09442f1d4170eaed5dc213865}{reset}} () \{\}}
+\DoxyCodeLine{50     }
+\DoxyCodeLine{57     \textcolor{keywordtype}{int} \mbox{\hyperlink{classmwbmatching_a19c5144f8a7c44e238743e6eaff8c228}{get\_mwbm}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} m\_mwbm; \}}
+\DoxyCodeLine{58     }
+\DoxyCodeLine{66     \mbox{\hyperlink{edge_8h_a8f9587479bda6cf612c103494b3858e3}{GTL::edges\_t}} \mbox{\hyperlink{classmwbmatching_a4bd441ea18a1deb0b9f0175c4e6ecc41}{get\_match}}() \{ \textcolor{keywordflow}{return} m\_result; \}}
+\DoxyCodeLine{67     }
+\DoxyCodeLine{68 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{72     \textcolor{keywordtype}{long} m\_mwbm = 0;}
+\DoxyCodeLine{73     }
+\DoxyCodeLine{77     \textcolor{keywordtype}{bool} m\_set\_vars\_executed = \textcolor{keyword}{false};}
+\DoxyCodeLine{78     }
+\DoxyCodeLine{82     GTL::edge\_map<int> \mbox{\hyperlink{classmwbmatching_a7881a3114b1892d5de2c1348f0fe0f8b}{m\_edge\_weight}};}
+\DoxyCodeLine{83     }
+\DoxyCodeLine{84     \mbox{\hyperlink{edge_8h_a8f9587479bda6cf612c103494b3858e3}{GTL::edges\_t}} \mbox{\hyperlink{classmwbmatching_a9da559776bd40a29505d8cb57c47b877}{m\_result}};}
+\DoxyCodeLine{85     }
+\DoxyCodeLine{86     GTL::node\_map<long> \mbox{\hyperlink{classmwbmatching_aa7a60c4c69a83837b3b780c7e0c6adfa}{m\_pot}};}
+\DoxyCodeLine{87     GTL::node\_map<bool> \mbox{\hyperlink{classmwbmatching_a86d146f0a3cfe7bf2e831bda41898acf}{m\_free}};}
+\DoxyCodeLine{88     GTL::node\_map<long> \mbox{\hyperlink{classmwbmatching_a3333608ae35385390f02e69e10334506}{m\_dist}};}
+\DoxyCodeLine{89     GTL::node\_map<long> \mbox{\hyperlink{classmwbmatching_a91f8dc1f5b62e9f3be64ec95c68526f7}{m\_pred}};}
+\DoxyCodeLine{90     std::map <int, GTL::node, std::less<int> > \mbox{\hyperlink{classmwbmatching_ac8ede6a82cf5c41eef197f1fca61e84f}{m\_node\_from\_id}};}
+\DoxyCodeLine{91     std::map <int, GTL::edge, std::less<int> > \mbox{\hyperlink{classmwbmatching_a85dd535fa3323ecddceadc750e83b3e6}{m\_edge\_from\_id}};}
+\DoxyCodeLine{92     }
+\DoxyCodeLine{93     \mbox{\hyperlink{structfheap}{fheap\_t}}* m\_pq = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{94     }
+\DoxyCodeLine{95     \textcolor{keywordtype}{int} augment(GTL::graph\& G, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} a);}
+\DoxyCodeLine{96     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} augment\_path\_to (GTL::graph \&G, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}} v);}
+\DoxyCodeLine{97 \};}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99 }
+\DoxyCodeLine{107 \mbox{\hyperlink{edge_8h_a8f9587479bda6cf612c103494b3858e3}{GTL::edges\_t}} \mbox{\hyperlink{mwbmatching_8h_a99932750832b03e1db45346969330d58}{MAX\_WEIGHT\_BIPARTITE\_MATCHING}}(GTL::graph \&G, GTL::edge\_map<int> weights);}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{113 }
+
+\end{DoxyCode}

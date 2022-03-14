@@ -1,0 +1,248 @@
+\hypertarget{region__layer_8c}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/region\+\_\+layer.c 文件参考}
+\label{region__layer_8c}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/region\_layer.c@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/region\_layer.c}}
+{\ttfamily \#include \char`\"{}region\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}activations.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}blas.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}box.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dark\+\_\+cuda.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+region\+\_\+layer.\+c 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{region__layer_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{宏定义}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{region__layer_8c_a54712934400b05cd6b6d992d0c00be98}{DOABS}}~1
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{region__layer_8h_a14bbb6b7569c9228cf67cfcde56d2a3a}{region\+\_\+layer}} \mbox{\hyperlink{region__layer_8c_ab27a534be24b38da5d4ad78d362e9f57}{make\+\_\+region\+\_\+layer}} (int batch, int w, int h, int n, int classes, int coords, int max\+\_\+boxes)
+\item 
+void \mbox{\hyperlink{region__layer_8c_a882147a796b341f5ec5989f0e71b7797}{resize\+\_\+region\+\_\+layer}} (\mbox{\hyperlink{structlayer}{layer}} $\ast$l, int w, int h)
+\item 
+\mbox{\hyperlink{structbox}{box}} \mbox{\hyperlink{region__layer_8c_acd9e43f4ee29bae684bb8ec5dbe507f7}{get\+\_\+region\+\_\+box}} (float $\ast$\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, float $\ast$biases, int n, int index, int i, int j, int w, int h)
+\item 
+float \mbox{\hyperlink{region__layer_8c_aa8e5b8126dc5fa76b6334a2c54fdf03b}{delta\+\_\+region\+\_\+box}} (\mbox{\hyperlink{structbox}{box}} truth, float $\ast$\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, float $\ast$biases, int n, int index, int i, int j, int w, int h, float $\ast$delta, float scale)
+\item 
+void \mbox{\hyperlink{region__layer_8c_a78081bd3232d9ee703961f21d1852a65}{delta\+\_\+region\+\_\+class}} (float $\ast$output, float $\ast$delta, int index, int class\+\_\+id, int classes, \mbox{\hyperlink{structtree}{tree}} $\ast$hier, float scale, float $\ast$avg\+\_\+cat, int focal\+\_\+loss)
+\item 
+float \mbox{\hyperlink{region__layer_8c_ae78a64fa28eedd9d67db987b4e6cdbab}{logit}} (float \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}})
+\item 
+float \mbox{\hyperlink{region__layer_8c_a81568d0ffbba5b9640b433ffb03105a6}{tisnan}} (float \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}})
+\item 
+static int \mbox{\hyperlink{region__layer_8c_a698816f78a55ee099300248673408599}{entry\+\_\+index}} (\mbox{\hyperlink{structlayer}{layer}} l, int batch, int location, int entry)
+\item 
+void \mbox{\hyperlink{region__layer_8c_a95a2c83ae6770bd47370481e93677645}{softmax\+\_\+tree}} (float $\ast$input, int batch, int inputs, float temp, \mbox{\hyperlink{structtree}{tree}} $\ast$hierarchy, float $\ast$output)
+\item 
+void \mbox{\hyperlink{region__layer_8c_a833802abdc5ed4661ddccbc900bc46be}{forward\+\_\+region\+\_\+layer}} (const \mbox{\hyperlink{region__layer_8h_a14bbb6b7569c9228cf67cfcde56d2a3a}{region\+\_\+layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{region__layer_8c_aa5ebaf3fa40caac7d0ea9d635730393e}{backward\+\_\+region\+\_\+layer}} (const \mbox{\hyperlink{region__layer_8h_a14bbb6b7569c9228cf67cfcde56d2a3a}{region\+\_\+layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{region__layer_8c_a8ca83abc38f47e10d0d0e3a1bc1df537}{get\+\_\+region\+\_\+boxes}} (\mbox{\hyperlink{structlayer}{layer}} l, int w, int h, float thresh, float $\ast$$\ast$probs, \mbox{\hyperlink{structbox}{box}} $\ast$boxes, int only\+\_\+objectness, int $\ast$map)
+\item 
+void \mbox{\hyperlink{region__layer_8c_a434161daee4c80ecee942e55af1ff66f}{correct\+\_\+region\+\_\+boxes}} (\mbox{\hyperlink{structdetection}{detection}} $\ast$dets, int n, int w, int h, int netw, int neth, int relative)
+\item 
+void \mbox{\hyperlink{region__layer_8c_a6217638afe6e4a40bceda1d617aea6ec}{get\+\_\+region\+\_\+detections}} (\mbox{\hyperlink{structlayer}{layer}} l, int w, int h, int netw, int neth, float thresh, int $\ast$map, float tree\+\_\+thresh, int relative, \mbox{\hyperlink{structdetection}{detection}} $\ast$dets)
+\item 
+void \mbox{\hyperlink{region__layer_8c_a482d1347c52a7651d858f842518c705e}{zero\+\_\+objectness}} (\mbox{\hyperlink{structlayer}{layer}} l)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{宏定义说明}
+\mbox{\Hypertarget{region__layer_8c_a54712934400b05cd6b6d992d0c00be98}\label{region__layer_8c_a54712934400b05cd6b6d992d0c00be98}} 
+\index{region\_layer.c@{region\_layer.c}!DOABS@{DOABS}}
+\index{DOABS@{DOABS}!region\_layer.c@{region\_layer.c}}
+\doxysubsubsection{\texorpdfstring{DOABS}{DOABS}}
+{\footnotesize\ttfamily \#define DOABS~1}
+
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{region__layer_8c_aa5ebaf3fa40caac7d0ea9d635730393e}\label{region__layer_8c_aa5ebaf3fa40caac7d0ea9d635730393e}} 
+\index{region\_layer.c@{region\_layer.c}!backward\_region\_layer@{backward\_region\_layer}}
+\index{backward\_region\_layer@{backward\_region\_layer}!region\_layer.c@{region\_layer.c}}
+\doxysubsubsection{\texorpdfstring{backward\_region\_layer()}{backward\_region\_layer()}}
+{\footnotesize\ttfamily void backward\+\_\+region\+\_\+layer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{region__layer_8h_a14bbb6b7569c9228cf67cfcde56d2a3a}{region\+\_\+layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=291pt]{region__layer_8c_aa5ebaf3fa40caac7d0ea9d635730393e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{region__layer_8c_a434161daee4c80ecee942e55af1ff66f}\label{region__layer_8c_a434161daee4c80ecee942e55af1ff66f}} 
+\index{region\_layer.c@{region\_layer.c}!correct\_region\_boxes@{correct\_region\_boxes}}
+\index{correct\_region\_boxes@{correct\_region\_boxes}!region\_layer.c@{region\_layer.c}}
+\doxysubsubsection{\texorpdfstring{correct\_region\_boxes()}{correct\_region\_boxes()}}
+{\footnotesize\ttfamily void correct\+\_\+region\+\_\+boxes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{dets,  }\item[{int}]{n,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{int}]{netw,  }\item[{int}]{neth,  }\item[{int}]{relative }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{region__layer_8c_a434161daee4c80ecee942e55af1ff66f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{region__layer_8c_aa8e5b8126dc5fa76b6334a2c54fdf03b}\label{region__layer_8c_aa8e5b8126dc5fa76b6334a2c54fdf03b}} 
+\index{region\_layer.c@{region\_layer.c}!delta\_region\_box@{delta\_region\_box}}
+\index{delta\_region\_box@{delta\_region\_box}!region\_layer.c@{region\_layer.c}}
+\doxysubsubsection{\texorpdfstring{delta\_region\_box()}{delta\_region\_box()}}
+{\footnotesize\ttfamily float delta\+\_\+region\+\_\+box (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbox}{box}}}]{truth,  }\item[{float $\ast$}]{x,  }\item[{float $\ast$}]{biases,  }\item[{int}]{n,  }\item[{int}]{index,  }\item[{int}]{i,  }\item[{int}]{j,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{float $\ast$}]{delta,  }\item[{float}]{scale }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{region__layer_8c_aa8e5b8126dc5fa76b6334a2c54fdf03b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{region__layer_8c_a78081bd3232d9ee703961f21d1852a65}\label{region__layer_8c_a78081bd3232d9ee703961f21d1852a65}} 
+\index{region\_layer.c@{region\_layer.c}!delta\_region\_class@{delta\_region\_class}}
+\index{delta\_region\_class@{delta\_region\_class}!region\_layer.c@{region\_layer.c}}
+\doxysubsubsection{\texorpdfstring{delta\_region\_class()}{delta\_region\_class()}}
+{\footnotesize\ttfamily void delta\+\_\+region\+\_\+class (\begin{DoxyParamCaption}\item[{float $\ast$}]{output,  }\item[{float $\ast$}]{delta,  }\item[{int}]{index,  }\item[{int}]{class\+\_\+id,  }\item[{int}]{classes,  }\item[{\mbox{\hyperlink{structtree}{tree}} $\ast$}]{hier,  }\item[{float}]{scale,  }\item[{float $\ast$}]{avg\+\_\+cat,  }\item[{int}]{focal\+\_\+loss }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{region__layer_8c_a698816f78a55ee099300248673408599}\label{region__layer_8c_a698816f78a55ee099300248673408599}} 
+\index{region\_layer.c@{region\_layer.c}!entry\_index@{entry\_index}}
+\index{entry\_index@{entry\_index}!region\_layer.c@{region\_layer.c}}
+\doxysubsubsection{\texorpdfstring{entry\_index()}{entry\_index()}}
+{\footnotesize\ttfamily static int entry\+\_\+index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{int}]{batch,  }\item[{int}]{location,  }\item[{int}]{entry }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{region__layer_8c_a833802abdc5ed4661ddccbc900bc46be}\label{region__layer_8c_a833802abdc5ed4661ddccbc900bc46be}} 
+\index{region\_layer.c@{region\_layer.c}!forward\_region\_layer@{forward\_region\_layer}}
+\index{forward\_region\_layer@{forward\_region\_layer}!region\_layer.c@{region\_layer.c}}
+\doxysubsubsection{\texorpdfstring{forward\_region\_layer()}{forward\_region\_layer()}}
+{\footnotesize\ttfamily void forward\+\_\+region\+\_\+layer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{region__layer_8h_a14bbb6b7569c9228cf67cfcde56d2a3a}{region\+\_\+layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{region__layer_8c_a833802abdc5ed4661ddccbc900bc46be_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{region__layer_8c_acd9e43f4ee29bae684bb8ec5dbe507f7}\label{region__layer_8c_acd9e43f4ee29bae684bb8ec5dbe507f7}} 
+\index{region\_layer.c@{region\_layer.c}!get\_region\_box@{get\_region\_box}}
+\index{get\_region\_box@{get\_region\_box}!region\_layer.c@{region\_layer.c}}
+\doxysubsubsection{\texorpdfstring{get\_region\_box()}{get\_region\_box()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structbox}{box}} get\+\_\+region\+\_\+box (\begin{DoxyParamCaption}\item[{float $\ast$}]{x,  }\item[{float $\ast$}]{biases,  }\item[{int}]{n,  }\item[{int}]{index,  }\item[{int}]{i,  }\item[{int}]{j,  }\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=285pt]{region__layer_8c_acd9e43f4ee29bae684bb8ec5dbe507f7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{region__layer_8c_a8ca83abc38f47e10d0d0e3a1bc1df537}\label{region__layer_8c_a8ca83abc38f47e10d0d0e3a1bc1df537}} 
+\index{region\_layer.c@{region\_layer.c}!get\_region\_boxes@{get\_region\_boxes}}
+\index{get\_region\_boxes@{get\_region\_boxes}!region\_layer.c@{region\_layer.c}}
+\doxysubsubsection{\texorpdfstring{get\_region\_boxes()}{get\_region\_boxes()}}
+{\footnotesize\ttfamily void get\+\_\+region\+\_\+boxes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{float}]{thresh,  }\item[{float $\ast$$\ast$}]{probs,  }\item[{\mbox{\hyperlink{structbox}{box}} $\ast$}]{boxes,  }\item[{int}]{only\+\_\+objectness,  }\item[{int $\ast$}]{map }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{region__layer_8c_a8ca83abc38f47e10d0d0e3a1bc1df537_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{region__layer_8c_a6217638afe6e4a40bceda1d617aea6ec}\label{region__layer_8c_a6217638afe6e4a40bceda1d617aea6ec}} 
+\index{region\_layer.c@{region\_layer.c}!get\_region\_detections@{get\_region\_detections}}
+\index{get\_region\_detections@{get\_region\_detections}!region\_layer.c@{region\_layer.c}}
+\doxysubsubsection{\texorpdfstring{get\_region\_detections()}{get\_region\_detections()}}
+{\footnotesize\ttfamily void get\+\_\+region\+\_\+detections (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{int}]{netw,  }\item[{int}]{neth,  }\item[{float}]{thresh,  }\item[{int $\ast$}]{map,  }\item[{float}]{tree\+\_\+thresh,  }\item[{int}]{relative,  }\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{dets }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{region__layer_8c_a6217638afe6e4a40bceda1d617aea6ec_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{region__layer_8c_ae78a64fa28eedd9d67db987b4e6cdbab}\label{region__layer_8c_ae78a64fa28eedd9d67db987b4e6cdbab}} 
+\index{region\_layer.c@{region\_layer.c}!logit@{logit}}
+\index{logit@{logit}!region\_layer.c@{region\_layer.c}}
+\doxysubsubsection{\texorpdfstring{logit()}{logit()}}
+{\footnotesize\ttfamily float logit (\begin{DoxyParamCaption}\item[{float}]{x }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{region__layer_8c_ab27a534be24b38da5d4ad78d362e9f57}\label{region__layer_8c_ab27a534be24b38da5d4ad78d362e9f57}} 
+\index{region\_layer.c@{region\_layer.c}!make\_region\_layer@{make\_region\_layer}}
+\index{make\_region\_layer@{make\_region\_layer}!region\_layer.c@{region\_layer.c}}
+\doxysubsubsection{\texorpdfstring{make\_region\_layer()}{make\_region\_layer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{region__layer_8h_a14bbb6b7569c9228cf67cfcde56d2a3a}{region\+\_\+layer}} make\+\_\+region\+\_\+layer (\begin{DoxyParamCaption}\item[{int}]{batch,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{int}]{n,  }\item[{int}]{classes,  }\item[{int}]{coords,  }\item[{int}]{max\+\_\+boxes }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{region__layer_8c_ab27a534be24b38da5d4ad78d362e9f57_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{region__layer_8c_a882147a796b341f5ec5989f0e71b7797}\label{region__layer_8c_a882147a796b341f5ec5989f0e71b7797}} 
+\index{region\_layer.c@{region\_layer.c}!resize\_region\_layer@{resize\_region\_layer}}
+\index{resize\_region\_layer@{resize\_region\_layer}!region\_layer.c@{region\_layer.c}}
+\doxysubsubsection{\texorpdfstring{resize\_region\_layer()}{resize\_region\_layer()}}
+{\footnotesize\ttfamily void resize\+\_\+region\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}} $\ast$}]{l,  }\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=279pt]{region__layer_8c_a882147a796b341f5ec5989f0e71b7797_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{region__layer_8c_a95a2c83ae6770bd47370481e93677645}\label{region__layer_8c_a95a2c83ae6770bd47370481e93677645}} 
+\index{region\_layer.c@{region\_layer.c}!softmax\_tree@{softmax\_tree}}
+\index{softmax\_tree@{softmax\_tree}!region\_layer.c@{region\_layer.c}}
+\doxysubsubsection{\texorpdfstring{softmax\_tree()}{softmax\_tree()}}
+{\footnotesize\ttfamily void softmax\+\_\+tree (\begin{DoxyParamCaption}\item[{float $\ast$}]{input,  }\item[{int}]{batch,  }\item[{int}]{inputs,  }\item[{float}]{temp,  }\item[{\mbox{\hyperlink{structtree}{tree}} $\ast$}]{hierarchy,  }\item[{float $\ast$}]{output }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{region__layer_8c_a95a2c83ae6770bd47370481e93677645_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{region__layer_8c_a81568d0ffbba5b9640b433ffb03105a6}\label{region__layer_8c_a81568d0ffbba5b9640b433ffb03105a6}} 
+\index{region\_layer.c@{region\_layer.c}!tisnan@{tisnan}}
+\index{tisnan@{tisnan}!region\_layer.c@{region\_layer.c}}
+\doxysubsubsection{\texorpdfstring{tisnan()}{tisnan()}}
+{\footnotesize\ttfamily float tisnan (\begin{DoxyParamCaption}\item[{float}]{x }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{region__layer_8c_a482d1347c52a7651d858f842518c705e}\label{region__layer_8c_a482d1347c52a7651d858f842518c705e}} 
+\index{region\_layer.c@{region\_layer.c}!zero\_objectness@{zero\_objectness}}
+\index{zero\_objectness@{zero\_objectness}!region\_layer.c@{region\_layer.c}}
+\doxysubsubsection{\texorpdfstring{zero\_objectness()}{zero\_objectness()}}
+{\footnotesize\ttfamily void zero\+\_\+objectness (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{l }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=271pt]{region__layer_8c_a482d1347c52a7651d858f842518c705e_cgraph}
+\end{center}
+\end{figure}

@@ -1,0 +1,128 @@
+\hypertarget{track_8h_source}{}\doxysection{track.\+h}
+\label{track_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/track.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/track.h}}
+\mbox{\hyperlink{track_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <deque>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <array>}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#ifdef USE\_OCV\_KCF}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <opencv2/tracking.hpp>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{defines_8h}{defines.h}}"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{trajectory_8h}{trajectory.h}}"{}}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{object__types_8h}{object\_types.h}}"{}}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_kalman_8h}{Kalman.h}}"{}}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_v_o_t_tracker_8hpp}{VOTTracker.hpp}}"{}}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{21 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_region_embedding}{RegionEmbedding}}}
+\DoxyCodeLine{22 \{}
+\DoxyCodeLine{23     cv::Mat \mbox{\hyperlink{struct_region_embedding_a818805cec30a7b97dfabaab731ea8ba7}{m\_hist}};}
+\DoxyCodeLine{24     cv::Mat \mbox{\hyperlink{struct_region_embedding_ae1681f4ce9a700e5af7cc5524056a131}{m\_embedding}};}
+\DoxyCodeLine{25     \textcolor{keywordtype}{double} \mbox{\hyperlink{struct_region_embedding_a66d6c85139401795f6c9fb0ceba00fe6}{m\_embDot}} = 0.;}
+\DoxyCodeLine{26 \};}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{31 \textcolor{keyword}{class }\mbox{\hyperlink{class_c_track}{CTrack}}}
+\DoxyCodeLine{32 \{}
+\DoxyCodeLine{33 \textcolor{keyword}{public}:}
+\DoxyCodeLine{34     \mbox{\hyperlink{class_c_track_a71146c2005dab0b12167a68ff97e8435}{CTrack}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_c_region}{CRegion}}\& region,}
+\DoxyCodeLine{35            \mbox{\hyperlink{namespacetracking_a83f2c4d58ea2737f7d6296dce3eb722a}{tracking::KalmanType}} kalmanType,}
+\DoxyCodeLine{36            \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} deltaTime,}
+\DoxyCodeLine{37            \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} accelNoiseMag,}
+\DoxyCodeLine{38            \textcolor{keywordtype}{bool} useAcceleration,}
+\DoxyCodeLine{39            \mbox{\hyperlink{class_track_i_d}{track\_id\_t}} trackID,}
+\DoxyCodeLine{40            \textcolor{keywordtype}{bool} filterObjectSize,}
+\DoxyCodeLine{41            \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3}{tracking::LostTrackType}} externalTrackerForLost);}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43     \mbox{\hyperlink{class_c_track_a71146c2005dab0b12167a68ff97e8435}{CTrack}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_c_region}{CRegion}}\& region,}
+\DoxyCodeLine{44            \textcolor{keyword}{const} \mbox{\hyperlink{struct_region_embedding}{RegionEmbedding}}\& regionEmbedding,}
+\DoxyCodeLine{45            \mbox{\hyperlink{namespacetracking_a83f2c4d58ea2737f7d6296dce3eb722a}{tracking::KalmanType}} kalmanType,}
+\DoxyCodeLine{46            \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} deltaTime,}
+\DoxyCodeLine{47            \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} accelNoiseMag,}
+\DoxyCodeLine{48            \textcolor{keywordtype}{bool} useAcceleration,}
+\DoxyCodeLine{49            \mbox{\hyperlink{class_track_i_d}{track\_id\_t}} trackID,}
+\DoxyCodeLine{50            \textcolor{keywordtype}{bool} filterObjectSize,}
+\DoxyCodeLine{51            \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3}{tracking::LostTrackType}} externalTrackerForLost);}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{59     \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} \mbox{\hyperlink{class_c_track_a22c87450ea74a8bfccb53ee3ce0d8cd6}{CalcDistCenter}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_c_region}{CRegion}}\& reg) \textcolor{keyword}{const};}
+\DoxyCodeLine{66     \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} \mbox{\hyperlink{class_c_track_ae89aec30ac60f352222fe20645606f1f}{CalcDistRect}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_c_region}{CRegion}}\& reg) \textcolor{keyword}{const};}
+\DoxyCodeLine{73     \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} \mbox{\hyperlink{class_c_track_a37d8b005c65f317d70a8368996994e86}{CalcDistJaccard}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_c_region}{CRegion}}\& reg) \textcolor{keyword}{const};}
+\DoxyCodeLine{79     \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} \mbox{\hyperlink{class_c_track_aa98cd3fd065d59f3a821a92176b5a8f8}{CalcMahalanobisDist}}(\textcolor{keyword}{const} cv::RotatedRect\& rrect) \textcolor{keyword}{const};}
+\DoxyCodeLine{86     \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} \mbox{\hyperlink{class_c_track_a81340cb5adbf3d5f2eaf45fe7239c1f3}{CalcDistHist}}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_region_embedding}{RegionEmbedding}}\& embedding) \textcolor{keyword}{const};}
+\DoxyCodeLine{93     std::pair<track\_t, bool> \mbox{\hyperlink{class_c_track_aaa947fcee45192ad082daa31afc3611e}{CalcCosine}}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_region_embedding}{RegionEmbedding}}\& embedding) \textcolor{keyword}{const};}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95     cv::RotatedRect \mbox{\hyperlink{class_c_track_a233abd3a7f9d71a136300160250c6361}{CalcPredictionEllipse}}(cv::Size\_<track\_t> minRadius) \textcolor{keyword}{const};}
+\DoxyCodeLine{103     \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} \mbox{\hyperlink{class_c_track_a804209059c71c75751842659e486e3b4}{IsInsideArea}}(\textcolor{keyword}{const} \mbox{\hyperlink{defines_8h_a8c42696da8f098b91374a8e8bb84b430}{Point\_t}}\& \mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}, \textcolor{keyword}{const} cv::RotatedRect\& rrect) \textcolor{keyword}{const};}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105     \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} \mbox{\hyperlink{class_c_track_a6cf460150ad8a9d248c560d46eba42f7}{WidthDist}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_c_region}{CRegion}}\& reg) \textcolor{keyword}{const};}
+\DoxyCodeLine{106     \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} \mbox{\hyperlink{class_c_track_a5b5148bc1610e1fd13c00b97dcce310d}{HeightDist}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_c_region}{CRegion}}\& reg) \textcolor{keyword}{const};}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_track_ad5836a45c9436a38c50fa69dd53e3911}{Update}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_c_region}{CRegion}}\& region, \textcolor{keywordtype}{bool} dataCorrect, \textcolor{keywordtype}{size\_t} max\_trace\_length, cv::UMat prevFrame, cv::UMat currFrame, \textcolor{keywordtype}{int} trajLen, \textcolor{keywordtype}{int} maxSpeedForStatic);}
+\DoxyCodeLine{109     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_track_ad5836a45c9436a38c50fa69dd53e3911}{Update}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_c_region}{CRegion}}\& region, \textcolor{keyword}{const} \mbox{\hyperlink{struct_region_embedding}{RegionEmbedding}}\& regionEmbedding, \textcolor{keywordtype}{bool} dataCorrect, \textcolor{keywordtype}{size\_t} max\_trace\_length, cv::UMat prevFrame, cv::UMat currFrame, \textcolor{keywordtype}{int} trajLen, \textcolor{keywordtype}{int} maxSpeedForStatic);}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_track_a4f3265c10e4ad24b8b7b10668edfa309}{IsStatic}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{112     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_track_a815097c7b43655fcd5954d817493198c}{IsStaticTimeout}}(\textcolor{keywordtype}{int} framesTime) \textcolor{keyword}{const};}
+\DoxyCodeLine{113     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_track_a93709a6b9f3d807dde857492dbb77d14}{IsOutOfTheFrame}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115     cv::RotatedRect \mbox{\hyperlink{class_c_track_a13102cdcea040804732269b17cf4bd92}{GetLastRect}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117     \textcolor{keyword}{const} \mbox{\hyperlink{defines_8h_a8c42696da8f098b91374a8e8bb84b430}{Point\_t}}\& \mbox{\hyperlink{class_c_track_af79b33fa9b157e1aebaa5740dfb209c8}{AveragePoint}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{118     \mbox{\hyperlink{defines_8h_a8c42696da8f098b91374a8e8bb84b430}{Point\_t}}\& \mbox{\hyperlink{class_c_track_a3422f6199966b912fc3182d4337ac457}{AveragePoint}}();}
+\DoxyCodeLine{119     \textcolor{keyword}{const} \mbox{\hyperlink{class_c_region}{CRegion}}\& \mbox{\hyperlink{class_c_track_a517648bad954f0c4347f3e9573ecdabf}{LastRegion}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{120     \mbox{\hyperlink{object__types_8h_aef073148585075f745f149202b5ccc90}{objtype\_t}} \mbox{\hyperlink{class_c_track_aceeeb4e59b18414587d4607c8bd53f9b}{GetCurrType}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{121     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_c_track_abec4a9274447423cc10d5c632944dbb3}{SkippedFrames}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{122     \textcolor{keywordtype}{size\_t}\& \mbox{\hyperlink{class_c_track_abec4a9274447423cc10d5c632944dbb3}{SkippedFrames}}();}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124     \mbox{\hyperlink{struct_tracking_object}{TrackingObject}} \mbox{\hyperlink{class_c_track_a25844b86df3cb8242741b26a202fc63c}{ConstructObject}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{125     \mbox{\hyperlink{class_track_i_d}{track\_id\_t}} \mbox{\hyperlink{class_c_track_a1e0b8bfdf1eb026f1edf0407d1c4bf39}{GetID}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_track_a5be5b3225ad1c5b281d57a1ba10c1295}{GetFilterObjectSize}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{128     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_track_a8698d4f1a0b3709ba62452f49fc6053f}{KalmanPredictRect}}();}
+\DoxyCodeLine{129     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_track_a6f84e0c644620d13f9ff37917e1f5f42}{KalmanPredictPoint}}();}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131 \textcolor{keyword}{private}:}
+\DoxyCodeLine{132     \mbox{\hyperlink{class_t_kalman_filter}{TKalmanFilter}} \mbox{\hyperlink{class_c_track_a85c7771b70f05a4f64ac53e2dd0afca3}{m\_kalman}};}
+\DoxyCodeLine{133     \mbox{\hyperlink{class_c_region}{CRegion}} \mbox{\hyperlink{class_c_track_a5af91fbfad7ebf07bd0f681f915e440c}{m\_lastRegion}};}
+\DoxyCodeLine{134     \mbox{\hyperlink{class_trace}{Trace}} \mbox{\hyperlink{class_c_track_adf88ff8678ec928ac3ca764f7308b96f}{m\_trace}};}
+\DoxyCodeLine{135     cv::RotatedRect \mbox{\hyperlink{class_c_track_abae9d26232876d478181ccbecd58322d}{m\_predictionRect}};}
+\DoxyCodeLine{136     \mbox{\hyperlink{defines_8h_a8c42696da8f098b91374a8e8bb84b430}{Point\_t}} \mbox{\hyperlink{class_c_track_a8ee3f8baaf290aeb113f34c26a446a76}{m\_predictionPoint}};}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138     \mbox{\hyperlink{class_track_i_d}{track\_id\_t}} \mbox{\hyperlink{class_c_track_a971aad35df938b9d0b27c5762a571dd0}{m\_trackID}};}
+\DoxyCodeLine{139     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_c_track_a3308a34b70a90692b0fb863eb621bd37}{m\_skippedFrames}} = 0;}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141     \mbox{\hyperlink{object__types_8h_aef073148585075f745f149202b5ccc90}{objtype\_t}} \mbox{\hyperlink{class_c_track_ac5e6823569dc2375da9fb3ab30d9d7da}{m\_currType}} = \mbox{\hyperlink{object__types_8h_ac568810e98b5f032d6b916e7878ebe53}{bad\_type}};}
+\DoxyCodeLine{142     \mbox{\hyperlink{object__types_8h_aef073148585075f745f149202b5ccc90}{objtype\_t}} \mbox{\hyperlink{class_c_track_a9a611292865e57b9dddc34886ecc89fe}{m\_lastType}} = \mbox{\hyperlink{object__types_8h_ac568810e98b5f032d6b916e7878ebe53}{bad\_type}};}
+\DoxyCodeLine{143     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_c_track_a421abae595e57e991d45727683c43389}{m\_anotherTypeCounter}} = 0;}
+\DoxyCodeLine{144     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_c_track_a2db3fc2a2cc2a382861bf84a94e1e627}{m\_changeTypeThreshold}} = 25;}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146     \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3}{tracking::LostTrackType}} \mbox{\hyperlink{class_c_track_a7d1f6c9d8d56790a28a7139e85896dc8}{m\_externalTrackerForLost}} = \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a3bd92892a83828375b9fce502732c491}{tracking::TrackNone}};}
+\DoxyCodeLine{147 \textcolor{preprocessor}{\#ifdef USE\_OCV\_KCF}}
+\DoxyCodeLine{148     cv::Ptr<cv::Tracker> m\_tracker;}
+\DoxyCodeLine{149 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{150     std::unique\_ptr<VOTTracker> \mbox{\hyperlink{class_c_track_ae7741468d9b920aca0c51056ce93afda}{m\_VOTTracker}};}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{153     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_track_a0f4fc1dc488e8ae339e988962dae6873}{RectUpdate}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_c_region}{CRegion}}\& region, \textcolor{keywordtype}{bool} dataCorrect, cv::UMat prevFrame, cv::UMat currFrame);}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{156     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_track_ac57513aeb2cb8577b75c31ee7b1a6e1b}{CreateExternalTracker}}(\textcolor{keywordtype}{int} channels);}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{159     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_c_track_a6759699cc954928c935533830024fead}{PointUpdate}}(\textcolor{keyword}{const} \mbox{\hyperlink{defines_8h_a8c42696da8f098b91374a8e8bb84b430}{Point\_t}}\& \mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}, \textcolor{keyword}{const} cv::Size\& newObjSize, \textcolor{keywordtype}{bool} dataCorrect, \textcolor{keyword}{const} cv::Size\& frameSize);}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161     \mbox{\hyperlink{struct_region_embedding}{RegionEmbedding}} \mbox{\hyperlink{class_c_track_a4216df27820b99c96d5a3370df4584d0}{m\_regionEmbedding}};}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{164     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_track_a5b1a0522e416e899ec4bdb7c49827111}{CheckStatic}}(\textcolor{keywordtype}{int} trajLen, cv::UMat currFrame, \textcolor{keyword}{const} \mbox{\hyperlink{class_c_region}{CRegion}}\& region, \textcolor{keywordtype}{int} maxSpeedForStatic);}
+\DoxyCodeLine{165     cv::UMat \mbox{\hyperlink{class_c_track_a87bfcad44f8da34b2411733ed5ddcbae}{m\_staticFrame}};}
+\DoxyCodeLine{166     cv::Rect \mbox{\hyperlink{class_c_track_abbec66a84ee65ce5d6390565698e5156}{m\_staticRect}};}
+\DoxyCodeLine{167     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_c_track_abafeef3579e8b8ee12dd6e8c788c368e}{m\_staticFrames}} = 0;}
+\DoxyCodeLine{168     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_track_a37f858466a4c5de19eea18ab829e4745}{m\_isStatic}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_track_a5573dab5b9fe2e5143204355b8146c87}{m\_filterObjectSize}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{171     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_c_track_ad97c3e53969dbb60e7690c4f2d038172}{m\_outOfTheFrame}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{172 \};}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174 \textcolor{keyword}{typedef} std::vector<std::unique\_ptr<CTrack>> \mbox{\hyperlink{track_8h_aaa9881295be74ce8bd6990b9aafaf788}{tracks\_t}};}
+
+\end{DoxyCode}

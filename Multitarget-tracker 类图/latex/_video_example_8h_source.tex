@@ -1,0 +1,224 @@
+\hypertarget{_video_example_8h_source}{}\doxysection{Video\+Example.\+h}
+\label{_video_example_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/example/VideoExample.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/example/VideoExample.h}}
+\mbox{\hyperlink{_video_example_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <thread>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <mutex>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <condition\_variable>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <atomic>}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_base_detector_8h}{BaseDetector.h}}"{}}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_ctracker_8h}{Ctracker.h}}"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_file_logger_8h}{FileLogger.h}}"{}}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{18 \textcolor{keyword}{class }\mbox{\hyperlink{class_frame}{Frame}}}
+\DoxyCodeLine{19 \{}
+\DoxyCodeLine{20 \textcolor{keyword}{public}:}
+\DoxyCodeLine{21     \mbox{\hyperlink{class_frame_af859480e7bdedf343c1ad7d941106f26}{Frame}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{22     \mbox{\hyperlink{class_frame_a9a4fb8e21d042ccffd42a9ccff67dd0e}{Frame}}(cv::Mat imgBGR)}
+\DoxyCodeLine{23     \{}
+\DoxyCodeLine{24         \mbox{\hyperlink{class_frame_a7830191fe5ce36d0c2b49c8464a19313}{m\_mBGR}} = imgBGR;}
+\DoxyCodeLine{25     \}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{28     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_frame_a23878c23812f26ae7cc1c2ace07e11d3}{empty}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{29 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{30         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_frame_a7830191fe5ce36d0c2b49c8464a19313}{m\_mBGR}}.empty();}
+\DoxyCodeLine{31     \}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{34     \textcolor{keyword}{const} cv::Mat\& \mbox{\hyperlink{class_frame_aee2683826badd3c399bd63f9d0fb510d}{GetMatBGR}}()}
+\DoxyCodeLine{35     \{}
+\DoxyCodeLine{36         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_frame_a7830191fe5ce36d0c2b49c8464a19313}{m\_mBGR}};}
+\DoxyCodeLine{37     \}}
+\DoxyCodeLine{39     cv::Mat\& \mbox{\hyperlink{class_frame_a8a04e1d832f4badfb03b12641af2da35}{GetMatBGRWrite}}()}
+\DoxyCodeLine{40     \{}
+\DoxyCodeLine{41         \mbox{\hyperlink{class_frame_a386862baca8b845f3144966585ee4315}{m\_umBGRGenerated}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{42         \mbox{\hyperlink{class_frame_a3f57b0b24f6f4eef3af780a828475fc5}{m\_mGrayGenerated}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{43         \mbox{\hyperlink{class_frame_ad08ce24092275dba1398307e78904e75}{m\_umGrayGenerated}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{44         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_frame_a7830191fe5ce36d0c2b49c8464a19313}{m\_mBGR}};}
+\DoxyCodeLine{45     \}}
+\DoxyCodeLine{47     \textcolor{keyword}{const} cv::Mat\& \mbox{\hyperlink{class_frame_a7e1de2c7b01494b9f93c5a1ccd6431a7}{GetMatGray}}()}
+\DoxyCodeLine{48     \{}
+\DoxyCodeLine{49         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_frame_a2ac75fbde4875992625163b61094ab73}{m\_mGray}}.empty() || !\mbox{\hyperlink{class_frame_a3f57b0b24f6f4eef3af780a828475fc5}{m\_mGrayGenerated}})}
+\DoxyCodeLine{50         \{}
+\DoxyCodeLine{51             \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_frame_a0b23106e2293aa8df6c9e7543ec1280f}{m\_umGray}}.empty() || !\mbox{\hyperlink{class_frame_ad08ce24092275dba1398307e78904e75}{m\_umGrayGenerated}})}
+\DoxyCodeLine{52                 cv::cvtColor(\mbox{\hyperlink{class_frame_a7830191fe5ce36d0c2b49c8464a19313}{m\_mBGR}}, \mbox{\hyperlink{class_frame_a2ac75fbde4875992625163b61094ab73}{m\_mGray}}, cv::COLOR\_BGR2GRAY);}
+\DoxyCodeLine{53             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{54                 \mbox{\hyperlink{class_frame_a2ac75fbde4875992625163b61094ab73}{m\_mGray}} = \mbox{\hyperlink{class_frame_a0b23106e2293aa8df6c9e7543ec1280f}{m\_umGray}}.getMat(cv::ACCESS\_READ);}
+\DoxyCodeLine{55             \mbox{\hyperlink{class_frame_a3f57b0b24f6f4eef3af780a828475fc5}{m\_mGrayGenerated}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{56         \}}
+\DoxyCodeLine{57         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_frame_a2ac75fbde4875992625163b61094ab73}{m\_mGray}};}
+\DoxyCodeLine{58     \}}
+\DoxyCodeLine{60     \textcolor{keyword}{const} cv::UMat\& \mbox{\hyperlink{class_frame_a6da91fd7cf2c1a86c237c18967ebef33}{GetUMatBGR}}()}
+\DoxyCodeLine{61     \{}
+\DoxyCodeLine{62         std::thread::id lastThreadID = std::this\_thread::get\_id();}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_frame_a751832474c003903a709162d6dbde42b}{m\_umBGR}}.empty() || !\mbox{\hyperlink{class_frame_a386862baca8b845f3144966585ee4315}{m\_umBGRGenerated}} || lastThreadID != \mbox{\hyperlink{class_frame_a343edceadd1a5b708e740ce9f0fb0393}{m\_umBGRThreadID}})}
+\DoxyCodeLine{65         \{}
+\DoxyCodeLine{66             \mbox{\hyperlink{class_frame_a751832474c003903a709162d6dbde42b}{m\_umBGR}} = \mbox{\hyperlink{class_frame_a7830191fe5ce36d0c2b49c8464a19313}{m\_mBGR}}.getUMat(cv::ACCESS\_READ);}
+\DoxyCodeLine{67             \mbox{\hyperlink{class_frame_a386862baca8b845f3144966585ee4315}{m\_umBGRGenerated}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{68             \mbox{\hyperlink{class_frame_a343edceadd1a5b708e740ce9f0fb0393}{m\_umBGRThreadID}} = lastThreadID;}
+\DoxyCodeLine{69         \}}
+\DoxyCodeLine{70         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_frame_a751832474c003903a709162d6dbde42b}{m\_umBGR}};}
+\DoxyCodeLine{71     \}}
+\DoxyCodeLine{73     \textcolor{keyword}{const} cv::UMat\& \mbox{\hyperlink{class_frame_a5379f8a8e66315349038b05cdf1e1e80}{GetUMatGray}}()}
+\DoxyCodeLine{74     \{}
+\DoxyCodeLine{75         std::thread::id lastThreadID = std::this\_thread::get\_id();}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_frame_a0b23106e2293aa8df6c9e7543ec1280f}{m\_umGray}}.empty() || !\mbox{\hyperlink{class_frame_ad08ce24092275dba1398307e78904e75}{m\_umGrayGenerated}} || lastThreadID != \mbox{\hyperlink{class_frame_a656a948458e4ebfb5357877276dbacbd}{m\_umGrayThreadID}})}
+\DoxyCodeLine{78         \{}
+\DoxyCodeLine{79             \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_frame_a2ac75fbde4875992625163b61094ab73}{m\_mGray}}.empty() || !\mbox{\hyperlink{class_frame_a3f57b0b24f6f4eef3af780a828475fc5}{m\_mGrayGenerated}})}
+\DoxyCodeLine{80             \{}
+\DoxyCodeLine{81                 \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_frame_a751832474c003903a709162d6dbde42b}{m\_umBGR}}.empty() || !\mbox{\hyperlink{class_frame_a386862baca8b845f3144966585ee4315}{m\_umBGRGenerated}} || lastThreadID != \mbox{\hyperlink{class_frame_a656a948458e4ebfb5357877276dbacbd}{m\_umGrayThreadID}})}
+\DoxyCodeLine{82                     cv::cvtColor(\mbox{\hyperlink{class_frame_a7830191fe5ce36d0c2b49c8464a19313}{m\_mBGR}}, \mbox{\hyperlink{class_frame_a0b23106e2293aa8df6c9e7543ec1280f}{m\_umGray}}, cv::COLOR\_BGR2GRAY);}
+\DoxyCodeLine{83                 \textcolor{keywordflow}{else}}
+\DoxyCodeLine{84                     cv::cvtColor(\mbox{\hyperlink{class_frame_a751832474c003903a709162d6dbde42b}{m\_umBGR}}, \mbox{\hyperlink{class_frame_a0b23106e2293aa8df6c9e7543ec1280f}{m\_umGray}}, cv::COLOR\_BGR2GRAY);}
+\DoxyCodeLine{85             \}}
+\DoxyCodeLine{86             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{87             \{}
+\DoxyCodeLine{88                 \mbox{\hyperlink{class_frame_a0b23106e2293aa8df6c9e7543ec1280f}{m\_umGray}} = \mbox{\hyperlink{class_frame_a2ac75fbde4875992625163b61094ab73}{m\_mGray}}.getUMat(cv::ACCESS\_READ);}
+\DoxyCodeLine{89             \}}
+\DoxyCodeLine{90             \mbox{\hyperlink{class_frame_ad08ce24092275dba1398307e78904e75}{m\_umGrayGenerated}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{91             \mbox{\hyperlink{class_frame_a656a948458e4ebfb5357877276dbacbd}{m\_umGrayThreadID}} = lastThreadID;}
+\DoxyCodeLine{92         \}}
+\DoxyCodeLine{93         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_frame_a0b23106e2293aa8df6c9e7543ec1280f}{m\_umGray}};}
+\DoxyCodeLine{94     \}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96 \textcolor{keyword}{private}:}
+\DoxyCodeLine{97     cv::Mat \mbox{\hyperlink{class_frame_a7830191fe5ce36d0c2b49c8464a19313}{m\_mBGR}};}
+\DoxyCodeLine{98     cv::Mat \mbox{\hyperlink{class_frame_a2ac75fbde4875992625163b61094ab73}{m\_mGray}};}
+\DoxyCodeLine{99     cv::UMat \mbox{\hyperlink{class_frame_a751832474c003903a709162d6dbde42b}{m\_umBGR}};}
+\DoxyCodeLine{100     cv::UMat \mbox{\hyperlink{class_frame_a0b23106e2293aa8df6c9e7543ec1280f}{m\_umGray}};}
+\DoxyCodeLine{101     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_frame_a386862baca8b845f3144966585ee4315}{m\_umBGRGenerated}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{102     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_frame_a3f57b0b24f6f4eef3af780a828475fc5}{m\_mGrayGenerated}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{103     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_frame_ad08ce24092275dba1398307e78904e75}{m\_umGrayGenerated}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{104     std::thread::id \mbox{\hyperlink{class_frame_a343edceadd1a5b708e740ce9f0fb0393}{m\_umBGRThreadID}};}
+\DoxyCodeLine{105     std::thread::id \mbox{\hyperlink{class_frame_a656a948458e4ebfb5357877276dbacbd}{m\_umGrayThreadID}};}
+\DoxyCodeLine{106 \};}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{111 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_frame_info}{FrameInfo}}}
+\DoxyCodeLine{112 \{}
+\DoxyCodeLine{114     \mbox{\hyperlink{struct_frame_info_a7f2d192b7969f7b60479a48e1f7eba61}{FrameInfo}}()}
+\DoxyCodeLine{115     \{}
+\DoxyCodeLine{116         \mbox{\hyperlink{struct_frame_info_aa2a35df351c6e85161049fb38712d900}{m\_frames}}.reserve(\mbox{\hyperlink{struct_frame_info_ad0392fd8aefd5a9fbaadd02c75491884}{m\_batchSize}});}
+\DoxyCodeLine{117         \mbox{\hyperlink{struct_frame_info_a623b2b20e3b4c1f7713a557c9d11ce78}{m\_regions}}.reserve(\mbox{\hyperlink{struct_frame_info_ad0392fd8aefd5a9fbaadd02c75491884}{m\_batchSize}});}
+\DoxyCodeLine{118         \mbox{\hyperlink{struct_frame_info_a7aa37adb3d0ae90b29b705c4dbc607a1}{m\_frameInds}}.reserve(\mbox{\hyperlink{struct_frame_info_ad0392fd8aefd5a9fbaadd02c75491884}{m\_batchSize}});}
+\DoxyCodeLine{119     \}}
+\DoxyCodeLine{121     \mbox{\hyperlink{struct_frame_info_a8be4976907027141fc6b10429efe2031}{FrameInfo}}(\textcolor{keywordtype}{size\_t} batchSize)}
+\DoxyCodeLine{122         : \mbox{\hyperlink{struct_frame_info_ad0392fd8aefd5a9fbaadd02c75491884}{m\_batchSize}}(batchSize)}
+\DoxyCodeLine{123     \{}
+\DoxyCodeLine{124         \mbox{\hyperlink{struct_frame_info_aa2a35df351c6e85161049fb38712d900}{m\_frames}}.reserve(\mbox{\hyperlink{struct_frame_info_ad0392fd8aefd5a9fbaadd02c75491884}{m\_batchSize}});}
+\DoxyCodeLine{125         \mbox{\hyperlink{struct_frame_info_a623b2b20e3b4c1f7713a557c9d11ce78}{m\_regions}}.reserve(\mbox{\hyperlink{struct_frame_info_ad0392fd8aefd5a9fbaadd02c75491884}{m\_batchSize}});}
+\DoxyCodeLine{126         \mbox{\hyperlink{struct_frame_info_a7aa37adb3d0ae90b29b705c4dbc607a1}{m\_frameInds}}.reserve(\mbox{\hyperlink{struct_frame_info_ad0392fd8aefd5a9fbaadd02c75491884}{m\_batchSize}});}
+\DoxyCodeLine{127     \}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{130     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_frame_info_a294125f87262602951139030632b927a}{SetBatchSize}}(\textcolor{keywordtype}{size\_t} batchSize)}
+\DoxyCodeLine{131     \{}
+\DoxyCodeLine{132         \mbox{\hyperlink{struct_frame_info_ad0392fd8aefd5a9fbaadd02c75491884}{m\_batchSize}} = batchSize;}
+\DoxyCodeLine{133         \mbox{\hyperlink{struct_frame_info_aa2a35df351c6e85161049fb38712d900}{m\_frames}}.reserve(\mbox{\hyperlink{struct_frame_info_ad0392fd8aefd5a9fbaadd02c75491884}{m\_batchSize}});}
+\DoxyCodeLine{134         \mbox{\hyperlink{struct_frame_info_a623b2b20e3b4c1f7713a557c9d11ce78}{m\_regions}}.reserve(\mbox{\hyperlink{struct_frame_info_ad0392fd8aefd5a9fbaadd02c75491884}{m\_batchSize}});}
+\DoxyCodeLine{135         \mbox{\hyperlink{struct_frame_info_a7aa37adb3d0ae90b29b705c4dbc607a1}{m\_frameInds}}.reserve(\mbox{\hyperlink{struct_frame_info_ad0392fd8aefd5a9fbaadd02c75491884}{m\_batchSize}});}
+\DoxyCodeLine{136     \}}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{139     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_frame_info_a0c5810e95523fba54ac1d74737315ffd}{CleanRegions}}()}
+\DoxyCodeLine{140     \{}
+\DoxyCodeLine{141         \textcolor{keywordflow}{if} (\mbox{\hyperlink{struct_frame_info_a623b2b20e3b4c1f7713a557c9d11ce78}{m\_regions}}.size() != \mbox{\hyperlink{struct_frame_info_ad0392fd8aefd5a9fbaadd02c75491884}{m\_batchSize}})}
+\DoxyCodeLine{142             \mbox{\hyperlink{struct_frame_info_a623b2b20e3b4c1f7713a557c9d11ce78}{m\_regions}}.resize(\mbox{\hyperlink{struct_frame_info_ad0392fd8aefd5a9fbaadd02c75491884}{m\_batchSize}});}
+\DoxyCodeLine{143         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& regions : \mbox{\hyperlink{struct_frame_info_a623b2b20e3b4c1f7713a557c9d11ce78}{m\_regions}})}
+\DoxyCodeLine{144         \{}
+\DoxyCodeLine{145             regions.clear();}
+\DoxyCodeLine{146         \}}
+\DoxyCodeLine{147     \}}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{150     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_frame_info_ae9b5efd8cddd63b4909218a134f7ff00}{CleanTracks}}()}
+\DoxyCodeLine{151     \{}
+\DoxyCodeLine{152         \textcolor{keywordflow}{if} (\mbox{\hyperlink{struct_frame_info_a0adc8cb4158c56da3593252825224a4c}{m\_tracks}}.size() != \mbox{\hyperlink{struct_frame_info_ad0392fd8aefd5a9fbaadd02c75491884}{m\_batchSize}})}
+\DoxyCodeLine{153             \mbox{\hyperlink{struct_frame_info_a0adc8cb4158c56da3593252825224a4c}{m\_tracks}}.resize(\mbox{\hyperlink{struct_frame_info_ad0392fd8aefd5a9fbaadd02c75491884}{m\_batchSize}});}
+\DoxyCodeLine{154         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& tracks : \mbox{\hyperlink{struct_frame_info_a0adc8cb4158c56da3593252825224a4c}{m\_tracks}})}
+\DoxyCodeLine{155         \{}
+\DoxyCodeLine{156             tracks.clear();}
+\DoxyCodeLine{157         \}}
+\DoxyCodeLine{158     \}}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160     std::vector<Frame> \mbox{\hyperlink{struct_frame_info_aa2a35df351c6e85161049fb38712d900}{m\_frames}};}
+\DoxyCodeLine{161     std::vector<regions\_t> \mbox{\hyperlink{struct_frame_info_ab8b2570ca13539648d122005466c6bd3}{m\_regions}};}
+\DoxyCodeLine{162     std::vector<std::vector<TrackingObject>> \mbox{\hyperlink{struct_frame_info_a8642984926e2f11e462a91477169467b}{m\_tracks}};}
+\DoxyCodeLine{163     std::vector<int> \mbox{\hyperlink{struct_frame_info_a7aa37adb3d0ae90b29b705c4dbc607a1}{m\_frameInds}};}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{165     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{struct_frame_info_ad0392fd8aefd5a9fbaadd02c75491884}{m\_batchSize}} = 1;}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167     int64 \mbox{\hyperlink{struct_frame_info_a93060fcbec035fac7c828a947c15cc65}{m\_dt}} = 0;}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{169     std::condition\_variable \mbox{\hyperlink{struct_frame_info_a1bf5d48e563f73397b38eaba5c2d595e}{m\_cond}};}
+\DoxyCodeLine{170     \mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{std::mutex}} \mbox{\hyperlink{struct_frame_info_ac8b5c98e5472b2fbbbf9a80093d46778}{m\_mutex}};}
+\DoxyCodeLine{171     std::atomic<bool> \mbox{\hyperlink{struct_frame_info_a702d7dbc2ad96013ece93b42952a878a}{m\_captured}} \{ \textcolor{keyword}{false} \};}
+\DoxyCodeLine{172 \};}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{177 \textcolor{keyword}{class }\mbox{\hyperlink{class_video_example}{VideoExample}}}
+\DoxyCodeLine{178 \{}
+\DoxyCodeLine{179 \textcolor{keyword}{public}:}
+\DoxyCodeLine{180     \mbox{\hyperlink{class_video_example_aedc40ab44835e8ad1cf731b7709cd4ac}{VideoExample}}(\textcolor{keyword}{const} cv::CommandLineParser\& parser);}
+\DoxyCodeLine{181     \mbox{\hyperlink{class_video_example_ac034d0de4c6bfe2a57a79022724e9fad}{VideoExample}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_video_example}{VideoExample}}\&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{182     \mbox{\hyperlink{class_video_example_a5ce57fe77203562129d9d7d9f1f2ec2e}{VideoExample}}(\mbox{\hyperlink{class_video_example}{VideoExample}}\&\&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{183     \mbox{\hyperlink{class_video_example}{VideoExample}}\& \mbox{\hyperlink{class_video_example_a9bf80be70a1a1d5bfa3691110b435153}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_video_example}{VideoExample}}\&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{184     \mbox{\hyperlink{class_video_example}{VideoExample}}\& \mbox{\hyperlink{class_video_example_a4c1a77b9819cbe33b43e467c72b79134}{operator=}}(\mbox{\hyperlink{class_video_example}{VideoExample}}\&\&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{185 }
+\DoxyCodeLine{186     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_video_example_ad09745ab5851a0c5be604595cac4a64b}{\string~VideoExample}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_video_example_a9dba9cbc5a6f09f998bea3021772ef70}{AsyncProcess}}();}
+\DoxyCodeLine{189     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_video_example_abc93ba2674224a298683cbb62ac76de8}{SyncProcess}}();}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{192     std::unique\_ptr<BaseDetector> \mbox{\hyperlink{class_video_example_a00fee4b18b68d605b87051f3bdaa1c92}{m\_detector}};}
+\DoxyCodeLine{193     std::unique\_ptr<BaseTracker> \mbox{\hyperlink{class_video_example_a00d78d9bed36599aa94ecd05ab12779a}{m\_tracker}};}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{195     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_video_example_af3bfe51e3e1452bb084016602c668463}{m\_showLogs}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{196     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_video_example_ae8110012f8d57f39d6355377cf20fb27}{m\_fps}} = 25;}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{198     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_video_example_af62de91e526f6314fa18b43bd1d7e817}{m\_batchSize}} = 1;}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{200     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_video_example_aea3c9dd66a3464fab8c61a838aff0ccf}{m\_captureTimeOut}} = 60000;}
+\DoxyCodeLine{201     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_video_example_a47c8dd1d6ec7e8e18a8f7d92536c53a2}{m\_trackingTimeOut}} = 60000;}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203     \mbox{\hyperlink{class_results_log}{ResultsLog}} \mbox{\hyperlink{class_video_example_acf9ffcb78ecb084cb8d4a357917a0db6}{m\_resultsLog}};}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_video_example_abcd68458bec018c8800a4f1b47749722}{CaptureAndDetect}}(\mbox{\hyperlink{class_video_example}{VideoExample}}* thisPtr, std::atomic<bool>\& stopCapture);}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{207     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_video_example_aa9e473f7b8c6bcb62b1255cf2759abc5}{InitDetector}}(cv::UMat frame) = 0;}
+\DoxyCodeLine{208     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_video_example_a93e23d64075fb2f508423e45d15c5421}{InitTracker}}(cv::UMat frame) = 0;}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_video_example_aa39a4c1d95243863e90cd595825f5109}{Detection}}(\mbox{\hyperlink{struct_frame_info}{FrameInfo}}\& frame);}
+\DoxyCodeLine{211     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_video_example_a0f74d3525647dcfdeb87f56e77719113}{Tracking}}(\mbox{\hyperlink{struct_frame_info}{FrameInfo}}\& frame);}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{213     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_video_example_ab596f681981326ab19792e751fac340a}{DrawData}}(cv::Mat frame, \textcolor{keyword}{const} std::vector<TrackingObject>\& tracks, \textcolor{keywordtype}{int} framesCounter, \textcolor{keywordtype}{int} currTime) = 0;}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_video_example_a137f6e99dc6dc3b60dc82aee2e69aa16}{DrawTrack}}(cv::Mat frame, \textcolor{keyword}{const} \mbox{\hyperlink{struct_tracking_object}{TrackingObject}}\& track, \textcolor{keywordtype}{bool} drawTrajectory, \textcolor{keywordtype}{int} framesCounter);}
+\DoxyCodeLine{216 }
+\DoxyCodeLine{217     \mbox{\hyperlink{struct_tracker_settings}{TrackerSettings}} \mbox{\hyperlink{class_video_example_a0da997d525911fbf07060e76622b43e5}{m\_trackerSettings}};}
+\DoxyCodeLine{218     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_video_example_a71d27647505468a77659beb64def6b6e}{m\_trackerSettingsLoaded}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{220     std::vector<cv::Scalar> \mbox{\hyperlink{class_video_example_a2b6d4a6e85d52d13d8899c57cc6ddc66}{m\_colors}};}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{222 \textcolor{keyword}{private}:}
+\DoxyCodeLine{223     std::vector<TrackingObject> \mbox{\hyperlink{class_video_example_a0677e6b4787b28e3b50fd8a5d91a8653}{m\_tracks}};}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{225     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_video_example_ac39c29e82360b1100d09b72b61c7c461}{m\_isTrackerInitialized}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{226     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_video_example_a326ba10bc882113e7940c4c3fc29803f}{m\_isDetectorInitialized}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{227     std::string \mbox{\hyperlink{class_video_example_ac536e84dec6f9be505779689322b42ca}{m\_inFile}};}
+\DoxyCodeLine{228     std::string \mbox{\hyperlink{class_video_example_a4234fb0df2f009bc3f651f01cbd5bde5}{m\_outFile}};}
+\DoxyCodeLine{229     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_video_example_af4437afde684ce944d7ae8180d0d007b}{m\_fourcc}} = cv::VideoWriter::fourcc(\textcolor{charliteral}{'M'}, \textcolor{charliteral}{'J'}, \textcolor{charliteral}{'P'}, \textcolor{charliteral}{'G'});}
+\DoxyCodeLine{230     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_video_example_a98dbe94b8827c5a1898e3a9423cce402}{m\_startFrame}} = 0;}
+\DoxyCodeLine{231     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_video_example_ae44e854b8a76b3d4f6393582afd70e67}{m\_endFrame}} = 0;}
+\DoxyCodeLine{232     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_video_example_ac21a646c343edd4c11db034fa2c8c085}{m\_finishDelay}} = 0;}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{234     \mbox{\hyperlink{struct_frame_info}{FrameInfo}} \mbox{\hyperlink{class_video_example_af5363ad3ed9a34bd105dbdaf274acb66}{m\_frameInfo}}[2];}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{236     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_video_example_a042dcfda289fae422b8eb06089a8e77b}{OpenCapture}}(cv::VideoCapture\& capture);}
+\DoxyCodeLine{237     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_video_example_acd8b58a663c41a0467e372728f612c88}{WriteFrame}}(cv::VideoWriter\& writer, \textcolor{keyword}{const} cv::Mat\& frame);}
+\DoxyCodeLine{238 \};}
+
+\end{DoxyCode}

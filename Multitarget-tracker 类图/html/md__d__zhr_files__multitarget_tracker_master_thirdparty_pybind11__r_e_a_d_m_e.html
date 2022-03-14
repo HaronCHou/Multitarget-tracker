@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: README</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">My Project
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">README </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p ><img src="https://github.com/pybind/pybind11/raw/master/docs/pybind11-logo.png" alt="pybind11 logo" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md20"></a>
+pybind11 — Seamless operability between C++11 and Python</h1>
+<p ><a href="http://pybind11.readthedocs.org/en/master/?badge=master"><img src="https://readthedocs.org/projects/pybind11/badge/?version=master" alt="Documentation Status" class="inline"/></a> <a href="http://pybind11.readthedocs.org/en/stable/?badge=stable"><img src="https://readthedocs.org/projects/pybind11/badge/?version=stable" alt="Documentation Status" class="inline"/></a> <a href="https://gitter.im/pybind/Lobby"><img src="https://img.shields.io/gitter/room/gitterHQ/gitter.svg" alt="Gitter chat" style="pointer-events: none;" class="inline"/></a> <a href="https://travis-ci.org/pybind/pybind11"><img src="https://travis-ci.org/pybind/pybind11.svg?branch=master" alt="Build Status" style="pointer-events: none;" class="inline"/></a> <a href="https://ci.appveyor.com/project/wjakob/pybind11"><img src="https://ci.appveyor.com/api/projects/status/riaj54pn4h08xy40?svg=true" alt="Build status" class="inline"/></a></p>
+<p ><b><a class="el" href="namespacepybind11.html">pybind11</a></b> is a lightweight header-only library that exposes C++ types in Python and vice versa, mainly to create Python bindings of existing C++ code. Its goals and syntax are similar to the excellent <a href="http://www.boost.org/doc/libs/1_58_0/libs/python/doc/">Boost.Python</a> library by David Abrahams: to minimize boilerplate code in traditional extension modules by inferring type information using compile-time introspection.</p>
+<p >The main issue with Boost.Python—and the reason for creating such a similar project—is Boost. Boost is an enormously large and complex suite of utility libraries that works with almost every C++ compiler in existence. This compatibility has its cost: arcane template tricks and workarounds are necessary to support the oldest and buggiest of compiler specimens. Now that C++11-compatible compilers are widely available, this heavy machinery has become an excessively large and unnecessary dependency.</p>
+<p >Think of this library as a tiny self-contained version of Boost.Python with everything stripped away that isn't relevant for binding generation. Without comments, the core header files only require ~4K lines of code and depend on Python (2.7 or 3.x, or PyPy2.7 &gt;= 5.7) and the C++ standard library. This compact implementation was possible thanks to some of the new C++11 language features (specifically: tuples, lambda functions and variadic templates). Since its creation, this library has grown beyond Boost.Python in many ways, leading to dramatically simpler binding code in many common situations.</p>
+<p >Tutorial and reference documentation is provided at <a href="http://pybind11.readthedocs.org/en/master">http://pybind11.readthedocs.org/en/master</a>. A PDF version of the manual is available <a href="https://media.readthedocs.org/pdf/pybind11/master/pybind11.pdf">here</a>.</p>
+<h2><a class="anchor" id="autotoc_md21"></a>
+Core features</h2>
+<p ><a class="el" href="namespacepybind11.html">pybind11</a> can map the following core C++ features to Python</p>
+<ul>
+<li>Functions accepting and returning custom data structures per value, reference, or pointer</li>
+<li>Instance methods and static methods</li>
+<li>Overloaded functions</li>
+<li>Instance attributes and static attributes</li>
+<li>Arbitrary exception types</li>
+<li>Enumerations</li>
+<li>Callbacks</li>
+<li>Iterators and ranges</li>
+<li>Custom operators</li>
+<li>Single and multiple inheritance</li>
+<li>STL data structures</li>
+<li>Smart pointers with reference counting like <code>std::shared_ptr</code></li>
+<li>Internal references with correct reference counting</li>
+<li>C++ classes with virtual (and pure virtual) methods can be extended in Python</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md22"></a>
+Goodies</h2>
+<p >In addition to the core functionality, <a class="el" href="namespacepybind11.html">pybind11</a> provides some extra goodies:</p>
+<ul>
+<li>Python 2.7, 3.x, and PyPy (PyPy2.7 &gt;= 5.7) are supported with an implementation-agnostic interface.</li>
+<li>It is possible to bind C++11 lambda functions with captured variables. The lambda capture data is stored inside the resulting Python function object.</li>
+<li><a class="el" href="namespacepybind11.html">pybind11</a> uses C++11 move constructors and move assignment operators whenever possible to efficiently transfer custom data types.</li>
+<li>It's easy to expose the internal storage of custom data types through Pythons' buffer protocols. This is handy e.g. for fast conversion between C++ matrix classes like Eigen and NumPy without expensive copy operations.</li>
+<li><a class="el" href="namespacepybind11.html">pybind11</a> can automatically vectorize functions so that they are transparently applied to all entries of one or more NumPy array arguments.</li>
+<li>Python's slice-based access and assignment operations can be supported with just a few lines of code.</li>
+<li>Everything is contained in just a few header files; there is no need to link against any additional libraries.</li>
+<li>Binaries are generally smaller by a factor of at least 2 compared to equivalent bindings generated by Boost.Python. A recent <a class="el" href="namespacepybind11.html">pybind11</a> conversion of PyRosetta, an enormous Boost.Python binding project, <a href="http://graylab.jhu.edu/RosettaCon2016/PyRosetta-4.pdf">reported</a> a binary size reduction of <b>5.4x</b> and compile time reduction by <b>5.8x</b>.</li>
+<li>Function signatures are precomputed at compile time (using <code>constexpr</code>), leading to smaller binaries.</li>
+<li>With little extra effort, C++ types can be pickled and unpickled similar to regular Python objects.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md23"></a>
+Supported compilers</h2>
+<ol type="1">
+<li>Clang/LLVM 3.3 or newer (for Apple Xcode's clang, this is 5.0.0 or newer)</li>
+<li>GCC 4.8 or newer</li>
+<li>Microsoft Visual Studio 2015 Update 3 or newer</li>
+<li>Intel C++ compiler 17 or newer (16 with <a class="el" href="namespacepybind11.html">pybind11</a> v2.0 and 15 with <a class="el" href="namespacepybind11.html">pybind11</a> v2.0 and a <a href="https://github.com/pybind/pybind11/issues/276">workaround</a>)</li>
+<li>Cygwin/GCC (tested on 2.5.1)</li>
+</ol>
+<h2><a class="anchor" id="autotoc_md24"></a>
+About</h2>
+<p >This project was created by <a href="http://rgl.epfl.ch/people/wjakob">Wenzel Jakob</a>. Significant features and/or improvements to the code were contributed by Jonas Adler, Lori A. Burns, Sylvain Corlay, Trent Houliston, Axel Huebl, @hulucc, Sergey Lyskov Johan Mabille, Tomasz Miąsko, Dean Moldovan, Ben Pritchard, Jason Rhinelander, Boris Schäling, Pim Schellart, Henry Schreiner, Ivan Smirnov, and Patrick Stewart.</p>
+<h3><a class="anchor" id="autotoc_md25"></a>
+License</h3>
+<p ><a class="el" href="namespacepybind11.html">pybind11</a> is provided under a BSD-style license that can be found in the <code>LICENSE</code> file. By using, distributing, or contributing to this project, you agree to the terms and conditions of this license. </p>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>

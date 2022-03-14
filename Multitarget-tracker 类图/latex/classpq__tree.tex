@@ -1,0 +1,635 @@
+\hypertarget{classpq__tree}{}\doxysection{pq\+\_\+tree类 参考}
+\label{classpq__tree}\index{pq\_tree@{pq\_tree}}
+
+
+PQ-\/\+Trees.  
+
+
+
+
+{\ttfamily \#include $<$pq\+\_\+tree.\+h$>$}
+
+
+
+pq\+\_\+tree 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpq__tree__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 类型}
+\begin{DoxyCompactItemize}
+\item 
+typedef \mbox{\hyperlink{classsymlist}{symlist}}$<$ \mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$ $>$ \mbox{\hyperlink{classpq__tree_a241e516724fdb5ca21239772164458f3}{sons\+\_\+list}}
+\item 
+typedef \mbox{\hyperlink{classsymlist}{symlist}}$<$ \mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$ $>$\mbox{\hyperlink{classiterator}{\+::iterator}} \mbox{\hyperlink{classpq__tree_ab47263066d4b0acc70e00043870d748a}{sons\+\_\+iterator}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classpq__tree_afea06921780eb07ddb36294b109964d0}{pq\+\_\+tree}} ()
+\begin{DoxyCompactList}\small\item\em Creates empty \mbox{\hyperlink{classpq__tree}{pq\+\_\+tree}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classpq__tree_a0372501c64ecd090277367fc15e96fed}{pq\+\_\+tree}} (int id, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}} n, const \mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$ \mbox{\hyperlink{classpq__leaf}{pq\+\_\+leaf}} $\ast$ $>$ \&le)
+\begin{DoxyCompactList}\small\item\em Creates a PQ-\/tree consisting of a single P-\/node whose whose children are the leaves given in list {\ttfamily le}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classpq__tree_ae6b44b3a6db8914beb368aee2bf7cc92}{$\sim$pq\+\_\+tree}} ()
+\begin{DoxyCompactList}\small\item\em Deletes PQ-\/tree. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classpq__tree_acb0ee48faea2e5829564c48eedc5d147}{reduce}} (\mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$ \mbox{\hyperlink{classpq__leaf}{pq\+\_\+leaf}} $\ast$ $>$ \&leaves)
+\begin{DoxyCompactList}\small\item\em Applies so called template matchings to the tree until either all leaves labeled with {\ttfamily id} are consecutive in all equivalent trees or until it is recognized that this can\textquotesingle{}t be achieved. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpq__tree_ab05412fd12abb42e5f84d36590e586e0}{replace\+\_\+pert}} (int id, \mbox{\hyperlink{structnode}{node}} n, const \mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$ \mbox{\hyperlink{classpq__leaf}{pq\+\_\+leaf}} $\ast$ $>$ \&le, \mbox{\hyperlink{classplanar__embedding}{planar\+\_\+embedding}} $\ast$em=0, \mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$ \mbox{\hyperlink{classdirection__indicator}{direction\+\_\+indicator}} $>$ $\ast$dirs=0)
+\begin{DoxyCompactList}\small\item\em Replaces all the pertinent parts of the PQ-\/tree after a (successful) reduction by a new P-\/node, whose children are given in {\ttfamily le}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpq__tree_a7b4e6037469858019336255cdbd38fa1}{get\+\_\+frontier}} (\mbox{\hyperlink{classplanar__embedding}{planar\+\_\+embedding}} \&em, \mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$ \mbox{\hyperlink{classdirection__indicator}{direction\+\_\+indicator}} $>$ \&dirs)
+\begin{DoxyCompactList}\small\item\em Scans whole tree from left to right and stores edges (in the graph) represented by the leaves in {\ttfamily em}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classpq__tree_a1e2bdfb9af85972e9254260d74c63651}{reset}} ()
+\begin{DoxyCompactList}\small\item\em After a (successful) reduction {\ttfamily reset} has to be called in order to prepare the tree for the next reduction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$ \mbox{\hyperlink{classpq__tree_a183039ca5b8c80fd8ff5e196c9f575f4}{get\+\_\+fail}} ()
+\begin{DoxyCompactList}\small\item\em Returns the (PQ-\/) node to which none of the template matchings were applicable. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classpq__tree_ab320f9d84cba3198a95cc5f33fde0813}{is\+\_\+fail\+\_\+root}} ()
+\begin{DoxyCompactList}\small\item\em Returns true iff fail is the root of the pertinent subtree. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classpq__tree_ab47263066d4b0acc70e00043870d748a}{sons\+\_\+iterator}} \mbox{\hyperlink{classpq__tree_a68737f5cebd17670d9b73b797ca01a74}{remove\+\_\+dir\+\_\+ind}} (\mbox{\hyperlink{classq__node}{q\+\_\+node}} $\ast$q\+\_\+fail, \mbox{\hyperlink{classpq__tree_ab47263066d4b0acc70e00043870d748a}{sons\+\_\+iterator}} s\+\_\+it)
+\begin{DoxyCompactList}\small\item\em Remove a direction indicator among sons of a Q-\/node. Needed for computation of the obstruction set. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classpq__tree_a170813af06d7b02083c3a7785e080de5}{integrity\+\_\+check}} () const
+\begin{DoxyCompactList}\small\item\em Checks the structure of the tree. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classpq__tree_af683951c4a1432c1125d33ed99d4696b}{bubble\+\_\+up}} (\mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$ \mbox{\hyperlink{classpq__leaf}{pq\+\_\+leaf}} $\ast$ $>$ \&leaves)
+\item 
+void \mbox{\hyperlink{classpq__tree_a60d97d712c79b072693f75de3f0d328e}{dfs}} (\mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$p, \mbox{\hyperlink{classplanar__embedding}{planar\+\_\+embedding}} \&em, \mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$ \mbox{\hyperlink{classdirection__indicator}{direction\+\_\+indicator}} $>$ \&dirs)
+\item 
+\mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$ \mbox{\hyperlink{classpq__tree_adf4c0caf846fd0c5d793e4797ec46e3e}{leads\+\_\+to\+\_\+blocked}} (\mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$le)
+\item 
+bool \mbox{\hyperlink{classpq__tree_aa2c33ce6225a761119a1ea00b91753db}{leads\+\_\+to}} (\mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$le, \mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$other)
+\item 
+\mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$ \mbox{\hyperlink{classpq__tree_acf543b931418cd25f849631b8d406d6e}{where\+\_\+bubble\+\_\+up\+\_\+failed}} (\mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$ \mbox{\hyperlink{classpq__leaf}{pq\+\_\+leaf}} $\ast$ $>$ \&leaves)
+\item 
+\mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$ \mbox{\hyperlink{classpq__tree_a6ce932de3106ad6c9d84bb2058784b0a}{blocked\+\_\+in\+\_\+subtree}} (\mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$n)
+\item 
+bool \mbox{\hyperlink{classpq__tree_a3f3e775ad71be792aaf061d99d7d2af8}{P1}} (\mbox{\hyperlink{classp__node}{p\+\_\+node}} $\ast$\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, bool)
+\item 
+bool \mbox{\hyperlink{classpq__tree_a38e09d7b7f7627dde9cb20a869e09e96}{P2}} (\mbox{\hyperlink{classp__node}{p\+\_\+node}} $\ast$\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}})
+\item 
+bool \mbox{\hyperlink{classpq__tree_a8afbdc0f1163021d5ca651c32a1da1d3}{P3}} (\mbox{\hyperlink{classp__node}{p\+\_\+node}} $\ast$\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}})
+\item 
+bool \mbox{\hyperlink{classpq__tree_aacac6fd2b8e973b98f961e91285540f0}{P4}} (\mbox{\hyperlink{classp__node}{p\+\_\+node}} $\ast$\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}})
+\item 
+bool \mbox{\hyperlink{classpq__tree_a274efe525064f511488091d318f1588e}{P5}} (\mbox{\hyperlink{classp__node}{p\+\_\+node}} $\ast$\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}})
+\item 
+bool \mbox{\hyperlink{classpq__tree_afbc208233ab34b2d0ed9e9a7fb5e19a7}{P6}} (\mbox{\hyperlink{classp__node}{p\+\_\+node}} $\ast$\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}})
+\item 
+bool \mbox{\hyperlink{classpq__tree_ab1c7266de209f9ac9f3267b4d8cafc48}{Q1}} (\mbox{\hyperlink{classq__node}{q\+\_\+node}} $\ast$\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, bool)
+\item 
+bool \mbox{\hyperlink{classpq__tree_a76ca10878264d589c1a11f4f4bf93f83}{Q2}} (\mbox{\hyperlink{classq__node}{q\+\_\+node}} $\ast$\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, bool)
+\item 
+bool \mbox{\hyperlink{classpq__tree_aaf2d4b1daf78f11cb3377d40a8125ac1}{Q3}} (\mbox{\hyperlink{classq__node}{q\+\_\+node}} $\ast$\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$ \mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$ $>$ \mbox{\hyperlink{classpq__tree_a43bcdb58d91b7e20860f523f49c74fd1}{clear\+\_\+me}}
+\item 
+\mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$ \mbox{\hyperlink{classpq__tree_ad8e4e2235fe68fb99769cec54e1760ba}{root}} = nullptr
+\item 
+\mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$ \mbox{\hyperlink{classpq__tree_adf0d16ca5a29bfbe863efb525135ac01}{pert\+\_\+root}} = nullptr
+\item 
+\mbox{\hyperlink{classq__node}{q\+\_\+node}} $\ast$ \mbox{\hyperlink{classpq__tree_a036ce0ebe9f5129d5c4ad930bbcc3e6f}{pseudo}} = nullptr
+\item 
+\mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$ \mbox{\hyperlink{classpq__tree_a4e0a0e6d74a8ac062acf3a05723a35f2}{fail}} = nullptr
+\item 
+bool \mbox{\hyperlink{classpq__tree_a5ed4fd9eead5a983afc5e449debe73e2}{failed\+\_\+at\+\_\+root}} = false
+\item 
+int \mbox{\hyperlink{classpq__tree_a73eb0b66a10e300745e76df657767ef5}{pert\+\_\+leaves\+\_\+count}} = 0
+\end{DoxyCompactItemize}
+\doxysubsection*{友元}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\+\_\+\+EXTERN}} friend std\+::ostream \& \mbox{\hyperlink{classpq__tree_a2b5c5ab66e2181507f358a1e04ccfe1f}{operator$<$$<$}} (std\+::ostream \&, const \mbox{\hyperlink{classpq__tree}{pq\+\_\+tree}} \&)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+PQ-\/\+Trees. 
+
+\begin{DoxyParagraph}{Date}
+2008/02/03 18\+:17\+:08 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Revision}
+1.\+20 
+\end{DoxyParagraph}
+
+
+\doxysubsection{成员类型定义说明}
+\mbox{\Hypertarget{classpq__tree_ab47263066d4b0acc70e00043870d748a}\label{classpq__tree_ab47263066d4b0acc70e00043870d748a}} 
+\index{pq\_tree@{pq\_tree}!sons\_iterator@{sons\_iterator}}
+\index{sons\_iterator@{sons\_iterator}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{sons\_iterator}{sons\_iterator}}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{classsymlist}{symlist}}$<$\mbox{\hyperlink{classpq__node}{pq\+\_\+node}}$\ast$$>$\mbox{\hyperlink{classiterator}{\+::iterator}} \mbox{\hyperlink{classpq__tree_ab47263066d4b0acc70e00043870d748a}{pq\+\_\+tree\+::sons\+\_\+iterator}}}
+
+\mbox{\Hypertarget{classpq__tree_a241e516724fdb5ca21239772164458f3}\label{classpq__tree_a241e516724fdb5ca21239772164458f3}} 
+\index{pq\_tree@{pq\_tree}!sons\_list@{sons\_list}}
+\index{sons\_list@{sons\_list}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{sons\_list}{sons\_list}}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{classsymlist}{symlist}}$<$\mbox{\hyperlink{classpq__node}{pq\+\_\+node}}$\ast$$>$ \mbox{\hyperlink{classpq__tree_a241e516724fdb5ca21239772164458f3}{pq\+\_\+tree\+::sons\+\_\+list}}}
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classpq__tree_afea06921780eb07ddb36294b109964d0}\label{classpq__tree_afea06921780eb07ddb36294b109964d0}} 
+\index{pq\_tree@{pq\_tree}!pq\_tree@{pq\_tree}}
+\index{pq\_tree@{pq\_tree}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{pq\_tree()}{pq\_tree()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily pq\+\_\+tree\+::pq\+\_\+tree (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates empty \mbox{\hyperlink{classpq__tree}{pq\+\_\+tree}}. 
+
+\mbox{\Hypertarget{classpq__tree_a0372501c64ecd090277367fc15e96fed}\label{classpq__tree_a0372501c64ecd090277367fc15e96fed}} 
+\index{pq\_tree@{pq\_tree}!pq\_tree@{pq\_tree}}
+\index{pq\_tree@{pq\_tree}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{pq\_tree()}{pq\_tree()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_g_t_l_8h_a2d9f24096ac60918452dd51f32b64aa9}{\+\_\+\+\_\+\+GTL\+\_\+\+BEGIN\+\_\+\+NAMESPACE}} pq\+\_\+tree\+::pq\+\_\+tree (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}}}]{n,  }\item[{const \mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$ \mbox{\hyperlink{classpq__leaf}{pq\+\_\+leaf}} $\ast$ $>$ \&}]{le }\end{DoxyParamCaption})}
+
+
+
+Creates a PQ-\/tree consisting of a single P-\/node whose whose children are the leaves given in list {\ttfamily le}. 
+
+
+\begin{DoxyParams}{参数}
+{\em id} & st-\/number of {\ttfamily n} \\
+\hline
+{\em n} & node in the graph to which the P-\/node refers \\
+\hline
+{\em le} & list of children \\
+\hline
+\end{DoxyParams}
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpq__tree_a0372501c64ecd090277367fc15e96fed_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classpq__tree_ae6b44b3a6db8914beb368aee2bf7cc92}\label{classpq__tree_ae6b44b3a6db8914beb368aee2bf7cc92}} 
+\index{pq\_tree@{pq\_tree}!````~pq\_tree@{$\sim$pq\_tree}}
+\index{````~pq\_tree@{$\sim$pq\_tree}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{$\sim$pq\_tree()}{~pq\_tree()}}
+{\footnotesize\ttfamily pq\+\_\+tree\+::$\sim$pq\+\_\+tree (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Deletes PQ-\/tree. 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpq__tree_ae6b44b3a6db8914beb368aee2bf7cc92_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classpq__tree_a6ce932de3106ad6c9d84bb2058784b0a}\label{classpq__tree_a6ce932de3106ad6c9d84bb2058784b0a}} 
+\index{pq\_tree@{pq\_tree}!blocked\_in\_subtree@{blocked\_in\_subtree}}
+\index{blocked\_in\_subtree@{blocked\_in\_subtree}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{blocked\_in\_subtree()}{blocked\_in\_subtree()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$ pq\+\_\+tree\+::blocked\+\_\+in\+\_\+subtree (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpq__tree_a6ce932de3106ad6c9d84bb2058784b0a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classpq__tree_af683951c4a1432c1125d33ed99d4696b}\label{classpq__tree_af683951c4a1432c1125d33ed99d4696b}} 
+\index{pq\_tree@{pq\_tree}!bubble\_up@{bubble\_up}}
+\index{bubble\_up@{bubble\_up}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{bubble\_up()}{bubble\_up()}}
+{\footnotesize\ttfamily bool pq\+\_\+tree\+::bubble\+\_\+up (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$ \mbox{\hyperlink{classpq__leaf}{pq\+\_\+leaf}} $\ast$ $>$ \&}]{leaves }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=292pt]{classpq__tree_af683951c4a1432c1125d33ed99d4696b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classpq__tree_a60d97d712c79b072693f75de3f0d328e}\label{classpq__tree_a60d97d712c79b072693f75de3f0d328e}} 
+\index{pq\_tree@{pq\_tree}!dfs@{dfs}}
+\index{dfs@{dfs}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{dfs()}{dfs()}}
+{\footnotesize\ttfamily void pq\+\_\+tree\+::dfs (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$}]{p,  }\item[{\mbox{\hyperlink{classplanar__embedding}{planar\+\_\+embedding}} \&}]{em,  }\item[{\mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$ \mbox{\hyperlink{classdirection__indicator}{direction\+\_\+indicator}} $>$ \&}]{dirs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpq__tree_a60d97d712c79b072693f75de3f0d328e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classpq__tree_a183039ca5b8c80fd8ff5e196c9f575f4}\label{classpq__tree_a183039ca5b8c80fd8ff5e196c9f575f4}} 
+\index{pq\_tree@{pq\_tree}!get\_fail@{get\_fail}}
+\index{get\_fail@{get\_fail}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{get\_fail()}{get\_fail()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$ pq\+\_\+tree\+::get\+\_\+fail (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the (PQ-\/) node to which none of the template matchings were applicable. 
+
+\begin{DoxyReturn}{返回}
+PQ-\/node at which the reduction failed 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classpq__tree_a7b4e6037469858019336255cdbd38fa1}\label{classpq__tree_a7b4e6037469858019336255cdbd38fa1}} 
+\index{pq\_tree@{pq\_tree}!get\_frontier@{get\_frontier}}
+\index{get\_frontier@{get\_frontier}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{get\_frontier()}{get\_frontier()}}
+{\footnotesize\ttfamily void pq\+\_\+tree\+::get\+\_\+frontier (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classplanar__embedding}{planar\+\_\+embedding}} \&}]{em,  }\item[{\mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$ \mbox{\hyperlink{classdirection__indicator}{direction\+\_\+indicator}} $>$ \&}]{dirs }\end{DoxyParamCaption})}
+
+
+
+Scans whole tree from left to right and stores edges (in the graph) represented by the leaves in {\ttfamily em}. 
+
+All direction indicators in the tree are stored in {\ttfamily dirs}. This is used in planarity test to get the upward embedding of the last node, because no reduction is needed in this case since all leaves are labeled with the same number.
+
+
+\begin{DoxyParams}{参数}
+{\em em} & planar embedding \\
+\hline
+{\em dirs} & direction indicators in tree \\
+\hline
+\end{DoxyParams}
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpq__tree_a7b4e6037469858019336255cdbd38fa1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classpq__tree_a170813af06d7b02083c3a7785e080de5}\label{classpq__tree_a170813af06d7b02083c3a7785e080de5}} 
+\index{pq\_tree@{pq\_tree}!integrity\_check@{integrity\_check}}
+\index{integrity\_check@{integrity\_check}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{integrity\_check()}{integrity\_check()}}
+{\footnotesize\ttfamily bool pq\+\_\+tree\+::integrity\+\_\+check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Checks the structure of the tree. 
+
+\begin{DoxyNote}{注解}
+Use this only for debugging since it scans the whole tree, which isn\textquotesingle{}t acceptable in terms of performance in most cases.
+\end{DoxyNote}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & iff tree passes checks \\
+\hline
+\end{DoxyRetVals}
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpq__tree_a170813af06d7b02083c3a7785e080de5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classpq__tree_ab320f9d84cba3198a95cc5f33fde0813}\label{classpq__tree_ab320f9d84cba3198a95cc5f33fde0813}} 
+\index{pq\_tree@{pq\_tree}!is\_fail\_root@{is\_fail\_root}}
+\index{is\_fail\_root@{is\_fail\_root}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{is\_fail\_root()}{is\_fail\_root()}}
+{\footnotesize\ttfamily bool pq\+\_\+tree\+::is\+\_\+fail\+\_\+root (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns true iff fail is the root of the pertinent subtree. 
+
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & iff reduction failed at the root of the pertinent subtree. \\
+\hline
+\end{DoxyRetVals}
+\mbox{\Hypertarget{classpq__tree_aa2c33ce6225a761119a1ea00b91753db}\label{classpq__tree_aa2c33ce6225a761119a1ea00b91753db}} 
+\index{pq\_tree@{pq\_tree}!leads\_to@{leads\_to}}
+\index{leads\_to@{leads\_to}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{leads\_to()}{leads\_to()}}
+{\footnotesize\ttfamily bool pq\+\_\+tree\+::leads\+\_\+to (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$}]{le,  }\item[{\mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{classpq__tree_aa2c33ce6225a761119a1ea00b91753db_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classpq__tree_adf4c0caf846fd0c5d793e4797ec46e3e}\label{classpq__tree_adf4c0caf846fd0c5d793e4797ec46e3e}} 
+\index{pq\_tree@{pq\_tree}!leads\_to\_blocked@{leads\_to\_blocked}}
+\index{leads\_to\_blocked@{leads\_to\_blocked}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{leads\_to\_blocked()}{leads\_to\_blocked()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$ pq\+\_\+tree\+::leads\+\_\+to\+\_\+blocked (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$}]{le }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=211pt]{classpq__tree_adf4c0caf846fd0c5d793e4797ec46e3e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classpq__tree_a3f3e775ad71be792aaf061d99d7d2af8}\label{classpq__tree_a3f3e775ad71be792aaf061d99d7d2af8}} 
+\index{pq\_tree@{pq\_tree}!P1@{P1}}
+\index{P1@{P1}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{P1()}{P1()}}
+{\footnotesize\ttfamily bool pq\+\_\+tree\+::\+P1 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classp__node}{p\+\_\+node}} $\ast$}]{x,  }\item[{bool}]{is\+\_\+root }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classpq__tree_a38e09d7b7f7627dde9cb20a869e09e96}\label{classpq__tree_a38e09d7b7f7627dde9cb20a869e09e96}} 
+\index{pq\_tree@{pq\_tree}!P2@{P2}}
+\index{P2@{P2}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{P2()}{P2()}}
+{\footnotesize\ttfamily bool pq\+\_\+tree\+::\+P2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classp__node}{p\+\_\+node}} $\ast$}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classpq__tree_a8afbdc0f1163021d5ca651c32a1da1d3}\label{classpq__tree_a8afbdc0f1163021d5ca651c32a1da1d3}} 
+\index{pq\_tree@{pq\_tree}!P3@{P3}}
+\index{P3@{P3}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{P3()}{P3()}}
+{\footnotesize\ttfamily bool pq\+\_\+tree\+::\+P3 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classp__node}{p\+\_\+node}} $\ast$}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpq__tree_a8afbdc0f1163021d5ca651c32a1da1d3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classpq__tree_aacac6fd2b8e973b98f961e91285540f0}\label{classpq__tree_aacac6fd2b8e973b98f961e91285540f0}} 
+\index{pq\_tree@{pq\_tree}!P4@{P4}}
+\index{P4@{P4}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{P4()}{P4()}}
+{\footnotesize\ttfamily bool pq\+\_\+tree\+::\+P4 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classp__node}{p\+\_\+node}} $\ast$}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpq__tree_aacac6fd2b8e973b98f961e91285540f0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classpq__tree_a274efe525064f511488091d318f1588e}\label{classpq__tree_a274efe525064f511488091d318f1588e}} 
+\index{pq\_tree@{pq\_tree}!P5@{P5}}
+\index{P5@{P5}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{P5()}{P5()}}
+{\footnotesize\ttfamily bool pq\+\_\+tree\+::\+P5 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classp__node}{p\+\_\+node}} $\ast$}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpq__tree_a274efe525064f511488091d318f1588e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classpq__tree_afbc208233ab34b2d0ed9e9a7fb5e19a7}\label{classpq__tree_afbc208233ab34b2d0ed9e9a7fb5e19a7}} 
+\index{pq\_tree@{pq\_tree}!P6@{P6}}
+\index{P6@{P6}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{P6()}{P6()}}
+{\footnotesize\ttfamily bool pq\+\_\+tree\+::\+P6 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classp__node}{p\+\_\+node}} $\ast$}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpq__tree_afbc208233ab34b2d0ed9e9a7fb5e19a7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classpq__tree_ab1c7266de209f9ac9f3267b4d8cafc48}\label{classpq__tree_ab1c7266de209f9ac9f3267b4d8cafc48}} 
+\index{pq\_tree@{pq\_tree}!Q1@{Q1}}
+\index{Q1@{Q1}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{Q1()}{Q1()}}
+{\footnotesize\ttfamily bool pq\+\_\+tree\+::\+Q1 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classq__node}{q\+\_\+node}} $\ast$}]{x,  }\item[{bool}]{is\+\_\+root }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classpq__tree_a76ca10878264d589c1a11f4f4bf93f83}\label{classpq__tree_a76ca10878264d589c1a11f4f4bf93f83}} 
+\index{pq\_tree@{pq\_tree}!Q2@{Q2}}
+\index{Q2@{Q2}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{Q2()}{Q2()}}
+{\footnotesize\ttfamily bool pq\+\_\+tree\+::\+Q2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classq__node}{q\+\_\+node}} $\ast$}]{x,  }\item[{bool}]{is\+\_\+root }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpq__tree_a76ca10878264d589c1a11f4f4bf93f83_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classpq__tree_aaf2d4b1daf78f11cb3377d40a8125ac1}\label{classpq__tree_aaf2d4b1daf78f11cb3377d40a8125ac1}} 
+\index{pq\_tree@{pq\_tree}!Q3@{Q3}}
+\index{Q3@{Q3}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{Q3()}{Q3()}}
+{\footnotesize\ttfamily bool pq\+\_\+tree\+::\+Q3 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classq__node}{q\+\_\+node}} $\ast$}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpq__tree_aaf2d4b1daf78f11cb3377d40a8125ac1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classpq__tree_acb0ee48faea2e5829564c48eedc5d147}\label{classpq__tree_acb0ee48faea2e5829564c48eedc5d147}} 
+\index{pq\_tree@{pq\_tree}!reduce@{reduce}}
+\index{reduce@{reduce}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{reduce()}{reduce()}}
+{\footnotesize\ttfamily bool pq\+\_\+tree\+::reduce (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$ \mbox{\hyperlink{classpq__leaf}{pq\+\_\+leaf}} $\ast$ $>$ \&}]{leaves }\end{DoxyParamCaption})}
+
+
+
+Applies so called template matchings to the tree until either all leaves labeled with {\ttfamily id} are consecutive in all equivalent trees or until it is recognized that this can\textquotesingle{}t be achieved. 
+
+This operation is guaranteed to perform in O(\+PPT), where PPT is the size of the so called {\itshape pruned} {\itshape pertinent} {\itshape subtree}, which can be constructed, by cutting away all the parts of the PQ-\/tree, that do not contain a leaf labeled with {\ttfamily id}.
+
+
+\begin{DoxyParams}{参数}
+{\em leaves} & list of full leaves\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & if tree was successfully reduced \\
+\hline
+{\em false} & if reduction failed \\
+\hline
+\end{DoxyRetVals}
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classpq__tree_acb0ee48faea2e5829564c48eedc5d147_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classpq__tree_a68737f5cebd17670d9b73b797ca01a74}\label{classpq__tree_a68737f5cebd17670d9b73b797ca01a74}} 
+\index{pq\_tree@{pq\_tree}!remove\_dir\_ind@{remove\_dir\_ind}}
+\index{remove\_dir\_ind@{remove\_dir\_ind}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{remove\_dir\_ind()}{remove\_dir\_ind()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classpq__tree_ab47263066d4b0acc70e00043870d748a}{pq\+\_\+tree\+::sons\+\_\+iterator}} pq\+\_\+tree\+::remove\+\_\+dir\+\_\+ind (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classq__node}{q\+\_\+node}} $\ast$}]{q\+\_\+fail,  }\item[{\mbox{\hyperlink{classpq__tree_ab47263066d4b0acc70e00043870d748a}{sons\+\_\+iterator}}}]{s\+\_\+it }\end{DoxyParamCaption})}
+
+
+
+Remove a direction indicator among sons of a Q-\/node. Needed for computation of the obstruction set. 
+
+
+\begin{DoxyParams}{参数}
+{\em q\+\_\+fail} & the Q-\/node on which the reduction failed \\
+\hline
+{\em the} & position of the direction indicator among the sons\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{返回值}
+{\em next} & valid sons iterator \\
+\hline
+\end{DoxyRetVals}
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpq__tree_a68737f5cebd17670d9b73b797ca01a74_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classpq__tree_ab05412fd12abb42e5f84d36590e586e0}\label{classpq__tree_ab05412fd12abb42e5f84d36590e586e0}} 
+\index{pq\_tree@{pq\_tree}!replace\_pert@{replace\_pert}}
+\index{replace\_pert@{replace\_pert}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{replace\_pert()}{replace\_pert()}}
+{\footnotesize\ttfamily void pq\+\_\+tree\+::replace\+\_\+pert (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{\mbox{\hyperlink{structnode}{node}}}]{n,  }\item[{const \mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$ \mbox{\hyperlink{classpq__leaf}{pq\+\_\+leaf}} $\ast$ $>$ \&}]{le,  }\item[{\mbox{\hyperlink{classplanar__embedding}{planar\+\_\+embedding}} $\ast$}]{em = {\ttfamily 0},  }\item[{\mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$ \mbox{\hyperlink{classdirection__indicator}{direction\+\_\+indicator}} $>$ $\ast$}]{dirs = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Replaces all the pertinent parts of the PQ-\/tree after a (successful) reduction by a new P-\/node, whose children are given in {\ttfamily le}. 
+
+The edges (in the graph), represented by the leaves are stored in left to right order in {\ttfamily em}\mbox{[}n\mbox{]} They form (up to reversion) the so called upward-\/embedding. A direction indicator representing the direction in which the leaves were scanned is added to the sons of the root of the pertinent subtree (if neccessary). All direction indicators in the pertinent subtree are stored in {\ttfamily dirs}.
+
+
+\begin{DoxyParams}{参数}
+{\em id} & st-\/number of {\ttfamily n} \\
+\hline
+{\em n} & node in the graph to which the new P-\/node refers \\
+\hline
+{\em le} & list of children \\
+\hline
+{\em em} & planar embedding \\
+\hline
+{\em dirs} & direction indicators in pertinent subtree \\
+\hline
+\end{DoxyParams}
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpq__tree_ab05412fd12abb42e5f84d36590e586e0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classpq__tree_a1e2bdfb9af85972e9254260d74c63651}\label{classpq__tree_a1e2bdfb9af85972e9254260d74c63651}} 
+\index{pq\_tree@{pq\_tree}!reset@{reset}}
+\index{reset@{reset}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void pq\+\_\+tree\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+After a (successful) reduction {\ttfamily reset} has to be called in order to prepare the tree for the next reduction. 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpq__tree_a1e2bdfb9af85972e9254260d74c63651_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classpq__tree_acf543b931418cd25f849631b8d406d6e}\label{classpq__tree_acf543b931418cd25f849631b8d406d6e}} 
+\index{pq\_tree@{pq\_tree}!where\_bubble\_up\_failed@{where\_bubble\_up\_failed}}
+\index{where\_bubble\_up\_failed@{where\_bubble\_up\_failed}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{where\_bubble\_up\_failed()}{where\_bubble\_up\_failed()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classpq__node}{pq\+\_\+node}} $\ast$ pq\+\_\+tree\+::where\+\_\+bubble\+\_\+up\+\_\+failed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$ \mbox{\hyperlink{classpq__leaf}{pq\+\_\+leaf}} $\ast$ $>$ \&}]{leaves }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classpq__tree_acf543b931418cd25f849631b8d406d6e_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{友元及相关函数文档}
+\mbox{\Hypertarget{classpq__tree_a2b5c5ab66e2181507f358a1e04ccfe1f}\label{classpq__tree_a2b5c5ab66e2181507f358a1e04ccfe1f}} 
+\index{pq\_tree@{pq\_tree}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\+\_\+\+EXTERN}} friend std\+::ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{const \mbox{\hyperlink{classpq__tree}{pq\+\_\+tree}} \&}]{tree }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classpq__tree_a43bcdb58d91b7e20860f523f49c74fd1}\label{classpq__tree_a43bcdb58d91b7e20860f523f49c74fd1}} 
+\index{pq\_tree@{pq\_tree}!clear\_me@{clear\_me}}
+\index{clear\_me@{clear\_me}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{clear\_me}{clear\_me}}
+{\footnotesize\ttfamily \mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$\mbox{\hyperlink{classpq__node}{pq\+\_\+node}}$\ast$$>$ pq\+\_\+tree\+::clear\+\_\+me\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classpq__tree_a4e0a0e6d74a8ac062acf3a05723a35f2}\label{classpq__tree_a4e0a0e6d74a8ac062acf3a05723a35f2}} 
+\index{pq\_tree@{pq\_tree}!fail@{fail}}
+\index{fail@{fail}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{fail}{fail}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classpq__node}{pq\+\_\+node}}$\ast$ pq\+\_\+tree\+::fail = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classpq__tree_a5ed4fd9eead5a983afc5e449debe73e2}\label{classpq__tree_a5ed4fd9eead5a983afc5e449debe73e2}} 
+\index{pq\_tree@{pq\_tree}!failed\_at\_root@{failed\_at\_root}}
+\index{failed\_at\_root@{failed\_at\_root}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{failed\_at\_root}{failed\_at\_root}}
+{\footnotesize\ttfamily bool pq\+\_\+tree\+::failed\+\_\+at\+\_\+root = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classpq__tree_a73eb0b66a10e300745e76df657767ef5}\label{classpq__tree_a73eb0b66a10e300745e76df657767ef5}} 
+\index{pq\_tree@{pq\_tree}!pert\_leaves\_count@{pert\_leaves\_count}}
+\index{pert\_leaves\_count@{pert\_leaves\_count}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{pert\_leaves\_count}{pert\_leaves\_count}}
+{\footnotesize\ttfamily int pq\+\_\+tree\+::pert\+\_\+leaves\+\_\+count = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classpq__tree_adf0d16ca5a29bfbe863efb525135ac01}\label{classpq__tree_adf0d16ca5a29bfbe863efb525135ac01}} 
+\index{pq\_tree@{pq\_tree}!pert\_root@{pert\_root}}
+\index{pert\_root@{pert\_root}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{pert\_root}{pert\_root}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classpq__node}{pq\+\_\+node}}$\ast$ pq\+\_\+tree\+::pert\+\_\+root = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classpq__tree_a036ce0ebe9f5129d5c4ad930bbcc3e6f}\label{classpq__tree_a036ce0ebe9f5129d5c4ad930bbcc3e6f}} 
+\index{pq\_tree@{pq\_tree}!pseudo@{pseudo}}
+\index{pseudo@{pseudo}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{pseudo}{pseudo}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classq__node}{q\+\_\+node}}$\ast$ pq\+\_\+tree\+::pseudo = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classpq__tree_ad8e4e2235fe68fb99769cec54e1760ba}\label{classpq__tree_ad8e4e2235fe68fb99769cec54e1760ba}} 
+\index{pq\_tree@{pq\_tree}!root@{root}}
+\index{root@{root}!pq\_tree@{pq\_tree}}
+\doxysubsubsection{\texorpdfstring{root}{root}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classpq__node}{pq\+\_\+node}}$\ast$ pq\+\_\+tree\+::root = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Tracker/graph/\+GTL/include/\+GTL/\mbox{\hyperlink{pq__tree_8h}{pq\+\_\+tree.\+h}}\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Tracker/graph/\+GTL/src/\mbox{\hyperlink{pq__tree_8cpp}{pq\+\_\+tree.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,239 @@
+\hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/\+Subsense/\+Background\+Subtractor\+Su\+BSENSE.cpp 文件参考}
+\label{_background_subtractor_su_b_s_e_n_s_e_8cpp}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/Subsense/BackgroundSubtractorSuBSENSE.cpp@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/Subsense/BackgroundSubtractorSuBSENSE.cpp}}
+{\ttfamily \#include \char`\"{}Background\+Subtractor\+Su\+BSENSE.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Distance\+Utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Rand\+Utils.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$iomanip$>$}\newline
+Background\+Subtractor\+Su\+BSENSE.\+cpp 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_background_subtractor_su_b_s_e_n_s_e_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{宏定义}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_aa1fa68710898742a17b61ace30b21120}{GHOSTDET\+\_\+\+D\+\_\+\+MAX}}~(0.\+010f)
+\begin{DoxyCompactList}\small\item\em defines the threshold value(s) used to detect long-\/term ghosting and trigger the fast edge-\/based absorption heuristic \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_aa6ad1e76fe6a12c04328c5541d44ebcb}{GHOSTDET\+\_\+\+S\+\_\+\+MIN}}~(0.\+995\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}})
+\item 
+\#define \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_a4c9d9560115af87b00cdd28d4dee178a}{FEEDBACK\+\_\+\+R\+\_\+\+VAR}}~(0.\+01\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}})
+\begin{DoxyCompactList}\small\item\em parameter used to scale dynamic distance threshold adjustments (\textquotesingle{}R(x)\textquotesingle{}) \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_a55f10981362bbf2c494e76d1b8002255}{FEEDBACK\+\_\+\+V\+\_\+\+INCR}}~(1.\+000f)
+\begin{DoxyCompactList}\small\item\em parameters used to adjust the variation step size of \textquotesingle{}v(x)\textquotesingle{} \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_a9acb8c94db1a579c5404b3f03fe986b5}{FEEDBACK\+\_\+\+V\+\_\+\+DECR}}~(0.\+100f)
+\item 
+\#define \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_aeb1e65c4ebe34d91c849054de1951361}{FEEDBACK\+\_\+\+T\+\_\+\+DECR}}~(0.\+2500f)
+\begin{DoxyCompactList}\small\item\em parameters used to scale dynamic learning rate adjustments (\textquotesingle{}T(x)\textquotesingle{}) \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_afa487dca8c1f4ae73e03567566465382}{FEEDBACK\+\_\+\+T\+\_\+\+INCR}}~(0.\+5000f)
+\item 
+\#define \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_a6975332215c62c3172a76af852bc5566}{FEEDBACK\+\_\+\+T\+\_\+\+LOWER}}~(2.\+0000f)
+\item 
+\#define \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_a23bd980dc8c9bbffe3f27b44fa983f9c}{FEEDBACK\+\_\+\+T\+\_\+\+UPPER}}~(256.\+00f)
+\item 
+\#define \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_acaad1bde74ca3c5a5c43c0e8deea2313}{UNSTABLE\+\_\+\+REG\+\_\+\+RATIO\+\_\+\+MIN}}~(0.\+100f)
+\begin{DoxyCompactList}\small\item\em parameters used to define \textquotesingle{}unstable\textquotesingle{} regions, based on segm noise/bg dynamics and local dist threshold values \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_a6168b44590b3d4a1fdcee44fe0755f39}{UNSTABLE\+\_\+\+REG\+\_\+\+RDIST\+\_\+\+MIN}}~(3.\+000f)
+\item 
+\#define \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_a792ccbdc08e1e874e0e01f98e7ec3d2e}{LBSPDESC\+\_\+\+NONZERO\+\_\+\+RATIO\+\_\+\+MIN}}~(0.\+100f)
+\begin{DoxyCompactList}\small\item\em parameters used to scale the relative \mbox{\hyperlink{class_l_b_s_p}{LBSP}} intensity threshold used for internal comparisons \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_a2ea7c0dd116ae4aa27401193f54919ec}{LBSPDESC\+\_\+\+NONZERO\+\_\+\+RATIO\+\_\+\+MAX}}~(0.\+500f)
+\item 
+\#define \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_a0cb380c0500e4a688b9b1b794c29de01}{FRAMELEVEL\+\_\+\+MIN\+\_\+\+COLOR\+\_\+\+DIFF\+\_\+\+THRESHOLD}}~(m\+\_\+n\+Min\+Color\+Dist\+Threshold/2)
+\begin{DoxyCompactList}\small\item\em parameters used to define model reset/learning rate boosts in our frame-\/level component \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_ab07d30f0cf4181205776a4c1e85f6527}{FRAMELEVEL\+\_\+\+ANALYSIS\+\_\+\+DOWNSAMPLE\+\_\+\+RATIO}}~(8)
+\item 
+\#define \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_a6857e706ab34d3f0041cdf982e9260cf}{DISPLAY\+\_\+\+SUBSENSE\+\_\+\+DEBUG\+\_\+\+INFO}}~0
+\item 
+\#define \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_aee6405a4f74939fffcc9b3055af94b3a}{DEFAULT\+\_\+\+FRAME\+\_\+\+SIZE}}~cv\+::\+Size(320,240)
+\item 
+\#define \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_af60b797fbe4d762be8f140d56f6d8a0a}{STAB\+\_\+\+COLOR\+\_\+\+DIST\+\_\+\+OFFSET}}~(m\+\_\+n\+Min\+Color\+Dist\+Threshold/5)
+\item 
+\#define \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_af189e5399183f3cfa1dee820fb2fa8fc}{UNSTAB\+\_\+\+DESC\+\_\+\+DIST\+\_\+\+OFFSET}}~(m\+\_\+n\+Desc\+Dist\+Threshold\+Offset)
+\end{DoxyCompactItemize}
+\doxysubsection*{变量}
+\begin{DoxyCompactItemize}
+\item 
+static const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_ad0ce3de05453a1b3738f711d9955031f}{s\+\_\+n\+Color\+Max\+Data\+Range\+\_\+1ch}} = UCHAR\+\_\+\+MAX
+\item 
+static const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_a15305d6ff106cc0ab9f1b7cfb21a27c7}{s\+\_\+n\+Desc\+Max\+Data\+Range\+\_\+1ch}} = \mbox{\hyperlink{class_l_b_s_p_a452b6c5a8b8aad43128493de145cbc23}{LBSP\+::\+DESC\+\_\+\+SIZE}}$\ast$8
+\item 
+static const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_a986ab69736996b917f1e964b2d064aad}{s\+\_\+n\+Color\+Max\+Data\+Range\+\_\+3ch}} = \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_ad0ce3de05453a1b3738f711d9955031f}{s\+\_\+n\+Color\+Max\+Data\+Range\+\_\+1ch}}$\ast$3
+\item 
+static const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_a5304f7a24033acdfa11a34dcb3d2720e}{s\+\_\+n\+Desc\+Max\+Data\+Range\+\_\+3ch}} = \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_a15305d6ff106cc0ab9f1b7cfb21a27c7}{s\+\_\+n\+Desc\+Max\+Data\+Range\+\_\+1ch}}$\ast$3
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{宏定义说明}
+\mbox{\Hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp_aee6405a4f74939fffcc9b3055af94b3a}\label{_background_subtractor_su_b_s_e_n_s_e_8cpp_aee6405a4f74939fffcc9b3055af94b3a}} 
+\index{BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}!DEFAULT\_FRAME\_SIZE@{DEFAULT\_FRAME\_SIZE}}
+\index{DEFAULT\_FRAME\_SIZE@{DEFAULT\_FRAME\_SIZE}!BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_FRAME\_SIZE}{DEFAULT\_FRAME\_SIZE}}
+{\footnotesize\ttfamily \#define DEFAULT\+\_\+\+FRAME\+\_\+\+SIZE~cv\+::\+Size(320,240)}
+
+\mbox{\Hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp_a6857e706ab34d3f0041cdf982e9260cf}\label{_background_subtractor_su_b_s_e_n_s_e_8cpp_a6857e706ab34d3f0041cdf982e9260cf}} 
+\index{BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}!DISPLAY\_SUBSENSE\_DEBUG\_INFO@{DISPLAY\_SUBSENSE\_DEBUG\_INFO}}
+\index{DISPLAY\_SUBSENSE\_DEBUG\_INFO@{DISPLAY\_SUBSENSE\_DEBUG\_INFO}!BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}}
+\doxysubsubsection{\texorpdfstring{DISPLAY\_SUBSENSE\_DEBUG\_INFO}{DISPLAY\_SUBSENSE\_DEBUG\_INFO}}
+{\footnotesize\ttfamily \#define DISPLAY\+\_\+\+SUBSENSE\+\_\+\+DEBUG\+\_\+\+INFO~0}
+
+\mbox{\Hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp_a4c9d9560115af87b00cdd28d4dee178a}\label{_background_subtractor_su_b_s_e_n_s_e_8cpp_a4c9d9560115af87b00cdd28d4dee178a}} 
+\index{BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}!FEEDBACK\_R\_VAR@{FEEDBACK\_R\_VAR}}
+\index{FEEDBACK\_R\_VAR@{FEEDBACK\_R\_VAR}!BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}}
+\doxysubsubsection{\texorpdfstring{FEEDBACK\_R\_VAR}{FEEDBACK\_R\_VAR}}
+{\footnotesize\ttfamily \#define FEEDBACK\+\_\+\+R\+\_\+\+VAR~(0.\+01\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}})}
+
+
+
+parameter used to scale dynamic distance threshold adjustments (\textquotesingle{}R(x)\textquotesingle{}) 
+
+\mbox{\Hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp_aeb1e65c4ebe34d91c849054de1951361}\label{_background_subtractor_su_b_s_e_n_s_e_8cpp_aeb1e65c4ebe34d91c849054de1951361}} 
+\index{BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}!FEEDBACK\_T\_DECR@{FEEDBACK\_T\_DECR}}
+\index{FEEDBACK\_T\_DECR@{FEEDBACK\_T\_DECR}!BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}}
+\doxysubsubsection{\texorpdfstring{FEEDBACK\_T\_DECR}{FEEDBACK\_T\_DECR}}
+{\footnotesize\ttfamily \#define FEEDBACK\+\_\+\+T\+\_\+\+DECR~(0.\+2500f)}
+
+
+
+parameters used to scale dynamic learning rate adjustments (\textquotesingle{}T(x)\textquotesingle{}) 
+
+\mbox{\Hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp_afa487dca8c1f4ae73e03567566465382}\label{_background_subtractor_su_b_s_e_n_s_e_8cpp_afa487dca8c1f4ae73e03567566465382}} 
+\index{BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}!FEEDBACK\_T\_INCR@{FEEDBACK\_T\_INCR}}
+\index{FEEDBACK\_T\_INCR@{FEEDBACK\_T\_INCR}!BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}}
+\doxysubsubsection{\texorpdfstring{FEEDBACK\_T\_INCR}{FEEDBACK\_T\_INCR}}
+{\footnotesize\ttfamily \#define FEEDBACK\+\_\+\+T\+\_\+\+INCR~(0.\+5000f)}
+
+\mbox{\Hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp_a6975332215c62c3172a76af852bc5566}\label{_background_subtractor_su_b_s_e_n_s_e_8cpp_a6975332215c62c3172a76af852bc5566}} 
+\index{BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}!FEEDBACK\_T\_LOWER@{FEEDBACK\_T\_LOWER}}
+\index{FEEDBACK\_T\_LOWER@{FEEDBACK\_T\_LOWER}!BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}}
+\doxysubsubsection{\texorpdfstring{FEEDBACK\_T\_LOWER}{FEEDBACK\_T\_LOWER}}
+{\footnotesize\ttfamily \#define FEEDBACK\+\_\+\+T\+\_\+\+LOWER~(2.\+0000f)}
+
+\mbox{\Hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp_a23bd980dc8c9bbffe3f27b44fa983f9c}\label{_background_subtractor_su_b_s_e_n_s_e_8cpp_a23bd980dc8c9bbffe3f27b44fa983f9c}} 
+\index{BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}!FEEDBACK\_T\_UPPER@{FEEDBACK\_T\_UPPER}}
+\index{FEEDBACK\_T\_UPPER@{FEEDBACK\_T\_UPPER}!BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}}
+\doxysubsubsection{\texorpdfstring{FEEDBACK\_T\_UPPER}{FEEDBACK\_T\_UPPER}}
+{\footnotesize\ttfamily \#define FEEDBACK\+\_\+\+T\+\_\+\+UPPER~(256.\+00f)}
+
+\mbox{\Hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp_a9acb8c94db1a579c5404b3f03fe986b5}\label{_background_subtractor_su_b_s_e_n_s_e_8cpp_a9acb8c94db1a579c5404b3f03fe986b5}} 
+\index{BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}!FEEDBACK\_V\_DECR@{FEEDBACK\_V\_DECR}}
+\index{FEEDBACK\_V\_DECR@{FEEDBACK\_V\_DECR}!BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}}
+\doxysubsubsection{\texorpdfstring{FEEDBACK\_V\_DECR}{FEEDBACK\_V\_DECR}}
+{\footnotesize\ttfamily \#define FEEDBACK\+\_\+\+V\+\_\+\+DECR~(0.\+100f)}
+
+\mbox{\Hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp_a55f10981362bbf2c494e76d1b8002255}\label{_background_subtractor_su_b_s_e_n_s_e_8cpp_a55f10981362bbf2c494e76d1b8002255}} 
+\index{BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}!FEEDBACK\_V\_INCR@{FEEDBACK\_V\_INCR}}
+\index{FEEDBACK\_V\_INCR@{FEEDBACK\_V\_INCR}!BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}}
+\doxysubsubsection{\texorpdfstring{FEEDBACK\_V\_INCR}{FEEDBACK\_V\_INCR}}
+{\footnotesize\ttfamily \#define FEEDBACK\+\_\+\+V\+\_\+\+INCR~(1.\+000f)}
+
+
+
+parameters used to adjust the variation step size of \textquotesingle{}v(x)\textquotesingle{} 
+
+\mbox{\Hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp_ab07d30f0cf4181205776a4c1e85f6527}\label{_background_subtractor_su_b_s_e_n_s_e_8cpp_ab07d30f0cf4181205776a4c1e85f6527}} 
+\index{BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}!FRAMELEVEL\_ANALYSIS\_DOWNSAMPLE\_RATIO@{FRAMELEVEL\_ANALYSIS\_DOWNSAMPLE\_RATIO}}
+\index{FRAMELEVEL\_ANALYSIS\_DOWNSAMPLE\_RATIO@{FRAMELEVEL\_ANALYSIS\_DOWNSAMPLE\_RATIO}!BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}}
+\doxysubsubsection{\texorpdfstring{FRAMELEVEL\_ANALYSIS\_DOWNSAMPLE\_RATIO}{FRAMELEVEL\_ANALYSIS\_DOWNSAMPLE\_RATIO}}
+{\footnotesize\ttfamily \#define FRAMELEVEL\+\_\+\+ANALYSIS\+\_\+\+DOWNSAMPLE\+\_\+\+RATIO~(8)}
+
+\mbox{\Hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp_a0cb380c0500e4a688b9b1b794c29de01}\label{_background_subtractor_su_b_s_e_n_s_e_8cpp_a0cb380c0500e4a688b9b1b794c29de01}} 
+\index{BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}!FRAMELEVEL\_MIN\_COLOR\_DIFF\_THRESHOLD@{FRAMELEVEL\_MIN\_COLOR\_DIFF\_THRESHOLD}}
+\index{FRAMELEVEL\_MIN\_COLOR\_DIFF\_THRESHOLD@{FRAMELEVEL\_MIN\_COLOR\_DIFF\_THRESHOLD}!BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}}
+\doxysubsubsection{\texorpdfstring{FRAMELEVEL\_MIN\_COLOR\_DIFF\_THRESHOLD}{FRAMELEVEL\_MIN\_COLOR\_DIFF\_THRESHOLD}}
+{\footnotesize\ttfamily \#define FRAMELEVEL\+\_\+\+MIN\+\_\+\+COLOR\+\_\+\+DIFF\+\_\+\+THRESHOLD~(m\+\_\+n\+Min\+Color\+Dist\+Threshold/2)}
+
+
+
+parameters used to define model reset/learning rate boosts in our frame-\/level component 
+
+\mbox{\Hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp_aa1fa68710898742a17b61ace30b21120}\label{_background_subtractor_su_b_s_e_n_s_e_8cpp_aa1fa68710898742a17b61ace30b21120}} 
+\index{BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}!GHOSTDET\_D\_MAX@{GHOSTDET\_D\_MAX}}
+\index{GHOSTDET\_D\_MAX@{GHOSTDET\_D\_MAX}!BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}}
+\doxysubsubsection{\texorpdfstring{GHOSTDET\_D\_MAX}{GHOSTDET\_D\_MAX}}
+{\footnotesize\ttfamily \#define GHOSTDET\+\_\+\+D\+\_\+\+MAX~(0.\+010f)}
+
+
+
+defines the threshold value(s) used to detect long-\/term ghosting and trigger the fast edge-\/based absorption heuristic 
+
+\mbox{\Hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp_aa6ad1e76fe6a12c04328c5541d44ebcb}\label{_background_subtractor_su_b_s_e_n_s_e_8cpp_aa6ad1e76fe6a12c04328c5541d44ebcb}} 
+\index{BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}!GHOSTDET\_S\_MIN@{GHOSTDET\_S\_MIN}}
+\index{GHOSTDET\_S\_MIN@{GHOSTDET\_S\_MIN}!BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}}
+\doxysubsubsection{\texorpdfstring{GHOSTDET\_S\_MIN}{GHOSTDET\_S\_MIN}}
+{\footnotesize\ttfamily \#define GHOSTDET\+\_\+\+S\+\_\+\+MIN~(0.\+995\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}})}
+
+\mbox{\Hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp_a2ea7c0dd116ae4aa27401193f54919ec}\label{_background_subtractor_su_b_s_e_n_s_e_8cpp_a2ea7c0dd116ae4aa27401193f54919ec}} 
+\index{BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}!LBSPDESC\_NONZERO\_RATIO\_MAX@{LBSPDESC\_NONZERO\_RATIO\_MAX}}
+\index{LBSPDESC\_NONZERO\_RATIO\_MAX@{LBSPDESC\_NONZERO\_RATIO\_MAX}!BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}}
+\doxysubsubsection{\texorpdfstring{LBSPDESC\_NONZERO\_RATIO\_MAX}{LBSPDESC\_NONZERO\_RATIO\_MAX}}
+{\footnotesize\ttfamily \#define LBSPDESC\+\_\+\+NONZERO\+\_\+\+RATIO\+\_\+\+MAX~(0.\+500f)}
+
+\mbox{\Hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp_a792ccbdc08e1e874e0e01f98e7ec3d2e}\label{_background_subtractor_su_b_s_e_n_s_e_8cpp_a792ccbdc08e1e874e0e01f98e7ec3d2e}} 
+\index{BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}!LBSPDESC\_NONZERO\_RATIO\_MIN@{LBSPDESC\_NONZERO\_RATIO\_MIN}}
+\index{LBSPDESC\_NONZERO\_RATIO\_MIN@{LBSPDESC\_NONZERO\_RATIO\_MIN}!BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}}
+\doxysubsubsection{\texorpdfstring{LBSPDESC\_NONZERO\_RATIO\_MIN}{LBSPDESC\_NONZERO\_RATIO\_MIN}}
+{\footnotesize\ttfamily \#define LBSPDESC\+\_\+\+NONZERO\+\_\+\+RATIO\+\_\+\+MIN~(0.\+100f)}
+
+
+
+parameters used to scale the relative \mbox{\hyperlink{class_l_b_s_p}{LBSP}} intensity threshold used for internal comparisons 
+
+\mbox{\Hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp_af60b797fbe4d762be8f140d56f6d8a0a}\label{_background_subtractor_su_b_s_e_n_s_e_8cpp_af60b797fbe4d762be8f140d56f6d8a0a}} 
+\index{BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}!STAB\_COLOR\_DIST\_OFFSET@{STAB\_COLOR\_DIST\_OFFSET}}
+\index{STAB\_COLOR\_DIST\_OFFSET@{STAB\_COLOR\_DIST\_OFFSET}!BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}}
+\doxysubsubsection{\texorpdfstring{STAB\_COLOR\_DIST\_OFFSET}{STAB\_COLOR\_DIST\_OFFSET}}
+{\footnotesize\ttfamily \#define STAB\+\_\+\+COLOR\+\_\+\+DIST\+\_\+\+OFFSET~(m\+\_\+n\+Min\+Color\+Dist\+Threshold/5)}
+
+\mbox{\Hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp_af189e5399183f3cfa1dee820fb2fa8fc}\label{_background_subtractor_su_b_s_e_n_s_e_8cpp_af189e5399183f3cfa1dee820fb2fa8fc}} 
+\index{BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}!UNSTAB\_DESC\_DIST\_OFFSET@{UNSTAB\_DESC\_DIST\_OFFSET}}
+\index{UNSTAB\_DESC\_DIST\_OFFSET@{UNSTAB\_DESC\_DIST\_OFFSET}!BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}}
+\doxysubsubsection{\texorpdfstring{UNSTAB\_DESC\_DIST\_OFFSET}{UNSTAB\_DESC\_DIST\_OFFSET}}
+{\footnotesize\ttfamily \#define UNSTAB\+\_\+\+DESC\+\_\+\+DIST\+\_\+\+OFFSET~(m\+\_\+n\+Desc\+Dist\+Threshold\+Offset)}
+
+\mbox{\Hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp_acaad1bde74ca3c5a5c43c0e8deea2313}\label{_background_subtractor_su_b_s_e_n_s_e_8cpp_acaad1bde74ca3c5a5c43c0e8deea2313}} 
+\index{BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}!UNSTABLE\_REG\_RATIO\_MIN@{UNSTABLE\_REG\_RATIO\_MIN}}
+\index{UNSTABLE\_REG\_RATIO\_MIN@{UNSTABLE\_REG\_RATIO\_MIN}!BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}}
+\doxysubsubsection{\texorpdfstring{UNSTABLE\_REG\_RATIO\_MIN}{UNSTABLE\_REG\_RATIO\_MIN}}
+{\footnotesize\ttfamily \#define UNSTABLE\+\_\+\+REG\+\_\+\+RATIO\+\_\+\+MIN~(0.\+100f)}
+
+
+
+parameters used to define \textquotesingle{}unstable\textquotesingle{} regions, based on segm noise/bg dynamics and local dist threshold values 
+
+\mbox{\Hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp_a6168b44590b3d4a1fdcee44fe0755f39}\label{_background_subtractor_su_b_s_e_n_s_e_8cpp_a6168b44590b3d4a1fdcee44fe0755f39}} 
+\index{BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}!UNSTABLE\_REG\_RDIST\_MIN@{UNSTABLE\_REG\_RDIST\_MIN}}
+\index{UNSTABLE\_REG\_RDIST\_MIN@{UNSTABLE\_REG\_RDIST\_MIN}!BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}}
+\doxysubsubsection{\texorpdfstring{UNSTABLE\_REG\_RDIST\_MIN}{UNSTABLE\_REG\_RDIST\_MIN}}
+{\footnotesize\ttfamily \#define UNSTABLE\+\_\+\+REG\+\_\+\+RDIST\+\_\+\+MIN~(3.\+000f)}
+
+
+
+\doxysubsection{变量说明}
+\mbox{\Hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp_ad0ce3de05453a1b3738f711d9955031f}\label{_background_subtractor_su_b_s_e_n_s_e_8cpp_ad0ce3de05453a1b3738f711d9955031f}} 
+\index{BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}!s\_nColorMaxDataRange\_1ch@{s\_nColorMaxDataRange\_1ch}}
+\index{s\_nColorMaxDataRange\_1ch@{s\_nColorMaxDataRange\_1ch}!BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}}
+\doxysubsubsection{\texorpdfstring{s\_nColorMaxDataRange\_1ch}{s\_nColorMaxDataRange\_1ch}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} s\+\_\+n\+Color\+Max\+Data\+Range\+\_\+1ch = UCHAR\+\_\+\+MAX\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp_a986ab69736996b917f1e964b2d064aad}\label{_background_subtractor_su_b_s_e_n_s_e_8cpp_a986ab69736996b917f1e964b2d064aad}} 
+\index{BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}!s\_nColorMaxDataRange\_3ch@{s\_nColorMaxDataRange\_3ch}}
+\index{s\_nColorMaxDataRange\_3ch@{s\_nColorMaxDataRange\_3ch}!BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}}
+\doxysubsubsection{\texorpdfstring{s\_nColorMaxDataRange\_3ch}{s\_nColorMaxDataRange\_3ch}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} s\+\_\+n\+Color\+Max\+Data\+Range\+\_\+3ch = \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_ad0ce3de05453a1b3738f711d9955031f}{s\+\_\+n\+Color\+Max\+Data\+Range\+\_\+1ch}}$\ast$3\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp_a15305d6ff106cc0ab9f1b7cfb21a27c7}\label{_background_subtractor_su_b_s_e_n_s_e_8cpp_a15305d6ff106cc0ab9f1b7cfb21a27c7}} 
+\index{BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}!s\_nDescMaxDataRange\_1ch@{s\_nDescMaxDataRange\_1ch}}
+\index{s\_nDescMaxDataRange\_1ch@{s\_nDescMaxDataRange\_1ch}!BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}}
+\doxysubsubsection{\texorpdfstring{s\_nDescMaxDataRange\_1ch}{s\_nDescMaxDataRange\_1ch}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} s\+\_\+n\+Desc\+Max\+Data\+Range\+\_\+1ch = \mbox{\hyperlink{class_l_b_s_p_a452b6c5a8b8aad43128493de145cbc23}{LBSP\+::\+DESC\+\_\+\+SIZE}}$\ast$8\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{_background_subtractor_su_b_s_e_n_s_e_8cpp_a5304f7a24033acdfa11a34dcb3d2720e}\label{_background_subtractor_su_b_s_e_n_s_e_8cpp_a5304f7a24033acdfa11a34dcb3d2720e}} 
+\index{BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}!s\_nDescMaxDataRange\_3ch@{s\_nDescMaxDataRange\_3ch}}
+\index{s\_nDescMaxDataRange\_3ch@{s\_nDescMaxDataRange\_3ch}!BackgroundSubtractorSuBSENSE.cpp@{BackgroundSubtractorSuBSENSE.cpp}}
+\doxysubsubsection{\texorpdfstring{s\_nDescMaxDataRange\_3ch}{s\_nDescMaxDataRange\_3ch}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} s\+\_\+n\+Desc\+Max\+Data\+Range\+\_\+3ch = \mbox{\hyperlink{_background_subtractor_su_b_s_e_n_s_e_8cpp_a15305d6ff106cc0ab9f1b7cfb21a27c7}{s\+\_\+n\+Desc\+Max\+Data\+Range\+\_\+1ch}}$\ast$3\hspace{0.3cm}{\ttfamily [static]}}
+

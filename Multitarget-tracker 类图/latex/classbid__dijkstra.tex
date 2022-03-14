@@ -1,0 +1,672 @@
+\hypertarget{classbid__dijkstra}{}\doxysection{bid\+\_\+dijkstra类 参考}
+\label{classbid__dijkstra}\index{bid\_dijkstra@{bid\_dijkstra}}
+
+
+Dijkstra\textquotesingle{}s Algorithm for computing a shortest path from a single source to a single target.  
+
+
+
+
+{\ttfamily \#include $<$bid\+\_\+dijkstra.\+h$>$}
+
+
+
+类 bid\+\_\+dijkstra 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=146pt]{classbid__dijkstra__inherit__graph}
+\end{center}
+\end{figure}
+
+
+bid\+\_\+dijkstra 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classbid__dijkstra__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 类型}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classbid__dijkstra_a8b7dcccc9fab2ec5edc8da01029c09d5}{node\+\_\+color}} \{ \mbox{\hyperlink{classbid__dijkstra_a8b7dcccc9fab2ec5edc8da01029c09d5abbd36b03487d4100360b3d6e94309b7b}{white}}
+, \mbox{\hyperlink{classbid__dijkstra_a8b7dcccc9fab2ec5edc8da01029c09d5a5e3971e0090719b93ed71811edcd7360}{grey}}
+, \mbox{\hyperlink{classbid__dijkstra_a8b7dcccc9fab2ec5edc8da01029c09d5acc2693da1b850fc6c7e79aef42fae336}{black}}
+ \}
+\item 
+typedef nodes\+\_\+t\+::const\+\_\+iterator \mbox{\hyperlink{classbid__dijkstra_a47d15051149b03179778a1553635b9d3}{shortest\+\_\+path\+\_\+node\+\_\+iterator}}
+\begin{DoxyCompactList}\small\item\em Iterator type for traversing nodes on one shortest path. \end{DoxyCompactList}\item 
+typedef edges\+\_\+t\+::const\+\_\+iterator \mbox{\hyperlink{classbid__dijkstra_a12c551a4f2fea9d38d2b6488278e3a09}{shortest\+\_\+path\+\_\+edge\+\_\+iterator}}
+\begin{DoxyCompactList}\small\item\em Iterator type for traversing edges on one shortest path. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classbid__dijkstra_a1f9ddd95b88b24f45afe0966c2ae181b}{bid\+\_\+dijkstra}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classbid__dijkstra_a3d46b327a3a87ac874e3930227a13757}{$\sim$bid\+\_\+dijkstra}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbid__dijkstra_a25dfbd432043e2e642e4dc71f4cb3208}{source\+\_\+target}} (const \mbox{\hyperlink{structnode}{node}} \&\mbox{\hyperlink{classbid__dijkstra_a118e2ebd0d08ffc991c2bc578f8284a4}{s}}, const \mbox{\hyperlink{structnode}{node}} \&\mbox{\hyperlink{classbid__dijkstra_a9370a71076d7807d1f3963e6dad9897e}{t}})
+\begin{DoxyCompactList}\small\item\em Sets source and target node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbid__dijkstra_a33dd3a1cc5eb156b56a72235c9140e7d}{weights}} (const \mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$ double $>$ \&\mbox{\hyperlink{classbid__dijkstra_a477c4f7ce631df84c832cb7d517cd243}{weight}})
+\begin{DoxyCompactList}\small\item\em Sets weights of the edges. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classbid__dijkstra_a0032d9b44c8b3f6f5733ff3ef94cf169}{store\+\_\+path}} (bool \mbox{\hyperlink{classset}{set}})
+\begin{DoxyCompactList}\small\item\em Enables or disables the storing of the shortest path. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{classbid__dijkstra_a6b17056b579e9f4ffe272034fb9741e0}{check}} (GTL\+::graph \&G)
+\begin{DoxyCompactList}\small\item\em Checks whether the preconditions for bidirectional Dijkstra are satisfied. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classbid__dijkstra_ad1d8bd67f884328ee911fd98f92c71ea}{run}} (GTL\+::graph \&G)
+\begin{DoxyCompactList}\small\item\em Runs shortest path algorithm on {\ttfamily G}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classbid__dijkstra_ae8f5268e008b003e38f25c83ed3fd138}{source}} () const
+\begin{DoxyCompactList}\small\item\em Returns source node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classbid__dijkstra_a5d32d74a93c1be5581f56ba3a2839ff5}{target}} () const
+\begin{DoxyCompactList}\small\item\em Returns target node if set, {\ttfamily \mbox{\hyperlink{structnode_a6da4ea35f222059db9a59cf40be459f9}{node\+::node()}}} else. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classbid__dijkstra_ad9716d8f542f07e5696aba778417cc12}{store\+\_\+path}} () const
+\begin{DoxyCompactList}\small\item\em Returns whether the storing of the shortest path is enabled. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classbid__dijkstra_a97f599b54fe9b030d87474898ff4a64c}{reached}} () const
+\begin{DoxyCompactList}\small\item\em Returns whether target is reachable from source. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classbid__dijkstra_a6150beb75d59f16d0332f42d5ff7e3f3}{distance}} () const
+\begin{DoxyCompactList}\small\item\em Returns the distance from source node to target node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbid__dijkstra_a47d15051149b03179778a1553635b9d3}{shortest\+\_\+path\+\_\+node\+\_\+iterator}} \mbox{\hyperlink{classbid__dijkstra_a03807bf76c9a75f0e17e79d20d73f48d}{shortest\+\_\+path\+\_\+nodes\+\_\+begin}} ()
+\begin{DoxyCompactList}\small\item\em Returns an iterator to the beginning (to the source node) of the shortest node path to target node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbid__dijkstra_a47d15051149b03179778a1553635b9d3}{shortest\+\_\+path\+\_\+node\+\_\+iterator}} \mbox{\hyperlink{classbid__dijkstra_af06035d39e06a70a1c44f1c60c347c5a}{shortest\+\_\+path\+\_\+nodes\+\_\+end}} ()
+\begin{DoxyCompactList}\small\item\em Returns an iterator one after the end (one after target node) of the shortest node path to target node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbid__dijkstra_a12c551a4f2fea9d38d2b6488278e3a09}{shortest\+\_\+path\+\_\+edge\+\_\+iterator}} \mbox{\hyperlink{classbid__dijkstra_a177bf7ffd4bf83ce364076ab5183dc3e}{shortest\+\_\+path\+\_\+edges\+\_\+begin}} ()
+\begin{DoxyCompactList}\small\item\em Returns an iterator to the beginning edge of the shortest edge path to target node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classbid__dijkstra_a12c551a4f2fea9d38d2b6488278e3a09}{shortest\+\_\+path\+\_\+edge\+\_\+iterator}} \mbox{\hyperlink{classbid__dijkstra_a0c31fda13205cd7905ff2400c60bb5e2}{shortest\+\_\+path\+\_\+edges\+\_\+end}} ()
+\begin{DoxyCompactList}\small\item\em Returns an iterator one after the end of a shortest edge path to target node. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classbid__dijkstra_a6df2769941bc73fc5626b084745a2258}{reset}} ()
+\begin{DoxyCompactList}\small\item\em Resets Dijkstra\textquotesingle{}s bidirectional algorithm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classbid__dijkstra_a16574970a28a3f453011e5b98d63e191}{reset\+\_\+algorithm}} ()
+\item 
+void \mbox{\hyperlink{classbid__dijkstra_a027e056b392e7af0d9aead570dbcd54b}{init}} (GTL\+::graph \&G)
+\item 
+void \mbox{\hyperlink{classbid__dijkstra_a279264a4cee9a4a8ad45ec957245e90a}{fill\+\_\+node\+\_\+edge\+\_\+lists}} (const \mbox{\hyperlink{structnode}{node}} \&n)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classbid__dijkstra_a118e2ebd0d08ffc991c2bc578f8284a4}{s}}
+\item 
+\mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classbid__dijkstra_a9370a71076d7807d1f3963e6dad9897e}{t}}
+\item 
+bool \mbox{\hyperlink{classbid__dijkstra_a7636f90a27d14c9eb4b115e8dad05464}{weights\+\_\+set}}
+\item 
+bool \mbox{\hyperlink{classbid__dijkstra_aa7b329f69600fffae2753f87501dab9d}{path\+\_\+set}}
+\item 
+\mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$ double $>$ \mbox{\hyperlink{classbid__dijkstra_a477c4f7ce631df84c832cb7d517cd243}{weight}}
+\item 
+double \mbox{\hyperlink{classbid__dijkstra_a10224bf2b56cb3fe20cef83592ecdc13}{dist}}
+\item 
+bool \mbox{\hyperlink{classbid__dijkstra_a4714ec557ae9199e88e0242f9c6c2393}{reached\+\_\+t}}
+\item 
+\mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ \mbox{\hyperlink{classedge}{edge}} $>$ \mbox{\hyperlink{classbid__dijkstra_a930f24f8d17953eccfa0e8765587b0ea}{pred}}
+\item 
+\mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ \mbox{\hyperlink{classedge}{edge}} $>$ \mbox{\hyperlink{classbid__dijkstra_a7379d185faf9af3820b8292676f9d88a}{succ}}
+\item 
+\mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ int $>$ \mbox{\hyperlink{classbid__dijkstra_a1b3684b69db38c8eaf9d4fbb056bc392}{source\+\_\+mark}}
+\item 
+\mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ int $>$ \mbox{\hyperlink{classbid__dijkstra_a72bc13758ebe2f752cd15f018c5ba64e}{target\+\_\+mark}}
+\item 
+\mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ double $>$ \mbox{\hyperlink{classbid__dijkstra_a19dc6c350617f0fa5769e5c70781d658}{source\+\_\+dist}}
+\item 
+\mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ double $>$ \mbox{\hyperlink{classbid__dijkstra_a7a46fe8fe075d798eaca14b37aa15c0d}{target\+\_\+dist}}
+\item 
+\mbox{\hyperlink{edge_8h_a22ac17689106ba21a84e7bc54d1199d6}{nodes\+\_\+t}} \mbox{\hyperlink{classbid__dijkstra_a70041b0a90fb840e141126fe7a6119db}{shortest\+\_\+path\+\_\+node\+\_\+list}}
+\item 
+\mbox{\hyperlink{edge_8h_a8f9587479bda6cf612c103494b3858e3}{edges\+\_\+t}} \mbox{\hyperlink{classbid__dijkstra_a4b7bdbc4d016748b40ca925cf1e6f778}{shortest\+\_\+path\+\_\+edge\+\_\+list}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+Dijkstra\textquotesingle{}s Algorithm for computing a shortest path from a single source to a single target. 
+
+\begin{DoxyParagraph}{Date}
+2003/03/24 15\+:58\+:54 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Revision}
+1.\+3 
+\end{DoxyParagraph}
+
+
+This class implements Dijkstra\textquotesingle{}s algorithm in a bidirectional manner for computing a shortest path from a single source to a single target in $\mathcal{O}((|V| + |E|) log |V|)$ worst case.
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classdijkstra}{dijkstra}} 
+
+\mbox{\hyperlink{classbellman__ford}{bellman\+\_\+ford}}
+\end{DoxySeeAlso}
+\begin{DoxyAuthor}{作者}
+Christian Bachmaier \href{mailto:chris@infosun.fmi.uni-passau.de}{\texttt{ chris@infosun.\+fmi.\+uni-\/passau.\+de}} 
+\end{DoxyAuthor}
+
+
+\doxysubsection{成员类型定义说明}
+\mbox{\Hypertarget{classbid__dijkstra_a12c551a4f2fea9d38d2b6488278e3a09}\label{classbid__dijkstra_a12c551a4f2fea9d38d2b6488278e3a09}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!shortest\_path\_edge\_iterator@{shortest\_path\_edge\_iterator}}
+\index{shortest\_path\_edge\_iterator@{shortest\_path\_edge\_iterator}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{shortest\_path\_edge\_iterator}{shortest\_path\_edge\_iterator}}
+{\footnotesize\ttfamily typedef edges\+\_\+t\+::const\+\_\+iterator \mbox{\hyperlink{classbid__dijkstra_a12c551a4f2fea9d38d2b6488278e3a09}{bid\+\_\+dijkstra\+::shortest\+\_\+path\+\_\+edge\+\_\+iterator}}}
+
+
+
+Iterator type for traversing edges on one shortest path. 
+
+\mbox{\Hypertarget{classbid__dijkstra_a47d15051149b03179778a1553635b9d3}\label{classbid__dijkstra_a47d15051149b03179778a1553635b9d3}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!shortest\_path\_node\_iterator@{shortest\_path\_node\_iterator}}
+\index{shortest\_path\_node\_iterator@{shortest\_path\_node\_iterator}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{shortest\_path\_node\_iterator}{shortest\_path\_node\_iterator}}
+{\footnotesize\ttfamily typedef nodes\+\_\+t\+::const\+\_\+iterator \mbox{\hyperlink{classbid__dijkstra_a47d15051149b03179778a1553635b9d3}{bid\+\_\+dijkstra\+::shortest\+\_\+path\+\_\+node\+\_\+iterator}}}
+
+
+
+Iterator type for traversing nodes on one shortest path. 
+
+
+
+\doxysubsection{成员枚举类型说明}
+\mbox{\Hypertarget{classbid__dijkstra_a8b7dcccc9fab2ec5edc8da01029c09d5}\label{classbid__dijkstra_a8b7dcccc9fab2ec5edc8da01029c09d5}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!node\_color@{node\_color}}
+\index{node\_color@{node\_color}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{node\_color}{node\_color}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classbid__dijkstra_a8b7dcccc9fab2ec5edc8da01029c09d5}{bid\+\_\+dijkstra\+::node\+\_\+color}}}
+
+\begin{DoxyEnumFields}{枚举值}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{white@{white}!bid\_dijkstra@{bid\_dijkstra}}\index{bid\_dijkstra@{bid\_dijkstra}!white@{white}}}\mbox{\Hypertarget{classbid__dijkstra_a8b7dcccc9fab2ec5edc8da01029c09d5abbd36b03487d4100360b3d6e94309b7b}\label{classbid__dijkstra_a8b7dcccc9fab2ec5edc8da01029c09d5abbd36b03487d4100360b3d6e94309b7b}} 
+white&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{grey@{grey}!bid\_dijkstra@{bid\_dijkstra}}\index{bid\_dijkstra@{bid\_dijkstra}!grey@{grey}}}\mbox{\Hypertarget{classbid__dijkstra_a8b7dcccc9fab2ec5edc8da01029c09d5a5e3971e0090719b93ed71811edcd7360}\label{classbid__dijkstra_a8b7dcccc9fab2ec5edc8da01029c09d5a5e3971e0090719b93ed71811edcd7360}} 
+grey&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{black@{black}!bid\_dijkstra@{bid\_dijkstra}}\index{bid\_dijkstra@{bid\_dijkstra}!black@{black}}}\mbox{\Hypertarget{classbid__dijkstra_a8b7dcccc9fab2ec5edc8da01029c09d5acc2693da1b850fc6c7e79aef42fae336}\label{classbid__dijkstra_a8b7dcccc9fab2ec5edc8da01029c09d5acc2693da1b850fc6c7e79aef42fae336}} 
+black&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classbid__dijkstra_a1f9ddd95b88b24f45afe0966c2ae181b}\label{classbid__dijkstra_a1f9ddd95b88b24f45afe0966c2ae181b}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!bid\_dijkstra@{bid\_dijkstra}}
+\index{bid\_dijkstra@{bid\_dijkstra}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{bid\_dijkstra()}{bid\_dijkstra()}}
+{\footnotesize\ttfamily bid\+\_\+dijkstra\+::bid\+\_\+dijkstra (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+Enables only the calculation of shortest paths.
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classalgorithm_ab79e1ddec2f2afdf4b36b10724db8b15}{algorithm\+::algorithm}} 
+\end{DoxySeeAlso}
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=332pt]{classbid__dijkstra_a1f9ddd95b88b24f45afe0966c2ae181b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classbid__dijkstra_a3d46b327a3a87ac874e3930227a13757}\label{classbid__dijkstra_a3d46b327a3a87ac874e3930227a13757}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!````~bid\_dijkstra@{$\sim$bid\_dijkstra}}
+\index{````~bid\_dijkstra@{$\sim$bid\_dijkstra}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{$\sim$bid\_dijkstra()}{~bid\_dijkstra()}}
+{\footnotesize\ttfamily bid\+\_\+dijkstra\+::$\sim$bid\+\_\+dijkstra (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classalgorithm_adca9b1e7fa3afd914519a9dbb44e9fd5}{algorithm\+::$\sim$algorithm}} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classbid__dijkstra_a6b17056b579e9f4ffe272034fb9741e0}\label{classbid__dijkstra_a6b17056b579e9f4ffe272034fb9741e0}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!check@{check}}
+\index{check@{check}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{check()}{check()}}
+{\footnotesize\ttfamily int bid\+\_\+dijkstra\+::check (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{G }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Checks whether the preconditions for bidirectional Dijkstra are satisfied. 
+
+The Precondition are that the weights of the edges have been set and that the graph has at least one node. Additionally all edge weights must be $\ge 0$ and and source and target nodes must be found in {\ttfamily G}.
+
+
+\begin{DoxyParams}{参数}
+{\em G} & graph\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{返回值}
+{\em \mbox{\hyperlink{classalgorithm_a7ecf5c2bab575f8f2fae9e9e5093a6eaa5114c20e4a96a76b5de9f28bf15e282b}{algorithm\+::\+GTL\+\_\+\+OK}}} & if algorithm can be applied \\
+\hline
+{\em \mbox{\hyperlink{classalgorithm_a7ecf5c2bab575f8f2fae9e9e5093a6eaa6fcf574690bbd6cf710837a169510dd7}{algorithm\+::\+GTL\+\_\+\+ERROR}}} & otherwise\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classdijkstra_a9689f2628f76ddb3747ea18c91bd7041}{dijkstra\+::source}} 
+
+dijkstra\+::weigths 
+
+\mbox{\hyperlink{classalgorithm_a528100c0e54d446fab1e329a53935364}{algorithm\+::check}} 
+\end{DoxySeeAlso}
+
+
+实现了 \mbox{\hyperlink{classalgorithm_a528100c0e54d446fab1e329a53935364}{algorithm}}.
+
+\mbox{\Hypertarget{classbid__dijkstra_a6150beb75d59f16d0332f42d5ff7e3f3}\label{classbid__dijkstra_a6150beb75d59f16d0332f42d5ff7e3f3}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!distance@{distance}}
+\index{distance@{distance}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{distance()}{distance()}}
+{\footnotesize\ttfamily double bid\+\_\+dijkstra\+::distance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the distance from source node to target node. 
+
+\begin{DoxyReturn}{返回}
+distance if target is \mbox{\hyperlink{classbid__dijkstra_a97f599b54fe9b030d87474898ff4a64c}{bid\+\_\+dijkstra\+::reached}}, {\ttfamily -\/1.\+0} else 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbid__dijkstra_a279264a4cee9a4a8ad45ec957245e90a}\label{classbid__dijkstra_a279264a4cee9a4a8ad45ec957245e90a}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!fill\_node\_edge\_lists@{fill\_node\_edge\_lists}}
+\index{fill\_node\_edge\_lists@{fill\_node\_edge\_lists}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{fill\_node\_edge\_lists()}{fill\_node\_edge\_lists()}}
+{\footnotesize\ttfamily void bid\+\_\+dijkstra\+::fill\+\_\+node\+\_\+edge\+\_\+lists (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structnode}{node}} \&}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{classbid__dijkstra_a279264a4cee9a4a8ad45ec957245e90a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classbid__dijkstra_a027e056b392e7af0d9aead570dbcd54b}\label{classbid__dijkstra_a027e056b392e7af0d9aead570dbcd54b}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!init@{init}}
+\index{init@{init}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void bid\+\_\+dijkstra\+::init (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{G }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=271pt]{classbid__dijkstra_a027e056b392e7af0d9aead570dbcd54b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classbid__dijkstra_a97f599b54fe9b030d87474898ff4a64c}\label{classbid__dijkstra_a97f599b54fe9b030d87474898ff4a64c}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!reached@{reached}}
+\index{reached@{reached}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{reached()}{reached()}}
+{\footnotesize\ttfamily bool bid\+\_\+dijkstra\+::reached (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns whether target is reachable from source. 
+
+\begin{DoxyReturn}{返回}
+{\ttfamily true} iff target was reached from source 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbid__dijkstra_a6df2769941bc73fc5626b084745a2258}\label{classbid__dijkstra_a6df2769941bc73fc5626b084745a2258}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!reset@{reset}}
+\index{reset@{reset}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void bid\+\_\+dijkstra\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Resets Dijkstra\textquotesingle{}s bidirectional algorithm. 
+
+It prepares the algorithm to be applied again, possibly to another graph.
+
+\begin{DoxyNote}{注解}
+The weights are not reset. You can apply this algorithms
+\end{DoxyNote}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classalgorithm_a21aba63d066ae7897de6ca7d8425c408}{algorithm\+::reset}} 
+\end{DoxySeeAlso}
+
+
+实现了 \mbox{\hyperlink{classalgorithm_a21aba63d066ae7897de6ca7d8425c408}{algorithm}}.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{classbid__dijkstra_a6df2769941bc73fc5626b084745a2258_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classbid__dijkstra_a16574970a28a3f453011e5b98d63e191}\label{classbid__dijkstra_a16574970a28a3f453011e5b98d63e191}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!reset\_algorithm@{reset\_algorithm}}
+\index{reset\_algorithm@{reset\_algorithm}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{reset\_algorithm()}{reset\_algorithm()}}
+{\footnotesize\ttfamily void bid\+\_\+dijkstra\+::reset\+\_\+algorithm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classbid__dijkstra_ad1d8bd67f884328ee911fd98f92c71ea}\label{classbid__dijkstra_ad1d8bd67f884328ee911fd98f92c71ea}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!run@{run}}
+\index{run@{run}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily int bid\+\_\+dijkstra\+::run (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{G }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Runs shortest path algorithm on {\ttfamily G}. 
+
+This should return always \mbox{\hyperlink{classalgorithm_a7ecf5c2bab575f8f2fae9e9e5093a6eaa5114c20e4a96a76b5de9f28bf15e282b}{algorithm\+::\+GTL\+\_\+\+OK}}. The return value only tracks errors that might occur. Afterwards the result of the test can be accessed via access methods.
+
+
+\begin{DoxyParams}{参数}
+{\em G} & graph\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{返回值}
+{\em \mbox{\hyperlink{classalgorithm_a7ecf5c2bab575f8f2fae9e9e5093a6eaa5114c20e4a96a76b5de9f28bf15e282b}{algorithm\+::\+GTL\+\_\+\+OK}}} & on success \\
+\hline
+{\em \mbox{\hyperlink{classalgorithm_a7ecf5c2bab575f8f2fae9e9e5093a6eaa6fcf574690bbd6cf710837a169510dd7}{algorithm\+::\+GTL\+\_\+\+ERROR}}} & otherwise\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classalgorithm_a4baee48c513c5802975743152c33f34c}{algorithm\+::run}} 
+\end{DoxySeeAlso}
+
+
+实现了 \mbox{\hyperlink{classalgorithm_a4baee48c513c5802975743152c33f34c}{algorithm}}.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classbid__dijkstra_ad1d8bd67f884328ee911fd98f92c71ea_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classbid__dijkstra_a177bf7ffd4bf83ce364076ab5183dc3e}\label{classbid__dijkstra_a177bf7ffd4bf83ce364076ab5183dc3e}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!shortest\_path\_edges\_begin@{shortest\_path\_edges\_begin}}
+\index{shortest\_path\_edges\_begin@{shortest\_path\_edges\_begin}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{shortest\_path\_edges\_begin()}{shortest\_path\_edges\_begin()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbid__dijkstra_a12c551a4f2fea9d38d2b6488278e3a09}{bid\+\_\+dijkstra\+::shortest\+\_\+path\+\_\+edge\+\_\+iterator}} bid\+\_\+dijkstra\+::shortest\+\_\+path\+\_\+edges\+\_\+begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns an iterator to the beginning edge of the shortest edge path to target node. 
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbid__dijkstra_a0032d9b44c8b3f6f5733ff3ef94cf169}{bid\+\_\+dijkstra\+::store\+\_\+path}}
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{返回}
+beginning edge iterator of the shortest path
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+The method requires that path calculation option was enabled during last run. 
+\end{DoxyNote}
+\mbox{\Hypertarget{classbid__dijkstra_a0c31fda13205cd7905ff2400c60bb5e2}\label{classbid__dijkstra_a0c31fda13205cd7905ff2400c60bb5e2}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!shortest\_path\_edges\_end@{shortest\_path\_edges\_end}}
+\index{shortest\_path\_edges\_end@{shortest\_path\_edges\_end}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{shortest\_path\_edges\_end()}{shortest\_path\_edges\_end()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbid__dijkstra_a12c551a4f2fea9d38d2b6488278e3a09}{bid\+\_\+dijkstra\+::shortest\+\_\+path\+\_\+edge\+\_\+iterator}} bid\+\_\+dijkstra\+::shortest\+\_\+path\+\_\+edges\+\_\+end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns an iterator one after the end of a shortest edge path to target node. 
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbid__dijkstra_a0032d9b44c8b3f6f5733ff3ef94cf169}{bid\+\_\+dijkstra\+::store\+\_\+path}}
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{返回}
+shortest path end edge iterator
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+The method requires that predecessor calculation option was enabled during last run. 
+\end{DoxyNote}
+\mbox{\Hypertarget{classbid__dijkstra_a03807bf76c9a75f0e17e79d20d73f48d}\label{classbid__dijkstra_a03807bf76c9a75f0e17e79d20d73f48d}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!shortest\_path\_nodes\_begin@{shortest\_path\_nodes\_begin}}
+\index{shortest\_path\_nodes\_begin@{shortest\_path\_nodes\_begin}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{shortest\_path\_nodes\_begin()}{shortest\_path\_nodes\_begin()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbid__dijkstra_a47d15051149b03179778a1553635b9d3}{bid\+\_\+dijkstra\+::shortest\+\_\+path\+\_\+node\+\_\+iterator}} bid\+\_\+dijkstra\+::shortest\+\_\+path\+\_\+nodes\+\_\+begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns an iterator to the beginning (to the source node) of the shortest node path to target node. 
+
+\begin{DoxyReturn}{返回}
+beginning node iterator of the shortest path
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbid__dijkstra_a0032d9b44c8b3f6f5733ff3ef94cf169}{bid\+\_\+dijkstra\+::store\+\_\+path}}
+\end{DoxySeeAlso}
+\begin{DoxyNote}{注解}
+The method requires that path calculation option was enabled during last run. 
+\end{DoxyNote}
+\mbox{\Hypertarget{classbid__dijkstra_af06035d39e06a70a1c44f1c60c347c5a}\label{classbid__dijkstra_af06035d39e06a70a1c44f1c60c347c5a}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!shortest\_path\_nodes\_end@{shortest\_path\_nodes\_end}}
+\index{shortest\_path\_nodes\_end@{shortest\_path\_nodes\_end}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{shortest\_path\_nodes\_end()}{shortest\_path\_nodes\_end()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classbid__dijkstra_a47d15051149b03179778a1553635b9d3}{bid\+\_\+dijkstra\+::shortest\+\_\+path\+\_\+node\+\_\+iterator}} bid\+\_\+dijkstra\+::shortest\+\_\+path\+\_\+nodes\+\_\+end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns an iterator one after the end (one after target node) of the shortest node path to target node. 
+
+\begin{DoxyReturn}{返回}
+shortest path end node iterator
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classbid__dijkstra_a0032d9b44c8b3f6f5733ff3ef94cf169}{bid\+\_\+dijkstra\+::store\+\_\+path}}
+\end{DoxySeeAlso}
+\begin{DoxyNote}{注解}
+The method requires that path calculation option was enabled during last run. 
+\end{DoxyNote}
+\mbox{\Hypertarget{classbid__dijkstra_ae8f5268e008b003e38f25c83ed3fd138}\label{classbid__dijkstra_ae8f5268e008b003e38f25c83ed3fd138}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!source@{source}}
+\index{source@{source}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{source()}{source()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structnode}{node}} bid\+\_\+dijkstra\+::source (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns source node. 
+
+\begin{DoxyReturn}{返回}
+source node 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbid__dijkstra_a25dfbd432043e2e642e4dc71f4cb3208}\label{classbid__dijkstra_a25dfbd432043e2e642e4dc71f4cb3208}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!source\_target@{source\_target}}
+\index{source\_target@{source\_target}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{source\_target()}{source\_target()}}
+{\footnotesize\ttfamily void bid\+\_\+dijkstra\+::source\+\_\+target (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structnode}{node}} \&}]{s,  }\item[{const \mbox{\hyperlink{structnode}{node}} \&}]{t }\end{DoxyParamCaption})}
+
+
+
+Sets source and target node. 
+
+Must be executed every time before check and run of this algorithm.
+
+
+\begin{DoxyParams}{参数}
+{\em s} & source node \\
+\hline
+{\em t} & target node \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classbid__dijkstra_ad9716d8f542f07e5696aba778417cc12}\label{classbid__dijkstra_ad9716d8f542f07e5696aba778417cc12}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!store\_path@{store\_path}}
+\index{store\_path@{store\_path}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{store\_path()}{store\_path()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool bid\+\_\+dijkstra\+::store\+\_\+path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns whether the storing of the shortest path is enabled. 
+
+\begin{DoxyReturn}{返回}
+{\ttfamily true} iff the storing of path is enabled.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{参见}
+dijkstra\+::predecessor 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbid__dijkstra_a0032d9b44c8b3f6f5733ff3ef94cf169}\label{classbid__dijkstra_a0032d9b44c8b3f6f5733ff3ef94cf169}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!store\_path@{store\_path}}
+\index{store\_path@{store\_path}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{store\_path()}{store\_path()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void bid\+\_\+dijkstra\+::store\+\_\+path (\begin{DoxyParamCaption}\item[{bool}]{set }\end{DoxyParamCaption})}
+
+
+
+Enables or disables the storing of the shortest path. 
+
+If enabled for every node and edge on the shortest path from source to target will be stored.
+
+
+\begin{DoxyParams}{参数}
+{\em set} & true if path should be stored\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classdijkstra_a99c17ee7c2b55574ea8c2952fac09faf}{dijkstra\+::predecessor\+\_\+node}} 
+
+\mbox{\hyperlink{classdijkstra_aa3ef1a7d7dfc33e4a39aff309f873929}{dijkstra\+::predecessor\+\_\+edge}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classbid__dijkstra_a5d32d74a93c1be5581f56ba3a2839ff5}\label{classbid__dijkstra_a5d32d74a93c1be5581f56ba3a2839ff5}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!target@{target}}
+\index{target@{target}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{target()}{target()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structnode}{node}} bid\+\_\+dijkstra\+::target (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns target node if set, {\ttfamily \mbox{\hyperlink{structnode_a6da4ea35f222059db9a59cf40be459f9}{node\+::node()}}} else. 
+
+\begin{DoxyReturn}{返回}
+target node 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classbid__dijkstra_a33dd3a1cc5eb156b56a72235c9140e7d}\label{classbid__dijkstra_a33dd3a1cc5eb156b56a72235c9140e7d}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!weights@{weights}}
+\index{weights@{weights}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{weights()}{weights()}}
+{\footnotesize\ttfamily void bid\+\_\+dijkstra\+::weights (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$ double $>$ \&}]{weight }\end{DoxyParamCaption})}
+
+
+
+Sets weights of the edges. 
+
+This method {\bfseries{must}} be called before check and run.
+
+
+\begin{DoxyParams}{参数}
+{\em weight} & weights of the edges \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classbid__dijkstra_a10224bf2b56cb3fe20cef83592ecdc13}\label{classbid__dijkstra_a10224bf2b56cb3fe20cef83592ecdc13}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!dist@{dist}}
+\index{dist@{dist}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{dist}{dist}}
+{\footnotesize\ttfamily double bid\+\_\+dijkstra\+::dist\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classbid__dijkstra_aa7b329f69600fffae2753f87501dab9d}\label{classbid__dijkstra_aa7b329f69600fffae2753f87501dab9d}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!path\_set@{path\_set}}
+\index{path\_set@{path\_set}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{path\_set}{path\_set}}
+{\footnotesize\ttfamily bool bid\+\_\+dijkstra\+::path\+\_\+set\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classbid__dijkstra_a930f24f8d17953eccfa0e8765587b0ea}\label{classbid__dijkstra_a930f24f8d17953eccfa0e8765587b0ea}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!pred@{pred}}
+\index{pred@{pred}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{pred}{pred}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$\mbox{\hyperlink{classedge}{edge}}$>$ bid\+\_\+dijkstra\+::pred\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classbid__dijkstra_a4714ec557ae9199e88e0242f9c6c2393}\label{classbid__dijkstra_a4714ec557ae9199e88e0242f9c6c2393}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!reached\_t@{reached\_t}}
+\index{reached\_t@{reached\_t}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{reached\_t}{reached\_t}}
+{\footnotesize\ttfamily bool bid\+\_\+dijkstra\+::reached\+\_\+t\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classbid__dijkstra_a118e2ebd0d08ffc991c2bc578f8284a4}\label{classbid__dijkstra_a118e2ebd0d08ffc991c2bc578f8284a4}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!s@{s}}
+\index{s@{s}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{s}{s}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structnode}{node}} bid\+\_\+dijkstra\+::s\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classbid__dijkstra_a4b7bdbc4d016748b40ca925cf1e6f778}\label{classbid__dijkstra_a4b7bdbc4d016748b40ca925cf1e6f778}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!shortest\_path\_edge\_list@{shortest\_path\_edge\_list}}
+\index{shortest\_path\_edge\_list@{shortest\_path\_edge\_list}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{shortest\_path\_edge\_list}{shortest\_path\_edge\_list}}
+{\footnotesize\ttfamily \mbox{\hyperlink{edge_8h_a8f9587479bda6cf612c103494b3858e3}{edges\+\_\+t}} bid\+\_\+dijkstra\+::shortest\+\_\+path\+\_\+edge\+\_\+list\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classbid__dijkstra_a70041b0a90fb840e141126fe7a6119db}\label{classbid__dijkstra_a70041b0a90fb840e141126fe7a6119db}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!shortest\_path\_node\_list@{shortest\_path\_node\_list}}
+\index{shortest\_path\_node\_list@{shortest\_path\_node\_list}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{shortest\_path\_node\_list}{shortest\_path\_node\_list}}
+{\footnotesize\ttfamily \mbox{\hyperlink{edge_8h_a22ac17689106ba21a84e7bc54d1199d6}{nodes\+\_\+t}} bid\+\_\+dijkstra\+::shortest\+\_\+path\+\_\+node\+\_\+list\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classbid__dijkstra_a19dc6c350617f0fa5769e5c70781d658}\label{classbid__dijkstra_a19dc6c350617f0fa5769e5c70781d658}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!source\_dist@{source\_dist}}
+\index{source\_dist@{source\_dist}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{source\_dist}{source\_dist}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$double$>$ bid\+\_\+dijkstra\+::source\+\_\+dist\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classbid__dijkstra_a1b3684b69db38c8eaf9d4fbb056bc392}\label{classbid__dijkstra_a1b3684b69db38c8eaf9d4fbb056bc392}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!source\_mark@{source\_mark}}
+\index{source\_mark@{source\_mark}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{source\_mark}{source\_mark}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$int$>$ bid\+\_\+dijkstra\+::source\+\_\+mark\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classbid__dijkstra_a7379d185faf9af3820b8292676f9d88a}\label{classbid__dijkstra_a7379d185faf9af3820b8292676f9d88a}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!succ@{succ}}
+\index{succ@{succ}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{succ}{succ}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$\mbox{\hyperlink{classedge}{edge}}$>$ bid\+\_\+dijkstra\+::succ\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classbid__dijkstra_a9370a71076d7807d1f3963e6dad9897e}\label{classbid__dijkstra_a9370a71076d7807d1f3963e6dad9897e}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!t@{t}}
+\index{t@{t}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{t}{t}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structnode}{node}} bid\+\_\+dijkstra\+::t\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classbid__dijkstra_a7a46fe8fe075d798eaca14b37aa15c0d}\label{classbid__dijkstra_a7a46fe8fe075d798eaca14b37aa15c0d}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!target\_dist@{target\_dist}}
+\index{target\_dist@{target\_dist}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{target\_dist}{target\_dist}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$double$>$ bid\+\_\+dijkstra\+::target\+\_\+dist\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classbid__dijkstra_a72bc13758ebe2f752cd15f018c5ba64e}\label{classbid__dijkstra_a72bc13758ebe2f752cd15f018c5ba64e}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!target\_mark@{target\_mark}}
+\index{target\_mark@{target\_mark}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{target\_mark}{target\_mark}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$int$>$ bid\+\_\+dijkstra\+::target\+\_\+mark\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classbid__dijkstra_a477c4f7ce631df84c832cb7d517cd243}\label{classbid__dijkstra_a477c4f7ce631df84c832cb7d517cd243}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!weight@{weight}}
+\index{weight@{weight}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{weight}{weight}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$double$>$ bid\+\_\+dijkstra\+::weight\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classbid__dijkstra_a7636f90a27d14c9eb4b115e8dad05464}\label{classbid__dijkstra_a7636f90a27d14c9eb4b115e8dad05464}} 
+\index{bid\_dijkstra@{bid\_dijkstra}!weights\_set@{weights\_set}}
+\index{weights\_set@{weights\_set}!bid\_dijkstra@{bid\_dijkstra}}
+\doxysubsubsection{\texorpdfstring{weights\_set}{weights\_set}}
+{\footnotesize\ttfamily bool bid\+\_\+dijkstra\+::weights\+\_\+set\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Tracker/graph/\+GTL/include/\+GTL/\mbox{\hyperlink{bid__dijkstra_8h}{bid\+\_\+dijkstra.\+h}}\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Tracker/graph/\+GTL/src/\mbox{\hyperlink{bid__dijkstra_8cpp}{bid\+\_\+dijkstra.\+cpp}}\end{DoxyCompactItemize}

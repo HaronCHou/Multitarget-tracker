@@ -1,0 +1,114 @@
+\hypertarget{maxflow__sap_8h_source}{}\doxysection{maxflow\+\_\+sap.\+h}
+\label{maxflow__sap_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/maxflow\_sap.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/maxflow\_sap.h}}
+\mbox{\hyperlink{maxflow__sap_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* This software is distributed under the GNU Lesser General Public License */}}
+\DoxyCodeLine{2 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{//   maxflow\_sap.h}}
+\DoxyCodeLine{5 \textcolor{comment}{//}}
+\DoxyCodeLine{6 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{// \$Id: maxflow\_sap.h,v 1.4 2003/01/31 08:15:05 chris Exp \$}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#ifndef GTL\_MAXFLOW\_SAP\_H}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define GTL\_MAXFLOW\_SAP\_H}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{_g_t_l_8h}{GTL/GTL.h}}>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{graph_8h}{GTL/graph.h}}>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{node__map_8h}{GTL/node\_map.h}}>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{edge__map_8h}{GTL/edge\_map.h}}>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{algorithm_8h}{GTL/algorithm.h}}>}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <queue>}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \mbox{\hyperlink{_g_t_l_8h_a2d9f24096ac60918452dd51f32b64aa9}{\_\_GTL\_BEGIN\_NAMESPACE}}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{34 \textcolor{keyword}{class }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{classmaxflow__sap}{maxflow\_sap}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classalgorithm}{algorithm}}}
+\DoxyCodeLine{35 \{}
+\DoxyCodeLine{36 \textcolor{keyword}{public}:}
+\DoxyCodeLine{43     \mbox{\hyperlink{classmaxflow__sap}{maxflow\_sap}}();}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{50     \textcolor{keyword}{virtual} \mbox{\hyperlink{classmaxflow__sap}{\string~maxflow\_sap}}();}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{59     \textcolor{keywordtype}{void} set\_vars(\textcolor{keyword}{const} \mbox{\hyperlink{classedge__map}{edge\_map<double>}}\& edge\_capacity);}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{68     \textcolor{keywordtype}{void} set\_vars(\textcolor{keyword}{const} \mbox{\hyperlink{classedge__map}{edge\_map<double>}}\& edge\_capacity, }
+\DoxyCodeLine{69                   \textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& net\_source, }
+\DoxyCodeLine{70                   \textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& net\_target);}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{89     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{classalgorithm_a528100c0e54d446fab1e329a53935364}{check}}(GTL::graph\& G);}
+\DoxyCodeLine{90         }
+\DoxyCodeLine{99     \textcolor{keywordtype}{int} \mbox{\hyperlink{classalgorithm_a4baee48c513c5802975743152c33f34c}{run}}(GTL::graph\& G);}
+\DoxyCodeLine{100         }
+\DoxyCodeLine{107     \textcolor{keywordtype}{double} get\_max\_flow(\textcolor{keyword}{const} \mbox{\hyperlink{classedge}{edge}}\& e) \textcolor{keyword}{const};}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{114     \textcolor{keywordtype}{double} get\_max\_flow() \textcolor{keyword}{const};}
+\DoxyCodeLine{115     }
+\DoxyCodeLine{122     \textcolor{keywordtype}{double} get\_rem\_cap(\textcolor{keyword}{const} \mbox{\hyperlink{classedge}{edge}}\& e) \textcolor{keyword}{const};}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{130     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classalgorithm_a21aba63d066ae7897de6ca7d8425c408}{reset}}();}
+\DoxyCodeLine{131 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{135     \textcolor{keyword}{enum} \{AP\_FOUND = 2, NO\_AP\_FOUND = 3\};}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{140     \textcolor{keywordtype}{bool} artif\_source\_target = \textcolor{keyword}{false};}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{145     \textcolor{keywordtype}{bool} set\_vars\_executed = \textcolor{keyword}{false};}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{150     \textcolor{keywordtype}{double} max\_graph\_flow = 0.;}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{155     \mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classmaxflow__sap_abd4266c76dbd73f7f719d3a4fba2655d}{net\_source}};}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{160     \mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classmaxflow__sap_a8d0e8f448ed29a1329a70c8f4f496c2c}{net\_target}};}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{165     \mbox{\hyperlink{edge_8h_a8f9587479bda6cf612c103494b3858e3}{edges\_t}} \mbox{\hyperlink{classmaxflow__sap_ac97c4038560f49eee2e781d12a64fdf5}{edges\_not\_org}};}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{170     \mbox{\hyperlink{classnode__map}{node\_map<int>}} \mbox{\hyperlink{classmaxflow__sap_a14eef09823ae0ac69348c2b3a60e6ca3}{dist\_label}};}
+\DoxyCodeLine{171     }
+\DoxyCodeLine{175     \mbox{\hyperlink{classedge__map}{edge\_map<bool>}} \mbox{\hyperlink{classmaxflow__sap_ac445d8c2f7e2080e890a9cdf7413c372}{edge\_org}};}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{180     \mbox{\hyperlink{classedge__map}{edge\_map<bool>}} \mbox{\hyperlink{classmaxflow__sap_a13f2b98efc2a4f62fab4ac391ca83a51}{back\_edge\_exists}};}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{185     \mbox{\hyperlink{classedge__map}{edge\_map<edge>}} \mbox{\hyperlink{classmaxflow__sap_a34793d0909089155a9957deed7c0e1b7}{back\_edge}};}
+\DoxyCodeLine{186 }
+\DoxyCodeLine{190     \mbox{\hyperlink{classedge__map}{edge\_map<double>}} \mbox{\hyperlink{classmaxflow__sap_acfa95eef5ea5bf7814c4dabd3994bc63}{edge\_capacity}};}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{195     \mbox{\hyperlink{classedge__map}{edge\_map<double>}} \mbox{\hyperlink{classmaxflow__sap_a25820db833a98efc69fc3edb79fc49d3}{edge\_max\_flow}};}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{200     \textcolor{keywordtype}{void} create\_artif\_source\_target(GTL::graph\& G);}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{205     \textcolor{keywordtype}{void} prepare\_run(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G);}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{210     \textcolor{keywordtype}{void} comp\_dist\_labels(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G, std::vector<int>\& numb);}
+\DoxyCodeLine{211 }
+\DoxyCodeLine{215     \textcolor{keywordtype}{bool} has\_an\_admissible\_arc(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}} cur\_node);}
+\DoxyCodeLine{216 }
+\DoxyCodeLine{220     \textcolor{keywordtype}{void} advance(\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\& cur\_node, GTL::node\_map<edge>\& last\_edge);}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{225     \textcolor{keywordtype}{void} augment(GTL::graph\& G, \textcolor{keyword}{const} \mbox{\hyperlink{classnode__map}{node\_map<edge>}}\& last\_edge);}
+\DoxyCodeLine{226 }
+\DoxyCodeLine{230     \textcolor{keywordtype}{bool} retreat(\textcolor{keyword}{const} \textcolor{keywordtype}{int} number\_of\_nodes,}
+\DoxyCodeLine{231                  \mbox{\hyperlink{structnode}{node}}\& cur\_node,}
+\DoxyCodeLine{232                  \textcolor{keyword}{const} \mbox{\hyperlink{classnode__map}{node\_map<edge>}}\& last\_edge,}
+\DoxyCodeLine{233                  std::vector<int>\& numb);}
+\DoxyCodeLine{234 }
+\DoxyCodeLine{238     \textcolor{keywordtype}{int} min\_neighbour\_label(\textcolor{keyword}{const} \textcolor{keywordtype}{int} number\_of\_nodes,}
+\DoxyCodeLine{239                             \textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}} cur\_node) \textcolor{keyword}{const};}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{244     \textcolor{keywordtype}{double} free\_capacity(\textcolor{keyword}{const} \mbox{\hyperlink{classnode__map}{node\_map<edge>}}\& last\_edge) \textcolor{keyword}{const};}
+\DoxyCodeLine{245 }
+\DoxyCodeLine{249     \textcolor{keywordtype}{void} create\_back\_edge(GTL::graph\& G, \textcolor{keyword}{const} \mbox{\hyperlink{classedge}{edge}}\& org\_edge);}
+\DoxyCodeLine{250 }
+\DoxyCodeLine{254     \textcolor{keywordtype}{void} comp\_max\_flow(\textcolor{keyword}{const} \mbox{\hyperlink{classgraph}{graph}}\& G);}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{259     \textcolor{keywordtype}{void} restore\_graph(GTL::graph\& G);}
+\DoxyCodeLine{260 \};}
+\DoxyCodeLine{261 }
+\DoxyCodeLine{262 \mbox{\hyperlink{_g_t_l_8h_a46af2b3ec266ac2f9d36fa7222358017}{\_\_GTL\_END\_NAMESPACE}}}
+\DoxyCodeLine{263 }
+\DoxyCodeLine{264 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GTL\_MAXFLOW\_SAP\_H}}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{266 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{267 \textcolor{comment}{//   end of file}}
+\DoxyCodeLine{268 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+
+\end{DoxyCode}

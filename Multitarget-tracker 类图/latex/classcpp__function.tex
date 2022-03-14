@@ -1,0 +1,252 @@
+\hypertarget{classcpp__function}{}\doxysection{cpp\+\_\+function类 参考}
+\label{classcpp__function}\index{cpp\_function@{cpp\_function}}
+
+
+Wraps an arbitrary C++ function/method/lambda function/.. into a callable Python object  
+
+
+
+
+{\ttfamily \#include $<$pybind11.\+h$>$}
+
+
+
+类 cpp\+\_\+function 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{classcpp__function__inherit__graph}
+\end{center}
+\end{figure}
+
+
+cpp\+\_\+function 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{classcpp__function__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcpp__function_ae280a9823b07b3832e8d7e786a863bf4}{cpp\+\_\+function}} ()
+\item 
+\mbox{\hyperlink{classcpp__function_a645776419d4d24d2fef4c3339cffe7c3}{cpp\+\_\+function}} (std\+::nullptr\+\_\+t)
+\item 
+{\footnotesize template$<$typename Return , typename... Args, typename... Extra$>$ }\\\mbox{\hyperlink{classcpp__function_adf288fd4fadeaf8e9e142d177fc267da}{cpp\+\_\+function}} (Return($\ast$\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}})(Args...), const Extra \&... extra)
+\begin{DoxyCompactList}\small\item\em Construct a \mbox{\hyperlink{classcpp__function}{cpp\+\_\+function}} from a vanilla function pointer \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Func , typename... Extra, typename  = detail\+::enable\+\_\+if\+\_\+t$<$detail\+::is\+\_\+lambda$<$\+Func$>$\+::value$>$$>$ }\\\mbox{\hyperlink{classcpp__function_a345da213151996cb60ba487622036899}{cpp\+\_\+function}} (Func \&\&\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}}, const Extra \&... extra)
+\begin{DoxyCompactList}\small\item\em Construct a \mbox{\hyperlink{classcpp__function}{cpp\+\_\+function}} from a lambda function (possibly with internal state) \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Return , typename Class , typename... Arg, typename... Extra$>$ }\\\mbox{\hyperlink{classcpp__function_a977ae047c5ece21dbfbbccda8c304986}{cpp\+\_\+function}} (Return(Class\+::$\ast$\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}})(Arg...), const Extra \&... extra)
+\begin{DoxyCompactList}\small\item\em Construct a \mbox{\hyperlink{classcpp__function}{cpp\+\_\+function}} from a class method (non-\/const) \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Return , typename Class , typename... Arg, typename... Extra$>$ }\\\mbox{\hyperlink{classcpp__function_adf1a5ad6ed0992a0bd07c2048b98d6f1}{cpp\+\_\+function}} (Return(Class\+::$\ast$\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}})(Arg...) const, const Extra \&... extra)
+\begin{DoxyCompactList}\small\item\em Construct a \mbox{\hyperlink{classcpp__function}{cpp\+\_\+function}} from a class method (const) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classobject}{object}} \mbox{\hyperlink{classcpp__function_a5d8bcdd6781aa6da434299589c68013e}{name}} () const
+\begin{DoxyCompactList}\small\item\em Return the function name \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\+\_\+\+NOINLINE}} detail\+::function\+\_\+record $\ast$ \mbox{\hyperlink{classcpp__function_af183e360a4104776ad303e0c1d17ec38}{make\+\_\+function\+\_\+record}} ()
+\begin{DoxyCompactList}\small\item\em Space optimization\+: don\textquotesingle{}t inline this frequently instantiated fragment \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Func , typename Return , typename... Args, typename... Extra$>$ }\\void \mbox{\hyperlink{classcpp__function_a97487e306e9e0a8d0535fb5fe5c6d8ef}{initialize}} (Func \&\&\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}}, Return($\ast$)(Args...), const Extra \&... extra)
+\begin{DoxyCompactList}\small\item\em Special internal constructor for functors, lambda functions, etc. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcpp__function_a4120dff5c867829edb5ad1df929ec522}{initialize\+\_\+generic}} (detail\+::function\+\_\+record $\ast$rec, const char $\ast$text, const std\+::type\+\_\+info $\ast$const $\ast$types, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{classargs}{args}})
+\begin{DoxyCompactList}\small\item\em Register a function call with Python (generic non-\/templated code goes here) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{静态 Protected 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classcpp__function_a61bdafab94b0fa0bad23c5161e7f9e59}{destruct}} (detail\+::function\+\_\+record $\ast$rec)
+\begin{DoxyCompactList}\small\item\em When a \mbox{\hyperlink{classcpp__function}{cpp\+\_\+function}} is GCed, release any memory allocated by \mbox{\hyperlink{namespacepybind11}{pybind11}} \end{DoxyCompactList}\item 
+static Py\+Object $\ast$ \mbox{\hyperlink{classcpp__function_a163f9490577dfa9822978b60bf8938b6}{dispatcher}} (Py\+Object $\ast$\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}, Py\+Object $\ast$args\+\_\+in, Py\+Object $\ast$kwargs\+\_\+in)
+\begin{DoxyCompactList}\small\item\em Main dispatch logic for calls to functions bound using \mbox{\hyperlink{namespacepybind11}{pybind11}} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{额外继承的成员函数}
+
+
+\doxysubsection{详细描述}
+Wraps an arbitrary C++ function/method/lambda function/.. into a callable Python object 
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classcpp__function_ae280a9823b07b3832e8d7e786a863bf4}\label{classcpp__function_ae280a9823b07b3832e8d7e786a863bf4}} 
+\index{cpp\_function@{cpp\_function}!cpp\_function@{cpp\_function}}
+\index{cpp\_function@{cpp\_function}!cpp\_function@{cpp\_function}}
+\doxysubsubsection{\texorpdfstring{cpp\_function()}{cpp\_function()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily cpp\+\_\+function\+::cpp\+\_\+function (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classcpp__function_a645776419d4d24d2fef4c3339cffe7c3}\label{classcpp__function_a645776419d4d24d2fef4c3339cffe7c3}} 
+\index{cpp\_function@{cpp\_function}!cpp\_function@{cpp\_function}}
+\index{cpp\_function@{cpp\_function}!cpp\_function@{cpp\_function}}
+\doxysubsubsection{\texorpdfstring{cpp\_function()}{cpp\_function()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily cpp\+\_\+function\+::cpp\+\_\+function (\begin{DoxyParamCaption}\item[{std\+::nullptr\+\_\+t}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classcpp__function_adf288fd4fadeaf8e9e142d177fc267da}\label{classcpp__function_adf288fd4fadeaf8e9e142d177fc267da}} 
+\index{cpp\_function@{cpp\_function}!cpp\_function@{cpp\_function}}
+\index{cpp\_function@{cpp\_function}!cpp\_function@{cpp\_function}}
+\doxysubsubsection{\texorpdfstring{cpp\_function()}{cpp\_function()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily template$<$typename Return , typename... Args, typename... Extra$>$ \\
+cpp\+\_\+function\+::cpp\+\_\+function (\begin{DoxyParamCaption}\item[{Return($\ast$)(Args...)}]{f,  }\item[{const Extra \&...}]{extra }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a \mbox{\hyperlink{classcpp__function}{cpp\+\_\+function}} from a vanilla function pointer 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=277pt]{classcpp__function_adf288fd4fadeaf8e9e142d177fc267da_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classcpp__function_a345da213151996cb60ba487622036899}\label{classcpp__function_a345da213151996cb60ba487622036899}} 
+\index{cpp\_function@{cpp\_function}!cpp\_function@{cpp\_function}}
+\index{cpp\_function@{cpp\_function}!cpp\_function@{cpp\_function}}
+\doxysubsubsection{\texorpdfstring{cpp\_function()}{cpp\_function()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily template$<$typename Func , typename... Extra, typename  = detail\+::enable\+\_\+if\+\_\+t$<$detail\+::is\+\_\+lambda$<$\+Func$>$\+::value$>$$>$ \\
+cpp\+\_\+function\+::cpp\+\_\+function (\begin{DoxyParamCaption}\item[{Func \&\&}]{f,  }\item[{const Extra \&...}]{extra }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a \mbox{\hyperlink{classcpp__function}{cpp\+\_\+function}} from a lambda function (possibly with internal state) 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=277pt]{classcpp__function_a345da213151996cb60ba487622036899_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classcpp__function_a977ae047c5ece21dbfbbccda8c304986}\label{classcpp__function_a977ae047c5ece21dbfbbccda8c304986}} 
+\index{cpp\_function@{cpp\_function}!cpp\_function@{cpp\_function}}
+\index{cpp\_function@{cpp\_function}!cpp\_function@{cpp\_function}}
+\doxysubsubsection{\texorpdfstring{cpp\_function()}{cpp\_function()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily template$<$typename Return , typename Class , typename... Arg, typename... Extra$>$ \\
+cpp\+\_\+function\+::cpp\+\_\+function (\begin{DoxyParamCaption}\item[{Return(Class\+::$\ast$)(Arg...)}]{f,  }\item[{const Extra \&...}]{extra }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a \mbox{\hyperlink{classcpp__function}{cpp\+\_\+function}} from a class method (non-\/const) 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=277pt]{classcpp__function_a977ae047c5ece21dbfbbccda8c304986_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classcpp__function_adf1a5ad6ed0992a0bd07c2048b98d6f1}\label{classcpp__function_adf1a5ad6ed0992a0bd07c2048b98d6f1}} 
+\index{cpp\_function@{cpp\_function}!cpp\_function@{cpp\_function}}
+\index{cpp\_function@{cpp\_function}!cpp\_function@{cpp\_function}}
+\doxysubsubsection{\texorpdfstring{cpp\_function()}{cpp\_function()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily template$<$typename Return , typename Class , typename... Arg, typename... Extra$>$ \\
+cpp\+\_\+function\+::cpp\+\_\+function (\begin{DoxyParamCaption}\item[{Return(Class\+::$\ast$)(Arg...) const}]{f,  }\item[{const Extra \&...}]{extra }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a \mbox{\hyperlink{classcpp__function}{cpp\+\_\+function}} from a class method (const) 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=277pt]{classcpp__function_adf1a5ad6ed0992a0bd07c2048b98d6f1_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classcpp__function_a61bdafab94b0fa0bad23c5161e7f9e59}\label{classcpp__function_a61bdafab94b0fa0bad23c5161e7f9e59}} 
+\index{cpp\_function@{cpp\_function}!destruct@{destruct}}
+\index{destruct@{destruct}!cpp\_function@{cpp\_function}}
+\doxysubsubsection{\texorpdfstring{destruct()}{destruct()}}
+{\footnotesize\ttfamily static void cpp\+\_\+function\+::destruct (\begin{DoxyParamCaption}\item[{detail\+::function\+\_\+record $\ast$}]{rec }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+When a \mbox{\hyperlink{classcpp__function}{cpp\+\_\+function}} is GCed, release any memory allocated by \mbox{\hyperlink{namespacepybind11}{pybind11}} 
+
+\mbox{\Hypertarget{classcpp__function_a163f9490577dfa9822978b60bf8938b6}\label{classcpp__function_a163f9490577dfa9822978b60bf8938b6}} 
+\index{cpp\_function@{cpp\_function}!dispatcher@{dispatcher}}
+\index{dispatcher@{dispatcher}!cpp\_function@{cpp\_function}}
+\doxysubsubsection{\texorpdfstring{dispatcher()}{dispatcher()}}
+{\footnotesize\ttfamily static Py\+Object $\ast$ cpp\+\_\+function\+::dispatcher (\begin{DoxyParamCaption}\item[{Py\+Object $\ast$}]{self,  }\item[{Py\+Object $\ast$}]{args\+\_\+in,  }\item[{Py\+Object $\ast$}]{kwargs\+\_\+in }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Main dispatch logic for calls to functions bound using \mbox{\hyperlink{namespacepybind11}{pybind11}} 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcpp__function_a163f9490577dfa9822978b60bf8938b6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classcpp__function_a97487e306e9e0a8d0535fb5fe5c6d8ef}\label{classcpp__function_a97487e306e9e0a8d0535fb5fe5c6d8ef}} 
+\index{cpp\_function@{cpp\_function}!initialize@{initialize}}
+\index{initialize@{initialize}!cpp\_function@{cpp\_function}}
+\doxysubsubsection{\texorpdfstring{initialize()}{initialize()}}
+{\footnotesize\ttfamily template$<$typename Func , typename Return , typename... Args, typename... Extra$>$ \\
+void cpp\+\_\+function\+::initialize (\begin{DoxyParamCaption}\item[{Func \&\&}]{f,  }\item[{Return($\ast$)(Args...)}]{,  }\item[{const Extra \&...}]{extra }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Special internal constructor for functors, lambda functions, etc. 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcpp__function_a97487e306e9e0a8d0535fb5fe5c6d8ef_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classcpp__function_a4120dff5c867829edb5ad1df929ec522}\label{classcpp__function_a4120dff5c867829edb5ad1df929ec522}} 
+\index{cpp\_function@{cpp\_function}!initialize\_generic@{initialize\_generic}}
+\index{initialize\_generic@{initialize\_generic}!cpp\_function@{cpp\_function}}
+\doxysubsubsection{\texorpdfstring{initialize\_generic()}{initialize\_generic()}}
+{\footnotesize\ttfamily void cpp\+\_\+function\+::initialize\+\_\+generic (\begin{DoxyParamCaption}\item[{detail\+::function\+\_\+record $\ast$}]{rec,  }\item[{const char $\ast$}]{text,  }\item[{const std\+::type\+\_\+info $\ast$const $\ast$}]{types,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Register a function call with Python (generic non-\/templated code goes here) 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classcpp__function_a4120dff5c867829edb5ad1df929ec522_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classcpp__function_af183e360a4104776ad303e0c1d17ec38}\label{classcpp__function_af183e360a4104776ad303e0c1d17ec38}} 
+\index{cpp\_function@{cpp\_function}!make\_function\_record@{make\_function\_record}}
+\index{make\_function\_record@{make\_function\_record}!cpp\_function@{cpp\_function}}
+\doxysubsubsection{\texorpdfstring{make\_function\_record()}{make\_function\_record()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\+\_\+\+NOINLINE}} detail\+::function\+\_\+record $\ast$ cpp\+\_\+function\+::make\+\_\+function\+\_\+record (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Space optimization\+: don\textquotesingle{}t inline this frequently instantiated fragment 
+
+\mbox{\Hypertarget{classcpp__function_a5d8bcdd6781aa6da434299589c68013e}\label{classcpp__function_a5d8bcdd6781aa6da434299589c68013e}} 
+\index{cpp\_function@{cpp\_function}!name@{name}}
+\index{name@{name}!cpp\_function@{cpp\_function}}
+\doxysubsubsection{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classobject}{object}} cpp\+\_\+function\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the function name 
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/\mbox{\hyperlink{pybind11_8h}{pybind11.\+h}}\end{DoxyCompactItemize}

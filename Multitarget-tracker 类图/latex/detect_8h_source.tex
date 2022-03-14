@@ -1,0 +1,143 @@
+\hypertarget{detect_8h_source}{}\doxysection{detect.\+h}
+\label{detect_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/detect.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/detect.h}}
+\mbox{\hyperlink{detect_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef \_DETECT\_H\_}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define \_DETECT\_H\_}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}NvInfer.h"{}}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacenvinfer1}{nvinfer1}}}
+\DoxyCodeLine{9 \{}
+\DoxyCodeLine{10     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{11     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacenvinfer1_a8455d49d12f876ef3c07a5df62bbe17c}{write}}(\textcolor{keywordtype}{char}*\& \mbox{\hyperlink{classbuffer}{buffer}}, \textcolor{keyword}{const} T\& val)}
+\DoxyCodeLine{12     \{}
+\DoxyCodeLine{13         *\textcolor{keyword}{reinterpret\_cast<}T*\textcolor{keyword}{>}(\mbox{\hyperlink{classbuffer}{buffer}}) = val;}
+\DoxyCodeLine{14         \mbox{\hyperlink{classbuffer}{buffer}} += \textcolor{keyword}{sizeof}(T);}
+\DoxyCodeLine{15     \}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{18     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacenvinfer1_aba564f1375831c7ba550dadc966101b6}{read}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char}*\& \mbox{\hyperlink{classbuffer}{buffer}}, T\& val)}
+\DoxyCodeLine{19     \{}
+\DoxyCodeLine{20         val = *\textcolor{keyword}{reinterpret\_cast<}\textcolor{keyword}{const }T*\textcolor{keyword}{>}(\mbox{\hyperlink{classbuffer}{buffer}});}
+\DoxyCodeLine{21         \mbox{\hyperlink{classbuffer}{buffer}} += \textcolor{keyword}{sizeof}(T);}
+\DoxyCodeLine{22     \}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24     \textcolor{keyword}{class }\mbox{\hyperlink{classnvinfer1_1_1_detect}{Detect}} :\textcolor{keyword}{public} IPluginV2}
+\DoxyCodeLine{25     \{}
+\DoxyCodeLine{26     \textcolor{keyword}{public}:}
+\DoxyCodeLine{27         \mbox{\hyperlink{classnvinfer1_1_1_detect_ab3dea3a2297b510b2b304b67b4271d17}{Detect}}();}
+\DoxyCodeLine{28         \mbox{\hyperlink{classnvinfer1_1_1_detect_ad2299e732e17ed07decf937b6629bb42}{Detect}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* \mbox{\hyperlink{structdata}{data}}, \textcolor{keywordtype}{size\_t} length);}
+\DoxyCodeLine{29         \mbox{\hyperlink{classnvinfer1_1_1_detect_a6c0a94e2e1cb3ec66b5921b32c6e50e6}{Detect}}(\textcolor{keyword}{const} uint32\_t n\_anchor\_, \textcolor{keyword}{const} uint32\_t \_n\_classes\_,}
+\DoxyCodeLine{30             \textcolor{keyword}{const} uint32\_t n\_grid\_h\_, \textcolor{keyword}{const} uint32\_t n\_grid\_w\_\textcolor{comment}{/*,}}
+\DoxyCodeLine{31 \textcolor{comment}{            const uint32\_t \&n\_stride\_h\_, const uint32\_t \&n\_stride\_w\_*/});}
+\DoxyCodeLine{32         \mbox{\hyperlink{classnvinfer1_1_1_detect_aaf6d81bf08e1a363a31c33d5bb190d3c}{\string~Detect}}();}
+\DoxyCodeLine{33         \textcolor{keywordtype}{int} \mbox{\hyperlink{classnvinfer1_1_1_detect_aff8e94e8255822da3c5cf5ce89cae33f}{getNbOutputs}}()const noexcept\textcolor{keyword}{ override}}
+\DoxyCodeLine{34 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{35             \textcolor{keywordflow}{return} 1;}
+\DoxyCodeLine{36         \}}
+\DoxyCodeLine{37         Dims \mbox{\hyperlink{classnvinfer1_1_1_detect_a7aa95f21971188f5195c72bf337ff040}{getOutputDimensions}}(\textcolor{keywordtype}{int} index, \textcolor{keyword}{const} Dims* inputs, \textcolor{keywordtype}{int} nbInputDims) \textcolor{keyword}{noexcept}  \textcolor{keyword}{override}}
+\DoxyCodeLine{38         \{}
+\DoxyCodeLine{39             \textcolor{keywordflow}{return} inputs[0];}
+\DoxyCodeLine{40         \}}
+\DoxyCodeLine{41         \textcolor{keywordtype}{int} \mbox{\hyperlink{classnvinfer1_1_1_detect_a1da0113af1c46c9eba0a6b9652a60f5b}{initialize}}() noexcept\textcolor{keyword}{  override}}
+\DoxyCodeLine{42 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{43             \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{44         \}}
+\DoxyCodeLine{45         \textcolor{keywordtype}{void} \mbox{\hyperlink{classnvinfer1_1_1_detect_ada2138bebaea19d3b5b7e2125b937a66}{terminate}}() noexcept\textcolor{keyword}{  override}}
+\DoxyCodeLine{46 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{47         \}}
+\DoxyCodeLine{48         \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{classnvinfer1_1_1_detect_aba69b2636caa86d3abb59c27f02d70a1}{getWorkspaceSize}}(\textcolor{keywordtype}{int} maxBatchSize) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}  \textcolor{keyword}{override}}
+\DoxyCodeLine{49         \{}
+\DoxyCodeLine{50             \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{51         \}}
+\DoxyCodeLine{52         \textcolor{keywordtype}{int} \mbox{\hyperlink{classnvinfer1_1_1_detect_a58f31333952c483b01f4ee6406aa7638}{enqueue}}(\textcolor{keywordtype}{int} batchSize, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* \textcolor{keyword}{const}* inputs, \textcolor{keywordtype}{void}** outputs, \textcolor{keywordtype}{void}* workspace, cudaStream\_t stream) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{53         \textcolor{keywordtype}{int} \mbox{\hyperlink{classnvinfer1_1_1_detect_a961f96279032379f570a2b24403dde91}{enqueue}}(\textcolor{keywordtype}{int} batchSize, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* \textcolor{keyword}{const}* inputs, \textcolor{keywordtype}{void}* \textcolor{keyword}{const}* outputs, \textcolor{keywordtype}{void}* workspace, cudaStream\_t stream) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55         \textcolor{keywordtype}{bool} \mbox{\hyperlink{classnvinfer1_1_1_detect_a06a41ffc2b3cdee3d05aad41791524f0}{supportsFormat}}(DataType type, PluginFormat format) \textcolor{keyword}{const} \textcolor{keyword}{noexcept} \textcolor{keyword}{override};}
+\DoxyCodeLine{56         \textcolor{keywordtype}{void} \mbox{\hyperlink{classnvinfer1_1_1_detect_a350b6f913297c3e1daa5f034aa5c3077}{configureWithFormat}}(\textcolor{keyword}{const} Dims* inputDims, \textcolor{keywordtype}{int} nbInputs, \textcolor{keyword}{const} Dims* outputDims, \textcolor{keywordtype}{int} nbOutputs, DataType type, PluginFormat format, \textcolor{keywordtype}{int} maxBatchSize) \textcolor{keyword}{noexcept} \textcolor{keyword}{override};}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58         \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{classnvinfer1_1_1_detect_ad6f68f8c9827e808bccfe9074cfd57ba}{getSerializationSize}}() const noexcept  override;}
+\DoxyCodeLine{59         \textcolor{keywordtype}{void} \mbox{\hyperlink{classnvinfer1_1_1_detect_a79fa3a6eeb4176ef6946c0e353eef815}{serialize}}(\textcolor{keywordtype}{void}* \mbox{\hyperlink{classbuffer}{buffer}}) const noexcept  override;}
+\DoxyCodeLine{60         const \textcolor{keywordtype}{char}* \mbox{\hyperlink{classnvinfer1_1_1_detect_a1d97b32134efcd17772d5da841eb32b0}{getPluginType}}() const noexcept\textcolor{keyword}{  override}}
+\DoxyCodeLine{61 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{62             \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}DETECT\_TRT"{}};}
+\DoxyCodeLine{63         \}}
+\DoxyCodeLine{64         \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{classnvinfer1_1_1_detect_a3e36ee8508d67ea0672d4044329084ab}{getPluginVersion}}() const noexcept\textcolor{keyword}{  override}}
+\DoxyCodeLine{65 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{66             \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}1.0"{}};}
+\DoxyCodeLine{67         \}}
+\DoxyCodeLine{68         \textcolor{keywordtype}{void} \mbox{\hyperlink{classnvinfer1_1_1_detect_a347b4c8f0ff0365ca5a0b24150c6fbee}{destroy}}() noexcept\textcolor{keyword}{  override}}
+\DoxyCodeLine{69 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{70             \textcolor{keyword}{delete} \textcolor{keyword}{this};}
+\DoxyCodeLine{71         \}}
+\DoxyCodeLine{72         \textcolor{keywordtype}{void} \mbox{\hyperlink{classnvinfer1_1_1_detect_ad4fa644d6c300352d8d5a010d3de1e04}{setPluginNamespace}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* pluginNamespace) \textcolor{keyword}{noexcept}  \textcolor{keyword}{override}}
+\DoxyCodeLine{73         \{}
+\DoxyCodeLine{74             \mbox{\hyperlink{classnvinfer1_1_1_detect_a7d4144d55b63316e8d7598759f96bd70}{\_s\_plugin\_namespace}} = pluginNamespace;}
+\DoxyCodeLine{75         \}}
+\DoxyCodeLine{76         \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{classnvinfer1_1_1_detect_ac7aa0b898321fe6a106a2660e0be923a}{getPluginNamespace}}() const  noexcept\textcolor{keyword}{ override}}
+\DoxyCodeLine{77 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{78             \textcolor{keywordflow}{return} \mbox{\hyperlink{classnvinfer1_1_1_detect_a7d4144d55b63316e8d7598759f96bd70}{\_s\_plugin\_namespace}}.c\_str();}
+\DoxyCodeLine{79         \}}
+\DoxyCodeLine{80         DataType \mbox{\hyperlink{classnvinfer1_1_1_detect_ae91d839f7caf2742b7ce871ade324dca}{getOutputDataType}}(\textcolor{keywordtype}{int} index, \textcolor{keyword}{const} nvinfer1::DataType* inputTypes, \textcolor{keywordtype}{int} nbInputs) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{81         \{}
+\DoxyCodeLine{82             \textcolor{keywordflow}{return} DataType::kFLOAT;}
+\DoxyCodeLine{83         \}}
+\DoxyCodeLine{84         \textcolor{keywordtype}{bool} \mbox{\hyperlink{classnvinfer1_1_1_detect_a844a5398e2ba20377b81717841ba37de}{isOutputBroadcastAcrossBatch}}(\textcolor{keywordtype}{int} outputIndex, \textcolor{keyword}{const} \textcolor{keywordtype}{bool}* inputIsBroadcasted, \textcolor{keywordtype}{int} nbInputs) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{85         \{}
+\DoxyCodeLine{86             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{87         \}}
+\DoxyCodeLine{88         \textcolor{keywordtype}{bool} \mbox{\hyperlink{classnvinfer1_1_1_detect_a054672bec18a40f603ddf4f7c55e7718}{canBroadcastInputAcrossBatch}}(\textcolor{keywordtype}{int} inputIndex) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{89         \{}
+\DoxyCodeLine{90             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{91         \}}
+\DoxyCodeLine{92         \textcolor{keywordtype}{void} \mbox{\hyperlink{classnvinfer1_1_1_detect_a5158049e2178c1940d4ce294be253d5e}{attachToContext}}(}
+\DoxyCodeLine{93             cudnnContext* cudnnContext, cublasContext* cublasContext, IGpuAllocator* gpuAllocator)}
+\DoxyCodeLine{94         \{\}}
+\DoxyCodeLine{95         \textcolor{keywordtype}{void} \mbox{\hyperlink{classnvinfer1_1_1_detect_a20e72196f4c9600ba99bafe6668d9d0c}{configurePlugin}}(\textcolor{keyword}{const} PluginTensorDesc* in, \textcolor{keywordtype}{int} nbInput, \textcolor{keyword}{const} PluginTensorDesc* out, \textcolor{keywordtype}{int} nbOutput) ;}
+\DoxyCodeLine{96         \textcolor{keywordtype}{void} \mbox{\hyperlink{classnvinfer1_1_1_detect_ab46fe85f7ee8b861abbdc157c189653d}{detachFromContext}}()}
+\DoxyCodeLine{97         \{\}}
+\DoxyCodeLine{98         \textcolor{keywordtype}{bool} \mbox{\hyperlink{classnvinfer1_1_1_detect_a09b047f3d9c4df8590be59c7c3f4af91}{supportsFormatCombination}}(\textcolor{keywordtype}{int} pos, \textcolor{keyword}{const} PluginTensorDesc* inOut, \textcolor{keywordtype}{int} nbInputs, \textcolor{keywordtype}{int} nbOutputs) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{99         \{}
+\DoxyCodeLine{100             \textcolor{keywordflow}{return} inOut[pos].format == TensorFormat::kLINEAR \&\& inOut[pos].type == DataType::kFLOAT;}
+\DoxyCodeLine{101         \}}
+\DoxyCodeLine{102         IPluginV2* \mbox{\hyperlink{classnvinfer1_1_1_detect_a340904a2b9bbf011884b644eff056605}{clone}}() const noexcept override;}
+\DoxyCodeLine{103     private:}
+\DoxyCodeLine{104         }
+\DoxyCodeLine{105         uint32\_t \mbox{\hyperlink{classnvinfer1_1_1_detect_aee5b0b6a9199afc8364b0d1b908b2d60}{\_n\_anchor}};}
+\DoxyCodeLine{106         uint32\_t \mbox{\hyperlink{classnvinfer1_1_1_detect_a1ec2fe95131917f21f95c85c9ca90f49}{\_n\_classes}};}
+\DoxyCodeLine{107         uint32\_t \mbox{\hyperlink{classnvinfer1_1_1_detect_af9c2b0e49b0ff3ac960fb79cf8f4cb0a}{\_n\_grid\_h}};}
+\DoxyCodeLine{108         uint32\_t \mbox{\hyperlink{classnvinfer1_1_1_detect_a7560bb4215ef999aebc66a6d72c5ed06}{\_n\_grid\_w}};}
+\DoxyCodeLine{109         \textcolor{comment}{//uint32\_t \_n\_stride\_h;}}
+\DoxyCodeLine{110     \textcolor{comment}{//  uint32\_t \_n\_stride\_w;}}
+\DoxyCodeLine{111         uint64\_t \mbox{\hyperlink{classnvinfer1_1_1_detect_acb38d18b5e1e2825bc3926241fd4efb9}{\_n\_output\_size}};}
+\DoxyCodeLine{112         \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string} \mbox{\hyperlink{classnvinfer1_1_1_detect_a7d4144d55b63316e8d7598759f96bd70}{\_s\_plugin\_namespace}};}
+\DoxyCodeLine{113     \}; \textcolor{comment}{//end detect}}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115     class \mbox{\hyperlink{classnvinfer1_1_1_detect_plugin_creator}{DetectPluginCreator}} : public IPluginCreator}
+\DoxyCodeLine{116     \{}
+\DoxyCodeLine{117     \textcolor{keyword}{public}:}
+\DoxyCodeLine{118         \mbox{\hyperlink{classnvinfer1_1_1_detect_plugin_creator_ab29cf0135f396b4fcab7a816475a4075}{DetectPluginCreator}}();}
+\DoxyCodeLine{119         \mbox{\hyperlink{classnvinfer1_1_1_detect_plugin_creator_a6d626504f38afad068e90dbfa8ca283d}{\string~DetectPluginCreator}}() \textcolor{keyword}{override} = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{120         \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{classnvinfer1_1_1_detect_plugin_creator_a2e9bdbf3ae7954f3084da63ad9bedfa4}{getPluginName}}()const noexcept  override;}
+\DoxyCodeLine{121         const \textcolor{keywordtype}{char}* \mbox{\hyperlink{classnvinfer1_1_1_detect_a3e36ee8508d67ea0672d4044329084ab}{getPluginVersion}}() const  noexcept override;}
+\DoxyCodeLine{122         const PluginFieldCollection* getFieldNames() noexcept  override;}
+\DoxyCodeLine{123         IPluginV2* createPlugin(const \textcolor{keywordtype}{char}* \mbox{\hyperlink{structname}{name}}, const PluginFieldCollection* fc) noexcept  override;}
+\DoxyCodeLine{124         IPluginV2* deserializePlugin(const \textcolor{keywordtype}{char}* \mbox{\hyperlink{structname}{name}}, const \textcolor{keywordtype}{void}* serialData, \textcolor{keywordtype}{size\_t} serialLength) noexcept  override;}
+\DoxyCodeLine{125         \textcolor{keywordtype}{void} \mbox{\hyperlink{classnvinfer1_1_1_detect_ad4fa644d6c300352d8d5a010d3de1e04}{setPluginNamespace}}(const \textcolor{keywordtype}{char}* libNamespace)  noexcept override;}
+\DoxyCodeLine{126         const \textcolor{keywordtype}{char}* \mbox{\hyperlink{classnvinfer1_1_1_detect_ac7aa0b898321fe6a106a2660e0be923a}{getPluginNamespace}}() const noexcept  override;}
+\DoxyCodeLine{127     private:}
+\DoxyCodeLine{128         \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string} \_s\_name\_space;}
+\DoxyCodeLine{129         static PluginFieldCollection \_fc;}
+\DoxyCodeLine{130         static \mbox{\hyperlink{namespacestd}{std}}::vector<PluginField> \_vec\_plugin\_attributes;}
+\DoxyCodeLine{131     \};\textcolor{comment}{//end detect creator}}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133 \}\textcolor{comment}{//end namespace nvinfer1}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

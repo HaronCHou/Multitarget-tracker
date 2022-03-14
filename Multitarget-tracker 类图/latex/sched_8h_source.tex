@@ -1,0 +1,189 @@
+\hypertarget{sched_8h_source}{}\doxysection{sched.\+h}
+\label{sched_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/3rdparty/include/sched.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/3rdparty/include/sched.h}}
+\mbox{\hyperlink{sched_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * Module: sched.h}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Purpose:}}
+\DoxyCodeLine{5 \textcolor{comment}{ *      Provides an implementation of POSIX realtime extensions}}
+\DoxyCodeLine{6 \textcolor{comment}{ *      as defined in }}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ *              POSIX 1003.1b-\/1993      (POSIX.1b)}}
+\DoxyCodeLine{9 \textcolor{comment}{ *}}
+\DoxyCodeLine{10 \textcolor{comment}{ * -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{11 \textcolor{comment}{ *}}
+\DoxyCodeLine{12 \textcolor{comment}{ *      Pthreads-\/win32 -\/ POSIX Threads Library for Win32}}
+\DoxyCodeLine{13 \textcolor{comment}{ *      Copyright(C) 1998 John E. Bossom}}
+\DoxyCodeLine{14 \textcolor{comment}{ *      Copyright(C) 1999,2005 Pthreads-\/win32 contributors}}
+\DoxyCodeLine{15 \textcolor{comment}{ * }}
+\DoxyCodeLine{16 \textcolor{comment}{ *      Contact Email: rpj@callisto.canberra.edu.au}}
+\DoxyCodeLine{17 \textcolor{comment}{ * }}
+\DoxyCodeLine{18 \textcolor{comment}{ *      The current list of contributors is contained}}
+\DoxyCodeLine{19 \textcolor{comment}{ *      in the file CONTRIBUTORS included with the source}}
+\DoxyCodeLine{20 \textcolor{comment}{ *      code distribution. The list can also be seen at the}}
+\DoxyCodeLine{21 \textcolor{comment}{ *      following World Wide Web location:}}
+\DoxyCodeLine{22 \textcolor{comment}{ *      http://sources.redhat.com/pthreads-\/win32/contributors.html}}
+\DoxyCodeLine{23 \textcolor{comment}{ * }}
+\DoxyCodeLine{24 \textcolor{comment}{ *      This library is free software; you can redistribute it and/or}}
+\DoxyCodeLine{25 \textcolor{comment}{ *      modify it under the terms of the GNU Lesser General Public}}
+\DoxyCodeLine{26 \textcolor{comment}{ *      License as published by the Free Software Foundation; either}}
+\DoxyCodeLine{27 \textcolor{comment}{ *      version 2 of the License, or (at your option) any later version.}}
+\DoxyCodeLine{28 \textcolor{comment}{ * }}
+\DoxyCodeLine{29 \textcolor{comment}{ *      This library is distributed in the hope that it will be useful,}}
+\DoxyCodeLine{30 \textcolor{comment}{ *      but WITHOUT ANY WARRANTY; without even the implied warranty of}}
+\DoxyCodeLine{31 \textcolor{comment}{ *      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU}}
+\DoxyCodeLine{32 \textcolor{comment}{ *      Lesser General Public License for more details.}}
+\DoxyCodeLine{33 \textcolor{comment}{ * }}
+\DoxyCodeLine{34 \textcolor{comment}{ *      You should have received a copy of the GNU Lesser General Public}}
+\DoxyCodeLine{35 \textcolor{comment}{ *      License along with this library in the file COPYING.LIB;}}
+\DoxyCodeLine{36 \textcolor{comment}{ *      if not, write to the Free Software Foundation, Inc.,}}
+\DoxyCodeLine{37 \textcolor{comment}{ *      59 Temple Place -\/ Suite 330, Boston, MA 02111-\/1307, USA}}
+\DoxyCodeLine{38 \textcolor{comment}{ */}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#if !defined(\_SCHED\_H)}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#define \_SCHED\_H}}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#undef PTW32\_SCHED\_LEVEL}}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#if defined(\_POSIX\_SOURCE)}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#define PTW32\_SCHED\_LEVEL 0}}
+\DoxyCodeLine{46 \textcolor{comment}{/* Early POSIX */}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#if defined(\_POSIX\_C\_SOURCE) \&\& \_POSIX\_C\_SOURCE >= 199309}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#undef PTW32\_SCHED\_LEVEL}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#define PTW32\_SCHED\_LEVEL 1}}
+\DoxyCodeLine{52 \textcolor{comment}{/* Include 1b, 1c and 1d */}}
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#if defined(INCLUDE\_NP)}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#undef PTW32\_SCHED\_LEVEL}}
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#define PTW32\_SCHED\_LEVEL 2}}
+\DoxyCodeLine{58 \textcolor{comment}{/* Include Non-\/Portable extensions */}}
+\DoxyCodeLine{59 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{preprocessor}{\#define PTW32\_SCHED\_LEVEL\_MAX 3}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#if ( defined(\_POSIX\_C\_SOURCE) \&\& \_POSIX\_C\_SOURCE >= 200112 )  || !defined(PTW32\_SCHED\_LEVEL)}}
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#define PTW32\_SCHED\_LEVEL PTW32\_SCHED\_LEVEL\_MAX}}
+\DoxyCodeLine{65 \textcolor{comment}{/* Include everything */}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69 \textcolor{preprocessor}{\#if defined(\_\_GNUC\_\_) \&\& !defined(\_\_declspec)}}
+\DoxyCodeLine{70 \textcolor{preprocessor}{\# error Please upgrade your GNU compiler to one that supports \_\_declspec.}}
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \textcolor{comment}{/*}}
+\DoxyCodeLine{74 \textcolor{comment}{ * When building the library, you should define PTW32\_BUILD so that}}
+\DoxyCodeLine{75 \textcolor{comment}{ * the variables/functions are exported correctly. When using the library,}}
+\DoxyCodeLine{76 \textcolor{comment}{ * do NOT define PTW32\_BUILD, and then the variables/functions will}}
+\DoxyCodeLine{77 \textcolor{comment}{ * be imported correctly.}}
+\DoxyCodeLine{78 \textcolor{comment}{ */}}
+\DoxyCodeLine{79 \textcolor{preprocessor}{\#if !defined(PTW32\_STATIC\_LIB)}}
+\DoxyCodeLine{80 \textcolor{preprocessor}{\#  if defined(PTW32\_BUILD)}}
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#    define PTW32\_DLLPORT \_\_declspec (dllexport)}}
+\DoxyCodeLine{82 \textcolor{preprocessor}{\#  else}}
+\DoxyCodeLine{83 \textcolor{preprocessor}{\#    define PTW32\_DLLPORT \_\_declspec (dllimport)}}
+\DoxyCodeLine{84 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{85 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#  define PTW32\_DLLPORT}}
+\DoxyCodeLine{87 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89 \textcolor{comment}{/*}}
+\DoxyCodeLine{90 \textcolor{comment}{ * This is a duplicate of what is in the autoconf config.h,}}
+\DoxyCodeLine{91 \textcolor{comment}{ * which is only used when building the pthread-\/win32 libraries.}}
+\DoxyCodeLine{92 \textcolor{comment}{ */}}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#if !defined(PTW32\_CONFIG\_H)}}
+\DoxyCodeLine{95 \textcolor{preprocessor}{\#  if defined(WINCE)}}
+\DoxyCodeLine{96 \textcolor{preprocessor}{\#    define NEED\_ERRNO}}
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#    define NEED\_SEM}}
+\DoxyCodeLine{98 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#  if defined(\_\_MINGW64\_\_)}}
+\DoxyCodeLine{100 \textcolor{preprocessor}{\#    define HAVE\_STRUCT\_TIMESPEC}}
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#    define HAVE\_MODE\_T}}
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#  elif defined(\_UWIN) || defined(\_\_MINGW32\_\_)}}
+\DoxyCodeLine{103 \textcolor{preprocessor}{\#    define HAVE\_MODE\_T}}
+\DoxyCodeLine{104 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{105 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107 \textcolor{comment}{/*}}
+\DoxyCodeLine{108 \textcolor{comment}{ *}}
+\DoxyCodeLine{109 \textcolor{comment}{ */}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111 \textcolor{preprocessor}{\#if PTW32\_SCHED\_LEVEL >= PTW32\_SCHED\_LEVEL\_MAX}}
+\DoxyCodeLine{112 \textcolor{preprocessor}{\#if defined(NEED\_ERRNO)}}
+\DoxyCodeLine{113 \textcolor{preprocessor}{\#include "{}need\_errno.h"{}}}
+\DoxyCodeLine{114 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{115 \textcolor{preprocessor}{\#include <errno.h>}}
+\DoxyCodeLine{116 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{117 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* PTW32\_SCHED\_LEVEL >= PTW32\_SCHED\_LEVEL\_MAX */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119 \textcolor{preprocessor}{\#if (defined(\_\_MINGW64\_\_) || defined(\_\_MINGW32\_\_)) || defined(\_UWIN)}}
+\DoxyCodeLine{120 \textcolor{preprocessor}{\# if PTW32\_SCHED\_LEVEL >= PTW32\_SCHED\_LEVEL\_MAX}}
+\DoxyCodeLine{121 \textcolor{comment}{/* For pid\_t */}}
+\DoxyCodeLine{122 \textcolor{preprocessor}{\#  include <sys/types.h>}}
+\DoxyCodeLine{123 \textcolor{comment}{/* Required by Unix 98 */}}
+\DoxyCodeLine{124 \textcolor{preprocessor}{\#  include <time.h>}}
+\DoxyCodeLine{125 \textcolor{preprocessor}{\# else}}
+\DoxyCodeLine{126    \textcolor{keyword}{typedef} \textcolor{keywordtype}{int} \mbox{\hyperlink{sched_8h_a288e13e815d43b06e75819f8939524df}{pid\_t}};}
+\DoxyCodeLine{127 \textcolor{preprocessor}{\# endif}}
+\DoxyCodeLine{128 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{129  \textcolor{keyword}{typedef} \textcolor{keywordtype}{int} \mbox{\hyperlink{sched_8h_a288e13e815d43b06e75819f8939524df}{pid\_t}};}
+\DoxyCodeLine{130 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132 \textcolor{comment}{/* Thread scheduling policies */}}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{134 \textcolor{keyword}{enum} \{}
+\DoxyCodeLine{135   \mbox{\hyperlink{sched_8h_abc6126af1d45847bc59afa0aa3216b04a4894e7b32f4adb6f45772da81e079112}{SCHED\_OTHER}} = 0,}
+\DoxyCodeLine{136   \mbox{\hyperlink{sched_8h_abc6126af1d45847bc59afa0aa3216b04aeac62b0eeeb49c48d0ced7c24e683dc2}{SCHED\_FIFO}},}
+\DoxyCodeLine{137   \mbox{\hyperlink{sched_8h_abc6126af1d45847bc59afa0aa3216b04a52fe874d96104f50e65c006f73c3b537}{SCHED\_RR}},}
+\DoxyCodeLine{138   \mbox{\hyperlink{sched_8h_abc6126af1d45847bc59afa0aa3216b04aca3b7063e8797fc88293d732fa166b2a}{SCHED\_MIN}}   = \mbox{\hyperlink{sched_8h_abc6126af1d45847bc59afa0aa3216b04a4894e7b32f4adb6f45772da81e079112}{SCHED\_OTHER}},}
+\DoxyCodeLine{139   \mbox{\hyperlink{sched_8h_abc6126af1d45847bc59afa0aa3216b04af27f94f0b48324aa0346078a9bd36293}{SCHED\_MAX}}   = \mbox{\hyperlink{sched_8h_abc6126af1d45847bc59afa0aa3216b04a52fe874d96104f50e65c006f73c3b537}{SCHED\_RR}}}
+\DoxyCodeLine{140 \};}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142 \textcolor{keyword}{struct }\mbox{\hyperlink{structsched__param}{sched\_param}} \{}
+\DoxyCodeLine{143   \textcolor{keywordtype}{int} \mbox{\hyperlink{structsched__param_aa0f2640949273f2c30549ed8d1bb197e}{sched\_priority}};}
+\DoxyCodeLine{144 \};}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{146 \textcolor{preprocessor}{\#if defined(\_\_cplusplus)}}
+\DoxyCodeLine{147 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}}}
+\DoxyCodeLine{148 \{}
+\DoxyCodeLine{149 \textcolor{preprocessor}{\#endif                          }\textcolor{comment}{/* \_\_cplusplus */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151 \mbox{\hyperlink{sched_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \_\_cdecl \mbox{\hyperlink{sched_8h_a4a919e099705cccbb1a98bd6b4e0f9a0}{sched\_yield}} (\textcolor{keywordtype}{void});}
+\DoxyCodeLine{152 }
+\DoxyCodeLine{153 \mbox{\hyperlink{sched_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \_\_cdecl \mbox{\hyperlink{sched_8h_a5742de615df61c0d990d4d2d45e6482f}{sched\_get\_priority\_min}} (\textcolor{keywordtype}{int} policy);}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155 \mbox{\hyperlink{sched_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \_\_cdecl \mbox{\hyperlink{sched_8h_a98a3d9d92b18a265a536d35cafcc5eeb}{sched\_get\_priority\_max}} (\textcolor{keywordtype}{int} policy);}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157 \mbox{\hyperlink{sched_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \_\_cdecl \mbox{\hyperlink{sched_8h_a24be0c88e6e719833473c24a23d480d5}{sched\_setscheduler}} (\mbox{\hyperlink{sched_8h_a288e13e815d43b06e75819f8939524df}{pid\_t}} pid, \textcolor{keywordtype}{int} policy);}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159 \mbox{\hyperlink{sched_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\_DLLPORT}} \textcolor{keywordtype}{int} \_\_cdecl \mbox{\hyperlink{sched_8h_a1d832f27698809137006af945e7d2545}{sched\_getscheduler}} (\mbox{\hyperlink{sched_8h_a288e13e815d43b06e75819f8939524df}{pid\_t}} pid);}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161 \textcolor{comment}{/*}}
+\DoxyCodeLine{162 \textcolor{comment}{ * Note that this macro returns ENOTSUP rather than}}
+\DoxyCodeLine{163 \textcolor{comment}{ * ENOSYS as might be expected. However, returning ENOSYS}}
+\DoxyCodeLine{164 \textcolor{comment}{ * should mean that sched\_get\_priority\_\{min,max\} are}}
+\DoxyCodeLine{165 \textcolor{comment}{ * not implemented as well as sched\_rr\_get\_interval.}}
+\DoxyCodeLine{166 \textcolor{comment}{ * This is not the case, since we just don't support}}
+\DoxyCodeLine{167 \textcolor{comment}{ * round-\/robin scheduling. Therefore I have chosen to}}
+\DoxyCodeLine{168 \textcolor{comment}{ * return the same value as sched\_setscheduler when}}
+\DoxyCodeLine{169 \textcolor{comment}{ * SCHED\_RR is passed to it.}}
+\DoxyCodeLine{170 \textcolor{comment}{ */}}
+\DoxyCodeLine{171 \textcolor{preprocessor}{\#define sched\_rr\_get\_interval(\_pid, \_interval) \(\backslash\)}}
+\DoxyCodeLine{172 \textcolor{preprocessor}{  ( errno = ENOTSUP, (int) -\/1 )}}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175 \textcolor{preprocessor}{\#if defined(\_\_cplusplus)}}
+\DoxyCodeLine{176 \}                               \textcolor{comment}{/* End of extern "{}C"{} */}}
+\DoxyCodeLine{177 \textcolor{preprocessor}{\#endif                          }\textcolor{comment}{/* \_\_cplusplus */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179 \textcolor{preprocessor}{\#undef PTW32\_SCHED\_LEVEL}}
+\DoxyCodeLine{180 \textcolor{preprocessor}{\#undef PTW32\_SCHED\_LEVEL\_MAX}}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182 \textcolor{preprocessor}{\#endif                          }\textcolor{comment}{/* !\_SCHED\_H */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{183 }
+
+\end{DoxyCode}

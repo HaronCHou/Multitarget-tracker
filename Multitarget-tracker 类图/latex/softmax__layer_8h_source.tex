@@ -1,0 +1,45 @@
+\hypertarget{softmax__layer_8h_source}{}\doxysection{softmax\+\_\+layer.\+h}
+\label{softmax__layer_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/softmax\_layer.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/softmax\_layer.h}}
+\mbox{\hyperlink{softmax__layer_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef SOFTMAX\_LAYER\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define SOFTMAX\_LAYER\_H}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{layer_8h}{layer.h}}"{}}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{network_8h}{network.h}}"{}}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{keyword}{typedef} \mbox{\hyperlink{structlayer}{layer}} \mbox{\hyperlink{softmax__layer_8h_aa78f145c1fcb83ebd29188f78fd8f170}{softmax\_layer}};}
+\DoxyCodeLine{7 \textcolor{keyword}{typedef} \mbox{\hyperlink{structlayer}{layer}} \mbox{\hyperlink{softmax__layer_8h_aeb56bdd74932ddf8867fc1a0ee3d504f}{contrastive\_layer}};}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{10 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{12 \textcolor{keywordtype}{void} \mbox{\hyperlink{softmax__layer_8h_a246de34228e1ef70754d083b568eba1a}{softmax\_array}}(\textcolor{keywordtype}{float} *input, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{float} temp, \textcolor{keywordtype}{float} *output);}
+\DoxyCodeLine{13 \mbox{\hyperlink{structlayer}{softmax\_layer}} \mbox{\hyperlink{softmax__layer_8h_a8cff8d62542982029c5187d95241059b}{make\_softmax\_layer}}(\textcolor{keywordtype}{int} batch, \textcolor{keywordtype}{int} inputs, \textcolor{keywordtype}{int} groups);}
+\DoxyCodeLine{14 \textcolor{keywordtype}{void} \mbox{\hyperlink{softmax__layer_8h_a8be13719e90f580cf854638646cdcc05}{forward\_softmax\_layer}}(\textcolor{keyword}{const} \mbox{\hyperlink{structlayer}{softmax\_layer}} l, \mbox{\hyperlink{structnetwork__state}{network\_state}} state);}
+\DoxyCodeLine{15 \textcolor{keywordtype}{void} \mbox{\hyperlink{softmax__layer_8h_a887793798f9e3478a93591cf3ab19304}{backward\_softmax\_layer}}(\textcolor{keyword}{const} \mbox{\hyperlink{structlayer}{softmax\_layer}} l, \mbox{\hyperlink{structnetwork__state}{network\_state}} state);}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#ifdef GPU}}
+\DoxyCodeLine{18 \textcolor{keywordtype}{void} pull\_softmax\_layer\_output(\textcolor{keyword}{const} \mbox{\hyperlink{structlayer}{softmax\_layer}} l);}
+\DoxyCodeLine{19 \textcolor{keywordtype}{void} forward\_softmax\_layer\_gpu(\textcolor{keyword}{const} \mbox{\hyperlink{structlayer}{softmax\_layer}} l, \mbox{\hyperlink{structnetwork__state}{network\_state}} state);}
+\DoxyCodeLine{20 \textcolor{keywordtype}{void} backward\_softmax\_layer\_gpu(\textcolor{keyword}{const} \mbox{\hyperlink{structlayer}{softmax\_layer}} l, \mbox{\hyperlink{structnetwork__state}{network\_state}} state);}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \mbox{\hyperlink{structlayer}{contrastive\_layer}} \mbox{\hyperlink{softmax__layer_8h_a6f516b18034489fdb1f84cbd45b28ac1}{make\_contrastive\_layer}}(\textcolor{keywordtype}{int} batch, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} classes, \textcolor{keywordtype}{int} inputs, \mbox{\hyperlink{structlayer}{layer}} *yolo\_layer);}
+\DoxyCodeLine{26 \textcolor{keywordtype}{void} \mbox{\hyperlink{softmax__layer_8h_af84681ec165990b247defdc7aeb51c55}{forward\_contrastive\_layer}}(\mbox{\hyperlink{structlayer}{contrastive\_layer}} l, \mbox{\hyperlink{structnetwork__state}{network\_state}} state);}
+\DoxyCodeLine{27 \textcolor{keywordtype}{void} \mbox{\hyperlink{softmax__layer_8h_a78356948e0358012e8d183553c4d28d0}{backward\_contrastive\_layer}}(\mbox{\hyperlink{structlayer}{contrastive\_layer}} l, \mbox{\hyperlink{structnetwork__state}{network\_state}} net);}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#ifdef GPU}}
+\DoxyCodeLine{30 \textcolor{keywordtype}{void} pull\_contrastive\_layer\_output(\textcolor{keyword}{const} \mbox{\hyperlink{structlayer}{contrastive\_layer}} l);}
+\DoxyCodeLine{31 \textcolor{keywordtype}{void} push\_contrastive\_layer\_output(\textcolor{keyword}{const} \mbox{\hyperlink{structlayer}{contrastive\_layer}} l);}
+\DoxyCodeLine{32 \textcolor{keywordtype}{void} forward\_contrastive\_layer\_gpu(\mbox{\hyperlink{structlayer}{contrastive\_layer}} l, \mbox{\hyperlink{structnetwork__state}{network\_state}} state);}
+\DoxyCodeLine{33 \textcolor{keywordtype}{void} backward\_contrastive\_layer\_gpu(\mbox{\hyperlink{structlayer}{contrastive\_layer}} \mbox{\hyperlink{structlayer}{layer}}, \mbox{\hyperlink{structnetwork__state}{network\_state}} state);}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{37 \}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

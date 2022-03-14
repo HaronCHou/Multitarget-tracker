@@ -1,0 +1,159 @@
+\hypertarget{softmax__layer_8c}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/softmax\+\_\+layer.c 文件参考}
+\label{softmax__layer_8c}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/softmax\_layer.c@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/softmax\_layer.c}}
+{\ttfamily \#include \char`\"{}softmax\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}blas.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dark\+\_\+cuda.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$float.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+softmax\+\_\+layer.\+c 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{softmax__layer_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{宏定义}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{softmax__layer_8c_a01bd62fb1c4b3701980911a0baf699d6}{SECRET\+\_\+\+NUM}}~-\/1234
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{softmax__layer_8c_a95a2c83ae6770bd47370481e93677645}{softmax\+\_\+tree}} (float $\ast$input, int batch, int inputs, float temp, \mbox{\hyperlink{structtree}{tree}} $\ast$hierarchy, float $\ast$output)
+\item 
+\mbox{\hyperlink{softmax__layer_8h_aa78f145c1fcb83ebd29188f78fd8f170}{softmax\+\_\+layer}} \mbox{\hyperlink{softmax__layer_8c_a8cff8d62542982029c5187d95241059b}{make\+\_\+softmax\+\_\+layer}} (int batch, int inputs, int groups)
+\item 
+void \mbox{\hyperlink{softmax__layer_8c_a26c8e26ac0185ad74c9c432abd2cc9e3}{forward\+\_\+softmax\+\_\+layer}} (const \mbox{\hyperlink{softmax__layer_8h_aa78f145c1fcb83ebd29188f78fd8f170}{softmax\+\_\+layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} net)
+\item 
+void \mbox{\hyperlink{softmax__layer_8c_ac6874a48314c635b41d11f6fa6a87772}{backward\+\_\+softmax\+\_\+layer}} (const \mbox{\hyperlink{softmax__layer_8h_aa78f145c1fcb83ebd29188f78fd8f170}{softmax\+\_\+layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} net)
+\item 
+\mbox{\hyperlink{softmax__layer_8h_aeb56bdd74932ddf8867fc1a0ee3d504f}{contrastive\+\_\+layer}} \mbox{\hyperlink{softmax__layer_8c_a60c626635c5666ff5bec83c57afc9567}{make\+\_\+contrastive\+\_\+layer}} (int batch, int w, int h, int c, int classes, int inputs, \mbox{\hyperlink{structlayer}{layer}} $\ast$yolo\+\_\+layer)
+\item 
+static float \mbox{\hyperlink{softmax__layer_8c_ab87f45e4f9f97a74104f3382b00c4156}{clip\+\_\+value}} (float val, const float max\+\_\+val)
+\item 
+void \mbox{\hyperlink{softmax__layer_8c_af84681ec165990b247defdc7aeb51c55}{forward\+\_\+contrastive\+\_\+layer}} (\mbox{\hyperlink{softmax__layer_8h_aeb56bdd74932ddf8867fc1a0ee3d504f}{contrastive\+\_\+layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{softmax__layer_8c_ae0f6ee7ea113f6963177d6d9b0b614a8}{backward\+\_\+contrastive\+\_\+layer}} (\mbox{\hyperlink{softmax__layer_8h_aeb56bdd74932ddf8867fc1a0ee3d504f}{contrastive\+\_\+layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{宏定义说明}
+\mbox{\Hypertarget{softmax__layer_8c_a01bd62fb1c4b3701980911a0baf699d6}\label{softmax__layer_8c_a01bd62fb1c4b3701980911a0baf699d6}} 
+\index{softmax\_layer.c@{softmax\_layer.c}!SECRET\_NUM@{SECRET\_NUM}}
+\index{SECRET\_NUM@{SECRET\_NUM}!softmax\_layer.c@{softmax\_layer.c}}
+\doxysubsubsection{\texorpdfstring{SECRET\_NUM}{SECRET\_NUM}}
+{\footnotesize\ttfamily \#define SECRET\+\_\+\+NUM~-\/1234}
+
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{softmax__layer_8c_ae0f6ee7ea113f6963177d6d9b0b614a8}\label{softmax__layer_8c_ae0f6ee7ea113f6963177d6d9b0b614a8}} 
+\index{softmax\_layer.c@{softmax\_layer.c}!backward\_contrastive\_layer@{backward\_contrastive\_layer}}
+\index{backward\_contrastive\_layer@{backward\_contrastive\_layer}!softmax\_layer.c@{softmax\_layer.c}}
+\doxysubsubsection{\texorpdfstring{backward\_contrastive\_layer()}{backward\_contrastive\_layer()}}
+{\footnotesize\ttfamily void backward\+\_\+contrastive\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{softmax__layer_8h_aeb56bdd74932ddf8867fc1a0ee3d504f}{contrastive\+\_\+layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=285pt]{softmax__layer_8c_ae0f6ee7ea113f6963177d6d9b0b614a8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{softmax__layer_8c_ac6874a48314c635b41d11f6fa6a87772}\label{softmax__layer_8c_ac6874a48314c635b41d11f6fa6a87772}} 
+\index{softmax\_layer.c@{softmax\_layer.c}!backward\_softmax\_layer@{backward\_softmax\_layer}}
+\index{backward\_softmax\_layer@{backward\_softmax\_layer}!softmax\_layer.c@{softmax\_layer.c}}
+\doxysubsubsection{\texorpdfstring{backward\_softmax\_layer()}{backward\_softmax\_layer()}}
+{\footnotesize\ttfamily void backward\+\_\+softmax\+\_\+layer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{softmax__layer_8h_aa78f145c1fcb83ebd29188f78fd8f170}{softmax\+\_\+layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{net }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=299pt]{softmax__layer_8c_ac6874a48314c635b41d11f6fa6a87772_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{softmax__layer_8c_ab87f45e4f9f97a74104f3382b00c4156}\label{softmax__layer_8c_ab87f45e4f9f97a74104f3382b00c4156}} 
+\index{softmax\_layer.c@{softmax\_layer.c}!clip\_value@{clip\_value}}
+\index{clip\_value@{clip\_value}!softmax\_layer.c@{softmax\_layer.c}}
+\doxysubsubsection{\texorpdfstring{clip\_value()}{clip\_value()}}
+{\footnotesize\ttfamily static float clip\+\_\+value (\begin{DoxyParamCaption}\item[{float}]{val,  }\item[{const float}]{max\+\_\+val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\Hypertarget{softmax__layer_8c_af84681ec165990b247defdc7aeb51c55}\label{softmax__layer_8c_af84681ec165990b247defdc7aeb51c55}} 
+\index{softmax\_layer.c@{softmax\_layer.c}!forward\_contrastive\_layer@{forward\_contrastive\_layer}}
+\index{forward\_contrastive\_layer@{forward\_contrastive\_layer}!softmax\_layer.c@{softmax\_layer.c}}
+\doxysubsubsection{\texorpdfstring{forward\_contrastive\_layer()}{forward\_contrastive\_layer()}}
+{\footnotesize\ttfamily void forward\+\_\+contrastive\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{softmax__layer_8h_aeb56bdd74932ddf8867fc1a0ee3d504f}{contrastive\+\_\+layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{softmax__layer_8c_af84681ec165990b247defdc7aeb51c55_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{softmax__layer_8c_a26c8e26ac0185ad74c9c432abd2cc9e3}\label{softmax__layer_8c_a26c8e26ac0185ad74c9c432abd2cc9e3}} 
+\index{softmax\_layer.c@{softmax\_layer.c}!forward\_softmax\_layer@{forward\_softmax\_layer}}
+\index{forward\_softmax\_layer@{forward\_softmax\_layer}!softmax\_layer.c@{softmax\_layer.c}}
+\doxysubsubsection{\texorpdfstring{forward\_softmax\_layer()}{forward\_softmax\_layer()}}
+{\footnotesize\ttfamily void forward\+\_\+softmax\+\_\+layer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{softmax__layer_8h_aa78f145c1fcb83ebd29188f78fd8f170}{softmax\+\_\+layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{net }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{softmax__layer_8c_a26c8e26ac0185ad74c9c432abd2cc9e3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{softmax__layer_8c_a60c626635c5666ff5bec83c57afc9567}\label{softmax__layer_8c_a60c626635c5666ff5bec83c57afc9567}} 
+\index{softmax\_layer.c@{softmax\_layer.c}!make\_contrastive\_layer@{make\_contrastive\_layer}}
+\index{make\_contrastive\_layer@{make\_contrastive\_layer}!softmax\_layer.c@{softmax\_layer.c}}
+\doxysubsubsection{\texorpdfstring{make\_contrastive\_layer()}{make\_contrastive\_layer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{softmax__layer_8h_aeb56bdd74932ddf8867fc1a0ee3d504f}{contrastive\+\_\+layer}} make\+\_\+contrastive\+\_\+layer (\begin{DoxyParamCaption}\item[{int}]{batch,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{int}]{c,  }\item[{int}]{classes,  }\item[{int}]{inputs,  }\item[{\mbox{\hyperlink{structlayer}{layer}} $\ast$}]{yolo\+\_\+layer }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{softmax__layer_8c_a60c626635c5666ff5bec83c57afc9567_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{softmax__layer_8c_a8cff8d62542982029c5187d95241059b}\label{softmax__layer_8c_a8cff8d62542982029c5187d95241059b}} 
+\index{softmax\_layer.c@{softmax\_layer.c}!make\_softmax\_layer@{make\_softmax\_layer}}
+\index{make\_softmax\_layer@{make\_softmax\_layer}!softmax\_layer.c@{softmax\_layer.c}}
+\doxysubsubsection{\texorpdfstring{make\_softmax\_layer()}{make\_softmax\_layer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{softmax__layer_8h_aa78f145c1fcb83ebd29188f78fd8f170}{softmax\+\_\+layer}} make\+\_\+softmax\+\_\+layer (\begin{DoxyParamCaption}\item[{int}]{batch,  }\item[{int}]{inputs,  }\item[{int}]{groups }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{softmax__layer_8c_a8cff8d62542982029c5187d95241059b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{softmax__layer_8c_a95a2c83ae6770bd47370481e93677645}\label{softmax__layer_8c_a95a2c83ae6770bd47370481e93677645}} 
+\index{softmax\_layer.c@{softmax\_layer.c}!softmax\_tree@{softmax\_tree}}
+\index{softmax\_tree@{softmax\_tree}!softmax\_layer.c@{softmax\_layer.c}}
+\doxysubsubsection{\texorpdfstring{softmax\_tree()}{softmax\_tree()}}
+{\footnotesize\ttfamily void softmax\+\_\+tree (\begin{DoxyParamCaption}\item[{float $\ast$}]{input,  }\item[{int}]{batch,  }\item[{int}]{inputs,  }\item[{float}]{temp,  }\item[{\mbox{\hyperlink{structtree}{tree}} $\ast$}]{hierarchy,  }\item[{float $\ast$}]{output }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{softmax__layer_8c_a95a2c83ae6770bd47370481e93677645_cgraph}
+\end{center}
+\end{figure}

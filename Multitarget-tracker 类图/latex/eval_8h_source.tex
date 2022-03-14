@@ -1,0 +1,120 @@
+\hypertarget{eval_8h_source}{}\doxysection{eval.\+h}
+\label{eval_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/eval.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/eval.h}}
+\mbox{\hyperlink{eval_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{    pybind11/exec.h: Support for evaluating Python expressions and statements}}
+\DoxyCodeLine{3 \textcolor{comment}{    from strings and files}}
+\DoxyCodeLine{4 \textcolor{comment}{}}
+\DoxyCodeLine{5 \textcolor{comment}{    Copyright (c) 2016 Klemens Morgenstern <klemens.morgenstern@ed-\/chemnitz.de> and}}
+\DoxyCodeLine{6 \textcolor{comment}{                       Wenzel Jakob <wenzel.jakob@epfl.ch>}}
+\DoxyCodeLine{7 \textcolor{comment}{}}
+\DoxyCodeLine{8 \textcolor{comment}{    All rights reserved. Use of this source code is governed by a}}
+\DoxyCodeLine{9 \textcolor{comment}{    BSD-\/style license that can be found in the LICENSE file.}}
+\DoxyCodeLine{10 \textcolor{comment}{*/}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{pybind11_8h}{pybind11.h}}"{}}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 enum \mbox{\hyperlink{eval_8h_a6d50103ad6f0c6153036eb4de26b4402}{eval\_mode}} \{}
+\DoxyCodeLine{20     \mbox{\hyperlink{eval_8h_a6d50103ad6f0c6153036eb4de26b4402a13ee23259644f43a168398c6dad4ec5f}{eval\_expr}},}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{23     \mbox{\hyperlink{eval_8h_a6d50103ad6f0c6153036eb4de26b4402aa95d5b53ff5eb4c4b9ecdcfd5669e66a}{eval\_single\_statement}},}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{26     \mbox{\hyperlink{eval_8h_a6d50103ad6f0c6153036eb4de26b4402a2d5a53dedbd3cbd8c72523a442eb4587}{eval\_statements}}}
+\DoxyCodeLine{27 \};}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{keyword}{template} <eval\_mode mode = eval\_expr>}
+\DoxyCodeLine{30 \textcolor{keywordtype}{object} \mbox{\hyperlink{eval_8h_a98d9870e362ca0f63c23d3eacfde02bf}{eval}}(\mbox{\hyperlink{classstr}{str}} expr, \textcolor{keywordtype}{object} global = \mbox{\hyperlink{group__python__builtins_ga0be04c9e8c8a6833cabae628e2243b6c}{globals}}(), \textcolor{keywordtype}{object} local = \textcolor{keywordtype}{object}()) \{}
+\DoxyCodeLine{31     \textcolor{keywordflow}{if} (!local)}
+\DoxyCodeLine{32         local = global;}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34     \textcolor{comment}{/* PyRun\_String does not accept a PyObject / encoding specifier,}}
+\DoxyCodeLine{35 \textcolor{comment}{       this seems to be the only alternative */}}
+\DoxyCodeLine{36     std::string \mbox{\hyperlink{classbuffer}{buffer}} = \textcolor{stringliteral}{"{}\# -\/*-\/ coding: utf-\/8 -\/*-\/\(\backslash\)n"{}} + (std::string) expr;}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38     \textcolor{keywordtype}{int} start;}
+\DoxyCodeLine{39     \textcolor{keywordflow}{switch} (mode) \{}
+\DoxyCodeLine{40         \textcolor{keywordflow}{case} \mbox{\hyperlink{eval_8h_a6d50103ad6f0c6153036eb4de26b4402a13ee23259644f43a168398c6dad4ec5f}{eval\_expr}}:             start = Py\_eval\_input;   \textcolor{keywordflow}{break};}
+\DoxyCodeLine{41         \textcolor{keywordflow}{case} \mbox{\hyperlink{eval_8h_a6d50103ad6f0c6153036eb4de26b4402aa95d5b53ff5eb4c4b9ecdcfd5669e66a}{eval\_single\_statement}}: start = Py\_single\_input; \textcolor{keywordflow}{break};}
+\DoxyCodeLine{42         \textcolor{keywordflow}{case} \mbox{\hyperlink{eval_8h_a6d50103ad6f0c6153036eb4de26b4402a2d5a53dedbd3cbd8c72523a442eb4587}{eval\_statements}}:       start = Py\_file\_input;   \textcolor{keywordflow}{break};}
+\DoxyCodeLine{43         \textcolor{keywordflow}{default}: \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}invalid evaluation mode"{}});}
+\DoxyCodeLine{44     \}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     PyObject *result = PyRun\_String(\mbox{\hyperlink{classbuffer}{buffer}}.c\_str(), start, global.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), local.ptr());}
+\DoxyCodeLine{47     \textcolor{keywordflow}{if} (!result)}
+\DoxyCodeLine{48         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}();}
+\DoxyCodeLine{49     \textcolor{keywordflow}{return} reinterpret\_steal<object>(result);}
+\DoxyCodeLine{50 \}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{keyword}{template} <eval\_mode mode = eval\_expr, \textcolor{keywordtype}{size\_t} N>}
+\DoxyCodeLine{53 \textcolor{keywordtype}{object} \mbox{\hyperlink{eval_8h_a98d9870e362ca0f63c23d3eacfde02bf}{eval}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} (\&s)[N], \textcolor{keywordtype}{object} global = \mbox{\hyperlink{group__python__builtins_ga0be04c9e8c8a6833cabae628e2243b6c}{globals}}(), \textcolor{keywordtype}{object} local = \textcolor{keywordtype}{object}()) \{}
+\DoxyCodeLine{54     \textcolor{comment}{/* Support raw string literals by removing common leading whitespace */}}
+\DoxyCodeLine{55     \textcolor{keyword}{auto} expr = (s[0] == \textcolor{charliteral}{'\(\backslash\)n'}) ? \mbox{\hyperlink{classstr}{str}}(\mbox{\hyperlink{classmodule_a40817edef0ded5727701534bcded9982}{module::import}}(\textcolor{stringliteral}{"{}textwrap"{}}).attr(\textcolor{stringliteral}{"{}dedent"{}})(s))}
+\DoxyCodeLine{56                                : \mbox{\hyperlink{classstr}{str}}(s);}
+\DoxyCodeLine{57     \textcolor{keywordflow}{return} eval<mode>(expr, global, local);}
+\DoxyCodeLine{58 \}}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{eval_8h_aae9679de60fdf33114386f7c79e3ba0e}{exec}}(\mbox{\hyperlink{classstr}{str}} expr, \textcolor{keywordtype}{object} global = \mbox{\hyperlink{group__python__builtins_ga0be04c9e8c8a6833cabae628e2243b6c}{globals}}(), \textcolor{keywordtype}{object} local = \textcolor{keywordtype}{object}()) \{}
+\DoxyCodeLine{61     eval<eval\_statements>(expr, global, local);}
+\DoxyCodeLine{62 \}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t} N>}
+\DoxyCodeLine{65 \textcolor{keywordtype}{void} \mbox{\hyperlink{eval_8h_aae9679de60fdf33114386f7c79e3ba0e}{exec}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} (\&s)[N], \textcolor{keywordtype}{object} global = \mbox{\hyperlink{group__python__builtins_ga0be04c9e8c8a6833cabae628e2243b6c}{globals}}(), \textcolor{keywordtype}{object} local = \textcolor{keywordtype}{object}()) \{}
+\DoxyCodeLine{66     eval<eval\_statements>(s, global, local);}
+\DoxyCodeLine{67 \}}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69 \textcolor{keyword}{template} <eval\_mode mode = eval\_statements>}
+\DoxyCodeLine{70 \textcolor{keywordtype}{object} \mbox{\hyperlink{eval_8h_af701b0ce2cc48fc0763a33374afcff5b}{eval\_file}}(\mbox{\hyperlink{classstr}{str}} fname, \textcolor{keywordtype}{object} global = \mbox{\hyperlink{group__python__builtins_ga0be04c9e8c8a6833cabae628e2243b6c}{globals}}(), \textcolor{keywordtype}{object} local = \textcolor{keywordtype}{object}()) \{}
+\DoxyCodeLine{71     \textcolor{keywordflow}{if} (!local)}
+\DoxyCodeLine{72         local = global;}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74     \textcolor{keywordtype}{int} start;}
+\DoxyCodeLine{75     \textcolor{keywordflow}{switch} (mode) \{}
+\DoxyCodeLine{76         \textcolor{keywordflow}{case} \mbox{\hyperlink{eval_8h_a6d50103ad6f0c6153036eb4de26b4402a13ee23259644f43a168398c6dad4ec5f}{eval\_expr}}:             start = Py\_eval\_input;   \textcolor{keywordflow}{break};}
+\DoxyCodeLine{77         \textcolor{keywordflow}{case} \mbox{\hyperlink{eval_8h_a6d50103ad6f0c6153036eb4de26b4402aa95d5b53ff5eb4c4b9ecdcfd5669e66a}{eval\_single\_statement}}: start = Py\_single\_input; \textcolor{keywordflow}{break};}
+\DoxyCodeLine{78         \textcolor{keywordflow}{case} \mbox{\hyperlink{eval_8h_a6d50103ad6f0c6153036eb4de26b4402a2d5a53dedbd3cbd8c72523a442eb4587}{eval\_statements}}:       start = Py\_file\_input;   \textcolor{keywordflow}{break};}
+\DoxyCodeLine{79         \textcolor{keywordflow}{default}: \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}invalid evaluation mode"{}});}
+\DoxyCodeLine{80     \}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82     \textcolor{keywordtype}{int} closeFile = 1;}
+\DoxyCodeLine{83     std::string fname\_str = (std::string) fname;}
+\DoxyCodeLine{84 \textcolor{preprocessor}{\#if PY\_VERSION\_HEX >= 0x03040000}}
+\DoxyCodeLine{85     FILE *\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}} = \_Py\_fopen\_obj(fname.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), \textcolor{stringliteral}{"{}r"{}});}
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#elif PY\_VERSION\_HEX >= 0x03000000}}
+\DoxyCodeLine{87     FILE *\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}} = \_Py\_fopen(fname.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), \textcolor{stringliteral}{"{}r"{}});}
+\DoxyCodeLine{88 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{89     \textcolor{comment}{/* No unicode support in open() :( */}}
+\DoxyCodeLine{90     \textcolor{keyword}{auto} fobj = reinterpret\_steal<object>(PyFile\_FromString(}
+\DoxyCodeLine{91         \textcolor{keyword}{const\_cast<}\textcolor{keywordtype}{char} *\textcolor{keyword}{>}(fname\_str.c\_str()),}
+\DoxyCodeLine{92         \textcolor{keyword}{const\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>}(\textcolor{stringliteral}{"{}r"{}})));}
+\DoxyCodeLine{93     FILE *\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{94     \textcolor{keywordflow}{if} (fobj)}
+\DoxyCodeLine{95         \mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}} = PyFile\_AsFile(fobj.ptr());}
+\DoxyCodeLine{96     closeFile = 0;}
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{98     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}}) \{}
+\DoxyCodeLine{99         PyErr\_Clear();}
+\DoxyCodeLine{100         \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}File \(\backslash\)"{}"{}} + fname\_str + \textcolor{stringliteral}{"{}\(\backslash\)"{} could not be opened!"{}});}
+\DoxyCodeLine{101     \}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103 \textcolor{preprocessor}{\#if PY\_VERSION\_HEX < 0x03000000 \&\& defined(PYPY\_VERSION)}}
+\DoxyCodeLine{104     PyObject *result = PyRun\_File(\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}}, fname\_str.c\_str(), start, global.ptr(),}
+\DoxyCodeLine{105                                   local.ptr());}
+\DoxyCodeLine{106     (void) closeFile;}
+\DoxyCodeLine{107 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{108     PyObject *result = PyRun\_FileEx(\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}}, fname\_str.c\_str(), start, global.ptr(),}
+\DoxyCodeLine{109                                     local.ptr(), closeFile);}
+\DoxyCodeLine{110 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112     \textcolor{keywordflow}{if} (!result)}
+\DoxyCodeLine{113         \textcolor{keywordflow}{throw} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}}();}
+\DoxyCodeLine{114     \textcolor{keywordflow}{return} reinterpret\_steal<object>(result);}
+\DoxyCodeLine{115 \}}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+
+\end{DoxyCode}

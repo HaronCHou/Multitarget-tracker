@@ -1,0 +1,216 @@
+\hypertarget{classiterator}{}\doxysection{iterator类 参考}
+\label{classiterator}\index{iterator@{iterator}}
+
+
+{\ttfamily \#include $<$pytypes.\+h$>$}
+
+
+
+类 iterator 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{classiterator__inherit__graph}
+\end{center}
+\end{figure}
+
+
+iterator 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{classiterator__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 类型}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classiterator_ab77598aff5149ea763f55e0a375c58bd}{iterator\+\_\+category}} = std\+::input\+\_\+iterator\+\_\+tag
+\item 
+using \mbox{\hyperlink{classiterator_a573d7d10c131e60e9dbc7f691a3c03b1}{difference\+\_\+type}} = \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}}
+\item 
+using \mbox{\hyperlink{classiterator_abe68ba19a8452dd80cf2c893c1feb9d6}{value\+\_\+type}} = \mbox{\hyperlink{classhandle}{handle}}
+\item 
+using \mbox{\hyperlink{classiterator_af05a87057b5891fb984648429ca60492}{reference}} = const \mbox{\hyperlink{classhandle}{handle}}
+\item 
+using \mbox{\hyperlink{classiterator_a47f6aa746357c82353203dfcbe8d8c1c}{pointer}} = const \mbox{\hyperlink{classhandle}{handle}} $\ast$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classiterator}{iterator}} \& \mbox{\hyperlink{classiterator_a2d47455ae266b5080fb079c0f7066b19}{operator++}} ()
+\item 
+\mbox{\hyperlink{classiterator}{iterator}} \mbox{\hyperlink{classiterator_a49f48e4e587336b7fa48d609ee8f1779}{operator++}} (int)
+\item 
+\mbox{\hyperlink{classiterator_af05a87057b5891fb984648429ca60492}{reference}} \mbox{\hyperlink{classiterator_ac92dc18748448d5e9878c2df3c36eca2}{operator$\ast$}} () const
+\item 
+\mbox{\hyperlink{classiterator_a47f6aa746357c82353203dfcbe8d8c1c}{pointer}} \mbox{\hyperlink{classiterator_ae157ebb58c3c02e644023b31616f2491}{operator-\/$>$}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{静态 Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classiterator}{iterator}} \mbox{\hyperlink{classiterator_ace2b4797f9e34e51c1df9d52ba164203}{sentinel}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classiterator_ab04b3480fcce40c9d37d7a8b425e46a8}{advance}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classobject}{object}} \mbox{\hyperlink{classiterator_a6713b0f7092affdad18ae668b86dd81f}{value}} = \{\}
+\end{DoxyCompactItemize}
+\doxysubsection*{友元}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classiterator_a81d10d7799462c7ca5e7cf19119ca356}{operator==}} (const \mbox{\hyperlink{classiterator}{iterator}} \&a, const \mbox{\hyperlink{classiterator}{iterator}} \&b)
+\item 
+bool \mbox{\hyperlink{classiterator_a55a8ee0e80dad1a7da9d751c25bc0386}{operator!=}} (const \mbox{\hyperlink{classiterator}{iterator}} \&a, const \mbox{\hyperlink{classiterator}{iterator}} \&b)
+\end{DoxyCompactItemize}
+\doxysubsection*{额外继承的成员函数}
+
+
+\doxysubsection{详细描述}
+\textbackslash{}rst Wraps a Python iterator so that it can also be used as a C++ input iterator
+
+Caveat\+: copying an iterator does not (and cannot) clone the internal state of the Python iterable. This also applies to the post-\/increment operator. This iterator should only be used to retrieve the current value using {\ttfamily \mbox{\hyperlink{classiterator_ac92dc18748448d5e9878c2df3c36eca2}{operator$\ast$()}}}. \textbackslash{}endrst 
+
+\doxysubsection{成员类型定义说明}
+\mbox{\Hypertarget{classiterator_a573d7d10c131e60e9dbc7f691a3c03b1}\label{classiterator_a573d7d10c131e60e9dbc7f691a3c03b1}} 
+\index{iterator@{iterator}!difference\_type@{difference\_type}}
+\index{difference\_type@{difference\_type}!iterator@{iterator}}
+\doxysubsubsection{\texorpdfstring{difference\_type}{difference\_type}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classiterator_a573d7d10c131e60e9dbc7f691a3c03b1}{iterator\+::difference\+\_\+type}} =  \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}}}
+
+\mbox{\Hypertarget{classiterator_ab77598aff5149ea763f55e0a375c58bd}\label{classiterator_ab77598aff5149ea763f55e0a375c58bd}} 
+\index{iterator@{iterator}!iterator\_category@{iterator\_category}}
+\index{iterator\_category@{iterator\_category}!iterator@{iterator}}
+\doxysubsubsection{\texorpdfstring{iterator\_category}{iterator\_category}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classiterator_ab77598aff5149ea763f55e0a375c58bd}{iterator\+::iterator\+\_\+category}} =  std\+::input\+\_\+iterator\+\_\+tag}
+
+\mbox{\Hypertarget{classiterator_a47f6aa746357c82353203dfcbe8d8c1c}\label{classiterator_a47f6aa746357c82353203dfcbe8d8c1c}} 
+\index{iterator@{iterator}!pointer@{pointer}}
+\index{pointer@{pointer}!iterator@{iterator}}
+\doxysubsubsection{\texorpdfstring{pointer}{pointer}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classiterator_a47f6aa746357c82353203dfcbe8d8c1c}{iterator\+::pointer}} =  const \mbox{\hyperlink{classhandle}{handle}} $\ast$}
+
+\mbox{\Hypertarget{classiterator_af05a87057b5891fb984648429ca60492}\label{classiterator_af05a87057b5891fb984648429ca60492}} 
+\index{iterator@{iterator}!reference@{reference}}
+\index{reference@{reference}!iterator@{iterator}}
+\doxysubsubsection{\texorpdfstring{reference}{reference}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classiterator_af05a87057b5891fb984648429ca60492}{iterator\+::reference}} =  const \mbox{\hyperlink{classhandle}{handle}}}
+
+\mbox{\Hypertarget{classiterator_abe68ba19a8452dd80cf2c893c1feb9d6}\label{classiterator_abe68ba19a8452dd80cf2c893c1feb9d6}} 
+\index{iterator@{iterator}!value\_type@{value\_type}}
+\index{value\_type@{value\_type}!iterator@{iterator}}
+\doxysubsubsection{\texorpdfstring{value\_type}{value\_type}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classiterator_abe68ba19a8452dd80cf2c893c1feb9d6}{iterator\+::value\+\_\+type}} =  \mbox{\hyperlink{classhandle}{handle}}}
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classiterator_ab04b3480fcce40c9d37d7a8b425e46a8}\label{classiterator_ab04b3480fcce40c9d37d7a8b425e46a8}} 
+\index{iterator@{iterator}!advance@{advance}}
+\index{advance@{advance}!iterator@{iterator}}
+\doxysubsubsection{\texorpdfstring{advance()}{advance()}}
+{\footnotesize\ttfamily void iterator\+::advance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{classiterator_ac92dc18748448d5e9878c2df3c36eca2}\label{classiterator_ac92dc18748448d5e9878c2df3c36eca2}} 
+\index{iterator@{iterator}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!iterator@{iterator}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classiterator_af05a87057b5891fb984648429ca60492}{reference}} iterator\+::operator$\ast$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=270pt]{classiterator_ac92dc18748448d5e9878c2df3c36eca2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classiterator_a2d47455ae266b5080fb079c0f7066b19}\label{classiterator_a2d47455ae266b5080fb079c0f7066b19}} 
+\index{iterator@{iterator}!operator++@{operator++}}
+\index{operator++@{operator++}!iterator@{iterator}}
+\doxysubsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classiterator}{iterator}} \& iterator\+::operator++ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{classiterator_a2d47455ae266b5080fb079c0f7066b19_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classiterator_a49f48e4e587336b7fa48d609ee8f1779}\label{classiterator_a49f48e4e587336b7fa48d609ee8f1779}} 
+\index{iterator@{iterator}!operator++@{operator++}}
+\index{operator++@{operator++}!iterator@{iterator}}
+\doxysubsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classiterator}{iterator}} iterator\+::operator++ (\begin{DoxyParamCaption}\item[{int}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=304pt]{classiterator_a49f48e4e587336b7fa48d609ee8f1779_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classiterator_ae157ebb58c3c02e644023b31616f2491}\label{classiterator_ae157ebb58c3c02e644023b31616f2491}} 
+\index{iterator@{iterator}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!iterator@{iterator}}
+\doxysubsubsection{\texorpdfstring{operator-\/$>$()}{operator->()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classiterator_a47f6aa746357c82353203dfcbe8d8c1c}{pointer}} iterator\+::operator-\/$>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classiterator_ae157ebb58c3c02e644023b31616f2491_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classiterator_ace2b4797f9e34e51c1df9d52ba164203}\label{classiterator_ace2b4797f9e34e51c1df9d52ba164203}} 
+\index{iterator@{iterator}!sentinel@{sentinel}}
+\index{sentinel@{sentinel}!iterator@{iterator}}
+\doxysubsubsection{\texorpdfstring{sentinel()}{sentinel()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classiterator}{iterator}} iterator\+::sentinel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\textbackslash{}rst The value which marks the end of the iteration. {\ttfamily it == \mbox{\hyperlink{classiterator_ace2b4797f9e34e51c1df9d52ba164203}{iterator\+::sentinel()}}} is equivalent to catching {\ttfamily Stop\+Iteration} in Python.
+
+.. code-\/block\+:: cpp \begin{DoxyVerb}void foo(py::iterator it) {
+    while (it != py::iterator::sentinel()) {
+\end{DoxyVerb}
+ use {\ttfamily $\ast$it} ++it; \} \} \textbackslash{}endrst 
+
+\doxysubsection{友元及相关函数文档}
+\mbox{\Hypertarget{classiterator_a55a8ee0e80dad1a7da9d751c25bc0386}\label{classiterator_a55a8ee0e80dad1a7da9d751c25bc0386}} 
+\index{iterator@{iterator}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!iterator@{iterator}}
+\doxysubsubsection{\texorpdfstring{operator"!=}{operator!=}}
+{\footnotesize\ttfamily bool operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classiterator}{iterator}} \&}]{a,  }\item[{const \mbox{\hyperlink{classiterator}{iterator}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+\mbox{\Hypertarget{classiterator_a81d10d7799462c7ca5e7cf19119ca356}\label{classiterator_a81d10d7799462c7ca5e7cf19119ca356}} 
+\index{iterator@{iterator}!operator==@{operator==}}
+\index{operator==@{operator==}!iterator@{iterator}}
+\doxysubsubsection{\texorpdfstring{operator==}{operator==}}
+{\footnotesize\ttfamily bool operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classiterator}{iterator}} \&}]{a,  }\item[{const \mbox{\hyperlink{classiterator}{iterator}} \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classiterator_a6713b0f7092affdad18ae668b86dd81f}\label{classiterator_a6713b0f7092affdad18ae668b86dd81f}} 
+\index{iterator@{iterator}!value@{value}}
+\index{value@{value}!iterator@{iterator}}
+\doxysubsubsection{\texorpdfstring{value}{value}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classobject}{object}} iterator\+::value = \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/\mbox{\hyperlink{pytypes_8h}{pytypes.\+h}}\end{DoxyCompactItemize}

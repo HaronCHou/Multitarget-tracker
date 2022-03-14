@@ -1,0 +1,357 @@
+\hypertarget{logging_8h_source}{}\doxysection{logging.\+h}
+\label{logging_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/logging.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/logging.h}}
+\mbox{\hyperlink{logging_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * Copyright (c) 2019, NVIDIA CORPORATION. All rights reserved.}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Licensed under the Apache License, Version 2.0 (the "{}License"{});}}
+\DoxyCodeLine{5 \textcolor{comment}{ * you may not use this file except in compliance with the License.}}
+\DoxyCodeLine{6 \textcolor{comment}{ * You may obtain a copy of the License at}}
+\DoxyCodeLine{7 \textcolor{comment}{ *}}
+\DoxyCodeLine{8 \textcolor{comment}{ *     http://www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{9 \textcolor{comment}{ *}}
+\DoxyCodeLine{10 \textcolor{comment}{ * Unless required by applicable law or agreed to in writing, software}}
+\DoxyCodeLine{11 \textcolor{comment}{ * distributed under the License is distributed on an "{}AS IS"{} BASIS,}}
+\DoxyCodeLine{12 \textcolor{comment}{ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.}}
+\DoxyCodeLine{13 \textcolor{comment}{ * See the License for the specific language governing permissions and}}
+\DoxyCodeLine{14 \textcolor{comment}{ * limitations under the License.}}
+\DoxyCodeLine{15 \textcolor{comment}{ */}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#ifndef TENSORRT\_LOGGING\_H}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define TENSORRT\_LOGGING\_H}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include "{}NvInferRuntimeCommon.h"{}}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <cassert>}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include <ctime>}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include <iomanip>}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#include <ostream>}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#include <sstream>}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{keyword}{using} \mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} = \mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{nvinfer1::ILogger::Severity}};}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{keyword}{class }\mbox{\hyperlink{class_log_stream_consumer_buffer}{LogStreamConsumerBuffer}} : \textcolor{keyword}{public} std::stringbuf}
+\DoxyCodeLine{32 \{}
+\DoxyCodeLine{33 \textcolor{keyword}{public}:}
+\DoxyCodeLine{34     \mbox{\hyperlink{class_log_stream_consumer_buffer_ac2b3e40478269fb944221bf9e1569cbc}{LogStreamConsumerBuffer}}(std::ostream\& stream, \textcolor{keyword}{const} std::string\& prefix, \textcolor{keywordtype}{bool} shouldLog)}
+\DoxyCodeLine{35         : \mbox{\hyperlink{class_log_stream_consumer_buffer_a5ffedbd9f7390a978b366f5c1918f728}{mOutput}}(stream)}
+\DoxyCodeLine{36         , \mbox{\hyperlink{class_log_stream_consumer_buffer_a6d8beed2f63b86f821d9e7109cfa17ae}{mPrefix}}(prefix)}
+\DoxyCodeLine{37         , \mbox{\hyperlink{class_log_stream_consumer_buffer_a53ba8e1edac515efd9f9fa2bc0505826}{mShouldLog}}(shouldLog)}
+\DoxyCodeLine{38     \{}
+\DoxyCodeLine{39     \}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     \mbox{\hyperlink{class_log_stream_consumer_buffer_a60732ec297c4e26bc6f146717c827d0e}{LogStreamConsumerBuffer}}(\mbox{\hyperlink{class_log_stream_consumer_buffer}{LogStreamConsumerBuffer}}\&\& other)}
+\DoxyCodeLine{42         : \mbox{\hyperlink{class_log_stream_consumer_buffer_a5ffedbd9f7390a978b366f5c1918f728}{mOutput}}(other.\mbox{\hyperlink{class_log_stream_consumer_buffer_a5ffedbd9f7390a978b366f5c1918f728}{mOutput}})}
+\DoxyCodeLine{43     \{}
+\DoxyCodeLine{44     \}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     \mbox{\hyperlink{class_log_stream_consumer_buffer_a11b04c1cc2b435dc3fd0a1bdead1dd08}{\string~LogStreamConsumerBuffer}}()}
+\DoxyCodeLine{47     \{}
+\DoxyCodeLine{48         \textcolor{comment}{// std::streambuf::pbase() gives a pointer to the beginning of the buffered part of the output sequence}}
+\DoxyCodeLine{49         \textcolor{comment}{// std::streambuf::pptr() gives a pointer to the current position of the output sequence}}
+\DoxyCodeLine{50         \textcolor{comment}{// if the pointer to the beginning is not equal to the pointer to the current position,}}
+\DoxyCodeLine{51         \textcolor{comment}{// call putOutput() to log the output to the stream}}
+\DoxyCodeLine{52         \textcolor{keywordflow}{if} (pbase() != pptr())}
+\DoxyCodeLine{53         \{}
+\DoxyCodeLine{54             \mbox{\hyperlink{class_log_stream_consumer_buffer_a01269fec956bac2f901846f24613dad0}{putOutput}}();}
+\DoxyCodeLine{55         \}}
+\DoxyCodeLine{56     \}}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58     \textcolor{comment}{// synchronizes the stream buffer and returns 0 on success}}
+\DoxyCodeLine{59     \textcolor{comment}{// synchronizing the stream buffer consists of inserting the buffer contents into the stream,}}
+\DoxyCodeLine{60     \textcolor{comment}{// resetting the buffer and flushing the stream}}
+\DoxyCodeLine{61     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_log_stream_consumer_buffer_a9dfa0e1c9f57cf8a517371c82fec5d28}{sync}}()}
+\DoxyCodeLine{62     \{}
+\DoxyCodeLine{63         \mbox{\hyperlink{class_log_stream_consumer_buffer_a01269fec956bac2f901846f24613dad0}{putOutput}}();}
+\DoxyCodeLine{64         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{65     \}}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_log_stream_consumer_buffer_a01269fec956bac2f901846f24613dad0}{putOutput}}()}
+\DoxyCodeLine{68     \{}
+\DoxyCodeLine{69         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_log_stream_consumer_buffer_a53ba8e1edac515efd9f9fa2bc0505826}{mShouldLog}})}
+\DoxyCodeLine{70         \{}
+\DoxyCodeLine{71             \textcolor{comment}{// prepend timestamp}}
+\DoxyCodeLine{72             std::time\_t timestamp = std::time(\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{73             tm* tm\_local = std::localtime(\&timestamp);}
+\DoxyCodeLine{74             std::cout << \textcolor{stringliteral}{"{}["{}};}
+\DoxyCodeLine{75             std::cout << std::setw(2) << std::setfill(\textcolor{charliteral}{'0'}) << 1 + tm\_local-\/>tm\_mon << \textcolor{stringliteral}{"{}/"{}};}
+\DoxyCodeLine{76             std::cout << std::setw(2) << std::setfill(\textcolor{charliteral}{'0'}) << tm\_local-\/>tm\_mday << \textcolor{stringliteral}{"{}/"{}};}
+\DoxyCodeLine{77             std::cout << std::setw(4) << std::setfill(\textcolor{charliteral}{'0'}) << 1900 + tm\_local-\/>tm\_year << \textcolor{stringliteral}{"{}-\/"{}};}
+\DoxyCodeLine{78             std::cout << std::setw(2) << std::setfill(\textcolor{charliteral}{'0'}) << tm\_local-\/>tm\_hour << \textcolor{stringliteral}{"{}:"{}};}
+\DoxyCodeLine{79             std::cout << std::setw(2) << std::setfill(\textcolor{charliteral}{'0'}) << tm\_local-\/>tm\_min << \textcolor{stringliteral}{"{}:"{}};}
+\DoxyCodeLine{80             std::cout << std::setw(2) << std::setfill(\textcolor{charliteral}{'0'}) << tm\_local-\/>tm\_sec << \textcolor{stringliteral}{"{}] "{}};}
+\DoxyCodeLine{81             \textcolor{comment}{// std::stringbuf::str() gets the string contents of the buffer}}
+\DoxyCodeLine{82             \textcolor{comment}{// insert the buffer contents pre-\/appended by the appropriate prefix into the stream}}
+\DoxyCodeLine{83             \mbox{\hyperlink{class_log_stream_consumer_buffer_a5ffedbd9f7390a978b366f5c1918f728}{mOutput}} << \mbox{\hyperlink{class_log_stream_consumer_buffer_a6d8beed2f63b86f821d9e7109cfa17ae}{mPrefix}} << \mbox{\hyperlink{classstr}{str}}();}
+\DoxyCodeLine{84             \textcolor{comment}{// set the buffer to empty}}
+\DoxyCodeLine{85             \mbox{\hyperlink{classstr}{str}}(\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{86             \textcolor{comment}{// flush the stream}}
+\DoxyCodeLine{87             \mbox{\hyperlink{class_log_stream_consumer_buffer_a5ffedbd9f7390a978b366f5c1918f728}{mOutput}}.flush();}
+\DoxyCodeLine{88         \}}
+\DoxyCodeLine{89     \}}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_log_stream_consumer_buffer_a3565567473c5b08873c39df2f93451cb}{setShouldLog}}(\textcolor{keywordtype}{bool} shouldLog)}
+\DoxyCodeLine{92     \{}
+\DoxyCodeLine{93         \mbox{\hyperlink{class_log_stream_consumer_buffer_a53ba8e1edac515efd9f9fa2bc0505826}{mShouldLog}} = shouldLog;}
+\DoxyCodeLine{94     \}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96 \textcolor{keyword}{private}:}
+\DoxyCodeLine{97     std::ostream\& \mbox{\hyperlink{class_log_stream_consumer_buffer_a5ffedbd9f7390a978b366f5c1918f728}{mOutput}};}
+\DoxyCodeLine{98     std::string \mbox{\hyperlink{class_log_stream_consumer_buffer_a6d8beed2f63b86f821d9e7109cfa17ae}{mPrefix}};}
+\DoxyCodeLine{99     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_log_stream_consumer_buffer_a53ba8e1edac515efd9f9fa2bc0505826}{mShouldLog}};}
+\DoxyCodeLine{100 \};}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{106 \textcolor{keyword}{class }\mbox{\hyperlink{class_log_stream_consumer_base}{LogStreamConsumerBase}}}
+\DoxyCodeLine{107 \{}
+\DoxyCodeLine{108 \textcolor{keyword}{public}:}
+\DoxyCodeLine{109     \mbox{\hyperlink{class_log_stream_consumer_base_ac58666fc7c09ed7a2e74db730bb988ad}{LogStreamConsumerBase}}(std::ostream\& stream, \textcolor{keyword}{const} std::string\& prefix, \textcolor{keywordtype}{bool} shouldLog)}
+\DoxyCodeLine{110         : \mbox{\hyperlink{class_log_stream_consumer_base_acd68d77e942be3903453ec9243877043}{mBuffer}}(stream, prefix, shouldLog)}
+\DoxyCodeLine{111     \{}
+\DoxyCodeLine{112     \}}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{115     \mbox{\hyperlink{class_log_stream_consumer_buffer}{LogStreamConsumerBuffer}} \mbox{\hyperlink{class_log_stream_consumer_base_acd68d77e942be3903453ec9243877043}{mBuffer}};}
+\DoxyCodeLine{116 \};}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{127 \textcolor{keyword}{class }\mbox{\hyperlink{class_log_stream_consumer}{LogStreamConsumer}} : \textcolor{keyword}{protected} \mbox{\hyperlink{class_log_stream_consumer_base}{LogStreamConsumerBase}}, \textcolor{keyword}{public} std::ostream}
+\DoxyCodeLine{128 \{}
+\DoxyCodeLine{129 \textcolor{keyword}{public}:}
+\DoxyCodeLine{132     \mbox{\hyperlink{class_log_stream_consumer_aa3edfc2cad600f89ed66c7bff5da13fb}{LogStreamConsumer}}(\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} reportableSeverity, \mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} severity)}
+\DoxyCodeLine{133         : \mbox{\hyperlink{class_log_stream_consumer_base}{LogStreamConsumerBase}}(\mbox{\hyperlink{class_log_stream_consumer_a68b46903ba102396debffade902b67bf}{severityOstream}}(severity), \mbox{\hyperlink{class_log_stream_consumer_a56fbf31b98048cc7e64771706ea5bb75}{severityPrefix}}(severity), severity <= reportableSeverity)}
+\DoxyCodeLine{134         , \mbox{\hyperlink{namespacestd}{std}}::ostream(\&\mbox{\hyperlink{class_log_stream_consumer_base_acd68d77e942be3903453ec9243877043}{mBuffer}}) \textcolor{comment}{// links the stream buffer with the stream}}
+\DoxyCodeLine{135         , \mbox{\hyperlink{class_log_stream_consumer_a5a5a6a5d74e57d6066edcd0dcdbf6cbb}{mShouldLog}}(severity <= reportableSeverity)}
+\DoxyCodeLine{136         , \mbox{\hyperlink{class_log_stream_consumer_a8545f0732148a07ce037380f00b6fa9d}{mSeverity}}(severity)}
+\DoxyCodeLine{137     \{}
+\DoxyCodeLine{138     \}}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140     \mbox{\hyperlink{class_log_stream_consumer_a8ee4cfc24d4209e2686b30b29161b1e5}{LogStreamConsumer}}(\mbox{\hyperlink{class_log_stream_consumer}{LogStreamConsumer}}\&\& other)}
+\DoxyCodeLine{141         : \mbox{\hyperlink{class_log_stream_consumer_base}{LogStreamConsumerBase}}(\mbox{\hyperlink{class_log_stream_consumer_a68b46903ba102396debffade902b67bf}{severityOstream}}(other.\mbox{\hyperlink{class_log_stream_consumer_a8545f0732148a07ce037380f00b6fa9d}{mSeverity}}), \mbox{\hyperlink{class_log_stream_consumer_a56fbf31b98048cc7e64771706ea5bb75}{severityPrefix}}(other.\mbox{\hyperlink{class_log_stream_consumer_a8545f0732148a07ce037380f00b6fa9d}{mSeverity}}), other.\mbox{\hyperlink{class_log_stream_consumer_a5a5a6a5d74e57d6066edcd0dcdbf6cbb}{mShouldLog}})}
+\DoxyCodeLine{142         , \mbox{\hyperlink{namespacestd}{std}}::ostream(\&\mbox{\hyperlink{class_log_stream_consumer_base_acd68d77e942be3903453ec9243877043}{mBuffer}}) \textcolor{comment}{// links the stream buffer with the stream}}
+\DoxyCodeLine{143         , \mbox{\hyperlink{class_log_stream_consumer_a5a5a6a5d74e57d6066edcd0dcdbf6cbb}{mShouldLog}}(other.\mbox{\hyperlink{class_log_stream_consumer_a5a5a6a5d74e57d6066edcd0dcdbf6cbb}{mShouldLog}})}
+\DoxyCodeLine{144         , \mbox{\hyperlink{class_log_stream_consumer_a8545f0732148a07ce037380f00b6fa9d}{mSeverity}}(other.\mbox{\hyperlink{class_log_stream_consumer_a8545f0732148a07ce037380f00b6fa9d}{mSeverity}})}
+\DoxyCodeLine{145     \{}
+\DoxyCodeLine{146     \}}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_log_stream_consumer_ab2901265e048e86e5b3233fddb3452f9}{setReportableSeverity}}(\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} reportableSeverity)}
+\DoxyCodeLine{149     \{}
+\DoxyCodeLine{150         \mbox{\hyperlink{class_log_stream_consumer_a5a5a6a5d74e57d6066edcd0dcdbf6cbb}{mShouldLog}} = \mbox{\hyperlink{class_log_stream_consumer_a8545f0732148a07ce037380f00b6fa9d}{mSeverity}} <= reportableSeverity;}
+\DoxyCodeLine{151         \mbox{\hyperlink{class_log_stream_consumer_base_acd68d77e942be3903453ec9243877043}{mBuffer}}.\mbox{\hyperlink{class_log_stream_consumer_buffer_a3565567473c5b08873c39df2f93451cb}{setShouldLog}}(\mbox{\hyperlink{class_log_stream_consumer_a5a5a6a5d74e57d6066edcd0dcdbf6cbb}{mShouldLog}});}
+\DoxyCodeLine{152     \}}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154 \textcolor{keyword}{private}:}
+\DoxyCodeLine{155     \textcolor{keyword}{static} std::ostream\& \mbox{\hyperlink{class_log_stream_consumer_a68b46903ba102396debffade902b67bf}{severityOstream}}(\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} severity)}
+\DoxyCodeLine{156     \{}
+\DoxyCodeLine{157         \textcolor{keywordflow}{return} severity >= Severity::kINFO ? std::cout : std::cerr;}
+\DoxyCodeLine{158     \}}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160     \textcolor{keyword}{static} std::string \mbox{\hyperlink{class_log_stream_consumer_a56fbf31b98048cc7e64771706ea5bb75}{severityPrefix}}(\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} severity)}
+\DoxyCodeLine{161     \{}
+\DoxyCodeLine{162         \textcolor{keywordflow}{switch} (severity)}
+\DoxyCodeLine{163         \{}
+\DoxyCodeLine{164         \textcolor{keywordflow}{case} Severity::kINTERNAL\_ERROR: \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}[F] "{}};}
+\DoxyCodeLine{165         \textcolor{keywordflow}{case} Severity::kERROR: \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}[E] "{}};}
+\DoxyCodeLine{166         \textcolor{keywordflow}{case} Severity::kWARNING: \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}[W] "{}};}
+\DoxyCodeLine{167         \textcolor{keywordflow}{case} Severity::kINFO: \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}[I] "{}};}
+\DoxyCodeLine{168         \textcolor{keywordflow}{case} Severity::kVERBOSE: \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}[V] "{}};}
+\DoxyCodeLine{169         \textcolor{keywordflow}{default}: assert(0); \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{170         \}}
+\DoxyCodeLine{171     \}}
+\DoxyCodeLine{172 }
+\DoxyCodeLine{173     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_log_stream_consumer_a5a5a6a5d74e57d6066edcd0dcdbf6cbb}{mShouldLog}};}
+\DoxyCodeLine{174     \mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} \mbox{\hyperlink{class_log_stream_consumer_a8545f0732148a07ce037380f00b6fa9d}{mSeverity}};}
+\DoxyCodeLine{175 \};}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{200 }
+\DoxyCodeLine{201 \textcolor{keyword}{class }\mbox{\hyperlink{class_logger}{Logger}} : \textcolor{keyword}{public} nvinfer1::ILogger}
+\DoxyCodeLine{202 \{}
+\DoxyCodeLine{203 \textcolor{keyword}{public}:}
+\DoxyCodeLine{204     \mbox{\hyperlink{class_logger_a63fff05551d45cdedfe5644779d3fd0d}{Logger}}(\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} severity = Severity::kWARNING)}
+\DoxyCodeLine{205         : \mbox{\hyperlink{class_logger_aa9a55206b6b7b0e4096e17484277cd59}{mReportableSeverity}}(severity)}
+\DoxyCodeLine{206     \{}
+\DoxyCodeLine{207     \}}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{213     \textcolor{keyword}{enum class} \mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71b}{TestResult}}}
+\DoxyCodeLine{214     \{}
+\DoxyCodeLine{215         kRUNNING, }
+\DoxyCodeLine{216         kPASSED,  }
+\DoxyCodeLine{217         kFAILED,  }
+\DoxyCodeLine{218         kWAIVED   }
+\DoxyCodeLine{219     \};}
+\DoxyCodeLine{220 }
+\DoxyCodeLine{228     nvinfer1::ILogger\& \mbox{\hyperlink{class_logger_aab67f7cc03c6a459269150acc3e3fc58}{getTRTLogger}}()}
+\DoxyCodeLine{229     \{}
+\DoxyCodeLine{230         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{231     \}}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{239     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_logger_a040846c2f1bbed1875c42d0dd8996e3a}{log}}(\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} severity, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* msg)\textcolor{keyword}{ override}}
+\DoxyCodeLine{240 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{241         \mbox{\hyperlink{class_log_stream_consumer}{LogStreamConsumer}}(\mbox{\hyperlink{class_logger_aa9a55206b6b7b0e4096e17484277cd59}{mReportableSeverity}}, severity) << \textcolor{stringliteral}{"{}[TRT] "{}} << std::string(msg) << std::endl;}
+\DoxyCodeLine{242     \}}
+\DoxyCodeLine{243 }
+\DoxyCodeLine{249     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_logger_ac23251be76ec8e0058b84f77f2236c5a}{setReportableSeverity}}(\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} severity)}
+\DoxyCodeLine{250     \{}
+\DoxyCodeLine{251         \mbox{\hyperlink{class_logger_aa9a55206b6b7b0e4096e17484277cd59}{mReportableSeverity}} = severity;}
+\DoxyCodeLine{252     \}}
+\DoxyCodeLine{253 }
+\DoxyCodeLine{261     \textcolor{keyword}{class }\mbox{\hyperlink{class_logger_1_1_test_atom}{TestAtom}}}
+\DoxyCodeLine{262     \{}
+\DoxyCodeLine{263     \textcolor{keyword}{public}:}
+\DoxyCodeLine{264         \mbox{\hyperlink{class_logger_1_1_test_atom_a396d85a9458e8bcb7723764b4779bc50}{TestAtom}}(\mbox{\hyperlink{class_logger_1_1_test_atom}{TestAtom}}\&\&) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{266     \textcolor{keyword}{private}:}
+\DoxyCodeLine{267         \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{class_logger}{Logger}};}
+\DoxyCodeLine{268 }
+\DoxyCodeLine{269         \mbox{\hyperlink{class_logger_1_1_test_atom_a1a591ec59fbfad62f57f039c478dc67e}{TestAtom}}(\textcolor{keywordtype}{bool} started, \textcolor{keyword}{const} std::string\& \mbox{\hyperlink{structname}{name}}, \textcolor{keyword}{const} std::string\& cmdline)}
+\DoxyCodeLine{270             : \mbox{\hyperlink{class_logger_1_1_test_atom_a4f578463d267224289a8d058f501af77}{mStarted}}(started)}
+\DoxyCodeLine{271             , \mbox{\hyperlink{class_logger_1_1_test_atom_a2fd08795040e5d5457bb3b0a8b4b4db9}{mName}}(\mbox{\hyperlink{structname}{name}})}
+\DoxyCodeLine{272             , \mbox{\hyperlink{class_logger_1_1_test_atom_a06f5e121f1b346692b38468c487b6aa6}{mCmdline}}(cmdline)}
+\DoxyCodeLine{273         \{}
+\DoxyCodeLine{274         \}}
+\DoxyCodeLine{275 }
+\DoxyCodeLine{276         \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_logger_1_1_test_atom_a4f578463d267224289a8d058f501af77}{mStarted}};}
+\DoxyCodeLine{277         std::string \mbox{\hyperlink{class_logger_1_1_test_atom_a2fd08795040e5d5457bb3b0a8b4b4db9}{mName}};}
+\DoxyCodeLine{278         std::string \mbox{\hyperlink{class_logger_1_1_test_atom_a06f5e121f1b346692b38468c487b6aa6}{mCmdline}};}
+\DoxyCodeLine{279     \};}
+\DoxyCodeLine{280 }
+\DoxyCodeLine{289     \textcolor{comment}{//}}
+\DoxyCodeLine{292 \textcolor{comment}{}    \textcolor{keyword}{static} \mbox{\hyperlink{class_logger_1_1_test_atom}{TestAtom}} \mbox{\hyperlink{class_logger_afb592500347528aa18527c9909562a96}{defineTest}}(\textcolor{keyword}{const} std::string\& \mbox{\hyperlink{structname}{name}}, \textcolor{keyword}{const} std::string\& cmdline)}
+\DoxyCodeLine{293     \{}
+\DoxyCodeLine{294         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_logger_1_1_test_atom}{TestAtom}}(\textcolor{keyword}{false}, \mbox{\hyperlink{structname}{name}}, cmdline);}
+\DoxyCodeLine{295     \}}
+\DoxyCodeLine{296 }
+\DoxyCodeLine{306     \textcolor{keyword}{static} \mbox{\hyperlink{class_logger_1_1_test_atom}{TestAtom}} \mbox{\hyperlink{class_logger_ab3c573608bf0944dcf92a0591f36325d}{defineTest}}(\textcolor{keyword}{const} std::string\& \mbox{\hyperlink{structname}{name}}, \textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} \textcolor{keyword}{const}* \textcolor{keyword}{const}* argv)}
+\DoxyCodeLine{307     \{}
+\DoxyCodeLine{308         \textcolor{keyword}{auto} cmdline = \mbox{\hyperlink{class_logger_af318a670d7f793faf81fb7b2db49d38d}{genCmdlineString}}(argc, argv);}
+\DoxyCodeLine{309         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_logger_afb592500347528aa18527c9909562a96}{defineTest}}(\mbox{\hyperlink{structname}{name}}, cmdline);}
+\DoxyCodeLine{310     \}}
+\DoxyCodeLine{311 }
+\DoxyCodeLine{319     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_logger_a7af0c49258bc567af8f20960d7e5e372}{reportTestStart}}(\mbox{\hyperlink{class_logger_1_1_test_atom}{TestAtom}}\& testAtom)}
+\DoxyCodeLine{320     \{}
+\DoxyCodeLine{321         \mbox{\hyperlink{class_logger_a5fa2c3903dc8e7abcaf036d7be60be6b}{reportTestResult}}(testAtom, \mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71ba4a9e534cf49d01e9e1901dd98fd74ac3}{TestResult::kRUNNING}});}
+\DoxyCodeLine{322         assert(!testAtom.\mbox{\hyperlink{class_logger_1_1_test_atom_a4f578463d267224289a8d058f501af77}{mStarted}});}
+\DoxyCodeLine{323         testAtom.\mbox{\hyperlink{class_logger_1_1_test_atom_a4f578463d267224289a8d058f501af77}{mStarted}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{324     \}}
+\DoxyCodeLine{325 }
+\DoxyCodeLine{335     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_logger_ab8d056eb2133432eaef0c8c0f01e1afa}{reportTestEnd}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_logger_1_1_test_atom}{TestAtom}}\& testAtom, \mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71b}{TestResult}} result)}
+\DoxyCodeLine{336     \{}
+\DoxyCodeLine{337         assert(result != \mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71ba4a9e534cf49d01e9e1901dd98fd74ac3}{TestResult::kRUNNING}});}
+\DoxyCodeLine{338         assert(testAtom.\mbox{\hyperlink{class_logger_1_1_test_atom_a4f578463d267224289a8d058f501af77}{mStarted}});}
+\DoxyCodeLine{339         \mbox{\hyperlink{class_logger_a5fa2c3903dc8e7abcaf036d7be60be6b}{reportTestResult}}(testAtom, result);}
+\DoxyCodeLine{340     \}}
+\DoxyCodeLine{341 }
+\DoxyCodeLine{342     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_logger_aeecb48586b5885dc6185dfb49a965a34}{reportPass}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_logger_1_1_test_atom}{TestAtom}}\& testAtom)}
+\DoxyCodeLine{343     \{}
+\DoxyCodeLine{344         \mbox{\hyperlink{class_logger_ab8d056eb2133432eaef0c8c0f01e1afa}{reportTestEnd}}(testAtom, \mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71ba4165977411390120b846177872de54dc}{TestResult::kPASSED}});}
+\DoxyCodeLine{345         \textcolor{keywordflow}{return} EXIT\_SUCCESS;}
+\DoxyCodeLine{346     \}}
+\DoxyCodeLine{347 }
+\DoxyCodeLine{348     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_logger_a43e8ec7321b3439eeb9c5fb0a8918603}{reportFail}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_logger_1_1_test_atom}{TestAtom}}\& testAtom)}
+\DoxyCodeLine{349     \{}
+\DoxyCodeLine{350         \mbox{\hyperlink{class_logger_ab8d056eb2133432eaef0c8c0f01e1afa}{reportTestEnd}}(testAtom, \mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71ba02e6ecbfad299a24779409a440f68caf}{TestResult::kFAILED}});}
+\DoxyCodeLine{351         \textcolor{keywordflow}{return} EXIT\_FAILURE;}
+\DoxyCodeLine{352     \}}
+\DoxyCodeLine{353 }
+\DoxyCodeLine{354     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_logger_a64f02f5bb628e47eb08b4e93278102f3}{reportWaive}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_logger_1_1_test_atom}{TestAtom}}\& testAtom)}
+\DoxyCodeLine{355     \{}
+\DoxyCodeLine{356         \mbox{\hyperlink{class_logger_ab8d056eb2133432eaef0c8c0f01e1afa}{reportTestEnd}}(testAtom, \mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71bae0bb82a02ed075300160607d0d1f2bc7}{TestResult::kWAIVED}});}
+\DoxyCodeLine{357         \textcolor{keywordflow}{return} EXIT\_SUCCESS;}
+\DoxyCodeLine{358     \}}
+\DoxyCodeLine{359 }
+\DoxyCodeLine{360     \textcolor{keyword}{static} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_logger_aed19e792e4f52622b3db6d5a8b629322}{reportTest}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_logger_1_1_test_atom}{TestAtom}}\& testAtom, \textcolor{keywordtype}{bool} pass)}
+\DoxyCodeLine{361     \{}
+\DoxyCodeLine{362         \textcolor{keywordflow}{return} pass ? \mbox{\hyperlink{class_logger_aeecb48586b5885dc6185dfb49a965a34}{reportPass}}(testAtom) : \mbox{\hyperlink{class_logger_a43e8ec7321b3439eeb9c5fb0a8918603}{reportFail}}(testAtom);}
+\DoxyCodeLine{363     \}}
+\DoxyCodeLine{364 }
+\DoxyCodeLine{365     \mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} \mbox{\hyperlink{class_logger_a3a2132ceba20c13016a2af87d5fdc284}{getReportableSeverity}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{366 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{367         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_logger_aa9a55206b6b7b0e4096e17484277cd59}{mReportableSeverity}};}
+\DoxyCodeLine{368     \}}
+\DoxyCodeLine{369 }
+\DoxyCodeLine{370 \textcolor{keyword}{private}:}
+\DoxyCodeLine{374     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{class_logger_a6e65087dd6d0dc4bc97530a547f9a9af}{severityPrefix}}(\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} severity)}
+\DoxyCodeLine{375     \{}
+\DoxyCodeLine{376         \textcolor{keywordflow}{switch} (severity)}
+\DoxyCodeLine{377         \{}
+\DoxyCodeLine{378         \textcolor{keywordflow}{case} Severity::kINTERNAL\_ERROR: \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}[F] "{}};}
+\DoxyCodeLine{379         \textcolor{keywordflow}{case} Severity::kERROR: \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}[E] "{}};}
+\DoxyCodeLine{380         \textcolor{keywordflow}{case} Severity::kWARNING: \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}[W] "{}};}
+\DoxyCodeLine{381         \textcolor{keywordflow}{case} Severity::kINFO: \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}[I] "{}};}
+\DoxyCodeLine{382         \textcolor{keywordflow}{case} Severity::kVERBOSE: \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}[V] "{}};}
+\DoxyCodeLine{383         \textcolor{keywordflow}{default}: assert(0); \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{384         \}}
+\DoxyCodeLine{385     \}}
+\DoxyCodeLine{386 }
+\DoxyCodeLine{390     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{class_logger_a3cf916dd984e67a5bbcbeb78837e4f24}{testResultString}}(\mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71b}{TestResult}} result)}
+\DoxyCodeLine{391     \{}
+\DoxyCodeLine{392         \textcolor{keywordflow}{switch} (result)}
+\DoxyCodeLine{393         \{}
+\DoxyCodeLine{394         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71ba4a9e534cf49d01e9e1901dd98fd74ac3}{TestResult::kRUNNING}}: \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}RUNNING"{}};}
+\DoxyCodeLine{395         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71ba4165977411390120b846177872de54dc}{TestResult::kPASSED}}: \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}PASSED"{}};}
+\DoxyCodeLine{396         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71ba02e6ecbfad299a24779409a440f68caf}{TestResult::kFAILED}}: \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}FAILED"{}};}
+\DoxyCodeLine{397         \textcolor{keywordflow}{case} \mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71bae0bb82a02ed075300160607d0d1f2bc7}{TestResult::kWAIVED}}: \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}WAIVED"{}};}
+\DoxyCodeLine{398         \textcolor{keywordflow}{default}: assert(0); \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{399         \}}
+\DoxyCodeLine{400     \}}
+\DoxyCodeLine{401 }
+\DoxyCodeLine{405     \textcolor{keyword}{static} std::ostream\& \mbox{\hyperlink{class_logger_a5e0a5508b11e7dd713d765db73af63e2}{severityOstream}}(\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} severity)}
+\DoxyCodeLine{406     \{}
+\DoxyCodeLine{407         \textcolor{keywordflow}{return} severity >= Severity::kINFO ? std::cout : std::cerr;}
+\DoxyCodeLine{408     \}}
+\DoxyCodeLine{409 }
+\DoxyCodeLine{413     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_logger_a5fa2c3903dc8e7abcaf036d7be60be6b}{reportTestResult}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_logger_1_1_test_atom}{TestAtom}}\& testAtom, \mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71b}{TestResult}} result)}
+\DoxyCodeLine{414     \{}
+\DoxyCodeLine{415         \mbox{\hyperlink{class_logger_a5e0a5508b11e7dd713d765db73af63e2}{severityOstream}}(Severity::kINFO) << \textcolor{stringliteral}{"{}\&\&\&\& "{}} << \mbox{\hyperlink{class_logger_a3cf916dd984e67a5bbcbeb78837e4f24}{testResultString}}(result) << \textcolor{stringliteral}{"{} "{}} << testAtom.\mbox{\hyperlink{class_logger_1_1_test_atom_a2fd08795040e5d5457bb3b0a8b4b4db9}{mName}} << \textcolor{stringliteral}{"{} \# "{}}}
+\DoxyCodeLine{416                                          << testAtom.\mbox{\hyperlink{class_logger_1_1_test_atom_a06f5e121f1b346692b38468c487b6aa6}{mCmdline}} << std::endl;}
+\DoxyCodeLine{417     \}}
+\DoxyCodeLine{418 }
+\DoxyCodeLine{422     \textcolor{keyword}{static} std::string \mbox{\hyperlink{class_logger_af318a670d7f793faf81fb7b2db49d38d}{genCmdlineString}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} \textcolor{keyword}{const}* \textcolor{keyword}{const}* argv)}
+\DoxyCodeLine{423     \{}
+\DoxyCodeLine{424         std::stringstream ss;}
+\DoxyCodeLine{425         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < argc; i++)}
+\DoxyCodeLine{426         \{}
+\DoxyCodeLine{427             \textcolor{keywordflow}{if} (i > 0)}
+\DoxyCodeLine{428                 ss << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{429             ss << argv[i];}
+\DoxyCodeLine{430         \}}
+\DoxyCodeLine{431         \textcolor{keywordflow}{return} ss.str();}
+\DoxyCodeLine{432     \}}
+\DoxyCodeLine{433 }
+\DoxyCodeLine{434     \mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} \mbox{\hyperlink{class_logger_aa9a55206b6b7b0e4096e17484277cd59}{mReportableSeverity}};}
+\DoxyCodeLine{435 \};}
+\DoxyCodeLine{436 }
+\DoxyCodeLine{437 \textcolor{keyword}{namespace}}
+\DoxyCodeLine{438 \{}
+\DoxyCodeLine{439 }
+\DoxyCodeLine{447 \textcolor{keyword}{inline} \mbox{\hyperlink{class_log_stream_consumer}{LogStreamConsumer}} LOG\_VERBOSE(\textcolor{keyword}{const} \mbox{\hyperlink{class_logger}{Logger}}\& logger)}
+\DoxyCodeLine{448 \{}
+\DoxyCodeLine{449     \textcolor{keywordflow}{return} \mbox{\hyperlink{class_log_stream_consumer}{LogStreamConsumer}}(logger.\mbox{\hyperlink{class_logger_a3a2132ceba20c13016a2af87d5fdc284}{getReportableSeverity}}(), Severity::kVERBOSE);}
+\DoxyCodeLine{450 \}}
+\DoxyCodeLine{451 }
+\DoxyCodeLine{459 \textcolor{keyword}{inline} \mbox{\hyperlink{class_log_stream_consumer}{LogStreamConsumer}} LOG\_INFO(\textcolor{keyword}{const} \mbox{\hyperlink{class_logger}{Logger}}\& logger)}
+\DoxyCodeLine{460 \{}
+\DoxyCodeLine{461     \textcolor{keywordflow}{return} \mbox{\hyperlink{class_log_stream_consumer}{LogStreamConsumer}}(logger.\mbox{\hyperlink{class_logger_a3a2132ceba20c13016a2af87d5fdc284}{getReportableSeverity}}(), Severity::kINFO);}
+\DoxyCodeLine{462 \}}
+\DoxyCodeLine{463 }
+\DoxyCodeLine{471 \textcolor{keyword}{inline} \mbox{\hyperlink{class_log_stream_consumer}{LogStreamConsumer}} LOG\_WARN(\textcolor{keyword}{const} \mbox{\hyperlink{class_logger}{Logger}}\& logger)}
+\DoxyCodeLine{472 \{}
+\DoxyCodeLine{473     \textcolor{keywordflow}{return} \mbox{\hyperlink{class_log_stream_consumer}{LogStreamConsumer}}(logger.\mbox{\hyperlink{class_logger_a3a2132ceba20c13016a2af87d5fdc284}{getReportableSeverity}}(), Severity::kWARNING);}
+\DoxyCodeLine{474 \}}
+\DoxyCodeLine{475 }
+\DoxyCodeLine{483 \textcolor{keyword}{inline} \mbox{\hyperlink{class_log_stream_consumer}{LogStreamConsumer}} LOG\_ERROR(\textcolor{keyword}{const} \mbox{\hyperlink{class_logger}{Logger}}\& logger)}
+\DoxyCodeLine{484 \{}
+\DoxyCodeLine{485     \textcolor{keywordflow}{return} \mbox{\hyperlink{class_log_stream_consumer}{LogStreamConsumer}}(logger.\mbox{\hyperlink{class_logger_a3a2132ceba20c13016a2af87d5fdc284}{getReportableSeverity}}(), Severity::kERROR);}
+\DoxyCodeLine{486 \}}
+\DoxyCodeLine{487 }
+\DoxyCodeLine{490 \textcolor{comment}{//         ("{}fatal"{} severity)}}
+\DoxyCodeLine{496 \textcolor{comment}{}\textcolor{keyword}{inline} \mbox{\hyperlink{class_log_stream_consumer}{LogStreamConsumer}} LOG\_FATAL(\textcolor{keyword}{const} \mbox{\hyperlink{class_logger}{Logger}}\& logger)}
+\DoxyCodeLine{497 \{}
+\DoxyCodeLine{498     \textcolor{keywordflow}{return} \mbox{\hyperlink{class_log_stream_consumer}{LogStreamConsumer}}(logger.\mbox{\hyperlink{class_logger_a3a2132ceba20c13016a2af87d5fdc284}{getReportableSeverity}}(), Severity::kINTERNAL\_ERROR);}
+\DoxyCodeLine{499 \}}
+\DoxyCodeLine{500 }
+\DoxyCodeLine{501 \} \textcolor{comment}{// anonymous namespace}}
+\DoxyCodeLine{502 }
+\DoxyCodeLine{503 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// TENSORRT\_LOGGING\_H}}
+
+\end{DoxyCode}

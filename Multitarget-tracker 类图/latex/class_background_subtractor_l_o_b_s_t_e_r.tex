@@ -1,0 +1,265 @@
+\hypertarget{class_background_subtractor_l_o_b_s_t_e_r}{}\doxysection{Background\+Subtractor\+LOBSTER类 参考}
+\label{class_background_subtractor_l_o_b_s_t_e_r}\index{BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}}
+
+
+{\ttfamily \#include $<$Background\+Subtractor\+LOBSTER.\+h$>$}
+
+
+
+类 Background\+Subtractor\+LOBSTER 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=238pt]{class_background_subtractor_l_o_b_s_t_e_r__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Background\+Subtractor\+LOBSTER 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_background_subtractor_l_o_b_s_t_e_r__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_a5a09b9ca80e50ba2f8686aaee6d461b7}{Background\+Subtractor\+LOBSTER}} (float f\+Rel\+LBSPThreshold=\mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_a3025dcc96b2d2c6416bfa57325d79ba5}{BGSLOBSTER\+\_\+\+DEFAULT\+\_\+\+LBSP\+\_\+\+REL\+\_\+\+SIMILARITY\+\_\+\+THRESHOLD}}, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} n\+LBSPThreshold\+Offset=\mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_a705c59e9c9a6fd8c0c57a5adab5a72c0}{BGSLOBSTER\+\_\+\+DEFAULT\+\_\+\+LBSP\+\_\+\+OFFSET\+\_\+\+SIMILARITY\+\_\+\+THRESHOLD}}, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} n\+Desc\+Dist\+Threshold=\mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_a11b89942e22902c0bbbbc2f0154804c2}{BGSLOBSTER\+\_\+\+DEFAULT\+\_\+\+DESC\+\_\+\+DIST\+\_\+\+THRESHOLD}}, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} n\+Color\+Dist\+Threshold=\mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_a8442ce9b67919b77ad15847e5d80d983}{BGSLOBSTER\+\_\+\+DEFAULT\+\_\+\+COLOR\+\_\+\+DIST\+\_\+\+THRESHOLD}}, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} n\+BGSamples=\mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_aea7261dd4c4233733b24fd175b6cb2b3}{BGSLOBSTER\+\_\+\+DEFAULT\+\_\+\+NB\+\_\+\+BG\+\_\+\+SAMPLES}}, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} n\+Required\+BGSamples=\mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_a209f60b8a126e31bb8ec6f8209d95ad0}{BGSLOBSTER\+\_\+\+DEFAULT\+\_\+\+REQUIRED\+\_\+\+NB\+\_\+\+BG\+\_\+\+SAMPLES}})
+\begin{DoxyCompactList}\small\item\em full constructor \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_a249ab359859ee9d439cd130d4271edd6}{$\sim$\+Background\+Subtractor\+LOBSTER}} ()
+\begin{DoxyCompactList}\small\item\em default destructor \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_a452bea31dcbd2e10efc701cc2cd25776}{initialize}} (const cv\+::\+Mat \&o\+Init\+Img, const cv\+::\+Mat \&o\+ROI)
+\begin{DoxyCompactList}\small\item\em (re)initiaization method; needs to be called before starting background subtraction \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_aeb3b23c1f47cfe71a73f3ca47ec06a75}{refresh\+Model}} (float f\+Samples\+Refresh\+Frac, bool b\+Force\+FGUpdate=false)
+\begin{DoxyCompactList}\small\item\em refreshes all samples based on the last analyzed frame \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_a0c0faf2754a7a74a6ae56cea47207070}{operator()}} (cv\+::\+Input\+Array \mbox{\hyperlink{structimage}{image}}, cv\+::\+Output\+Array fgmask, double learning\+Rate=\mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_a2d317f4a065c4c58c7241080d9c4457c}{BGSLOBSTER\+\_\+\+DEFAULT\+\_\+\+LEARNING\+\_\+\+RATE}})
+\begin{DoxyCompactList}\small\item\em primary model update function; the learning param is reinterpreted as an integer and should be \texorpdfstring{$>$}{>} 0 (smaller values == faster adaptation) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_a07872de46dbbd970b0bca959f2eb9392}{get\+Background\+Image}} (cv\+::\+Output\+Array background\+Image) const
+\begin{DoxyCompactList}\small\item\em returns a copy of the latest reconstructed background image \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_a28b005819f237ece74ab9eeacef8d770}{get\+Background\+Descriptors\+Image}} (cv\+::\+Output\+Array background\+Desc\+Image) const
+\begin{DoxyCompactList}\small\item\em returns a copy of the latest reconstructed background descriptors image \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_a58c127d4b95230d1e7fdc64055943ef3}{apply}} (cv\+::\+Input\+Array \mbox{\hyperlink{structimage}{image}}, cv\+::\+Output\+Array fgmask, double learning\+Rate\+Override=\mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_a2d317f4a065c4c58c7241080d9c4457c}{BGSLOBSTER\+\_\+\+DEFAULT\+\_\+\+LEARNING\+\_\+\+RATE}})
+\begin{DoxyCompactList}\small\item\em compute foreground mask \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected 属性}
+\begin{DoxyCompactItemize}
+\item 
+const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_a37a37a0a46fc8e33d954c33c1318d7b2}{m\+\_\+n\+Color\+Dist\+Threshold}}
+\begin{DoxyCompactList}\small\item\em absolute color distance threshold \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_abe3f4a836343e901746e4f243f5252e4}{m\+\_\+n\+Desc\+Dist\+Threshold}}
+\begin{DoxyCompactList}\small\item\em absolute descriptor distance threshold \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_a20c53540b952d608d849a305fd5eed89}{m\+\_\+n\+BGSamples}}
+\begin{DoxyCompactList}\small\item\em number of different samples per pixel/block to be taken from input frames to build the background model \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_acb558aefc1b6205a63c1906b6fd1eeff}{m\+\_\+n\+Required\+BGSamples}}
+\begin{DoxyCompactList}\small\item\em number of similar samples needed to consider the current pixel/block as \textquotesingle{}background\textquotesingle{} \end{DoxyCompactList}\item 
+std\+::vector$<$ cv\+::\+Mat $>$ \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_ac981b39f8ae7b28d3e4326d8e6be6332}{m\+\_\+vo\+BGColor\+Samples}}
+\begin{DoxyCompactList}\small\item\em background model pixel intensity samples \end{DoxyCompactList}\item 
+std\+::vector$<$ cv\+::\+Mat $>$ \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_a3c49866ae652423b2173215957907d04}{m\+\_\+vo\+BGDesc\+Samples}}
+\begin{DoxyCompactList}\small\item\em background model descriptors samples \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{额外继承的成员函数}
+
+
+\doxysubsection{详细描述}
+LOcal Binary Similarity segmen\+TER (LOBSTER) change detection algorithm.
+
+Note\+: both grayscale and RGB/\+BGR images may be used with this extractor (parameters are adjusted automatically). For optimal grayscale results, use CV\+\_\+8\+UC1 frames instead of CV\+\_\+8\+UC3.
+
+For more details on the different parameters or on the algorithm itself, see P.-\/L. St-\/\+Charles and G.-\/A. Bilodeau, \char`\"{}\+Improving Background Subtraction using Local Binary Similarity Patterns\char`\"{}, in WACV 2014.
+
+This algorithm is currently NOT thread-\/safe. 
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{class_background_subtractor_l_o_b_s_t_e_r_a5a09b9ca80e50ba2f8686aaee6d461b7}\label{class_background_subtractor_l_o_b_s_t_e_r_a5a09b9ca80e50ba2f8686aaee6d461b7}} 
+\index{BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}!BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}}
+\index{BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}!BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}}
+\doxysubsubsection{\texorpdfstring{BackgroundSubtractorLOBSTER()}{BackgroundSubtractorLOBSTER()}}
+{\footnotesize\ttfamily Background\+Subtractor\+LOBSTER\+::\+Background\+Subtractor\+LOBSTER (\begin{DoxyParamCaption}\item[{float}]{f\+Rel\+LBSPThreshold = {\ttfamily \mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_a3025dcc96b2d2c6416bfa57325d79ba5}{BGSLOBSTER\+\_\+\+DEFAULT\+\_\+\+LBSP\+\_\+\+REL\+\_\+\+SIMILARITY\+\_\+\+THRESHOLD}}},  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{n\+LBSPThreshold\+Offset = {\ttfamily \mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_a705c59e9c9a6fd8c0c57a5adab5a72c0}{BGSLOBSTER\+\_\+\+DEFAULT\+\_\+\+LBSP\+\_\+\+OFFSET\+\_\+\+SIMILARITY\+\_\+\+THRESHOLD}}},  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{n\+Desc\+Dist\+Threshold = {\ttfamily \mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_a11b89942e22902c0bbbbc2f0154804c2}{BGSLOBSTER\+\_\+\+DEFAULT\+\_\+\+DESC\+\_\+\+DIST\+\_\+\+THRESHOLD}}},  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{n\+Color\+Dist\+Threshold = {\ttfamily \mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_a8442ce9b67919b77ad15847e5d80d983}{BGSLOBSTER\+\_\+\+DEFAULT\+\_\+\+COLOR\+\_\+\+DIST\+\_\+\+THRESHOLD}}},  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{n\+BGSamples = {\ttfamily \mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_aea7261dd4c4233733b24fd175b6cb2b3}{BGSLOBSTER\+\_\+\+DEFAULT\+\_\+\+NB\+\_\+\+BG\+\_\+\+SAMPLES}}},  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{n\+Required\+BGSamples = {\ttfamily \mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_a209f60b8a126e31bb8ec6f8209d95ad0}{BGSLOBSTER\+\_\+\+DEFAULT\+\_\+\+REQUIRED\+\_\+\+NB\+\_\+\+BG\+\_\+\+SAMPLES}}} }\end{DoxyParamCaption})}
+
+
+
+full constructor 
+
+\mbox{\Hypertarget{class_background_subtractor_l_o_b_s_t_e_r_a249ab359859ee9d439cd130d4271edd6}\label{class_background_subtractor_l_o_b_s_t_e_r_a249ab359859ee9d439cd130d4271edd6}} 
+\index{BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}!````~BackgroundSubtractorLOBSTER@{$\sim$BackgroundSubtractorLOBSTER}}
+\index{````~BackgroundSubtractorLOBSTER@{$\sim$BackgroundSubtractorLOBSTER}!BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}}
+\doxysubsubsection{\texorpdfstring{$\sim$BackgroundSubtractorLOBSTER()}{~BackgroundSubtractorLOBSTER()}}
+{\footnotesize\ttfamily Background\+Subtractor\+LOBSTER\+::$\sim$\+Background\+Subtractor\+LOBSTER (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+default destructor 
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{class_background_subtractor_l_o_b_s_t_e_r_a58c127d4b95230d1e7fdc64055943ef3}\label{class_background_subtractor_l_o_b_s_t_e_r_a58c127d4b95230d1e7fdc64055943ef3}} 
+\index{BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}!apply@{apply}}
+\index{apply@{apply}!BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}}
+\doxysubsubsection{\texorpdfstring{apply()}{apply()}}
+{\footnotesize\ttfamily void Background\+Subtractor\+LOBSTER\+::apply (\begin{DoxyParamCaption}\item[{cv\+::\+Input\+Array}]{image,  }\item[{cv\+::\+Output\+Array}]{fgmask,  }\item[{double}]{learning\+Rate\+Override = {\ttfamily \mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_a2d317f4a065c4c58c7241080d9c4457c}{BGSLOBSTER\+\_\+\+DEFAULT\+\_\+\+LEARNING\+\_\+\+RATE}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+compute foreground mask 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_background_subtractor_l_o_b_s_t_e_r_a58c127d4b95230d1e7fdc64055943ef3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_background_subtractor_l_o_b_s_t_e_r_a28b005819f237ece74ab9eeacef8d770}\label{class_background_subtractor_l_o_b_s_t_e_r_a28b005819f237ece74ab9eeacef8d770}} 
+\index{BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}!getBackgroundDescriptorsImage@{getBackgroundDescriptorsImage}}
+\index{getBackgroundDescriptorsImage@{getBackgroundDescriptorsImage}!BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}}
+\doxysubsubsection{\texorpdfstring{getBackgroundDescriptorsImage()}{getBackgroundDescriptorsImage()}}
+{\footnotesize\ttfamily void Background\+Subtractor\+LOBSTER\+::get\+Background\+Descriptors\+Image (\begin{DoxyParamCaption}\item[{cv\+::\+Output\+Array}]{background\+Desc\+Image }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+returns a copy of the latest reconstructed background descriptors image 
+
+\mbox{\Hypertarget{class_background_subtractor_l_o_b_s_t_e_r_a07872de46dbbd970b0bca959f2eb9392}\label{class_background_subtractor_l_o_b_s_t_e_r_a07872de46dbbd970b0bca959f2eb9392}} 
+\index{BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}!getBackgroundImage@{getBackgroundImage}}
+\index{getBackgroundImage@{getBackgroundImage}!BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}}
+\doxysubsubsection{\texorpdfstring{getBackgroundImage()}{getBackgroundImage()}}
+{\footnotesize\ttfamily void Background\+Subtractor\+LOBSTER\+::get\+Background\+Image (\begin{DoxyParamCaption}\item[{cv\+::\+Output\+Array}]{background\+Image }\end{DoxyParamCaption}) const}
+
+
+
+returns a copy of the latest reconstructed background image 
+
+\mbox{\Hypertarget{class_background_subtractor_l_o_b_s_t_e_r_a452bea31dcbd2e10efc701cc2cd25776}\label{class_background_subtractor_l_o_b_s_t_e_r_a452bea31dcbd2e10efc701cc2cd25776}} 
+\index{BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}!initialize@{initialize}}
+\index{initialize@{initialize}!BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}}
+\doxysubsubsection{\texorpdfstring{initialize()}{initialize()}}
+{\footnotesize\ttfamily void Background\+Subtractor\+LOBSTER\+::initialize (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{o\+Init\+Img,  }\item[{const cv\+::\+Mat \&}]{o\+ROI }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+(re)initiaization method; needs to be called before starting background subtraction 
+
+
+
+实现了 \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a3644bc10ec3beda6fad22c633fe0f8fb}{Background\+Subtractor\+LBSP}}.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_background_subtractor_l_o_b_s_t_e_r_a452bea31dcbd2e10efc701cc2cd25776_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_background_subtractor_l_o_b_s_t_e_r_a0c0faf2754a7a74a6ae56cea47207070}\label{class_background_subtractor_l_o_b_s_t_e_r_a0c0faf2754a7a74a6ae56cea47207070}} 
+\index{BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}!operator()@{operator()}}
+\index{operator()@{operator()}!BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily void Background\+Subtractor\+LOBSTER\+::operator() (\begin{DoxyParamCaption}\item[{cv\+::\+Input\+Array}]{image,  }\item[{cv\+::\+Output\+Array}]{fgmask,  }\item[{double}]{learning\+Rate = {\ttfamily \mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_a2d317f4a065c4c58c7241080d9c4457c}{BGSLOBSTER\+\_\+\+DEFAULT\+\_\+\+LEARNING\+\_\+\+RATE}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+primary model update function; the learning param is reinterpreted as an integer and should be \texorpdfstring{$>$}{>} 0 (smaller values == faster adaptation) 
+
+
+
+实现了 \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a4771cac59b7ac865d6ec25cbf049948e}{Background\+Subtractor\+LBSP}}.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_background_subtractor_l_o_b_s_t_e_r_a0c0faf2754a7a74a6ae56cea47207070_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_background_subtractor_l_o_b_s_t_e_r_aeb3b23c1f47cfe71a73f3ca47ec06a75}\label{class_background_subtractor_l_o_b_s_t_e_r_aeb3b23c1f47cfe71a73f3ca47ec06a75}} 
+\index{BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}!refreshModel@{refreshModel}}
+\index{refreshModel@{refreshModel}!BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}}
+\doxysubsubsection{\texorpdfstring{refreshModel()}{refreshModel()}}
+{\footnotesize\ttfamily void Background\+Subtractor\+LOBSTER\+::refresh\+Model (\begin{DoxyParamCaption}\item[{float}]{f\+Samples\+Refresh\+Frac,  }\item[{bool}]{b\+Force\+FGUpdate = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+refreshes all samples based on the last analyzed frame 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_background_subtractor_l_o_b_s_t_e_r_aeb3b23c1f47cfe71a73f3ca47ec06a75_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{class_background_subtractor_l_o_b_s_t_e_r_a20c53540b952d608d849a305fd5eed89}\label{class_background_subtractor_l_o_b_s_t_e_r_a20c53540b952d608d849a305fd5eed89}} 
+\index{BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}!m\_nBGSamples@{m\_nBGSamples}}
+\index{m\_nBGSamples@{m\_nBGSamples}!BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}}
+\doxysubsubsection{\texorpdfstring{m\_nBGSamples}{m\_nBGSamples}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} Background\+Subtractor\+LOBSTER\+::m\+\_\+n\+BGSamples\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+number of different samples per pixel/block to be taken from input frames to build the background model 
+
+\mbox{\Hypertarget{class_background_subtractor_l_o_b_s_t_e_r_a37a37a0a46fc8e33d954c33c1318d7b2}\label{class_background_subtractor_l_o_b_s_t_e_r_a37a37a0a46fc8e33d954c33c1318d7b2}} 
+\index{BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}!m\_nColorDistThreshold@{m\_nColorDistThreshold}}
+\index{m\_nColorDistThreshold@{m\_nColorDistThreshold}!BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}}
+\doxysubsubsection{\texorpdfstring{m\_nColorDistThreshold}{m\_nColorDistThreshold}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} Background\+Subtractor\+LOBSTER\+::m\+\_\+n\+Color\+Dist\+Threshold\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+absolute color distance threshold 
+
+\mbox{\Hypertarget{class_background_subtractor_l_o_b_s_t_e_r_abe3f4a836343e901746e4f243f5252e4}\label{class_background_subtractor_l_o_b_s_t_e_r_abe3f4a836343e901746e4f243f5252e4}} 
+\index{BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}!m\_nDescDistThreshold@{m\_nDescDistThreshold}}
+\index{m\_nDescDistThreshold@{m\_nDescDistThreshold}!BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}}
+\doxysubsubsection{\texorpdfstring{m\_nDescDistThreshold}{m\_nDescDistThreshold}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} Background\+Subtractor\+LOBSTER\+::m\+\_\+n\+Desc\+Dist\+Threshold\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+absolute descriptor distance threshold 
+
+\mbox{\Hypertarget{class_background_subtractor_l_o_b_s_t_e_r_acb558aefc1b6205a63c1906b6fd1eeff}\label{class_background_subtractor_l_o_b_s_t_e_r_acb558aefc1b6205a63c1906b6fd1eeff}} 
+\index{BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}!m\_nRequiredBGSamples@{m\_nRequiredBGSamples}}
+\index{m\_nRequiredBGSamples@{m\_nRequiredBGSamples}!BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}}
+\doxysubsubsection{\texorpdfstring{m\_nRequiredBGSamples}{m\_nRequiredBGSamples}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} Background\+Subtractor\+LOBSTER\+::m\+\_\+n\+Required\+BGSamples\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+number of similar samples needed to consider the current pixel/block as \textquotesingle{}background\textquotesingle{} 
+
+\mbox{\Hypertarget{class_background_subtractor_l_o_b_s_t_e_r_ac981b39f8ae7b28d3e4326d8e6be6332}\label{class_background_subtractor_l_o_b_s_t_e_r_ac981b39f8ae7b28d3e4326d8e6be6332}} 
+\index{BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}!m\_voBGColorSamples@{m\_voBGColorSamples}}
+\index{m\_voBGColorSamples@{m\_voBGColorSamples}!BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}}
+\doxysubsubsection{\texorpdfstring{m\_voBGColorSamples}{m\_voBGColorSamples}}
+{\footnotesize\ttfamily std\+::vector$<$cv\+::\+Mat$>$ Background\+Subtractor\+LOBSTER\+::m\+\_\+vo\+BGColor\+Samples\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+background model pixel intensity samples 
+
+\mbox{\Hypertarget{class_background_subtractor_l_o_b_s_t_e_r_a3c49866ae652423b2173215957907d04}\label{class_background_subtractor_l_o_b_s_t_e_r_a3c49866ae652423b2173215957907d04}} 
+\index{BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}!m\_voBGDescSamples@{m\_voBGDescSamples}}
+\index{m\_voBGDescSamples@{m\_voBGDescSamples}!BackgroundSubtractorLOBSTER@{BackgroundSubtractorLOBSTER}}
+\doxysubsubsection{\texorpdfstring{m\_voBGDescSamples}{m\_voBGDescSamples}}
+{\footnotesize\ttfamily std\+::vector$<$cv\+::\+Mat$>$ Background\+Subtractor\+LOBSTER\+::m\+\_\+vo\+BGDesc\+Samples\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+background model descriptors samples 
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/\+Subsense/\mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h}{Background\+Subtractor\+LOBSTER.\+h}}\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/\+Subsense/\mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8cpp}{Background\+Subtractor\+LOBSTER.\+cpp}}\end{DoxyCompactItemize}

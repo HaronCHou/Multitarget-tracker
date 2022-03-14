@@ -1,0 +1,522 @@
+\hypertarget{darknet_8c}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/darknet.c 文件参考}
+\label{darknet_8c}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/darknet.c@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/darknet.c}}
+{\ttfamily \#include \char`\"{}darknet.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}parser.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dark\+\_\+cuda.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}blas.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}connected\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}convolutional\+\_\+layer.\+h\char`\"{}}\newline
+darknet.\+c 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{darknet_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{darknet_8c_aa8603edf5e9da49cdee89b35d6bc5b42}{predict\+\_\+classifier}} (char $\ast$datacfg, char $\ast$cfgfile, char $\ast$weightfile, char $\ast$filename, int top)
+\item 
+void \mbox{\hyperlink{darknet_8c_a2d502a871e36992b74083d7f81377d9b}{run\+\_\+voxel}} (int argc, char $\ast$$\ast$argv)
+\item 
+void \mbox{\hyperlink{darknet_8c_ae2af4814947b728e7cfafec8c446050e}{run\+\_\+yolo}} (int argc, char $\ast$$\ast$argv)
+\item 
+void \mbox{\hyperlink{darknet_8c_a677c1747fd7a58c7f7da3314af5d6120}{run\+\_\+detector}} (int argc, char $\ast$$\ast$argv)
+\item 
+void \mbox{\hyperlink{darknet_8c_a9a2e98f86cd2b185650f4ec039d38b03}{run\+\_\+coco}} (int argc, char $\ast$$\ast$argv)
+\item 
+void \mbox{\hyperlink{darknet_8c_a95a0514071cfac42ef963ccead9acb49}{run\+\_\+writing}} (int argc, char $\ast$$\ast$argv)
+\item 
+void \mbox{\hyperlink{darknet_8c_add5178ee1c90068a3229f6ee5349dfcc}{run\+\_\+captcha}} (int argc, char $\ast$$\ast$argv)
+\item 
+void \mbox{\hyperlink{darknet_8c_aaefb0ed0f5bd621bb9e131e2bc1b4852}{run\+\_\+nightmare}} (int argc, char $\ast$$\ast$argv)
+\item 
+void \mbox{\hyperlink{darknet_8c_a08655daec67d2702a462675941bab3e2}{run\+\_\+dice}} (int argc, char $\ast$$\ast$argv)
+\item 
+void \mbox{\hyperlink{darknet_8c_adad6db98a4c5c1342319cd731b5654c7}{run\+\_\+compare}} (int argc, char $\ast$$\ast$argv)
+\item 
+void \mbox{\hyperlink{darknet_8c_a08cb29ba2c4674431352eff4e6274b56}{run\+\_\+classifier}} (int argc, char $\ast$$\ast$argv)
+\item 
+void \mbox{\hyperlink{darknet_8c_a7fd5ff39b30355662b36d8f1c3efae78}{run\+\_\+char\+\_\+rnn}} (int argc, char $\ast$$\ast$argv)
+\item 
+void \mbox{\hyperlink{darknet_8c_a900f16d9c0fb61d330864d5f10195547}{run\+\_\+vid\+\_\+rnn}} (int argc, char $\ast$$\ast$argv)
+\item 
+void \mbox{\hyperlink{darknet_8c_a695072073d4da637e4728d2527422292}{run\+\_\+tag}} (int argc, char $\ast$$\ast$argv)
+\item 
+void \mbox{\hyperlink{darknet_8c_a964d88fc4dfa875f6de21066f7171d11}{run\+\_\+cifar}} (int argc, char $\ast$$\ast$argv)
+\item 
+void \mbox{\hyperlink{darknet_8c_acbc5b7a174f506f13ab6d0fca1faa102}{run\+\_\+go}} (int argc, char $\ast$$\ast$argv)
+\item 
+void \mbox{\hyperlink{darknet_8c_a4c4bbc70a093ad78def4e127f35bc626}{run\+\_\+art}} (int argc, char $\ast$$\ast$argv)
+\item 
+void \mbox{\hyperlink{darknet_8c_a4bc1230a2d77e86644c4719157fc69cc}{run\+\_\+super}} (int argc, char $\ast$$\ast$argv)
+\item 
+void \mbox{\hyperlink{darknet_8c_a7dfa7e733fd4cb2475215182772ba1bf}{average}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\item 
+void \mbox{\hyperlink{darknet_8c_a4c45f1bb571fe1f3c52c4f7b7d858f8d}{speed}} (char $\ast$cfgfile, int tics)
+\item 
+void \mbox{\hyperlink{darknet_8c_ac61af9d7b12e2d1ac431925614a3b819}{operations}} (char $\ast$cfgfile)
+\item 
+void \mbox{\hyperlink{darknet_8c_ab5a20c1c9997af0dec519e992b9400b9}{oneoff}} (char $\ast$cfgfile, char $\ast$weightfile, char $\ast$outfile)
+\item 
+void \mbox{\hyperlink{darknet_8c_a4663de4fa674346c82a366077969fd4b}{partial}} (char $\ast$cfgfile, char $\ast$weightfile, char $\ast$outfile, int \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}})
+\item 
+void \mbox{\hyperlink{darknet_8c_a83ca859f15e1369a5e569df1a7486ebe}{rescale\+\_\+net}} (char $\ast$cfgfile, char $\ast$weightfile, char $\ast$outfile)
+\item 
+void \mbox{\hyperlink{darknet_8c_a2bc7b77a09e6cfe48e3511ff39990af4}{rgbgr\+\_\+net}} (char $\ast$cfgfile, char $\ast$weightfile, char $\ast$outfile)
+\item 
+void \mbox{\hyperlink{darknet_8c_a69898d896e1117395eae539fa27b4eee}{reset\+\_\+normalize\+\_\+net}} (char $\ast$cfgfile, char $\ast$weightfile, char $\ast$outfile)
+\item 
+\mbox{\hyperlink{structlayer}{layer}} \mbox{\hyperlink{darknet_8c_a71be3d176e3af144125a308286d80fdc}{normalize\+\_\+layer}} (\mbox{\hyperlink{structlayer}{layer}} l, int n)
+\item 
+void \mbox{\hyperlink{darknet_8c_a6a824943f20fa1121776a2a4fd6f1b03}{normalize\+\_\+net}} (char $\ast$cfgfile, char $\ast$weightfile, char $\ast$outfile)
+\item 
+void \mbox{\hyperlink{darknet_8c_ab619dcce0bf0acf8db3db0d86dfa83de}{statistics\+\_\+net}} (char $\ast$cfgfile, char $\ast$weightfile)
+\item 
+void \mbox{\hyperlink{darknet_8c_a59310cd440b860b5f21bd6e3ffef65d0}{denormalize\+\_\+net}} (char $\ast$cfgfile, char $\ast$weightfile, char $\ast$outfile)
+\item 
+void \mbox{\hyperlink{darknet_8c_a2b74a3332b1c442875e900ee9254649c}{visualize}} (char $\ast$cfgfile, char $\ast$weightfile)
+\item 
+int \mbox{\hyperlink{darknet_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{darknet_8c_a7dfa7e733fd4cb2475215182772ba1bf}\label{darknet_8c_a7dfa7e733fd4cb2475215182772ba1bf}} 
+\index{darknet.c@{darknet.c}!average@{average}}
+\index{average@{average}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{average()}{average()}}
+{\footnotesize\ttfamily void average (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_a7dfa7e733fd4cb2475215182772ba1bf_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_a59310cd440b860b5f21bd6e3ffef65d0}\label{darknet_8c_a59310cd440b860b5f21bd6e3ffef65d0}} 
+\index{darknet.c@{darknet.c}!denormalize\_net@{denormalize\_net}}
+\index{denormalize\_net@{denormalize\_net}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{denormalize\_net()}{denormalize\_net()}}
+{\footnotesize\ttfamily void denormalize\+\_\+net (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{char $\ast$}]{outfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_a59310cd440b860b5f21bd6e3ffef65d0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{darknet_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{darknet.c@{darknet.c}!main@{main}}
+\index{main@{main}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_a3c04138a5bfe5d72780bb7e82a18e627_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_a71be3d176e3af144125a308286d80fdc}\label{darknet_8c_a71be3d176e3af144125a308286d80fdc}} 
+\index{darknet.c@{darknet.c}!normalize\_layer@{normalize\_layer}}
+\index{normalize\_layer@{normalize\_layer}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{normalize\_layer()}{normalize\_layer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlayer}{layer}} normalize\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{darknet_8c_a6a824943f20fa1121776a2a4fd6f1b03}\label{darknet_8c_a6a824943f20fa1121776a2a4fd6f1b03}} 
+\index{darknet.c@{darknet.c}!normalize\_net@{normalize\_net}}
+\index{normalize\_net@{normalize\_net}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{normalize\_net()}{normalize\_net()}}
+{\footnotesize\ttfamily void normalize\+\_\+net (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{char $\ast$}]{outfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_a6a824943f20fa1121776a2a4fd6f1b03_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_ab5a20c1c9997af0dec519e992b9400b9}\label{darknet_8c_ab5a20c1c9997af0dec519e992b9400b9}} 
+\index{darknet.c@{darknet.c}!oneoff@{oneoff}}
+\index{oneoff@{oneoff}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{oneoff()}{oneoff()}}
+{\footnotesize\ttfamily void oneoff (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{char $\ast$}]{outfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_ab5a20c1c9997af0dec519e992b9400b9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_ac61af9d7b12e2d1ac431925614a3b819}\label{darknet_8c_ac61af9d7b12e2d1ac431925614a3b819}} 
+\index{darknet.c@{darknet.c}!operations@{operations}}
+\index{operations@{operations}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{operations()}{operations()}}
+{\footnotesize\ttfamily void operations (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_ac61af9d7b12e2d1ac431925614a3b819_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_a4663de4fa674346c82a366077969fd4b}\label{darknet_8c_a4663de4fa674346c82a366077969fd4b}} 
+\index{darknet.c@{darknet.c}!partial@{partial}}
+\index{partial@{partial}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{partial()}{partial()}}
+{\footnotesize\ttfamily void partial (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{char $\ast$}]{outfile,  }\item[{int}]{max }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_a4663de4fa674346c82a366077969fd4b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_aa8603edf5e9da49cdee89b35d6bc5b42}\label{darknet_8c_aa8603edf5e9da49cdee89b35d6bc5b42}} 
+\index{darknet.c@{darknet.c}!predict\_classifier@{predict\_classifier}}
+\index{predict\_classifier@{predict\_classifier}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{predict\_classifier()}{predict\_classifier()}}
+{\footnotesize\ttfamily void predict\+\_\+classifier (\begin{DoxyParamCaption}\item[{char $\ast$}]{datacfg,  }\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{char $\ast$}]{filename,  }\item[{int}]{top }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_aa8603edf5e9da49cdee89b35d6bc5b42_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_a83ca859f15e1369a5e569df1a7486ebe}\label{darknet_8c_a83ca859f15e1369a5e569df1a7486ebe}} 
+\index{darknet.c@{darknet.c}!rescale\_net@{rescale\_net}}
+\index{rescale\_net@{rescale\_net}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{rescale\_net()}{rescale\_net()}}
+{\footnotesize\ttfamily void rescale\+\_\+net (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{char $\ast$}]{outfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_a83ca859f15e1369a5e569df1a7486ebe_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_a69898d896e1117395eae539fa27b4eee}\label{darknet_8c_a69898d896e1117395eae539fa27b4eee}} 
+\index{darknet.c@{darknet.c}!reset\_normalize\_net@{reset\_normalize\_net}}
+\index{reset\_normalize\_net@{reset\_normalize\_net}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{reset\_normalize\_net()}{reset\_normalize\_net()}}
+{\footnotesize\ttfamily void reset\+\_\+normalize\+\_\+net (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{char $\ast$}]{outfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_a69898d896e1117395eae539fa27b4eee_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_a2bc7b77a09e6cfe48e3511ff39990af4}\label{darknet_8c_a2bc7b77a09e6cfe48e3511ff39990af4}} 
+\index{darknet.c@{darknet.c}!rgbgr\_net@{rgbgr\_net}}
+\index{rgbgr\_net@{rgbgr\_net}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{rgbgr\_net()}{rgbgr\_net()}}
+{\footnotesize\ttfamily void rgbgr\+\_\+net (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{char $\ast$}]{outfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_a2bc7b77a09e6cfe48e3511ff39990af4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_a4c4bbc70a093ad78def4e127f35bc626}\label{darknet_8c_a4c4bbc70a093ad78def4e127f35bc626}} 
+\index{darknet.c@{darknet.c}!run\_art@{run\_art}}
+\index{run\_art@{run\_art}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{run\_art()}{run\_art()}}
+{\footnotesize\ttfamily void run\+\_\+art (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{darknet_8c_a4c4bbc70a093ad78def4e127f35bc626_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_add5178ee1c90068a3229f6ee5349dfcc}\label{darknet_8c_add5178ee1c90068a3229f6ee5349dfcc}} 
+\index{darknet.c@{darknet.c}!run\_captcha@{run\_captcha}}
+\index{run\_captcha@{run\_captcha}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{run\_captcha()}{run\_captcha()}}
+{\footnotesize\ttfamily void run\+\_\+captcha (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{darknet_8c_add5178ee1c90068a3229f6ee5349dfcc_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_a7fd5ff39b30355662b36d8f1c3efae78}\label{darknet_8c_a7fd5ff39b30355662b36d8f1c3efae78}} 
+\index{darknet.c@{darknet.c}!run\_char\_rnn@{run\_char\_rnn}}
+\index{run\_char\_rnn@{run\_char\_rnn}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{run\_char\_rnn()}{run\_char\_rnn()}}
+{\footnotesize\ttfamily void run\+\_\+char\+\_\+rnn (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_a7fd5ff39b30355662b36d8f1c3efae78_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_a964d88fc4dfa875f6de21066f7171d11}\label{darknet_8c_a964d88fc4dfa875f6de21066f7171d11}} 
+\index{darknet.c@{darknet.c}!run\_cifar@{run\_cifar}}
+\index{run\_cifar@{run\_cifar}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{run\_cifar()}{run\_cifar()}}
+{\footnotesize\ttfamily void run\+\_\+cifar (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_a964d88fc4dfa875f6de21066f7171d11_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_a08cb29ba2c4674431352eff4e6274b56}\label{darknet_8c_a08cb29ba2c4674431352eff4e6274b56}} 
+\index{darknet.c@{darknet.c}!run\_classifier@{run\_classifier}}
+\index{run\_classifier@{run\_classifier}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{run\_classifier()}{run\_classifier()}}
+{\footnotesize\ttfamily void run\+\_\+classifier (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_a08cb29ba2c4674431352eff4e6274b56_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_a9a2e98f86cd2b185650f4ec039d38b03}\label{darknet_8c_a9a2e98f86cd2b185650f4ec039d38b03}} 
+\index{darknet.c@{darknet.c}!run\_coco@{run\_coco}}
+\index{run\_coco@{run\_coco}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{run\_coco()}{run\_coco()}}
+{\footnotesize\ttfamily void run\+\_\+coco (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_a9a2e98f86cd2b185650f4ec039d38b03_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_adad6db98a4c5c1342319cd731b5654c7}\label{darknet_8c_adad6db98a4c5c1342319cd731b5654c7}} 
+\index{darknet.c@{darknet.c}!run\_compare@{run\_compare}}
+\index{run\_compare@{run\_compare}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{run\_compare()}{run\_compare()}}
+{\footnotesize\ttfamily void run\+\_\+compare (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{darknet_8c_adad6db98a4c5c1342319cd731b5654c7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_a677c1747fd7a58c7f7da3314af5d6120}\label{darknet_8c_a677c1747fd7a58c7f7da3314af5d6120}} 
+\index{darknet.c@{darknet.c}!run\_detector@{run\_detector}}
+\index{run\_detector@{run\_detector}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{run\_detector()}{run\_detector()}}
+{\footnotesize\ttfamily void run\+\_\+detector (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_a677c1747fd7a58c7f7da3314af5d6120_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_a08655daec67d2702a462675941bab3e2}\label{darknet_8c_a08655daec67d2702a462675941bab3e2}} 
+\index{darknet.c@{darknet.c}!run\_dice@{run\_dice}}
+\index{run\_dice@{run\_dice}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{run\_dice()}{run\_dice()}}
+{\footnotesize\ttfamily void run\+\_\+dice (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{darknet_8c_a08655daec67d2702a462675941bab3e2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_acbc5b7a174f506f13ab6d0fca1faa102}\label{darknet_8c_acbc5b7a174f506f13ab6d0fca1faa102}} 
+\index{darknet.c@{darknet.c}!run\_go@{run\_go}}
+\index{run\_go@{run\_go}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{run\_go()}{run\_go()}}
+{\footnotesize\ttfamily void run\+\_\+go (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_acbc5b7a174f506f13ab6d0fca1faa102_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_aaefb0ed0f5bd621bb9e131e2bc1b4852}\label{darknet_8c_aaefb0ed0f5bd621bb9e131e2bc1b4852}} 
+\index{darknet.c@{darknet.c}!run\_nightmare@{run\_nightmare}}
+\index{run\_nightmare@{run\_nightmare}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{run\_nightmare()}{run\_nightmare()}}
+{\footnotesize\ttfamily void run\+\_\+nightmare (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_aaefb0ed0f5bd621bb9e131e2bc1b4852_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_a4bc1230a2d77e86644c4719157fc69cc}\label{darknet_8c_a4bc1230a2d77e86644c4719157fc69cc}} 
+\index{darknet.c@{darknet.c}!run\_super@{run\_super}}
+\index{run\_super@{run\_super}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{run\_super()}{run\_super()}}
+{\footnotesize\ttfamily void run\+\_\+super (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_a4bc1230a2d77e86644c4719157fc69cc_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_a695072073d4da637e4728d2527422292}\label{darknet_8c_a695072073d4da637e4728d2527422292}} 
+\index{darknet.c@{darknet.c}!run\_tag@{run\_tag}}
+\index{run\_tag@{run\_tag}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{run\_tag()}{run\_tag()}}
+{\footnotesize\ttfamily void run\+\_\+tag (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{darknet_8c_a695072073d4da637e4728d2527422292_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_a900f16d9c0fb61d330864d5f10195547}\label{darknet_8c_a900f16d9c0fb61d330864d5f10195547}} 
+\index{darknet.c@{darknet.c}!run\_vid\_rnn@{run\_vid\_rnn}}
+\index{run\_vid\_rnn@{run\_vid\_rnn}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{run\_vid\_rnn()}{run\_vid\_rnn()}}
+{\footnotesize\ttfamily void run\+\_\+vid\+\_\+rnn (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{darknet_8c_a2d502a871e36992b74083d7f81377d9b}\label{darknet_8c_a2d502a871e36992b74083d7f81377d9b}} 
+\index{darknet.c@{darknet.c}!run\_voxel@{run\_voxel}}
+\index{run\_voxel@{run\_voxel}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{run\_voxel()}{run\_voxel()}}
+{\footnotesize\ttfamily void run\+\_\+voxel (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_a2d502a871e36992b74083d7f81377d9b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_a95a0514071cfac42ef963ccead9acb49}\label{darknet_8c_a95a0514071cfac42ef963ccead9acb49}} 
+\index{darknet.c@{darknet.c}!run\_writing@{run\_writing}}
+\index{run\_writing@{run\_writing}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{run\_writing()}{run\_writing()}}
+{\footnotesize\ttfamily void run\+\_\+writing (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{darknet_8c_a95a0514071cfac42ef963ccead9acb49_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_ae2af4814947b728e7cfafec8c446050e}\label{darknet_8c_ae2af4814947b728e7cfafec8c446050e}} 
+\index{darknet.c@{darknet.c}!run\_yolo@{run\_yolo}}
+\index{run\_yolo@{run\_yolo}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{run\_yolo()}{run\_yolo()}}
+{\footnotesize\ttfamily void run\+\_\+yolo (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_ae2af4814947b728e7cfafec8c446050e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_a4c45f1bb571fe1f3c52c4f7b7d858f8d}\label{darknet_8c_a4c45f1bb571fe1f3c52c4f7b7d858f8d}} 
+\index{darknet.c@{darknet.c}!speed@{speed}}
+\index{speed@{speed}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{speed()}{speed()}}
+{\footnotesize\ttfamily void speed (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{int}]{tics }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_a4c45f1bb571fe1f3c52c4f7b7d858f8d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_ab619dcce0bf0acf8db3db0d86dfa83de}\label{darknet_8c_ab619dcce0bf0acf8db3db0d86dfa83de}} 
+\index{darknet.c@{darknet.c}!statistics\_net@{statistics\_net}}
+\index{statistics\_net@{statistics\_net}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{statistics\_net()}{statistics\_net()}}
+{\footnotesize\ttfamily void statistics\+\_\+net (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_ab619dcce0bf0acf8db3db0d86dfa83de_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{darknet_8c_a2b74a3332b1c442875e900ee9254649c}\label{darknet_8c_a2b74a3332b1c442875e900ee9254649c}} 
+\index{darknet.c@{darknet.c}!visualize@{visualize}}
+\index{visualize@{visualize}!darknet.c@{darknet.c}}
+\doxysubsubsection{\texorpdfstring{visualize()}{visualize()}}
+{\footnotesize\ttfamily void visualize (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{darknet_8c_a2b74a3332b1c442875e900ee9254649c_cgraph}
+\end{center}
+\end{figure}

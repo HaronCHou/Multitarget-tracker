@@ -1,0 +1,311 @@
+\hypertarget{bin__heap_8h_source}{}\doxysection{bin\+\_\+heap.\+h}
+\label{bin__heap_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/bin\_heap.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/bin\_heap.h}}
+\mbox{\hyperlink{bin__heap_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* This software is distributed under the GNU Lesser General Public License */}}
+\DoxyCodeLine{2 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{//   bin\_heap.h}}
+\DoxyCodeLine{5 \textcolor{comment}{//}}
+\DoxyCodeLine{6 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{// \$Id: bin\_heap.h,v 1.10 2003/01/07 07:01:05 chris Exp \$}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#ifndef GTL\_BIN\_HEAP\_H}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define GTL\_BIN\_HEAP\_H}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{_g_t_l_8h}{GTL/GTL.h}}>}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <cassert>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \mbox{\hyperlink{_g_t_l_8h_a2d9f24096ac60918452dd51f32b64aa9}{\_\_GTL\_BEGIN\_NAMESPACE}}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{24 \textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{25 \textcolor{keyword}{class }\mbox{\hyperlink{classheap__node}{heap\_node}}}
+\DoxyCodeLine{26 \{}
+\DoxyCodeLine{27 \textcolor{keyword}{public}:}
+\DoxyCodeLine{32     \mbox{\hyperlink{classheap__node_a28a9434410001fe7fc975901ec6b7b33}{heap\_node}}()}
+\DoxyCodeLine{33     \{}
+\DoxyCodeLine{34     \}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{39     \mbox{\hyperlink{classheap__node_a5f7209d13a6e95fe84770ea15c6a77b1}{heap\_node}}(\textcolor{keyword}{const} T\& n) : \mbox{\hyperlink{structdata}{data}}(n)}
+\DoxyCodeLine{40     \{}
+\DoxyCodeLine{41     \}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{47     T \mbox{\hyperlink{classheap__node_ae37815e49df4d367e28ca4615b40e397}{data}};}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{53     \textcolor{keywordtype}{int} \mbox{\hyperlink{classheap__node_a6d6ebca320ede4a2dc3749caf0519534}{pos}} = 0;}
+\DoxyCodeLine{54 \};}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56     }
+\DoxyCodeLine{62 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keyword}{class} Pred>}
+\DoxyCodeLine{63 \textcolor{keyword}{class }\mbox{\hyperlink{classbin__heap}{bin\_heap}}}
+\DoxyCodeLine{64 \{}
+\DoxyCodeLine{65 \textcolor{keyword}{public}:}
+\DoxyCodeLine{71     \mbox{\hyperlink{classbin__heap_a9de42b60fac4b0d38aa738522eb7c4cd}{bin\_heap}}(\textcolor{keyword}{const} Pred\& \mbox{\hyperlink{classbin__heap_a5ecc420dfd03a6a0b4c9328cac1fae14}{prd}});}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{79     \mbox{\hyperlink{classbin__heap_a9de42b60fac4b0d38aa738522eb7c4cd}{bin\_heap}}(\textcolor{keyword}{const} Pred\& \mbox{\hyperlink{classbin__heap_a5ecc420dfd03a6a0b4c9328cac1fae14}{prd}}, \textcolor{keyword}{const} \textcolor{keywordtype}{int} est\_size);}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{86     \mbox{\hyperlink{classbin__heap_a9de42b60fac4b0d38aa738522eb7c4cd}{bin\_heap}}(\textcolor{keyword}{const} \mbox{\hyperlink{classbin__heap}{bin\_heap<T, Pred>}}\& bh);}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{98     \mbox{\hyperlink{classbin__heap}{bin\_heap<T, Pred>}}\& \mbox{\hyperlink{classbin__heap_ad31b6806316a272686015fcbf5f633cd}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{classbin__heap}{bin\_heap<T, Pred>}}\& bh);}
+\DoxyCodeLine{99     }
+\DoxyCodeLine{103     \mbox{\hyperlink{classbin__heap_a5283db56783a84ee28dea9d393acf905}{\string~bin\_heap}}();}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{110     \textcolor{keywordtype}{void} \mbox{\hyperlink{classbin__heap_a6d658d61533e66cf83dce2f8e35bed17}{push}}(\textcolor{keyword}{const} T\& ins);}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{115     \textcolor{keywordtype}{void} \mbox{\hyperlink{classbin__heap_ab463bc655b2f46cd5ff021cab28b1210}{pop}}();}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{122     \textcolor{keyword}{const} T\& \mbox{\hyperlink{classbin__heap_acd711ddeafe82630f153906da7e8fa1c}{top}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{123     }
+\DoxyCodeLine{136     \textcolor{keywordtype}{void} \mbox{\hyperlink{classbin__heap_ab1353fe40c5cfc1205314a4db6334f1b}{changeKey}}(\textcolor{keyword}{const} T\& cha);}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{143     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classbin__heap_a2bbb9cf5cc5cda265c8603c561b796a5}{is\_empty}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{149     \textcolor{keywordtype}{void} \mbox{\hyperlink{classbin__heap_abf7a6189fcb48e435fc156f764e38f1d}{clear}}();}
+\DoxyCodeLine{150 \textcolor{keyword}{private}:}
+\DoxyCodeLine{155     \textcolor{keyword}{const} Pred\& \mbox{\hyperlink{classbin__heap_a5ecc420dfd03a6a0b4c9328cac1fae14}{prd}};}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{161     \textcolor{keywordtype}{int} \mbox{\hyperlink{classbin__heap_a8dde1008dcc24d734dbdb2c7ca50435b}{size}};}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{168     \textcolor{keywordtype}{int} \mbox{\hyperlink{classbin__heap_ac5aa6948898bfc047cae2fe99ba28f57}{capacity}};}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{174     std::vector<heap\_node<T>* > \mbox{\hyperlink{classbin__heap_a413200f4c6e24090c5e9a32184fc8857}{container}};}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{180     std::map<T, heap\_node<T>* > \mbox{\hyperlink{classbin__heap_ab646175f97b352ca26587d23bf57c79f}{heap\_node\_map}};}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{186     \textcolor{keywordtype}{void} \mbox{\hyperlink{classbin__heap_aefc41dde4f1decfe523d23eb3d5e885f}{bubble\_up}}(\mbox{\hyperlink{classheap__node}{heap\_node<T>}}* \textcolor{keyword}{const} n);}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{192     \textcolor{keywordtype}{void} \mbox{\hyperlink{classbin__heap_a6c16b71925f4df063778aadc527a6fc6}{bubble\_down}}(\mbox{\hyperlink{classheap__node}{heap\_node<T>}}* \textcolor{keyword}{const} n);}
+\DoxyCodeLine{193 \textcolor{preprocessor}{\#ifdef \_DEBUG}}
+\DoxyCodeLine{194 \textcolor{keyword}{public}:}
+\DoxyCodeLine{199     \textcolor{keywordtype}{void} print\_data\_container();}
+\DoxyCodeLine{200 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// \_DEBUG}}
+\DoxyCodeLine{201 \};}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203 \textcolor{comment}{// Implementation Begin}}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keyword}{class} Pred>}
+\DoxyCodeLine{206 \mbox{\hyperlink{classbin__heap_a9de42b60fac4b0d38aa738522eb7c4cd}{bin\_heap<T, Pred>::bin\_heap}}(\textcolor{keyword}{const} Pred\& prd) :}
+\DoxyCodeLine{207     prd(prd), size(0), capacity(50)}
+\DoxyCodeLine{208 \{}
+\DoxyCodeLine{209     \mbox{\hyperlink{classbin__heap_a413200f4c6e24090c5e9a32184fc8857}{container}}.resize(\mbox{\hyperlink{classbin__heap_ac5aa6948898bfc047cae2fe99ba28f57}{capacity}});}
+\DoxyCodeLine{210 \}}
+\DoxyCodeLine{211 }
+\DoxyCodeLine{212 }
+\DoxyCodeLine{213 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keyword}{class} Pred>}
+\DoxyCodeLine{214 \mbox{\hyperlink{classbin__heap_a9de42b60fac4b0d38aa738522eb7c4cd}{bin\_heap<T, Pred>::bin\_heap}}(\textcolor{keyword}{const} Pred\& prd, \textcolor{keyword}{const} \textcolor{keywordtype}{int} est\_size) :}
+\DoxyCodeLine{215     prd(prd), size(0), capacity(50)}
+\DoxyCodeLine{216 \{}
+\DoxyCodeLine{217     \textcolor{keywordflow}{if} (est\_size > 50)}
+\DoxyCodeLine{218     \{}
+\DoxyCodeLine{219     \mbox{\hyperlink{classbin__heap_ac5aa6948898bfc047cae2fe99ba28f57}{capacity}} = est\_size;}
+\DoxyCodeLine{220     \}}
+\DoxyCodeLine{221     \mbox{\hyperlink{classbin__heap_a413200f4c6e24090c5e9a32184fc8857}{container}}.resize(\mbox{\hyperlink{classbin__heap_ac5aa6948898bfc047cae2fe99ba28f57}{capacity}});}
+\DoxyCodeLine{222 \}}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{224 }
+\DoxyCodeLine{225 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keyword}{class} Pred>}
+\DoxyCodeLine{226 \mbox{\hyperlink{classbin__heap_a9de42b60fac4b0d38aa738522eb7c4cd}{bin\_heap<T, Pred>::bin\_heap}}(\textcolor{keyword}{const} \mbox{\hyperlink{classbin__heap}{bin\_heap<T, Pred>}}\& bh) :}
+\DoxyCodeLine{227     prd(bh.prd), size(bh.size), capacity(bh.capacity)}
+\DoxyCodeLine{228 \{}
+\DoxyCodeLine{229     \mbox{\hyperlink{classbin__heap_a413200f4c6e24090c5e9a32184fc8857}{container}}.resize(\mbox{\hyperlink{classbin__heap_ac5aa6948898bfc047cae2fe99ba28f57}{capacity}});}
+\DoxyCodeLine{230     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \mbox{\hyperlink{classbin__heap_a8dde1008dcc24d734dbdb2c7ca50435b}{size}}; ++i)}
+\DoxyCodeLine{231     \{}
+\DoxyCodeLine{232     \mbox{\hyperlink{classbin__heap_a413200f4c6e24090c5e9a32184fc8857}{container}}[i] = \textcolor{keyword}{new} \mbox{\hyperlink{classheap__node}{heap\_node<T>}}(bh.\mbox{\hyperlink{classbin__heap_a413200f4c6e24090c5e9a32184fc8857}{container}}[i]-\/>data);}
+\DoxyCodeLine{233     \}}
+\DoxyCodeLine{234 \}}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{236 }
+\DoxyCodeLine{237 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keyword}{class} Pred>}
+\DoxyCodeLine{238 \mbox{\hyperlink{classbin__heap}{bin\_heap<T, Pred>}}\& \mbox{\hyperlink{classbin__heap_ad31b6806316a272686015fcbf5f633cd}{bin\_heap<T, Pred>::operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{classbin__heap}{bin\_heap<T, Pred>}}\& bh)}
+\DoxyCodeLine{239 \{}
+\DoxyCodeLine{240     \textcolor{keywordflow}{if} (\textcolor{keyword}{this} != \&bh)    \textcolor{comment}{// no self assignment}}
+\DoxyCodeLine{241     \{}
+\DoxyCodeLine{242     assert(\&prd == \&(bh.\mbox{\hyperlink{classbin__heap_a5ecc420dfd03a6a0b4c9328cac1fae14}{prd}}));}
+\DoxyCodeLine{243     clear();}
+\DoxyCodeLine{244     size = bh.\mbox{\hyperlink{classbin__heap_a8dde1008dcc24d734dbdb2c7ca50435b}{size}};}
+\DoxyCodeLine{245     capacity = bh.\mbox{\hyperlink{classbin__heap_ac5aa6948898bfc047cae2fe99ba28f57}{capacity}};}
+\DoxyCodeLine{246     container.resize(capacity);}
+\DoxyCodeLine{247     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < size; ++i)}
+\DoxyCodeLine{248     \{}
+\DoxyCodeLine{249         container[i] = \textcolor{keyword}{new} \mbox{\hyperlink{classheap__node}{heap\_node<T>}}(bh.\mbox{\hyperlink{classbin__heap_a413200f4c6e24090c5e9a32184fc8857}{container}}[i]-\/>data);}
+\DoxyCodeLine{250     \}}
+\DoxyCodeLine{251     \}}
+\DoxyCodeLine{252     \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{253 \}}
+\DoxyCodeLine{254 }
+\DoxyCodeLine{255 }
+\DoxyCodeLine{256 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keyword}{class} Pred>}
+\DoxyCodeLine{257 \mbox{\hyperlink{classbin__heap_a5283db56783a84ee28dea9d393acf905}{bin\_heap<T, Pred>::\string~bin\_heap}}()}
+\DoxyCodeLine{258 \{}
+\DoxyCodeLine{259     clear();}
+\DoxyCodeLine{260 \}}
+\DoxyCodeLine{261 }
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keyword}{class} Pred>}
+\DoxyCodeLine{264 \textcolor{keywordtype}{void} \mbox{\hyperlink{classbin__heap_a6d658d61533e66cf83dce2f8e35bed17}{bin\_heap<T, Pred>::push}}(\textcolor{keyword}{const} T\& ins)}
+\DoxyCodeLine{265 \{}
+\DoxyCodeLine{266     \textcolor{keywordflow}{if} (size == capacity)}
+\DoxyCodeLine{267     \{}
+\DoxyCodeLine{268      \textcolor{comment}{// dynamic memory allocation}}
+\DoxyCodeLine{269     capacity *= 2;}
+\DoxyCodeLine{270     container.resize(capacity);}
+\DoxyCodeLine{271     \}}
+\DoxyCodeLine{272     \mbox{\hyperlink{classheap__node}{heap\_node<T>}}* n = \textcolor{keyword}{new} \mbox{\hyperlink{classheap__node}{heap\_node<T>}}(ins);}
+\DoxyCodeLine{273     n-\/>\mbox{\hyperlink{classheap__node_a6d6ebca320ede4a2dc3749caf0519534}{pos}} = size;}
+\DoxyCodeLine{274     container[size] = n;}
+\DoxyCodeLine{275     heap\_node\_map[ins] = n;}
+\DoxyCodeLine{276     ++size;}
+\DoxyCodeLine{277     bubble\_up(n);}
+\DoxyCodeLine{278 \}}
+\DoxyCodeLine{279 }
+\DoxyCodeLine{280 }
+\DoxyCodeLine{281 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keyword}{class} Pred>}
+\DoxyCodeLine{282 \textcolor{keywordtype}{void} \mbox{\hyperlink{classbin__heap_ab463bc655b2f46cd5ff021cab28b1210}{bin\_heap<T, Pred>::pop}}() }
+\DoxyCodeLine{283 \{}
+\DoxyCodeLine{284     assert(size > 0);}
+\DoxyCodeLine{285     \textcolor{comment}{// save smallest element for return (ensured by heap condition)}}
+\DoxyCodeLine{286     heap\_node\_map.erase(container[0]-\/>\mbox{\hyperlink{structdata}{data}});}
+\DoxyCodeLine{287     \textcolor{keyword}{delete} container[0];}
+\DoxyCodeLine{288     \textcolor{comment}{// replace by last element in array and decrease heap "{}size"{}}}
+\DoxyCodeLine{289     \textcolor{keywordflow}{if} (size > 1)}
+\DoxyCodeLine{290     \{}
+\DoxyCodeLine{291     container[0] = container[-\/-\/size];}
+\DoxyCodeLine{292     container[0]-\/>pos = 0;}
+\DoxyCodeLine{293     \textcolor{comment}{// reorder heap to ensure heap conditions}}
+\DoxyCodeLine{294     bubble\_down(container[0]);}
+\DoxyCodeLine{295     \}}
+\DoxyCodeLine{296     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{297     \{}
+\DoxyCodeLine{298     size = 0;}
+\DoxyCodeLine{299     \}}
+\DoxyCodeLine{300 \}}
+\DoxyCodeLine{301 }
+\DoxyCodeLine{302 }
+\DoxyCodeLine{303 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keyword}{class} Pred>}
+\DoxyCodeLine{304 \textcolor{keyword}{const} T\& \mbox{\hyperlink{classbin__heap_acd711ddeafe82630f153906da7e8fa1c}{bin\_heap<T, Pred>::top}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{305 \textcolor{keyword}{}\{}
+\DoxyCodeLine{306     \textcolor{keywordflow}{return} container[0]-\/>data;}
+\DoxyCodeLine{307 \}}
+\DoxyCodeLine{308 }
+\DoxyCodeLine{309 }
+\DoxyCodeLine{310 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keyword}{class} Pred>}
+\DoxyCodeLine{311 \textcolor{keywordtype}{void} \mbox{\hyperlink{classbin__heap_ab1353fe40c5cfc1205314a4db6334f1b}{bin\_heap<T, Pred>::changeKey}}(\textcolor{keyword}{const} T\& cha)}
+\DoxyCodeLine{312 \{}
+\DoxyCodeLine{313     \textcolor{keywordtype}{int} pos = heap\_node\_map[cha]-\/>pos;}
+\DoxyCodeLine{314     \mbox{\hyperlink{classheap__node}{heap\_node<T>}}* n = container[pos];}
+\DoxyCodeLine{315     \textcolor{keywordflow}{if} (pos != 0)}
+\DoxyCodeLine{316     \{}
+\DoxyCodeLine{317     \mbox{\hyperlink{classheap__node}{heap\_node<T>}}* father = container[(pos -\/ 1) / 2];}
+\DoxyCodeLine{318     \textcolor{keywordflow}{if} (prd(n-\/>\mbox{\hyperlink{classheap__node_ae37815e49df4d367e28ca4615b40e397}{data}}, father-\/>\mbox{\hyperlink{classheap__node_ae37815e49df4d367e28ca4615b40e397}{data}}))}
+\DoxyCodeLine{319     \{}
+\DoxyCodeLine{320         bubble\_up(n);}
+\DoxyCodeLine{321         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{322     \}}
+\DoxyCodeLine{323     \}}
+\DoxyCodeLine{324     bubble\_down(n);}
+\DoxyCodeLine{325 \}}
+\DoxyCodeLine{326 }
+\DoxyCodeLine{327 }
+\DoxyCodeLine{328 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keyword}{class} Pred>}
+\DoxyCodeLine{329 \textcolor{keywordtype}{bool} \mbox{\hyperlink{classbin__heap_a2bbb9cf5cc5cda265c8603c561b796a5}{bin\_heap<T, Pred>::is\_empty}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{330 \textcolor{keyword}{}\{}
+\DoxyCodeLine{331     \textcolor{comment}{// empty if if first free index is 0}}
+\DoxyCodeLine{332     \textcolor{keywordflow}{return} size == 0;}
+\DoxyCodeLine{333 \}}
+\DoxyCodeLine{334   }
+\DoxyCodeLine{335 }
+\DoxyCodeLine{336 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keyword}{class} Pred>}
+\DoxyCodeLine{337 \textcolor{keywordtype}{void} \mbox{\hyperlink{classbin__heap_abf7a6189fcb48e435fc156f764e38f1d}{bin\_heap<T, Pred>::clear}}()}
+\DoxyCodeLine{338 \{}
+\DoxyCodeLine{339     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < size; ++i)}
+\DoxyCodeLine{340     \{}
+\DoxyCodeLine{341     \textcolor{keyword}{delete} container[i];}
+\DoxyCodeLine{342     \}}
+\DoxyCodeLine{343     size = 0;}
+\DoxyCodeLine{344     heap\_node\_map.clear();}
+\DoxyCodeLine{345 \}}
+\DoxyCodeLine{346 }
+\DoxyCodeLine{347   }
+\DoxyCodeLine{348 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keyword}{class} Pred>}
+\DoxyCodeLine{349 \textcolor{keywordtype}{void} \mbox{\hyperlink{classbin__heap_aefc41dde4f1decfe523d23eb3d5e885f}{bin\_heap<T, Pred>::bubble\_up}}(\mbox{\hyperlink{classheap__node}{heap\_node<T>}}* \textcolor{keyword}{const} n)}
+\DoxyCodeLine{350 \{}
+\DoxyCodeLine{351     \textcolor{keywordtype}{int} pos = n-\/>\mbox{\hyperlink{classheap__node_a6d6ebca320ede4a2dc3749caf0519534}{pos}};}
+\DoxyCodeLine{352     \textcolor{comment}{// if we are not already at top AND the parent in heap is more}}
+\DoxyCodeLine{353     \textcolor{keywordflow}{while} ((pos != 0) \&\&}
+\DoxyCodeLine{354        (prd(n-\/>\mbox{\hyperlink{classheap__node_ae37815e49df4d367e28ca4615b40e397}{data}}, container[(pos -\/ 1) / 2]-\/>data)))}
+\DoxyCodeLine{355     \{}
+\DoxyCodeLine{356     \textcolor{comment}{// move father down}}
+\DoxyCodeLine{357     container[pos] = container[(pos -\/ 1) / 2];}
+\DoxyCodeLine{358     container[pos]-\/>pos = pos;}
+\DoxyCodeLine{359     \textcolor{comment}{// increment k to parent index}}
+\DoxyCodeLine{360     pos = (pos -\/ 1) / 2;}
+\DoxyCodeLine{361     \}}
+\DoxyCodeLine{362     \textcolor{comment}{// place value in its highest position in heap}}
+\DoxyCodeLine{363     container[pos] = n;}
+\DoxyCodeLine{364     container[pos]-\/>\mbox{\hyperlink{classheap__node_a6d6ebca320ede4a2dc3749caf0519534}{pos}} = pos;}
+\DoxyCodeLine{365 \}}
+\DoxyCodeLine{366 }
+\DoxyCodeLine{367 }
+\DoxyCodeLine{368 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keyword}{class} Pred>}
+\DoxyCodeLine{369 \textcolor{keywordtype}{void} \mbox{\hyperlink{classbin__heap_a6c16b71925f4df063778aadc527a6fc6}{bin\_heap<T, Pred>::bubble\_down}}(\mbox{\hyperlink{classheap__node}{heap\_node<T>}}* \textcolor{keyword}{const} n)}
+\DoxyCodeLine{370 \{}
+\DoxyCodeLine{371     \textcolor{keywordtype}{int} pos = n-\/>\mbox{\hyperlink{classheap__node_a6d6ebca320ede4a2dc3749caf0519534}{pos}};}
+\DoxyCodeLine{372     \textcolor{keywordtype}{int} j = 0;}
+\DoxyCodeLine{373     \textcolor{keywordflow}{while} (pos < size / 2)}
+\DoxyCodeLine{374     \{}
+\DoxyCodeLine{375     j = 2 * pos + 1;}
+\DoxyCodeLine{376     \textcolor{comment}{// if right child is smaller than left child get right child}}
+\DoxyCodeLine{377     \textcolor{keywordflow}{if} ((j < size -\/ 1) \&\&}
+\DoxyCodeLine{378         (prd(container[j + 1]-\/>\mbox{\hyperlink{structdata}{data}}, container[j]-\/>\mbox{\hyperlink{structdata}{data}})))}
+\DoxyCodeLine{379     \{}
+\DoxyCodeLine{380         ++j;}
+\DoxyCodeLine{381     \}}
+\DoxyCodeLine{382     \textcolor{comment}{// if element is less or equal than its child leave it here}}
+\DoxyCodeLine{383     \textcolor{keywordflow}{if} (!prd(container[j]-\/>\mbox{\hyperlink{structdata}{data}}, n-\/>\mbox{\hyperlink{classheap__node_ae37815e49df4d367e28ca4615b40e397}{data}}))}
+\DoxyCodeLine{384     \{}
+\DoxyCodeLine{385         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{386     \}}
+\DoxyCodeLine{387     \textcolor{comment}{// else move its child up}}
+\DoxyCodeLine{388     container[pos] = container[j];}
+\DoxyCodeLine{389     container[pos]-\/>pos = pos;}
+\DoxyCodeLine{390     \textcolor{comment}{// repeat for new position}}
+\DoxyCodeLine{391     pos = j;}
+\DoxyCodeLine{392     \}}
+\DoxyCodeLine{393     \textcolor{comment}{// place element into position, where heap condition is fulfilled}}
+\DoxyCodeLine{394     container[pos] = n;}
+\DoxyCodeLine{395     container[pos]-\/>\mbox{\hyperlink{classheap__node_a6d6ebca320ede4a2dc3749caf0519534}{pos}} = pos;}
+\DoxyCodeLine{396 \}}
+\DoxyCodeLine{397   }
+\DoxyCodeLine{398 \textcolor{preprocessor}{\#ifdef \_DEBUG}}
+\DoxyCodeLine{399 \textcolor{keyword}{template} <\textcolor{keyword}{class} T, \textcolor{keyword}{class} Pred>}
+\DoxyCodeLine{400 \textcolor{keywordtype}{void} \mbox{\hyperlink{classbin__heap}{bin\_heap<T, Pred>::print\_data\_container}}()}
+\DoxyCodeLine{401 \{}
+\DoxyCodeLine{402     \textcolor{keywordflow}{if} (size == 0)}
+\DoxyCodeLine{403     \{}
+\DoxyCodeLine{404     cout << \textcolor{stringliteral}{"{}empty"{}};}
+\DoxyCodeLine{405     \}}
+\DoxyCodeLine{406     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{407     \{}
+\DoxyCodeLine{408     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} pos = 0; pos < size; ++pos)}
+\DoxyCodeLine{409     \{}
+\DoxyCodeLine{410         cout << container[pos]-\/>data << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{411     \}}
+\DoxyCodeLine{412     \}}
+\DoxyCodeLine{413     cout << endl;}
+\DoxyCodeLine{414 \}}
+\DoxyCodeLine{415 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// \_DEBUG}}
+\DoxyCodeLine{416 }
+\DoxyCodeLine{417 \textcolor{comment}{// Implementation End}}
+\DoxyCodeLine{418 }
+\DoxyCodeLine{419 \mbox{\hyperlink{_g_t_l_8h_a46af2b3ec266ac2f9d36fa7222358017}{\_\_GTL\_END\_NAMESPACE}}}
+\DoxyCodeLine{420 }
+\DoxyCodeLine{421 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// GTL\_BIN\_HEAP\_H}}
+\DoxyCodeLine{422 }
+\DoxyCodeLine{423 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{424 \textcolor{comment}{//   end of file}}
+\DoxyCodeLine{425 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+
+\end{DoxyCode}

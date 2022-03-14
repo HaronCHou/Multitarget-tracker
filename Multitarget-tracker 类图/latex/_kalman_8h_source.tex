@@ -1,0 +1,119 @@
+\hypertarget{_kalman_8h_source}{}\doxysection{Kalman.\+h}
+\label{_kalman_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/Kalman.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/Kalman.h}}
+\mbox{\hyperlink{_kalman_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{defines_8h}{defines.h}}"{}}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <deque>}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <opencv2/opencv.hpp>}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#ifdef USE\_OCV\_UKF}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <opencv2/tracking.hpp>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <opencv2/tracking/kalman\_filters.hpp>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{17 \textcolor{keyword}{class }\mbox{\hyperlink{class_t_kalman_filter}{TKalmanFilter}}}
+\DoxyCodeLine{18 \{}
+\DoxyCodeLine{19 \textcolor{keyword}{public}:}
+\DoxyCodeLine{20     \mbox{\hyperlink{class_t_kalman_filter_a52b955d24816535d4e684eaaa5063888}{TKalmanFilter}}(\mbox{\hyperlink{namespacetracking_a83f2c4d58ea2737f7d6296dce3eb722a}{tracking::KalmanType}} type, \textcolor{keywordtype}{bool} useAcceleration, \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} deltaTime, \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} accelNoiseMag);}
+\DoxyCodeLine{21     \mbox{\hyperlink{class_t_kalman_filter_ad0232ba6dd604f7cb806102538cf5fe4}{\string~TKalmanFilter}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23     \mbox{\hyperlink{defines_8h_a8c42696da8f098b91374a8e8bb84b430}{Point\_t}} \mbox{\hyperlink{class_t_kalman_filter_a103fb495ee14ff2be7a29053695ce7d1}{GetPointPrediction}}();}
+\DoxyCodeLine{24     \mbox{\hyperlink{defines_8h_a8c42696da8f098b91374a8e8bb84b430}{Point\_t}} \mbox{\hyperlink{class_t_kalman_filter_a0c25b9a1a9676956aed0db44ad56696a}{Update}}(\mbox{\hyperlink{defines_8h_a8c42696da8f098b91374a8e8bb84b430}{Point\_t}} \mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}, \textcolor{keywordtype}{bool} dataCorrect);}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26     cv::Rect \mbox{\hyperlink{class_t_kalman_filter_af112feed15a064055987a1faedf9673d}{GetRectPrediction}}();}
+\DoxyCodeLine{27     cv::Rect \mbox{\hyperlink{class_t_kalman_filter_a0c25b9a1a9676956aed0db44ad56696a}{Update}}(cv::Rect rect, \textcolor{keywordtype}{bool} dataCorrect);}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29     cv::Vec<track\_t, 2> \mbox{\hyperlink{class_t_kalman_filter_a4162b8f75c9250f78080a426a0bfe972}{GetVelocity}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_t_kalman_filter_adc9ff4a3662eb459857fb337e188869a}{GetPtStateAndResCov}}(cv::Mat\& covar, cv::Mat\& state) \textcolor{keyword}{const};}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{keyword}{private}:}
+\DoxyCodeLine{34     cv::KalmanFilter \mbox{\hyperlink{class_t_kalman_filter_ad3315672464cae356898f67bd231a4ec}{m\_linearKalman}};}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#ifdef USE\_OCV\_UKF}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#if (((CV\_VERSION\_MAJOR == 4) \&\& (CV\_VERSION\_MINOR < 5)) || ((CV\_VERSION\_MAJOR == 4) \&\& (CV\_VERSION\_MINOR == 5) \&\& (CV\_VERSION\_REVISION < 1)) || (CV\_VERSION\_MAJOR == 3))}}
+\DoxyCodeLine{37     cv::Ptr<cv::tracking::UnscentedKalmanFilter> m\_uncsentedKalman;}
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{39     cv::Ptr<cv::detail::tracking::UnscentedKalmanFilter> m\_uncsentedKalman;}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_t_kalman_filter_a0dd802ac18ce482315223352ffd79986}{MIN\_INIT\_VALS}} = 4;}
+\DoxyCodeLine{44     std::vector<Point\_t> \mbox{\hyperlink{class_t_kalman_filter_aa91a48f4b3d4440ca69de561940d2352}{m\_initialPoints}};}
+\DoxyCodeLine{45     std::vector<cv::Rect> \mbox{\hyperlink{class_t_kalman_filter_a99b59326e73a8147b665ca10ddf41b65}{m\_initialRects}};}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47     cv::Rect\_<track\_t> \mbox{\hyperlink{class_t_kalman_filter_aed4818c7aac455928ef02dd03f8bfe56}{m\_lastRectResult}};}
+\DoxyCodeLine{48     cv::Rect\_<track\_t> \mbox{\hyperlink{class_t_kalman_filter_a8e03a4e34d3f59c994a95ca0a5954a88}{m\_lastRect}};}
+\DoxyCodeLine{49     \mbox{\hyperlink{defines_8h_a8c42696da8f098b91374a8e8bb84b430}{Point\_t}} \mbox{\hyperlink{class_t_kalman_filter_a91efb6a00cfae5df3e513ceba2239fa3}{m\_lastPointResult}};}
+\DoxyCodeLine{50     \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} \mbox{\hyperlink{class_t_kalman_filter_a9f511e8885e5e89643fa6d59ea7bbd27}{m\_accelNoiseMag}} = 0.5f;}
+\DoxyCodeLine{51     \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} \mbox{\hyperlink{class_t_kalman_filter_a7335e3bd7a695ebaf5eaa93c42e39eae}{m\_deltaTime}} = 0.2f;}
+\DoxyCodeLine{52     \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} \mbox{\hyperlink{class_t_kalman_filter_aaeee38d0ed5c08f257ff4b5b686a26f7}{m\_deltaTimeMin}} = 0.2f;}
+\DoxyCodeLine{53     \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} \mbox{\hyperlink{class_t_kalman_filter_a3f427d0adb203bce7cd521674828f170}{m\_deltaTimeMax}} = 2 * 0.2f;}
+\DoxyCodeLine{54     \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} \mbox{\hyperlink{class_t_kalman_filter_a8a5dbf9e4a803bb540994a424225f330}{m\_lastDist}} = 0;}
+\DoxyCodeLine{55     \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} \mbox{\hyperlink{class_t_kalman_filter_ae31fbddf137395ed860115c1d0bd3ff5}{m\_deltaStep}} = 0;}
+\DoxyCodeLine{56     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_t_kalman_filter_ab4857da3b24001a0cadeab645388f1e8}{m\_deltaStepsCount}} = 20;}
+\DoxyCodeLine{57     \mbox{\hyperlink{namespacetracking_a83f2c4d58ea2737f7d6296dce3eb722a}{tracking::KalmanType}} \mbox{\hyperlink{class_t_kalman_filter_a00cabc6683f6cc848559515df46d7101}{m\_type}} = \mbox{\hyperlink{namespacetracking_a83f2c4d58ea2737f7d6296dce3eb722aa889eca583e371386c92e05814797a885}{tracking::KalmanLinear}};}
+\DoxyCodeLine{58     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_t_kalman_filter_a688c50115e6a1a9f994f4262364457c4}{m\_useAcceleration}} = \textcolor{keyword}{false}; \textcolor{comment}{// If set true then will be used motion model x(t) = x0 + v0 * t + a * t\string^2 / 2}}
+\DoxyCodeLine{59     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_t_kalman_filter_a5633e302e878261c8669816695f6a314}{m\_initialized}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61     \textcolor{comment}{// Constant velocity model}}
+\DoxyCodeLine{62     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_t_kalman_filter_a6b1bb8fb881f82ce0a766e6ea41f159c}{CreateLinear}}(\mbox{\hyperlink{defines_8h_a8c42696da8f098b91374a8e8bb84b430}{Point\_t}} xy0, \mbox{\hyperlink{defines_8h_a8c42696da8f098b91374a8e8bb84b430}{Point\_t}} xyv0);}
+\DoxyCodeLine{63     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_t_kalman_filter_a6b1bb8fb881f82ce0a766e6ea41f159c}{CreateLinear}}(cv::Rect\_<track\_t> rect0, \mbox{\hyperlink{defines_8h_a8c42696da8f098b91374a8e8bb84b430}{Point\_t}} rectv0);}
+\DoxyCodeLine{64     }
+\DoxyCodeLine{65     \textcolor{comment}{// Constant acceleration model}}
+\DoxyCodeLine{66     \textcolor{comment}{// https://www.mathworks.com/help/driving/ug/linear-\/kalman-\/filters.html}}
+\DoxyCodeLine{67     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_t_kalman_filter_a4b7541e185a33de1af54f945b6514412}{CreateLinearAcceleration}}(\mbox{\hyperlink{defines_8h_a8c42696da8f098b91374a8e8bb84b430}{Point\_t}} xy0, \mbox{\hyperlink{defines_8h_a8c42696da8f098b91374a8e8bb84b430}{Point\_t}} xyv0);}
+\DoxyCodeLine{68     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_t_kalman_filter_a4b7541e185a33de1af54f945b6514412}{CreateLinearAcceleration}}(cv::Rect\_<track\_t> rect0, \mbox{\hyperlink{defines_8h_a8c42696da8f098b91374a8e8bb84b430}{Point\_t}} rectv0);}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#ifdef USE\_OCV\_UKF}}
+\DoxyCodeLine{71     \textcolor{keywordtype}{void} CreateUnscented(\mbox{\hyperlink{defines_8h_a8c42696da8f098b91374a8e8bb84b430}{Point\_t}} xy0, \mbox{\hyperlink{defines_8h_a8c42696da8f098b91374a8e8bb84b430}{Point\_t}} xyv0);}
+\DoxyCodeLine{72     \textcolor{keywordtype}{void} CreateUnscented(cv::Rect\_<track\_t> rect0, \mbox{\hyperlink{defines_8h_a8c42696da8f098b91374a8e8bb84b430}{Point\_t}} rectv0);}
+\DoxyCodeLine{73     \textcolor{keywordtype}{void} CreateAugmentedUnscented(\mbox{\hyperlink{defines_8h_a8c42696da8f098b91374a8e8bb84b430}{Point\_t}} xy0, \mbox{\hyperlink{defines_8h_a8c42696da8f098b91374a8e8bb84b430}{Point\_t}} xyv0);}
+\DoxyCodeLine{74     \textcolor{keywordtype}{void} CreateAugmentedUnscented(cv::Rect\_<track\_t> rect0, \mbox{\hyperlink{defines_8h_a8c42696da8f098b91374a8e8bb84b430}{Point\_t}} rectv0);}
+\DoxyCodeLine{75 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{76 \};}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{84 \textcolor{comment}{}\textcolor{keyword}{template}<\textcolor{keyword}{class} T> \textcolor{keyword}{inline}}
+\DoxyCodeLine{85 T \mbox{\hyperlink{_kalman_8h_a73c53554444754d40def3c6da833b646}{sqr}}(T val)}
+\DoxyCodeLine{86 \{}
+\DoxyCodeLine{87     \textcolor{keywordflow}{return} val * val;}
+\DoxyCodeLine{88 \}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{100 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T, \textcolor{keyword}{typename} CONT>}
+\DoxyCodeLine{101 \textcolor{keywordtype}{void} \mbox{\hyperlink{_kalman_8h_a956aedf9af504c89aa2ca585a168dc47}{get\_lin\_regress\_params}}(}
+\DoxyCodeLine{102         \textcolor{keyword}{const} CONT\& in\_data,}
+\DoxyCodeLine{103         \textcolor{keywordtype}{size\_t} start\_pos,}
+\DoxyCodeLine{104         \textcolor{keywordtype}{size\_t} in\_data\_size,}
+\DoxyCodeLine{105         T\& kx, T\& bx, T\& ky, T\& by)}
+\DoxyCodeLine{106 \{}
+\DoxyCodeLine{107     T m1(0.), m2(0.);}
+\DoxyCodeLine{108     T m3\_x(0.), m4\_x(0.);}
+\DoxyCodeLine{109     T m3\_y(0.), m4\_y(0.);}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111     \textcolor{keyword}{const} T el\_count = \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(in\_data\_size -\/ start\_pos);}
+\DoxyCodeLine{112     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = start\_pos; i < in\_data\_size; ++i)}
+\DoxyCodeLine{113     \{}
+\DoxyCodeLine{114         m1 += i;}
+\DoxyCodeLine{115         m2 += \mbox{\hyperlink{_kalman_8h_a73c53554444754d40def3c6da833b646}{sqr}}(i);}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117         m3\_x += in\_data[i].x;}
+\DoxyCodeLine{118         m4\_x += i * in\_data[i].x;}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120         m3\_y += in\_data[i].y;}
+\DoxyCodeLine{121         m4\_y += i * in\_data[i].y;}
+\DoxyCodeLine{122     \}}
+\DoxyCodeLine{123     T det\_1 = 1 / (el\_count * m2 -\/ \mbox{\hyperlink{_kalman_8h_a73c53554444754d40def3c6da833b646}{sqr}}(m1));}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125     m1 *= -\/1;}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127     kx = det\_1 * (m1 * m3\_x + el\_count * m4\_x);}
+\DoxyCodeLine{128     bx = det\_1 * (m2 * m3\_x + m1 * m4\_x);}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130     ky = det\_1 * (m1 * m3\_y + el\_count * m4\_y);}
+\DoxyCodeLine{131     by = det\_1 * (m2 * m3\_y + m1 * m4\_y);}
+\DoxyCodeLine{132 \}}
+
+\end{DoxyCode}

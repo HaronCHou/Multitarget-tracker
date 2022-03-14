@@ -1,0 +1,55 @@
+\hypertarget{_background_subtractor_l_b_s_p_8h_source}{}\doxysection{Background\+Subtractor\+LBSP.\+h}
+\label{_background_subtractor_l_b_s_p_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/Subsense/BackgroundSubtractorLBSP.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/Subsense/BackgroundSubtractorLBSP.h}}
+\mbox{\hyperlink{_background_subtractor_l_b_s_p_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <opencv2/opencv.hpp>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_l_b_s_p_8h}{LBSP.h}}"{}}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{15 \textcolor{keyword}{class }\mbox{\hyperlink{class_background_subtractor_l_b_s_p}{BackgroundSubtractorLBSP}} : \textcolor{keyword}{public} cv::BackgroundSubtractor}
+\DoxyCodeLine{16  \{}
+\DoxyCodeLine{17 \textcolor{keyword}{public}:}
+\DoxyCodeLine{19     \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a5f7f42ea5c9697479cbe237b49ca6ae9}{BackgroundSubtractorLBSP}}(\textcolor{keywordtype}{float} fRelLBSPThreshold, \textcolor{keywordtype}{size\_t} nLBSPThresholdOffset=0);}
+\DoxyCodeLine{21     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_ab1ccd653c0d227cedd18b08278c6ea8b}{\string~BackgroundSubtractorLBSP}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{23     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_ac6b854f94414497b143375d4a0ae8b6f}{initialize}}(\textcolor{keyword}{const} cv::Mat\& oInitImg);}
+\DoxyCodeLine{25     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a3644bc10ec3beda6fad22c633fe0f8fb}{initialize}}(\textcolor{keyword}{const} cv::Mat\& oInitImg, \textcolor{keyword}{const} cv::Mat\& oROI)=0;}
+\DoxyCodeLine{27     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a4771cac59b7ac865d6ec25cbf049948e}{operator()}}(cv::InputArray \mbox{\hyperlink{structimage}{image}}, cv::OutputArray fgmask, \textcolor{keywordtype}{double} learningRate=0)=0;}
+\DoxyCodeLine{29     \textcolor{comment}{//virtual cv::Algorithm* info() const;}}
+\DoxyCodeLine{31 \textcolor{comment}{}    \textcolor{keyword}{virtual} cv::Mat \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a9843f87f8adcd0e85274303f9210b883}{getROICopy}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{33     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a34dc38d3d925d46d289c750786f232dc}{setROI}}(cv::Mat\& oROI);}
+\DoxyCodeLine{35     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a31b8474f8b4ffa6ef08ec682cfcef9b0}{setAutomaticModelReset}}(\textcolor{keywordtype}{bool});}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{38     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_background_subtractor_l_b_s_p_1_1_px_info_base}{PxInfoBase}} \{}
+\DoxyCodeLine{39         \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_background_subtractor_l_b_s_p_1_1_px_info_base_a42cb6eecda647b2a11b90ea420f2bc31}{nImgCoord\_Y}};}
+\DoxyCodeLine{40         \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_background_subtractor_l_b_s_p_1_1_px_info_base_a10966fe72f000045adede9e853156b48}{nImgCoord\_X}};}
+\DoxyCodeLine{41         \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{struct_background_subtractor_l_b_s_p_1_1_px_info_base_afe4a63a708fa0f3ea6ed2fac837bc71d}{nModelIdx}};}
+\DoxyCodeLine{42     \};}
+\DoxyCodeLine{44     cv::Mat \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a53fe98bd2489d95de5292467145901e9}{m\_oROI}};}
+\DoxyCodeLine{46     cv::Size \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a732d5e6ae35fb0e858cadb3af5ce08a2}{m\_oImgSize}};}
+\DoxyCodeLine{48     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_ab3467ebee2c5d1249061ccd704cc0584}{m\_nImgChannels}};}
+\DoxyCodeLine{50     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a7d2f52ecd5ff56e42da86f97e0ad93b5}{m\_nImgType}};}
+\DoxyCodeLine{52     \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a209eb6aaa34e8ad8e565e79f85404e24}{m\_nLBSPThresholdOffset}};}
+\DoxyCodeLine{54     \textcolor{keyword}{const} \textcolor{keywordtype}{float} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_ad759c645b14e9b16bf3940cae862df32}{m\_fRelLBSPThreshold}};}
+\DoxyCodeLine{56     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a9d1e247267afbddb7032bdcabd67d931}{m\_nTotPxCount}}, \mbox{\hyperlink{class_background_subtractor_l_b_s_p_ac3b54f4d2dfa3a576475214f26501d85}{m\_nTotRelevantPxCount}};}
+\DoxyCodeLine{58     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a8a2350cad84f19c68ef61b7aaf91c43f}{m\_nFrameIndex}}, \mbox{\hyperlink{class_background_subtractor_l_b_s_p_ab56bf775dfdf0579e834e45210c3a92a}{m\_nFramesSinceLastReset}}, \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a5ea18d388afacf8285c46ba0f754e7ee}{m\_nModelResetCooldown}};}
+\DoxyCodeLine{60     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_aefe69d94f08b2c4ba73ad1d254ad9153}{m\_anLBSPThreshold\_8bitLUT}}[UCHAR\_MAX+1];}
+\DoxyCodeLine{62     \textcolor{keywordtype}{size\_t}* \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a06b4f0d3f24fa08bccd3c9eca085713e}{m\_aPxIdxLUT}};}
+\DoxyCodeLine{64     \mbox{\hyperlink{struct_background_subtractor_l_b_s_p_1_1_px_info_base}{PxInfoBase}}* \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a74e73d4832ccdef652d93756582024db}{m\_aPxInfoLUT}};}
+\DoxyCodeLine{66     \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a2585fe6e41e10af6da3e325dc20fe7f1}{m\_nDefaultMedianBlurKernelSize}};}
+\DoxyCodeLine{68     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a55cea104a0924fd50d5bed0912828a7e}{m\_bInitialized}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{70     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a9d260f4e42e3fc79fb21af950ca9087a}{m\_bAutoModelResetEnabled}};}
+\DoxyCodeLine{72     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a5b1ec2694ae59661bb146ad0d4d49811}{m\_bUsingMovingCamera}};}
+\DoxyCodeLine{74     cv::Mat \mbox{\hyperlink{class_background_subtractor_l_b_s_p_ab1dc003792ab1d0b881a6fd10e0e29b3}{m\_oLastColorFrame}};}
+\DoxyCodeLine{76     cv::Mat \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a9c637c0b87cac495887295690d83ba13}{m\_oLastDescFrame}};}
+\DoxyCodeLine{78     cv::Mat \mbox{\hyperlink{class_background_subtractor_l_b_s_p_adb6dc0af596c5592c91f9d8faa5c8a4b}{m\_oLastFGMask}};}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80 \textcolor{keyword}{public}:}
+\DoxyCodeLine{81     \textcolor{comment}{// \#\#\#\#\#\#\#\# DEBUG PURPOSES ONLY \#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{82     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a49771cd7b2c8354cde3da6e593d3febe}{nDebugCoordX}}, \mbox{\hyperlink{class_background_subtractor_l_b_s_p_a8e1451fd90eb4459aa84ea5e7133268a}{nDebugCoordY}};}
+\DoxyCodeLine{83     std::string \mbox{\hyperlink{class_background_subtractor_l_b_s_p_ada55b4a5eec8c82d0e05b0f9f1600ecb}{sDebugName}};}
+\DoxyCodeLine{84 \};}
+\DoxyCodeLine{85 }
+
+\end{DoxyCode}

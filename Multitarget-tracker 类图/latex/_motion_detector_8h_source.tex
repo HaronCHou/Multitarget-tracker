@@ -1,0 +1,41 @@
+\hypertarget{_motion_detector_8h_source}{}\doxysection{Motion\+Detector.\+h}
+\label{_motion_detector_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/MotionDetector.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/MotionDetector.h}}
+\mbox{\hyperlink{_motion_detector_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_base_detector_8h}{BaseDetector.h}}"{}}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_background_subtract_8h}{BackgroundSubtract.h}}"{}}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{9 \textcolor{keyword}{class }\mbox{\hyperlink{class_motion_detector}{MotionDetector}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_base_detector}{BaseDetector}}}
+\DoxyCodeLine{10 \{}
+\DoxyCodeLine{11 \textcolor{keyword}{public}:}
+\DoxyCodeLine{12     \mbox{\hyperlink{class_motion_detector_a1ce403d010fe56f6484c9dd051493486}{MotionDetector}}(\mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949f}{BackgroundSubtract::BGFG\_ALGS}} algType, \textcolor{keyword}{const} cv::UMat\& gray);}
+\DoxyCodeLine{13     \mbox{\hyperlink{class_motion_detector_a1ce403d010fe56f6484c9dd051493486}{MotionDetector}}(\mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949f}{BackgroundSubtract::BGFG\_ALGS}} algType, \textcolor{keyword}{const} cv::Mat\& gray);}
+\DoxyCodeLine{14     \mbox{\hyperlink{class_motion_detector_acf2e6acc94321654025dfb4fb341aa49}{\string~MotionDetector}}(\textcolor{keywordtype}{void}) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_motion_detector_a72e0c3038254625b1a540f35817c6d67}{Init}}(\textcolor{keyword}{const} \mbox{\hyperlink{defines_8h_a9fcffa231cb8ff6a5fc4e2e2e71f3ead}{config\_t}}\& config) \textcolor{keyword}{override};}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_motion_detector_abf9f418e68bbbf9b585681d5a13ce6b9}{Detect}}(\textcolor{keyword}{const} cv::UMat\& gray) \textcolor{keyword}{override};}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_motion_detector_a5f24b6a158bb23b0598a6fa96849afbf}{CanGrayProcessing}}()\textcolor{keyword}{ const override}}
+\DoxyCodeLine{21 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{22         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{23     \}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_motion_detector_a6676f2c722d62143be96205af2460297}{CalcMotionMap}}(cv::Mat\& frame) \textcolor{keyword}{override};}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_motion_detector_ad40689af41198db11559eaa206c7fb6d}{ResetModel}}(\textcolor{keyword}{const} cv::UMat\& img, \textcolor{keyword}{const} cv::Rect\& roiRect) \textcolor{keyword}{override};}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{keyword}{private}:}
+\DoxyCodeLine{30     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_motion_detector_ab45a525c0ef2f5af9bc10c363c1b22e5}{DetectContour}}();}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32     std::unique\_ptr<BackgroundSubtract> \mbox{\hyperlink{class_motion_detector_ab0f8334cbe63bfaae0ed54650336e0d4}{m\_backgroundSubst}};}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34     cv::UMat \mbox{\hyperlink{class_motion_detector_ac751815be986935ac095aff5428b6c24}{m\_fg}};}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36     \mbox{\hyperlink{class_background_subtract_a56850081696df68b55f87b4f3d87949f}{BackgroundSubtract::BGFG\_ALGS}} \mbox{\hyperlink{class_motion_detector_a5254c16cea9d7a7155a35fd92c0b12ac}{m\_algType}} = BackgroundSubtract::BGFG\_ALGS::ALG\_MOG2;}
+\DoxyCodeLine{37     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_motion_detector_a8d16c5ff0f0d48b2eba0bea9d012028b}{m\_useRotatedRect}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{38 \};}
+
+\end{DoxyCode}

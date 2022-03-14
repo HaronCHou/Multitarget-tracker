@@ -1,0 +1,149 @@
+\hypertarget{_g_t_l_8h_source}{}\doxysection{GTL.\+h}
+\label{_g_t_l_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/GTL.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/GTL.h}}
+\mbox{\hyperlink{_g_t_l_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* This software is distributed under the GNU Lesser General Public License */}}
+\DoxyCodeLine{2 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{//   GTL.h -\/ Internal header: DO NO USE IT DIRECTLY !!!}}
+\DoxyCodeLine{5 \textcolor{comment}{//}}
+\DoxyCodeLine{6 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{// \$Id: GTL.h,v 1.29 2008/02/03 18:17:08 chris Exp \$}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#ifndef GTL\_GTL\_H}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define GTL\_GTL\_H}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{_tracker_2graph_2_g_t_l_2include_2_g_t_l_2version_8h}{GTL/version.h}}>}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{15 \textcolor{comment}{//   Generic iteration over container elements}}
+\DoxyCodeLine{16 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{17 \textcolor{comment}{//}}
+\DoxyCodeLine{18 \textcolor{comment}{// elem: loop variable}}
+\DoxyCodeLine{19 \textcolor{comment}{// cont: container to iterate over}}
+\DoxyCodeLine{20 \textcolor{comment}{// iter\_t: iterator type}}
+\DoxyCodeLine{21 \textcolor{comment}{// iter: prefix for begin() and end()}}
+\DoxyCodeLine{22 \textcolor{comment}{//}}
+\DoxyCodeLine{23 \textcolor{comment}{// contains a hack for Microsoft Visual C++ 5.0, because code like}}
+\DoxyCodeLine{24 \textcolor{comment}{//}}
+\DoxyCodeLine{25 \textcolor{comment}{//   for(int i=0; i<10; ++i) \{ ... do something ... \}}}
+\DoxyCodeLine{26 \textcolor{comment}{//   for(int i=0; i<10; ++i) \{ ... do something again ... \}}}
+\DoxyCodeLine{27 \textcolor{comment}{//}}
+\DoxyCodeLine{28 \textcolor{comment}{// is illegal with Microsoft Extensions enabled, but without Microsoft}}
+\DoxyCodeLine{29 \textcolor{comment}{// Extensions, the Microsoft STL does not work :-\/(.}}
+\DoxyCodeLine{30 \textcolor{comment}{// So we code the line number (\_\_LINE\_\_) into our loop variables.}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#define GTL\_CONCAT(x, y) x\#\#y}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#define GTL\_FORALL\_VAR(y) GTL\_CONCAT(GTL\_FORALL\_VAR, y)}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#define GTL\_FORALL(elem, cont, iter\_t, iter)            \(\backslash\)}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{if ((cont).iter\#\#begin() != (cont).iter\#\#end())         \(\backslash\)}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{    (elem) = *((cont).iter\#\#begin());               \(\backslash\)}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{for (iter\_t GTL\_FORALL\_VAR(\_\_LINE\_\_) = (cont).iter\#\#begin();    \(\backslash\)}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{    GTL\_FORALL\_VAR(\_\_LINE\_\_) != (cont).iter\#\#end();             \(\backslash\)}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{    (elem) = (++GTL\_FORALL\_VAR(\_\_LINE\_\_)) ==                    \(\backslash\)}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{        (cont).iter\#\#end() ? (elem) : *GTL\_FORALL\_VAR(\_\_LINE\_\_))}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{44 \textcolor{comment}{//   Configuration for GCC >= 2.8.0}}
+\DoxyCodeLine{45 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \textcolor{comment}{//}}
+\DoxyCodeLine{48 \textcolor{comment}{// Using namespaces is the default; may be unset by one of the }}
+\DoxyCodeLine{49 \textcolor{comment}{// following configurations.}}
+\DoxyCodeLine{50 \textcolor{comment}{//}}
+\DoxyCodeLine{51  }
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#define \_\_GTL\_USE\_NAMESPACES}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#ifdef \_\_GNUC\_\_}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#  define \_\_GTL\_GCC}}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58 \textcolor{preprocessor}{\#  if \_\_GNUC\_\_ == 2 \&\& \_\_GNUC\_MINOR\_\_ >= 8}}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#    undef \_\_GTL\_USE\_NAMESPACES}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#  elif \_\_GNUC\_\_ < 3}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#    error "{}Need at least version 2.8.0 of GCC to compile GTL."{}}}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68 \textcolor{comment}{// }}
+\DoxyCodeLine{69 \textcolor{comment}{// 2/3/2008 chris:}}
+\DoxyCodeLine{70 \textcolor{comment}{//}}
+\DoxyCodeLine{71 \textcolor{comment}{// Enable comparison of iterators in debug mode}}
+\DoxyCodeLine{72 \textcolor{comment}{//}}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#  if \_\_GNUC\_\_ >= 4}}
+\DoxyCodeLine{75 \textcolor{preprocessor}{\#    undef \_GLIBCXX\_DEBUG}}
+\DoxyCodeLine{76 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{77 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{80 \textcolor{comment}{//    Configuration for Microsoft Visual C++ 5.0}}
+\DoxyCodeLine{81 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83 \textcolor{preprocessor}{\#ifdef \_MSC\_VER}}
+\DoxyCodeLine{84 \textcolor{comment}{/*}}
+\DoxyCodeLine{85 \textcolor{comment}{\#  if \_MSC\_VER >= 1400 // Visual Studio 2005}}
+\DoxyCodeLine{86 \textcolor{comment}{}}
+\DoxyCodeLine{87 \textcolor{comment}{\#    define \_HAS\_ITERATOR\_DEBUGGING 0}}
+\DoxyCodeLine{88 \textcolor{comment}{\#    define \_CRT\_SECURE\_NO\_DEPRECATE 1}}
+\DoxyCodeLine{89 \textcolor{comment}{\#    define \_SECURE\_SCL 0}}
+\DoxyCodeLine{90 \textcolor{comment}{}}
+\DoxyCodeLine{91 \textcolor{comment}{\#  endif}}
+\DoxyCodeLine{92 \textcolor{comment}{*/}}
+\DoxyCodeLine{93 \textcolor{preprocessor}{\#  if \_MSC\_VER >= 1100}}
+\DoxyCodeLine{94     }
+\DoxyCodeLine{95 \textcolor{preprocessor}{\#    define \_\_GTL\_USE\_NAMESPACES}}
+\DoxyCodeLine{96 \textcolor{preprocessor}{\#    define \_\_GTL\_MSVCC}}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98 \textcolor{preprocessor}{\#    pragma warning( disable : 4786 )}}
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#    pragma warning( disable : 4251 )}}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#    define GTL\_EXTERN}}
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#  else}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \textcolor{preprocessor}{\#    error "{}Need at least version 5.0 of MS Visual C++ to compile GTL."{}}}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{107 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109 \textcolor{preprocessor}{\#   define GTL\_EXTERN}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{114 \textcolor{comment}{//   Namespaces}}
+\DoxyCodeLine{115 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117 \textcolor{preprocessor}{\#ifdef \_\_GTL\_USE\_NAMESPACES}}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119 \textcolor{preprocessor}{\#  define \_\_GTL\_BEGIN\_NAMESPACE namespace GTL \{}}
+\DoxyCodeLine{120 \textcolor{preprocessor}{\#  define \_\_GTL\_END\_NAMESPACE \}}}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124 \textcolor{preprocessor}{\#  define \_\_GTL\_BEGIN\_NAMESPACE}}
+\DoxyCodeLine{125 \textcolor{preprocessor}{\#  define \_\_GTL\_END\_NAMESPACE}}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{130 \textcolor{comment}{//   Temporary hack until Graphlet (i.e. gcc) supports Namespaces}}
+\DoxyCodeLine{131 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133 \textcolor{preprocessor}{\#ifdef \_\_GTL\_USE\_NAMESPACES}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespace_g_t_l}{GTL}} \{\}}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// \_\_GTL\_USE\_NAMESPACES}}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{139 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GTL\_GTL\_H}}
+\DoxyCodeLine{140     }
+\DoxyCodeLine{141 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{142 \textcolor{comment}{//   end of file}}
+\DoxyCodeLine{143 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+
+\end{DoxyCode}

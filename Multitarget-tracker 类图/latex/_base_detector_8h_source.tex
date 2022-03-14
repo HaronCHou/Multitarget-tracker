@@ -1,0 +1,235 @@
+\hypertarget{_base_detector_8h_source}{}\doxysection{Base\+Detector.\+h}
+\label{_base_detector_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/BaseDetector.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/BaseDetector.h}}
+\mbox{\hyperlink{_base_detector_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{defines_8h}{defines.h}}"{}}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{9 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_key_val}{KeyVal}}}
+\DoxyCodeLine{10 \{}
+\DoxyCodeLine{11     \mbox{\hyperlink{struct_key_val_af70e538a0aeaec01c97062615bb90e80}{KeyVal}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{12     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_key_val_a251d241a81960ec85045554abb468f56}{Add}}(\textcolor{keyword}{const} std::string\& key, \textcolor{keyword}{const} std::string\& val)}
+\DoxyCodeLine{13     \{}
+\DoxyCodeLine{14         \mbox{\hyperlink{struct_key_val_aa1f1b8d664bdf60da4e57aaaec6be9e4}{m\_config}}.emplace\_back(key, val);}
+\DoxyCodeLine{15     \}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17     std::vector<std::pair<std::string, std::string>> \mbox{\hyperlink{struct_key_val_aa1f1b8d664bdf60da4e57aaaec6be9e4}{m\_config}};}
+\DoxyCodeLine{18 \};}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{23 \textcolor{keyword}{class }\mbox{\hyperlink{class_base_detector}{BaseDetector}}}
+\DoxyCodeLine{24 \{}
+\DoxyCodeLine{25 \textcolor{keyword}{public}:}
+\DoxyCodeLine{30     \mbox{\hyperlink{class_base_detector_a4ac0fad726ca567a1faad90bb86c4c15}{BaseDetector}}(\textcolor{keyword}{const} cv::UMat\& frame)}
+\DoxyCodeLine{31     \{}
+\DoxyCodeLine{32         \mbox{\hyperlink{class_base_detector_a651b938c89c94daac4763728637d90c9}{m\_minObjectSize}}.width = \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{std::max}}(5, frame.cols / 100);}
+\DoxyCodeLine{33         \mbox{\hyperlink{class_base_detector_a651b938c89c94daac4763728637d90c9}{m\_minObjectSize}}.height = \mbox{\hyperlink{class_base_detector_a651b938c89c94daac4763728637d90c9}{m\_minObjectSize}}.width;}
+\DoxyCodeLine{34     \}}
+\DoxyCodeLine{39     \mbox{\hyperlink{class_base_detector_ab308635a770b8c90cb4f5ee6865ef46f}{BaseDetector}}(\textcolor{keyword}{const} cv::Mat\& frame)}
+\DoxyCodeLine{40     \{}
+\DoxyCodeLine{41         \mbox{\hyperlink{class_base_detector_a651b938c89c94daac4763728637d90c9}{m\_minObjectSize}}.width = \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{std::max}}(5, frame.cols / 100);}
+\DoxyCodeLine{42         \mbox{\hyperlink{class_base_detector_a651b938c89c94daac4763728637d90c9}{m\_minObjectSize}}.height = \mbox{\hyperlink{class_base_detector_a651b938c89c94daac4763728637d90c9}{m\_minObjectSize}}.width;}
+\DoxyCodeLine{43     \}}
+\DoxyCodeLine{47     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_base_detector_a0fb4ca85eaaf1b6ea3d254415b35e50e}{\string~BaseDetector}}(\textcolor{keywordtype}{void}) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{53     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_base_detector_a44c53608e9e4e3455ff553d987165260}{Init}}(\textcolor{keyword}{const} \mbox{\hyperlink{defines_8h_a9fcffa231cb8ff6a5fc4e2e2e71f3ead}{config\_t}}\& config) = 0;}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{59     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_base_detector_a7a233d2d77dfc4ad678eb852b11f2937}{Detect}}(\textcolor{keyword}{const} cv::UMat\& frame) = 0;}
+\DoxyCodeLine{60     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_base_detector_a89d6520e269a13f0f89e9ba3ba0edd89}{DetectMat}}(cv::Mat frame)}
+\DoxyCodeLine{61     \{}
+\DoxyCodeLine{62         cv::UMat um = frame.getUMat(cv::ACCESS\_READ);}
+\DoxyCodeLine{63         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_base_detector_a7a233d2d77dfc4ad678eb852b11f2937}{Detect}}(um);}
+\DoxyCodeLine{64     \}}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{71     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_base_detector_a24888473e1dd58fba2a0b2f876d6e4cf}{Detect}}(\textcolor{keyword}{const} std::vector<cv::UMat>\& frames, std::vector<regions\_t>\& regions)}
+\DoxyCodeLine{72     \{}
+\DoxyCodeLine{73         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < frames.size(); ++i)}
+\DoxyCodeLine{74         \{}
+\DoxyCodeLine{75             \mbox{\hyperlink{class_base_detector_a7a233d2d77dfc4ad678eb852b11f2937}{Detect}}(frames[i]);}
+\DoxyCodeLine{76             \textcolor{keyword}{auto} res = \mbox{\hyperlink{class_base_detector_ab4b66dc0e2d6b6f40017d440320a3939}{GetDetects}}();}
+\DoxyCodeLine{77             regions[i].assign(std::begin(res), \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{std::end}}(res));}
+\DoxyCodeLine{78         \}}
+\DoxyCodeLine{79     \}}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{86     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_base_detector_a0939a48f87510d1c74befc576efcc852}{ResetModel}}(\textcolor{keyword}{const} cv::UMat\& \textcolor{comment}{/*img*/}, \textcolor{keyword}{const} cv::Rect\& \textcolor{comment}{/*roiRect*/})}
+\DoxyCodeLine{87     \{}
+\DoxyCodeLine{88     \}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{93     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_base_detector_a02d2f4d0c973bdeac1b1424004bf15ee}{ResetIgnoreMask}}()}
+\DoxyCodeLine{94     \{}
+\DoxyCodeLine{95         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{class_base_detector_aeb0433dd82a1fad5d6c319b4a14c10e4}{m\_ignoreMask}}.empty())}
+\DoxyCodeLine{96             \mbox{\hyperlink{class_base_detector_aeb0433dd82a1fad5d6c319b4a14c10e4}{m\_ignoreMask}} = 255;}
+\DoxyCodeLine{97     \}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{104     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_base_detector_aaf8998dfdd7622fe47f26de87984f72b}{UpdateIgnoreMask}}(\textcolor{keyword}{const} cv::UMat\& img, cv::Rect roiRect)}
+\DoxyCodeLine{105     \{}
+\DoxyCodeLine{106         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_base_detector_aeb0433dd82a1fad5d6c319b4a14c10e4}{m\_ignoreMask}}.empty())}
+\DoxyCodeLine{107             \mbox{\hyperlink{class_base_detector_aeb0433dd82a1fad5d6c319b4a14c10e4}{m\_ignoreMask}} = cv::Mat(img.size(), CV\_8UC1, cv::Scalar(255));}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109         \textcolor{keyword}{auto} Clamp = [](\textcolor{keywordtype}{int}\& v, \textcolor{keywordtype}{int}\& size, \textcolor{keywordtype}{int} hi)}
+\DoxyCodeLine{110         \{}
+\DoxyCodeLine{111             \textcolor{keywordflow}{if} (v < 0)}
+\DoxyCodeLine{112             \{}
+\DoxyCodeLine{113                 size += v;}
+\DoxyCodeLine{114                 v = 0;}
+\DoxyCodeLine{115             \}}
+\DoxyCodeLine{116             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (v + size > hi -\/ 1)}
+\DoxyCodeLine{117             \{}
+\DoxyCodeLine{118                 size = hi -\/ 1 -\/ v;}
+\DoxyCodeLine{119             \}}
+\DoxyCodeLine{120         \};}
+\DoxyCodeLine{121         Clamp(roiRect.x, roiRect.width, \mbox{\hyperlink{class_base_detector_aeb0433dd82a1fad5d6c319b4a14c10e4}{m\_ignoreMask}}.cols);}
+\DoxyCodeLine{122         Clamp(roiRect.y, roiRect.height, \mbox{\hyperlink{class_base_detector_aeb0433dd82a1fad5d6c319b4a14c10e4}{m\_ignoreMask}}.rows);}
+\DoxyCodeLine{123         \mbox{\hyperlink{class_base_detector_aeb0433dd82a1fad5d6c319b4a14c10e4}{m\_ignoreMask}}(roiRect) = 0;}
+\DoxyCodeLine{124     \}}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{129     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_base_detector_a90782137a95a0e6d243af591de7876dc}{CanGrayProcessing}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{135     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_base_detector_ab459f4e77cf1110cc1ee84027f0f2a03}{SetMinObjectSize}}(cv::Size minObjectSize)}
+\DoxyCodeLine{136     \{}
+\DoxyCodeLine{137         \mbox{\hyperlink{class_base_detector_a651b938c89c94daac4763728637d90c9}{m\_minObjectSize}} = minObjectSize;}
+\DoxyCodeLine{138     \}}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{144     \textcolor{keyword}{const} \mbox{\hyperlink{defines_8h_a01db0de56a20f4342820a093c5154536}{regions\_t}}\& \mbox{\hyperlink{class_base_detector_ab4b66dc0e2d6b6f40017d440320a3939}{GetDetects}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{145 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{146         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_base_detector_a409c20093acba261db8354ca72058fce}{m\_regions}};}
+\DoxyCodeLine{147     \}}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{153     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_base_detector_a52fe5df1270a559a8d2dde7420256edf}{CalcMotionMap}}(cv::Mat\& frame)}
+\DoxyCodeLine{154     \{}
+\DoxyCodeLine{155         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_base_detector_a45a2d54a0b69e271aa5c44ee301682b7}{m\_motionMap}}.size() != frame.size())}
+\DoxyCodeLine{156             \mbox{\hyperlink{class_base_detector_a45a2d54a0b69e271aa5c44ee301682b7}{m\_motionMap}} = cv::Mat(frame.size(), CV\_32FC1, cv::Scalar(0, 0, 0));}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158         cv::Mat foreground(\mbox{\hyperlink{class_base_detector_a45a2d54a0b69e271aa5c44ee301682b7}{m\_motionMap}}.size(), CV\_8UC1, cv::Scalar(0, 0, 0));}
+\DoxyCodeLine{159         \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& region : \mbox{\hyperlink{class_base_detector_a409c20093acba261db8354ca72058fce}{m\_regions}})}
+\DoxyCodeLine{160         \{}
+\DoxyCodeLine{161 \textcolor{preprocessor}{\#if (CV\_VERSION\_MAJOR < 4)}}
+\DoxyCodeLine{162             cv::ellipse(foreground, region.m\_rrect, cv::Scalar(255, 255, 255), CV\_FILLED);}
+\DoxyCodeLine{163 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{164             cv::ellipse(foreground, region.m\_rrect, cv::Scalar(255, 255, 255), cv::FILLED);}
+\DoxyCodeLine{165 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{166         \}}
+\DoxyCodeLine{167         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{class_base_detector_aeb0433dd82a1fad5d6c319b4a14c10e4}{m\_ignoreMask}}.empty())}
+\DoxyCodeLine{168             cv::bitwise\_and(foreground, \mbox{\hyperlink{class_base_detector_aeb0433dd82a1fad5d6c319b4a14c10e4}{m\_ignoreMask}}, foreground);}
+\DoxyCodeLine{169         cv::normalize(foreground, \mbox{\hyperlink{class_base_detector_a664b1af3b1eee4df4528cb42a499b4d8}{m\_normFor}}, 255, 0, cv::NORM\_MINMAX, \mbox{\hyperlink{class_base_detector_a45a2d54a0b69e271aa5c44ee301682b7}{m\_motionMap}}.type());}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{171         \textcolor{keywordtype}{double} alpha = 0.95;}
+\DoxyCodeLine{172         cv::addWeighted(\mbox{\hyperlink{class_base_detector_a45a2d54a0b69e271aa5c44ee301682b7}{m\_motionMap}}, alpha, \mbox{\hyperlink{class_base_detector_a664b1af3b1eee4df4528cb42a499b4d8}{m\_normFor}}, 1 -\/ alpha, 0, \mbox{\hyperlink{class_base_detector_a45a2d54a0b69e271aa5c44ee301682b7}{m\_motionMap}});}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174         \textcolor{keyword}{const} \textcolor{keywordtype}{int} chans = frame.channels();}
+\DoxyCodeLine{175         \textcolor{keyword}{const} \textcolor{keywordtype}{int} height = frame.rows;}
+\DoxyCodeLine{176 \textcolor{preprocessor}{\#pragma omp parallel for}}
+\DoxyCodeLine{177         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}} = 0; \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}} < height; ++\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}})}
+\DoxyCodeLine{178         \{}
+\DoxyCodeLine{179             uchar* imgPtr = frame.ptr(\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}});}
+\DoxyCodeLine{180             \textcolor{keyword}{const} \textcolor{keywordtype}{float}* moPtr = \textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{float}*\textcolor{keyword}{>}(\mbox{\hyperlink{class_base_detector_a45a2d54a0b69e271aa5c44ee301682b7}{m\_motionMap}}.ptr(\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}));}
+\DoxyCodeLine{181             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}} = 0; \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}} < frame.cols; ++\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}})}
+\DoxyCodeLine{182             \{}
+\DoxyCodeLine{183                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ci = chans -\/ 1; ci < chans; ++ci)}
+\DoxyCodeLine{184                 \{}
+\DoxyCodeLine{185                     imgPtr[ci] = cv::saturate\_cast<uchar>(imgPtr[ci] + moPtr[0]);}
+\DoxyCodeLine{186                 \}}
+\DoxyCodeLine{187                 imgPtr += chans;}
+\DoxyCodeLine{188                 ++moPtr;}
+\DoxyCodeLine{189             \}}
+\DoxyCodeLine{190         \}}
+\DoxyCodeLine{191 \textcolor{preprocessor}{\#if 0}}
+\DoxyCodeLine{192         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{class_base_detector_aeb0433dd82a1fad5d6c319b4a14c10e4}{m\_ignoreMask}}.empty())}
+\DoxyCodeLine{193             cv::imshow(\textcolor{stringliteral}{"{}ignoreMask"{}}, \mbox{\hyperlink{class_base_detector_aeb0433dd82a1fad5d6c319b4a14c10e4}{m\_ignoreMask}});}
+\DoxyCodeLine{194 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{195     \}}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{198     \textcolor{keyword}{static} std::unique\_ptr<BaseDetector> \mbox{\hyperlink{class_base_detector_ace4947f819fe58544ac2f005f4f35ca0}{CreateDetector}}(\mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760}{tracking::Detectors}} detectorType, \textcolor{keyword}{const} \mbox{\hyperlink{defines_8h_a9fcffa231cb8ff6a5fc4e2e2e71f3ead}{config\_t}}\& config, \textcolor{keyword}{const} cv::UMat\& gray);}
+\DoxyCodeLine{199     \textcolor{keyword}{static} std::unique\_ptr<BaseDetector> \mbox{\hyperlink{class_base_detector_a0099ebd099e85b188f6c73bbdb0c10cd}{CreateDetectorKV}}(\mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760}{tracking::Detectors}} detectorType, \textcolor{keyword}{const} \mbox{\hyperlink{struct_key_val}{KeyVal}}\& config, \textcolor{keyword}{const} cv::Mat\& gray);}
+\DoxyCodeLine{200 }
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{203     \mbox{\hyperlink{defines_8h_a01db0de56a20f4342820a093c5154536}{regions\_t}} \mbox{\hyperlink{class_base_detector_a409c20093acba261db8354ca72058fce}{m\_regions}};}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205     cv::Size \mbox{\hyperlink{class_base_detector_a651b938c89c94daac4763728637d90c9}{m\_minObjectSize}};}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{207     cv::Mat \mbox{\hyperlink{class_base_detector_aeb0433dd82a1fad5d6c319b4a14c10e4}{m\_ignoreMask}};}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{209     \textcolor{comment}{// Motion map for visualization current detections}}
+\DoxyCodeLine{210     cv::Mat \mbox{\hyperlink{class_base_detector_a45a2d54a0b69e271aa5c44ee301682b7}{m\_motionMap}};}
+\DoxyCodeLine{211     cv::Mat \mbox{\hyperlink{class_base_detector_a664b1af3b1eee4df4528cb42a499b4d8}{m\_normFor}};}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{213     std::set<objtype\_t> \mbox{\hyperlink{class_base_detector_aa9dc92d3f63af542f2c657aa5bda2373}{m\_classesWhiteList}};}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215     std::vector<cv::Rect> \mbox{\hyperlink{class_base_detector_adca2006126d93cdfd3b01e9ef1240233}{GetCrops}}(\textcolor{keywordtype}{float} maxCropRatio, cv::Size netSize, cv::Size imgSize)\textcolor{keyword}{ const}}
+\DoxyCodeLine{216 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{217         std::vector<cv::Rect> crops;}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219         \textcolor{keyword}{const} \textcolor{keywordtype}{float} whRatio = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(netSize.width) / \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(netSize.height);}
+\DoxyCodeLine{220         \textcolor{keywordtype}{int} cropHeight = cvRound(maxCropRatio * netSize.height);}
+\DoxyCodeLine{221         \textcolor{keywordtype}{int} cropWidth = cvRound(maxCropRatio * netSize.width);}
+\DoxyCodeLine{222 }
+\DoxyCodeLine{223         \textcolor{keywordflow}{if} (imgSize.width / (\textcolor{keywordtype}{float})imgSize.height > whRatio)}
+\DoxyCodeLine{224         \{}
+\DoxyCodeLine{225             \textcolor{keywordflow}{if} (cropHeight >= imgSize.height)}
+\DoxyCodeLine{226                 cropHeight = imgSize.height;}
+\DoxyCodeLine{227             cropWidth = cvRound(cropHeight * whRatio);}
+\DoxyCodeLine{228         \}}
+\DoxyCodeLine{229         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{230         \{}
+\DoxyCodeLine{231             \textcolor{keywordflow}{if} (cropWidth >= imgSize.width)}
+\DoxyCodeLine{232                 cropWidth = imgSize.width;}
+\DoxyCodeLine{233             cropHeight = cvRound(cropWidth / whRatio);}
+\DoxyCodeLine{234         \}}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{236         \textcolor{comment}{//std::cout << "{}Frame size "{} << imgSize << "{}, crop size = "{} << cv::Size(cropWidth, cropHeight) << "{}, ratio = "{} << maxCropRatio << std::endl;}}
+\DoxyCodeLine{237 }
+\DoxyCodeLine{238         \textcolor{keyword}{const} \textcolor{keywordtype}{int} stepX = 3 * cropWidth / 4;}
+\DoxyCodeLine{239         \textcolor{keyword}{const} \textcolor{keywordtype}{int} stepY = 3 * cropHeight / 4;}
+\DoxyCodeLine{240         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}} = 0; \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}} < imgSize.height; \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}} += stepY)}
+\DoxyCodeLine{241         \{}
+\DoxyCodeLine{242             \textcolor{keywordtype}{bool} needBreakY = \textcolor{keyword}{false};}
+\DoxyCodeLine{243             \textcolor{keywordflow}{if} (\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}} + cropHeight >= imgSize.height)}
+\DoxyCodeLine{244             \{}
+\DoxyCodeLine{245                 \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}} = imgSize.height -\/ cropHeight;}
+\DoxyCodeLine{246                 needBreakY = \textcolor{keyword}{true};}
+\DoxyCodeLine{247             \}}
+\DoxyCodeLine{248             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}} = 0; \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}} < imgSize.width; \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}} += stepX)}
+\DoxyCodeLine{249             \{}
+\DoxyCodeLine{250                 \textcolor{keywordtype}{bool} needBreakX = \textcolor{keyword}{false};}
+\DoxyCodeLine{251                 \textcolor{keywordflow}{if} (\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}} + cropWidth >= imgSize.width)}
+\DoxyCodeLine{252                 \{}
+\DoxyCodeLine{253                     \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}} = imgSize.width -\/ cropWidth;}
+\DoxyCodeLine{254                     needBreakX = \textcolor{keyword}{true};}
+\DoxyCodeLine{255                 \}}
+\DoxyCodeLine{256                 crops.emplace\_back(\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}, cropWidth, cropHeight);}
+\DoxyCodeLine{257                 \textcolor{keywordflow}{if} (needBreakX)}
+\DoxyCodeLine{258                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{259             \}}
+\DoxyCodeLine{260             \textcolor{keywordflow}{if} (needBreakY)}
+\DoxyCodeLine{261                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{262         \}}
+\DoxyCodeLine{263         \textcolor{keywordflow}{return} crops;}
+\DoxyCodeLine{264     \}}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{267     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_base_detector_af30c8ccfca762afd85669826bda23461}{FillTypesMap}}(\textcolor{keyword}{const} std::vector<std::string>\& classNames)}
+\DoxyCodeLine{268     \{}
+\DoxyCodeLine{269         \textcolor{keywordtype}{bool} res = \textcolor{keyword}{true};}
+\DoxyCodeLine{270 }
+\DoxyCodeLine{271         \mbox{\hyperlink{class_base_detector_afab41526f7a8f84aa54b5da106a9a388}{m\_typesMap}}.resize(classNames.size(), \mbox{\hyperlink{object__types_8h_ac568810e98b5f032d6b916e7878ebe53}{bad\_type}});}
+\DoxyCodeLine{272         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < classNames.size(); ++i)}
+\DoxyCodeLine{273         \{}
+\DoxyCodeLine{274             \mbox{\hyperlink{object__types_8h_aef073148585075f745f149202b5ccc90}{objtype\_t}} type = \mbox{\hyperlink{class_type_converter_a6f984699cc599419c2f4c0350ecad4e1}{TypeConverter::Str2Type}}(classNames[i]);}
+\DoxyCodeLine{275             \mbox{\hyperlink{class_base_detector_afab41526f7a8f84aa54b5da106a9a388}{m\_typesMap}}[i] = type;}
+\DoxyCodeLine{276             res \&= (type != \mbox{\hyperlink{object__types_8h_ac568810e98b5f032d6b916e7878ebe53}{bad\_type}});}
+\DoxyCodeLine{277         \}}
+\DoxyCodeLine{278         \textcolor{keywordflow}{return} res;}
+\DoxyCodeLine{279     \}}
+\DoxyCodeLine{280     }
+\DoxyCodeLine{282     \mbox{\hyperlink{object__types_8h_aef073148585075f745f149202b5ccc90}{objtype\_t}} \mbox{\hyperlink{class_base_detector_ab7ff9233e4f675ba575fc5de43d60abb}{T2T}}(\textcolor{keywordtype}{size\_t} typeInd)\textcolor{keyword}{ const}}
+\DoxyCodeLine{283 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{284         \mbox{\hyperlink{object__types_8h_aef073148585075f745f149202b5ccc90}{objtype\_t}} res = (typeInd < \mbox{\hyperlink{class_base_detector_afab41526f7a8f84aa54b5da106a9a388}{m\_typesMap}}.size()) ? \mbox{\hyperlink{class_base_detector_afab41526f7a8f84aa54b5da106a9a388}{m\_typesMap}}[typeInd] : \mbox{\hyperlink{object__types_8h_ac568810e98b5f032d6b916e7878ebe53}{bad\_type}};}
+\DoxyCodeLine{285         \textcolor{keywordflow}{return} res;}
+\DoxyCodeLine{286     \}}
+\DoxyCodeLine{287 }
+\DoxyCodeLine{288 \textcolor{keyword}{private}:}
+\DoxyCodeLine{289     std::vector<objtype\_t> \mbox{\hyperlink{class_base_detector_afab41526f7a8f84aa54b5da106a9a388}{m\_typesMap}};}
+\DoxyCodeLine{290 \};}
+
+\end{DoxyCode}

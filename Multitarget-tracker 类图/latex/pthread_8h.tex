@@ -1,0 +1,1652 @@
+\hypertarget{pthread_8h}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/3rdparty/include/pthread.h 文件参考}
+\label{pthread_8h}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/3rdparty/include/pthread.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/3rdparty/include/pthread.h}}
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$limits.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$sched.\+h$>$}\newline
+pthread.\+h 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=298pt]{pthread_8h__incl}
+\end{center}
+\end{figure}
+此图展示该文件直接或间接的被哪些文件引用了\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{pthread_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structtimespec}{timespec}}
+\item 
+struct \mbox{\hyperlink{structptw32__handle__t}{ptw32\+\_\+handle\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structpthread__once__t__}{pthread\+\_\+once\+\_\+t\+\_\+}}
+\item 
+struct \mbox{\hyperlink{structptw32__cleanup__t}{ptw32\+\_\+cleanup\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsection*{宏定义}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a22fe6e6a32292e2fc265a73d241e8c2c}{PTW32\+\_\+\+VERSION}}~2,9,1,0
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a5f55e3c8d3c8722604f4a6c71a483391}{PTW32\+\_\+\+VERSION\+\_\+\+STRING}}~\char`\"{}2, 9, 1, 0\textbackslash{}0\char`\"{}
+\item 
+\#define \mbox{\hyperlink{pthread_8h_aaed1be6d92ad89e540313db1e4dbdcc1}{\+\_\+\+\_\+\+CLEANUP\+\_\+C}}
+\item 
+\#define \mbox{\hyperlink{pthread_8h_aee5322b749059b286658c7730a60e1df}{PTW32\+\_\+\+LEVEL\+\_\+\+MAX}}~3
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a8c5fc343ad580694988ca020042049b1}{PTW32\+\_\+\+LEVEL}}~\mbox{\hyperlink{pthread_8h_aee5322b749059b286658c7730a60e1df}{PTW32\+\_\+\+LEVEL\+\_\+\+MAX}}
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a91457bbf35f0f1085619a99423bb1f33}{ENOTSUP}}~48   /$\ast$ This is the value in Solaris. $\ast$/
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a597718e59a8fc9c4d4ab63f5a34e28b1}{ETIMEDOUT}}~10060 /$\ast$ Same as WSAETIMEDOUT $\ast$/
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a43785b9969e0bd1af532dbde06c5540b}{ENOSYS}}~140     /$\ast$ Semi-\/arbitrary value $\ast$/
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a55cc70ce0ba661298f3c412095dfeeb6}{EDEADLK}}~36     /$\ast$ This is the value in MSVC. $\ast$/
+\item 
+\#define \mbox{\hyperlink{pthread_8h_af3f021d87caf24b44761036578c7beae}{EOWNERDEAD}}~43
+\item 
+\#define \mbox{\hyperlink{pthread_8h_ac69acb8e9e296867cc3f9fdf4223d05d}{ENOTRECOVERABLE}}~44
+\item 
+\#define \mbox{\hyperlink{pthread_8h_abe1404a828ff592d1a80eb8476fa55c4}{PTW32\+\_\+\+\_\+\+HANDLE\+\_\+\+DEF}}
+\item 
+\#define \mbox{\hyperlink{pthread_8h_ab521aa5010fb1afb801a899a55569e03}{HANDLE}}~void $\ast$
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a996d25b6b70ab34a0e763bc3cdc0e7f1}{PTW32\+\_\+\+\_\+\+DWORD\+\_\+\+DEF}}
+\item 
+\#define \mbox{\hyperlink{pthread_8h_aa39b39d94407451a6ec0226479db68cf}{DWORD}}~unsigned long
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a9bed4a5724ac5d5ff76fbe36f0851323}{HAVE\+\_\+\+STRUCT\+\_\+\+TIMESPEC}}
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a60786f3d097f22d55e9c364ec3d019a8}{\+\_\+\+TIMESPEC\+\_\+\+DEFINED}}
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a927f6ae16379576d638006c7498ac5d7}{SIG\+\_\+\+BLOCK}}~0
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a5fcd73313a63dac2cc7eb3b654215250}{SIG\+\_\+\+UNBLOCK}}~1
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a37750b78b7ae75fe02ad26e70f6cc845}{SIG\+\_\+\+SETMASK}}~2
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a5e89527a7c4b94907d559a975d5850ce}{\+\_\+\+POSIX\+\_\+\+THREADS}}~200809L
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a0de534c83bc64084bd72a2af38c38fc4}{\+\_\+\+POSIX\+\_\+\+READER\+\_\+\+WRITER\+\_\+\+LOCKS}}~200809L
+\item 
+\#define \mbox{\hyperlink{pthread_8h_ad022064435f5624d1112e6dded65456a}{\+\_\+\+POSIX\+\_\+\+SPIN\+\_\+\+LOCKS}}~200809L
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a1888bb32a3fab081911db6d9b4dd3168}{\+\_\+\+POSIX\+\_\+\+BARRIERS}}~200809L
+\item 
+\#define \mbox{\hyperlink{pthread_8h_ade059a4eb8c07d70a146f0e49181509f}{\+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+SAFE\+\_\+\+FUNCTIONS}}~200809L
+\item 
+\#define \mbox{\hyperlink{pthread_8h_aba151d9d724809f6582df29e5fc32214}{\+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+ATTR\+\_\+\+STACKSIZE}}~200809L
+\item 
+\#define \mbox{\hyperlink{pthread_8h_ae4859a1b4149bcd791a3af45d6ff5a4d}{\+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+ATTR\+\_\+\+STACKADDR}}~-\/1
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a28aec623eccedfe65e0debaa9069c9f4}{\+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+PRIO\+\_\+\+INHERIT}}~-\/1
+\item 
+\#define \mbox{\hyperlink{pthread_8h_afcec38ca6f262d40533c1913572c8de9}{\+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+PRIO\+\_\+\+PROTECT}}~-\/1
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a77dd793eebe0421a728236adc79e18e1}{\+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+PRIORITY\+\_\+\+SCHEDULING}}~-\/1
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a95523afb162efd2b5eadde6122e00de6}{\+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+PROCESS\+\_\+\+SHARED}}~-\/1
+\item 
+\#define \mbox{\hyperlink{pthread_8h_ab1dcb8bed4f0f3540e278a4932223ade}{\+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+DESTRUCTOR\+\_\+\+ITERATIONS}}~4
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a1d96b13a4ba5975d724c5fe13788a957}{PTHREAD\+\_\+\+DESTRUCTOR\+\_\+\+ITERATIONS}}~\mbox{\hyperlink{pthread_8h_ab1dcb8bed4f0f3540e278a4932223ade}{\+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+DESTRUCTOR\+\_\+\+ITERATIONS}}
+\item 
+\#define \mbox{\hyperlink{pthread_8h_acfe1124183f47eb0a395e9115446ad51}{\+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+KEYS\+\_\+\+MAX}}~128
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a0a23e66e087bcf5c253b9b2746f19a64}{PTHREAD\+\_\+\+KEYS\+\_\+\+MAX}}~\mbox{\hyperlink{pthread_8h_acfe1124183f47eb0a395e9115446ad51}{\+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+KEYS\+\_\+\+MAX}}
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a8b3dc1c5c1a165d6143b1dce950e8266}{PTHREAD\+\_\+\+STACK\+\_\+\+MIN}}~0
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a4b941a84a6ba25b666a6127b88598fec}{\+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+THREADS\+\_\+\+MAX}}~64
+\item 
+\#define \mbox{\hyperlink{pthread_8h_ab8f25dec585d6255fcf40b67db66c1c5}{PTHREAD\+\_\+\+THREADS\+\_\+\+MAX}}~2019
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a3463f30f1c9e21a1771c73ed61fa8526}{\+\_\+\+POSIX\+\_\+\+SEM\+\_\+\+NSEMS\+\_\+\+MAX}}~256
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a829c888ff8820c37384a5531577cea33}{SEM\+\_\+\+NSEMS\+\_\+\+MAX}}~1024
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a190812c14fc01d39aad9a8f8259a4656}{\+\_\+\+POSIX\+\_\+\+SEM\+\_\+\+VALUE\+\_\+\+MAX}}~32767
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a2961bb23950351c6b10976674c27ddaf}{SEM\+\_\+\+VALUE\+\_\+\+MAX}}~INT\+\_\+\+MAX
+\item 
+\#define \mbox{\hyperlink{pthread_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}}~\+\_\+\+\_\+declspec (dllimport)
+\item 
+\#define \mbox{\hyperlink{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}{PTW32\+\_\+\+CDECL}}~\+\_\+\+\_\+cdecl
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a17ddda04a6c1ee32116c49c85e2ac4ae}{PTHREAD\+\_\+\+CANCELED}}~((void $\ast$)(\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}) -\/1)
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a59e22497b65fc305ddb5cea8b4990b51}{PTHREAD\+\_\+\+ONCE\+\_\+\+INIT}}~\{ \mbox{\hyperlink{pthread_8h_a06fc87d81c62e9abb8790b6e5713c55ba343b8b7b252f706fa206f1ca5f07ef34}{PTW32\+\_\+\+FALSE}}, 0, 0, 0\}
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a84e55100366a6a8338a2af3b3f279686}{PTHREAD\+\_\+\+MUTEX\+\_\+\+INITIALIZER}}~((\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}})(\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}) -\/1)
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a93186a549e7d7aace381171097da1823}{PTHREAD\+\_\+\+RECURSIVE\+\_\+\+MUTEX\+\_\+\+INITIALIZER}}~((\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}})(\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}) -\/2)
+\item 
+\#define \mbox{\hyperlink{pthread_8h_ace0d1f1ec8dd8eadd769ff324153599d}{PTHREAD\+\_\+\+ERRORCHECK\+\_\+\+MUTEX\+\_\+\+INITIALIZER}}~((\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}})(\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}) -\/3)
+\item 
+\#define \mbox{\hyperlink{pthread_8h_ac2663553b072167a403521db5b4e82c4}{PTHREAD\+\_\+\+RECURSIVE\+\_\+\+MUTEX\+\_\+\+INITIALIZER\+\_\+\+NP}}~\mbox{\hyperlink{pthread_8h_a93186a549e7d7aace381171097da1823}{PTHREAD\+\_\+\+RECURSIVE\+\_\+\+MUTEX\+\_\+\+INITIALIZER}}
+\item 
+\#define \mbox{\hyperlink{pthread_8h_acff148607c8534833336adb03d3f7b5b}{PTHREAD\+\_\+\+ERRORCHECK\+\_\+\+MUTEX\+\_\+\+INITIALIZER\+\_\+\+NP}}~\mbox{\hyperlink{pthread_8h_ace0d1f1ec8dd8eadd769ff324153599d}{PTHREAD\+\_\+\+ERRORCHECK\+\_\+\+MUTEX\+\_\+\+INITIALIZER}}
+\item 
+\#define \mbox{\hyperlink{pthread_8h_aa7b867fe46f3660283fcb356c4fcbbf0}{PTHREAD\+\_\+\+COND\+\_\+\+INITIALIZER}}~((\mbox{\hyperlink{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}{pthread\+\_\+cond\+\_\+t}})(\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}) -\/1)
+\item 
+\#define \mbox{\hyperlink{pthread_8h_aa92fd7b492a8a5b31b2f8b3b6039c622}{PTHREAD\+\_\+\+RWLOCK\+\_\+\+INITIALIZER}}~((\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\+\_\+rwlock\+\_\+t}})(\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}) -\/1)
+\item 
+\#define \mbox{\hyperlink{pthread_8h_ad4620a03c26b4119bf642a7f53df4fb2}{PTHREAD\+\_\+\+SPINLOCK\+\_\+\+INITIALIZER}}~((\mbox{\hyperlink{pthread_8h_a8481ca14ebb4b48ccc42d2c805e75e54}{pthread\+\_\+spinlock\+\_\+t}})(\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}) -\/1)
+\item 
+\#define \mbox{\hyperlink{pthread_8h_a2465afe6031ce3a3453bfc1a0bfcaad1}{pthread\+\_\+cleanup\+\_\+push}}(\+\_\+rout,  \+\_\+arg)
+\item 
+\#define \mbox{\hyperlink{pthread_8h_af361719ce5f44312eea2e58b24522698}{pthread\+\_\+cleanup\+\_\+pop}}(\+\_\+execute)
+\end{DoxyCompactItemize}
+\doxysubsection*{类型定义}
+\begin{DoxyCompactItemize}
+\item 
+typedef \mbox{\hyperlink{structptw32__handle__t}{ptw32\+\_\+handle\+\_\+t}} \mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}}
+\item 
+typedef struct pthread\+\_\+attr\+\_\+t\+\_\+ $\ast$ \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}}
+\item 
+typedef struct \mbox{\hyperlink{structpthread__once__t__}{pthread\+\_\+once\+\_\+t\+\_\+}} \mbox{\hyperlink{pthread_8h_a1068306e6f9855c0284651364e10b3f5}{pthread\+\_\+once\+\_\+t}}
+\item 
+typedef struct pthread\+\_\+key\+\_\+t\+\_\+ $\ast$ \mbox{\hyperlink{pthread_8h_ad0376f110bc69993ad8bee03134fbd7d}{pthread\+\_\+key\+\_\+t}}
+\item 
+typedef struct pthread\+\_\+mutex\+\_\+t\+\_\+ $\ast$ \mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}}
+\item 
+typedef struct pthread\+\_\+mutexattr\+\_\+t\+\_\+ $\ast$ \mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}}
+\item 
+typedef struct pthread\+\_\+cond\+\_\+t\+\_\+ $\ast$ \mbox{\hyperlink{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}{pthread\+\_\+cond\+\_\+t}}
+\item 
+typedef struct pthread\+\_\+condattr\+\_\+t\+\_\+ $\ast$ \mbox{\hyperlink{pthread_8h_ab77e7203e4ab594ba14d1f92969d19ef}{pthread\+\_\+condattr\+\_\+t}}
+\item 
+typedef struct pthread\+\_\+rwlock\+\_\+t\+\_\+ $\ast$ \mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\+\_\+rwlock\+\_\+t}}
+\item 
+typedef struct pthread\+\_\+rwlockattr\+\_\+t\+\_\+ $\ast$ \mbox{\hyperlink{pthread_8h_a516f3fa0225b050ba34327f6491638fd}{pthread\+\_\+rwlockattr\+\_\+t}}
+\item 
+typedef struct pthread\+\_\+spinlock\+\_\+t\+\_\+ $\ast$ \mbox{\hyperlink{pthread_8h_a8481ca14ebb4b48ccc42d2c805e75e54}{pthread\+\_\+spinlock\+\_\+t}}
+\item 
+typedef struct pthread\+\_\+barrier\+\_\+t\+\_\+ $\ast$ \mbox{\hyperlink{pthread_8h_a9cd526c5e963f8f6b9fc31adbfb49608}{pthread\+\_\+barrier\+\_\+t}}
+\item 
+typedef struct pthread\+\_\+barrierattr\+\_\+t\+\_\+ $\ast$ \mbox{\hyperlink{pthread_8h_a6c1bb0434bca06a34fee71ee8965dd34}{pthread\+\_\+barrierattr\+\_\+t}}
+\item 
+typedef struct \mbox{\hyperlink{structptw32__cleanup__t}{ptw32\+\_\+cleanup\+\_\+t}} \mbox{\hyperlink{pthread_8h_a444ab682d004460bed44c47b66143731}{ptw32\+\_\+cleanup\+\_\+t}}
+\item 
+typedef void($\ast$ \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}}) (void $\ast$)
+\end{DoxyCompactItemize}
+\doxysubsection*{枚举}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{pthread_8h_a06fc87d81c62e9abb8790b6e5713c55ba343b8b7b252f706fa206f1ca5f07ef34}{PTW32\+\_\+\+FALSE}} = 0
+, \mbox{\hyperlink{pthread_8h_a06fc87d81c62e9abb8790b6e5713c55ba70bc7f92c20752f710d06c078d88d1ab}{PTW32\+\_\+\+TRUE}} = (! PTW32\+\_\+\+FALSE)
+ \}
+\item 
+enum \{ \newline
+\mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7aedde61df7c9c0c7589106ab45c7980a5}{PTHREAD\+\_\+\+CREATE\+\_\+\+JOINABLE}} = 0
+, \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a2512d11dd7fa9db00e8ae247e21344a5}{PTHREAD\+\_\+\+CREATE\+\_\+\+DETACHED}} = 1
+, \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a63e1b1953bee944d07218f02021d0bcb}{PTHREAD\+\_\+\+INHERIT\+\_\+\+SCHED}} = 0
+, \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7ad04777d52cc78357fb1d29f309e801e8}{PTHREAD\+\_\+\+EXPLICIT\+\_\+\+SCHED}} = 1
+, \newline
+\mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a7592df21cac6b1e35bec267f6c733cd6}{PTHREAD\+\_\+\+SCOPE\+\_\+\+PROCESS}} = 0
+, \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7adf110376f12d0244378522922f3c313f}{PTHREAD\+\_\+\+SCOPE\+\_\+\+SYSTEM}} = 1
+, \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a0107de44d6bf8ca8f270853d3079f2ce}{PTHREAD\+\_\+\+CANCEL\+\_\+\+ENABLE}} = 0
+, \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7aa2bc8caabe477c20eb2437b04a7ca951}{PTHREAD\+\_\+\+CANCEL\+\_\+\+DISABLE}} = 1
+, \newline
+\mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7afde2fe11618067c09922faa311f5d053}{PTHREAD\+\_\+\+CANCEL\+\_\+\+ASYNCHRONOUS}} = 0
+, \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7accf936610764207fb210dc3e2053a40f}{PTHREAD\+\_\+\+CANCEL\+\_\+\+DEFERRED}} = 1
+, \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a4b597774e6a4da2b7572ecaba5d78f7b}{PTHREAD\+\_\+\+PROCESS\+\_\+\+PRIVATE}} = 0
+, \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a08295b03be77cfee92360b82e4f07963}{PTHREAD\+\_\+\+PROCESS\+\_\+\+SHARED}} = 1
+, \newline
+\mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7aa2eecfff4ef9e6d1cd72b06ebb80479c}{PTHREAD\+\_\+\+MUTEX\+\_\+\+STALLED}} = 0
+, \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a1d15b780c0738efc4f9892521664061d}{PTHREAD\+\_\+\+MUTEX\+\_\+\+ROBUST}} = 1
+, \mbox{\hyperlink{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7ab8cb5055533bdf0fe1d122a77cf0354c}{PTHREAD\+\_\+\+BARRIER\+\_\+\+SERIAL\+\_\+\+THREAD}} = -\/1
+ \}
+\item 
+enum \{ \newline
+\mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5a01edd504ac7d7b5f9de62ff00890609b}{PTHREAD\+\_\+\+MUTEX\+\_\+\+FAST\+\_\+\+NP}}
+, \mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5acce072a3d99dd4cfad8a609089f34f15}{PTHREAD\+\_\+\+MUTEX\+\_\+\+RECURSIVE\+\_\+\+NP}}
+, \mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5ac4347bd162505ca1224fe0fc3f48327d}{PTHREAD\+\_\+\+MUTEX\+\_\+\+ERRORCHECK\+\_\+\+NP}}
+, \mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5a7de470be3659bf2cb4220ac081e93dc8}{PTHREAD\+\_\+\+MUTEX\+\_\+\+TIMED\+\_\+\+NP}} = PTHREAD\+\_\+\+MUTEX\+\_\+\+FAST\+\_\+\+NP
+, \newline
+\mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5a9e8ac90bbb9d4737d345b2de6bdbf3de}{PTHREAD\+\_\+\+MUTEX\+\_\+\+ADAPTIVE\+\_\+\+NP}} = PTHREAD\+\_\+\+MUTEX\+\_\+\+FAST\+\_\+\+NP
+, \mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5abea5d963222d69ea123978b50dfe8a7a}{PTHREAD\+\_\+\+MUTEX\+\_\+\+NORMAL}} = PTHREAD\+\_\+\+MUTEX\+\_\+\+FAST\+\_\+\+NP
+, \mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5a02e48297eea4a6d3c2b8182d73691475}{PTHREAD\+\_\+\+MUTEX\+\_\+\+RECURSIVE}} = PTHREAD\+\_\+\+MUTEX\+\_\+\+RECURSIVE\+\_\+\+NP
+, \mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5a3a806dca7fa5a505456e978151a3cc95}{PTHREAD\+\_\+\+MUTEX\+\_\+\+ERRORCHECK}} = PTHREAD\+\_\+\+MUTEX\+\_\+\+ERRORCHECK\+\_\+\+NP
+, \newline
+\mbox{\hyperlink{pthread_8h_a99fb83031ce9923c84392b4e92f956b5aed70ed455310e0cc0a964ea462e27d31}{PTHREAD\+\_\+\+MUTEX\+\_\+\+DEFAULT}} = PTHREAD\+\_\+\+MUTEX\+\_\+\+NORMAL
+ \}
+\item 
+enum \mbox{\hyperlink{pthread_8h_a4a774bc048b9769b9542886175bba8cb}{ptw32\+\_\+features}} \{ \mbox{\hyperlink{pthread_8h_a4a774bc048b9769b9542886175bba8cba5070a13a659cc8de3d9902af9503961a}{PTW32\+\_\+\+SYSTEM\+\_\+\+INTERLOCKED\+\_\+\+COMPARE\+\_\+\+EXCHANGE}} = 0x0001
+, \mbox{\hyperlink{pthread_8h_a4a774bc048b9769b9542886175bba8cba5633aa8ed9c08c70740d274c9aa85538}{PTW32\+\_\+\+ALERTABLE\+\_\+\+ASYNC\+\_\+\+CANCEL}} = 0x0002
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a233ec381ddfac891f1180c492e265339}{pthread\+\_\+attr\+\_\+init}} (\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$attr)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a50335580950b3c48323f0ed36a4ea96d}{pthread\+\_\+attr\+\_\+destroy}} (\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$attr)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_ad6412a38f971d1902f205a8aeb2e327a}{pthread\+\_\+attr\+\_\+getdetachstate}} (const \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$attr, int $\ast$detachstate)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a8afdfd0a4371f1a37c4f5c3d1f97b7d4}{pthread\+\_\+attr\+\_\+getstackaddr}} (const \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$attr, void $\ast$$\ast$stackaddr)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a0eaa73e7811a82a8916749a2d093e3ee}{pthread\+\_\+attr\+\_\+getstacksize}} (const \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$attr, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} $\ast$stacksize)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_ab832983dc76a65ca3f0bdcef99a46c56}{pthread\+\_\+attr\+\_\+setdetachstate}} (\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$attr, int detachstate)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a922a32f3aeedcc20459a3dfabc9a201d}{pthread\+\_\+attr\+\_\+setstackaddr}} (\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$attr, void $\ast$stackaddr)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a03ca37cf80250af1a39e03ae937b5aae}{pthread\+\_\+attr\+\_\+setstacksize}} (\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$attr, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} stacksize)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a4a1db9aa4b0d70229991b0e061fdfe70}{pthread\+\_\+attr\+\_\+getschedparam}} (const \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$attr, struct \mbox{\hyperlink{structsched__param}{sched\+\_\+param}} $\ast$param)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_acded755dff2e91a76e4619a73ddd7592}{pthread\+\_\+attr\+\_\+setschedparam}} (\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$attr, const struct \mbox{\hyperlink{structsched__param}{sched\+\_\+param}} $\ast$param)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a309bb60a0dce82095287c78bebc8c911}{pthread\+\_\+attr\+\_\+setschedpolicy}} (\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$, int)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a7484fc9841befb18ad17b1ceac9e3efd}{pthread\+\_\+attr\+\_\+getschedpolicy}} (const \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$, int $\ast$)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a42693136811c95c2b852cab01f7ae88c}{pthread\+\_\+attr\+\_\+setinheritsched}} (\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$attr, int inheritsched)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a2bc4e0f5a270f37414a5a18d627d839b}{pthread\+\_\+attr\+\_\+getinheritsched}} (const \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$attr, int $\ast$inheritsched)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_afd31c956c8a0a321d2eba62d2689f6b1}{pthread\+\_\+attr\+\_\+setscope}} (\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$, int)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_abd6135fcecf2fd9646a4e0aca85b2ab3}{pthread\+\_\+attr\+\_\+getscope}} (const \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$, int $\ast$)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a263f28dc2825a4e62b2126294d839ac2}{pthread\+\_\+create}} (\mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}} $\ast$tid, const \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$attr, void $\ast$(\mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} $\ast$start)(void $\ast$), void $\ast$\mbox{\hyperlink{structarg}{arg}})
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a63dff6d0e31eba46785ba0daa14bebb0}{pthread\+\_\+detach}} (\mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}} tid)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_abd5e197f5bb562cf30e149571ad6e51f}{pthread\+\_\+equal}} (\mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}} \mbox{\hyperlink{rings_8cpp_a214bd1a0500f5739ce581a8bcffb518a}{t1}}, \mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}} t2)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} void \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a0d15af992e1e2b72f2df584c198b9aa7}{pthread\+\_\+exit}} (void $\ast$value\+\_\+ptr)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a49f1914675a9a21671cb0871281a3276}{pthread\+\_\+join}} (\mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}} thread, void $\ast$$\ast$value\+\_\+ptr)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} \mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}} \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_ab817f3baacf5f0b911e1a440cc97c109}{pthread\+\_\+self}} (void)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_aab4eb0a6a5be18d82421942dac137f30}{pthread\+\_\+cancel}} (\mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}} thread)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a4106226e5a0b24d373e400e387dac334}{pthread\+\_\+setcancelstate}} (int state, int $\ast$oldstate)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a66acf8bb759895422b215ed7a8bb4c50}{pthread\+\_\+setcanceltype}} (int type, int $\ast$oldtype)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} void \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a9aaf8f6e21da6b9e6eb7583fdd551ea5}{pthread\+\_\+testcancel}} (void)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_abfa1663a318b2e18a0943d7de8adffb1}{pthread\+\_\+once}} (\mbox{\hyperlink{pthread_8h_a1068306e6f9855c0284651364e10b3f5}{pthread\+\_\+once\+\_\+t}} $\ast$once\+\_\+control, void(\mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} $\ast$init\+\_\+routine)(void))
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} \mbox{\hyperlink{structptw32__cleanup__t}{ptw32\+\_\+cleanup\+\_\+t}} $\ast$\mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a3c90e1d0ffae6dedd248f39abc6a581d}{ptw32\+\_\+pop\+\_\+cleanup}} (int execute)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} void \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_af4e43660b45ebecd4fdc536edea22d4c}{ptw32\+\_\+push\+\_\+cleanup}} (\mbox{\hyperlink{structptw32__cleanup__t}{ptw32\+\_\+cleanup\+\_\+t}} $\ast$cleanup, ptw32\+\_\+cleanup\+\_\+callback\+\_\+t routine, void $\ast$\mbox{\hyperlink{structarg}{arg}})
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_aa6b87bb25e4cfae0c933632fa2ca24ea}{pthread\+\_\+key\+\_\+create}} (\mbox{\hyperlink{pthread_8h_ad0376f110bc69993ad8bee03134fbd7d}{pthread\+\_\+key\+\_\+t}} $\ast$key, void(\mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} $\ast$destructor)(void $\ast$))
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a4511523e853e2070c82c519220478d0a}{pthread\+\_\+key\+\_\+delete}} (\mbox{\hyperlink{pthread_8h_ad0376f110bc69993ad8bee03134fbd7d}{pthread\+\_\+key\+\_\+t}} key)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a70508e8085a6652a4176584617c65a93}{pthread\+\_\+setspecific}} (\mbox{\hyperlink{pthread_8h_ad0376f110bc69993ad8bee03134fbd7d}{pthread\+\_\+key\+\_\+t}} key, const void $\ast$value)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} void $\ast$\mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_ab3dee7585800e6f3c863d4192d0ef4c5}{pthread\+\_\+getspecific}} (\mbox{\hyperlink{pthread_8h_ad0376f110bc69993ad8bee03134fbd7d}{pthread\+\_\+key\+\_\+t}} key)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a051d6c0d7ebd725cfcdb4d7620ed7127}{pthread\+\_\+mutexattr\+\_\+init}} (\mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}} $\ast$attr)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a9acd8cda4095a3ea418518f659adea97}{pthread\+\_\+mutexattr\+\_\+destroy}} (\mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}} $\ast$attr)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a64dd38ac66074db355fc1c5b18ddfb5a}{pthread\+\_\+mutexattr\+\_\+getpshared}} (const \mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}} $\ast$attr, int $\ast$pshared)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a07229ffe3eb84b4a3fe02e9c673e16d2}{pthread\+\_\+mutexattr\+\_\+setpshared}} (\mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}} $\ast$attr, int pshared)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_acafedc981ddf60df3bf39a970f15d477}{pthread\+\_\+mutexattr\+\_\+settype}} (\mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}} $\ast$attr, int kind)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a09ec983b7f42c0d4fefa36fabcec3d0a}{pthread\+\_\+mutexattr\+\_\+gettype}} (const \mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}} $\ast$attr, int $\ast$kind)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a576513773e8765ab651da5b375242e01}{pthread\+\_\+mutexattr\+\_\+setrobust}} (\mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}} $\ast$attr, int robust)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a8bda789a288f22df10fd761e94ef1775}{pthread\+\_\+mutexattr\+\_\+getrobust}} (const \mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}} $\ast$attr, int $\ast$robust)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a1def5c7cb6ca87b746ecea2e45b601dd}{pthread\+\_\+barrierattr\+\_\+init}} (\mbox{\hyperlink{pthread_8h_a6c1bb0434bca06a34fee71ee8965dd34}{pthread\+\_\+barrierattr\+\_\+t}} $\ast$attr)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_ae7b73c216e7ee2e7b381ea2ce49cc1b4}{pthread\+\_\+barrierattr\+\_\+destroy}} (\mbox{\hyperlink{pthread_8h_a6c1bb0434bca06a34fee71ee8965dd34}{pthread\+\_\+barrierattr\+\_\+t}} $\ast$attr)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a8d82645fc1e9de26b75cd1b1278d133a}{pthread\+\_\+barrierattr\+\_\+getpshared}} (const \mbox{\hyperlink{pthread_8h_a6c1bb0434bca06a34fee71ee8965dd34}{pthread\+\_\+barrierattr\+\_\+t}} $\ast$attr, int $\ast$pshared)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_ad9c1e49254c1bfb0270dcd6ddfc79adc}{pthread\+\_\+barrierattr\+\_\+setpshared}} (\mbox{\hyperlink{pthread_8h_a6c1bb0434bca06a34fee71ee8965dd34}{pthread\+\_\+barrierattr\+\_\+t}} $\ast$attr, int pshared)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a67e427da2ca618b8ea8cc238704365f6}{pthread\+\_\+mutex\+\_\+init}} (\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}} $\ast$\mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{mutex}}, const \mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}} $\ast$attr)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_aa004edfa9d205948987fc16d1ed066c5}{pthread\+\_\+mutex\+\_\+destroy}} (\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}} $\ast$\mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{mutex}})
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_aef3f55cad288fdbc9c39bff9d668de1e}{pthread\+\_\+mutex\+\_\+lock}} (\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}} $\ast$\mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{mutex}})
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_aa96593fce8d2088dbf148528bf7f3ad4}{pthread\+\_\+mutex\+\_\+timedlock}} (\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}} $\ast$\mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{mutex}}, const struct \mbox{\hyperlink{structtimespec}{timespec}} $\ast$abstime)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a16f083c38b7d3e6e58b6d4454599e793}{pthread\+\_\+mutex\+\_\+trylock}} (\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}} $\ast$\mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{mutex}})
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a2e24c7aa54ba10a032b7b6cd06c3caaa}{pthread\+\_\+mutex\+\_\+unlock}} (\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}} $\ast$\mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{mutex}})
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_aed997547f0442c71792a7fc812c39d69}{pthread\+\_\+mutex\+\_\+consistent}} (\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}} $\ast$\mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{mutex}})
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a7d1e0feb499ed6c2ec25fe4f2a72dd16}{pthread\+\_\+spin\+\_\+init}} (\mbox{\hyperlink{pthread_8h_a8481ca14ebb4b48ccc42d2c805e75e54}{pthread\+\_\+spinlock\+\_\+t}} $\ast$lock, int pshared)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a7cbf10e08febd9d8642b4856fab73e46}{pthread\+\_\+spin\+\_\+destroy}} (\mbox{\hyperlink{pthread_8h_a8481ca14ebb4b48ccc42d2c805e75e54}{pthread\+\_\+spinlock\+\_\+t}} $\ast$lock)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_af47165b8bc6ef3215ede56fa45a2860e}{pthread\+\_\+spin\+\_\+lock}} (\mbox{\hyperlink{pthread_8h_a8481ca14ebb4b48ccc42d2c805e75e54}{pthread\+\_\+spinlock\+\_\+t}} $\ast$lock)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_acec9b0ce898853be7afbb64286ffce29}{pthread\+\_\+spin\+\_\+trylock}} (\mbox{\hyperlink{pthread_8h_a8481ca14ebb4b48ccc42d2c805e75e54}{pthread\+\_\+spinlock\+\_\+t}} $\ast$lock)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a8257239fc03fb14a96f162d829c0ecf9}{pthread\+\_\+spin\+\_\+unlock}} (\mbox{\hyperlink{pthread_8h_a8481ca14ebb4b48ccc42d2c805e75e54}{pthread\+\_\+spinlock\+\_\+t}} $\ast$lock)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a64383f18835ca6913c96b722864ed070}{pthread\+\_\+barrier\+\_\+init}} (\mbox{\hyperlink{pthread_8h_a9cd526c5e963f8f6b9fc31adbfb49608}{pthread\+\_\+barrier\+\_\+t}} $\ast$barrier, const \mbox{\hyperlink{pthread_8h_a6c1bb0434bca06a34fee71ee8965dd34}{pthread\+\_\+barrierattr\+\_\+t}} $\ast$attr, unsigned int count)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a568823b9d1f1af8da415edc872b60acc}{pthread\+\_\+barrier\+\_\+destroy}} (\mbox{\hyperlink{pthread_8h_a9cd526c5e963f8f6b9fc31adbfb49608}{pthread\+\_\+barrier\+\_\+t}} $\ast$barrier)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a1922825aab81d188e853c84c73a0bc34}{pthread\+\_\+barrier\+\_\+wait}} (\mbox{\hyperlink{pthread_8h_a9cd526c5e963f8f6b9fc31adbfb49608}{pthread\+\_\+barrier\+\_\+t}} $\ast$barrier)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_ab4f09e50ad468e518d3f7ddda442dd69}{pthread\+\_\+condattr\+\_\+init}} (\mbox{\hyperlink{pthread_8h_ab77e7203e4ab594ba14d1f92969d19ef}{pthread\+\_\+condattr\+\_\+t}} $\ast$attr)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_aceabe31f8e012a02be4f1da7c6496f8d}{pthread\+\_\+condattr\+\_\+destroy}} (\mbox{\hyperlink{pthread_8h_ab77e7203e4ab594ba14d1f92969d19ef}{pthread\+\_\+condattr\+\_\+t}} $\ast$attr)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a5a0b03a00065b02ea13f8085d09f9d13}{pthread\+\_\+condattr\+\_\+getpshared}} (const \mbox{\hyperlink{pthread_8h_ab77e7203e4ab594ba14d1f92969d19ef}{pthread\+\_\+condattr\+\_\+t}} $\ast$attr, int $\ast$pshared)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a63c9ae89354b54ae864852c7591cf8e4}{pthread\+\_\+condattr\+\_\+setpshared}} (\mbox{\hyperlink{pthread_8h_ab77e7203e4ab594ba14d1f92969d19ef}{pthread\+\_\+condattr\+\_\+t}} $\ast$attr, int pshared)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_aef4d3338d205f245ebd83dd1c89211e6}{pthread\+\_\+cond\+\_\+init}} (\mbox{\hyperlink{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}{pthread\+\_\+cond\+\_\+t}} $\ast$cond, const \mbox{\hyperlink{pthread_8h_ab77e7203e4ab594ba14d1f92969d19ef}{pthread\+\_\+condattr\+\_\+t}} $\ast$attr)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_af4ede487c145c4669c5905c399ccee26}{pthread\+\_\+cond\+\_\+destroy}} (\mbox{\hyperlink{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}{pthread\+\_\+cond\+\_\+t}} $\ast$cond)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a9035020a597e6c45a28444e23a6f9772}{pthread\+\_\+cond\+\_\+wait}} (\mbox{\hyperlink{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}{pthread\+\_\+cond\+\_\+t}} $\ast$cond, \mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}} $\ast$\mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{mutex}})
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_af56c2145ec4faede0c8d518665f845d6}{pthread\+\_\+cond\+\_\+timedwait}} (\mbox{\hyperlink{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}{pthread\+\_\+cond\+\_\+t}} $\ast$cond, \mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}} $\ast$\mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{mutex}}, const struct \mbox{\hyperlink{structtimespec}{timespec}} $\ast$abstime)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a105816a30aaf691997231de1be04f84e}{pthread\+\_\+cond\+\_\+signal}} (\mbox{\hyperlink{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}{pthread\+\_\+cond\+\_\+t}} $\ast$cond)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a16e8dfccfb672b9a29aa8afa6f0ce94e}{pthread\+\_\+cond\+\_\+broadcast}} (\mbox{\hyperlink{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}{pthread\+\_\+cond\+\_\+t}} $\ast$cond)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a9e906d879b9b8d757ebce40ef44f941e}{pthread\+\_\+setschedparam}} (\mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}} thread, int policy, const struct \mbox{\hyperlink{structsched__param}{sched\+\_\+param}} $\ast$param)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a3c0a5f0a269e7bd4381680c8f1deb0a3}{pthread\+\_\+getschedparam}} (\mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}} thread, int $\ast$policy, struct \mbox{\hyperlink{structsched__param}{sched\+\_\+param}} $\ast$param)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a700b6bade0a18d05513b9e6f0e03f460}{pthread\+\_\+setconcurrency}} (int)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_ae8013566ddc5a14102dc423c97614528}{pthread\+\_\+getconcurrency}} (void)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a2e37baf55dda04dd7abfa80083528480}{pthread\+\_\+rwlock\+\_\+init}} (\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\+\_\+rwlock\+\_\+t}} $\ast$lock, const \mbox{\hyperlink{pthread_8h_a516f3fa0225b050ba34327f6491638fd}{pthread\+\_\+rwlockattr\+\_\+t}} $\ast$attr)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a4bbc654f777f188db7b77e9f760aecd2}{pthread\+\_\+rwlock\+\_\+destroy}} (\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\+\_\+rwlock\+\_\+t}} $\ast$lock)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a3bd74d79519b333ec7bf44e5d6dfcf76}{pthread\+\_\+rwlock\+\_\+tryrdlock}} (\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\+\_\+rwlock\+\_\+t}} $\ast$)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_ae14bb7aa25d120e2ccc31ba50387400d}{pthread\+\_\+rwlock\+\_\+trywrlock}} (\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\+\_\+rwlock\+\_\+t}} $\ast$)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a37c859ff91371ed1dda62aa34f8d5ea7}{pthread\+\_\+rwlock\+\_\+rdlock}} (\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\+\_\+rwlock\+\_\+t}} $\ast$lock)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_ab1581386c8c21c16b76750f70c755407}{pthread\+\_\+rwlock\+\_\+timedrdlock}} (\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\+\_\+rwlock\+\_\+t}} $\ast$lock, const struct \mbox{\hyperlink{structtimespec}{timespec}} $\ast$abstime)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_afdceb6ceb25bbc31854c5108de55cdd5}{pthread\+\_\+rwlock\+\_\+wrlock}} (\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\+\_\+rwlock\+\_\+t}} $\ast$lock)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a52433d05535bc70a26f46f1740e93fbe}{pthread\+\_\+rwlock\+\_\+timedwrlock}} (\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\+\_\+rwlock\+\_\+t}} $\ast$lock, const struct \mbox{\hyperlink{structtimespec}{timespec}} $\ast$abstime)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a3f8864786d4efc639811a7f3b268d257}{pthread\+\_\+rwlock\+\_\+unlock}} (\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\+\_\+rwlock\+\_\+t}} $\ast$lock)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a01b24ca706f34301420c136c2f2768f9}{pthread\+\_\+rwlockattr\+\_\+init}} (\mbox{\hyperlink{pthread_8h_a516f3fa0225b050ba34327f6491638fd}{pthread\+\_\+rwlockattr\+\_\+t}} $\ast$attr)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_ab5485b6bd6bf581762c89c8157dcc40d}{pthread\+\_\+rwlockattr\+\_\+destroy}} (\mbox{\hyperlink{pthread_8h_a516f3fa0225b050ba34327f6491638fd}{pthread\+\_\+rwlockattr\+\_\+t}} $\ast$attr)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a035376244a23895053db5911eee94037}{pthread\+\_\+rwlockattr\+\_\+getpshared}} (const \mbox{\hyperlink{pthread_8h_a516f3fa0225b050ba34327f6491638fd}{pthread\+\_\+rwlockattr\+\_\+t}} $\ast$attr, int $\ast$pshared)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a76b5925cab830955d7c974dc93710135}{pthread\+\_\+rwlockattr\+\_\+setpshared}} (\mbox{\hyperlink{pthread_8h_a516f3fa0225b050ba34327f6491638fd}{pthread\+\_\+rwlockattr\+\_\+t}} $\ast$attr, int pshared)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a8d7893d132fcbfb75cc83f71dc610301}{pthread\+\_\+kill}} (\mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}} thread, int sig)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a7ca8ca573c6417dc157dbd75112b97e1}{pthread\+\_\+mutexattr\+\_\+setkind\+\_\+np}} (\mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}} $\ast$attr, int kind)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_aac08d02d9bf0c624c97b63842e5364cf}{pthread\+\_\+mutexattr\+\_\+getkind\+\_\+np}} (\mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}} $\ast$attr, int $\ast$kind)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a97256a2a3a17c8a01649e3ed6a226303}{pthread\+\_\+delay\+\_\+np}} (struct \mbox{\hyperlink{structtimespec}{timespec}} $\ast$interval)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a5eaa89ddb2f49f3c0aabb9b02af1c41a}{pthread\+\_\+num\+\_\+processors\+\_\+np}} (void)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} unsigned \+\_\+\+\_\+int64 \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a7334d010cbf7ba9793e15ead3e2a3ca7}{pthread\+\_\+getunique\+\_\+np}} (\mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}} thread)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a54447dac6247f871b997016b234368bc}{pthread\+\_\+win32\+\_\+process\+\_\+attach\+\_\+np}} (void)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a1e5681f9bf4379e816c6910669da3d22}{pthread\+\_\+win32\+\_\+process\+\_\+detach\+\_\+np}} (void)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a8b51f50b2c482fdad5f3c954a16d9b42}{pthread\+\_\+win32\+\_\+thread\+\_\+attach\+\_\+np}} (void)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_af2dc3c1a6301d39e16416731d2ceda8b}{pthread\+\_\+win32\+\_\+thread\+\_\+detach\+\_\+np}} (void)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_ae657dd834dde0b40712219adc2a98ce1}{pthread\+\_\+win32\+\_\+test\+\_\+features\+\_\+np}} (int)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} void $\ast$\mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_afd4e052d762360f6559914c865831758}{pthread\+\_\+timechange\+\_\+handler\+\_\+np}} (void $\ast$)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} \mbox{\hyperlink{pthread_8h_ab521aa5010fb1afb801a899a55569e03}{HANDLE}} \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a301e894a99c332d3894c2db179a73176}{pthread\+\_\+getw32threadhandle\+\_\+np}} (\mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}} thread)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} \mbox{\hyperlink{pthread_8h_aa39b39d94407451a6ec0226479db68cf}{DWORD}} \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a408a4c644acff58249ecb78085c8b39c}{pthread\+\_\+getw32threadid\+\_\+np}} (\mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}} thread)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a143d9645c5fd1237c00bffdeb95e5d83}{pthread\+Cancelable\+Wait}} (\mbox{\hyperlink{pthread_8h_ab521aa5010fb1afb801a899a55569e03}{HANDLE}} wait\+Handle)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a6271587898b5432c811f84fb100e6297}{pthread\+Cancelable\+Timed\+Wait}} (\mbox{\hyperlink{pthread_8h_ab521aa5010fb1afb801a899a55569e03}{HANDLE}} wait\+Handle, \mbox{\hyperlink{pthread_8h_aa39b39d94407451a6ec0226479db68cf}{DWORD}} timeout)
+\item 
+\mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} \mbox{\hyperlink{pthread_8h_aa39b39d94407451a6ec0226479db68cf}{DWORD}} \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} \mbox{\hyperlink{pthread_8h_a0f3375320c170b991305596a32e1cf59}{ptw32\+\_\+get\+\_\+exception\+\_\+services\+\_\+code}} (void)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{宏定义说明}
+\mbox{\Hypertarget{pthread_8h_aaed1be6d92ad89e540313db1e4dbdcc1}\label{pthread_8h_aaed1be6d92ad89e540313db1e4dbdcc1}} 
+\index{pthread.h@{pthread.h}!\_\_CLEANUP\_C@{\_\_CLEANUP\_C}}
+\index{\_\_CLEANUP\_C@{\_\_CLEANUP\_C}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{\_\_CLEANUP\_C}{\_\_CLEANUP\_C}}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+CLEANUP\+\_\+C}
+
+\mbox{\Hypertarget{pthread_8h_a1888bb32a3fab081911db6d9b4dd3168}\label{pthread_8h_a1888bb32a3fab081911db6d9b4dd3168}} 
+\index{pthread.h@{pthread.h}!\_POSIX\_BARRIERS@{\_POSIX\_BARRIERS}}
+\index{\_POSIX\_BARRIERS@{\_POSIX\_BARRIERS}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{\_POSIX\_BARRIERS}{\_POSIX\_BARRIERS}}
+{\footnotesize\ttfamily \#define \+\_\+\+POSIX\+\_\+\+BARRIERS~200809L}
+
+\mbox{\Hypertarget{pthread_8h_a0de534c83bc64084bd72a2af38c38fc4}\label{pthread_8h_a0de534c83bc64084bd72a2af38c38fc4}} 
+\index{pthread.h@{pthread.h}!\_POSIX\_READER\_WRITER\_LOCKS@{\_POSIX\_READER\_WRITER\_LOCKS}}
+\index{\_POSIX\_READER\_WRITER\_LOCKS@{\_POSIX\_READER\_WRITER\_LOCKS}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{\_POSIX\_READER\_WRITER\_LOCKS}{\_POSIX\_READER\_WRITER\_LOCKS}}
+{\footnotesize\ttfamily \#define \+\_\+\+POSIX\+\_\+\+READER\+\_\+\+WRITER\+\_\+\+LOCKS~200809L}
+
+\mbox{\Hypertarget{pthread_8h_a3463f30f1c9e21a1771c73ed61fa8526}\label{pthread_8h_a3463f30f1c9e21a1771c73ed61fa8526}} 
+\index{pthread.h@{pthread.h}!\_POSIX\_SEM\_NSEMS\_MAX@{\_POSIX\_SEM\_NSEMS\_MAX}}
+\index{\_POSIX\_SEM\_NSEMS\_MAX@{\_POSIX\_SEM\_NSEMS\_MAX}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{\_POSIX\_SEM\_NSEMS\_MAX}{\_POSIX\_SEM\_NSEMS\_MAX}}
+{\footnotesize\ttfamily \#define \+\_\+\+POSIX\+\_\+\+SEM\+\_\+\+NSEMS\+\_\+\+MAX~256}
+
+\mbox{\Hypertarget{pthread_8h_a190812c14fc01d39aad9a8f8259a4656}\label{pthread_8h_a190812c14fc01d39aad9a8f8259a4656}} 
+\index{pthread.h@{pthread.h}!\_POSIX\_SEM\_VALUE\_MAX@{\_POSIX\_SEM\_VALUE\_MAX}}
+\index{\_POSIX\_SEM\_VALUE\_MAX@{\_POSIX\_SEM\_VALUE\_MAX}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{\_POSIX\_SEM\_VALUE\_MAX}{\_POSIX\_SEM\_VALUE\_MAX}}
+{\footnotesize\ttfamily \#define \+\_\+\+POSIX\+\_\+\+SEM\+\_\+\+VALUE\+\_\+\+MAX~32767}
+
+\mbox{\Hypertarget{pthread_8h_ad022064435f5624d1112e6dded65456a}\label{pthread_8h_ad022064435f5624d1112e6dded65456a}} 
+\index{pthread.h@{pthread.h}!\_POSIX\_SPIN\_LOCKS@{\_POSIX\_SPIN\_LOCKS}}
+\index{\_POSIX\_SPIN\_LOCKS@{\_POSIX\_SPIN\_LOCKS}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{\_POSIX\_SPIN\_LOCKS}{\_POSIX\_SPIN\_LOCKS}}
+{\footnotesize\ttfamily \#define \+\_\+\+POSIX\+\_\+\+SPIN\+\_\+\+LOCKS~200809L}
+
+\mbox{\Hypertarget{pthread_8h_ae4859a1b4149bcd791a3af45d6ff5a4d}\label{pthread_8h_ae4859a1b4149bcd791a3af45d6ff5a4d}} 
+\index{pthread.h@{pthread.h}!\_POSIX\_THREAD\_ATTR\_STACKADDR@{\_POSIX\_THREAD\_ATTR\_STACKADDR}}
+\index{\_POSIX\_THREAD\_ATTR\_STACKADDR@{\_POSIX\_THREAD\_ATTR\_STACKADDR}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{\_POSIX\_THREAD\_ATTR\_STACKADDR}{\_POSIX\_THREAD\_ATTR\_STACKADDR}}
+{\footnotesize\ttfamily \#define \+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+ATTR\+\_\+\+STACKADDR~-\/1}
+
+\mbox{\Hypertarget{pthread_8h_aba151d9d724809f6582df29e5fc32214}\label{pthread_8h_aba151d9d724809f6582df29e5fc32214}} 
+\index{pthread.h@{pthread.h}!\_POSIX\_THREAD\_ATTR\_STACKSIZE@{\_POSIX\_THREAD\_ATTR\_STACKSIZE}}
+\index{\_POSIX\_THREAD\_ATTR\_STACKSIZE@{\_POSIX\_THREAD\_ATTR\_STACKSIZE}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{\_POSIX\_THREAD\_ATTR\_STACKSIZE}{\_POSIX\_THREAD\_ATTR\_STACKSIZE}}
+{\footnotesize\ttfamily \#define \+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+ATTR\+\_\+\+STACKSIZE~200809L}
+
+\mbox{\Hypertarget{pthread_8h_ab1dcb8bed4f0f3540e278a4932223ade}\label{pthread_8h_ab1dcb8bed4f0f3540e278a4932223ade}} 
+\index{pthread.h@{pthread.h}!\_POSIX\_THREAD\_DESTRUCTOR\_ITERATIONS@{\_POSIX\_THREAD\_DESTRUCTOR\_ITERATIONS}}
+\index{\_POSIX\_THREAD\_DESTRUCTOR\_ITERATIONS@{\_POSIX\_THREAD\_DESTRUCTOR\_ITERATIONS}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{\_POSIX\_THREAD\_DESTRUCTOR\_ITERATIONS}{\_POSIX\_THREAD\_DESTRUCTOR\_ITERATIONS}}
+{\footnotesize\ttfamily \#define \+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+DESTRUCTOR\+\_\+\+ITERATIONS~4}
+
+\mbox{\Hypertarget{pthread_8h_acfe1124183f47eb0a395e9115446ad51}\label{pthread_8h_acfe1124183f47eb0a395e9115446ad51}} 
+\index{pthread.h@{pthread.h}!\_POSIX\_THREAD\_KEYS\_MAX@{\_POSIX\_THREAD\_KEYS\_MAX}}
+\index{\_POSIX\_THREAD\_KEYS\_MAX@{\_POSIX\_THREAD\_KEYS\_MAX}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{\_POSIX\_THREAD\_KEYS\_MAX}{\_POSIX\_THREAD\_KEYS\_MAX}}
+{\footnotesize\ttfamily \#define \+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+KEYS\+\_\+\+MAX~128}
+
+\mbox{\Hypertarget{pthread_8h_a28aec623eccedfe65e0debaa9069c9f4}\label{pthread_8h_a28aec623eccedfe65e0debaa9069c9f4}} 
+\index{pthread.h@{pthread.h}!\_POSIX\_THREAD\_PRIO\_INHERIT@{\_POSIX\_THREAD\_PRIO\_INHERIT}}
+\index{\_POSIX\_THREAD\_PRIO\_INHERIT@{\_POSIX\_THREAD\_PRIO\_INHERIT}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{\_POSIX\_THREAD\_PRIO\_INHERIT}{\_POSIX\_THREAD\_PRIO\_INHERIT}}
+{\footnotesize\ttfamily \#define \+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+PRIO\+\_\+\+INHERIT~-\/1}
+
+\mbox{\Hypertarget{pthread_8h_afcec38ca6f262d40533c1913572c8de9}\label{pthread_8h_afcec38ca6f262d40533c1913572c8de9}} 
+\index{pthread.h@{pthread.h}!\_POSIX\_THREAD\_PRIO\_PROTECT@{\_POSIX\_THREAD\_PRIO\_PROTECT}}
+\index{\_POSIX\_THREAD\_PRIO\_PROTECT@{\_POSIX\_THREAD\_PRIO\_PROTECT}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{\_POSIX\_THREAD\_PRIO\_PROTECT}{\_POSIX\_THREAD\_PRIO\_PROTECT}}
+{\footnotesize\ttfamily \#define \+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+PRIO\+\_\+\+PROTECT~-\/1}
+
+\mbox{\Hypertarget{pthread_8h_a77dd793eebe0421a728236adc79e18e1}\label{pthread_8h_a77dd793eebe0421a728236adc79e18e1}} 
+\index{pthread.h@{pthread.h}!\_POSIX\_THREAD\_PRIORITY\_SCHEDULING@{\_POSIX\_THREAD\_PRIORITY\_SCHEDULING}}
+\index{\_POSIX\_THREAD\_PRIORITY\_SCHEDULING@{\_POSIX\_THREAD\_PRIORITY\_SCHEDULING}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{\_POSIX\_THREAD\_PRIORITY\_SCHEDULING}{\_POSIX\_THREAD\_PRIORITY\_SCHEDULING}}
+{\footnotesize\ttfamily \#define \+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+PRIORITY\+\_\+\+SCHEDULING~-\/1}
+
+\mbox{\Hypertarget{pthread_8h_a95523afb162efd2b5eadde6122e00de6}\label{pthread_8h_a95523afb162efd2b5eadde6122e00de6}} 
+\index{pthread.h@{pthread.h}!\_POSIX\_THREAD\_PROCESS\_SHARED@{\_POSIX\_THREAD\_PROCESS\_SHARED}}
+\index{\_POSIX\_THREAD\_PROCESS\_SHARED@{\_POSIX\_THREAD\_PROCESS\_SHARED}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{\_POSIX\_THREAD\_PROCESS\_SHARED}{\_POSIX\_THREAD\_PROCESS\_SHARED}}
+{\footnotesize\ttfamily \#define \+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+PROCESS\+\_\+\+SHARED~-\/1}
+
+\mbox{\Hypertarget{pthread_8h_ade059a4eb8c07d70a146f0e49181509f}\label{pthread_8h_ade059a4eb8c07d70a146f0e49181509f}} 
+\index{pthread.h@{pthread.h}!\_POSIX\_THREAD\_SAFE\_FUNCTIONS@{\_POSIX\_THREAD\_SAFE\_FUNCTIONS}}
+\index{\_POSIX\_THREAD\_SAFE\_FUNCTIONS@{\_POSIX\_THREAD\_SAFE\_FUNCTIONS}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{\_POSIX\_THREAD\_SAFE\_FUNCTIONS}{\_POSIX\_THREAD\_SAFE\_FUNCTIONS}}
+{\footnotesize\ttfamily \#define \+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+SAFE\+\_\+\+FUNCTIONS~200809L}
+
+\mbox{\Hypertarget{pthread_8h_a4b941a84a6ba25b666a6127b88598fec}\label{pthread_8h_a4b941a84a6ba25b666a6127b88598fec}} 
+\index{pthread.h@{pthread.h}!\_POSIX\_THREAD\_THREADS\_MAX@{\_POSIX\_THREAD\_THREADS\_MAX}}
+\index{\_POSIX\_THREAD\_THREADS\_MAX@{\_POSIX\_THREAD\_THREADS\_MAX}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{\_POSIX\_THREAD\_THREADS\_MAX}{\_POSIX\_THREAD\_THREADS\_MAX}}
+{\footnotesize\ttfamily \#define \+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+THREADS\+\_\+\+MAX~64}
+
+\mbox{\Hypertarget{pthread_8h_a5e89527a7c4b94907d559a975d5850ce}\label{pthread_8h_a5e89527a7c4b94907d559a975d5850ce}} 
+\index{pthread.h@{pthread.h}!\_POSIX\_THREADS@{\_POSIX\_THREADS}}
+\index{\_POSIX\_THREADS@{\_POSIX\_THREADS}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{\_POSIX\_THREADS}{\_POSIX\_THREADS}}
+{\footnotesize\ttfamily \#define \+\_\+\+POSIX\+\_\+\+THREADS~200809L}
+
+\mbox{\Hypertarget{pthread_8h_a60786f3d097f22d55e9c364ec3d019a8}\label{pthread_8h_a60786f3d097f22d55e9c364ec3d019a8}} 
+\index{pthread.h@{pthread.h}!\_TIMESPEC\_DEFINED@{\_TIMESPEC\_DEFINED}}
+\index{\_TIMESPEC\_DEFINED@{\_TIMESPEC\_DEFINED}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{\_TIMESPEC\_DEFINED}{\_TIMESPEC\_DEFINED}}
+{\footnotesize\ttfamily \#define \+\_\+\+TIMESPEC\+\_\+\+DEFINED}
+
+\mbox{\Hypertarget{pthread_8h_aa39b39d94407451a6ec0226479db68cf}\label{pthread_8h_aa39b39d94407451a6ec0226479db68cf}} 
+\index{pthread.h@{pthread.h}!DWORD@{DWORD}}
+\index{DWORD@{DWORD}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{DWORD}{DWORD}}
+{\footnotesize\ttfamily \#define DWORD~unsigned long}
+
+\mbox{\Hypertarget{pthread_8h_a55cc70ce0ba661298f3c412095dfeeb6}\label{pthread_8h_a55cc70ce0ba661298f3c412095dfeeb6}} 
+\index{pthread.h@{pthread.h}!EDEADLK@{EDEADLK}}
+\index{EDEADLK@{EDEADLK}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{EDEADLK}{EDEADLK}}
+{\footnotesize\ttfamily \#define EDEADLK~36     /$\ast$ This is the value in MSVC. $\ast$/}
+
+\mbox{\Hypertarget{pthread_8h_a43785b9969e0bd1af532dbde06c5540b}\label{pthread_8h_a43785b9969e0bd1af532dbde06c5540b}} 
+\index{pthread.h@{pthread.h}!ENOSYS@{ENOSYS}}
+\index{ENOSYS@{ENOSYS}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{ENOSYS}{ENOSYS}}
+{\footnotesize\ttfamily \#define ENOSYS~140     /$\ast$ Semi-\/arbitrary value $\ast$/}
+
+\mbox{\Hypertarget{pthread_8h_ac69acb8e9e296867cc3f9fdf4223d05d}\label{pthread_8h_ac69acb8e9e296867cc3f9fdf4223d05d}} 
+\index{pthread.h@{pthread.h}!ENOTRECOVERABLE@{ENOTRECOVERABLE}}
+\index{ENOTRECOVERABLE@{ENOTRECOVERABLE}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{ENOTRECOVERABLE}{ENOTRECOVERABLE}}
+{\footnotesize\ttfamily \#define ENOTRECOVERABLE~44}
+
+\mbox{\Hypertarget{pthread_8h_a91457bbf35f0f1085619a99423bb1f33}\label{pthread_8h_a91457bbf35f0f1085619a99423bb1f33}} 
+\index{pthread.h@{pthread.h}!ENOTSUP@{ENOTSUP}}
+\index{ENOTSUP@{ENOTSUP}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{ENOTSUP}{ENOTSUP}}
+{\footnotesize\ttfamily \#define ENOTSUP~48   /$\ast$ This is the value in Solaris. $\ast$/}
+
+\mbox{\Hypertarget{pthread_8h_af3f021d87caf24b44761036578c7beae}\label{pthread_8h_af3f021d87caf24b44761036578c7beae}} 
+\index{pthread.h@{pthread.h}!EOWNERDEAD@{EOWNERDEAD}}
+\index{EOWNERDEAD@{EOWNERDEAD}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{EOWNERDEAD}{EOWNERDEAD}}
+{\footnotesize\ttfamily \#define EOWNERDEAD~43}
+
+\mbox{\Hypertarget{pthread_8h_a597718e59a8fc9c4d4ab63f5a34e28b1}\label{pthread_8h_a597718e59a8fc9c4d4ab63f5a34e28b1}} 
+\index{pthread.h@{pthread.h}!ETIMEDOUT@{ETIMEDOUT}}
+\index{ETIMEDOUT@{ETIMEDOUT}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{ETIMEDOUT}{ETIMEDOUT}}
+{\footnotesize\ttfamily \#define ETIMEDOUT~10060 /$\ast$ Same as WSAETIMEDOUT $\ast$/}
+
+\mbox{\Hypertarget{pthread_8h_ab521aa5010fb1afb801a899a55569e03}\label{pthread_8h_ab521aa5010fb1afb801a899a55569e03}} 
+\index{pthread.h@{pthread.h}!HANDLE@{HANDLE}}
+\index{HANDLE@{HANDLE}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{HANDLE}{HANDLE}}
+{\footnotesize\ttfamily \#define HANDLE~void $\ast$}
+
+\mbox{\Hypertarget{pthread_8h_a9bed4a5724ac5d5ff76fbe36f0851323}\label{pthread_8h_a9bed4a5724ac5d5ff76fbe36f0851323}} 
+\index{pthread.h@{pthread.h}!HAVE\_STRUCT\_TIMESPEC@{HAVE\_STRUCT\_TIMESPEC}}
+\index{HAVE\_STRUCT\_TIMESPEC@{HAVE\_STRUCT\_TIMESPEC}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{HAVE\_STRUCT\_TIMESPEC}{HAVE\_STRUCT\_TIMESPEC}}
+{\footnotesize\ttfamily \#define HAVE\+\_\+\+STRUCT\+\_\+\+TIMESPEC}
+
+\mbox{\Hypertarget{pthread_8h_a17ddda04a6c1ee32116c49c85e2ac4ae}\label{pthread_8h_a17ddda04a6c1ee32116c49c85e2ac4ae}} 
+\index{pthread.h@{pthread.h}!PTHREAD\_CANCELED@{PTHREAD\_CANCELED}}
+\index{PTHREAD\_CANCELED@{PTHREAD\_CANCELED}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{PTHREAD\_CANCELED}{PTHREAD\_CANCELED}}
+{\footnotesize\ttfamily \#define PTHREAD\+\_\+\+CANCELED~((void $\ast$)(\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}) -\/1)}
+
+\mbox{\Hypertarget{pthread_8h_af361719ce5f44312eea2e58b24522698}\label{pthread_8h_af361719ce5f44312eea2e58b24522698}} 
+\index{pthread.h@{pthread.h}!pthread\_cleanup\_pop@{pthread\_cleanup\_pop}}
+\index{pthread\_cleanup\_pop@{pthread\_cleanup\_pop}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_cleanup\_pop}{pthread\_cleanup\_pop}}
+{\footnotesize\ttfamily \#define pthread\+\_\+cleanup\+\_\+pop(\begin{DoxyParamCaption}\item[{}]{\+\_\+execute }\end{DoxyParamCaption})}
+
+{\bfseries 值\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{            (void) \mbox{\hyperlink{pthread_8h_a3c90e1d0ffae6dedd248f39abc6a581d}{ptw32\_pop\_cleanup}}( \_execute ); \(\backslash\)}
+\DoxyCodeLine{        \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{pthread_8h_a2465afe6031ce3a3453bfc1a0bfcaad1}\label{pthread_8h_a2465afe6031ce3a3453bfc1a0bfcaad1}} 
+\index{pthread.h@{pthread.h}!pthread\_cleanup\_push@{pthread\_cleanup\_push}}
+\index{pthread\_cleanup\_push@{pthread\_cleanup\_push}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_cleanup\_push}{pthread\_cleanup\_push}}
+{\footnotesize\ttfamily \#define pthread\+\_\+cleanup\+\_\+push(\begin{DoxyParamCaption}\item[{}]{\+\_\+rout,  }\item[{}]{\+\_\+arg }\end{DoxyParamCaption})}
+
+{\bfseries 值\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{        \{ \(\backslash\)}
+\DoxyCodeLine{            ptw32\_cleanup\_t     \_cleanup; \mbox{\hyperlink{pthread_8h_af4e43660b45ebecd4fdc536edea22d4c}{\(\backslash\)}}}
+\DoxyCodeLine{\mbox{\hyperlink{pthread_8h_af4e43660b45ebecd4fdc536edea22d4c}{            \(\backslash\)}}}
+\DoxyCodeLine{\mbox{\hyperlink{pthread_8h_af4e43660b45ebecd4fdc536edea22d4c}{            ptw32\_push\_cleanup}}( \&\_cleanup, (ptw32\_cleanup\_callback\_t) (\_rout), (\_arg) ); \(\backslash\)}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{pthread_8h_aa7b867fe46f3660283fcb356c4fcbbf0}\label{pthread_8h_aa7b867fe46f3660283fcb356c4fcbbf0}} 
+\index{pthread.h@{pthread.h}!PTHREAD\_COND\_INITIALIZER@{PTHREAD\_COND\_INITIALIZER}}
+\index{PTHREAD\_COND\_INITIALIZER@{PTHREAD\_COND\_INITIALIZER}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{PTHREAD\_COND\_INITIALIZER}{PTHREAD\_COND\_INITIALIZER}}
+{\footnotesize\ttfamily \#define PTHREAD\+\_\+\+COND\+\_\+\+INITIALIZER~((\mbox{\hyperlink{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}{pthread\+\_\+cond\+\_\+t}})(\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}) -\/1)}
+
+\mbox{\Hypertarget{pthread_8h_a1d96b13a4ba5975d724c5fe13788a957}\label{pthread_8h_a1d96b13a4ba5975d724c5fe13788a957}} 
+\index{pthread.h@{pthread.h}!PTHREAD\_DESTRUCTOR\_ITERATIONS@{PTHREAD\_DESTRUCTOR\_ITERATIONS}}
+\index{PTHREAD\_DESTRUCTOR\_ITERATIONS@{PTHREAD\_DESTRUCTOR\_ITERATIONS}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{PTHREAD\_DESTRUCTOR\_ITERATIONS}{PTHREAD\_DESTRUCTOR\_ITERATIONS}}
+{\footnotesize\ttfamily \#define PTHREAD\+\_\+\+DESTRUCTOR\+\_\+\+ITERATIONS~\mbox{\hyperlink{pthread_8h_ab1dcb8bed4f0f3540e278a4932223ade}{\+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+DESTRUCTOR\+\_\+\+ITERATIONS}}}
+
+\mbox{\Hypertarget{pthread_8h_ace0d1f1ec8dd8eadd769ff324153599d}\label{pthread_8h_ace0d1f1ec8dd8eadd769ff324153599d}} 
+\index{pthread.h@{pthread.h}!PTHREAD\_ERRORCHECK\_MUTEX\_INITIALIZER@{PTHREAD\_ERRORCHECK\_MUTEX\_INITIALIZER}}
+\index{PTHREAD\_ERRORCHECK\_MUTEX\_INITIALIZER@{PTHREAD\_ERRORCHECK\_MUTEX\_INITIALIZER}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{PTHREAD\_ERRORCHECK\_MUTEX\_INITIALIZER}{PTHREAD\_ERRORCHECK\_MUTEX\_INITIALIZER}}
+{\footnotesize\ttfamily \#define PTHREAD\+\_\+\+ERRORCHECK\+\_\+\+MUTEX\+\_\+\+INITIALIZER~((\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}})(\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}) -\/3)}
+
+\mbox{\Hypertarget{pthread_8h_acff148607c8534833336adb03d3f7b5b}\label{pthread_8h_acff148607c8534833336adb03d3f7b5b}} 
+\index{pthread.h@{pthread.h}!PTHREAD\_ERRORCHECK\_MUTEX\_INITIALIZER\_NP@{PTHREAD\_ERRORCHECK\_MUTEX\_INITIALIZER\_NP}}
+\index{PTHREAD\_ERRORCHECK\_MUTEX\_INITIALIZER\_NP@{PTHREAD\_ERRORCHECK\_MUTEX\_INITIALIZER\_NP}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{PTHREAD\_ERRORCHECK\_MUTEX\_INITIALIZER\_NP}{PTHREAD\_ERRORCHECK\_MUTEX\_INITIALIZER\_NP}}
+{\footnotesize\ttfamily \#define PTHREAD\+\_\+\+ERRORCHECK\+\_\+\+MUTEX\+\_\+\+INITIALIZER\+\_\+\+NP~\mbox{\hyperlink{pthread_8h_ace0d1f1ec8dd8eadd769ff324153599d}{PTHREAD\+\_\+\+ERRORCHECK\+\_\+\+MUTEX\+\_\+\+INITIALIZER}}}
+
+\mbox{\Hypertarget{pthread_8h_a0a23e66e087bcf5c253b9b2746f19a64}\label{pthread_8h_a0a23e66e087bcf5c253b9b2746f19a64}} 
+\index{pthread.h@{pthread.h}!PTHREAD\_KEYS\_MAX@{PTHREAD\_KEYS\_MAX}}
+\index{PTHREAD\_KEYS\_MAX@{PTHREAD\_KEYS\_MAX}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{PTHREAD\_KEYS\_MAX}{PTHREAD\_KEYS\_MAX}}
+{\footnotesize\ttfamily \#define PTHREAD\+\_\+\+KEYS\+\_\+\+MAX~\mbox{\hyperlink{pthread_8h_acfe1124183f47eb0a395e9115446ad51}{\+\_\+\+POSIX\+\_\+\+THREAD\+\_\+\+KEYS\+\_\+\+MAX}}}
+
+\mbox{\Hypertarget{pthread_8h_a84e55100366a6a8338a2af3b3f279686}\label{pthread_8h_a84e55100366a6a8338a2af3b3f279686}} 
+\index{pthread.h@{pthread.h}!PTHREAD\_MUTEX\_INITIALIZER@{PTHREAD\_MUTEX\_INITIALIZER}}
+\index{PTHREAD\_MUTEX\_INITIALIZER@{PTHREAD\_MUTEX\_INITIALIZER}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{PTHREAD\_MUTEX\_INITIALIZER}{PTHREAD\_MUTEX\_INITIALIZER}}
+{\footnotesize\ttfamily \#define PTHREAD\+\_\+\+MUTEX\+\_\+\+INITIALIZER~((\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}})(\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}) -\/1)}
+
+\mbox{\Hypertarget{pthread_8h_a59e22497b65fc305ddb5cea8b4990b51}\label{pthread_8h_a59e22497b65fc305ddb5cea8b4990b51}} 
+\index{pthread.h@{pthread.h}!PTHREAD\_ONCE\_INIT@{PTHREAD\_ONCE\_INIT}}
+\index{PTHREAD\_ONCE\_INIT@{PTHREAD\_ONCE\_INIT}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{PTHREAD\_ONCE\_INIT}{PTHREAD\_ONCE\_INIT}}
+{\footnotesize\ttfamily \#define PTHREAD\+\_\+\+ONCE\+\_\+\+INIT~\{ \mbox{\hyperlink{pthread_8h_a06fc87d81c62e9abb8790b6e5713c55ba343b8b7b252f706fa206f1ca5f07ef34}{PTW32\+\_\+\+FALSE}}, 0, 0, 0\}}
+
+\mbox{\Hypertarget{pthread_8h_a93186a549e7d7aace381171097da1823}\label{pthread_8h_a93186a549e7d7aace381171097da1823}} 
+\index{pthread.h@{pthread.h}!PTHREAD\_RECURSIVE\_MUTEX\_INITIALIZER@{PTHREAD\_RECURSIVE\_MUTEX\_INITIALIZER}}
+\index{PTHREAD\_RECURSIVE\_MUTEX\_INITIALIZER@{PTHREAD\_RECURSIVE\_MUTEX\_INITIALIZER}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{PTHREAD\_RECURSIVE\_MUTEX\_INITIALIZER}{PTHREAD\_RECURSIVE\_MUTEX\_INITIALIZER}}
+{\footnotesize\ttfamily \#define PTHREAD\+\_\+\+RECURSIVE\+\_\+\+MUTEX\+\_\+\+INITIALIZER~((\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}})(\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}) -\/2)}
+
+\mbox{\Hypertarget{pthread_8h_ac2663553b072167a403521db5b4e82c4}\label{pthread_8h_ac2663553b072167a403521db5b4e82c4}} 
+\index{pthread.h@{pthread.h}!PTHREAD\_RECURSIVE\_MUTEX\_INITIALIZER\_NP@{PTHREAD\_RECURSIVE\_MUTEX\_INITIALIZER\_NP}}
+\index{PTHREAD\_RECURSIVE\_MUTEX\_INITIALIZER\_NP@{PTHREAD\_RECURSIVE\_MUTEX\_INITIALIZER\_NP}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{PTHREAD\_RECURSIVE\_MUTEX\_INITIALIZER\_NP}{PTHREAD\_RECURSIVE\_MUTEX\_INITIALIZER\_NP}}
+{\footnotesize\ttfamily \#define PTHREAD\+\_\+\+RECURSIVE\+\_\+\+MUTEX\+\_\+\+INITIALIZER\+\_\+\+NP~\mbox{\hyperlink{pthread_8h_a93186a549e7d7aace381171097da1823}{PTHREAD\+\_\+\+RECURSIVE\+\_\+\+MUTEX\+\_\+\+INITIALIZER}}}
+
+\mbox{\Hypertarget{pthread_8h_aa92fd7b492a8a5b31b2f8b3b6039c622}\label{pthread_8h_aa92fd7b492a8a5b31b2f8b3b6039c622}} 
+\index{pthread.h@{pthread.h}!PTHREAD\_RWLOCK\_INITIALIZER@{PTHREAD\_RWLOCK\_INITIALIZER}}
+\index{PTHREAD\_RWLOCK\_INITIALIZER@{PTHREAD\_RWLOCK\_INITIALIZER}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{PTHREAD\_RWLOCK\_INITIALIZER}{PTHREAD\_RWLOCK\_INITIALIZER}}
+{\footnotesize\ttfamily \#define PTHREAD\+\_\+\+RWLOCK\+\_\+\+INITIALIZER~((\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\+\_\+rwlock\+\_\+t}})(\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}) -\/1)}
+
+\mbox{\Hypertarget{pthread_8h_ad4620a03c26b4119bf642a7f53df4fb2}\label{pthread_8h_ad4620a03c26b4119bf642a7f53df4fb2}} 
+\index{pthread.h@{pthread.h}!PTHREAD\_SPINLOCK\_INITIALIZER@{PTHREAD\_SPINLOCK\_INITIALIZER}}
+\index{PTHREAD\_SPINLOCK\_INITIALIZER@{PTHREAD\_SPINLOCK\_INITIALIZER}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{PTHREAD\_SPINLOCK\_INITIALIZER}{PTHREAD\_SPINLOCK\_INITIALIZER}}
+{\footnotesize\ttfamily \#define PTHREAD\+\_\+\+SPINLOCK\+\_\+\+INITIALIZER~((\mbox{\hyperlink{pthread_8h_a8481ca14ebb4b48ccc42d2c805e75e54}{pthread\+\_\+spinlock\+\_\+t}})(\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}) -\/1)}
+
+\mbox{\Hypertarget{pthread_8h_a8b3dc1c5c1a165d6143b1dce950e8266}\label{pthread_8h_a8b3dc1c5c1a165d6143b1dce950e8266}} 
+\index{pthread.h@{pthread.h}!PTHREAD\_STACK\_MIN@{PTHREAD\_STACK\_MIN}}
+\index{PTHREAD\_STACK\_MIN@{PTHREAD\_STACK\_MIN}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{PTHREAD\_STACK\_MIN}{PTHREAD\_STACK\_MIN}}
+{\footnotesize\ttfamily \#define PTHREAD\+\_\+\+STACK\+\_\+\+MIN~0}
+
+\mbox{\Hypertarget{pthread_8h_ab8f25dec585d6255fcf40b67db66c1c5}\label{pthread_8h_ab8f25dec585d6255fcf40b67db66c1c5}} 
+\index{pthread.h@{pthread.h}!PTHREAD\_THREADS\_MAX@{PTHREAD\_THREADS\_MAX}}
+\index{PTHREAD\_THREADS\_MAX@{PTHREAD\_THREADS\_MAX}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{PTHREAD\_THREADS\_MAX}{PTHREAD\_THREADS\_MAX}}
+{\footnotesize\ttfamily \#define PTHREAD\+\_\+\+THREADS\+\_\+\+MAX~2019}
+
+\mbox{\Hypertarget{pthread_8h_a996d25b6b70ab34a0e763bc3cdc0e7f1}\label{pthread_8h_a996d25b6b70ab34a0e763bc3cdc0e7f1}} 
+\index{pthread.h@{pthread.h}!PTW32\_\_DWORD\_DEF@{PTW32\_\_DWORD\_DEF}}
+\index{PTW32\_\_DWORD\_DEF@{PTW32\_\_DWORD\_DEF}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{PTW32\_\_DWORD\_DEF}{PTW32\_\_DWORD\_DEF}}
+{\footnotesize\ttfamily \#define PTW32\+\_\+\+\_\+\+DWORD\+\_\+\+DEF}
+
+\mbox{\Hypertarget{pthread_8h_abe1404a828ff592d1a80eb8476fa55c4}\label{pthread_8h_abe1404a828ff592d1a80eb8476fa55c4}} 
+\index{pthread.h@{pthread.h}!PTW32\_\_HANDLE\_DEF@{PTW32\_\_HANDLE\_DEF}}
+\index{PTW32\_\_HANDLE\_DEF@{PTW32\_\_HANDLE\_DEF}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{PTW32\_\_HANDLE\_DEF}{PTW32\_\_HANDLE\_DEF}}
+{\footnotesize\ttfamily \#define PTW32\+\_\+\+\_\+\+HANDLE\+\_\+\+DEF}
+
+\mbox{\Hypertarget{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}\label{pthread_8h_aed6a26b76b742adc34fb676a8ad07190}} 
+\index{pthread.h@{pthread.h}!PTW32\_CDECL@{PTW32\_CDECL}}
+\index{PTW32\_CDECL@{PTW32\_CDECL}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{PTW32\_CDECL}{PTW32\_CDECL}}
+{\footnotesize\ttfamily \#define PTW32\+\_\+\+CDECL~\+\_\+\+\_\+cdecl}
+
+\mbox{\Hypertarget{pthread_8h_aad097c5dd36151a8af6b69109151b370}\label{pthread_8h_aad097c5dd36151a8af6b69109151b370}} 
+\index{pthread.h@{pthread.h}!PTW32\_DLLPORT@{PTW32\_DLLPORT}}
+\index{PTW32\_DLLPORT@{PTW32\_DLLPORT}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{PTW32\_DLLPORT}{PTW32\_DLLPORT}}
+{\footnotesize\ttfamily \#define PTW32\+\_\+\+DLLPORT~\+\_\+\+\_\+declspec (dllimport)}
+
+\mbox{\Hypertarget{pthread_8h_a8c5fc343ad580694988ca020042049b1}\label{pthread_8h_a8c5fc343ad580694988ca020042049b1}} 
+\index{pthread.h@{pthread.h}!PTW32\_LEVEL@{PTW32\_LEVEL}}
+\index{PTW32\_LEVEL@{PTW32\_LEVEL}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{PTW32\_LEVEL}{PTW32\_LEVEL}}
+{\footnotesize\ttfamily \#define PTW32\+\_\+\+LEVEL~\mbox{\hyperlink{pthread_8h_aee5322b749059b286658c7730a60e1df}{PTW32\+\_\+\+LEVEL\+\_\+\+MAX}}}
+
+\mbox{\Hypertarget{pthread_8h_aee5322b749059b286658c7730a60e1df}\label{pthread_8h_aee5322b749059b286658c7730a60e1df}} 
+\index{pthread.h@{pthread.h}!PTW32\_LEVEL\_MAX@{PTW32\_LEVEL\_MAX}}
+\index{PTW32\_LEVEL\_MAX@{PTW32\_LEVEL\_MAX}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{PTW32\_LEVEL\_MAX}{PTW32\_LEVEL\_MAX}}
+{\footnotesize\ttfamily \#define PTW32\+\_\+\+LEVEL\+\_\+\+MAX~3}
+
+\mbox{\Hypertarget{pthread_8h_a22fe6e6a32292e2fc265a73d241e8c2c}\label{pthread_8h_a22fe6e6a32292e2fc265a73d241e8c2c}} 
+\index{pthread.h@{pthread.h}!PTW32\_VERSION@{PTW32\_VERSION}}
+\index{PTW32\_VERSION@{PTW32\_VERSION}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{PTW32\_VERSION}{PTW32\_VERSION}}
+{\footnotesize\ttfamily \#define PTW32\+\_\+\+VERSION~2,9,1,0}
+
+\mbox{\Hypertarget{pthread_8h_a5f55e3c8d3c8722604f4a6c71a483391}\label{pthread_8h_a5f55e3c8d3c8722604f4a6c71a483391}} 
+\index{pthread.h@{pthread.h}!PTW32\_VERSION\_STRING@{PTW32\_VERSION\_STRING}}
+\index{PTW32\_VERSION\_STRING@{PTW32\_VERSION\_STRING}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{PTW32\_VERSION\_STRING}{PTW32\_VERSION\_STRING}}
+{\footnotesize\ttfamily \#define PTW32\+\_\+\+VERSION\+\_\+\+STRING~\char`\"{}2, 9, 1, 0\textbackslash{}0\char`\"{}}
+
+\mbox{\Hypertarget{pthread_8h_a829c888ff8820c37384a5531577cea33}\label{pthread_8h_a829c888ff8820c37384a5531577cea33}} 
+\index{pthread.h@{pthread.h}!SEM\_NSEMS\_MAX@{SEM\_NSEMS\_MAX}}
+\index{SEM\_NSEMS\_MAX@{SEM\_NSEMS\_MAX}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{SEM\_NSEMS\_MAX}{SEM\_NSEMS\_MAX}}
+{\footnotesize\ttfamily \#define SEM\+\_\+\+NSEMS\+\_\+\+MAX~1024}
+
+\mbox{\Hypertarget{pthread_8h_a2961bb23950351c6b10976674c27ddaf}\label{pthread_8h_a2961bb23950351c6b10976674c27ddaf}} 
+\index{pthread.h@{pthread.h}!SEM\_VALUE\_MAX@{SEM\_VALUE\_MAX}}
+\index{SEM\_VALUE\_MAX@{SEM\_VALUE\_MAX}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{SEM\_VALUE\_MAX}{SEM\_VALUE\_MAX}}
+{\footnotesize\ttfamily \#define SEM\+\_\+\+VALUE\+\_\+\+MAX~INT\+\_\+\+MAX}
+
+\mbox{\Hypertarget{pthread_8h_a927f6ae16379576d638006c7498ac5d7}\label{pthread_8h_a927f6ae16379576d638006c7498ac5d7}} 
+\index{pthread.h@{pthread.h}!SIG\_BLOCK@{SIG\_BLOCK}}
+\index{SIG\_BLOCK@{SIG\_BLOCK}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{SIG\_BLOCK}{SIG\_BLOCK}}
+{\footnotesize\ttfamily \#define SIG\+\_\+\+BLOCK~0}
+
+\mbox{\Hypertarget{pthread_8h_a37750b78b7ae75fe02ad26e70f6cc845}\label{pthread_8h_a37750b78b7ae75fe02ad26e70f6cc845}} 
+\index{pthread.h@{pthread.h}!SIG\_SETMASK@{SIG\_SETMASK}}
+\index{SIG\_SETMASK@{SIG\_SETMASK}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{SIG\_SETMASK}{SIG\_SETMASK}}
+{\footnotesize\ttfamily \#define SIG\+\_\+\+SETMASK~2}
+
+\mbox{\Hypertarget{pthread_8h_a5fcd73313a63dac2cc7eb3b654215250}\label{pthread_8h_a5fcd73313a63dac2cc7eb3b654215250}} 
+\index{pthread.h@{pthread.h}!SIG\_UNBLOCK@{SIG\_UNBLOCK}}
+\index{SIG\_UNBLOCK@{SIG\_UNBLOCK}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{SIG\_UNBLOCK}{SIG\_UNBLOCK}}
+{\footnotesize\ttfamily \#define SIG\+\_\+\+UNBLOCK~1}
+
+
+
+\doxysubsection{类型定义说明}
+\mbox{\Hypertarget{pthread_8h_a7db277988eef706b066958f84981b47b}\label{pthread_8h_a7db277988eef706b066958f84981b47b}} 
+\index{pthread.h@{pthread.h}!pthread\_attr\_t@{pthread\_attr\_t}}
+\index{pthread\_attr\_t@{pthread\_attr\_t}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_attr\_t}{pthread\_attr\_t}}
+{\footnotesize\ttfamily typedef struct pthread\+\_\+attr\+\_\+t\+\_\+$\ast$ \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}}}
+
+\mbox{\Hypertarget{pthread_8h_a9cd526c5e963f8f6b9fc31adbfb49608}\label{pthread_8h_a9cd526c5e963f8f6b9fc31adbfb49608}} 
+\index{pthread.h@{pthread.h}!pthread\_barrier\_t@{pthread\_barrier\_t}}
+\index{pthread\_barrier\_t@{pthread\_barrier\_t}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_barrier\_t}{pthread\_barrier\_t}}
+{\footnotesize\ttfamily typedef struct pthread\+\_\+barrier\+\_\+t\+\_\+$\ast$ \mbox{\hyperlink{pthread_8h_a9cd526c5e963f8f6b9fc31adbfb49608}{pthread\+\_\+barrier\+\_\+t}}}
+
+\mbox{\Hypertarget{pthread_8h_a6c1bb0434bca06a34fee71ee8965dd34}\label{pthread_8h_a6c1bb0434bca06a34fee71ee8965dd34}} 
+\index{pthread.h@{pthread.h}!pthread\_barrierattr\_t@{pthread\_barrierattr\_t}}
+\index{pthread\_barrierattr\_t@{pthread\_barrierattr\_t}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_barrierattr\_t}{pthread\_barrierattr\_t}}
+{\footnotesize\ttfamily typedef struct pthread\+\_\+barrierattr\+\_\+t\+\_\+$\ast$ \mbox{\hyperlink{pthread_8h_a6c1bb0434bca06a34fee71ee8965dd34}{pthread\+\_\+barrierattr\+\_\+t}}}
+
+\mbox{\Hypertarget{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}\label{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}} 
+\index{pthread.h@{pthread.h}!pthread\_cond\_t@{pthread\_cond\_t}}
+\index{pthread\_cond\_t@{pthread\_cond\_t}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_cond\_t}{pthread\_cond\_t}}
+{\footnotesize\ttfamily typedef struct pthread\+\_\+cond\+\_\+t\+\_\+$\ast$ \mbox{\hyperlink{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}{pthread\+\_\+cond\+\_\+t}}}
+
+\mbox{\Hypertarget{pthread_8h_ab77e7203e4ab594ba14d1f92969d19ef}\label{pthread_8h_ab77e7203e4ab594ba14d1f92969d19ef}} 
+\index{pthread.h@{pthread.h}!pthread\_condattr\_t@{pthread\_condattr\_t}}
+\index{pthread\_condattr\_t@{pthread\_condattr\_t}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_condattr\_t}{pthread\_condattr\_t}}
+{\footnotesize\ttfamily typedef struct pthread\+\_\+condattr\+\_\+t\+\_\+$\ast$ \mbox{\hyperlink{pthread_8h_ab77e7203e4ab594ba14d1f92969d19ef}{pthread\+\_\+condattr\+\_\+t}}}
+
+\mbox{\Hypertarget{pthread_8h_ad0376f110bc69993ad8bee03134fbd7d}\label{pthread_8h_ad0376f110bc69993ad8bee03134fbd7d}} 
+\index{pthread.h@{pthread.h}!pthread\_key\_t@{pthread\_key\_t}}
+\index{pthread\_key\_t@{pthread\_key\_t}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_key\_t}{pthread\_key\_t}}
+{\footnotesize\ttfamily typedef struct pthread\+\_\+key\+\_\+t\+\_\+$\ast$ \mbox{\hyperlink{pthread_8h_ad0376f110bc69993ad8bee03134fbd7d}{pthread\+\_\+key\+\_\+t}}}
+
+\mbox{\Hypertarget{pthread_8h_a688434dc7e5ec519465492a35681ed53}\label{pthread_8h_a688434dc7e5ec519465492a35681ed53}} 
+\index{pthread.h@{pthread.h}!pthread\_mutex\_t@{pthread\_mutex\_t}}
+\index{pthread\_mutex\_t@{pthread\_mutex\_t}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_mutex\_t}{pthread\_mutex\_t}}
+{\footnotesize\ttfamily typedef struct pthread\+\_\+mutex\+\_\+t\+\_\+$\ast$ \mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}}}
+
+\mbox{\Hypertarget{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}\label{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}} 
+\index{pthread.h@{pthread.h}!pthread\_mutexattr\_t@{pthread\_mutexattr\_t}}
+\index{pthread\_mutexattr\_t@{pthread\_mutexattr\_t}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_mutexattr\_t}{pthread\_mutexattr\_t}}
+{\footnotesize\ttfamily typedef struct pthread\+\_\+mutexattr\+\_\+t\+\_\+$\ast$ \mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}}}
+
+\mbox{\Hypertarget{pthread_8h_a1068306e6f9855c0284651364e10b3f5}\label{pthread_8h_a1068306e6f9855c0284651364e10b3f5}} 
+\index{pthread.h@{pthread.h}!pthread\_once\_t@{pthread\_once\_t}}
+\index{pthread\_once\_t@{pthread\_once\_t}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_once\_t}{pthread\_once\_t}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structpthread__once__t__}{pthread\+\_\+once\+\_\+t\+\_\+}} \mbox{\hyperlink{pthread_8h_a1068306e6f9855c0284651364e10b3f5}{pthread\+\_\+once\+\_\+t}}}
+
+\mbox{\Hypertarget{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}\label{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}} 
+\index{pthread.h@{pthread.h}!pthread\_rwlock\_t@{pthread\_rwlock\_t}}
+\index{pthread\_rwlock\_t@{pthread\_rwlock\_t}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_rwlock\_t}{pthread\_rwlock\_t}}
+{\footnotesize\ttfamily typedef struct pthread\+\_\+rwlock\+\_\+t\+\_\+$\ast$ \mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\+\_\+rwlock\+\_\+t}}}
+
+\mbox{\Hypertarget{pthread_8h_a516f3fa0225b050ba34327f6491638fd}\label{pthread_8h_a516f3fa0225b050ba34327f6491638fd}} 
+\index{pthread.h@{pthread.h}!pthread\_rwlockattr\_t@{pthread\_rwlockattr\_t}}
+\index{pthread\_rwlockattr\_t@{pthread\_rwlockattr\_t}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_rwlockattr\_t}{pthread\_rwlockattr\_t}}
+{\footnotesize\ttfamily typedef struct pthread\+\_\+rwlockattr\+\_\+t\+\_\+$\ast$ \mbox{\hyperlink{pthread_8h_a516f3fa0225b050ba34327f6491638fd}{pthread\+\_\+rwlockattr\+\_\+t}}}
+
+\mbox{\Hypertarget{pthread_8h_a8481ca14ebb4b48ccc42d2c805e75e54}\label{pthread_8h_a8481ca14ebb4b48ccc42d2c805e75e54}} 
+\index{pthread.h@{pthread.h}!pthread\_spinlock\_t@{pthread\_spinlock\_t}}
+\index{pthread\_spinlock\_t@{pthread\_spinlock\_t}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_spinlock\_t}{pthread\_spinlock\_t}}
+{\footnotesize\ttfamily typedef struct pthread\+\_\+spinlock\+\_\+t\+\_\+$\ast$ \mbox{\hyperlink{pthread_8h_a8481ca14ebb4b48ccc42d2c805e75e54}{pthread\+\_\+spinlock\+\_\+t}}}
+
+\mbox{\Hypertarget{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}\label{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}} 
+\index{pthread.h@{pthread.h}!pthread\_t@{pthread\_t}}
+\index{pthread\_t@{pthread\_t}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_t}{pthread\_t}}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{structptw32__handle__t}{ptw32\+\_\+handle\+\_\+t}} \mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}}}
+
+\mbox{\Hypertarget{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}\label{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}} 
+\index{pthread.h@{pthread.h}!PTW32\_CDECL@{PTW32\_CDECL}}
+\index{PTW32\_CDECL@{PTW32\_CDECL}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{PTW32\_CDECL}{PTW32\_CDECL}}
+{\footnotesize\ttfamily typedef void($\ast$ PTW32\+\_\+\+CDECL) (void $\ast$)}
+
+\mbox{\Hypertarget{pthread_8h_a444ab682d004460bed44c47b66143731}\label{pthread_8h_a444ab682d004460bed44c47b66143731}} 
+\index{pthread.h@{pthread.h}!ptw32\_cleanup\_t@{ptw32\_cleanup\_t}}
+\index{ptw32\_cleanup\_t@{ptw32\_cleanup\_t}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{ptw32\_cleanup\_t}{ptw32\_cleanup\_t}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structptw32__cleanup__t}{ptw32\+\_\+cleanup\+\_\+t}} \mbox{\hyperlink{structptw32__cleanup__t}{ptw32\+\_\+cleanup\+\_\+t}}}
+
+
+
+\doxysubsection{枚举类型说明}
+\mbox{\Hypertarget{pthread_8h_a06fc87d81c62e9abb8790b6e5713c55b}\label{pthread_8h_a06fc87d81c62e9abb8790b6e5713c55b}} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily anonymous enum}
+
+\begin{DoxyEnumFields}{枚举值}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTW32\_FALSE@{PTW32\_FALSE}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTW32\_FALSE@{PTW32\_FALSE}}}\mbox{\Hypertarget{pthread_8h_a06fc87d81c62e9abb8790b6e5713c55ba343b8b7b252f706fa206f1ca5f07ef34}\label{pthread_8h_a06fc87d81c62e9abb8790b6e5713c55ba343b8b7b252f706fa206f1ca5f07ef34}} 
+PTW32\+\_\+\+FALSE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTW32\_TRUE@{PTW32\_TRUE}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTW32\_TRUE@{PTW32\_TRUE}}}\mbox{\Hypertarget{pthread_8h_a06fc87d81c62e9abb8790b6e5713c55ba70bc7f92c20752f710d06c078d88d1ab}\label{pthread_8h_a06fc87d81c62e9abb8790b6e5713c55ba70bc7f92c20752f710d06c078d88d1ab}} 
+PTW32\+\_\+\+TRUE&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7}\label{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7}} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily anonymous enum}
+
+\begin{DoxyEnumFields}{枚举值}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_CREATE\_JOINABLE@{PTHREAD\_CREATE\_JOINABLE}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_CREATE\_JOINABLE@{PTHREAD\_CREATE\_JOINABLE}}}\mbox{\Hypertarget{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7aedde61df7c9c0c7589106ab45c7980a5}\label{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7aedde61df7c9c0c7589106ab45c7980a5}} 
+PTHREAD\+\_\+\+CREATE\+\_\+\+JOINABLE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_CREATE\_DETACHED@{PTHREAD\_CREATE\_DETACHED}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_CREATE\_DETACHED@{PTHREAD\_CREATE\_DETACHED}}}\mbox{\Hypertarget{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a2512d11dd7fa9db00e8ae247e21344a5}\label{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a2512d11dd7fa9db00e8ae247e21344a5}} 
+PTHREAD\+\_\+\+CREATE\+\_\+\+DETACHED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_INHERIT\_SCHED@{PTHREAD\_INHERIT\_SCHED}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_INHERIT\_SCHED@{PTHREAD\_INHERIT\_SCHED}}}\mbox{\Hypertarget{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a63e1b1953bee944d07218f02021d0bcb}\label{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a63e1b1953bee944d07218f02021d0bcb}} 
+PTHREAD\+\_\+\+INHERIT\+\_\+\+SCHED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_EXPLICIT\_SCHED@{PTHREAD\_EXPLICIT\_SCHED}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_EXPLICIT\_SCHED@{PTHREAD\_EXPLICIT\_SCHED}}}\mbox{\Hypertarget{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7ad04777d52cc78357fb1d29f309e801e8}\label{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7ad04777d52cc78357fb1d29f309e801e8}} 
+PTHREAD\+\_\+\+EXPLICIT\+\_\+\+SCHED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_SCOPE\_PROCESS@{PTHREAD\_SCOPE\_PROCESS}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_SCOPE\_PROCESS@{PTHREAD\_SCOPE\_PROCESS}}}\mbox{\Hypertarget{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a7592df21cac6b1e35bec267f6c733cd6}\label{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a7592df21cac6b1e35bec267f6c733cd6}} 
+PTHREAD\+\_\+\+SCOPE\+\_\+\+PROCESS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_SCOPE\_SYSTEM@{PTHREAD\_SCOPE\_SYSTEM}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_SCOPE\_SYSTEM@{PTHREAD\_SCOPE\_SYSTEM}}}\mbox{\Hypertarget{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7adf110376f12d0244378522922f3c313f}\label{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7adf110376f12d0244378522922f3c313f}} 
+PTHREAD\+\_\+\+SCOPE\+\_\+\+SYSTEM&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_CANCEL\_ENABLE@{PTHREAD\_CANCEL\_ENABLE}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_CANCEL\_ENABLE@{PTHREAD\_CANCEL\_ENABLE}}}\mbox{\Hypertarget{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a0107de44d6bf8ca8f270853d3079f2ce}\label{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a0107de44d6bf8ca8f270853d3079f2ce}} 
+PTHREAD\+\_\+\+CANCEL\+\_\+\+ENABLE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_CANCEL\_DISABLE@{PTHREAD\_CANCEL\_DISABLE}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_CANCEL\_DISABLE@{PTHREAD\_CANCEL\_DISABLE}}}\mbox{\Hypertarget{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7aa2bc8caabe477c20eb2437b04a7ca951}\label{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7aa2bc8caabe477c20eb2437b04a7ca951}} 
+PTHREAD\+\_\+\+CANCEL\+\_\+\+DISABLE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_CANCEL\_ASYNCHRONOUS@{PTHREAD\_CANCEL\_ASYNCHRONOUS}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_CANCEL\_ASYNCHRONOUS@{PTHREAD\_CANCEL\_ASYNCHRONOUS}}}\mbox{\Hypertarget{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7afde2fe11618067c09922faa311f5d053}\label{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7afde2fe11618067c09922faa311f5d053}} 
+PTHREAD\+\_\+\+CANCEL\+\_\+\+ASYNCHRONOUS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_CANCEL\_DEFERRED@{PTHREAD\_CANCEL\_DEFERRED}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_CANCEL\_DEFERRED@{PTHREAD\_CANCEL\_DEFERRED}}}\mbox{\Hypertarget{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7accf936610764207fb210dc3e2053a40f}\label{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7accf936610764207fb210dc3e2053a40f}} 
+PTHREAD\+\_\+\+CANCEL\+\_\+\+DEFERRED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_PROCESS\_PRIVATE@{PTHREAD\_PROCESS\_PRIVATE}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_PROCESS\_PRIVATE@{PTHREAD\_PROCESS\_PRIVATE}}}\mbox{\Hypertarget{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a4b597774e6a4da2b7572ecaba5d78f7b}\label{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a4b597774e6a4da2b7572ecaba5d78f7b}} 
+PTHREAD\+\_\+\+PROCESS\+\_\+\+PRIVATE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_PROCESS\_SHARED@{PTHREAD\_PROCESS\_SHARED}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_PROCESS\_SHARED@{PTHREAD\_PROCESS\_SHARED}}}\mbox{\Hypertarget{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a08295b03be77cfee92360b82e4f07963}\label{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a08295b03be77cfee92360b82e4f07963}} 
+PTHREAD\+\_\+\+PROCESS\+\_\+\+SHARED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_MUTEX\_STALLED@{PTHREAD\_MUTEX\_STALLED}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_MUTEX\_STALLED@{PTHREAD\_MUTEX\_STALLED}}}\mbox{\Hypertarget{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7aa2eecfff4ef9e6d1cd72b06ebb80479c}\label{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7aa2eecfff4ef9e6d1cd72b06ebb80479c}} 
+PTHREAD\+\_\+\+MUTEX\+\_\+\+STALLED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_MUTEX\_ROBUST@{PTHREAD\_MUTEX\_ROBUST}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_MUTEX\_ROBUST@{PTHREAD\_MUTEX\_ROBUST}}}\mbox{\Hypertarget{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a1d15b780c0738efc4f9892521664061d}\label{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7a1d15b780c0738efc4f9892521664061d}} 
+PTHREAD\+\_\+\+MUTEX\+\_\+\+ROBUST&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_BARRIER\_SERIAL\_THREAD@{PTHREAD\_BARRIER\_SERIAL\_THREAD}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_BARRIER\_SERIAL\_THREAD@{PTHREAD\_BARRIER\_SERIAL\_THREAD}}}\mbox{\Hypertarget{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7ab8cb5055533bdf0fe1d122a77cf0354c}\label{pthread_8h_adf764cbdea00d65edcd07bb9953ad2b7ab8cb5055533bdf0fe1d122a77cf0354c}} 
+PTHREAD\+\_\+\+BARRIER\+\_\+\+SERIAL\+\_\+\+THREAD&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{pthread_8h_a99fb83031ce9923c84392b4e92f956b5}\label{pthread_8h_a99fb83031ce9923c84392b4e92f956b5}} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily anonymous enum}
+
+\begin{DoxyEnumFields}{枚举值}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_MUTEX\_FAST\_NP@{PTHREAD\_MUTEX\_FAST\_NP}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_MUTEX\_FAST\_NP@{PTHREAD\_MUTEX\_FAST\_NP}}}\mbox{\Hypertarget{pthread_8h_a99fb83031ce9923c84392b4e92f956b5a01edd504ac7d7b5f9de62ff00890609b}\label{pthread_8h_a99fb83031ce9923c84392b4e92f956b5a01edd504ac7d7b5f9de62ff00890609b}} 
+PTHREAD\+\_\+\+MUTEX\+\_\+\+FAST\+\_\+\+NP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_MUTEX\_RECURSIVE\_NP@{PTHREAD\_MUTEX\_RECURSIVE\_NP}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_MUTEX\_RECURSIVE\_NP@{PTHREAD\_MUTEX\_RECURSIVE\_NP}}}\mbox{\Hypertarget{pthread_8h_a99fb83031ce9923c84392b4e92f956b5acce072a3d99dd4cfad8a609089f34f15}\label{pthread_8h_a99fb83031ce9923c84392b4e92f956b5acce072a3d99dd4cfad8a609089f34f15}} 
+PTHREAD\+\_\+\+MUTEX\+\_\+\+RECURSIVE\+\_\+\+NP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_MUTEX\_ERRORCHECK\_NP@{PTHREAD\_MUTEX\_ERRORCHECK\_NP}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_MUTEX\_ERRORCHECK\_NP@{PTHREAD\_MUTEX\_ERRORCHECK\_NP}}}\mbox{\Hypertarget{pthread_8h_a99fb83031ce9923c84392b4e92f956b5ac4347bd162505ca1224fe0fc3f48327d}\label{pthread_8h_a99fb83031ce9923c84392b4e92f956b5ac4347bd162505ca1224fe0fc3f48327d}} 
+PTHREAD\+\_\+\+MUTEX\+\_\+\+ERRORCHECK\+\_\+\+NP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_MUTEX\_TIMED\_NP@{PTHREAD\_MUTEX\_TIMED\_NP}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_MUTEX\_TIMED\_NP@{PTHREAD\_MUTEX\_TIMED\_NP}}}\mbox{\Hypertarget{pthread_8h_a99fb83031ce9923c84392b4e92f956b5a7de470be3659bf2cb4220ac081e93dc8}\label{pthread_8h_a99fb83031ce9923c84392b4e92f956b5a7de470be3659bf2cb4220ac081e93dc8}} 
+PTHREAD\+\_\+\+MUTEX\+\_\+\+TIMED\+\_\+\+NP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_MUTEX\_ADAPTIVE\_NP@{PTHREAD\_MUTEX\_ADAPTIVE\_NP}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_MUTEX\_ADAPTIVE\_NP@{PTHREAD\_MUTEX\_ADAPTIVE\_NP}}}\mbox{\Hypertarget{pthread_8h_a99fb83031ce9923c84392b4e92f956b5a9e8ac90bbb9d4737d345b2de6bdbf3de}\label{pthread_8h_a99fb83031ce9923c84392b4e92f956b5a9e8ac90bbb9d4737d345b2de6bdbf3de}} 
+PTHREAD\+\_\+\+MUTEX\+\_\+\+ADAPTIVE\+\_\+\+NP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_MUTEX\_NORMAL@{PTHREAD\_MUTEX\_NORMAL}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_MUTEX\_NORMAL@{PTHREAD\_MUTEX\_NORMAL}}}\mbox{\Hypertarget{pthread_8h_a99fb83031ce9923c84392b4e92f956b5abea5d963222d69ea123978b50dfe8a7a}\label{pthread_8h_a99fb83031ce9923c84392b4e92f956b5abea5d963222d69ea123978b50dfe8a7a}} 
+PTHREAD\+\_\+\+MUTEX\+\_\+\+NORMAL&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_MUTEX\_RECURSIVE@{PTHREAD\_MUTEX\_RECURSIVE}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_MUTEX\_RECURSIVE@{PTHREAD\_MUTEX\_RECURSIVE}}}\mbox{\Hypertarget{pthread_8h_a99fb83031ce9923c84392b4e92f956b5a02e48297eea4a6d3c2b8182d73691475}\label{pthread_8h_a99fb83031ce9923c84392b4e92f956b5a02e48297eea4a6d3c2b8182d73691475}} 
+PTHREAD\+\_\+\+MUTEX\+\_\+\+RECURSIVE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_MUTEX\_ERRORCHECK@{PTHREAD\_MUTEX\_ERRORCHECK}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_MUTEX\_ERRORCHECK@{PTHREAD\_MUTEX\_ERRORCHECK}}}\mbox{\Hypertarget{pthread_8h_a99fb83031ce9923c84392b4e92f956b5a3a806dca7fa5a505456e978151a3cc95}\label{pthread_8h_a99fb83031ce9923c84392b4e92f956b5a3a806dca7fa5a505456e978151a3cc95}} 
+PTHREAD\+\_\+\+MUTEX\+\_\+\+ERRORCHECK&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTHREAD\_MUTEX\_DEFAULT@{PTHREAD\_MUTEX\_DEFAULT}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTHREAD\_MUTEX\_DEFAULT@{PTHREAD\_MUTEX\_DEFAULT}}}\mbox{\Hypertarget{pthread_8h_a99fb83031ce9923c84392b4e92f956b5aed70ed455310e0cc0a964ea462e27d31}\label{pthread_8h_a99fb83031ce9923c84392b4e92f956b5aed70ed455310e0cc0a964ea462e27d31}} 
+PTHREAD\+\_\+\+MUTEX\+\_\+\+DEFAULT&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{pthread_8h_a4a774bc048b9769b9542886175bba8cb}\label{pthread_8h_a4a774bc048b9769b9542886175bba8cb}} 
+\index{pthread.h@{pthread.h}!ptw32\_features@{ptw32\_features}}
+\index{ptw32\_features@{ptw32\_features}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{ptw32\_features}{ptw32\_features}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{pthread_8h_a4a774bc048b9769b9542886175bba8cb}{ptw32\+\_\+features}}}
+
+\begin{DoxyEnumFields}{枚举值}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTW32\_SYSTEM\_INTERLOCKED\_COMPARE\_EXCHANGE@{PTW32\_SYSTEM\_INTERLOCKED\_COMPARE\_EXCHANGE}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTW32\_SYSTEM\_INTERLOCKED\_COMPARE\_EXCHANGE@{PTW32\_SYSTEM\_INTERLOCKED\_COMPARE\_EXCHANGE}}}\mbox{\Hypertarget{pthread_8h_a4a774bc048b9769b9542886175bba8cba5070a13a659cc8de3d9902af9503961a}\label{pthread_8h_a4a774bc048b9769b9542886175bba8cba5070a13a659cc8de3d9902af9503961a}} 
+PTW32\+\_\+\+SYSTEM\+\_\+\+INTERLOCKED\+\_\+\+COMPARE\+\_\+\+EXCHANGE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PTW32\_ALERTABLE\_ASYNC\_CANCEL@{PTW32\_ALERTABLE\_ASYNC\_CANCEL}!pthread.h@{pthread.h}}\index{pthread.h@{pthread.h}!PTW32\_ALERTABLE\_ASYNC\_CANCEL@{PTW32\_ALERTABLE\_ASYNC\_CANCEL}}}\mbox{\Hypertarget{pthread_8h_a4a774bc048b9769b9542886175bba8cba5633aa8ed9c08c70740d274c9aa85538}\label{pthread_8h_a4a774bc048b9769b9542886175bba8cba5633aa8ed9c08c70740d274c9aa85538}} 
+PTW32\+\_\+\+ALERTABLE\+\_\+\+ASYNC\+\_\+\+CANCEL&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{pthread_8h_a50335580950b3c48323f0ed36a4ea96d}\label{pthread_8h_a50335580950b3c48323f0ed36a4ea96d}} 
+\index{pthread.h@{pthread.h}!pthread\_attr\_destroy@{pthread\_attr\_destroy}}
+\index{pthread\_attr\_destroy@{pthread\_attr\_destroy}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_attr\_destroy()}{pthread\_attr\_destroy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+attr\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$}]{attr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_ad6412a38f971d1902f205a8aeb2e327a}\label{pthread_8h_ad6412a38f971d1902f205a8aeb2e327a}} 
+\index{pthread.h@{pthread.h}!pthread\_attr\_getdetachstate@{pthread\_attr\_getdetachstate}}
+\index{pthread\_attr\_getdetachstate@{pthread\_attr\_getdetachstate}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_attr\_getdetachstate()}{pthread\_attr\_getdetachstate()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+attr\+\_\+getdetachstate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$}]{attr,  }\item[{int $\ast$}]{detachstate }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a2bc4e0f5a270f37414a5a18d627d839b}\label{pthread_8h_a2bc4e0f5a270f37414a5a18d627d839b}} 
+\index{pthread.h@{pthread.h}!pthread\_attr\_getinheritsched@{pthread\_attr\_getinheritsched}}
+\index{pthread\_attr\_getinheritsched@{pthread\_attr\_getinheritsched}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_attr\_getinheritsched()}{pthread\_attr\_getinheritsched()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+attr\+\_\+getinheritsched (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$}]{attr,  }\item[{int $\ast$}]{inheritsched }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a4a1db9aa4b0d70229991b0e061fdfe70}\label{pthread_8h_a4a1db9aa4b0d70229991b0e061fdfe70}} 
+\index{pthread.h@{pthread.h}!pthread\_attr\_getschedparam@{pthread\_attr\_getschedparam}}
+\index{pthread\_attr\_getschedparam@{pthread\_attr\_getschedparam}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_attr\_getschedparam()}{pthread\_attr\_getschedparam()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+attr\+\_\+getschedparam (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$}]{attr,  }\item[{struct \mbox{\hyperlink{structsched__param}{sched\+\_\+param}} $\ast$}]{param }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a7484fc9841befb18ad17b1ceac9e3efd}\label{pthread_8h_a7484fc9841befb18ad17b1ceac9e3efd}} 
+\index{pthread.h@{pthread.h}!pthread\_attr\_getschedpolicy@{pthread\_attr\_getschedpolicy}}
+\index{pthread\_attr\_getschedpolicy@{pthread\_attr\_getschedpolicy}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_attr\_getschedpolicy()}{pthread\_attr\_getschedpolicy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+attr\+\_\+getschedpolicy (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$}]{,  }\item[{int $\ast$}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_abd6135fcecf2fd9646a4e0aca85b2ab3}\label{pthread_8h_abd6135fcecf2fd9646a4e0aca85b2ab3}} 
+\index{pthread.h@{pthread.h}!pthread\_attr\_getscope@{pthread\_attr\_getscope}}
+\index{pthread\_attr\_getscope@{pthread\_attr\_getscope}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_attr\_getscope()}{pthread\_attr\_getscope()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+attr\+\_\+getscope (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$}]{,  }\item[{int $\ast$}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a8afdfd0a4371f1a37c4f5c3d1f97b7d4}\label{pthread_8h_a8afdfd0a4371f1a37c4f5c3d1f97b7d4}} 
+\index{pthread.h@{pthread.h}!pthread\_attr\_getstackaddr@{pthread\_attr\_getstackaddr}}
+\index{pthread\_attr\_getstackaddr@{pthread\_attr\_getstackaddr}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_attr\_getstackaddr()}{pthread\_attr\_getstackaddr()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+attr\+\_\+getstackaddr (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$}]{attr,  }\item[{void $\ast$$\ast$}]{stackaddr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a0eaa73e7811a82a8916749a2d093e3ee}\label{pthread_8h_a0eaa73e7811a82a8916749a2d093e3ee}} 
+\index{pthread.h@{pthread.h}!pthread\_attr\_getstacksize@{pthread\_attr\_getstacksize}}
+\index{pthread\_attr\_getstacksize@{pthread\_attr\_getstacksize}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_attr\_getstacksize()}{pthread\_attr\_getstacksize()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+attr\+\_\+getstacksize (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$}]{attr,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} $\ast$}]{stacksize }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a233ec381ddfac891f1180c492e265339}\label{pthread_8h_a233ec381ddfac891f1180c492e265339}} 
+\index{pthread.h@{pthread.h}!pthread\_attr\_init@{pthread\_attr\_init}}
+\index{pthread\_attr\_init@{pthread\_attr\_init}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_attr\_init()}{pthread\_attr\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+attr\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$}]{attr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_ab832983dc76a65ca3f0bdcef99a46c56}\label{pthread_8h_ab832983dc76a65ca3f0bdcef99a46c56}} 
+\index{pthread.h@{pthread.h}!pthread\_attr\_setdetachstate@{pthread\_attr\_setdetachstate}}
+\index{pthread\_attr\_setdetachstate@{pthread\_attr\_setdetachstate}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_attr\_setdetachstate()}{pthread\_attr\_setdetachstate()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+attr\+\_\+setdetachstate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$}]{attr,  }\item[{int}]{detachstate }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a42693136811c95c2b852cab01f7ae88c}\label{pthread_8h_a42693136811c95c2b852cab01f7ae88c}} 
+\index{pthread.h@{pthread.h}!pthread\_attr\_setinheritsched@{pthread\_attr\_setinheritsched}}
+\index{pthread\_attr\_setinheritsched@{pthread\_attr\_setinheritsched}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_attr\_setinheritsched()}{pthread\_attr\_setinheritsched()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+attr\+\_\+setinheritsched (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$}]{attr,  }\item[{int}]{inheritsched }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_acded755dff2e91a76e4619a73ddd7592}\label{pthread_8h_acded755dff2e91a76e4619a73ddd7592}} 
+\index{pthread.h@{pthread.h}!pthread\_attr\_setschedparam@{pthread\_attr\_setschedparam}}
+\index{pthread\_attr\_setschedparam@{pthread\_attr\_setschedparam}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_attr\_setschedparam()}{pthread\_attr\_setschedparam()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+attr\+\_\+setschedparam (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$}]{attr,  }\item[{const struct \mbox{\hyperlink{structsched__param}{sched\+\_\+param}} $\ast$}]{param }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a309bb60a0dce82095287c78bebc8c911}\label{pthread_8h_a309bb60a0dce82095287c78bebc8c911}} 
+\index{pthread.h@{pthread.h}!pthread\_attr\_setschedpolicy@{pthread\_attr\_setschedpolicy}}
+\index{pthread\_attr\_setschedpolicy@{pthread\_attr\_setschedpolicy}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_attr\_setschedpolicy()}{pthread\_attr\_setschedpolicy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+attr\+\_\+setschedpolicy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$}]{,  }\item[{int}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_afd31c956c8a0a321d2eba62d2689f6b1}\label{pthread_8h_afd31c956c8a0a321d2eba62d2689f6b1}} 
+\index{pthread.h@{pthread.h}!pthread\_attr\_setscope@{pthread\_attr\_setscope}}
+\index{pthread\_attr\_setscope@{pthread\_attr\_setscope}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_attr\_setscope()}{pthread\_attr\_setscope()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+attr\+\_\+setscope (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$}]{,  }\item[{int}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a922a32f3aeedcc20459a3dfabc9a201d}\label{pthread_8h_a922a32f3aeedcc20459a3dfabc9a201d}} 
+\index{pthread.h@{pthread.h}!pthread\_attr\_setstackaddr@{pthread\_attr\_setstackaddr}}
+\index{pthread\_attr\_setstackaddr@{pthread\_attr\_setstackaddr}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_attr\_setstackaddr()}{pthread\_attr\_setstackaddr()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+attr\+\_\+setstackaddr (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$}]{attr,  }\item[{void $\ast$}]{stackaddr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a03ca37cf80250af1a39e03ae937b5aae}\label{pthread_8h_a03ca37cf80250af1a39e03ae937b5aae}} 
+\index{pthread.h@{pthread.h}!pthread\_attr\_setstacksize@{pthread\_attr\_setstacksize}}
+\index{pthread\_attr\_setstacksize@{pthread\_attr\_setstacksize}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_attr\_setstacksize()}{pthread\_attr\_setstacksize()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+attr\+\_\+setstacksize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$}]{attr,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{stacksize }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a568823b9d1f1af8da415edc872b60acc}\label{pthread_8h_a568823b9d1f1af8da415edc872b60acc}} 
+\index{pthread.h@{pthread.h}!pthread\_barrier\_destroy@{pthread\_barrier\_destroy}}
+\index{pthread\_barrier\_destroy@{pthread\_barrier\_destroy}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_barrier\_destroy()}{pthread\_barrier\_destroy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+barrier\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a9cd526c5e963f8f6b9fc31adbfb49608}{pthread\+\_\+barrier\+\_\+t}} $\ast$}]{barrier }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a64383f18835ca6913c96b722864ed070}\label{pthread_8h_a64383f18835ca6913c96b722864ed070}} 
+\index{pthread.h@{pthread.h}!pthread\_barrier\_init@{pthread\_barrier\_init}}
+\index{pthread\_barrier\_init@{pthread\_barrier\_init}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_barrier\_init()}{pthread\_barrier\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+barrier\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a9cd526c5e963f8f6b9fc31adbfb49608}{pthread\+\_\+barrier\+\_\+t}} $\ast$}]{barrier,  }\item[{const \mbox{\hyperlink{pthread_8h_a6c1bb0434bca06a34fee71ee8965dd34}{pthread\+\_\+barrierattr\+\_\+t}} $\ast$}]{attr,  }\item[{unsigned int}]{count }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a1922825aab81d188e853c84c73a0bc34}\label{pthread_8h_a1922825aab81d188e853c84c73a0bc34}} 
+\index{pthread.h@{pthread.h}!pthread\_barrier\_wait@{pthread\_barrier\_wait}}
+\index{pthread\_barrier\_wait@{pthread\_barrier\_wait}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_barrier\_wait()}{pthread\_barrier\_wait()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+barrier\+\_\+wait (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a9cd526c5e963f8f6b9fc31adbfb49608}{pthread\+\_\+barrier\+\_\+t}} $\ast$}]{barrier }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_ae7b73c216e7ee2e7b381ea2ce49cc1b4}\label{pthread_8h_ae7b73c216e7ee2e7b381ea2ce49cc1b4}} 
+\index{pthread.h@{pthread.h}!pthread\_barrierattr\_destroy@{pthread\_barrierattr\_destroy}}
+\index{pthread\_barrierattr\_destroy@{pthread\_barrierattr\_destroy}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_barrierattr\_destroy()}{pthread\_barrierattr\_destroy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+barrierattr\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a6c1bb0434bca06a34fee71ee8965dd34}{pthread\+\_\+barrierattr\+\_\+t}} $\ast$}]{attr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a8d82645fc1e9de26b75cd1b1278d133a}\label{pthread_8h_a8d82645fc1e9de26b75cd1b1278d133a}} 
+\index{pthread.h@{pthread.h}!pthread\_barrierattr\_getpshared@{pthread\_barrierattr\_getpshared}}
+\index{pthread\_barrierattr\_getpshared@{pthread\_barrierattr\_getpshared}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_barrierattr\_getpshared()}{pthread\_barrierattr\_getpshared()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+barrierattr\+\_\+getpshared (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{pthread_8h_a6c1bb0434bca06a34fee71ee8965dd34}{pthread\+\_\+barrierattr\+\_\+t}} $\ast$}]{attr,  }\item[{int $\ast$}]{pshared }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a1def5c7cb6ca87b746ecea2e45b601dd}\label{pthread_8h_a1def5c7cb6ca87b746ecea2e45b601dd}} 
+\index{pthread.h@{pthread.h}!pthread\_barrierattr\_init@{pthread\_barrierattr\_init}}
+\index{pthread\_barrierattr\_init@{pthread\_barrierattr\_init}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_barrierattr\_init()}{pthread\_barrierattr\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+barrierattr\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a6c1bb0434bca06a34fee71ee8965dd34}{pthread\+\_\+barrierattr\+\_\+t}} $\ast$}]{attr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_ad9c1e49254c1bfb0270dcd6ddfc79adc}\label{pthread_8h_ad9c1e49254c1bfb0270dcd6ddfc79adc}} 
+\index{pthread.h@{pthread.h}!pthread\_barrierattr\_setpshared@{pthread\_barrierattr\_setpshared}}
+\index{pthread\_barrierattr\_setpshared@{pthread\_barrierattr\_setpshared}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_barrierattr\_setpshared()}{pthread\_barrierattr\_setpshared()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+barrierattr\+\_\+setpshared (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a6c1bb0434bca06a34fee71ee8965dd34}{pthread\+\_\+barrierattr\+\_\+t}} $\ast$}]{attr,  }\item[{int}]{pshared }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_aab4eb0a6a5be18d82421942dac137f30}\label{pthread_8h_aab4eb0a6a5be18d82421942dac137f30}} 
+\index{pthread.h@{pthread.h}!pthread\_cancel@{pthread\_cancel}}
+\index{pthread\_cancel@{pthread\_cancel}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_cancel()}{pthread\_cancel()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+cancel (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}}}]{thread }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a16e8dfccfb672b9a29aa8afa6f0ce94e}\label{pthread_8h_a16e8dfccfb672b9a29aa8afa6f0ce94e}} 
+\index{pthread.h@{pthread.h}!pthread\_cond\_broadcast@{pthread\_cond\_broadcast}}
+\index{pthread\_cond\_broadcast@{pthread\_cond\_broadcast}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_cond\_broadcast()}{pthread\_cond\_broadcast()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+cond\+\_\+broadcast (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}{pthread\+\_\+cond\+\_\+t}} $\ast$}]{cond }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_af4ede487c145c4669c5905c399ccee26}\label{pthread_8h_af4ede487c145c4669c5905c399ccee26}} 
+\index{pthread.h@{pthread.h}!pthread\_cond\_destroy@{pthread\_cond\_destroy}}
+\index{pthread\_cond\_destroy@{pthread\_cond\_destroy}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_cond\_destroy()}{pthread\_cond\_destroy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+cond\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}{pthread\+\_\+cond\+\_\+t}} $\ast$}]{cond }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_aef4d3338d205f245ebd83dd1c89211e6}\label{pthread_8h_aef4d3338d205f245ebd83dd1c89211e6}} 
+\index{pthread.h@{pthread.h}!pthread\_cond\_init@{pthread\_cond\_init}}
+\index{pthread\_cond\_init@{pthread\_cond\_init}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_cond\_init()}{pthread\_cond\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+cond\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}{pthread\+\_\+cond\+\_\+t}} $\ast$}]{cond,  }\item[{const \mbox{\hyperlink{pthread_8h_ab77e7203e4ab594ba14d1f92969d19ef}{pthread\+\_\+condattr\+\_\+t}} $\ast$}]{attr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a105816a30aaf691997231de1be04f84e}\label{pthread_8h_a105816a30aaf691997231de1be04f84e}} 
+\index{pthread.h@{pthread.h}!pthread\_cond\_signal@{pthread\_cond\_signal}}
+\index{pthread\_cond\_signal@{pthread\_cond\_signal}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_cond\_signal()}{pthread\_cond\_signal()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+cond\+\_\+signal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}{pthread\+\_\+cond\+\_\+t}} $\ast$}]{cond }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_af56c2145ec4faede0c8d518665f845d6}\label{pthread_8h_af56c2145ec4faede0c8d518665f845d6}} 
+\index{pthread.h@{pthread.h}!pthread\_cond\_timedwait@{pthread\_cond\_timedwait}}
+\index{pthread\_cond\_timedwait@{pthread\_cond\_timedwait}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_cond\_timedwait()}{pthread\_cond\_timedwait()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+cond\+\_\+timedwait (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}{pthread\+\_\+cond\+\_\+t}} $\ast$}]{cond,  }\item[{\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}} $\ast$}]{mutex,  }\item[{const struct \mbox{\hyperlink{structtimespec}{timespec}} $\ast$}]{abstime }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a9035020a597e6c45a28444e23a6f9772}\label{pthread_8h_a9035020a597e6c45a28444e23a6f9772}} 
+\index{pthread.h@{pthread.h}!pthread\_cond\_wait@{pthread\_cond\_wait}}
+\index{pthread\_cond\_wait@{pthread\_cond\_wait}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_cond\_wait()}{pthread\_cond\_wait()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+cond\+\_\+wait (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a29d0f7be62d3b804190e3dfb45fdcf9c}{pthread\+\_\+cond\+\_\+t}} $\ast$}]{cond,  }\item[{\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}} $\ast$}]{mutex }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_aceabe31f8e012a02be4f1da7c6496f8d}\label{pthread_8h_aceabe31f8e012a02be4f1da7c6496f8d}} 
+\index{pthread.h@{pthread.h}!pthread\_condattr\_destroy@{pthread\_condattr\_destroy}}
+\index{pthread\_condattr\_destroy@{pthread\_condattr\_destroy}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_condattr\_destroy()}{pthread\_condattr\_destroy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+condattr\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_ab77e7203e4ab594ba14d1f92969d19ef}{pthread\+\_\+condattr\+\_\+t}} $\ast$}]{attr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a5a0b03a00065b02ea13f8085d09f9d13}\label{pthread_8h_a5a0b03a00065b02ea13f8085d09f9d13}} 
+\index{pthread.h@{pthread.h}!pthread\_condattr\_getpshared@{pthread\_condattr\_getpshared}}
+\index{pthread\_condattr\_getpshared@{pthread\_condattr\_getpshared}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_condattr\_getpshared()}{pthread\_condattr\_getpshared()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+condattr\+\_\+getpshared (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{pthread_8h_ab77e7203e4ab594ba14d1f92969d19ef}{pthread\+\_\+condattr\+\_\+t}} $\ast$}]{attr,  }\item[{int $\ast$}]{pshared }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_ab4f09e50ad468e518d3f7ddda442dd69}\label{pthread_8h_ab4f09e50ad468e518d3f7ddda442dd69}} 
+\index{pthread.h@{pthread.h}!pthread\_condattr\_init@{pthread\_condattr\_init}}
+\index{pthread\_condattr\_init@{pthread\_condattr\_init}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_condattr\_init()}{pthread\_condattr\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+condattr\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_ab77e7203e4ab594ba14d1f92969d19ef}{pthread\+\_\+condattr\+\_\+t}} $\ast$}]{attr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a63c9ae89354b54ae864852c7591cf8e4}\label{pthread_8h_a63c9ae89354b54ae864852c7591cf8e4}} 
+\index{pthread.h@{pthread.h}!pthread\_condattr\_setpshared@{pthread\_condattr\_setpshared}}
+\index{pthread\_condattr\_setpshared@{pthread\_condattr\_setpshared}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_condattr\_setpshared()}{pthread\_condattr\_setpshared()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+condattr\+\_\+setpshared (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_ab77e7203e4ab594ba14d1f92969d19ef}{pthread\+\_\+condattr\+\_\+t}} $\ast$}]{attr,  }\item[{int}]{pshared }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a263f28dc2825a4e62b2126294d839ac2}\label{pthread_8h_a263f28dc2825a4e62b2126294d839ac2}} 
+\index{pthread.h@{pthread.h}!pthread\_create@{pthread\_create}}
+\index{pthread\_create@{pthread\_create}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_create()}{pthread\_create()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+create (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}} $\ast$}]{tid,  }\item[{const \mbox{\hyperlink{pthread_8h_a7db277988eef706b066958f84981b47b}{pthread\+\_\+attr\+\_\+t}} $\ast$}]{attr,  }\item[{void $\ast$}]{PTW32\+\_\+\+CDECL $\ast$start)(void $\ast$,  }\item[{void $\ast$}]{arg }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a97256a2a3a17c8a01649e3ed6a226303}\label{pthread_8h_a97256a2a3a17c8a01649e3ed6a226303}} 
+\index{pthread.h@{pthread.h}!pthread\_delay\_np@{pthread\_delay\_np}}
+\index{pthread\_delay\_np@{pthread\_delay\_np}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_delay\_np()}{pthread\_delay\_np()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+delay\+\_\+np (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structtimespec}{timespec}} $\ast$}]{interval }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a63dff6d0e31eba46785ba0daa14bebb0}\label{pthread_8h_a63dff6d0e31eba46785ba0daa14bebb0}} 
+\index{pthread.h@{pthread.h}!pthread\_detach@{pthread\_detach}}
+\index{pthread\_detach@{pthread\_detach}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_detach()}{pthread\_detach()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+detach (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}}}]{tid }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_abd5e197f5bb562cf30e149571ad6e51f}\label{pthread_8h_abd5e197f5bb562cf30e149571ad6e51f}} 
+\index{pthread.h@{pthread.h}!pthread\_equal@{pthread\_equal}}
+\index{pthread\_equal@{pthread\_equal}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_equal()}{pthread\_equal()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+equal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}}}]{t1,  }\item[{\mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}}}]{t2 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a0d15af992e1e2b72f2df584c198b9aa7}\label{pthread_8h_a0d15af992e1e2b72f2df584c198b9aa7}} 
+\index{pthread.h@{pthread.h}!pthread\_exit@{pthread\_exit}}
+\index{pthread\_exit@{pthread\_exit}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_exit()}{pthread\_exit()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} void \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+exit (\begin{DoxyParamCaption}\item[{void $\ast$}]{value\+\_\+ptr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_ae8013566ddc5a14102dc423c97614528}\label{pthread_8h_ae8013566ddc5a14102dc423c97614528}} 
+\index{pthread.h@{pthread.h}!pthread\_getconcurrency@{pthread\_getconcurrency}}
+\index{pthread\_getconcurrency@{pthread\_getconcurrency}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_getconcurrency()}{pthread\_getconcurrency()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+getconcurrency (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a3c0a5f0a269e7bd4381680c8f1deb0a3}\label{pthread_8h_a3c0a5f0a269e7bd4381680c8f1deb0a3}} 
+\index{pthread.h@{pthread.h}!pthread\_getschedparam@{pthread\_getschedparam}}
+\index{pthread\_getschedparam@{pthread\_getschedparam}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_getschedparam()}{pthread\_getschedparam()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+getschedparam (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}}}]{thread,  }\item[{int $\ast$}]{policy,  }\item[{struct \mbox{\hyperlink{structsched__param}{sched\+\_\+param}} $\ast$}]{param }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_ab3dee7585800e6f3c863d4192d0ef4c5}\label{pthread_8h_ab3dee7585800e6f3c863d4192d0ef4c5}} 
+\index{pthread.h@{pthread.h}!pthread\_getspecific@{pthread\_getspecific}}
+\index{pthread\_getspecific@{pthread\_getspecific}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_getspecific()}{pthread\_getspecific()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} void $\ast$\mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+getspecific (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_ad0376f110bc69993ad8bee03134fbd7d}{pthread\+\_\+key\+\_\+t}}}]{key }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a7334d010cbf7ba9793e15ead3e2a3ca7}\label{pthread_8h_a7334d010cbf7ba9793e15ead3e2a3ca7}} 
+\index{pthread.h@{pthread.h}!pthread\_getunique\_np@{pthread\_getunique\_np}}
+\index{pthread\_getunique\_np@{pthread\_getunique\_np}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_getunique\_np()}{pthread\_getunique\_np()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} unsigned \+\_\+\+\_\+int64 \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+getunique\+\_\+np (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}}}]{thread }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a301e894a99c332d3894c2db179a73176}\label{pthread_8h_a301e894a99c332d3894c2db179a73176}} 
+\index{pthread.h@{pthread.h}!pthread\_getw32threadhandle\_np@{pthread\_getw32threadhandle\_np}}
+\index{pthread\_getw32threadhandle\_np@{pthread\_getw32threadhandle\_np}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_getw32threadhandle\_np()}{pthread\_getw32threadhandle\_np()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} \mbox{\hyperlink{pthread_8h_ab521aa5010fb1afb801a899a55569e03}{HANDLE}} \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+getw32threadhandle\+\_\+np (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}}}]{thread }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a408a4c644acff58249ecb78085c8b39c}\label{pthread_8h_a408a4c644acff58249ecb78085c8b39c}} 
+\index{pthread.h@{pthread.h}!pthread\_getw32threadid\_np@{pthread\_getw32threadid\_np}}
+\index{pthread\_getw32threadid\_np@{pthread\_getw32threadid\_np}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_getw32threadid\_np()}{pthread\_getw32threadid\_np()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} \mbox{\hyperlink{pthread_8h_aa39b39d94407451a6ec0226479db68cf}{DWORD}} \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+getw32threadid\+\_\+np (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}}}]{thread }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a49f1914675a9a21671cb0871281a3276}\label{pthread_8h_a49f1914675a9a21671cb0871281a3276}} 
+\index{pthread.h@{pthread.h}!pthread\_join@{pthread\_join}}
+\index{pthread\_join@{pthread\_join}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_join()}{pthread\_join()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+join (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}}}]{thread,  }\item[{void $\ast$$\ast$}]{value\+\_\+ptr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_aa6b87bb25e4cfae0c933632fa2ca24ea}\label{pthread_8h_aa6b87bb25e4cfae0c933632fa2ca24ea}} 
+\index{pthread.h@{pthread.h}!pthread\_key\_create@{pthread\_key\_create}}
+\index{pthread\_key\_create@{pthread\_key\_create}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_key\_create()}{pthread\_key\_create()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+key\+\_\+create (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_ad0376f110bc69993ad8bee03134fbd7d}{pthread\+\_\+key\+\_\+t}} $\ast$}]{key,  }\item[{void(\mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} $\ast$destructor)(void $\ast$)}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a4511523e853e2070c82c519220478d0a}\label{pthread_8h_a4511523e853e2070c82c519220478d0a}} 
+\index{pthread.h@{pthread.h}!pthread\_key\_delete@{pthread\_key\_delete}}
+\index{pthread\_key\_delete@{pthread\_key\_delete}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_key\_delete()}{pthread\_key\_delete()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+key\+\_\+delete (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_ad0376f110bc69993ad8bee03134fbd7d}{pthread\+\_\+key\+\_\+t}}}]{key }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a8d7893d132fcbfb75cc83f71dc610301}\label{pthread_8h_a8d7893d132fcbfb75cc83f71dc610301}} 
+\index{pthread.h@{pthread.h}!pthread\_kill@{pthread\_kill}}
+\index{pthread\_kill@{pthread\_kill}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_kill()}{pthread\_kill()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+kill (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}}}]{thread,  }\item[{int}]{sig }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_aed997547f0442c71792a7fc812c39d69}\label{pthread_8h_aed997547f0442c71792a7fc812c39d69}} 
+\index{pthread.h@{pthread.h}!pthread\_mutex\_consistent@{pthread\_mutex\_consistent}}
+\index{pthread\_mutex\_consistent@{pthread\_mutex\_consistent}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_mutex\_consistent()}{pthread\_mutex\_consistent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+mutex\+\_\+consistent (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}} $\ast$}]{mutex }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_aa004edfa9d205948987fc16d1ed066c5}\label{pthread_8h_aa004edfa9d205948987fc16d1ed066c5}} 
+\index{pthread.h@{pthread.h}!pthread\_mutex\_destroy@{pthread\_mutex\_destroy}}
+\index{pthread\_mutex\_destroy@{pthread\_mutex\_destroy}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_mutex\_destroy()}{pthread\_mutex\_destroy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+mutex\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}} $\ast$}]{mutex }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a67e427da2ca618b8ea8cc238704365f6}\label{pthread_8h_a67e427da2ca618b8ea8cc238704365f6}} 
+\index{pthread.h@{pthread.h}!pthread\_mutex\_init@{pthread\_mutex\_init}}
+\index{pthread\_mutex\_init@{pthread\_mutex\_init}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_mutex\_init()}{pthread\_mutex\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+mutex\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}} $\ast$}]{mutex,  }\item[{const \mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}} $\ast$}]{attr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_aef3f55cad288fdbc9c39bff9d668de1e}\label{pthread_8h_aef3f55cad288fdbc9c39bff9d668de1e}} 
+\index{pthread.h@{pthread.h}!pthread\_mutex\_lock@{pthread\_mutex\_lock}}
+\index{pthread\_mutex\_lock@{pthread\_mutex\_lock}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_mutex\_lock()}{pthread\_mutex\_lock()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+mutex\+\_\+lock (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}} $\ast$}]{mutex }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_aa96593fce8d2088dbf148528bf7f3ad4}\label{pthread_8h_aa96593fce8d2088dbf148528bf7f3ad4}} 
+\index{pthread.h@{pthread.h}!pthread\_mutex\_timedlock@{pthread\_mutex\_timedlock}}
+\index{pthread\_mutex\_timedlock@{pthread\_mutex\_timedlock}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_mutex\_timedlock()}{pthread\_mutex\_timedlock()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+mutex\+\_\+timedlock (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}} $\ast$}]{mutex,  }\item[{const struct \mbox{\hyperlink{structtimespec}{timespec}} $\ast$}]{abstime }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a16f083c38b7d3e6e58b6d4454599e793}\label{pthread_8h_a16f083c38b7d3e6e58b6d4454599e793}} 
+\index{pthread.h@{pthread.h}!pthread\_mutex\_trylock@{pthread\_mutex\_trylock}}
+\index{pthread\_mutex\_trylock@{pthread\_mutex\_trylock}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_mutex\_trylock()}{pthread\_mutex\_trylock()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+mutex\+\_\+trylock (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}} $\ast$}]{mutex }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a2e24c7aa54ba10a032b7b6cd06c3caaa}\label{pthread_8h_a2e24c7aa54ba10a032b7b6cd06c3caaa}} 
+\index{pthread.h@{pthread.h}!pthread\_mutex\_unlock@{pthread\_mutex\_unlock}}
+\index{pthread\_mutex\_unlock@{pthread\_mutex\_unlock}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_mutex\_unlock()}{pthread\_mutex\_unlock()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+mutex\+\_\+unlock (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a688434dc7e5ec519465492a35681ed53}{pthread\+\_\+mutex\+\_\+t}} $\ast$}]{mutex }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a9acd8cda4095a3ea418518f659adea97}\label{pthread_8h_a9acd8cda4095a3ea418518f659adea97}} 
+\index{pthread.h@{pthread.h}!pthread\_mutexattr\_destroy@{pthread\_mutexattr\_destroy}}
+\index{pthread\_mutexattr\_destroy@{pthread\_mutexattr\_destroy}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_mutexattr\_destroy()}{pthread\_mutexattr\_destroy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+mutexattr\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}} $\ast$}]{attr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_aac08d02d9bf0c624c97b63842e5364cf}\label{pthread_8h_aac08d02d9bf0c624c97b63842e5364cf}} 
+\index{pthread.h@{pthread.h}!pthread\_mutexattr\_getkind\_np@{pthread\_mutexattr\_getkind\_np}}
+\index{pthread\_mutexattr\_getkind\_np@{pthread\_mutexattr\_getkind\_np}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_mutexattr\_getkind\_np()}{pthread\_mutexattr\_getkind\_np()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+mutexattr\+\_\+getkind\+\_\+np (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}} $\ast$}]{attr,  }\item[{int $\ast$}]{kind }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a64dd38ac66074db355fc1c5b18ddfb5a}\label{pthread_8h_a64dd38ac66074db355fc1c5b18ddfb5a}} 
+\index{pthread.h@{pthread.h}!pthread\_mutexattr\_getpshared@{pthread\_mutexattr\_getpshared}}
+\index{pthread\_mutexattr\_getpshared@{pthread\_mutexattr\_getpshared}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_mutexattr\_getpshared()}{pthread\_mutexattr\_getpshared()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+mutexattr\+\_\+getpshared (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}} $\ast$}]{attr,  }\item[{int $\ast$}]{pshared }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a8bda789a288f22df10fd761e94ef1775}\label{pthread_8h_a8bda789a288f22df10fd761e94ef1775}} 
+\index{pthread.h@{pthread.h}!pthread\_mutexattr\_getrobust@{pthread\_mutexattr\_getrobust}}
+\index{pthread\_mutexattr\_getrobust@{pthread\_mutexattr\_getrobust}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_mutexattr\_getrobust()}{pthread\_mutexattr\_getrobust()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+mutexattr\+\_\+getrobust (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}} $\ast$}]{attr,  }\item[{int $\ast$}]{robust }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a09ec983b7f42c0d4fefa36fabcec3d0a}\label{pthread_8h_a09ec983b7f42c0d4fefa36fabcec3d0a}} 
+\index{pthread.h@{pthread.h}!pthread\_mutexattr\_gettype@{pthread\_mutexattr\_gettype}}
+\index{pthread\_mutexattr\_gettype@{pthread\_mutexattr\_gettype}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_mutexattr\_gettype()}{pthread\_mutexattr\_gettype()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+mutexattr\+\_\+gettype (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}} $\ast$}]{attr,  }\item[{int $\ast$}]{kind }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a051d6c0d7ebd725cfcdb4d7620ed7127}\label{pthread_8h_a051d6c0d7ebd725cfcdb4d7620ed7127}} 
+\index{pthread.h@{pthread.h}!pthread\_mutexattr\_init@{pthread\_mutexattr\_init}}
+\index{pthread\_mutexattr\_init@{pthread\_mutexattr\_init}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_mutexattr\_init()}{pthread\_mutexattr\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+mutexattr\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}} $\ast$}]{attr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a7ca8ca573c6417dc157dbd75112b97e1}\label{pthread_8h_a7ca8ca573c6417dc157dbd75112b97e1}} 
+\index{pthread.h@{pthread.h}!pthread\_mutexattr\_setkind\_np@{pthread\_mutexattr\_setkind\_np}}
+\index{pthread\_mutexattr\_setkind\_np@{pthread\_mutexattr\_setkind\_np}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_mutexattr\_setkind\_np()}{pthread\_mutexattr\_setkind\_np()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+mutexattr\+\_\+setkind\+\_\+np (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}} $\ast$}]{attr,  }\item[{int}]{kind }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a07229ffe3eb84b4a3fe02e9c673e16d2}\label{pthread_8h_a07229ffe3eb84b4a3fe02e9c673e16d2}} 
+\index{pthread.h@{pthread.h}!pthread\_mutexattr\_setpshared@{pthread\_mutexattr\_setpshared}}
+\index{pthread\_mutexattr\_setpshared@{pthread\_mutexattr\_setpshared}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_mutexattr\_setpshared()}{pthread\_mutexattr\_setpshared()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+mutexattr\+\_\+setpshared (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}} $\ast$}]{attr,  }\item[{int}]{pshared }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a576513773e8765ab651da5b375242e01}\label{pthread_8h_a576513773e8765ab651da5b375242e01}} 
+\index{pthread.h@{pthread.h}!pthread\_mutexattr\_setrobust@{pthread\_mutexattr\_setrobust}}
+\index{pthread\_mutexattr\_setrobust@{pthread\_mutexattr\_setrobust}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_mutexattr\_setrobust()}{pthread\_mutexattr\_setrobust()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+mutexattr\+\_\+setrobust (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}} $\ast$}]{attr,  }\item[{int}]{robust }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_acafedc981ddf60df3bf39a970f15d477}\label{pthread_8h_acafedc981ddf60df3bf39a970f15d477}} 
+\index{pthread.h@{pthread.h}!pthread\_mutexattr\_settype@{pthread\_mutexattr\_settype}}
+\index{pthread\_mutexattr\_settype@{pthread\_mutexattr\_settype}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_mutexattr\_settype()}{pthread\_mutexattr\_settype()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+mutexattr\+\_\+settype (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_acd8bc746d049613ddf2f8fb82148f956}{pthread\+\_\+mutexattr\+\_\+t}} $\ast$}]{attr,  }\item[{int}]{kind }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a5eaa89ddb2f49f3c0aabb9b02af1c41a}\label{pthread_8h_a5eaa89ddb2f49f3c0aabb9b02af1c41a}} 
+\index{pthread.h@{pthread.h}!pthread\_num\_processors\_np@{pthread\_num\_processors\_np}}
+\index{pthread\_num\_processors\_np@{pthread\_num\_processors\_np}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_num\_processors\_np()}{pthread\_num\_processors\_np()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+num\+\_\+processors\+\_\+np (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_abfa1663a318b2e18a0943d7de8adffb1}\label{pthread_8h_abfa1663a318b2e18a0943d7de8adffb1}} 
+\index{pthread.h@{pthread.h}!pthread\_once@{pthread\_once}}
+\index{pthread\_once@{pthread\_once}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_once()}{pthread\_once()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+once (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a1068306e6f9855c0284651364e10b3f5}{pthread\+\_\+once\+\_\+t}} $\ast$}]{once\+\_\+control,  }\item[{void(\mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} $\ast$init\+\_\+routine)(void)}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a4bbc654f777f188db7b77e9f760aecd2}\label{pthread_8h_a4bbc654f777f188db7b77e9f760aecd2}} 
+\index{pthread.h@{pthread.h}!pthread\_rwlock\_destroy@{pthread\_rwlock\_destroy}}
+\index{pthread\_rwlock\_destroy@{pthread\_rwlock\_destroy}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_rwlock\_destroy()}{pthread\_rwlock\_destroy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+rwlock\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\+\_\+rwlock\+\_\+t}} $\ast$}]{lock }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a2e37baf55dda04dd7abfa80083528480}\label{pthread_8h_a2e37baf55dda04dd7abfa80083528480}} 
+\index{pthread.h@{pthread.h}!pthread\_rwlock\_init@{pthread\_rwlock\_init}}
+\index{pthread\_rwlock\_init@{pthread\_rwlock\_init}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_rwlock\_init()}{pthread\_rwlock\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+rwlock\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\+\_\+rwlock\+\_\+t}} $\ast$}]{lock,  }\item[{const \mbox{\hyperlink{pthread_8h_a516f3fa0225b050ba34327f6491638fd}{pthread\+\_\+rwlockattr\+\_\+t}} $\ast$}]{attr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a37c859ff91371ed1dda62aa34f8d5ea7}\label{pthread_8h_a37c859ff91371ed1dda62aa34f8d5ea7}} 
+\index{pthread.h@{pthread.h}!pthread\_rwlock\_rdlock@{pthread\_rwlock\_rdlock}}
+\index{pthread\_rwlock\_rdlock@{pthread\_rwlock\_rdlock}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_rwlock\_rdlock()}{pthread\_rwlock\_rdlock()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+rwlock\+\_\+rdlock (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\+\_\+rwlock\+\_\+t}} $\ast$}]{lock }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_ab1581386c8c21c16b76750f70c755407}\label{pthread_8h_ab1581386c8c21c16b76750f70c755407}} 
+\index{pthread.h@{pthread.h}!pthread\_rwlock\_timedrdlock@{pthread\_rwlock\_timedrdlock}}
+\index{pthread\_rwlock\_timedrdlock@{pthread\_rwlock\_timedrdlock}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_rwlock\_timedrdlock()}{pthread\_rwlock\_timedrdlock()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+rwlock\+\_\+timedrdlock (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\+\_\+rwlock\+\_\+t}} $\ast$}]{lock,  }\item[{const struct \mbox{\hyperlink{structtimespec}{timespec}} $\ast$}]{abstime }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a52433d05535bc70a26f46f1740e93fbe}\label{pthread_8h_a52433d05535bc70a26f46f1740e93fbe}} 
+\index{pthread.h@{pthread.h}!pthread\_rwlock\_timedwrlock@{pthread\_rwlock\_timedwrlock}}
+\index{pthread\_rwlock\_timedwrlock@{pthread\_rwlock\_timedwrlock}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_rwlock\_timedwrlock()}{pthread\_rwlock\_timedwrlock()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+rwlock\+\_\+timedwrlock (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\+\_\+rwlock\+\_\+t}} $\ast$}]{lock,  }\item[{const struct \mbox{\hyperlink{structtimespec}{timespec}} $\ast$}]{abstime }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a3bd74d79519b333ec7bf44e5d6dfcf76}\label{pthread_8h_a3bd74d79519b333ec7bf44e5d6dfcf76}} 
+\index{pthread.h@{pthread.h}!pthread\_rwlock\_tryrdlock@{pthread\_rwlock\_tryrdlock}}
+\index{pthread\_rwlock\_tryrdlock@{pthread\_rwlock\_tryrdlock}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_rwlock\_tryrdlock()}{pthread\_rwlock\_tryrdlock()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+rwlock\+\_\+tryrdlock (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\+\_\+rwlock\+\_\+t}} $\ast$}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_ae14bb7aa25d120e2ccc31ba50387400d}\label{pthread_8h_ae14bb7aa25d120e2ccc31ba50387400d}} 
+\index{pthread.h@{pthread.h}!pthread\_rwlock\_trywrlock@{pthread\_rwlock\_trywrlock}}
+\index{pthread\_rwlock\_trywrlock@{pthread\_rwlock\_trywrlock}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_rwlock\_trywrlock()}{pthread\_rwlock\_trywrlock()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+rwlock\+\_\+trywrlock (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\+\_\+rwlock\+\_\+t}} $\ast$}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a3f8864786d4efc639811a7f3b268d257}\label{pthread_8h_a3f8864786d4efc639811a7f3b268d257}} 
+\index{pthread.h@{pthread.h}!pthread\_rwlock\_unlock@{pthread\_rwlock\_unlock}}
+\index{pthread\_rwlock\_unlock@{pthread\_rwlock\_unlock}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_rwlock\_unlock()}{pthread\_rwlock\_unlock()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+rwlock\+\_\+unlock (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\+\_\+rwlock\+\_\+t}} $\ast$}]{lock }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_afdceb6ceb25bbc31854c5108de55cdd5}\label{pthread_8h_afdceb6ceb25bbc31854c5108de55cdd5}} 
+\index{pthread.h@{pthread.h}!pthread\_rwlock\_wrlock@{pthread\_rwlock\_wrlock}}
+\index{pthread\_rwlock\_wrlock@{pthread\_rwlock\_wrlock}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_rwlock\_wrlock()}{pthread\_rwlock\_wrlock()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+rwlock\+\_\+wrlock (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a234de2d6d1c3f3f197df40c1264528ec}{pthread\+\_\+rwlock\+\_\+t}} $\ast$}]{lock }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_ab5485b6bd6bf581762c89c8157dcc40d}\label{pthread_8h_ab5485b6bd6bf581762c89c8157dcc40d}} 
+\index{pthread.h@{pthread.h}!pthread\_rwlockattr\_destroy@{pthread\_rwlockattr\_destroy}}
+\index{pthread\_rwlockattr\_destroy@{pthread\_rwlockattr\_destroy}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_rwlockattr\_destroy()}{pthread\_rwlockattr\_destroy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+rwlockattr\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a516f3fa0225b050ba34327f6491638fd}{pthread\+\_\+rwlockattr\+\_\+t}} $\ast$}]{attr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a035376244a23895053db5911eee94037}\label{pthread_8h_a035376244a23895053db5911eee94037}} 
+\index{pthread.h@{pthread.h}!pthread\_rwlockattr\_getpshared@{pthread\_rwlockattr\_getpshared}}
+\index{pthread\_rwlockattr\_getpshared@{pthread\_rwlockattr\_getpshared}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_rwlockattr\_getpshared()}{pthread\_rwlockattr\_getpshared()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+rwlockattr\+\_\+getpshared (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{pthread_8h_a516f3fa0225b050ba34327f6491638fd}{pthread\+\_\+rwlockattr\+\_\+t}} $\ast$}]{attr,  }\item[{int $\ast$}]{pshared }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a01b24ca706f34301420c136c2f2768f9}\label{pthread_8h_a01b24ca706f34301420c136c2f2768f9}} 
+\index{pthread.h@{pthread.h}!pthread\_rwlockattr\_init@{pthread\_rwlockattr\_init}}
+\index{pthread\_rwlockattr\_init@{pthread\_rwlockattr\_init}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_rwlockattr\_init()}{pthread\_rwlockattr\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+rwlockattr\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a516f3fa0225b050ba34327f6491638fd}{pthread\+\_\+rwlockattr\+\_\+t}} $\ast$}]{attr }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a76b5925cab830955d7c974dc93710135}\label{pthread_8h_a76b5925cab830955d7c974dc93710135}} 
+\index{pthread.h@{pthread.h}!pthread\_rwlockattr\_setpshared@{pthread\_rwlockattr\_setpshared}}
+\index{pthread\_rwlockattr\_setpshared@{pthread\_rwlockattr\_setpshared}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_rwlockattr\_setpshared()}{pthread\_rwlockattr\_setpshared()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+rwlockattr\+\_\+setpshared (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a516f3fa0225b050ba34327f6491638fd}{pthread\+\_\+rwlockattr\+\_\+t}} $\ast$}]{attr,  }\item[{int}]{pshared }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_ab817f3baacf5f0b911e1a440cc97c109}\label{pthread_8h_ab817f3baacf5f0b911e1a440cc97c109}} 
+\index{pthread.h@{pthread.h}!pthread\_self@{pthread\_self}}
+\index{pthread\_self@{pthread\_self}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_self()}{pthread\_self()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} \mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}} \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+self (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a4106226e5a0b24d373e400e387dac334}\label{pthread_8h_a4106226e5a0b24d373e400e387dac334}} 
+\index{pthread.h@{pthread.h}!pthread\_setcancelstate@{pthread\_setcancelstate}}
+\index{pthread\_setcancelstate@{pthread\_setcancelstate}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_setcancelstate()}{pthread\_setcancelstate()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+setcancelstate (\begin{DoxyParamCaption}\item[{int}]{state,  }\item[{int $\ast$}]{oldstate }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a66acf8bb759895422b215ed7a8bb4c50}\label{pthread_8h_a66acf8bb759895422b215ed7a8bb4c50}} 
+\index{pthread.h@{pthread.h}!pthread\_setcanceltype@{pthread\_setcanceltype}}
+\index{pthread\_setcanceltype@{pthread\_setcanceltype}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_setcanceltype()}{pthread\_setcanceltype()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+setcanceltype (\begin{DoxyParamCaption}\item[{int}]{type,  }\item[{int $\ast$}]{oldtype }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a700b6bade0a18d05513b9e6f0e03f460}\label{pthread_8h_a700b6bade0a18d05513b9e6f0e03f460}} 
+\index{pthread.h@{pthread.h}!pthread\_setconcurrency@{pthread\_setconcurrency}}
+\index{pthread\_setconcurrency@{pthread\_setconcurrency}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_setconcurrency()}{pthread\_setconcurrency()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+setconcurrency (\begin{DoxyParamCaption}\item[{int}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a9e906d879b9b8d757ebce40ef44f941e}\label{pthread_8h_a9e906d879b9b8d757ebce40ef44f941e}} 
+\index{pthread.h@{pthread.h}!pthread\_setschedparam@{pthread\_setschedparam}}
+\index{pthread\_setschedparam@{pthread\_setschedparam}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_setschedparam()}{pthread\_setschedparam()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+setschedparam (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a26149ddff01fba852b8da453ffee0ccf}{pthread\+\_\+t}}}]{thread,  }\item[{int}]{policy,  }\item[{const struct \mbox{\hyperlink{structsched__param}{sched\+\_\+param}} $\ast$}]{param }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a70508e8085a6652a4176584617c65a93}\label{pthread_8h_a70508e8085a6652a4176584617c65a93}} 
+\index{pthread.h@{pthread.h}!pthread\_setspecific@{pthread\_setspecific}}
+\index{pthread\_setspecific@{pthread\_setspecific}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_setspecific()}{pthread\_setspecific()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+setspecific (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_ad0376f110bc69993ad8bee03134fbd7d}{pthread\+\_\+key\+\_\+t}}}]{key,  }\item[{const void $\ast$}]{value }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a7cbf10e08febd9d8642b4856fab73e46}\label{pthread_8h_a7cbf10e08febd9d8642b4856fab73e46}} 
+\index{pthread.h@{pthread.h}!pthread\_spin\_destroy@{pthread\_spin\_destroy}}
+\index{pthread\_spin\_destroy@{pthread\_spin\_destroy}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_spin\_destroy()}{pthread\_spin\_destroy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+spin\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a8481ca14ebb4b48ccc42d2c805e75e54}{pthread\+\_\+spinlock\+\_\+t}} $\ast$}]{lock }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a7d1e0feb499ed6c2ec25fe4f2a72dd16}\label{pthread_8h_a7d1e0feb499ed6c2ec25fe4f2a72dd16}} 
+\index{pthread.h@{pthread.h}!pthread\_spin\_init@{pthread\_spin\_init}}
+\index{pthread\_spin\_init@{pthread\_spin\_init}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_spin\_init()}{pthread\_spin\_init()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+spin\+\_\+init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a8481ca14ebb4b48ccc42d2c805e75e54}{pthread\+\_\+spinlock\+\_\+t}} $\ast$}]{lock,  }\item[{int}]{pshared }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_af47165b8bc6ef3215ede56fa45a2860e}\label{pthread_8h_af47165b8bc6ef3215ede56fa45a2860e}} 
+\index{pthread.h@{pthread.h}!pthread\_spin\_lock@{pthread\_spin\_lock}}
+\index{pthread\_spin\_lock@{pthread\_spin\_lock}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_spin\_lock()}{pthread\_spin\_lock()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+spin\+\_\+lock (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a8481ca14ebb4b48ccc42d2c805e75e54}{pthread\+\_\+spinlock\+\_\+t}} $\ast$}]{lock }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_acec9b0ce898853be7afbb64286ffce29}\label{pthread_8h_acec9b0ce898853be7afbb64286ffce29}} 
+\index{pthread.h@{pthread.h}!pthread\_spin\_trylock@{pthread\_spin\_trylock}}
+\index{pthread\_spin\_trylock@{pthread\_spin\_trylock}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_spin\_trylock()}{pthread\_spin\_trylock()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+spin\+\_\+trylock (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a8481ca14ebb4b48ccc42d2c805e75e54}{pthread\+\_\+spinlock\+\_\+t}} $\ast$}]{lock }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a8257239fc03fb14a96f162d829c0ecf9}\label{pthread_8h_a8257239fc03fb14a96f162d829c0ecf9}} 
+\index{pthread.h@{pthread.h}!pthread\_spin\_unlock@{pthread\_spin\_unlock}}
+\index{pthread\_spin\_unlock@{pthread\_spin\_unlock}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_spin\_unlock()}{pthread\_spin\_unlock()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+spin\+\_\+unlock (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_a8481ca14ebb4b48ccc42d2c805e75e54}{pthread\+\_\+spinlock\+\_\+t}} $\ast$}]{lock }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a9aaf8f6e21da6b9e6eb7583fdd551ea5}\label{pthread_8h_a9aaf8f6e21da6b9e6eb7583fdd551ea5}} 
+\index{pthread.h@{pthread.h}!pthread\_testcancel@{pthread\_testcancel}}
+\index{pthread\_testcancel@{pthread\_testcancel}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_testcancel()}{pthread\_testcancel()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} void \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+testcancel (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_afd4e052d762360f6559914c865831758}\label{pthread_8h_afd4e052d762360f6559914c865831758}} 
+\index{pthread.h@{pthread.h}!pthread\_timechange\_handler\_np@{pthread\_timechange\_handler\_np}}
+\index{pthread\_timechange\_handler\_np@{pthread\_timechange\_handler\_np}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_timechange\_handler\_np()}{pthread\_timechange\_handler\_np()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} void $\ast$\mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+timechange\+\_\+handler\+\_\+np (\begin{DoxyParamCaption}\item[{void $\ast$}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a54447dac6247f871b997016b234368bc}\label{pthread_8h_a54447dac6247f871b997016b234368bc}} 
+\index{pthread.h@{pthread.h}!pthread\_win32\_process\_attach\_np@{pthread\_win32\_process\_attach\_np}}
+\index{pthread\_win32\_process\_attach\_np@{pthread\_win32\_process\_attach\_np}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_win32\_process\_attach\_np()}{pthread\_win32\_process\_attach\_np()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+win32\+\_\+process\+\_\+attach\+\_\+np (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a1e5681f9bf4379e816c6910669da3d22}\label{pthread_8h_a1e5681f9bf4379e816c6910669da3d22}} 
+\index{pthread.h@{pthread.h}!pthread\_win32\_process\_detach\_np@{pthread\_win32\_process\_detach\_np}}
+\index{pthread\_win32\_process\_detach\_np@{pthread\_win32\_process\_detach\_np}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_win32\_process\_detach\_np()}{pthread\_win32\_process\_detach\_np()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+win32\+\_\+process\+\_\+detach\+\_\+np (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_ae657dd834dde0b40712219adc2a98ce1}\label{pthread_8h_ae657dd834dde0b40712219adc2a98ce1}} 
+\index{pthread.h@{pthread.h}!pthread\_win32\_test\_features\_np@{pthread\_win32\_test\_features\_np}}
+\index{pthread\_win32\_test\_features\_np@{pthread\_win32\_test\_features\_np}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_win32\_test\_features\_np()}{pthread\_win32\_test\_features\_np()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+win32\+\_\+test\+\_\+features\+\_\+np (\begin{DoxyParamCaption}\item[{int}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a8b51f50b2c482fdad5f3c954a16d9b42}\label{pthread_8h_a8b51f50b2c482fdad5f3c954a16d9b42}} 
+\index{pthread.h@{pthread.h}!pthread\_win32\_thread\_attach\_np@{pthread\_win32\_thread\_attach\_np}}
+\index{pthread\_win32\_thread\_attach\_np@{pthread\_win32\_thread\_attach\_np}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_win32\_thread\_attach\_np()}{pthread\_win32\_thread\_attach\_np()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+win32\+\_\+thread\+\_\+attach\+\_\+np (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_af2dc3c1a6301d39e16416731d2ceda8b}\label{pthread_8h_af2dc3c1a6301d39e16416731d2ceda8b}} 
+\index{pthread.h@{pthread.h}!pthread\_win32\_thread\_detach\_np@{pthread\_win32\_thread\_detach\_np}}
+\index{pthread\_win32\_thread\_detach\_np@{pthread\_win32\_thread\_detach\_np}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthread\_win32\_thread\_detach\_np()}{pthread\_win32\_thread\_detach\_np()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+\_\+win32\+\_\+thread\+\_\+detach\+\_\+np (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a6271587898b5432c811f84fb100e6297}\label{pthread_8h_a6271587898b5432c811f84fb100e6297}} 
+\index{pthread.h@{pthread.h}!pthreadCancelableTimedWait@{pthreadCancelableTimedWait}}
+\index{pthreadCancelableTimedWait@{pthreadCancelableTimedWait}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthreadCancelableTimedWait()}{pthreadCancelableTimedWait()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+Cancelable\+Timed\+Wait (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_ab521aa5010fb1afb801a899a55569e03}{HANDLE}}}]{wait\+Handle,  }\item[{\mbox{\hyperlink{pthread_8h_aa39b39d94407451a6ec0226479db68cf}{DWORD}}}]{timeout }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a143d9645c5fd1237c00bffdeb95e5d83}\label{pthread_8h_a143d9645c5fd1237c00bffdeb95e5d83}} 
+\index{pthread.h@{pthread.h}!pthreadCancelableWait@{pthreadCancelableWait}}
+\index{pthreadCancelableWait@{pthreadCancelableWait}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{pthreadCancelableWait()}{pthreadCancelableWait()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} int \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} pthread\+Cancelable\+Wait (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{pthread_8h_ab521aa5010fb1afb801a899a55569e03}{HANDLE}}}]{wait\+Handle }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a0f3375320c170b991305596a32e1cf59}\label{pthread_8h_a0f3375320c170b991305596a32e1cf59}} 
+\index{pthread.h@{pthread.h}!ptw32\_get\_exception\_services\_code@{ptw32\_get\_exception\_services\_code}}
+\index{ptw32\_get\_exception\_services\_code@{ptw32\_get\_exception\_services\_code}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{ptw32\_get\_exception\_services\_code()}{ptw32\_get\_exception\_services\_code()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} \mbox{\hyperlink{pthread_8h_aa39b39d94407451a6ec0226479db68cf}{DWORD}} \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} ptw32\+\_\+get\+\_\+exception\+\_\+services\+\_\+code (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_a3c90e1d0ffae6dedd248f39abc6a581d}\label{pthread_8h_a3c90e1d0ffae6dedd248f39abc6a581d}} 
+\index{pthread.h@{pthread.h}!ptw32\_pop\_cleanup@{ptw32\_pop\_cleanup}}
+\index{ptw32\_pop\_cleanup@{ptw32\_pop\_cleanup}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{ptw32\_pop\_cleanup()}{ptw32\_pop\_cleanup()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} \mbox{\hyperlink{structptw32__cleanup__t}{ptw32\+\_\+cleanup\+\_\+t}} $\ast$\mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} ptw32\+\_\+pop\+\_\+cleanup (\begin{DoxyParamCaption}\item[{int}]{execute }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{pthread_8h_af4e43660b45ebecd4fdc536edea22d4c}\label{pthread_8h_af4e43660b45ebecd4fdc536edea22d4c}} 
+\index{pthread.h@{pthread.h}!ptw32\_push\_cleanup@{ptw32\_push\_cleanup}}
+\index{ptw32\_push\_cleanup@{ptw32\_push\_cleanup}!pthread.h@{pthread.h}}
+\doxysubsubsection{\texorpdfstring{ptw32\_push\_cleanup()}{ptw32\_push\_cleanup()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{semaphore_8h_aad097c5dd36151a8af6b69109151b370}{PTW32\+\_\+\+DLLPORT}} void \mbox{\hyperlink{pthread_8h_a9cbd3ea4a3f79619eae736fab803fdab}{PTW32\+\_\+\+CDECL}} ptw32\+\_\+push\+\_\+cleanup (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structptw32__cleanup__t}{ptw32\+\_\+cleanup\+\_\+t}} $\ast$}]{cleanup,  }\item[{ptw32\+\_\+cleanup\+\_\+callback\+\_\+t}]{routine,  }\item[{void $\ast$}]{arg }\end{DoxyParamCaption})}
+

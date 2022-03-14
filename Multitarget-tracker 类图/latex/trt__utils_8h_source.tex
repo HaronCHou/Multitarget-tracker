@@ -1,0 +1,263 @@
+\hypertarget{trt__utils_8h_source}{}\doxysection{trt\+\_\+utils.\+h}
+\label{trt__utils_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/trt\_utils.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/trt\_utils.h}}
+\mbox{\hyperlink{trt__utils_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#ifndef \_\_TRT\_UTILS\_H\_\_}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#define \_\_TRT\_UTILS\_H\_\_}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{comment}{/* OpenCV headers */}}
+\DoxyCodeLine{31 \textcolor{comment}{//\#include <opencv/cv.h>}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#include <opencv2/opencv.hpp>}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#include <opencv2/core/core.hpp>}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#include <opencv2/dnn/dnn.hpp>}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#include <opencv2/highgui/highgui.hpp>}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#include <opencv2/imgproc/imgproc.hpp>}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{mish_8h}{mish.h}}"{}}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{chunk_8h}{chunk.h}}"{}}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{hardswish_8h}{hardswish.h}}"{}}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#include <set>}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#include <math.h>}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#include "{}NvInfer.h"{}}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{ds__image_8h}{ds\_image.h}}"{}}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{plugin__factory_8h}{plugin\_factory.h}}"{}}}
+\DoxyCodeLine{48 \textcolor{comment}{//\#include "{}logging.h"{}}}
+\DoxyCodeLine{49 \textcolor{keyword}{class }\mbox{\hyperlink{class_ds_image}{DsImage}};}
+\DoxyCodeLine{50 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_b_box}{BBox}}}
+\DoxyCodeLine{51 \{}
+\DoxyCodeLine{52     \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_b_box_ab063d1cc01f221b4992410e92ff51d60}{x1}} = 0;}
+\DoxyCodeLine{53     \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_b_box_a136d3911912a9799c4ba568665daa2ed}{y1}} = 0;}
+\DoxyCodeLine{54     \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_b_box_a4e5594907d923d49bc884cef23ebdf89}{x2}} = 0;}
+\DoxyCodeLine{55     \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_b_box_a09e4eb598909e4ccf5fa328370718993}{y2}} = 0;}
+\DoxyCodeLine{56 \};}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_b_box_info}{BBoxInfo}}}
+\DoxyCodeLine{59 \{}
+\DoxyCodeLine{60     \mbox{\hyperlink{struct_b_box}{BBox}} \mbox{\hyperlink{struct_b_box_info_ab82e2ef6dabf604aa8fe6506c79723f2}{box}};}
+\DoxyCodeLine{61     \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_b_box_info_a8454d8b88a86652f2c9262f0c8fc2ba9}{label}} = 0;}
+\DoxyCodeLine{62     \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_b_box_info_afd6ed282023436f3a9cda9613a28d506}{classId}} = 0; \textcolor{comment}{// For coco benchmarking}}
+\DoxyCodeLine{63     \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_b_box_info_a8ef93011a2e0b4decda5dae1d4a5be18}{prob}} = 0;}
+\DoxyCodeLine{64 \};}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66 \textcolor{keyword}{class }\mbox{\hyperlink{class_logger}{Logger}} : \textcolor{keyword}{public} nvinfer1::ILogger}
+\DoxyCodeLine{67 \{}
+\DoxyCodeLine{68 \textcolor{keyword}{public}:}
+\DoxyCodeLine{69     \mbox{\hyperlink{class_logger_a63fff05551d45cdedfe5644779d3fd0d}{Logger}}(\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} severity = Severity::kWARNING)}
+\DoxyCodeLine{70     \{}
+\DoxyCodeLine{71         severity = severity;}
+\DoxyCodeLine{72     \}}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74     \mbox{\hyperlink{class_logger_a81414467aac1f8740c5bd13624f3aa0b}{\string~Logger}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76     nvinfer1::ILogger\& \mbox{\hyperlink{class_logger_aab67f7cc03c6a459269150acc3e3fc58}{getTRTLogger}}()}
+\DoxyCodeLine{77     \{}
+\DoxyCodeLine{78         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{79     \}}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_logger_ac36bd2be00191ea19ca16164e7757dc1}{log}}(\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{nvinfer1::ILogger::Severity}} severity, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* msg)  \textcolor{keyword}{noexcept} \textcolor{keyword}{override}}
+\DoxyCodeLine{82     \{}
+\DoxyCodeLine{83         \textcolor{comment}{// suppress info-\/level messages}}
+\DoxyCodeLine{84         \textcolor{keywordflow}{if} (severity == Severity::kINFO) \textcolor{keywordflow}{return};}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86         \textcolor{keywordflow}{switch} (severity)}
+\DoxyCodeLine{87         \{}
+\DoxyCodeLine{88         \textcolor{keywordflow}{case} Severity::kINTERNAL\_ERROR: std::cerr << \textcolor{stringliteral}{"{}INTERNAL\_ERROR: "{}} << msg << std::endl; \textcolor{keywordflow}{break};}
+\DoxyCodeLine{89         \textcolor{keywordflow}{case} Severity::kERROR: std::cerr << \textcolor{stringliteral}{"{}ERROR: "{}} << msg << std::endl; \textcolor{keywordflow}{break};}
+\DoxyCodeLine{90         \textcolor{keywordflow}{case} Severity::kWARNING: std::cerr << \textcolor{stringliteral}{"{}WARNING: "{}} << msg << std::endl; \textcolor{keywordflow}{break};}
+\DoxyCodeLine{91         \textcolor{keywordflow}{case} Severity::kINFO: std::cerr << \textcolor{stringliteral}{"{}INFO: "{}} << msg << std::endl; \textcolor{keywordflow}{break};}
+\DoxyCodeLine{92         \textcolor{keywordflow}{case} Severity::kVERBOSE: \textcolor{keywordflow}{break};}
+\DoxyCodeLine{93       \textcolor{comment}{//  default: std::cerr <<"{}UNKNOW:"{}<< msg << std::endl;break;}}
+\DoxyCodeLine{94         \}}
+\DoxyCodeLine{95     \}}
+\DoxyCodeLine{96 \};}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98 \textcolor{comment}{//class YoloTinyMaxpoolPaddingFormula : public nvinfer1::IOutputDimensionsFormula}}
+\DoxyCodeLine{99 \textcolor{comment}{//\{}}
+\DoxyCodeLine{100 \textcolor{comment}{//}}
+\DoxyCodeLine{101 \textcolor{comment}{//private:}}
+\DoxyCodeLine{102 \textcolor{comment}{//    std::set<std::string> m\_SamePaddingLayers;}}
+\DoxyCodeLine{103 \textcolor{comment}{//}}
+\DoxyCodeLine{104 \textcolor{comment}{//    nvinfer1::DimsHW compute(nvinfer1::DimsHW inputDims, nvinfer1::DimsHW kernelSize,}}
+\DoxyCodeLine{105 \textcolor{comment}{//                             nvinfer1::DimsHW stride, nvinfer1::DimsHW padding,}}
+\DoxyCodeLine{106 \textcolor{comment}{//                             nvinfer1::DimsHW dilation, const char* layerName) const override}}
+\DoxyCodeLine{107 \textcolor{comment}{//    \{}}
+\DoxyCodeLine{108 \textcolor{comment}{//     //   assert(inputDims.d[0] == inputDims.d[1]);}}
+\DoxyCodeLine{109 \textcolor{comment}{//        assert(kernelSize.d[0] == kernelSize.d[1]);}}
+\DoxyCodeLine{110 \textcolor{comment}{//        assert(stride.d[0] == stride.d[1]);}}
+\DoxyCodeLine{111 \textcolor{comment}{//        assert(padding.d[0] == padding.d[1]);}}
+\DoxyCodeLine{112 \textcolor{comment}{//}}
+\DoxyCodeLine{113 \textcolor{comment}{//      int output\_h, output\_w;}}
+\DoxyCodeLine{114 \textcolor{comment}{//        // Only layer maxpool\_12 makes use of same padding}}
+\DoxyCodeLine{115 \textcolor{comment}{//        if (m\_SamePaddingLayers.find(layerName) != m\_SamePaddingLayers.end())}}
+\DoxyCodeLine{116 \textcolor{comment}{//        \{}}
+\DoxyCodeLine{117 \textcolor{comment}{//            output\_h = (inputDims.d[0] + 2 * padding.d[0]) / stride.d[0];}}
+\DoxyCodeLine{118 \textcolor{comment}{//            output\_w = (inputDims.d[1] + 2 * padding.d[1]) / stride.d[1];}}
+\DoxyCodeLine{119 \textcolor{comment}{//        \}}}
+\DoxyCodeLine{120 \textcolor{comment}{//        // Valid Padding}}
+\DoxyCodeLine{121 \textcolor{comment}{//        else}}
+\DoxyCodeLine{122 \textcolor{comment}{//        \{}}
+\DoxyCodeLine{123 \textcolor{comment}{//            output\_h = (inputDims.d[0] -\/ kernelSize.d[0]) / stride.d[0] + 1;}}
+\DoxyCodeLine{124 \textcolor{comment}{//            output\_w = (inputDims.d[1] -\/ kernelSize.d[1]) / stride.d[1] + 1;}}
+\DoxyCodeLine{125 \textcolor{comment}{//        \}}}
+\DoxyCodeLine{126 \textcolor{comment}{//        return nvinfer1::DimsHW\{output\_h, output\_w\};}}
+\DoxyCodeLine{127 \textcolor{comment}{//    \}}}
+\DoxyCodeLine{128 \textcolor{comment}{//}}
+\DoxyCodeLine{129 \textcolor{comment}{//public:}}
+\DoxyCodeLine{130 \textcolor{comment}{//    void addSamePaddingLayer(std::string input) \{ m\_SamePaddingLayers.insert(input); \}}}
+\DoxyCodeLine{131 \textcolor{comment}{//\};}}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133 \textcolor{comment}{// Common helper functions}}
+\DoxyCodeLine{134 \textcolor{keywordtype}{void} \mbox{\hyperlink{trt__utils_8h_aeb0f94d2500292926bc8416c9a904297}{blobFromDsImages}}(\textcolor{keyword}{const} std::vector<DsImage>\& inputImages, cv::Mat\& blob, \textcolor{keyword}{const} \textcolor{keywordtype}{int}\& inputH, \textcolor{keyword}{const} \textcolor{keywordtype}{int}\& inputW);}
+\DoxyCodeLine{135 std::string \mbox{\hyperlink{trt__utils_8h_a9de43e600ebc3a0f919582b007c25322}{trim}}(std::string s);}
+\DoxyCodeLine{136 std::string \mbox{\hyperlink{trt__utils_8h_abbdafbe11cc77edd6d4c99a1fda70d2c}{triml}}(std::string s, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* t);}
+\DoxyCodeLine{137 std::string \mbox{\hyperlink{trt__utils_8h_a0154026299e5fc73737172009e714d50}{trimr}}(std::string s, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* t);}
+\DoxyCodeLine{138 \textcolor{keywordtype}{float} \mbox{\hyperlink{trt__utils_8h_abfab750429265ecfdced0e67e7120325}{clamp}}(\textcolor{keyword}{const} \textcolor{keywordtype}{float} val, \textcolor{keyword}{const} \textcolor{keywordtype}{float} minVal, \textcolor{keyword}{const} \textcolor{keywordtype}{float} maxVal);}
+\DoxyCodeLine{139 \textcolor{keywordtype}{bool} \mbox{\hyperlink{trt__utils_8h_ae785e7485fbc6c3df50ff300588f61a9}{fileExists}}(\textcolor{keyword}{const} std::string fileName, \textcolor{keywordtype}{bool} verbose = \textcolor{keyword}{true});}
+\DoxyCodeLine{140 \mbox{\hyperlink{struct_b_box}{BBox}} \mbox{\hyperlink{trt__utils_8h_afcb46afd4bada782cab0f1962502bb03}{convertBBoxNetRes}}(\textcolor{keyword}{const} \textcolor{keywordtype}{float}\& bx, \textcolor{keyword}{const} \textcolor{keywordtype}{float}\& by, \textcolor{keyword}{const} \textcolor{keywordtype}{float}\& bw, \textcolor{keyword}{const} \textcolor{keywordtype}{float}\& bh,}
+\DoxyCodeLine{141                        \textcolor{keyword}{const} uint32\_t\& stride, \textcolor{keyword}{const} uint32\_t\& netW, \textcolor{keyword}{const} uint32\_t\& netH);}
+\DoxyCodeLine{142 \textcolor{keywordtype}{void} \mbox{\hyperlink{trt__utils_8h_a1ffb8af5e042500c5b1914f5d62d9969}{convertBBoxImgRes}}(\textcolor{keyword}{const} \textcolor{keywordtype}{float} scalingFactor,}
+\DoxyCodeLine{143     \textcolor{keyword}{const} \textcolor{keywordtype}{float} xOffset,}
+\DoxyCodeLine{144     \textcolor{keyword}{const} \textcolor{keywordtype}{float} yOffset,}
+\DoxyCodeLine{145     \mbox{\hyperlink{struct_b_box}{BBox}}\& bbox);}
+\DoxyCodeLine{146 \textcolor{keywordtype}{void} \mbox{\hyperlink{trt__utils_8h_aa4c60f96db695abc26779437f79435ab}{printPredictions}}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_b_box_info}{BBoxInfo}}\& \mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}}, \textcolor{keyword}{const} std::string\& className);}
+\DoxyCodeLine{147 std::vector<std::string> \mbox{\hyperlink{trt__utils_8h_a5008482093197b2c41c92e4f4c1a0a73}{loadListFromTextFile}}(\textcolor{keyword}{const} std::string filename);}
+\DoxyCodeLine{148 std::vector<std::string> \mbox{\hyperlink{trt__utils_8h_ab7f84a69c05af87778a897de4e4b55cd}{loadImageList}}(\textcolor{keyword}{const} std::string filename, \textcolor{keyword}{const} std::string prefix);}
+\DoxyCodeLine{149 std::vector<BBoxInfo> \mbox{\hyperlink{trt__utils_8h_ae0ec7d082a29313605238e01ec1f646d}{diou\_nms}}(\textcolor{keyword}{const} \textcolor{keywordtype}{float} numThresh, std::vector<BBoxInfo> binfo);}
+\DoxyCodeLine{150 std::vector<BBoxInfo> \mbox{\hyperlink{trt__utils_8h_a6a32da7bd6620d4ba5d17910fbd3fc3e}{nmsAllClasses}}(\textcolor{keyword}{const} \textcolor{keywordtype}{float} nmsThresh, std::vector<BBoxInfo>\& binfo,}
+\DoxyCodeLine{151                                     \textcolor{keyword}{const} uint32\_t numClasses, \textcolor{keyword}{const} std::string \&model\_type);}
+\DoxyCodeLine{152 std::vector<BBoxInfo> \mbox{\hyperlink{trt__utils_8h_a45e762481b9e65f8387491193bcd2d62}{nonMaximumSuppression}}(\textcolor{keyword}{const} \textcolor{keywordtype}{float} nmsThresh, std::vector<BBoxInfo> binfo);}
+\DoxyCodeLine{153 nvinfer1::ICudaEngine* \mbox{\hyperlink{trt__utils_8h_ae8eb0fe94034053ae9ebb52e614d4739}{loadTRTEngine}}(\textcolor{keyword}{const} std::string planFilePath,\textcolor{comment}{/* PluginFactory* pluginFactory,*/}}
+\DoxyCodeLine{154                                      \mbox{\hyperlink{class_logger}{Logger}}\& logger);}
+\DoxyCodeLine{155 std::vector<float> \mbox{\hyperlink{trt__utils_8h_a77ed00049c38105c28e06119722dc061}{loadWeights}}(\textcolor{keyword}{const} std::string weightsFilePath, \textcolor{keyword}{const} std::string\& networkType);}
+\DoxyCodeLine{156 std::string \mbox{\hyperlink{trt__utils_8h_aed750fa89d08b75ff9a692b191bf4715}{dimsToString}}(\textcolor{keyword}{const} nvinfer1::Dims \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}});}
+\DoxyCodeLine{157 \textcolor{keywordtype}{void} \mbox{\hyperlink{trt__utils_8h_aff66fa220f3baee9755337748eaecfdc}{displayDimType}}(\textcolor{keyword}{const} nvinfer1::Dims \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}});}
+\DoxyCodeLine{158 \textcolor{keywordtype}{int} \mbox{\hyperlink{trt__utils_8h_a7bff9bcbf45a029f18e9a99610cc9249}{getNumChannels}}(nvinfer1::ITensor* t);}
+\DoxyCodeLine{159 uint64\_t \mbox{\hyperlink{trt__utils_8h_a9de629449e53b871ddc700c43c111e06}{get3DTensorVolume}}(nvinfer1::Dims inputDims);}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161 \textcolor{comment}{// Helper functions to create yolo engine}}
+\DoxyCodeLine{162 nvinfer1::ILayer* \mbox{\hyperlink{trt__utils_8h_a62b1daf2ac3defa199e502199ea9f7cb}{netAddMaxpool}}(\textcolor{keywordtype}{int} layerIdx, std::map<std::string, std::string>\& block,}
+\DoxyCodeLine{163                                 nvinfer1::ITensor* input, nvinfer1::INetworkDefinition* \mbox{\hyperlink{structnetwork}{network}});}
+\DoxyCodeLine{164 nvinfer1::ILayer* \mbox{\hyperlink{trt__utils_8h_a5eb9a5f6fe24782a6c3ec767dc1c1efb}{netAddConvLinear}}(\textcolor{keywordtype}{int} layerIdx, std::map<std::string, std::string>\& block,}
+\DoxyCodeLine{165                                    std::vector<float>\& weights,}
+\DoxyCodeLine{166                                    std::vector<nvinfer1::Weights>\& trtWeights, \textcolor{keywordtype}{int}\& weightPtr,}
+\DoxyCodeLine{167                                    \textcolor{keywordtype}{int}\& inputChannels, nvinfer1::ITensor* input,}
+\DoxyCodeLine{168                                    nvinfer1::INetworkDefinition* \mbox{\hyperlink{structnetwork}{network}});}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170 nvinfer1::ILayer* \mbox{\hyperlink{trt__utils_8h_a2b0587f7147a5e01bcbeb04946542f12}{net\_conv\_bn\_mish}}(\textcolor{keywordtype}{int} layerIdx,}
+\DoxyCodeLine{171     std::map<std::string, std::string>\& block,}
+\DoxyCodeLine{172     std::vector<float>\& weights,}
+\DoxyCodeLine{173     std::vector<nvinfer1::Weights>\& trtWeights,}
+\DoxyCodeLine{174     \textcolor{keywordtype}{int}\& weightPtr,}
+\DoxyCodeLine{175     \textcolor{keywordtype}{int}\& inputChannels,}
+\DoxyCodeLine{176     nvinfer1::ITensor* input,}
+\DoxyCodeLine{177     nvinfer1::INetworkDefinition* \mbox{\hyperlink{structnetwork}{network}});}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179 nvinfer1::ILayer* \mbox{\hyperlink{trt__utils_8h_aa9d863781c46745dbd718cc6ff9068b0}{netAddConvBNLeaky}}(\textcolor{keywordtype}{int} layerIdx, std::map<std::string, std::string>\& block,}
+\DoxyCodeLine{180                                     std::vector<float>\& weights,}
+\DoxyCodeLine{181                                     std::vector<nvinfer1::Weights>\& trtWeights, \textcolor{keywordtype}{int}\& weightPtr,}
+\DoxyCodeLine{182                                     \textcolor{keywordtype}{int}\& inputChannels, nvinfer1::ITensor* input,}
+\DoxyCodeLine{183                                     nvinfer1::INetworkDefinition* \mbox{\hyperlink{structnetwork}{network}});}
+\DoxyCodeLine{184 nvinfer1::ILayer* \mbox{\hyperlink{trt__utils_8h_afa21b244a61df4b22aa84632fb1479bd}{netAddUpsample}}(\textcolor{keywordtype}{int} layerIdx, std::map<std::string, std::string>\& block,}
+\DoxyCodeLine{185                                  std::vector<float>\& weights,}
+\DoxyCodeLine{186                                  std::vector<nvinfer1::Weights>\& trtWeights, \textcolor{keywordtype}{int}\& inputChannels,}
+\DoxyCodeLine{187                                  nvinfer1::ITensor* input, nvinfer1::INetworkDefinition* \mbox{\hyperlink{structnetwork}{network}});}
+\DoxyCodeLine{188 \textcolor{keywordtype}{void} \mbox{\hyperlink{trt__utils_8h_ae8916d83be16511bbe571ea56c040b5a}{printLayerInfo}}(std::string layerIndex, std::string layerName, std::string layerInput,}
+\DoxyCodeLine{189                     std::string layerOutput, std::string weightPtr);}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191 nvinfer1::ILayer * \mbox{\hyperlink{trt__utils_8h_a1a359d8589c73e577d53e25f9b215bf8}{layer\_split}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int} n\_layer\_index\_,}
+\DoxyCodeLine{192     nvinfer1::ITensor *input\_,}
+\DoxyCodeLine{193     nvinfer1::INetworkDefinition* \mbox{\hyperlink{structnetwork}{network}});}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{195 std::vector<int> \mbox{\hyperlink{trt__utils_8h_a92fa92cf8203fd79df2242436943502e}{parse\_int\_list}}(\textcolor{keyword}{const} std::string s\_args\_);}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{197 nvinfer1::ILayer* \mbox{\hyperlink{trt__utils_8h_a3ab89a0c81092b4ef6ce96143240046e}{layer\_focus}}(std::vector<nvinfer1::Weights> \&trtWeights\_,}
+\DoxyCodeLine{198     std::string s\_model\_name\_,}
+\DoxyCodeLine{199     std::map<std::string, std::vector<float>>\& map\_wts\_,}
+\DoxyCodeLine{200     nvinfer1::ITensor* input,}
+\DoxyCodeLine{201     \textcolor{keyword}{const} \textcolor{keywordtype}{int} out\_channels\_,}
+\DoxyCodeLine{202     \textcolor{keyword}{const} \textcolor{keywordtype}{int} kernel\_size\_,}
+\DoxyCodeLine{203     std::vector<nvinfer1::Weights>\& trtWeights,}
+\DoxyCodeLine{204     nvinfer1::INetworkDefinition* \mbox{\hyperlink{structnetwork}{network}});}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{206 nvinfer1::ILayer * \mbox{\hyperlink{trt__utils_8h_ada50d58a8ecef3548376803281f6565c}{layer\_conv\_bn\_act}}(std::vector<nvinfer1::Weights> \&trtWeights\_,}
+\DoxyCodeLine{207     \textcolor{keyword}{const} std::string s\_layer\_name\_,}
+\DoxyCodeLine{208     std::map<std::string, std::vector<float>> \&vec\_wts\_,\textcolor{comment}{//conv-\/bn}}
+\DoxyCodeLine{209     nvinfer1::ITensor* input\_,}
+\DoxyCodeLine{210     nvinfer1::INetworkDefinition* network\_,}
+\DoxyCodeLine{211     \textcolor{keyword}{const} \textcolor{keywordtype}{int} n\_filters\_,}
+\DoxyCodeLine{212     \textcolor{keyword}{const} \textcolor{keywordtype}{int} n\_kernel\_size\_ = 3,}
+\DoxyCodeLine{213     \textcolor{keyword}{const} \textcolor{keywordtype}{int} n\_stride\_ = 1,}
+\DoxyCodeLine{214     \textcolor{keyword}{const} \textcolor{keywordtype}{int} group\_ =1,}
+\DoxyCodeLine{215     \textcolor{keyword}{const} \textcolor{keywordtype}{bool} b\_padding\_ = \textcolor{keyword}{true},}
+\DoxyCodeLine{216     \textcolor{keyword}{const} \textcolor{keywordtype}{bool} b\_bn\_ = \textcolor{keyword}{true},}
+\DoxyCodeLine{217     \textcolor{keyword}{const} std::string s\_act\_ = \textcolor{stringliteral}{"{}silu"{}});}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219 nvinfer1::ILayer * \mbox{\hyperlink{trt__utils_8h_ae3aa46de667dd2361caf32ea9760e1cb}{layer\_act}}(nvinfer1::ITensor* input\_,}
+\DoxyCodeLine{220     nvinfer1::INetworkDefinition* network\_,}
+\DoxyCodeLine{221     \textcolor{keyword}{const} std::string s\_act\_ = \textcolor{stringliteral}{"{}silu"{}});}
+\DoxyCodeLine{222 }
+\DoxyCodeLine{223 nvinfer1::ILayer * \mbox{\hyperlink{trt__utils_8h_a9455dd90e3da264919bb6ede2085571e}{C3}}(std::vector<nvinfer1::Weights> \&trtWeights\_,}
+\DoxyCodeLine{224     std::string s\_model\_name\_,}
+\DoxyCodeLine{225     std::map<std::string, std::vector<float>> \&map\_wts\_,}
+\DoxyCodeLine{226     nvinfer1::INetworkDefinition* network\_,}
+\DoxyCodeLine{227     nvinfer1::ITensor* input\_,}
+\DoxyCodeLine{228     \textcolor{keyword}{const} \textcolor{keywordtype}{int} c2\_,}
+\DoxyCodeLine{229     \textcolor{keyword}{const} \textcolor{keywordtype}{int} n\_depth\_ = 1,}
+\DoxyCodeLine{230     \textcolor{keyword}{const} \textcolor{keywordtype}{bool} b\_short\_cut\_ = \textcolor{keyword}{true},}
+\DoxyCodeLine{231     \textcolor{keyword}{const} \textcolor{keywordtype}{int} group\_ = 1,}
+\DoxyCodeLine{232     \textcolor{keyword}{const} \textcolor{keywordtype}{float} e\_ = 0.5);}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{234 nvinfer1::ILayer * \mbox{\hyperlink{trt__utils_8h_a76fd0d87e61ab0e7bb68032caf9cfde4}{layer\_bottleneck\_csp}}(std::vector<nvinfer1::Weights> \&trtWeights\_,}
+\DoxyCodeLine{235     std::string s\_model\_name\_,}
+\DoxyCodeLine{236     std::map<std::string, std::vector<float>> \&map\_wts\_,}
+\DoxyCodeLine{237     nvinfer1::INetworkDefinition* network\_,}
+\DoxyCodeLine{238     nvinfer1::ITensor* input\_,}
+\DoxyCodeLine{239     \textcolor{keyword}{const} \textcolor{keywordtype}{int} c2\_,}
+\DoxyCodeLine{240     \textcolor{keyword}{const} \textcolor{keywordtype}{int} n\_depth\_ = 1,}
+\DoxyCodeLine{241     \textcolor{keyword}{const} \textcolor{keywordtype}{bool} b\_short\_cut\_ = \textcolor{keyword}{true},}
+\DoxyCodeLine{242     \textcolor{keyword}{const} \textcolor{keywordtype}{int} group\_ = 1,}
+\DoxyCodeLine{243     \textcolor{keyword}{const} \textcolor{keywordtype}{float} e\_ = 0.5);}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{245 nvinfer1::ILayer * \mbox{\hyperlink{trt__utils_8h_a1adb16a0d6e7d1c22d9f73fb74732d09}{layer\_spp}}(std::vector<nvinfer1::Weights> \&trtWeights\_,}
+\DoxyCodeLine{246     std::string s\_model\_name\_,}
+\DoxyCodeLine{247     std::map<std::string, std::vector<float>> \&map\_wts\_,}
+\DoxyCodeLine{248     nvinfer1::INetworkDefinition* network\_,}
+\DoxyCodeLine{249     nvinfer1::ITensor* input\_,}
+\DoxyCodeLine{250     \textcolor{keyword}{const} \textcolor{keywordtype}{int} c2\_,}
+\DoxyCodeLine{251     \textcolor{keyword}{const} std::vector<int> \&vec\_args\_);}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{253 nvinfer1::ILayer * \mbox{\hyperlink{trt__utils_8h_a11405f4d7148539c986372291d834b02}{layer\_sppf}}(std::vector<nvinfer1::Weights> \&trtWeights\_,}
+\DoxyCodeLine{254     std::string s\_model\_name\_,}
+\DoxyCodeLine{255     std::map<std::string, std::vector<float>> \&map\_wts\_,}
+\DoxyCodeLine{256     nvinfer1::INetworkDefinition* network\_,}
+\DoxyCodeLine{257     nvinfer1::ITensor* input\_,}
+\DoxyCodeLine{258     \textcolor{keyword}{const} \textcolor{keywordtype}{int} c2\_,}
+\DoxyCodeLine{259     \textcolor{keywordtype}{int} k\_);}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{261 nvinfer1::ILayer *\mbox{\hyperlink{trt__utils_8h_ab2b50679d0e2f13ea1855357a85ef94f}{layer\_upsample}}(std::string s\_model\_name\_,}
+\DoxyCodeLine{262     std::map<std::string, std::vector<float>> \&map\_wts\_,}
+\DoxyCodeLine{263     nvinfer1::INetworkDefinition* network\_,}
+\DoxyCodeLine{264     nvinfer1::ITensor* input\_,}
+\DoxyCodeLine{265     \textcolor{keyword}{const} \textcolor{keywordtype}{int} n\_scale\_);}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{267 nvinfer1::ILayer * \mbox{\hyperlink{trt__utils_8h_a42e263a5c641d27c06dc5edeca3fcc1e}{layer\_conv}}(std::vector<nvinfer1::Weights> \&trtWeights\_,}
+\DoxyCodeLine{268     \textcolor{keyword}{const} std::string s\_layer\_name\_,}
+\DoxyCodeLine{269     std::map<std::string, std::vector<float>>\&vec\_wts\_,\textcolor{comment}{//conv-\/bn}}
+\DoxyCodeLine{270     nvinfer1::ITensor* input\_,}
+\DoxyCodeLine{271     nvinfer1::INetworkDefinition* network\_,}
+\DoxyCodeLine{272     \textcolor{keyword}{const} \textcolor{keywordtype}{int} n\_filters\_,}
+\DoxyCodeLine{273     \textcolor{keyword}{const} \textcolor{keywordtype}{int} n\_kernel\_size\_,}
+\DoxyCodeLine{274     \textcolor{keyword}{const} \textcolor{keywordtype}{int} n\_stride\_ = 1,}
+\DoxyCodeLine{275     \textcolor{keyword}{const} \textcolor{keywordtype}{bool} b\_bias\_ = \textcolor{keyword}{false},}
+\DoxyCodeLine{276     \textcolor{keyword}{const} \textcolor{keywordtype}{int} group\_ = 1,}
+\DoxyCodeLine{277     \textcolor{keyword}{const} \textcolor{keywordtype}{bool} b\_padding\_ = \textcolor{keyword}{true});}
+\DoxyCodeLine{278 std::vector<int> \mbox{\hyperlink{trt__utils_8h_a7154a8b2287fe450e29b0b3c9184af3c}{dims2chw}}(\textcolor{keyword}{const} nvinfer1::Dims \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}});}
+\DoxyCodeLine{279 }
+\DoxyCodeLine{280 }
+\DoxyCodeLine{281 }
+\DoxyCodeLine{282 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

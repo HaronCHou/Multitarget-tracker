@@ -1,0 +1,251 @@
+\href{https://github.com/Nuzhny007/Multitarget-tracker/actions?query=workflow\%3Abuild-Ubuntu}{\texttt{ }} \href{https://github.com/Smorodov/Multitarget-tracker/actions?query=workflow\%3ACodeQL}{\texttt{ }}\hypertarget{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md0}{}\doxysection{Last changes}\label{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md0}
+
+\begin{DoxyItemize}
+\item Tensor\+RT 8 for YOLO detectors
+\item Re-\/identification embeddings for persons and vehicles from Open\+VINO correctly works!
+\end{DoxyItemize}\hypertarget{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md1}{}\doxysection{New videos!}\label{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md1}
+
+\begin{DoxyItemize}
+\item Vehicles speed calculation with YOLO v4 (Thanks \href{https://medium.com/hal24k-techblog/how-to-track-objects-in-the-real-world-with-tensorflow-sort-and-opencv-a64d9564ccb1}{\texttt{ Sam Blake for great idea!}})
+\end{DoxyItemize}
+
+\href{https://youtu.be/qOHYvDwpsO0}{\texttt{ }}
+
+
+\begin{DoxyItemize}
+\item First step to ADAS with YOLO v4
+\end{DoxyItemize}
+
+\href{https://youtu.be/5cgg5fy90Xg}{\texttt{ }}\hypertarget{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md2}{}\doxysection{Multitarget (multiple objects) tracker}\label{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md2}
+\hypertarget{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md3}{}\doxyparagraph{1. Objects detector can be created with function $<$a href=\char`\"{}https\+://github.\+com/\+Smorodov/\+Multitarget-\/tracker/blob/master/src/\+Detector/\+Base\+Detector.\+cpp\char`\"{} $>$\+Create\+Detector$<$/a$>$ with different values of the detector\+Type\+:}\label{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md3}
+1.\+1. Based on background substraction\+: built-\/in Vibe (\mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a87b70978153a0274b03015d9390db7ae}{tracking\+::\+Motion\+\_\+\+VIBE}}), Su\+BSENSE (\mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760ad699aae73e9117bdd3aee641a3a6e7fe}{tracking\+::\+Motion\+\_\+\+Su\+BSENSE}}) and LOBSTER (\mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a9d3afb434e136e0b4e413cca1d893484}{tracking\+::\+Motion\+\_\+\+LOBSTER}}); MOG2 (\mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a44ff25b64c66d3d3700ffbfa5b8b9330}{tracking\+::\+Motion\+\_\+\+MOG2}}) from \href{https://github.com/opencv/opencv/blob/master/modules/video/include/opencv2/video/background_segm.hpp}{\texttt{ opencv}}; MOG (\mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a924d297b40e8c4518aa2e0553f6f8f61}{tracking\+::\+Motion\+\_\+\+MOG}}), GMG (\mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760aff944e05b5f591282b599c4d97ab8ab0}{tracking\+::\+Motion\+\_\+\+GMG}}) and CNT (\mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760af40f12386e08503dd5d82774d5e36617}{tracking\+::\+Motion\+\_\+\+CNT}}) from \href{https://github.com/opencv/opencv_contrib/tree/master/modules/bgsegm}{\texttt{ opencv\+\_\+contrib}}. For foreground segmentation used contours from Open\+CV with result as cv\+::\+Rotated\+Rect
+
+1.\+2. Haar face detector from Open\+CV (\mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a4988e24edd891887cab51c40c8766469}{tracking\+::\+Face\+\_\+\+HAAR}})
+
+1.\+3. HOG pedestrian detector from Open\+CV (\mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a115099e7e10e6d96d1d98c2b49846deb}{tracking\+::\+Pedestrian\+\_\+\+HOG}}) and C4 pedestrian detector from \href{https://github.com/sturkmen72/C4-Real-time-pedestrian-detection}{\texttt{ sturkmen72}} (\mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a9ac24174fd8e83cd08a363fdac49d0d4}{tracking\+::\+Pedestrian\+\_\+\+C4}})
+
+1.\+4. Detector based on opencv\+\_\+dnn (\mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760abdea7a6f6616904879fd0eb85f951dbb}{tracking\+::\+DNN\+\_\+\+OCV}}) and pretrained models from \href{https://github.com/chuanqi305/MobileNet-SSD}{\texttt{ chuanqi305}} and \href{https://pjreddie.com/darknet/yolo/}{\texttt{ pjreddie}}
+
+1.\+5. YOLO detector (\mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a92cb97c8c0003db338921cb8433c3855}{tracking\+::\+Yolo\+\_\+\+Darknet}}) with darknet inference from \href{https://github.com/AlexeyAB/darknet}{\texttt{ Alexey\+AB}} and pretrained models from \href{https://pjreddie.com/darknet/yolo/}{\texttt{ pjreddie}}
+
+1.\+6. YOLO detector (\mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760ae4a5051b95e76d3619192fc72b1f076f}{tracking\+::\+Yolo\+\_\+\+Tensor\+RT}}) with NVidia Tensor\+RT inference from \href{https://github.com/enazoe/yolo-tensorrt}{\texttt{ enazoe}} and pretrained models from \href{https://pjreddie.com/darknet/yolo/}{\texttt{ pjreddie}}
+
+1.\+7. You can to use custom detector with bounding or rotated rectangle as output.\hypertarget{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md4}{}\doxyparagraph{2. Matching or solve an $<$a href=\char`\"{}https\+://github.\+com/\+Smorodov/\+Multitarget-\/tracker/blob/master/src/\+Tracker/\+Ctracker.\+h\char`\"{} $>$assignment problem$<$/a$>$\+:}\label{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md4}
+2.\+1. Hungrian algorithm (\mbox{\hyperlink{namespacetracking_a491e50c9261ab820965d871a217d4f13a8c97315e46df8c0716a9538655fc967d}{tracking\+::\+Match\+Hungrian}}) with cubic time O(\+N$^\wedge$3) where N is objects count
+
+2.\+2. Algorithm based on weighted bipartite graphs (\mbox{\hyperlink{namespacetracking_a491e50c9261ab820965d871a217d4f13a41d2324dafb3393ff2cb54671c8b06ef}{tracking\+::\+Match\+Bipart}}) from \href{https://github.com/rdmpage/maximum-weighted-bipartite-matching}{\texttt{ rdmpage}} with time O(\+M $\ast$ N$^\wedge$2) where N is objects count and M is connections count between detections on frame and tracking objects. It can be faster than Hungrian algorithm
+
+2.\+3. \href{https://github.com/Smorodov/Multitarget-tracker/blob/master/src/Tracker/Ctracker.h}{\texttt{ Distance}} from detections and objects\+: euclidean distance in pixels between centers (\mbox{\hyperlink{namespacetracking_a55743c5e18b9b228c4ba2587260b2502a30176bdc0b4f965c6812767a2fa52e1e}{tracking\+::\+Dist\+Centers}}), euclidean distance in pixels between rectangles (\mbox{\hyperlink{namespacetracking_a55743c5e18b9b228c4ba2587260b2502a43af27628a9ee8e94a23c079eab5d448}{tracking\+::\+Dist\+Rects}}), Jaccard or IoU distance from 0 to 1 (\mbox{\hyperlink{namespacetracking_a55743c5e18b9b228c4ba2587260b2502a731b827afcbde6eb19624ad6130b1798}{tracking\+::\+Dist\+Jaccard}})\hypertarget{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md5}{}\doxyparagraph{3. $<$a href=\char`\"{}https\+://github.\+com/\+Smorodov/\+Multitarget-\/tracker/blob/master/src/\+Tracker/\+Ctracker.\+h\char`\"{} $>$\+Smoothing trajectories and predict missed objects$<$/a$>$\+:}\label{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md5}
+3.\+1. Linear Kalman filter from Open\+CV (\mbox{\hyperlink{namespacetracking_a83f2c4d58ea2737f7d6296dce3eb722aa889eca583e371386c92e05814797a885}{tracking\+::\+Kalman\+Linear}})
+
+3.\+2. Unscented Kalman filter from Open\+CV (\mbox{\hyperlink{namespacetracking_a83f2c4d58ea2737f7d6296dce3eb722aa39d914d61ae37e52ad325f55d199dabc}{tracking\+::\+Kalman\+Unscented}}) with constant velocity or constant acceleration models
+
+3.\+3. \href{https://github.com/Smorodov/Multitarget-tracker/blob/master/src/Tracker/Ctracker.h}{\texttt{ Kalman goal}} is only coordinates (\mbox{\hyperlink{namespacetracking_a9b3e7d16c86cd8b781ab214e396b0ebfafac394783c1196957768400bc53ba491}{tracking\+::\+Filter\+Center}}) or coordinates and size (\mbox{\hyperlink{namespacetracking_a9b3e7d16c86cd8b781ab214e396b0ebfabb259eae9513c55b313c553ce6249aea}{tracking\+::\+Filter\+Rect}})
+
+3.\+4. Simple \href{https://github.com/Smorodov/Multitarget-tracker/blob/master/src/Tracker/Ctracker.h}{\texttt{ Abandoned detector}}
+
+3.\+5. \href{https://github.com/Smorodov/Multitarget-tracker/blob/master/src/CarsCounting.cpp}{\texttt{ Line intersection}} counting\hypertarget{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md6}{}\doxyparagraph{4. $<$a href=\char`\"{}https\+://github.\+com/\+Smorodov/\+Multitarget-\/tracker/blob/master/src/\+Tracker/\+Ctracker.\+h\char`\"{} $>$\+Advanced visual search$<$/a$>$ for objects if they have not been detected\+:}\label{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md6}
+4.\+1. No search (\mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a3bd92892a83828375b9fce502732c491}{tracking\+::\+Track\+None}})
+
+4.\+2. Built-\/in DAT (\mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a99099b5754baf71c0dbe2814c1d1ea9c}{tracking\+::\+Track\+DAT}}) from \href{https://github.com/foolwood/DAT}{\texttt{ foolwood}}, STAPLE (\mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a085b9d83f2d86b316f11fc0e65ed5c4e}{tracking\+::\+Track\+STAPLE}}) from \href{https://github.com/xuduo35/STAPLE}{\texttt{ xuduo35}} or LDES (\mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a74f6af365b6cf4ec1616d73cd9f31fb1}{tracking\+::\+Track\+LDES}}) from \href{https://github.com/yfji/LDESCpp}{\texttt{ yfji}}; KCF (\mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a9bba8e4377e562caa976576d47c5eb2e}{tracking\+::\+Track\+KCF}}), MIL (\mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a98b9586c66bb9e4b1e0fed027700a197}{tracking\+::\+Track\+MIL}}), Median\+Flow (\mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a637634260348d3b28ff4e28661bb417a}{tracking\+::\+Track\+Median\+Flow}}), GOTURN (\mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a674ec8effe560545c87b0c14bd40f7f3}{tracking\+::\+Track\+GOTURN}}), MOSSE (\mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3aa3948447c2ea9d8e9efef9b9433c70e2}{tracking\+::\+Track\+MOSSE}}) or CSRT (\mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a78f8ce9e03e5e13064aa3d0358654650}{tracking\+::\+Track\+CSRT}}) from \href{https://github.com/opencv/opencv_contrib/tree/master/modules/tracking}{\texttt{ opencv\+\_\+contrib}}
+
+With this option the tracking can work match slower but more accuracy.\hypertarget{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md7}{}\doxyparagraph{5. Pipeline}\label{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md7}
+5.\+1. Syncronous \href{https://github.com/Smorodov/Multitarget-tracker/blob/master/example/VideoExample.h}{\texttt{ pipeline -\/ Sync\+Process}}\+:
+\begin{DoxyItemize}
+\item get frame from capture device;
+\item decoding;
+\item objects detection (1);
+\item tracking (2-\/4);
+\item show result.
+\end{DoxyItemize}
+
+This pipeline is good if all algorithms are fast and works faster than time between two frames (40 ms for device with 25 fps). Or it can be used if we have only 1 core for all (no parallelization).
+
+5.\+2. Pipeline with \href{https://github.com/Smorodov/Multitarget-tracker/blob/master/example/VideoExample.h}{\texttt{ 2 threads -\/ Async\+Process}}\+:
+\begin{DoxyItemize}
+\item 1th thread takes frame t and makes capture, decoding and objects detection;
+\item 2th thread takes frame t-\/1, results from first thread and makes tracking and results presentation (this is the Main read).
+\end{DoxyItemize}
+
+So we have a latency on 1 frame but on two free CPU cores we can increase performance on 2 times.
+
+5.\+3. Fully \href{https://github.com/Smorodov/Multitarget-tracker/tree/master/async_detector}{\texttt{ acynchronous pipeline}} can be used if the objects detector works with low fps and we have a free 2 CPU cores. In this case we use 4 threads\+:
+\begin{DoxyItemize}
+\item 1th main thread is not busy and used for GUI and result presentation;
+\item 2th thread makes capture and decoding, puts frames in threadsafe queue;
+\item 3th thread is used for objects detection on the newest frame from the queue;
+\item 4th thread is used for objects tracking\+: waits the frame with detection from 3th tread and used advanced visual search (4) in intermediate frames from queue until it ges a frame with detections.
+\end{DoxyItemize}
+
+This pipeline can used with slow but accuracy DNN and track objects in intermediate frame in realtime without latency.
+
+Also you can read \href{https://github.com/Smorodov/Multitarget-tracker/wiki}{\texttt{ Wiki in Russian}}.\hypertarget{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md8}{}\doxyparagraph{Demo Videos}\label{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md8}
+
+\begin{DoxyItemize}
+\item Mouse tracking\+:
+\end{DoxyItemize}
+
+\href{https://www.youtube.com/watch?v=2fW5TmAtAXM}{\texttt{ }}
+
+
+\begin{DoxyItemize}
+\item Motion Detection and tracking\+:
+\end{DoxyItemize}
+
+\href{https://www.youtube.com/watch?v=GjN8jOy4kVw}{\texttt{ }}
+
+
+\begin{DoxyItemize}
+\item Multiple Faces tracking\+:
+\end{DoxyItemize}
+
+\href{https://www.youtube.com/watch?v=j67CFwFtciU}{\texttt{ }}
+
+
+\begin{DoxyItemize}
+\item Simple Abandoned detector\+:
+\end{DoxyItemize}
+
+\href{https://www.youtube.com/watch?v=fpkHRsFzspA}{\texttt{ }}\hypertarget{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md9}{}\doxyparagraph{Tested Platforms}\label{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md9}
+
+\begin{DoxyEnumerate}
+\item Ubuntu Linux 18.\+04 with x86 processors
+\item Ubuntu Linux 18.\+04 with Nvidia Jetson Nano (YOLO + darknet on GPU works!)
+\item Windows 10 (x64 and x32 builds)
+\end{DoxyEnumerate}\hypertarget{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md10}{}\doxyparagraph{Build}\label{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md10}
+
+\begin{DoxyEnumerate}
+\item Download project sources
+\item Install CMake
+\item Install Open\+CV (\href{https://github.com/opencv/opencv}{\texttt{ https\+://github.\+com/opencv/opencv}}) and Open\+CV contrib (\href{https://github.com/opencv/opencv_contrib}{\texttt{ https\+://github.\+com/opencv/opencv\+\_\+contrib}}) repositories
+\item Configure project Cmake\+Lists.\+txt, set Open\+CV\+\_\+\+DIR (-\/DOpen\+CV\+\_\+\+DIR=/path/to/opencv/build).
+\item If opencv\+\_\+contrib don\textquotesingle{}t installed then disable options USE\+\_\+\+OCV\+\_\+\+BGFG=OFF, USE\+\_\+\+OCV\+\_\+\+KCF=OFF and USE\+\_\+\+OCV\+\_\+\+UKF=OFF
+\item If you want to use native darknet YOLO detector with CUDA + cu\+DNN then set BUILD\+\_\+\+YOLO\+\_\+\+LIB=ON (Install first CUDA and cu\+DNN libraries from Nvidia)
+\item If you want to use YOLO detector with Tensor\+RT then set BUILD\+\_\+\+YOLO\+\_\+\+TENSORRT=ON (Install first Tensor\+RT library from Nvidia)
+\item For building example with low fps detector (now native darknet YOLO detector) and Tracker worked on each frame\+: BUILD\+\_\+\+ASYNC\+\_\+\+DETECTOR=ON
+\item For building example with line crossing detection (cars counting)\+: BUILD\+\_\+\+CARS\+\_\+\+COUNTING=ON
+\item Go to the build directory and run make
+\end{DoxyEnumerate}
+
+{\bfseries{Full build\+:}} \begin{DoxyVerb}       git clone https://github.com/Smorodov/Multitarget-tracker.git
+       cd Multitarget-tracker
+       mkdir build
+       cd build
+       cmake . .. -DUSE_OCV_BGFG=ON -DUSE_OCV_KCF=ON -DUSE_OCV_UKF=ON -DBUILD_YOLO_LIB=ON -DBUILD_YOLO_TENSORRT=ON -DBUILD_ASYNC_DETECTOR=ON -DBUILD_CARS_COUNTING=ON
+       make -j
+\end{DoxyVerb}
+ How to run cmake on Windows for Visual Studio 15 2017 Win64\+: \href{https://github.com/Smorodov/Multitarget-tracker/blob/master/data/cmake_vs2017.bat}{\texttt{ example}}. You need to add directory with cmake.\+exe to PATH and change build params in cmake.\+bat
+
+{\bfseries{Usage\+:}} \begin{DoxyVerb}       Usage:
+         ./MultitargetTracker <path to movie file> [--example]=<number of example 0..7> [--start_frame]=<start a video from this position> [--end_frame]=<play a video to this position> [--end_delay]=<delay in milliseconds after video ending> [--out]=<name of result video file> [--show_logs]=<show logs> [--gpu]=<use OpenCL> [--async]=<async pipeline> [--res]=<csv log file> [--settings]=<ini file> [--batch_size=<number of frames>]
+         ./MultitargetTracker ../data/atrium.avi -e=1 -o=../data/atrium_motion.avi
+       Press:
+       * 'm' key for change mode: play|pause. When video is paused you can press any key for get next frame.
+       * Press Esc to exit from video
+
+       Params:
+       1. Movie file, for example ../data/atrium.avi
+       2. [Optional] Number of example: 0 - MouseTracking, 1 - MotionDetector, 2 - FaceDetector, 3 - PedestrianDetector, 4 - OpenCV dnn objects detector, 5 - Yolo Darknet detector, 6 - YOLO TensorRT Detector, Cars counting
+          -e=0 or --example=1
+       3. [Optional] Frame number to start a video from this position
+          -sf=0 or --start_frame==1500
+       4. [Optional] Play a video to this position (if 0 then played to the end of file)
+          -ef=0 or --end_frame==200
+       5. [Optional] Delay in milliseconds after video ending
+          -ed=0 or --end_delay=1000
+       6. [Optional] Name of result video file
+          -o=out.avi or --out=result.mp4
+       7. [Optional] Show Trackers logs in terminal
+          -sl=1 or --show_logs=0
+       8. [Optional] Use built-in OpenCL
+          -g=1 or --gpu=0
+       9. [Optional] Use 2 threads for processing pipeline
+          -a=1 or --async=0
+       10. [Optional] Path to the csv file with tracking result
+          -r=res.csv or --res=res.csv
+       11. [Optional] Path to the ini file with tracker settings
+          -s=settings.ini or --settings=settings.ini
+       12. [Optional] Batch size - simultaneous detection on several consecutive frames
+          -bs=2 or --batch_size=1
+\end{DoxyVerb}
+ More details here\+: \href{https://github.com/Smorodov/Multitarget-tracker/wiki/Run-examples}{\texttt{ How to run examples}}.\hypertarget{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md11}{}\doxyparagraph{Using MT Tracking as a library in your CMake project}\label{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md11}
+Build MTTracking in the usual way, and choose an installation prefix where the library will be installed (see \href{https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html}{\texttt{ CMake Documentation}} for the defaults).
+
+In the {\ttfamily build} directory run 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$ cmake -\/-\/install .}
+
+\end{DoxyCode}
+ This will generate the CMake files needed to find the MTTracking package with libraries and include files for your project. E.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{MTTrackingConfig.cmake}
+\DoxyCodeLine{MTTrackingConfigVersion.cmake}
+\DoxyCodeLine{MTTrackingTargets.cmake}
+
+\end{DoxyCode}
+
+
+In your CMake project, do the following\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{find\_package(MTTracking REQUIRED)}
+\DoxyCodeLine{target\_include\_directories(MyProjectTarget PUBLIC \$\{MTTracking\_INCLUDE\_DIR\})}
+\DoxyCodeLine{target\_link\_libraries(MyProjectTarget PUBLIC MTTracking::mtracking MTTracking::mdetection)}
+
+\end{DoxyCode}
+
+
+You may need to provide CMake with the location to find the above {\ttfamily .cmake} files, e.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\$ cmake -\/DMTTracking\_DIR=<location\_of\_cmake\_files> ..}
+
+\end{DoxyCode}
+
+
+If CMake succeeds at finding the package, you can use MTTracking in your project e.\+g. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#include <mtracking/Ctracker.h>}
+\DoxyCodeLine{//...}
+\DoxyCodeLine{    std::unique\_ptr<BaseTracker> m\_tracker;}
+\DoxyCodeLine{}
+\DoxyCodeLine{    TrackerSettings settings;}
+\DoxyCodeLine{    settings.SetDistance(tracking::DistJaccard);}
+\DoxyCodeLine{    m\_tracker = BaseTracker::CreateTracker(settings);}
+\DoxyCodeLine{//...}
+
+\end{DoxyCode}
+ And so on.\hypertarget{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md12}{}\doxyparagraph{Thirdparty libraries}\label{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md12}
+
+\begin{DoxyItemize}
+\item Open\+CV (and contrib)\+: \href{https://github.com/opencv/opencv}{\texttt{ https\+://github.\+com/opencv/opencv}} and \href{https://github.com/opencv/opencv_contrib}{\texttt{ https\+://github.\+com/opencv/opencv\+\_\+contrib}}
+\item Vibe\+: \href{https://github.com/BelBES/VIBE}{\texttt{ https\+://github.\+com/\+Bel\+BES/\+VIBE}}
+\item Su\+BSENSE and LOBSTER\+: \href{https://github.com/ethereon/subsense}{\texttt{ https\+://github.\+com/ethereon/subsense}}
+\item \mbox{\hyperlink{namespace_g_t_l}{GTL}}\+: \href{https://github.com/rdmpage/graph-template-library}{\texttt{ https\+://github.\+com/rdmpage/graph-\/template-\/library}}
+\item MWBM\+: \href{https://github.com/rdmpage/maximum-weighted-bipartite-matching}{\texttt{ https\+://github.\+com/rdmpage/maximum-\/weighted-\/bipartite-\/matching}}
+\item Pedestrians detector\+: \href{https://github.com/sturkmen72/C4-Real-time-pedestrian-detection}{\texttt{ https\+://github.\+com/sturkmen72/\+C4-\/\+Real-\/time-\/pedestrian-\/detection}}
+\item Non Maximum Suppression\+: \href{https://github.com/Nuzhny007/Non-Maximum-Suppression}{\texttt{ https\+://github.\+com/\+Nuzhny007/\+Non-\/\+Maximum-\/\+Suppression}}
+\item Mobile\+Net SSD models\+: \href{https://github.com/chuanqi305/MobileNet-SSD}{\texttt{ https\+://github.\+com/chuanqi305/\+Mobile\+Net-\/\+SSD}}
+\item YOLO v3 models\+: \href{https://pjreddie.com/darknet/yolo/}{\texttt{ https\+://pjreddie.\+com/darknet/yolo/}}
+\item Darknet inference and YOLO v4 models\+: \href{https://github.com/AlexeyAB/darknet}{\texttt{ https\+://github.\+com/\+Alexey\+AB/darknet}}
+\item NVidia Tensor\+RT inference and YOLO v5 models\+: \href{https://github.com/enazoe/yolo-tensorrt}{\texttt{ https\+://github.\+com/enazoe/yolo-\/tensorrt}}
+\item GOTURN models\+: \href{https://github.com/opencv/opencv_extra/tree/c4219d5eb3105ed8e634278fad312a1a8d2c182d/testdata/tracking}{\texttt{ https\+://github.\+com/opencv/opencv\+\_\+extra/tree/c4219d5eb3105ed8e634278fad312a1a8d2c182d/testdata/tracking}}
+\item DAT tracker\+: \href{https://github.com/foolwood/DAT}{\texttt{ https\+://github.\+com/foolwood/\+DAT}}
+\item STAPLE tracker\+: \href{https://github.com/xuduo35/STAPLE}{\texttt{ https\+://github.\+com/xuduo35/\+STAPLE}}
+\item LDES tracker\+: \href{https://github.com/yfji/LDESCpp}{\texttt{ https\+://github.\+com/yfji/\+LDESCpp}}
+\item Ini file parser\+: \href{https://github.com/benhoyt/inih}{\texttt{ https\+://github.\+com/benhoyt/inih}}
+\end{DoxyItemize}\hypertarget{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md13}{}\doxyparagraph{License}\label{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md13}
+Apache 2.\+0\+: \href{https://github.com/Smorodov/Multitarget-tracker/blob/master/LICENSE}{\texttt{ LICENSE text}}\hypertarget{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md14}{}\doxyparagraph{Project cititations}\label{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e_autotoc_md14}
+
+\begin{DoxyEnumerate}
+\item Jeroen PROVOOST \char`\"{}\+Camera gebaseerde analysevan de verkeersstromen aaneen kruispunt\char`\"{}, 2014 ( \href{https://iiw.kuleuven.be/onderzoek/eavise/mastertheses/provoost.pdf}{\texttt{ https\+://iiw.\+kuleuven.\+be/onderzoek/eavise/mastertheses/provoost.\+pdf}} )
+\item Roberto Ciano, Dimitrij Klesev \char`\"{}\+Autonome Roboterschwarme in geschlossenen Raumen\char`\"{}, 2015 ( \href{https://www.hs-furtwangen.de/fileadmin/user_upload/fak_IN/Dokumente/Forschung_InformatikJournal/informatikJournal_2016.pdf\#page=18}{\texttt{ https\+://www.\+hs-\/furtwangen.\+de/fileadmin/user\+\_\+upload/fak\+\_\+\+IN/\+Dokumente/\+Forschung\+\_\+\+Informatik\+Journal/informatik\+Journal\+\_\+2016.\+pdf\#page=18}} )
+\item Wenda Qin, Tian Zhang, Junhe Chen \char`\"{}\+Traffic Monitoring By Video\+: Vehicles Tracking and Vehicle Data Analysing\char`\"{}, 2016 ( \href{http://cs-people.bu.edu/wdqin/FinalProject/CS585\%20FinalProjectReport.html}{\texttt{ http\+://cs-\/people.\+bu.\+edu/wdqin/\+Final\+Project/\+CS585\%20\+Final\+Project\+Report.\+html}} )
+\item Ipek BARIS \char`\"{}\+CLASSIFICATION AND TRACKING OF VEHICLES WITH HYBRID CAMERA SYSTEMS\char`\"{}, 2016 ( \href{http://cvrg.iyte.edu.tr/publications/IpekBaris_MScThesis.pdf}{\texttt{ http\+://cvrg.\+iyte.\+edu.\+tr/publications/\+Ipek\+Baris\+\_\+\+MSc\+Thesis.\+pdf}} )
+\item Cheng-\/\+Ta Lee, Albert Y. Chen, Cheng-\/\+Yi Chang \char`\"{}\+In-\/building Coverage of Automated External Defibrillators Considering Pedestrian Flow\char`\"{}, 2016 ( \href{http://www.see.eng.osaka-u.ac.jp/seeit/icccbe2016/Proceedings/Full_Papers/092-132.pdf}{\texttt{ http\+://www.\+see.\+eng.\+osaka-\/u.\+ac.\+jp/seeit/icccbe2016/\+Proceedings/\+Full\+\_\+\+Papers/092-\/132.\+pdf}} )
+\item Roberto Ciano, Dimitrij Klesev \char`\"{}\+Autonome Roboterschwarme in geschlossenen Raumen\char`\"{} in \char`\"{}informatik\+Journal 2016/17\char`\"{}, 2017 ( \href{https://docplayer.org/124538994-2016-17-informatikjournal-2016-17-aktuelle-berichte-aus-forschung-und-lehre-der-fakultaet-informatik.html}{\texttt{ https\+://docplayer.\+org/124538994-\/2016-\/17-\/informatikjournal-\/2016-\/17-\/aktuelle-\/berichte-\/aus-\/forschung-\/und-\/lehre-\/der-\/fakultaet-\/informatik.\+html}} )
+\item Omid Noorshams \char`\"{}\+Automated systems to assess weights and activity in grouphoused mice\char`\"{}, 2017 ( \href{https://pdfs.semanticscholar.org/e5ff/f04b4200c149fb39d56f171ba7056ab798d3.pdf}{\texttt{ https\+://pdfs.\+semanticscholar.\+org/e5ff/f04b4200c149fb39d56f171ba7056ab798d3.\+pdf}} )
+\item RADEK VOPÁ\+LENSKÝ \char`\"{}\+DETECTION,\+TRACKING AND CLASSIFICATION OF VEHICLES\char`\"{}, 2018 ( \href{https://www.vutbr.cz/www_base/zav_prace_soubor_verejne.php?file_id=181063}{\texttt{ https\+://www.\+vutbr.\+cz/www\+\_\+base/zav\+\_\+prace\+\_\+soubor\+\_\+verejne.\+php?file\+\_\+id=181063}} )
+\item Márk Rátosi, Gyula Simon \char`\"{}\+Real-\/\+Time Localization and Tracking  using Visible Light Communication\char`\"{}, 2018 ( \href{https://ieeexplore.ieee.org/abstract/document/8533800}{\texttt{ https\+://ieeexplore.\+ieee.\+org/abstract/document/8533800}} )
+\item Thi Nha Ngo, Kung-\/\+Chin Wu, En-\/\+Cheng Yang, Ta-\/\+Te Lin \char`\"{}\+Areal-\/time imaging system for multiple honey bee tracking and activity monitoring\char`\"{}, 2019 ( \href{https://www.sciencedirect.com/science/article/pii/S0168169919301498}{\texttt{ https\+://www.\+sciencedirect.\+com/science/article/pii/\+S0168169919301498}} )
+\item Tiago Miguel, Rodrigues de Almeida \char`\"{}\+Multi-\/\+Camera and Multi-\/\+Algorithm Architecture for Visual\+Perception onboard the ATLASCAR2\char`\"{}, 2019 ( \href{http://lars.mec.ua.pt/public/LAR\%20Projects/Vision/2019_TiagoAlmeida/Thesis_Tiago_AlmeidaVF_26Jul2019.pdf}{\texttt{ http\+://lars.\+mec.\+ua.\+pt/public/\+LAR\%20\+Projects/\+Vision/2019\+\_\+\+Tiago\+Almeida/\+Thesis\+\_\+\+Tiago\+\_\+\+Almeida\+VF\+\_\+26\+Jul2019.\+pdf}} )
+\item ROS, \href{http://docs.ros.org/lunar/api/costmap_converter/html/Ctracker_8cpp_source.html}{\texttt{ http\+://docs.\+ros.\+org/lunar/api/costmap\+\_\+converter/html/\+Ctracker\+\_\+8cpp\+\_\+source.\+html}} 
+\end{DoxyEnumerate}

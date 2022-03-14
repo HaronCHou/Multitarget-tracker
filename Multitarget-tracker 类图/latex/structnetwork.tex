@@ -1,0 +1,987 @@
+\hypertarget{structnetwork}{}\doxysection{network结构体 参考}
+\label{structnetwork}\index{network@{network}}
+
+
+{\ttfamily \#include $<$darknet.\+h$>$}
+
+
+
+network 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=327pt]{structnetwork__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 属性}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{structnetwork_a1c7625720955322d05924a075d013877}{n}}
+\item 
+int \mbox{\hyperlink{structnetwork_a04f448f3f8c3f1314e2b23b429bec827}{batch}}
+\item 
+uint64\+\_\+t $\ast$ \mbox{\hyperlink{structnetwork_af8bfbe8d3d66b2d759e9ad725af2f91c}{seen}}
+\item 
+float $\ast$ \mbox{\hyperlink{structnetwork_a0a54507f5ed082627370e5fca67d177d}{badlabels\+\_\+reject\+\_\+threshold}}
+\item 
+float $\ast$ \mbox{\hyperlink{structnetwork_ab80d80d344f0b84ea46f576f4adc008e}{delta\+\_\+rolling\+\_\+max}}
+\item 
+float $\ast$ \mbox{\hyperlink{structnetwork_a55a879319ae656fbd0e89eee73da8b44}{delta\+\_\+rolling\+\_\+avg}}
+\item 
+float $\ast$ \mbox{\hyperlink{structnetwork_a8bbf10f80fc4d110e6a7fc405f17d555}{delta\+\_\+rolling\+\_\+std}}
+\item 
+int \mbox{\hyperlink{structnetwork_a99b87633f58f386713b3d0397b4c0dd6}{weights\+\_\+reject\+\_\+freq}}
+\item 
+int \mbox{\hyperlink{structnetwork_a130f7de05202083e2415f20e612e190c}{equidistant\+\_\+point}}
+\item 
+float \mbox{\hyperlink{structnetwork_a2f18836ae0a3062028725706fbac42b2}{badlabels\+\_\+rejection\+\_\+percentage}}
+\item 
+float \mbox{\hyperlink{structnetwork_a1d8e47052ed164db0f722ef285f4e127}{num\+\_\+sigmas\+\_\+reject\+\_\+badlabels}}
+\item 
+float \mbox{\hyperlink{structnetwork_a7b81ad2bc1d89ef605109f9270cfffee}{ema\+\_\+alpha}}
+\item 
+int $\ast$ \mbox{\hyperlink{structnetwork_a9fe172363bf2b19369280210608b1577}{cur\+\_\+iteration}}
+\item 
+float \mbox{\hyperlink{structnetwork_a3b16ca93b69637c4e76bb8ac3749c840}{loss\+\_\+scale}}
+\item 
+int $\ast$ \mbox{\hyperlink{structnetwork_a185b52d74237f3cd32d2d0186d2d2f5b}{t}}
+\item 
+float \mbox{\hyperlink{structnetwork_a7b16b097d1814258e82b58d663692875}{epoch}}
+\item 
+int \mbox{\hyperlink{structnetwork_ab30643da07e0f787ee0cd2058cd41a6e}{subdivisions}}
+\item 
+\mbox{\hyperlink{structlayer}{layer}} $\ast$ \mbox{\hyperlink{structnetwork_a9770423f88b722bafc9d1fd3c6091d75}{layers}}
+\item 
+float $\ast$ \mbox{\hyperlink{structnetwork_a274dce0db2d5175992eb3b273ab09df7}{output}}
+\item 
+\mbox{\hyperlink{darknet_8h_a9c2ce38711c59085616b738d2aa21184}{learning\+\_\+rate\+\_\+policy}} \mbox{\hyperlink{structnetwork_a78121635a0f0c3a1d9991390b4325dc3}{policy}}
+\item 
+int \mbox{\hyperlink{structnetwork_a3a68b9064af67870549f955c5ae86411}{benchmark\+\_\+layers}}
+\item 
+int $\ast$ \mbox{\hyperlink{structnetwork_ac30ea9cb7c016e0f1836dafb93fc6b2c}{total\+\_\+bbox}}
+\item 
+int $\ast$ \mbox{\hyperlink{structnetwork_a4aeafac79e76694fb1e9f4556f704370}{rewritten\+\_\+bbox}}
+\item 
+float \mbox{\hyperlink{structnetwork_a978d3e339536cd6bea2270d49d93c35a}{learning\+\_\+rate}}
+\item 
+float \mbox{\hyperlink{structnetwork_adaa4989c2523a59364b1205a5f09f2db}{learning\+\_\+rate\+\_\+min}}
+\item 
+float \mbox{\hyperlink{structnetwork_aac981fedad322cf0dca979bcaa0f430a}{learning\+\_\+rate\+\_\+max}}
+\item 
+int \mbox{\hyperlink{structnetwork_a6be8cee6e55f9449a9b3a4fc6febe466}{batches\+\_\+per\+\_\+cycle}}
+\item 
+int \mbox{\hyperlink{structnetwork_aaf7145298c7340fde499bda38a5f7073}{batches\+\_\+cycle\+\_\+mult}}
+\item 
+float \mbox{\hyperlink{structnetwork_a495c60ef821ca0ade1c42907c8bc90bf}{momentum}}
+\item 
+float \mbox{\hyperlink{structnetwork_a9afd53b100d35dc162e48118ef4f7eea}{decay}}
+\item 
+float \mbox{\hyperlink{structnetwork_a5460d67e44c0877ca016ed12925788fe}{gamma}}
+\item 
+float \mbox{\hyperlink{structnetwork_a0d9e7af8dde42e28a7fdb0e685b2f23b}{scale}}
+\item 
+float \mbox{\hyperlink{structnetwork_ae38f864b7b9966c38f1882f468131eda}{power}}
+\item 
+int \mbox{\hyperlink{structnetwork_abaf83235b5968fb68a2dc9215cc67c8c}{time\+\_\+steps}}
+\item 
+int \mbox{\hyperlink{structnetwork_a9ed08472400f140c49ecac3ecd1def87}{step}}
+\item 
+int \mbox{\hyperlink{structnetwork_a163b931990a5ac8f456884405de2192b}{max\+\_\+batches}}
+\item 
+int \mbox{\hyperlink{structnetwork_a8dfd10de37f2b101304e808d28924769}{num\+\_\+boxes}}
+\item 
+int \mbox{\hyperlink{structnetwork_aa348b0397dcf150bbe4c3f1f730c8575}{train\+\_\+images\+\_\+num}}
+\item 
+float $\ast$ \mbox{\hyperlink{structnetwork_ab9f91f1d867103ebd0f73735f54bc93b}{seq\+\_\+scales}}
+\item 
+float $\ast$ \mbox{\hyperlink{structnetwork_a64c1fa0153559f530cc815fb6b8a95c8}{scales}}
+\item 
+int $\ast$ \mbox{\hyperlink{structnetwork_a48fb87937b7ff22cf01875d8d5807cc2}{steps}}
+\item 
+int \mbox{\hyperlink{structnetwork_a6e656092c18afdc2bcb72f87d0ed2547}{num\+\_\+steps}}
+\item 
+int \mbox{\hyperlink{structnetwork_a1e0395e7cbcd9cd93d5c8621bb1a38aa}{burn\+\_\+in}}
+\item 
+int \mbox{\hyperlink{structnetwork_a119825e5954cdef79a86b6c4cf0316d5}{cudnn\+\_\+half}}
+\item 
+int \mbox{\hyperlink{structnetwork_a7274661135ee8efe567aef0e9c0e40f9}{adam}}
+\item 
+float \mbox{\hyperlink{structnetwork_a6c56d5eccebbfd39c085766b94cd36b7}{B1}}
+\item 
+float \mbox{\hyperlink{structnetwork_a42ea583b98356e06dca647bf95520e5c}{B2}}
+\item 
+float \mbox{\hyperlink{structnetwork_a13a150c894a1f34f08b7f8dff7808ea7}{eps}}
+\item 
+int \mbox{\hyperlink{structnetwork_a529a36505548232d049abcb84fdcf389}{inputs}}
+\item 
+int \mbox{\hyperlink{structnetwork_a5268de11127a02d86e6f517cf3b3acc9}{outputs}}
+\item 
+int \mbox{\hyperlink{structnetwork_a794927f8c4d44cd8e85ff39e0d4c9939}{truths}}
+\item 
+int \mbox{\hyperlink{structnetwork_a6769bc5e23225cecf0a46eedba29719a}{notruth}}
+\item 
+int \mbox{\hyperlink{structnetwork_a0e57f4230f8ecb07bba0c97cf8f045c7}{h}}
+\item 
+int \mbox{\hyperlink{structnetwork_a944b83cb20da2454c6092e07b9a1d3e9}{w}}
+\item 
+int \mbox{\hyperlink{structnetwork_a05014921b926874b8a362aa83d98283a}{c}}
+\item 
+int \mbox{\hyperlink{structnetwork_af98abf1cccd7bfee97b9f7eae752687c}{max\+\_\+crop}}
+\item 
+int \mbox{\hyperlink{structnetwork_a9e52bfae3a850150ed2e32c10ab11bec}{min\+\_\+crop}}
+\item 
+float \mbox{\hyperlink{structnetwork_a181329911f37d2d5adce2290683a9897}{max\+\_\+ratio}}
+\item 
+float \mbox{\hyperlink{structnetwork_a395ccde63912c9272f91ee6c9af14784}{min\+\_\+ratio}}
+\item 
+int \mbox{\hyperlink{structnetwork_a87bf27881ed88606fae1b80f9049e4ca}{center}}
+\item 
+int \mbox{\hyperlink{structnetwork_a543fe111f1c172543e95fe9dbaa48df7}{flip}}
+\item 
+int \mbox{\hyperlink{structnetwork_a82832ccccf1530644f96bec02ede7066}{gaussian\+\_\+noise}}
+\item 
+int \mbox{\hyperlink{structnetwork_a04d2ff93c81f07cbcc1c9fae9aafbd59}{blur}}
+\item 
+int \mbox{\hyperlink{structnetwork_a5bcf917836e9c4a877df8bd9517120ea}{mixup}}
+\item 
+float \mbox{\hyperlink{structnetwork_aa59eb3c12daa241b48cda6d5000caf2c}{label\+\_\+smooth\+\_\+eps}}
+\item 
+int \mbox{\hyperlink{structnetwork_a562e7cf1b7309da00807cc69031be744}{resize\+\_\+step}}
+\item 
+int \mbox{\hyperlink{structnetwork_aefed0ccee9c36d7fc2c8ed4c47cb70f0}{attention}}
+\item 
+int \mbox{\hyperlink{structnetwork_abf02badebd91e5392bd487e504be600c}{adversarial}}
+\item 
+float \mbox{\hyperlink{structnetwork_a688f9545af231f86a106a8fbaa85a38d}{adversarial\+\_\+lr}}
+\item 
+float \mbox{\hyperlink{structnetwork_a803a556aa8a0ff6e7ec892df324ddd61}{max\+\_\+chart\+\_\+loss}}
+\item 
+int \mbox{\hyperlink{structnetwork_a3353341e3dba21487aa035b314cffc85}{letter\+\_\+box}}
+\item 
+int \mbox{\hyperlink{structnetwork_a023b95b67bdf4e7d23fd45d91a0da444}{mosaic\+\_\+bound}}
+\item 
+int \mbox{\hyperlink{structnetwork_ae0c077136dec3c804536d42630f4371e}{contrastive}}
+\item 
+int \mbox{\hyperlink{structnetwork_a90fa7e71aa536e77e5c2028e2ab23565}{contrastive\+\_\+jit\+\_\+flip}}
+\item 
+int \mbox{\hyperlink{structnetwork_aaa8f8fbace07c5c1502de194cbdf5b7e}{contrastive\+\_\+color}}
+\item 
+int \mbox{\hyperlink{structnetwork_a99da8cf542521e5374f2bb7702582c41}{unsupervised}}
+\item 
+float \mbox{\hyperlink{structnetwork_abe286813534c121ee16da09c258eaf2e}{angle}}
+\item 
+float \mbox{\hyperlink{structnetwork_acaa88cf6c30100edff5dc061bfb226bb}{aspect}}
+\item 
+float \mbox{\hyperlink{structnetwork_a609572db2c14c55c6c261844cb33fa12}{exposure}}
+\item 
+float \mbox{\hyperlink{structnetwork_a9bbb55144a6eca464fbc122f97bf1af8}{saturation}}
+\item 
+float \mbox{\hyperlink{structnetwork_ae38058a4e1ad0a334026ecbe01f101f4}{hue}}
+\item 
+int \mbox{\hyperlink{structnetwork_a89dfdaa6178f338c250d7b6631476fa1}{random}}
+\item 
+int \mbox{\hyperlink{structnetwork_a50ea7873bccd5929b0b9749453da1f46}{track}}
+\item 
+int \mbox{\hyperlink{structnetwork_a602ff3583dabda56bbbc42b4e359b1fe}{augment\+\_\+speed}}
+\item 
+int \mbox{\hyperlink{structnetwork_a651ca5bba7949fa86ffe1a2edb5d10ca}{sequential\+\_\+subdivisions}}
+\item 
+int \mbox{\hyperlink{structnetwork_a3b0a8678b266dd09c64dd57400f73a24}{init\+\_\+sequential\+\_\+subdivisions}}
+\item 
+int \mbox{\hyperlink{structnetwork_ac4d8db1ebfe0b71dc1a260d0ae872760}{current\+\_\+subdivision}}
+\item 
+int \mbox{\hyperlink{structnetwork_ac8da8cb90c4cd45a8f249e08ade12356}{try\+\_\+fix\+\_\+nan}}
+\item 
+int \mbox{\hyperlink{structnetwork_a8ba8b1354e8d018ac74920eb0cd882e8}{gpu\+\_\+index}}
+\item 
+\mbox{\hyperlink{structtree}{tree}} $\ast$ \mbox{\hyperlink{structnetwork_a36d6158f07498646e400bf6f7e20a705}{hierarchy}}
+\item 
+float $\ast$ \mbox{\hyperlink{structnetwork_a8f391155a3ceb60caf07d0ee6c6a93f2}{input}}
+\item 
+float $\ast$ \mbox{\hyperlink{structnetwork_a1453c2cf9a735bde55a281d698797a05}{truth}}
+\item 
+float $\ast$ \mbox{\hyperlink{structnetwork_a7787a7dde0eea2d91b208c23cdba6286}{delta}}
+\item 
+float $\ast$ \mbox{\hyperlink{structnetwork_a624719738b94a1d55de651f5dac16b79}{workspace}}
+\item 
+int \mbox{\hyperlink{structnetwork_a32e7b55fe8dfa07391b6cdce17b4a2c1}{train}}
+\item 
+int \mbox{\hyperlink{structnetwork_a67a4b2779829a2891b1e3194b4910334}{index}}
+\item 
+float $\ast$ \mbox{\hyperlink{structnetwork_ac80b4b4eeda5cf4cc4af5c2173d0ad31}{cost}}
+\item 
+float \mbox{\hyperlink{structnetwork_ac04afd1b20edc7f8734cf2eabe4b57f0}{clip}}
+\item 
+float $\ast$ \mbox{\hyperlink{structnetwork_a8d4b5c18fdf0f9fc1c8261b19dff7067}{delta\+\_\+gpu}}
+\item 
+float $\ast$ \mbox{\hyperlink{structnetwork_ae86280dc96f37e99b6f4bb72d25d3cbb}{output\+\_\+gpu}}
+\item 
+float $\ast$ \mbox{\hyperlink{structnetwork_ab0b9da626c611f53e5a299f75e06e18f}{input\+\_\+state\+\_\+gpu}}
+\item 
+float $\ast$ \mbox{\hyperlink{structnetwork_ae3a4bb542ac197dfc3d052bc1b4d71bf}{input\+\_\+pinned\+\_\+cpu}}
+\item 
+int \mbox{\hyperlink{structnetwork_ae267a5615efc9f282ea969c2b7fb26cc}{input\+\_\+pinned\+\_\+cpu\+\_\+flag}}
+\item 
+float $\ast$$\ast$ \mbox{\hyperlink{structnetwork_a453981d30c67aa549f3961bb1455e98a}{input\+\_\+gpu}}
+\item 
+float $\ast$$\ast$ \mbox{\hyperlink{structnetwork_a6ed22759648ff09e2cfaa9f331dc1e38}{truth\+\_\+gpu}}
+\item 
+float $\ast$$\ast$ \mbox{\hyperlink{structnetwork_a3473fa8eebafdf46318506b8bc2b1114}{input16\+\_\+gpu}}
+\item 
+float $\ast$$\ast$ \mbox{\hyperlink{structnetwork_a0948e3973a8490877c95616a6a2b1fa7}{output16\+\_\+gpu}}
+\item 
+\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} $\ast$ \mbox{\hyperlink{structnetwork_ab9e60c4c3092115f10dd8a9288c074b0}{max\+\_\+input16\+\_\+size}}
+\item 
+\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} $\ast$ \mbox{\hyperlink{structnetwork_a26aa45acbe051446a9a451132f77125e}{max\+\_\+output16\+\_\+size}}
+\item 
+int \mbox{\hyperlink{structnetwork_a1178dc0d580008cf4ba0c9bf67a57b7c}{wait\+\_\+stream}}
+\item 
+void $\ast$ \mbox{\hyperlink{structnetwork_ad2795f74630992210f16f4a24f496790}{cuda\+\_\+graph}}
+\item 
+void $\ast$ \mbox{\hyperlink{structnetwork_a2f14934c73d48c4191403b4349c67d11}{cuda\+\_\+graph\+\_\+exec}}
+\item 
+int \mbox{\hyperlink{structnetwork_a5e190d16cc2a35c6f9263bccd7949577}{use\+\_\+cuda\+\_\+graph}}
+\item 
+int $\ast$ \mbox{\hyperlink{structnetwork_a0f8db2e961be851fa454ba5ef510b1d1}{cuda\+\_\+graph\+\_\+ready}}
+\item 
+float $\ast$ \mbox{\hyperlink{structnetwork_adc87b730d0e5602d34c47656a3a3f4bc}{global\+\_\+delta\+\_\+gpu}}
+\item 
+float $\ast$ \mbox{\hyperlink{structnetwork_a08406c4227be6aaed2a6f6b3449f6a15}{state\+\_\+delta\+\_\+gpu}}
+\item 
+\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{structnetwork_ab019a2be083c6d3e17da31842dbf51ec}{max\+\_\+delta\+\_\+gpu\+\_\+size}}
+\item 
+int \mbox{\hyperlink{structnetwork_ac07d0bb809f276a32c8a91f82d2882f3}{optimized\+\_\+memory}}
+\item 
+int \mbox{\hyperlink{structnetwork_a18ef3cad204d769464467e035117bd50}{dynamic\+\_\+minibatch}}
+\item 
+\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{structnetwork_ad60825a8df8601ded4e232c86b79e57f}{workspace\+\_\+size\+\_\+limit}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{structnetwork_a7274661135ee8efe567aef0e9c0e40f9}\label{structnetwork_a7274661135ee8efe567aef0e9c0e40f9}} 
+\index{network@{network}!adam@{adam}}
+\index{adam@{adam}!network@{network}}
+\doxysubsubsection{\texorpdfstring{adam}{adam}}
+{\footnotesize\ttfamily int network\+::adam}
+
+\mbox{\Hypertarget{structnetwork_abf02badebd91e5392bd487e504be600c}\label{structnetwork_abf02badebd91e5392bd487e504be600c}} 
+\index{network@{network}!adversarial@{adversarial}}
+\index{adversarial@{adversarial}!network@{network}}
+\doxysubsubsection{\texorpdfstring{adversarial}{adversarial}}
+{\footnotesize\ttfamily int network\+::adversarial}
+
+\mbox{\Hypertarget{structnetwork_a688f9545af231f86a106a8fbaa85a38d}\label{structnetwork_a688f9545af231f86a106a8fbaa85a38d}} 
+\index{network@{network}!adversarial\_lr@{adversarial\_lr}}
+\index{adversarial\_lr@{adversarial\_lr}!network@{network}}
+\doxysubsubsection{\texorpdfstring{adversarial\_lr}{adversarial\_lr}}
+{\footnotesize\ttfamily float network\+::adversarial\+\_\+lr}
+
+\mbox{\Hypertarget{structnetwork_abe286813534c121ee16da09c258eaf2e}\label{structnetwork_abe286813534c121ee16da09c258eaf2e}} 
+\index{network@{network}!angle@{angle}}
+\index{angle@{angle}!network@{network}}
+\doxysubsubsection{\texorpdfstring{angle}{angle}}
+{\footnotesize\ttfamily float network\+::angle}
+
+\mbox{\Hypertarget{structnetwork_acaa88cf6c30100edff5dc061bfb226bb}\label{structnetwork_acaa88cf6c30100edff5dc061bfb226bb}} 
+\index{network@{network}!aspect@{aspect}}
+\index{aspect@{aspect}!network@{network}}
+\doxysubsubsection{\texorpdfstring{aspect}{aspect}}
+{\footnotesize\ttfamily float network\+::aspect}
+
+\mbox{\Hypertarget{structnetwork_aefed0ccee9c36d7fc2c8ed4c47cb70f0}\label{structnetwork_aefed0ccee9c36d7fc2c8ed4c47cb70f0}} 
+\index{network@{network}!attention@{attention}}
+\index{attention@{attention}!network@{network}}
+\doxysubsubsection{\texorpdfstring{attention}{attention}}
+{\footnotesize\ttfamily int network\+::attention}
+
+\mbox{\Hypertarget{structnetwork_a602ff3583dabda56bbbc42b4e359b1fe}\label{structnetwork_a602ff3583dabda56bbbc42b4e359b1fe}} 
+\index{network@{network}!augment\_speed@{augment\_speed}}
+\index{augment\_speed@{augment\_speed}!network@{network}}
+\doxysubsubsection{\texorpdfstring{augment\_speed}{augment\_speed}}
+{\footnotesize\ttfamily int network\+::augment\+\_\+speed}
+
+\mbox{\Hypertarget{structnetwork_a6c56d5eccebbfd39c085766b94cd36b7}\label{structnetwork_a6c56d5eccebbfd39c085766b94cd36b7}} 
+\index{network@{network}!B1@{B1}}
+\index{B1@{B1}!network@{network}}
+\doxysubsubsection{\texorpdfstring{B1}{B1}}
+{\footnotesize\ttfamily float network\+::\+B1}
+
+\mbox{\Hypertarget{structnetwork_a42ea583b98356e06dca647bf95520e5c}\label{structnetwork_a42ea583b98356e06dca647bf95520e5c}} 
+\index{network@{network}!B2@{B2}}
+\index{B2@{B2}!network@{network}}
+\doxysubsubsection{\texorpdfstring{B2}{B2}}
+{\footnotesize\ttfamily float network\+::\+B2}
+
+\mbox{\Hypertarget{structnetwork_a0a54507f5ed082627370e5fca67d177d}\label{structnetwork_a0a54507f5ed082627370e5fca67d177d}} 
+\index{network@{network}!badlabels\_reject\_threshold@{badlabels\_reject\_threshold}}
+\index{badlabels\_reject\_threshold@{badlabels\_reject\_threshold}!network@{network}}
+\doxysubsubsection{\texorpdfstring{badlabels\_reject\_threshold}{badlabels\_reject\_threshold}}
+{\footnotesize\ttfamily float$\ast$ network\+::badlabels\+\_\+reject\+\_\+threshold}
+
+\mbox{\Hypertarget{structnetwork_a2f18836ae0a3062028725706fbac42b2}\label{structnetwork_a2f18836ae0a3062028725706fbac42b2}} 
+\index{network@{network}!badlabels\_rejection\_percentage@{badlabels\_rejection\_percentage}}
+\index{badlabels\_rejection\_percentage@{badlabels\_rejection\_percentage}!network@{network}}
+\doxysubsubsection{\texorpdfstring{badlabels\_rejection\_percentage}{badlabels\_rejection\_percentage}}
+{\footnotesize\ttfamily float network\+::badlabels\+\_\+rejection\+\_\+percentage}
+
+\mbox{\Hypertarget{structnetwork_a04f448f3f8c3f1314e2b23b429bec827}\label{structnetwork_a04f448f3f8c3f1314e2b23b429bec827}} 
+\index{network@{network}!batch@{batch}}
+\index{batch@{batch}!network@{network}}
+\doxysubsubsection{\texorpdfstring{batch}{batch}}
+{\footnotesize\ttfamily int network\+::batch}
+
+\mbox{\Hypertarget{structnetwork_aaf7145298c7340fde499bda38a5f7073}\label{structnetwork_aaf7145298c7340fde499bda38a5f7073}} 
+\index{network@{network}!batches\_cycle\_mult@{batches\_cycle\_mult}}
+\index{batches\_cycle\_mult@{batches\_cycle\_mult}!network@{network}}
+\doxysubsubsection{\texorpdfstring{batches\_cycle\_mult}{batches\_cycle\_mult}}
+{\footnotesize\ttfamily int network\+::batches\+\_\+cycle\+\_\+mult}
+
+\mbox{\Hypertarget{structnetwork_a6be8cee6e55f9449a9b3a4fc6febe466}\label{structnetwork_a6be8cee6e55f9449a9b3a4fc6febe466}} 
+\index{network@{network}!batches\_per\_cycle@{batches\_per\_cycle}}
+\index{batches\_per\_cycle@{batches\_per\_cycle}!network@{network}}
+\doxysubsubsection{\texorpdfstring{batches\_per\_cycle}{batches\_per\_cycle}}
+{\footnotesize\ttfamily int network\+::batches\+\_\+per\+\_\+cycle}
+
+\mbox{\Hypertarget{structnetwork_a3a68b9064af67870549f955c5ae86411}\label{structnetwork_a3a68b9064af67870549f955c5ae86411}} 
+\index{network@{network}!benchmark\_layers@{benchmark\_layers}}
+\index{benchmark\_layers@{benchmark\_layers}!network@{network}}
+\doxysubsubsection{\texorpdfstring{benchmark\_layers}{benchmark\_layers}}
+{\footnotesize\ttfamily int network\+::benchmark\+\_\+layers}
+
+\mbox{\Hypertarget{structnetwork_a04d2ff93c81f07cbcc1c9fae9aafbd59}\label{structnetwork_a04d2ff93c81f07cbcc1c9fae9aafbd59}} 
+\index{network@{network}!blur@{blur}}
+\index{blur@{blur}!network@{network}}
+\doxysubsubsection{\texorpdfstring{blur}{blur}}
+{\footnotesize\ttfamily int network\+::blur}
+
+\mbox{\Hypertarget{structnetwork_a1e0395e7cbcd9cd93d5c8621bb1a38aa}\label{structnetwork_a1e0395e7cbcd9cd93d5c8621bb1a38aa}} 
+\index{network@{network}!burn\_in@{burn\_in}}
+\index{burn\_in@{burn\_in}!network@{network}}
+\doxysubsubsection{\texorpdfstring{burn\_in}{burn\_in}}
+{\footnotesize\ttfamily int network\+::burn\+\_\+in}
+
+\mbox{\Hypertarget{structnetwork_a05014921b926874b8a362aa83d98283a}\label{structnetwork_a05014921b926874b8a362aa83d98283a}} 
+\index{network@{network}!c@{c}}
+\index{c@{c}!network@{network}}
+\doxysubsubsection{\texorpdfstring{c}{c}}
+{\footnotesize\ttfamily int network\+::c}
+
+\mbox{\Hypertarget{structnetwork_a87bf27881ed88606fae1b80f9049e4ca}\label{structnetwork_a87bf27881ed88606fae1b80f9049e4ca}} 
+\index{network@{network}!center@{center}}
+\index{center@{center}!network@{network}}
+\doxysubsubsection{\texorpdfstring{center}{center}}
+{\footnotesize\ttfamily int network\+::center}
+
+\mbox{\Hypertarget{structnetwork_ac04afd1b20edc7f8734cf2eabe4b57f0}\label{structnetwork_ac04afd1b20edc7f8734cf2eabe4b57f0}} 
+\index{network@{network}!clip@{clip}}
+\index{clip@{clip}!network@{network}}
+\doxysubsubsection{\texorpdfstring{clip}{clip}}
+{\footnotesize\ttfamily float network\+::clip}
+
+\mbox{\Hypertarget{structnetwork_ae0c077136dec3c804536d42630f4371e}\label{structnetwork_ae0c077136dec3c804536d42630f4371e}} 
+\index{network@{network}!contrastive@{contrastive}}
+\index{contrastive@{contrastive}!network@{network}}
+\doxysubsubsection{\texorpdfstring{contrastive}{contrastive}}
+{\footnotesize\ttfamily int network\+::contrastive}
+
+\mbox{\Hypertarget{structnetwork_aaa8f8fbace07c5c1502de194cbdf5b7e}\label{structnetwork_aaa8f8fbace07c5c1502de194cbdf5b7e}} 
+\index{network@{network}!contrastive\_color@{contrastive\_color}}
+\index{contrastive\_color@{contrastive\_color}!network@{network}}
+\doxysubsubsection{\texorpdfstring{contrastive\_color}{contrastive\_color}}
+{\footnotesize\ttfamily int network\+::contrastive\+\_\+color}
+
+\mbox{\Hypertarget{structnetwork_a90fa7e71aa536e77e5c2028e2ab23565}\label{structnetwork_a90fa7e71aa536e77e5c2028e2ab23565}} 
+\index{network@{network}!contrastive\_jit\_flip@{contrastive\_jit\_flip}}
+\index{contrastive\_jit\_flip@{contrastive\_jit\_flip}!network@{network}}
+\doxysubsubsection{\texorpdfstring{contrastive\_jit\_flip}{contrastive\_jit\_flip}}
+{\footnotesize\ttfamily int network\+::contrastive\+\_\+jit\+\_\+flip}
+
+\mbox{\Hypertarget{structnetwork_ac80b4b4eeda5cf4cc4af5c2173d0ad31}\label{structnetwork_ac80b4b4eeda5cf4cc4af5c2173d0ad31}} 
+\index{network@{network}!cost@{cost}}
+\index{cost@{cost}!network@{network}}
+\doxysubsubsection{\texorpdfstring{cost}{cost}}
+{\footnotesize\ttfamily float$\ast$ network\+::cost}
+
+\mbox{\Hypertarget{structnetwork_ad2795f74630992210f16f4a24f496790}\label{structnetwork_ad2795f74630992210f16f4a24f496790}} 
+\index{network@{network}!cuda\_graph@{cuda\_graph}}
+\index{cuda\_graph@{cuda\_graph}!network@{network}}
+\doxysubsubsection{\texorpdfstring{cuda\_graph}{cuda\_graph}}
+{\footnotesize\ttfamily void$\ast$ network\+::cuda\+\_\+graph}
+
+\mbox{\Hypertarget{structnetwork_a2f14934c73d48c4191403b4349c67d11}\label{structnetwork_a2f14934c73d48c4191403b4349c67d11}} 
+\index{network@{network}!cuda\_graph\_exec@{cuda\_graph\_exec}}
+\index{cuda\_graph\_exec@{cuda\_graph\_exec}!network@{network}}
+\doxysubsubsection{\texorpdfstring{cuda\_graph\_exec}{cuda\_graph\_exec}}
+{\footnotesize\ttfamily void$\ast$ network\+::cuda\+\_\+graph\+\_\+exec}
+
+\mbox{\Hypertarget{structnetwork_a0f8db2e961be851fa454ba5ef510b1d1}\label{structnetwork_a0f8db2e961be851fa454ba5ef510b1d1}} 
+\index{network@{network}!cuda\_graph\_ready@{cuda\_graph\_ready}}
+\index{cuda\_graph\_ready@{cuda\_graph\_ready}!network@{network}}
+\doxysubsubsection{\texorpdfstring{cuda\_graph\_ready}{cuda\_graph\_ready}}
+{\footnotesize\ttfamily int$\ast$ network\+::cuda\+\_\+graph\+\_\+ready}
+
+\mbox{\Hypertarget{structnetwork_a119825e5954cdef79a86b6c4cf0316d5}\label{structnetwork_a119825e5954cdef79a86b6c4cf0316d5}} 
+\index{network@{network}!cudnn\_half@{cudnn\_half}}
+\index{cudnn\_half@{cudnn\_half}!network@{network}}
+\doxysubsubsection{\texorpdfstring{cudnn\_half}{cudnn\_half}}
+{\footnotesize\ttfamily int network\+::cudnn\+\_\+half}
+
+\mbox{\Hypertarget{structnetwork_a9fe172363bf2b19369280210608b1577}\label{structnetwork_a9fe172363bf2b19369280210608b1577}} 
+\index{network@{network}!cur\_iteration@{cur\_iteration}}
+\index{cur\_iteration@{cur\_iteration}!network@{network}}
+\doxysubsubsection{\texorpdfstring{cur\_iteration}{cur\_iteration}}
+{\footnotesize\ttfamily int$\ast$ network\+::cur\+\_\+iteration}
+
+\mbox{\Hypertarget{structnetwork_ac4d8db1ebfe0b71dc1a260d0ae872760}\label{structnetwork_ac4d8db1ebfe0b71dc1a260d0ae872760}} 
+\index{network@{network}!current\_subdivision@{current\_subdivision}}
+\index{current\_subdivision@{current\_subdivision}!network@{network}}
+\doxysubsubsection{\texorpdfstring{current\_subdivision}{current\_subdivision}}
+{\footnotesize\ttfamily int network\+::current\+\_\+subdivision}
+
+\mbox{\Hypertarget{structnetwork_a9afd53b100d35dc162e48118ef4f7eea}\label{structnetwork_a9afd53b100d35dc162e48118ef4f7eea}} 
+\index{network@{network}!decay@{decay}}
+\index{decay@{decay}!network@{network}}
+\doxysubsubsection{\texorpdfstring{decay}{decay}}
+{\footnotesize\ttfamily float network\+::decay}
+
+\mbox{\Hypertarget{structnetwork_a7787a7dde0eea2d91b208c23cdba6286}\label{structnetwork_a7787a7dde0eea2d91b208c23cdba6286}} 
+\index{network@{network}!delta@{delta}}
+\index{delta@{delta}!network@{network}}
+\doxysubsubsection{\texorpdfstring{delta}{delta}}
+{\footnotesize\ttfamily float$\ast$ network\+::delta}
+
+\mbox{\Hypertarget{structnetwork_a8d4b5c18fdf0f9fc1c8261b19dff7067}\label{structnetwork_a8d4b5c18fdf0f9fc1c8261b19dff7067}} 
+\index{network@{network}!delta\_gpu@{delta\_gpu}}
+\index{delta\_gpu@{delta\_gpu}!network@{network}}
+\doxysubsubsection{\texorpdfstring{delta\_gpu}{delta\_gpu}}
+{\footnotesize\ttfamily float$\ast$ network\+::delta\+\_\+gpu}
+
+\mbox{\Hypertarget{structnetwork_a55a879319ae656fbd0e89eee73da8b44}\label{structnetwork_a55a879319ae656fbd0e89eee73da8b44}} 
+\index{network@{network}!delta\_rolling\_avg@{delta\_rolling\_avg}}
+\index{delta\_rolling\_avg@{delta\_rolling\_avg}!network@{network}}
+\doxysubsubsection{\texorpdfstring{delta\_rolling\_avg}{delta\_rolling\_avg}}
+{\footnotesize\ttfamily float$\ast$ network\+::delta\+\_\+rolling\+\_\+avg}
+
+\mbox{\Hypertarget{structnetwork_ab80d80d344f0b84ea46f576f4adc008e}\label{structnetwork_ab80d80d344f0b84ea46f576f4adc008e}} 
+\index{network@{network}!delta\_rolling\_max@{delta\_rolling\_max}}
+\index{delta\_rolling\_max@{delta\_rolling\_max}!network@{network}}
+\doxysubsubsection{\texorpdfstring{delta\_rolling\_max}{delta\_rolling\_max}}
+{\footnotesize\ttfamily float$\ast$ network\+::delta\+\_\+rolling\+\_\+max}
+
+\mbox{\Hypertarget{structnetwork_a8bbf10f80fc4d110e6a7fc405f17d555}\label{structnetwork_a8bbf10f80fc4d110e6a7fc405f17d555}} 
+\index{network@{network}!delta\_rolling\_std@{delta\_rolling\_std}}
+\index{delta\_rolling\_std@{delta\_rolling\_std}!network@{network}}
+\doxysubsubsection{\texorpdfstring{delta\_rolling\_std}{delta\_rolling\_std}}
+{\footnotesize\ttfamily float$\ast$ network\+::delta\+\_\+rolling\+\_\+std}
+
+\mbox{\Hypertarget{structnetwork_a18ef3cad204d769464467e035117bd50}\label{structnetwork_a18ef3cad204d769464467e035117bd50}} 
+\index{network@{network}!dynamic\_minibatch@{dynamic\_minibatch}}
+\index{dynamic\_minibatch@{dynamic\_minibatch}!network@{network}}
+\doxysubsubsection{\texorpdfstring{dynamic\_minibatch}{dynamic\_minibatch}}
+{\footnotesize\ttfamily int network\+::dynamic\+\_\+minibatch}
+
+\mbox{\Hypertarget{structnetwork_a7b81ad2bc1d89ef605109f9270cfffee}\label{structnetwork_a7b81ad2bc1d89ef605109f9270cfffee}} 
+\index{network@{network}!ema\_alpha@{ema\_alpha}}
+\index{ema\_alpha@{ema\_alpha}!network@{network}}
+\doxysubsubsection{\texorpdfstring{ema\_alpha}{ema\_alpha}}
+{\footnotesize\ttfamily float network\+::ema\+\_\+alpha}
+
+\mbox{\Hypertarget{structnetwork_a7b16b097d1814258e82b58d663692875}\label{structnetwork_a7b16b097d1814258e82b58d663692875}} 
+\index{network@{network}!epoch@{epoch}}
+\index{epoch@{epoch}!network@{network}}
+\doxysubsubsection{\texorpdfstring{epoch}{epoch}}
+{\footnotesize\ttfamily float network\+::epoch}
+
+\mbox{\Hypertarget{structnetwork_a13a150c894a1f34f08b7f8dff7808ea7}\label{structnetwork_a13a150c894a1f34f08b7f8dff7808ea7}} 
+\index{network@{network}!eps@{eps}}
+\index{eps@{eps}!network@{network}}
+\doxysubsubsection{\texorpdfstring{eps}{eps}}
+{\footnotesize\ttfamily float network\+::eps}
+
+\mbox{\Hypertarget{structnetwork_a130f7de05202083e2415f20e612e190c}\label{structnetwork_a130f7de05202083e2415f20e612e190c}} 
+\index{network@{network}!equidistant\_point@{equidistant\_point}}
+\index{equidistant\_point@{equidistant\_point}!network@{network}}
+\doxysubsubsection{\texorpdfstring{equidistant\_point}{equidistant\_point}}
+{\footnotesize\ttfamily int network\+::equidistant\+\_\+point}
+
+\mbox{\Hypertarget{structnetwork_a609572db2c14c55c6c261844cb33fa12}\label{structnetwork_a609572db2c14c55c6c261844cb33fa12}} 
+\index{network@{network}!exposure@{exposure}}
+\index{exposure@{exposure}!network@{network}}
+\doxysubsubsection{\texorpdfstring{exposure}{exposure}}
+{\footnotesize\ttfamily float network\+::exposure}
+
+\mbox{\Hypertarget{structnetwork_a543fe111f1c172543e95fe9dbaa48df7}\label{structnetwork_a543fe111f1c172543e95fe9dbaa48df7}} 
+\index{network@{network}!flip@{flip}}
+\index{flip@{flip}!network@{network}}
+\doxysubsubsection{\texorpdfstring{flip}{flip}}
+{\footnotesize\ttfamily int network\+::flip}
+
+\mbox{\Hypertarget{structnetwork_a5460d67e44c0877ca016ed12925788fe}\label{structnetwork_a5460d67e44c0877ca016ed12925788fe}} 
+\index{network@{network}!gamma@{gamma}}
+\index{gamma@{gamma}!network@{network}}
+\doxysubsubsection{\texorpdfstring{gamma}{gamma}}
+{\footnotesize\ttfamily float network\+::gamma}
+
+\mbox{\Hypertarget{structnetwork_a82832ccccf1530644f96bec02ede7066}\label{structnetwork_a82832ccccf1530644f96bec02ede7066}} 
+\index{network@{network}!gaussian\_noise@{gaussian\_noise}}
+\index{gaussian\_noise@{gaussian\_noise}!network@{network}}
+\doxysubsubsection{\texorpdfstring{gaussian\_noise}{gaussian\_noise}}
+{\footnotesize\ttfamily int network\+::gaussian\+\_\+noise}
+
+\mbox{\Hypertarget{structnetwork_adc87b730d0e5602d34c47656a3a3f4bc}\label{structnetwork_adc87b730d0e5602d34c47656a3a3f4bc}} 
+\index{network@{network}!global\_delta\_gpu@{global\_delta\_gpu}}
+\index{global\_delta\_gpu@{global\_delta\_gpu}!network@{network}}
+\doxysubsubsection{\texorpdfstring{global\_delta\_gpu}{global\_delta\_gpu}}
+{\footnotesize\ttfamily float$\ast$ network\+::global\+\_\+delta\+\_\+gpu}
+
+\mbox{\Hypertarget{structnetwork_a8ba8b1354e8d018ac74920eb0cd882e8}\label{structnetwork_a8ba8b1354e8d018ac74920eb0cd882e8}} 
+\index{network@{network}!gpu\_index@{gpu\_index}}
+\index{gpu\_index@{gpu\_index}!network@{network}}
+\doxysubsubsection{\texorpdfstring{gpu\_index}{gpu\_index}}
+{\footnotesize\ttfamily int network\+::gpu\+\_\+index}
+
+\mbox{\Hypertarget{structnetwork_a0e57f4230f8ecb07bba0c97cf8f045c7}\label{structnetwork_a0e57f4230f8ecb07bba0c97cf8f045c7}} 
+\index{network@{network}!h@{h}}
+\index{h@{h}!network@{network}}
+\doxysubsubsection{\texorpdfstring{h}{h}}
+{\footnotesize\ttfamily int network\+::h}
+
+\mbox{\Hypertarget{structnetwork_a36d6158f07498646e400bf6f7e20a705}\label{structnetwork_a36d6158f07498646e400bf6f7e20a705}} 
+\index{network@{network}!hierarchy@{hierarchy}}
+\index{hierarchy@{hierarchy}!network@{network}}
+\doxysubsubsection{\texorpdfstring{hierarchy}{hierarchy}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structtree}{tree}}$\ast$ network\+::hierarchy}
+
+\mbox{\Hypertarget{structnetwork_ae38058a4e1ad0a334026ecbe01f101f4}\label{structnetwork_ae38058a4e1ad0a334026ecbe01f101f4}} 
+\index{network@{network}!hue@{hue}}
+\index{hue@{hue}!network@{network}}
+\doxysubsubsection{\texorpdfstring{hue}{hue}}
+{\footnotesize\ttfamily float network\+::hue}
+
+\mbox{\Hypertarget{structnetwork_a67a4b2779829a2891b1e3194b4910334}\label{structnetwork_a67a4b2779829a2891b1e3194b4910334}} 
+\index{network@{network}!index@{index}}
+\index{index@{index}!network@{network}}
+\doxysubsubsection{\texorpdfstring{index}{index}}
+{\footnotesize\ttfamily int network\+::index}
+
+\mbox{\Hypertarget{structnetwork_a3b0a8678b266dd09c64dd57400f73a24}\label{structnetwork_a3b0a8678b266dd09c64dd57400f73a24}} 
+\index{network@{network}!init\_sequential\_subdivisions@{init\_sequential\_subdivisions}}
+\index{init\_sequential\_subdivisions@{init\_sequential\_subdivisions}!network@{network}}
+\doxysubsubsection{\texorpdfstring{init\_sequential\_subdivisions}{init\_sequential\_subdivisions}}
+{\footnotesize\ttfamily int network\+::init\+\_\+sequential\+\_\+subdivisions}
+
+\mbox{\Hypertarget{structnetwork_a8f391155a3ceb60caf07d0ee6c6a93f2}\label{structnetwork_a8f391155a3ceb60caf07d0ee6c6a93f2}} 
+\index{network@{network}!input@{input}}
+\index{input@{input}!network@{network}}
+\doxysubsubsection{\texorpdfstring{input}{input}}
+{\footnotesize\ttfamily float$\ast$ network\+::input}
+
+\mbox{\Hypertarget{structnetwork_a3473fa8eebafdf46318506b8bc2b1114}\label{structnetwork_a3473fa8eebafdf46318506b8bc2b1114}} 
+\index{network@{network}!input16\_gpu@{input16\_gpu}}
+\index{input16\_gpu@{input16\_gpu}!network@{network}}
+\doxysubsubsection{\texorpdfstring{input16\_gpu}{input16\_gpu}}
+{\footnotesize\ttfamily float$\ast$$\ast$ network\+::input16\+\_\+gpu}
+
+\mbox{\Hypertarget{structnetwork_a453981d30c67aa549f3961bb1455e98a}\label{structnetwork_a453981d30c67aa549f3961bb1455e98a}} 
+\index{network@{network}!input\_gpu@{input\_gpu}}
+\index{input\_gpu@{input\_gpu}!network@{network}}
+\doxysubsubsection{\texorpdfstring{input\_gpu}{input\_gpu}}
+{\footnotesize\ttfamily float$\ast$$\ast$ network\+::input\+\_\+gpu}
+
+\mbox{\Hypertarget{structnetwork_ae3a4bb542ac197dfc3d052bc1b4d71bf}\label{structnetwork_ae3a4bb542ac197dfc3d052bc1b4d71bf}} 
+\index{network@{network}!input\_pinned\_cpu@{input\_pinned\_cpu}}
+\index{input\_pinned\_cpu@{input\_pinned\_cpu}!network@{network}}
+\doxysubsubsection{\texorpdfstring{input\_pinned\_cpu}{input\_pinned\_cpu}}
+{\footnotesize\ttfamily float$\ast$ network\+::input\+\_\+pinned\+\_\+cpu}
+
+\mbox{\Hypertarget{structnetwork_ae267a5615efc9f282ea969c2b7fb26cc}\label{structnetwork_ae267a5615efc9f282ea969c2b7fb26cc}} 
+\index{network@{network}!input\_pinned\_cpu\_flag@{input\_pinned\_cpu\_flag}}
+\index{input\_pinned\_cpu\_flag@{input\_pinned\_cpu\_flag}!network@{network}}
+\doxysubsubsection{\texorpdfstring{input\_pinned\_cpu\_flag}{input\_pinned\_cpu\_flag}}
+{\footnotesize\ttfamily int network\+::input\+\_\+pinned\+\_\+cpu\+\_\+flag}
+
+\mbox{\Hypertarget{structnetwork_ab0b9da626c611f53e5a299f75e06e18f}\label{structnetwork_ab0b9da626c611f53e5a299f75e06e18f}} 
+\index{network@{network}!input\_state\_gpu@{input\_state\_gpu}}
+\index{input\_state\_gpu@{input\_state\_gpu}!network@{network}}
+\doxysubsubsection{\texorpdfstring{input\_state\_gpu}{input\_state\_gpu}}
+{\footnotesize\ttfamily float$\ast$ network\+::input\+\_\+state\+\_\+gpu}
+
+\mbox{\Hypertarget{structnetwork_a529a36505548232d049abcb84fdcf389}\label{structnetwork_a529a36505548232d049abcb84fdcf389}} 
+\index{network@{network}!inputs@{inputs}}
+\index{inputs@{inputs}!network@{network}}
+\doxysubsubsection{\texorpdfstring{inputs}{inputs}}
+{\footnotesize\ttfamily int network\+::inputs}
+
+\mbox{\Hypertarget{structnetwork_aa59eb3c12daa241b48cda6d5000caf2c}\label{structnetwork_aa59eb3c12daa241b48cda6d5000caf2c}} 
+\index{network@{network}!label\_smooth\_eps@{label\_smooth\_eps}}
+\index{label\_smooth\_eps@{label\_smooth\_eps}!network@{network}}
+\doxysubsubsection{\texorpdfstring{label\_smooth\_eps}{label\_smooth\_eps}}
+{\footnotesize\ttfamily float network\+::label\+\_\+smooth\+\_\+eps}
+
+\mbox{\Hypertarget{structnetwork_a9770423f88b722bafc9d1fd3c6091d75}\label{structnetwork_a9770423f88b722bafc9d1fd3c6091d75}} 
+\index{network@{network}!layers@{layers}}
+\index{layers@{layers}!network@{network}}
+\doxysubsubsection{\texorpdfstring{layers}{layers}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlayer}{layer}}$\ast$ network\+::layers}
+
+\mbox{\Hypertarget{structnetwork_a978d3e339536cd6bea2270d49d93c35a}\label{structnetwork_a978d3e339536cd6bea2270d49d93c35a}} 
+\index{network@{network}!learning\_rate@{learning\_rate}}
+\index{learning\_rate@{learning\_rate}!network@{network}}
+\doxysubsubsection{\texorpdfstring{learning\_rate}{learning\_rate}}
+{\footnotesize\ttfamily float network\+::learning\+\_\+rate}
+
+\mbox{\Hypertarget{structnetwork_aac981fedad322cf0dca979bcaa0f430a}\label{structnetwork_aac981fedad322cf0dca979bcaa0f430a}} 
+\index{network@{network}!learning\_rate\_max@{learning\_rate\_max}}
+\index{learning\_rate\_max@{learning\_rate\_max}!network@{network}}
+\doxysubsubsection{\texorpdfstring{learning\_rate\_max}{learning\_rate\_max}}
+{\footnotesize\ttfamily float network\+::learning\+\_\+rate\+\_\+max}
+
+\mbox{\Hypertarget{structnetwork_adaa4989c2523a59364b1205a5f09f2db}\label{structnetwork_adaa4989c2523a59364b1205a5f09f2db}} 
+\index{network@{network}!learning\_rate\_min@{learning\_rate\_min}}
+\index{learning\_rate\_min@{learning\_rate\_min}!network@{network}}
+\doxysubsubsection{\texorpdfstring{learning\_rate\_min}{learning\_rate\_min}}
+{\footnotesize\ttfamily float network\+::learning\+\_\+rate\+\_\+min}
+
+\mbox{\Hypertarget{structnetwork_a3353341e3dba21487aa035b314cffc85}\label{structnetwork_a3353341e3dba21487aa035b314cffc85}} 
+\index{network@{network}!letter\_box@{letter\_box}}
+\index{letter\_box@{letter\_box}!network@{network}}
+\doxysubsubsection{\texorpdfstring{letter\_box}{letter\_box}}
+{\footnotesize\ttfamily int network\+::letter\+\_\+box}
+
+\mbox{\Hypertarget{structnetwork_a3b16ca93b69637c4e76bb8ac3749c840}\label{structnetwork_a3b16ca93b69637c4e76bb8ac3749c840}} 
+\index{network@{network}!loss\_scale@{loss\_scale}}
+\index{loss\_scale@{loss\_scale}!network@{network}}
+\doxysubsubsection{\texorpdfstring{loss\_scale}{loss\_scale}}
+{\footnotesize\ttfamily float network\+::loss\+\_\+scale}
+
+\mbox{\Hypertarget{structnetwork_a163b931990a5ac8f456884405de2192b}\label{structnetwork_a163b931990a5ac8f456884405de2192b}} 
+\index{network@{network}!max\_batches@{max\_batches}}
+\index{max\_batches@{max\_batches}!network@{network}}
+\doxysubsubsection{\texorpdfstring{max\_batches}{max\_batches}}
+{\footnotesize\ttfamily int network\+::max\+\_\+batches}
+
+\mbox{\Hypertarget{structnetwork_a803a556aa8a0ff6e7ec892df324ddd61}\label{structnetwork_a803a556aa8a0ff6e7ec892df324ddd61}} 
+\index{network@{network}!max\_chart\_loss@{max\_chart\_loss}}
+\index{max\_chart\_loss@{max\_chart\_loss}!network@{network}}
+\doxysubsubsection{\texorpdfstring{max\_chart\_loss}{max\_chart\_loss}}
+{\footnotesize\ttfamily float network\+::max\+\_\+chart\+\_\+loss}
+
+\mbox{\Hypertarget{structnetwork_af98abf1cccd7bfee97b9f7eae752687c}\label{structnetwork_af98abf1cccd7bfee97b9f7eae752687c}} 
+\index{network@{network}!max\_crop@{max\_crop}}
+\index{max\_crop@{max\_crop}!network@{network}}
+\doxysubsubsection{\texorpdfstring{max\_crop}{max\_crop}}
+{\footnotesize\ttfamily int network\+::max\+\_\+crop}
+
+\mbox{\Hypertarget{structnetwork_ab019a2be083c6d3e17da31842dbf51ec}\label{structnetwork_ab019a2be083c6d3e17da31842dbf51ec}} 
+\index{network@{network}!max\_delta\_gpu\_size@{max\_delta\_gpu\_size}}
+\index{max\_delta\_gpu\_size@{max\_delta\_gpu\_size}!network@{network}}
+\doxysubsubsection{\texorpdfstring{max\_delta\_gpu\_size}{max\_delta\_gpu\_size}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} network\+::max\+\_\+delta\+\_\+gpu\+\_\+size}
+
+\mbox{\Hypertarget{structnetwork_ab9e60c4c3092115f10dd8a9288c074b0}\label{structnetwork_ab9e60c4c3092115f10dd8a9288c074b0}} 
+\index{network@{network}!max\_input16\_size@{max\_input16\_size}}
+\index{max\_input16\_size@{max\_input16\_size}!network@{network}}
+\doxysubsubsection{\texorpdfstring{max\_input16\_size}{max\_input16\_size}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}$\ast$ network\+::max\+\_\+input16\+\_\+size}
+
+\mbox{\Hypertarget{structnetwork_a26aa45acbe051446a9a451132f77125e}\label{structnetwork_a26aa45acbe051446a9a451132f77125e}} 
+\index{network@{network}!max\_output16\_size@{max\_output16\_size}}
+\index{max\_output16\_size@{max\_output16\_size}!network@{network}}
+\doxysubsubsection{\texorpdfstring{max\_output16\_size}{max\_output16\_size}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}$\ast$ network\+::max\+\_\+output16\+\_\+size}
+
+\mbox{\Hypertarget{structnetwork_a181329911f37d2d5adce2290683a9897}\label{structnetwork_a181329911f37d2d5adce2290683a9897}} 
+\index{network@{network}!max\_ratio@{max\_ratio}}
+\index{max\_ratio@{max\_ratio}!network@{network}}
+\doxysubsubsection{\texorpdfstring{max\_ratio}{max\_ratio}}
+{\footnotesize\ttfamily float network\+::max\+\_\+ratio}
+
+\mbox{\Hypertarget{structnetwork_a9e52bfae3a850150ed2e32c10ab11bec}\label{structnetwork_a9e52bfae3a850150ed2e32c10ab11bec}} 
+\index{network@{network}!min\_crop@{min\_crop}}
+\index{min\_crop@{min\_crop}!network@{network}}
+\doxysubsubsection{\texorpdfstring{min\_crop}{min\_crop}}
+{\footnotesize\ttfamily int network\+::min\+\_\+crop}
+
+\mbox{\Hypertarget{structnetwork_a395ccde63912c9272f91ee6c9af14784}\label{structnetwork_a395ccde63912c9272f91ee6c9af14784}} 
+\index{network@{network}!min\_ratio@{min\_ratio}}
+\index{min\_ratio@{min\_ratio}!network@{network}}
+\doxysubsubsection{\texorpdfstring{min\_ratio}{min\_ratio}}
+{\footnotesize\ttfamily float network\+::min\+\_\+ratio}
+
+\mbox{\Hypertarget{structnetwork_a5bcf917836e9c4a877df8bd9517120ea}\label{structnetwork_a5bcf917836e9c4a877df8bd9517120ea}} 
+\index{network@{network}!mixup@{mixup}}
+\index{mixup@{mixup}!network@{network}}
+\doxysubsubsection{\texorpdfstring{mixup}{mixup}}
+{\footnotesize\ttfamily int network\+::mixup}
+
+\mbox{\Hypertarget{structnetwork_a495c60ef821ca0ade1c42907c8bc90bf}\label{structnetwork_a495c60ef821ca0ade1c42907c8bc90bf}} 
+\index{network@{network}!momentum@{momentum}}
+\index{momentum@{momentum}!network@{network}}
+\doxysubsubsection{\texorpdfstring{momentum}{momentum}}
+{\footnotesize\ttfamily float network\+::momentum}
+
+\mbox{\Hypertarget{structnetwork_a023b95b67bdf4e7d23fd45d91a0da444}\label{structnetwork_a023b95b67bdf4e7d23fd45d91a0da444}} 
+\index{network@{network}!mosaic\_bound@{mosaic\_bound}}
+\index{mosaic\_bound@{mosaic\_bound}!network@{network}}
+\doxysubsubsection{\texorpdfstring{mosaic\_bound}{mosaic\_bound}}
+{\footnotesize\ttfamily int network\+::mosaic\+\_\+bound}
+
+\mbox{\Hypertarget{structnetwork_a1c7625720955322d05924a075d013877}\label{structnetwork_a1c7625720955322d05924a075d013877}} 
+\index{network@{network}!n@{n}}
+\index{n@{n}!network@{network}}
+\doxysubsubsection{\texorpdfstring{n}{n}}
+{\footnotesize\ttfamily int network\+::n}
+
+\mbox{\Hypertarget{structnetwork_a6769bc5e23225cecf0a46eedba29719a}\label{structnetwork_a6769bc5e23225cecf0a46eedba29719a}} 
+\index{network@{network}!notruth@{notruth}}
+\index{notruth@{notruth}!network@{network}}
+\doxysubsubsection{\texorpdfstring{notruth}{notruth}}
+{\footnotesize\ttfamily int network\+::notruth}
+
+\mbox{\Hypertarget{structnetwork_a8dfd10de37f2b101304e808d28924769}\label{structnetwork_a8dfd10de37f2b101304e808d28924769}} 
+\index{network@{network}!num\_boxes@{num\_boxes}}
+\index{num\_boxes@{num\_boxes}!network@{network}}
+\doxysubsubsection{\texorpdfstring{num\_boxes}{num\_boxes}}
+{\footnotesize\ttfamily int network\+::num\+\_\+boxes}
+
+\mbox{\Hypertarget{structnetwork_a1d8e47052ed164db0f722ef285f4e127}\label{structnetwork_a1d8e47052ed164db0f722ef285f4e127}} 
+\index{network@{network}!num\_sigmas\_reject\_badlabels@{num\_sigmas\_reject\_badlabels}}
+\index{num\_sigmas\_reject\_badlabels@{num\_sigmas\_reject\_badlabels}!network@{network}}
+\doxysubsubsection{\texorpdfstring{num\_sigmas\_reject\_badlabels}{num\_sigmas\_reject\_badlabels}}
+{\footnotesize\ttfamily float network\+::num\+\_\+sigmas\+\_\+reject\+\_\+badlabels}
+
+\mbox{\Hypertarget{structnetwork_a6e656092c18afdc2bcb72f87d0ed2547}\label{structnetwork_a6e656092c18afdc2bcb72f87d0ed2547}} 
+\index{network@{network}!num\_steps@{num\_steps}}
+\index{num\_steps@{num\_steps}!network@{network}}
+\doxysubsubsection{\texorpdfstring{num\_steps}{num\_steps}}
+{\footnotesize\ttfamily int network\+::num\+\_\+steps}
+
+\mbox{\Hypertarget{structnetwork_ac07d0bb809f276a32c8a91f82d2882f3}\label{structnetwork_ac07d0bb809f276a32c8a91f82d2882f3}} 
+\index{network@{network}!optimized\_memory@{optimized\_memory}}
+\index{optimized\_memory@{optimized\_memory}!network@{network}}
+\doxysubsubsection{\texorpdfstring{optimized\_memory}{optimized\_memory}}
+{\footnotesize\ttfamily int network\+::optimized\+\_\+memory}
+
+\mbox{\Hypertarget{structnetwork_a274dce0db2d5175992eb3b273ab09df7}\label{structnetwork_a274dce0db2d5175992eb3b273ab09df7}} 
+\index{network@{network}!output@{output}}
+\index{output@{output}!network@{network}}
+\doxysubsubsection{\texorpdfstring{output}{output}}
+{\footnotesize\ttfamily float$\ast$ network\+::output}
+
+\mbox{\Hypertarget{structnetwork_a0948e3973a8490877c95616a6a2b1fa7}\label{structnetwork_a0948e3973a8490877c95616a6a2b1fa7}} 
+\index{network@{network}!output16\_gpu@{output16\_gpu}}
+\index{output16\_gpu@{output16\_gpu}!network@{network}}
+\doxysubsubsection{\texorpdfstring{output16\_gpu}{output16\_gpu}}
+{\footnotesize\ttfamily float$\ast$$\ast$ network\+::output16\+\_\+gpu}
+
+\mbox{\Hypertarget{structnetwork_ae86280dc96f37e99b6f4bb72d25d3cbb}\label{structnetwork_ae86280dc96f37e99b6f4bb72d25d3cbb}} 
+\index{network@{network}!output\_gpu@{output\_gpu}}
+\index{output\_gpu@{output\_gpu}!network@{network}}
+\doxysubsubsection{\texorpdfstring{output\_gpu}{output\_gpu}}
+{\footnotesize\ttfamily float$\ast$ network\+::output\+\_\+gpu}
+
+\mbox{\Hypertarget{structnetwork_a5268de11127a02d86e6f517cf3b3acc9}\label{structnetwork_a5268de11127a02d86e6f517cf3b3acc9}} 
+\index{network@{network}!outputs@{outputs}}
+\index{outputs@{outputs}!network@{network}}
+\doxysubsubsection{\texorpdfstring{outputs}{outputs}}
+{\footnotesize\ttfamily int network\+::outputs}
+
+\mbox{\Hypertarget{structnetwork_a78121635a0f0c3a1d9991390b4325dc3}\label{structnetwork_a78121635a0f0c3a1d9991390b4325dc3}} 
+\index{network@{network}!policy@{policy}}
+\index{policy@{policy}!network@{network}}
+\doxysubsubsection{\texorpdfstring{policy}{policy}}
+{\footnotesize\ttfamily \mbox{\hyperlink{darknet_8h_a9c2ce38711c59085616b738d2aa21184}{learning\+\_\+rate\+\_\+policy}} network\+::policy}
+
+\mbox{\Hypertarget{structnetwork_ae38f864b7b9966c38f1882f468131eda}\label{structnetwork_ae38f864b7b9966c38f1882f468131eda}} 
+\index{network@{network}!power@{power}}
+\index{power@{power}!network@{network}}
+\doxysubsubsection{\texorpdfstring{power}{power}}
+{\footnotesize\ttfamily float network\+::power}
+
+\mbox{\Hypertarget{structnetwork_a89dfdaa6178f338c250d7b6631476fa1}\label{structnetwork_a89dfdaa6178f338c250d7b6631476fa1}} 
+\index{network@{network}!random@{random}}
+\index{random@{random}!network@{network}}
+\doxysubsubsection{\texorpdfstring{random}{random}}
+{\footnotesize\ttfamily int network\+::random}
+
+\mbox{\Hypertarget{structnetwork_a562e7cf1b7309da00807cc69031be744}\label{structnetwork_a562e7cf1b7309da00807cc69031be744}} 
+\index{network@{network}!resize\_step@{resize\_step}}
+\index{resize\_step@{resize\_step}!network@{network}}
+\doxysubsubsection{\texorpdfstring{resize\_step}{resize\_step}}
+{\footnotesize\ttfamily int network\+::resize\+\_\+step}
+
+\mbox{\Hypertarget{structnetwork_a4aeafac79e76694fb1e9f4556f704370}\label{structnetwork_a4aeafac79e76694fb1e9f4556f704370}} 
+\index{network@{network}!rewritten\_bbox@{rewritten\_bbox}}
+\index{rewritten\_bbox@{rewritten\_bbox}!network@{network}}
+\doxysubsubsection{\texorpdfstring{rewritten\_bbox}{rewritten\_bbox}}
+{\footnotesize\ttfamily int$\ast$ network\+::rewritten\+\_\+bbox}
+
+\mbox{\Hypertarget{structnetwork_a9bbb55144a6eca464fbc122f97bf1af8}\label{structnetwork_a9bbb55144a6eca464fbc122f97bf1af8}} 
+\index{network@{network}!saturation@{saturation}}
+\index{saturation@{saturation}!network@{network}}
+\doxysubsubsection{\texorpdfstring{saturation}{saturation}}
+{\footnotesize\ttfamily float network\+::saturation}
+
+\mbox{\Hypertarget{structnetwork_a0d9e7af8dde42e28a7fdb0e685b2f23b}\label{structnetwork_a0d9e7af8dde42e28a7fdb0e685b2f23b}} 
+\index{network@{network}!scale@{scale}}
+\index{scale@{scale}!network@{network}}
+\doxysubsubsection{\texorpdfstring{scale}{scale}}
+{\footnotesize\ttfamily float network\+::scale}
+
+\mbox{\Hypertarget{structnetwork_a64c1fa0153559f530cc815fb6b8a95c8}\label{structnetwork_a64c1fa0153559f530cc815fb6b8a95c8}} 
+\index{network@{network}!scales@{scales}}
+\index{scales@{scales}!network@{network}}
+\doxysubsubsection{\texorpdfstring{scales}{scales}}
+{\footnotesize\ttfamily float$\ast$ network\+::scales}
+
+\mbox{\Hypertarget{structnetwork_af8bfbe8d3d66b2d759e9ad725af2f91c}\label{structnetwork_af8bfbe8d3d66b2d759e9ad725af2f91c}} 
+\index{network@{network}!seen@{seen}}
+\index{seen@{seen}!network@{network}}
+\doxysubsubsection{\texorpdfstring{seen}{seen}}
+{\footnotesize\ttfamily uint64\+\_\+t$\ast$ network\+::seen}
+
+\mbox{\Hypertarget{structnetwork_ab9f91f1d867103ebd0f73735f54bc93b}\label{structnetwork_ab9f91f1d867103ebd0f73735f54bc93b}} 
+\index{network@{network}!seq\_scales@{seq\_scales}}
+\index{seq\_scales@{seq\_scales}!network@{network}}
+\doxysubsubsection{\texorpdfstring{seq\_scales}{seq\_scales}}
+{\footnotesize\ttfamily float$\ast$ network\+::seq\+\_\+scales}
+
+\mbox{\Hypertarget{structnetwork_a651ca5bba7949fa86ffe1a2edb5d10ca}\label{structnetwork_a651ca5bba7949fa86ffe1a2edb5d10ca}} 
+\index{network@{network}!sequential\_subdivisions@{sequential\_subdivisions}}
+\index{sequential\_subdivisions@{sequential\_subdivisions}!network@{network}}
+\doxysubsubsection{\texorpdfstring{sequential\_subdivisions}{sequential\_subdivisions}}
+{\footnotesize\ttfamily int network\+::sequential\+\_\+subdivisions}
+
+\mbox{\Hypertarget{structnetwork_a08406c4227be6aaed2a6f6b3449f6a15}\label{structnetwork_a08406c4227be6aaed2a6f6b3449f6a15}} 
+\index{network@{network}!state\_delta\_gpu@{state\_delta\_gpu}}
+\index{state\_delta\_gpu@{state\_delta\_gpu}!network@{network}}
+\doxysubsubsection{\texorpdfstring{state\_delta\_gpu}{state\_delta\_gpu}}
+{\footnotesize\ttfamily float$\ast$ network\+::state\+\_\+delta\+\_\+gpu}
+
+\mbox{\Hypertarget{structnetwork_a9ed08472400f140c49ecac3ecd1def87}\label{structnetwork_a9ed08472400f140c49ecac3ecd1def87}} 
+\index{network@{network}!step@{step}}
+\index{step@{step}!network@{network}}
+\doxysubsubsection{\texorpdfstring{step}{step}}
+{\footnotesize\ttfamily int network\+::step}
+
+\mbox{\Hypertarget{structnetwork_a48fb87937b7ff22cf01875d8d5807cc2}\label{structnetwork_a48fb87937b7ff22cf01875d8d5807cc2}} 
+\index{network@{network}!steps@{steps}}
+\index{steps@{steps}!network@{network}}
+\doxysubsubsection{\texorpdfstring{steps}{steps}}
+{\footnotesize\ttfamily int$\ast$ network\+::steps}
+
+\mbox{\Hypertarget{structnetwork_ab30643da07e0f787ee0cd2058cd41a6e}\label{structnetwork_ab30643da07e0f787ee0cd2058cd41a6e}} 
+\index{network@{network}!subdivisions@{subdivisions}}
+\index{subdivisions@{subdivisions}!network@{network}}
+\doxysubsubsection{\texorpdfstring{subdivisions}{subdivisions}}
+{\footnotesize\ttfamily int network\+::subdivisions}
+
+\mbox{\Hypertarget{structnetwork_a185b52d74237f3cd32d2d0186d2d2f5b}\label{structnetwork_a185b52d74237f3cd32d2d0186d2d2f5b}} 
+\index{network@{network}!t@{t}}
+\index{t@{t}!network@{network}}
+\doxysubsubsection{\texorpdfstring{t}{t}}
+{\footnotesize\ttfamily int$\ast$ network\+::t}
+
+\mbox{\Hypertarget{structnetwork_abaf83235b5968fb68a2dc9215cc67c8c}\label{structnetwork_abaf83235b5968fb68a2dc9215cc67c8c}} 
+\index{network@{network}!time\_steps@{time\_steps}}
+\index{time\_steps@{time\_steps}!network@{network}}
+\doxysubsubsection{\texorpdfstring{time\_steps}{time\_steps}}
+{\footnotesize\ttfamily int network\+::time\+\_\+steps}
+
+\mbox{\Hypertarget{structnetwork_ac30ea9cb7c016e0f1836dafb93fc6b2c}\label{structnetwork_ac30ea9cb7c016e0f1836dafb93fc6b2c}} 
+\index{network@{network}!total\_bbox@{total\_bbox}}
+\index{total\_bbox@{total\_bbox}!network@{network}}
+\doxysubsubsection{\texorpdfstring{total\_bbox}{total\_bbox}}
+{\footnotesize\ttfamily int$\ast$ network\+::total\+\_\+bbox}
+
+\mbox{\Hypertarget{structnetwork_a50ea7873bccd5929b0b9749453da1f46}\label{structnetwork_a50ea7873bccd5929b0b9749453da1f46}} 
+\index{network@{network}!track@{track}}
+\index{track@{track}!network@{network}}
+\doxysubsubsection{\texorpdfstring{track}{track}}
+{\footnotesize\ttfamily int network\+::track}
+
+\mbox{\Hypertarget{structnetwork_a32e7b55fe8dfa07391b6cdce17b4a2c1}\label{structnetwork_a32e7b55fe8dfa07391b6cdce17b4a2c1}} 
+\index{network@{network}!train@{train}}
+\index{train@{train}!network@{network}}
+\doxysubsubsection{\texorpdfstring{train}{train}}
+{\footnotesize\ttfamily int network\+::train}
+
+\mbox{\Hypertarget{structnetwork_aa348b0397dcf150bbe4c3f1f730c8575}\label{structnetwork_aa348b0397dcf150bbe4c3f1f730c8575}} 
+\index{network@{network}!train\_images\_num@{train\_images\_num}}
+\index{train\_images\_num@{train\_images\_num}!network@{network}}
+\doxysubsubsection{\texorpdfstring{train\_images\_num}{train\_images\_num}}
+{\footnotesize\ttfamily int network\+::train\+\_\+images\+\_\+num}
+
+\mbox{\Hypertarget{structnetwork_a1453c2cf9a735bde55a281d698797a05}\label{structnetwork_a1453c2cf9a735bde55a281d698797a05}} 
+\index{network@{network}!truth@{truth}}
+\index{truth@{truth}!network@{network}}
+\doxysubsubsection{\texorpdfstring{truth}{truth}}
+{\footnotesize\ttfamily float$\ast$ network\+::truth}
+
+\mbox{\Hypertarget{structnetwork_a6ed22759648ff09e2cfaa9f331dc1e38}\label{structnetwork_a6ed22759648ff09e2cfaa9f331dc1e38}} 
+\index{network@{network}!truth\_gpu@{truth\_gpu}}
+\index{truth\_gpu@{truth\_gpu}!network@{network}}
+\doxysubsubsection{\texorpdfstring{truth\_gpu}{truth\_gpu}}
+{\footnotesize\ttfamily float$\ast$$\ast$ network\+::truth\+\_\+gpu}
+
+\mbox{\Hypertarget{structnetwork_a794927f8c4d44cd8e85ff39e0d4c9939}\label{structnetwork_a794927f8c4d44cd8e85ff39e0d4c9939}} 
+\index{network@{network}!truths@{truths}}
+\index{truths@{truths}!network@{network}}
+\doxysubsubsection{\texorpdfstring{truths}{truths}}
+{\footnotesize\ttfamily int network\+::truths}
+
+\mbox{\Hypertarget{structnetwork_ac8da8cb90c4cd45a8f249e08ade12356}\label{structnetwork_ac8da8cb90c4cd45a8f249e08ade12356}} 
+\index{network@{network}!try\_fix\_nan@{try\_fix\_nan}}
+\index{try\_fix\_nan@{try\_fix\_nan}!network@{network}}
+\doxysubsubsection{\texorpdfstring{try\_fix\_nan}{try\_fix\_nan}}
+{\footnotesize\ttfamily int network\+::try\+\_\+fix\+\_\+nan}
+
+\mbox{\Hypertarget{structnetwork_a99da8cf542521e5374f2bb7702582c41}\label{structnetwork_a99da8cf542521e5374f2bb7702582c41}} 
+\index{network@{network}!unsupervised@{unsupervised}}
+\index{unsupervised@{unsupervised}!network@{network}}
+\doxysubsubsection{\texorpdfstring{unsupervised}{unsupervised}}
+{\footnotesize\ttfamily int network\+::unsupervised}
+
+\mbox{\Hypertarget{structnetwork_a5e190d16cc2a35c6f9263bccd7949577}\label{structnetwork_a5e190d16cc2a35c6f9263bccd7949577}} 
+\index{network@{network}!use\_cuda\_graph@{use\_cuda\_graph}}
+\index{use\_cuda\_graph@{use\_cuda\_graph}!network@{network}}
+\doxysubsubsection{\texorpdfstring{use\_cuda\_graph}{use\_cuda\_graph}}
+{\footnotesize\ttfamily int network\+::use\+\_\+cuda\+\_\+graph}
+
+\mbox{\Hypertarget{structnetwork_a944b83cb20da2454c6092e07b9a1d3e9}\label{structnetwork_a944b83cb20da2454c6092e07b9a1d3e9}} 
+\index{network@{network}!w@{w}}
+\index{w@{w}!network@{network}}
+\doxysubsubsection{\texorpdfstring{w}{w}}
+{\footnotesize\ttfamily int network\+::w}
+
+\mbox{\Hypertarget{structnetwork_a1178dc0d580008cf4ba0c9bf67a57b7c}\label{structnetwork_a1178dc0d580008cf4ba0c9bf67a57b7c}} 
+\index{network@{network}!wait\_stream@{wait\_stream}}
+\index{wait\_stream@{wait\_stream}!network@{network}}
+\doxysubsubsection{\texorpdfstring{wait\_stream}{wait\_stream}}
+{\footnotesize\ttfamily int network\+::wait\+\_\+stream}
+
+\mbox{\Hypertarget{structnetwork_a99b87633f58f386713b3d0397b4c0dd6}\label{structnetwork_a99b87633f58f386713b3d0397b4c0dd6}} 
+\index{network@{network}!weights\_reject\_freq@{weights\_reject\_freq}}
+\index{weights\_reject\_freq@{weights\_reject\_freq}!network@{network}}
+\doxysubsubsection{\texorpdfstring{weights\_reject\_freq}{weights\_reject\_freq}}
+{\footnotesize\ttfamily int network\+::weights\+\_\+reject\+\_\+freq}
+
+\mbox{\Hypertarget{structnetwork_a624719738b94a1d55de651f5dac16b79}\label{structnetwork_a624719738b94a1d55de651f5dac16b79}} 
+\index{network@{network}!workspace@{workspace}}
+\index{workspace@{workspace}!network@{network}}
+\doxysubsubsection{\texorpdfstring{workspace}{workspace}}
+{\footnotesize\ttfamily float$\ast$ network\+::workspace}
+
+\mbox{\Hypertarget{structnetwork_ad60825a8df8601ded4e232c86b79e57f}\label{structnetwork_ad60825a8df8601ded4e232c86b79e57f}} 
+\index{network@{network}!workspace\_size\_limit@{workspace\_size\_limit}}
+\index{workspace\_size\_limit@{workspace\_size\_limit}!network@{network}}
+\doxysubsubsection{\texorpdfstring{workspace\_size\_limit}{workspace\_size\_limit}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} network\+::workspace\+\_\+size\+\_\+limit}
+
+
+
+该结构体的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/include/\mbox{\hyperlink{darknet_8h}{darknet.\+h}}\end{DoxyCompactItemize}

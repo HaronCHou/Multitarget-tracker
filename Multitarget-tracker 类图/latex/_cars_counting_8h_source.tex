@@ -1,0 +1,449 @@
+\hypertarget{_cars_counting_8h_source}{}\doxysection{Cars\+Counting.\+h}
+\label{_cars_counting_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/example/CarsCounting.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/example/CarsCounting.h}}
+\mbox{\hyperlink{_cars_counting_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <unordered\_set>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_video_example_8h}{VideoExample.h}}"{}}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{7 \textcolor{keyword}{constexpr} \textcolor{keywordtype}{double} \mbox{\hyperlink{_cars_counting_8h_a410b5189721a469108e809fbf4f6e601}{DEG\_TO\_RAD}} = 0.017453292519943295769236907684886;}
+\DoxyCodeLine{8 \textcolor{keyword}{constexpr} \textcolor{keywordtype}{double} \mbox{\hyperlink{_cars_counting_8h_afb96b5546e7a469d9c0602e4f4313289}{EARTH\_RADIUS\_IN\_METERS}} = 6372797.560856;}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{11 T \mbox{\hyperlink{_cars_counting_8h_a619eb3804be1b25c5de872413c5260fc}{Haversine}}(\textcolor{keyword}{const} cv::Point\_<T>\& from, \textcolor{keyword}{const} cv::Point\_<T>\& to)}
+\DoxyCodeLine{12 \{}
+\DoxyCodeLine{13     \textcolor{keyword}{constexpr} T Deg2Rad = \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(\mbox{\hyperlink{_cars_counting_8h_a410b5189721a469108e809fbf4f6e601}{DEG\_TO\_RAD}});}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15     T lat\_arc = (from.x -\/ to.x) * Deg2Rad;}
+\DoxyCodeLine{16     T lon\_arc = (from.y -\/ to.y) * Deg2Rad;}
+\DoxyCodeLine{17     T lat\_h = sin(lat\_arc * \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(0.5));}
+\DoxyCodeLine{18     lat\_h *= lat\_h;}
+\DoxyCodeLine{19     T lon\_h = sin(lon\_arc * \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(0.5));}
+\DoxyCodeLine{20     lon\_h *= lon\_h;}
+\DoxyCodeLine{21     T tmp = cos(from.x * Deg2Rad) * cos(to.y * Deg2Rad);}
+\DoxyCodeLine{22     \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(2.0) * asin(sqrt(lat\_h + tmp * lon\_h));}
+\DoxyCodeLine{23 \}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{26 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{27 T \mbox{\hyperlink{_cars_counting_8h_a0c726ee1896d40a9d4e3a33d5af8b168}{DistanceInMeters}}(\textcolor{keyword}{const} cv::Point\_<T>\& from, \textcolor{keyword}{const} cv::Point\_<T>\& to)}
+\DoxyCodeLine{28 \{}
+\DoxyCodeLine{29     \textcolor{keyword}{constexpr} T EarthRadius = \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(\mbox{\hyperlink{_cars_counting_8h_afb96b5546e7a469d9c0602e4f4313289}{EARTH\_RADIUS\_IN\_METERS}});}
+\DoxyCodeLine{30     \textcolor{keywordflow}{return} EarthRadius * \mbox{\hyperlink{_cars_counting_8h_a619eb3804be1b25c5de872413c5260fc}{Haversine}}(from, to);}
+\DoxyCodeLine{31 \}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{comment}{// Fix cv::getPerspectiveTransform for double}}
+\DoxyCodeLine{34 \textcolor{keyword}{template}<\textcolor{keyword}{class} T>}
+\DoxyCodeLine{35 cv::Mat \mbox{\hyperlink{_cars_counting_8h_ac7c4d8baf901135b7d8605c1a9a10004}{GetPerspectiveTransform}}(\textcolor{keyword}{const} std::vector<cv::Point\_<T>>\& src, \textcolor{keyword}{const} std::vector<cv::Point\_<T>>\& dst, \textcolor{keywordtype}{int} solveMethod)}
+\DoxyCodeLine{36 \{}
+\DoxyCodeLine{37     cv::Mat M(3, 3, CV\_64F), X(8, 1, CV\_64F, M.ptr());}
+\DoxyCodeLine{38     \textcolor{keywordtype}{double} a[8][8], b[8];}
+\DoxyCodeLine{39     cv::Mat A(8, 8, CV\_64F, a), B(8, 1, CV\_64F, b);}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 4; ++i)}
+\DoxyCodeLine{42     \{}
+\DoxyCodeLine{43         a[i][0] = a[i + 4][3] = src[i].x;}
+\DoxyCodeLine{44         a[i][1] = a[i + 4][4] = src[i].y;}
+\DoxyCodeLine{45         a[i][2] = a[i + 4][5] = 1;}
+\DoxyCodeLine{46         a[i][3] = a[i][4] = a[i][5] = a[i + 4][0] = a[i + 4][1] = a[i + 4][2] = 0;}
+\DoxyCodeLine{47         a[i][6] = -\/src[i].x * dst[i].x;}
+\DoxyCodeLine{48         a[i][7] = -\/src[i].y * dst[i].x;}
+\DoxyCodeLine{49         a[i + 4][6] = -\/src[i].x * dst[i].y;}
+\DoxyCodeLine{50         a[i + 4][7] = -\/src[i].y * dst[i].y;}
+\DoxyCodeLine{51         b[i] = dst[i].x;}
+\DoxyCodeLine{52         b[i + 4] = dst[i].y;}
+\DoxyCodeLine{53     \}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55     cv::solve(A, B, X, solveMethod);}
+\DoxyCodeLine{56     M.ptr<\textcolor{keywordtype}{double}>()[8] = 1.;}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58     \textcolor{keywordflow}{return} M;}
+\DoxyCodeLine{59 \}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{64 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{65 \textcolor{keyword}{class }\mbox{\hyperlink{class_geo_params}{GeoParams}}}
+\DoxyCodeLine{66 \{}
+\DoxyCodeLine{67 \textcolor{keyword}{public}:}
+\DoxyCodeLine{69     \mbox{\hyperlink{class_geo_params_ac33280ae170b5403f0011529aa1e4e8a}{GeoParams}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{72     \mbox{\hyperlink{class_geo_params_a42c661d92cf33d0f92ed245916504879}{GeoParams}}(\textcolor{keyword}{const} std::vector<cv::Point>\& framePoints, \textcolor{keyword}{const} std::vector<cv::Point\_<T>>\& geoPoints)}
+\DoxyCodeLine{73     \{}
+\DoxyCodeLine{74         \mbox{\hyperlink{class_geo_params_a5d08294872267543091637e64b54a637}{SetKeyPoints}}(framePoints, geoPoints);}
+\DoxyCodeLine{75     \}}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{78     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_geo_params_a5d08294872267543091637e64b54a637}{SetKeyPoints}}(\textcolor{keyword}{const} std::vector<cv::Point>\& framePoints, \textcolor{keyword}{const} std::vector<cv::Point\_<T>>\& geoPoints)}
+\DoxyCodeLine{79     \{}
+\DoxyCodeLine{80         \mbox{\hyperlink{class_geo_params_a052542242bba7ac1dcc09932afa11b1f}{m\_framePoints}} = framePoints;}
+\DoxyCodeLine{81         \mbox{\hyperlink{class_geo_params_a57726f486c86058a0f36c0873d3c3489}{m\_geoPoints}} = geoPoints;}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83         assert(\mbox{\hyperlink{class_geo_params_a052542242bba7ac1dcc09932afa11b1f}{m\_framePoints}}.size() == \mbox{\hyperlink{class_geo_params_a57726f486c86058a0f36c0873d3c3489}{m\_geoPoints}}.size());}
+\DoxyCodeLine{84         assert(\mbox{\hyperlink{class_geo_params_a052542242bba7ac1dcc09932afa11b1f}{m\_framePoints}}.size() >= 4);}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86         \textcolor{keywordtype}{bool} res = \textcolor{keyword}{true};}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88         std::vector<cv::Point\_<T>> tmpPix;}
+\DoxyCodeLine{89         tmpPix.reserve(\mbox{\hyperlink{class_geo_params_a052542242bba7ac1dcc09932afa11b1f}{m\_framePoints}}.size());}
+\DoxyCodeLine{90         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} pix : \mbox{\hyperlink{class_geo_params_a052542242bba7ac1dcc09932afa11b1f}{m\_framePoints}})}
+\DoxyCodeLine{91         \{}
+\DoxyCodeLine{92             tmpPix.emplace\_back(\textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(pix.x), \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(pix.y));}
+\DoxyCodeLine{93         \}}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#if 0}}
+\DoxyCodeLine{95         std::cout << \textcolor{stringliteral}{"{}Coords pairs: "{}};}
+\DoxyCodeLine{96         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < tmpPix.size(); ++i)}
+\DoxyCodeLine{97         \{}
+\DoxyCodeLine{98             std::cout << tmpPix[i] << \textcolor{stringliteral}{"{} -\/ "{}} << \mbox{\hyperlink{class_geo_params_a57726f486c86058a0f36c0873d3c3489}{m\_geoPoints}}[i] << \textcolor{stringliteral}{"{}; "{}};}
+\DoxyCodeLine{99         \}}
+\DoxyCodeLine{100         std::cout << std::endl;}
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{102         cv::Mat toGeo = \mbox{\hyperlink{_cars_counting_8h_ac7c4d8baf901135b7d8605c1a9a10004}{GetPerspectiveTransform}}(tmpPix, \mbox{\hyperlink{class_geo_params_a57726f486c86058a0f36c0873d3c3489}{m\_geoPoints}}, (\textcolor{keywordtype}{int})cv::DECOMP\_LU);}
+\DoxyCodeLine{103         cv::Mat toPix = \mbox{\hyperlink{_cars_counting_8h_ac7c4d8baf901135b7d8605c1a9a10004}{GetPerspectiveTransform}}(\mbox{\hyperlink{class_geo_params_a57726f486c86058a0f36c0873d3c3489}{m\_geoPoints}}, tmpPix, (\textcolor{keywordtype}{int})cv::DECOMP\_LU);}
+\DoxyCodeLine{104         \mbox{\hyperlink{class_geo_params_a42ee0a5cb2cacb058b301217c06309d3}{m\_toGeo}} = toGeo;}
+\DoxyCodeLine{105         \mbox{\hyperlink{class_geo_params_a6f91e26ae0f1d12439435fc653d325de}{m\_toPix}} = toPix;}
+\DoxyCodeLine{106         \textcolor{comment}{//std::cout << "{}To Geo: "{} << m\_toGeo << std::endl;}}
+\DoxyCodeLine{107         \textcolor{comment}{//std::cout << "{}To Pix: "{} << m\_toPix << std::endl;}}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109         \textcolor{keywordflow}{return} res;}
+\DoxyCodeLine{110     \}}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{113     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_geo_params_abbf7b4adb1a1dd86f8d07cc4812aa531}{SetMapParams}}(\textcolor{keyword}{const} std::string\& mapfile, \textcolor{keyword}{const} std::vector<cv::Point\_<T>>\& mapGeoCorners)}
+\DoxyCodeLine{114     \{}
+\DoxyCodeLine{115         \mbox{\hyperlink{class_geo_params_a38f6e8ca0f7b76ef53da6903c98f5f81}{m\_map}} = cv::imread(mapfile);}
+\DoxyCodeLine{116         \mbox{\hyperlink{class_geo_params_a1fc52178ad4184695bcb336da8529b33}{m\_mapGeoCorners}}.assign(std::begin(mapGeoCorners), \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{std::end}}(mapGeoCorners));}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118         \textcolor{keywordflow}{if} (!\mbox{\hyperlink{class_geo_params_a38f6e8ca0f7b76ef53da6903c98f5f81}{m\_map}}.empty())}
+\DoxyCodeLine{119             \mbox{\hyperlink{class_geo_params_a1bfed2259a7e53c6f4a20a1ca491409c}{m\_p2mParams}}.\mbox{\hyperlink{struct_geo_params_1_1_pix2_map_params_a927e0e467f4aff37376b6d5a8481b994}{Init}}(\mbox{\hyperlink{class_geo_params_a1fc52178ad4184695bcb336da8529b33}{m\_mapGeoCorners}}, \mbox{\hyperlink{class_geo_params_a38f6e8ca0f7b76ef53da6903c98f5f81}{m\_map}}.cols, \mbox{\hyperlink{class_geo_params_a38f6e8ca0f7b76ef53da6903c98f5f81}{m\_map}}.rows);}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121         \textcolor{keywordflow}{return} !\mbox{\hyperlink{class_geo_params_a38f6e8ca0f7b76ef53da6903c98f5f81}{m\_map}}.empty();}
+\DoxyCodeLine{122     \}}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{125     cv::Point \mbox{\hyperlink{class_geo_params_aec8c9310b074f1d382926bd49924b906}{Geo2Pix}}(\textcolor{keyword}{const} cv::Point\_<T>\& geo)\textcolor{keyword}{ const}}
+\DoxyCodeLine{126 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{127         cv::Vec<T, 3> \mbox{\hyperlink{rings_8cpp_aa9df5aa3976a89a96a5f1c7611d42938}{g}}(geo.x, geo.y, 1);}
+\DoxyCodeLine{128         \textcolor{keyword}{auto} p = \mbox{\hyperlink{class_geo_params_a6f91e26ae0f1d12439435fc653d325de}{m\_toPix}} * \mbox{\hyperlink{rings_8cpp_aa9df5aa3976a89a96a5f1c7611d42938}{g}};}
+\DoxyCodeLine{129         \textcolor{keywordflow}{return} cv::Point(cvRound(p[0] / p[2]), cvRound(p[1] / p[2]));}
+\DoxyCodeLine{130     \}}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{133     cv::Point\_<T> \mbox{\hyperlink{class_geo_params_a01de051ef5af603d3bd3aedb1353ae51}{Pix2Geo}}(\textcolor{keyword}{const} cv::Point\& pix)\textcolor{keyword}{ const}}
+\DoxyCodeLine{134 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{135         cv::Vec<T, 3> p(\textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(pix.x), \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(pix.y), 1);}
+\DoxyCodeLine{136         \textcolor{keyword}{auto} \mbox{\hyperlink{rings_8cpp_aa9df5aa3976a89a96a5f1c7611d42938}{g}} = \mbox{\hyperlink{class_geo_params_a42ee0a5cb2cacb058b301217c06309d3}{m\_toGeo}} * p;}
+\DoxyCodeLine{137         \textcolor{keywordflow}{return} cv::Point\_<T>(\mbox{\hyperlink{rings_8cpp_aa9df5aa3976a89a96a5f1c7611d42938}{g}}[0] / \mbox{\hyperlink{rings_8cpp_aa9df5aa3976a89a96a5f1c7611d42938}{g}}[2], \mbox{\hyperlink{rings_8cpp_aa9df5aa3976a89a96a5f1c7611d42938}{g}}[1] / \mbox{\hyperlink{rings_8cpp_aa9df5aa3976a89a96a5f1c7611d42938}{g}}[2]);}
+\DoxyCodeLine{138     \}}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{141     std::vector<cv::Point> \mbox{\hyperlink{class_geo_params_a4307fc56394c52cb8405708f85a30ff1}{GetFramePoints}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{142 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{143         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_geo_params_a052542242bba7ac1dcc09932afa11b1f}{m\_framePoints}};}
+\DoxyCodeLine{144     \}}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{147     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_geo_params_a1619afae1a6b5e87d10e0e28a4715e7e}{Empty}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{148 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{149         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_geo_params_a052542242bba7ac1dcc09932afa11b1f}{m\_framePoints}}.size() != \mbox{\hyperlink{class_geo_params_a57726f486c86058a0f36c0873d3c3489}{m\_geoPoints}}.size() || \mbox{\hyperlink{class_geo_params_a052542242bba7ac1dcc09932afa11b1f}{m\_framePoints}}.size() < 4;}
+\DoxyCodeLine{150     \}}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{153     cv::Mat \mbox{\hyperlink{class_geo_params_a47804ec622efa7a12033eed46ad1d737}{DrawTracksOnMap}}(\textcolor{keyword}{const} std::vector<TrackingObject>\& tracks)}
+\DoxyCodeLine{154     \{}
+\DoxyCodeLine{155         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_geo_params_a38f6e8ca0f7b76ef53da6903c98f5f81}{m\_map}}.empty())}
+\DoxyCodeLine{156             \textcolor{keywordflow}{return} cv::Mat();}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158         cv::Mat map = \mbox{\hyperlink{class_geo_params_a38f6e8ca0f7b76ef53da6903c98f5f81}{m\_map}}.clone();}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160 \textcolor{preprocessor}{\#if 0 }\textcolor{comment}{// Debug output}}
+\DoxyCodeLine{161         \textcolor{comment}{// Draw bindings points}}
+\DoxyCodeLine{162         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < \mbox{\hyperlink{class_geo_params_a57726f486c86058a0f36c0873d3c3489}{m\_geoPoints}}.size(); ++i)}
+\DoxyCodeLine{163         \{}
+\DoxyCodeLine{164             cv::Point\_<T> gp1(\mbox{\hyperlink{class_geo_params_a57726f486c86058a0f36c0873d3c3489}{m\_geoPoints}}[i \% \mbox{\hyperlink{class_geo_params_a57726f486c86058a0f36c0873d3c3489}{m\_geoPoints}}.size()]);}
+\DoxyCodeLine{165             cv::Point p1(\mbox{\hyperlink{class_geo_params_a1bfed2259a7e53c6f4a20a1ca491409c}{m\_p2mParams}}.\mbox{\hyperlink{struct_geo_params_1_1_pix2_map_params_af37070c68cf4f0fb8f698fa6cbd6e467}{Geo2Pix}}(gp1));}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167             cv::Point\_<T> gp2(\mbox{\hyperlink{class_geo_params_a57726f486c86058a0f36c0873d3c3489}{m\_geoPoints}}[(i + 1) \% \mbox{\hyperlink{class_geo_params_a57726f486c86058a0f36c0873d3c3489}{m\_geoPoints}}.size()]);}
+\DoxyCodeLine{168             cv::Point p2(\mbox{\hyperlink{class_geo_params_a1bfed2259a7e53c6f4a20a1ca491409c}{m\_p2mParams}}.\mbox{\hyperlink{struct_geo_params_1_1_pix2_map_params_af37070c68cf4f0fb8f698fa6cbd6e467}{Geo2Pix}}(gp2));}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170             cv::line(map, p1, p2, cv::Scalar(255, 255, 255), 1, cv::LINE\_AA);}
+\DoxyCodeLine{171 }
+\DoxyCodeLine{172             std::cout << p1 << \textcolor{stringliteral}{"{} -\/ "{}} << p2 << std::endl;}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174             std::stringstream label;}
+\DoxyCodeLine{175             label << std::fixed << std::setw(5) << std::setprecision(5) << \textcolor{stringliteral}{"{}["{}} << \mbox{\hyperlink{class_geo_params_a57726f486c86058a0f36c0873d3c3489}{m\_geoPoints}}[i].x << \textcolor{stringliteral}{"{}, "{}} << \mbox{\hyperlink{class_geo_params_a57726f486c86058a0f36c0873d3c3489}{m\_geoPoints}}[i].y << \textcolor{stringliteral}{"{}]"{}};}
+\DoxyCodeLine{176             \textcolor{keywordtype}{int} baseLine = 0;}
+\DoxyCodeLine{177             \textcolor{keywordtype}{double} fontScale = 0.5;}
+\DoxyCodeLine{178             cv::Size labelSize = cv::getTextSize(label.str(), cv::FONT\_HERSHEY\_SIMPLEX, fontScale, 1, \&baseLine);}
+\DoxyCodeLine{179             cv::putText(map, label.str(), p1, cv::FONT\_HERSHEY\_SIMPLEX, fontScale, cv::Scalar(255, 255, 255));}
+\DoxyCodeLine{180         \}}
+\DoxyCodeLine{181 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{183         \textcolor{comment}{// Draw tracks}}
+\DoxyCodeLine{184         \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& track : tracks)}
+\DoxyCodeLine{185         \{}
+\DoxyCodeLine{186             \textcolor{keywordflow}{if} (track.m\_lastRobust)}
+\DoxyCodeLine{187             \{}
+\DoxyCodeLine{188                 \textcolor{keyword}{auto} geoCenter = \mbox{\hyperlink{class_geo_params_a01de051ef5af603d3bd3aedb1353ae51}{Pix2Geo}}(track.m\_rrect.center);}
+\DoxyCodeLine{189                 \textcolor{keyword}{auto} center = \mbox{\hyperlink{class_geo_params_a1bfed2259a7e53c6f4a20a1ca491409c}{m\_p2mParams}}.\mbox{\hyperlink{struct_geo_params_1_1_pix2_map_params_af37070c68cf4f0fb8f698fa6cbd6e467}{Geo2Pix}}(geoCenter);}
+\DoxyCodeLine{190                 \textcolor{comment}{//std::cout << "{}Convert: "{} << track.m\_rrect.center << "{} -\/> "{} << geoCenter << "{} -\/> "{} << center << std::endl;}}
+\DoxyCodeLine{191                 \textcolor{keywordflow}{if} (center.x > 0 \&\& center.x < map.cols \&\& center.y > 0 \&\& center.y < map.rows)}
+\DoxyCodeLine{192                     cv::ellipse(map, center, cv::Size(3, 3), 0, 0, 360, cv::Scalar(255, 0, 255), cv::FILLED, 8);}
+\DoxyCodeLine{193             \}}
+\DoxyCodeLine{194         \}}
+\DoxyCodeLine{195  }
+\DoxyCodeLine{196         \textcolor{keywordflow}{return} map;}
+\DoxyCodeLine{197     \}}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199 \textcolor{keyword}{private}:}
+\DoxyCodeLine{200     std::vector<cv::Point> \mbox{\hyperlink{class_geo_params_a052542242bba7ac1dcc09932afa11b1f}{m\_framePoints}};}
+\DoxyCodeLine{201     std::vector<cv::Point\_<T>> \mbox{\hyperlink{class_geo_params_a57726f486c86058a0f36c0873d3c3489}{m\_geoPoints}};}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203     cv::Matx<T, 3, 3> \mbox{\hyperlink{class_geo_params_a42ee0a5cb2cacb058b301217c06309d3}{m\_toGeo}};}
+\DoxyCodeLine{204     cv::Matx<T, 3, 3> \mbox{\hyperlink{class_geo_params_a6f91e26ae0f1d12439435fc653d325de}{m\_toPix}};}
+\DoxyCodeLine{205 }
+\DoxyCodeLine{206     cv::Mat \mbox{\hyperlink{class_geo_params_a38f6e8ca0f7b76ef53da6903c98f5f81}{m\_map}};}
+\DoxyCodeLine{207     std::vector<cv::Point\_<T>> \mbox{\hyperlink{class_geo_params_a1fc52178ad4184695bcb336da8529b33}{m\_mapGeoCorners}};}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{210     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_geo_params_1_1_pix2_map_params}{Pix2MapParams}}}
+\DoxyCodeLine{211     \{}
+\DoxyCodeLine{212         cv::Matx<T, 3, 3> \mbox{\hyperlink{struct_geo_params_1_1_pix2_map_params_a6d9a90526bc694a096de9d911035bd1d}{m\_toPix}};}
+\DoxyCodeLine{213 }
+\DoxyCodeLine{215         cv::Point \mbox{\hyperlink{struct_geo_params_1_1_pix2_map_params_af37070c68cf4f0fb8f698fa6cbd6e467}{Geo2Pix}}(\textcolor{keyword}{const} cv::Point\_<T>\& geo)\textcolor{keyword}{ const}}
+\DoxyCodeLine{216 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{217             cv::Vec<T, 3> \mbox{\hyperlink{rings_8cpp_aa9df5aa3976a89a96a5f1c7611d42938}{g}}(geo.x, geo.y, 1);}
+\DoxyCodeLine{218             \textcolor{keyword}{auto} p = \mbox{\hyperlink{struct_geo_params_1_1_pix2_map_params_a6d9a90526bc694a096de9d911035bd1d}{m\_toPix}} * \mbox{\hyperlink{rings_8cpp_aa9df5aa3976a89a96a5f1c7611d42938}{g}};}
+\DoxyCodeLine{219             \textcolor{keywordflow}{return} cv::Point(cvRound(p[0] / p[2]), cvRound(p[1] / p[2]));}
+\DoxyCodeLine{220         \}}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{223         \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_geo_params_1_1_pix2_map_params_a927e0e467f4aff37376b6d5a8481b994}{Init}}(\textcolor{keyword}{const} std::vector<cv::Point\_<T>>\& geoCorners, \textcolor{keywordtype}{int} mapWidth, \textcolor{keywordtype}{int} mapHeight)}
+\DoxyCodeLine{224         \{}
+\DoxyCodeLine{225             std::vector<cv::Point\_<T>> frameCorners \{ cv::Point\_<T>(0, 0), cv::Point\_<T>(mapWidth, 0), cv::Point\_<T>(mapWidth, mapHeight), cv::Point\_<T>(0, mapHeight) \};}
+\DoxyCodeLine{226             cv::Mat toPix = \mbox{\hyperlink{_cars_counting_8h_ac7c4d8baf901135b7d8605c1a9a10004}{GetPerspectiveTransform}}(geoCorners, frameCorners, (\textcolor{keywordtype}{int})cv::DECOMP\_LU);}
+\DoxyCodeLine{227             \mbox{\hyperlink{struct_geo_params_1_1_pix2_map_params_a6d9a90526bc694a096de9d911035bd1d}{m\_toPix}} = toPix;}
+\DoxyCodeLine{228         \}}
+\DoxyCodeLine{229     \};}
+\DoxyCodeLine{230     \mbox{\hyperlink{struct_geo_params_1_1_pix2_map_params}{Pix2MapParams}} \mbox{\hyperlink{class_geo_params_a1bfed2259a7e53c6f4a20a1ca491409c}{m\_p2mParams}};}
+\DoxyCodeLine{231 \};}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{236 \textcolor{keyword}{class }\mbox{\hyperlink{class_road_line}{RoadLine}}}
+\DoxyCodeLine{237 \{}
+\DoxyCodeLine{238 \textcolor{keyword}{public}:}
+\DoxyCodeLine{242     \mbox{\hyperlink{class_road_line_a1bbc5057a09c048b39c2cbd39afb6284}{RoadLine}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{243     \mbox{\hyperlink{class_road_line_a7aafe4432a9b1297084d3d5b8d3d02af}{RoadLine}}(\textcolor{keyword}{const} cv::Point2f\& pt1, \textcolor{keyword}{const} cv::Point2f\& pt2, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} uid)}
+\DoxyCodeLine{244         :}
+\DoxyCodeLine{245           \mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}(pt1), \mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}(pt2), \mbox{\hyperlink{class_road_line_ad24b133b5d844362f112866686f70688}{m\_uid}}(uid)}
+\DoxyCodeLine{246     \{}
+\DoxyCodeLine{247     \}}
+\DoxyCodeLine{248 }
+\DoxyCodeLine{249     cv::Point2f \mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}};}
+\DoxyCodeLine{250     cv::Point2f \mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}};}
+\DoxyCodeLine{251 }
+\DoxyCodeLine{252     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_road_line_ad24b133b5d844362f112866686f70688}{m\_uid}} = 0;}
+\DoxyCodeLine{253 }
+\DoxyCodeLine{254     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_road_line_ae310ec6538e74272c778ff226df95f31}{m\_intersect1}} = 0;}
+\DoxyCodeLine{255     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_road_line_afc99126461e4bd33fef0fdd3951b757b}{m\_intersect2}} = 0;}
+\DoxyCodeLine{256 }
+\DoxyCodeLine{262     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_road_line_a52575d3261a997795e7758ee0a88f5f9}{operator==}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_road_line}{RoadLine}} \&line)\textcolor{keyword}{ const}}
+\DoxyCodeLine{263 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{264         \textcolor{keywordflow}{return} line.\mbox{\hyperlink{class_road_line_ad24b133b5d844362f112866686f70688}{m\_uid}} == \mbox{\hyperlink{class_road_line_ad24b133b5d844362f112866686f70688}{m\_uid}};}
+\DoxyCodeLine{265     \}}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{271     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_road_line_a5af565ce7b0b4b5b6dd95dce57b9ca09}{Draw}}(cv::Mat frame)\textcolor{keyword}{ const}}
+\DoxyCodeLine{272 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{273         \textcolor{keyword}{auto} Ptf2i = [\&](cv::Point2f \mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}})}
+\DoxyCodeLine{274         \{}
+\DoxyCodeLine{275             \textcolor{keywordflow}{return} cv::Point(cvRound(frame.cols * \mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}.x), cvRound(frame.rows * \mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}.y));}
+\DoxyCodeLine{276         \};}
+\DoxyCodeLine{277 }
+\DoxyCodeLine{278         cv::line(frame, Ptf2i(\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}), Ptf2i(\mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}), cv::Scalar(0, 255, 255), 1, cv::LINE\_8, 0);}
+\DoxyCodeLine{279 }
+\DoxyCodeLine{280         std::string label = \textcolor{stringliteral}{"{}Line "{}} + std::to\_string(\mbox{\hyperlink{class_road_line_ad24b133b5d844362f112866686f70688}{m\_uid}}) + \textcolor{stringliteral}{"{}: "{}} + std::to\_string(\mbox{\hyperlink{class_road_line_ae310ec6538e74272c778ff226df95f31}{m\_intersect1}}) + \textcolor{stringliteral}{"{}/"{}} + std::to\_string(\mbox{\hyperlink{class_road_line_afc99126461e4bd33fef0fdd3951b757b}{m\_intersect2}});}
+\DoxyCodeLine{281         \textcolor{keywordtype}{int} baseLine = 0;}
+\DoxyCodeLine{282         \textcolor{keywordtype}{double} fontScale = 0.7;}
+\DoxyCodeLine{283         \textcolor{keywordtype}{int} thickness = 1;}
+\DoxyCodeLine{284         cv::Size labelSize = cv::getTextSize(label, cv::FONT\_HERSHEY\_SIMPLEX, fontScale, 1, \&baseLine);}
+\DoxyCodeLine{285         cv::Point \mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}(Ptf2i(0.5f * (\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}} + \mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}})));}
+\DoxyCodeLine{286         \mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}.y += labelSize.height;}
+\DoxyCodeLine{287         \textcolor{comment}{//pt.x += labelSize.width;}}
+\DoxyCodeLine{288         cv::putText(frame, label, \mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}, cv::FONT\_HERSHEY\_TRIPLEX, fontScale, cv::Scalar(0, 0, 0), thickness);}
+\DoxyCodeLine{289     \}}
+\DoxyCodeLine{290 }
+\DoxyCodeLine{297     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_road_line_adcfee645911dbeb5c53124a849bb115b}{IsIntersect}}(\mbox{\hyperlink{class_track_i_d}{track\_id\_t}} objID, cv::Point2f pt1, cv::Point2f pt2)}
+\DoxyCodeLine{298     \{}
+\DoxyCodeLine{299         \textcolor{keywordtype}{int} direction = 0;}
+\DoxyCodeLine{300 }
+\DoxyCodeLine{301         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_road_line_a39a7fbc750e4b6710658ef95dcbc384b}{m\_lastIntersections}}.find(objID) != \mbox{\hyperlink{class_road_line_a39a7fbc750e4b6710658ef95dcbc384b}{m\_lastIntersections}}.end())}
+\DoxyCodeLine{302             \textcolor{keywordflow}{return} direction;}
+\DoxyCodeLine{303 }
+\DoxyCodeLine{304         \textcolor{keywordtype}{bool} isIntersect = \mbox{\hyperlink{class_road_line_ac72a6bdc3cfe18d5598b133c57a15448}{CheckIntersection}}(pt1, pt2);}
+\DoxyCodeLine{305 }
+\DoxyCodeLine{306         \textcolor{keywordflow}{if} (isIntersect)}
+\DoxyCodeLine{307         \{}
+\DoxyCodeLine{308             \mbox{\hyperlink{class_road_line_a39a7fbc750e4b6710658ef95dcbc384b}{m\_lastIntersections}}.emplace(objID);}
+\DoxyCodeLine{309 }
+\DoxyCodeLine{310             cv::Point2f \mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}};}
+\DoxyCodeLine{311             \textcolor{keywordflow}{if} ((\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.x <= \mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}.x) \&\& (\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.y > \mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}.y))}
+\DoxyCodeLine{312             \{}
+\DoxyCodeLine{313                 \mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}.x = (\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.x + \mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}.x) / 2.f -\/ 0.01f;}
+\DoxyCodeLine{314                 \mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}.y = (\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.y + \mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.y) / 2.f -\/ 0.01f;}
+\DoxyCodeLine{315             \}}
+\DoxyCodeLine{316             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{317             \{}
+\DoxyCodeLine{318                 \textcolor{keywordflow}{if} ((\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.x <= \mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}.x) \&\& (\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.y <= \mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}.y))}
+\DoxyCodeLine{319                 \{}
+\DoxyCodeLine{320                     \mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}.x = (\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.x + \mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}.x) / 2.f + 0.01f;}
+\DoxyCodeLine{321                     \mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}.y = (\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.y + \mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.y) / 2.f -\/ 0.01f;}
+\DoxyCodeLine{322                 \}}
+\DoxyCodeLine{323                 \textcolor{keywordflow}{else}}
+\DoxyCodeLine{324                 \{}
+\DoxyCodeLine{325                     \textcolor{keywordflow}{if} ((\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.x > \mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}.x) \&\& (\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.y > \mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}.y))}
+\DoxyCodeLine{326                     \{}
+\DoxyCodeLine{327                         \mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}.x = (\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.x + \mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}.x) / 2.f -\/ 0.01f;}
+\DoxyCodeLine{328                         \mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}.y = (\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.y + \mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.y) / 2.f + 0.01f;}
+\DoxyCodeLine{329                     \}}
+\DoxyCodeLine{330                     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{331                     \{}
+\DoxyCodeLine{332                         \textcolor{keywordflow}{if} ((\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.x > \mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}.x) \&\& (\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.y <= \mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}.y))}
+\DoxyCodeLine{333                         \{}
+\DoxyCodeLine{334                             \mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}.x = (\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.x + \mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}.x) / 2.f + 0.01f;}
+\DoxyCodeLine{335                             \mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}.y = (\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.y + \mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.y) / 2.f + 0.01f;}
+\DoxyCodeLine{336                         \}}
+\DoxyCodeLine{337                     \}}
+\DoxyCodeLine{338                 \}}
+\DoxyCodeLine{339             \}}
+\DoxyCodeLine{340             \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_road_line_ac72a6bdc3cfe18d5598b133c57a15448}{CheckIntersection}}(pt1, \mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}))}
+\DoxyCodeLine{341             \{}
+\DoxyCodeLine{342                 direction = 1;}
+\DoxyCodeLine{343                 ++\mbox{\hyperlink{class_road_line_ae310ec6538e74272c778ff226df95f31}{m\_intersect1}};}
+\DoxyCodeLine{344             \}}
+\DoxyCodeLine{345             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{346             \{}
+\DoxyCodeLine{347                 direction = 2;}
+\DoxyCodeLine{348                 ++\mbox{\hyperlink{class_road_line_afc99126461e4bd33fef0fdd3951b757b}{m\_intersect2}};}
+\DoxyCodeLine{349             \}}
+\DoxyCodeLine{350         \}}
+\DoxyCodeLine{351 }
+\DoxyCodeLine{352         \textcolor{keywordflow}{return} direction;}
+\DoxyCodeLine{353     \}}
+\DoxyCodeLine{354 }
+\DoxyCodeLine{355 \textcolor{keyword}{private}:}
+\DoxyCodeLine{356 }
+\DoxyCodeLine{357     std::unordered\_set<track\_id\_t> \mbox{\hyperlink{class_road_line_a39a7fbc750e4b6710658ef95dcbc384b}{m\_lastIntersections}};}
+\DoxyCodeLine{358 }
+\DoxyCodeLine{365     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_road_line_ac72a6bdc3cfe18d5598b133c57a15448}{CheckIntersection}}(cv::Point2f pt1, cv::Point2f pt2)\textcolor{keyword}{ const}}
+\DoxyCodeLine{366 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{367         \textcolor{keyword}{const} \textcolor{keywordtype}{float} eps = 0.00001f; \textcolor{comment}{// Epsilon for equal comparing}}
+\DoxyCodeLine{368 }
+\DoxyCodeLine{369         \textcolor{comment}{// First line equation}}
+\DoxyCodeLine{370         \textcolor{keywordtype}{float} a1 = 0;}
+\DoxyCodeLine{371         \textcolor{keywordtype}{float} b1 = 0;}
+\DoxyCodeLine{372         \textcolor{keywordtype}{bool} trivial1 = \textcolor{keyword}{false}; \textcolor{comment}{// Is first line is perpendicular with OX}}
+\DoxyCodeLine{373 }
+\DoxyCodeLine{374         \textcolor{keywordflow}{if} (fabs(\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.x -\/ \mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}.x) < eps)}
+\DoxyCodeLine{375         \{}
+\DoxyCodeLine{376             trivial1 = \textcolor{keyword}{true};}
+\DoxyCodeLine{377         \}}
+\DoxyCodeLine{378         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{379         \{}
+\DoxyCodeLine{380             a1 = (\mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}.y -\/ \mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.y) / (\mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}.x -\/ \mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.x);}
+\DoxyCodeLine{381             b1 = (\mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}.x * \mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.y -\/ \mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.x * \mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}.y) / (\mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}.x -\/ \mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.x);}
+\DoxyCodeLine{382         \}}
+\DoxyCodeLine{383 }
+\DoxyCodeLine{384         \textcolor{comment}{// Second line equation}}
+\DoxyCodeLine{385         \textcolor{keywordtype}{float} a2 = 0;}
+\DoxyCodeLine{386         \textcolor{keywordtype}{float} b2 = 0;}
+\DoxyCodeLine{387         \textcolor{keywordtype}{bool} trivial2 = \textcolor{keyword}{false}; \textcolor{comment}{// Is second line is perpendicular with OX}}
+\DoxyCodeLine{388 }
+\DoxyCodeLine{389         \textcolor{keywordflow}{if} (fabs(pt1.x -\/ pt2.x) < eps)}
+\DoxyCodeLine{390         \{}
+\DoxyCodeLine{391             trivial2 = \textcolor{keyword}{true};}
+\DoxyCodeLine{392         \}}
+\DoxyCodeLine{393         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{394         \{}
+\DoxyCodeLine{395             a2 = (pt2.y -\/ pt1.y) / (pt2.x -\/ pt1.x);}
+\DoxyCodeLine{396             b2 = (pt2.x * pt1.y -\/ pt1.x * pt2.y) / (pt2.x -\/ pt1.x);}
+\DoxyCodeLine{397         \}}
+\DoxyCodeLine{398 }
+\DoxyCodeLine{399         \textcolor{comment}{// Intersection coords}}
+\DoxyCodeLine{400         cv::Point2f intersectPt;}
+\DoxyCodeLine{401 }
+\DoxyCodeLine{402         \textcolor{keywordtype}{bool} isIntersect = \textcolor{keyword}{true};}
+\DoxyCodeLine{403         \textcolor{keywordflow}{if} (trivial1)}
+\DoxyCodeLine{404         \{}
+\DoxyCodeLine{405             \textcolor{keywordflow}{if} (trivial2)}
+\DoxyCodeLine{406                 isIntersect = (fabs(\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.x -\/ pt1.x) < eps);}
+\DoxyCodeLine{407             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{408                 intersectPt.x = \mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.x;}
+\DoxyCodeLine{409 }
+\DoxyCodeLine{410             intersectPt.y = a2 * intersectPt.x + b2;}
+\DoxyCodeLine{411         \}}
+\DoxyCodeLine{412         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{413         \{}
+\DoxyCodeLine{414             \textcolor{keywordflow}{if} (trivial2)}
+\DoxyCodeLine{415             \{}
+\DoxyCodeLine{416                 intersectPt.x = pt1.x;}
+\DoxyCodeLine{417             \}}
+\DoxyCodeLine{418             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{419             \{}
+\DoxyCodeLine{420                 \textcolor{keywordflow}{if} (fabs(a2 -\/ a1) > eps)}
+\DoxyCodeLine{421                     intersectPt.x = (b1 -\/ b2) / (a2 -\/ a1);}
+\DoxyCodeLine{422                 \textcolor{keywordflow}{else}}
+\DoxyCodeLine{423                     isIntersect = \textcolor{keyword}{false};}
+\DoxyCodeLine{424             \}}
+\DoxyCodeLine{425             intersectPt.y = a1 * intersectPt.x + b1;}
+\DoxyCodeLine{426         \}}
+\DoxyCodeLine{427 }
+\DoxyCodeLine{428         \textcolor{keywordflow}{if} (isIntersect)}
+\DoxyCodeLine{429         \{}
+\DoxyCodeLine{430             \textcolor{keyword}{auto} InRange = [](\textcolor{keywordtype}{float} val, \textcolor{keywordtype}{float} minVal, \textcolor{keywordtype}{float}  maxVal) -\/> \textcolor{keywordtype}{bool}}
+\DoxyCodeLine{431             \{}
+\DoxyCodeLine{432                 \textcolor{keywordflow}{return} (val >= minVal) \&\& (val <= maxVal);}
+\DoxyCodeLine{433             \};}
+\DoxyCodeLine{434 }
+\DoxyCodeLine{435             isIntersect = InRange(intersectPt.x, \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{std::min}}(\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.x, \mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}.x) -\/ eps, \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{std::max}}(\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.x, \mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}.x) + eps) \&\&}
+\DoxyCodeLine{436                     InRange(intersectPt.x, \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{std::min}}(pt1.x, pt2.x) -\/ eps, \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{std::max}}(pt1.x, pt2.x) + eps) \&\&}
+\DoxyCodeLine{437                     InRange(intersectPt.y, \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{std::min}}(\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.y, \mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}.y) -\/ eps, \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{std::max}}(\mbox{\hyperlink{class_road_line_aca5a12d84a59ccd0e391e7a3618fdc5b}{m\_pt1}}.y, \mbox{\hyperlink{class_road_line_ad00fd4a194367ac181af092d95fb7650}{m\_pt2}}.y) + eps) \&\&}
+\DoxyCodeLine{438                     InRange(intersectPt.y, \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{std::min}}(pt1.y, pt2.y) -\/ eps, \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{std::max}}(pt1.y, pt2.y) + eps);}
+\DoxyCodeLine{439         \}}
+\DoxyCodeLine{440 }
+\DoxyCodeLine{441         \textcolor{keywordflow}{return} isIntersect;}
+\DoxyCodeLine{442     \}}
+\DoxyCodeLine{443 \};}
+\DoxyCodeLine{444 }
+\DoxyCodeLine{448 \textcolor{keyword}{class }\mbox{\hyperlink{class_cars_counting}{CarsCounting}} final : \textcolor{keyword}{public} \mbox{\hyperlink{class_video_example}{VideoExample}}}
+\DoxyCodeLine{449 \{}
+\DoxyCodeLine{450 \textcolor{keyword}{public}:}
+\DoxyCodeLine{451     \mbox{\hyperlink{class_cars_counting_ade1460bcaaed0b64b08b812c6640de64}{CarsCounting}}(\textcolor{keyword}{const} cv::CommandLineParser\& parser);}
+\DoxyCodeLine{452 }
+\DoxyCodeLine{453     \textcolor{comment}{// Lines API}}
+\DoxyCodeLine{454     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_cars_counting_a4b0c789ba23cd3dcc2c9a4fb74d05e8f}{AddLine}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_road_line}{RoadLine}}\& newLine);}
+\DoxyCodeLine{455     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_cars_counting_a11c4032f4d13c8d87e3adbae1e814048}{GetLine}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} lineUid, \mbox{\hyperlink{class_road_line}{RoadLine}}\& line);}
+\DoxyCodeLine{456     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_cars_counting_aabf0d24def4be83ae28ae88b64f0fbdc}{RemoveLine}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} lineUid);}
+\DoxyCodeLine{457 }
+\DoxyCodeLine{458 \textcolor{keyword}{private}:}
+\DoxyCodeLine{459 }
+\DoxyCodeLine{460     std::string \mbox{\hyperlink{class_cars_counting_aed13666700d62f68752a7ad7ae951815}{m\_weightsFile}};}
+\DoxyCodeLine{461     std::string \mbox{\hyperlink{class_cars_counting_af96c183efe27e966fe4e358ceb5c21ee}{m\_configFile}};}
+\DoxyCodeLine{462     std::string \mbox{\hyperlink{class_cars_counting_a48b5ad0f19261d4b44c665fc7c89b346}{m\_namesFile}};}
+\DoxyCodeLine{463     \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760}{tracking::Detectors}} \mbox{\hyperlink{class_cars_counting_a4246dca33bce2d22cca7532d6a77fae1}{m\_detectorType}} = \mbox{\hyperlink{namespacetracking_a1edf574df68abf048988b7cbacc52760a92cb97c8c0003db338921cb8433c3855}{tracking::Detectors::Yolo\_Darknet}};}
+\DoxyCodeLine{464 }
+\DoxyCodeLine{465     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_cars_counting_af492cbc8ed6b6e06930d104bf051e629}{m\_drawHeatMap}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{466 }
+\DoxyCodeLine{467     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_cars_counting_a6b1df40e72c1626917558419d22472b5}{InitDetector}}(cv::UMat frame) \textcolor{keyword}{override};}
+\DoxyCodeLine{468     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_cars_counting_a018c303dd37fc1a25edd2c30ca3ecad5}{InitTracker}}(cv::UMat frame) \textcolor{keyword}{override};}
+\DoxyCodeLine{469 }
+\DoxyCodeLine{470     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_cars_counting_a144731ba8c4acfc8c2d45dc19d33f2ec}{DrawData}}(cv::Mat frame, \textcolor{keyword}{const} std::vector<TrackingObject>\& tracks, \textcolor{keywordtype}{int} framesCounter, \textcolor{keywordtype}{int} currTime) \textcolor{keyword}{override};}
+\DoxyCodeLine{471     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_cars_counting_a47c2c1e353e3e777dee8ceefcdb1bd9c}{DrawTrack}}(cv::Mat frame, \textcolor{keyword}{const} \mbox{\hyperlink{struct_tracking_object}{TrackingObject}}\& track, \textcolor{keywordtype}{bool} drawTrajectory, \textcolor{keywordtype}{int} framesCounter) \textcolor{keyword}{override};}
+\DoxyCodeLine{472 }
+\DoxyCodeLine{473     \textcolor{comment}{// Road lines}}
+\DoxyCodeLine{474     std::deque<RoadLine> \mbox{\hyperlink{class_cars_counting_a5f79df8fa99cdaa1ca14bf997513bb39}{m\_lines}};}
+\DoxyCodeLine{475     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_cars_counting_a9addbc0d3fc16df8cde6e31deccbff88}{CheckLinesIntersection}}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_tracking_object}{TrackingObject}}\& track, \textcolor{keywordtype}{float} xMax, \textcolor{keywordtype}{float} yMax);}
+\DoxyCodeLine{476 }
+\DoxyCodeLine{477     \textcolor{comment}{// Binding frame coordinates to geographical coordinates}}
+\DoxyCodeLine{478     \mbox{\hyperlink{class_geo_params}{GeoParams<double>}} \mbox{\hyperlink{class_cars_counting_a32881e3f2a82908899b0a9f093db7fd9}{m\_geoParams}};}
+\DoxyCodeLine{479     std::string \mbox{\hyperlink{class_cars_counting_a04d08395fb8164a7af05149b68d98ae3}{m\_geoBindFile}};}
+\DoxyCodeLine{480     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_cars_counting_a5e8bcfbe2e0b1f7f8b89e55bb5df1822}{ReadGeobindings}}(cv::Size frameSize);}
+\DoxyCodeLine{481 }
+\DoxyCodeLine{482     \textcolor{comment}{// Heat map for visualization long term detections}}
+\DoxyCodeLine{483     cv::Mat \mbox{\hyperlink{class_cars_counting_a7e41778d2e3c1be9e1ca1a8030584ac9}{m\_keyFrame}};}
+\DoxyCodeLine{484     cv::Mat \mbox{\hyperlink{class_cars_counting_a2bce2491a9ae08ba96553b0761840b4a}{m\_heatMap}};}
+\DoxyCodeLine{485     cv::Mat \mbox{\hyperlink{class_cars_counting_a191c7516ed7ffcbb202b005aa782b86a}{m\_normHeatMap}};}
+\DoxyCodeLine{486     cv::Mat \mbox{\hyperlink{class_cars_counting_abbacefae186b1fb02fa9285f43e5edeb}{m\_colorMap}};}
+\DoxyCodeLine{487 }
+\DoxyCodeLine{488     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_cars_counting_ad464f22fa1248e21f291c2a4c1c6b361}{AddToHeatMap}}(\textcolor{keyword}{const} cv::Rect\& rect);}
+\DoxyCodeLine{489     cv::Mat \mbox{\hyperlink{class_cars_counting_ad946e780e252d549b330201a08331473}{DrawHeatMap}}();}
+\DoxyCodeLine{490 \};}
+
+\end{DoxyCode}

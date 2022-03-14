@@ -1,0 +1,190 @@
+\hypertarget{network_8h_source}{}\doxysection{network.\+h}
+\label{network_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/network.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/network.h}}
+\mbox{\hyperlink{network_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{// Oh boy, why am I about to do this....}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#ifndef NETWORK\_H}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#define NETWORK\_H}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{darknet_8h}{darknet.h}}"{}}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <stdint.h>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{layer_8h}{layer.h}}"{}}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{image_8h}{image.h}}"{}}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{data_8h}{data.h}}"{}}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{tree_8h}{tree.h}}"{}}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{15 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{17 \textcolor{comment}{/*}}
+\DoxyCodeLine{18 \textcolor{comment}{typedef enum \{}}
+\DoxyCodeLine{19 \textcolor{comment}{    CONSTANT, STEP, EXP, POLY, STEPS, SIG, RANDOM}}
+\DoxyCodeLine{20 \textcolor{comment}{\} learning\_rate\_policy;}}
+\DoxyCodeLine{21 \textcolor{comment}{}}
+\DoxyCodeLine{22 \textcolor{comment}{typedef struct network\{}}
+\DoxyCodeLine{23 \textcolor{comment}{    float *workspace;}}
+\DoxyCodeLine{24 \textcolor{comment}{    int n;}}
+\DoxyCodeLine{25 \textcolor{comment}{    int batch;}}
+\DoxyCodeLine{26 \textcolor{comment}{    uint64\_t *seen;}}
+\DoxyCodeLine{27 \textcolor{comment}{    float epoch;}}
+\DoxyCodeLine{28 \textcolor{comment}{    int subdivisions;}}
+\DoxyCodeLine{29 \textcolor{comment}{    float momentum;}}
+\DoxyCodeLine{30 \textcolor{comment}{    float decay;}}
+\DoxyCodeLine{31 \textcolor{comment}{    layer *layers;}}
+\DoxyCodeLine{32 \textcolor{comment}{    int outputs;}}
+\DoxyCodeLine{33 \textcolor{comment}{    float *output;}}
+\DoxyCodeLine{34 \textcolor{comment}{    learning\_rate\_policy policy;}}
+\DoxyCodeLine{35 \textcolor{comment}{}}
+\DoxyCodeLine{36 \textcolor{comment}{    float learning\_rate;}}
+\DoxyCodeLine{37 \textcolor{comment}{    float gamma;}}
+\DoxyCodeLine{38 \textcolor{comment}{    float scale;}}
+\DoxyCodeLine{39 \textcolor{comment}{    float power;}}
+\DoxyCodeLine{40 \textcolor{comment}{    int time\_steps;}}
+\DoxyCodeLine{41 \textcolor{comment}{    int step;}}
+\DoxyCodeLine{42 \textcolor{comment}{    int max\_batches;}}
+\DoxyCodeLine{43 \textcolor{comment}{    float *scales;}}
+\DoxyCodeLine{44 \textcolor{comment}{    int   *steps;}}
+\DoxyCodeLine{45 \textcolor{comment}{    int num\_steps;}}
+\DoxyCodeLine{46 \textcolor{comment}{    int burn\_in;}}
+\DoxyCodeLine{47 \textcolor{comment}{    int cudnn\_half;}}
+\DoxyCodeLine{48 \textcolor{comment}{}}
+\DoxyCodeLine{49 \textcolor{comment}{    int adam;}}
+\DoxyCodeLine{50 \textcolor{comment}{    float B1;}}
+\DoxyCodeLine{51 \textcolor{comment}{    float B2;}}
+\DoxyCodeLine{52 \textcolor{comment}{    float eps;}}
+\DoxyCodeLine{53 \textcolor{comment}{}}
+\DoxyCodeLine{54 \textcolor{comment}{    int inputs;}}
+\DoxyCodeLine{55 \textcolor{comment}{    int h, w, c;}}
+\DoxyCodeLine{56 \textcolor{comment}{    int max\_crop;}}
+\DoxyCodeLine{57 \textcolor{comment}{    int min\_crop;}}
+\DoxyCodeLine{58 \textcolor{comment}{    int flip; // horizontal flip 50\% probability augmentaiont for classifier training (default = 1)}}
+\DoxyCodeLine{59 \textcolor{comment}{    float angle;}}
+\DoxyCodeLine{60 \textcolor{comment}{    float aspect;}}
+\DoxyCodeLine{61 \textcolor{comment}{    float exposure;}}
+\DoxyCodeLine{62 \textcolor{comment}{    float saturation;}}
+\DoxyCodeLine{63 \textcolor{comment}{    float hue;}}
+\DoxyCodeLine{64 \textcolor{comment}{    int small\_object;}}
+\DoxyCodeLine{65 \textcolor{comment}{}}
+\DoxyCodeLine{66 \textcolor{comment}{    int gpu\_index;}}
+\DoxyCodeLine{67 \textcolor{comment}{    tree *hierarchy;}}
+\DoxyCodeLine{68 \textcolor{comment}{}}
+\DoxyCodeLine{69 \textcolor{comment}{    \#ifdef GPU}}
+\DoxyCodeLine{70 \textcolor{comment}{    float *input\_state\_gpu;}}
+\DoxyCodeLine{71 \textcolor{comment}{}}
+\DoxyCodeLine{72 \textcolor{comment}{    float **input\_gpu;}}
+\DoxyCodeLine{73 \textcolor{comment}{    float **truth\_gpu;}}
+\DoxyCodeLine{74 \textcolor{comment}{    float **input16\_gpu;}}
+\DoxyCodeLine{75 \textcolor{comment}{    float **output16\_gpu;}}
+\DoxyCodeLine{76 \textcolor{comment}{    size\_t *max\_input16\_size;}}
+\DoxyCodeLine{77 \textcolor{comment}{    size\_t *max\_output16\_size;}}
+\DoxyCodeLine{78 \textcolor{comment}{    int wait\_stream;}}
+\DoxyCodeLine{79 \textcolor{comment}{    \#endif}}
+\DoxyCodeLine{80 \textcolor{comment}{\} network;}}
+\DoxyCodeLine{81 \textcolor{comment}{}}
+\DoxyCodeLine{82 \textcolor{comment}{}}
+\DoxyCodeLine{83 \textcolor{comment}{typedef struct network\_state \{}}
+\DoxyCodeLine{84 \textcolor{comment}{    float *truth;}}
+\DoxyCodeLine{85 \textcolor{comment}{    float *input;}}
+\DoxyCodeLine{86 \textcolor{comment}{    float *delta;}}
+\DoxyCodeLine{87 \textcolor{comment}{    float *workspace;}}
+\DoxyCodeLine{88 \textcolor{comment}{    int train;}}
+\DoxyCodeLine{89 \textcolor{comment}{    int index;}}
+\DoxyCodeLine{90 \textcolor{comment}{    network net;}}
+\DoxyCodeLine{91 \textcolor{comment}{\} network\_state;}}
+\DoxyCodeLine{92 \textcolor{comment}{*/}}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#ifdef GPU}}
+\DoxyCodeLine{95 \textcolor{keywordtype}{float} train\_networks(\mbox{\hyperlink{structnetwork}{network}} *nets, \textcolor{keywordtype}{int} n, \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}, \textcolor{keywordtype}{int} interval);}
+\DoxyCodeLine{96 \textcolor{keywordtype}{void} sync\_nets(\mbox{\hyperlink{structnetwork}{network}} *nets, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} interval);}
+\DoxyCodeLine{97 \textcolor{keywordtype}{float} train\_network\_datum\_gpu(\mbox{\hyperlink{structnetwork}{network}} net, \textcolor{keywordtype}{float} *\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \textcolor{keywordtype}{float} *\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}});}
+\DoxyCodeLine{98 \textcolor{keywordtype}{float} *network\_predict\_gpu(\mbox{\hyperlink{structnetwork}{network}} net, \textcolor{keywordtype}{float} *input);}
+\DoxyCodeLine{99 \textcolor{keywordtype}{float} * get\_network\_output\_gpu\_layer(\mbox{\hyperlink{structnetwork}{network}} net, \textcolor{keywordtype}{int} i);}
+\DoxyCodeLine{100 \textcolor{keywordtype}{float} * get\_network\_delta\_gpu\_layer(\mbox{\hyperlink{structnetwork}{network}} net, \textcolor{keywordtype}{int} i);}
+\DoxyCodeLine{101 \textcolor{keywordtype}{float} *get\_network\_output\_gpu(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{102 \textcolor{keywordtype}{void} forward\_network\_gpu(\mbox{\hyperlink{structnetwork}{network}} net, \mbox{\hyperlink{structnetwork__state}{network\_state}} state);}
+\DoxyCodeLine{103 \textcolor{keywordtype}{void} backward\_network\_gpu(\mbox{\hyperlink{structnetwork}{network}} net, \mbox{\hyperlink{structnetwork__state}{network\_state}} state);}
+\DoxyCodeLine{104 \textcolor{keywordtype}{void} update\_network\_gpu(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{105 \textcolor{keywordtype}{void} forward\_backward\_network\_gpu(\mbox{\hyperlink{structnetwork}{network}} net, \textcolor{keywordtype}{float} *\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \textcolor{keywordtype}{float} *\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}});}
+\DoxyCodeLine{106 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108 \textcolor{keywordtype}{float} \mbox{\hyperlink{network_8h_a38133fd1fde9f03b10ad34fb88545ab2}{get\_current\_seq\_subdivisions}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{109 \textcolor{keywordtype}{int} \mbox{\hyperlink{network_8h_a972a0ca9abacb6a2b48f38c015d86c9b}{get\_sequence\_value}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{110 \textcolor{keywordtype}{float} \mbox{\hyperlink{network_8h_ac997daf700149608de15d93a083c33dc}{get\_current\_rate}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{111 \textcolor{keywordtype}{int} \mbox{\hyperlink{network_8h_a95734b6e69a080abf33395707ab56b59}{get\_current\_batch}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{112 int64\_t \mbox{\hyperlink{network_8h_a947571d2d8ca60387d1d827118241393}{get\_current\_iteration}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{113 \textcolor{comment}{//void free\_network(network net); // darknet.h}}
+\DoxyCodeLine{114 \textcolor{keywordtype}{void} \mbox{\hyperlink{network_8h_a07a0d80b8ee64d2219c8441593606434}{compare\_networks}}(\mbox{\hyperlink{structnetwork}{network}} n1, \mbox{\hyperlink{structnetwork}{network}} n2, \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}});}
+\DoxyCodeLine{115 \textcolor{keywordtype}{char} *\mbox{\hyperlink{network_8h_a12782ce6d5a2d3c663dfa28879e5ddbb}{get\_layer\_string}}(\mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154}{LAYER\_TYPE}} a);}
+\DoxyCodeLine{116 }
+\DoxyCodeLine{117 \mbox{\hyperlink{structnetwork}{network}} \mbox{\hyperlink{network_8h_ad2dcde69603d71857d11484ae99bd8fe}{make\_network}}(\textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{118 \textcolor{keywordtype}{void} \mbox{\hyperlink{network_8h_a3d37980bfc1ac87112a8cb750a863086}{forward\_network}}(\mbox{\hyperlink{structnetwork}{network}} net, \mbox{\hyperlink{structnetwork__state}{network\_state}} state);}
+\DoxyCodeLine{119 \textcolor{keywordtype}{void} \mbox{\hyperlink{network_8h_aa2be63492179595eaccc4ec7a4392a2f}{backward\_network}}(\mbox{\hyperlink{structnetwork}{network}} net, \mbox{\hyperlink{structnetwork__state}{network\_state}} state);}
+\DoxyCodeLine{120 \textcolor{keywordtype}{void} \mbox{\hyperlink{network_8h_a87d52c62f9d37ca596ddecc132a0f0ab}{update\_network}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122 \textcolor{keywordtype}{float} \mbox{\hyperlink{network_8h_aeb752f771f5cfe8c401fc8dee8f3e439}{train\_network}}(\mbox{\hyperlink{structnetwork}{network}} net, \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}});}
+\DoxyCodeLine{123 \textcolor{keywordtype}{float} \mbox{\hyperlink{network_8h_a04614f46839fba458294a79cfef40382}{train\_network\_waitkey}}(\mbox{\hyperlink{structnetwork}{network}} net, \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}, \textcolor{keywordtype}{int} wait\_key);}
+\DoxyCodeLine{124 \textcolor{keywordtype}{float} \mbox{\hyperlink{network_8h_a4b91888b95e37adf361669399843a940}{train\_network\_batch}}(\mbox{\hyperlink{structnetwork}{network}} net, \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{125 \textcolor{keywordtype}{float} \mbox{\hyperlink{network_8h_a8b54b8e2d0a90c40d03b84d67503e279}{train\_network\_sgd}}(\mbox{\hyperlink{structnetwork}{network}} net, \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{126 \textcolor{keywordtype}{float} \mbox{\hyperlink{network_8h_a0f3d3c4cbdf9c64f7f22eb649d2019a6}{train\_network\_datum}}(\mbox{\hyperlink{structnetwork}{network}} net, \textcolor{keywordtype}{float} *\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \textcolor{keywordtype}{float} *\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}});}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128 \mbox{\hyperlink{structmatrix}{matrix}} \mbox{\hyperlink{network_8h_aad8d8b4979ad81ba5a61b4f3d2e39fc9}{network\_predict\_data}}(\mbox{\hyperlink{structnetwork}{network}} net, \mbox{\hyperlink{structdata}{data}} test);}
+\DoxyCodeLine{129 \textcolor{comment}{//LIB\_API float *network\_predict(network net, float *input);}}
+\DoxyCodeLine{130 \textcolor{comment}{//LIB\_API float *network\_predict\_ptr(network *net, float *input);}}
+\DoxyCodeLine{131 \textcolor{keywordtype}{float} \mbox{\hyperlink{network_8h_ac046932b096b7f11a444efdb93ed920d}{network\_accuracy}}(\mbox{\hyperlink{structnetwork}{network}} net, \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}});}
+\DoxyCodeLine{132 \textcolor{keywordtype}{float} *\mbox{\hyperlink{network_8h_a5aaa1cd36832c1b6b1e2ef33ade17341}{network\_accuracies}}(\mbox{\hyperlink{structnetwork}{network}} net, \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{133 \textcolor{keywordtype}{float} \mbox{\hyperlink{network_8h_aaa77e8c97a6c4963b95512f377725e0e}{network\_accuracy\_multi}}(\mbox{\hyperlink{structnetwork}{network}} net, \mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{134 \textcolor{keywordtype}{void} \mbox{\hyperlink{network_8h_aceb61bb5ef38c2acc0ed2aea8b153e9f}{top\_predictions}}(\mbox{\hyperlink{structnetwork}{network}} net, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} *index);}
+\DoxyCodeLine{135 \textcolor{keywordtype}{float} *\mbox{\hyperlink{network_8h_a80be2d9576b5e94e38f2e5337159c2a0}{get\_network\_output}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{136 \textcolor{keywordtype}{float} *\mbox{\hyperlink{network_8h_aaf92736b446bc27422674d66320dfd31}{get\_network\_output\_layer}}(\mbox{\hyperlink{structnetwork}{network}} net, \textcolor{keywordtype}{int} i);}
+\DoxyCodeLine{137 \textcolor{keywordtype}{float} *\mbox{\hyperlink{network_8h_ac107b57bb25059b45f07ba03f55977d8}{get\_network\_delta\_layer}}(\mbox{\hyperlink{structnetwork}{network}} net, \textcolor{keywordtype}{int} i);}
+\DoxyCodeLine{138 \textcolor{keywordtype}{float} *\mbox{\hyperlink{network_8h_acba2cd65b00608e563a4e4e58be44dd8}{get\_network\_delta}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{139 \textcolor{keywordtype}{int} \mbox{\hyperlink{network_8h_ae493b3884d3d1376dabb97e4449b8baf}{get\_network\_output\_size\_layer}}(\mbox{\hyperlink{structnetwork}{network}} net, \textcolor{keywordtype}{int} i);}
+\DoxyCodeLine{140 \textcolor{keywordtype}{int} \mbox{\hyperlink{network_8h_a4c84d1db6ac9eb1beb77c84b7d962fab}{get\_network\_output\_size}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{141 \mbox{\hyperlink{structimage}{image}} \mbox{\hyperlink{network_8h_a565138b1e47b93ded561ae9bc4a1ed10}{get\_network\_image}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{142 \mbox{\hyperlink{structimage}{image}} \mbox{\hyperlink{network_8h_a5bb83a6363a3ed2358ce290c69be0d06}{get\_network\_image\_layer}}(\mbox{\hyperlink{structnetwork}{network}} net, \textcolor{keywordtype}{int} i);}
+\DoxyCodeLine{143 \textcolor{keywordtype}{int} \mbox{\hyperlink{network_8h_a7a804bdac41f35d78938f15579109979}{get\_predicted\_class\_network}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{144 \textcolor{keywordtype}{void} \mbox{\hyperlink{network_8h_aded1fe29d38b99e33a816677a4c01078}{print\_network}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{145 \textcolor{keywordtype}{void} \mbox{\hyperlink{network_8h_ad1b0b41c13be3bdaeb07f5c9f59c62c6}{visualize\_network}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{146 \textcolor{keywordtype}{int} \mbox{\hyperlink{network_8h_a6ae710d2d9ad32cfdec1f925f48c2b50}{resize\_network}}(\mbox{\hyperlink{structnetwork}{network}} *net, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h);}
+\DoxyCodeLine{147 \textcolor{keywordtype}{void} \mbox{\hyperlink{network_8h_a0cf39a1104b8f0415c56796b54a3670a}{set\_batch\_network}}(\mbox{\hyperlink{structnetwork}{network}} *net, \textcolor{keywordtype}{int} b);}
+\DoxyCodeLine{148 \textcolor{keywordtype}{int} \mbox{\hyperlink{network_8h_add852ed9ae352068b9faebde88432e0a}{get\_network\_input\_size}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{149 \textcolor{keywordtype}{float} \mbox{\hyperlink{network_8h_a46b7f52c4149617c9f99a5c80ddb3c62}{get\_network\_cost}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{150 \textcolor{comment}{//LIB\_API layer* get\_network\_layer(network* net, int i);}}
+\DoxyCodeLine{151 \textcolor{comment}{//LIB\_API detection *get\_network\_boxes(network *net, int w, int h, float thresh, float hier, int *map, int relative, int *num, int letter);}}
+\DoxyCodeLine{152 \textcolor{comment}{//LIB\_API detection *make\_network\_boxes(network *net, float thresh, int *num);}}
+\DoxyCodeLine{153 \textcolor{comment}{//LIB\_API void free\_detections(detection *dets, int n);}}
+\DoxyCodeLine{154 \textcolor{comment}{//LIB\_API void reset\_rnn(network *net);}}
+\DoxyCodeLine{155 \textcolor{comment}{//LIB\_API network *load\_network\_custom(char *cfg, char *weights, int clear, int batch);}}
+\DoxyCodeLine{156 \textcolor{comment}{//LIB\_API network *load\_network(char *cfg, char *weights, int clear);}}
+\DoxyCodeLine{157 \textcolor{comment}{//LIB\_API float *network\_predict\_image(network *net, image im);}}
+\DoxyCodeLine{158 \textcolor{comment}{//LIB\_API float validate\_detector\_map(char *datacfg, char *cfgfile, char *weightfile, float thresh\_calc\_avg\_iou, const float iou\_thresh, int map\_points, int letter\_box, network *existing\_net);}}
+\DoxyCodeLine{159 \textcolor{comment}{//LIB\_API void train\_detector(char *datacfg, char *cfgfile, char *weightfile, int *gpus, int ngpus, int clear, int dont\_show, int calc\_map, int mjpeg\_port);}}
+\DoxyCodeLine{160 \textcolor{comment}{//LIB\_API int network\_width(network *net);}}
+\DoxyCodeLine{161 \textcolor{comment}{//LIB\_API int network\_height(network *net);}}
+\DoxyCodeLine{162 \textcolor{comment}{//LIB\_API void optimize\_picture(network *net, image orig, int max\_layer, float scale, float rate, float thresh, int norm);}}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164 \textcolor{keywordtype}{int} \mbox{\hyperlink{network_8h_a89ac3afe16b7246fc82a29b3ebc9b86d}{get\_network\_nuisance}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{165 \textcolor{keywordtype}{int} \mbox{\hyperlink{network_8h_ab9afdbdd929aca48e84315b9592c2745}{get\_network\_background}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{166 \textcolor{comment}{//LIB\_API void fuse\_conv\_batchnorm(network net);}}
+\DoxyCodeLine{167 \textcolor{comment}{//LIB\_API void calculate\_binary\_weights(network net);}}
+\DoxyCodeLine{168 \mbox{\hyperlink{structnetwork}{network}} \mbox{\hyperlink{network_8h_a580fbf1ea108cccba4f80930cbc9510f}{combine\_train\_valid\_networks}}(\mbox{\hyperlink{structnetwork}{network}} net\_train, \mbox{\hyperlink{structnetwork}{network}} net\_map);}
+\DoxyCodeLine{169 \textcolor{keywordtype}{void} \mbox{\hyperlink{network_8h_ab7f32dd9f51963f1754ebfdc0db69f5d}{copy\_weights\_net}}(\mbox{\hyperlink{structnetwork}{network}} net\_train, \mbox{\hyperlink{structnetwork}{network}} *net\_map);}
+\DoxyCodeLine{170 \textcolor{keywordtype}{void} \mbox{\hyperlink{network_8h_a395325b5be7921434d47965f9b3aabc3}{free\_network\_recurrent\_state}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{171 \textcolor{keywordtype}{void} \mbox{\hyperlink{network_8h_ab69bec742eb3e270d13be4a2a833bcb9}{randomize\_network\_recurrent\_state}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{172 \textcolor{keywordtype}{void} \mbox{\hyperlink{network_8h_aab21fd7e8728622b883fe4c4d691eb06}{remember\_network\_recurrent\_state}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{173 \textcolor{keywordtype}{void} \mbox{\hyperlink{network_8h_ad2e19f76773ce95b9795f8796b5523bd}{restore\_network\_recurrent\_state}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{174 \textcolor{keywordtype}{int} \mbox{\hyperlink{network_8h_a0643a1e5b2bba9db81453c92d4966ff9}{is\_ema\_initialized}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{175 \textcolor{keywordtype}{void} \mbox{\hyperlink{network_8h_aae40075a4919e24e1ebaa59ec53c6cea}{ema\_update}}(\mbox{\hyperlink{structnetwork}{network}} net, \textcolor{keywordtype}{float} ema\_alpha);}
+\DoxyCodeLine{176 \textcolor{keywordtype}{void} \mbox{\hyperlink{network_8h_a356340c1fccaf752cb1a2c6c16bf1cb7}{ema\_apply}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{177 \textcolor{keywordtype}{void} \mbox{\hyperlink{network_8h_a7201d2eb22ebe2c966d4707751af3008}{reject\_similar\_weights}}(\mbox{\hyperlink{structnetwork}{network}} net, \textcolor{keywordtype}{float} sim\_threshold);}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{181 \}}
+\DoxyCodeLine{182 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{184 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

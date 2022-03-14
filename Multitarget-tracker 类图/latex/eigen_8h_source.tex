@@ -1,0 +1,613 @@
+\hypertarget{eigen_8h_source}{}\doxysection{eigen.\+h}
+\label{eigen_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/eigen.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/eigen.h}}
+\mbox{\hyperlink{eigen_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{    pybind11/eigen.h: Transparent conversion for dense and sparse Eigen matrices}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{    Copyright (c) 2016 Wenzel Jakob <wenzel.jakob@epfl.ch>}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{    All rights reserved. Use of this source code is governed by a}}
+\DoxyCodeLine{7 \textcolor{comment}{    BSD-\/style license that can be found in the LICENSE file.}}
+\DoxyCodeLine{8 \textcolor{comment}{*/}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{numpy_8h}{numpy.h}}"{}}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#if defined(\_\_INTEL\_COMPILER)}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#  pragma warning(disable: 1682) }\textcolor{comment}{// implicit conversion of a 64-\/bit integral type to a smaller integral type (potential portability problem)}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#elif defined(\_\_GNUG\_\_) || defined(\_\_clang\_\_)}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#  pragma GCC diagnostic push}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#  pragma GCC diagnostic ignored "{}-\/Wconversion"{}}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#  pragma GCC diagnostic ignored "{}-\/Wdeprecated-\/declarations"{}}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#  ifdef \_\_clang\_\_}}
+\DoxyCodeLine{21 \textcolor{comment}{//   Eigen generates a bunch of implicit-\/copy-\/constructor-\/is-\/deprecated warnings with -\/Wdeprecated}}
+\DoxyCodeLine{22 \textcolor{comment}{//   under Clang, so disable that warning here:}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#    pragma GCC diagnostic ignored "{}-\/Wdeprecated"{}}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#  if \_\_GNUC\_\_ >= 7}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#    pragma GCC diagnostic ignored "{}-\/Wint-\/in-\/bool-\/context"{}}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#  endif}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#if defined(\_MSC\_VER)}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#  pragma warning(push)}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#  pragma warning(disable: 4127) }\textcolor{comment}{// warning C4127: Conditional expression is constant}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#  pragma warning(disable: 4996) }\textcolor{comment}{// warning C4996: std::unary\_negate is deprecated in C++17}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#include <Eigen/Core>}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#include <Eigen/SparseCore>}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{comment}{// Eigen prior to 3.2.7 doesn't have proper move constructors-\/-\/but worse, some classes get implicit}}
+\DoxyCodeLine{40 \textcolor{comment}{// move constructors that break things.  We could detect this an explicitly copy, but an extra copy}}
+\DoxyCodeLine{41 \textcolor{comment}{// of matrices seems highly undesirable.}}
+\DoxyCodeLine{42 \textcolor{keyword}{static\_assert}(EIGEN\_VERSION\_AT\_LEAST(3,2,7), \textcolor{stringliteral}{"{}Eigen support in pybind11 requires Eigen >= 3.2.7"{}});}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{comment}{// Provide a convenience alias for easier pass-\/by-\/ref usage with fully dynamic strides:}}
+\DoxyCodeLine{47 using \mbox{\hyperlink{eigen_8h_a509c0a3fae790584bf0cfcccef41c784}{EigenDStride}} = Eigen::Stride<Eigen::Dynamic, Eigen::Dynamic>;}
+\DoxyCodeLine{48 template <typename MatrixType> using \mbox{\hyperlink{eigen_8h_acbc233ed620e7b33cb07e33dd3b64246}{EigenDRef}} = Eigen::Ref<MatrixType, 0, \mbox{\hyperlink{eigen_8h_a509c0a3fae790584bf0cfcccef41c784}{EigenDStride}}>;}
+\DoxyCodeLine{49 template <typename MatrixType> using \mbox{\hyperlink{eigen_8h_a4a2c97fc69ae1875e8c48bf44891fbfd}{EigenDMap}} = Eigen::Map<MatrixType, 0, \mbox{\hyperlink{eigen_8h_a509c0a3fae790584bf0cfcccef41c784}{EigenDStride}}>;}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#if EIGEN\_VERSION\_AT\_LEAST(3,3,0)}}
+\DoxyCodeLine{54 \textcolor{keyword}{using} \mbox{\hyperlink{eigen_8h_a4e595ab182718d84a409dd05e0829bdd}{EigenIndex}} = Eigen::Index;}
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{56 \textcolor{keyword}{using} \mbox{\hyperlink{eigen_8h_a4e595ab182718d84a409dd05e0829bdd}{EigenIndex}} = EIGEN\_DEFAULT\_DENSE\_INDEX\_TYPE;}
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \textcolor{comment}{// Matches Eigen::Map, Eigen::Ref, blocks, etc:}}
+\DoxyCodeLine{60 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{using} \mbox{\hyperlink{eigen_8h_a403c575c8e7ae68daa89a11a4b683038}{is\_eigen\_dense\_map}} = \mbox{\hyperlink{detail_2common_8h_a4f440ffd11216b5a0aa72d2842546340}{all\_of<is\_template\_base\_of<Eigen::DenseBase, T>}}, std::is\_base\_of<Eigen::MapBase<T, Eigen::ReadOnlyAccessors>, T>>;}
+\DoxyCodeLine{61 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{using} \mbox{\hyperlink{eigen_8h_aabbcc3f1a17addf39e1577576553acf5}{is\_eigen\_mutable\_map}} = std::is\_base\_of<Eigen::MapBase<T, Eigen::WriteAccessors>, T>;}
+\DoxyCodeLine{62 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{using} \mbox{\hyperlink{eigen_8h_a93c6985faade6e9052f9e0917826b26d}{is\_eigen\_dense\_plain}} = \mbox{\hyperlink{detail_2common_8h_a4f440ffd11216b5a0aa72d2842546340}{all\_of<negation<is\_eigen\_dense\_map<T>}}>, \mbox{\hyperlink{detail_2common_8h_a3e21897d302612ea06a937769b92b71c}{is\_template\_base\_of<Eigen::PlainObjectBase, T>}}>;}
+\DoxyCodeLine{63 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{using} \mbox{\hyperlink{eigen_8h_af680e1af5697a93b0f4fc037a2100fbc}{is\_eigen\_sparse}} = \mbox{\hyperlink{detail_2common_8h_a3e21897d302612ea06a937769b92b71c}{is\_template\_base\_of<Eigen::SparseMatrixBase, T>}};}
+\DoxyCodeLine{64 \textcolor{comment}{// Test for objects inheriting from EigenBase<Derived> that aren't captured by the above.  This}}
+\DoxyCodeLine{65 \textcolor{comment}{// basically covers anything that can be assigned to a dense matrix but that don't have a typical}}
+\DoxyCodeLine{66 \textcolor{comment}{// matrix data layout that can be copied from their .data().  For example, DiagonalMatrix and}}
+\DoxyCodeLine{67 \textcolor{comment}{// SelfAdjointView fall into this category.}}
+\DoxyCodeLine{68 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{using} \mbox{\hyperlink{eigen_8h_a7be1c6745b73821227ddafd46d41c583}{is\_eigen\_other}} = \mbox{\hyperlink{detail_2common_8h_a4f440ffd11216b5a0aa72d2842546340}{all\_of}}<}
+\DoxyCodeLine{69     \mbox{\hyperlink{detail_2common_8h_a3e21897d302612ea06a937769b92b71c}{is\_template\_base\_of<Eigen::EigenBase, T>}},}
+\DoxyCodeLine{70     \mbox{\hyperlink{structnegation}{negation<any\_of<is\_eigen\_dense\_map<T>}}, \mbox{\hyperlink{eigen_8h_a93c6985faade6e9052f9e0917826b26d}{is\_eigen\_dense\_plain<T>}}, \mbox{\hyperlink{eigen_8h_af680e1af5697a93b0f4fc037a2100fbc}{is\_eigen\_sparse<T>}}>>}
+\DoxyCodeLine{71 >;}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \textcolor{comment}{// Captures numpy/eigen conformability status (returned by EigenProps::conformable()):}}
+\DoxyCodeLine{74 \textcolor{keyword}{template} <\textcolor{keywordtype}{bool} EigenRowMajor> \textcolor{keyword}{struct }\mbox{\hyperlink{struct_eigen_conformable}{EigenConformable}} \{}
+\DoxyCodeLine{75     \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_eigen_conformable_a0350af318be37c2422635571601e238f}{conformable}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{76     \mbox{\hyperlink{eigen_8h_a4e595ab182718d84a409dd05e0829bdd}{EigenIndex}} \mbox{\hyperlink{struct_eigen_conformable_a3f4cea0fad3c49cfa1e543d7388af7be}{rows}} = 0, \mbox{\hyperlink{struct_eigen_conformable_a91d8590cd3f680d5c142367dc12f6ddd}{cols}} = 0;}
+\DoxyCodeLine{77     \mbox{\hyperlink{eigen_8h_a509c0a3fae790584bf0cfcccef41c784}{EigenDStride}} \mbox{\hyperlink{struct_eigen_conformable_a956848cb9f7abf1a2e6e31516c362360}{stride}}\{0, 0\};      \textcolor{comment}{// Only valid if negativestrides is false!}}
+\DoxyCodeLine{78     \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_eigen_conformable_aa5b13a64eb1b8a64f4b7778315e44f21}{negativestrides}} = \textcolor{keyword}{false};   \textcolor{comment}{// If true, do not use stride!}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80     \mbox{\hyperlink{struct_eigen_conformable_a1061925396248cab26b777a4a5f17fc2}{EigenConformable}}(\textcolor{keywordtype}{bool} fits = \textcolor{keyword}{false}) : \mbox{\hyperlink{struct_eigen_conformable_a0350af318be37c2422635571601e238f}{conformable}}\{fits\} \{\}}
+\DoxyCodeLine{81     \textcolor{comment}{// Matrix type:}}
+\DoxyCodeLine{82     \mbox{\hyperlink{struct_eigen_conformable_a54b71e05fb8b9dc914cc3c52c8ca9a34}{EigenConformable}}(\mbox{\hyperlink{eigen_8h_a4e595ab182718d84a409dd05e0829bdd}{EigenIndex}} \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}}, \mbox{\hyperlink{eigen_8h_a4e595ab182718d84a409dd05e0829bdd}{EigenIndex}} c,}
+\DoxyCodeLine{83             \mbox{\hyperlink{eigen_8h_a4e595ab182718d84a409dd05e0829bdd}{EigenIndex}} rstride, \mbox{\hyperlink{eigen_8h_a4e595ab182718d84a409dd05e0829bdd}{EigenIndex}} cstride) :}
+\DoxyCodeLine{84         \mbox{\hyperlink{struct_eigen_conformable_a0350af318be37c2422635571601e238f}{conformable}}\{true\}, \mbox{\hyperlink{struct_eigen_conformable_a3f4cea0fad3c49cfa1e543d7388af7be}{rows}}\{\mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}}\}, \mbox{\hyperlink{struct_eigen_conformable_a91d8590cd3f680d5c142367dc12f6ddd}{cols}}\{c\} \{}
+\DoxyCodeLine{85         \textcolor{comment}{// TODO: when Eigen bug \#747 is fixed, remove the tests for non-\/negativity. http://eigen.tuxfamily.org/bz/show\_bug.cgi?id=747}}
+\DoxyCodeLine{86         \textcolor{keywordflow}{if} (rstride < 0 || cstride < 0) \{}
+\DoxyCodeLine{87             \mbox{\hyperlink{struct_eigen_conformable_aa5b13a64eb1b8a64f4b7778315e44f21}{negativestrides}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{88         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{89             \mbox{\hyperlink{struct_eigen_conformable_a956848cb9f7abf1a2e6e31516c362360}{stride}} = \{EigenRowMajor ? rstride : cstride \textcolor{comment}{/* outer stride */},}
+\DoxyCodeLine{90                       EigenRowMajor ? cstride : rstride \textcolor{comment}{/* inner stride */} \};}
+\DoxyCodeLine{91         \}}
+\DoxyCodeLine{92     \}}
+\DoxyCodeLine{93     \textcolor{comment}{// Vector type:}}
+\DoxyCodeLine{94     \mbox{\hyperlink{struct_eigen_conformable_a5e9a4c9c561bfc0bc8fba49eb196f242}{EigenConformable}}(\mbox{\hyperlink{eigen_8h_a4e595ab182718d84a409dd05e0829bdd}{EigenIndex}} \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}}, \mbox{\hyperlink{eigen_8h_a4e595ab182718d84a409dd05e0829bdd}{EigenIndex}} c, \mbox{\hyperlink{eigen_8h_a4e595ab182718d84a409dd05e0829bdd}{EigenIndex}} \mbox{\hyperlink{struct_eigen_conformable_a956848cb9f7abf1a2e6e31516c362360}{stride}})}
+\DoxyCodeLine{95         : \mbox{\hyperlink{struct_eigen_conformable}{EigenConformable}}(\mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}}, c, \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}} == 1 ? c*\mbox{\hyperlink{struct_eigen_conformable_a956848cb9f7abf1a2e6e31516c362360}{stride}} : \mbox{\hyperlink{struct_eigen_conformable_a956848cb9f7abf1a2e6e31516c362360}{stride}}, c == 1 ? \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}} : \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}}*\mbox{\hyperlink{struct_eigen_conformable_a956848cb9f7abf1a2e6e31516c362360}{stride}}) \{\}}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97     \textcolor{keyword}{template} <\textcolor{keyword}{typename} props> \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_eigen_conformable_a8faa27145cf2b8940a7d8919de19f9ad}{stride\_compatible}}()\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{98         \textcolor{comment}{// To have compatible strides, we need (on both dimensions) one of fully dynamic strides,}}
+\DoxyCodeLine{99         \textcolor{comment}{// matching strides, or a dimension size of 1 (in which case the stride value is irrelevant)}}
+\DoxyCodeLine{100         \textcolor{keywordflow}{return}}
+\DoxyCodeLine{101             !\mbox{\hyperlink{struct_eigen_conformable_aa5b13a64eb1b8a64f4b7778315e44f21}{negativestrides}} \&\&}
+\DoxyCodeLine{102             (props::inner\_stride == Eigen::Dynamic || props::inner\_stride == \mbox{\hyperlink{struct_eigen_conformable_a956848cb9f7abf1a2e6e31516c362360}{stride}}.inner() ||}
+\DoxyCodeLine{103                 (EigenRowMajor ? \mbox{\hyperlink{struct_eigen_conformable_a91d8590cd3f680d5c142367dc12f6ddd}{cols}} : \mbox{\hyperlink{struct_eigen_conformable_a3f4cea0fad3c49cfa1e543d7388af7be}{rows}}) == 1) \&\&}
+\DoxyCodeLine{104             (props::outer\_stride == Eigen::Dynamic || props::outer\_stride == \mbox{\hyperlink{struct_eigen_conformable_a956848cb9f7abf1a2e6e31516c362360}{stride}}.outer() ||}
+\DoxyCodeLine{105                 (EigenRowMajor ? \mbox{\hyperlink{struct_eigen_conformable_a3f4cea0fad3c49cfa1e543d7388af7be}{rows}} : \mbox{\hyperlink{struct_eigen_conformable_a91d8590cd3f680d5c142367dc12f6ddd}{cols}}) == 1);}
+\DoxyCodeLine{106     \}}
+\DoxyCodeLine{107     \textcolor{keyword}{operator} bool()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{struct_eigen_conformable_a0350af318be37c2422635571601e238f}{conformable}}; \}}
+\DoxyCodeLine{108 \};}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type> \textcolor{keyword}{struct }\mbox{\hyperlink{structeigen__extract__stride}{eigen\_extract\_stride}} \{ \textcolor{keyword}{using} \mbox{\hyperlink{structeigen__extract__stride_accb64046a085e995039046e8a6811c7a}{type}} = Type; \};}
+\DoxyCodeLine{111 \textcolor{keyword}{template} <\textcolor{keyword}{typename} PlainObjectType, \textcolor{keywordtype}{int} MapOptions, \textcolor{keyword}{typename} Str\textcolor{keywordtype}{id}eType>}
+\DoxyCodeLine{112 \textcolor{keyword}{struct }\mbox{\hyperlink{structeigen__extract__stride}{eigen\_extract\_stride}}<Eigen::Map<PlainObjectType, MapOptions, StrideType>> \{ \textcolor{keyword}{using} \mbox{\hyperlink{structeigen__extract__stride_3_01_eigen_1_1_map_3_01_plain_object_type_00_01_map_options_00_01_stride_type_01_4_01_4_a5b20e9b2e74fa3bed76831203ba87a9f}{type}} = StrideType; \};}
+\DoxyCodeLine{113 \textcolor{keyword}{template} <\textcolor{keyword}{typename} PlainObjectType, \textcolor{keywordtype}{int} Options, \textcolor{keyword}{typename} Str\textcolor{keywordtype}{id}eType>}
+\DoxyCodeLine{114 \textcolor{keyword}{struct }\mbox{\hyperlink{structeigen__extract__stride}{eigen\_extract\_stride}}<Eigen::Ref<PlainObjectType, Options, StrideType>> \{ \textcolor{keyword}{using} \mbox{\hyperlink{structeigen__extract__stride_3_01_eigen_1_1_ref_3_01_plain_object_type_00_01_options_00_01_stride_type_01_4_01_4_a057cc3e02bf77ac7ff9afebaa760cdeb}{type}} = StrideType; \};}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116 \textcolor{comment}{// Helper struct for extracting information from an Eigen type}}
+\DoxyCodeLine{117 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type\_> \textcolor{keyword}{struct }\mbox{\hyperlink{struct_eigen_props}{EigenProps}} \{}
+\DoxyCodeLine{118     \textcolor{keyword}{using} \mbox{\hyperlink{struct_eigen_props_ababed0b6298eeb5f4ded06da92c96cd7}{Type}} = Type\_;}
+\DoxyCodeLine{119     \textcolor{keyword}{using} \mbox{\hyperlink{struct_eigen_props_ae36317e24288de2c7b47017ce58acc37}{Scalar}} = \textcolor{keyword}{typename} Type::Scalar;}
+\DoxyCodeLine{120     \textcolor{keyword}{using} \mbox{\hyperlink{struct_eigen_props_a21dcc2d713c484e7a84e679c793e8fea}{StrideType}} = \textcolor{keyword}{typename} \mbox{\hyperlink{structeigen__extract__stride_accb64046a085e995039046e8a6811c7a}{eigen\_extract\_stride<Type>::type}};}
+\DoxyCodeLine{121     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \mbox{\hyperlink{eigen_8h_a4e595ab182718d84a409dd05e0829bdd}{EigenIndex}}}
+\DoxyCodeLine{122         \mbox{\hyperlink{struct_eigen_props_a2f00028920ef3138640e602c80ff9a0d}{rows}} = Type::RowsAtCompileTime,}
+\DoxyCodeLine{123         \mbox{\hyperlink{struct_eigen_props_a11241a3435168ade35c58f1a2899df8b}{cols}} = Type::ColsAtCompileTime,}
+\DoxyCodeLine{124         \mbox{\hyperlink{struct_eigen_props_a9765247d03fa7156e28b73409689df17}{size}} = Type::SizeAtCompileTime;}
+\DoxyCodeLine{125     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{bool}}
+\DoxyCodeLine{126         \mbox{\hyperlink{struct_eigen_props_a290ebf6baed2dca134f928c13dda4030}{row\_major}} = Type::IsRowMajor,}
+\DoxyCodeLine{127         \mbox{\hyperlink{struct_eigen_props_a6c26ad4c67abd91b08285b63afed9ab9}{vector}} = Type::IsVectorAtCompileTime, \textcolor{comment}{// At least one dimension has fixed size 1}}
+\DoxyCodeLine{128         \mbox{\hyperlink{struct_eigen_props_a4fdf3fa6c9908561ddfac176c9c106f7}{fixed\_rows}} = \mbox{\hyperlink{struct_eigen_props_a2f00028920ef3138640e602c80ff9a0d}{rows}} != Eigen::Dynamic,}
+\DoxyCodeLine{129         \mbox{\hyperlink{struct_eigen_props_afc4954afca9a4dd098b009a5653b2b48}{fixed\_cols}} = \mbox{\hyperlink{struct_eigen_props_a11241a3435168ade35c58f1a2899df8b}{cols}} != Eigen::Dynamic,}
+\DoxyCodeLine{130         \mbox{\hyperlink{struct_eigen_props_a4234c331255e14bd0e2a817ac9e0352e}{fixed}} = \mbox{\hyperlink{struct_eigen_props_a9765247d03fa7156e28b73409689df17}{size}} != Eigen::Dynamic, \textcolor{comment}{// Fully-\/fixed size}}
+\DoxyCodeLine{131         \mbox{\hyperlink{struct_eigen_props_a8cda015be17e948b92d687ff58c78169}{dynamic}} = !\mbox{\hyperlink{struct_eigen_props_a4fdf3fa6c9908561ddfac176c9c106f7}{fixed\_rows}} \&\& !\mbox{\hyperlink{struct_eigen_props_afc4954afca9a4dd098b009a5653b2b48}{fixed\_cols}}; \textcolor{comment}{// Fully-\/dynamic size}}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133     \textcolor{keyword}{template} <EigenIndex i, EigenIndex ifzero> \textcolor{keyword}{using} \mbox{\hyperlink{struct_eigen_props_aa728072a2702217ee987bf9ab3b9d07d}{if\_zero}} = std::integral\_constant<EigenIndex, i == 0 ? ifzero : i>;}
+\DoxyCodeLine{134     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \mbox{\hyperlink{eigen_8h_a4e595ab182718d84a409dd05e0829bdd}{EigenIndex}} \mbox{\hyperlink{struct_eigen_props_aadd1cceef220ef97abe8eb74f1f78ecd}{inner\_stride}} = \mbox{\hyperlink{struct_eigen_props_aa728072a2702217ee987bf9ab3b9d07d}{if\_zero<StrideType::InnerStrideAtCompileTime, 1>::value}},}
+\DoxyCodeLine{135                                 \mbox{\hyperlink{struct_eigen_props_ac31d9e8cc3baff0f804000486c35759d}{outer\_stride}} = \mbox{\hyperlink{struct_eigen_props_aa728072a2702217ee987bf9ab3b9d07d}{if\_zero}}<StrideType::OuterStrideAtCompileTime,}
+\DoxyCodeLine{136                                                        \mbox{\hyperlink{struct_eigen_props_a6c26ad4c67abd91b08285b63afed9ab9}{vector}} ? \mbox{\hyperlink{struct_eigen_props_a9765247d03fa7156e28b73409689df17}{size}} : \mbox{\hyperlink{struct_eigen_props_a290ebf6baed2dca134f928c13dda4030}{row\_major}} ? \mbox{\hyperlink{struct_eigen_props_a11241a3435168ade35c58f1a2899df8b}{cols}} : \mbox{\hyperlink{struct_eigen_props_a2f00028920ef3138640e602c80ff9a0d}{rows}}>::value;}
+\DoxyCodeLine{137     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_eigen_props_a32861acd4f8d759619f7a3438a5a56a4}{dynamic\_stride}} = \mbox{\hyperlink{struct_eigen_props_aadd1cceef220ef97abe8eb74f1f78ecd}{inner\_stride}} == Eigen::Dynamic \&\& \mbox{\hyperlink{struct_eigen_props_ac31d9e8cc3baff0f804000486c35759d}{outer\_stride}} == Eigen::Dynamic;}
+\DoxyCodeLine{138     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_eigen_props_a71445c69c5e4084c30449ff2207571c7}{requires\_row\_major}} = !\mbox{\hyperlink{struct_eigen_props_a32861acd4f8d759619f7a3438a5a56a4}{dynamic\_stride}} \&\& !\mbox{\hyperlink{struct_eigen_props_a6c26ad4c67abd91b08285b63afed9ab9}{vector}} \&\& (\mbox{\hyperlink{struct_eigen_props_a290ebf6baed2dca134f928c13dda4030}{row\_major}} ? \mbox{\hyperlink{struct_eigen_props_aadd1cceef220ef97abe8eb74f1f78ecd}{inner\_stride}} : \mbox{\hyperlink{struct_eigen_props_ac31d9e8cc3baff0f804000486c35759d}{outer\_stride}}) == 1;}
+\DoxyCodeLine{139     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_eigen_props_a070c53f0e952e411c98e3ddfdbeaae3d}{requires\_col\_major}} = !\mbox{\hyperlink{struct_eigen_props_a32861acd4f8d759619f7a3438a5a56a4}{dynamic\_stride}} \&\& !\mbox{\hyperlink{struct_eigen_props_a6c26ad4c67abd91b08285b63afed9ab9}{vector}} \&\& (\mbox{\hyperlink{struct_eigen_props_a290ebf6baed2dca134f928c13dda4030}{row\_major}} ? \mbox{\hyperlink{struct_eigen_props_ac31d9e8cc3baff0f804000486c35759d}{outer\_stride}} : \mbox{\hyperlink{struct_eigen_props_aadd1cceef220ef97abe8eb74f1f78ecd}{inner\_stride}}) == 1;}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141     \textcolor{comment}{// Takes an input array and determines whether we can make it fit into the Eigen type.  If}}
+\DoxyCodeLine{142     \textcolor{comment}{// the array is a vector, we attempt to fit it into either an Eigen 1xN or Nx1 vector}}
+\DoxyCodeLine{143     \textcolor{comment}{// (preferring the latter if it will fit in either, i.e. for a fully dynamic matrix type).}}
+\DoxyCodeLine{144     \textcolor{keyword}{static} \mbox{\hyperlink{struct_eigen_conformable}{EigenConformable<row\_major>}} \mbox{\hyperlink{struct_eigen_props_a478389110d39976dea498fdeff611058}{conformable}}(\textcolor{keyword}{const} \mbox{\hyperlink{classarray}{array}} \&a) \{}
+\DoxyCodeLine{145         \textcolor{keyword}{const} \textcolor{keyword}{auto} dims = a.\mbox{\hyperlink{classarray_a184360492eac7224753f132d1a0a973e}{ndim}}();}
+\DoxyCodeLine{146         \textcolor{keywordflow}{if} (dims < 1 || dims > 2)}
+\DoxyCodeLine{147             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149         \textcolor{keywordflow}{if} (dims == 2) \{ \textcolor{comment}{// Matrix type: require exact match (or dynamic)}}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151             \mbox{\hyperlink{eigen_8h_a4e595ab182718d84a409dd05e0829bdd}{EigenIndex}}}
+\DoxyCodeLine{152                 np\_rows = a.\mbox{\hyperlink{classarray_a67d6d0115fb7d616ffe28792da8a33f6}{shape}}(0),}
+\DoxyCodeLine{153                 np\_cols = a.\mbox{\hyperlink{classarray_a67d6d0115fb7d616ffe28792da8a33f6}{shape}}(1),}
+\DoxyCodeLine{154                 np\_rstride = a.\mbox{\hyperlink{classarray_a29e3cbc08a6c1f2e713ed1c00a91d9fc}{strides}}(0) / \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}\textcolor{keyword}{>}(\textcolor{keyword}{sizeof}(\mbox{\hyperlink{struct_eigen_props_ae36317e24288de2c7b47017ce58acc37}{Scalar}})),}
+\DoxyCodeLine{155                 np\_cstride = a.\mbox{\hyperlink{classarray_a29e3cbc08a6c1f2e713ed1c00a91d9fc}{strides}}(1) / \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}\textcolor{keyword}{>}(\textcolor{keyword}{sizeof}(\mbox{\hyperlink{struct_eigen_props_ae36317e24288de2c7b47017ce58acc37}{Scalar}}));}
+\DoxyCodeLine{156             \textcolor{keywordflow}{if} ((\mbox{\hyperlink{struct_eigen_props_a4fdf3fa6c9908561ddfac176c9c106f7}{fixed\_rows}} \&\& np\_rows != \mbox{\hyperlink{struct_eigen_props_a2f00028920ef3138640e602c80ff9a0d}{rows}}) || (\mbox{\hyperlink{struct_eigen_props_afc4954afca9a4dd098b009a5653b2b48}{fixed\_cols}} \&\& np\_cols != \mbox{\hyperlink{struct_eigen_props_a11241a3435168ade35c58f1a2899df8b}{cols}}))}
+\DoxyCodeLine{157                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159             \textcolor{keywordflow}{return} \{np\_rows, np\_cols, np\_rstride, np\_cstride\};}
+\DoxyCodeLine{160         \}}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162         \textcolor{comment}{// Otherwise we're storing an n-\/vector.  Only one of the strides will be used, but whichever}}
+\DoxyCodeLine{163         \textcolor{comment}{// is used, we want the (single) numpy stride value.}}
+\DoxyCodeLine{164         \textcolor{keyword}{const} \mbox{\hyperlink{eigen_8h_a4e595ab182718d84a409dd05e0829bdd}{EigenIndex}} n = a.\mbox{\hyperlink{classarray_a67d6d0115fb7d616ffe28792da8a33f6}{shape}}(0),}
+\DoxyCodeLine{165               stride = a.\mbox{\hyperlink{classarray_a29e3cbc08a6c1f2e713ed1c00a91d9fc}{strides}}(0) / \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}}\textcolor{keyword}{>}(\textcolor{keyword}{sizeof}(\mbox{\hyperlink{struct_eigen_props_ae36317e24288de2c7b47017ce58acc37}{Scalar}}));}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{167         \textcolor{keywordflow}{if} (\mbox{\hyperlink{struct_eigen_props_a6c26ad4c67abd91b08285b63afed9ab9}{vector}}) \{ \textcolor{comment}{// Eigen type is a compile-\/time vector}}
+\DoxyCodeLine{168             \textcolor{keywordflow}{if} (\mbox{\hyperlink{struct_eigen_props_a4234c331255e14bd0e2a817ac9e0352e}{fixed}} \&\& \mbox{\hyperlink{struct_eigen_props_a9765247d03fa7156e28b73409689df17}{size}} != n)}
+\DoxyCodeLine{169                 \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \textcolor{comment}{// Vector size mismatch}}
+\DoxyCodeLine{170             \textcolor{keywordflow}{return} \{\mbox{\hyperlink{struct_eigen_props_a2f00028920ef3138640e602c80ff9a0d}{rows}} == 1 ? 1 : n, \mbox{\hyperlink{struct_eigen_props_a11241a3435168ade35c58f1a2899df8b}{cols}} == 1 ? 1 : n, stride\};}
+\DoxyCodeLine{171         \}}
+\DoxyCodeLine{172         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\mbox{\hyperlink{struct_eigen_props_a4234c331255e14bd0e2a817ac9e0352e}{fixed}}) \{}
+\DoxyCodeLine{173             \textcolor{comment}{// The type has a fixed size, but is not a vector: abort}}
+\DoxyCodeLine{174             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{175         \}}
+\DoxyCodeLine{176         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\mbox{\hyperlink{struct_eigen_props_afc4954afca9a4dd098b009a5653b2b48}{fixed\_cols}}) \{}
+\DoxyCodeLine{177             \textcolor{comment}{// Since this isn't a vector, cols must be != 1.  We allow this only if it exactly}}
+\DoxyCodeLine{178             \textcolor{comment}{// equals the number of elements (rows is Dynamic, and so 1 row is allowed).}}
+\DoxyCodeLine{179             \textcolor{keywordflow}{if} (\mbox{\hyperlink{struct_eigen_props_a11241a3435168ade35c58f1a2899df8b}{cols}} != n) \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{180             \textcolor{keywordflow}{return} \{1, n, stride\};}
+\DoxyCodeLine{181         \}}
+\DoxyCodeLine{182         \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{183             \textcolor{comment}{// Otherwise it's either fully dynamic, or column dynamic; both become a column vector}}
+\DoxyCodeLine{184             \textcolor{keywordflow}{if} (\mbox{\hyperlink{struct_eigen_props_a4fdf3fa6c9908561ddfac176c9c106f7}{fixed\_rows}} \&\& \mbox{\hyperlink{struct_eigen_props_a2f00028920ef3138640e602c80ff9a0d}{rows}} != n) \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{185             \textcolor{keywordflow}{return} \{n, 1, stride\};}
+\DoxyCodeLine{186         \}}
+\DoxyCodeLine{187     \}}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_eigen_props_a028698ea3f672d4a0e95922dc6553f23}{show\_writeable}} = \mbox{\hyperlink{eigen_8h_a403c575c8e7ae68daa89a11a4b683038}{is\_eigen\_dense\_map<Type>::value}} \&\& \mbox{\hyperlink{eigen_8h_aabbcc3f1a17addf39e1577576553acf5}{is\_eigen\_mutable\_map<Type>::value}};}
+\DoxyCodeLine{190     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_eigen_props_ae3040a55462cdeaed7843ba858eb8e68}{show\_order}} = \mbox{\hyperlink{eigen_8h_a403c575c8e7ae68daa89a11a4b683038}{is\_eigen\_dense\_map<Type>::value}};}
+\DoxyCodeLine{191     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_eigen_props_a280202108f280aab1ccbe5f9e946a8eb}{show\_c\_contiguous}} = \mbox{\hyperlink{struct_eigen_props_ae3040a55462cdeaed7843ba858eb8e68}{show\_order}} \&\& \mbox{\hyperlink{struct_eigen_props_a71445c69c5e4084c30449ff2207571c7}{requires\_row\_major}};}
+\DoxyCodeLine{192     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_eigen_props_ae9fd27ba9318cfb3d632f80bfc04e94f}{show\_f\_contiguous}} = !\mbox{\hyperlink{struct_eigen_props_a280202108f280aab1ccbe5f9e946a8eb}{show\_c\_contiguous}} \&\& \mbox{\hyperlink{struct_eigen_props_ae3040a55462cdeaed7843ba858eb8e68}{show\_order}} \&\& \mbox{\hyperlink{struct_eigen_props_a070c53f0e952e411c98e3ddfdbeaae3d}{requires\_col\_major}};}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{194     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{struct_eigen_props_aa3861d665ff4bf5df6b531008fe358ef}{descriptor}} =}
+\DoxyCodeLine{195         \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}numpy.ndarray["{}}) + \mbox{\hyperlink{structnpy__format__descriptor}{npy\_format\_descriptor<Scalar>::name}} +}
+\DoxyCodeLine{196         \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}["{}})  + \_<fixed\_rows>(\mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}<(\textcolor{keywordtype}{size\_t}) \mbox{\hyperlink{struct_eigen_props_a2f00028920ef3138640e602c80ff9a0d}{rows}}>(), \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}m"{}})) +}
+\DoxyCodeLine{197         \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}, "{}}) + \_<fixed\_cols>(\mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}<(\textcolor{keywordtype}{size\_t}) \mbox{\hyperlink{struct_eigen_props_a11241a3435168ade35c58f1a2899df8b}{cols}}>(), \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}n"{}})) +}
+\DoxyCodeLine{198         \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}]"{}}) +}
+\DoxyCodeLine{199         \textcolor{comment}{// For a reference type (e.g. Ref<MatrixXd>) we have other constraints that might need to be}}
+\DoxyCodeLine{200         \textcolor{comment}{// satisfied: writeable=True (for a mutable reference), and, depending on the map's stride}}
+\DoxyCodeLine{201         \textcolor{comment}{// options, possibly f\_contiguous or c\_contiguous.  We include them in the descriptor output}}
+\DoxyCodeLine{202         \textcolor{comment}{// to provide some hint as to why a TypeError is occurring (otherwise it can be confusing to}}
+\DoxyCodeLine{203         \textcolor{comment}{// see that a function accepts a 'numpy.ndarray[float64[3,2]]' and an error message that you}}
+\DoxyCodeLine{204         \textcolor{comment}{// *gave* a numpy.ndarray of the right type and dimensions.}}
+\DoxyCodeLine{205         \_<show\_writeable>(\textcolor{stringliteral}{"{}, flags.writeable"{}}, \textcolor{stringliteral}{"{}"{}}) +}
+\DoxyCodeLine{206         \_<show\_c\_contiguous>(\textcolor{stringliteral}{"{}, flags.c\_contiguous"{}}, \textcolor{stringliteral}{"{}"{}}) +}
+\DoxyCodeLine{207         \_<show\_f\_contiguous>(\textcolor{stringliteral}{"{}, flags.f\_contiguous"{}}, \textcolor{stringliteral}{"{}"{}}) +}
+\DoxyCodeLine{208         \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}]"{}});}
+\DoxyCodeLine{209 \};}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{211 \textcolor{comment}{// Casts an Eigen type to numpy array.  If given a base, the numpy array references the src data,}}
+\DoxyCodeLine{212 \textcolor{comment}{// otherwise it'll make a copy.  writeable lets you turn off the writeable flag for the array.}}
+\DoxyCodeLine{213 \textcolor{keyword}{template} <\textcolor{keyword}{typename} props> \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{eigen_8h_a3c3714c0ebfda3176a02ed911375184a}{eigen\_array\_cast}}(\textcolor{keyword}{typename} props::Type \textcolor{keyword}{const} \&src, \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structbase}{base}} = \mbox{\hyperlink{classhandle}{handle}}(), \textcolor{keywordtype}{bool} writeable = \textcolor{keyword}{true}) \{}
+\DoxyCodeLine{214     \textcolor{keyword}{constexpr} \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\_t}} elem\_size = \textcolor{keyword}{sizeof}(\textcolor{keyword}{typename} props::Scalar);}
+\DoxyCodeLine{215     \mbox{\hyperlink{classarray}{array}} a;}
+\DoxyCodeLine{216     \textcolor{keywordflow}{if} (props::vector)}
+\DoxyCodeLine{217         a = \mbox{\hyperlink{classarray}{array}}(\{ src.size() \}, \{ elem\_size * src.innerStride() \}, src.data(), \mbox{\hyperlink{structbase}{base}});}
+\DoxyCodeLine{218     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{219         a = \mbox{\hyperlink{classarray}{array}}(\{ src.rows(), src.cols() \}, \{ elem\_size * src.rowStride(), elem\_size * src.colStride() \},}
+\DoxyCodeLine{220                   src.data(), \mbox{\hyperlink{structbase}{base}});}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{222     \textcolor{keywordflow}{if} (!writeable)}
+\DoxyCodeLine{223         \mbox{\hyperlink{numpy_8h_a186fb9996379f73af97c9e42dd055db8}{array\_proxy}}(a.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}())-\/>\mbox{\hyperlink{struct_py_array___proxy_a3eb84eade4ac85d3964c89b9b8a8645b}{flags}} \&= \string~detail\mbox{\hyperlink{structnpy__api_a788409fb003cbdfdb9adee0cfb6573f9a6d7679437ff22ffaa63276ed07f3be99}{::npy\_api::NPY\_ARRAY\_WRITEABLE\_}};}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{225     \textcolor{keywordflow}{return} a.\mbox{\hyperlink{classobject_a4ce66b1d44b37ae6b28e80228b075aae}{release}}();}
+\DoxyCodeLine{226 \}}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{228 \textcolor{comment}{// Takes an lvalue ref to some Eigen type and a (python) base object, creating a numpy array that}}
+\DoxyCodeLine{229 \textcolor{comment}{// reference the Eigen object's data with `base` as the python-\/registered base class (if omitted,}}
+\DoxyCodeLine{230 \textcolor{comment}{// the base will be set to None, and lifetime management is up to the caller).  The numpy array is}}
+\DoxyCodeLine{231 \textcolor{comment}{// non-\/writeable if the given type is const.}}
+\DoxyCodeLine{232 \textcolor{keyword}{template} <\textcolor{keyword}{typename} props, \textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{233 \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{eigen_8h_a4b925631bc4c732a0301f6cf0a08317f}{eigen\_ref\_array}}(Type \&src, \mbox{\hyperlink{classhandle}{handle}} parent = \mbox{\hyperlink{classnone}{none}}()) \{}
+\DoxyCodeLine{234     \textcolor{comment}{// none here is to get past array's should-\/we-\/copy detection, which currently always}}
+\DoxyCodeLine{235     \textcolor{comment}{// copies when there is no base.  Setting the base to None should be harmless.}}
+\DoxyCodeLine{236     \textcolor{keywordflow}{return} eigen\_array\_cast<props>(src, parent, !std::is\_const<Type>::value);}
+\DoxyCodeLine{237 \}}
+\DoxyCodeLine{238 }
+\DoxyCodeLine{239 \textcolor{comment}{// Takes a pointer to some dense, plain Eigen type, builds a capsule around it, then returns a numpy}}
+\DoxyCodeLine{240 \textcolor{comment}{// array that references the encapsulated data with a python-\/side reference to the capsule to tie}}
+\DoxyCodeLine{241 \textcolor{comment}{// its destruction to that of any dependent python objects.  Const-\/ness is determined by whether or}}
+\DoxyCodeLine{242 \textcolor{comment}{// not the Type of the pointer given is const.}}
+\DoxyCodeLine{243 template <typename props, typename Type, typename = enable\_if\_t<is\_eigen\_dense\_plain<Type>::value>>}
+\DoxyCodeLine{244 \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{eigen_8h_a5ebcb9c19dfc26cd6ef45955a0492e83}{eigen\_encapsulate}}(Type *src) \{}
+\DoxyCodeLine{245     \mbox{\hyperlink{classcapsule}{capsule}} \mbox{\hyperlink{structbase}{base}}(src, [](\textcolor{keywordtype}{void} *o) \{ \textcolor{keyword}{delete} \textcolor{keyword}{static\_cast<}Type *\textcolor{keyword}{>}(o); \});}
+\DoxyCodeLine{246     \textcolor{keywordflow}{return} eigen\_ref\_array<props>(*src, \mbox{\hyperlink{structbase}{base}});}
+\DoxyCodeLine{247 \}}
+\DoxyCodeLine{248 }
+\DoxyCodeLine{249 \textcolor{comment}{// Type caster for regular, dense matrix types (e.g. MatrixXd), but not maps/refs/etc. of dense}}
+\DoxyCodeLine{250 \textcolor{comment}{// types.}}
+\DoxyCodeLine{251 \textcolor{keyword}{template}<\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{252 \textcolor{keyword}{struct }\mbox{\hyperlink{classtype__caster}{type\_caster}}<Type, \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<\mbox{\hyperlink{eigen_8h_a93c6985faade6e9052f9e0917826b26d}{is\_eigen\_dense\_plain}}<Type>::\mbox{\hyperlink{classtype__caster__generic_a077b8d1e4af829443b2e41c3e5786f4d}{value}}>> \{}
+\DoxyCodeLine{253     \textcolor{keyword}{using} \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__dense__plain_3_01_type_01_4_1_1value_01_4_01_4_ac0e9d7ef9b4e07d6d90d4a9093b3e939}{Scalar}} = \textcolor{keyword}{typename} Type::Scalar;}
+\DoxyCodeLine{254     \textcolor{keyword}{using} \mbox{\hyperlink{struct_eigen_props}{props}} = \mbox{\hyperlink{struct_eigen_props}{EigenProps<Type>}};}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{256     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__dense__plain_3_01_type_01_4_1_1value_01_4_01_4_a685eaafb5ace9e29ba92080349ee523d}{load}}(\mbox{\hyperlink{classhandle}{handle}} src, \textcolor{keywordtype}{bool} convert) \{}
+\DoxyCodeLine{257         \textcolor{comment}{// If we're in no-\/convert mode, only load if given an array of the correct type}}
+\DoxyCodeLine{258         \textcolor{keywordflow}{if} (!convert \&\& !\mbox{\hyperlink{group__python__builtins_gade020f155a1f133cc9e245bac2981280}{isinstance}}<\mbox{\hyperlink{classarray__t}{array\_t<Scalar>}}>(src))}
+\DoxyCodeLine{259             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{261         \textcolor{comment}{// Coerce into an array, but don't do type conversion yet; the copy below handles it.}}
+\DoxyCodeLine{262         \textcolor{keyword}{auto} buf = \mbox{\hyperlink{classarray_a4b19125eed75474c00a93c829dba3a8b}{array::ensure}}(src);}
+\DoxyCodeLine{263 }
+\DoxyCodeLine{264         \textcolor{keywordflow}{if} (!buf)}
+\DoxyCodeLine{265             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{267         \textcolor{keyword}{auto} dims = buf.ndim();}
+\DoxyCodeLine{268         \textcolor{keywordflow}{if} (dims < 1 || dims > 2)}
+\DoxyCodeLine{269             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{270 }
+\DoxyCodeLine{271         \textcolor{keyword}{auto} fits = props::conformable(buf);}
+\DoxyCodeLine{272         \textcolor{keywordflow}{if} (!fits)}
+\DoxyCodeLine{273             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{274 }
+\DoxyCodeLine{275         \textcolor{comment}{// Allocate the new type, then build a numpy reference into it}}
+\DoxyCodeLine{276         \mbox{\hyperlink{classtype__caster__generic_a077b8d1e4af829443b2e41c3e5786f4d}{value}} = Type(fits.rows, fits.cols);}
+\DoxyCodeLine{277         \textcolor{keyword}{auto} ref = reinterpret\_steal<array>(eigen\_ref\_array<props>(\mbox{\hyperlink{classtype__caster__generic_a077b8d1e4af829443b2e41c3e5786f4d}{value}}));}
+\DoxyCodeLine{278         \textcolor{keywordflow}{if} (dims == 1) ref = ref.squeeze();}
+\DoxyCodeLine{279         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (ref.ndim() == 1) buf = buf.squeeze();}
+\DoxyCodeLine{280 }
+\DoxyCodeLine{281         \textcolor{keywordtype}{int} result = detail::npy\_api::get().PyArray\_CopyInto\_(ref.ptr(), buf.ptr());}
+\DoxyCodeLine{282 }
+\DoxyCodeLine{283         \textcolor{keywordflow}{if} (result < 0) \{ \textcolor{comment}{// Copy failed!}}
+\DoxyCodeLine{284             PyErr\_Clear();}
+\DoxyCodeLine{285             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{286         \}}
+\DoxyCodeLine{287 }
+\DoxyCodeLine{288         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{289     \}}
+\DoxyCodeLine{290 }
+\DoxyCodeLine{291 \textcolor{keyword}{private}:}
+\DoxyCodeLine{292 }
+\DoxyCodeLine{293     \textcolor{comment}{// Cast implementation}}
+\DoxyCodeLine{294     \textcolor{keyword}{template} <\textcolor{keyword}{typename} CType>}
+\DoxyCodeLine{295     \textcolor{keyword}{static} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__dense__plain_3_01_type_01_4_1_1value_01_4_01_4_a5a342bc5f0bfd42c6c91b427be546590}{cast\_impl}}(CType *src, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} policy, \mbox{\hyperlink{classhandle}{handle}} parent) \{}
+\DoxyCodeLine{296         \textcolor{keywordflow}{switch} (policy) \{}
+\DoxyCodeLine{297             \textcolor{keywordflow}{case} \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a5dc4bb19391b04351f49572019c628c0}{return\_value\_policy::take\_ownership}}:}
+\DoxyCodeLine{298             \textcolor{keywordflow}{case} \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a2bd9c0ed00116be1258e0cc66617d7c8}{return\_value\_policy::automatic}}:}
+\DoxyCodeLine{299                 \textcolor{keywordflow}{return} eigen\_encapsulate<props>(src);}
+\DoxyCodeLine{300             \textcolor{keywordflow}{case} \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a3734a903022249b3010be1897042568e}{return\_value\_policy::move}}:}
+\DoxyCodeLine{301                 \textcolor{keywordflow}{return} eigen\_encapsulate<props>(\textcolor{keyword}{new} CType(std::move(*src)));}
+\DoxyCodeLine{302             \textcolor{keywordflow}{case} \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a12cba3ee81cf4a793796a51b6327c678}{return\_value\_policy::copy}}:}
+\DoxyCodeLine{303                 \textcolor{keywordflow}{return} eigen\_array\_cast<props>(*src);}
+\DoxyCodeLine{304             \textcolor{keywordflow}{case} \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841ab8af13ea9c8fe890c9979a1fa8dbde22}{return\_value\_policy::reference}}:}
+\DoxyCodeLine{305             \textcolor{keywordflow}{case} \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a1c1628c22d69b3b9bac4b5c3674852e3}{return\_value\_policy::automatic\_reference}}:}
+\DoxyCodeLine{306                 \textcolor{keywordflow}{return} eigen\_ref\_array<props>(*src);}
+\DoxyCodeLine{307             \textcolor{keywordflow}{case} \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841aa39bc0596cb125c1605a78fbd287df7f}{return\_value\_policy::reference\_internal}}:}
+\DoxyCodeLine{308                 \textcolor{keywordflow}{return} eigen\_ref\_array<props>(*src, parent);}
+\DoxyCodeLine{309             \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{310                 \textcolor{keywordflow}{throw} cast\_error(\textcolor{stringliteral}{"{}unhandled return\_value\_policy: should not happen!"{}});}
+\DoxyCodeLine{311         \};}
+\DoxyCodeLine{312     \}}
+\DoxyCodeLine{313 }
+\DoxyCodeLine{314 \textcolor{keyword}{public}:}
+\DoxyCodeLine{315 }
+\DoxyCodeLine{316     \textcolor{comment}{// Normal returned non-\/reference, non-\/const value:}}
+\DoxyCodeLine{317     \textcolor{keyword}{static} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__dense__plain_3_01_type_01_4_1_1value_01_4_01_4_a4d2b168b0b863ac2b9e542d71b8bdc9e}{cast}}(Type \&\&src, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} \textcolor{comment}{/* policy */}, \mbox{\hyperlink{classhandle}{handle}} parent) \{}
+\DoxyCodeLine{318         \textcolor{keywordflow}{return} cast\_impl(\&src, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a3734a903022249b3010be1897042568e}{return\_value\_policy::move}}, parent);}
+\DoxyCodeLine{319     \}}
+\DoxyCodeLine{320     \textcolor{comment}{// If you return a non-\/reference const, we mark the numpy array readonly:}}
+\DoxyCodeLine{321     \textcolor{keyword}{static} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__dense__plain_3_01_type_01_4_1_1value_01_4_01_4_ad23467565f3ff7b54e65d19919ad1590}{cast}}(\textcolor{keyword}{const} Type \&\&src, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} \textcolor{comment}{/* policy */}, \mbox{\hyperlink{classhandle}{handle}} parent) \{}
+\DoxyCodeLine{322         \textcolor{keywordflow}{return} cast\_impl(\&src, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a3734a903022249b3010be1897042568e}{return\_value\_policy::move}}, parent);}
+\DoxyCodeLine{323     \}}
+\DoxyCodeLine{324     \textcolor{comment}{// lvalue reference return; default (automatic) becomes copy}}
+\DoxyCodeLine{325     \textcolor{keyword}{static} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__dense__plain_3_01_type_01_4_1_1value_01_4_01_4_a03fb62073335cac48802bf5e347aca87}{cast}}(Type \&src, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} policy, \mbox{\hyperlink{classhandle}{handle}} parent) \{}
+\DoxyCodeLine{326         \textcolor{keywordflow}{if} (policy == \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a2bd9c0ed00116be1258e0cc66617d7c8}{return\_value\_policy::automatic}} || policy == \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a1c1628c22d69b3b9bac4b5c3674852e3}{return\_value\_policy::automatic\_reference}})}
+\DoxyCodeLine{327             policy = \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a12cba3ee81cf4a793796a51b6327c678}{return\_value\_policy::copy}};}
+\DoxyCodeLine{328         \textcolor{keywordflow}{return} cast\_impl(\&src, policy, parent);}
+\DoxyCodeLine{329     \}}
+\DoxyCodeLine{330     \textcolor{comment}{// const lvalue reference return; default (automatic) becomes copy}}
+\DoxyCodeLine{331     \textcolor{keyword}{static} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__dense__plain_3_01_type_01_4_1_1value_01_4_01_4_a148c4ff2b6ac5cd89c17ac0d8cbc1030}{cast}}(\textcolor{keyword}{const} Type \&src, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} policy, \mbox{\hyperlink{classhandle}{handle}} parent) \{}
+\DoxyCodeLine{332         \textcolor{keywordflow}{if} (policy == \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a2bd9c0ed00116be1258e0cc66617d7c8}{return\_value\_policy::automatic}} || policy == \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a1c1628c22d69b3b9bac4b5c3674852e3}{return\_value\_policy::automatic\_reference}})}
+\DoxyCodeLine{333             policy = \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a12cba3ee81cf4a793796a51b6327c678}{return\_value\_policy::copy}};}
+\DoxyCodeLine{334         \textcolor{keywordflow}{return} \mbox{\hyperlink{classtype__caster__base_acd5bd2fafc86fb3160c7955bfc2f88de}{cast}}(\&src, policy, parent);}
+\DoxyCodeLine{335     \}}
+\DoxyCodeLine{336     \textcolor{comment}{// non-\/const pointer return}}
+\DoxyCodeLine{337     \textcolor{keyword}{static} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__dense__plain_3_01_type_01_4_1_1value_01_4_01_4_a10d6c6701213c0e468f3e84caf8e1c33}{cast}}(Type *src, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} policy, \mbox{\hyperlink{classhandle}{handle}} parent) \{}
+\DoxyCodeLine{338         \textcolor{keywordflow}{return} cast\_impl(src, policy, parent);}
+\DoxyCodeLine{339     \}}
+\DoxyCodeLine{340     \textcolor{comment}{// const pointer return}}
+\DoxyCodeLine{341     \textcolor{keyword}{static} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__dense__plain_3_01_type_01_4_1_1value_01_4_01_4_ab840bfe04e47c2eed741308eff51e954}{cast}}(\textcolor{keyword}{const} Type *src, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} policy, \mbox{\hyperlink{classhandle}{handle}} parent) \{}
+\DoxyCodeLine{342         \textcolor{keywordflow}{return} cast\_impl(src, policy, parent);}
+\DoxyCodeLine{343     \}}
+\DoxyCodeLine{344 }
+\DoxyCodeLine{345     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structname}{name}} = props::descriptor;}
+\DoxyCodeLine{346 }
+\DoxyCodeLine{347     \textcolor{keyword}{operator} Type*() \{ \textcolor{keywordflow}{return} \&\mbox{\hyperlink{classtype__caster__generic_a077b8d1e4af829443b2e41c3e5786f4d}{value}}; \}}
+\DoxyCodeLine{348     \textcolor{keyword}{operator} Type\&() \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classtype__caster__generic_a077b8d1e4af829443b2e41c3e5786f4d}{value}}; \}}
+\DoxyCodeLine{349     \textcolor{keyword}{operator} Type\&\&() \&\& \{ \textcolor{keywordflow}{return} std::move(\mbox{\hyperlink{classtype__caster__generic_a077b8d1e4af829443b2e41c3e5786f4d}{value}}); \}}
+\DoxyCodeLine{350     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T> \textcolor{keyword}{using} \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__dense__plain_3_01_type_01_4_1_1value_01_4_01_4_a3155cecdaa64bdd698c332239d9af2e4}{cast\_op\_type}} = \mbox{\hyperlink{cast_8h_a32fe7f4c6e2ae670844b4f3ab92ba3b8}{movable\_cast\_op\_type<T>}};}
+\DoxyCodeLine{351 }
+\DoxyCodeLine{352 \textcolor{keyword}{private}:}
+\DoxyCodeLine{353     Type \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__dense__plain_3_01_type_01_4_1_1value_01_4_01_4_a3942950f8d9865256c88961ad5df420d}{value}};}
+\DoxyCodeLine{354 \};}
+\DoxyCodeLine{355 }
+\DoxyCodeLine{356 \textcolor{comment}{// Base class for casting reference/map/block/etc. objects back to python.}}
+\DoxyCodeLine{357 \textcolor{keyword}{template} <\textcolor{keyword}{typename} MapType> \textcolor{keyword}{struct }\mbox{\hyperlink{structeigen__map__caster}{eigen\_map\_caster}} \{}
+\DoxyCodeLine{358 \textcolor{keyword}{private}:}
+\DoxyCodeLine{359     \textcolor{keyword}{using} \mbox{\hyperlink{struct_eigen_props}{props}} = \mbox{\hyperlink{struct_eigen_props}{EigenProps<MapType>}};}
+\DoxyCodeLine{360 }
+\DoxyCodeLine{361 \textcolor{keyword}{public}:}
+\DoxyCodeLine{362 }
+\DoxyCodeLine{363     \textcolor{comment}{// Directly referencing a ref/map's data is a bit dangerous (whatever the map/ref points to has}}
+\DoxyCodeLine{364     \textcolor{comment}{// to stay around), but we'll allow it under the assumption that you know what you're doing (and}}
+\DoxyCodeLine{365     \textcolor{comment}{// have an appropriate keep\_alive in place).  We return a numpy array pointing directly at the}}
+\DoxyCodeLine{366     \textcolor{comment}{// ref's data (The numpy array ends up read-\/only if the ref was to a const matrix type.) Note}}
+\DoxyCodeLine{367     \textcolor{comment}{// that this means you need to ensure you don't destroy the object in some other way (e.g. with}}
+\DoxyCodeLine{368     \textcolor{comment}{// an appropriate keep\_alive, or with a reference to a statically allocated matrix).}}
+\DoxyCodeLine{369     \textcolor{keyword}{static} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structeigen__map__caster_aed7867693cf11abd62f586672ef45316}{cast}}(\textcolor{keyword}{const} MapType \&src, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} policy, \mbox{\hyperlink{classhandle}{handle}} parent) \{}
+\DoxyCodeLine{370         \textcolor{keywordflow}{switch} (policy) \{}
+\DoxyCodeLine{371             \textcolor{keywordflow}{case} \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a12cba3ee81cf4a793796a51b6327c678}{return\_value\_policy::copy}}:}
+\DoxyCodeLine{372                 \textcolor{keywordflow}{return} eigen\_array\_cast<props>(src);}
+\DoxyCodeLine{373             \textcolor{keywordflow}{case} \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841aa39bc0596cb125c1605a78fbd287df7f}{return\_value\_policy::reference\_internal}}:}
+\DoxyCodeLine{374                 \textcolor{keywordflow}{return} eigen\_array\_cast<props>(src, parent, \mbox{\hyperlink{eigen_8h_aabbcc3f1a17addf39e1577576553acf5}{is\_eigen\_mutable\_map<MapType>::value}});}
+\DoxyCodeLine{375             \textcolor{keywordflow}{case} \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841ab8af13ea9c8fe890c9979a1fa8dbde22}{return\_value\_policy::reference}}:}
+\DoxyCodeLine{376             \textcolor{keywordflow}{case} \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a2bd9c0ed00116be1258e0cc66617d7c8}{return\_value\_policy::automatic}}:}
+\DoxyCodeLine{377             \textcolor{keywordflow}{case} \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a1c1628c22d69b3b9bac4b5c3674852e3}{return\_value\_policy::automatic\_reference}}:}
+\DoxyCodeLine{378                 \textcolor{keywordflow}{return} eigen\_array\_cast<props>(src, \mbox{\hyperlink{classnone}{none}}(), \mbox{\hyperlink{eigen_8h_aabbcc3f1a17addf39e1577576553acf5}{is\_eigen\_mutable\_map<MapType>::value}});}
+\DoxyCodeLine{379             \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{380                 \textcolor{comment}{// move, take\_ownership don't make any sense for a ref/map:}}
+\DoxyCodeLine{381                 \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}Invalid return\_value\_policy for Eigen Map/Ref/Block type"{}});}
+\DoxyCodeLine{382         \}}
+\DoxyCodeLine{383     \}}
+\DoxyCodeLine{384 }
+\DoxyCodeLine{385     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structname}{name}} = \mbox{\hyperlink{struct_eigen_props_aa3861d665ff4bf5df6b531008fe358ef}{props::descriptor}};}
+\DoxyCodeLine{386 }
+\DoxyCodeLine{387     \textcolor{comment}{// Explicitly delete these: support python -\/> C++ conversion on these (i.e. these can be return}}
+\DoxyCodeLine{388     \textcolor{comment}{// types but not bound arguments).  We still provide them (with an explicitly delete) so that}}
+\DoxyCodeLine{389     \textcolor{comment}{// you end up here if you try anyway.}}
+\DoxyCodeLine{390     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structeigen__map__caster_a901a2ca1d09920c5b6cd7a86676960d3}{load}}(\mbox{\hyperlink{classhandle}{handle}}, \textcolor{keywordtype}{bool}) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{391     \textcolor{keyword}{operator} MapType() = \textcolor{keyword}{delete};}
+\DoxyCodeLine{392     \textcolor{keyword}{template} <\textcolor{keyword}{typename}> \textcolor{keyword}{using} \mbox{\hyperlink{structeigen__map__caster_a43b715680bfd06ff00ca9caa2ca07c9d}{cast\_op\_type}} = MapType;}
+\DoxyCodeLine{393 \};}
+\DoxyCodeLine{394 }
+\DoxyCodeLine{395 \textcolor{comment}{// We can return any map-\/like object (but can only load Refs, specialized next):}}
+\DoxyCodeLine{396 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type> \textcolor{keyword}{struct }\mbox{\hyperlink{classtype__caster}{type\_caster}}<Type, \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<\mbox{\hyperlink{eigen_8h_a403c575c8e7ae68daa89a11a4b683038}{is\_eigen\_dense\_map}}<Type>::\mbox{\hyperlink{classtype__caster__generic_a077b8d1e4af829443b2e41c3e5786f4d}{value}}>>}
+\DoxyCodeLine{397     : \mbox{\hyperlink{structeigen__map__caster}{eigen\_map\_caster}}<Type> \{\};}
+\DoxyCodeLine{398 }
+\DoxyCodeLine{399 \textcolor{comment}{// Loader for Ref<...> arguments.  See the documentation for info on how to make this work without}}
+\DoxyCodeLine{400 \textcolor{comment}{// copying (it requires some extra effort in many cases).}}
+\DoxyCodeLine{401 \textcolor{keyword}{template} <\textcolor{keyword}{typename} PlainObjectType, \textcolor{keyword}{typename} Str\textcolor{keywordtype}{id}eType>}
+\DoxyCodeLine{402 \textcolor{keyword}{struct }\mbox{\hyperlink{classtype__caster}{type\_caster}}<}
+\DoxyCodeLine{403     Eigen::Ref<PlainObjectType, 0, StrideType>,}
+\DoxyCodeLine{404     \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<is\_eigen\_dense\_map<Eigen::Ref<PlainObjectType, 0, StrideType>>::value>}
+\DoxyCodeLine{405 > : \textcolor{keyword}{public} \mbox{\hyperlink{structeigen__map__caster}{eigen\_map\_caster}}<Eigen::Ref<PlainObjectType, 0, StrideType>> \{}
+\DoxyCodeLine{406 \textcolor{keyword}{private}:}
+\DoxyCodeLine{407     \textcolor{keyword}{using} \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_a2f3a7b827265009544ad88e6d38b8be7}{Type}} = Eigen::Ref<PlainObjectType, 0, StrideType>;}
+\DoxyCodeLine{408     \textcolor{keyword}{using} \mbox{\hyperlink{struct_eigen_props}{props}} = \mbox{\hyperlink{struct_eigen_props}{EigenProps<Type>}};}
+\DoxyCodeLine{409     \textcolor{keyword}{using} \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_af90ee08e4c9259b88c39f068016c1efd}{Scalar}} = \textcolor{keyword}{typename} \mbox{\hyperlink{struct_eigen_props_ae36317e24288de2c7b47017ce58acc37}{props::Scalar}};}
+\DoxyCodeLine{410     \textcolor{keyword}{using} \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_a7d0bc64f8b1fca558b2cea48a59d53fe}{MapType}} = Eigen::Map<PlainObjectType, 0, StrideType>;}
+\DoxyCodeLine{411     \textcolor{keyword}{using} \mbox{\hyperlink{classarray__t}{Array}} = \mbox{\hyperlink{classarray__t}{array\_t}}<\mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_af90ee08e4c9259b88c39f068016c1efd}{Scalar}}, \mbox{\hyperlink{classarray_ae8bcbba531ac94a007768363ecc186eba2886e477a3f6090266168e82d389adc1}{array::forcecast}} |}
+\DoxyCodeLine{412                 ((props::row\_major ? props::inner\_stride : props::outer\_stride) == 1 ? \mbox{\hyperlink{classarray_ae8bcbba531ac94a007768363ecc186ebacaa99b2eea8427713331c18117d633d3}{array::c\_style}} :}
+\DoxyCodeLine{413                  (props::row\_major ? props::outer\_stride : props::inner\_stride) == 1 ? \mbox{\hyperlink{classarray_ae8bcbba531ac94a007768363ecc186eba184167ee839296f10d5c04c1480736bd}{array::f\_style}} : 0)>;}
+\DoxyCodeLine{414     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{bool} need\_writeable = \mbox{\hyperlink{eigen_8h_aabbcc3f1a17addf39e1577576553acf5}{is\_eigen\_mutable\_map<Type>::value}};}
+\DoxyCodeLine{415     \textcolor{comment}{// Delay construction (these have no default constructor)}}
+\DoxyCodeLine{416     std::unique\_ptr<MapType> \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_aefb7894b00e8fbf7c2e941241c0b9611}{map}};}
+\DoxyCodeLine{417     std::unique\_ptr<Type> \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_a78cd5f637caf5b175ac596b541cff548}{ref}};}
+\DoxyCodeLine{418     \textcolor{comment}{// Our array.  When possible, this is just a numpy array pointing to the source data, but}}
+\DoxyCodeLine{419     \textcolor{comment}{// sometimes we can't avoid copying (e.g. input is not a numpy array at all, has an incompatible}}
+\DoxyCodeLine{420     \textcolor{comment}{// layout, or is an array of a type that needs to be converted).  Using a numpy temporary}}
+\DoxyCodeLine{421     \textcolor{comment}{// (rather than an Eigen temporary) saves an extra copy when we need both type conversion and}}
+\DoxyCodeLine{422     \textcolor{comment}{// storage order conversion.  (Note that we refuse to use this temporary copy when loading an}}
+\DoxyCodeLine{423     \textcolor{comment}{// argument for a Ref<M> with M non-\/const, i.e. a read-\/write reference).}}
+\DoxyCodeLine{424     \mbox{\hyperlink{classarray__t}{Array}} \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_ab3ca92ce743a1c163034ae09a7563a7f}{copy\_or\_ref}};}
+\DoxyCodeLine{425 \textcolor{keyword}{public}:}
+\DoxyCodeLine{426     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_a878e1cda6c44df4deb615ca9fd78cfc0}{load}}(\mbox{\hyperlink{classhandle}{handle}} src, \textcolor{keywordtype}{bool} convert) \{}
+\DoxyCodeLine{427         \textcolor{comment}{// First check whether what we have is already an array of the right type.  If not, we can't}}
+\DoxyCodeLine{428         \textcolor{comment}{// avoid a copy (because the copy is also going to do type conversion).}}
+\DoxyCodeLine{429         \textcolor{keywordtype}{bool} need\_copy = !isinstance<Array>(src);}
+\DoxyCodeLine{430 }
+\DoxyCodeLine{431         \mbox{\hyperlink{struct_eigen_conformable}{EigenConformable<props::row\_major>}} fits;}
+\DoxyCodeLine{432         \textcolor{keywordflow}{if} (!need\_copy) \{}
+\DoxyCodeLine{433             \textcolor{comment}{// We don't need a converting copy, but we also need to check whether the strides are}}
+\DoxyCodeLine{434             \textcolor{comment}{// compatible with the Ref's stride requirements}}
+\DoxyCodeLine{435             \mbox{\hyperlink{classarray__t}{Array}} aref = reinterpret\_borrow<Array>(src);}
+\DoxyCodeLine{436 }
+\DoxyCodeLine{437             \textcolor{keywordflow}{if} (aref \&\& (!need\_writeable || aref.\mbox{\hyperlink{classarray_a9c19f81ca43feebd34b2c9dd5b38f1d9}{writeable}}())) \{}
+\DoxyCodeLine{438                 fits = props::conformable(aref);}
+\DoxyCodeLine{439                 \textcolor{keywordflow}{if} (!fits) \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \textcolor{comment}{// Incompatible dimensions}}
+\DoxyCodeLine{440                 \textcolor{keywordflow}{if} (!fits.template stride\_compatible<props>())}
+\DoxyCodeLine{441                     need\_copy = \textcolor{keyword}{true};}
+\DoxyCodeLine{442                 \textcolor{keywordflow}{else}}
+\DoxyCodeLine{443                     copy\_or\_ref = std::move(aref);}
+\DoxyCodeLine{444             \}}
+\DoxyCodeLine{445             \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{446                 need\_copy = \textcolor{keyword}{true};}
+\DoxyCodeLine{447             \}}
+\DoxyCodeLine{448         \}}
+\DoxyCodeLine{449 }
+\DoxyCodeLine{450         \textcolor{keywordflow}{if} (need\_copy) \{}
+\DoxyCodeLine{451             \textcolor{comment}{// We need to copy: If we need a mutable reference, or we're not supposed to convert}}
+\DoxyCodeLine{452             \textcolor{comment}{// (either because we're in the no-\/convert overload pass, or because we're explicitly}}
+\DoxyCodeLine{453             \textcolor{comment}{// instructed not to copy (via `py::arg().noconvert()`) we have to fail loading.}}
+\DoxyCodeLine{454             \textcolor{keywordflow}{if} (!convert || need\_writeable) \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{455 }
+\DoxyCodeLine{456             \mbox{\hyperlink{classarray__t}{Array}} \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a12cba3ee81cf4a793796a51b6327c678}{copy}} = Array::ensure(src);}
+\DoxyCodeLine{457             \textcolor{keywordflow}{if} (!\mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a12cba3ee81cf4a793796a51b6327c678}{copy}}) \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{458             fits = props::conformable(\mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a12cba3ee81cf4a793796a51b6327c678}{copy}});}
+\DoxyCodeLine{459             \textcolor{keywordflow}{if} (!fits || !fits.template stride\_compatible<props>())}
+\DoxyCodeLine{460                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{461             copy\_or\_ref = std::move(\mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a12cba3ee81cf4a793796a51b6327c678}{copy}});}
+\DoxyCodeLine{462             \mbox{\hyperlink{classloader__life__support_a0759a5fe160fb836f1f1d47eecdfb36f}{loader\_life\_support::add\_patient}}(copy\_or\_ref);}
+\DoxyCodeLine{463         \}}
+\DoxyCodeLine{464 }
+\DoxyCodeLine{465         ref.reset();}
+\DoxyCodeLine{466         map.reset(\textcolor{keyword}{new} \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_a7d0bc64f8b1fca558b2cea48a59d53fe}{MapType}}(\mbox{\hyperlink{darknet_8h_a493583f6fc164cf849745e01e4c04ab5}{data}}(copy\_or\_ref), fits.\mbox{\hyperlink{struct_eigen_conformable_a3f4cea0fad3c49cfa1e543d7388af7be}{rows}}, fits.\mbox{\hyperlink{struct_eigen_conformable_a91d8590cd3f680d5c142367dc12f6ddd}{cols}}, make\_stride(fits.\mbox{\hyperlink{struct_eigen_conformable_a956848cb9f7abf1a2e6e31516c362360}{stride}}.outer(), fits.\mbox{\hyperlink{struct_eigen_conformable_a956848cb9f7abf1a2e6e31516c362360}{stride}}.inner())));}
+\DoxyCodeLine{467         ref.reset(\textcolor{keyword}{new} \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_a2f3a7b827265009544ad88e6d38b8be7}{Type}}(*map));}
+\DoxyCodeLine{468 }
+\DoxyCodeLine{469         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{470     \}}
+\DoxyCodeLine{471 }
+\DoxyCodeLine{472     \textcolor{keyword}{operator} \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_a2f3a7b827265009544ad88e6d38b8be7}{Type}}*() \{ \textcolor{keywordflow}{return} ref.get(); \}}
+\DoxyCodeLine{473     \textcolor{keyword}{operator} \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_a2f3a7b827265009544ad88e6d38b8be7}{Type}}\&() \{ \textcolor{keywordflow}{return} *ref; \}}
+\DoxyCodeLine{474     \textcolor{keyword}{template} <\textcolor{keyword}{typename} \_T> \textcolor{keyword}{using} \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_a3b666256badf35b095f136fc774c7c0d}{cast\_op\_type}} = pybind11::detail::cast\_op\_type<\_T>;}
+\DoxyCodeLine{475 }
+\DoxyCodeLine{476 \textcolor{keyword}{private}:}
+\DoxyCodeLine{477     template <typename T = Type, enable\_if\_t<is\_eigen\_mutable\_map<T>::value, \textcolor{keywordtype}{int}> = 0>}
+\DoxyCodeLine{478     \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_af90ee08e4c9259b88c39f068016c1efd}{Scalar}} *\mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_a7f97b0bd35523509f373b9630b9f4c2b}{data}}(\mbox{\hyperlink{classarray__t}{Array}} \&a) \{ \textcolor{keywordflow}{return} a.\mbox{\hyperlink{classarray__t_a36ef1b532b88bcfa508d08c43865e4c0}{mutable\_data}}(); \}}
+\DoxyCodeLine{479 }
+\DoxyCodeLine{480     template <typename T = Type, enable\_if\_t<!is\_eigen\_mutable\_map<T>::value, \textcolor{keywordtype}{int}> = 0>}
+\DoxyCodeLine{481     \textcolor{keyword}{const} \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_af90ee08e4c9259b88c39f068016c1efd}{Scalar}} *\mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_aa1448e959ac572b8c3ce40b663ffdd78}{data}}(\mbox{\hyperlink{classarray__t}{Array}} \&a) \{ \textcolor{keywordflow}{return} a.\mbox{\hyperlink{classarray__t_a2ee342f4e2dd56ec93730d5a387bd28f}{data}}(); \}}
+\DoxyCodeLine{482 }
+\DoxyCodeLine{483     \textcolor{comment}{// Attempt to figure out a constructor of `Stride` that will work.}}
+\DoxyCodeLine{484     \textcolor{comment}{// If both strides are fixed, use a default constructor:}}
+\DoxyCodeLine{485     \textcolor{keyword}{template} <\textcolor{keyword}{typename} S> \textcolor{keyword}{using} \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_ab2fe442aef678bdf239304b6fd74ecd3}{stride\_ctor\_default}} = \mbox{\hyperlink{detail_2common_8h_a0d337b508cc2fb5a92d8e72db201e53b}{bool\_constant}}<}
+\DoxyCodeLine{486         S::InnerStrideAtCompileTime != Eigen::Dynamic \&\& S::OuterStrideAtCompileTime != Eigen::Dynamic \&\&}
+\DoxyCodeLine{487         std::is\_default\_constructible<S>::value>;}
+\DoxyCodeLine{488     \textcolor{comment}{// Otherwise, if there is a two-\/index constructor, assume it is (outer,inner) like}}
+\DoxyCodeLine{489     \textcolor{comment}{// Eigen::Stride, and use it:}}
+\DoxyCodeLine{490     \textcolor{keyword}{template} <\textcolor{keyword}{typename} S> \textcolor{keyword}{using} \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_a08088d7e28999d6ae1ce91b282102278}{stride\_ctor\_dual}} = \mbox{\hyperlink{detail_2common_8h_a0d337b508cc2fb5a92d8e72db201e53b}{bool\_constant}}<}
+\DoxyCodeLine{491         !\mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_ab2fe442aef678bdf239304b6fd74ecd3}{stride\_ctor\_default<S>::value}} \&\& std::is\_constructible<S, EigenIndex, EigenIndex>::value>;}
+\DoxyCodeLine{492     \textcolor{comment}{// Otherwise, if there is a one-\/index constructor, and just one of the strides is dynamic, use}}
+\DoxyCodeLine{493     \textcolor{comment}{// it (passing whichever stride is dynamic).}}
+\DoxyCodeLine{494     \textcolor{keyword}{template} <\textcolor{keyword}{typename} S> \textcolor{keyword}{using} \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_ae4de29c4e3f36d72fd279e594e9c774c}{stride\_ctor\_outer}} = \mbox{\hyperlink{detail_2common_8h_a0d337b508cc2fb5a92d8e72db201e53b}{bool\_constant}}<}
+\DoxyCodeLine{495         !\mbox{\hyperlink{structnegation}{any\_of<stride\_ctor\_default<S>}}, \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_a08088d7e28999d6ae1ce91b282102278}{stride\_ctor\_dual<S>}}>\mbox{\hyperlink{classtype__caster__generic_a077b8d1e4af829443b2e41c3e5786f4d}{::value}} \&\&}
+\DoxyCodeLine{496         S::OuterStrideAtCompileTime == Eigen::Dynamic \&\& S::InnerStrideAtCompileTime != Eigen::Dynamic \&\&}
+\DoxyCodeLine{497         std::is\_constructible<S, EigenIndex>::value>;}
+\DoxyCodeLine{498     \textcolor{keyword}{template} <\textcolor{keyword}{typename} S> \textcolor{keyword}{using} \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_a685ba9b933209192f28f1b8d62c7ad81}{stride\_ctor\_inner}} = \mbox{\hyperlink{detail_2common_8h_a0d337b508cc2fb5a92d8e72db201e53b}{bool\_constant}}<}
+\DoxyCodeLine{499         !\mbox{\hyperlink{structnegation}{any\_of<stride\_ctor\_default<S>}}, \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_a08088d7e28999d6ae1ce91b282102278}{stride\_ctor\_dual<S>}}>\mbox{\hyperlink{classtype__caster__generic_a077b8d1e4af829443b2e41c3e5786f4d}{::value}} \&\&}
+\DoxyCodeLine{500         S::InnerStrideAtCompileTime == Eigen::Dynamic \&\& S::OuterStrideAtCompileTime != Eigen::Dynamic \&\&}
+\DoxyCodeLine{501         std::is\_constructible<S, EigenIndex>::value>;}
+\DoxyCodeLine{502 }
+\DoxyCodeLine{503     template <typename S = StrideType, enable\_if\_t<stride\_ctor\_default<S>::value, \textcolor{keywordtype}{int}> = 0>}
+\DoxyCodeLine{504     \textcolor{keyword}{static} S \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_ad8e0c9076585d1e015df4d0cb2c15fcc}{make\_stride}}(\mbox{\hyperlink{eigen_8h_a4e595ab182718d84a409dd05e0829bdd}{EigenIndex}}, \mbox{\hyperlink{eigen_8h_a4e595ab182718d84a409dd05e0829bdd}{EigenIndex}}) \{ \textcolor{keywordflow}{return} S(); \}}
+\DoxyCodeLine{505     template <typename S = StrideType, enable\_if\_t<stride\_ctor\_dual<S>::value, \textcolor{keywordtype}{int}> = 0>}
+\DoxyCodeLine{506     \textcolor{keyword}{static} S \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_a2232f2aa08b6edb60f2492e6c7f98da0}{make\_stride}}(\mbox{\hyperlink{eigen_8h_a4e595ab182718d84a409dd05e0829bdd}{EigenIndex}} outer, \mbox{\hyperlink{eigen_8h_a4e595ab182718d84a409dd05e0829bdd}{EigenIndex}} inner) \{ \textcolor{keywordflow}{return} S(outer, inner); \}}
+\DoxyCodeLine{507     template <typename S = StrideType, enable\_if\_t<stride\_ctor\_outer<S>::value, \textcolor{keywordtype}{int}> = 0>}
+\DoxyCodeLine{508     \textcolor{keyword}{static} S \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_a75de50b703022c53ace47e2bab5287ed}{make\_stride}}(\mbox{\hyperlink{eigen_8h_a4e595ab182718d84a409dd05e0829bdd}{EigenIndex}} outer, \mbox{\hyperlink{eigen_8h_a4e595ab182718d84a409dd05e0829bdd}{EigenIndex}}) \{ \textcolor{keywordflow}{return} S(outer); \}}
+\DoxyCodeLine{509     template <typename S = StrideType, enable\_if\_t<stride\_ctor\_inner<S>::value, \textcolor{keywordtype}{int}> = 0>}
+\DoxyCodeLine{510     \textcolor{keyword}{static} S \mbox{\hyperlink{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63_a4bca1f47acaaae7a028a95ca9981425d}{make\_stride}}(\mbox{\hyperlink{eigen_8h_a4e595ab182718d84a409dd05e0829bdd}{EigenIndex}}, \mbox{\hyperlink{eigen_8h_a4e595ab182718d84a409dd05e0829bdd}{EigenIndex}} inner) \{ \textcolor{keywordflow}{return} S(inner); \}}
+\DoxyCodeLine{511 }
+\DoxyCodeLine{512 \};}
+\DoxyCodeLine{513 }
+\DoxyCodeLine{514 \textcolor{comment}{// type\_caster for special matrix types (e.g. DiagonalMatrix), which are EigenBase, but not}}
+\DoxyCodeLine{515 \textcolor{comment}{// EigenDense (i.e. they don't have a data(), at least not with the usual matrix layout).}}
+\DoxyCodeLine{516 \textcolor{comment}{// load() is not supported, but we can cast them into the python domain by first copying to a}}
+\DoxyCodeLine{517 \textcolor{comment}{// regular Eigen::Matrix, then casting that.}}
+\DoxyCodeLine{518 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{519 \textcolor{keyword}{struct }\mbox{\hyperlink{classtype__caster}{type\_caster}}<Type, \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<\mbox{\hyperlink{eigen_8h_a7be1c6745b73821227ddafd46d41c583}{is\_eigen\_other}}<Type>::\mbox{\hyperlink{classtype__caster__generic_a077b8d1e4af829443b2e41c3e5786f4d}{value}}>> \{}
+\DoxyCodeLine{520 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{521     \textcolor{keyword}{using} \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__other_3_01_type_01_4_1_1value_01_4_01_4_a398c545dcd18f723905d9809fd2a5b8e}{Matrix}} = Eigen::Matrix<typename Type::Scalar, Type::RowsAtCompileTime, Type::ColsAtCompileTime>;}
+\DoxyCodeLine{522     \textcolor{keyword}{using} \mbox{\hyperlink{struct_eigen_props}{props}} = \mbox{\hyperlink{struct_eigen_props}{EigenProps<Matrix>}};}
+\DoxyCodeLine{523 \textcolor{keyword}{public}:}
+\DoxyCodeLine{524     \textcolor{keyword}{static} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__other_3_01_type_01_4_1_1value_01_4_01_4_ada76b4f2900fcf0a8f98727110bfa3e3}{cast}}(\textcolor{keyword}{const} Type \&src, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} \textcolor{comment}{/* policy */}, \mbox{\hyperlink{classhandle}{handle}} \textcolor{comment}{/* parent */}) \{}
+\DoxyCodeLine{525         \mbox{\hyperlink{classhandle}{handle}} h = eigen\_encapsulate<props>(\textcolor{keyword}{new} \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__other_3_01_type_01_4_1_1value_01_4_01_4_a398c545dcd18f723905d9809fd2a5b8e}{Matrix}}(src));}
+\DoxyCodeLine{526         \textcolor{keywordflow}{return} h;}
+\DoxyCodeLine{527     \}}
+\DoxyCodeLine{528     \textcolor{keyword}{static} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__other_3_01_type_01_4_1_1value_01_4_01_4_a840872c8083396d9f6b2547d1a9cdbf2}{cast}}(\textcolor{keyword}{const} Type *src, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} policy, \mbox{\hyperlink{classhandle}{handle}} parent) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__other_3_01_type_01_4_1_1value_01_4_01_4_a840872c8083396d9f6b2547d1a9cdbf2}{cast}}(*src, policy, parent); \}}
+\DoxyCodeLine{529 }
+\DoxyCodeLine{530     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structname}{name}} = props::descriptor;}
+\DoxyCodeLine{531 }
+\DoxyCodeLine{532     \textcolor{comment}{// Explicitly delete these: support python -\/> C++ conversion on these (i.e. these can be return}}
+\DoxyCodeLine{533     \textcolor{comment}{// types but not bound arguments).  We still provide them (with an explicitly delete) so that}}
+\DoxyCodeLine{534     \textcolor{comment}{// you end up here if you try anyway.}}
+\DoxyCodeLine{535     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__other_3_01_type_01_4_1_1value_01_4_01_4_a4fc54d74dd4bd4748303a182b02258d1}{load}}(\mbox{\hyperlink{classhandle}{handle}}, \textcolor{keywordtype}{bool}) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{536     \textcolor{keyword}{operator} Type() = \textcolor{keyword}{delete};}
+\DoxyCodeLine{537     \textcolor{keyword}{template} <\textcolor{keyword}{typename}> \textcolor{keyword}{using} \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__other_3_01_type_01_4_1_1value_01_4_01_4_a7fdd708c43bd783fa5e327a2c976e246}{cast\_op\_type}} = Type;}
+\DoxyCodeLine{538 \};}
+\DoxyCodeLine{539 }
+\DoxyCodeLine{540 \textcolor{keyword}{template}<\textcolor{keyword}{typename} Type>}
+\DoxyCodeLine{541 \textcolor{keyword}{struct }\mbox{\hyperlink{classtype__caster}{type\_caster}}<Type, \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<\mbox{\hyperlink{eigen_8h_af680e1af5697a93b0f4fc037a2100fbc}{is\_eigen\_sparse}}<Type>::\mbox{\hyperlink{classtype__caster__generic_a077b8d1e4af829443b2e41c3e5786f4d}{value}}>> \{}
+\DoxyCodeLine{542     \textcolor{keyword}{typedef} \textcolor{keyword}{typename} Type::Scalar \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__sparse_3_01_type_01_4_1_1value_01_4_01_4_a5136dbf552bfcb9ca707f5ed51fed848}{Scalar}};}
+\DoxyCodeLine{543     \textcolor{keyword}{typedef} \mbox{\hyperlink{detail_2common_8h_a3a08cea569e6926ac8d7d74dd7178b5f}{remove\_reference\_t<decltype(*std::declval<Type>}}().outerIndexPtr())> \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__sparse_3_01_type_01_4_1_1value_01_4_01_4_a81ca04666ad0ec9d67ac21837f467e16}{StorageIndex}};}
+\DoxyCodeLine{544     \textcolor{keyword}{typedef} \textcolor{keyword}{typename} Type::Index \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__sparse_3_01_type_01_4_1_1value_01_4_01_4_a9ce3b790dd5bdeb5578419053e450feb}{Index}};}
+\DoxyCodeLine{545     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{bool} rowMajor = Type::IsRowMajor;}
+\DoxyCodeLine{546 }
+\DoxyCodeLine{547     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__sparse_3_01_type_01_4_1_1value_01_4_01_4_afd4f3130a50768064872d4c9e57b0fdd}{load}}(\mbox{\hyperlink{classhandle}{handle}} src, \textcolor{keywordtype}{bool}) \{}
+\DoxyCodeLine{548         \textcolor{keywordflow}{if} (!src)}
+\DoxyCodeLine{549             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{550 }
+\DoxyCodeLine{551         \textcolor{keyword}{auto} obj = reinterpret\_borrow<object>(src);}
+\DoxyCodeLine{552         \textcolor{keywordtype}{object} sparse\_module = \mbox{\hyperlink{classmodule_a40817edef0ded5727701534bcded9982}{module::import}}(\textcolor{stringliteral}{"{}scipy.sparse"{}});}
+\DoxyCodeLine{553         \textcolor{keywordtype}{object} matrix\_type = sparse\_module.attr(}
+\DoxyCodeLine{554             rowMajor ? \textcolor{stringliteral}{"{}csr\_matrix"{}} : \textcolor{stringliteral}{"{}csc\_matrix"{}});}
+\DoxyCodeLine{555 }
+\DoxyCodeLine{556         \textcolor{keywordflow}{if} (!obj.get\_type().is(matrix\_type)) \{}
+\DoxyCodeLine{557             \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{558                 obj = matrix\_type(obj);}
+\DoxyCodeLine{559             \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \mbox{\hyperlink{classerror__already__set}{error\_already\_set}} \&) \{}
+\DoxyCodeLine{560                 \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{561             \}}
+\DoxyCodeLine{562         \}}
+\DoxyCodeLine{563 }
+\DoxyCodeLine{564         \textcolor{keyword}{auto} values = \mbox{\hyperlink{classarray__t}{array\_t<Scalar>}}((\textcolor{keywordtype}{object}) obj.attr(\textcolor{stringliteral}{"{}data"{}}));}
+\DoxyCodeLine{565         \textcolor{keyword}{auto} innerIndices = \mbox{\hyperlink{classarray__t}{array\_t<StorageIndex>}}((\textcolor{keywordtype}{object}) obj.attr(\textcolor{stringliteral}{"{}indices"{}}));}
+\DoxyCodeLine{566         \textcolor{keyword}{auto} outerIndices = \mbox{\hyperlink{classarray__t}{array\_t<StorageIndex>}}((\textcolor{keywordtype}{object}) obj.attr(\textcolor{stringliteral}{"{}indptr"{}}));}
+\DoxyCodeLine{567         \textcolor{keyword}{auto} shape = pybind11::tuple((pybind11::object) obj.attr(\textcolor{stringliteral}{"{}shape"{}}));}
+\DoxyCodeLine{568         \textcolor{keyword}{auto} nnz = obj.attr(\textcolor{stringliteral}{"{}nnz"{}}).cast<\mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__sparse_3_01_type_01_4_1_1value_01_4_01_4_a9ce3b790dd5bdeb5578419053e450feb}{Index}}>();}
+\DoxyCodeLine{569 }
+\DoxyCodeLine{570         \textcolor{keywordflow}{if} (!values || !innerIndices || !outerIndices)}
+\DoxyCodeLine{571             \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{572 }
+\DoxyCodeLine{573         \mbox{\hyperlink{classtype__caster__generic_a077b8d1e4af829443b2e41c3e5786f4d}{value}} = Eigen::MappedSparseMatrix<Scalar, Type::Flags, StorageIndex>(}
+\DoxyCodeLine{574             shape[0].cast<Index>(), shape[1].cast<Index>(), nnz,}
+\DoxyCodeLine{575             outerIndices.mutable\_data(), innerIndices.mutable\_data(), values.mutable\_data());}
+\DoxyCodeLine{576 }
+\DoxyCodeLine{577         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{578     \}}
+\DoxyCodeLine{579 }
+\DoxyCodeLine{580     \textcolor{keyword}{static} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__sparse_3_01_type_01_4_1_1value_01_4_01_4_a1a15393d11a1bba5521da71a0be20a45}{cast}}(\textcolor{keyword}{const} Type \&src, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}} \textcolor{comment}{/* policy */}, \mbox{\hyperlink{classhandle}{handle}} \textcolor{comment}{/* parent */}) \{}
+\DoxyCodeLine{581         \textcolor{keyword}{const\_cast<}Type\&\textcolor{keyword}{>}(src).makeCompressed();}
+\DoxyCodeLine{582 }
+\DoxyCodeLine{583         \textcolor{keywordtype}{object} matrix\_type = \mbox{\hyperlink{classmodule_a40817edef0ded5727701534bcded9982}{module::import}}(\textcolor{stringliteral}{"{}scipy.sparse"{}}).attr(}
+\DoxyCodeLine{584             rowMajor ? \textcolor{stringliteral}{"{}csr\_matrix"{}} : \textcolor{stringliteral}{"{}csc\_matrix"{}});}
+\DoxyCodeLine{585 }
+\DoxyCodeLine{586         \mbox{\hyperlink{classarray}{array}} \mbox{\hyperlink{darknet_8h_a493583f6fc164cf849745e01e4c04ab5}{data}}(src.nonZeros(), src.valuePtr());}
+\DoxyCodeLine{587         \mbox{\hyperlink{classarray}{array}} outerIndices((rowMajor ? src.rows() : src.cols()) + 1, src.outerIndexPtr());}
+\DoxyCodeLine{588         \mbox{\hyperlink{classarray}{array}} innerIndices(src.nonZeros(), src.innerIndexPtr());}
+\DoxyCodeLine{589 }
+\DoxyCodeLine{590         \textcolor{keywordflow}{return} matrix\_type(}
+\DoxyCodeLine{591             \mbox{\hyperlink{cast_8h_aa579291da56488336ff46fda4743248d}{std::make\_tuple}}(\mbox{\hyperlink{structdata}{data}}, innerIndices, outerIndices),}
+\DoxyCodeLine{592             std::make\_pair(src.rows(), src.cols())}
+\DoxyCodeLine{593         ).\mbox{\hyperlink{classobject_a4ce66b1d44b37ae6b28e80228b075aae}{release}}();}
+\DoxyCodeLine{594     \}}
+\DoxyCodeLine{595 }
+\DoxyCodeLine{596     \mbox{\hyperlink{cast_8h_a026b55873d04f38f5ae026c900d16160}{PYBIND11\_TYPE\_CASTER}}(Type, \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}<(Type::IsRowMajor) != 0>(\textcolor{stringliteral}{"{}scipy.sparse.csr\_matrix["{}}, \textcolor{stringliteral}{"{}scipy.sparse.csc\_matrix["{}})}
+\DoxyCodeLine{597             + \mbox{\hyperlink{structnpy__format__descriptor}{npy\_format\_descriptor<Scalar>::name}} + \mbox{\hyperlink{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__sparse_3_01_type_01_4_1_1value_01_4_01_4_a6584708434d88a65ae949bdb3d989824}{\_}}(\textcolor{stringliteral}{"{}]"{}}));}
+\DoxyCodeLine{598 \};}
+\DoxyCodeLine{599 }
+\DoxyCodeLine{600 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{601 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+\DoxyCodeLine{602 }
+\DoxyCodeLine{603 \textcolor{preprocessor}{\#if defined(\_\_GNUG\_\_) || defined(\_\_clang\_\_)}}
+\DoxyCodeLine{604 \textcolor{preprocessor}{\#  pragma GCC diagnostic pop}}
+\DoxyCodeLine{605 \textcolor{preprocessor}{\#elif defined(\_MSC\_VER)}}
+\DoxyCodeLine{606 \textcolor{preprocessor}{\#  pragma warning(pop)}}
+\DoxyCodeLine{607 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

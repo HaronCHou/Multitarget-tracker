@@ -1,0 +1,1126 @@
+\hypertarget{darknet_8h_source}{}\doxysection{darknet.\+h}
+\label{darknet_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/include/darknet.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/include/darknet.h}}
+\mbox{\hyperlink{darknet_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef DARKNET\_API}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define DARKNET\_API}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#if defined(\_MSC\_VER) \&\& \_MSC\_VER < 1900}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#define inline \_\_inline}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#if defined(DEBUG) \&\& !defined(\_CRTDBG\_MAP\_ALLOC)}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#define \_CRTDBG\_MAP\_ALLOC}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <string.h>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <stdint.h>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <assert.h>}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{pthread_8h}{pthread.h}}>}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#ifndef LIB\_API}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#ifdef LIB\_EXPORTS}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#if defined(\_MSC\_VER)}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#define LIB\_API \_\_declspec(dllexport)}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#define LIB\_API \_\_attribute\_\_((visibility("{}default"{}})))}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#if defined(\_MSC\_VER)}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#define LIB\_API}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#define LIB\_API}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#define SECRET\_NUM -\/1234}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{ \mbox{\hyperlink{darknet_8h_ad10f82e83ef2e1ccbc7e52733383c9cdad90c0fe0c91576c74ba901ff293ba1a7}{UNUSED\_DEF\_VAL}} \} \mbox{\hyperlink{darknet_8h_ad10f82e83ef2e1ccbc7e52733383c9cd}{UNUSED\_ENUM\_TYPE}};}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#ifdef GPU}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#include <cuda\_runtime.h>}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#include <curand.h>}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#include <cublas\_v2.h>}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#ifdef CUDNN}}
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#include <cudnn.h>}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// CUDNN}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// GPU}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{51 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{keyword}{struct }\mbox{\hyperlink{structnetwork}{network}};}
+\DoxyCodeLine{55 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structnetwork}{network}} \mbox{\hyperlink{structnetwork}{network}};}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{keyword}{struct }\mbox{\hyperlink{structnetwork__state}{network\_state}};}
+\DoxyCodeLine{58 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structnetwork__state}{network\_state}} \mbox{\hyperlink{structnetwork__state}{network\_state}};}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60 \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}};}
+\DoxyCodeLine{61 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} \mbox{\hyperlink{structlayer}{layer}};}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63 \textcolor{keyword}{struct }\mbox{\hyperlink{structimage}{image}};}
+\DoxyCodeLine{64 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structimage}{image}} \mbox{\hyperlink{structimage}{image}};}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66 \textcolor{keyword}{struct }\mbox{\hyperlink{structdetection}{detection}};}
+\DoxyCodeLine{67 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structdetection}{detection}} \mbox{\hyperlink{structdetection}{detection}};}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69 \textcolor{keyword}{struct }\mbox{\hyperlink{structload__args}{load\_args}};}
+\DoxyCodeLine{70 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structload__args}{load\_args}} \mbox{\hyperlink{structload__args}{load\_args}};}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72 \textcolor{keyword}{struct }\mbox{\hyperlink{structdata}{data}};}
+\DoxyCodeLine{73 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{structdata}{data}};}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75 \textcolor{keyword}{struct }\mbox{\hyperlink{structmetadata}{metadata}};}
+\DoxyCodeLine{76 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structmetadata}{metadata}} \mbox{\hyperlink{structmetadata}{metadata}};}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 \textcolor{keyword}{struct }\mbox{\hyperlink{structtree}{tree}};}
+\DoxyCodeLine{79 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structtree}{tree}} \mbox{\hyperlink{structtree}{tree}};}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81 \textcolor{keyword}{extern} \textcolor{keywordtype}{int} \mbox{\hyperlink{darknet_8h_a4bd97081f0d76d0c9084ae88dfd68621}{gpu\_index}};}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83 \textcolor{comment}{// option\_list.h}}
+\DoxyCodeLine{84 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structmetadata}{metadata}} \{}
+\DoxyCodeLine{85     \textcolor{keywordtype}{int} \mbox{\hyperlink{structmetadata_a79e09a60e76b3658018e342933715f69}{classes}};}
+\DoxyCodeLine{86     \textcolor{keywordtype}{char} **\mbox{\hyperlink{structmetadata_aee443b3a2259ad9031259d20ddf79086}{names}};}
+\DoxyCodeLine{87 \} \mbox{\hyperlink{darknet_8h_a02cdca45b038146ade173c035b9a5ca6}{metadata}};}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90 \textcolor{comment}{// tree.h}}
+\DoxyCodeLine{91 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structtree}{tree}} \{}
+\DoxyCodeLine{92     \textcolor{keywordtype}{int} *\mbox{\hyperlink{structtree_a08371bc037edecea4f1632c2185b1ff1}{leaf}};}
+\DoxyCodeLine{93     \textcolor{keywordtype}{int} \mbox{\hyperlink{structtree_a2273fc7497601bfaf9121d1a797453b5}{n}};}
+\DoxyCodeLine{94     \textcolor{keywordtype}{int} *\mbox{\hyperlink{structtree_a77b1eb5cb07b504420034ed006f75cb5}{parent}};}
+\DoxyCodeLine{95     \textcolor{keywordtype}{int} *\mbox{\hyperlink{structtree_ac33525f8c2ea9df09aa39e4e5f0f46b0}{child}};}
+\DoxyCodeLine{96     \textcolor{keywordtype}{int} *\mbox{\hyperlink{structtree_a3accabb15b1b96d0f81e40341e55cc20}{group}};}
+\DoxyCodeLine{97     \textcolor{keywordtype}{char} **\mbox{\hyperlink{structtree_aef62d17752842a143625d7313073c068}{name}};}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99     \textcolor{keywordtype}{int} \mbox{\hyperlink{structtree_ab4d92fc866330ea5e427d6b5b8075604}{groups}};}
+\DoxyCodeLine{100     \textcolor{keywordtype}{int} *\mbox{\hyperlink{structtree_a4b84be443f42bcf6cc16fd9d3fa1f326}{group\_size}};}
+\DoxyCodeLine{101     \textcolor{keywordtype}{int} *\mbox{\hyperlink{structtree_a349dec53fea0efa2e19de49785a2f0ff}{group\_offset}};}
+\DoxyCodeLine{102 \} \mbox{\hyperlink{darknet_8h_a434e35ec9d53f159cc82d020517a98bb}{tree}};}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105 \textcolor{comment}{// activations.h}}
+\DoxyCodeLine{106 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{}
+\DoxyCodeLine{107     \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032a42472611591399e9deba20bd204fd056}{LOGISTIC}}, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032a9b69aa04edddb5cade1fea783ef633a3}{RELU}}, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032aada18f14cd0b475ce0f63612bf5b52dc}{RELU6}}, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032a81581ff70b227e2f6841cbdd7c3155eb}{RELIE}}, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032adc101ebf31c49c2d4b80b7c6f59f22cb}{LINEAR}}, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032a291e3bb43cd8449155161d1fa023348b}{RAMP}}, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032a5cf05eaf3e6d14026cfec37f90ca44e4}{TANH}}, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032a41b2e6a8ac180df18be63075e942dea2}{PLSE}}, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032a6095910faa23671ab8bcd4b056050540}{REVLEAKY}}, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032ab21ea5bce5af6a04d401f3209c1cea5a}{LEAKY}}, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032a33cbe63d0d4602edef85fec86d3967ea}{ELU}}, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032a1dd14f5397de952e32f5851e0cb020f4}{LOGGY}}, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032aa833dedb7a8d7bae7fc2d5a709ac960a}{STAIR}}, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032a84e918bf702ec89ce24f8eebedf69387}{HARDTAN}}, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032ab1502d7fc488cff3387d7296c2f84e62}{LHTAN}}, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032aa8bec3a86f95286fe63ef68c3f8f7ee8}{SELU}}, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032ad24c071fafbb7c6cd078196832c9f540}{GELU}}, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032a681708022d3dfd3ceb050218d63c6649}{SWISH}}, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032a17f85b938e41203a14c7d65c0ebc837a}{MISH}}, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032a827975083307d192eef663ea3098793e}{HARD\_MISH}}, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032a5fa110991df7d66dc49e2d7ec0cc58ca}{NORM\_CHAN}}, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032aeec46dc3abf58c9a22a91414946f34c8}{NORM\_CHAN\_SOFTMAX}}, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032adce63a34561f37167518be0d049a0821}{NORM\_CHAN\_SOFTMAX\_MAXVAL}}}
+\DoxyCodeLine{108 \}\mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032}{ACTIVATION}};}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110 \textcolor{comment}{// parser.h}}
+\DoxyCodeLine{111 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{}
+\DoxyCodeLine{112     \mbox{\hyperlink{darknet_8h_aab757338e5429453acc81f7bc21a3e92a459a89a89a3ba55f9dd9716ab44ccee5}{IOU}}, \mbox{\hyperlink{darknet_8h_aab757338e5429453acc81f7bc21a3e92ae83e668b276debf7f7c4f50b148d888f}{GIOU}}, \mbox{\hyperlink{darknet_8h_aab757338e5429453acc81f7bc21a3e92aafb483e0e91a566ecdf90b7a3b277f99}{MSE}}, \mbox{\hyperlink{darknet_8h_aab757338e5429453acc81f7bc21a3e92af4615d665bcb2d210a356edfdc5c1c4d}{DIOU}}, \mbox{\hyperlink{darknet_8h_aab757338e5429453acc81f7bc21a3e92a9f78b98c32b9e9338e77d5e852b595af}{CIOU}}}
+\DoxyCodeLine{113 \} \mbox{\hyperlink{darknet_8h_aab757338e5429453acc81f7bc21a3e92}{IOU\_LOSS}};}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115 \textcolor{comment}{// parser.h}}
+\DoxyCodeLine{116 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{}
+\DoxyCodeLine{117     \mbox{\hyperlink{darknet_8h_a1f05008bd71fc89cca27954e4d42312dabf91c9075ec74851c31787010bca4792}{DEFAULT\_NMS}}, \mbox{\hyperlink{darknet_8h_a1f05008bd71fc89cca27954e4d42312da4a6e0d7d9eedc3edb8ae7dfd8249069c}{GREEDY\_NMS}}, \mbox{\hyperlink{darknet_8h_a1f05008bd71fc89cca27954e4d42312da00aac3097f0cd14a9ede57a78609c61f}{DIOU\_NMS}}, \mbox{\hyperlink{darknet_8h_a1f05008bd71fc89cca27954e4d42312da3e2bd0feba450a5fa61fb119d4363853}{CORNERS\_NMS}}}
+\DoxyCodeLine{118 \} \mbox{\hyperlink{darknet_8h_a1f05008bd71fc89cca27954e4d42312d}{NMS\_KIND}};}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120 \textcolor{comment}{// parser.h}}
+\DoxyCodeLine{121 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{}
+\DoxyCodeLine{122     \mbox{\hyperlink{darknet_8h_a9b53d206083cc713c7f793227d1beef1ab871761a6739c167842556a44e166986}{YOLO\_CENTER}} = 1 << 0, \mbox{\hyperlink{darknet_8h_a9b53d206083cc713c7f793227d1beef1a95f7c42cb30b177130977effa9c3fb11}{YOLO\_LEFT\_TOP}} = 1 << 1, \mbox{\hyperlink{darknet_8h_a9b53d206083cc713c7f793227d1beef1a1daaab5045bcf9bea77457e620229033}{YOLO\_RIGHT\_BOTTOM}} = 1 << 2}
+\DoxyCodeLine{123 \} \mbox{\hyperlink{darknet_8h_a9b53d206083cc713c7f793227d1beef1}{YOLO\_POINT}};}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125 \textcolor{comment}{// parser.h}}
+\DoxyCodeLine{126 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{}
+\DoxyCodeLine{127     \mbox{\hyperlink{darknet_8h_ae95509f392646b11c7eb85995970449aa17c1633f2e2f45eff712b78fbe9b0fa9}{NO\_WEIGHTS}}, \mbox{\hyperlink{darknet_8h_ae95509f392646b11c7eb85995970449aa47e8d49bf496eab12968ce82697a1862}{PER\_FEATURE}}, \mbox{\hyperlink{darknet_8h_ae95509f392646b11c7eb85995970449aac6d99a66fe9e587a07d903e7c468f840}{PER\_CHANNEL}}}
+\DoxyCodeLine{128 \} \mbox{\hyperlink{darknet_8h_ae95509f392646b11c7eb85995970449a}{WEIGHTS\_TYPE\_T}};}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130 \textcolor{comment}{// parser.h}}
+\DoxyCodeLine{131 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{}
+\DoxyCodeLine{132     \mbox{\hyperlink{darknet_8h_a4e81c0088b04bf77fe4fb1b96456d8eead9a831b0ac370f4155b26a850ce64fc8}{NO\_NORMALIZATION}}, \mbox{\hyperlink{darknet_8h_a4e81c0088b04bf77fe4fb1b96456d8eea21ea9a11b41cc7238f15b4f9d37b7c4e}{RELU\_NORMALIZATION}}, \mbox{\hyperlink{darknet_8h_a4e81c0088b04bf77fe4fb1b96456d8eea55fadebeeeec4282b26ec9a1429041b8}{SOFTMAX\_NORMALIZATION}}}
+\DoxyCodeLine{133 \} \mbox{\hyperlink{darknet_8h_a4e81c0088b04bf77fe4fb1b96456d8ee}{WEIGHTS\_NORMALIZATION\_T}};}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135 \textcolor{comment}{// image.h}}
+\DoxyCodeLine{136 \textcolor{keyword}{typedef} \textcolor{keyword}{enum}\{}
+\DoxyCodeLine{137     \mbox{\hyperlink{darknet_8h_a36b53cbe404ed4e26d36a0dab64efb6da842c5fc4bbe3f780e57c76d1a3cafe9f}{PNG}}, \mbox{\hyperlink{darknet_8h_a36b53cbe404ed4e26d36a0dab64efb6da472992a8061f64e53dced30fb026b3b7}{BMP}}, \mbox{\hyperlink{darknet_8h_a36b53cbe404ed4e26d36a0dab64efb6da6d617c1c14d4c45ef4892562fdd17e22}{TGA}}, \mbox{\hyperlink{darknet_8h_a36b53cbe404ed4e26d36a0dab64efb6da193eff471c99a2d5cad5433221091f7f}{JPG}}}
+\DoxyCodeLine{138 \} \mbox{\hyperlink{darknet_8h_a36b53cbe404ed4e26d36a0dab64efb6d}{IMTYPE}};}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140 \textcolor{comment}{// activations.h}}
+\DoxyCodeLine{141 \textcolor{keyword}{typedef} \textcolor{keyword}{enum}\{}
+\DoxyCodeLine{142     \mbox{\hyperlink{darknet_8h_a67f2640e50a57d8bc252052a0de400b6a18a2956fb463e60c1a099d6d69e2c0ef}{MULT}}, \mbox{\hyperlink{darknet_8h_a67f2640e50a57d8bc252052a0de400b6acfcf145f2788bf340ff3f3098bc54909}{ADD}}, \mbox{\hyperlink{darknet_8h_a67f2640e50a57d8bc252052a0de400b6a12b733d4941495e86811fe6ceeeff9da}{SUB}}, \mbox{\hyperlink{darknet_8h_a67f2640e50a57d8bc252052a0de400b6a8565f0d60c3ba6d468661c49d86e9744}{DIV}}}
+\DoxyCodeLine{143 \} \mbox{\hyperlink{darknet_8h_a67f2640e50a57d8bc252052a0de400b6}{BINARY\_ACTIVATION}};}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145 \textcolor{comment}{// blas.h}}
+\DoxyCodeLine{146 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structcontrastive__params}{contrastive\_params}} \{}
+\DoxyCodeLine{147     \textcolor{keywordtype}{float} \mbox{\hyperlink{structcontrastive__params_aef6f9a69f11b64d717498c3bca3a2457}{sim}};}
+\DoxyCodeLine{148     \textcolor{keywordtype}{float} \mbox{\hyperlink{structcontrastive__params_acbfd34cd13fc913af68b18473dbb4b5d}{exp\_sim}};}
+\DoxyCodeLine{149     \textcolor{keywordtype}{float} \mbox{\hyperlink{structcontrastive__params_a5b81477832110df53dba8bb2553f3db7}{P}};}
+\DoxyCodeLine{150     \textcolor{keywordtype}{int} \mbox{\hyperlink{structcontrastive__params_ab2f68852976a40e5c5667c16b296e9be}{i}}, \mbox{\hyperlink{structcontrastive__params_a0c90a35c5079d4ea1f77f16f0d0027c1}{j}};}
+\DoxyCodeLine{151     \textcolor{keywordtype}{int} \mbox{\hyperlink{structcontrastive__params_af9a27c0fea778c03dcf574ffa9825952}{time\_step\_i}}, \mbox{\hyperlink{structcontrastive__params_ae8889dc4018e32ac28c5eb07112c5bb9}{time\_step\_j}};}
+\DoxyCodeLine{152 \} \mbox{\hyperlink{darknet_8h_a05a5fd9ba8ff0021dad1df7f62ac65d4}{contrastive\_params}};}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155 \textcolor{comment}{// layer.h}}
+\DoxyCodeLine{156 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{}
+\DoxyCodeLine{157     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a58439c145f9707af4279108805b47497}{CONVOLUTIONAL}},}
+\DoxyCodeLine{158     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a6f42d67663870dc1a9dcec9b9935c41d}{DECONVOLUTIONAL}},}
+\DoxyCodeLine{159     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a7a691a2430ec26878897b5fbc9c22a4c}{CONNECTED}},}
+\DoxyCodeLine{160     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a8659ae590f5fcbc3535bdc2f4490d553}{MAXPOOL}},}
+\DoxyCodeLine{161     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154ad2702303a96190630942a4a73f3518e4}{LOCAL\_AVGPOOL}},}
+\DoxyCodeLine{162     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154ab511c653dc93fe58bc97983ae731bf9d}{SOFTMAX}},}
+\DoxyCodeLine{163     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a167a7ee1aabe9f27e010fff93c0ba971}{DETECTION}},}
+\DoxyCodeLine{164     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a4091bbb54d34f4cfbf5f8c69b961b72d}{DROPOUT}},}
+\DoxyCodeLine{165     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a8a1e6cb3d7b8626207ee919105caffb9}{CROP}},}
+\DoxyCodeLine{166     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a6530dd7e53049fcde9b27580cd9b8cdd}{ROUTE}},}
+\DoxyCodeLine{167     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a42e5eb78021f8dcbbfaedef77f83f7a1}{COST}},}
+\DoxyCodeLine{168     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a0de981225527baadd805eabc7a029173}{NORMALIZATION}},}
+\DoxyCodeLine{169     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a80d08a4eecd2caa9369a4dc603a6a404}{AVGPOOL}},}
+\DoxyCodeLine{170     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154ad0ef00e708ed18ba004480dceb79ecfb}{LOCAL}},}
+\DoxyCodeLine{171     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154ad178853912254bdda9a11f604f3c0eb4}{SHORTCUT}},}
+\DoxyCodeLine{172     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154aa9f2395ee778219bd62761aa380f66fd}{SCALE\_CHANNELS}},}
+\DoxyCodeLine{173     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a5e72f846ee5b2e4e04de87e6bd3e6662}{SAM}},}
+\DoxyCodeLine{174     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a33cf1d8ef1d06ee698a7fabf40eb3a7f}{ACTIVE}},}
+\DoxyCodeLine{175     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a55661cd8d595b42aaece780991f95da7}{RNN}},}
+\DoxyCodeLine{176     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154ac237f1b4a6ca8bd7cc87fa92ff222be5}{GRU}},}
+\DoxyCodeLine{177     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a3040d3d70fd0e89403a89c6263807ce9}{LSTM}},}
+\DoxyCodeLine{178     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a5ed89d765047888cebf06374fe774a04}{CONV\_LSTM}},}
+\DoxyCodeLine{179     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a283e4f8f90756c9892871460a0d62a60}{HISTORY}},}
+\DoxyCodeLine{180     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a044279c034c21e9ce2c60cd5621be27c}{CRNN}},}
+\DoxyCodeLine{181     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a227af5923f055e4b147a1890f7e139a0}{BATCHNORM}},}
+\DoxyCodeLine{182     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a56a2a28eb93430f5083e6427bc59319c}{NETWORK}},}
+\DoxyCodeLine{183     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a840b1dd1731de56a162991c0ecef890f}{XNOR}},}
+\DoxyCodeLine{184     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a3bfda0bdc93e66e77b2242a9ce4cd804}{REGION}},}
+\DoxyCodeLine{185     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a05354d7be491a5c0eb8beaf1cbe6fae0}{YOLO}},}
+\DoxyCodeLine{186     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a818af094bbf15c0f450b4ef95c8d33c5}{GAUSSIAN\_YOLO}},}
+\DoxyCodeLine{187     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a735c965d33357e4243db779343e2f8b7}{ISEG}},}
+\DoxyCodeLine{188     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154ae36bcc3973387f0b5253ec83a21fb401}{REORG}},}
+\DoxyCodeLine{189     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a01cb22c6b8fd5e69302de3d13f7caefd}{REORG\_OLD}},}
+\DoxyCodeLine{190     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154ab529a0817764bcc0d5cfa7bbb480fc0e}{UPSAMPLE}},}
+\DoxyCodeLine{191     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a09d34f8c37fdee06cc26246a4807ff4a}{LOGXENT}},}
+\DoxyCodeLine{192     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a2a9fd1f879cc9ef1c8a09f876e5e5547}{L2NORM}},}
+\DoxyCodeLine{193     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a2f0d18fc0d0fa4a6cd92dc328501874d}{EMPTY}},}
+\DoxyCodeLine{194     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a9eea16b4e105c96853a3a4cb462cc3a4}{BLANK}},}
+\DoxyCodeLine{195     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154ae1a1a271f32c3d370d88928eb116deb7}{CONTRASTIVE}},}
+\DoxyCodeLine{196     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154a9d9226d9994439f6bcd2ca11840053a5}{IMPLICIT}}}
+\DoxyCodeLine{197 \} \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154}{LAYER\_TYPE}};}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199 \textcolor{comment}{// layer.h}}
+\DoxyCodeLine{200 \textcolor{keyword}{typedef} \textcolor{keyword}{enum}\{}
+\DoxyCodeLine{201     \mbox{\hyperlink{darknet_8h_a590358b1971d8e902008d6731f40e35ca403b03371fd04961f31f99b254cf8e57}{SSE}}, \mbox{\hyperlink{darknet_8h_a590358b1971d8e902008d6731f40e35ca6ddbe57e526adc33ae02b4378c441c43}{MASKED}}, \mbox{\hyperlink{darknet_8h_a590358b1971d8e902008d6731f40e35cae5bc7ee7d6dda5340a28f91834f10543}{L1}}, \mbox{\hyperlink{darknet_8h_a590358b1971d8e902008d6731f40e35ca04ac0c05629917c780c280202e107178}{SEG}}, \mbox{\hyperlink{darknet_8h_a590358b1971d8e902008d6731f40e35ca33c7ccbb848d8fd75455dd9786a1153a}{SMOOTH}},\mbox{\hyperlink{darknet_8h_a590358b1971d8e902008d6731f40e35ca346d09659f32bd75f8c2071a4be63fbc}{WGAN}}}
+\DoxyCodeLine{202 \} \mbox{\hyperlink{darknet_8h_a590358b1971d8e902008d6731f40e35c}{COST\_TYPE}};}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204 \textcolor{comment}{// layer.h}}
+\DoxyCodeLine{205 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structupdate__args}{update\_args}} \{}
+\DoxyCodeLine{206     \textcolor{keywordtype}{int} \mbox{\hyperlink{structupdate__args_a1accceb722234c5aa3f38cc85c1d7cf7}{batch}};}
+\DoxyCodeLine{207     \textcolor{keywordtype}{float} \mbox{\hyperlink{structupdate__args_a3a0145d580360b2ffae2879af7e68c67}{learning\_rate}};}
+\DoxyCodeLine{208     \textcolor{keywordtype}{float} \mbox{\hyperlink{structupdate__args_abc35ad880888473f137cb9744e874870}{momentum}};}
+\DoxyCodeLine{209     \textcolor{keywordtype}{float} \mbox{\hyperlink{structupdate__args_a9eb5a4b5663dca4b69a13a19da674f19}{decay}};}
+\DoxyCodeLine{210     \textcolor{keywordtype}{int} \mbox{\hyperlink{structupdate__args_ab246da6c016ed395f727ab4f12df6e7d}{adam}};}
+\DoxyCodeLine{211     \textcolor{keywordtype}{float} \mbox{\hyperlink{structupdate__args_a1822b0d844c349135590f3583415faec}{B1}};}
+\DoxyCodeLine{212     \textcolor{keywordtype}{float} \mbox{\hyperlink{structupdate__args_ad4542261082ee829820f2d6a750021f6}{B2}};}
+\DoxyCodeLine{213     \textcolor{keywordtype}{float} \mbox{\hyperlink{structupdate__args_a7a173936c93e7424d77347cfa9ab3f2f}{eps}};}
+\DoxyCodeLine{214     \textcolor{keywordtype}{int} \mbox{\hyperlink{structupdate__args_addc09d90e7323fc19a4e04b0612ef10b}{t}};}
+\DoxyCodeLine{215 \} \mbox{\hyperlink{darknet_8h_a238a7088d90aaa410206680ba50c1f5e}{update\_args}};}
+\DoxyCodeLine{216 }
+\DoxyCodeLine{217 \textcolor{comment}{// layer.h}}
+\DoxyCodeLine{218 \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} \{}
+\DoxyCodeLine{219     \mbox{\hyperlink{darknet_8h_a5f7e99058765b058df158c099200b154}{LAYER\_TYPE}} \mbox{\hyperlink{structlayer_af00e36adaf6e404a3e5234843c723714}{type}};}
+\DoxyCodeLine{220     \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032}{ACTIVATION}} \mbox{\hyperlink{structlayer_af7e837568a9975545159025b2fdbf31a}{activation}};}
+\DoxyCodeLine{221     \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032}{ACTIVATION}} \mbox{\hyperlink{structlayer_ae9bf511a7186211d8ddc52bce5136836}{lstm\_activation}};}
+\DoxyCodeLine{222     \mbox{\hyperlink{darknet_8h_a590358b1971d8e902008d6731f40e35c}{COST\_TYPE}} \mbox{\hyperlink{structlayer_a8f172c29b1ada15656f1f346e7491507}{cost\_type}};}
+\DoxyCodeLine{223     void(*\mbox{\hyperlink{structlayer_a50be8d55be2d3525e66a65279a4e7fdd}{forward}})   (\textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}}, struct \mbox{\hyperlink{structnetwork__state}{network\_state}});}
+\DoxyCodeLine{224     void(*\mbox{\hyperlink{structlayer_adaf40cd82f4dfc363c3597de1059579b}{backward}})  (\textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}}, struct \mbox{\hyperlink{structnetwork__state}{network\_state}});}
+\DoxyCodeLine{225     void(*\mbox{\hyperlink{structlayer_a2c4a0897bf4438fcd67ce5ae00da98e1}{update}})    (\textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}}, int, float, float, float);}
+\DoxyCodeLine{226     void(*\mbox{\hyperlink{structlayer_aaddb4b73b50f3beba48d523a4151bbd0}{forward\_gpu}})   (\textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}}, struct \mbox{\hyperlink{structnetwork__state}{network\_state}});}
+\DoxyCodeLine{227     void(*\mbox{\hyperlink{structlayer_a2f2339047f183d5aeeaffc3e1db78291}{backward\_gpu}})  (\textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}}, struct \mbox{\hyperlink{structnetwork__state}{network\_state}});}
+\DoxyCodeLine{228     void(*\mbox{\hyperlink{structlayer_a76c4189c57af17bb8170020e7e85110e}{update\_gpu}})    (\textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}}, int, float, float, float, float);}
+\DoxyCodeLine{229     \mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_a9dc06c6a0515971656310eaf5bdfdaa9}{share\_layer}};}
+\DoxyCodeLine{230     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a7cffc49b85c119766fd2842975fdfa5f}{train}};}
+\DoxyCodeLine{231     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_aadece0789f5956a7e5f077868b8075c3}{avgpool}};}
+\DoxyCodeLine{232     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a9af00a1fb4729a6ecdc62df42f4d3ae3}{batch\_normalize}};}
+\DoxyCodeLine{233     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a84b1f1077ca914dafadb8e82bb12d46d}{shortcut}};}
+\DoxyCodeLine{234     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_aff6bd99e74d13cccca4c492dd3e8de9c}{batch}};}
+\DoxyCodeLine{235     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a3f6835dd0e2b0ccc253750fe2d7b9d49}{dynamic\_minibatch}};}
+\DoxyCodeLine{236     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_acf386a1f7b93955cc5d04513bb4e4649}{forced}};}
+\DoxyCodeLine{237     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a44bd658c46a69f7863d781eb731475b0}{flipped}};}
+\DoxyCodeLine{238     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a3fac583bf31e18ca679d195b1485b316}{inputs}};}
+\DoxyCodeLine{239     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a0874fab782ae0e8f1075cc99d776478b}{outputs}};}
+\DoxyCodeLine{240     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a9d41bf18a11cf0aeffe925cf43c429d0}{mean\_alpha}};}
+\DoxyCodeLine{241     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a76a23567dbc4b223d8ba3c34c0f5e82f}{nweights}};}
+\DoxyCodeLine{242     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a8da8330f6a80f7fcb86fb2421c0484e5}{nbiases}};}
+\DoxyCodeLine{243     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_aaaa32102948bc9d4d4a506cf258b9910}{extra}};}
+\DoxyCodeLine{244     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a086d4ebdf69d011ef4c11a487bd5ff60}{truths}};}
+\DoxyCodeLine{245     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a7766d090f7dac8294b7456c1251ab485}{h}}, \mbox{\hyperlink{structlayer_a2e00450d79170c48791a1ed5a6f1d0c4}{w}}, \mbox{\hyperlink{structlayer_a6d10d2818541049ff11e94b257077a2d}{c}};}
+\DoxyCodeLine{246     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a8f8224d0915a9903d93874aefe278f98}{out\_h}}, \mbox{\hyperlink{structlayer_a46454d978f2d84f8b8aba918a747c761}{out\_w}}, \mbox{\hyperlink{structlayer_a298d150dabc449824204579f4851b926}{out\_c}};}
+\DoxyCodeLine{247     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a454b8980d0186eb0095a25aadef41744}{n}};}
+\DoxyCodeLine{248     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a97f045f2c42981c7d1b9e47b8c69788f}{max\_boxes}};}
+\DoxyCodeLine{249     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a72dcd008fa2a331def7e31b31b559891}{truth\_size}};}
+\DoxyCodeLine{250     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a2a7404991ccfcc0b7b884a7638d078ff}{groups}};}
+\DoxyCodeLine{251     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a7c933b7a43a47cb1c1b4b27e0d4e6e79}{group\_id}};}
+\DoxyCodeLine{252     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a4168fc846264723c6149d4e464097a00}{size}};}
+\DoxyCodeLine{253     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a0286d4acb9afd3c080b0158bf6ef3ca1}{side}};}
+\DoxyCodeLine{254     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a239bfd11f56b41f70e2933333f80c81b}{stride}};}
+\DoxyCodeLine{255     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_ac03c7c0a6efeebd354426b1c08578b40}{stride\_x}};}
+\DoxyCodeLine{256     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a9ae9f5520c5d5e03fd0079ac9e19057f}{stride\_y}};}
+\DoxyCodeLine{257     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a958c6a9f65e10d82fb90738dc2865a42}{dilation}};}
+\DoxyCodeLine{258     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a96e338da3ea4180787f8393c4b2b474f}{antialiasing}};}
+\DoxyCodeLine{259     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a9c95e50d7148baa1ba467d622af7b8ae}{maxpool\_depth}};}
+\DoxyCodeLine{260     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_ae265b2f95116012ca99ae57b8ad8a029}{maxpool\_zero\_nonmax}};}
+\DoxyCodeLine{261     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a368b5f179edb8d2e0239457daa74b876}{out\_channels}};}
+\DoxyCodeLine{262     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a38a53eb34bc8096d35bcd23a9229521b}{reverse}};}
+\DoxyCodeLine{263     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a53f49b7d47e20c42c5bd672524a752c2}{coordconv}};}
+\DoxyCodeLine{264     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_abd9dc10c7124e7d7e54b3ad6811deb00}{flatten}};}
+\DoxyCodeLine{265     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_aeca00102f8c93bcb3e30670623e835de}{spatial}};}
+\DoxyCodeLine{266     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_ac7f6c035a8161713696db818f4dcb6ea}{pad}};}
+\DoxyCodeLine{267     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a30e95ebb753b16822e759bd903ca8f1a}{sqrt}};}
+\DoxyCodeLine{268     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_ade1cdfc041b6c641c73f74bea2492b5f}{flip}};}
+\DoxyCodeLine{269     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a98964b626e3a83be1235c3aed8178810}{index}};}
+\DoxyCodeLine{270     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a3cc731e617f782017d115cf93b4c8abf}{scale\_wh}};}
+\DoxyCodeLine{271     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a7a6777b89f1faa3ec8dbc9d6fd2b431b}{binary}};}
+\DoxyCodeLine{272     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_abd05a6404f54ecf89e6ddc0c23d431ab}{xnor}};}
+\DoxyCodeLine{273     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_add3e8174176a9afae06a4c428a122ab1}{peephole}};}
+\DoxyCodeLine{274     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a85b71fe362ba760f1fdc45ffb0086855}{use\_bin\_output}};}
+\DoxyCodeLine{275     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a44a1f247c8f9cb76000319d2b795c89f}{keep\_delta\_gpu}};}
+\DoxyCodeLine{276     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a128f4a119aaa61abfccf888ec0128527}{optimized\_memory}};}
+\DoxyCodeLine{277     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_ad060e2cc161c5aa290a76613d024f03a}{steps}};}
+\DoxyCodeLine{278     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a01af395cd8f32a7fa47fdb4d21849969}{history\_size}};}
+\DoxyCodeLine{279     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a1e8d1a9e805f1cd15adb3e0cedf563eb}{bottleneck}};}
+\DoxyCodeLine{280     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a5e1e55698adff0dd117ce595ff8849c5}{time\_normalizer}};}
+\DoxyCodeLine{281     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a88bb9d926e02f463c33e5560832ab57c}{state\_constrain}};}
+\DoxyCodeLine{282     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a10071bf2848df19c845b55fc575dcd9c}{hidden}};}
+\DoxyCodeLine{283     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_ac669e3f8294d93e118977cec91bb792b}{truth}};}
+\DoxyCodeLine{284     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a4ecd91c02a2368b51bdfa66d3b92c6d6}{smooth}};}
+\DoxyCodeLine{285     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_aaf67b912e38bb35777c7dd1867217a06}{dot}};}
+\DoxyCodeLine{286     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a6858636ceea2383d12525dfbfcc8a016}{deform}};}
+\DoxyCodeLine{287     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_aab9191689ea8d3c82b620dac7f522f3c}{grad\_centr}};}
+\DoxyCodeLine{288     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_abf29575533f7c2a8bad0943e73fc3ee4}{sway}};}
+\DoxyCodeLine{289     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a9d8695eaef4c145ee7ba852b8dd03f5a}{rotate}};}
+\DoxyCodeLine{290     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a9e60c3d6ed956b6ad3c5fe97dfdfc4d5}{stretch}};}
+\DoxyCodeLine{291     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_ab9be16ba2d36dfb1e821d531333bc057}{stretch\_sway}};}
+\DoxyCodeLine{292     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_ad484c9f3947a86cd9c328811c1d0b24f}{angle}};}
+\DoxyCodeLine{293     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a5a580dce2dc1716ff9fe8524da2f4237}{jitter}};}
+\DoxyCodeLine{294     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_ad6b79ba1f4774541217fe5253e3a044d}{resize}};}
+\DoxyCodeLine{295     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a900c449abe20f24a3ab6f171679d12dd}{saturation}};}
+\DoxyCodeLine{296     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a3c8781cb592ce45d1a6e331e558310f7}{exposure}};}
+\DoxyCodeLine{297     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a67d23cb25a1d405a4cc63bdea8363f78}{shift}};}
+\DoxyCodeLine{298     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a2752501fc00b1ff2bdd19e0a24b5370c}{ratio}};}
+\DoxyCodeLine{299     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a329f298275a866fae317080159336d98}{learning\_rate\_scale}};}
+\DoxyCodeLine{300     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a1728042fca5440265c959059a869bd2f}{clip}};}
+\DoxyCodeLine{301     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_aa32c6c108f869308a919cdfce707b268}{focal\_loss}};}
+\DoxyCodeLine{302     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a251a265964f47ea7240bdff56d30c246}{classes\_multipliers}};}
+\DoxyCodeLine{303     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_adf620e4831127f18a19699f3ba30c059}{label\_smooth\_eps}};}
+\DoxyCodeLine{304     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_adb76d65c794792dbed1932aaa560a1aa}{noloss}};}
+\DoxyCodeLine{305     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a7b07ddac3afad25586ff7c18956ba9a9}{softmax}};}
+\DoxyCodeLine{306     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_af8d01e54a44d8682c38d431c32faed45}{classes}};}
+\DoxyCodeLine{307     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_ab07b70b6dac4b98f45ff330da1714296}{detection}};}
+\DoxyCodeLine{308     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a6388f3b78b3484a3ce2bbf45f41c4520}{embedding\_layer\_id}};}
+\DoxyCodeLine{309     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a1333dcc7d59816fab37d1b1f909671ed}{embedding\_output}};}
+\DoxyCodeLine{310     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a8acb992803d7a0271a573a8c53ab44fd}{embedding\_size}};}
+\DoxyCodeLine{311     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a93acce5de36cb75a126156ebe9758edb}{sim\_thresh}};}
+\DoxyCodeLine{312     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_ad87762820f90d75eccc41e9c1af4da01}{track\_history\_size}};}
+\DoxyCodeLine{313     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a8721b2ce9316da3b8645e0397ca42e2c}{dets\_for\_track}};}
+\DoxyCodeLine{314     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a6e2e7e124b6274ac11340535027933fe}{dets\_for\_show}};}
+\DoxyCodeLine{315     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a2af7f7f5299c2992dad4b02c0ac3a85b}{track\_ciou\_norm}};}
+\DoxyCodeLine{316     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a6b8636464bcea5dea2c2235ee133af29}{coords}};}
+\DoxyCodeLine{317     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a509601d552c5e188902dc7cfddfe6ee4}{background}};}
+\DoxyCodeLine{318     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a662867ba4218e923a302fd215dab2ddd}{rescore}};}
+\DoxyCodeLine{319     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_aaf0a24ead54282e6bbb9c766f357c57f}{objectness}};}
+\DoxyCodeLine{320     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a271335dc08773f19b83547bd5d31c4bf}{does\_cost}};}
+\DoxyCodeLine{321     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_aac680bb3fa86a374a0252fff77bb887d}{joint}};}
+\DoxyCodeLine{322     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_addd7dd5ca8a7ce6bb15aa2d06efe69ee}{noadjust}};}
+\DoxyCodeLine{323     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a13f7dcacfefce8f8f5694dad9e5aa6ae}{reorg}};}
+\DoxyCodeLine{324     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a540b5bcf6b30bef535ff82e133bffd79}{log}};}
+\DoxyCodeLine{325     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a386df76b9ede3725ade44f66c45ecdcb}{tanh}};}
+\DoxyCodeLine{326     \textcolor{keywordtype}{int} *\mbox{\hyperlink{structlayer_aaa82c8e027d08dfd571c663653f85588}{mask}};}
+\DoxyCodeLine{327     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a5899baa591f5d9e897b6af62b0fd13e0}{total}};}
+\DoxyCodeLine{328     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a12150bcc8ae903b26626dbce5f098cdc}{bflops}};}
+\DoxyCodeLine{329 }
+\DoxyCodeLine{330     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a876fb2370f04869e45f6013740d84654}{adam}};}
+\DoxyCodeLine{331     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a97703c43f0c2b8a67076ca552b96b3a9}{B1}};}
+\DoxyCodeLine{332     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_aa7c10c3f7b315dcc4070a0a5360ffdd9}{B2}};}
+\DoxyCodeLine{333     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a80c4959716d3921edf98a655d368c38c}{eps}};}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{335     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a0f94f5e2d356d148803682ea17d1a94d}{t}};}
+\DoxyCodeLine{336 }
+\DoxyCodeLine{337     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_aa9495e20d42d431aa52dd4eedb03e8b5}{alpha}};}
+\DoxyCodeLine{338     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a375acd63c42b47b9c3007a1c064caef7}{beta}};}
+\DoxyCodeLine{339     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_ac8ee04d5346e8f3d682ebc02e8a6b663}{kappa}};}
+\DoxyCodeLine{340 }
+\DoxyCodeLine{341     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a4cb681c94203182c328d7818bcb39de8}{coord\_scale}};}
+\DoxyCodeLine{342     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a502c7f71d253c01f1724adbe8bc585fc}{object\_scale}};}
+\DoxyCodeLine{343     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_ad10b4f2f32b1991c3cd8e66d138c5eaa}{noobject\_scale}};}
+\DoxyCodeLine{344     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a9e6e9d0cbdfbef34920e842d0542670e}{mask\_scale}};}
+\DoxyCodeLine{345     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a7175af778d4be5a066ccc212421617b7}{class\_scale}};}
+\DoxyCodeLine{346     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a9f5919edff3bdaa0e3f02f13728415c3}{bias\_match}};}
+\DoxyCodeLine{347     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a3000ca26f225ed967cd2161e31a36d72}{random}};}
+\DoxyCodeLine{348     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_ad1052957257631f1cba42a25ed63159b}{ignore\_thresh}};}
+\DoxyCodeLine{349     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a53f9de692e18bf39eeaf322afa9612cb}{truth\_thresh}};}
+\DoxyCodeLine{350     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_ae013203289f704188e01e936a7940023}{iou\_thresh}};}
+\DoxyCodeLine{351     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a20c059ef419e2b863c67d4df87ec4488}{thresh}};}
+\DoxyCodeLine{352     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_afa6d90f3ca746a776b5d79b3f8ead52d}{focus}};}
+\DoxyCodeLine{353     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a510630027ff3061ae0ad07e151fbf1a5}{classfix}};}
+\DoxyCodeLine{354     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_afe0cd75c5d7d210ec413df79b73aa40a}{absolute}};}
+\DoxyCodeLine{355     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a467d9fffd3f98b74c8525ede3e643b10}{assisted\_excitation}};}
+\DoxyCodeLine{356 }
+\DoxyCodeLine{357     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a975a97f550b56c3503feba36b8eacf45}{onlyforward}};}
+\DoxyCodeLine{358     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_ada9c281fad0eae687276387e0dc5d8d1}{stopbackward}};}
+\DoxyCodeLine{359     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_ac54f577d1d79e89f87ffc2549620ef1b}{train\_only\_bn}};}
+\DoxyCodeLine{360     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_acc7affdc79bab4223402ae499d5d405c}{dont\_update}};}
+\DoxyCodeLine{361     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_af38014163ef83e15e86e7b41f8065a85}{burnin\_update}};}
+\DoxyCodeLine{362     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a90d11f2ddc0ae1f0bfcce33d5eab9f1b}{dontload}};}
+\DoxyCodeLine{363     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_acc28d07d2164bd944a3a3857b482629d}{dontsave}};}
+\DoxyCodeLine{364     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a5ba6e7bfc48b309721ddbed942d2d531}{dontloadscales}};}
+\DoxyCodeLine{365     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a8bec1047611039a963da6e7fdb0bf4ff}{numload}};}
+\DoxyCodeLine{366 }
+\DoxyCodeLine{367     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a965290dca263c7774c9e9b4272a43c49}{temperature}};}
+\DoxyCodeLine{368     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a3c133867d28268532e3786ae75db47fc}{probability}};}
+\DoxyCodeLine{369     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a64882982f7b84c4db680d453ffec5e99}{dropblock\_size\_rel}};}
+\DoxyCodeLine{370     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a32d40861d2ec15586b669244a42f0dd2}{dropblock\_size\_abs}};}
+\DoxyCodeLine{371     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_aa19c182f1c6a733a38c85d9de0846cc1}{dropblock}};}
+\DoxyCodeLine{372     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a7225a2fa7d8cf13688e1c8a421f3ad7f}{scale}};}
+\DoxyCodeLine{373 }
+\DoxyCodeLine{374     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_ae91798ab402aa0cd743b0b1f8521abb2}{receptive\_w}};}
+\DoxyCodeLine{375     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_aa512f19b1c460b38492c4105f9746f89}{receptive\_h}};}
+\DoxyCodeLine{376     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a676c9490198de98f976495523a5e4dbe}{receptive\_w\_scale}};}
+\DoxyCodeLine{377     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a6cf86b54bf7280f749279222255ace86}{receptive\_h\_scale}};}
+\DoxyCodeLine{378 }
+\DoxyCodeLine{379     \textcolor{keywordtype}{char}  * \mbox{\hyperlink{structlayer_a5a1da440e0ebe63674288f9006bd8ad7}{cweights}};}
+\DoxyCodeLine{380     \textcolor{keywordtype}{int}   * \mbox{\hyperlink{structlayer_a545ce2f1db475b370db778c433913fde}{indexes}};}
+\DoxyCodeLine{381     \textcolor{keywordtype}{int}   * \mbox{\hyperlink{structlayer_afd5797d71336f51f9b5b1bd1ef0bddd8}{input\_layers}};}
+\DoxyCodeLine{382     \textcolor{keywordtype}{int}   * \mbox{\hyperlink{structlayer_aef52d6a821c836ddd1b1993911c648f2}{input\_sizes}};}
+\DoxyCodeLine{383     \textcolor{keywordtype}{float} **\mbox{\hyperlink{structlayer_a737ff908fe2011ff425abeb7c6ccbe1d}{layers\_output}};}
+\DoxyCodeLine{384     \textcolor{keywordtype}{float} **\mbox{\hyperlink{structlayer_ad990989f3031bc76ba6abfbd66449997}{layers\_delta}};}
+\DoxyCodeLine{385     \mbox{\hyperlink{darknet_8h_ae95509f392646b11c7eb85995970449a}{WEIGHTS\_TYPE\_T}} \mbox{\hyperlink{structlayer_ab21a1f6e78a426a00c233eb52ac2fdb4}{weights\_type}};}
+\DoxyCodeLine{386     \mbox{\hyperlink{darknet_8h_a4e81c0088b04bf77fe4fb1b96456d8ee}{WEIGHTS\_NORMALIZATION\_T}} \mbox{\hyperlink{structlayer_ab4cb4b1b830c6150294c2e2c1ce73cbd}{weights\_normalization}};}
+\DoxyCodeLine{387     \textcolor{keywordtype}{int}   * \mbox{\hyperlink{structlayer_a9950b1b44120256269e082cb5efbd42e}{map}};}
+\DoxyCodeLine{388     \textcolor{keywordtype}{int}   * \mbox{\hyperlink{structlayer_a394f545b22a67ae82f4f02c991b69711}{counts}};}
+\DoxyCodeLine{389     \textcolor{keywordtype}{float} ** \mbox{\hyperlink{structlayer_a5b4578b7559435b224fb4483132a37d0}{sums}};}
+\DoxyCodeLine{390     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a254a888ee1b4383a7ce6035a88e7b825}{rand}};}
+\DoxyCodeLine{391     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a9a71dbf0ad70f63a10787d8217633776}{cost}};}
+\DoxyCodeLine{392     \textcolor{keywordtype}{int} *\mbox{\hyperlink{structlayer_ab7dee829e50502939bf19780110d1070}{labels}};}
+\DoxyCodeLine{393     \textcolor{keywordtype}{int} *\mbox{\hyperlink{structlayer_a74e7196506bbd9c4f05ea4e3f50c730d}{class\_ids}};}
+\DoxyCodeLine{394     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a9186156ab410fef721f699fe19fcd621}{contrastive\_neg\_max}};}
+\DoxyCodeLine{395     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_ac466d72baceb883d9129797c459b4268}{cos\_sim}};}
+\DoxyCodeLine{396     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_ad038c165cb00bf70a9caf06ad448e051}{exp\_cos\_sim}};}
+\DoxyCodeLine{397     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a68031357632f8a09a81c8410119628f3}{p\_constrastive}};}
+\DoxyCodeLine{398     \mbox{\hyperlink{structcontrastive__params}{contrastive\_params}} *\mbox{\hyperlink{structlayer_a69f5d77a64d1989684e37a00bffcf717}{contrast\_p\_gpu}};}
+\DoxyCodeLine{399     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_af47d59ee97d2b512e5ca64a25af476c1}{state}};}
+\DoxyCodeLine{400     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_aa82477e38a85af20ebd0300cab6ea6e1}{prev\_state}};}
+\DoxyCodeLine{401     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a8c96fb4f8b4a7d7dac14d6220938bdc3}{forgot\_state}};}
+\DoxyCodeLine{402     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a03015ecf4e0ca81f3b0133c93cab1354}{forgot\_delta}};}
+\DoxyCodeLine{403     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a48c287c5df2e2cd3bea497e6a93487a6}{state\_delta}};}
+\DoxyCodeLine{404     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_abf10dce2bd742799a95eb1241e0c4e71}{combine\_cpu}};}
+\DoxyCodeLine{405     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a00fca0bda761ca0a2ceaf81934b31293}{combine\_delta\_cpu}};}
+\DoxyCodeLine{406 }
+\DoxyCodeLine{407     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_aa2edc68cb4713d7b34f52b27b2c0a35b}{concat}};}
+\DoxyCodeLine{408     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a1de4fac7dfc2c7c9ab387bc322246258}{concat\_delta}};}
+\DoxyCodeLine{409 }
+\DoxyCodeLine{410     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a105fc98c2adbd8d8de839e327fb284b7}{binary\_weights}};}
+\DoxyCodeLine{411 }
+\DoxyCodeLine{412     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_aaa7f20cb294d09ee0011d32658675a48}{biases}};}
+\DoxyCodeLine{413     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a53f11ac2a72b28b8c3529b799f1662fd}{bias\_updates}};}
+\DoxyCodeLine{414 }
+\DoxyCodeLine{415     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a82237cebb237c586f13f0a0ab35e38a3}{scales}};}
+\DoxyCodeLine{416     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_afe8abd57f459714570b99b521cf9e159}{scale\_updates}};}
+\DoxyCodeLine{417 }
+\DoxyCodeLine{418     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_ac91ad761feaebe1c6c345d72755dd73b}{weights\_ema}};}
+\DoxyCodeLine{419     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_aa97a799e50cc98db6ae9a75e3d0fd754}{biases\_ema}};}
+\DoxyCodeLine{420     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_aafb794ff5f5837c269158b03b41cab46}{scales\_ema}};}
+\DoxyCodeLine{421 }
+\DoxyCodeLine{422     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a552e6eca39a5d0dc6fa12901502c7e78}{weights}};}
+\DoxyCodeLine{423     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a24eda1775cf0b0e188446089a25780b7}{weight\_updates}};}
+\DoxyCodeLine{424 }
+\DoxyCodeLine{425     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a650212b2c76d5d4e57aeab5a7ba48e1e}{scale\_x\_y}};}
+\DoxyCodeLine{426     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a4c4cf83ca066873a1aa8d914c83fe2de}{objectness\_smooth}};}
+\DoxyCodeLine{427     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_ae50f5418e82a6037b619112a8e08eff0}{new\_coords}};}
+\DoxyCodeLine{428     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a232c06612a519d5d339b40b8b2f4db4d}{show\_details}};}
+\DoxyCodeLine{429     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a64af1d45c027b2b1e29c90f6e27e3131}{max\_delta}};}
+\DoxyCodeLine{430     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a1d8b4df35c254c14e51f0552ec40df33}{uc\_normalizer}};}
+\DoxyCodeLine{431     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a45a8082ba9135bbc13f39d3c42dcf845}{iou\_normalizer}};}
+\DoxyCodeLine{432     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a84aa67d569e1177371b5cae9f938b8d1}{obj\_normalizer}};}
+\DoxyCodeLine{433     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a012befe15b597ff23993bf0abf07135c}{cls\_normalizer}};}
+\DoxyCodeLine{434     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_ac569a8c113a9b583ef7382492e467a80}{delta\_normalizer}};}
+\DoxyCodeLine{435     \mbox{\hyperlink{darknet_8h_aab757338e5429453acc81f7bc21a3e92}{IOU\_LOSS}} \mbox{\hyperlink{structlayer_a206405bb0f72734828d306b5451061b5}{iou\_loss}};}
+\DoxyCodeLine{436     \mbox{\hyperlink{darknet_8h_aab757338e5429453acc81f7bc21a3e92}{IOU\_LOSS}} \mbox{\hyperlink{structlayer_a60e1f68552a6c11d0f50e6688c294672}{iou\_thresh\_kind}};}
+\DoxyCodeLine{437     \mbox{\hyperlink{darknet_8h_a1f05008bd71fc89cca27954e4d42312d}{NMS\_KIND}} \mbox{\hyperlink{structlayer_aa57e8e12ac51ee1757afab628ee04f5c}{nms\_kind}};}
+\DoxyCodeLine{438     \textcolor{keywordtype}{float} \mbox{\hyperlink{structlayer_a02e32e6762cee3ded6ae5c612f74784b}{beta\_nms}};}
+\DoxyCodeLine{439     \mbox{\hyperlink{darknet_8h_a9b53d206083cc713c7f793227d1beef1}{YOLO\_POINT}} \mbox{\hyperlink{structlayer_a2509f804370f365841e76f9ca55ebabd}{yolo\_point}};}
+\DoxyCodeLine{440 }
+\DoxyCodeLine{441     \textcolor{keywordtype}{char} *\mbox{\hyperlink{structlayer_ad7fe21d5757916ba57d296075bcd8620}{align\_bit\_weights\_gpu}};}
+\DoxyCodeLine{442     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_adab9cc157c3ba594c43e70758b29da8e}{mean\_arr\_gpu}};}
+\DoxyCodeLine{443     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a2ac95dd3fddc3285adaaf5f989101294}{align\_workspace\_gpu}};}
+\DoxyCodeLine{444     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a4e03e57000a9d8782927192d94167b94}{transposed\_align\_workspace\_gpu}};}
+\DoxyCodeLine{445     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_a644d913b5f74930037b400db652e6dcc}{align\_workspace\_size}};}
+\DoxyCodeLine{446 }
+\DoxyCodeLine{447     \textcolor{keywordtype}{char} *\mbox{\hyperlink{structlayer_ab95b0ae09f86665e9a46ca61c6111975}{align\_bit\_weights}};}
+\DoxyCodeLine{448     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_ae93ca48388ab72635538f17a6bec0f73}{mean\_arr}};}
+\DoxyCodeLine{449     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_ae0c07222565519da13611a5da20721fd}{align\_bit\_weights\_size}};}
+\DoxyCodeLine{450     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_acfe63fdcd0944723bf61ceec202c8816}{lda\_align}};}
+\DoxyCodeLine{451     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_ae27a9247027b521f7ab93ca6d0b45e48}{new\_lda}};}
+\DoxyCodeLine{452     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_ac63d0f97e5d30b9d05849d7056e6c647}{bit\_align}};}
+\DoxyCodeLine{453 }
+\DoxyCodeLine{454     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a97684c445f918c99bda11e4d30370342}{col\_image}};}
+\DoxyCodeLine{455     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a1360cf3c28df067cc6f3af139fa95d3a}{delta}};}
+\DoxyCodeLine{456     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a04d23c71428242b3153eda588f844eb3}{output}};}
+\DoxyCodeLine{457     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_ac5b4e140d09b365b49302bae9db536f0}{activation\_input}};}
+\DoxyCodeLine{458     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_afe5f6c3dc8361c1833ac68a5d4d87517}{delta\_pinned}};}
+\DoxyCodeLine{459     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_ade1f019dc5240bb47674d789fbcd1ca1}{output\_pinned}};}
+\DoxyCodeLine{460     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a6554389eac1170d557224124d81eb3d6}{loss}};}
+\DoxyCodeLine{461     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_ae8ed52c73d5fc1d13d2fbf0b920dda7e}{squared}};}
+\DoxyCodeLine{462     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_acb730788dd9a0c77c7e501b9118a2933}{norms}};}
+\DoxyCodeLine{463 }
+\DoxyCodeLine{464     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_ac3167d1999c93f60856076a4da9c3fc3}{spatial\_mean}};}
+\DoxyCodeLine{465     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a57e3ce10060c51c846086d20944f2448}{mean}};}
+\DoxyCodeLine{466     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a4307e89c5c91bef35a9b54e4662e247d}{variance}};}
+\DoxyCodeLine{467 }
+\DoxyCodeLine{468     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a6ae807c0129ad454f9a850e2e5c20544}{mean\_delta}};}
+\DoxyCodeLine{469     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a6ac77051b9f79c2a72732b7b7f3f536c}{variance\_delta}};}
+\DoxyCodeLine{470 }
+\DoxyCodeLine{471     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_aadc24d03a6dbab21fcafad3d29bb1310}{rolling\_mean}};}
+\DoxyCodeLine{472     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a316830907cb724b9304cea311c8d8dc5}{rolling\_variance}};}
+\DoxyCodeLine{473 }
+\DoxyCodeLine{474     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a78b279684acc59b1b891f63225e5715e}{x}};}
+\DoxyCodeLine{475     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a080a015b7c11489ecca087ece911a6b6}{x\_norm}};}
+\DoxyCodeLine{476 }
+\DoxyCodeLine{477     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_acfd875ae4a4c774d30e04e03a24085f9}{m}};}
+\DoxyCodeLine{478     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a9493ddf18d4f6d9234a703d2575697db}{v}};}
+\DoxyCodeLine{479 }
+\DoxyCodeLine{480     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_acfe31e9816074f6118b1dfaa7c55e53f}{bias\_m}};}
+\DoxyCodeLine{481     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a52052221eb80a84d1486c79ede9a1477}{bias\_v}};}
+\DoxyCodeLine{482     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a858dcb301c88b816430a797dce3b95b6}{scale\_m}};}
+\DoxyCodeLine{483     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a881162ac744dcf116ec9c14c97fb1633}{scale\_v}};}
+\DoxyCodeLine{484 }
+\DoxyCodeLine{485 }
+\DoxyCodeLine{486     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_aa38a67974b34aad9ada08b970ace3318}{z\_cpu}};}
+\DoxyCodeLine{487     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_aaaefd9c6dccae5505e5600831d99a026}{r\_cpu}};}
+\DoxyCodeLine{488     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_aff93d520e69e75d6aa104a687d5ab21e}{h\_cpu}};}
+\DoxyCodeLine{489     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_ae6b38d8c3172adf9d9a3d79c8214c546}{stored\_h\_cpu}};}
+\DoxyCodeLine{490     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_afcadbe531d4b320c23877019284168b0}{prev\_state\_cpu}};}
+\DoxyCodeLine{491 }
+\DoxyCodeLine{492     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a8a566c099cbba1da8bb7cc4d90643d0b}{temp\_cpu}};}
+\DoxyCodeLine{493     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a12c40b990c72966e93dc2936c5a91447}{temp2\_cpu}};}
+\DoxyCodeLine{494     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a5576a957c950547134d305cb5e7ed42b}{temp3\_cpu}};}
+\DoxyCodeLine{495 }
+\DoxyCodeLine{496     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_acb9dec30688fb0f1d836e14e507a441d}{dh\_cpu}};}
+\DoxyCodeLine{497     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_af62005e5700299a59c76dafe7bb00529}{hh\_cpu}};}
+\DoxyCodeLine{498     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a4844271cfffe336d89a934705c8e3cc9}{prev\_cell\_cpu}};}
+\DoxyCodeLine{499     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a0dbcc8d653aaea58b9aaddcda570b9fb}{cell\_cpu}};}
+\DoxyCodeLine{500     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a2f326ac879fefe2ab4ef8a4b48664b01}{f\_cpu}};}
+\DoxyCodeLine{501     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a3cbe33860e4b1605034034f9dbddc227}{i\_cpu}};}
+\DoxyCodeLine{502     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_abc8c1af0663167cc50b83e918e0a3c1d}{g\_cpu}};}
+\DoxyCodeLine{503     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_ae0b82851bad0a9588a448e93bf6ba5cc}{o\_cpu}};}
+\DoxyCodeLine{504     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_ae6b07fa9262cecce9ec149e37c001d81}{c\_cpu}};}
+\DoxyCodeLine{505     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a5c02f141648d7b001abeadc3718f8b21}{stored\_c\_cpu}};}
+\DoxyCodeLine{506     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_ac4bc1b441b4be3b7a33d48934d883a92}{dc\_cpu}};}
+\DoxyCodeLine{507 }
+\DoxyCodeLine{508     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a65b3a401a9e02fc7b7260705ade1b317}{binary\_input}};}
+\DoxyCodeLine{509     uint32\_t *\mbox{\hyperlink{structlayer_a7bd1e361abceeb8970631a24bedeb753}{bin\_re\_packed\_input}};}
+\DoxyCodeLine{510     \textcolor{keywordtype}{char} *\mbox{\hyperlink{structlayer_a54a1baff673dc538c112ebd4c5ddc722}{t\_bit\_input}};}
+\DoxyCodeLine{511 }
+\DoxyCodeLine{512     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_afcfa8ab43a850ea490c6d82ff05def87}{input\_layer}};}
+\DoxyCodeLine{513     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_a4b265f84aaca806ccaf8607156fbb067}{self\_layer}};}
+\DoxyCodeLine{514     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_a93e590cb5d7d1cb0ff4803cd15dd0b51}{output\_layer}};}
+\DoxyCodeLine{515 }
+\DoxyCodeLine{516     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_a091a5757286a08a99ee76cd332ae8631}{reset\_layer}};}
+\DoxyCodeLine{517     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_a777da8634fb7e1e1243c79dbec93304e}{update\_layer}};}
+\DoxyCodeLine{518     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_ac79543fef7f4662508f07bc68483a78f}{state\_layer}};}
+\DoxyCodeLine{519 }
+\DoxyCodeLine{520     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_ad7cd67a8989bbdafa89982d9c1f64c78}{input\_gate\_layer}};}
+\DoxyCodeLine{521     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_a0b1b6cbee3d9421055512d52d8291929}{state\_gate\_layer}};}
+\DoxyCodeLine{522     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_a1dca5c6d106ae9a60fe70b7a9532cfc5}{input\_save\_layer}};}
+\DoxyCodeLine{523     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_a5258c642da20d6011c579edc4d1efe03}{state\_save\_layer}};}
+\DoxyCodeLine{524     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_a1f41820898325961a6acc16b113b90c7}{input\_state\_layer}};}
+\DoxyCodeLine{525     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_a2c2e848a9857ec5f5fd2b6205b2e963f}{state\_state\_layer}};}
+\DoxyCodeLine{526 }
+\DoxyCodeLine{527     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_addf22ace8c49b848e3f19122bdb703d5}{input\_z\_layer}};}
+\DoxyCodeLine{528     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_a22598554a0e6c65dd6e6fb2246ceb6cf}{state\_z\_layer}};}
+\DoxyCodeLine{529 }
+\DoxyCodeLine{530     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_a7c67ff6cd710e56e2eb0da199c4d0cff}{input\_r\_layer}};}
+\DoxyCodeLine{531     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_a2ce6e1f069b4ebc57b4a49d56afbe875}{state\_r\_layer}};}
+\DoxyCodeLine{532 }
+\DoxyCodeLine{533     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_a526089c1cc0aa9d9738f3e5b8358166f}{input\_h\_layer}};}
+\DoxyCodeLine{534     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_a8d566da721348636889c3f9aadd6f5e0}{state\_h\_layer}};}
+\DoxyCodeLine{535 }
+\DoxyCodeLine{536     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_af5ebb2f94c441e094e4ba3f04e318185}{wz}};}
+\DoxyCodeLine{537     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_aebc50a1f698ed78ce6ca500609ad7308}{uz}};}
+\DoxyCodeLine{538     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_a9385c1d546abb2148bb8e05258d19bd4}{wr}};}
+\DoxyCodeLine{539     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_a9e91b6abfb4f0d901e6e62c46f8ccab9}{ur}};}
+\DoxyCodeLine{540     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_a2060deb333927330706e80f48129b7f0}{wh}};}
+\DoxyCodeLine{541     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_ae663063cf926ae0cb83b03113479ca2a}{uh}};}
+\DoxyCodeLine{542     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_a071f72e7d57e6612d98defa8d4f1e3e7}{uo}};}
+\DoxyCodeLine{543     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_a9a4ba5c783fb440ee82552fe917254b6}{wo}};}
+\DoxyCodeLine{544     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_ac8d915d8143d9bc19b84dabb74c881fe}{vo}};}
+\DoxyCodeLine{545     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_a509fb446cc0040855b530840f4cc9aad}{uf}};}
+\DoxyCodeLine{546     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_a02dc5b80b7e15c4b4bd9d968ffbde662}{wf}};}
+\DoxyCodeLine{547     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_afb73093663deed17a50030542e28b02c}{vf}};}
+\DoxyCodeLine{548     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_ab1c06528fcb7f3a3ffedfc89db86d109}{ui}};}
+\DoxyCodeLine{549     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_aea3b1b349201ba0f9234d978e2b249a8}{wi}};}
+\DoxyCodeLine{550     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_a70798fdcb95859b8d8053b3b364c52dd}{vi}};}
+\DoxyCodeLine{551     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_ad1a598647343ef1b791891b186dc9186}{ug}};}
+\DoxyCodeLine{552     \textcolor{keyword}{struct }\mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structlayer_ae2aa4b3552e0fd33370d332c3b318066}{wg}};}
+\DoxyCodeLine{553 }
+\DoxyCodeLine{554     \mbox{\hyperlink{structtree}{tree}} *\mbox{\hyperlink{structlayer_ada8540db939d29074a5764ac9ba92f57}{softmax\_tree}};}
+\DoxyCodeLine{555 }
+\DoxyCodeLine{556     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structlayer_afeb9d7fb2a202ef5387c135fbade83da}{workspace\_size}};}
+\DoxyCodeLine{557 }
+\DoxyCodeLine{558 \textcolor{comment}{//\#ifdef GPU}}
+\DoxyCodeLine{559     \textcolor{keywordtype}{int} *\mbox{\hyperlink{structlayer_adbd6ced22034118e06ca40941ef828ef}{indexes\_gpu}};}
+\DoxyCodeLine{560 }
+\DoxyCodeLine{561     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_ae97585067a629d628c85c189d2a32bab}{stream}};}
+\DoxyCodeLine{562     \textcolor{keywordtype}{int} \mbox{\hyperlink{structlayer_abbc9c08207073105f7463d939892c120}{wait\_stream\_id}};}
+\DoxyCodeLine{563 }
+\DoxyCodeLine{564     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a99c365b2488c4142c3d6e3d7ab03f567}{z\_gpu}};}
+\DoxyCodeLine{565     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a1e02e67ad71507de3bb9bb9f032ab0bb}{r\_gpu}};}
+\DoxyCodeLine{566     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_afc9048fdcb2c2cfe55e0a2ea292ce2d6}{h\_gpu}};}
+\DoxyCodeLine{567     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a4e81f3c38ac39667f920225d9069c91d}{stored\_h\_gpu}};}
+\DoxyCodeLine{568     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a2bfe494fc52898616e2ebcf154081fc2}{bottelneck\_hi\_gpu}};}
+\DoxyCodeLine{569     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_aff116480eeb3fcb2e7abd19fe59dbc4f}{bottelneck\_delta\_gpu}};}
+\DoxyCodeLine{570 }
+\DoxyCodeLine{571     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a955dcd393b1a68aed76ccd496172c7e6}{temp\_gpu}};}
+\DoxyCodeLine{572     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a56fe41d887712a6618a2a8c8ce8b6f99}{temp2\_gpu}};}
+\DoxyCodeLine{573     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_aed2fb6e101280c5a92079366f5810f00}{temp3\_gpu}};}
+\DoxyCodeLine{574 }
+\DoxyCodeLine{575     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_aee2e23830f187d41c77ed891c43f0a42}{dh\_gpu}};}
+\DoxyCodeLine{576     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a9d9b05060d16f988db72793743093d9f}{hh\_gpu}};}
+\DoxyCodeLine{577     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a05014aa2e8d5fdae9929f37eb6236814}{prev\_cell\_gpu}};}
+\DoxyCodeLine{578     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_ab3ef7e1135c26848189e2c4e433b547a}{prev\_state\_gpu}};}
+\DoxyCodeLine{579     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a950ddfcf6a9147876888058a6fafdafd}{last\_prev\_state\_gpu}};}
+\DoxyCodeLine{580     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a3a1458d2ace8e7cefad31a1078f8a3bc}{last\_prev\_cell\_gpu}};}
+\DoxyCodeLine{581     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_acd67c0d8d943e7eab58541d8856110b7}{cell\_gpu}};}
+\DoxyCodeLine{582     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_ac834433993169d5f61a4989812e8fdef}{f\_gpu}};}
+\DoxyCodeLine{583     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_acdab0c046a80abe2764a857edcf03d6c}{i\_gpu}};}
+\DoxyCodeLine{584     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a7f38be50b60447cc212912be5c84afcb}{g\_gpu}};}
+\DoxyCodeLine{585     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a86f7b88b64e97e3630712d03fa2ba8f6}{o\_gpu}};}
+\DoxyCodeLine{586     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a29f16ce8c992f05e4b97ebb19452d24a}{c\_gpu}};}
+\DoxyCodeLine{587     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a86b5a20447d1c218d38d95a6c62e4acb}{stored\_c\_gpu}};}
+\DoxyCodeLine{588     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_ad24ed4a42422a160a6850a4121d847c0}{dc\_gpu}};}
+\DoxyCodeLine{589 }
+\DoxyCodeLine{590     \textcolor{comment}{// adam}}
+\DoxyCodeLine{591     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a8047818d292c869044137dac2aa9a6f4}{m\_gpu}};}
+\DoxyCodeLine{592     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a3a036933fe681d9f1da312acefffd02c}{v\_gpu}};}
+\DoxyCodeLine{593     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a24e462bef5a9a89459efe571c37c67c7}{bias\_m\_gpu}};}
+\DoxyCodeLine{594     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a278cb0263a46cbdc92b961d10a565041}{scale\_m\_gpu}};}
+\DoxyCodeLine{595     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_aa04a308a615a99b14008764e3056c48d}{bias\_v\_gpu}};}
+\DoxyCodeLine{596     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a094f05176c9c123e3c09bfb5503556aa}{scale\_v\_gpu}};}
+\DoxyCodeLine{597 }
+\DoxyCodeLine{598     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a2bcf46eebc778c556c65aa715a55fd24}{combine\_gpu}};}
+\DoxyCodeLine{599     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a467804209257a683fb0b55a3a594300c}{combine\_delta\_gpu}};}
+\DoxyCodeLine{600 }
+\DoxyCodeLine{601     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a6f0af9c3d1f1dbef998bc5e60e59ad27}{forgot\_state\_gpu}};}
+\DoxyCodeLine{602     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a46cde451948434f80e912594d930c17f}{forgot\_delta\_gpu}};}
+\DoxyCodeLine{603     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a5e33eb13b9906b7b7a0bed088c31d47b}{state\_gpu}};}
+\DoxyCodeLine{604     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a54f6ee5f43bdd5987cfb553f3a5bf64a}{state\_delta\_gpu}};}
+\DoxyCodeLine{605     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a1d8dc0f151b066d9900f9893c84a2fbd}{gate\_gpu}};}
+\DoxyCodeLine{606     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_aab1d5479fed0c5e8490025418eeaa97d}{gate\_delta\_gpu}};}
+\DoxyCodeLine{607     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a96349aae2ec121e4ba45fe6ee1d1bbe7}{save\_gpu}};}
+\DoxyCodeLine{608     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_ac389a09137fbc30d49e1cb5b421c4b27}{save\_delta\_gpu}};}
+\DoxyCodeLine{609     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a0aad22f42981bc9bdd1d404d4452900f}{concat\_gpu}};}
+\DoxyCodeLine{610     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a26bf9afe640faf1a67ce624d1503be33}{concat\_delta\_gpu}};}
+\DoxyCodeLine{611 }
+\DoxyCodeLine{612     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a269afb9008dc160d955f076ba64a9abf}{binary\_input\_gpu}};}
+\DoxyCodeLine{613     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a2ca4835c754aef1d41c3f5e377846d56}{binary\_weights\_gpu}};}
+\DoxyCodeLine{614     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_ac8c3357cf5474e26068d548198cc7010}{bin\_conv\_shortcut\_in\_gpu}};}
+\DoxyCodeLine{615     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_afb853692817f514252da1f056dd79485}{bin\_conv\_shortcut\_out\_gpu}};}
+\DoxyCodeLine{616 }
+\DoxyCodeLine{617     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a072bdb2e6e8c8883409827769d9bcada}{mean\_gpu}};}
+\DoxyCodeLine{618     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a71f01a01f6d6c8a14c8e5bd446280f62}{variance\_gpu}};}
+\DoxyCodeLine{619     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a49dffed9c12e8492f9b9d9e905132539}{m\_cbn\_avg\_gpu}};}
+\DoxyCodeLine{620     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_ae3f291d9e2d268d94b395338be6ce8a3}{v\_cbn\_avg\_gpu}};}
+\DoxyCodeLine{621 }
+\DoxyCodeLine{622     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a2031c5ebac043011eaa583c315036516}{rolling\_mean\_gpu}};}
+\DoxyCodeLine{623     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_ae87e1c88c0c79c7a4a6dca1527af9469}{rolling\_variance\_gpu}};}
+\DoxyCodeLine{624 }
+\DoxyCodeLine{625     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_adf8c660738f80d2ed1a44b540bfd6a85}{variance\_delta\_gpu}};}
+\DoxyCodeLine{626     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a9a3afb0ac8fe9ab7a3d0aece3d89cbfc}{mean\_delta\_gpu}};}
+\DoxyCodeLine{627 }
+\DoxyCodeLine{628     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a330f478b440d39c1d4c77774cac47a36}{col\_image\_gpu}};}
+\DoxyCodeLine{629 }
+\DoxyCodeLine{630     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a1bf29b11ec1eff241462ba46108fafb7}{x\_gpu}};}
+\DoxyCodeLine{631     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_aeb8710e1f5f0a7f83c15546a37de0b27}{x\_norm\_gpu}};}
+\DoxyCodeLine{632     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a35d5b780854162bfaa165bb79996cdf8}{weights\_gpu}};}
+\DoxyCodeLine{633     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_ae1a75312934994b3a246c9df2b78c7a6}{weight\_updates\_gpu}};}
+\DoxyCodeLine{634     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_ae50217d223313bab03773e012001c3ed}{weight\_deform\_gpu}};}
+\DoxyCodeLine{635     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a3dc237b5b547ae88a0261233ebbfcc74}{weight\_change\_gpu}};}
+\DoxyCodeLine{636 }
+\DoxyCodeLine{637     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a20b939eac3533d6ec3858aa87007de8b}{weights\_gpu16}};}
+\DoxyCodeLine{638     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a7a580590466a2dfc621c1e417a1d896c}{weight\_updates\_gpu16}};}
+\DoxyCodeLine{639 }
+\DoxyCodeLine{640     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a2e404e71999f54cbbeaa174b6fb48ad7}{biases\_gpu}};}
+\DoxyCodeLine{641     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a361440231c0581d6e87da5dc24c9231e}{bias\_updates\_gpu}};}
+\DoxyCodeLine{642     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a8fc91b2e0f8c024234fad7bb7c98326b}{bias\_change\_gpu}};}
+\DoxyCodeLine{643 }
+\DoxyCodeLine{644     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_ab4b7e5e2b8f2b6b56c83468e2a747304}{scales\_gpu}};}
+\DoxyCodeLine{645     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a9bab37a4f9c53ff559501ddcf9410c02}{scale\_updates\_gpu}};}
+\DoxyCodeLine{646     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_ab7ee6d5a5929b3788a4b9f947ae2550b}{scale\_change\_gpu}};}
+\DoxyCodeLine{647 }
+\DoxyCodeLine{648     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a7ffbd839458292438330bbe16dfbff2b}{input\_antialiasing\_gpu}};}
+\DoxyCodeLine{649     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a7a20e50fcc701a5b7791ea5151f1a781}{output\_gpu}};}
+\DoxyCodeLine{650     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a2db9667f28522414a4715dd84bc2ccf6}{output\_avg\_gpu}};}
+\DoxyCodeLine{651     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a31b432a6e063e3d8f57009c857a1b2b0}{activation\_input\_gpu}};}
+\DoxyCodeLine{652     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_aa0a8071f7612148b73554d23a13213a3}{loss\_gpu}};}
+\DoxyCodeLine{653     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_ab6156a7d2348d3bc1c29ce33d19f18ce}{delta\_gpu}};}
+\DoxyCodeLine{654     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a2068a41d69fb160acd3bf79a9a02ec3c}{cos\_sim\_gpu}};}
+\DoxyCodeLine{655     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a21e55769ef8935aea182ed267b3beacc}{rand\_gpu}};}
+\DoxyCodeLine{656     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a7b85f25a0d4e9aa2c3fb6e7f69a5b23e}{drop\_blocks\_scale}};}
+\DoxyCodeLine{657     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a27aaff552f3a428586ee363eb801bef3}{drop\_blocks\_scale\_gpu}};}
+\DoxyCodeLine{658     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a43e158c6cef6919e8658de22d82e1aad}{squared\_gpu}};}
+\DoxyCodeLine{659     \textcolor{keywordtype}{float} * \mbox{\hyperlink{structlayer_a0bd35cca6769fb003a48b9c93d999cee}{norms\_gpu}};}
+\DoxyCodeLine{660 }
+\DoxyCodeLine{661     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a4d1d20c78184969ba1dc77362c811265}{gt\_gpu}};}
+\DoxyCodeLine{662     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structlayer_a1ccb4ef915b15beab41ce4f75e748018}{a\_avg\_gpu}};}
+\DoxyCodeLine{663 }
+\DoxyCodeLine{664     \textcolor{keywordtype}{int} *\mbox{\hyperlink{structlayer_ab3ecf1ebd979b520af49c93d80bae232}{input\_sizes\_gpu}};}
+\DoxyCodeLine{665     \textcolor{keywordtype}{float} **\mbox{\hyperlink{structlayer_a27570c8d9df53719ddf90310c8c1f0d5}{layers\_output\_gpu}};}
+\DoxyCodeLine{666     \textcolor{keywordtype}{float} **\mbox{\hyperlink{structlayer_a9cb43d8f71cd4d5f3d00bd2abb65d1d5}{layers\_delta\_gpu}};}
+\DoxyCodeLine{667 \textcolor{preprocessor}{\#ifdef CUDNN}}
+\DoxyCodeLine{668     cudnnTensorDescriptor\_t \mbox{\hyperlink{structlayer_a82908d5c9687a5f6230844c9b85aefa1}{srcTensorDesc}}, \mbox{\hyperlink{structlayer_a3c44ace07fb3586acb2e4c521449dcb6}{dstTensorDesc}};}
+\DoxyCodeLine{669     cudnnTensorDescriptor\_t \mbox{\hyperlink{structlayer_a22ae0b388cada3334da113ff439ba66b}{srcTensorDesc16}}, \mbox{\hyperlink{structlayer_a7a9cdbf904d0b8d3d8c6ed04b2f4b450}{dstTensorDesc16}};}
+\DoxyCodeLine{670     cudnnTensorDescriptor\_t \mbox{\hyperlink{structlayer_a855c09c2cec6653b50dd7477db0f5a02}{dsrcTensorDesc}}, \mbox{\hyperlink{structlayer_a495e3709d540cb4c89cf7d16e7dfe488}{ddstTensorDesc}};}
+\DoxyCodeLine{671     cudnnTensorDescriptor\_t \mbox{\hyperlink{structlayer_adde7521ce5150f2f1ad4ac9eca795b42}{dsrcTensorDesc16}}, \mbox{\hyperlink{structlayer_a4ea7b5ae4a71ca5be4f245a846eca384}{ddstTensorDesc16}};}
+\DoxyCodeLine{672     cudnnTensorDescriptor\_t \mbox{\hyperlink{structlayer_a8b59dab0e4d71b9551f8ec4dbb1e2c61}{normTensorDesc}}, \mbox{\hyperlink{structlayer_aae31687abeb3d944030cba25632da326}{normDstTensorDesc}}, \mbox{\hyperlink{structlayer_a74a2bb537c99605e1933ee333fcce61f}{normDstTensorDescF16}};}
+\DoxyCodeLine{673     cudnnFilterDescriptor\_t \mbox{\hyperlink{structlayer_a0fad0202a2e2789af34259ceedba1956}{weightDesc}}, \mbox{\hyperlink{structlayer_ab3f6bca6099634bde93754ae73b5ee3b}{weightDesc16}};}
+\DoxyCodeLine{674     cudnnFilterDescriptor\_t \mbox{\hyperlink{structlayer_aa5ba139abf72b6e31de89bb47cdb7c7a}{dweightDesc}}, \mbox{\hyperlink{structlayer_acb8f71651573978baf2bc831299e7231}{dweightDesc16}};}
+\DoxyCodeLine{675     cudnnConvolutionDescriptor\_t \mbox{\hyperlink{structlayer_a24c3ffa8e23dc0f258714d3b85b5fd55}{convDesc}};}
+\DoxyCodeLine{676     cudnnConvolutionFwdAlgo\_t \mbox{\hyperlink{structlayer_a441896894c4d2db888bf35a96a6d7f8b}{fw\_algo}}, \mbox{\hyperlink{structlayer_a34b25453b3ca6d8dbb21a4f0dc030e13}{fw\_algo16}};}
+\DoxyCodeLine{677     cudnnConvolutionBwdDataAlgo\_t \mbox{\hyperlink{structlayer_ae46649956975eca06426969708c3c46e}{bd\_algo}}, \mbox{\hyperlink{structlayer_a02b11853dd69e2204bded692789e884d}{bd\_algo16}};}
+\DoxyCodeLine{678     cudnnConvolutionBwdFilterAlgo\_t \mbox{\hyperlink{structlayer_af44a76a46d9503830ba435f86c3d87df}{bf\_algo}}, \mbox{\hyperlink{structlayer_a68d5efaa56015ba7af1013739d773fed}{bf\_algo16}};}
+\DoxyCodeLine{679     cudnnPoolingDescriptor\_t \mbox{\hyperlink{structlayer_a4e3ac8e8f7d6d13478d68c6d6ae4b81a}{poolingDesc}};}
+\DoxyCodeLine{680 \textcolor{preprocessor}{\#else   }\textcolor{comment}{// CUDNN}}
+\DoxyCodeLine{681     \textcolor{keywordtype}{void}* \mbox{\hyperlink{structlayer_a82908d5c9687a5f6230844c9b85aefa1}{srcTensorDesc}}, *\mbox{\hyperlink{structlayer_a3c44ace07fb3586acb2e4c521449dcb6}{dstTensorDesc}};}
+\DoxyCodeLine{682     \textcolor{keywordtype}{void}* \mbox{\hyperlink{structlayer_a22ae0b388cada3334da113ff439ba66b}{srcTensorDesc16}}, *\mbox{\hyperlink{structlayer_a7a9cdbf904d0b8d3d8c6ed04b2f4b450}{dstTensorDesc16}};}
+\DoxyCodeLine{683     \textcolor{keywordtype}{void}* \mbox{\hyperlink{structlayer_a855c09c2cec6653b50dd7477db0f5a02}{dsrcTensorDesc}}, *\mbox{\hyperlink{structlayer_a495e3709d540cb4c89cf7d16e7dfe488}{ddstTensorDesc}};}
+\DoxyCodeLine{684     \textcolor{keywordtype}{void}* \mbox{\hyperlink{structlayer_adde7521ce5150f2f1ad4ac9eca795b42}{dsrcTensorDesc16}}, *\mbox{\hyperlink{structlayer_a4ea7b5ae4a71ca5be4f245a846eca384}{ddstTensorDesc16}};}
+\DoxyCodeLine{685     \textcolor{keywordtype}{void}* \mbox{\hyperlink{structlayer_a8b59dab0e4d71b9551f8ec4dbb1e2c61}{normTensorDesc}}, *\mbox{\hyperlink{structlayer_aae31687abeb3d944030cba25632da326}{normDstTensorDesc}}, *\mbox{\hyperlink{structlayer_a74a2bb537c99605e1933ee333fcce61f}{normDstTensorDescF16}};}
+\DoxyCodeLine{686     \textcolor{keywordtype}{void}* \mbox{\hyperlink{structlayer_a0fad0202a2e2789af34259ceedba1956}{weightDesc}}, *\mbox{\hyperlink{structlayer_ab3f6bca6099634bde93754ae73b5ee3b}{weightDesc16}};}
+\DoxyCodeLine{687     \textcolor{keywordtype}{void}* \mbox{\hyperlink{structlayer_aa5ba139abf72b6e31de89bb47cdb7c7a}{dweightDesc}}, *\mbox{\hyperlink{structlayer_acb8f71651573978baf2bc831299e7231}{dweightDesc16}};}
+\DoxyCodeLine{688     \textcolor{keywordtype}{void}* \mbox{\hyperlink{structlayer_a24c3ffa8e23dc0f258714d3b85b5fd55}{convDesc}};}
+\DoxyCodeLine{689     \mbox{\hyperlink{darknet_8h_ad10f82e83ef2e1ccbc7e52733383c9cd}{UNUSED\_ENUM\_TYPE}} \mbox{\hyperlink{structlayer_a441896894c4d2db888bf35a96a6d7f8b}{fw\_algo}}, \mbox{\hyperlink{structlayer_a34b25453b3ca6d8dbb21a4f0dc030e13}{fw\_algo16}};}
+\DoxyCodeLine{690     \mbox{\hyperlink{darknet_8h_ad10f82e83ef2e1ccbc7e52733383c9cd}{UNUSED\_ENUM\_TYPE}} \mbox{\hyperlink{structlayer_ae46649956975eca06426969708c3c46e}{bd\_algo}}, \mbox{\hyperlink{structlayer_a02b11853dd69e2204bded692789e884d}{bd\_algo16}};}
+\DoxyCodeLine{691     \mbox{\hyperlink{darknet_8h_ad10f82e83ef2e1ccbc7e52733383c9cd}{UNUSED\_ENUM\_TYPE}} \mbox{\hyperlink{structlayer_af44a76a46d9503830ba435f86c3d87df}{bf\_algo}}, \mbox{\hyperlink{structlayer_a68d5efaa56015ba7af1013739d773fed}{bf\_algo16}};}
+\DoxyCodeLine{692     \textcolor{keywordtype}{void}* \mbox{\hyperlink{structlayer_a4e3ac8e8f7d6d13478d68c6d6ae4b81a}{poolingDesc}};}
+\DoxyCodeLine{693 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// CUDNN}}
+\DoxyCodeLine{694 \textcolor{comment}{//\#endif  // GPU}}
+\DoxyCodeLine{695 \};}
+\DoxyCodeLine{696 }
+\DoxyCodeLine{697 }
+\DoxyCodeLine{698 \textcolor{comment}{// network.h}}
+\DoxyCodeLine{699 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{}
+\DoxyCodeLine{700     \mbox{\hyperlink{darknet_8h_a9c2ce38711c59085616b738d2aa21184a83972670b57415508523b5641bb46116}{CONSTANT}}, \mbox{\hyperlink{darknet_8h_a9c2ce38711c59085616b738d2aa21184ac0ba526afb7f54207517b48a892961c2}{STEP}}, \mbox{\hyperlink{darknet_8h_a9c2ce38711c59085616b738d2aa21184a25f966031f3630b7ea2a347fa376b757}{EXP}}, \mbox{\hyperlink{darknet_8h_a9c2ce38711c59085616b738d2aa21184a7d85766d041d397d096dcbc0d7c793fd}{POLY}}, \mbox{\hyperlink{darknet_8h_a9c2ce38711c59085616b738d2aa21184a82a0755661f4fce9a39b2adcf7f6af30}{STEPS}}, \mbox{\hyperlink{darknet_8h_a9c2ce38711c59085616b738d2aa21184abed797aac9b7d073c8459e0d95496ba9}{SIG}}, \mbox{\hyperlink{darknet_8h_a9c2ce38711c59085616b738d2aa21184aa2b65445a3a16f164c5e811064d75726}{RANDOM}}, \mbox{\hyperlink{darknet_8h_a9c2ce38711c59085616b738d2aa21184a8473845c07cc73021261cc030e86d6ec}{SGDR}}}
+\DoxyCodeLine{701 \} \mbox{\hyperlink{darknet_8h_a9c2ce38711c59085616b738d2aa21184}{learning\_rate\_policy}};}
+\DoxyCodeLine{702 }
+\DoxyCodeLine{703 \textcolor{comment}{// network.h}}
+\DoxyCodeLine{704 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structnetwork}{network}} \{}
+\DoxyCodeLine{705     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a1c7625720955322d05924a075d013877}{n}};}
+\DoxyCodeLine{706     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a04f448f3f8c3f1314e2b23b429bec827}{batch}};}
+\DoxyCodeLine{707     uint64\_t *\mbox{\hyperlink{structnetwork_af8bfbe8d3d66b2d759e9ad725af2f91c}{seen}};}
+\DoxyCodeLine{708     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structnetwork_a0a54507f5ed082627370e5fca67d177d}{badlabels\_reject\_threshold}};}
+\DoxyCodeLine{709     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structnetwork_ab80d80d344f0b84ea46f576f4adc008e}{delta\_rolling\_max}};}
+\DoxyCodeLine{710     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structnetwork_a55a879319ae656fbd0e89eee73da8b44}{delta\_rolling\_avg}};}
+\DoxyCodeLine{711     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structnetwork_a8bbf10f80fc4d110e6a7fc405f17d555}{delta\_rolling\_std}};}
+\DoxyCodeLine{712     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a99b87633f58f386713b3d0397b4c0dd6}{weights\_reject\_freq}};}
+\DoxyCodeLine{713     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a130f7de05202083e2415f20e612e190c}{equidistant\_point}};}
+\DoxyCodeLine{714     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_a2f18836ae0a3062028725706fbac42b2}{badlabels\_rejection\_percentage}};}
+\DoxyCodeLine{715     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_a1d8e47052ed164db0f722ef285f4e127}{num\_sigmas\_reject\_badlabels}};}
+\DoxyCodeLine{716     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_a7b81ad2bc1d89ef605109f9270cfffee}{ema\_alpha}};}
+\DoxyCodeLine{717     \textcolor{keywordtype}{int} *\mbox{\hyperlink{structnetwork_a9fe172363bf2b19369280210608b1577}{cur\_iteration}};}
+\DoxyCodeLine{718     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_a3b16ca93b69637c4e76bb8ac3749c840}{loss\_scale}};}
+\DoxyCodeLine{719     \textcolor{keywordtype}{int} *\mbox{\hyperlink{structnetwork_a185b52d74237f3cd32d2d0186d2d2f5b}{t}};}
+\DoxyCodeLine{720     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_a7b16b097d1814258e82b58d663692875}{epoch}};}
+\DoxyCodeLine{721     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_ab30643da07e0f787ee0cd2058cd41a6e}{subdivisions}};}
+\DoxyCodeLine{722     \mbox{\hyperlink{structlayer}{layer}} *\mbox{\hyperlink{structnetwork_a9770423f88b722bafc9d1fd3c6091d75}{layers}};}
+\DoxyCodeLine{723     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structnetwork_a274dce0db2d5175992eb3b273ab09df7}{output}};}
+\DoxyCodeLine{724     \mbox{\hyperlink{darknet_8h_a9c2ce38711c59085616b738d2aa21184}{learning\_rate\_policy}} \mbox{\hyperlink{structnetwork_a78121635a0f0c3a1d9991390b4325dc3}{policy}};}
+\DoxyCodeLine{725     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a3a68b9064af67870549f955c5ae86411}{benchmark\_layers}};}
+\DoxyCodeLine{726     \textcolor{keywordtype}{int} *\mbox{\hyperlink{structnetwork_ac30ea9cb7c016e0f1836dafb93fc6b2c}{total\_bbox}};}
+\DoxyCodeLine{727     \textcolor{keywordtype}{int} *\mbox{\hyperlink{structnetwork_a4aeafac79e76694fb1e9f4556f704370}{rewritten\_bbox}};}
+\DoxyCodeLine{728 }
+\DoxyCodeLine{729     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_a978d3e339536cd6bea2270d49d93c35a}{learning\_rate}};}
+\DoxyCodeLine{730     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_adaa4989c2523a59364b1205a5f09f2db}{learning\_rate\_min}};}
+\DoxyCodeLine{731     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_aac981fedad322cf0dca979bcaa0f430a}{learning\_rate\_max}};}
+\DoxyCodeLine{732     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a6be8cee6e55f9449a9b3a4fc6febe466}{batches\_per\_cycle}};}
+\DoxyCodeLine{733     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_aaf7145298c7340fde499bda38a5f7073}{batches\_cycle\_mult}};}
+\DoxyCodeLine{734     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_a495c60ef821ca0ade1c42907c8bc90bf}{momentum}};}
+\DoxyCodeLine{735     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_a9afd53b100d35dc162e48118ef4f7eea}{decay}};}
+\DoxyCodeLine{736     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_a5460d67e44c0877ca016ed12925788fe}{gamma}};}
+\DoxyCodeLine{737     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_a0d9e7af8dde42e28a7fdb0e685b2f23b}{scale}};}
+\DoxyCodeLine{738     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_ae38f864b7b9966c38f1882f468131eda}{power}};}
+\DoxyCodeLine{739     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_abaf83235b5968fb68a2dc9215cc67c8c}{time\_steps}};}
+\DoxyCodeLine{740     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a9ed08472400f140c49ecac3ecd1def87}{step}};}
+\DoxyCodeLine{741     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a163b931990a5ac8f456884405de2192b}{max\_batches}};}
+\DoxyCodeLine{742     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a8dfd10de37f2b101304e808d28924769}{num\_boxes}};}
+\DoxyCodeLine{743     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_aa348b0397dcf150bbe4c3f1f730c8575}{train\_images\_num}};}
+\DoxyCodeLine{744     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structnetwork_ab9f91f1d867103ebd0f73735f54bc93b}{seq\_scales}};}
+\DoxyCodeLine{745     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structnetwork_a64c1fa0153559f530cc815fb6b8a95c8}{scales}};}
+\DoxyCodeLine{746     \textcolor{keywordtype}{int}   *\mbox{\hyperlink{structnetwork_a48fb87937b7ff22cf01875d8d5807cc2}{steps}};}
+\DoxyCodeLine{747     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a6e656092c18afdc2bcb72f87d0ed2547}{num\_steps}};}
+\DoxyCodeLine{748     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a1e0395e7cbcd9cd93d5c8621bb1a38aa}{burn\_in}};}
+\DoxyCodeLine{749     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a119825e5954cdef79a86b6c4cf0316d5}{cudnn\_half}};}
+\DoxyCodeLine{750 }
+\DoxyCodeLine{751     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a7274661135ee8efe567aef0e9c0e40f9}{adam}};}
+\DoxyCodeLine{752     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_a6c56d5eccebbfd39c085766b94cd36b7}{B1}};}
+\DoxyCodeLine{753     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_a42ea583b98356e06dca647bf95520e5c}{B2}};}
+\DoxyCodeLine{754     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_a13a150c894a1f34f08b7f8dff7808ea7}{eps}};}
+\DoxyCodeLine{755 }
+\DoxyCodeLine{756     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a529a36505548232d049abcb84fdcf389}{inputs}};}
+\DoxyCodeLine{757     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a5268de11127a02d86e6f517cf3b3acc9}{outputs}};}
+\DoxyCodeLine{758     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a794927f8c4d44cd8e85ff39e0d4c9939}{truths}};}
+\DoxyCodeLine{759     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a6769bc5e23225cecf0a46eedba29719a}{notruth}};}
+\DoxyCodeLine{760     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a0e57f4230f8ecb07bba0c97cf8f045c7}{h}}, \mbox{\hyperlink{structnetwork_a944b83cb20da2454c6092e07b9a1d3e9}{w}}, \mbox{\hyperlink{structnetwork_a05014921b926874b8a362aa83d98283a}{c}};}
+\DoxyCodeLine{761     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_af98abf1cccd7bfee97b9f7eae752687c}{max\_crop}};}
+\DoxyCodeLine{762     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a9e52bfae3a850150ed2e32c10ab11bec}{min\_crop}};}
+\DoxyCodeLine{763     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_a181329911f37d2d5adce2290683a9897}{max\_ratio}};}
+\DoxyCodeLine{764     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_a395ccde63912c9272f91ee6c9af14784}{min\_ratio}};}
+\DoxyCodeLine{765     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a87bf27881ed88606fae1b80f9049e4ca}{center}};}
+\DoxyCodeLine{766     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a543fe111f1c172543e95fe9dbaa48df7}{flip}}; \textcolor{comment}{// horizontal flip 50\% probability augmentaiont for classifier training (default = 1)}}
+\DoxyCodeLine{767     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a82832ccccf1530644f96bec02ede7066}{gaussian\_noise}};}
+\DoxyCodeLine{768     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a04d2ff93c81f07cbcc1c9fae9aafbd59}{blur}};}
+\DoxyCodeLine{769     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a5bcf917836e9c4a877df8bd9517120ea}{mixup}};}
+\DoxyCodeLine{770     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_aa59eb3c12daa241b48cda6d5000caf2c}{label\_smooth\_eps}};}
+\DoxyCodeLine{771     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a562e7cf1b7309da00807cc69031be744}{resize\_step}};}
+\DoxyCodeLine{772     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_aefed0ccee9c36d7fc2c8ed4c47cb70f0}{attention}};}
+\DoxyCodeLine{773     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_abf02badebd91e5392bd487e504be600c}{adversarial}};}
+\DoxyCodeLine{774     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_a688f9545af231f86a106a8fbaa85a38d}{adversarial\_lr}};}
+\DoxyCodeLine{775     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_a803a556aa8a0ff6e7ec892df324ddd61}{max\_chart\_loss}};}
+\DoxyCodeLine{776     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a3353341e3dba21487aa035b314cffc85}{letter\_box}};}
+\DoxyCodeLine{777     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a023b95b67bdf4e7d23fd45d91a0da444}{mosaic\_bound}};}
+\DoxyCodeLine{778     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_ae0c077136dec3c804536d42630f4371e}{contrastive}};}
+\DoxyCodeLine{779     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a90fa7e71aa536e77e5c2028e2ab23565}{contrastive\_jit\_flip}};}
+\DoxyCodeLine{780     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_aaa8f8fbace07c5c1502de194cbdf5b7e}{contrastive\_color}};}
+\DoxyCodeLine{781     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a99da8cf542521e5374f2bb7702582c41}{unsupervised}};}
+\DoxyCodeLine{782     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_abe286813534c121ee16da09c258eaf2e}{angle}};}
+\DoxyCodeLine{783     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_acaa88cf6c30100edff5dc061bfb226bb}{aspect}};}
+\DoxyCodeLine{784     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_a609572db2c14c55c6c261844cb33fa12}{exposure}};}
+\DoxyCodeLine{785     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_a9bbb55144a6eca464fbc122f97bf1af8}{saturation}};}
+\DoxyCodeLine{786     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_ae38058a4e1ad0a334026ecbe01f101f4}{hue}};}
+\DoxyCodeLine{787     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a89dfdaa6178f338c250d7b6631476fa1}{random}};}
+\DoxyCodeLine{788     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a50ea7873bccd5929b0b9749453da1f46}{track}};}
+\DoxyCodeLine{789     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a602ff3583dabda56bbbc42b4e359b1fe}{augment\_speed}};}
+\DoxyCodeLine{790     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a651ca5bba7949fa86ffe1a2edb5d10ca}{sequential\_subdivisions}};}
+\DoxyCodeLine{791     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a3b0a8678b266dd09c64dd57400f73a24}{init\_sequential\_subdivisions}};}
+\DoxyCodeLine{792     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_ac4d8db1ebfe0b71dc1a260d0ae872760}{current\_subdivision}};}
+\DoxyCodeLine{793     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_ac8da8cb90c4cd45a8f249e08ade12356}{try\_fix\_nan}};}
+\DoxyCodeLine{794 }
+\DoxyCodeLine{795     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a8ba8b1354e8d018ac74920eb0cd882e8}{gpu\_index}};}
+\DoxyCodeLine{796     \mbox{\hyperlink{structtree}{tree}} *\mbox{\hyperlink{structnetwork_a36d6158f07498646e400bf6f7e20a705}{hierarchy}};}
+\DoxyCodeLine{797 }
+\DoxyCodeLine{798     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structnetwork_a8f391155a3ceb60caf07d0ee6c6a93f2}{input}};}
+\DoxyCodeLine{799     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structnetwork_a1453c2cf9a735bde55a281d698797a05}{truth}};}
+\DoxyCodeLine{800     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structnetwork_a7787a7dde0eea2d91b208c23cdba6286}{delta}};}
+\DoxyCodeLine{801     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structnetwork_a624719738b94a1d55de651f5dac16b79}{workspace}};}
+\DoxyCodeLine{802     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a32e7b55fe8dfa07391b6cdce17b4a2c1}{train}};}
+\DoxyCodeLine{803     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a67a4b2779829a2891b1e3194b4910334}{index}};}
+\DoxyCodeLine{804     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structnetwork_ac80b4b4eeda5cf4cc4af5c2173d0ad31}{cost}};}
+\DoxyCodeLine{805     \textcolor{keywordtype}{float} \mbox{\hyperlink{structnetwork_ac04afd1b20edc7f8734cf2eabe4b57f0}{clip}};}
+\DoxyCodeLine{806 }
+\DoxyCodeLine{807 \textcolor{comment}{//\#ifdef GPU}}
+\DoxyCodeLine{808     \textcolor{comment}{//float *input\_gpu;}}
+\DoxyCodeLine{809     \textcolor{comment}{//float *truth\_gpu;}}
+\DoxyCodeLine{810     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structnetwork_a8d4b5c18fdf0f9fc1c8261b19dff7067}{delta\_gpu}};}
+\DoxyCodeLine{811     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structnetwork_ae86280dc96f37e99b6f4bb72d25d3cbb}{output\_gpu}};}
+\DoxyCodeLine{812 }
+\DoxyCodeLine{813     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structnetwork_ab0b9da626c611f53e5a299f75e06e18f}{input\_state\_gpu}};}
+\DoxyCodeLine{814     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structnetwork_ae3a4bb542ac197dfc3d052bc1b4d71bf}{input\_pinned\_cpu}};}
+\DoxyCodeLine{815     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_ae267a5615efc9f282ea969c2b7fb26cc}{input\_pinned\_cpu\_flag}};}
+\DoxyCodeLine{816 }
+\DoxyCodeLine{817     \textcolor{keywordtype}{float} **\mbox{\hyperlink{structnetwork_a453981d30c67aa549f3961bb1455e98a}{input\_gpu}};}
+\DoxyCodeLine{818     \textcolor{keywordtype}{float} **\mbox{\hyperlink{structnetwork_a6ed22759648ff09e2cfaa9f331dc1e38}{truth\_gpu}};}
+\DoxyCodeLine{819     \textcolor{keywordtype}{float} **\mbox{\hyperlink{structnetwork_a3473fa8eebafdf46318506b8bc2b1114}{input16\_gpu}};}
+\DoxyCodeLine{820     \textcolor{keywordtype}{float} **\mbox{\hyperlink{structnetwork_a0948e3973a8490877c95616a6a2b1fa7}{output16\_gpu}};}
+\DoxyCodeLine{821     \textcolor{keywordtype}{size\_t} *\mbox{\hyperlink{structnetwork_ab9e60c4c3092115f10dd8a9288c074b0}{max\_input16\_size}};}
+\DoxyCodeLine{822     \textcolor{keywordtype}{size\_t} *\mbox{\hyperlink{structnetwork_a26aa45acbe051446a9a451132f77125e}{max\_output16\_size}};}
+\DoxyCodeLine{823     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a1178dc0d580008cf4ba0c9bf67a57b7c}{wait\_stream}};}
+\DoxyCodeLine{824 }
+\DoxyCodeLine{825     \textcolor{keywordtype}{void} *\mbox{\hyperlink{structnetwork_ad2795f74630992210f16f4a24f496790}{cuda\_graph}};}
+\DoxyCodeLine{826     \textcolor{keywordtype}{void} *\mbox{\hyperlink{structnetwork_a2f14934c73d48c4191403b4349c67d11}{cuda\_graph\_exec}};}
+\DoxyCodeLine{827     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a5e190d16cc2a35c6f9263bccd7949577}{use\_cuda\_graph}};}
+\DoxyCodeLine{828     \textcolor{keywordtype}{int} *\mbox{\hyperlink{structnetwork_a0f8db2e961be851fa454ba5ef510b1d1}{cuda\_graph\_ready}};}
+\DoxyCodeLine{829 }
+\DoxyCodeLine{830     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structnetwork_adc87b730d0e5602d34c47656a3a3f4bc}{global\_delta\_gpu}};}
+\DoxyCodeLine{831     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structnetwork_a08406c4227be6aaed2a6f6b3449f6a15}{state\_delta\_gpu}};}
+\DoxyCodeLine{832     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structnetwork_ab019a2be083c6d3e17da31842dbf51ec}{max\_delta\_gpu\_size}};}
+\DoxyCodeLine{833 \textcolor{comment}{//\#endif  // GPU}}
+\DoxyCodeLine{834     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_ac07d0bb809f276a32c8a91f82d2882f3}{optimized\_memory}};}
+\DoxyCodeLine{835     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork_a18ef3cad204d769464467e035117bd50}{dynamic\_minibatch}};}
+\DoxyCodeLine{836     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structnetwork_ad60825a8df8601ded4e232c86b79e57f}{workspace\_size\_limit}};}
+\DoxyCodeLine{837 \} \mbox{\hyperlink{darknet_8h_a68a544bd92073d49f1908929cfb2b4a5}{network}};}
+\DoxyCodeLine{838 }
+\DoxyCodeLine{839 \textcolor{comment}{// network.h}}
+\DoxyCodeLine{840 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structnetwork__state}{network\_state}} \{}
+\DoxyCodeLine{841     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structnetwork__state_a7d28704c42287263de27bd235be3f9ee}{truth}};}
+\DoxyCodeLine{842     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structnetwork__state_a96304e9dcd58757de70fc9395c18003f}{input}};}
+\DoxyCodeLine{843     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structnetwork__state_af783ba5ae54431b40bd222c4b4b67c6b}{delta}};}
+\DoxyCodeLine{844     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structnetwork__state_a6f220042761a9c8732260d0e428cc59b}{workspace}};}
+\DoxyCodeLine{845     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork__state_a43617ae468ae925ab6115eb99b500e2a}{train}};}
+\DoxyCodeLine{846     \textcolor{keywordtype}{int} \mbox{\hyperlink{structnetwork__state_a223493244e17d2bedf98b933f7b7d5ed}{index}};}
+\DoxyCodeLine{847     \mbox{\hyperlink{structnetwork}{network}} \mbox{\hyperlink{structnetwork__state_a39ab6b269528f5cc92b4ee4d6846fd29}{net}};}
+\DoxyCodeLine{848 \} \mbox{\hyperlink{darknet_8h_a19aa1c59fa905a609c36d662b8a753b2}{network\_state}};}
+\DoxyCodeLine{849 }
+\DoxyCodeLine{850 \textcolor{comment}{//typedef struct \{}}
+\DoxyCodeLine{851 \textcolor{comment}{//    int w;}}
+\DoxyCodeLine{852 \textcolor{comment}{//    int h;}}
+\DoxyCodeLine{853 \textcolor{comment}{//    float scale;}}
+\DoxyCodeLine{854 \textcolor{comment}{//    float rad;}}
+\DoxyCodeLine{855 \textcolor{comment}{//    float dx;}}
+\DoxyCodeLine{856 \textcolor{comment}{//    float dy;}}
+\DoxyCodeLine{857 \textcolor{comment}{//    float aspect;}}
+\DoxyCodeLine{858 \textcolor{comment}{//\} augment\_args;}}
+\DoxyCodeLine{859 }
+\DoxyCodeLine{860 \textcolor{comment}{// image.h}}
+\DoxyCodeLine{861 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structimage}{image}} \{}
+\DoxyCodeLine{862     \textcolor{keywordtype}{int} \mbox{\hyperlink{structimage_aa6480e4024a0d5ca8d36b4145b3ceb43}{w}};}
+\DoxyCodeLine{863     \textcolor{keywordtype}{int} \mbox{\hyperlink{structimage_a30e2caee481a59608823b3bcec8a139f}{h}};}
+\DoxyCodeLine{864     \textcolor{keywordtype}{int} \mbox{\hyperlink{structimage_aa67d2491c4d17dd240453d69dfc99482}{c}};}
+\DoxyCodeLine{865     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structimage_aed7e0704080213b735419d6661251a0a}{data}};}
+\DoxyCodeLine{866 \} \mbox{\hyperlink{darknet_8h_a183300a528553b66677f173c07c7170e}{image}};}
+\DoxyCodeLine{867 }
+\DoxyCodeLine{868 \textcolor{comment}{//typedef struct \{}}
+\DoxyCodeLine{869 \textcolor{comment}{//    int w;}}
+\DoxyCodeLine{870 \textcolor{comment}{//    int h;}}
+\DoxyCodeLine{871 \textcolor{comment}{//    int c;}}
+\DoxyCodeLine{872 \textcolor{comment}{//    float *data;}}
+\DoxyCodeLine{873 \textcolor{comment}{//\} image;}}
+\DoxyCodeLine{874 }
+\DoxyCodeLine{875 \textcolor{comment}{// box.h}}
+\DoxyCodeLine{876 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structbox}{box}} \{}
+\DoxyCodeLine{877     \textcolor{keywordtype}{float} \mbox{\hyperlink{structbox_a26adb5cfaf492245aba926b2f212b712}{x}}, \mbox{\hyperlink{structbox_ab25e5389fd474ccd83c7dfcf0b1f9957}{y}}, \mbox{\hyperlink{structbox_abd9b0191e52f22befa76bcf37b9e6477}{w}}, \mbox{\hyperlink{structbox_a56959fa604cfb411d0c001be7c444d05}{h}};}
+\DoxyCodeLine{878 \} \mbox{\hyperlink{darknet_8h_a35be482f569ea334a35ba069ce601a7a}{box}};}
+\DoxyCodeLine{879 }
+\DoxyCodeLine{880 \textcolor{comment}{// box.h}}
+\DoxyCodeLine{881 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structboxabs}{boxabs}} \{}
+\DoxyCodeLine{882     \textcolor{keywordtype}{float} \mbox{\hyperlink{structboxabs_ad66f38c56a46ba95359929f0b1de6c53}{left}}, \mbox{\hyperlink{structboxabs_a38c8622f267b915b1db680fc8709f7d3}{right}}, \mbox{\hyperlink{structboxabs_acfd7d547e300a9ca5d3cff7c25221803}{top}}, \mbox{\hyperlink{structboxabs_ac8ce0207ab8ed0962a6b02d0174248fe}{bot}};}
+\DoxyCodeLine{883 \} \mbox{\hyperlink{darknet_8h_a699903128669faf8bb347232e0cbf66b}{boxabs}};}
+\DoxyCodeLine{884 }
+\DoxyCodeLine{885 \textcolor{comment}{// box.h}}
+\DoxyCodeLine{886 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structdxrep}{dxrep}} \{}
+\DoxyCodeLine{887     \textcolor{keywordtype}{float} \mbox{\hyperlink{structdxrep_a492ceb29773db8c2637c5abb4d46d4c4}{dt}}, \mbox{\hyperlink{structdxrep_af0bdaf311757e9314c77e9a2f6a4fbdd}{db}}, \mbox{\hyperlink{structdxrep_ac636322e3ec68a60210a8ecadd8f520c}{dl}}, \mbox{\hyperlink{structdxrep_a547337755bab61e037abaaff8758c87c}{dr}};}
+\DoxyCodeLine{888 \} \mbox{\hyperlink{darknet_8h_ac7dc960d05f3e6df9803f5d72635f618}{dxrep}};}
+\DoxyCodeLine{889 }
+\DoxyCodeLine{890 \textcolor{comment}{// box.h}}
+\DoxyCodeLine{891 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structious}{ious}} \{}
+\DoxyCodeLine{892     \textcolor{keywordtype}{float} \mbox{\hyperlink{structious_a4c4dfaf8d1d3a9df7b392b227ae78525}{iou}}, \mbox{\hyperlink{structious_a2f0673c1216f526c817bef5523b61f59}{giou}}, \mbox{\hyperlink{structious_a5872ffb28d4597461411adfaf325afaa}{diou}}, \mbox{\hyperlink{structious_a4f9f240e573ff12a96c1bc8f05eb3a96}{ciou}};}
+\DoxyCodeLine{893     \mbox{\hyperlink{structdxrep}{dxrep}} \mbox{\hyperlink{structious_a3d8e525e9975341601fec546f72894de}{dx\_iou}};}
+\DoxyCodeLine{894     \mbox{\hyperlink{structdxrep}{dxrep}} \mbox{\hyperlink{structious_a9bfc7e710f55496653fec2edec55fdaf}{dx\_giou}};}
+\DoxyCodeLine{895 \} \mbox{\hyperlink{darknet_8h_a19957b0e24a531c6a55004a7867642fe}{ious}};}
+\DoxyCodeLine{896 }
+\DoxyCodeLine{897 }
+\DoxyCodeLine{898 \textcolor{comment}{// box.h}}
+\DoxyCodeLine{899 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structdetection}{detection}}\{}
+\DoxyCodeLine{900     \mbox{\hyperlink{structbox}{box}} \mbox{\hyperlink{structdetection_a0e96ec314ffa1b5462b81752d1842191}{bbox}};}
+\DoxyCodeLine{901     \textcolor{keywordtype}{int} \mbox{\hyperlink{structdetection_a5501f226bdc7ce3630666a8065fa70b9}{classes}};}
+\DoxyCodeLine{902     \textcolor{keywordtype}{int} \mbox{\hyperlink{structdetection_a6d44ea0ed3f4f55cdc1112ff1f04d3ad}{best\_class\_idx}};}
+\DoxyCodeLine{903     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structdetection_a135fa8f73988691651cb54335e6e20c2}{prob}};}
+\DoxyCodeLine{904     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structdetection_a52d75f4c96f7ae42075f4792b1852946}{mask}};}
+\DoxyCodeLine{905     \textcolor{keywordtype}{float} \mbox{\hyperlink{structdetection_afd81464803f6cca28d0d3171158f0d52}{objectness}};}
+\DoxyCodeLine{906     \textcolor{keywordtype}{int} \mbox{\hyperlink{structdetection_a134b1d6d4fa5b3356af1e4af9d53f344}{sort\_class}};}
+\DoxyCodeLine{907     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structdetection_a0e0b9a40021e869be806ca5fd6025239}{uc}}; \textcolor{comment}{// Gaussian\_YOLOv3 -\/ tx,ty,tw,th uncertainty}}
+\DoxyCodeLine{908     \textcolor{keywordtype}{int} \mbox{\hyperlink{structdetection_a14bddb62478cb550b1606517063cdc1d}{points}}; \textcolor{comment}{// bit-\/0 -\/ center, bit-\/1 -\/ top-\/left-\/corner, bit-\/2 -\/ bottom-\/right-\/corner}}
+\DoxyCodeLine{909     \textcolor{keywordtype}{float} *\mbox{\hyperlink{structdetection_a5d3cf73c6fce4725b64f7f7da3e11b0c}{embeddings}};  \textcolor{comment}{// embeddings for tracking}}
+\DoxyCodeLine{910     \textcolor{keywordtype}{int} \mbox{\hyperlink{structdetection_aa64ec7504b8acf32176efcbdb9067b58}{embedding\_size}};}
+\DoxyCodeLine{911     \textcolor{keywordtype}{float} \mbox{\hyperlink{structdetection_aad6b046ac4191429a1d13f5013026ec5}{sim}};}
+\DoxyCodeLine{912     \textcolor{keywordtype}{int} \mbox{\hyperlink{structdetection_ac116735cc0dbfe80d656d525a503d2fb}{track\_id}};}
+\DoxyCodeLine{913 \} \mbox{\hyperlink{darknet_8h_a133407954ec8ecfeb85373ea6c50bf34}{detection}};}
+\DoxyCodeLine{914 }
+\DoxyCodeLine{915 \textcolor{comment}{// network.c -\/batch inference}}
+\DoxyCodeLine{916 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structdet__num__pair}{det\_num\_pair}} \{}
+\DoxyCodeLine{917     \textcolor{keywordtype}{int} \mbox{\hyperlink{structdet__num__pair_a8476f8f325f76ae5d67a48951a46928c}{num}};}
+\DoxyCodeLine{918     \mbox{\hyperlink{structdetection}{detection}} *\mbox{\hyperlink{structdet__num__pair_a596a0346278f08d85c38eac8aea764cc}{dets}};}
+\DoxyCodeLine{919 \} \mbox{\hyperlink{darknet_8h_aa045d203e26e44c14f261604fa235fc9}{det\_num\_pair}}, *\mbox{\hyperlink{darknet_8h_acb5800dc09982568893174f3b9d2c56e}{pdet\_num\_pair}};}
+\DoxyCodeLine{920 }
+\DoxyCodeLine{921 \textcolor{comment}{// matrix.h}}
+\DoxyCodeLine{922 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structmatrix}{matrix}} \{}
+\DoxyCodeLine{923     \textcolor{keywordtype}{int} \mbox{\hyperlink{structmatrix_af83737a5597214de0458c5535a787143}{rows}}, \mbox{\hyperlink{structmatrix_a8a250fb537afd000561485dd88281356}{cols}};}
+\DoxyCodeLine{924     \textcolor{keywordtype}{float} **\mbox{\hyperlink{structmatrix_ac06cdc346e87ea5cb4e4ae1a9b91d61f}{vals}};}
+\DoxyCodeLine{925 \} \mbox{\hyperlink{darknet_8h_afd84c975757d75768fbbe11e7f67de27}{matrix}};}
+\DoxyCodeLine{926 }
+\DoxyCodeLine{927 \textcolor{comment}{// data.h}}
+\DoxyCodeLine{928 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structdata}{data}} \{}
+\DoxyCodeLine{929     \textcolor{keywordtype}{int} \mbox{\hyperlink{structdata_a9de96028e1598b323d91ffb059cd48b2}{w}}, \mbox{\hyperlink{structdata_adbac4a041922ac9e6c47953f5fa23126}{h}};}
+\DoxyCodeLine{930     \mbox{\hyperlink{structmatrix}{matrix}} \mbox{\hyperlink{structdata_a1f37ae26b26b12ef5c70a12957826e87}{X}};}
+\DoxyCodeLine{931     \mbox{\hyperlink{structmatrix}{matrix}} \mbox{\hyperlink{structdata_a30946bde3a05e40df6fbb49c5dd9b627}{y}};}
+\DoxyCodeLine{932     \textcolor{keywordtype}{int} \mbox{\hyperlink{structdata_a3ef4c4e942b1f2b6a5e64e7fb7e12491}{shallow}};}
+\DoxyCodeLine{933     \textcolor{keywordtype}{int} *\mbox{\hyperlink{structdata_afba4d3b06050db7a30b0b11809ae6e23}{num\_boxes}};}
+\DoxyCodeLine{934     \mbox{\hyperlink{structbox}{box}} **\mbox{\hyperlink{structdata_a8379df4ef55945c6fdb778dd581dce55}{boxes}};}
+\DoxyCodeLine{935 \} \mbox{\hyperlink{darknet_8h_a493583f6fc164cf849745e01e4c04ab5}{data}};}
+\DoxyCodeLine{936 }
+\DoxyCodeLine{937 \textcolor{comment}{// data.h}}
+\DoxyCodeLine{938 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{}
+\DoxyCodeLine{939     \mbox{\hyperlink{darknet_8h_ac2ad7f431e3446fddcd9b6b9f93c4c14a6e94b1b980ce6cf0203483eaea660b08}{CLASSIFICATION\_DATA}}, \mbox{\hyperlink{darknet_8h_ac2ad7f431e3446fddcd9b6b9f93c4c14a2f79071e8db47748f5ce9cbc06686b3c}{DETECTION\_DATA}}, \mbox{\hyperlink{darknet_8h_ac2ad7f431e3446fddcd9b6b9f93c4c14aec3b1e9e356262e110360ff124ae82f1}{CAPTCHA\_DATA}}, \mbox{\hyperlink{darknet_8h_ac2ad7f431e3446fddcd9b6b9f93c4c14a65e122ba01bcce9d0ec2fb618f60f6e0}{REGION\_DATA}}, \mbox{\hyperlink{darknet_8h_ac2ad7f431e3446fddcd9b6b9f93c4c14a5b52eea059c9abc7985f6fe90ca48bcf}{IMAGE\_DATA}}, \mbox{\hyperlink{darknet_8h_ac2ad7f431e3446fddcd9b6b9f93c4c14aaf964f5661650f69891f7827c9a7c856}{COMPARE\_DATA}}, \mbox{\hyperlink{darknet_8h_ac2ad7f431e3446fddcd9b6b9f93c4c14a0b8199f155b076c21e7602ae1f89b93a}{WRITING\_DATA}}, \mbox{\hyperlink{darknet_8h_ac2ad7f431e3446fddcd9b6b9f93c4c14a3a7509c13d5d89cc918d07cdd1da6fe3}{SWAG\_DATA}}, \mbox{\hyperlink{darknet_8h_ac2ad7f431e3446fddcd9b6b9f93c4c14a9d2df7a59b12607c4d981b4657f64be1}{TAG\_DATA}}, \mbox{\hyperlink{darknet_8h_ac2ad7f431e3446fddcd9b6b9f93c4c14a681e5d628481accd8ccc09b0fc1159a8}{OLD\_CLASSIFICATION\_DATA}}, \mbox{\hyperlink{darknet_8h_ac2ad7f431e3446fddcd9b6b9f93c4c14aa65b279c42d4df46d975594828e5dd89}{STUDY\_DATA}}, \mbox{\hyperlink{darknet_8h_ac2ad7f431e3446fddcd9b6b9f93c4c14a1e0e55ea501dacf43e0e397ef6e03df8}{DET\_DATA}}, \mbox{\hyperlink{darknet_8h_ac2ad7f431e3446fddcd9b6b9f93c4c14a231552854064208cc016dee7eaa07939}{SUPER\_DATA}}, \mbox{\hyperlink{darknet_8h_ac2ad7f431e3446fddcd9b6b9f93c4c14a0b04f371887aff76bef9f6035dc0ebd9}{LETTERBOX\_DATA}}, \mbox{\hyperlink{darknet_8h_ac2ad7f431e3446fddcd9b6b9f93c4c14a8412b05658ad561ef6817766e4e23aea}{REGRESSION\_DATA}}, \mbox{\hyperlink{darknet_8h_ac2ad7f431e3446fddcd9b6b9f93c4c14ac411ec9f8ed5d22abae5970b4ba960c7}{SEGMENTATION\_DATA}}, \mbox{\hyperlink{darknet_8h_ac2ad7f431e3446fddcd9b6b9f93c4c14a13e7a33aec0cca03cbfe238c465c401a}{INSTANCE\_DATA}}, \mbox{\hyperlink{darknet_8h_ac2ad7f431e3446fddcd9b6b9f93c4c14a18ea991202b2c4e2cb7dc013c845fe32}{ISEG\_DATA}}}
+\DoxyCodeLine{940 \} \mbox{\hyperlink{darknet_8h_ac2ad7f431e3446fddcd9b6b9f93c4c14}{data\_type}};}
+\DoxyCodeLine{941 }
+\DoxyCodeLine{942 \textcolor{comment}{// data.h}}
+\DoxyCodeLine{943 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structload__args}{load\_args}} \{}
+\DoxyCodeLine{944     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_a3f6b3f3ef9406ab124550bc8166f2dcd}{threads}};}
+\DoxyCodeLine{945     \textcolor{keywordtype}{char} **\mbox{\hyperlink{structload__args_aadcafc7eb67b2a86a1a7a6ff2ab80a94}{paths}};}
+\DoxyCodeLine{946     \textcolor{keywordtype}{char} *\mbox{\hyperlink{structload__args_a2fe0df26f167df4807c7fb67bf835813}{path}};}
+\DoxyCodeLine{947     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_a46de5db87a3c8c05130d5b23a2cdea2f}{n}};}
+\DoxyCodeLine{948     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_aca89fa6ea8f11383062a905539477001}{m}};}
+\DoxyCodeLine{949     \textcolor{keywordtype}{char} **\mbox{\hyperlink{structload__args_a66b04c5770c0b451fa14a4a87258be9d}{labels}};}
+\DoxyCodeLine{950     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_a9cc50b164512ec4db097288e9d569729}{h}};}
+\DoxyCodeLine{951     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_a936232a911399499924e00ba80ad16bf}{w}};}
+\DoxyCodeLine{952     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_ae2617af28f32debbfd91c082d78e1f5a}{c}}; \textcolor{comment}{// color depth}}
+\DoxyCodeLine{953     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_aac906990c64be46d44ca7c9895eca6ec}{out\_w}};}
+\DoxyCodeLine{954     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_aebbded43f56f35f190cd93501cfb8fa3}{out\_h}};}
+\DoxyCodeLine{955     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_a2a9063dbc5416dc01971bec6a3179a80}{nh}};}
+\DoxyCodeLine{956     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_a46bfaa805648b12918b2fff4c66940c7}{nw}};}
+\DoxyCodeLine{957     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_ac8bdb2525a537b886829037122651101}{num\_boxes}};}
+\DoxyCodeLine{958     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_ad5b1944f008ed470202378e57249225d}{truth\_size}};}
+\DoxyCodeLine{959     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_a1dceb8bb209570cf9dd9fd5de36f206d}{min}}, \mbox{\hyperlink{structload__args_a7f5319b3ca7889ed85ac8cc60de8a40d}{max}}, \mbox{\hyperlink{structload__args_a57fbd5eb4f1b223ad19b5324fa01b184}{size}};}
+\DoxyCodeLine{960     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_af12ce52f9bf54ea7985cb0e9b9dfaf55}{classes}};}
+\DoxyCodeLine{961     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_a05d8a43c38b9e069a854cc6a7c7625db}{background}};}
+\DoxyCodeLine{962     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_a27932099db4ddca9b7ca717f92891a44}{scale}};}
+\DoxyCodeLine{963     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_a84a09ba4d910b1129e92dd91fa01d6f0}{center}};}
+\DoxyCodeLine{964     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_a8db147261d62a355ba735d96f99ada43}{coords}};}
+\DoxyCodeLine{965     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_a526097372b46b8a5798e0272d0a8c89a}{mini\_batch}};}
+\DoxyCodeLine{966     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_a21d1642b47d7f716ef63a59c0a5d3ffc}{track}};}
+\DoxyCodeLine{967     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_abc48561bdb08c037dc638025f832885f}{augment\_speed}};}
+\DoxyCodeLine{968     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_af975a586108ab378f88693de4a47fab0}{letter\_box}};}
+\DoxyCodeLine{969     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_a8bf5d92892be8fb06fe9e1ac673f3cbb}{mosaic\_bound}};}
+\DoxyCodeLine{970     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_a7d9ed3a237d204f5401adf6aa24d5829}{show\_imgs}};}
+\DoxyCodeLine{971     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_a41e2b4f3139e0a5c193f92881409fafb}{dontuse\_opencv}};}
+\DoxyCodeLine{972     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_a4f1f4037d2b95e6e444ee8f0e2c399fe}{contrastive}};}
+\DoxyCodeLine{973     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_a426e7935c58e1eab1a690b2fb72c827f}{contrastive\_jit\_flip}};}
+\DoxyCodeLine{974     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_aaa306b61289bf7e3bdb4a7e72e815175}{contrastive\_color}};}
+\DoxyCodeLine{975     \textcolor{keywordtype}{float} \mbox{\hyperlink{structload__args_ad446757635db989216a02b331d254906}{jitter}};}
+\DoxyCodeLine{976     \textcolor{keywordtype}{float} \mbox{\hyperlink{structload__args_ac8f40c8beb9f49fcdc07d63644db73ef}{resize}};}
+\DoxyCodeLine{977     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_a783e4d11a0b993ef61eefd0b13116cd6}{flip}};}
+\DoxyCodeLine{978     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_af125e695763ee8aff1909b420846d390}{gaussian\_noise}};}
+\DoxyCodeLine{979     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_ac0064bf7634387d46850552d44c9baca}{blur}};}
+\DoxyCodeLine{980     \textcolor{keywordtype}{int} \mbox{\hyperlink{structload__args_af9ad9ad0254d90fe19a7160ec9288a61}{mixup}};}
+\DoxyCodeLine{981     \textcolor{keywordtype}{float} \mbox{\hyperlink{structload__args_ab5ef2cdec218c29fd6d39df79c3618d2}{label\_smooth\_eps}};}
+\DoxyCodeLine{982     \textcolor{keywordtype}{float} \mbox{\hyperlink{structload__args_a6cc2a92701869043348a92cb810edbbd}{angle}};}
+\DoxyCodeLine{983     \textcolor{keywordtype}{float} \mbox{\hyperlink{structload__args_a0077414b1db970d5eecfc2c756fc328b}{aspect}};}
+\DoxyCodeLine{984     \textcolor{keywordtype}{float} \mbox{\hyperlink{structload__args_ad478a463de03972022a6c6f89c7c4912}{saturation}};}
+\DoxyCodeLine{985     \textcolor{keywordtype}{float} \mbox{\hyperlink{structload__args_a3db966b80533d8c5003372710f9e8632}{exposure}};}
+\DoxyCodeLine{986     \textcolor{keywordtype}{float} \mbox{\hyperlink{structload__args_a37e3681f1edc871b1e15432f08d00114}{hue}};}
+\DoxyCodeLine{987     \mbox{\hyperlink{structdata}{data}} *\mbox{\hyperlink{structload__args_a0b1c4f762d67a0f0cbcc1241cfa5463d}{d}};}
+\DoxyCodeLine{988     \mbox{\hyperlink{structimage}{image}} *\mbox{\hyperlink{structload__args_ac821b75a2e615c801b67a73911dd0134}{im}};}
+\DoxyCodeLine{989     \mbox{\hyperlink{structimage}{image}} *\mbox{\hyperlink{structload__args_aa9dc3e3e93a6031df60420a5cb36c508}{resized}};}
+\DoxyCodeLine{990     \mbox{\hyperlink{darknet_8h_ac2ad7f431e3446fddcd9b6b9f93c4c14}{data\_type}} \mbox{\hyperlink{structload__args_a281729b932cef85bb4e2a88e1133518d}{type}};}
+\DoxyCodeLine{991     \mbox{\hyperlink{structtree}{tree}} *\mbox{\hyperlink{structload__args_a2c1866cf8b94474f3f8416a1e0f0cf91}{hierarchy}};}
+\DoxyCodeLine{992 \} \mbox{\hyperlink{darknet_8h_a45e6c0701044f6033e3786cdbf132ef5}{load\_args}};}
+\DoxyCodeLine{993 }
+\DoxyCodeLine{994 \textcolor{comment}{// data.h}}
+\DoxyCodeLine{995 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structbox__label}{box\_label}} \{}
+\DoxyCodeLine{996     \textcolor{keywordtype}{int} \mbox{\hyperlink{structbox__label_a70328738c0d38547cd93d2fa59310a31}{id}};}
+\DoxyCodeLine{997     \textcolor{keywordtype}{int} \mbox{\hyperlink{structbox__label_a1a7bf225c0bd93aaa685d0dac28117f0}{track\_id}};}
+\DoxyCodeLine{998     \textcolor{keywordtype}{float} \mbox{\hyperlink{structbox__label_a50bbc824640977cfbd11b7d129c488d3}{x}}, \mbox{\hyperlink{structbox__label_ae188dc93ed34cce2910afcd3b5e43730}{y}}, \mbox{\hyperlink{structbox__label_ad866cd941fd0704a6ab79c068d3b2aff}{w}}, \mbox{\hyperlink{structbox__label_a16f7c9ecdbd1919c153e7b3aa07f8d64}{h}};}
+\DoxyCodeLine{999     \textcolor{keywordtype}{float} \mbox{\hyperlink{structbox__label_adbd27415d605f29a7022298fd615ed75}{left}}, \mbox{\hyperlink{structbox__label_a4c7c88557656ba121f112021522b5837}{right}}, \mbox{\hyperlink{structbox__label_a1f60ec698e94e15cc51a2d5d9e07126c}{top}}, \mbox{\hyperlink{structbox__label_a284fc060d46feacdf929ec53dca7c643}{bottom}};}
+\DoxyCodeLine{1000 \} \mbox{\hyperlink{darknet_8h_a5c8e66e3aefd103ca50cfdab51c118db}{box\_label}};}
+\DoxyCodeLine{1001 }
+\DoxyCodeLine{1002 \textcolor{comment}{// list.h}}
+\DoxyCodeLine{1003 \textcolor{comment}{//typedef struct node \{}}
+\DoxyCodeLine{1004 \textcolor{comment}{//    void *val;}}
+\DoxyCodeLine{1005 \textcolor{comment}{//    struct node *next;}}
+\DoxyCodeLine{1006 \textcolor{comment}{//    struct node *prev;}}
+\DoxyCodeLine{1007 \textcolor{comment}{//\} node;}}
+\DoxyCodeLine{1008 }
+\DoxyCodeLine{1009 \textcolor{comment}{// list.h}}
+\DoxyCodeLine{1010 \textcolor{comment}{//typedef struct list \{}}
+\DoxyCodeLine{1011 \textcolor{comment}{//    int size;}}
+\DoxyCodeLine{1012 \textcolor{comment}{//    node *front;}}
+\DoxyCodeLine{1013 \textcolor{comment}{//    node *back;}}
+\DoxyCodeLine{1014 \textcolor{comment}{//\} list;}}
+\DoxyCodeLine{1015 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{1016 }
+\DoxyCodeLine{1017 }
+\DoxyCodeLine{1018 \textcolor{comment}{// parser.c}}
+\DoxyCodeLine{1019 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \mbox{\hyperlink{structnetwork}{network}} *\mbox{\hyperlink{darknet_8h_af78081cc3cc3e70341302a1eb857d247}{load\_network}}(\textcolor{keywordtype}{char} *cfg, \textcolor{keywordtype}{char} *weights, \textcolor{keywordtype}{int} clear);}
+\DoxyCodeLine{1020 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \mbox{\hyperlink{structnetwork}{network}} *\mbox{\hyperlink{darknet_8h_a50e96f00fa6cc29719f2895da907c6cb}{load\_network\_custom}}(\textcolor{keywordtype}{char} *cfg, \textcolor{keywordtype}{char} *weights, \textcolor{keywordtype}{int} clear, \textcolor{keywordtype}{int} batch);}
+\DoxyCodeLine{1021 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a8dc99084990754ab7cd2d1338092a4af}{free\_network}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{1022 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_aa6ae06613a5d02fe91931a75cc8e67e5}{free\_network\_ptr}}(\mbox{\hyperlink{structnetwork}{network}}* net);}
+\DoxyCodeLine{1023 }
+\DoxyCodeLine{1024 \textcolor{comment}{// network.c}}
+\DoxyCodeLine{1025 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \mbox{\hyperlink{structload__args}{load\_args}} \mbox{\hyperlink{darknet_8h_ac8f3b2ec91fff8887b254f9a74293633}{get\_base\_args}}(\mbox{\hyperlink{structnetwork}{network}} *net);}
+\DoxyCodeLine{1026 }
+\DoxyCodeLine{1027 \textcolor{comment}{// box.h}}
+\DoxyCodeLine{1028 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_af78f230d2e3ae6ca2d05b7c968a29295}{do\_nms\_sort}}(\mbox{\hyperlink{structdetection}{detection}} *dets, \textcolor{keywordtype}{int} total, \textcolor{keywordtype}{int} classes, \textcolor{keywordtype}{float} thresh);}
+\DoxyCodeLine{1029 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a6012f403337a7acc82fe7b12f3d4f1f4}{do\_nms\_obj}}(\mbox{\hyperlink{structdetection}{detection}} *dets, \textcolor{keywordtype}{int} total, \textcolor{keywordtype}{int} classes, \textcolor{keywordtype}{float} thresh);}
+\DoxyCodeLine{1030 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a922c53992049b23988b2e6fc17e2332c}{diounms\_sort}}(\mbox{\hyperlink{structdetection}{detection}} *dets, \textcolor{keywordtype}{int} total, \textcolor{keywordtype}{int} classes, \textcolor{keywordtype}{float} thresh, \mbox{\hyperlink{darknet_8h_a1f05008bd71fc89cca27954e4d42312d}{NMS\_KIND}} nms\_kind, \textcolor{keywordtype}{float} beta1);}
+\DoxyCodeLine{1031 }
+\DoxyCodeLine{1032 \textcolor{comment}{// network.h}}
+\DoxyCodeLine{1033 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{float} *\mbox{\hyperlink{darknet_8h_a020f7ac7d6a72f26a103e664e1434776}{network\_predict}}(\mbox{\hyperlink{structnetwork}{network}} net, \textcolor{keywordtype}{float} *input);}
+\DoxyCodeLine{1034 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{float} *\mbox{\hyperlink{darknet_8h_abee1d3a409d23602f6ff5e3b70536695}{network\_predict\_ptr}}(\mbox{\hyperlink{structnetwork}{network}} *net, \textcolor{keywordtype}{float} *input);}
+\DoxyCodeLine{1035 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \mbox{\hyperlink{structdetection}{detection}} *\mbox{\hyperlink{darknet_8h_a41208849fe6fdff5540a0f54e3adfc02}{get\_network\_boxes}}(\mbox{\hyperlink{structnetwork}{network}} *net, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h, \textcolor{keywordtype}{float} thresh, \textcolor{keywordtype}{float} hier, \textcolor{keywordtype}{int} *map, \textcolor{keywordtype}{int} relative, \textcolor{keywordtype}{int} *num, \textcolor{keywordtype}{int} letter);}
+\DoxyCodeLine{1036 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \mbox{\hyperlink{structdet__num__pair}{det\_num\_pair}}* \mbox{\hyperlink{darknet_8h_a35c2f3af84c5a5162a79b2e6275394a4}{network\_predict\_batch}}(\mbox{\hyperlink{structnetwork}{network}} *net, \mbox{\hyperlink{structimage}{image}} im, \textcolor{keywordtype}{int} batch\_size, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h, \textcolor{keywordtype}{float} thresh, \textcolor{keywordtype}{float} hier, \textcolor{keywordtype}{int} *map, \textcolor{keywordtype}{int} relative, \textcolor{keywordtype}{int} letter);}
+\DoxyCodeLine{1037 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_ac1f9a536ea28be96ab3d6d090579d0fa}{free\_detections}}(\mbox{\hyperlink{structdetection}{detection}} *dets, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{1038 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a293ab7a36cb02010287295ee65ff5e45}{free\_batch\_detections}}(\mbox{\hyperlink{structdet__num__pair}{det\_num\_pair}} *det\_num\_pairs, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{1039 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a9810b1b59454bb22bbf4ca54105be4d9}{fuse\_conv\_batchnorm}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{1040 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a2f1f40101a896fc28cb34d75a402f042}{calculate\_binary\_weights}}(\mbox{\hyperlink{structnetwork}{network}} net);}
+\DoxyCodeLine{1041 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{char} *\mbox{\hyperlink{darknet_8h_a84e0fc409ce8937f7cc713916169666e}{detection\_to\_json}}(\mbox{\hyperlink{structdetection}{detection}} *dets, \textcolor{keywordtype}{int} nboxes, \textcolor{keywordtype}{int} classes, \textcolor{keywordtype}{char} **names, \textcolor{keywordtype}{long} \textcolor{keywordtype}{long} \textcolor{keywordtype}{int} frame\_id, \textcolor{keywordtype}{char} *filename);}
+\DoxyCodeLine{1042 }
+\DoxyCodeLine{1043 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \mbox{\hyperlink{structlayer}{layer}}* \mbox{\hyperlink{darknet_8h_ac281613779195d062a4a29b968d873a6}{get\_network\_layer}}(\mbox{\hyperlink{structnetwork}{network}}* net, \textcolor{keywordtype}{int} i);}
+\DoxyCodeLine{1044 \textcolor{comment}{//LIB\_API detection *get\_network\_boxes(network *net, int w, int h, float thresh, float hier, int *map, int relative, int *num, int letter);}}
+\DoxyCodeLine{1045 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \mbox{\hyperlink{structdetection}{detection}} *\mbox{\hyperlink{darknet_8h_aaa2101571b3121a4a506f87949185e2d}{make\_network\_boxes}}(\mbox{\hyperlink{structnetwork}{network}} *net, \textcolor{keywordtype}{float} thresh, \textcolor{keywordtype}{int} *num);}
+\DoxyCodeLine{1046 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_abbf17a52ec7d2b469f99c31b0c9f62d9}{reset\_rnn}}(\mbox{\hyperlink{structnetwork}{network}} *net);}
+\DoxyCodeLine{1047 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{float} *\mbox{\hyperlink{darknet_8h_a2a679b63c7848beb0e97224ba0142e7b}{network\_predict\_image}}(\mbox{\hyperlink{structnetwork}{network}} *net, \mbox{\hyperlink{structimage}{image}} im);}
+\DoxyCodeLine{1048 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{float} *\mbox{\hyperlink{darknet_8h_a5a2fd41faf58526d37c29d279b436317}{network\_predict\_image\_letterbox}}(\mbox{\hyperlink{structnetwork}{network}} *net, \mbox{\hyperlink{structimage}{image}} im);}
+\DoxyCodeLine{1049 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{float} \mbox{\hyperlink{darknet_8h_a81e043f20facd63c281053febd6620fc}{validate\_detector\_map}}(\textcolor{keywordtype}{char} *datacfg, \textcolor{keywordtype}{char} *cfgfile, \textcolor{keywordtype}{char} *weightfile, \textcolor{keywordtype}{float} thresh\_calc\_avg\_iou, \textcolor{keyword}{const} \textcolor{keywordtype}{float} iou\_thresh, \textcolor{keyword}{const} \textcolor{keywordtype}{int} map\_points, \textcolor{keywordtype}{int} letter\_box, \mbox{\hyperlink{structnetwork}{network}} *existing\_net);}
+\DoxyCodeLine{1050 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_ae884a9af616ea2e6ea9b970846962231}{train\_detector}}(\textcolor{keywordtype}{char} *datacfg, \textcolor{keywordtype}{char} *cfgfile, \textcolor{keywordtype}{char} *weightfile, \textcolor{keywordtype}{int} *gpus, \textcolor{keywordtype}{int} ngpus, \textcolor{keywordtype}{int} clear, \textcolor{keywordtype}{int} dont\_show, \textcolor{keywordtype}{int} calc\_map, \textcolor{keywordtype}{float} thresh, \textcolor{keywordtype}{float} iou\_thresh, \textcolor{keywordtype}{int} mjpeg\_port, \textcolor{keywordtype}{int} show\_imgs, \textcolor{keywordtype}{int} benchmark\_layers, \textcolor{keywordtype}{char}* chart\_path);}
+\DoxyCodeLine{1051 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a45eade612123abf3135f7136a4276dd5}{test\_detector}}(\textcolor{keywordtype}{char} *datacfg, \textcolor{keywordtype}{char} *cfgfile, \textcolor{keywordtype}{char} *weightfile, \textcolor{keywordtype}{char} *filename, \textcolor{keywordtype}{float} thresh,}
+\DoxyCodeLine{1052     \textcolor{keywordtype}{float} hier\_thresh, \textcolor{keywordtype}{int} dont\_show, \textcolor{keywordtype}{int} ext\_output, \textcolor{keywordtype}{int} save\_labels, \textcolor{keywordtype}{char} *outfile, \textcolor{keywordtype}{int} letter\_box, \textcolor{keywordtype}{int} benchmark\_layers);}
+\DoxyCodeLine{1053 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{int} \mbox{\hyperlink{darknet_8h_a49744f8642b690c9bb56dc9586160d69}{network\_width}}(\mbox{\hyperlink{structnetwork}{network}} *net);}
+\DoxyCodeLine{1054 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{int} \mbox{\hyperlink{darknet_8h_a5a3c68f019b9db1a65e9e849216e92f0}{network\_height}}(\mbox{\hyperlink{structnetwork}{network}} *net);}
+\DoxyCodeLine{1055 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a4e4a2a9d9b1243d9d535f2a87964b547}{optimize\_picture}}(\mbox{\hyperlink{structnetwork}{network}} *net, \mbox{\hyperlink{structimage}{image}} orig, \textcolor{keywordtype}{int} max\_layer, \textcolor{keywordtype}{float} scale, \textcolor{keywordtype}{float} rate, \textcolor{keywordtype}{float} thresh, \textcolor{keywordtype}{int} norm);}
+\DoxyCodeLine{1056 }
+\DoxyCodeLine{1057 \textcolor{comment}{// image.h}}
+\DoxyCodeLine{1058 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_ace11d75e0eabc3007be712a85ceab1f1}{make\_image\_red}}(\mbox{\hyperlink{structimage}{image}} im);}
+\DoxyCodeLine{1059 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \mbox{\hyperlink{structimage}{image}} \mbox{\hyperlink{darknet_8h_aa3aafb51c8df7c51905c7d397fe3e9f4}{make\_attention\_image}}(\textcolor{keywordtype}{int} img\_size, \textcolor{keywordtype}{float} *original\_delta\_cpu, \textcolor{keywordtype}{float} *original\_input\_cpu, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h, \textcolor{keywordtype}{int} c, \textcolor{keywordtype}{float} alpha);}
+\DoxyCodeLine{1060 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \mbox{\hyperlink{structimage}{image}} \mbox{\hyperlink{darknet_8h_a43dbcf54a744bcdd8c7ae183d2503dff}{resize\_image}}(\mbox{\hyperlink{structimage}{image}} im, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h);}
+\DoxyCodeLine{1061 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a389eebb53dc18517445a86c7328bd848}{quantize\_image}}(\mbox{\hyperlink{structimage}{image}} im);}
+\DoxyCodeLine{1062 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_aeb3eacd2fb08d7aad38e40cc0b371f00}{copy\_image\_from\_bytes}}(\mbox{\hyperlink{structimage}{image}} im, \textcolor{keywordtype}{char} *pdata);}
+\DoxyCodeLine{1063 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \mbox{\hyperlink{structimage}{image}} \mbox{\hyperlink{darknet_8h_a6029b55917eb6cc6ec43a2eb68d6fe9f}{letterbox\_image}}(\mbox{\hyperlink{structimage}{image}} im, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h);}
+\DoxyCodeLine{1064 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a85a4b6dc4330ad3f26e3bae73fdb0146}{rgbgr\_image}}(\mbox{\hyperlink{structimage}{image}} im);}
+\DoxyCodeLine{1065 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \mbox{\hyperlink{structimage}{image}} \mbox{\hyperlink{darknet_8h_a817da030ba0a42e377d7bcdea1913842}{make\_image}}(\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h, \textcolor{keywordtype}{int} c);}
+\DoxyCodeLine{1066 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \mbox{\hyperlink{structimage}{image}} \mbox{\hyperlink{darknet_8h_aca4dc4f276ef472ce7b6d38cf645fe70}{load\_image\_color}}(\textcolor{keywordtype}{char} *filename, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h);}
+\DoxyCodeLine{1067 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a523a669a46659bed0f2e824609f93853}{free\_image}}(\mbox{\hyperlink{structimage}{image}} m);}
+\DoxyCodeLine{1068 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \mbox{\hyperlink{structimage}{image}} \mbox{\hyperlink{darknet_8h_a742530298c4df6bdf2ce73d933659f8c}{crop\_image}}(\mbox{\hyperlink{structimage}{image}} im, \textcolor{keywordtype}{int} dx, \textcolor{keywordtype}{int} dy, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h);}
+\DoxyCodeLine{1069 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \mbox{\hyperlink{structimage}{image}} \mbox{\hyperlink{darknet_8h_a66ea0121ece0a01ed50179eee49d6b62}{resize\_min}}(\mbox{\hyperlink{structimage}{image}} im, \textcolor{keywordtype}{int} \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{min}});}
+\DoxyCodeLine{1070 }
+\DoxyCodeLine{1071 \textcolor{comment}{// layer.h}}
+\DoxyCodeLine{1072 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a91aba8a1ee831e122fd5ea239ceb4c81}{free\_layer\_custom}}(\mbox{\hyperlink{structlayer}{layer}} l, \textcolor{keywordtype}{int} keep\_cudnn\_desc);}
+\DoxyCodeLine{1073 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a32852f223b701d928a1b8f53c5493a82}{free\_layer}}(\mbox{\hyperlink{structlayer}{layer}} l);}
+\DoxyCodeLine{1074 }
+\DoxyCodeLine{1075 \textcolor{comment}{// data.c}}
+\DoxyCodeLine{1076 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a55e266faa216380decacd0e8fc921d0d}{free\_data}}(\mbox{\hyperlink{structdata}{data}} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}});}
+\DoxyCodeLine{1077 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \mbox{\hyperlink{structptw32__handle__t}{pthread\_t}} \mbox{\hyperlink{darknet_8h_ab2429c7b48288daac5f2b4bfc7e3bcf2}{load\_data}}(\mbox{\hyperlink{structload__args}{load\_args}} \mbox{\hyperlink{classargs}{args}});}
+\DoxyCodeLine{1078 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a7d814fd370d878eeaf00d5e19f93ff6b}{free\_load\_threads}}(\textcolor{keywordtype}{void} *ptr);}
+\DoxyCodeLine{1079 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \mbox{\hyperlink{structptw32__handle__t}{pthread\_t}} \mbox{\hyperlink{darknet_8h_acf3ba804863609385794f97bf91adf90}{load\_data\_in\_thread}}(\mbox{\hyperlink{structload__args}{load\_args}} \mbox{\hyperlink{classargs}{args}});}
+\DoxyCodeLine{1080 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} *\mbox{\hyperlink{darknet_8h_a0792f471578a97e215d636cc118e28df}{load\_thread}}(\textcolor{keywordtype}{void} *ptr);}
+\DoxyCodeLine{1081 }
+\DoxyCodeLine{1082 \textcolor{comment}{// dark\_cuda.h}}
+\DoxyCodeLine{1083 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a9b7d2e0159c0a4c5ce1a12321b12e14f}{cuda\_pull\_array}}(\textcolor{keywordtype}{float} *x\_gpu, \textcolor{keywordtype}{float} *\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \textcolor{keywordtype}{size\_t} n);}
+\DoxyCodeLine{1084 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_ada4081125d674526dddeddf1edf5a325}{cuda\_pull\_array\_async}}(\textcolor{keywordtype}{float} *x\_gpu, \textcolor{keywordtype}{float} *\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \textcolor{keywordtype}{size\_t} n);}
+\DoxyCodeLine{1085 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a9a2c5d3170b5c5982cc53ee8c869edd6}{cuda\_set\_device}}(\textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{1086 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} *\mbox{\hyperlink{darknet_8h_ae60b8656c1250423db5fb35df49b9043}{cuda\_get\_context}}();}
+\DoxyCodeLine{1087 }
+\DoxyCodeLine{1088 \textcolor{comment}{// utils.h}}
+\DoxyCodeLine{1089 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a15af89a3137f5ce4826405b948818b37}{free\_ptrs}}(\textcolor{keywordtype}{void} **ptrs, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{1090 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a5f1dced59cc67d7a3052e84adf77c1e7}{top\_k}}(\textcolor{keywordtype}{float} *a, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} k, \textcolor{keywordtype}{int} *index);}
+\DoxyCodeLine{1091 }
+\DoxyCodeLine{1092 \textcolor{comment}{// tree.h}}
+\DoxyCodeLine{1093 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \mbox{\hyperlink{structtree}{tree}} *\mbox{\hyperlink{darknet_8h_ac61c0333fd7f2299640889f423708103}{read\_tree}}(\textcolor{keywordtype}{char} *filename);}
+\DoxyCodeLine{1094 }
+\DoxyCodeLine{1095 \textcolor{comment}{// option\_list.h}}
+\DoxyCodeLine{1096 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \mbox{\hyperlink{structmetadata}{metadata}} \mbox{\hyperlink{darknet_8h_a905732955e0aa508488ae1261d33baf2}{get\_metadata}}(\textcolor{keywordtype}{char} *file);}
+\DoxyCodeLine{1097 }
+\DoxyCodeLine{1098 }
+\DoxyCodeLine{1099 \textcolor{comment}{// http\_stream.h}}
+\DoxyCodeLine{1100 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_ad933754aa6d5562e2dea49b753bec4c7}{delete\_json\_sender}}();}
+\DoxyCodeLine{1101 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_af1afd3ad58232642bc4aa574b6c5ea3a}{send\_json\_custom}}(\textcolor{keywordtype}{char} \textcolor{keyword}{const}* send\_buf, \textcolor{keywordtype}{int} port, \textcolor{keywordtype}{int} timeout);}
+\DoxyCodeLine{1102 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{double} \mbox{\hyperlink{darknet_8h_a21d2dcafd13c996caf0371c91303de9c}{get\_time\_point}}();}
+\DoxyCodeLine{1103 \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_aaedac22c55880495505bf375e0e132c1}{start\_timer}}();}
+\DoxyCodeLine{1104 \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a58997b988646976eadf522f6b26c9f46}{stop\_timer}}();}
+\DoxyCodeLine{1105 \textcolor{keywordtype}{double} \mbox{\hyperlink{darknet_8h_af7ab092ab10d65db3b9051a12420fa52}{get\_time}}();}
+\DoxyCodeLine{1106 \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a3d2c318bb3c522e22d3656b16e7be0a2}{stop\_timer\_and\_show}}();}
+\DoxyCodeLine{1107 \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a4d58074f921d7b0b2fc827789a131c97}{stop\_timer\_and\_show\_name}}(\textcolor{keywordtype}{char} *\mbox{\hyperlink{structname}{name}});}
+\DoxyCodeLine{1108 \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_adfa3555c2fa503fc3ffe52712fe03ac3}{show\_total\_time}}();}
+\DoxyCodeLine{1109 }
+\DoxyCodeLine{1110 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_a4a5b899a48920aba84d4cbf85f504b63}{set\_track\_id}}(\mbox{\hyperlink{structdetection}{detection}} *new\_dets, \textcolor{keywordtype}{int} new\_dets\_num, \textcolor{keywordtype}{float} thresh, \textcolor{keywordtype}{float} sim\_thresh, \textcolor{keywordtype}{float} track\_ciou\_norm, \textcolor{keywordtype}{int} deque\_size, \textcolor{keywordtype}{int} dets\_for\_track, \textcolor{keywordtype}{int} dets\_for\_show);}
+\DoxyCodeLine{1111 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{int} \mbox{\hyperlink{darknet_8h_aa686662931ac89e5aa0562ef4c4de8a3}{fill\_remaining\_id}}(\mbox{\hyperlink{structdetection}{detection}} *new\_dets, \textcolor{keywordtype}{int} new\_dets\_num, \textcolor{keywordtype}{int} new\_track\_id, \textcolor{keywordtype}{float} thresh);}
+\DoxyCodeLine{1112 }
+\DoxyCodeLine{1113 }
+\DoxyCodeLine{1114 \textcolor{comment}{// gemm.h}}
+\DoxyCodeLine{1115 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{darknet_8h_ada2c06e89e36af4a95725a2bf4b1946c}{init\_cpu}}();}
+\DoxyCodeLine{1116 }
+\DoxyCodeLine{1117 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{1118 \}}
+\DoxyCodeLine{1119 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// \_\_cplusplus}}
+\DoxyCodeLine{1120 \textcolor{preprocessor}{\#endif  }\textcolor{comment}{// DARKNET\_API}}
+
+\end{DoxyCode}

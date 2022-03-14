@@ -1,0 +1,285 @@
+\hypertarget{structfunction__record}{}\doxysection{function\+\_\+record结构体 参考}
+\label{structfunction__record}\index{function\_record@{function\_record}}
+
+
+Internal data structure which holds metadata about a bound function (signature, overloads, etc.)  
+
+
+
+
+{\ttfamily \#include $<$attr.\+h$>$}
+
+
+
+function\+\_\+record 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=207pt]{structfunction__record__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structfunction__record_a29becdf2041f6b80b1f1531d22175ed9}{function\+\_\+record}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 属性}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \mbox{\hyperlink{structfunction__record_a55d760eb0046c3beec8a20d94ed1d07c}{name}} = nullptr
+\begin{DoxyCompactList}\small\item\em Function name \end{DoxyCompactList}\item 
+char $\ast$ \mbox{\hyperlink{structfunction__record_a01cd5465d0e01d7f0995982b918efed4}{doc}} = nullptr
+\item 
+char $\ast$ \mbox{\hyperlink{structfunction__record_aed1e3374bb684af2676d1aeb457c65b5}{signature}} = nullptr
+\begin{DoxyCompactList}\small\item\em Human-\/readable version of the function signature \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{structargument__record}{argument\+\_\+record}} $>$ \mbox{\hyperlink{structfunction__record_abc060d33223e10553cb15c879e326ef5}{args}}
+\begin{DoxyCompactList}\small\item\em List of registered keyword arguments \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classhandle}{handle}}($\ast$ \mbox{\hyperlink{structfunction__record_a0e6a4fd6fef173a1958f8c14c6610ac9}{impl}} )(\mbox{\hyperlink{structfunction__call}{function\+\_\+call}} \&) = nullptr
+\begin{DoxyCompactList}\small\item\em Pointer to lambda function which converts arguments and performs the actual call \end{DoxyCompactList}\item 
+void $\ast$ \mbox{\hyperlink{structfunction__record_ada09f0077964b216ba0bf9c12cb6c25f}{data}} \mbox{[}3\mbox{]} = \{ \}
+\begin{DoxyCompactList}\small\item\em Storage for the wrapped function pointer and captured data, if any \end{DoxyCompactList}\item 
+void($\ast$ \mbox{\hyperlink{structfunction__record_aa3019482c3aba125c05edf641d557576}{free\+\_\+data}} )(\mbox{\hyperlink{structfunction__record}{function\+\_\+record}} $\ast$ptr) = nullptr
+\begin{DoxyCompactList}\small\item\em Pointer to custom destructor for \textquotesingle{}data\textquotesingle{} (if needed) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\+\_\+value\+\_\+policy}} \mbox{\hyperlink{structfunction__record_a27926b7355bd89048ff5da97758b5282}{policy}} = \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a2bd9c0ed00116be1258e0cc66617d7c8}{return\+\_\+value\+\_\+policy\+::automatic}}
+\begin{DoxyCompactList}\small\item\em Return value policy associated with this function \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structfunction__record_aa014e3469d353ed93ffb67d626879a29}{is\+\_\+constructor}}\+: 1
+\begin{DoxyCompactList}\small\item\em True if name == \textquotesingle{}{\bfseries{init}}\textquotesingle{} \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structfunction__record_a2a002c9d435634209613d4be9f3d5d7c}{is\+\_\+new\+\_\+style\+\_\+constructor}}\+: 1
+\begin{DoxyCompactList}\small\item\em True if this is a new-\/style {\ttfamily \+\_\+\+\_\+init\+\_\+\+\_\+} defined in {\ttfamily \mbox{\hyperlink{init_8h}{detail/init.\+h}}} \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structfunction__record_abdee0c594dc06ef0b4d4b136255ea971}{is\+\_\+stateless}}\+: 1
+\begin{DoxyCompactList}\small\item\em True if this is a stateless function pointer \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structfunction__record_ab57608549c3d2c71771feda7808a2595}{is\+\_\+operator}}\+: 1
+\begin{DoxyCompactList}\small\item\em True if this is an operator ({\bfseries{add}}), etc. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structfunction__record_af05b5fc3d6d3b5bcec45bbd1c3e75f15}{has\+\_\+args}}\+: 1
+\begin{DoxyCompactList}\small\item\em True if the function has a \textquotesingle{}$\ast$args\textquotesingle{} argument \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structfunction__record_af72350bd8c047108e403ff873c0a1f7d}{has\+\_\+kwargs}}\+: 1
+\begin{DoxyCompactList}\small\item\em True if the function has a \textquotesingle{}$\ast$$\ast$kwargs\textquotesingle{} argument \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structfunction__record_aaad664f057b3151927053a855ec3aea0}{is\+\_\+method}}\+: 1
+\begin{DoxyCompactList}\small\item\em True if this is a method \end{DoxyCompactList}\item 
+std\+::uint16\+\_\+t \mbox{\hyperlink{structfunction__record_a8082876641e039386647a6b6b5118d41}{nargs}}
+\begin{DoxyCompactList}\small\item\em Number of arguments (including py\+::args and/or py\+::kwargs, if present) \end{DoxyCompactList}\item 
+Py\+Method\+Def $\ast$ \mbox{\hyperlink{structfunction__record_a3297bc630d16b17a5559025615390ffa}{def}} = nullptr
+\begin{DoxyCompactList}\small\item\em Python method object \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structfunction__record_ad4112e6eb003c64f181968b2759a08af}{scope}}
+\begin{DoxyCompactList}\small\item\em Python handle to the parent scope (a class or a module) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structfunction__record_a647a4421f0491047b6ea680efd2c0e45}{sibling}}
+\begin{DoxyCompactList}\small\item\em Python handle to the sibling function representing an overload chain \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structfunction__record}{function\+\_\+record}} $\ast$ \mbox{\hyperlink{structfunction__record_a141b30999d54286b04d06ad6180dbf99}{next}} = nullptr
+\begin{DoxyCompactList}\small\item\em Pointer to next overload \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+Internal data structure which holds metadata about a bound function (signature, overloads, etc.) 
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{structfunction__record_a29becdf2041f6b80b1f1531d22175ed9}\label{structfunction__record_a29becdf2041f6b80b1f1531d22175ed9}} 
+\index{function\_record@{function\_record}!function\_record@{function\_record}}
+\index{function\_record@{function\_record}!function\_record@{function\_record}}
+\doxysubsubsection{\texorpdfstring{function\_record()}{function\_record()}}
+{\footnotesize\ttfamily function\+\_\+record\+::function\+\_\+record (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{structfunction__record_abc060d33223e10553cb15c879e326ef5}\label{structfunction__record_abc060d33223e10553cb15c879e326ef5}} 
+\index{function\_record@{function\_record}!args@{args}}
+\index{args@{args}!function\_record@{function\_record}}
+\doxysubsubsection{\texorpdfstring{args}{args}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structargument__record}{argument\+\_\+record}}$>$ function\+\_\+record\+::args}
+
+
+
+List of registered keyword arguments 
+
+\mbox{\Hypertarget{structfunction__record_ada09f0077964b216ba0bf9c12cb6c25f}\label{structfunction__record_ada09f0077964b216ba0bf9c12cb6c25f}} 
+\index{function\_record@{function\_record}!data@{data}}
+\index{data@{data}!function\_record@{function\_record}}
+\doxysubsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily void$\ast$ function\+\_\+record\+::data\mbox{[}3\mbox{]} = \{ \}}
+
+
+
+Storage for the wrapped function pointer and captured data, if any 
+
+\mbox{\Hypertarget{structfunction__record_a3297bc630d16b17a5559025615390ffa}\label{structfunction__record_a3297bc630d16b17a5559025615390ffa}} 
+\index{function\_record@{function\_record}!def@{def}}
+\index{def@{def}!function\_record@{function\_record}}
+\doxysubsubsection{\texorpdfstring{def}{def}}
+{\footnotesize\ttfamily Py\+Method\+Def$\ast$ function\+\_\+record\+::def = nullptr}
+
+
+
+Python method object 
+
+\mbox{\Hypertarget{structfunction__record_a01cd5465d0e01d7f0995982b918efed4}\label{structfunction__record_a01cd5465d0e01d7f0995982b918efed4}} 
+\index{function\_record@{function\_record}!doc@{doc}}
+\index{doc@{doc}!function\_record@{function\_record}}
+\doxysubsubsection{\texorpdfstring{doc}{doc}}
+{\footnotesize\ttfamily char$\ast$ function\+\_\+record\+::doc = nullptr}
+
+\mbox{\Hypertarget{structfunction__record_aa3019482c3aba125c05edf641d557576}\label{structfunction__record_aa3019482c3aba125c05edf641d557576}} 
+\index{function\_record@{function\_record}!free\_data@{free\_data}}
+\index{free\_data@{free\_data}!function\_record@{function\_record}}
+\doxysubsubsection{\texorpdfstring{free\_data}{free\_data}}
+{\footnotesize\ttfamily void($\ast$ function\+\_\+record\+::free\+\_\+data) (\mbox{\hyperlink{structfunction__record}{function\+\_\+record}} $\ast$ptr) = nullptr}
+
+
+
+Pointer to custom destructor for \textquotesingle{}data\textquotesingle{} (if needed) 
+
+\mbox{\Hypertarget{structfunction__record_af05b5fc3d6d3b5bcec45bbd1c3e75f15}\label{structfunction__record_af05b5fc3d6d3b5bcec45bbd1c3e75f15}} 
+\index{function\_record@{function\_record}!has\_args@{has\_args}}
+\index{has\_args@{has\_args}!function\_record@{function\_record}}
+\doxysubsubsection{\texorpdfstring{has\_args}{has\_args}}
+{\footnotesize\ttfamily bool function\+\_\+record\+::has\+\_\+args}
+
+
+
+True if the function has a \textquotesingle{}$\ast$args\textquotesingle{} argument 
+
+\mbox{\Hypertarget{structfunction__record_af72350bd8c047108e403ff873c0a1f7d}\label{structfunction__record_af72350bd8c047108e403ff873c0a1f7d}} 
+\index{function\_record@{function\_record}!has\_kwargs@{has\_kwargs}}
+\index{has\_kwargs@{has\_kwargs}!function\_record@{function\_record}}
+\doxysubsubsection{\texorpdfstring{has\_kwargs}{has\_kwargs}}
+{\footnotesize\ttfamily bool function\+\_\+record\+::has\+\_\+kwargs}
+
+
+
+True if the function has a \textquotesingle{}$\ast$$\ast$kwargs\textquotesingle{} argument 
+
+\mbox{\Hypertarget{structfunction__record_a0e6a4fd6fef173a1958f8c14c6610ac9}\label{structfunction__record_a0e6a4fd6fef173a1958f8c14c6610ac9}} 
+\index{function\_record@{function\_record}!impl@{impl}}
+\index{impl@{impl}!function\_record@{function\_record}}
+\doxysubsubsection{\texorpdfstring{impl}{impl}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhandle}{handle}}($\ast$ function\+\_\+record\+::impl) (\mbox{\hyperlink{structfunction__call}{function\+\_\+call}} \&) = nullptr}
+
+
+
+Pointer to lambda function which converts arguments and performs the actual call 
+
+\mbox{\Hypertarget{structfunction__record_aa014e3469d353ed93ffb67d626879a29}\label{structfunction__record_aa014e3469d353ed93ffb67d626879a29}} 
+\index{function\_record@{function\_record}!is\_constructor@{is\_constructor}}
+\index{is\_constructor@{is\_constructor}!function\_record@{function\_record}}
+\doxysubsubsection{\texorpdfstring{is\_constructor}{is\_constructor}}
+{\footnotesize\ttfamily bool function\+\_\+record\+::is\+\_\+constructor}
+
+
+
+True if name == \textquotesingle{}{\bfseries{init}}\textquotesingle{} 
+
+\mbox{\Hypertarget{structfunction__record_aaad664f057b3151927053a855ec3aea0}\label{structfunction__record_aaad664f057b3151927053a855ec3aea0}} 
+\index{function\_record@{function\_record}!is\_method@{is\_method}}
+\index{is\_method@{is\_method}!function\_record@{function\_record}}
+\doxysubsubsection{\texorpdfstring{is\_method}{is\_method}}
+{\footnotesize\ttfamily bool function\+\_\+record\+::is\+\_\+method}
+
+
+
+True if this is a method 
+
+\mbox{\Hypertarget{structfunction__record_a2a002c9d435634209613d4be9f3d5d7c}\label{structfunction__record_a2a002c9d435634209613d4be9f3d5d7c}} 
+\index{function\_record@{function\_record}!is\_new\_style\_constructor@{is\_new\_style\_constructor}}
+\index{is\_new\_style\_constructor@{is\_new\_style\_constructor}!function\_record@{function\_record}}
+\doxysubsubsection{\texorpdfstring{is\_new\_style\_constructor}{is\_new\_style\_constructor}}
+{\footnotesize\ttfamily bool function\+\_\+record\+::is\+\_\+new\+\_\+style\+\_\+constructor}
+
+
+
+True if this is a new-\/style {\ttfamily \+\_\+\+\_\+init\+\_\+\+\_\+} defined in {\ttfamily \mbox{\hyperlink{init_8h}{detail/init.\+h}}} 
+
+\mbox{\Hypertarget{structfunction__record_ab57608549c3d2c71771feda7808a2595}\label{structfunction__record_ab57608549c3d2c71771feda7808a2595}} 
+\index{function\_record@{function\_record}!is\_operator@{is\_operator}}
+\index{is\_operator@{is\_operator}!function\_record@{function\_record}}
+\doxysubsubsection{\texorpdfstring{is\_operator}{is\_operator}}
+{\footnotesize\ttfamily bool function\+\_\+record\+::is\+\_\+operator}
+
+
+
+True if this is an operator ({\bfseries{add}}), etc. 
+
+\mbox{\Hypertarget{structfunction__record_abdee0c594dc06ef0b4d4b136255ea971}\label{structfunction__record_abdee0c594dc06ef0b4d4b136255ea971}} 
+\index{function\_record@{function\_record}!is\_stateless@{is\_stateless}}
+\index{is\_stateless@{is\_stateless}!function\_record@{function\_record}}
+\doxysubsubsection{\texorpdfstring{is\_stateless}{is\_stateless}}
+{\footnotesize\ttfamily bool function\+\_\+record\+::is\+\_\+stateless}
+
+
+
+True if this is a stateless function pointer 
+
+\mbox{\Hypertarget{structfunction__record_a55d760eb0046c3beec8a20d94ed1d07c}\label{structfunction__record_a55d760eb0046c3beec8a20d94ed1d07c}} 
+\index{function\_record@{function\_record}!name@{name}}
+\index{name@{name}!function\_record@{function\_record}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily char$\ast$ function\+\_\+record\+::name = nullptr}
+
+
+
+Function name 
+
+\mbox{\Hypertarget{structfunction__record_a8082876641e039386647a6b6b5118d41}\label{structfunction__record_a8082876641e039386647a6b6b5118d41}} 
+\index{function\_record@{function\_record}!nargs@{nargs}}
+\index{nargs@{nargs}!function\_record@{function\_record}}
+\doxysubsubsection{\texorpdfstring{nargs}{nargs}}
+{\footnotesize\ttfamily std\+::uint16\+\_\+t function\+\_\+record\+::nargs}
+
+
+
+Number of arguments (including py\+::args and/or py\+::kwargs, if present) 
+
+\mbox{\Hypertarget{structfunction__record_a141b30999d54286b04d06ad6180dbf99}\label{structfunction__record_a141b30999d54286b04d06ad6180dbf99}} 
+\index{function\_record@{function\_record}!next@{next}}
+\index{next@{next}!function\_record@{function\_record}}
+\doxysubsubsection{\texorpdfstring{next}{next}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structfunction__record}{function\+\_\+record}}$\ast$ function\+\_\+record\+::next = nullptr}
+
+
+
+Pointer to next overload 
+
+\mbox{\Hypertarget{structfunction__record_a27926b7355bd89048ff5da97758b5282}\label{structfunction__record_a27926b7355bd89048ff5da97758b5282}} 
+\index{function\_record@{function\_record}!policy@{policy}}
+\index{policy@{policy}!function\_record@{function\_record}}
+\doxysubsubsection{\texorpdfstring{policy}{policy}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\+\_\+value\+\_\+policy}} function\+\_\+record\+::policy = \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841a2bd9c0ed00116be1258e0cc66617d7c8}{return\+\_\+value\+\_\+policy\+::automatic}}}
+
+
+
+Return value policy associated with this function 
+
+\mbox{\Hypertarget{structfunction__record_ad4112e6eb003c64f181968b2759a08af}\label{structfunction__record_ad4112e6eb003c64f181968b2759a08af}} 
+\index{function\_record@{function\_record}!scope@{scope}}
+\index{scope@{scope}!function\_record@{function\_record}}
+\doxysubsubsection{\texorpdfstring{scope}{scope}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhandle}{handle}} function\+\_\+record\+::scope}
+
+
+
+Python handle to the parent scope (a class or a module) 
+
+\mbox{\Hypertarget{structfunction__record_a647a4421f0491047b6ea680efd2c0e45}\label{structfunction__record_a647a4421f0491047b6ea680efd2c0e45}} 
+\index{function\_record@{function\_record}!sibling@{sibling}}
+\index{sibling@{sibling}!function\_record@{function\_record}}
+\doxysubsubsection{\texorpdfstring{sibling}{sibling}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhandle}{handle}} function\+\_\+record\+::sibling}
+
+
+
+Python handle to the sibling function representing an overload chain 
+
+\mbox{\Hypertarget{structfunction__record_aed1e3374bb684af2676d1aeb457c65b5}\label{structfunction__record_aed1e3374bb684af2676d1aeb457c65b5}} 
+\index{function\_record@{function\_record}!signature@{signature}}
+\index{signature@{signature}!function\_record@{function\_record}}
+\doxysubsubsection{\texorpdfstring{signature}{signature}}
+{\footnotesize\ttfamily char$\ast$ function\+\_\+record\+::signature = nullptr}
+
+
+
+Human-\/readable version of the function signature 
+
+
+
+该结构体的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/\mbox{\hyperlink{attr_8h}{attr.\+h}}\end{DoxyCompactItemize}

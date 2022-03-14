@@ -1,0 +1,170 @@
+\hypertarget{operators_8h_source}{}\doxysection{operators.\+h}
+\label{operators_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/operators.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/operators.h}}
+\mbox{\hyperlink{operators_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{    pybind11/operator.h: Metatemplates for operator overloading}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{    Copyright (c) 2016 Wenzel Jakob <wenzel.jakob@epfl.ch>}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{    All rights reserved. Use of this source code is governed by a}}
+\DoxyCodeLine{7 \textcolor{comment}{    BSD-\/style license that can be found in the LICENSE file.}}
+\DoxyCodeLine{8 \textcolor{comment}{*/}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{pybind11_8h}{pybind11.h}}"{}}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#if defined(\_\_clang\_\_) \&\& !defined(\_\_INTEL\_COMPILER)}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#  pragma clang diagnostic ignored "{}-\/Wunsequenced"{}} \textcolor{comment}{// multiple unsequenced modifications to 'self' (when using def(py::self OP Type()))}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#elif defined(\_MSC\_VER)}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#  pragma warning(push)}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#  pragma warning(disable: 4127) }\textcolor{comment}{// warning C4127: Conditional expression is constant}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+\DoxyCodeLine{22 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 enum \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5}{op\_id}} : \textcolor{keywordtype}{int} \{}
+\DoxyCodeLine{26     \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5aa40d59d8106d114d0613277ddff6b8f9}{op\_add}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a6691d35e7609fddad5a3a8bb084ed2d4}{op\_sub}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a191257fb19e99c6933d20d16671b22bd}{op\_mul}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a7fb3fe984442359dcfdc3bea9f2c9a2c}{op\_div}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a7740a4205743660e6b9061cc291ecc75}{op\_mod}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5ae986486005ec6935119028103b924424}{op\_divmod}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a51109ae18aefc3ee07e879efd559eed7}{op\_pow}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a33fd5048c57885779a2e76faa8b141e6}{op\_lshift}},}
+\DoxyCodeLine{27     \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a4b2021b414ba3f28e8c3ec9b4857f058}{op\_rshift}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5aaa40d345480c83536e8de605817047ac}{op\_and}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5aa9308d7f3eb6241245d3c480f22a44c8}{op\_xor}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5ac756feb5828ea77c0eff49283bcce294}{op\_or}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5afb44dcdf65eb726cc449f800a9dd0357}{op\_neg}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a2b65f1ce0c0f4c8cdea0056f5bc14b9b}{op\_pos}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a84837b88ee35ff4458712d77df9f7435}{op\_abs}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a5f31087ef075bb41d1cf450b0b8ef8c3}{op\_invert}},}
+\DoxyCodeLine{28     \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a183516bfdb9d8b2233fad9720babdbf8}{op\_int}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a3c581ec9164f304e45761b8099f35b2b}{op\_long}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a3d0171822b01becf05fe0d4e729ccd66}{op\_float}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a36077a1417b36a5af1571011429277e0}{op\_str}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5af8e1ca58a77009b81bd9655f49241612}{op\_cmp}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a097cbe215e3f033299a2251c2ac86aad}{op\_gt}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5ad11a42a504180c51233bb18f4a2cdecf}{op\_ge}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a202548d8abb029da83901625c7f84418}{op\_lt}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a134e7349f8bf33cae3d9e94e809eaf19}{op\_le}},}
+\DoxyCodeLine{29     \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a4e69ea2ca0c85fcabed38bb02a11b8bd}{op\_eq}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a9a82b065d0a64ef21a526ef2102b89b9}{op\_ne}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a39d1a4e014990f2c1c543357883aeb68}{op\_iadd}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a3da3a0948a3cee481e19f1b202bf0b51}{op\_isub}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a54d8bc8f4055376a41a9e4f271bb00dc}{op\_imul}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5af6dcacc56d410161d4762b3faec0f86e}{op\_idiv}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5af9a88476974ea810ca3722b9c5f3a85a}{op\_imod}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a06abab4047191a086ed15142217b9e8d}{op\_ilshift}},}
+\DoxyCodeLine{30     \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a846588e0464293c236a7f50b0b5f2254}{op\_irshift}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5aea0b949fc5a86e83e6803cc19972162b}{op\_iand}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5abf390ddec4993f5cda621e1a05238020}{op\_ixor}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a4f3288dc88ca60cbed284ec9096e016a}{op\_ior}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a7d10257a47bd259cb9784ce3ce017176}{op\_complex}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5ae2684694d169f6b6eec20fd337c61a48}{op\_bool}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a1b0a4e9d558a3d0ff80df037ffd279ca}{op\_nonzero}},}
+\DoxyCodeLine{31     \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a041fddc9e42570e7489ed6d3adb4617f}{op\_repr}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5aa21ce58522ea31bafa84e76d61fb38fb}{op\_truediv}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a507e1d31969587b804617dd8a14eeba9}{op\_itruediv}}, \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a81adc2eb6d7a4b8fa5fad865800dc31a}{op\_hash}}}
+\DoxyCodeLine{32 \};}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{keyword}{enum} \mbox{\hyperlink{operators_8h_ae1bc65aa25538fc2163cdc822a45a71d}{op\_type}} : \textcolor{keywordtype}{int} \{}
+\DoxyCodeLine{35     \mbox{\hyperlink{operators_8h_ae1bc65aa25538fc2163cdc822a45a71da05531cc41979d9d0a7139125a946d5b6}{op\_l}}, \textcolor{comment}{/* base type on left */}}
+\DoxyCodeLine{36     \mbox{\hyperlink{operators_8h_ae1bc65aa25538fc2163cdc822a45a71da3e546121633055dadc0454b3f841c6c7}{op\_r}}, \textcolor{comment}{/* base type on right */}}
+\DoxyCodeLine{37     \mbox{\hyperlink{operators_8h_ae1bc65aa25538fc2163cdc822a45a71da86d7a24f271e8b3f4af2ae90d71a0b73}{op\_u}}  \textcolor{comment}{/* unary operator */}}
+\DoxyCodeLine{38 \};}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 \textcolor{keyword}{struct }\mbox{\hyperlink{structself__t}{self\_t}} \{ \};}
+\DoxyCodeLine{41 \textcolor{keyword}{static} \textcolor{keyword}{const} \mbox{\hyperlink{structself__t}{self\_t}} \mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}} = \mbox{\hyperlink{structself__t}{self\_t}}();}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{44 \textcolor{keyword}{struct }\mbox{\hyperlink{structundefined__t}{undefined\_t}} \{ \};}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{47 \textcolor{keyword}{inline} \mbox{\hyperlink{structself__t}{self\_t}} \mbox{\hyperlink{operators_8h_afc6cfb37dee95cc34e8f7cc2ac54483c}{\_\_self}}() \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}; \}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{50 \textcolor{keyword}{template} <op\_\textcolor{keywordtype}{id}, op\_type, \textcolor{keyword}{typename} B, \textcolor{keyword}{typename} L, \textcolor{keyword}{typename} R> \textcolor{keyword}{struct }\mbox{\hyperlink{structop__impl}{op\_impl}} \{ \};}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{53 \textcolor{keyword}{template} <op\_\textcolor{keywordtype}{id} \textcolor{keywordtype}{id}, op\_type ot, \textcolor{keyword}{typename} L, \textcolor{keyword}{typename} R> \textcolor{keyword}{struct }\mbox{\hyperlink{structop__}{op\_}} \{}
+\DoxyCodeLine{54     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class, \textcolor{keyword}{typename}... Extra> \textcolor{keywordtype}{void} \mbox{\hyperlink{structop___aa92b55350b41ce2bceacbd41a19102cc}{execute}}(Class \&cl, \textcolor{keyword}{const} Extra\&... extra)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{55         \textcolor{keyword}{using} Base = \textcolor{keyword}{typename} Class::type;}
+\DoxyCodeLine{56         \textcolor{keyword}{using} L\_type = \mbox{\hyperlink{detail_2common_8h_acdb0eff728aec08ed6fff07d2885ea9d}{conditional\_t<std::is\_same<L, self\_t>::value}}, Base, L>;}
+\DoxyCodeLine{57         \textcolor{keyword}{using} R\_type = \mbox{\hyperlink{detail_2common_8h_acdb0eff728aec08ed6fff07d2885ea9d}{conditional\_t<std::is\_same<R, self\_t>::value}}, Base, R>;}
+\DoxyCodeLine{58         \textcolor{keyword}{using} op = \mbox{\hyperlink{structop__impl}{op\_impl<id, ot, Base, L\_type, R\_type>}};}
+\DoxyCodeLine{59         cl.def(op::name(), \&op::execute, \mbox{\hyperlink{structis__operator}{is\_operator}}(), extra...);}
+\DoxyCodeLine{60 \textcolor{preprocessor}{        \#if PY\_MAJOR\_VERSION < 3}}
+\DoxyCodeLine{61         \textcolor{keywordflow}{if} (\textcolor{keywordtype}{id} == \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5aa21ce58522ea31bafa84e76d61fb38fb}{op\_truediv}} || \textcolor{keywordtype}{id} == \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a507e1d31969587b804617dd8a14eeba9}{op\_itruediv}})}
+\DoxyCodeLine{62             cl.def(\textcolor{keywordtype}{id} == \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a507e1d31969587b804617dd8a14eeba9}{op\_itruediv}} ? \textcolor{stringliteral}{"{}\_\_idiv\_\_"{}} : ot == \mbox{\hyperlink{operators_8h_ae1bc65aa25538fc2163cdc822a45a71da05531cc41979d9d0a7139125a946d5b6}{op\_l}} ? \textcolor{stringliteral}{"{}\_\_div\_\_"{}} : \textcolor{stringliteral}{"{}\_\_rdiv\_\_"{}},}
+\DoxyCodeLine{63                     \&op::execute, \mbox{\hyperlink{structis__operator}{is\_operator}}(), extra...);}
+\DoxyCodeLine{64 \textcolor{preprocessor}{        \#endif}}
+\DoxyCodeLine{65     \}}
+\DoxyCodeLine{66     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class, \textcolor{keyword}{typename}... Extra> \textcolor{keywordtype}{void} \mbox{\hyperlink{structop___a558b286aee467524017f0dac59bb4abf}{execute\_cast}}(Class \&cl, \textcolor{keyword}{const} Extra\&... extra)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{67         \textcolor{keyword}{using} Base = \textcolor{keyword}{typename} Class::type;}
+\DoxyCodeLine{68         \textcolor{keyword}{using} L\_type = \mbox{\hyperlink{detail_2common_8h_acdb0eff728aec08ed6fff07d2885ea9d}{conditional\_t<std::is\_same<L, self\_t>::value}}, Base, L>;}
+\DoxyCodeLine{69         \textcolor{keyword}{using} R\_type = \mbox{\hyperlink{detail_2common_8h_acdb0eff728aec08ed6fff07d2885ea9d}{conditional\_t<std::is\_same<R, self\_t>::value}}, Base, R>;}
+\DoxyCodeLine{70         \textcolor{keyword}{using} op = \mbox{\hyperlink{structop__impl}{op\_impl<id, ot, Base, L\_type, R\_type>}};}
+\DoxyCodeLine{71         cl.def(op::name(), \&op::execute\_cast, \mbox{\hyperlink{structis__operator}{is\_operator}}(), extra...);}
+\DoxyCodeLine{72 \textcolor{preprocessor}{        \#if PY\_MAJOR\_VERSION < 3}}
+\DoxyCodeLine{73         \textcolor{keywordflow}{if} (\textcolor{keywordtype}{id} == \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5aa21ce58522ea31bafa84e76d61fb38fb}{op\_truediv}} || \textcolor{keywordtype}{id} == \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a507e1d31969587b804617dd8a14eeba9}{op\_itruediv}})}
+\DoxyCodeLine{74             cl.def(\textcolor{keywordtype}{id} == \mbox{\hyperlink{operators_8h_af7a0dcf3b52966a31277a5e8e18bacb5a507e1d31969587b804617dd8a14eeba9}{op\_itruediv}} ? \textcolor{stringliteral}{"{}\_\_idiv\_\_"{}} : ot == \mbox{\hyperlink{operators_8h_ae1bc65aa25538fc2163cdc822a45a71da05531cc41979d9d0a7139125a946d5b6}{op\_l}} ? \textcolor{stringliteral}{"{}\_\_div\_\_"{}} : \textcolor{stringliteral}{"{}\_\_rdiv\_\_"{}},}
+\DoxyCodeLine{75                     \&op::execute, \mbox{\hyperlink{structis__operator}{is\_operator}}(), extra...);}
+\DoxyCodeLine{76 \textcolor{preprocessor}{        \#endif}}
+\DoxyCodeLine{77     \}}
+\DoxyCodeLine{78 \};}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80 \textcolor{preprocessor}{\#define PYBIND11\_BINARY\_OPERATOR(id, rid, op, expr)                                    \(\backslash\)}}
+\DoxyCodeLine{81 \textcolor{preprocessor}{template <typename B, typename L, typename R> struct op\_impl<op\_\#\#id, op\_l, B, L, R> \{ \(\backslash\)}}
+\DoxyCodeLine{82 \textcolor{preprocessor}{    static char const* name() \{ return "{}\_\_"{}} \#id "{}\_\_"{}; \}                                \(\backslash\)}
+\DoxyCodeLine{83     static auto execute(const L \&l, const R \&r) -\/> decltype(expr) \{ return (expr); \}   \(\backslash\)}
+\DoxyCodeLine{84     static B execute\_cast(const L \&l, const R \&r) \{ return B(expr); \}                  \(\backslash\)}
+\DoxyCodeLine{85 \};                                                                                     \(\backslash\)}
+\DoxyCodeLine{86 template <typename B, typename L, typename R> struct op\_impl<op\_\#\#id, op\_r, B, L, R> \{ \(\backslash\)}
+\DoxyCodeLine{87     static char const* name() \{ return "{}\_\_"{} \#rid "{}\_\_"{}; \}                               \(\backslash\)}
+\DoxyCodeLine{88     static auto execute(const R \&r, const L \&l) -\/> decltype(expr) \{ return (expr); \}   \(\backslash\)}
+\DoxyCodeLine{89     static B execute\_cast(const R \&r, const L \&l) \{ return B(expr); \}                  \(\backslash\)}
+\DoxyCodeLine{90 \};                                                                                     \(\backslash\)}
+\DoxyCodeLine{91 inline op\_<op\_\#\#id, op\_l, self\_t, self\_t> op(const self\_t \&, const self\_t \&) \{         \(\backslash\)}
+\DoxyCodeLine{92     return op\_<op\_\#\#id, op\_l, self\_t, self\_t>();                                       \(\backslash\)}
+\DoxyCodeLine{93 \}                                                                                      \(\backslash\)}
+\DoxyCodeLine{94 template <typename T> op\_<op\_\#\#id, op\_l, self\_t, T> op(const self\_t \&, const T \&) \{    \(\backslash\)}
+\DoxyCodeLine{95     return op\_<op\_\#\#id, op\_l, self\_t, T>();                                            \(\backslash\)}
+\DoxyCodeLine{96 \}                                                                                      \(\backslash\)}
+\DoxyCodeLine{97 template <typename T> op\_<op\_\#\#id, op\_r, T, self\_t> op(const T \&, const self\_t \&) \{    \(\backslash\)}
+\DoxyCodeLine{98     return op\_<op\_\#\#id, op\_r, T, self\_t>();                                            \(\backslash\)}
+\DoxyCodeLine{99 \}}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#define PYBIND11\_INPLACE\_OPERATOR(id, op, expr)                                        \(\backslash\)}}
+\DoxyCodeLine{102 \textcolor{preprocessor}{template <typename B, typename L, typename R> struct op\_impl<op\_\#\#id, op\_l, B, L, R> \{ \(\backslash\)}}
+\DoxyCodeLine{103 \textcolor{preprocessor}{    static char const* name() \{ return "{}\_\_"{}} \#id "{}\_\_"{}; \}                                \(\backslash\)}
+\DoxyCodeLine{104     static auto execute(L \&l, const R \&r) -\/> decltype(expr) \{ return expr; \}           \(\backslash\)}
+\DoxyCodeLine{105     static B execute\_cast(L \&l, const R \&r) \{ return B(expr); \}                        \(\backslash\)}
+\DoxyCodeLine{106 \};                                                                                     \(\backslash\)}
+\DoxyCodeLine{107 template <typename T> op\_<op\_\#\#id, op\_l, self\_t, T> op(const self\_t \&, const T \&) \{    \(\backslash\)}
+\DoxyCodeLine{108     return op\_<op\_\#\#id, op\_l, self\_t, T>();                                            \(\backslash\)}
+\DoxyCodeLine{109 \}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111 \textcolor{preprocessor}{\#define PYBIND11\_UNARY\_OPERATOR(id, op, expr)                                          \(\backslash\)}}
+\DoxyCodeLine{112 \textcolor{preprocessor}{template <typename B, typename L> struct op\_impl<op\_\#\#id, op\_u, B, L, undefined\_t> \{   \(\backslash\)}}
+\DoxyCodeLine{113 \textcolor{preprocessor}{    static char const* name() \{ return "{}\_\_"{}} \#id "{}\_\_"{}; \}                                \(\backslash\)}
+\DoxyCodeLine{114     static auto execute(const L \&l) -\/> decltype(expr) \{ return expr; \}                 \(\backslash\)}
+\DoxyCodeLine{115     static B execute\_cast(const L \&l) \{ return B(expr); \}                              \(\backslash\)}
+\DoxyCodeLine{116 \};                                                                                     \(\backslash\)}
+\DoxyCodeLine{117 inline op\_<op\_\#\#id, op\_u, self\_t, undefined\_t> op(const self\_t \&) \{                    \(\backslash\)}
+\DoxyCodeLine{118     return op\_<op\_\#\#id, op\_u, self\_t, undefined\_t>();                                  \(\backslash\)}
+\DoxyCodeLine{119 \}}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121 \mbox{\hyperlink{operators_8h_ae0ae1ae0678152d452b6ceaaa2fc8c1d}{PYBIND11\_BINARY\_OPERATOR}}(sub,       rsub,         \textcolor{keyword}{operator}-\/,    l -\/ \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{122 \mbox{\hyperlink{operators_8h_ae0ae1ae0678152d452b6ceaaa2fc8c1d}{PYBIND11\_BINARY\_OPERATOR}}(add,       radd,         \textcolor{keyword}{operator}+,    l + \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{123 \mbox{\hyperlink{operators_8h_ae0ae1ae0678152d452b6ceaaa2fc8c1d}{PYBIND11\_BINARY\_OPERATOR}}(mul,       rmul,         \textcolor{keyword}{operator}*,    l * \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{124 \mbox{\hyperlink{operators_8h_ae0ae1ae0678152d452b6ceaaa2fc8c1d}{PYBIND11\_BINARY\_OPERATOR}}(truediv,   rtruediv,     \textcolor{keyword}{operator}/,    l / \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{125 \mbox{\hyperlink{operators_8h_ae0ae1ae0678152d452b6ceaaa2fc8c1d}{PYBIND11\_BINARY\_OPERATOR}}(mod,       rmod,         \textcolor{keyword}{operator}\%,    l \% \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{126 \mbox{\hyperlink{operators_8h_ae0ae1ae0678152d452b6ceaaa2fc8c1d}{PYBIND11\_BINARY\_OPERATOR}}(lshift,    rlshift,      \textcolor{keyword}{operator}<<,   l << \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{127 \mbox{\hyperlink{operators_8h_ae0ae1ae0678152d452b6ceaaa2fc8c1d}{PYBIND11\_BINARY\_OPERATOR}}(rshift,    rrshift,      \textcolor{keyword}{operator}>>,   l >> \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{128 \mbox{\hyperlink{operators_8h_ae0ae1ae0678152d452b6ceaaa2fc8c1d}{PYBIND11\_BINARY\_OPERATOR}}(and,       rand,         \textcolor{keyword}{operator}\&,    l \& \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{129 \mbox{\hyperlink{operators_8h_ae0ae1ae0678152d452b6ceaaa2fc8c1d}{PYBIND11\_BINARY\_OPERATOR}}(xor,       rxor,         \textcolor{keyword}{operator}\string^,    l \string^ \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{130 \mbox{\hyperlink{operators_8h_ae0ae1ae0678152d452b6ceaaa2fc8c1d}{PYBIND11\_BINARY\_OPERATOR}}(eq,        eq,           \textcolor{keyword}{operator}==,   l == \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{131 \mbox{\hyperlink{operators_8h_ae0ae1ae0678152d452b6ceaaa2fc8c1d}{PYBIND11\_BINARY\_OPERATOR}}(ne,        ne,           \textcolor{keyword}{operator}!=,   l != \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{132 \mbox{\hyperlink{operators_8h_ae0ae1ae0678152d452b6ceaaa2fc8c1d}{PYBIND11\_BINARY\_OPERATOR}}(or,        ror,          \textcolor{keyword}{operator}|,    l | \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{133 \mbox{\hyperlink{operators_8h_ae0ae1ae0678152d452b6ceaaa2fc8c1d}{PYBIND11\_BINARY\_OPERATOR}}(gt,        lt,           \textcolor{keyword}{operator}>,    l > \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{134 \mbox{\hyperlink{operators_8h_ae0ae1ae0678152d452b6ceaaa2fc8c1d}{PYBIND11\_BINARY\_OPERATOR}}(ge,        le,           \textcolor{keyword}{operator}>=,   l >= \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{135 \mbox{\hyperlink{operators_8h_ae0ae1ae0678152d452b6ceaaa2fc8c1d}{PYBIND11\_BINARY\_OPERATOR}}(lt,        gt,           \textcolor{keyword}{operator}<,    l < \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{136 \mbox{\hyperlink{operators_8h_ae0ae1ae0678152d452b6ceaaa2fc8c1d}{PYBIND11\_BINARY\_OPERATOR}}(le,        ge,           \textcolor{keyword}{operator}<=,   l <= \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{137 \textcolor{comment}{//PYBIND11\_BINARY\_OPERATOR(pow,       rpow,         pow,          std::pow(l,  r))}}
+\DoxyCodeLine{138 \mbox{\hyperlink{operators_8h_a9a0c6e2407d7ea49f4cfc61acf48db59}{PYBIND11\_INPLACE\_OPERATOR}}(iadd,     \textcolor{keyword}{operator}+=,   l += \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{139 \mbox{\hyperlink{operators_8h_a9a0c6e2407d7ea49f4cfc61acf48db59}{PYBIND11\_INPLACE\_OPERATOR}}(isub,     \textcolor{keyword}{operator}-\/=,   l -\/= \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{140 \mbox{\hyperlink{operators_8h_a9a0c6e2407d7ea49f4cfc61acf48db59}{PYBIND11\_INPLACE\_OPERATOR}}(imul,     \textcolor{keyword}{operator}*=,   l *= \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{141 \mbox{\hyperlink{operators_8h_a9a0c6e2407d7ea49f4cfc61acf48db59}{PYBIND11\_INPLACE\_OPERATOR}}(itruediv, \textcolor{keyword}{operator}/=,   l /= \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{142 \mbox{\hyperlink{operators_8h_a9a0c6e2407d7ea49f4cfc61acf48db59}{PYBIND11\_INPLACE\_OPERATOR}}(imod,     \textcolor{keyword}{operator}\%=,   l \%= \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{143 \mbox{\hyperlink{operators_8h_a9a0c6e2407d7ea49f4cfc61acf48db59}{PYBIND11\_INPLACE\_OPERATOR}}(ilshift,  \textcolor{keyword}{operator}<<=,  l <<= \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{144 \mbox{\hyperlink{operators_8h_a9a0c6e2407d7ea49f4cfc61acf48db59}{PYBIND11\_INPLACE\_OPERATOR}}(irshift,  \textcolor{keyword}{operator}>>=,  l >>= \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{145 \mbox{\hyperlink{operators_8h_a9a0c6e2407d7ea49f4cfc61acf48db59}{PYBIND11\_INPLACE\_OPERATOR}}(iand,     \textcolor{keyword}{operator}\&=,   l \&= \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{146 \mbox{\hyperlink{operators_8h_a9a0c6e2407d7ea49f4cfc61acf48db59}{PYBIND11\_INPLACE\_OPERATOR}}(ixor,     \textcolor{keyword}{operator}\string^=,   l \string^= \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{147 \mbox{\hyperlink{operators_8h_a9a0c6e2407d7ea49f4cfc61acf48db59}{PYBIND11\_INPLACE\_OPERATOR}}(ior,      \textcolor{keyword}{operator}|=,   l |= \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}})}
+\DoxyCodeLine{148 \mbox{\hyperlink{operators_8h_acc5a7d37ef285c22f7b3ca856a3646d9}{PYBIND11\_UNARY\_OPERATOR}}(neg,        \textcolor{keyword}{operator}-\/,    -\/l)}
+\DoxyCodeLine{149 \mbox{\hyperlink{operators_8h_acc5a7d37ef285c22f7b3ca856a3646d9}{PYBIND11\_UNARY\_OPERATOR}}(pos,        \textcolor{keyword}{operator}+,    +l)}
+\DoxyCodeLine{150 \mbox{\hyperlink{operators_8h_acc5a7d37ef285c22f7b3ca856a3646d9}{PYBIND11\_UNARY\_OPERATOR}}(abs,        abs,          std::abs(l))}
+\DoxyCodeLine{151 \mbox{\hyperlink{operators_8h_acc5a7d37ef285c22f7b3ca856a3646d9}{PYBIND11\_UNARY\_OPERATOR}}(\mbox{\hyperlink{group__python__builtins_ga117a7eab72791313448c40a2f25f3582}{hash}},       \mbox{\hyperlink{group__python__builtins_ga117a7eab72791313448c40a2f25f3582}{hash}},         std::hash<L>()(l))}
+\DoxyCodeLine{152 \mbox{\hyperlink{operators_8h_acc5a7d37ef285c22f7b3ca856a3646d9}{PYBIND11\_UNARY\_OPERATOR}}(invert,     \textcolor{keyword}{operator}\string~,    (\string~l))}
+\DoxyCodeLine{153 \mbox{\hyperlink{operators_8h_acc5a7d37ef285c22f7b3ca856a3646d9}{PYBIND11\_UNARY\_OPERATOR}}(\textcolor{keywordtype}{bool},       \textcolor{keyword}{operator}!,    !!l)}
+\DoxyCodeLine{154 \mbox{\hyperlink{operators_8h_acc5a7d37ef285c22f7b3ca856a3646d9}{PYBIND11\_UNARY\_OPERATOR}}(\textcolor{keywordtype}{int},        \mbox{\hyperlink{classint__}{int\_}},         (\textcolor{keywordtype}{int}) l)}
+\DoxyCodeLine{155 \mbox{\hyperlink{operators_8h_acc5a7d37ef285c22f7b3ca856a3646d9}{PYBIND11\_UNARY\_OPERATOR}}(\textcolor{keywordtype}{float},      \mbox{\hyperlink{classfloat__}{float\_}},       (\textcolor{keywordtype}{double}) l)}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157 \textcolor{preprocessor}{\#undef PYBIND11\_BINARY\_OPERATOR}}
+\DoxyCodeLine{158 \textcolor{preprocessor}{\#undef PYBIND11\_INPLACE\_OPERATOR}}
+\DoxyCodeLine{159 \textcolor{preprocessor}{\#undef PYBIND11\_UNARY\_OPERATOR}}
+\DoxyCodeLine{160 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162 \textcolor{keyword}{using} \mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{detail::self}};}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{164 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166 \textcolor{preprocessor}{\#if defined(\_MSC\_VER)}}
+\DoxyCodeLine{167 \textcolor{preprocessor}{\#  pragma warning(pop)}}
+\DoxyCodeLine{168 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

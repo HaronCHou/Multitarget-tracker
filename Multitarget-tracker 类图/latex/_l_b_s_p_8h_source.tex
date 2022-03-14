@@ -1,0 +1,89 @@
+\hypertarget{_l_b_s_p_8h_source}{}\doxysection{LBSP.\+h}
+\label{_l_b_s_p_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/Subsense/LBSP.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/Subsense/LBSP.h}}
+\mbox{\hyperlink{_l_b_s_p_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <opencv2/core.hpp>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <opencv2/features2d/features2d.hpp>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_distance_utils_8h}{DistanceUtils.h}}"{}}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{18 \textcolor{keyword}{class }\mbox{\hyperlink{class_l_b_s_p}{LBSP}} final : \textcolor{keyword}{public} cv::DescriptorExtractor}
+\DoxyCodeLine{19 \{}
+\DoxyCodeLine{20 \textcolor{keyword}{public}:}
+\DoxyCodeLine{22     \mbox{\hyperlink{class_l_b_s_p_ae8297d81cf95b0e5333bf2e88b396a23}{LBSP}}(\textcolor{keywordtype}{size\_t} nThreshold);}
+\DoxyCodeLine{24     \mbox{\hyperlink{class_l_b_s_p_ae8297d81cf95b0e5333bf2e88b396a23}{LBSP}}(\textcolor{keywordtype}{float} fRelThreshold, \textcolor{keywordtype}{size\_t} nThresholdOffset=0);}
+\DoxyCodeLine{26     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_l_b_s_p_aa6c4b51bfee06724c02695942c121c57}{\string~LBSP}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{28     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_b_s_p_abd44c9e34e9a3b10ca1f08e32cc7f2fa}{read}}(\textcolor{keyword}{const} cv::FileNode\&);}
+\DoxyCodeLine{30     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_b_s_p_a8a669d927653d7ba62c4097b306e0d5a}{write}}(cv::FileStorage\&) \textcolor{keyword}{const};}
+\DoxyCodeLine{32     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_b_s_p_a0d35c4022d72d62e90b44507f7a979bf}{setReference}}(\textcolor{keyword}{const} cv::Mat\&);}
+\DoxyCodeLine{34     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_l_b_s_p_afc7aa065fa562edd2b16b766910e7806}{descriptorSize}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{36     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_l_b_s_p_a36803a3126c171c945dcb35a1d43f421}{descriptorType}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{38     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_l_b_s_p_a1f75012723a8990ea7b9f74d3293dbe6}{isUsingRelThreshold}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{40     \textcolor{keyword}{virtual} \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_b_s_p_acf999adf45d5e425d28b00ace6c928a4}{getRelThreshold}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{42     \textcolor{keyword}{virtual} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_l_b_s_p_a6412e6797415eaf34def8ec7a92dc7ab}{getAbsThreshold}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{45     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_b_s_p_ab61148341758dbc004660761bca04f84}{compute2}}(\textcolor{keyword}{const} cv::Mat\& oImage, std::vector<cv::KeyPoint>\& voKeypoints, cv::Mat\& oDescriptors) \textcolor{keyword}{const};}
+\DoxyCodeLine{47     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_b_s_p_ab61148341758dbc004660761bca04f84}{compute2}}(\textcolor{keyword}{const} std::vector<cv::Mat>\& voImageCollection, std::vector<std::vector<cv::KeyPoint> >\& vvoPointCollection, std::vector<cv::Mat>\& voDescCollection) \textcolor{keyword}{const};}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{50     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_b_s_p_a4a5f635868b6b81ba53df2692ee3dfd8}{computeGrayscaleDescriptor}}(\textcolor{keyword}{const} cv::Mat\& oInputImg, \textcolor{keyword}{const} uchar \_ref, \textcolor{keyword}{const} \textcolor{keywordtype}{int} \_x, \textcolor{keyword}{const} \textcolor{keywordtype}{int} \_y, \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} \_t, ushort\& \_res) \{}
+\DoxyCodeLine{51         CV\_DbgAssert(!oInputImg.empty());}
+\DoxyCodeLine{52         CV\_DbgAssert(oInputImg.type()==CV\_8UC1);}
+\DoxyCodeLine{53         CV\_DbgAssert(\mbox{\hyperlink{class_l_b_s_p_a452b6c5a8b8aad43128493de145cbc23}{LBSP::DESC\_SIZE}}==2); \textcolor{comment}{// @@@ also relies on a constant desc size}}
+\DoxyCodeLine{54         CV\_DbgAssert(\_x>=(\textcolor{keywordtype}{int})\mbox{\hyperlink{class_l_b_s_p_a1cfa21e58b330ecfbf3dba5b7772176d}{LBSP::PATCH\_SIZE}}/2 \&\& \_y>=(\textcolor{keywordtype}{int})\mbox{\hyperlink{class_l_b_s_p_a1cfa21e58b330ecfbf3dba5b7772176d}{LBSP::PATCH\_SIZE}}/2);}
+\DoxyCodeLine{55         CV\_DbgAssert(\_x<oInputImg.cols-\/(\textcolor{keywordtype}{int})\mbox{\hyperlink{class_l_b_s_p_a1cfa21e58b330ecfbf3dba5b7772176d}{LBSP::PATCH\_SIZE}}/2 \&\& \_y<oInputImg.rows-\/(\textcolor{keywordtype}{int})\mbox{\hyperlink{class_l_b_s_p_a1cfa21e58b330ecfbf3dba5b7772176d}{LBSP::PATCH\_SIZE}}/2);}
+\DoxyCodeLine{56         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} \_step\_row = oInputImg.step.p[0];}
+\DoxyCodeLine{57         \textcolor{keyword}{const} uchar* \textcolor{keyword}{const} \_data = oInputImg.data;}
+\DoxyCodeLine{58 \textcolor{preprocessor}{        \#include "{}LBSP\_16bits\_dbcross\_1ch.i"{}}}
+\DoxyCodeLine{59     \}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{62     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_b_s_p_a27a44cb6f6e3015ee26047bd3d84f892}{computeRGBDescriptor}}(\textcolor{keyword}{const} cv::Mat\& oInputImg, \textcolor{keyword}{const} uchar* \textcolor{keyword}{const} \_ref,  \textcolor{keyword}{const} \textcolor{keywordtype}{int} \_x, \textcolor{keyword}{const} \textcolor{keywordtype}{int} \_y, \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t}* \textcolor{keyword}{const} \_t, ushort* \_res) \{}
+\DoxyCodeLine{63         CV\_DbgAssert(!oInputImg.empty());}
+\DoxyCodeLine{64         CV\_DbgAssert(oInputImg.type()==CV\_8UC3);}
+\DoxyCodeLine{65         CV\_DbgAssert(\mbox{\hyperlink{class_l_b_s_p_a452b6c5a8b8aad43128493de145cbc23}{LBSP::DESC\_SIZE}}==2); \textcolor{comment}{// @@@ also relies on a constant desc size}}
+\DoxyCodeLine{66         CV\_DbgAssert(\_x>=(\textcolor{keywordtype}{int})\mbox{\hyperlink{class_l_b_s_p_a1cfa21e58b330ecfbf3dba5b7772176d}{LBSP::PATCH\_SIZE}}/2 \&\& \_y>=(\textcolor{keywordtype}{int})\mbox{\hyperlink{class_l_b_s_p_a1cfa21e58b330ecfbf3dba5b7772176d}{LBSP::PATCH\_SIZE}}/2);}
+\DoxyCodeLine{67         CV\_DbgAssert(\_x<oInputImg.cols-\/(\textcolor{keywordtype}{int})\mbox{\hyperlink{class_l_b_s_p_a1cfa21e58b330ecfbf3dba5b7772176d}{LBSP::PATCH\_SIZE}}/2 \&\& \_y<oInputImg.rows-\/(\textcolor{keywordtype}{int})\mbox{\hyperlink{class_l_b_s_p_a1cfa21e58b330ecfbf3dba5b7772176d}{LBSP::PATCH\_SIZE}}/2);}
+\DoxyCodeLine{68         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} \_step\_row = oInputImg.step.p[0];}
+\DoxyCodeLine{69         \textcolor{keyword}{const} uchar* \textcolor{keyword}{const} \_data = oInputImg.data;}
+\DoxyCodeLine{70 \textcolor{preprocessor}{        \#include "{}LBSP\_16bits\_dbcross\_3ch3t.i"{}}}
+\DoxyCodeLine{71     \}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{74     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_b_s_p_a806e1de0fdf2a59acb9fa1303b62b102}{computeRGBDescriptor}}(\textcolor{keyword}{const} cv::Mat\& oInputImg, \textcolor{keyword}{const} uchar* \textcolor{keyword}{const} \_ref,  \textcolor{keyword}{const} \textcolor{keywordtype}{int} \_x, \textcolor{keyword}{const} \textcolor{keywordtype}{int} \_y, \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} \_t, ushort* \_res) \{}
+\DoxyCodeLine{75         CV\_DbgAssert(!oInputImg.empty());}
+\DoxyCodeLine{76         CV\_DbgAssert(oInputImg.type()==CV\_8UC3);}
+\DoxyCodeLine{77         CV\_DbgAssert(\mbox{\hyperlink{class_l_b_s_p_a452b6c5a8b8aad43128493de145cbc23}{LBSP::DESC\_SIZE}}==2); \textcolor{comment}{// @@@ also relies on a constant desc size}}
+\DoxyCodeLine{78         CV\_DbgAssert(\_x>=(\textcolor{keywordtype}{int})\mbox{\hyperlink{class_l_b_s_p_a1cfa21e58b330ecfbf3dba5b7772176d}{LBSP::PATCH\_SIZE}}/2 \&\& \_y>=(\textcolor{keywordtype}{int})\mbox{\hyperlink{class_l_b_s_p_a1cfa21e58b330ecfbf3dba5b7772176d}{LBSP::PATCH\_SIZE}}/2);}
+\DoxyCodeLine{79         CV\_DbgAssert(\_x<oInputImg.cols-\/(\textcolor{keywordtype}{int})\mbox{\hyperlink{class_l_b_s_p_a1cfa21e58b330ecfbf3dba5b7772176d}{LBSP::PATCH\_SIZE}}/2 \&\& \_y<oInputImg.rows-\/(\textcolor{keywordtype}{int})\mbox{\hyperlink{class_l_b_s_p_a1cfa21e58b330ecfbf3dba5b7772176d}{LBSP::PATCH\_SIZE}}/2);}
+\DoxyCodeLine{80         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} \_step\_row = oInputImg.step.p[0];}
+\DoxyCodeLine{81         \textcolor{keyword}{const} uchar* \textcolor{keyword}{const} \_data = oInputImg.data;}
+\DoxyCodeLine{82 \textcolor{preprocessor}{        \#include "{}LBSP\_16bits\_dbcross\_3ch1t.i"{}}}
+\DoxyCodeLine{83     \}}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{86     \textcolor{keyword}{inline} \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_b_s_p_a35f2abfacc0d540810d678ff5e8cd619}{computeSingleRGBDescriptor}}(\textcolor{keyword}{const} cv::Mat\& oInputImg, \textcolor{keyword}{const} uchar \_ref, \textcolor{keyword}{const} \textcolor{keywordtype}{int} \_x, \textcolor{keyword}{const} \textcolor{keywordtype}{int} \_y, \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} \_c, \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} \_t, ushort\& \_res) \{}
+\DoxyCodeLine{87         CV\_DbgAssert(!oInputImg.empty());}
+\DoxyCodeLine{88         CV\_DbgAssert(oInputImg.type()==CV\_8UC3 \&\& \_c<3);}
+\DoxyCodeLine{89         CV\_DbgAssert(\mbox{\hyperlink{class_l_b_s_p_a452b6c5a8b8aad43128493de145cbc23}{LBSP::DESC\_SIZE}}==2); \textcolor{comment}{// @@@ also relies on a constant desc size}}
+\DoxyCodeLine{90         CV\_DbgAssert(\_x>=(\textcolor{keywordtype}{int})\mbox{\hyperlink{class_l_b_s_p_a1cfa21e58b330ecfbf3dba5b7772176d}{LBSP::PATCH\_SIZE}}/2 \&\& \_y>=(\textcolor{keywordtype}{int})\mbox{\hyperlink{class_l_b_s_p_a1cfa21e58b330ecfbf3dba5b7772176d}{LBSP::PATCH\_SIZE}}/2);}
+\DoxyCodeLine{91         CV\_DbgAssert(\_x<oInputImg.cols-\/(\textcolor{keywordtype}{int})\mbox{\hyperlink{class_l_b_s_p_a1cfa21e58b330ecfbf3dba5b7772176d}{LBSP::PATCH\_SIZE}}/2 \&\& \_y<oInputImg.rows-\/(\textcolor{keywordtype}{int})\mbox{\hyperlink{class_l_b_s_p_a1cfa21e58b330ecfbf3dba5b7772176d}{LBSP::PATCH\_SIZE}}/2);}
+\DoxyCodeLine{92         \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} \_step\_row = oInputImg.step.p[0];}
+\DoxyCodeLine{93         \textcolor{keyword}{const} uchar* \textcolor{keyword}{const} \_data = oInputImg.data;}
+\DoxyCodeLine{94 \textcolor{preprocessor}{        \#include "{}LBSP\_16bits\_dbcross\_s3ch.i"{}}}
+\DoxyCodeLine{95     \}}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{98     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_b_s_p_a555e2f241fbdac2ebb1eab31482f5f05}{reshapeDesc}}(cv::Size oSize, \textcolor{keyword}{const} std::vector<cv::KeyPoint>\& voKeypoints, \textcolor{keyword}{const} cv::Mat\& oDescriptors, cv::Mat\& oOutput);}
+\DoxyCodeLine{100     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_b_s_p_a5d390a2a6f3d94a4edadae3718daf884}{calcDescImgDiff}}(\textcolor{keyword}{const} cv::Mat\& oDesc1, \textcolor{keyword}{const} cv::Mat\& oDesc2, cv::Mat\& oOutput, \textcolor{keywordtype}{bool} bForceMergeChannels=\textcolor{keyword}{false});}
+\DoxyCodeLine{102     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_b_s_p_ae5efff966783470187b0a7b7cde63469}{validateKeyPoints}}(std::vector<cv::KeyPoint>\& voKeypoints, cv::Size oImgSize);}
+\DoxyCodeLine{104     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_b_s_p_ad97557be4bc6cfd7b0fa4b01ab8f8c55}{validateROI}}(cv::Mat\& oROI);}
+\DoxyCodeLine{106     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_l_b_s_p_a1cfa21e58b330ecfbf3dba5b7772176d}{PATCH\_SIZE}} = 5;}
+\DoxyCodeLine{108     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_l_b_s_p_a452b6c5a8b8aad43128493de145cbc23}{DESC\_SIZE}} = 2;}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{112     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_l_b_s_p_a1a9b0613104169b3cdf567f7625c7fc4}{computeImpl}}(\textcolor{keyword}{const} cv::Mat\& oImage, std::vector<cv::KeyPoint>\& voKeypoints, cv::Mat\& oDescriptors) \textcolor{keyword}{const};}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114     \textcolor{keyword}{const} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_l_b_s_p_a5f49537c70502b73f32038218a4f8371}{m\_bOnlyUsingAbsThreshold}};}
+\DoxyCodeLine{115     \textcolor{keyword}{const} \textcolor{keywordtype}{float} \mbox{\hyperlink{class_l_b_s_p_a99fbb83c842782bb5621a43efb7580d5}{m\_fRelThreshold}};}
+\DoxyCodeLine{116     \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_l_b_s_p_aa1c90eb308a5ff277df09c4da186693a}{m\_nThreshold}};}
+\DoxyCodeLine{117     cv::Mat \mbox{\hyperlink{class_l_b_s_p_a8c5ccb37124c8fa457db0ba9dbe28c18}{m\_oRefImage}};}
+\DoxyCodeLine{118 \};}
+
+\end{DoxyCode}

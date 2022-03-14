@@ -1,0 +1,96 @@
+\hypertarget{classclang_1_1cindex_1_1_index}{}\doxysection{clang.\+cindex.\+Index类 参考}
+\label{classclang_1_1cindex_1_1_index}\index{clang.cindex.Index@{clang.cindex.Index}}
+
+
+类 clang.\+cindex.\+Index 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{classclang_1_1cindex_1_1_index__inherit__graph}
+\end{center}
+\end{figure}
+
+
+clang.\+cindex.\+Index 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{classclang_1_1cindex_1_1_index__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classclang_1_1cindex_1_1_index_a24ee60e91974932c89459eb047eb7d80}{\+\_\+\+\_\+del\+\_\+\+\_\+}} (\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}})
+\item 
+def \mbox{\hyperlink{classclang_1_1cindex_1_1_index_acd02b0bd93386e88451c94b75de75a83}{read}} (\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}, \mbox{\hyperlink{gml2nestedsql_8cpp_a10cdd7e2573589f34f8a03983f8cd8f8}{path}})
+\item 
+def \mbox{\hyperlink{classclang_1_1cindex_1_1_index_a81abf028df9283752ca0ff1524da07c8}{parse}} (\mbox{\hyperlink{operators_8h_af4dd1b150253900ea502952376f42a42}{self}}, \mbox{\hyperlink{gml2nestedsql_8cpp_a10cdd7e2573589f34f8a03983f8cd8f8}{path}}, \mbox{\hyperlink{classargs}{args}}=None, unsaved\+\_\+files=None, \mbox{\hyperlink{classoptions}{options}}=0)
+\end{DoxyCompactItemize}
+\doxysubsection*{静态 Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classclang_1_1cindex_1_1_index_a14edb5aed9383028f19381c95efe7269}{create}} (exclude\+Decls=False)
+\end{DoxyCompactItemize}
+\doxysubsection*{额外继承的成员函数}
+
+
+\doxysubsection{详细描述}
+\begin{DoxyVerb}The Index type provides the primary interface to the Clang CIndex library,
+primarily by providing an interface for reading and parsing translation
+units.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classclang_1_1cindex_1_1_index_a24ee60e91974932c89459eb047eb7d80}\label{classclang_1_1cindex_1_1_index_a24ee60e91974932c89459eb047eb7d80}} 
+\index{clang.cindex.Index@{clang.cindex.Index}!\_\_del\_\_@{\_\_del\_\_}}
+\index{\_\_del\_\_@{\_\_del\_\_}!clang.cindex.Index@{clang.cindex.Index}}
+\doxysubsubsection{\texorpdfstring{\_\_del\_\_()}{\_\_del\_\_()}}
+{\footnotesize\ttfamily def clang.\+cindex.\+Index.\+\_\+\+\_\+del\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classclang_1_1cindex_1_1_index_a14edb5aed9383028f19381c95efe7269}\label{classclang_1_1cindex_1_1_index_a14edb5aed9383028f19381c95efe7269}} 
+\index{clang.cindex.Index@{clang.cindex.Index}!create@{create}}
+\index{create@{create}!clang.cindex.Index@{clang.cindex.Index}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily def clang.\+cindex.\+Index.\+create (\begin{DoxyParamCaption}\item[{}]{exclude\+Decls = {\ttfamily False} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyVerb}Create a new Index.
+Parameters:
+excludeDecls -- Exclude local declarations from translation units.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classclang_1_1cindex_1_1_index_a81abf028df9283752ca0ff1524da07c8}\label{classclang_1_1cindex_1_1_index_a81abf028df9283752ca0ff1524da07c8}} 
+\index{clang.cindex.Index@{clang.cindex.Index}!parse@{parse}}
+\index{parse@{parse}!clang.cindex.Index@{clang.cindex.Index}}
+\doxysubsubsection{\texorpdfstring{parse()}{parse()}}
+{\footnotesize\ttfamily def clang.\+cindex.\+Index.\+parse (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{path,  }\item[{}]{args = {\ttfamily None},  }\item[{}]{unsaved\+\_\+files = {\ttfamily None},  }\item[{}]{options = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Load the translation unit from the given source code file by running
+clang and generating the AST before loading. Additional command line
+parameters can be passed to clang via the args parameter.
+
+In-memory contents for files can be provided by passing a list of pairs
+to as unsaved_files, the first item should be the filenames to be mapped
+and the second should be the contents to be substituted for the
+file. The contents may be passed as strings or file objects.
+
+If an error was encountered during parsing, a TranslationUnitLoadError
+will be raised.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classclang_1_1cindex_1_1_index_acd02b0bd93386e88451c94b75de75a83}\label{classclang_1_1cindex_1_1_index_acd02b0bd93386e88451c94b75de75a83}} 
+\index{clang.cindex.Index@{clang.cindex.Index}!read@{read}}
+\index{read@{read}!clang.cindex.Index@{clang.cindex.Index}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily def clang.\+cindex.\+Index.\+read (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{path }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Load a TranslationUnit from the given AST file.\end{DoxyVerb}
+ 
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/thirdparty/pybind11/tools/clang/\mbox{\hyperlink{cindex_8py}{cindex.\+py}}\end{DoxyCompactItemize}

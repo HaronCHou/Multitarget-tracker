@@ -1,0 +1,247 @@
+\hypertarget{matrix_8c}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/matrix.c 文件参考}
+\label{matrix_8c}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/matrix.c@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/matrix.c}}
+{\ttfamily \#include \char`\"{}matrix.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+matrix.\+c 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{matrix_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{matrix_8c_ab8962ce6e94daf63d29a9ba6decf6e1e}{free\+\_\+matrix}} (\mbox{\hyperlink{structmatrix}{matrix}} m)
+\item 
+float \mbox{\hyperlink{matrix_8c_a9e757080a9136315d2296d69449164ff}{matrix\+\_\+topk\+\_\+accuracy}} (\mbox{\hyperlink{structmatrix}{matrix}} truth, \mbox{\hyperlink{structmatrix}{matrix}} guess, int k)
+\item 
+void \mbox{\hyperlink{matrix_8c_ade28f39462a5d2214301ffad7e8ef5aa}{scale\+\_\+matrix}} (\mbox{\hyperlink{structmatrix}{matrix}} m, float scale)
+\item 
+\mbox{\hyperlink{structmatrix}{matrix}} \mbox{\hyperlink{matrix_8c_a2f40e69a38757ece1beb945fd74a22a7}{resize\+\_\+matrix}} (\mbox{\hyperlink{structmatrix}{matrix}} m, int size)
+\item 
+void \mbox{\hyperlink{matrix_8c_ae49f0208bc1892729b6b458b2a09b62c}{matrix\+\_\+add\+\_\+matrix}} (\mbox{\hyperlink{structmatrix}{matrix}} from, \mbox{\hyperlink{structmatrix}{matrix}} to)
+\item 
+\mbox{\hyperlink{structmatrix}{matrix}} \mbox{\hyperlink{matrix_8c_a47438b60c4cf871ff2523161d8a26eef}{make\+\_\+matrix}} (int rows, int cols)
+\item 
+\mbox{\hyperlink{structmatrix}{matrix}} \mbox{\hyperlink{matrix_8c_a7bfa78622f014b79c789e83d809c579a}{hold\+\_\+out\+\_\+matrix}} (\mbox{\hyperlink{structmatrix}{matrix}} $\ast$m, int n)
+\item 
+float $\ast$ \mbox{\hyperlink{matrix_8c_a512c5b7007b0cb902f2d361ffd996d7c}{pop\+\_\+column}} (\mbox{\hyperlink{structmatrix}{matrix}} $\ast$m, int c)
+\item 
+\mbox{\hyperlink{structmatrix}{matrix}} \mbox{\hyperlink{matrix_8c_a12744b90f70f047690f92a66263db284}{csv\+\_\+to\+\_\+matrix}} (char $\ast$filename)
+\item 
+void \mbox{\hyperlink{matrix_8c_abca397f1d2c194cd152e02c4f295cb5f}{matrix\+\_\+to\+\_\+csv}} (\mbox{\hyperlink{structmatrix}{matrix}} m)
+\item 
+void \mbox{\hyperlink{matrix_8c_a351aa1d3aab0557ae4206f81a84b190e}{print\+\_\+matrix}} (\mbox{\hyperlink{structmatrix}{matrix}} m)
+\item 
+void \mbox{\hyperlink{matrix_8c_a3e4d6f00c3d5fcdc71b96bef42cbcf5e}{copy}} (float $\ast$\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, float $\ast$\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}, int n)
+\item 
+float \mbox{\hyperlink{matrix_8c_afd6b64cdf07c11e9670ac4ff6196216d}{dist}} (float $\ast$\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, float $\ast$\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}, int n)
+\item 
+int $\ast$ \mbox{\hyperlink{matrix_8c_a8018b58f0158817edac20f8326086e8c}{sample}} (int n)
+\item 
+int \mbox{\hyperlink{matrix_8c_a3a91499f18d0a2ead70f9d2e83d7291b}{closest\+\_\+center}} (float $\ast$datum, \mbox{\hyperlink{structmatrix}{matrix}} centers)
+\item 
+float \mbox{\hyperlink{matrix_8c_ad6cfb342121dba01117e6f79ef9d752b}{dist\+\_\+to\+\_\+closest\+\_\+center}} (float $\ast$datum, \mbox{\hyperlink{structmatrix}{matrix}} centers)
+\item 
+int \mbox{\hyperlink{matrix_8c_ae2f40f1453e7596a9a4a2f9c97c37594}{kmeans\+\_\+expectation}} (\mbox{\hyperlink{structmatrix}{matrix}} \mbox{\hyperlink{structdata}{data}}, int $\ast$assignments, \mbox{\hyperlink{structmatrix}{matrix}} centers)
+\item 
+void \mbox{\hyperlink{matrix_8c_a17d8aa5a28596ebbc90d557821543227}{kmeans\+\_\+maximization}} (\mbox{\hyperlink{structmatrix}{matrix}} \mbox{\hyperlink{structdata}{data}}, int $\ast$assignments, \mbox{\hyperlink{structmatrix}{matrix}} centers)
+\item 
+void \mbox{\hyperlink{matrix_8c_a0442ec4e28d99c85c0a06be7c2fb6e62}{random\+\_\+centers}} (\mbox{\hyperlink{structmatrix}{matrix}} \mbox{\hyperlink{structdata}{data}}, \mbox{\hyperlink{structmatrix}{matrix}} centers)
+\item 
+\mbox{\hyperlink{structmodel}{model}} \mbox{\hyperlink{matrix_8c_aaaf01b2778388ca6e38aaa084ee2807d}{do\+\_\+kmeans}} (\mbox{\hyperlink{structmatrix}{matrix}} \mbox{\hyperlink{structdata}{data}}, int k)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{matrix_8c_a3a91499f18d0a2ead70f9d2e83d7291b}\label{matrix_8c_a3a91499f18d0a2ead70f9d2e83d7291b}} 
+\index{matrix.c@{matrix.c}!closest\_center@{closest\_center}}
+\index{closest\_center@{closest\_center}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{closest\_center()}{closest\_center()}}
+{\footnotesize\ttfamily int closest\+\_\+center (\begin{DoxyParamCaption}\item[{float $\ast$}]{datum,  }\item[{\mbox{\hyperlink{structmatrix}{matrix}}}]{centers }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=228pt]{matrix_8c_a3a91499f18d0a2ead70f9d2e83d7291b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{matrix_8c_a3e4d6f00c3d5fcdc71b96bef42cbcf5e}\label{matrix_8c_a3e4d6f00c3d5fcdc71b96bef42cbcf5e}} 
+\index{matrix.c@{matrix.c}!copy@{copy}}
+\index{copy@{copy}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{copy()}{copy()}}
+{\footnotesize\ttfamily void copy (\begin{DoxyParamCaption}\item[{float $\ast$}]{x,  }\item[{float $\ast$}]{y,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_a12744b90f70f047690f92a66263db284}\label{matrix_8c_a12744b90f70f047690f92a66263db284}} 
+\index{matrix.c@{matrix.c}!csv\_to\_matrix@{csv\_to\_matrix}}
+\index{csv\_to\_matrix@{csv\_to\_matrix}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{csv\_to\_matrix()}{csv\_to\_matrix()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmatrix}{matrix}} csv\+\_\+to\+\_\+matrix (\begin{DoxyParamCaption}\item[{char $\ast$}]{filename }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=261pt]{matrix_8c_a12744b90f70f047690f92a66263db284_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{matrix_8c_afd6b64cdf07c11e9670ac4ff6196216d}\label{matrix_8c_afd6b64cdf07c11e9670ac4ff6196216d}} 
+\index{matrix.c@{matrix.c}!dist@{dist}}
+\index{dist@{dist}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{dist()}{dist()}}
+{\footnotesize\ttfamily float dist (\begin{DoxyParamCaption}\item[{float $\ast$}]{x,  }\item[{float $\ast$}]{y,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_ad6cfb342121dba01117e6f79ef9d752b}\label{matrix_8c_ad6cfb342121dba01117e6f79ef9d752b}} 
+\index{matrix.c@{matrix.c}!dist\_to\_closest\_center@{dist\_to\_closest\_center}}
+\index{dist\_to\_closest\_center@{dist\_to\_closest\_center}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{dist\_to\_closest\_center()}{dist\_to\_closest\_center()}}
+{\footnotesize\ttfamily float dist\+\_\+to\+\_\+closest\+\_\+center (\begin{DoxyParamCaption}\item[{float $\ast$}]{datum,  }\item[{\mbox{\hyperlink{structmatrix}{matrix}}}]{centers }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{matrix_8c_ad6cfb342121dba01117e6f79ef9d752b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{matrix_8c_aaaf01b2778388ca6e38aaa084ee2807d}\label{matrix_8c_aaaf01b2778388ca6e38aaa084ee2807d}} 
+\index{matrix.c@{matrix.c}!do\_kmeans@{do\_kmeans}}
+\index{do\_kmeans@{do\_kmeans}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{do\_kmeans()}{do\_kmeans()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmodel}{model}} do\+\_\+kmeans (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmatrix}{matrix}}}]{data,  }\item[{int}]{k }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{matrix_8c_aaaf01b2778388ca6e38aaa084ee2807d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{matrix_8c_ab8962ce6e94daf63d29a9ba6decf6e1e}\label{matrix_8c_ab8962ce6e94daf63d29a9ba6decf6e1e}} 
+\index{matrix.c@{matrix.c}!free\_matrix@{free\_matrix}}
+\index{free\_matrix@{free\_matrix}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{free\_matrix()}{free\_matrix()}}
+{\footnotesize\ttfamily void free\+\_\+matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmatrix}{matrix}}}]{m }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_a7bfa78622f014b79c789e83d809c579a}\label{matrix_8c_a7bfa78622f014b79c789e83d809c579a}} 
+\index{matrix.c@{matrix.c}!hold\_out\_matrix@{hold\_out\_matrix}}
+\index{hold\_out\_matrix@{hold\_out\_matrix}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{hold\_out\_matrix()}{hold\_out\_matrix()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmatrix}{matrix}} hold\+\_\+out\+\_\+matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmatrix}{matrix}} $\ast$}]{m,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_ae2f40f1453e7596a9a4a2f9c97c37594}\label{matrix_8c_ae2f40f1453e7596a9a4a2f9c97c37594}} 
+\index{matrix.c@{matrix.c}!kmeans\_expectation@{kmeans\_expectation}}
+\index{kmeans\_expectation@{kmeans\_expectation}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{kmeans\_expectation()}{kmeans\_expectation()}}
+{\footnotesize\ttfamily int kmeans\+\_\+expectation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmatrix}{matrix}}}]{data,  }\item[{int $\ast$}]{assignments,  }\item[{\mbox{\hyperlink{structmatrix}{matrix}}}]{centers }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{matrix_8c_ae2f40f1453e7596a9a4a2f9c97c37594_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{matrix_8c_a17d8aa5a28596ebbc90d557821543227}\label{matrix_8c_a17d8aa5a28596ebbc90d557821543227}} 
+\index{matrix.c@{matrix.c}!kmeans\_maximization@{kmeans\_maximization}}
+\index{kmeans\_maximization@{kmeans\_maximization}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{kmeans\_maximization()}{kmeans\_maximization()}}
+{\footnotesize\ttfamily void kmeans\+\_\+maximization (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmatrix}{matrix}}}]{data,  }\item[{int $\ast$}]{assignments,  }\item[{\mbox{\hyperlink{structmatrix}{matrix}}}]{centers }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=303pt]{matrix_8c_a17d8aa5a28596ebbc90d557821543227_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{matrix_8c_a47438b60c4cf871ff2523161d8a26eef}\label{matrix_8c_a47438b60c4cf871ff2523161d8a26eef}} 
+\index{matrix.c@{matrix.c}!make\_matrix@{make\_matrix}}
+\index{make\_matrix@{make\_matrix}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{make\_matrix()}{make\_matrix()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmatrix}{matrix}} make\+\_\+matrix (\begin{DoxyParamCaption}\item[{int}]{rows,  }\item[{int}]{cols }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_ae49f0208bc1892729b6b458b2a09b62c}\label{matrix_8c_ae49f0208bc1892729b6b458b2a09b62c}} 
+\index{matrix.c@{matrix.c}!matrix\_add\_matrix@{matrix\_add\_matrix}}
+\index{matrix\_add\_matrix@{matrix\_add\_matrix}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{matrix\_add\_matrix()}{matrix\_add\_matrix()}}
+{\footnotesize\ttfamily void matrix\+\_\+add\+\_\+matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmatrix}{matrix}}}]{from,  }\item[{\mbox{\hyperlink{structmatrix}{matrix}}}]{to }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_abca397f1d2c194cd152e02c4f295cb5f}\label{matrix_8c_abca397f1d2c194cd152e02c4f295cb5f}} 
+\index{matrix.c@{matrix.c}!matrix\_to\_csv@{matrix\_to\_csv}}
+\index{matrix\_to\_csv@{matrix\_to\_csv}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{matrix\_to\_csv()}{matrix\_to\_csv()}}
+{\footnotesize\ttfamily void matrix\+\_\+to\+\_\+csv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmatrix}{matrix}}}]{m }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_a9e757080a9136315d2296d69449164ff}\label{matrix_8c_a9e757080a9136315d2296d69449164ff}} 
+\index{matrix.c@{matrix.c}!matrix\_topk\_accuracy@{matrix\_topk\_accuracy}}
+\index{matrix\_topk\_accuracy@{matrix\_topk\_accuracy}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{matrix\_topk\_accuracy()}{matrix\_topk\_accuracy()}}
+{\footnotesize\ttfamily float matrix\+\_\+topk\+\_\+accuracy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmatrix}{matrix}}}]{truth,  }\item[{\mbox{\hyperlink{structmatrix}{matrix}}}]{guess,  }\item[{int}]{k }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=270pt]{matrix_8c_a9e757080a9136315d2296d69449164ff_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{matrix_8c_a512c5b7007b0cb902f2d361ffd996d7c}\label{matrix_8c_a512c5b7007b0cb902f2d361ffd996d7c}} 
+\index{matrix.c@{matrix.c}!pop\_column@{pop\_column}}
+\index{pop\_column@{pop\_column}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{pop\_column()}{pop\_column()}}
+{\footnotesize\ttfamily float $\ast$ pop\+\_\+column (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmatrix}{matrix}} $\ast$}]{m,  }\item[{int}]{c }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_a351aa1d3aab0557ae4206f81a84b190e}\label{matrix_8c_a351aa1d3aab0557ae4206f81a84b190e}} 
+\index{matrix.c@{matrix.c}!print\_matrix@{print\_matrix}}
+\index{print\_matrix@{print\_matrix}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{print\_matrix()}{print\_matrix()}}
+{\footnotesize\ttfamily void print\+\_\+matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmatrix}{matrix}}}]{m }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_a0442ec4e28d99c85c0a06be7c2fb6e62}\label{matrix_8c_a0442ec4e28d99c85c0a06be7c2fb6e62}} 
+\index{matrix.c@{matrix.c}!random\_centers@{random\_centers}}
+\index{random\_centers@{random\_centers}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{random\_centers()}{random\_centers()}}
+{\footnotesize\ttfamily void random\+\_\+centers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmatrix}{matrix}}}]{data,  }\item[{\mbox{\hyperlink{structmatrix}{matrix}}}]{centers }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=250pt]{matrix_8c_a0442ec4e28d99c85c0a06be7c2fb6e62_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{matrix_8c_a2f40e69a38757ece1beb945fd74a22a7}\label{matrix_8c_a2f40e69a38757ece1beb945fd74a22a7}} 
+\index{matrix.c@{matrix.c}!resize\_matrix@{resize\_matrix}}
+\index{resize\_matrix@{resize\_matrix}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{resize\_matrix()}{resize\_matrix()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmatrix}{matrix}} resize\+\_\+matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmatrix}{matrix}}}]{m,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_a8018b58f0158817edac20f8326086e8c}\label{matrix_8c_a8018b58f0158817edac20f8326086e8c}} 
+\index{matrix.c@{matrix.c}!sample@{sample}}
+\index{sample@{sample}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{sample()}{sample()}}
+{\footnotesize\ttfamily int $\ast$ sample (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{matrix_8c_ade28f39462a5d2214301ffad7e8ef5aa}\label{matrix_8c_ade28f39462a5d2214301ffad7e8ef5aa}} 
+\index{matrix.c@{matrix.c}!scale\_matrix@{scale\_matrix}}
+\index{scale\_matrix@{scale\_matrix}!matrix.c@{matrix.c}}
+\doxysubsubsection{\texorpdfstring{scale\_matrix()}{scale\_matrix()}}
+{\footnotesize\ttfamily void scale\+\_\+matrix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmatrix}{matrix}}}]{m,  }\item[{float}]{scale }\end{DoxyParamCaption})}
+

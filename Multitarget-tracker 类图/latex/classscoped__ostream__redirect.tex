@@ -1,0 +1,129 @@
+\hypertarget{classscoped__ostream__redirect}{}\doxysection{scoped\+\_\+ostream\+\_\+redirect类 参考}
+\label{classscoped__ostream__redirect}\index{scoped\_ostream\_redirect@{scoped\_ostream\_redirect}}
+
+
+{\ttfamily \#include $<$iostream.\+h$>$}
+
+
+
+类 scoped\+\_\+ostream\+\_\+redirect 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=206pt]{classscoped__ostream__redirect__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classscoped__ostream__redirect_ad03c41b00f3efb1753c75e9e5962e1cd}{scoped\+\_\+ostream\+\_\+redirect}} (std\+::ostream \&\mbox{\hyperlink{classscoped__ostream__redirect_a1d9b813b2e4e5bd72b1a735a9e9b13cb}{costream}}=std\+::cout, \mbox{\hyperlink{classobject}{object}} pyostream=\mbox{\hyperlink{classmodule_a40817edef0ded5727701534bcded9982}{module\+::import}}(\char`\"{}sys\char`\"{}).attr(\char`\"{}stdout\char`\"{}))
+\item 
+\mbox{\hyperlink{classscoped__ostream__redirect_a95ab99016f73336eb87d275ee88adfbf}{$\sim$scoped\+\_\+ostream\+\_\+redirect}} ()
+\item 
+\mbox{\hyperlink{classscoped__ostream__redirect_a1246061ecc80a86fb4ccdaba343ce2fc}{scoped\+\_\+ostream\+\_\+redirect}} (const \mbox{\hyperlink{classscoped__ostream__redirect}{scoped\+\_\+ostream\+\_\+redirect}} \&)=delete
+\item 
+\mbox{\hyperlink{classscoped__ostream__redirect_a2c7e1be131aaf58cc07bd103b376c500}{scoped\+\_\+ostream\+\_\+redirect}} (\mbox{\hyperlink{classscoped__ostream__redirect}{scoped\+\_\+ostream\+\_\+redirect}} \&\&other)=default
+\item 
+\mbox{\hyperlink{classscoped__ostream__redirect}{scoped\+\_\+ostream\+\_\+redirect}} \& \mbox{\hyperlink{classscoped__ostream__redirect_a6f376aefb213b0e39900b7a0e1603ef3}{operator=}} (const \mbox{\hyperlink{classscoped__ostream__redirect}{scoped\+\_\+ostream\+\_\+redirect}} \&)=delete
+\item 
+\mbox{\hyperlink{classscoped__ostream__redirect}{scoped\+\_\+ostream\+\_\+redirect}} \& \mbox{\hyperlink{classscoped__ostream__redirect_ab502d4dd886b80293f54b0ce0425dac8}{operator=}} (\mbox{\hyperlink{classscoped__ostream__redirect}{scoped\+\_\+ostream\+\_\+redirect}} \&\&)=delete
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected 属性}
+\begin{DoxyCompactItemize}
+\item 
+std\+::streambuf $\ast$ \mbox{\hyperlink{classscoped__ostream__redirect_a519992f77b1bfc432f151b2a890a85cf}{old}}
+\item 
+std\+::ostream \& \mbox{\hyperlink{classscoped__ostream__redirect_a1d9b813b2e4e5bd72b1a735a9e9b13cb}{costream}}
+\item 
+detail\+::pythonbuf \mbox{\hyperlink{classscoped__ostream__redirect_a8c3f64929efe3287aaa247f5c8d0559d}{buffer}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+\textbackslash{}rst This a move-\/only guard that redirects output.
+
+.. code-\/block\+:: cpp \begin{DoxyVerb}#include <pybind11/iostream.h>
+
+...
+
+{
+    py::scoped_ostream_redirect output;
+    std::cout << "Hello, World!"; // Python stdout
+} // <-- return std::cout to normal
+\end{DoxyVerb}
+ You can explicitly pass the c++ stream and the python object, for example to guard stderr instead.
+
+.. code-\/block\+:: cpp \begin{DoxyVerb}{
+    py::scoped_ostream_redirect output{std::cerr, py::module::import("sys").attr("stderr")};
+    std::cerr << "Hello, World!";
+}
+\end{DoxyVerb}
+ \textbackslash{}endrst 
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classscoped__ostream__redirect_ad03c41b00f3efb1753c75e9e5962e1cd}\label{classscoped__ostream__redirect_ad03c41b00f3efb1753c75e9e5962e1cd}} 
+\index{scoped\_ostream\_redirect@{scoped\_ostream\_redirect}!scoped\_ostream\_redirect@{scoped\_ostream\_redirect}}
+\index{scoped\_ostream\_redirect@{scoped\_ostream\_redirect}!scoped\_ostream\_redirect@{scoped\_ostream\_redirect}}
+\doxysubsubsection{\texorpdfstring{scoped\_ostream\_redirect()}{scoped\_ostream\_redirect()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily scoped\+\_\+ostream\+\_\+redirect\+::scoped\+\_\+ostream\+\_\+redirect (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{costream = {\ttfamily std\+:\+:cout},  }\item[{\mbox{\hyperlink{classobject}{object}}}]{pyostream = {\ttfamily \mbox{\hyperlink{classmodule_a40817edef0ded5727701534bcded9982}{module\+::import}}(\char`\"{}sys\char`\"{}).attr(\char`\"{}stdout\char`\"{})} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classscoped__ostream__redirect_a95ab99016f73336eb87d275ee88adfbf}\label{classscoped__ostream__redirect_a95ab99016f73336eb87d275ee88adfbf}} 
+\index{scoped\_ostream\_redirect@{scoped\_ostream\_redirect}!````~scoped\_ostream\_redirect@{$\sim$scoped\_ostream\_redirect}}
+\index{````~scoped\_ostream\_redirect@{$\sim$scoped\_ostream\_redirect}!scoped\_ostream\_redirect@{scoped\_ostream\_redirect}}
+\doxysubsubsection{\texorpdfstring{$\sim$scoped\_ostream\_redirect()}{~scoped\_ostream\_redirect()}}
+{\footnotesize\ttfamily scoped\+\_\+ostream\+\_\+redirect\+::$\sim$scoped\+\_\+ostream\+\_\+redirect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classscoped__ostream__redirect_a1246061ecc80a86fb4ccdaba343ce2fc}\label{classscoped__ostream__redirect_a1246061ecc80a86fb4ccdaba343ce2fc}} 
+\index{scoped\_ostream\_redirect@{scoped\_ostream\_redirect}!scoped\_ostream\_redirect@{scoped\_ostream\_redirect}}
+\index{scoped\_ostream\_redirect@{scoped\_ostream\_redirect}!scoped\_ostream\_redirect@{scoped\_ostream\_redirect}}
+\doxysubsubsection{\texorpdfstring{scoped\_ostream\_redirect()}{scoped\_ostream\_redirect()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily scoped\+\_\+ostream\+\_\+redirect\+::scoped\+\_\+ostream\+\_\+redirect (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classscoped__ostream__redirect}{scoped\+\_\+ostream\+\_\+redirect}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{classscoped__ostream__redirect_a2c7e1be131aaf58cc07bd103b376c500}\label{classscoped__ostream__redirect_a2c7e1be131aaf58cc07bd103b376c500}} 
+\index{scoped\_ostream\_redirect@{scoped\_ostream\_redirect}!scoped\_ostream\_redirect@{scoped\_ostream\_redirect}}
+\index{scoped\_ostream\_redirect@{scoped\_ostream\_redirect}!scoped\_ostream\_redirect@{scoped\_ostream\_redirect}}
+\doxysubsubsection{\texorpdfstring{scoped\_ostream\_redirect()}{scoped\_ostream\_redirect()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily scoped\+\_\+ostream\+\_\+redirect\+::scoped\+\_\+ostream\+\_\+redirect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classscoped__ostream__redirect}{scoped\+\_\+ostream\+\_\+redirect}} \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classscoped__ostream__redirect_a6f376aefb213b0e39900b7a0e1603ef3}\label{classscoped__ostream__redirect_a6f376aefb213b0e39900b7a0e1603ef3}} 
+\index{scoped\_ostream\_redirect@{scoped\_ostream\_redirect}!operator=@{operator=}}
+\index{operator=@{operator=}!scoped\_ostream\_redirect@{scoped\_ostream\_redirect}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classscoped__ostream__redirect}{scoped\+\_\+ostream\+\_\+redirect}} \& scoped\+\_\+ostream\+\_\+redirect\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classscoped__ostream__redirect}{scoped\+\_\+ostream\+\_\+redirect}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{classscoped__ostream__redirect_ab502d4dd886b80293f54b0ce0425dac8}\label{classscoped__ostream__redirect_ab502d4dd886b80293f54b0ce0425dac8}} 
+\index{scoped\_ostream\_redirect@{scoped\_ostream\_redirect}!operator=@{operator=}}
+\index{operator=@{operator=}!scoped\_ostream\_redirect@{scoped\_ostream\_redirect}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classscoped__ostream__redirect}{scoped\+\_\+ostream\+\_\+redirect}} \& scoped\+\_\+ostream\+\_\+redirect\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classscoped__ostream__redirect}{scoped\+\_\+ostream\+\_\+redirect}} \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classscoped__ostream__redirect_a8c3f64929efe3287aaa247f5c8d0559d}\label{classscoped__ostream__redirect_a8c3f64929efe3287aaa247f5c8d0559d}} 
+\index{scoped\_ostream\_redirect@{scoped\_ostream\_redirect}!buffer@{buffer}}
+\index{buffer@{buffer}!scoped\_ostream\_redirect@{scoped\_ostream\_redirect}}
+\doxysubsubsection{\texorpdfstring{buffer}{buffer}}
+{\footnotesize\ttfamily detail\+::pythonbuf scoped\+\_\+ostream\+\_\+redirect\+::buffer\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classscoped__ostream__redirect_a1d9b813b2e4e5bd72b1a735a9e9b13cb}\label{classscoped__ostream__redirect_a1d9b813b2e4e5bd72b1a735a9e9b13cb}} 
+\index{scoped\_ostream\_redirect@{scoped\_ostream\_redirect}!costream@{costream}}
+\index{costream@{costream}!scoped\_ostream\_redirect@{scoped\_ostream\_redirect}}
+\doxysubsubsection{\texorpdfstring{costream}{costream}}
+{\footnotesize\ttfamily std\+::ostream\& scoped\+\_\+ostream\+\_\+redirect\+::costream\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classscoped__ostream__redirect_a519992f77b1bfc432f151b2a890a85cf}\label{classscoped__ostream__redirect_a519992f77b1bfc432f151b2a890a85cf}} 
+\index{scoped\_ostream\_redirect@{scoped\_ostream\_redirect}!old@{old}}
+\index{old@{old}!scoped\_ostream\_redirect@{scoped\_ostream\_redirect}}
+\doxysubsubsection{\texorpdfstring{old}{old}}
+{\footnotesize\ttfamily std\+::streambuf$\ast$ scoped\+\_\+ostream\+\_\+redirect\+::old\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/\mbox{\hyperlink{iostream_8h}{iostream.\+h}}\end{DoxyCompactItemize}

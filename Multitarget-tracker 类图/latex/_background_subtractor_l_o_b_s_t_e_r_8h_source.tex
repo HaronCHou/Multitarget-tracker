@@ -1,0 +1,43 @@
+\hypertarget{_background_subtractor_l_o_b_s_t_e_r_8h_source}{}\doxysection{Background\+Subtractor\+LOBSTER.\+h}
+\label{_background_subtractor_l_o_b_s_t_e_r_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/Subsense/BackgroundSubtractorLOBSTER.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/Subsense/BackgroundSubtractorLOBSTER.h}}
+\mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_background_subtractor_l_b_s_p_8h}{BackgroundSubtractorLBSP.h}}"{}}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define BGSLOBSTER\_DEFAULT\_LBSP\_REL\_SIMILARITY\_THRESHOLD (0.365f)}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#define BGSLOBSTER\_DEFAULT\_LBSP\_OFFSET\_SIMILARITY\_THRESHOLD (0)}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define BGSLOBSTER\_DEFAULT\_DESC\_DIST\_THRESHOLD (4)}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#define BGSLOBSTER\_DEFAULT\_COLOR\_DIST\_THRESHOLD (30)}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#define BGSLOBSTER\_DEFAULT\_NB\_BG\_SAMPLES (35)}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#define BGSLOBSTER\_DEFAULT\_REQUIRED\_NB\_BG\_SAMPLES (2)}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define BGSLOBSTER\_DEFAULT\_LEARNING\_RATE (16)}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{31 \textcolor{keyword}{class }\mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r}{BackgroundSubtractorLOBSTER}} final : \textcolor{keyword}{public} \mbox{\hyperlink{class_background_subtractor_l_b_s_p}{BackgroundSubtractorLBSP}} \{}
+\DoxyCodeLine{32 \textcolor{keyword}{public}:}
+\DoxyCodeLine{34     \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_a5a09b9ca80e50ba2f8686aaee6d461b7}{BackgroundSubtractorLOBSTER}}(\textcolor{keywordtype}{float} fRelLBSPThreshold=\mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_a3025dcc96b2d2c6416bfa57325d79ba5}{BGSLOBSTER\_DEFAULT\_LBSP\_REL\_SIMILARITY\_THRESHOLD}},}
+\DoxyCodeLine{35                                 \textcolor{keywordtype}{size\_t} nLBSPThresholdOffset=\mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_a705c59e9c9a6fd8c0c57a5adab5a72c0}{BGSLOBSTER\_DEFAULT\_LBSP\_OFFSET\_SIMILARITY\_THRESHOLD}},}
+\DoxyCodeLine{36                                 \textcolor{keywordtype}{size\_t} nDescDistThreshold=\mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_a11b89942e22902c0bbbbc2f0154804c2}{BGSLOBSTER\_DEFAULT\_DESC\_DIST\_THRESHOLD}},}
+\DoxyCodeLine{37                                 \textcolor{keywordtype}{size\_t} nColorDistThreshold=\mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_a8442ce9b67919b77ad15847e5d80d983}{BGSLOBSTER\_DEFAULT\_COLOR\_DIST\_THRESHOLD}},}
+\DoxyCodeLine{38                                 \textcolor{keywordtype}{size\_t} nBGSamples=\mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_aea7261dd4c4233733b24fd175b6cb2b3}{BGSLOBSTER\_DEFAULT\_NB\_BG\_SAMPLES}},}
+\DoxyCodeLine{39                                 \textcolor{keywordtype}{size\_t} nRequiredBGSamples=\mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_a209f60b8a126e31bb8ec6f8209d95ad0}{BGSLOBSTER\_DEFAULT\_REQUIRED\_NB\_BG\_SAMPLES}});}
+\DoxyCodeLine{41     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_a249ab359859ee9d439cd130d4271edd6}{\string~BackgroundSubtractorLOBSTER}}();}
+\DoxyCodeLine{43     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_a452bea31dcbd2e10efc701cc2cd25776}{initialize}}(\textcolor{keyword}{const} cv::Mat\& oInitImg, \textcolor{keyword}{const} cv::Mat\& oROI);}
+\DoxyCodeLine{45     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_aeb3b23c1f47cfe71a73f3ca47ec06a75}{refreshModel}}(\textcolor{keywordtype}{float} fSamplesRefreshFrac, \textcolor{keywordtype}{bool} bForceFGUpdate=\textcolor{keyword}{false});}
+\DoxyCodeLine{47     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_a0c0faf2754a7a74a6ae56cea47207070}{operator()}}(cv::InputArray \mbox{\hyperlink{structimage}{image}}, cv::OutputArray fgmask, \textcolor{keywordtype}{double} learningRate=\mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_a2d317f4a065c4c58c7241080d9c4457c}{BGSLOBSTER\_DEFAULT\_LEARNING\_RATE}});}
+\DoxyCodeLine{49     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_a07872de46dbbd970b0bca959f2eb9392}{getBackgroundImage}}(cv::OutputArray backgroundImage) \textcolor{keyword}{const};}
+\DoxyCodeLine{51     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_a28b005819f237ece74ab9eeacef8d770}{getBackgroundDescriptorsImage}}(cv::OutputArray backgroundDescImage) \textcolor{keyword}{const};}
+\DoxyCodeLine{53     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_a58c127d4b95230d1e7fdc64055943ef3}{apply}}(cv::InputArray \mbox{\hyperlink{structimage}{image}}, cv::OutputArray fgmask, \textcolor{keywordtype}{double} learningRateOverride=\mbox{\hyperlink{_background_subtractor_l_o_b_s_t_e_r_8h_a2d317f4a065c4c58c7241080d9c4457c}{BGSLOBSTER\_DEFAULT\_LEARNING\_RATE}});}
+\DoxyCodeLine{54     }
+\DoxyCodeLine{55 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{57     \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_a37a37a0a46fc8e33d954c33c1318d7b2}{m\_nColorDistThreshold}};}
+\DoxyCodeLine{59     \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_abe3f4a836343e901746e4f243f5252e4}{m\_nDescDistThreshold}};}
+\DoxyCodeLine{61     \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_a20c53540b952d608d849a305fd5eed89}{m\_nBGSamples}};}
+\DoxyCodeLine{63     \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_acb558aefc1b6205a63c1906b6fd1eeff}{m\_nRequiredBGSamples}};}
+\DoxyCodeLine{65     std::vector<cv::Mat> \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_ac981b39f8ae7b28d3e4326d8e6be6332}{m\_voBGColorSamples}};}
+\DoxyCodeLine{67     std::vector<cv::Mat> \mbox{\hyperlink{class_background_subtractor_l_o_b_s_t_e_r_a3c49866ae652423b2173215957907d04}{m\_voBGDescSamples}};}
+\DoxyCodeLine{68 \};}
+\DoxyCodeLine{69 }
+
+\end{DoxyCode}

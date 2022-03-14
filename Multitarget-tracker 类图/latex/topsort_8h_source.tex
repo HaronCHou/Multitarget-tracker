@@ -1,0 +1,65 @@
+\hypertarget{topsort_8h_source}{}\doxysection{topsort.\+h}
+\label{topsort_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/topsort.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/topsort.h}}
+\mbox{\hyperlink{topsort_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* This software is distributed under the GNU Lesser General Public License */}}
+\DoxyCodeLine{2 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{//   topsort.h }}
+\DoxyCodeLine{5 \textcolor{comment}{//}}
+\DoxyCodeLine{6 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{// \$Id: topsort.h,v 1.8 2000/09/11 07:36:43 raitner Exp \$}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#ifndef GTL\_TOPSORT}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define GTL\_TOPSORT}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{_g_t_l_8h}{GTL/GTL.h}}>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{dfs_8h}{GTL/dfs.h}}>}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \mbox{\hyperlink{_g_t_l_8h_a2d9f24096ac60918452dd51f32b64aa9}{\_\_GTL\_BEGIN\_NAMESPACE}}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{35 \textcolor{keyword}{class }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{classtopsort}{topsort}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classdfs}{dfs}} }
+\DoxyCodeLine{36 \{}
+\DoxyCodeLine{37 \textcolor{keyword}{public}:}
+\DoxyCodeLine{43     \mbox{\hyperlink{classtopsort_a76a9055969b9dbf006320040be9fd5e6}{topsort}} () : \mbox{\hyperlink{classdfs}{dfs}} () \{whole\_graph = \textcolor{keyword}{true}; acyclic = \textcolor{keyword}{true};\}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{51     \textcolor{keywordtype}{int} \mbox{\hyperlink{classtopsort_a0f0b52c54ffa4d1056ef96f16489f30f}{top\_num}} (\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n)\textcolor{keyword}{ const }}
+\DoxyCodeLine{52 \textcolor{keyword}{    }\{ \textcolor{keywordflow}{return} top\_numbers[n]; \}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{59     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classtopsort_a05a4cb00bbd60859f4939355b23c25f1}{is\_acyclic}} ()\textcolor{keyword}{ const}}
+\DoxyCodeLine{60 \textcolor{keyword}{    }\{ \textcolor{keywordflow}{return} acyclic; \}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{65     \textcolor{keyword}{typedef} nodes\_t::const\_iterator \mbox{\hyperlink{classtopsort_a04a42f813522640e17dddbaeb55498e4}{topsort\_iterator}};}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{72     \mbox{\hyperlink{classtopsort_a04a42f813522640e17dddbaeb55498e4}{topsort\_iterator}} \mbox{\hyperlink{classtopsort_ab220dcce845e001b0f737d0dc7751abc}{top\_order\_begin}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{73 \textcolor{keyword}{    }\{ \textcolor{keywordflow}{return} top\_order.begin(); \}}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{80     \mbox{\hyperlink{classtopsort_a04a42f813522640e17dddbaeb55498e4}{topsort\_iterator}} \mbox{\hyperlink{classtopsort_ac9b784654ae0c4e9736931d63d03291b}{top\_order\_end}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{81 \textcolor{keyword}{    }\{ \textcolor{keywordflow}{return} top\_order.end(); \}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{95     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{classdfs_a70dfb7a0631d4561c1abc7ed6149bae8}{check}} (GTL::graph\& G);}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{101     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classdfs_affaffda8be8418d6dbf396c5b1d6b81a}{reset}} ();}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{106     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classdfs_a72c9a4dd5e737b984fcc567a029cdbcb}{init\_handler}} (GTL::graph\& G);}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{111     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classdfs_a9bcd9492189dac3aff8ecd4b6e2c90f6}{leave\_handler}} (GTL::graph\&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\&);}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{116     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classdfs_a4f4f2d856b8a61cbe8a42e9ff223d945}{old\_adj\_node\_handler}} (GTL::graph\&, GTL::edge\&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\&);}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{122     \textcolor{keywordtype}{int} act\_top\_num = 0;}
+\DoxyCodeLine{126     \mbox{\hyperlink{classnode__map}{node\_map<int>}} \mbox{\hyperlink{classtopsort_ae57da1aae22ed92acd0d84c737a1da2b}{top\_numbers}};}
+\DoxyCodeLine{130     \mbox{\hyperlink{edge_8h_a22ac17689106ba21a84e7bc54d1199d6}{nodes\_t}} \mbox{\hyperlink{classtopsort_a8b18b1b7ce816683694d6ac567e55cb8}{top\_order}};}
+\DoxyCodeLine{134     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classtopsort_a01d94e7627a5660836cc0765ec15727a}{acyclic}};}
+\DoxyCodeLine{135 \};}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137 \mbox{\hyperlink{_g_t_l_8h_a46af2b3ec266ac2f9d36fa7222358017}{\_\_GTL\_END\_NAMESPACE}}}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{139 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GTL\_TOPSORT}}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{142 \textcolor{comment}{//   end of file}}
+\DoxyCodeLine{143 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+
+\end{DoxyCode}

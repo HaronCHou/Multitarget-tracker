@@ -1,0 +1,104 @@
+\hypertarget{shortcut__layer_8c}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/shortcut\+\_\+layer.c 文件参考}
+\label{shortcut__layer_8c}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/shortcut\_layer.c@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/shortcut\_layer.c}}
+{\ttfamily \#include \char`\"{}shortcut\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}convolutional\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dark\+\_\+cuda.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}blas.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gemm.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+shortcut\+\_\+layer.\+c 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{shortcut__layer_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structlayer}{layer}} \mbox{\hyperlink{shortcut__layer_8c_a0d8211abacb269b41bf2b40b126f6ca1}{make\+\_\+shortcut\+\_\+layer}} (int batch, int n, int $\ast$input\+\_\+layers, int $\ast$input\+\_\+sizes, int w, int h, int c, float $\ast$$\ast$layers\+\_\+output, float $\ast$$\ast$layers\+\_\+delta, float $\ast$$\ast$layers\+\_\+output\+\_\+gpu, float $\ast$$\ast$layers\+\_\+delta\+\_\+gpu, \mbox{\hyperlink{darknet_8h_ae95509f392646b11c7eb85995970449a}{WEIGHTS\+\_\+\+TYPE\+\_\+T}} weights\+\_\+type, \mbox{\hyperlink{darknet_8h_a4e81c0088b04bf77fe4fb1b96456d8ee}{WEIGHTS\+\_\+\+NORMALIZATION\+\_\+T}} weights\+\_\+normalization, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032}{ACTIVATION}} activation, int train)
+\item 
+void \mbox{\hyperlink{shortcut__layer_8c_a84322043b139ecf11aff0dadf51d4c94}{resize\+\_\+shortcut\+\_\+layer}} (\mbox{\hyperlink{structlayer}{layer}} $\ast$l, int w, int h, \mbox{\hyperlink{structnetwork}{network}} $\ast$net)
+\item 
+void \mbox{\hyperlink{shortcut__layer_8c_a6dc2a4702b4c4e05ff4ea3f88764ec1c}{forward\+\_\+shortcut\+\_\+layer}} (const \mbox{\hyperlink{structlayer}{layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{shortcut__layer_8c_a7d9dc1513b5907a1db35a441ef801018}{backward\+\_\+shortcut\+\_\+layer}} (const \mbox{\hyperlink{structlayer}{layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{shortcut__layer_8c_a153ef8e037db9cd4ff6dc71e6161271b}{update\+\_\+shortcut\+\_\+layer}} (\mbox{\hyperlink{structlayer}{layer}} l, int batch, float learning\+\_\+rate\+\_\+init, float momentum, float decay)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{shortcut__layer_8c_a7d9dc1513b5907a1db35a441ef801018}\label{shortcut__layer_8c_a7d9dc1513b5907a1db35a441ef801018}} 
+\index{shortcut\_layer.c@{shortcut\_layer.c}!backward\_shortcut\_layer@{backward\_shortcut\_layer}}
+\index{backward\_shortcut\_layer@{backward\_shortcut\_layer}!shortcut\_layer.c@{shortcut\_layer.c}}
+\doxysubsubsection{\texorpdfstring{backward\_shortcut\_layer()}{backward\_shortcut\_layer()}}
+{\footnotesize\ttfamily void backward\+\_\+shortcut\+\_\+layer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{shortcut__layer_8c_a7d9dc1513b5907a1db35a441ef801018_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{shortcut__layer_8c_a6dc2a4702b4c4e05ff4ea3f88764ec1c}\label{shortcut__layer_8c_a6dc2a4702b4c4e05ff4ea3f88764ec1c}} 
+\index{shortcut\_layer.c@{shortcut\_layer.c}!forward\_shortcut\_layer@{forward\_shortcut\_layer}}
+\index{forward\_shortcut\_layer@{forward\_shortcut\_layer}!shortcut\_layer.c@{shortcut\_layer.c}}
+\doxysubsubsection{\texorpdfstring{forward\_shortcut\_layer()}{forward\_shortcut\_layer()}}
+{\footnotesize\ttfamily void forward\+\_\+shortcut\+\_\+layer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{shortcut__layer_8c_a6dc2a4702b4c4e05ff4ea3f88764ec1c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{shortcut__layer_8c_a0d8211abacb269b41bf2b40b126f6ca1}\label{shortcut__layer_8c_a0d8211abacb269b41bf2b40b126f6ca1}} 
+\index{shortcut\_layer.c@{shortcut\_layer.c}!make\_shortcut\_layer@{make\_shortcut\_layer}}
+\index{make\_shortcut\_layer@{make\_shortcut\_layer}!shortcut\_layer.c@{shortcut\_layer.c}}
+\doxysubsubsection{\texorpdfstring{make\_shortcut\_layer()}{make\_shortcut\_layer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlayer}{layer}} make\+\_\+shortcut\+\_\+layer (\begin{DoxyParamCaption}\item[{int}]{batch,  }\item[{int}]{n,  }\item[{int $\ast$}]{input\+\_\+layers,  }\item[{int $\ast$}]{input\+\_\+sizes,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{int}]{c,  }\item[{float $\ast$$\ast$}]{layers\+\_\+output,  }\item[{float $\ast$$\ast$}]{layers\+\_\+delta,  }\item[{float $\ast$$\ast$}]{layers\+\_\+output\+\_\+gpu,  }\item[{float $\ast$$\ast$}]{layers\+\_\+delta\+\_\+gpu,  }\item[{\mbox{\hyperlink{darknet_8h_ae95509f392646b11c7eb85995970449a}{WEIGHTS\+\_\+\+TYPE\+\_\+T}}}]{weights\+\_\+type,  }\item[{\mbox{\hyperlink{darknet_8h_a4e81c0088b04bf77fe4fb1b96456d8ee}{WEIGHTS\+\_\+\+NORMALIZATION\+\_\+T}}}]{weights\+\_\+normalization,  }\item[{\mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032}{ACTIVATION}}}]{activation,  }\item[{int}]{train }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{shortcut__layer_8c_a0d8211abacb269b41bf2b40b126f6ca1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{shortcut__layer_8c_a84322043b139ecf11aff0dadf51d4c94}\label{shortcut__layer_8c_a84322043b139ecf11aff0dadf51d4c94}} 
+\index{shortcut\_layer.c@{shortcut\_layer.c}!resize\_shortcut\_layer@{resize\_shortcut\_layer}}
+\index{resize\_shortcut\_layer@{resize\_shortcut\_layer}!shortcut\_layer.c@{shortcut\_layer.c}}
+\doxysubsubsection{\texorpdfstring{resize\_shortcut\_layer()}{resize\_shortcut\_layer()}}
+{\footnotesize\ttfamily void resize\+\_\+shortcut\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}} $\ast$}]{l,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{\mbox{\hyperlink{structnetwork}{network}} $\ast$}]{net }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{shortcut__layer_8c_a84322043b139ecf11aff0dadf51d4c94_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{shortcut__layer_8c_a153ef8e037db9cd4ff6dc71e6161271b}\label{shortcut__layer_8c_a153ef8e037db9cd4ff6dc71e6161271b}} 
+\index{shortcut\_layer.c@{shortcut\_layer.c}!update\_shortcut\_layer@{update\_shortcut\_layer}}
+\index{update\_shortcut\_layer@{update\_shortcut\_layer}!shortcut\_layer.c@{shortcut\_layer.c}}
+\doxysubsubsection{\texorpdfstring{update\_shortcut\_layer()}{update\_shortcut\_layer()}}
+{\footnotesize\ttfamily void update\+\_\+shortcut\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{int}]{batch,  }\item[{float}]{learning\+\_\+rate\+\_\+init,  }\item[{float}]{momentum,  }\item[{float}]{decay }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{shortcut__layer_8c_a153ef8e037db9cd4ff6dc71e6161271b_cgraph}
+\end{center}
+\end{figure}

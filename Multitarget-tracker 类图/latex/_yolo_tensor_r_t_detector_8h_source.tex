@@ -1,0 +1,37 @@
+\hypertarget{_yolo_tensor_r_t_detector_8h_source}{}\doxysection{Yolo\+Tensor\+RTDetector.\+h}
+\label{_yolo_tensor_r_t_detector_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/YoloTensorRTDetector.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/YoloTensorRTDetector.h}}
+\mbox{\hyperlink{_yolo_tensor_r_t_detector_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_base_detector_8h}{BaseDetector.h}}"{}}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{class__detector_8h}{tensorrt\_yolo/class\_detector.h}}"{}}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{9 \textcolor{keyword}{class }\mbox{\hyperlink{class_yolo_tensor_r_t_detector}{YoloTensorRTDetector}} final : \textcolor{keyword}{public} \mbox{\hyperlink{class_base_detector}{BaseDetector}}}
+\DoxyCodeLine{10 \{}
+\DoxyCodeLine{11 \textcolor{keyword}{public}:}
+\DoxyCodeLine{12     \mbox{\hyperlink{class_yolo_tensor_r_t_detector_a37ecb204070586224e6e6df55c91c1b1}{YoloTensorRTDetector}}(\textcolor{keyword}{const} cv::UMat\& colorFrame);}
+\DoxyCodeLine{13     \mbox{\hyperlink{class_yolo_tensor_r_t_detector_a37ecb204070586224e6e6df55c91c1b1}{YoloTensorRTDetector}}(\textcolor{keyword}{const} cv::Mat\& colorFrame);}
+\DoxyCodeLine{14     \mbox{\hyperlink{class_yolo_tensor_r_t_detector_ade510fac455fe271d68f50845a95577f}{\string~YoloTensorRTDetector}}(\textcolor{keywordtype}{void}) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_yolo_tensor_r_t_detector_a36dd41a0e6e128cc9862b383223d9c51}{Init}}(\textcolor{keyword}{const} \mbox{\hyperlink{defines_8h_a9fcffa231cb8ff6a5fc4e2e2e71f3ead}{config\_t}}\& config) \textcolor{keyword}{override};}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_yolo_tensor_r_t_detector_a56298c1cbdc5c4a3a3ca64a8c22f5cd2}{Detect}}(\textcolor{keyword}{const} cv::UMat\& colorFrame) \textcolor{keyword}{override};}
+\DoxyCodeLine{19     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_yolo_tensor_r_t_detector_a56298c1cbdc5c4a3a3ca64a8c22f5cd2}{Detect}}(\textcolor{keyword}{const} std::vector<cv::UMat>\& frames, std::vector<regions\_t>\& regions) \textcolor{keyword}{override};}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_yolo_tensor_r_t_detector_ae8945638aaf1e8a867bc4f6ad30cf6f0}{CanGrayProcessing}}()\textcolor{keyword}{ const override}}
+\DoxyCodeLine{22 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{23         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{24     \}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keyword}{private}:}
+\DoxyCodeLine{27     std::unique\_ptr<tensor\_rt::Detector> \mbox{\hyperlink{class_yolo_tensor_r_t_detector_ad0a653c58578c2c31d4523e69230dbe6}{m\_detector}};}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_yolo_tensor_r_t_detector_a27cc6739de6bf90d2c0994c70fe71439}{m\_maxCropRatio}} = 3.0f;}
+\DoxyCodeLine{30     std::vector<std::string> \mbox{\hyperlink{class_yolo_tensor_r_t_detector_a814499278af3e71b54bbea0665acca2b}{m\_classNames}};}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32     \mbox{\hyperlink{structtensor__rt_1_1_config}{tensor\_rt::Config}} \mbox{\hyperlink{class_yolo_tensor_r_t_detector_a541cfc4969e0585ac6864a8ff109393e}{m\_localConfig}};}
+\DoxyCodeLine{33     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{class_yolo_tensor_r_t_detector_af046c8153a6396ac2af8322a1bfef5b5}{m\_batchSize}} = 1;}
+\DoxyCodeLine{34 \};}
+
+\end{DoxyCode}

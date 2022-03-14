@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: D:/zhr_files/Multitarget-tracker-master/src/Tracker/graph/GTL/include/GTL/bfs.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">My Project
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_4c3458e0ccdb4c3720723c1caa1aaa1c.html">zhr_files</a></li><li class="navelem"><a class="el" href="dir_5a8d4bff745a16410b5074d3583a347e.html">Multitarget-tracker-master</a></li><li class="navelem"><a class="el" href="dir_46a27ab0460a6f8f8d12d2f44f38bf6b.html">src</a></li><li class="navelem"><a class="el" href="dir_49af9105677bf904e08b5b3082398310.html">Tracker</a></li><li class="navelem"><a class="el" href="dir_87284c152d3371e6094144b73a6f8795.html">graph</a></li><li class="navelem"><a class="el" href="dir_7b6594d99a601eace4ef3dd5f19e8e4e.html">GTL</a></li><li class="navelem"><a class="el" href="dir_5817f932378c35085430476a75d7fee1.html">include</a></li><li class="navelem"><a class="el" href="dir_64afc982368f096bd63542337c389cd0.html">GTL</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">bfs.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="bfs_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/* This software is distributed under the GNU Lesser General Public License */</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">//==========================================================================</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//   bfs.h</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//==========================================================================</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">// $Id: bfs.h,v 1.14 2003/03/24 15:58:54 raitner Exp $</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#ifndef GTL_BFS_H</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#define GTL_BFS_H</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;<a class="code" href="_g_t_l_8h.html">GTL/GTL.h</a>&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;<a class="code" href="algorithm_8h.html">GTL/algorithm.h</a>&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;<a class="code" href="node__map_8h.html">GTL/node_map.h</a>&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;deque&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><a class="code hl_define" href="_g_t_l_8h.html#a2d9f24096ac60918452dd51f32b64aa9">__GTL_BEGIN_NAMESPACE</a></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="classbfs.html">   87</a></span><span class="keyword">class </span><a class="code hl_define" href="_g_t_l_8h.html#a014cd1e9b3e67a78ae433eda95c8fd25">GTL_EXTERN</a> <a class="code hl_class" href="classbfs.html">bfs</a> final : <span class="keyword">public</span> <a class="code hl_class" href="classalgorithm.html">algorithm</a></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>{</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <a class="code hl_class" href="classbfs.html">bfs</a> ();</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keyword">virtual</span> <a class="code hl_class" href="classbfs.html">~bfs</a> ();</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classalgorithm.html#a4baee48c513c5802975743152c33f34c">run</a> (GTL::graph&amp; G);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="classbfs.html#a9d2deab6d367674e640e96fc83d9a6bc">  112</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classbfs.html#a9d2deab6d367674e640e96fc83d9a6bc">check</a> (GTL::graph&amp; <span class="comment">/*G*/</span>) { <span class="keywordflow">return</span> <a class="code hl_enumvalue" href="classalgorithm.html#a7ecf5c2bab575f8f2fae9e9e5093a6eaa5114c20e4a96a76b5de9f28bf15e282b">GTL_OK</a>; }</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classalgorithm.html#a21aba63d066ae7897de6ca7d8425c408">reset</a> ();</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="comment">//-----------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="comment">//  Parameters</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="comment">//-----------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="classbfs.html#a23e2981c2ee617a6e12a8833d2db6210">  129</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classbfs.html#a23e2981c2ee617a6e12a8833d2db6210">start_node</a> (<span class="keyword">const</span> <a class="code hl_class" href="structnode.html">node</a>&amp; n) {start = n;}</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno"><a class="line" href="classbfs.html#afac59b4a0d92449d8fa46a202b11ae4b">  136</a></span>    <a class="code hl_class" href="structnode.html">node</a> <a class="code hl_function" href="classbfs.html#afac59b4a0d92449d8fa46a202b11ae4b">start_node</a> ()<span class="keyword"> const </span>{<span class="keywordflow">return</span> start;}</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno"><a class="line" href="classbfs.html#a25fc51b1bfbbdd3afefe0a84c1bd2f6b">  155</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classbfs.html#a25fc51b1bfbbdd3afefe0a84c1bd2f6b">scan_whole_graph</a> (<span class="keywordtype">bool</span> <a class="code hl_class" href="classset.html">set</a>) {whole_graph = <a class="code hl_class" href="classset.html">set</a>;}</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno"><a class="line" href="classbfs.html#a1378f5cfbc59b036e9215c02563bac23">  163</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classbfs.html#a1378f5cfbc59b036e9215c02563bac23">scan_whole_graph</a> ()<span class="keyword"> const </span>{<span class="keywordflow">return</span> whole_graph;}</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <span class="keywordtype">void</span> calc_level (<span class="keywordtype">bool</span> <a class="code hl_class" href="classset.html">set</a>);</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    </div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno"><a class="line" href="classbfs.html#a78ea23abb1461e62dd7ecd416fecbd96">  183</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classbfs.html#a78ea23abb1461e62dd7ecd416fecbd96">calc_level</a> ()<span class="keyword"> const </span>{<span class="keywordflow">return</span> level_number != 0;}</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keywordtype">void</span> store_non_tree_edges (<span class="keywordtype">bool</span> <a class="code hl_class" href="classset.html">set</a>);</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno"><a class="line" href="classbfs.html#a9fe165e0a6d979d6d55b6234bfbe5b8f">  203</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classbfs.html#a9fe165e0a6d979d6d55b6234bfbe5b8f">store_non_tree_edges</a> ()<span class="keyword"> const </span>{<span class="keywordflow">return</span> non_tree != 0;}</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    <span class="keywordtype">void</span> store_preds (<span class="keywordtype">bool</span> <a class="code hl_class" href="classset.html">set</a>);</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno"><a class="line" href="classbfs.html#ac4373b51885382f6f1a9312c1b0923bd">  223</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classbfs.html#ac4373b51885382f6f1a9312c1b0923bd">store_preds</a> ()<span class="keyword"> const </span>{<span class="keywordflow">return</span> preds != 0;}</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span> </div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno"><a class="line" href="classbfs.html#ab1a7882a7d56e0e72bbe1a344381bdae">  231</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classbfs.html#ab1a7882a7d56e0e72bbe1a344381bdae">reached</a> (<span class="keyword">const</span> <a class="code hl_class" href="structnode.html">node</a>&amp; n)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="keyword">    </span>{<span class="keywordflow">return</span> bfs_number[n] != 0;}</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span> </div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno"><a class="line" href="classbfs.html#a6205cc191bc0bedf1ff9d74af0925735">  243</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classbfs.html#a6205cc191bc0bedf1ff9d74af0925735">bfs_num</a> (<span class="keyword">const</span> <a class="code hl_class" href="structnode.html">node</a>&amp; n)<span class="keyword"> const </span></div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span><span class="keyword">    </span>{<span class="keywordflow">return</span> bfs_number[n];}</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno"><a class="line" href="classbfs.html#addc2a3d0a275007455d22f6b76830e66">  255</a></span>    <span class="keywordtype">int</span> operator[] (<span class="keyword">const</span> <a class="code hl_class" href="structnode.html">node</a>&amp; n)<span class="keyword"> const </span></div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span><span class="keyword">    </span>{<span class="keywordflow">return</span> bfs_number[n];}</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span> </div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno"><a class="line" href="classbfs.html#ac0158a0453fb17a89be4049d21db56b1">  268</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classbfs.html#ac0158a0453fb17a89be4049d21db56b1">level</a> (<span class="keyword">const</span> <a class="code hl_class" href="structnode.html">node</a>&amp; n)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span><span class="keyword">    </span>{assert (level_number); <span class="keywordflow">return</span> (*level_number)[n];}</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span> </div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno"><a class="line" href="classbfs.html#a3e1a7b0e4bde586d0be44616e533c59c">  284</a></span>    <a class="code hl_class" href="structnode.html">node</a> <a class="code hl_function" href="classbfs.html#a3e1a7b0e4bde586d0be44616e533c59c">father</a> (<span class="keyword">const</span> <a class="code hl_class" href="structnode.html">node</a>&amp; n)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><span class="keyword">    </span>{assert (preds); <span class="keywordflow">return</span> (*preds)[n];}</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span> </div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno"><a class="line" href="classbfs.html#a04e608fe18089e5495cadb995aa75261">  290</a></span>    <span class="keyword">typedef</span> edges_t::const_iterator <a class="code hl_typedef" href="classbfs.html#a04e608fe18089e5495cadb995aa75261">tree_edges_iterator</a>;</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span> </div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno"><a class="line" href="classbfs.html#a56959215efdfee1a37826ad315ac13e7">  301</a></span>    <a class="code hl_typedef" href="classbfs.html#a04e608fe18089e5495cadb995aa75261">tree_edges_iterator</a> <a class="code hl_function" href="classbfs.html#a56959215efdfee1a37826ad315ac13e7">tree_edges_begin</a> ()<span class="keyword"> const </span></div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span><span class="keyword">    </span>{<span class="keywordflow">return</span> <a class="code hl_struct" href="structtree.html">tree</a>.begin();}</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span> </div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno"><a class="line" href="classbfs.html#a7db47d5d68e21e95fd548beea1a8db2b">  310</a></span>    <a class="code hl_typedef" href="classbfs.html#a04e608fe18089e5495cadb995aa75261">tree_edges_iterator</a> <a class="code hl_function" href="classbfs.html#a7db47d5d68e21e95fd548beea1a8db2b">tree_edges_end</a> ()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span><span class="keyword">    </span>{<span class="keywordflow">return</span> <a class="code hl_struct" href="structtree.html">tree</a>.end();}</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>   </div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno"><a class="line" href="classbfs.html#a1035f068a96de0370789ec315aef4f73">  316</a></span>    <span class="keyword">typedef</span> nodes_t::const_iterator <a class="code hl_typedef" href="classbfs.html#a1035f068a96de0370789ec315aef4f73">bfs_iterator</a>;</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span> </div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno"><a class="line" href="classbfs.html#aff214e6d33f7f2bbd899cf335540def9">  323</a></span>    <a class="code hl_typedef" href="classbfs.html#a1035f068a96de0370789ec315aef4f73">bfs_iterator</a> <a class="code hl_function" href="classbfs.html#aff214e6d33f7f2bbd899cf335540def9">begin</a> ()<span class="keyword"> const </span></div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span><span class="keyword">    </span>{<span class="keywordflow">return</span> bfs_order.begin();}</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span> </div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno"><a class="line" href="classbfs.html#ac35b3d3c37d33eb80adb752e17a60df9">  332</a></span>    <a class="code hl_typedef" href="classbfs.html#a1035f068a96de0370789ec315aef4f73">bfs_iterator</a> <a class="code hl_function" href="classbfs.html#ac35b3d3c37d33eb80adb752e17a60df9">end</a> ()<span class="keyword"> const </span></div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span><span class="keyword">    </span>{<span class="keywordflow">return</span> bfs_order.end();}</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span> </div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno"><a class="line" href="classbfs.html#a89ec32919076618d9eef18990fef543f">  338</a></span>    <span class="keyword">typedef</span> edges_t::const_iterator <a class="code hl_typedef" href="classbfs.html#a89ec32919076618d9eef18990fef543f">non_tree_edges_iterator</a>;</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span> </div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno"><a class="line" href="classbfs.html#a06d02d2643f184b4c086678771f0ff90">  346</a></span>    <a class="code hl_typedef" href="classbfs.html#a89ec32919076618d9eef18990fef543f">non_tree_edges_iterator</a> <a class="code hl_function" href="classbfs.html#a06d02d2643f184b4c086678771f0ff90">non_tree_edges_begin</a> ()<span class="keyword"> const </span></div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span><span class="keyword">    </span>{assert (non_tree);  <span class="keywordflow">return</span> non_tree-&gt;begin(); }</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span> </div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno"><a class="line" href="classbfs.html#a9fb470cd36eb487004ca28c1723cabda">  356</a></span>    <a class="code hl_typedef" href="classbfs.html#a89ec32919076618d9eef18990fef543f">non_tree_edges_iterator</a> <a class="code hl_function" href="classbfs.html#a9fb470cd36eb487004ca28c1723cabda">non_tree_edges_end</a> ()<span class="keyword"> const </span></div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span><span class="keyword">    </span>{assert (non_tree); <span class="keywordflow">return</span> non_tree-&gt;end(); }</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>    </div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno"><a class="line" href="classbfs.html#a70b915179053a2993154614d4358fdc1">  362</a></span>    <span class="keyword">typedef</span> std::list&lt;bfs_iterator&gt;::const_iterator <a class="code hl_typedef" href="classbfs.html#a70b915179053a2993154614d4358fdc1">roots_iterator</a>;</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span> </div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno"><a class="line" href="classbfs.html#a45d58d06d0dcd6427edad2ec52a6ebb9">  393</a></span>    <a class="code hl_typedef" href="classbfs.html#a70b915179053a2993154614d4358fdc1">roots_iterator</a> <a class="code hl_function" href="classbfs.html#a45d58d06d0dcd6427edad2ec52a6ebb9">roots_begin</a> ()<span class="keyword"> const </span></div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span><span class="keyword">    </span>{<span class="keywordflow">return</span> roots.begin();}</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span> </div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno"><a class="line" href="classbfs.html#ac84b90f777adeb90390689db62602d73">  402</a></span>    <a class="code hl_typedef" href="classbfs.html#a70b915179053a2993154614d4358fdc1">roots_iterator</a> <a class="code hl_function" href="classbfs.html#ac84b90f777adeb90390689db62602d73">roots_end</a> ()<span class="keyword"> const </span></div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span><span class="keyword">    </span>{<span class="keywordflow">return</span> roots.end();}</div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span> </div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno"><a class="line" href="classbfs.html#abb971551139ed87e6c78062275301c1b">  411</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classbfs.html#abb971551139ed87e6c78062275301c1b">number_of_reached_nodes</a> ()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span><span class="keyword">    </span>{<span class="keywordflow">return</span> reached_nodes;}</div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span> </div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>    <span class="comment">//-----------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>    <span class="comment">//   Handler</span></div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>    <span class="comment">//-----------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span> </div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno"><a class="line" href="classbfs.html#a34587829c64e90e08dc5ec445552da54">  423</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classbfs.html#a34587829c64e90e08dc5ec445552da54">init_handler</a> (GTL::graph&amp; <span class="comment">/*G*/</span>) { };</div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span> </div>
+<div class="line"><a id="l00430" name="l00430"></a><span class="lineno"><a class="line" href="classbfs.html#a68c86cd3193cd439726cf40683e49ef6">  430</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classbfs.html#a68c86cd3193cd439726cf40683e49ef6">end_handler</a> (GTL::graph&amp; <span class="comment">/*G*/</span>) { };</div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span> </div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno"><a class="line" href="classbfs.html#a0cc3df730352ceda47f8b863e989ed5d">  438</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classbfs.html#a0cc3df730352ceda47f8b863e989ed5d">popped_node_handler</a> (GTL::graph&amp; <span class="comment">/*G*/</span>, <a class="code hl_typedef" href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">GTL::node</a>&amp; <span class="comment">/*n*/</span>) { };</div>
+<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span> </div>
+<div class="line"><a id="l00449" name="l00449"></a><span class="lineno"><a class="line" href="classbfs.html#a795da80d8e97cfe5c79622a48ed8067d">  449</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classbfs.html#a795da80d8e97cfe5c79622a48ed8067d">finished_node_handler</a> (GTL::graph&amp; <span class="comment">/*G*/</span>, <a class="code hl_typedef" href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">GTL::node</a>&amp; <span class="comment">/*n*/</span>) { };</div>
+<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span> </div>
+<div class="line"><a id="l00461" name="l00461"></a><span class="lineno"><a class="line" href="classbfs.html#aabdc5480495611c4d62d87a576609387">  461</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classbfs.html#aabdc5480495611c4d62d87a576609387">unused_node_handler</a> (GTL::graph&amp; <span class="comment">/*G*/</span>, <a class="code hl_typedef" href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">GTL::node</a>&amp; <span class="comment">/*n*/</span>, <a class="code hl_typedef" href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">GTL::node</a>&amp; <span class="comment">/*f*/</span>) { };</div>
+<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span> </div>
+<div class="line"><a id="l00473" name="l00473"></a><span class="lineno"><a class="line" href="classbfs.html#a795b3bd7ff041d2cfa83260e3947458a">  473</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classbfs.html#a795b3bd7ff041d2cfa83260e3947458a">used_node_handler</a> (GTL::graph&amp; <span class="comment">/*G*/</span>, <a class="code hl_typedef" href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">GTL::node</a>&amp; <span class="comment">/*n*/</span>, <a class="code hl_typedef" href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">GTL::node</a>&amp; <span class="comment">/*f*/</span>) { };</div>
+<div class="line"><a id="l00474" name="l00474"></a><span class="lineno">  474</span> </div>
+<div class="line"><a id="l00486" name="l00486"></a><span class="lineno"><a class="line" href="classbfs.html#aa2314c17b3762e84fed5d2657d0189bf">  486</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classbfs.html#aa2314c17b3762e84fed5d2657d0189bf">new_start_handler</a> (GTL::graph&amp; <span class="comment">/*G*/</span>, <a class="code hl_typedef" href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">GTL::node</a>&amp; <span class="comment">/*n*/</span>) { };</div>
+<div class="line"><a id="l00487" name="l00487"></a><span class="lineno">  487</span> </div>
+<div class="line"><a id="l00488" name="l00488"></a><span class="lineno">  488</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00489" name="l00489"></a><span class="lineno">  489</span> </div>
+<div class="line"><a id="l00490" name="l00490"></a><span class="lineno">  490</span>    <span class="keywordtype">void</span> bfs_sub (GTL::graph&amp;, <span class="keyword">const</span> <a class="code hl_class" href="structnode.html">node</a>&amp;, GTL::edge_map&lt;int&gt;*);</div>
+<div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span> </div>
+<div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span> </div>
+<div class="line"><a id="l00494" name="l00494"></a><span class="lineno">  494</span>    <span class="comment">//-----------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00495" name="l00495"></a><span class="lineno">  495</span>    <span class="comment">//   Data</span></div>
+<div class="line"><a id="l00496" name="l00496"></a><span class="lineno">  496</span>    <span class="comment">//-----------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>    </div>
+<div class="line"><a id="l00501" name="l00501"></a><span class="lineno"><a class="line" href="classbfs.html#a5a4adad9562896536b8b58ab237e8478">  501</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classbfs.html#a5a4adad9562896536b8b58ab237e8478">act_bfs_num</a>;</div>
+<div class="line"><a id="l00502" name="l00502"></a><span class="lineno">  502</span> </div>
+<div class="line"><a id="l00506" name="l00506"></a><span class="lineno"><a class="line" href="classbfs.html#ad2ef1030dcc16a1056e6ef6dfc3f1b6b">  506</a></span>    std::deque&lt;node&gt; <a class="code hl_variable" href="classbfs.html#ad2ef1030dcc16a1056e6ef6dfc3f1b6b">qu</a>;</div>
+<div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span> </div>
+<div class="line"><a id="l00513" name="l00513"></a><span class="lineno"><a class="line" href="classbfs.html#a2596d2cf52f6e7922fd94ce1adde760e">  513</a></span>    <a class="code hl_typedef" href="edge_8h.html#a22ac17689106ba21a84e7bc54d1199d6">nodes_t</a> <a class="code hl_variable" href="classbfs.html#a2596d2cf52f6e7922fd94ce1adde760e">bfs_order</a>;</div>
+<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span> </div>
+<div class="line"><a id="l00520" name="l00520"></a><span class="lineno"><a class="line" href="classbfs.html#a8bc83afea6d1066ea4ceca3007799912">  520</a></span>    <a class="code hl_typedef" href="edge_8h.html#a8f9587479bda6cf612c103494b3858e3">edges_t</a> <a class="code hl_variable" href="classbfs.html#a8bc83afea6d1066ea4ceca3007799912">tree</a>;</div>
+<div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span> </div>
+<div class="line"><a id="l00525" name="l00525"></a><span class="lineno"><a class="line" href="classbfs.html#a59d0c5c5ad2715776b20b1aec03dbc3a">  525</a></span>    <a class="code hl_class" href="classnode__map.html">node_map&lt;int&gt;</a> <a class="code hl_variable" href="classbfs.html#a59d0c5c5ad2715776b20b1aec03dbc3a">bfs_number</a>;</div>
+<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span> </div>
+<div class="line"><a id="l00530" name="l00530"></a><span class="lineno"><a class="line" href="classbfs.html#ac3db80b59d5db049199936445a6c2da8">  530</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classbfs.html#ac3db80b59d5db049199936445a6c2da8">reached_nodes</a>;</div>
+<div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span>    </div>
+<div class="line"><a id="l00537" name="l00537"></a><span class="lineno"><a class="line" href="classbfs.html#acea071a6fdad8e590b40830ced241824">  537</a></span>    std::list&lt;bfs_iterator&gt; <a class="code hl_variable" href="classbfs.html#acea071a6fdad8e590b40830ced241824">roots</a>;</div>
+<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span> </div>
+<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>    <span class="comment">//-----------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>    <span class="comment">//   Optional</span></div>
+<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>    <span class="comment">//-----------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span> </div>
+<div class="line"><a id="l00548" name="l00548"></a><span class="lineno"><a class="line" href="classbfs.html#a6c08fbcc90d71f1cbdd03a1cdaa9dc99">  548</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="classbfs.html#a6c08fbcc90d71f1cbdd03a1cdaa9dc99">whole_graph</a>;</div>
+<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span> </div>
+<div class="line"><a id="l00555" name="l00555"></a><span class="lineno"><a class="line" href="classbfs.html#af2ab561d9e60a9fc2e25b02d1f807f96">  555</a></span>    <a class="code hl_class" href="structnode.html">node</a> <a class="code hl_variable" href="classbfs.html#af2ab561d9e60a9fc2e25b02d1f807f96">start</a>;</div>
+<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span> </div>
+<div class="line"><a id="l00562" name="l00562"></a><span class="lineno"><a class="line" href="classbfs.html#aab92e9d128612c28324aafe4750dbc84">  562</a></span>    <a class="code hl_class" href="classnode__map.html">node_map&lt;int&gt;</a>* <a class="code hl_variable" href="classbfs.html#aab92e9d128612c28324aafe4750dbc84">level_number</a>;</div>
+<div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span> </div>
+<div class="line"><a id="l00569" name="l00569"></a><span class="lineno"><a class="line" href="classbfs.html#a056b2131db11e62eb8f41c8dcc117d2e">  569</a></span>    <a class="code hl_typedef" href="edge_8h.html#a8f9587479bda6cf612c103494b3858e3">edges_t</a>* <a class="code hl_variable" href="classbfs.html#a056b2131db11e62eb8f41c8dcc117d2e">non_tree</a>;</div>
+<div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span> </div>
+<div class="line"><a id="l00576" name="l00576"></a><span class="lineno"><a class="line" href="classbfs.html#a3bac5ed333bb78a30a67099c3b94aa0c">  576</a></span>    <a class="code hl_class" href="classnode__map.html">node_map&lt;node&gt;</a>* <a class="code hl_variable" href="classbfs.html#a3bac5ed333bb78a30a67099c3b94aa0c">preds</a>;</div>
+<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>};</div>
+<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span> </div>
+<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span><a class="code hl_define" href="_g_t_l_8h.html#a46af2b3ec266ac2f9d36fa7222358017">__GTL_END_NAMESPACE</a></div>
+<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span> </div>
+<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span><span class="preprocessor">#endif </span><span class="comment">// GTL_BFS_H</span></div>
+<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span> </div>
+<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span><span class="comment">//--------------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span><span class="comment">//   end of file</span></div>
+<div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span><span class="comment">//--------------------------------------------------------------------------</span></div>
+<div class="ttc" id="a_g_t_l_8h_html"><div class="ttname"><a href="_g_t_l_8h.html">GTL.h</a></div></div>
+<div class="ttc" id="a_g_t_l_8h_html_a014cd1e9b3e67a78ae433eda95c8fd25"><div class="ttname"><a href="_g_t_l_8h.html#a014cd1e9b3e67a78ae433eda95c8fd25">GTL_EXTERN</a></div><div class="ttdeci">#define GTL_EXTERN</div><div class="ttdef"><b>Definition:</b> GTL.h:109</div></div>
+<div class="ttc" id="a_g_t_l_8h_html_a2d9f24096ac60918452dd51f32b64aa9"><div class="ttname"><a href="_g_t_l_8h.html#a2d9f24096ac60918452dd51f32b64aa9">__GTL_BEGIN_NAMESPACE</a></div><div class="ttdeci">#define __GTL_BEGIN_NAMESPACE</div><div class="ttdef"><b>Definition:</b> GTL.h:119</div></div>
+<div class="ttc" id="a_g_t_l_8h_html_a46af2b3ec266ac2f9d36fa7222358017"><div class="ttname"><a href="_g_t_l_8h.html#a46af2b3ec266ac2f9d36fa7222358017">__GTL_END_NAMESPACE</a></div><div class="ttdeci">#define __GTL_END_NAMESPACE</div><div class="ttdef"><b>Definition:</b> GTL.h:120</div></div>
+<div class="ttc" id="aalgorithm_8h_html"><div class="ttname"><a href="algorithm_8h.html">algorithm.h</a></div></div>
+<div class="ttc" id="aclassalgorithm_html"><div class="ttname"><a href="classalgorithm.html">algorithm</a></div><div class="ttdoc">Abstract baseclass for all algoritm-classes.</div><div class="ttdef"><b>Definition:</b> algorithm.h:23</div></div>
+<div class="ttc" id="aclassalgorithm_html_a21aba63d066ae7897de6ca7d8425c408"><div class="ttname"><a href="classalgorithm.html#a21aba63d066ae7897de6ca7d8425c408">algorithm::reset</a></div><div class="ttdeci">virtual void reset()=0</div><div class="ttdoc">Resets algorithm</div></div>
+<div class="ttc" id="aclassalgorithm_html_a4baee48c513c5802975743152c33f34c"><div class="ttname"><a href="classalgorithm.html#a4baee48c513c5802975743152c33f34c">algorithm::run</a></div><div class="ttdeci">virtual int run(GTL::graph &amp;g)=0</div><div class="ttdoc">Applies algorithm to graph g.</div></div>
+<div class="ttc" id="aclassalgorithm_html_a7ecf5c2bab575f8f2fae9e9e5093a6eaa5114c20e4a96a76b5de9f28bf15e282b"><div class="ttname"><a href="classalgorithm.html#a7ecf5c2bab575f8f2fae9e9e5093a6eaa5114c20e4a96a76b5de9f28bf15e282b">algorithm::GTL_OK</a></div><div class="ttdeci">@ GTL_OK</div><div class="ttdef"><b>Definition:</b> algorithm.h:41</div></div>
+<div class="ttc" id="aclassbfs_html"><div class="ttname"><a href="classbfs.html">bfs</a></div><div class="ttdoc">Breadth-First-Search (BFS) algorithm.</div><div class="ttdef"><b>Definition:</b> bfs.h:88</div></div>
+<div class="ttc" id="aclassbfs_html_a04e608fe18089e5495cadb995aa75261"><div class="ttname"><a href="classbfs.html#a04e608fe18089e5495cadb995aa75261">bfs::tree_edges_iterator</a></div><div class="ttdeci">edges_t::const_iterator tree_edges_iterator</div><div class="ttdoc">Iterator for tree-edges.</div><div class="ttdef"><b>Definition:</b> bfs.h:290</div></div>
+<div class="ttc" id="aclassbfs_html_a056b2131db11e62eb8f41c8dcc117d2e"><div class="ttname"><a href="classbfs.html#a056b2131db11e62eb8f41c8dcc117d2e">bfs::non_tree</a></div><div class="ttdeci">edges_t * non_tree</div><div class="ttdoc">List of non-tree edges (if enabled)</div><div class="ttdef"><b>Definition:</b> bfs.h:569</div></div>
+<div class="ttc" id="aclassbfs_html_a06d02d2643f184b4c086678771f0ff90"><div class="ttname"><a href="classbfs.html#a06d02d2643f184b4c086678771f0ff90">bfs::non_tree_edges_begin</a></div><div class="ttdeci">non_tree_edges_iterator non_tree_edges_begin() const</div><div class="ttdoc">Iterate through all non-tree-edges (if enabled).</div><div class="ttdef"><b>Definition:</b> bfs.h:346</div></div>
+<div class="ttc" id="aclassbfs_html_a0cc3df730352ceda47f8b863e989ed5d"><div class="ttname"><a href="classbfs.html#a0cc3df730352ceda47f8b863e989ed5d">bfs::popped_node_handler</a></div><div class="ttdeci">virtual void popped_node_handler(GTL::graph &amp;, GTL::node &amp;)</div><div class="ttdoc">Called after the node n was taken out of the queue.</div><div class="ttdef"><b>Definition:</b> bfs.h:438</div></div>
+<div class="ttc" id="aclassbfs_html_a1035f068a96de0370789ec315aef4f73"><div class="ttname"><a href="classbfs.html#a1035f068a96de0370789ec315aef4f73">bfs::bfs_iterator</a></div><div class="ttdeci">nodes_t::const_iterator bfs_iterator</div><div class="ttdoc">Iterator for nodes in BFS-order.</div><div class="ttdef"><b>Definition:</b> bfs.h:316</div></div>
+<div class="ttc" id="aclassbfs_html_a1378f5cfbc59b036e9215c02563bac23"><div class="ttname"><a href="classbfs.html#a1378f5cfbc59b036e9215c02563bac23">bfs::scan_whole_graph</a></div><div class="ttdeci">bool scan_whole_graph() const</div><div class="ttdoc">Returns whether the whole graph will be scanned.</div><div class="ttdef"><b>Definition:</b> bfs.h:163</div></div>
+<div class="ttc" id="aclassbfs_html_a23e2981c2ee617a6e12a8833d2db6210"><div class="ttname"><a href="classbfs.html#a23e2981c2ee617a6e12a8833d2db6210">bfs::start_node</a></div><div class="ttdeci">void start_node(const node &amp;n)</div><div class="ttdoc">Sets start-node for BFS.</div><div class="ttdef"><b>Definition:</b> bfs.h:129</div></div>
+<div class="ttc" id="aclassbfs_html_a2596d2cf52f6e7922fd94ce1adde760e"><div class="ttname"><a href="classbfs.html#a2596d2cf52f6e7922fd94ce1adde760e">bfs::bfs_order</a></div><div class="ttdeci">nodes_t bfs_order</div><div class="ttdoc">List of nodes in BFS-order</div><div class="ttdef"><b>Definition:</b> bfs.h:513</div></div>
+<div class="ttc" id="aclassbfs_html_a25fc51b1bfbbdd3afefe0a84c1bd2f6b"><div class="ttname"><a href="classbfs.html#a25fc51b1bfbbdd3afefe0a84c1bd2f6b">bfs::scan_whole_graph</a></div><div class="ttdeci">void scan_whole_graph(bool set)</div><div class="ttdoc">Enables or disables scanning of the whole graph.</div><div class="ttdef"><b>Definition:</b> bfs.h:155</div></div>
+<div class="ttc" id="aclassbfs_html_a34587829c64e90e08dc5ec445552da54"><div class="ttname"><a href="classbfs.html#a34587829c64e90e08dc5ec445552da54">bfs::init_handler</a></div><div class="ttdeci">virtual void init_handler(GTL::graph &amp;)</div><div class="ttdoc">Called at the start of BFS.</div><div class="ttdef"><b>Definition:</b> bfs.h:423</div></div>
+<div class="ttc" id="aclassbfs_html_a3bac5ed333bb78a30a67099c3b94aa0c"><div class="ttname"><a href="classbfs.html#a3bac5ed333bb78a30a67099c3b94aa0c">bfs::preds</a></div><div class="ttdeci">node_map&lt; node &gt; * preds</div><div class="ttdoc">Stores father of each node (if enabled)</div><div class="ttdef"><b>Definition:</b> bfs.h:576</div></div>
+<div class="ttc" id="aclassbfs_html_a3e1a7b0e4bde586d0be44616e533c59c"><div class="ttname"><a href="classbfs.html#a3e1a7b0e4bde586d0be44616e533c59c">bfs::father</a></div><div class="ttdeci">node father(const node &amp;n) const</div><div class="ttdoc">Father of node n in BFS-forest.</div><div class="ttdef"><b>Definition:</b> bfs.h:284</div></div>
+<div class="ttc" id="aclassbfs_html_a45d58d06d0dcd6427edad2ec52a6ebb9"><div class="ttname"><a href="classbfs.html#a45d58d06d0dcd6427edad2ec52a6ebb9">bfs::roots_begin</a></div><div class="ttdeci">roots_iterator roots_begin() const</div><div class="ttdoc">Iterator pointing towards the first root in the BFS-forest.</div><div class="ttdef"><b>Definition:</b> bfs.h:393</div></div>
+<div class="ttc" id="aclassbfs_html_a56959215efdfee1a37826ad315ac13e7"><div class="ttname"><a href="classbfs.html#a56959215efdfee1a37826ad315ac13e7">bfs::tree_edges_begin</a></div><div class="ttdeci">tree_edges_iterator tree_edges_begin() const</div><div class="ttdoc">Iterate through all tree-edges of last BFS.</div><div class="ttdef"><b>Definition:</b> bfs.h:301</div></div>
+<div class="ttc" id="aclassbfs_html_a59d0c5c5ad2715776b20b1aec03dbc3a"><div class="ttname"><a href="classbfs.html#a59d0c5c5ad2715776b20b1aec03dbc3a">bfs::bfs_number</a></div><div class="ttdeci">node_map&lt; int &gt; bfs_number</div><div class="ttdoc">Stores BFS-number of nodes.</div><div class="ttdef"><b>Definition:</b> bfs.h:525</div></div>
+<div class="ttc" id="aclassbfs_html_a5a4adad9562896536b8b58ab237e8478"><div class="ttname"><a href="classbfs.html#a5a4adad9562896536b8b58ab237e8478">bfs::act_bfs_num</a></div><div class="ttdeci">int act_bfs_num</div><div class="ttdoc">BFS number that will be assigned next.</div><div class="ttdef"><b>Definition:</b> bfs.h:501</div></div>
+<div class="ttc" id="aclassbfs_html_a6205cc191bc0bedf1ff9d74af0925735"><div class="ttname"><a href="classbfs.html#a6205cc191bc0bedf1ff9d74af0925735">bfs::bfs_num</a></div><div class="ttdeci">int bfs_num(const node &amp;n) const</div><div class="ttdoc">BFS-number of n.</div><div class="ttdef"><b>Definition:</b> bfs.h:243</div></div>
+<div class="ttc" id="aclassbfs_html_a68c86cd3193cd439726cf40683e49ef6"><div class="ttname"><a href="classbfs.html#a68c86cd3193cd439726cf40683e49ef6">bfs::end_handler</a></div><div class="ttdeci">virtual void end_handler(GTL::graph &amp;)</div><div class="ttdoc">Called right before the end of BFS.</div><div class="ttdef"><b>Definition:</b> bfs.h:430</div></div>
+<div class="ttc" id="aclassbfs_html_a6c08fbcc90d71f1cbdd03a1cdaa9dc99"><div class="ttname"><a href="classbfs.html#a6c08fbcc90d71f1cbdd03a1cdaa9dc99">bfs::whole_graph</a></div><div class="ttdeci">bool whole_graph</div><div class="ttdoc">Stores whether whole graph will be scanned.</div><div class="ttdef"><b>Definition:</b> bfs.h:548</div></div>
+<div class="ttc" id="aclassbfs_html_a70b915179053a2993154614d4358fdc1"><div class="ttname"><a href="classbfs.html#a70b915179053a2993154614d4358fdc1">bfs::roots_iterator</a></div><div class="ttdeci">std::list&lt; bfs_iterator &gt;::const_iterator roots_iterator</div><div class="ttdoc">Iterator for roots of trees in BFS-forest.</div><div class="ttdef"><b>Definition:</b> bfs.h:362</div></div>
+<div class="ttc" id="aclassbfs_html_a78ea23abb1461e62dd7ecd416fecbd96"><div class="ttname"><a href="classbfs.html#a78ea23abb1461e62dd7ecd416fecbd96">bfs::calc_level</a></div><div class="ttdeci">bool calc_level() const</div><div class="ttdoc">Returns whether level-numbers will be calculated.</div><div class="ttdef"><b>Definition:</b> bfs.h:183</div></div>
+<div class="ttc" id="aclassbfs_html_a795b3bd7ff041d2cfa83260e3947458a"><div class="ttname"><a href="classbfs.html#a795b3bd7ff041d2cfa83260e3947458a">bfs::used_node_handler</a></div><div class="ttdeci">virtual void used_node_handler(GTL::graph &amp;, GTL::node &amp;, GTL::node &amp;)</div><div class="ttdoc">Called when an used node n was found.</div><div class="ttdef"><b>Definition:</b> bfs.h:473</div></div>
+<div class="ttc" id="aclassbfs_html_a795da80d8e97cfe5c79622a48ed8067d"><div class="ttname"><a href="classbfs.html#a795da80d8e97cfe5c79622a48ed8067d">bfs::finished_node_handler</a></div><div class="ttdeci">virtual void finished_node_handler(GTL::graph &amp;, GTL::node &amp;)</div><div class="ttdoc">Called when finished with the node n.</div><div class="ttdef"><b>Definition:</b> bfs.h:449</div></div>
+<div class="ttc" id="aclassbfs_html_a7db47d5d68e21e95fd548beea1a8db2b"><div class="ttname"><a href="classbfs.html#a7db47d5d68e21e95fd548beea1a8db2b">bfs::tree_edges_end</a></div><div class="ttdeci">tree_edges_iterator tree_edges_end() const</div><div class="ttdoc">End-iterator for iteration through all tree-edges picked of last BFS.</div><div class="ttdef"><b>Definition:</b> bfs.h:310</div></div>
+<div class="ttc" id="aclassbfs_html_a89ec32919076618d9eef18990fef543f"><div class="ttname"><a href="classbfs.html#a89ec32919076618d9eef18990fef543f">bfs::non_tree_edges_iterator</a></div><div class="ttdeci">edges_t::const_iterator non_tree_edges_iterator</div><div class="ttdoc">Iterator for non-tree-edges.</div><div class="ttdef"><b>Definition:</b> bfs.h:338</div></div>
+<div class="ttc" id="aclassbfs_html_a8bc83afea6d1066ea4ceca3007799912"><div class="ttname"><a href="classbfs.html#a8bc83afea6d1066ea4ceca3007799912">bfs::tree</a></div><div class="ttdeci">edges_t tree</div><div class="ttdoc">List of all edges of the BFS-tree</div><div class="ttdef"><b>Definition:</b> bfs.h:520</div></div>
+<div class="ttc" id="aclassbfs_html_a9d2deab6d367674e640e96fc83d9a6bc"><div class="ttname"><a href="classbfs.html#a9d2deab6d367674e640e96fc83d9a6bc">bfs::check</a></div><div class="ttdeci">virtual int check(GTL::graph &amp;)</div><div class="ttdoc">Checks whether the preconditions for BFS are satisfied.</div><div class="ttdef"><b>Definition:</b> bfs.h:112</div></div>
+<div class="ttc" id="aclassbfs_html_a9fb470cd36eb487004ca28c1723cabda"><div class="ttname"><a href="classbfs.html#a9fb470cd36eb487004ca28c1723cabda">bfs::non_tree_edges_end</a></div><div class="ttdeci">non_tree_edges_iterator non_tree_edges_end() const</div><div class="ttdoc">End-iterator for iteration through all non-tree-edges (if enabled).</div><div class="ttdef"><b>Definition:</b> bfs.h:356</div></div>
+<div class="ttc" id="aclassbfs_html_a9fe165e0a6d979d6d55b6234bfbe5b8f"><div class="ttname"><a href="classbfs.html#a9fe165e0a6d979d6d55b6234bfbe5b8f">bfs::store_non_tree_edges</a></div><div class="ttdeci">bool store_non_tree_edges() const</div><div class="ttdoc">Returns whether the storing of non-tree-edges is enabled.</div><div class="ttdef"><b>Definition:</b> bfs.h:203</div></div>
+<div class="ttc" id="aclassbfs_html_aa2314c17b3762e84fed5d2657d0189bf"><div class="ttname"><a href="classbfs.html#aa2314c17b3762e84fed5d2657d0189bf">bfs::new_start_handler</a></div><div class="ttdeci">virtual void new_start_handler(GTL::graph &amp;, GTL::node &amp;)</div><div class="ttdoc">Called when BFS is started with start-node n.</div><div class="ttdef"><b>Definition:</b> bfs.h:486</div></div>
+<div class="ttc" id="aclassbfs_html_aab92e9d128612c28324aafe4750dbc84"><div class="ttname"><a href="classbfs.html#aab92e9d128612c28324aafe4750dbc84">bfs::level_number</a></div><div class="ttdeci">node_map&lt; int &gt; * level_number</div><div class="ttdoc">Stores level number of each node (if enabled)</div><div class="ttdef"><b>Definition:</b> bfs.h:562</div></div>
+<div class="ttc" id="aclassbfs_html_aabdc5480495611c4d62d87a576609387"><div class="ttname"><a href="classbfs.html#aabdc5480495611c4d62d87a576609387">bfs::unused_node_handler</a></div><div class="ttdeci">virtual void unused_node_handler(GTL::graph &amp;, GTL::node &amp;, GTL::node &amp;)</div><div class="ttdoc">Called when an unused node n was discovered.</div><div class="ttdef"><b>Definition:</b> bfs.h:461</div></div>
+<div class="ttc" id="aclassbfs_html_ab1a7882a7d56e0e72bbe1a344381bdae"><div class="ttname"><a href="classbfs.html#ab1a7882a7d56e0e72bbe1a344381bdae">bfs::reached</a></div><div class="ttdeci">bool reached(const node &amp;n) const</div><div class="ttdoc">Checks whether node n was reached in BFS.</div><div class="ttdef"><b>Definition:</b> bfs.h:231</div></div>
+<div class="ttc" id="aclassbfs_html_abb971551139ed87e6c78062275301c1b"><div class="ttname"><a href="classbfs.html#abb971551139ed87e6c78062275301c1b">bfs::number_of_reached_nodes</a></div><div class="ttdeci">int number_of_reached_nodes() const</div><div class="ttdoc">Number of nodes reached in last BFS.</div><div class="ttdef"><b>Definition:</b> bfs.h:411</div></div>
+<div class="ttc" id="aclassbfs_html_ac0158a0453fb17a89be4049d21db56b1"><div class="ttname"><a href="classbfs.html#ac0158a0453fb17a89be4049d21db56b1">bfs::level</a></div><div class="ttdeci">int level(const node &amp;n) const</div><div class="ttdoc">Level-number of node n.</div><div class="ttdef"><b>Definition:</b> bfs.h:268</div></div>
+<div class="ttc" id="aclassbfs_html_ac35b3d3c37d33eb80adb752e17a60df9"><div class="ttname"><a href="classbfs.html#ac35b3d3c37d33eb80adb752e17a60df9">bfs::end</a></div><div class="ttdeci">bfs_iterator end() const</div><div class="ttdoc">End-iterator for iteration through all (reached) nodes in BFS-Order.</div><div class="ttdef"><b>Definition:</b> bfs.h:332</div></div>
+<div class="ttc" id="aclassbfs_html_ac3db80b59d5db049199936445a6c2da8"><div class="ttname"><a href="classbfs.html#ac3db80b59d5db049199936445a6c2da8">bfs::reached_nodes</a></div><div class="ttdeci">int reached_nodes</div><div class="ttdoc">Number of nodes reached so far.</div><div class="ttdef"><b>Definition:</b> bfs.h:530</div></div>
+<div class="ttc" id="aclassbfs_html_ac4373b51885382f6f1a9312c1b0923bd"><div class="ttname"><a href="classbfs.html#ac4373b51885382f6f1a9312c1b0923bd">bfs::store_preds</a></div><div class="ttdeci">bool store_preds() const</div><div class="ttdoc">Returns whether the storing of predecessors is enabled.</div><div class="ttdef"><b>Definition:</b> bfs.h:223</div></div>
+<div class="ttc" id="aclassbfs_html_ac84b90f777adeb90390689db62602d73"><div class="ttname"><a href="classbfs.html#ac84b90f777adeb90390689db62602d73">bfs::roots_end</a></div><div class="ttdeci">roots_iterator roots_end() const</div><div class="ttdoc">Iterator pointing to the end of all roots.</div><div class="ttdef"><b>Definition:</b> bfs.h:402</div></div>
+<div class="ttc" id="aclassbfs_html_acea071a6fdad8e590b40830ced241824"><div class="ttname"><a href="classbfs.html#acea071a6fdad8e590b40830ced241824">bfs::roots</a></div><div class="ttdeci">std::list&lt; bfs_iterator &gt; roots</div><div class="ttdoc">List of all roots of the BFS-tree</div><div class="ttdef"><b>Definition:</b> bfs.h:537</div></div>
+<div class="ttc" id="aclassbfs_html_ad2ef1030dcc16a1056e6ef6dfc3f1b6b"><div class="ttname"><a href="classbfs.html#ad2ef1030dcc16a1056e6ef6dfc3f1b6b">bfs::qu</a></div><div class="ttdeci">std::deque&lt; node &gt; qu</div><div class="ttdoc">queue used in BFS.</div><div class="ttdef"><b>Definition:</b> bfs.h:506</div></div>
+<div class="ttc" id="aclassbfs_html_af2ab561d9e60a9fc2e25b02d1f807f96"><div class="ttname"><a href="classbfs.html#af2ab561d9e60a9fc2e25b02d1f807f96">bfs::start</a></div><div class="ttdeci">node start</div><div class="ttdoc">Stores start node.</div><div class="ttdef"><b>Definition:</b> bfs.h:555</div></div>
+<div class="ttc" id="aclassbfs_html_afac59b4a0d92449d8fa46a202b11ae4b"><div class="ttname"><a href="classbfs.html#afac59b4a0d92449d8fa46a202b11ae4b">bfs::start_node</a></div><div class="ttdeci">node start_node() const</div><div class="ttdoc">Returns start-node for BFS.</div><div class="ttdef"><b>Definition:</b> bfs.h:136</div></div>
+<div class="ttc" id="aclassbfs_html_aff214e6d33f7f2bbd899cf335540def9"><div class="ttname"><a href="classbfs.html#aff214e6d33f7f2bbd899cf335540def9">bfs::begin</a></div><div class="ttdeci">bfs_iterator begin() const</div><div class="ttdoc">Iterate through all (reached) nodes in BFS-Order.</div><div class="ttdef"><b>Definition:</b> bfs.h:323</div></div>
+<div class="ttc" id="aclassnode__map_html"><div class="ttname"><a href="classnode__map.html">node_map&lt; int &gt;</a></div></div>
+<div class="ttc" id="aclassset_html"><div class="ttname"><a href="classset.html">set</a></div><div class="ttdef"><b>Definition:</b> pytypes.h:1277</div></div>
+<div class="ttc" id="aedge_8h_html_a22ac17689106ba21a84e7bc54d1199d6"><div class="ttname"><a href="edge_8h.html#a22ac17689106ba21a84e7bc54d1199d6">nodes_t</a></div><div class="ttdeci">std::list&lt; node &gt; nodes_t</div><div class="ttdef"><b>Definition:</b> edge.h:24</div></div>
+<div class="ttc" id="aedge_8h_html_a8f9587479bda6cf612c103494b3858e3"><div class="ttname"><a href="edge_8h.html#a8f9587479bda6cf612c103494b3858e3">edges_t</a></div><div class="ttdeci">std::list&lt; edge &gt; edges_t</div><div class="ttdef"><b>Definition:</b> edge.h:141</div></div>
+<div class="ttc" id="alist_8h_html_af4aeda155dbe167f1c1cf38cb65bf324"><div class="ttname"><a href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">node</a></div><div class="ttdeci">struct node node</div><div class="ttdef"><b>Definition:</b> edge.h:133</div></div>
+<div class="ttc" id="anode__map_8h_html"><div class="ttname"><a href="node__map_8h.html">node_map.h</a></div></div>
+<div class="ttc" id="astructnode_html"><div class="ttname"><a href="structnode.html">node</a></div><div class="ttdoc">A node in a graph</div><div class="ttdef"><b>Definition:</b> list.h:4</div></div>
+<div class="ttc" id="astructtree_html"><div class="ttname"><a href="structtree.html">tree</a></div><div class="ttdef"><b>Definition:</b> darknet.h:91</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>

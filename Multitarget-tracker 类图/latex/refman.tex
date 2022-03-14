@@ -1,0 +1,1449 @@
+  % Handle batch mode
+  % to overcome problems with too many open files
+  \let\mypdfximage\pdfximage\def\pdfximage{\immediate\mypdfximage}
+  % Set document class depending on configuration
+  \documentclass[twoside]{book}
+  %% moved from doxygen.sty due to workaround for LaTex 2019 version and unmaintained tabu package
+  \usepackage{ifthen}
+  \ifx\requestedLaTeXdate\undefined
+    \usepackage{array}
+  \else
+    \usepackage{array}[=2016-10-06]
+  \fi
+  %%
+  % Packages required by doxygen
+  \usepackage{fixltx2e} % for \textsubscript
+  \usepackage{doxygen}
+  \usepackage{graphicx}
+  \usepackage[utf8]{inputenc}
+  \usepackage{makeidx}
+  \PassOptionsToPackage{warn}{textcomp}
+  \usepackage{textcomp}
+  \usepackage[nointegrals]{wasysym}
+  \usepackage{ifxetex}
+  % NLS support packages
+  \usepackage{CJKutf8}
+  % Define default fonts
+  % Font selection
+  % set main and monospaced font
+  \usepackage[scaled=.90]{helvet}
+\usepackage{courier}
+\renewcommand{\familydefault}{\sfdefault}
+  \usepackage{sectsty}
+  \allsectionsfont{%
+    \fontseries{bc}\selectfont%
+    \color{darkgray}%
+  }
+  \renewcommand{\DoxyLabelFont}{%
+    \fontseries{bc}\selectfont%
+    \color{darkgray}%
+  }
+  \newcommand{\+}{\discretionary{\mbox{\scriptsize$\hookleftarrow$}}{}{}}
+   % Arguments of doxygenemoji:
+   % 1) ':<text>:' form of the emoji, already LaTeX-escaped
+   % 2) file with the name of the emoji without the .png extension
+   % in case image exist use this otherwise use the ':<text>:' form
+   \newcommand{\doxygenemoji}[2]{%
+     \IfFileExists{./#2.png}{\raisebox{-0.1em}{\includegraphics[height=0.9em]{./#2.png}}}{#1}%
+   }
+  % Page & text layout
+  \usepackage{geometry}
+  \geometry{%
+    a4paper,%
+    top=2.5cm,%
+    bottom=2.5cm,%
+    left=2.5cm,%
+    right=2.5cm%
+  }
+  % Allow a bit of overflow to go unnoticed by other means
+  \tolerance=750
+  \hfuzz=15pt
+  \hbadness=750
+  \setlength{\emergencystretch}{15pt}
+  \setlength{\parindent}{0cm}
+  \newcommand{\doxynormalparskip}{\setlength{\parskip}{3ex plus 2ex minus 2ex}}
+  \newcommand{\doxytocparskip}{\setlength{\parskip}{1ex plus 0ex minus 0ex}}
+  \doxynormalparskip
+  % Redefine paragraph/subparagraph environments, using sectsty fonts
+  \makeatletter
+  \renewcommand{\paragraph}{%
+    \@startsection{paragraph}{4}{0ex}{-1.0ex}{1.0ex}{%
+      \normalfont\normalsize\bfseries\SS@parafont%
+    }%
+  }
+  \renewcommand{\subparagraph}{%
+    \@startsection{subparagraph}{5}{0ex}{-1.0ex}{1.0ex}{%
+      \normalfont\normalsize\bfseries\SS@subparafont%
+    }%
+  }
+  \makeatother
+  \makeatletter
+  \newcommand\hrulefilll{\leavevmode\leaders\hrule\hskip 0pt plus 1filll\kern\z@}
+  \makeatother
+  % Headers & footers
+  \usepackage{fancyhdr}
+  \pagestyle{fancyplain}
+  \renewcommand{\footrulewidth}{0.4pt}
+  \fancypagestyle{fancyplain}{
+    \fancyhf{}
+    \fancyhead[LE, RO]{\bfseries\thepage}
+    \fancyhead[LO]{\bfseries\rightmark}
+    \fancyhead[RE]{\bfseries\leftmark}
+    \fancyfoot[LO, RE]{\bfseries\scriptsize 制作者 Doxygen }
+  }
+  \fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[LO, RE]{\bfseries\scriptsize 制作者 Doxygen }
+    \renewcommand{\headrulewidth}{0pt}
+  }
+  \pagestyle{fancyplain}
+  \renewcommand{\chaptermark}[1]{%
+    \markboth{#1}{}%
+  }
+  \renewcommand{\sectionmark}[1]{%
+    \markright{\thesection\ #1}%
+  }
+  % ToC, LoF, LoT, bibliography, and index
+  % Indices & bibliography
+  \usepackage{natbib}
+  \usepackage[titles]{tocloft}
+  \setcounter{tocdepth}{3}
+  \setcounter{secnumdepth}{5}
+  % creating indexes
+  \makeindex
+  \usepackage{newunicodechar}
+  \newunicodechar{⁻}{${}^{-}$}% Superscript minus
+  \newunicodechar{²}{${}^{2}$}% Superscript two
+  \newunicodechar{³}{${}^{3}$}% Superscript three
+  % Hyperlinks
+    % Hyperlinks (required, but should be loaded last)
+    \ifpdf
+      \usepackage[pdftex,pagebackref=true]{hyperref}
+    \else
+      \ifxetex
+        \usepackage[pagebackref=true]{hyperref}
+      \else
+        \usepackage[ps2pdf,pagebackref=true]{hyperref}
+      \fi
+    \fi
+    \hypersetup{%
+      colorlinks=true,%
+      linkcolor=blue,%
+      citecolor=blue,%
+      unicode,%
+      pdftitle=My Project,%
+      pdfsubject=%
+    }
+  % Custom commands used by the header
+  % Custom commands
+  \newcommand{\clearemptydoublepage}{%
+    \newpage{\pagestyle{empty}\cleardoublepage}%
+  }
+  % caption style definition
+  \usepackage{caption}
+  \captionsetup{labelsep=space,justification=centering,font={bf},singlelinecheck=off,skip=4pt,position=top}
+  % in page table of contents
+  \usepackage{etoc}
+  \etocsettocstyle{\doxytocparskip}{\doxynormalparskip}
+  % prevent numbers overlap the titles in toc
+  \renewcommand{\numberline}[1]{#1~}
+% End of preamble, now comes the document contents
+%===== C O N T E N T S =====
+\begin{document}
+  \raggedbottom
+  \begin{CJK}{UTF8}{gbsn}
+  % Titlepage & ToC
+    % To avoid duplicate page anchors due to reuse of same numbers for
+    % the index (be it as roman numbers)
+    \hypersetup{pageanchor=false,
+                bookmarksnumbered=true,
+                pdfencoding=unicode
+               }
+  \pagenumbering{alph}
+  \begin{titlepage}
+  \vspace*{7cm}
+  \begin{center}%
+  {\Large My Project}\\
+  \vspace*{1cm}
+  {\large 制作者 Doxygen 1.9.3}\\
+  \end{center}
+  \end{titlepage}
+  \clearemptydoublepage
+  \pagenumbering{roman}
+  \tableofcontents
+  \clearemptydoublepage
+  \pagenumbering{arabic}
+  % re-enable anchors again
+  \hypersetup{pageanchor=true}
+%--- Begin generated contents ---
+\chapter{README}
+\label{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e}
+\Hypertarget{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e}
+\input{md__d__zhr_files__multitarget_tracker_master__r_e_a_d_m_e}
+\chapter{VIBE}
+\label{md__d__zhr_files__multitarget_tracker_master_src__detector_vibe_src__r_e_a_d_m_e}
+\Hypertarget{md__d__zhr_files__multitarget_tracker_master_src__detector_vibe_src__r_e_a_d_m_e}
+\input{md__d__zhr_files__multitarget_tracker_master_src__detector_vibe_src__r_e_a_d_m_e}
+\chapter{CONTRIBUTING}
+\label{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11__c_o_n_t_r_i_b_u_t_i_n_g}
+\Hypertarget{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11__c_o_n_t_r_i_b_u_t_i_n_g}
+\input{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11__c_o_n_t_r_i_b_u_t_i_n_g}
+\chapter{ISSUE\+\_\+\+TEMPLATE}
+\label{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11__i_s_s_u_e__t_e_m_p_l_a_t_e}
+\Hypertarget{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11__i_s_s_u_e__t_e_m_p_l_a_t_e}
+\input{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11__i_s_s_u_e__t_e_m_p_l_a_t_e}
+\chapter{README}
+\label{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11__r_e_a_d_m_e}
+\Hypertarget{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11__r_e_a_d_m_e}
+\input{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11__r_e_a_d_m_e}
+\chapter{README}
+\label{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11_tools_clang__r_e_a_d_m_e}
+\Hypertarget{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11_tools_clang__r_e_a_d_m_e}
+\input{md__d__zhr_files__multitarget_tracker_master_thirdparty_pybind11_tools_clang__r_e_a_d_m_e}
+\chapter{弃用列表}
+\label{deprecated}
+\Hypertarget{deprecated}
+\input{deprecated}
+\chapter{模块索引}
+\input{modules}
+\chapter{命名空间索引}
+\input{namespaces}
+\chapter{继承关系索引}
+\input{hierarchy}
+\chapter{类索引}
+\input{annotated}
+\chapter{文件索引}
+\input{files}
+\chapter{模块说明}
+\input{group__python__builtins}
+\input{group__annotations}
+\input{group__pytypes}
+\chapter{命名空间文档}
+\input{namespaceaccessor__policies}
+\input{namespaceclang}
+\input{namespaceclang_1_1cindex}
+\input{namespaceclang_1_1enumerations}
+\input{namespacedemo}
+\input{namespace_g_t_l}
+\input{namespacehttplib}
+\input{namespacehttplib_1_1detail}
+\input{namespacelibsize}
+\input{namespaceliterals}
+\input{namespacemkdoc}
+\input{namespacenvinfer1}
+\input{namespacepybind11}
+\input{namespacepybind11_1_1____main____}
+\input{namespacepybind11_1_1__version}
+\input{namespacepybind11_1_1detail}
+\input{namespacesetup}
+\input{namespacesse}
+\input{namespacestd}
+\input{namespacetensor__rt}
+\input{namespacetracking}
+\input{namespacevibe}
+\chapter{类说明}
+\input{classclang_1_1cindex_1_1___c_x_string}
+\input{classclang_1_1cindex_1_1___c_x_unsaved_file}
+\input{struct___i_g_n_o_r_e___p_i_p_e___s_i_g_n_a_l}
+\input{classaccessor}
+\input{classclang_1_1cindex_1_1_access_specifier}
+\input{classalgorithm}
+\input{structalias__constructor}
+\input{structalways__construct__holder}
+\input{structanchors__t}
+\input{classany__container}
+\input{structarg}
+\input{structarg__v}
+\input{classargs}
+\input{classargs__proxy}
+\input{classargument__loader}
+\input{structargument__record}
+\input{structarithmetic}
+\input{classarray}
+\input{class_array2d}
+\input{class_array2d_c}
+\input{structarray__caster}
+\input{structarray__info}
+\input{structarray__info_3_01char_0f_n_0e_4}
+\input{structarray__info_3_01std_1_1array_3_01char_00_01_n_01_4_01_4}
+\input{structarray__info_3_01std_1_1array_3_01_t_00_01_n_01_4_01_4}
+\input{structarray__info_3_01_t_0f_n_0e_4}
+\input{structarray__info__scalar}
+\input{classarray__t}
+\input{structarrow__proxy}
+\input{class_assignment_problem_solver}
+\input{class_async_detector}
+\input{classclang_1_1cindex_1_1_completion_string_1_1_availability}
+\input{class_background_subtract}
+\input{class_background_subtractor_l_b_s_p}
+\input{class_background_subtractor_l_o_b_s_t_e_r}
+\input{class_background_subtractor_su_b_s_e_n_s_e}
+\input{structbase}
+\input{class_base_detector}
+\input{classclang_1_1cindex_1_1_base_enumeration}
+\input{class_base_tracker}
+\input{struct_b_box}
+\input{structbbox__t}
+\input{structbbox__t__container}
+\input{struct_b_box_info}
+\input{classbellman__ford}
+\input{classbfs}
+\input{classbiconnectivity}
+\input{classbid__dijkstra}
+\input{classbin__heap}
+\input{classbool__}
+\input{structbools}
+\input{structobject_1_1borrowed__t}
+\input{structbox}
+\input{structbox__label}
+\input{structbox__prob}
+\input{structboxabs}
+\input{classbuffer}
+\input{structbuffer__info}
+\input{structbuffer__protocol}
+\input{classhttplib_1_1_buffer_stream}
+\input{classsetup_1_1_build_py}
+\input{classbuiltin__exception}
+\input{classbytes}
+\input{classclang_1_1cindex_1_1_cached_property}
+\input{structcall__guard}
+\input{structcall__guard_3_01_t_01_4}
+\input{structcall__guard_3_01_t_00_01_ts_8_8_8_01_4}
+\input{structcall__guard_3_4}
+\input{classcapsule}
+\input{class_cars_counting}
+\input{class_cascade_detector}
+\input{classclang_1_1cindex_1_1_c_c_r_structure}
+\input{classnvinfer1_1_1_chunk}
+\input{classnvinfer1_1_1_chunk_plugin_creator}
+\input{structhttplib_1_1detail_1_1ci}
+\input{classclang_1_1cindex_1_1_clang_object}
+\input{classclass__}
+\input{classhttplib_1_1_client}
+\input{classsetup_1_1_c_make_build}
+\input{classsetup_1_1_c_make_extension}
+\input{classclang_1_1cindex_1_1_code_completion_result}
+\input{classclang_1_1cindex_1_1_code_completion_results}
+\input{classcommon__iterator}
+\input{structcompare__buffer__info}
+\input{structcompare__buffer__info_3_01_t_00_01detail_1_1enable__if__t_3_01detail_1_1is__pod__struct_3_01_t_01_4_1_1value_01_4_01_4}
+\input{structcompare__buffer__info_3_01_t_00_01detail_1_1enable__if__t_3_01std_1_1is__integral_3_01_t_01_4_1_1value_01_4_01_4}
+\input{class_compare_nodes}
+\input{classclang_1_1cindex_1_1_compilation_database}
+\input{classclang_1_1cindex_1_1_compilation_database_error}
+\input{classclang_1_1cindex_1_1_compile_command}
+\input{classclang_1_1cindex_1_1_compile_commands}
+\input{classclang_1_1cindex_1_1_completion_chunk}
+\input{classclang_1_1cindex_1_1_completion_string}
+\input{classcomponents}
+\input{classclang_1_1cindex_1_1_config}
+\input{structtensor__rt_1_1_config}
+\input{classpathfinder_1_1const__iterator}
+\input{structconstructor}
+\input{structcontainer__traits}
+\input{structcontrastive__params}
+\input{structcopyable__holder__caster}
+\input{classcpp__function}
+\input{class_c_region}
+\input{class_c_track}
+\input{class_c_tracker}
+\input{classclang_1_1cindex_1_1_cursor}
+\input{classclang_1_1cindex_1_1_cursor_kind}
+\input{struct_cv_l_s_v_m_feature_map_caskade}
+\input{structdat__cfg}
+\input{class_d_a_t___t_r_a_c_k_e_r}
+\input{structdata}
+\input{structdbox}
+\input{structdeferred__type}
+\input{structdescr}
+\input{structdet__num__pair}
+\input{classnvinfer1_1_1_detect}
+\input{structdetection}
+\input{struct_results_log_1_1_detection}
+\input{structdetection__t}
+\input{structdetection__with__class}
+\input{class_detection_scanner}
+\input{classtensor__rt_1_1_detector}
+\input{structdetector__gpu__t}
+\input{classnvinfer1_1_1_detect_plugin_creator}
+\input{struct_results_log_1_1_detects_on_frame}
+\input{classdfs}
+\input{classclang_1_1cindex_1_1_diagnostic}
+\input{classdict}
+\input{classdict__readonly}
+\input{classdijkstra}
+\input{classdirection__indicator}
+\input{structdoc}
+\input{class_ds_image}
+\input{classdtype}
+\input{classduration__caster}
+\input{structdxrep}
+\input{structdynamic__attr}
+\input{classedge}
+\input{classedge__data}
+\input{classedge__map}
+\input{structeigen__extract__stride}
+\input{structeigen__extract__stride_3_01_eigen_1_1_map_3_01_plain_object_type_00_01_map_options_00_01_stride_type_01_4_01_4}
+\input{structeigen__extract__stride_3_01_eigen_1_1_ref_3_01_plain_object_type_00_01_options_00_01_stride_type_01_4_01_4}
+\input{structeigen__map__caster}
+\input{struct_eigen_conformable}
+\input{struct_eigen_props}
+\input{structembedded__module}
+\input{struct_tracker_settings_1_1_embedding_params}
+\input{class_embeddings_calculator}
+\input{classenum__}
+\input{structenum__base}
+\input{classerror__already__set}
+\input{structerror__scope}
+\input{structexactly__one}
+\input{structexactly__one_3_01_p_00_01_default_01_4}
+\input{classexception}
+\input{classmkdoc_1_1_extraction_thread}
+\input{class_face_detector}
+\input{class_face_detector_example}
+\input{structfactory}
+\input{structfactory_3_01_c_func_00_01_a_func_00_01_c_return_07_c_args_8_8_8_08_00_01_a_return_07_a_args_8_8_8_08_4}
+\input{structfactory_3_01_func_00_01void__type_07_5_08_07_08_00_01_return_07_args_8_8_8_08_4}
+\input{structfheap}
+\input{structfheap__node}
+\input{structfield__descriptor}
+\input{classclang_1_1cindex_1_1_file}
+\input{classclang_1_1cindex_1_1_file_inclusion}
+\input{classclang_1_1cindex_1_1_fix_it}
+\input{classfloat__}
+\input{structfloat__pair}
+\input{classfm__partition}
+\input{structformat__descriptor}
+\input{structformat__descriptor_3_01char_0f_n_0e_4}
+\input{structformat__descriptor_3_01std_1_1array_3_01char_00_01_n_01_4_01_4}
+\input{structformat__descriptor_3_01std_1_1complex_3_01_t_01_4_00_01detail_1_1enable__if__t_3_01std_1_183b0c7485f88e97534b116276abc2578}
+\input{structformat__descriptor_3_01_t_00_01detail_1_1enable__if__t_3_01detail_1_1array__info_3_01_t_01_4_1_1is__array_01_4_01_4}
+\input{structformat__descriptor_3_01_t_00_01detail_1_1enable__if__t_3_01detail_1_1is__pod__struct_3_01_t_01_4_1_1value_01_4_01_4}
+\input{structformat__descriptor_3_01_t_00_01detail_1_1enable__if__t_3_01std_1_1is__arithmetic_3_01_t_01_4_1_1value_01_4_01_4}
+\input{structformat__descriptor_3_01_t_00_01detail_1_1enable__if__t_3_01std_1_1is__enum_3_01_t_01_4_1_1value_01_4_01_4}
+\input{class_frame}
+\input{struct_frame_info}
+\input{class_frames_queue}
+\input{classfunction}
+\input{structfunction__call}
+\input{structfunction__record}
+\input{class_g_base_font}
+\input{class_g_base_port}
+\input{class_g_base_printer}
+\input{structgeneric__item}
+\input{classgeneric__iterator}
+\input{classgeneric__type}
+\input{class_geo_params}
+\input{classgil__scoped__acquire}
+\input{classgil__scoped__release}
+\input{class_g_mac_port}
+\input{struct_g_m_l__error}
+\input{struct_g_m_l__list__elem}
+\input{struct_g_m_l__pair}
+\input{union_g_m_l__pair__val}
+\input{struct_g_m_l__stat}
+\input{union_g_m_l__tok__val}
+\input{struct_g_m_l__token}
+\input{class_g_point}
+\input{class_g_postscript_port}
+\input{classgraph}
+\input{class_g_rect}
+\input{class_g_t_l__debug}
+\input{classhandle}
+\input{structhandle__type__name}
+\input{structhandle__type__name_3_01args_01_4}
+\input{structhandle__type__name_3_01array__t_3_01_t_00_01_flags_01_4_01_4}
+\input{structhandle__type__name_3_01bytes_01_4}
+\input{structhandle__type__name_3_01kwargs_01_4}
+\input{classnvinfer1_1_1_hardswish}
+\input{classnvinfer1_1_1_hardswish_plugin_creator}
+\input{structhas__operator__delete}
+\input{structhas__operator__delete_3_01_t_00_01void__t_3_01decltype_07static__cast_3_01void_07_5_08_07vbad95f4ce94079b9ba36252dd72d93b5}
+\input{structhas__operator__delete__size}
+\input{structhas__operator__delete__size_3_01_t_00_01void__t_3_01decltype_07static__cast_3_01void_07_5_e659cd67a562b6670920a523a8edb40c}
+\input{structstd_1_1hash_3_01track__id__t_01_4}
+\input{classheap__node}
+\input{structholder__helper}
+\input{structimage}
+\input{structimage__t}
+\input{classtensor__rt_1_1_detector_1_1_impl}
+\input{classclang_1_1cindex_1_1_index}
+\input{structindex__sequence}
+\input{struct_infer_params}
+\input{structini__parse__string__ctx}
+\input{class_i_n_i_reader}
+\input{classmin__tree_1_1input__comp}
+\input{classsetup_1_1_install_c_make_libs}
+\input{classsetup_1_1_install_headers}
+\input{structinstance}
+\input{class_int8_entropy_calibrator}
+\input{classint__}
+\input{structint__to__str}
+\input{structint__to__str_3_010_00_01_digits_8_8_8_01_4}
+\input{structinternals}
+\input{class_int_image}
+\input{structintrinsic__type}
+\input{structintrinsic__type_3_01const_01_t_01_4}
+\input{structintrinsic__type_3_01const_01_t_0f_n_0e_4}
+\input{structintrinsic__type_3_01_t_01_6_01_4}
+\input{structintrinsic__type_3_01_t_01_6_6_01_4}
+\input{structintrinsic__type_3_01_t_01_5_01_4}
+\input{structintrinsic__type_3_01_t_0f_n_0e_4}
+\input{structious}
+\input{structis__comparable}
+\input{structis__comparable_3_01_t_00_01enable__if__t_3_01container__traits_3_01_t_01_4_1_1is__element_81dba1096c4a7c2c4f27f8f67bb7d966}
+\input{structis__comparable_3_01_t_00_01enable__if__t_3_01container__traits_3_01_t_01_4_1_1is__pair_01_4_01_4}
+\input{structis__comparable_3_01_t_00_01enable__if__t_3_01container__traits_3_01_t_01_4_1_1is__vector_01_4_01_4}
+\input{structis__complex}
+\input{structis__complex_3_01std_1_1complex_3_01_t_01_4_01_4}
+\input{structis__copy__assignable}
+\input{structis__copy__assignable_3_01_container_00_01enable__if__t_3_01all__of_3_01std_1_1is__copy__as20354ef08d46a22473be8f5a1c6ade9a}
+\input{structis__copy__assignable_3_01std_1_1pair_3_01_t1_00_01_t2_01_4_01_4}
+\input{structis__copy__constructible}
+\input{structis__copy__constructible_3_01_container_00_01enable__if__t_3_01all__of_3_01std_1_1is__copy_71035f87d87bde541f2f835e06fd54cb}
+\input{structis__copy__constructible_3_01std_1_1pair_3_01_t1_00_01_t2_01_4_01_4}
+\input{structis__fmt__numeric}
+\input{structis__fmt__numeric_3_01std_1_1complex_3_01_t_01_4_00_01detail_1_1enable__if__t_3_01std_1_1is996a96e2979aed124e8880b0fa5542e3}
+\input{structis__fmt__numeric_3_01_t_00_01enable__if__t_3_01std_1_1is__arithmetic_3_01_t_01_4_1_1value_01_4_01_4}
+\input{structis__holder__type}
+\input{structis__holder__type_3_01base_00_01std_1_1unique__ptr_3_01base_00_01deleter_01_4_01_4}
+\input{structis__input__iterator}
+\input{structis__input__iterator_3_01_t_00_01void__t_3_01decltype_07_5std_1_1declval_3_01_t_01_6_01_4_07d75bfb9a8f56371f7d25507c315f9a0}
+\input{structis__instantiation}
+\input{structis__instantiation_3_01_class_00_01_class_3_01_us_8_8_8_01_4_01_4}
+\input{structis__method}
+\input{structis__new__style__constructor}
+\input{structis__operator}
+\input{structis__std__array}
+\input{structis__std__array_3_01std_1_1array_3_01_t_00_01_n_01_4_01_4}
+\input{structis__template__base__of__impl}
+\input{structclass___1_1is__valid__class__option}
+\input{classiterable}
+\input{classiterator}
+\input{structvalues__and__holders_1_1iterator}
+\input{structiterator__state}
+\input{class_j_s_o_n__sender}
+\input{structkeep__alive}
+\input{struct_key_val}
+\input{classclang_1_1cindex_1_1_completion_chunk_1_1_kind}
+\input{structkvp}
+\input{classkwargs}
+\input{classkwargs__proxy}
+\input{structlayer}
+\input{class_l_b_s_p}
+\input{class_l_d_e_s_tracker}
+\input{classless__dist}
+\input{classclang_1_1cindex_1_1_libclang_error}
+\input{structlist}
+\input{structlist__caster}
+\input{structlist__item}
+\input{structload__args}
+\input{classloader__life__support}
+\input{class_logger}
+\input{class_log_stream_consumer}
+\input{class_log_stream_consumer_base}
+\input{class_log_stream_consumer_buffer}
+\input{structmake__index__sequence__impl}
+\input{structmake__index__sequence__impl_3_010_00_01_s_8_8_8_01_4}
+\input{structmap__caster}
+\input{structmatrix}
+\input{classmaxflow__ff}
+\input{classmaxflow__pp}
+\input{classmaxflow__sap}
+\input{classmemoryview}
+\input{structmetaclass}
+\input{structmetadata}
+\input{classmin__tree}
+\input{classmincut}
+\input{classnvinfer1_1_1_mish_plugin}
+\input{classnvinfer1_1_1_mish_plugin_creator}
+\input{structmodel}
+\input{classmodule}
+\input{structmodule__local}
+\input{class_motion_detector}
+\input{class_motion_detector_example}
+\input{structmove__always}
+\input{structmove__always_3_01_t_00_01enable__if__t_3_01all__of_3_01move__is__plain__type_3_01_t_01_4_0e50de7266671f846c74349820989631d}
+\input{structmove__if__unreferenced}
+\input{structmove__if__unreferenced_3_01_t_00_01enable__if__t_3_01all__of_3_01move__is__plain__type_3_07c25d7eec5482f057834f0ec805da40d}
+\input{structmove__only__holder__caster}
+\input{structmoves}
+\input{classmulti__array__iterator}
+\input{structhttplib_1_1_multipart_file}
+\input{structhttplib_1_1_multipart_form_data}
+\input{structmultiple__inheritance}
+\input{classmwbmatching}
+\input{classmybfs}
+\input{classmydfs}
+\input{class_my_graph}
+\input{class_my_tree}
+\input{structname}
+\input{class_n_d_array_converter}
+\input{classne__map}
+\input{structnegation}
+\input{structnetwork}
+\input{structnetwork__state}
+\input{struct_network_info}
+\input{structnode}
+\input{classnode__data}
+\input{classnode__map}
+\input{class_node_detector}
+\input{structnodelete}
+\input{classmkdoc_1_1_no_filenames_error}
+\input{classnone}
+\input{structnonsimple__values__and__holders}
+\input{structnpy__api}
+\input{structnpy__format__descriptor}
+\input{structnpy__format__descriptor_3_01char_0f_n_0e_4}
+\input{structnpy__format__descriptor_3_01std_1_1array_3_01char_00_01_n_01_4_01_4}
+\input{structnpy__format__descriptor_3_01_t_00_01enable__if__t_3_01array__info_3_01_t_01_4_1_1is__array_01_4_01_4}
+\input{structnpy__format__descriptor_3_01_t_00_01enable__if__t_3_01satisfies__any__of_3_01_t_00_01std_19664305ecd151fe63e888175be34ab54}
+\input{structnpy__format__descriptor_3_01_t_00_01enable__if__t_3_01std_1_1is__enum_3_01_t_01_4_1_1value_01_4_01_4}
+\input{structnpy__format__descriptor__name}
+\input{structnpy__format__descriptor__name_3_01_t_00_01enable__if__t_3_01is__complex_3_01_t_01_4_1_1value_01_4_01_4}
+\input{structnpy__format__descriptor__name_3_01_t_00_01enable__if__t_3_01std_1_1is__floating__point_3_01_t_01_4_1_1value_01_4_01_4}
+\input{structnpy__format__descriptor__name_3_01_t_00_01enable__if__t_3_01std_1_1is__integral_3_01_t_01_4_1_1value_01_4_01_4}
+\input{structnumpy__internals}
+\input{structnumpy__type__info}
+\input{class_numpy_allocator}
+\input{structobj__attr}
+\input{classobject}
+\input{classobject__api}
+\input{structop__}
+\input{structop__impl}
+\input{class_open_c_v_d_n_n_example}
+\input{structoptional__caster}
+\input{classoptions}
+\input{class_ostream_redirect}
+\input{structoverload__cast}
+\input{structoverload__cast__impl}
+\input{structoverload__hash}
+\input{structoverload__unused}
+\input{classp__node}
+\input{structpack__element}
+\input{structpack__element_3_010_00_01_t_00_01_ts_8_8_8_01_4}
+\input{classpathfinder}
+\input{class_pedestrian_detector}
+\input{class_pedestrian_detector_example}
+\input{structpickle__factory}
+\input{structpickle__factory_3_01_get_00_01_set_00_01_ret_state_07_self_08_00_01_new_instance_07_arg_state_08_4}
+\input{struct_geo_params_1_1_pix2_map_params}
+\input{classplanar__embedding}
+\input{classplanarity}
+\input{structpolymorphic__type__hook}
+\input{structpolymorphic__type__hook_3_01itype_00_01detail_1_1enable__if__t_3_01std_1_1is__polymorphic_0beb76cac8a80692d7d7a957f3b6ad63}
+\input{classpq__leaf}
+\input{classpq__node}
+\input{classpq__tree}
+\input{structarray__t_1_1private__ctor}
+\input{structbuffer__info_1_1private__ctr__tag}
+\input{structprocess__attribute}
+\input{structprocess__attribute_3_01arg_01_4}
+\input{structprocess__attribute_3_01arg__v_01_4}
+\input{structprocess__attribute_3_01arithmetic_01_4}
+\input{structprocess__attribute_3_01base_3_01_t_01_4_01_4}
+\input{structprocess__attribute_3_01buffer__protocol_01_4}
+\input{structprocess__attribute_3_01call__guard_3_01_ts_8_8_8_01_4_01_4}
+\input{structprocess__attribute_3_01char_01_5_01_4}
+\input{structprocess__attribute_3_01const_01char_01_5_01_4}
+\input{structprocess__attribute_3_01doc_01_4}
+\input{structprocess__attribute_3_01dynamic__attr_01_4}
+\input{structprocess__attribute_3_01is__method_01_4}
+\input{structprocess__attribute_3_01is__new__style__constructor_01_4}
+\input{structprocess__attribute_3_01is__operator_01_4}
+\input{structprocess__attribute_3_01keep__alive_3_01_nurse_00_01_patient_01_4_01_4}
+\input{structprocess__attribute_3_01metaclass_01_4}
+\input{structprocess__attribute_3_01module__local_01_4}
+\input{structprocess__attribute_3_01multiple__inheritance_01_4}
+\input{structprocess__attribute_3_01name_01_4}
+\input{structprocess__attribute_3_01return__value__policy_01_4}
+\input{structprocess__attribute_3_01scope_01_4}
+\input{structprocess__attribute_3_01sibling_01_4}
+\input{structprocess__attribute_3_01_t_00_01enable__if__t_3_01is__pyobject_3_01_t_01_4_1_1value_01_4_01_4}
+\input{structprocess__attribute__default}
+\input{structprocess__attributes}
+\input{structpthread__once__t__}
+\input{structptw32__cleanup__t}
+\input{structptw32__handle__t}
+\input{struct_background_subtractor_l_b_s_p_1_1_px_info_base}
+\input{class_py_allow_threads}
+\input{structnpy__api_1_1_py_array___dims}
+\input{struct_py_array___proxy}
+\input{struct_py_array_descr___proxy}
+\input{class_py_base_tracker}
+\input{class_py_detector}
+\input{class_py_ensure_g_i_l}
+\input{class_py_motion_detector}
+\input{structpyobject__caster}
+\input{structpyobject__caster_3_01array__t_3_01_t_00_01_extra_flags_01_4_01_4}
+\input{classpyobject__tag}
+\input{classpythonbuf}
+\input{struct_py_void_scalar_object___proxy}
+\input{classq__node}
+\input{classratio__cut__partition}
+\input{classclang_1_1cindex_1_1_ref_qualifier_kind}
+\input{struct_region_embedding}
+\input{structremove__class}
+\input{structremove__class_3_01_r_07_c_1_1_5_08_07_a_8_8_8_08_01const_01_4}
+\input{structremove__class_3_01_r_07_c_1_1_5_08_07_a_8_8_8_08_4}
+\input{structhttplib_1_1_request}
+\input{structhttplib_1_1_response}
+\input{structtensor__rt_1_1_result}
+\input{class_results_log}
+\input{structreturn__value__policy__override}
+\input{structreturn__value__policy__override_3_01_return_00_01detail_1_1enable__if__t_3_01std_1_1is__badbc5555ea30d1cff9fa4aef329884809}
+\input{class_road_line}
+\input{structsame__size}
+\input{structsched__param}
+\input{structscope}
+\input{classscoped__estream__redirect}
+\input{classscoped__interpreter}
+\input{classscoped__ostream__redirect}
+\input{structsection}
+\input{structselect__indices__impl}
+\input{structselect__indices__impl_3_01index__sequence_3_01_i_prev_8_8_8_01_4_00_01_i_00_01_b_00_01_bs_8_8_8_01_4}
+\input{structself__t}
+\input{classsend__one__replaceable__object__t}
+\input{classsequence}
+\input{classsequence__fast__readonly}
+\input{structsequence__item}
+\input{classsequence__slow__readwrite}
+\input{classhttplib_1_1_server}
+\input{classset}
+\input{structset__caster}
+\input{class_short_path_calculator}
+\input{structsibling}
+\input{structsimilarity__detections__t}
+\input{classsimple__collector}
+\input{structsize__params}
+\input{classslice}
+\input{classhttplib_1_1_socket_stream}
+\input{structsortable__bbox}
+\input{classclang_1_1cindex_1_1_source_location}
+\input{classclang_1_1cindex_1_1_source_range}
+\input{class_s_p_bipart}
+\input{class_s_p_hungrian}
+\input{struct_s_p_settings}
+\input{classst__number}
+\input{structstaple__cfg}
+\input{class_s_t_a_p_l_e___t_r_a_c_k_e_r}
+\input{structoptions_1_1state}
+\input{classstaticmethod}
+\input{structstbi__io__callbacks}
+\input{structobject_1_1stolen__t}
+\input{classclang_1_1cindex_1_1_storage_class}
+\input{classstr}
+\input{structstr__attr}
+\input{classhttplib_1_1_stream}
+\input{classhttplib_1_1detail_1_1stream__line__reader}
+\input{structstring__caster}
+\input{structstrip__function__object}
+\input{class_s_v_g_port}
+\input{classsymlist}
+\input{structsymlist__iterator}
+\input{structsymnode}
+\input{classhttplib_1_1_task_queue}
+\input{classclang_1_1cindex_1_1_template_argument_kind}
+\input{struct_tensor_info}
+\input{class_logger_1_1_test_atom}
+\input{classhttplib_1_1_thread_pool}
+\input{class_timer}
+\input{structtimespec}
+\input{class_t_kalman_filter}
+\input{struct_tmp}
+\input{classclang_1_1cindex_1_1_token}
+\input{classclang_1_1cindex_1_1_token_group}
+\input{classclang_1_1cindex_1_1_token_kind}
+\input{classtopsort}
+\input{class_trace}
+\input{struct_tracker_settings}
+\input{class_track_i_d}
+\input{struct_tracking_object}
+\input{structtrain__yolo__args}
+\input{struct_trajectory_point}
+\input{classclang_1_1cindex_1_1_translation_unit}
+\input{classclang_1_1cindex_1_1_translation_unit_load_error}
+\input{classclang_1_1cindex_1_1_translation_unit_save_error}
+\input{structtree}
+\input{classtuple}
+\input{classtuple__caster}
+\input{structtuple__item}
+\input{structcall__guard_3_01_t_00_01_ts_8_8_8_01_4_1_1type}
+\input{classclang_1_1cindex_1_1_type}
+\input{classtype__caster}
+\input{classtype__caster_3_01bool_01_4}
+\input{structtype__caster_3_01_char_t_00_01enable__if__t_3_01is__std__char__type_3_01_char_t_01_4_1_1value_01_4_01_4}
+\input{structpybind11_1_1detail_1_1type__caster_3_01cv_1_1_mat_01_4}
+\input{structtype__caster_3_01_eigen_1_1_ref_3_01_plain_object_type_00_010_00_01_stride_type_01_4_00_01997112f6b495c38a69e2d7fe45885b63}
+\input{structtype__caster_3_01std_1_1array_3_01_type_00_01_size_01_4_01_4}
+\input{structtype__caster_3_01std_1_1basic__string_3_01_char_t_00_01_traits_00_01_allocator_01_4_00_01ece498b5200b790571970efc6b6c56da1}
+\input{classtype__caster_3_01std_1_1chrono_1_1duration_3_01_rep_00_01_period_01_4_01_4}
+\input{classtype__caster_3_01std_1_1chrono_1_1time__point_3_01_clock_00_01_duration_01_4_01_4}
+\input{classtype__caster_3_01std_1_1chrono_1_1time__point_3_01std_1_1chrono_1_1system__clock_00_01_duration_01_4_01_4}
+\input{classtype__caster_3_01std_1_1complex_3_01_t_01_4_01_4}
+\input{structtype__caster_3_01std_1_1deque_3_01_type_00_01_alloc_01_4_01_4}
+\input{structtype__caster_3_01std_1_1function_3_01_return_07_args_8_8_8_08_4_01_4}
+\input{structtype__caster_3_01std_1_1list_3_01_type_00_01_alloc_01_4_01_4}
+\input{structtype__caster_3_01std_1_1map_3_01_key_00_01_value_00_01_compare_00_01_alloc_01_4_01_4}
+\input{classtype__caster_3_01std_1_1nullptr__t_01_4}
+\input{classtype__caster_3_01std_1_1pair_3_01_t1_00_01_t2_01_4_01_4}
+\input{classtype__caster_3_01std_1_1reference__wrapper_3_01type_01_4_01_4}
+\input{structtype__caster_3_01std_1_1set_3_01_key_00_01_compare_00_01_alloc_01_4_01_4}
+\input{classtype__caster_3_01std_1_1shared__ptr_3_01_t_01_4_01_4}
+\input{classtype__caster_3_01std_1_1tuple_3_01_ts_8_8_8_01_4_01_4}
+\input{classtype__caster_3_01std_1_1unique__ptr_3_01type_00_01deleter_01_4_01_4}
+\input{structtype__caster_3_01std_1_1unordered__map_3_01_key_00_01_value_00_01_hash_00_01_equal_00_01_alloc_01_4_01_4}
+\input{structtype__caster_3_01std_1_1unordered__set_3_01_key_00_01_hash_00_01_equal_00_01_alloc_01_4_01_4}
+\input{structtype__caster_3_01std_1_1valarray_3_01_type_01_4_01_4}
+\input{structtype__caster_3_01std_1_1vector_3_01_type_00_01_alloc_01_4_01_4}
+\input{classtype__caster_3_01_t_00_01enable__if__t_3_01is__pyobject_3_01_t_01_4_1_1value_01_4_01_4}
+\input{structtype__caster_3_01_t_00_01enable__if__t_3_01std_1_1is__arithmetic_3_01_t_01_4_1_1value_01_624f9972c532456d927e4470192416960}
+\input{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__dense__map_3_01_type_01_4_1_1value_01_4_01_4}
+\input{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__dense__plain_3_01_type_01_4_1_1value_01_4_01_4}
+\input{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__other_3_01_type_01_4_1_1value_01_4_01_4}
+\input{structtype__caster_3_01_type_00_01enable__if__t_3_01is__eigen__sparse_3_01_type_01_4_1_1value_01_4_01_4}
+\input{structtype__caster_3_01unchecked__mutable__reference_3_01_t_00_01_dim_01_4_01_4}
+\input{structtype__caster_3_01unchecked__reference_3_01_t_00_01_dim_01_4_01_4}
+\input{classtype__caster_3_01value__and__holder_01_4}
+\input{classtype__caster_3_01void_01_4}
+\input{classtype__caster_3_01void__type_01_4}
+\input{classtype__caster__base}
+\input{classtype__caster__generic}
+\input{structtype__equal__to}
+\input{structtype__hash}
+\input{structtype__info}
+\input{structtype__list}
+\input{structtype__record}
+\input{class_type_converter}
+\input{classclang_1_1cindex_1_1_type_kind}
+\input{classunchecked__mutable__reference}
+\input{classunchecked__reference}
+\input{structundefined__t}
+\input{classunpacking__collector}
+\input{structupdate__args}
+\input{structvalue__and__holder}
+\input{structvalues__and__holders}
+\input{structvariant__caster}
+\input{structvariant__caster_3_01_v_3_01_ts_8_8_8_01_4_01_4}
+\input{structvariant__caster__visitor}
+\input{structvector__has__data__and__format}
+\input{structvector__has__data__and__format_3_01_vector_00_01enable__if__t_3_01std_1_1is__same_3_01decl747d65b4a7fb391eecda178e3ef74ddd}
+\input{structvectorize__arg}
+\input{structvectorize__helper}
+\input{classvibe_1_1_v_i_b_e}
+\input{class_video_example}
+\input{structvisit__helper}
+\input{structvoid__caster}
+\input{structvoid__t__impl}
+\input{structvoid__type}
+\input{class_v_o_t_tracker}
+\input{classweakref}
+\input{structhttplib_1_1_thread_pool_1_1worker}
+\input{class_yolo}
+\input{class_yolo_darknet_detector}
+\input{class_yolo_dectector}
+\input{classnvinfer1_1_1_yolo_layer}
+\input{classnvinfer1_1_1_yolo_layer_plugin_creator}
+\input{struct_yolo_plugin_ctx}
+\input{struct_yolo_plugin_init_params}
+\input{struct_yolo_plugin_object}
+\input{struct_yolo_plugin_output}
+\input{class_yolo_tensor_r_t_detector}
+\input{class_yolo_v2}
+\input{class_yolo_v3}
+\input{class_yolo_v4}
+\input{class_yolo_v5}
+\chapter{文件说明}
+\input{_async_detector_8cpp}
+\input{_async_detector_8h}
+\input{_async_detector_8h_source}
+\input{async__detector_2main_8cpp}
+\input{example_2main_8cpp}
+\input{_queue_8h}
+\input{_queue_8h_source}
+\input{build_2_c_make_files_23_821_81_2_compiler_id_c_2_c_make_c_compiler_id_8c}
+\input{_c_make_files_23_821_81_2_compiler_id_c_2_c_make_c_compiler_id_8c}
+\input{build_2_c_make_files_23_821_81_2_compiler_id_c_x_x_2_c_make_c_x_x_compiler_id_8cpp}
+\input{_c_make_files_23_821_81_2_compiler_id_c_x_x_2_c_make_c_x_x_compiler_id_8cpp}
+\input{build_2_c_make_files_2_find_open_m_p_2_open_m_p_try_flag_8c}
+\input{_c_make_files_2_find_open_m_p_2_open_m_p_try_flag_8c}
+\input{build_2_c_make_files_2_find_open_m_p_2_open_m_p_try_flag_8cpp}
+\input{_c_make_files_2_find_open_m_p_2_open_m_p_try_flag_8cpp}
+\input{_open_m_p_check_version_8c}
+\input{_open_m_p_check_version_8cpp}
+\input{demo_8py}
+\input{_cars_counting_8cpp}
+\input{_cars_counting_8h}
+\input{_cars_counting_8h_source}
+\input{examples_8h}
+\input{examples_8h_source}
+\input{_file_logger_8h}
+\input{_file_logger_8h_source}
+\input{_mouse_example_8h}
+\input{_mouse_example_8h_source}
+\input{_video_example_8cpp}
+\input{_video_example_8h}
+\input{_video_example_8h_source}
+\input{_r_e_a_d_m_e_8md}
+\input{src_2_detector_2vibe__src_2_r_e_a_d_m_e_8md}
+\input{thirdparty_2pybind11_2_r_e_a_d_m_e_8md}
+\input{thirdparty_2pybind11_2tools_2clang_2_r_e_a_d_m_e_8md}
+\input{setup_8py}
+\input{thirdparty_2pybind11_2setup_8py}
+\input{defines_8h}
+\input{defines_8h_source}
+\input{nms_8h}
+\input{nms_8h_source}
+\input{object__types_8cpp}
+\input{object__types_8h}
+\input{object__types_8h_source}
+\input{_background_subtract_8cpp}
+\input{_background_subtract_8h}
+\input{_background_subtract_8h_source}
+\input{_base_detector_8cpp}
+\input{_base_detector_8h}
+\input{_base_detector_8h_source}
+\input{pthread_8h}
+\input{pthread_8h_source}
+\input{sched_8h}
+\input{sched_8h_source}
+\input{semaphore_8h}
+\input{semaphore_8h_source}
+\input{stb__image_8h}
+\input{stb__image_8h_source}
+\input{stb__image__write_8h}
+\input{stb__image__write_8h_source}
+\input{darknet_8h}
+\input{darknet_8h_source}
+\input{yolo__v2__class_8hpp}
+\input{yolo__v2__class_8hpp_source}
+\input{activation__layer_8c}
+\input{activation__layer_8h}
+\input{activation__layer_8h_source}
+\input{activations_8c}
+\input{activations_8h}
+\input{activations_8h_source}
+\input{art_8c}
+\input{avgpool__layer_8c}
+\input{avgpool__layer_8h}
+\input{avgpool__layer_8h_source}
+\input{batchnorm__layer_8c}
+\input{batchnorm__layer_8h}
+\input{batchnorm__layer_8h_source}
+\input{blas_8c}
+\input{blas_8h}
+\input{blas_8h_source}
+\input{box_8c}
+\input{box_8h}
+\input{box_8h_source}
+\input{captcha_8c}
+\input{cifar_8c}
+\input{classifier_8c}
+\input{classifier_8h}
+\input{classifier_8h_source}
+\input{coco_8c}
+\input{col2im_8c}
+\input{col2im_8h}
+\input{col2im_8h_source}
+\input{compare_8c}
+\input{connected__layer_8c}
+\input{connected__layer_8h}
+\input{connected__layer_8h_source}
+\input{conv__lstm__layer_8c}
+\input{conv__lstm__layer_8h}
+\input{conv__lstm__layer_8h_source}
+\input{convolutional__layer_8c}
+\input{convolutional__layer_8h}
+\input{convolutional__layer_8h_source}
+\input{cost__layer_8c}
+\input{cost__layer_8h}
+\input{cost__layer_8h_source}
+\input{cpu__gemm_8c}
+\input{crnn__layer_8c}
+\input{crnn__layer_8h}
+\input{crnn__layer_8h_source}
+\input{crop__layer_8c}
+\input{crop__layer_8h}
+\input{crop__layer_8h_source}
+\input{dark__cuda_8c}
+\input{dark__cuda_8h}
+\input{dark__cuda_8h_source}
+\input{darknet_8c}
+\input{darkunistd_8h}
+\input{darkunistd_8h_source}
+\input{data_8c}
+\input{data_8h}
+\input{data_8h_source}
+\input{deconvolutional__layer_8c}
+\input{deconvolutional__layer_8h}
+\input{deconvolutional__layer_8h_source}
+\input{demo_8c}
+\input{demo_8h}
+\input{demo_8h_source}
+\input{detection__layer_8c}
+\input{detection__layer_8h}
+\input{detection__layer_8h_source}
+\input{detector_8c}
+\input{dice_8c}
+\input{dropout__layer_8c}
+\input{dropout__layer_8h}
+\input{dropout__layer_8h_source}
+\input{gaussian__yolo__layer_8c}
+\input{gaussian__yolo__layer_8h}
+\input{gaussian__yolo__layer_8h_source}
+\input{gemm_8c}
+\input{gemm_8h}
+\input{gemm_8h_source}
+\input{getopt_8c}
+\input{getopt_8h}
+\input{getopt_8h_source}
+\input{gettimeofday_8c}
+\input{gettimeofday_8h}
+\input{gettimeofday_8h_source}
+\input{go_8c}
+\input{gru__layer_8c}
+\input{gru__layer_8h}
+\input{gru__layer_8h_source}
+\input{http__stream_8cpp}
+\input{http__stream_8h}
+\input{http__stream_8h_source}
+\input{httplib_8h}
+\input{httplib_8h_source}
+\input{im2col_8c}
+\input{im2col_8h}
+\input{im2col_8h_source}
+\input{image_8c}
+\input{image_8h}
+\input{image_8h_source}
+\input{image__opencv_8cpp}
+\input{image__opencv_8h}
+\input{image__opencv_8h_source}
+\input{layer_8c}
+\input{layer_8h}
+\input{layer_8h_source}
+\input{list_8c}
+\input{list_8h}
+\input{list_8h_source}
+\input{local__layer_8c}
+\input{local__layer_8h}
+\input{local__layer_8h_source}
+\input{lstm__layer_8c}
+\input{lstm__layer_8h}
+\input{lstm__layer_8h_source}
+\input{matrix_8c}
+\input{matrix_8h}
+\input{matrix_8h_source}
+\input{maxpool__layer_8c}
+\input{maxpool__layer_8h}
+\input{maxpool__layer_8h_source}
+\input{network_8c}
+\input{network_8h}
+\input{network_8h_source}
+\input{nightmare_8c}
+\input{normalization__layer_8c}
+\input{normalization__layer_8h}
+\input{normalization__layer_8h_source}
+\input{option__list_8c}
+\input{option__list_8h}
+\input{option__list_8h_source}
+\input{parser_8c}
+\input{parser_8h}
+\input{parser_8h_source}
+\input{region__layer_8c}
+\input{region__layer_8h}
+\input{region__layer_8h_source}
+\input{reorg__layer_8c}
+\input{reorg__layer_8h}
+\input{reorg__layer_8h_source}
+\input{reorg__old__layer_8c}
+\input{reorg__old__layer_8h}
+\input{reorg__old__layer_8h_source}
+\input{representation__layer_8c}
+\input{representation__layer_8h}
+\input{representation__layer_8h_source}
+\input{rnn_8c}
+\input{rnn__layer_8c}
+\input{rnn__layer_8h}
+\input{rnn__layer_8h_source}
+\input{rnn__vid_8c}
+\input{route__layer_8c}
+\input{route__layer_8h}
+\input{route__layer_8h_source}
+\input{sam__layer_8c}
+\input{sam__layer_8h}
+\input{sam__layer_8h_source}
+\input{scale__channels__layer_8c}
+\input{scale__channels__layer_8h}
+\input{scale__channels__layer_8h_source}
+\input{shortcut__layer_8c}
+\input{shortcut__layer_8h}
+\input{shortcut__layer_8h_source}
+\input{softmax__layer_8c}
+\input{softmax__layer_8h}
+\input{softmax__layer_8h_source}
+\input{super_8c}
+\input{swag_8c}
+\input{tag_8c}
+\input{tree_8c}
+\input{tree_8h}
+\input{tree_8h_source}
+\input{upsample__layer_8c}
+\input{upsample__layer_8h}
+\input{upsample__layer_8h_source}
+\input{utils_8c}
+\input{utils_8h}
+\input{utils_8h_source}
+\input{_detector_2darknet_2src_2version_8h}
+\input{_detector_2darknet_2src_2version_8h_source}
+\input{_tracker_2graph_2_g_t_l_2include_2_g_t_l_2version_8h}
+\input{_tracker_2graph_2_g_t_l_2include_2_g_t_l_2version_8h_source}
+\input{voxel_8c}
+\input{writing_8c}
+\input{yolo_8c}
+\input{yolo__console__dll_8cpp}
+\input{yolo__layer_8c}
+\input{yolo__layer_8h}
+\input{yolo__layer_8h_source}
+\input{yolo__v2__class_8cpp}
+\input{_face_detector_8cpp}
+\input{_face_detector_8h}
+\input{_face_detector_8h_source}
+\input{_motion_detector_8cpp}
+\input{_motion_detector_8h}
+\input{_motion_detector_8h_source}
+\input{_o_c_v_d_n_n_detector_8cpp}
+\input{_o_c_v_d_n_n_detector_8h}
+\input{_o_c_v_d_n_n_detector_8h_source}
+\input{_pedestrian_detector_8cpp}
+\input{_pedestrian_detector_8h}
+\input{_pedestrian_detector_8h_source}
+\input{c4-pedestrian-detector_8cpp}
+\input{c4-pedestrian-detector_8h}
+\input{c4-pedestrian-detector_8h_source}
+\input{_background_subtractor_l_b_s_p_8cpp}
+\input{_background_subtractor_l_b_s_p_8h}
+\input{_background_subtractor_l_b_s_p_8h_source}
+\input{_background_subtractor_l_o_b_s_t_e_r_8cpp}
+\input{_background_subtractor_l_o_b_s_t_e_r_8h}
+\input{_background_subtractor_l_o_b_s_t_e_r_8h_source}
+\input{_background_subtractor_su_b_s_e_n_s_e_8cpp}
+\input{_background_subtractor_su_b_s_e_n_s_e_8h}
+\input{_background_subtractor_su_b_s_e_n_s_e_8h_source}
+\input{_distance_utils_8h}
+\input{_distance_utils_8h_source}
+\input{_l_b_s_p_8cpp}
+\input{_l_b_s_p_8h}
+\input{_l_b_s_p_8h_source}
+\input{_rand_utils_8h}
+\input{_rand_utils_8h_source}
+\input{_a_p_i_8h}
+\input{_a_p_i_8h_source}
+\input{calibrator_8cpp}
+\input{calibrator_8h}
+\input{calibrator_8h_source}
+\input{chunk_8h}
+\input{chunk_8h_source}
+\input{class__detector_8cpp}
+\input{class__detector_8h}
+\input{class__detector_8h_source}
+\input{class__timer_8hpp}
+\input{class__timer_8hpp_source}
+\input{class__yolo__detector_8hpp}
+\input{class__yolo__detector_8hpp_source}
+\input{detect_8h}
+\input{detect_8h_source}
+\input{ds__image_8cpp}
+\input{ds__image_8h}
+\input{ds__image_8h_source}
+\input{hardswish_8h}
+\input{hardswish_8h_source}
+\input{logging_8h}
+\input{logging_8h_source}
+\input{mish_8h}
+\input{mish_8h_source}
+\input{plugin__factory_8cpp}
+\input{plugin__factory_8h}
+\input{plugin__factory_8h_source}
+\input{trt__utils_8cpp}
+\input{trt__utils_8h}
+\input{trt__utils_8h_source}
+\input{yolo_8cpp}
+\input{yolo_8h}
+\input{yolo_8h_source}
+\input{yolo__config__parser_8cpp}
+\input{yolo__config__parser_8h}
+\input{yolo__config__parser_8h_source}
+\input{yoloplugin__lib_8cpp}
+\input{yoloplugin__lib_8h}
+\input{yoloplugin__lib_8h_source}
+\input{yolov2_8cpp}
+\input{yolov2_8h}
+\input{yolov2_8h_source}
+\input{yolov3_8cpp}
+\input{yolov3_8h}
+\input{yolov3_8h_source}
+\input{yolov4_8cpp}
+\input{yolov4_8h}
+\input{yolov4_8h_source}
+\input{yolov5_8cpp}
+\input{yolov5_8h}
+\input{yolov5_8h_source}
+\input{vibe_8cpp}
+\input{vibe_8hpp}
+\input{vibe_8hpp_source}
+\input{_yolo_darknet_detector_8cpp}
+\input{_yolo_darknet_detector_8h}
+\input{_yolo_darknet_detector_8h_source}
+\input{_yolo_tensor_r_t_detector_8cpp}
+\input{_yolo_tensor_r_t_detector_8h}
+\input{_yolo_tensor_r_t_detector_8h_source}
+\input{mtracker_8cpp}
+\input{ndarray__converter_8cpp}
+\input{ndarray__converter_8h}
+\input{ndarray__converter_8h_source}
+\input{_ctracker_8cpp}
+\input{_ctracker_8h}
+\input{_ctracker_8h_source}
+\input{dat__tracker_8cpp}
+\input{dat__tracker_8hpp}
+\input{dat__tracker_8hpp_source}
+\input{_embeddings_calculator_8hpp}
+\input{_embeddings_calculator_8hpp_source}
+\input{components_8cpp}
+\input{_g_t_l_2src_2components_8cpp}
+\input{fheap_8c}
+\input{fheap_8h}
+\input{fheap_8h_source}
+\input{gdefs_8h}
+\input{gdefs_8h_source}
+\input{gml2dot_8cpp}
+\input{gml2nestedsql_8cpp}
+\input{gport_8cpp}
+\input{gport_8h}
+\input{gport_8h_source}
+\input{algorithm_8h}
+\input{algorithm_8h_source}
+\input{bellman__ford_8h}
+\input{bellman__ford_8h_source}
+\input{bfs_8h}
+\input{bfs_8h_source}
+\input{biconnectivity_8h}
+\input{biconnectivity_8h_source}
+\input{bid__dijkstra_8h}
+\input{bid__dijkstra_8h_source}
+\input{bin__heap_8h}
+\input{bin__heap_8h_source}
+\input{components_8h}
+\input{components_8h_source}
+\input{debug_8h}
+\input{debug_8h_source}
+\input{dfs_8h}
+\input{dfs_8h_source}
+\input{dijkstra_8h}
+\input{dijkstra_8h_source}
+\input{edge_8h}
+\input{edge_8h_source}
+\input{edge__data_8h}
+\input{edge__data_8h_source}
+\input{edge__map_8h}
+\input{edge__map_8h_source}
+\input{embedding_8h}
+\input{embedding_8h_source}
+\input{fm__partition_8h}
+\input{fm__partition_8h_source}
+\input{gml__parser_8h}
+\input{gml__parser_8h_source}
+\input{gml__scanner_8h}
+\input{gml__scanner_8h_source}
+\input{graph_8h}
+\input{graph_8h_source}
+\input{_g_t_l_8h}
+\input{_g_t_l_8h_source}
+\input{maxflow__ff_8h}
+\input{maxflow__ff_8h_source}
+\input{maxflow__pp_8h}
+\input{maxflow__pp_8h_source}
+\input{maxflow__sap_8h}
+\input{maxflow__sap_8h_source}
+\input{min__tree_8h}
+\input{min__tree_8h_source}
+\input{ne__map_8h}
+\input{ne__map_8h_source}
+\input{node_8h}
+\input{node_8h_source}
+\input{node__data_8h}
+\input{node__data_8h_source}
+\input{node__map_8h}
+\input{node__map_8h_source}
+\input{planarity_8h}
+\input{planarity_8h_source}
+\input{pq__node_8h}
+\input{pq__node_8h_source}
+\input{pq__tree_8h}
+\input{pq__tree_8h_source}
+\input{ratio__cut__partition_8h}
+\input{ratio__cut__partition_8h_source}
+\input{st__number_8h}
+\input{st__number_8h_source}
+\input{symlist_8h}
+\input{symlist_8h_source}
+\input{topsort_8h}
+\input{topsort_8h_source}
+\input{bellman__ford_8cpp}
+\input{bfs_8cpp}
+\input{biconnectivity_8cpp}
+\input{bid__dijkstra_8cpp}
+\input{debug_8cpp}
+\input{dfs_8cpp}
+\input{dijkstra_8cpp}
+\input{edge_8cpp}
+\input{embedding_8cpp}
+\input{fm__partition_8cpp}
+\input{gml__parser_8cpp}
+\input{gml__scanner_8cpp}
+\input{graph_8cpp}
+\input{maxflow__ff_8cpp}
+\input{maxflow__pp_8cpp}
+\input{maxflow__sap_8cpp}
+\input{min__tree_8cpp}
+\input{node_8cpp}
+\input{planarity_8cpp}
+\input{pq__node_8cpp}
+\input{pq__tree_8cpp}
+\input{ratio__cut__partition_8cpp}
+\input{st__number_8cpp}
+\input{topsort_8cpp}
+\input{mincut_8cpp}
+\input{mincut_8h}
+\input{mincut_8h_source}
+\input{mwbmatching_8cpp}
+\input{mwbmatching_8h}
+\input{mwbmatching_8h_source}
+\input{mygraph_8cpp}
+\input{mygraph_8h}
+\input{mygraph_8h_source}
+\input{mytree_8cpp}
+\input{mytree_8h}
+\input{mytree_8h_source}
+\input{rings_8cpp}
+\input{script_8cpp}
+\input{tokenise_8cpp}
+\input{tokenise_8h}
+\input{tokenise_8h_source}
+\input{_hungarian_alg_8cpp}
+\input{_hungarian_alg_8h}
+\input{_hungarian_alg_8h_source}
+\input{_kalman_8cpp}
+\input{_kalman_8h}
+\input{_kalman_8h_source}
+\input{correlation_8cpp}
+\input{correlation_8h}
+\input{correlation_8h_source}
+\input{fft__functions_8cpp}
+\input{fft__functions_8h}
+\input{fft__functions_8h_source}
+\input{ldes_2fhog_8cpp}
+\input{staple_2fhog_8cpp}
+\input{fhog_8hpp}
+\input{fhog_8hpp_source}
+\input{hann_8cpp}
+\input{hann_8h}
+\input{hann_8h_source}
+\input{ldes__tracker_8cpp}
+\input{ldes__tracker_8h}
+\input{ldes__tracker_8h_source}
+\input{_short_path_calculator_8cpp}
+\input{_short_path_calculator_8h}
+\input{_short_path_calculator_8h_source}
+\input{fhog_8h}
+\input{fhog_8h_source}
+\input{sse_8hpp}
+\input{sse_8hpp_source}
+\input{staple__tracker_8cpp}
+\input{staple__tracker_8hpp}
+\input{staple__tracker_8hpp_source}
+\input{track_8cpp}
+\input{track_8h}
+\input{track_8h_source}
+\input{_tracker_settings_8cpp}
+\input{_tracker_settings_8h}
+\input{_tracker_settings_8h_source}
+\input{trajectory_8h}
+\input{trajectory_8h_source}
+\input{_v_o_t_tracker_8hpp}
+\input{_v_o_t_tracker_8hpp_source}
+\input{ini_8c}
+\input{ini_8h}
+\input{ini_8h_source}
+\input{_i_n_i_reader_8cpp}
+\input{_i_n_i_reader_8h}
+\input{_i_n_i_reader_8h_source}
+\input{_c_o_n_t_r_i_b_u_t_i_n_g_8md}
+\input{attr_8h}
+\input{attr_8h_source}
+\input{buffer__info_8h}
+\input{buffer__info_8h_source}
+\input{cast_8h}
+\input{cast_8h_source}
+\input{chrono_8h}
+\input{chrono_8h_source}
+\input{common_8h}
+\input{common_8h_source}
+\input{detail_2common_8h}
+\input{detail_2common_8h_source}
+\input{complex_8h}
+\input{complex_8h_source}
+\input{class_8h}
+\input{class_8h_source}
+\input{descr_8h}
+\input{descr_8h_source}
+\input{init_8h}
+\input{init_8h_source}
+\input{internals_8h}
+\input{internals_8h_source}
+\input{typeid_8h}
+\input{typeid_8h_source}
+\input{eigen_8h}
+\input{eigen_8h_source}
+\input{embed_8h}
+\input{embed_8h_source}
+\input{eval_8h}
+\input{eval_8h_source}
+\input{functional_8h}
+\input{functional_8h_source}
+\input{iostream_8h}
+\input{iostream_8h_source}
+\input{numpy_8h}
+\input{numpy_8h_source}
+\input{operators_8h}
+\input{operators_8h_source}
+\input{options_8h}
+\input{options_8h_source}
+\input{pybind11_8h}
+\input{pybind11_8h_source}
+\input{pytypes_8h}
+\input{pytypes_8h_source}
+\input{stl_8h}
+\input{stl_8h_source}
+\input{stl__bind_8h}
+\input{stl__bind_8h_source}
+\input{_i_s_s_u_e___t_e_m_p_l_a_t_e_8md}
+\input{pybind11_2____init_____8py}
+\input{tools_2clang_2____init_____8py}
+\input{____main_____8py}
+\input{__version_8py}
+\input{cindex_8py}
+\input{enumerations_8py}
+\input{libsize_8py}
+\input{mkdoc_8py}
+%--- End generated contents ---
+% Index
+  \backmatter
+  \newpage
+  \phantomsection
+  \clearemptydoublepage
+  \addcontentsline{toc}{chapter}{\indexname}
+  \printindex
+% Required for some languages (in combination with latexdocumentpre from the header)
+\end{CJK}
+\end{document}

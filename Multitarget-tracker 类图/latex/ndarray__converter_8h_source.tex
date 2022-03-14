@@ -1,0 +1,48 @@
+\hypertarget{ndarray__converter_8h_source}{}\doxysection{ndarray\+\_\+converter.\+h}
+\label{ndarray__converter_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/python\_bind/ndarray\_converter.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/python\_bind/ndarray\_converter.h}}
+\mbox{\hyperlink{ndarray__converter_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\# ifndef \_\_NDARRAY\_CONVERTER\_H\_\_}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\# define \_\_NDARRAY\_CONVERTER\_H\_\_}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <Python.h>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <opencv2/core/core.hpp>}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{keyword}{class }\mbox{\hyperlink{class_n_d_array_converter}{NDArrayConverter}} \{}
+\DoxyCodeLine{9 \textcolor{keyword}{public}:}
+\DoxyCodeLine{10     \textcolor{comment}{// must call this first, or the other routines don't work!}}
+\DoxyCodeLine{11     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_n_d_array_converter_a4baaec24909b6455ea0c347694419260}{init\_numpy}}();}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_n_d_array_converter_abe320b39ba3c4469a4ce75ad9cdadb5d}{toMat}}(PyObject* o, cv::Mat \&m);}
+\DoxyCodeLine{14     \textcolor{keyword}{static} PyObject* \mbox{\hyperlink{class_n_d_array_converter_a47dbf093a1afdfc4cef4edb2af0fbde9}{toNDArray}}(\textcolor{keyword}{const} cv::Mat\& mat);}
+\DoxyCodeLine{15 \};}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{comment}{//}}
+\DoxyCodeLine{18 \textcolor{comment}{// Define the type converter}}
+\DoxyCodeLine{19 \textcolor{comment}{//}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{pybind11_8h}{pybind11/pybind11.h}}>}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacepybind11}{pybind11}} \{ \textcolor{keyword}{namespace }detail \{}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{keyword}{template} <> \textcolor{keyword}{struct }\mbox{\hyperlink{classtype__caster}{type\_caster}}<cv::Mat> \{}
+\DoxyCodeLine{26 \textcolor{keyword}{public}:}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28     \mbox{\hyperlink{structpybind11_1_1detail_1_1type__caster_3_01cv_1_1_mat_01_4_a5a6064a881173ded418ace3fd15ea6c3}{PYBIND11\_TYPE\_CASTER}}(cv::Mat, \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}numpy.ndarray"{}}));}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structpybind11_1_1detail_1_1type__caster_3_01cv_1_1_mat_01_4_a1493055fa259fed471fd5462ef8d5279}{load}}(\mbox{\hyperlink{classhandle}{handle}} src, \textcolor{keywordtype}{bool} \textcolor{comment}{/* convert */}) \{}
+\DoxyCodeLine{31         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_n_d_array_converter_abe320b39ba3c4469a4ce75ad9cdadb5d}{NDArrayConverter::toMat}}(src.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}(), value);}
+\DoxyCodeLine{32     \}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34     \textcolor{keyword}{static} \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structpybind11_1_1detail_1_1type__caster_3_01cv_1_1_mat_01_4_aa374a4eda6ec701bee02d859240f11b3}{cast}}(\textcolor{keyword}{const} cv::Mat \&m, \mbox{\hyperlink{detail_2common_8h_adde72ab1fb0dd4b48a5232c349a53841}{return\_value\_policy}}, \mbox{\hyperlink{classhandle}{handle}} defval) \{}
+\DoxyCodeLine{35         \textcolor{keywordflow}{return} \mbox{\hyperlink{classhandle}{handle}}(\mbox{\hyperlink{class_n_d_array_converter_a47dbf093a1afdfc4cef4edb2af0fbde9}{NDArrayConverter::toNDArray}}(m));}
+\DoxyCodeLine{36     \}}
+\DoxyCodeLine{37 \};}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 \}\} \textcolor{comment}{// namespace pybind11::detail}}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{preprocessor}{\# endif}}
+
+\end{DoxyCode}

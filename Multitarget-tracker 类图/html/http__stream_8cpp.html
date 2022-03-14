@@ -1,0 +1,934 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: D:/zhr_files/Multitarget-tracker-master/src/Detector/darknet/src/http_stream.cpp 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">My Project
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_4c3458e0ccdb4c3720723c1caa1aaa1c.html">zhr_files</a></li><li class="navelem"><a class="el" href="dir_5a8d4bff745a16410b5074d3583a347e.html">Multitarget-tracker-master</a></li><li class="navelem"><a class="el" href="dir_46a27ab0460a6f8f8d12d2f44f38bf6b.html">src</a></li><li class="navelem"><a class="el" href="dir_458a7b7bb24e4af0790226fff519699f.html">Detector</a></li><li class="navelem"><a class="el" href="dir_30d5c7ca63d0957fa3fc1828f81516c9.html">darknet</a></li><li class="navelem"><a class="el" href="dir_87c8877901facfda8fbda37bca313156.html">src</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">类</a> &#124;
+<a href="#define-members">宏定义</a> &#124;
+<a href="#func-members">函数</a> &#124;
+<a href="#var-members">变量</a>  </div>
+  <div class="headertitle"><div class="title">http_stream.cpp 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="image_8h_source.html">image.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="http__stream_8h_source.html">http_stream.h</a>&quot;</code><br />
+<code>#include &lt;cstdio&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;memory&gt;</code><br />
+<code>#include &lt;mutex&gt;</code><br />
+<code>#include &lt;thread&gt;</code><br />
+<code>#include &lt;atomic&gt;</code><br />
+<code>#include &lt;ctime&gt;</code><br />
+<code>#include &quot;<a class="el" href="darkunistd_8h_source.html">darkunistd.h</a>&quot;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &lt;sys/time.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;sys/socket.h&gt;</code><br />
+<code>#include &lt;netdb.h&gt;</code><br />
+<code>#include &lt;netinet/in.h&gt;</code><br />
+<code>#include &lt;arpa/inet.h&gt;</code><br />
+<code>#include &lt;signal.h&gt;</code><br />
+<code>#include &lt;deque&gt;</code><br />
+<code>#include &quot;<a class="el" href="blas_8h_source.html">blas.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="utils_8h_source.html">utils.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+http_stream.cpp 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="http__stream_8cpp__incl.png" border="0" usemap="#a_d_1_2zhr__files_2_multitarget-tracker-master_2src_2_detector_2darknet_2src_2http__stream_8cpp" alt=""/></div>
+<map name="a_d_1_2zhr__files_2_multitarget-tracker-master_2src_2_detector_2darknet_2src_2http__stream_8cpp" id="a_d_1_2zhr__files_2_multitarget-tracker-master_2src_2_detector_2darknet_2src_2http__stream_8cpp">
+<area shape="rect" title=" " alt="" coords="1353,5,1542,61"/>
+<area shape="rect" href="image_8h.html" title=" " alt="" coords="388,184,456,211"/>
+<area shape="rect" href="http__stream_8h.html" title=" " alt="" coords="616,109,719,136"/>
+<area shape="rect" title=" " alt="" coords="801,109,859,136"/>
+<area shape="rect" title=" " alt="" coords="883,109,939,136"/>
+<area shape="rect" title=" " alt="" coords="963,109,1035,136"/>
+<area shape="rect" title=" " alt="" coords="1059,109,1134,136"/>
+<area shape="rect" title=" " alt="" coords="1158,109,1227,136"/>
+<area shape="rect" title=" " alt="" coords="1251,109,1310,136"/>
+<area shape="rect" title=" " alt="" coords="1334,109,1393,136"/>
+<area shape="rect" title=" " alt="" coords="1417,109,1478,136"/>
+<area shape="rect" title=" " alt="" coords="1503,109,1557,136"/>
+<area shape="rect" href="darkunistd_8h.html" title=" " alt="" coords="1582,109,1675,136"/>
+<area shape="rect" title=" " alt="" coords="1700,109,1757,136"/>
+<area shape="rect" title=" " alt="" coords="1782,109,1865,136"/>
+<area shape="rect" title=" " alt="" coords="1889,109,1979,136"/>
+<area shape="rect" title=" " alt="" coords="2004,109,2101,136"/>
+<area shape="rect" title=" " alt="" coords="2125,109,2191,136"/>
+<area shape="rect" title=" " alt="" coords="2215,109,2301,136"/>
+<area shape="rect" title=" " alt="" coords="2326,109,2409,136"/>
+<area shape="rect" title=" " alt="" coords="2433,109,2499,136"/>
+<area shape="rect" title=" " alt="" coords="2524,109,2581,136"/>
+<area shape="rect" href="blas_8h.html" title=" " alt="" coords="5,333,63,360"/>
+<area shape="rect" href="utils_8h.html" title=" " alt="" coords="744,333,801,360"/>
+<area shape="rect" href="darknet_8h.html" title=" " alt="" coords="436,408,512,435"/>
+<area shape="rect" title=" " alt="" coords="69,483,133,509"/>
+<area shape="rect" title=" " alt="" coords="655,483,717,509"/>
+<area shape="rect" title=" " alt="" coords="281,483,347,509"/>
+<area shape="rect" title=" " alt="" coords="139,259,196,285"/>
+<area shape="rect" title=" " alt="" coords="220,259,283,285"/>
+<area shape="rect" href="image__opencv_8h.html" title=" " alt="" coords="459,259,574,285"/>
+<area shape="rect" href="box_8h.html" title=" " alt="" coords="352,333,407,360"/>
+<area shape="rect" title=" " alt="" coords="565,483,631,509"/>
+<area shape="rect" title=" " alt="" coords="371,483,441,509"/>
+<area shape="rect" href="pthread_8h.html" title=" " alt="" coords="465,483,541,509"/>
+<area shape="rect" title=" " alt="" coords="714,557,773,584"/>
+<area shape="rect" title=" " alt="" coords="471,557,535,584"/>
+<area shape="rect" title=" " alt="" coords="461,632,524,659"/>
+<area shape="rect" href="sched_8h.html" title=" " alt="" coords="379,557,447,584"/>
+<area shape="rect" href="matrix_8h.html" title=" " alt="" coords="482,333,551,360"/>
+<area shape="rect" title=" " alt="" coords="1595,184,1663,211"/>
+<area shape="rect" href="list_8h.html" title=" " alt="" coords="886,408,937,435"/>
+<area shape="rect" title=" " alt="" coords="737,408,811,435"/>
+</map>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct___i_g_n_o_r_e___p_i_p_e___s_i_g_n_a_l.html">_IGNORE_PIPE_SIGNAL</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_j_s_o_n__sender.html">JSON_sender</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsimilarity__detections__t.html">similarity_detections_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structdetection__t.html">detection_t</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+宏定义</h2></td></tr>
+<tr class="memitem:a78c99ffd76a7bb3c8c74db76207e9ab4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#a78c99ffd76a7bb3c8c74db76207e9ab4">_XOPEN_SOURCE</a></td></tr>
+<tr class="separator:a78c99ffd76a7bb3c8c74db76207e9ab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a614217d263be1fb1a5f76e2ff7be19a2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#a614217d263be1fb1a5f76e2ff7be19a2">PORT</a>&#160;&#160;&#160;unsigned short</td></tr>
+<tr class="separator:a614217d263be1fb1a5f76e2ff7be19a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff55fe551a9992a54ec54621c524d0a4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#aff55fe551a9992a54ec54621c524d0a4">SOCKET</a>&#160;&#160;&#160;int</td></tr>
+<tr class="separator:aff55fe551a9992a54ec54621c524d0a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57d3354ee3dfb9bb53365e85a2322db0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#a57d3354ee3dfb9bb53365e85a2322db0">HOSTENT</a>&#160;&#160;&#160;struct hostent</td></tr>
+<tr class="separator:a57d3354ee3dfb9bb53365e85a2322db0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a964e73b2a42e87b1e20c8ffa730952a2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#a964e73b2a42e87b1e20c8ffa730952a2">SOCKADDR</a>&#160;&#160;&#160;struct sockaddr</td></tr>
+<tr class="separator:a964e73b2a42e87b1e20c8ffa730952a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91d11a5e66bd1e10b0e62aadb7775c9d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#a91d11a5e66bd1e10b0e62aadb7775c9d">SOCKADDR_IN</a>&#160;&#160;&#160;struct sockaddr_in</td></tr>
+<tr class="separator:a91d11a5e66bd1e10b0e62aadb7775c9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46bf22b51da27e3732ffce87ee5bf75b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#a46bf22b51da27e3732ffce87ee5bf75b">ADDRPOINTER</a>&#160;&#160;&#160;unsigned int*</td></tr>
+<tr class="separator:a46bf22b51da27e3732ffce87ee5bf75b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26769957ec1a2beaf223f33b66ee64ab"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#a26769957ec1a2beaf223f33b66ee64ab">INVALID_SOCKET</a>&#160;&#160;&#160;-1</td></tr>
+<tr class="separator:a26769957ec1a2beaf223f33b66ee64ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a633b0396ff93d336a088412a190a5072"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#a633b0396ff93d336a088412a190a5072">SOCKET_ERROR</a>&#160;&#160;&#160;-1</td></tr>
+<tr class="separator:a633b0396ff93d336a088412a190a5072"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:a39a3603e5e2769521b3b8a6105bcb63e"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#a39a3603e5e2769521b3b8a6105bcb63e">close_socket</a> (<a class="el" href="http__stream_8cpp.html#aff55fe551a9992a54ec54621c524d0a4">SOCKET</a> s)</td></tr>
+<tr class="separator:a39a3603e5e2769521b3b8a6105bcb63e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa33d67c0b74f1cb2568b6a949cd4caa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#aaa33d67c0b74f1cb2568b6a949cd4caa">delete_json_sender</a> ()</td></tr>
+<tr class="separator:aaa33d67c0b74f1cb2568b6a949cd4caa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab19e8e80b0985fdcd04c51fa57ae7c22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#ab19e8e80b0985fdcd04c51fa57ae7c22">send_json_custom</a> (char const *send_buf, int port, int timeout)</td></tr>
+<tr class="separator:ab19e8e80b0985fdcd04c51fa57ae7c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d9590557a3281661686c58e808b421b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#a7d9590557a3281661686c58e808b421b">send_json</a> (<a class="el" href="structdetection.html">detection</a> *dets, int nboxes, int classes, char **names, long long int frame_id, int port, int timeout)</td></tr>
+<tr class="separator:a7d9590557a3281661686c58e808b421b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac153241f54cc35e5cd528922c96f8256"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#ac153241f54cc35e5cd528922c96f8256">get_time_point</a> ()</td></tr>
+<tr class="separator:ac153241f54cc35e5cd528922c96f8256"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaedac22c55880495505bf375e0e132c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#aaedac22c55880495505bf375e0e132c1">start_timer</a> ()</td></tr>
+<tr class="separator:aaedac22c55880495505bf375e0e132c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58997b988646976eadf522f6b26c9f46"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#a58997b988646976eadf522f6b26c9f46">stop_timer</a> ()</td></tr>
+<tr class="separator:a58997b988646976eadf522f6b26c9f46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7ab092ab10d65db3b9051a12420fa52"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#af7ab092ab10d65db3b9051a12420fa52">get_time</a> ()</td></tr>
+<tr class="separator:af7ab092ab10d65db3b9051a12420fa52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d2c318bb3c522e22d3656b16e7be0a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#a3d2c318bb3c522e22d3656b16e7be0a2">stop_timer_and_show</a> ()</td></tr>
+<tr class="separator:a3d2c318bb3c522e22d3656b16e7be0a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d58074f921d7b0b2fc827789a131c97"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#a4d58074f921d7b0b2fc827789a131c97">stop_timer_and_show_name</a> (char *<a class="el" href="structname.html">name</a>)</td></tr>
+<tr class="separator:a4d58074f921d7b0b2fc827789a131c97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a823340f0425e190f6931ca5c4f2b05ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#a823340f0425e190f6931ca5c4f2b05ae">total_time</a> ()</td></tr>
+<tr class="separator:a823340f0425e190f6931ca5c4f2b05ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a175afeebdbc7b9f55209e439cb91fba0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#a175afeebdbc7b9f55209e439cb91fba0">check_prob</a> (<a class="el" href="structdetection.html">detection</a> det, float thresh)</td></tr>
+<tr class="separator:a175afeebdbc7b9f55209e439cb91fba0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a957748ebb5ee206b54c3d82d8c9b1a4f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#a957748ebb5ee206b54c3d82d8c9b1a4f">check_classes_id</a> (<a class="el" href="structdetection.html">detection</a> det1, <a class="el" href="structdetection.html">detection</a> det2, float thresh)</td></tr>
+<tr class="separator:a957748ebb5ee206b54c3d82d8c9b1a4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f7801137c2e6c6c03b20ad9cb3d3006"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#a5f7801137c2e6c6c03b20ad9cb3d3006">fill_remaining_id</a> (<a class="el" href="structdetection.html">detection</a> *new_dets, int new_dets_num, int new_track_id, float thresh, int detection_count)</td></tr>
+<tr class="separator:a5f7801137c2e6c6c03b20ad9cb3d3006"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2def90ef5e1a9bfa23b3403bc03cbe83"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#a2def90ef5e1a9bfa23b3403bc03cbe83">make_float_array</a> (float *src, <a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a> size)</td></tr>
+<tr class="separator:a2def90ef5e1a9bfa23b3403bc03cbe83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7293fb62bd165d15dc25098f0133fb53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#a7293fb62bd165d15dc25098f0133fb53">set_track_id</a> (<a class="el" href="structdetection.html">detection</a> *new_dets, int new_dets_num, float thresh, float sim_thresh, float track_ciou_norm, int deque_size, int dets_for_track, int dets_for_show)</td></tr>
+<tr class="separator:a7293fb62bd165d15dc25098f0133fb53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+变量</h2></td></tr>
+<tr class="memitem:a65e270c49cc44c3f188395c677b1a458"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct___i_g_n_o_r_e___p_i_p_e___s_i_g_n_a_l.html">_IGNORE_PIPE_SIGNAL</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#a65e270c49cc44c3f188395c677b1a458">_init_once</a></td></tr>
+<tr class="separator:a65e270c49cc44c3f188395c677b1a458"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45dd2f3cbd7faa4816b1b796612ba04c"><td class="memItemLeft" align="right" valign="top">static std::unique_ptr&lt; <a class="el" href="class_j_s_o_n__sender.html">JSON_sender</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#a45dd2f3cbd7faa4816b1b796612ba04c">js_ptr</a></td></tr>
+<tr class="separator:a45dd2f3cbd7faa4816b1b796612ba04c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5e0dbd36f0d71fce9b00b7f991b2f38"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="data_8c.html#a4acff8232e4aec9cd5c6dc200ac55ef3">std::mutex</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="http__stream_8cpp.html#ad5e0dbd36f0d71fce9b00b7f991b2f38">mtx</a></td></tr>
+<tr class="separator:ad5e0dbd36f0d71fce9b00b7f991b2f38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">宏定义说明</h2>
+<a id="a78c99ffd76a7bb3c8c74db76207e9ab4" name="a78c99ffd76a7bb3c8c74db76207e9ab4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78c99ffd76a7bb3c8c74db76207e9ab4">&#9670;&nbsp;</a></span>_XOPEN_SOURCE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define _XOPEN_SOURCE</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a46bf22b51da27e3732ffce87ee5bf75b" name="a46bf22b51da27e3732ffce87ee5bf75b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46bf22b51da27e3732ffce87ee5bf75b">&#9670;&nbsp;</a></span>ADDRPOINTER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ADDRPOINTER&#160;&#160;&#160;unsigned int*</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a57d3354ee3dfb9bb53365e85a2322db0" name="a57d3354ee3dfb9bb53365e85a2322db0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57d3354ee3dfb9bb53365e85a2322db0">&#9670;&nbsp;</a></span>HOSTENT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HOSTENT&#160;&#160;&#160;struct hostent</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a26769957ec1a2beaf223f33b66ee64ab" name="a26769957ec1a2beaf223f33b66ee64ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26769957ec1a2beaf223f33b66ee64ab">&#9670;&nbsp;</a></span>INVALID_SOCKET</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define INVALID_SOCKET&#160;&#160;&#160;-1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a614217d263be1fb1a5f76e2ff7be19a2" name="a614217d263be1fb1a5f76e2ff7be19a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a614217d263be1fb1a5f76e2ff7be19a2">&#9670;&nbsp;</a></span>PORT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PORT&#160;&#160;&#160;unsigned short</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a964e73b2a42e87b1e20c8ffa730952a2" name="a964e73b2a42e87b1e20c8ffa730952a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a964e73b2a42e87b1e20c8ffa730952a2">&#9670;&nbsp;</a></span>SOCKADDR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SOCKADDR&#160;&#160;&#160;struct sockaddr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a91d11a5e66bd1e10b0e62aadb7775c9d" name="a91d11a5e66bd1e10b0e62aadb7775c9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91d11a5e66bd1e10b0e62aadb7775c9d">&#9670;&nbsp;</a></span>SOCKADDR_IN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SOCKADDR_IN&#160;&#160;&#160;struct sockaddr_in</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aff55fe551a9992a54ec54621c524d0a4" name="aff55fe551a9992a54ec54621c524d0a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff55fe551a9992a54ec54621c524d0a4">&#9670;&nbsp;</a></span>SOCKET</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SOCKET&#160;&#160;&#160;int</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a633b0396ff93d336a088412a190a5072" name="a633b0396ff93d336a088412a190a5072"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a633b0396ff93d336a088412a190a5072">&#9670;&nbsp;</a></span>SOCKET_ERROR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SOCKET_ERROR&#160;&#160;&#160;-1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">函数说明</h2>
+<a id="a957748ebb5ee206b54c3d82d8c9b1a4f" name="a957748ebb5ee206b54c3d82d8c9b1a4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a957748ebb5ee206b54c3d82d8c9b1a4f">&#9670;&nbsp;</a></span>check_classes_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int check_classes_id </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structdetection.html">detection</a>&#160;</td>
+          <td class="paramname"><em>det1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structdetection.html">detection</a>&#160;</td>
+          <td class="paramname"><em>det2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>thresh</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a175afeebdbc7b9f55209e439cb91fba0" name="a175afeebdbc7b9f55209e439cb91fba0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a175afeebdbc7b9f55209e439cb91fba0">&#9670;&nbsp;</a></span>check_prob()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int check_prob </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structdetection.html">detection</a>&#160;</td>
+          <td class="paramname"><em>det</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>thresh</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a39a3603e5e2769521b3b8a6105bcb63e" name="a39a3603e5e2769521b3b8a6105bcb63e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39a3603e5e2769521b3b8a6105bcb63e">&#9670;&nbsp;</a></span>close_socket()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int close_socket </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="http__stream_8cpp.html#aff55fe551a9992a54ec54621c524d0a4">SOCKET</a>&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaa33d67c0b74f1cb2568b6a949cd4caa" name="aaa33d67c0b74f1cb2568b6a949cd4caa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa33d67c0b74f1cb2568b6a949cd4caa">&#9670;&nbsp;</a></span>delete_json_sender()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void delete_json_sender </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5f7801137c2e6c6c03b20ad9cb3d3006" name="a5f7801137c2e6c6c03b20ad9cb3d3006"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f7801137c2e6c6c03b20ad9cb3d3006">&#9670;&nbsp;</a></span>fill_remaining_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int fill_remaining_id </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structdetection.html">detection</a> *&#160;</td>
+          <td class="paramname"><em>new_dets</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>new_dets_num</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>new_track_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>thresh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>detection_count</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="http__stream_8cpp_a5f7801137c2e6c6c03b20ad9cb3d3006_cgraph.png" border="0" usemap="#ahttp__stream_8cpp_a5f7801137c2e6c6c03b20ad9cb3d3006_cgraph" alt=""/></div>
+<map name="ahttp__stream_8cpp_a5f7801137c2e6c6c03b20ad9cb3d3006_cgraph" id="ahttp__stream_8cpp_a5f7801137c2e6c6c03b20ad9cb3d3006_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,120,32"/>
+<area shape="rect" href="http__stream_8cpp.html#a175afeebdbc7b9f55209e439cb91fba0" title=" " alt="" coords="168,5,257,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="af7ab092ab10d65db3b9051a12420fa52" name="af7ab092ab10d65db3b9051a12420fa52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7ab092ab10d65db3b9051a12420fa52">&#9670;&nbsp;</a></span>get_time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double get_time </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac153241f54cc35e5cd528922c96f8256" name="ac153241f54cc35e5cd528922c96f8256"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac153241f54cc35e5cd528922c96f8256">&#9670;&nbsp;</a></span>get_time_point()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double get_time_point </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2def90ef5e1a9bfa23b3403bc03cbe83" name="a2def90ef5e1a9bfa23b3403bc03cbe83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2def90ef5e1a9bfa23b3403bc03cbe83">&#9670;&nbsp;</a></span>make_float_array()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float * make_float_array </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="detail_2common_8h.html#a801d6a451a01953ef8cbae6feb6a3638">size_t</a>&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7d9590557a3281661686c58e808b421b" name="a7d9590557a3281661686c58e808b421b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d9590557a3281661686c58e808b421b">&#9670;&nbsp;</a></span>send_json()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void send_json </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structdetection.html">detection</a> *&#160;</td>
+          <td class="paramname"><em>dets</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nboxes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>classes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>names</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long long int&#160;</td>
+          <td class="paramname"><em>frame_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>timeout</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="http__stream_8cpp_a7d9590557a3281661686c58e808b421b_cgraph.png" border="0" usemap="#ahttp__stream_8cpp_a7d9590557a3281661686c58e808b421b_cgraph" alt=""/></div>
+<map name="ahttp__stream_8cpp_a7d9590557a3281661686c58e808b421b_cgraph" id="ahttp__stream_8cpp_a7d9590557a3281661686c58e808b421b_cgraph">
+<area shape="rect" title=" " alt="" coords="5,31,87,57"/>
+<area shape="rect" href="network_8c.html#a1bb5ba0b05c25a1c2cc912b3a19cbb42" title=" " alt="" coords="138,5,262,32"/>
+<area shape="rect" href="http__stream_8cpp.html#ab19e8e80b0985fdcd04c51fa57ae7c22" title=" " alt="" coords="135,56,265,83"/>
+<area shape="rect" href="class_j_s_o_n__sender.html#aab675e4c8abd57eb63e251ae62132b79" title=" " alt="" coords="313,56,504,83"/>
+<area shape="rect" href="class_j_s_o_n__sender.html#a65215b9f54f3e0aa8d1ea91f5de0fe0b" title=" " alt="" coords="552,56,691,83"/>
+<area shape="rect" href="class_j_s_o_n__sender.html#ad8a1cf14af3fc0182484fc3adbef8c7e" title=" " alt="" coords="739,56,891,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab19e8e80b0985fdcd04c51fa57ae7c22" name="ab19e8e80b0985fdcd04c51fa57ae7c22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab19e8e80b0985fdcd04c51fa57ae7c22">&#9670;&nbsp;</a></span>send_json_custom()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void send_json_custom </td>
+          <td>(</td>
+          <td class="paramtype">char const *&#160;</td>
+          <td class="paramname"><em>send_buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>port</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>timeout</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="http__stream_8cpp_ab19e8e80b0985fdcd04c51fa57ae7c22_cgraph.png" border="0" usemap="#ahttp__stream_8cpp_ab19e8e80b0985fdcd04c51fa57ae7c22_cgraph" alt=""/></div>
+<map name="ahttp__stream_8cpp_ab19e8e80b0985fdcd04c51fa57ae7c22_cgraph" id="ahttp__stream_8cpp_ab19e8e80b0985fdcd04c51fa57ae7c22_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,136,32"/>
+<area shape="rect" href="class_j_s_o_n__sender.html#aab675e4c8abd57eb63e251ae62132b79" title=" " alt="" coords="184,5,375,32"/>
+<area shape="rect" href="class_j_s_o_n__sender.html#a65215b9f54f3e0aa8d1ea91f5de0fe0b" title=" " alt="" coords="423,5,561,32"/>
+<area shape="rect" href="class_j_s_o_n__sender.html#ad8a1cf14af3fc0182484fc3adbef8c7e" title=" " alt="" coords="609,5,761,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a7293fb62bd165d15dc25098f0133fb53" name="a7293fb62bd165d15dc25098f0133fb53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7293fb62bd165d15dc25098f0133fb53">&#9670;&nbsp;</a></span>set_track_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void set_track_id </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structdetection.html">detection</a> *&#160;</td>
+          <td class="paramname"><em>new_dets</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>new_dets_num</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>thresh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>sim_thresh</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>track_ciou_norm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>deque_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>dets_for_track</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>dets_for_show</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="http__stream_8cpp_a7293fb62bd165d15dc25098f0133fb53_cgraph.png" border="0" usemap="#ahttp__stream_8cpp_a7293fb62bd165d15dc25098f0133fb53_cgraph" alt=""/></div>
+<map name="ahttp__stream_8cpp_a7293fb62bd165d15dc25098f0133fb53_cgraph" id="ahttp__stream_8cpp_a7293fb62bd165d15dc25098f0133fb53_cgraph">
+<area shape="rect" title=" " alt="" coords="5,132,99,159"/>
+<area shape="rect" href="box_8c.html#ae14a614fc4d26ebb552d23615dfea313" title=" " alt="" coords="177,31,243,57"/>
+<area shape="rect" href="http__stream_8cpp.html#a957748ebb5ee206b54c3d82d8c9b1a4f" title=" " alt="" coords="147,81,273,108"/>
+<area shape="rect" href="http__stream_8cpp.html#a175afeebdbc7b9f55209e439cb91fba0" title=" " alt="" coords="321,157,411,184"/>
+<area shape="rect" href="blas_8c.html#ab1fae4b9ce6fd2360044c4d6d6f788e9" title=" " alt="" coords="151,183,269,209"/>
+<area shape="rect" href="http__stream_8cpp.html#a5f7801137c2e6c6c03b20ad9cb3d3006" title=" " alt="" coords="153,233,267,260"/>
+<area shape="rect" href="box_8c.html#a306e7943e82df234b6f9d9c70def621c" title=" " alt="" coords="459,31,576,57"/>
+<area shape="rect" href="box_8c.html#a6f5e94eb9c925d29647fd649799b8066" title=" " alt="" coords="325,56,407,83"/>
+<area shape="rect" href="box_8c.html#a49bbaf2c74dad0f7bbca22c9e41286ca" title=" " alt="" coords="634,5,697,32"/>
+<area shape="rect" href="namespacenvinfer1.html#abbfdeb9b425ae9b70088a3d288670867" title=" " alt="" coords="624,56,707,83"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aaedac22c55880495505bf375e0e132c1" name="aaedac22c55880495505bf375e0e132c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaedac22c55880495505bf375e0e132c1">&#9670;&nbsp;</a></span>start_timer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void start_timer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a58997b988646976eadf522f6b26c9f46" name="a58997b988646976eadf522f6b26c9f46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58997b988646976eadf522f6b26c9f46">&#9670;&nbsp;</a></span>stop_timer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void stop_timer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3d2c318bb3c522e22d3656b16e7be0a2" name="a3d2c318bb3c522e22d3656b16e7be0a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d2c318bb3c522e22d3656b16e7be0a2">&#9670;&nbsp;</a></span>stop_timer_and_show()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void stop_timer_and_show </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4d58074f921d7b0b2fc827789a131c97" name="a4d58074f921d7b0b2fc827789a131c97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d58074f921d7b0b2fc827789a131c97">&#9670;&nbsp;</a></span>stop_timer_and_show_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void stop_timer_and_show_name </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="http__stream_8cpp_a4d58074f921d7b0b2fc827789a131c97_cgraph.png" border="0" usemap="#ahttp__stream_8cpp_a4d58074f921d7b0b2fc827789a131c97_cgraph" alt=""/></div>
+<map name="ahttp__stream_8cpp_a4d58074f921d7b0b2fc827789a131c97_cgraph" id="ahttp__stream_8cpp_a4d58074f921d7b0b2fc827789a131c97_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,192,32"/>
+<area shape="rect" href="http__stream_8cpp.html#a3d2c318bb3c522e22d3656b16e7be0a2" title=" " alt="" coords="240,5,388,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a823340f0425e190f6931ca5c4f2b05ae" name="a823340f0425e190f6931ca5c4f2b05ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a823340f0425e190f6931ca5c4f2b05ae">&#9670;&nbsp;</a></span>total_time()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void total_time </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">变量说明</h2>
+<a id="a65e270c49cc44c3f188395c677b1a458" name="a65e270c49cc44c3f188395c677b1a458"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65e270c49cc44c3f188395c677b1a458">&#9670;&nbsp;</a></span>_init_once</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct___i_g_n_o_r_e___p_i_p_e___s_i_g_n_a_l.html">_IGNORE_PIPE_SIGNAL</a> _init_once</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a45dd2f3cbd7faa4816b1b796612ba04c" name="a45dd2f3cbd7faa4816b1b796612ba04c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45dd2f3cbd7faa4816b1b796612ba04c">&#9670;&nbsp;</a></span>js_ptr</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="class_j_s_o_n__sender.html">JSON_sender</a>&gt; js_ptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad5e0dbd36f0d71fce9b00b7f991b2f38" name="ad5e0dbd36f0d71fce9b00b7f991b2f38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5e0dbd36f0d71fce9b00b7f991b2f38">&#9670;&nbsp;</a></span>mtx</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="data_8c.html#a4acff8232e4aec9cd5c6dc200ac55ef3">std::mutex</a> mtx</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>

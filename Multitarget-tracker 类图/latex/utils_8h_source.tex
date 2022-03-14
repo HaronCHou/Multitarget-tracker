@@ -1,0 +1,125 @@
+\hypertarget{utils_8h_source}{}\doxysection{utils.\+h}
+\label{utils_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/utils.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/utils.h}}
+\mbox{\hyperlink{utils_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef UTILS\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define UTILS\_H}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{darknet_8h}{darknet.h}}"{}}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{list_8h}{list.h}}"{}}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <time.h>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <stdbool.h>}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#ifndef M\_PI}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#define M\_PI       3.14159265358979323846   }\textcolor{comment}{// pi}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{15 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define DARKNET\_LOC \_\_FILE\_\_, \_\_func\_\_, \_\_LINE\_\_}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{utils_8h_a15af89a3137f5ce4826405b948818b37}{free\_ptrs}}(\textcolor{keywordtype}{void} **ptrs, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{21 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{utils_8h_a5f1dced59cc67d7a3052e84adf77c1e7}{top\_k}}(\textcolor{keywordtype}{float} *a, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} k, \textcolor{keywordtype}{int} *index);}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{comment}{/* The "{}location"{} is the file, function, and line as defined by the DARKNET\_LOC macro.}}
+\DoxyCodeLine{24 \textcolor{comment}{ * This is then printed when error() is called to terminate the instance of darknet.}}
+\DoxyCodeLine{25 \textcolor{comment}{ */}}
+\DoxyCodeLine{26 \textcolor{keywordtype}{void} *\mbox{\hyperlink{utils_8h_a50dbd2e2a1de1a21c21acc92629e93b8}{xmalloc\_location}}(\textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} size, \textcolor{keyword}{const} \textcolor{keywordtype}{char} * \textcolor{keyword}{const} filename, \textcolor{keyword}{const} \textcolor{keywordtype}{char} * \textcolor{keyword}{const} funcname, \textcolor{keyword}{const} \textcolor{keywordtype}{int} line);}
+\DoxyCodeLine{27 \textcolor{keywordtype}{void} *\mbox{\hyperlink{utils_8h_a9d1ad9325c67b2a4bfd6101a3b7de22a}{xcalloc\_location}}(\textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} nmemb, \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} size, \textcolor{keyword}{const} \textcolor{keywordtype}{char} * \textcolor{keyword}{const} filename, \textcolor{keyword}{const} \textcolor{keywordtype}{char} * \textcolor{keyword}{const} funcname, \textcolor{keyword}{const} \textcolor{keywordtype}{int} line);}
+\DoxyCodeLine{28 \textcolor{keywordtype}{void} *\mbox{\hyperlink{utils_8h_a072bab1d0c031407b0906796e4479cf7}{xrealloc\_location}}(\textcolor{keywordtype}{void} *ptr, \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} size, \textcolor{keyword}{const} \textcolor{keywordtype}{char} * \textcolor{keyword}{const} filename, \textcolor{keyword}{const} \textcolor{keywordtype}{char} * \textcolor{keyword}{const} funcname, \textcolor{keyword}{const} \textcolor{keywordtype}{int} line);}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#define xmalloc(s)      xmalloc\_location(s, DARKNET\_LOC)}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#define xcalloc(m, s)   xcalloc\_location(m, s, DARKNET\_LOC)}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#define xrealloc(p, s)  xrealloc\_location(p, s, DARKNET\_LOC)}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{keywordtype}{void} \mbox{\hyperlink{utils_8h_a18c9530c3574f2eadefc8d6cddf4ccb6}{error}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} * \textcolor{keyword}{const} msg, \textcolor{keyword}{const} \textcolor{keywordtype}{char} * \textcolor{keyword}{const} filename, \textcolor{keyword}{const} \textcolor{keywordtype}{char} * \textcolor{keyword}{const} funcname, \textcolor{keyword}{const} \textcolor{keywordtype}{int} line);}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{keywordtype}{double} \mbox{\hyperlink{utils_8h_af89a5b997626c967e4716fd022aca7bb}{what\_time\_is\_it\_now}}();}
+\DoxyCodeLine{37 \textcolor{keywordtype}{int} *\mbox{\hyperlink{utils_8h_a63b04160ff54880e7c809f629f458f7a}{read\_map}}(\textcolor{keywordtype}{char} *filename);}
+\DoxyCodeLine{38 \textcolor{keywordtype}{void} \mbox{\hyperlink{utils_8h_a0ffcf3aef270870fe180405bc25cad50}{shuffle}}(\textcolor{keywordtype}{void} *arr, \textcolor{keywordtype}{size\_t} n, \textcolor{keywordtype}{size\_t} size);}
+\DoxyCodeLine{39 \textcolor{keywordtype}{void} \mbox{\hyperlink{utils_8h_a6d7f2250125f0cf3f16e5a7b7c1905a9}{sorta\_shuffle}}(\textcolor{keywordtype}{void} *arr, \textcolor{keywordtype}{size\_t} n, \textcolor{keywordtype}{size\_t} size, \textcolor{keywordtype}{size\_t} sections);}
+\DoxyCodeLine{40 \textcolor{keywordtype}{char} *\mbox{\hyperlink{utils_8h_a3f6136050e31d6f54440cc1045b8e165}{basecfg}}(\textcolor{keywordtype}{char} *cfgfile);}
+\DoxyCodeLine{41 \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8h_a6fa5fdc3d22a596fd2d21f012e5ec2c7}{alphanum\_to\_int}}(\textcolor{keywordtype}{char} c);}
+\DoxyCodeLine{42 \textcolor{keywordtype}{char} \mbox{\hyperlink{utils_8h_a88c02ede12c15131e71a2387a9ef226f}{int\_to\_alphanum}}(\textcolor{keywordtype}{int} i);}
+\DoxyCodeLine{43 \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8h_aeb107bc4d07f192c90ee37806b26a1d4}{read\_int}}(\textcolor{keywordtype}{int} fd);}
+\DoxyCodeLine{44 \textcolor{keywordtype}{void} \mbox{\hyperlink{utils_8h_a71b198ba343751a3b889b92bfe9d5fd2}{write\_int}}(\textcolor{keywordtype}{int} fd, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{45 \textcolor{keywordtype}{void} \mbox{\hyperlink{utils_8h_ad4220decb86d761447a704e03423f160}{read\_all}}(\textcolor{keywordtype}{int} fd, \textcolor{keywordtype}{char} *\mbox{\hyperlink{classbuffer}{buffer}}, \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{classbytes}{bytes}});}
+\DoxyCodeLine{46 \textcolor{keywordtype}{void} \mbox{\hyperlink{utils_8h_ab256fc300495d1768adc2e8b7997a140}{write\_all}}(\textcolor{keywordtype}{int} fd, \textcolor{keywordtype}{char} *\mbox{\hyperlink{classbuffer}{buffer}}, \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{classbytes}{bytes}});}
+\DoxyCodeLine{47 \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8h_afccdb26cd63a87476385c10ada582642}{read\_all\_fail}}(\textcolor{keywordtype}{int} fd, \textcolor{keywordtype}{char} *\mbox{\hyperlink{classbuffer}{buffer}}, \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{classbytes}{bytes}});}
+\DoxyCodeLine{48 \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8h_a1b877af1aab01bde49615e4ac0d45b27}{write\_all\_fail}}(\textcolor{keywordtype}{int} fd, \textcolor{keywordtype}{char} *\mbox{\hyperlink{classbuffer}{buffer}}, \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{classbytes}{bytes}});}
+\DoxyCodeLine{49 \mbox{\hyperlink{darknet_8h_a77278c8cc96e39fb27b5d0a347c8fb3d}{LIB\_API}} \textcolor{keywordtype}{void} \mbox{\hyperlink{utils_8h_a3161b92e0b111701d037d1b2ec224dc0}{find\_replace}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{classstr}{str}}, \textcolor{keywordtype}{char}* orig, \textcolor{keywordtype}{char}* rep, \textcolor{keywordtype}{char}* output);}
+\DoxyCodeLine{50 \textcolor{keywordtype}{void} \mbox{\hyperlink{utils_8h_adcb0ea13878d05b567742fe07fc55194}{replace\_image\_to\_label}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* input\_path, \textcolor{keywordtype}{char}* output\_path);}
+\DoxyCodeLine{51 \textcolor{keywordtype}{void} \mbox{\hyperlink{utils_8h_a0a4dc8240d8949be7e2cafb209b053ab}{malloc\_error}}(\textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} size, \textcolor{keyword}{const} \textcolor{keywordtype}{char} * \textcolor{keyword}{const} filename, \textcolor{keyword}{const} \textcolor{keywordtype}{char} * \textcolor{keyword}{const} funcname, \textcolor{keyword}{const} \textcolor{keywordtype}{int} line);}
+\DoxyCodeLine{52 \textcolor{keywordtype}{void} \mbox{\hyperlink{utils_8h_a8b87fa071befb335a93ad91f7a413986}{calloc\_error}}(\textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} size, \textcolor{keyword}{const} \textcolor{keywordtype}{char} * \textcolor{keyword}{const} filename, \textcolor{keyword}{const} \textcolor{keywordtype}{char} * \textcolor{keyword}{const} funcname, \textcolor{keyword}{const} \textcolor{keywordtype}{int} line);}
+\DoxyCodeLine{53 \textcolor{keywordtype}{void} \mbox{\hyperlink{utils_8h_ac060c97bd0eab7270e3a507646ec1337}{realloc\_error}}(\textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} size, \textcolor{keyword}{const} \textcolor{keywordtype}{char} * \textcolor{keyword}{const} filename, \textcolor{keyword}{const} \textcolor{keywordtype}{char} * \textcolor{keyword}{const} funcname, \textcolor{keyword}{const} \textcolor{keywordtype}{int} line);}
+\DoxyCodeLine{54 \textcolor{keywordtype}{void} \mbox{\hyperlink{utils_8h_a841e9c07b05bfb9765ccb1b40c265b99}{file\_error}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} * \textcolor{keyword}{const} s);}
+\DoxyCodeLine{55 \textcolor{keywordtype}{void} \mbox{\hyperlink{utils_8h_a76299b86e144434260dcab80323ec9da}{strip}}(\textcolor{keywordtype}{char} *s);}
+\DoxyCodeLine{56 \textcolor{keywordtype}{void} \mbox{\hyperlink{utils_8h_a2926b520ac617a9c97e31cd2810eba0c}{strip\_args}}(\textcolor{keywordtype}{char} *s);}
+\DoxyCodeLine{57 \textcolor{keywordtype}{void} \mbox{\hyperlink{utils_8h_a377b25b3b6d110d34bea9a85d0305917}{strip\_char}}(\textcolor{keywordtype}{char} *s, \textcolor{keywordtype}{char} bad);}
+\DoxyCodeLine{58 \mbox{\hyperlink{structlist}{list}} *\mbox{\hyperlink{utils_8h_a0a59255c6fd5fddbef99c85c0132bf62}{split\_str}}(\textcolor{keywordtype}{char} *s, \textcolor{keywordtype}{char} delim);}
+\DoxyCodeLine{59 \textcolor{keywordtype}{char} *\mbox{\hyperlink{utils_8h_a68966c4281f1bcbd7e30c94db429b0b9}{fgetl}}(FILE *fp);}
+\DoxyCodeLine{60 \mbox{\hyperlink{structlist}{list}} *\mbox{\hyperlink{utils_8h_ac1d7a44bc22c268044fb663f6fe394f0}{parse\_csv\_line}}(\textcolor{keywordtype}{char} *line);}
+\DoxyCodeLine{61 \textcolor{keywordtype}{char} *\mbox{\hyperlink{utils_8h_a4cdbae9d1d9c0632c8b949c224dc52b5}{copy\_string}}(\textcolor{keywordtype}{char} *s);}
+\DoxyCodeLine{62 \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8h_a55df64d8a7f8b49ad351188c9872f43e}{count\_fields}}(\textcolor{keywordtype}{char} *line);}
+\DoxyCodeLine{63 \textcolor{keywordtype}{float} *\mbox{\hyperlink{utils_8h_a2c255b13a6ce0e2eb4eb77946dffad2a}{parse\_fields}}(\textcolor{keywordtype}{char} *line, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{64 \textcolor{keywordtype}{void} \mbox{\hyperlink{utils_8h_af0d493fdef09c062d7c28c10401beed0}{normalize\_array}}(\textcolor{keywordtype}{float} *a, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{65 \textcolor{keywordtype}{void} \mbox{\hyperlink{utils_8h_a8fb2bfbc3ce8319adacd60978267cbb7}{scale\_array}}(\textcolor{keywordtype}{float} *a, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{float} s);}
+\DoxyCodeLine{66 \textcolor{keywordtype}{void} \mbox{\hyperlink{utils_8h_a4c6ce94b4d4e13bf928eedbd5186e8fe}{translate\_array}}(\textcolor{keywordtype}{float} *a, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{float} s);}
+\DoxyCodeLine{67 \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8h_a3ebf9ae027586c4c7d982ffc92bad3cf}{max\_index}}(\textcolor{keywordtype}{float} *a, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{68 \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8h_af8450e4c8bb6052a1a509c76a65b747d}{top\_max\_index}}(\textcolor{keywordtype}{float} *a, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} k);}
+\DoxyCodeLine{69 \textcolor{keywordtype}{float} \mbox{\hyperlink{utils_8h_acdd3cf194fe55404d95585fcf50a1b4c}{constrain}}(\textcolor{keywordtype}{float} \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{min}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}}, \textcolor{keywordtype}{float} a);}
+\DoxyCodeLine{70 \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8h_a5402a85f04198ed74b0ac1172b673a14}{constrain\_int}}(\textcolor{keywordtype}{int} a, \textcolor{keywordtype}{int} \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{min}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}});}
+\DoxyCodeLine{71 \textcolor{keywordtype}{float} \mbox{\hyperlink{utils_8h_aedf2898bb8258edd5db8da5f934a709e}{mse\_array}}(\textcolor{keywordtype}{float} *a, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{72 \textcolor{keywordtype}{float} \mbox{\hyperlink{utils_8h_a5b5b0c77bb2f450bce70777573f7ca90}{rand\_normal}}();}
+\DoxyCodeLine{73 \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{utils_8h_a840c471f9da17532e230bccbc490b8c6}{rand\_size\_t}}();}
+\DoxyCodeLine{74 \textcolor{keywordtype}{float} \mbox{\hyperlink{utils_8h_a5492196e16ed2d16bae1df8483ef79ed}{rand\_uniform}}(\textcolor{keywordtype}{float} \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{min}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}});}
+\DoxyCodeLine{75 \textcolor{keywordtype}{float} \mbox{\hyperlink{utils_8h_ae5e2a8baa8169333fae635a56852f4a8}{rand\_scale}}(\textcolor{keywordtype}{float} s);}
+\DoxyCodeLine{76 \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8h_ad3de83542e75e46f163db52544498f53}{rand\_int}}(\textcolor{keywordtype}{int} \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{min}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}});}
+\DoxyCodeLine{77 \textcolor{keywordtype}{float} \mbox{\hyperlink{utils_8h_abedfeccc4fae6ebb143af6a646658b35}{sum\_array}}(\textcolor{keywordtype}{float} *a, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{78 \textcolor{keywordtype}{float} \mbox{\hyperlink{utils_8h_a2098fae653a82f4bcc9c339229663285}{mean\_array}}(\textcolor{keywordtype}{float} *a, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{79 \textcolor{keywordtype}{void} \mbox{\hyperlink{utils_8h_a2b0ce94853a05e81d956416164450c5e}{mean\_arrays}}(\textcolor{keywordtype}{float} **a, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} els, \textcolor{keywordtype}{float} *avg);}
+\DoxyCodeLine{80 \textcolor{keywordtype}{float} \mbox{\hyperlink{utils_8h_acb8ffd5403deb84ad16360ab0bf87cfa}{variance\_array}}(\textcolor{keywordtype}{float} *a, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{81 \textcolor{keywordtype}{float} \mbox{\hyperlink{utils_8h_ab29ce45fa5e3847d0125e2e7f2e2cb44}{mag\_array}}(\textcolor{keywordtype}{float} *a, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{82 \textcolor{keywordtype}{float} \mbox{\hyperlink{utils_8h_a043331e85fee1990cf22f186d1bf0892}{mag\_array\_skip}}(\textcolor{keywordtype}{float} *a, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} * indices\_to\_skip);}
+\DoxyCodeLine{83 \textcolor{keywordtype}{float} \mbox{\hyperlink{utils_8h_ab103bec0ac7219b8766659a86555360d}{dist\_array}}(\textcolor{keywordtype}{float} *a, \textcolor{keywordtype}{float} *b, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} sub);}
+\DoxyCodeLine{84 \textcolor{keywordtype}{float} **\mbox{\hyperlink{utils_8h_a945de6ea7f55d641ac6ea0ea82c63d81}{one\_hot\_encode}}(\textcolor{keywordtype}{float} *a, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} k);}
+\DoxyCodeLine{85 \textcolor{keywordtype}{float} \mbox{\hyperlink{utils_8h_a375f4de29b8973c3e1b63bf49a5eb00e}{sec}}(clock\_t clocks);}
+\DoxyCodeLine{86 \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8h_a6c1259f0b709a2411c0375db749440a2}{find\_int\_arg}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv, \textcolor{keywordtype}{char} *\mbox{\hyperlink{structarg}{arg}}, \textcolor{keywordtype}{int} def);}
+\DoxyCodeLine{87 \textcolor{keywordtype}{float} \mbox{\hyperlink{utils_8h_af7e57f4e7e4fda1770fbeee64d9443b0}{find\_float\_arg}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv, \textcolor{keywordtype}{char} *\mbox{\hyperlink{structarg}{arg}}, \textcolor{keywordtype}{float} def);}
+\DoxyCodeLine{88 \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8h_a845f7b956fcb9711346b8189e18d3846}{find\_arg}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}* argv[], \textcolor{keywordtype}{char} *\mbox{\hyperlink{structarg}{arg}});}
+\DoxyCodeLine{89 \textcolor{keywordtype}{char} *\mbox{\hyperlink{utils_8h_ae4bb6e9d11a49c51cf77d820fd91eb07}{find\_char\_arg}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} **argv, \textcolor{keywordtype}{char} *\mbox{\hyperlink{structarg}{arg}}, \textcolor{keywordtype}{char} *def);}
+\DoxyCodeLine{90 \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8h_a505834ece1ee5be76ac5763e397ed000}{sample\_array}}(\textcolor{keywordtype}{float} *a, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{91 \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8h_ac1c1fc84b3e9f8e1da0b7b4b46f07f86}{sample\_array\_custom}}(\textcolor{keywordtype}{float} *a, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{92 \textcolor{keywordtype}{void} \mbox{\hyperlink{utils_8h_ae211f70582950d61802e8ebc3ae0b665}{print\_statistics}}(\textcolor{keywordtype}{float} *a, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{93 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8h_a7277bdc5e17cec1912f481e6a113bf95}{random\_gen\_fast}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{94 \textcolor{keywordtype}{float} \mbox{\hyperlink{utils_8h_a51d206c0bf5332e55209606c93da4774}{random\_float\_fast}}();}
+\DoxyCodeLine{95 \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8h_ae0cac674c3e9ade4811c88c82f92c858}{rand\_int\_fast}}(\textcolor{keywordtype}{int} \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{min}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}});}
+\DoxyCodeLine{96 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8h_a9550592017450eb947f81f675b67bfdc}{random\_gen}}();}
+\DoxyCodeLine{97 \textcolor{keywordtype}{float} \mbox{\hyperlink{utils_8h_a5ae57531895d1992301ac12a3ddb49c1}{random\_float}}();}
+\DoxyCodeLine{98 \textcolor{keywordtype}{float} \mbox{\hyperlink{utils_8h_a6d37719680670d57d47c363a6ca88f4a}{rand\_uniform\_strong}}(\textcolor{keywordtype}{float} \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{min}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}});}
+\DoxyCodeLine{99 \textcolor{keywordtype}{float} \mbox{\hyperlink{utils_8h_a5a7e122c73c5705b3b92ee320622f26c}{rand\_precalc\_random}}(\textcolor{keywordtype}{float} \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{min}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}}, \textcolor{keywordtype}{float} random\_part);}
+\DoxyCodeLine{100 \textcolor{keywordtype}{double} \mbox{\hyperlink{utils_8h_a52d959486d1bdfdffc1c5aaa4937ad5c}{double\_rand}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{101 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8h_aa454b4d31b753932e9bfbe1a3ff51b60}{uint\_rand}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} less\_than);}
+\DoxyCodeLine{102 \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8h_ad17512850938b51d41aede9ce86c015f}{check\_array\_is\_nan}}(\textcolor{keywordtype}{float} *arr, \textcolor{keywordtype}{int} size);}
+\DoxyCodeLine{103 \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8h_a7a04d2a67d468c9594c9c11863bff4b9}{check\_array\_is\_inf}}(\textcolor{keywordtype}{float} *arr, \textcolor{keywordtype}{int} size);}
+\DoxyCodeLine{104 \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8h_aa86516fcc6a1cb2cd90c69bafc8cad1f}{int\_index}}(\textcolor{keywordtype}{int} *a, \textcolor{keywordtype}{int} val, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{105 \textcolor{keywordtype}{int} *\mbox{\hyperlink{utils_8h_acf91c78e1faa528eb2e6054afa93c859}{random\_index\_order}}(\textcolor{keywordtype}{int} \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{min}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}});}
+\DoxyCodeLine{106 \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8h_a12f164831d230a6c2ecc035539b13211}{max\_int\_index}}(\textcolor{keywordtype}{int} *a, \textcolor{keywordtype}{int} n);}
+\DoxyCodeLine{107 \mbox{\hyperlink{structboxabs}{boxabs}} \mbox{\hyperlink{utils_8h_a498f8f3baa9f03fb10a795bbb72eb6fa}{box\_to\_boxabs}}(\textcolor{keyword}{const} \mbox{\hyperlink{structbox}{box}}* b, \textcolor{keyword}{const} \textcolor{keywordtype}{int} img\_w, \textcolor{keyword}{const} \textcolor{keywordtype}{int} img\_h, \textcolor{keyword}{const} \textcolor{keywordtype}{int} bounds\_check);}
+\DoxyCodeLine{108 \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8h_aa946fc74bc6c238b636db6788e14c25d}{make\_directory}}(\textcolor{keywordtype}{char} *\mbox{\hyperlink{gml2nestedsql_8cpp_a10cdd7e2573589f34f8a03983f8cd8f8}{path}}, \textcolor{keywordtype}{int} mode);}
+\DoxyCodeLine{109 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \mbox{\hyperlink{utils_8h_a70692d0d67ff6b964b5a1e7eb3d0dad5}{custom\_hash}}(\textcolor{keywordtype}{char} *\mbox{\hyperlink{classstr}{str}});}
+\DoxyCodeLine{110 \textcolor{keywordtype}{bool} \mbox{\hyperlink{utils_8h_aaecada79a9a365890edd9a174719b83d}{is\_live\_stream}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} * \mbox{\hyperlink{gml2nestedsql_8cpp_a10cdd7e2573589f34f8a03983f8cd8f8}{path}});}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112 \textcolor{preprocessor}{\#define max\_val\_cmp(a,b) (((a) > (b)) ? (a) : (b))}}
+\DoxyCodeLine{113 \textcolor{preprocessor}{\#define min\_val\_cmp(a,b) (((a) < (b)) ? (a) : (b))}}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{116 \}}
+\DoxyCodeLine{117 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

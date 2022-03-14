@@ -1,0 +1,466 @@
+\hypertarget{class_logger}{}\doxysection{Logger类 参考}
+\label{class_logger}\index{Logger@{Logger}}
+
+
+Class which manages logging of Tensor\+RT tools and samples  
+
+
+
+
+{\ttfamily \#include $<$logging.\+h$>$}
+
+
+
+类 Logger 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=166pt]{class_logger__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Logger 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=166pt]{class_logger__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_logger_1_1_test_atom}{Test\+Atom}}
+\begin{DoxyCompactList}\small\item\em Opaque handle that holds logging information for a particular test \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public 类型}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71b}{Test\+Result}} \{ \mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71ba4a9e534cf49d01e9e1901dd98fd74ac3}{k\+RUNNING}}
+, \mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71ba4165977411390120b846177872de54dc}{k\+PASSED}}
+, \mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71ba02e6ecbfad299a24779409a440f68caf}{k\+FAILED}}
+, \mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71bae0bb82a02ed075300160607d0d1f2bc7}{k\+WAIVED}}
+ \}
+\begin{DoxyCompactList}\small\item\em Represents the state of a given test \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_logger_a63fff05551d45cdedfe5644779d3fd0d}{Logger}} (\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} severity=Severity\+::k\+WARNING)
+\item 
+nvinfer1\+::\+ILogger \& \mbox{\hyperlink{class_logger_aab67f7cc03c6a459269150acc3e3fc58}{get\+TRTLogger}} ()
+\begin{DoxyCompactList}\small\item\em Forward-\/compatible method for retrieving the nvinfer\+::\+ILogger associated with this \mbox{\hyperlink{class_logger}{Logger}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_logger_a040846c2f1bbed1875c42d0dd8996e3a}{log}} (\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} severity, const char $\ast$msg) override
+\begin{DoxyCompactList}\small\item\em Implementation of the nvinfer1\+::\+ILogger\+::log() virtual method \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_logger_ac23251be76ec8e0058b84f77f2236c5a}{set\+Reportable\+Severity}} (\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} severity)
+\begin{DoxyCompactList}\small\item\em Method for controlling the verbosity of logging output \end{DoxyCompactList}\item 
+\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} \mbox{\hyperlink{class_logger_a3a2132ceba20c13016a2af87d5fdc284}{get\+Reportable\+Severity}} () const
+\item 
+\mbox{\hyperlink{class_logger_a63fff05551d45cdedfe5644779d3fd0d}{Logger}} (\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} severity=Severity\+::k\+WARNING)
+\item 
+\mbox{\hyperlink{class_logger_a81414467aac1f8740c5bd13624f3aa0b}{$\sim$\+Logger}} ()=default
+\item 
+nvinfer1\+::\+ILogger \& \mbox{\hyperlink{class_logger_aab67f7cc03c6a459269150acc3e3fc58}{get\+TRTLogger}} ()
+\item 
+void \mbox{\hyperlink{class_logger_ac36bd2be00191ea19ca16164e7757dc1}{log}} (\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{nvinfer1\+::\+ILogger\+::\+Severity}} severity, const char $\ast$msg) noexcept override
+\end{DoxyCompactItemize}
+\doxysubsection*{静态 Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_logger_1_1_test_atom}{Test\+Atom}} \mbox{\hyperlink{class_logger_afb592500347528aa18527c9909562a96}{define\+Test}} (const std\+::string \&\mbox{\hyperlink{structname}{name}}, const std\+::string \&cmdline)
+\begin{DoxyCompactList}\small\item\em Define a test for logging \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{class_logger_1_1_test_atom}{Test\+Atom}} \mbox{\hyperlink{class_logger_ab3c573608bf0944dcf92a0591f36325d}{define\+Test}} (const std\+::string \&\mbox{\hyperlink{structname}{name}}, int argc, char const $\ast$const $\ast$argv)
+\begin{DoxyCompactList}\small\item\em A convenience overloaded version of \mbox{\hyperlink{class_logger_afb592500347528aa18527c9909562a96}{define\+Test()}} that accepts an array of command-\/line arguments as input \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_logger_a7af0c49258bc567af8f20960d7e5e372}{report\+Test\+Start}} (\mbox{\hyperlink{class_logger_1_1_test_atom}{Test\+Atom}} \&test\+Atom)
+\begin{DoxyCompactList}\small\item\em Report that a test has started. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_logger_ab8d056eb2133432eaef0c8c0f01e1afa}{report\+Test\+End}} (const \mbox{\hyperlink{class_logger_1_1_test_atom}{Test\+Atom}} \&test\+Atom, \mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71b}{Test\+Result}} result)
+\begin{DoxyCompactList}\small\item\em Report that a test has ended. \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{class_logger_aeecb48586b5885dc6185dfb49a965a34}{report\+Pass}} (const \mbox{\hyperlink{class_logger_1_1_test_atom}{Test\+Atom}} \&test\+Atom)
+\item 
+static int \mbox{\hyperlink{class_logger_a43e8ec7321b3439eeb9c5fb0a8918603}{report\+Fail}} (const \mbox{\hyperlink{class_logger_1_1_test_atom}{Test\+Atom}} \&test\+Atom)
+\item 
+static int \mbox{\hyperlink{class_logger_a64f02f5bb628e47eb08b4e93278102f3}{report\+Waive}} (const \mbox{\hyperlink{class_logger_1_1_test_atom}{Test\+Atom}} \&test\+Atom)
+\item 
+static int \mbox{\hyperlink{class_logger_aed19e792e4f52622b3db6d5a8b629322}{report\+Test}} (const \mbox{\hyperlink{class_logger_1_1_test_atom}{Test\+Atom}} \&test\+Atom, bool pass)
+\end{DoxyCompactItemize}
+\doxysubsection*{静态 Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+static const char $\ast$ \mbox{\hyperlink{class_logger_a6e65087dd6d0dc4bc97530a547f9a9af}{severity\+Prefix}} (\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} severity)
+\begin{DoxyCompactList}\small\item\em returns an appropriate string for prefixing a log message with the given severity \end{DoxyCompactList}\item 
+static const char $\ast$ \mbox{\hyperlink{class_logger_a3cf916dd984e67a5bbcbeb78837e4f24}{test\+Result\+String}} (\mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71b}{Test\+Result}} result)
+\begin{DoxyCompactList}\small\item\em returns an appropriate string for prefixing a test result message with the given result \end{DoxyCompactList}\item 
+static std\+::ostream \& \mbox{\hyperlink{class_logger_a5e0a5508b11e7dd713d765db73af63e2}{severity\+Ostream}} (\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} severity)
+\begin{DoxyCompactList}\small\item\em returns an appropriate output stream (cout or cerr) to use with the given severity \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_logger_a5fa2c3903dc8e7abcaf036d7be60be6b}{report\+Test\+Result}} (const \mbox{\hyperlink{class_logger_1_1_test_atom}{Test\+Atom}} \&test\+Atom, \mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71b}{Test\+Result}} result)
+\begin{DoxyCompactList}\small\item\em method that implements logging test results \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{class_logger_af318a670d7f793faf81fb7b2db49d38d}{gen\+Cmdline\+String}} (int argc, char const $\ast$const $\ast$argv)
+\begin{DoxyCompactList}\small\item\em generate a command line string from the given (argc, argv) values \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} \mbox{\hyperlink{class_logger_aa9a55206b6b7b0e4096e17484277cd59}{m\+Reportable\+Severity}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+Class which manages logging of Tensor\+RT tools and samples 
+
+This class provides a common interface for Tensor\+RT tools and samples to log information to the console, and supports logging two types of messages\+:
+
+
+\begin{DoxyItemize}
+\item Debugging messages with an associated severity (info, warning, error, or internal error/fatal)
+\item Test pass/fail messages
+\end{DoxyItemize}
+
+The advantage of having all samples use this class for logging as opposed to emitting directly to stdout/stderr is that the logic for controlling the verbosity and formatting of sample output is centralized in one location.
+
+In the future, this class could be extended to support dumping test results to a file in some standard format (for example, JUnit XML), and providing additional metadata (e.\+g. timing the duration of a test run).
+
+TODO\+: For backwards compatibility with existing samples, this class inherits directly from the nvinfer1\+::\+ILogger interface, which is problematic since there isn\textquotesingle{}t a clean separation between messages coming from the Tensor\+RT library and messages coming from the sample.
+
+In the future (once all samples are updated to use \mbox{\hyperlink{class_logger_aab67f7cc03c6a459269150acc3e3fc58}{Logger\+::get\+TRTLogger()}} to access the ILogger) we can refactor the class to eliminate the inheritance and instead make the nvinfer1\+::\+ILogger implementation a member of the \mbox{\hyperlink{class_logger}{Logger}} object. 
+
+\doxysubsection{成员枚举类型说明}
+\mbox{\Hypertarget{class_logger_a80068f0ae8a76cb03e1c080f5fead71b}\label{class_logger_a80068f0ae8a76cb03e1c080f5fead71b}} 
+\index{Logger@{Logger}!TestResult@{TestResult}}
+\index{TestResult@{TestResult}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{TestResult}{TestResult}}
+{\footnotesize\ttfamily enum class \mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71b}{Logger\+::\+Test\+Result}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Represents the state of a given test 
+
+\begin{DoxyEnumFields}{枚举值}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kRUNNING@{kRUNNING}!Logger@{Logger}}\index{Logger@{Logger}!kRUNNING@{kRUNNING}}}\mbox{\Hypertarget{class_logger_a80068f0ae8a76cb03e1c080f5fead71ba4a9e534cf49d01e9e1901dd98fd74ac3}\label{class_logger_a80068f0ae8a76cb03e1c080f5fead71ba4a9e534cf49d01e9e1901dd98fd74ac3}} 
+k\+RUNNING&The test is running \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kPASSED@{kPASSED}!Logger@{Logger}}\index{Logger@{Logger}!kPASSED@{kPASSED}}}\mbox{\Hypertarget{class_logger_a80068f0ae8a76cb03e1c080f5fead71ba4165977411390120b846177872de54dc}\label{class_logger_a80068f0ae8a76cb03e1c080f5fead71ba4165977411390120b846177872de54dc}} 
+k\+PASSED&The test passed \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kFAILED@{kFAILED}!Logger@{Logger}}\index{Logger@{Logger}!kFAILED@{kFAILED}}}\mbox{\Hypertarget{class_logger_a80068f0ae8a76cb03e1c080f5fead71ba02e6ecbfad299a24779409a440f68caf}\label{class_logger_a80068f0ae8a76cb03e1c080f5fead71ba02e6ecbfad299a24779409a440f68caf}} 
+k\+FAILED&The test failed \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kWAIVED@{kWAIVED}!Logger@{Logger}}\index{Logger@{Logger}!kWAIVED@{kWAIVED}}}\mbox{\Hypertarget{class_logger_a80068f0ae8a76cb03e1c080f5fead71bae0bb82a02ed075300160607d0d1f2bc7}\label{class_logger_a80068f0ae8a76cb03e1c080f5fead71bae0bb82a02ed075300160607d0d1f2bc7}} 
+k\+WAIVED&The test was waived \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{class_logger_a63fff05551d45cdedfe5644779d3fd0d}\label{class_logger_a63fff05551d45cdedfe5644779d3fd0d}} 
+\index{Logger@{Logger}!Logger@{Logger}}
+\index{Logger@{Logger}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{Logger()}{Logger()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Logger\+::\+Logger (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}}}]{severity = {\ttfamily Severity\+:\+:kWARNING} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_logger_a63fff05551d45cdedfe5644779d3fd0d}\label{class_logger_a63fff05551d45cdedfe5644779d3fd0d}} 
+\index{Logger@{Logger}!Logger@{Logger}}
+\index{Logger@{Logger}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{Logger()}{Logger()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Logger\+::\+Logger (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}}}]{severity = {\ttfamily Severity\+:\+:kWARNING} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_logger_a81414467aac1f8740c5bd13624f3aa0b}\label{class_logger_a81414467aac1f8740c5bd13624f3aa0b}} 
+\index{Logger@{Logger}!````~Logger@{$\sim$Logger}}
+\index{````~Logger@{$\sim$Logger}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{$\sim$Logger()}{~Logger()}}
+{\footnotesize\ttfamily Logger\+::$\sim$\+Logger (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{class_logger_afb592500347528aa18527c9909562a96}\label{class_logger_afb592500347528aa18527c9909562a96}} 
+\index{Logger@{Logger}!defineTest@{defineTest}}
+\index{defineTest@{defineTest}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{defineTest()}{defineTest()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_logger_1_1_test_atom}{Test\+Atom}} Logger\+::define\+Test (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{const std\+::string \&}]{cmdline }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Define a test for logging 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em name} & The name of the test. This should be a string starting with \char`\"{}\+Tensor\+RT\char`\"{} and containing dot-\/separated strings containing the characters \mbox{[}A-\/\+Za-\/z0-\/9\+\_\+\mbox{]}. For example, \char`\"{}\+Tensor\+RT.\+sample\+\_\+googlenet\char`\"{} \\
+\hline
+\mbox{\texttt{ in}}  & {\em cmdline} & The command line used to reproduce the test \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+a \mbox{\hyperlink{class_logger_1_1_test_atom}{Test\+Atom}} that can be used in \mbox{\hyperlink{class_logger_aed19e792e4f52622b3db6d5a8b629322}{Logger\+::report\+Test}}\{Start,End\}(). 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_logger_ab3c573608bf0944dcf92a0591f36325d}\label{class_logger_ab3c573608bf0944dcf92a0591f36325d}} 
+\index{Logger@{Logger}!defineTest@{defineTest}}
+\index{defineTest@{defineTest}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{defineTest()}{defineTest()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{class_logger_1_1_test_atom}{Test\+Atom}} Logger\+::define\+Test (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{int}]{argc,  }\item[{char const $\ast$const $\ast$}]{argv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+A convenience overloaded version of \mbox{\hyperlink{class_logger_afb592500347528aa18527c9909562a96}{define\+Test()}} that accepts an array of command-\/line arguments as input 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em name} & The name of the test \\
+\hline
+\mbox{\texttt{ in}}  & {\em argc} & The number of command-\/line arguments \\
+\hline
+\mbox{\texttt{ in}}  & {\em argv} & The array of command-\/line arguments (given as C strings)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+a \mbox{\hyperlink{class_logger_1_1_test_atom}{Test\+Atom}} that can be used in \mbox{\hyperlink{class_logger_aed19e792e4f52622b3db6d5a8b629322}{Logger\+::report\+Test}}\{Start,End\}(). 
+\end{DoxyReturn}
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{class_logger_ab3c573608bf0944dcf92a0591f36325d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_logger_af318a670d7f793faf81fb7b2db49d38d}\label{class_logger_af318a670d7f793faf81fb7b2db49d38d}} 
+\index{Logger@{Logger}!genCmdlineString@{genCmdlineString}}
+\index{genCmdlineString@{genCmdlineString}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{genCmdlineString()}{genCmdlineString()}}
+{\footnotesize\ttfamily static std\+::string Logger\+::gen\+Cmdline\+String (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char const $\ast$const $\ast$}]{argv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+generate a command line string from the given (argc, argv) values 
+
+\mbox{\Hypertarget{class_logger_a3a2132ceba20c13016a2af87d5fdc284}\label{class_logger_a3a2132ceba20c13016a2af87d5fdc284}} 
+\index{Logger@{Logger}!getReportableSeverity@{getReportableSeverity}}
+\index{getReportableSeverity@{getReportableSeverity}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{getReportableSeverity()}{getReportableSeverity()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} Logger\+::get\+Reportable\+Severity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_logger_aab67f7cc03c6a459269150acc3e3fc58}\label{class_logger_aab67f7cc03c6a459269150acc3e3fc58}} 
+\index{Logger@{Logger}!getTRTLogger@{getTRTLogger}}
+\index{getTRTLogger@{getTRTLogger}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{getTRTLogger()}{getTRTLogger()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily nvinfer1\+::\+ILogger \& Logger\+::get\+TRTLogger (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Forward-\/compatible method for retrieving the nvinfer\+::\+ILogger associated with this \mbox{\hyperlink{class_logger}{Logger}} 
+
+\begin{DoxyReturn}{返回}
+The nvinfer1\+::\+ILogger associated with this \mbox{\hyperlink{class_logger}{Logger}}
+\end{DoxyReturn}
+TODO Once all samples are updated to use this method to register the logger with Tensor\+RT, we can eliminate the inheritance of \mbox{\hyperlink{class_logger}{Logger}} from ILogger \mbox{\Hypertarget{class_logger_aab67f7cc03c6a459269150acc3e3fc58}\label{class_logger_aab67f7cc03c6a459269150acc3e3fc58}} 
+\index{Logger@{Logger}!getTRTLogger@{getTRTLogger}}
+\index{getTRTLogger@{getTRTLogger}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{getTRTLogger()}{getTRTLogger()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily nvinfer1\+::\+ILogger \& Logger\+::get\+TRTLogger (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_logger_ac36bd2be00191ea19ca16164e7757dc1}\label{class_logger_ac36bd2be00191ea19ca16164e7757dc1}} 
+\index{Logger@{Logger}!log@{log}}
+\index{log@{log}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{log()}{log()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Logger\+::log (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{nvinfer1\+::\+ILogger\+::\+Severity}}}]{severity,  }\item[{const char $\ast$}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [noexcept]}}
+
+\mbox{\Hypertarget{class_logger_a040846c2f1bbed1875c42d0dd8996e3a}\label{class_logger_a040846c2f1bbed1875c42d0dd8996e3a}} 
+\index{Logger@{Logger}!log@{log}}
+\index{log@{log}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{log()}{log()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Logger\+::log (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}}}]{severity,  }\item[{const char $\ast$}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}
+
+
+
+Implementation of the nvinfer1\+::\+ILogger\+::log() virtual method 
+
+Note samples should not be calling this function directly; it will eventually go away once we eliminate the inheritance from nvinfer1\+::\+ILogger \mbox{\Hypertarget{class_logger_a43e8ec7321b3439eeb9c5fb0a8918603}\label{class_logger_a43e8ec7321b3439eeb9c5fb0a8918603}} 
+\index{Logger@{Logger}!reportFail@{reportFail}}
+\index{reportFail@{reportFail}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{reportFail()}{reportFail()}}
+{\footnotesize\ttfamily static int Logger\+::report\+Fail (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_logger_1_1_test_atom}{Test\+Atom}} \&}]{test\+Atom }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_logger_a43e8ec7321b3439eeb9c5fb0a8918603_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_logger_aeecb48586b5885dc6185dfb49a965a34}\label{class_logger_aeecb48586b5885dc6185dfb49a965a34}} 
+\index{Logger@{Logger}!reportPass@{reportPass}}
+\index{reportPass@{reportPass}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{reportPass()}{reportPass()}}
+{\footnotesize\ttfamily static int Logger\+::report\+Pass (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_logger_1_1_test_atom}{Test\+Atom}} \&}]{test\+Atom }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_logger_aeecb48586b5885dc6185dfb49a965a34_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_logger_aed19e792e4f52622b3db6d5a8b629322}\label{class_logger_aed19e792e4f52622b3db6d5a8b629322}} 
+\index{Logger@{Logger}!reportTest@{reportTest}}
+\index{reportTest@{reportTest}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{reportTest()}{reportTest()}}
+{\footnotesize\ttfamily static int Logger\+::report\+Test (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_logger_1_1_test_atom}{Test\+Atom}} \&}]{test\+Atom,  }\item[{bool}]{pass }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_logger_aed19e792e4f52622b3db6d5a8b629322_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_logger_ab8d056eb2133432eaef0c8c0f01e1afa}\label{class_logger_ab8d056eb2133432eaef0c8c0f01e1afa}} 
+\index{Logger@{Logger}!reportTestEnd@{reportTestEnd}}
+\index{reportTestEnd@{reportTestEnd}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{reportTestEnd()}{reportTestEnd()}}
+{\footnotesize\ttfamily static void Logger\+::report\+Test\+End (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_logger_1_1_test_atom}{Test\+Atom}} \&}]{test\+Atom,  }\item[{\mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71b}{Test\+Result}}}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Report that a test has ended. 
+
+\begin{DoxyPrecond}{前置条件}
+\mbox{\hyperlink{class_logger_a7af0c49258bc567af8f20960d7e5e372}{report\+Test\+Start()}} has been called for the given test\+Atom
+\end{DoxyPrecond}
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em test\+Atom} & The handle to the test that has ended \\
+\hline
+\mbox{\texttt{ in}}  & {\em result} & The result of the test. Should be one of \mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71ba4165977411390120b846177872de54dc}{Test\+Result\+::k\+PASSED}}, \mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71ba02e6ecbfad299a24779409a440f68caf}{Test\+Result\+::k\+FAILED}}, \mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71bae0bb82a02ed075300160607d0d1f2bc7}{Test\+Result\+::k\+WAIVED}} \\
+\hline
+\end{DoxyParams}
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_logger_ab8d056eb2133432eaef0c8c0f01e1afa_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_logger_a5fa2c3903dc8e7abcaf036d7be60be6b}\label{class_logger_a5fa2c3903dc8e7abcaf036d7be60be6b}} 
+\index{Logger@{Logger}!reportTestResult@{reportTestResult}}
+\index{reportTestResult@{reportTestResult}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{reportTestResult()}{reportTestResult()}}
+{\footnotesize\ttfamily static void Logger\+::report\+Test\+Result (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_logger_1_1_test_atom}{Test\+Atom}} \&}]{test\+Atom,  }\item[{\mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71b}{Test\+Result}}}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+method that implements logging test results 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_logger_a5fa2c3903dc8e7abcaf036d7be60be6b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_logger_a7af0c49258bc567af8f20960d7e5e372}\label{class_logger_a7af0c49258bc567af8f20960d7e5e372}} 
+\index{Logger@{Logger}!reportTestStart@{reportTestStart}}
+\index{reportTestStart@{reportTestStart}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{reportTestStart()}{reportTestStart()}}
+{\footnotesize\ttfamily static void Logger\+::report\+Test\+Start (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_logger_1_1_test_atom}{Test\+Atom}} \&}]{test\+Atom }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Report that a test has started. 
+
+\begin{DoxyPrecond}{前置条件}
+\mbox{\hyperlink{class_logger_a7af0c49258bc567af8f20960d7e5e372}{report\+Test\+Start()}} has not been called yet for the given test\+Atom
+\end{DoxyPrecond}
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em test\+Atom} & The handle to the test that has started \\
+\hline
+\end{DoxyParams}
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_logger_a7af0c49258bc567af8f20960d7e5e372_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_logger_a64f02f5bb628e47eb08b4e93278102f3}\label{class_logger_a64f02f5bb628e47eb08b4e93278102f3}} 
+\index{Logger@{Logger}!reportWaive@{reportWaive}}
+\index{reportWaive@{reportWaive}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{reportWaive()}{reportWaive()}}
+{\footnotesize\ttfamily static int Logger\+::report\+Waive (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_logger_1_1_test_atom}{Test\+Atom}} \&}]{test\+Atom }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_logger_a64f02f5bb628e47eb08b4e93278102f3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_logger_ac23251be76ec8e0058b84f77f2236c5a}\label{class_logger_ac23251be76ec8e0058b84f77f2236c5a}} 
+\index{Logger@{Logger}!setReportableSeverity@{setReportableSeverity}}
+\index{setReportableSeverity@{setReportableSeverity}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{setReportableSeverity()}{setReportableSeverity()}}
+{\footnotesize\ttfamily void Logger\+::set\+Reportable\+Severity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}}}]{severity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Method for controlling the verbosity of logging output 
+
+
+\begin{DoxyParams}{参数}
+{\em severity} & The logger will only emit messages that have severity of this level or higher. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_logger_a5e0a5508b11e7dd713d765db73af63e2}\label{class_logger_a5e0a5508b11e7dd713d765db73af63e2}} 
+\index{Logger@{Logger}!severityOstream@{severityOstream}}
+\index{severityOstream@{severityOstream}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{severityOstream()}{severityOstream()}}
+{\footnotesize\ttfamily static std\+::ostream \& Logger\+::severity\+Ostream (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}}}]{severity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+returns an appropriate output stream (cout or cerr) to use with the given severity 
+
+\mbox{\Hypertarget{class_logger_a6e65087dd6d0dc4bc97530a547f9a9af}\label{class_logger_a6e65087dd6d0dc4bc97530a547f9a9af}} 
+\index{Logger@{Logger}!severityPrefix@{severityPrefix}}
+\index{severityPrefix@{severityPrefix}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{severityPrefix()}{severityPrefix()}}
+{\footnotesize\ttfamily static const char $\ast$ Logger\+::severity\+Prefix (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}}}]{severity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+returns an appropriate string for prefixing a log message with the given severity 
+
+\mbox{\Hypertarget{class_logger_a3cf916dd984e67a5bbcbeb78837e4f24}\label{class_logger_a3cf916dd984e67a5bbcbeb78837e4f24}} 
+\index{Logger@{Logger}!testResultString@{testResultString}}
+\index{testResultString@{testResultString}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{testResultString()}{testResultString()}}
+{\footnotesize\ttfamily static const char $\ast$ Logger\+::test\+Result\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_logger_a80068f0ae8a76cb03e1c080f5fead71b}{Test\+Result}}}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+returns an appropriate string for prefixing a test result message with the given result 
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{class_logger_aa9a55206b6b7b0e4096e17484277cd59}\label{class_logger_aa9a55206b6b7b0e4096e17484277cd59}} 
+\index{Logger@{Logger}!mReportableSeverity@{mReportableSeverity}}
+\index{mReportableSeverity@{mReportableSeverity}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{mReportableSeverity}{mReportableSeverity}}
+{\footnotesize\ttfamily \mbox{\hyperlink{logging_8h_affefb19b6ab8406dc906e37f1f51818f}{Severity}} Logger\+::m\+Reportable\+Severity\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/tensorrt\+\_\+yolo/\mbox{\hyperlink{logging_8h}{logging.\+h}}\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/tensorrt\+\_\+yolo/\mbox{\hyperlink{trt__utils_8h}{trt\+\_\+utils.\+h}}\end{DoxyCompactItemize}

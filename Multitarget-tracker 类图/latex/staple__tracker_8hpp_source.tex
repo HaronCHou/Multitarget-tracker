@@ -1,0 +1,126 @@
+\hypertarget{staple__tracker_8hpp_source}{}\doxysection{staple\+\_\+tracker.\+hpp}
+\label{staple__tracker_8hpp_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/staple/staple\_tracker.hpp@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/staple/staple\_tracker.hpp}}
+\mbox{\hyperlink{staple__tracker_8hpp}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <cmath>}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <opencv2/opencv.hpp>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <opencv2/core/core.hpp>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <opencv2/highgui/highgui.hpp>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <opencv2/imgproc/imgproc.hpp>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <opencv2/features2d/features2d.hpp>}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include "{}../VOTTracker.hpp"{}}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{19 \textcolor{keyword}{struct }\mbox{\hyperlink{structstaple__cfg}{staple\_cfg}}}
+\DoxyCodeLine{20 \{}
+\DoxyCodeLine{21     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structstaple__cfg_a77c49d90ea7c4133c7ea8f5facc6d90a}{grayscale\_sequence}} = \textcolor{keyword}{false};    \textcolor{comment}{// suppose that sequence is colour}}
+\DoxyCodeLine{22     \textcolor{keywordtype}{int} \mbox{\hyperlink{structstaple__cfg_a37c5e1911986e9aca31fe14e612403f9}{hog\_cell\_size}} = 4;}
+\DoxyCodeLine{23     \textcolor{keywordtype}{int} \mbox{\hyperlink{structstaple__cfg_ad5f481daebcd9a73fad83b105a7d77d2}{fixed\_area}} = 150*150;           \textcolor{comment}{// standard area to which we resize the target}}
+\DoxyCodeLine{24     \textcolor{keywordtype}{int} \mbox{\hyperlink{structstaple__cfg_a362744c1489e261064733cb7be46c451}{n\_bins}} = 2*2*2*2*2;             \textcolor{comment}{// number of bins for the color histograms (bg and fg models)}}
+\DoxyCodeLine{25     \textcolor{keywordtype}{float} \mbox{\hyperlink{structstaple__cfg_a4b464b877d504156836b16a2004d16ab}{learning\_rate\_pwp}} = 0.04f;    \textcolor{comment}{// bg and fg color models learning rate}}
+\DoxyCodeLine{26     \textcolor{keyword}{const} \textcolor{keywordtype}{char} * \mbox{\hyperlink{structstaple__cfg_a802a957b47cb01209d74123d690450c6}{feature\_type}} = \textcolor{stringliteral}{"{}fhog"{}}; \textcolor{comment}{// "{}fhog"{}, "{}"{}gray"{}"{}}}
+\DoxyCodeLine{27     \textcolor{keywordtype}{float} \mbox{\hyperlink{structstaple__cfg_a5f36dfd73ba2d0f2c2d7ec7ca17c1e92}{inner\_padding}} = 0.2f;         \textcolor{comment}{// defines inner area used to sample colors from the foreground}}
+\DoxyCodeLine{28     \textcolor{keywordtype}{float} \mbox{\hyperlink{structstaple__cfg_a8df3b96743b9a2b6755f9377910bd947}{output\_sigma\_factor}} = 1/16.0f; \textcolor{comment}{// standard deviation for the desired translation filter output}}
+\DoxyCodeLine{29     \textcolor{keywordtype}{float} \mbox{\hyperlink{structstaple__cfg_a825beeb31ad9dc51ecc62425f927548b}{lambda}} = 1e-\/3f;               \textcolor{comment}{// egularization weight}}
+\DoxyCodeLine{30     \textcolor{keywordtype}{float} \mbox{\hyperlink{structstaple__cfg_a502f76c8a59987ebf732962359d3be3a}{learning\_rate\_cf}} = 0.01f;     \textcolor{comment}{// HOG model learning rate}}
+\DoxyCodeLine{31     \textcolor{keywordtype}{float} \mbox{\hyperlink{structstaple__cfg_ad88d15065849956b3afc2d239bd7a947}{merge\_factor}} = 0.3f;          \textcolor{comment}{// fixed interpolation factor -\/ how to linearly combine the two responses}}
+\DoxyCodeLine{32     \textcolor{keyword}{const} \textcolor{keywordtype}{char} * \mbox{\hyperlink{structstaple__cfg_aca6de645cb1653077c38c57b74344005}{merge\_method}} = \textcolor{stringliteral}{"{}const\_factor"{}};}
+\DoxyCodeLine{33     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structstaple__cfg_ad7bb6bfd4871b7d71094d7a8401db50f}{den\_per\_channel}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35     \textcolor{comment}{// scale related}}
+\DoxyCodeLine{36     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structstaple__cfg_ad765d500c5cc6f1285ac1234f332ff2a}{scale\_adaptation}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{37     \textcolor{keywordtype}{int} \mbox{\hyperlink{structstaple__cfg_aac337e3c7d730fd9ca9f83ee5ddcf271}{hog\_scale\_cell\_size}} = 4;         \textcolor{comment}{// Default DSST=4}}
+\DoxyCodeLine{38     \textcolor{keywordtype}{float} \mbox{\hyperlink{structstaple__cfg_a17b7d1abede030fcd38c466fee9e0058}{learning\_rate\_scale}} = 0.025f;}
+\DoxyCodeLine{39     \textcolor{keywordtype}{float} \mbox{\hyperlink{structstaple__cfg_a0522860b644d0227f6ea0b54e097cec5}{scale\_sigma\_factor}} = 1/4.0f;}
+\DoxyCodeLine{40     \textcolor{keywordtype}{int} \mbox{\hyperlink{structstaple__cfg_a9aacd9cdb306bdb9b78c6872df376f1e}{num\_scales}} = 33;}
+\DoxyCodeLine{41     \textcolor{keywordtype}{float} \mbox{\hyperlink{structstaple__cfg_a1df7e2b3aac4508ac47392e18bf80c16}{scale\_model\_factor}} = 1.0f;}
+\DoxyCodeLine{42     \textcolor{keywordtype}{float} \mbox{\hyperlink{structstaple__cfg_adc302f1d72a892e9c4b233fca94c2d57}{scale\_step}} = 1.02f;}
+\DoxyCodeLine{43     \textcolor{keywordtype}{float} \mbox{\hyperlink{structstaple__cfg_a725123eeadeef8933f40c7808b5a17ee}{scale\_model\_max\_area}} = 32*16;}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45     \textcolor{comment}{// debugging stuff}}
+\DoxyCodeLine{46     \textcolor{keywordtype}{int} \mbox{\hyperlink{structstaple__cfg_aa30c2c893fd40c1196d0a6a6f85a97f5}{visualization}} = 0;              \textcolor{comment}{// show output bbox on frame}}
+\DoxyCodeLine{47     \textcolor{keywordtype}{int} \mbox{\hyperlink{structstaple__cfg_a6db8a23fb33927bc9827b449b2bf6185}{visualization\_dbg}} = 0;          \textcolor{comment}{// show also per-\/pixel scores, desired response and filter output}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     cv::Point\_<float> \mbox{\hyperlink{structstaple__cfg_a5c18120f9336296e63081aef7bd0dbd7}{init\_pos}};}
+\DoxyCodeLine{50     cv::Size \mbox{\hyperlink{structstaple__cfg_a761b70b4fc13da4424bbcb4501bcaa46}{target\_sz}};}
+\DoxyCodeLine{51 \};}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{56 \textcolor{keyword}{class }\mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r}{STAPLE\_TRACKER}} final : \textcolor{keyword}{public} \mbox{\hyperlink{class_v_o_t_tracker}{VOTTracker}}}
+\DoxyCodeLine{57 \{}
+\DoxyCodeLine{58 \textcolor{keyword}{public}:}
+\DoxyCodeLine{59     \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_aaf5e2fe0d958a02a2f7d6175171329d4}{STAPLE\_TRACKER}}();}
+\DoxyCodeLine{60     \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_ad94b7c29e2bf00fca81c0599b233c4f3}{\string~STAPLE\_TRACKER}}();}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a1621fd1bead8ca8cb90b0baecdb06aed}{Initialize}}(\textcolor{keyword}{const} cv::Mat \&im, cv::Rect region);}
+\DoxyCodeLine{63     cv::RotatedRect \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a47088356bc52b4a4321edcdf7a9caef0}{Update}}(\textcolor{keyword}{const} cv::Mat \&im, \textcolor{keywordtype}{float}\& confidence);}
+\DoxyCodeLine{64     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a6163d9010f888e486863242dfa1e595e}{Train}}(\textcolor{keyword}{const} cv::Mat \&im, \textcolor{keywordtype}{bool} \mbox{\hyperlink{detail_2common_8h_a71226eea81f24762754f1413e2ead78f}{first}});}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{67     \mbox{\hyperlink{structstaple__cfg}{staple\_cfg}} \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_af93adaac17598610ace076731903fcf2}{default\_parameters\_staple}}();}
+\DoxyCodeLine{68     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a063cde4c22738a3f698d03ce2d57db98}{initializeAllAreas}}(\textcolor{keyword}{const} cv::Mat \&im);}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a4d7f0dc003c90fdc4dd52eec4e8579f3}{getSubwindow}}(\textcolor{keyword}{const} cv::Mat \&im, cv::Point\_<float> centerCoor, cv::Size model\_sz, cv::Size scaled\_sz, cv::Mat \&output);}
+\DoxyCodeLine{71     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_afefa80635628632f463757b6a6322121}{getSubwindowFloor}}(\textcolor{keyword}{const} cv::Mat \&im, cv::Point\_<float> centerCoor, cv::Size model\_sz, cv::Size scaled\_sz, cv::Mat \&output);}
+\DoxyCodeLine{72     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a8b487c0861d387b541a3a221a39e77ee}{updateHistModel}}(\textcolor{keywordtype}{bool} new\_model, cv::Mat \&patch, \textcolor{keywordtype}{float} learning\_rate\_pwp=0.0f);}
+\DoxyCodeLine{73     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a160a912fab374eb60778a767f4b05176}{CalculateHann}}(cv::Size sz, cv::Mat \&output);}
+\DoxyCodeLine{74     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a6c60255b9cc226a72bbb18bc97c286e1}{gaussianResponse}}(cv::Size rect\_size, \textcolor{keywordtype}{float} sigma, cv::Mat \&output);}
+\DoxyCodeLine{75     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_ac561069cb732e57d55704ed6b702150d}{getFeatureMap}}(cv::Mat \&im\_patch, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *feature\_type, cv::MatND \&output);}
+\DoxyCodeLine{76     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_ac82f157c7f1f621e379cdd74ced17dfb}{cropFilterResponse}}(\textcolor{keyword}{const} cv::Mat \&response\_cf, cv::Size response\_size, cv::Mat\& output);}
+\DoxyCodeLine{77     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a60e1b7efbfd10fa616b4565a23883f68}{getColourMap}}(\textcolor{keyword}{const} cv::Mat \&patch, cv::Mat\& output);}
+\DoxyCodeLine{78     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a39abf3b76913c3276a33e7426bfa75a8}{getCenterLikelihood}}(\textcolor{keyword}{const} cv::Mat \&object\_likelihood, cv::Size m, cv::Mat\& center\_likelihood);}
+\DoxyCodeLine{79     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a06fe57c0ac4156e154e9ca4539bc824b}{mergeResponses}}(\textcolor{keyword}{const} cv::Mat \&response\_cf, \textcolor{keyword}{const} cv::Mat \&response\_pwp, cv::Mat \&response);}
+\DoxyCodeLine{80     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a17bdcc1bccad4a01132b0758a185e16c}{getScaleSubwindow}}(\textcolor{keyword}{const} cv::Mat \&im, cv::Point\_<float> centerCoor, cv::Mat \&output);}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_af27628ddb37a685e2461ad8a8d0cee48}{mexResize}}(\textcolor{keyword}{const} cv::Mat \&im, cv::Mat \&output, cv::Size newsz, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *method);}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84 \textcolor{keyword}{private}:}
+\DoxyCodeLine{85     \mbox{\hyperlink{structstaple__cfg}{staple\_cfg}} \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_aa91bada49c769f5ee879404260b0967b}{m\_cfg}};}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87     cv::Point\_<float> \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a9f7aca4915835ed0745e1d7b4ba5b453}{pos}};}
+\DoxyCodeLine{88     cv::Size \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a84858878586e49cb556f4b8cce2a027f}{target\_sz}};}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90     cv::Size \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_ae9de5be5fc417429a3d2e24d27b78fa1}{bg\_area}};}
+\DoxyCodeLine{91     cv::Size \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_acd1087b2baaa72df893754d318ba34bc}{fg\_area}};}
+\DoxyCodeLine{92     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a61e16d1cafd23dfaa366e09160338fb5}{area\_resize\_factor}};}
+\DoxyCodeLine{93     cv::Size \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_af9ebadb6d39c18790a0dd49791e647d9}{cf\_response\_size}};}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95     cv::Size \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_aa1b05f7fbb9b998fbedb7cdfa6cd77d5}{norm\_bg\_area}};}
+\DoxyCodeLine{96     cv::Size \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a907e5996d690ae53ce61e8252ff3be28}{norm\_target\_sz}};}
+\DoxyCodeLine{97     cv::Size \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a0eab08311ead7a6ae97d99e9999b24b2}{norm\_delta\_area}};}
+\DoxyCodeLine{98     cv::Size \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a32609096667d6275e7181f6debfbfe5f}{norm\_pwp\_search\_area}};}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100     cv::Mat \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a0542f279068b4520f42affd5c97289ff}{im\_patch\_pwp}};}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102     cv::MatND \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a0cca656127223ea3b9607ef08a1aca5d}{bg\_hist}};}
+\DoxyCodeLine{103     cv::MatND \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a93a85575d93a893c4e30da884f5d6373}{fg\_hist}};}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105     cv::Mat \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_aeca0d59badc2b22a5e2665a1001d5e13}{hann\_window}};}
+\DoxyCodeLine{106     cv::Mat \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a4015eae56c9ff6b353ead11b74ad2b62}{yf}};}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108     std::vector<cv::Mat> \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a1f2e37affc740e43d5328c3f84172457}{hf\_den}};}
+\DoxyCodeLine{109     std::vector<cv::Mat> \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a98a012cfb4e49e95c38d76833f773fb8}{hf\_num}};}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111     cv::Rect \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_abd1b4c52f679d2fcbbe664ae1dc95d48}{rect\_position}};}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a4790a8b22aa0b7e9aa934f9de500f52c}{scale\_factor}};}
+\DoxyCodeLine{114     cv::Mat \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_acfdff1f0ed339eebec1c745ab193272c}{scale\_window}};}
+\DoxyCodeLine{115     cv::Mat \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a620f71f8d6d9a1ae58da88114e3d70d5}{scale\_factors}};}
+\DoxyCodeLine{116     cv::Size \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a48fdce0c3b168d01e85e8405b2fa2bf0}{scale\_model\_sz}};}
+\DoxyCodeLine{117     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a5d4405ef59a8512934f8122dfc50f31f}{min\_scale\_factor}};}
+\DoxyCodeLine{118     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a897af57c0c73bf3af658e59ae676ddbc}{max\_scale\_factor}};}
+\DoxyCodeLine{119     cv::Size \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_aff1c2bac367faefe34d6f69275125536}{base\_target\_sz}};}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121     cv::Mat \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a87ee4b4acbc3497c848d55fd62649ccf}{ysf}};}
+\DoxyCodeLine{122     cv::Mat \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a7280d98d2f181e2d8f287bc013b6904e}{sf\_den}};}
+\DoxyCodeLine{123     cv::Mat \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_aa4e19fd26dcfcd621affbb4b7bf4884e}{sf\_num}};}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_s_t_a_p_l_e___t_r_a_c_k_e_r_a798bd0cceb985d42837167bbdde0fc7d}{frameno}} = 0;}
+\DoxyCodeLine{126 \};}
+
+\end{DoxyCode}

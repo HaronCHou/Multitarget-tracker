@@ -1,0 +1,94 @@
+\hypertarget{im2col_8h_source}{}\doxysection{im2col.\+h}
+\label{im2col_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/im2col.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/im2col.h}}
+\mbox{\hyperlink{im2col_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef IM2COL\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define IM2COL\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <stddef.h>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <stdint.h>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{darknet_8h}{darknet.h}}"{}}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{9 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{11 \textcolor{keywordtype}{void} \mbox{\hyperlink{im2col_8h_a75c68e7a88c78eec8bc874ebcfb2cea2}{im2col\_cpu}}(\textcolor{keywordtype}{float}* data\_im,}
+\DoxyCodeLine{12         \textcolor{keywordtype}{int} channels, \textcolor{keywordtype}{int} height, \textcolor{keywordtype}{int} width,}
+\DoxyCodeLine{13         \textcolor{keywordtype}{int} ksize, \textcolor{keywordtype}{int} stride, \textcolor{keywordtype}{int} pad, \textcolor{keywordtype}{float}* data\_col);}
+\DoxyCodeLine{14 \textcolor{keywordtype}{float} \mbox{\hyperlink{im2col_8h_a926633415d519e82388c2fbe8d1d24ed}{im2col\_get\_pixel}}(\textcolor{keywordtype}{float}* im, \textcolor{keywordtype}{int} height, \textcolor{keywordtype}{int} width, \textcolor{keywordtype}{int} channels,}
+\DoxyCodeLine{15     \textcolor{keywordtype}{int} row, \textcolor{keywordtype}{int} col, \textcolor{keywordtype}{int} channel, \textcolor{keywordtype}{int} pad);}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{keywordtype}{void} \mbox{\hyperlink{im2col_8h_a30f26abc59094003af54a589e0d2ba80}{im2col\_cpu\_ext}}(\textcolor{keyword}{const} \textcolor{keywordtype}{float}* data\_im, \textcolor{keyword}{const} \textcolor{keywordtype}{int} channels,}
+\DoxyCodeLine{18     \textcolor{keyword}{const} \textcolor{keywordtype}{int} height, \textcolor{keyword}{const} \textcolor{keywordtype}{int} width, \textcolor{keyword}{const} \textcolor{keywordtype}{int} kernel\_h, \textcolor{keyword}{const} \textcolor{keywordtype}{int} kernel\_w,}
+\DoxyCodeLine{19     \textcolor{keyword}{const} \textcolor{keywordtype}{int} pad\_h, \textcolor{keyword}{const} \textcolor{keywordtype}{int} pad\_w,}
+\DoxyCodeLine{20     \textcolor{keyword}{const} \textcolor{keywordtype}{int} stride\_h, \textcolor{keyword}{const} \textcolor{keywordtype}{int} stride\_w,}
+\DoxyCodeLine{21     \textcolor{keyword}{const} \textcolor{keywordtype}{int} dilation\_h, \textcolor{keyword}{const} \textcolor{keywordtype}{int} dilation\_w,}
+\DoxyCodeLine{22     \textcolor{keywordtype}{float}* data\_col);}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#ifdef GPU}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{keywordtype}{void} im2col\_ongpu(\textcolor{keywordtype}{float} *im,}
+\DoxyCodeLine{27          \textcolor{keywordtype}{int} channels, \textcolor{keywordtype}{int} height, \textcolor{keywordtype}{int} width,}
+\DoxyCodeLine{28          \textcolor{keywordtype}{int} ksize, \textcolor{keywordtype}{int} stride, \textcolor{keywordtype}{int} pad,\textcolor{keywordtype}{float} *data\_col);}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{keywordtype}{void} im2col\_gpu\_ext(\textcolor{keyword}{const} \textcolor{keywordtype}{float}* data\_im, \textcolor{keyword}{const} \textcolor{keywordtype}{int} channels,}
+\DoxyCodeLine{31     \textcolor{keyword}{const} \textcolor{keywordtype}{int} height, \textcolor{keyword}{const} \textcolor{keywordtype}{int} width, \textcolor{keyword}{const} \textcolor{keywordtype}{int} kernel\_h, \textcolor{keyword}{const} \textcolor{keywordtype}{int} kernel\_w,}
+\DoxyCodeLine{32     \textcolor{keyword}{const} \textcolor{keywordtype}{int} pad\_h, \textcolor{keyword}{const} \textcolor{keywordtype}{int} pad\_w,}
+\DoxyCodeLine{33     \textcolor{keyword}{const} \textcolor{keywordtype}{int} stride\_h, \textcolor{keyword}{const} \textcolor{keywordtype}{int} stride\_w,}
+\DoxyCodeLine{34     \textcolor{keyword}{const} \textcolor{keywordtype}{int} dilation\_h, \textcolor{keyword}{const} \textcolor{keywordtype}{int} dilation\_w,}
+\DoxyCodeLine{35     \textcolor{keywordtype}{float}* data\_col);}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{keywordtype}{void} im2col\_align\_ongpu(\textcolor{keywordtype}{float} *im,}
+\DoxyCodeLine{38     \textcolor{keywordtype}{int} channels, \textcolor{keywordtype}{int} height, \textcolor{keywordtype}{int} width,}
+\DoxyCodeLine{39     \textcolor{keywordtype}{int} ksize, \textcolor{keywordtype}{int} stride, \textcolor{keywordtype}{int} pad, \textcolor{keywordtype}{float} *data\_col, \textcolor{keywordtype}{int} bit\_align);}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{keywordtype}{void} im2col\_align\_bin\_ongpu(\textcolor{keywordtype}{float} *im,}
+\DoxyCodeLine{42     \textcolor{keywordtype}{int} channels, \textcolor{keywordtype}{int} height, \textcolor{keywordtype}{int} width,}
+\DoxyCodeLine{43     \textcolor{keywordtype}{int} ksize, \textcolor{keywordtype}{int} stride, \textcolor{keywordtype}{int} pad, \textcolor{keywordtype}{float} *data\_col, \textcolor{keywordtype}{int} bit\_align);}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 \textcolor{keywordtype}{void} float\_to\_bit\_gpu(\textcolor{keywordtype}{float} *src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *dst, \textcolor{keywordtype}{size\_t} size);}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \textcolor{keywordtype}{void} transpose\_bin\_gpu(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *A, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *B, \textcolor{keyword}{const} \textcolor{keywordtype}{int} n, \textcolor{keyword}{const} \textcolor{keywordtype}{int} m,}
+\DoxyCodeLine{48     \textcolor{keyword}{const} \textcolor{keywordtype}{int} lda, \textcolor{keyword}{const} \textcolor{keywordtype}{int} ldb, \textcolor{keyword}{const} \textcolor{keywordtype}{int} block\_size);}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{keywordtype}{void} transpose\_uint32\_gpu(uint32\_t *src, uint32\_t *dst, \textcolor{keywordtype}{int} src\_h, \textcolor{keywordtype}{int} src\_w, \textcolor{keywordtype}{int} src\_align, \textcolor{keywordtype}{int} dst\_align);}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{keywordtype}{void} transpose\_uint32\_gpu\_2(uint32\_t *src, uint32\_t *dst, \textcolor{keywordtype}{int} src\_h, \textcolor{keywordtype}{int} src\_w, \textcolor{keywordtype}{int} src\_align, \textcolor{keywordtype}{int} dst\_align);}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{keywordtype}{void} repack\_input\_gpu(\textcolor{keywordtype}{float} *input, \textcolor{keywordtype}{float} *re\_packed\_input, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h, \textcolor{keywordtype}{int} c);}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 \textcolor{keywordtype}{void} repack\_input\_gpu\_2(\textcolor{keywordtype}{float} *input, \textcolor{keywordtype}{float} *re\_packed\_input, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h, \textcolor{keywordtype}{int} c);}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58 \textcolor{keywordtype}{void} repack\_input\_gpu\_bin(\textcolor{keywordtype}{float} *input, uint32\_t *re\_packed\_input\_bin, \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keywordtype}{int} h, \textcolor{keywordtype}{int} c);}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60 \textcolor{keywordtype}{void} fill\_int8\_gpu(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *src, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} val, \textcolor{keywordtype}{size\_t} size);}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{comment}{// shared\_memory + partial coalescing = GOOD}}
+\DoxyCodeLine{63 \textcolor{keywordtype}{void} gemm\_nn\_custom\_bin\_mean\_transposed\_gpu(\textcolor{keywordtype}{int} M, \textcolor{keywordtype}{int} N, \textcolor{keywordtype}{int} K,}
+\DoxyCodeLine{64     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *A, \textcolor{keywordtype}{int} lda,}
+\DoxyCodeLine{65     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *B, \textcolor{keywordtype}{int} ldb,}
+\DoxyCodeLine{66     \textcolor{keywordtype}{float} *C, \textcolor{keywordtype}{int} ldc, \textcolor{keywordtype}{float} *mean\_arr, \textcolor{keywordtype}{float} *bias, \textcolor{keywordtype}{int} leaky\_activation,}
+\DoxyCodeLine{67     \textcolor{keywordtype}{float} *shortcut\_in\_gpu, \textcolor{keywordtype}{float} *shortcut\_out\_gpu);}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69 \textcolor{comment}{// sequentially -\/ BAD}}
+\DoxyCodeLine{70 \textcolor{keywordtype}{void} gemm\_nn\_custom\_bin\_mean\_transposed\_sequentially\_gpu(\textcolor{keywordtype}{int} M, \textcolor{keywordtype}{int} N, \textcolor{keywordtype}{int} K,}
+\DoxyCodeLine{71     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *A, \textcolor{keywordtype}{int} lda,}
+\DoxyCodeLine{72     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *B, \textcolor{keywordtype}{int} ldb,}
+\DoxyCodeLine{73     \textcolor{keywordtype}{float} *C, \textcolor{keywordtype}{int} ldc, \textcolor{keywordtype}{float} *mean\_arr);}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75 \textcolor{keywordtype}{void} convolve\_gpu(\textcolor{keywordtype}{float} *input, \textcolor{keywordtype}{float} *weights, \textcolor{keywordtype}{float} *output, \textcolor{keywordtype}{int} in\_w, \textcolor{keywordtype}{int} in\_h, \textcolor{keywordtype}{int} in\_c, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} size, \textcolor{keywordtype}{int} pad);}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{keywordtype}{void} convolve\_bin\_gpu(\textcolor{keywordtype}{float} *input, \textcolor{keywordtype}{float} *weights, \textcolor{keywordtype}{float} *output, \textcolor{keywordtype}{int} in\_w, \textcolor{keywordtype}{int} in\_h, \textcolor{keywordtype}{int} in\_c, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{int} size, \textcolor{keywordtype}{int} pad,}
+\DoxyCodeLine{78     \textcolor{keywordtype}{int} new\_lda, \textcolor{keywordtype}{float} *mean\_arr\_gpu);}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80 \textcolor{comment}{//void convolve\_bin\_cpu(float *input, float *weights, float *output, int in\_w, int in\_h, int in\_c, int n, int size, int pad, int new\_lda, float *mean\_arr\_gpu);}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82 \textcolor{comment}{//void convolve\_cpu(float *input, float *weights, float *output, int in\_w, int in\_h, int in\_c, int n, int size, int pad);}}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{85 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{86 \}}
+\DoxyCodeLine{87 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{88 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,74 @@
+\hypertarget{gml__parser_8h_source}{}\doxysection{gml\+\_\+parser.\+h}
+\label{gml__parser_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/gml\_parser.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/gml\_parser.h}}
+\mbox{\hyperlink{gml__parser_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* This software is distributed under the GNU Lesser General Public License */}}
+\DoxyCodeLine{2 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{//   gml\_parser.h }}
+\DoxyCodeLine{5 \textcolor{comment}{//}}
+\DoxyCodeLine{6 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{// \$Id: gml\_parser.h,v 1.7 2000/01/05 16:32:36 raitner Exp \$}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#ifndef GTL\_GML\_PARSER\_H}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define GTL\_GML\_PARSER\_H}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{_g_t_l_8h}{GTL/GTL.h}}>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{gml__scanner_8h}{GTL/gml\_scanner.h}}>}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \mbox{\hyperlink{_g_t_l_8h_a2d9f24096ac60918452dd51f32b64aa9}{\_\_GTL\_BEGIN\_NAMESPACE}}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{20 \textcolor{keyword}{union }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{union_g_m_l__pair__val}{GML\_pair\_val}} \{}
+\DoxyCodeLine{21     \textcolor{keywordtype}{long} \mbox{\hyperlink{union_g_m_l__pair__val_a701b42178210e3460f15cc34bcd389ff}{integer}};}
+\DoxyCodeLine{22     \textcolor{keywordtype}{double} \mbox{\hyperlink{union_g_m_l__pair__val_a83eecc4083fbf9dfe1608e027311df6c}{floating}};}
+\DoxyCodeLine{23     \textcolor{keywordtype}{char}* \mbox{\hyperlink{union_g_m_l__pair__val_a8d2623e5827be15b91bf98dbd668e371}{str}};}
+\DoxyCodeLine{24     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_g_m_l__pair}{GML\_pair}}* \mbox{\hyperlink{union_g_m_l__pair__val_ad9d038864154789007178fbf4d43ec9d}{list}};}
+\DoxyCodeLine{25 \};}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{30 \textcolor{keyword}{struct }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{struct_g_m_l__pair}{GML\_pair}} \{}
+\DoxyCodeLine{31     \textcolor{keywordtype}{char}* \mbox{\hyperlink{struct_g_m_l__pair_a00e5de36c09fef63b8d439b4341f0655}{key}};}
+\DoxyCodeLine{32     \mbox{\hyperlink{gml__scanner_8h_a2dc4839311e05f9a17adefcd0012b77f}{GML\_value}} \mbox{\hyperlink{struct_g_m_l__pair_ab63f19fdd3fc40bfaba08d3af1a927d8}{kind}};}
+\DoxyCodeLine{33     \textcolor{keyword}{union }\mbox{\hyperlink{union_g_m_l__pair__val}{GML\_pair\_val}} value;}
+\DoxyCodeLine{34     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_g_m_l__pair}{GML\_pair}}* \mbox{\hyperlink{struct_g_m_l__pair_aef47e6103f05e1411fa55f731972b592}{next}};}
+\DoxyCodeLine{35 \};}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{40 \textcolor{keyword}{struct }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{struct_g_m_l__list__elem}{GML\_list\_elem}} \{}
+\DoxyCodeLine{41     \textcolor{keywordtype}{char}* \mbox{\hyperlink{struct_g_m_l__list__elem_af047b8e2eea4b76ca892872dee4f441c}{key}};}
+\DoxyCodeLine{42     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_g_m_l__list__elem}{GML\_list\_elem}}* \mbox{\hyperlink{struct_g_m_l__list__elem_a5e115c6cb92bf1b9e01e4e3500573635}{next}};}
+\DoxyCodeLine{43 \};}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{48 \textcolor{keyword}{struct }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{struct_g_m_l__stat}{GML\_stat}} \{}
+\DoxyCodeLine{49     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_g_m_l__error}{GML\_error}} err;}
+\DoxyCodeLine{50     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_g_m_l__list__elem}{GML\_list\_elem}}* \mbox{\hyperlink{struct_g_m_l__stat_a3c6317b5ad431531fea5a16bc64490dd}{key\_list}};}
+\DoxyCodeLine{51 \};}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \textcolor{comment}{/*}}
+\DoxyCodeLine{54 \textcolor{comment}{ * returns list of KEY -\/ VALUE pairs. Errors and a pointer to a list}}
+\DoxyCodeLine{55 \textcolor{comment}{ * of key-\/names are returned in GML\_stat. Previous information contained}}
+\DoxyCodeLine{56 \textcolor{comment}{ * in GML\_stat, i.e. the key\_list, will be *lost*. }}
+\DoxyCodeLine{57 \textcolor{comment}{ */}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{struct_g_m_l__pair}{GML\_pair}}* \mbox{\hyperlink{gml__parser_8h_aa3cc88d24a1d4ee8f78ae81c2bfbd4ac}{GML\_parser}} (FILE*, \mbox{\hyperlink{struct_g_m_l__stat}{GML\_stat}}*, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{comment}{/*}}
+\DoxyCodeLine{62 \textcolor{comment}{ * free memory used in a list of GML\_pair}}
+\DoxyCodeLine{63 \textcolor{comment}{ */}}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65 \mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \textcolor{keywordtype}{void} \mbox{\hyperlink{gml__parser_8h_ac8ee95de418abf6947ec597d235f0db2}{GML\_free\_list}} (\mbox{\hyperlink{struct_g_m_l__pair}{GML\_pair}}*, \mbox{\hyperlink{struct_g_m_l__list__elem}{GML\_list\_elem}}*);}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68 \textcolor{comment}{/*}}
+\DoxyCodeLine{69 \textcolor{comment}{ * debugging }}
+\DoxyCodeLine{70 \textcolor{comment}{ */}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72 \mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \textcolor{keywordtype}{void} \mbox{\hyperlink{gml__parser_8h_a96e8672b0cabf56d2e6ee5693ee604ee}{GML\_print\_list}} (\mbox{\hyperlink{struct_g_m_l__pair}{GML\_pair}}*, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74 \mbox{\hyperlink{_g_t_l_8h_a46af2b3ec266ac2f9d36fa7222358017}{\_\_GTL\_END\_NAMESPACE}}}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GTL\_GML\_PARSER\_H}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{79 \textcolor{comment}{//   end of file}}
+\DoxyCodeLine{80 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+
+\end{DoxyCode}

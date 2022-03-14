@@ -1,0 +1,344 @@
+\hypertarget{layer_8h_source}{}\doxysection{layer.\+h}
+\label{layer_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/layer.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/layer.h}}
+\mbox{\hyperlink{layer_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef BASE\_LAYER\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define BASE\_LAYER\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{activations_8h}{activations.h}}"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}stddef.h"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{tree_8h}{tree.h}}"{}}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{8 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{comment}{//struct network\_state;}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{comment}{//struct layer;}}
+\DoxyCodeLine{14 \textcolor{comment}{//typedef struct layer layer;}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{comment}{//typedef enum \{}}
+\DoxyCodeLine{17 \textcolor{comment}{//    CONVOLUTIONAL,}}
+\DoxyCodeLine{18 \textcolor{comment}{//    DECONVOLUTIONAL,}}
+\DoxyCodeLine{19 \textcolor{comment}{//    CONNECTED,}}
+\DoxyCodeLine{20 \textcolor{comment}{//    MAXPOOL,}}
+\DoxyCodeLine{21 \textcolor{comment}{//    SOFTMAX,}}
+\DoxyCodeLine{22 \textcolor{comment}{//    DETECTION,}}
+\DoxyCodeLine{23 \textcolor{comment}{//    DROPOUT,}}
+\DoxyCodeLine{24 \textcolor{comment}{//    CROP,}}
+\DoxyCodeLine{25 \textcolor{comment}{//    ROUTE,}}
+\DoxyCodeLine{26 \textcolor{comment}{//    COST,}}
+\DoxyCodeLine{27 \textcolor{comment}{//    NORMALIZATION,}}
+\DoxyCodeLine{28 \textcolor{comment}{//    AVGPOOL,}}
+\DoxyCodeLine{29 \textcolor{comment}{//    LOCAL,}}
+\DoxyCodeLine{30 \textcolor{comment}{//    SHORTCUT,}}
+\DoxyCodeLine{31 \textcolor{comment}{//    ACTIVE,}}
+\DoxyCodeLine{32 \textcolor{comment}{//    RNN,}}
+\DoxyCodeLine{33 \textcolor{comment}{//    GRU,}}
+\DoxyCodeLine{34 \textcolor{comment}{//    CRNN,}}
+\DoxyCodeLine{35 \textcolor{comment}{//    BATCHNORM,}}
+\DoxyCodeLine{36 \textcolor{comment}{//    NETWORK,}}
+\DoxyCodeLine{37 \textcolor{comment}{//    XNOR,}}
+\DoxyCodeLine{38 \textcolor{comment}{//    REGION,}}
+\DoxyCodeLine{39 \textcolor{comment}{//  YOLO,}}
+\DoxyCodeLine{40 \textcolor{comment}{//    REORG,}}
+\DoxyCodeLine{41 \textcolor{comment}{//  UPSAMPLE,}}
+\DoxyCodeLine{42 \textcolor{comment}{//  REORG\_OLD,}}
+\DoxyCodeLine{43 \textcolor{comment}{//    BLANK}}
+\DoxyCodeLine{44 \textcolor{comment}{//\} LAYER\_TYPE;}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{comment}{//typedef enum\{}}
+\DoxyCodeLine{47 \textcolor{comment}{//    SSE, MASKED, SMOOTH}}
+\DoxyCodeLine{48 \textcolor{comment}{//\} COST\_TYPE;}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{comment}{//typedef struct \{}}
+\DoxyCodeLine{51 \textcolor{comment}{//  int batch;}}
+\DoxyCodeLine{52 \textcolor{comment}{//  float learning\_rate;}}
+\DoxyCodeLine{53 \textcolor{comment}{//  float momentum;}}
+\DoxyCodeLine{54 \textcolor{comment}{//  float decay;}}
+\DoxyCodeLine{55 \textcolor{comment}{//  int adam;}}
+\DoxyCodeLine{56 \textcolor{comment}{//  float B1;}}
+\DoxyCodeLine{57 \textcolor{comment}{//  float B2;}}
+\DoxyCodeLine{58 \textcolor{comment}{//  float eps;}}
+\DoxyCodeLine{59 \textcolor{comment}{//  int t;}}
+\DoxyCodeLine{60 \textcolor{comment}{//\} update\_args;}}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{comment}{/*}}
+\DoxyCodeLine{63 \textcolor{comment}{struct layer\{}}
+\DoxyCodeLine{64 \textcolor{comment}{    LAYER\_TYPE type;}}
+\DoxyCodeLine{65 \textcolor{comment}{    ACTIVATION activation;}}
+\DoxyCodeLine{66 \textcolor{comment}{    COST\_TYPE cost\_type;}}
+\DoxyCodeLine{67 \textcolor{comment}{    void (*forward)   (struct layer, struct network\_state);}}
+\DoxyCodeLine{68 \textcolor{comment}{    void (*backward)  (struct layer, struct network\_state);}}
+\DoxyCodeLine{69 \textcolor{comment}{    void (*update)    (struct layer, int, float, float, float);}}
+\DoxyCodeLine{70 \textcolor{comment}{    void (*forward\_gpu)   (struct layer, struct network\_state);}}
+\DoxyCodeLine{71 \textcolor{comment}{    void (*backward\_gpu)  (struct layer, struct network\_state);}}
+\DoxyCodeLine{72 \textcolor{comment}{    void (*update\_gpu)    (struct layer, int, float, float, float);}}
+\DoxyCodeLine{73 \textcolor{comment}{    int batch\_normalize;}}
+\DoxyCodeLine{74 \textcolor{comment}{    int shortcut;}}
+\DoxyCodeLine{75 \textcolor{comment}{    int batch;}}
+\DoxyCodeLine{76 \textcolor{comment}{    int forced;}}
+\DoxyCodeLine{77 \textcolor{comment}{    int flipped;}}
+\DoxyCodeLine{78 \textcolor{comment}{    int inputs;}}
+\DoxyCodeLine{79 \textcolor{comment}{    int outputs;}}
+\DoxyCodeLine{80 \textcolor{comment}{    int truths;}}
+\DoxyCodeLine{81 \textcolor{comment}{    int h,w,c;}}
+\DoxyCodeLine{82 \textcolor{comment}{    int out\_h, out\_w, out\_c;}}
+\DoxyCodeLine{83 \textcolor{comment}{    int n;}}
+\DoxyCodeLine{84 \textcolor{comment}{    int max\_boxes;}}
+\DoxyCodeLine{85 \textcolor{comment}{    int groups;}}
+\DoxyCodeLine{86 \textcolor{comment}{    int size;}}
+\DoxyCodeLine{87 \textcolor{comment}{    int side;}}
+\DoxyCodeLine{88 \textcolor{comment}{    int stride;}}
+\DoxyCodeLine{89 \textcolor{comment}{    int reverse;}}
+\DoxyCodeLine{90 \textcolor{comment}{    int spatial;}}
+\DoxyCodeLine{91 \textcolor{comment}{    int pad;}}
+\DoxyCodeLine{92 \textcolor{comment}{    int sqrt;}}
+\DoxyCodeLine{93 \textcolor{comment}{    int flip;}}
+\DoxyCodeLine{94 \textcolor{comment}{    int index;}}
+\DoxyCodeLine{95 \textcolor{comment}{    int binary;}}
+\DoxyCodeLine{96 \textcolor{comment}{    int xnor;}}
+\DoxyCodeLine{97 \textcolor{comment}{    int use\_bin\_output;}}
+\DoxyCodeLine{98 \textcolor{comment}{    int steps;}}
+\DoxyCodeLine{99 \textcolor{comment}{    int hidden;}}
+\DoxyCodeLine{100 \textcolor{comment}{    float dot;}}
+\DoxyCodeLine{101 \textcolor{comment}{    float angle;}}
+\DoxyCodeLine{102 \textcolor{comment}{    float jitter;}}
+\DoxyCodeLine{103 \textcolor{comment}{    float saturation;}}
+\DoxyCodeLine{104 \textcolor{comment}{    float exposure;}}
+\DoxyCodeLine{105 \textcolor{comment}{    float shift;}}
+\DoxyCodeLine{106 \textcolor{comment}{    float ratio;}}
+\DoxyCodeLine{107 \textcolor{comment}{    float learning\_rate\_scale;}}
+\DoxyCodeLine{108 \textcolor{comment}{    int focal\_loss;}}
+\DoxyCodeLine{109 \textcolor{comment}{    int noloss;}}
+\DoxyCodeLine{110 \textcolor{comment}{    int softmax;}}
+\DoxyCodeLine{111 \textcolor{comment}{    int classes;}}
+\DoxyCodeLine{112 \textcolor{comment}{    int coords;}}
+\DoxyCodeLine{113 \textcolor{comment}{    int background;}}
+\DoxyCodeLine{114 \textcolor{comment}{    int rescore;}}
+\DoxyCodeLine{115 \textcolor{comment}{    int objectness;}}
+\DoxyCodeLine{116 \textcolor{comment}{    int does\_cost;}}
+\DoxyCodeLine{117 \textcolor{comment}{    int joint;}}
+\DoxyCodeLine{118 \textcolor{comment}{    int noadjust;}}
+\DoxyCodeLine{119 \textcolor{comment}{    int reorg;}}
+\DoxyCodeLine{120 \textcolor{comment}{    int log;}}
+\DoxyCodeLine{121 \textcolor{comment}{    int tanh;}}
+\DoxyCodeLine{122 \textcolor{comment}{    int *mask;}}
+\DoxyCodeLine{123 \textcolor{comment}{    int total;}}
+\DoxyCodeLine{124 \textcolor{comment}{    float bflops;}}
+\DoxyCodeLine{125 \textcolor{comment}{}}
+\DoxyCodeLine{126 \textcolor{comment}{    int adam;}}
+\DoxyCodeLine{127 \textcolor{comment}{    float B1;}}
+\DoxyCodeLine{128 \textcolor{comment}{    float B2;}}
+\DoxyCodeLine{129 \textcolor{comment}{    float eps;}}
+\DoxyCodeLine{130 \textcolor{comment}{}}
+\DoxyCodeLine{131 \textcolor{comment}{    int t;}}
+\DoxyCodeLine{132 \textcolor{comment}{    float *m;}}
+\DoxyCodeLine{133 \textcolor{comment}{    float *v;}}
+\DoxyCodeLine{134 \textcolor{comment}{    float * bias\_m;}}
+\DoxyCodeLine{135 \textcolor{comment}{    float * bias\_v;}}
+\DoxyCodeLine{136 \textcolor{comment}{    float * scale\_m;}}
+\DoxyCodeLine{137 \textcolor{comment}{    float * scale\_v;}}
+\DoxyCodeLine{138 \textcolor{comment}{}}
+\DoxyCodeLine{139 \textcolor{comment}{    tree *softmax\_tree;}}
+\DoxyCodeLine{140 \textcolor{comment}{    int  *map;}}
+\DoxyCodeLine{141 \textcolor{comment}{}}
+\DoxyCodeLine{142 \textcolor{comment}{    float alpha;}}
+\DoxyCodeLine{143 \textcolor{comment}{    float beta;}}
+\DoxyCodeLine{144 \textcolor{comment}{    float kappa;}}
+\DoxyCodeLine{145 \textcolor{comment}{}}
+\DoxyCodeLine{146 \textcolor{comment}{    float coord\_scale;}}
+\DoxyCodeLine{147 \textcolor{comment}{    float object\_scale;}}
+\DoxyCodeLine{148 \textcolor{comment}{    float noobject\_scale;}}
+\DoxyCodeLine{149 \textcolor{comment}{    float mask\_scale;}}
+\DoxyCodeLine{150 \textcolor{comment}{    float class\_scale;}}
+\DoxyCodeLine{151 \textcolor{comment}{    int bias\_match;}}
+\DoxyCodeLine{152 \textcolor{comment}{    int random;}}
+\DoxyCodeLine{153 \textcolor{comment}{    float ignore\_thresh;}}
+\DoxyCodeLine{154 \textcolor{comment}{    float truth\_thresh;}}
+\DoxyCodeLine{155 \textcolor{comment}{    float thresh;}}
+\DoxyCodeLine{156 \textcolor{comment}{    float focus;}}
+\DoxyCodeLine{157 \textcolor{comment}{    int classfix;}}
+\DoxyCodeLine{158 \textcolor{comment}{    int absolute;}}
+\DoxyCodeLine{159 \textcolor{comment}{}}
+\DoxyCodeLine{160 \textcolor{comment}{    int onlyforward;}}
+\DoxyCodeLine{161 \textcolor{comment}{    int stopbackward;}}
+\DoxyCodeLine{162 \textcolor{comment}{    int dontload;}}
+\DoxyCodeLine{163 \textcolor{comment}{    int dontloadscales;}}
+\DoxyCodeLine{164 \textcolor{comment}{}}
+\DoxyCodeLine{165 \textcolor{comment}{    float temperature;}}
+\DoxyCodeLine{166 \textcolor{comment}{    float probability;}}
+\DoxyCodeLine{167 \textcolor{comment}{    float scale;}}
+\DoxyCodeLine{168 \textcolor{comment}{}}
+\DoxyCodeLine{169 \textcolor{comment}{    int *indexes;}}
+\DoxyCodeLine{170 \textcolor{comment}{    float *rand;}}
+\DoxyCodeLine{171 \textcolor{comment}{    float *cost;}}
+\DoxyCodeLine{172 \textcolor{comment}{    char  *cweights;}}
+\DoxyCodeLine{173 \textcolor{comment}{    float *state;}}
+\DoxyCodeLine{174 \textcolor{comment}{    float *prev\_state;}}
+\DoxyCodeLine{175 \textcolor{comment}{    float *forgot\_state;}}
+\DoxyCodeLine{176 \textcolor{comment}{    float *forgot\_delta;}}
+\DoxyCodeLine{177 \textcolor{comment}{    float *state\_delta;}}
+\DoxyCodeLine{178 \textcolor{comment}{}}
+\DoxyCodeLine{179 \textcolor{comment}{    float *concat;}}
+\DoxyCodeLine{180 \textcolor{comment}{    float *concat\_delta;}}
+\DoxyCodeLine{181 \textcolor{comment}{}}
+\DoxyCodeLine{182 \textcolor{comment}{    float *binary\_weights;}}
+\DoxyCodeLine{183 \textcolor{comment}{}}
+\DoxyCodeLine{184 \textcolor{comment}{    float *biases;}}
+\DoxyCodeLine{185 \textcolor{comment}{    float *bias\_updates;}}
+\DoxyCodeLine{186 \textcolor{comment}{}}
+\DoxyCodeLine{187 \textcolor{comment}{    float *scales;}}
+\DoxyCodeLine{188 \textcolor{comment}{    float *scale\_updates;}}
+\DoxyCodeLine{189 \textcolor{comment}{}}
+\DoxyCodeLine{190 \textcolor{comment}{    float *weights;}}
+\DoxyCodeLine{191 \textcolor{comment}{    float *weight\_updates;}}
+\DoxyCodeLine{192 \textcolor{comment}{}}
+\DoxyCodeLine{193 \textcolor{comment}{    char *align\_bit\_weights\_gpu;}}
+\DoxyCodeLine{194 \textcolor{comment}{    float *mean\_arr\_gpu;}}
+\DoxyCodeLine{195 \textcolor{comment}{    float *align\_workspace\_gpu;}}
+\DoxyCodeLine{196 \textcolor{comment}{    float *transposed\_align\_workspace\_gpu;}}
+\DoxyCodeLine{197 \textcolor{comment}{    int align\_workspace\_size;}}
+\DoxyCodeLine{198 \textcolor{comment}{}}
+\DoxyCodeLine{199 \textcolor{comment}{    char *align\_bit\_weights;}}
+\DoxyCodeLine{200 \textcolor{comment}{    float *mean\_arr;}}
+\DoxyCodeLine{201 \textcolor{comment}{    int align\_bit\_weights\_size;}}
+\DoxyCodeLine{202 \textcolor{comment}{    int lda\_align;}}
+\DoxyCodeLine{203 \textcolor{comment}{    int new\_lda;}}
+\DoxyCodeLine{204 \textcolor{comment}{    int bit\_align;}}
+\DoxyCodeLine{205 \textcolor{comment}{}}
+\DoxyCodeLine{206 \textcolor{comment}{    float *col\_image;}}
+\DoxyCodeLine{207 \textcolor{comment}{    int   * input\_layers;}}
+\DoxyCodeLine{208 \textcolor{comment}{    int   * input\_sizes;}}
+\DoxyCodeLine{209 \textcolor{comment}{    float * delta;}}
+\DoxyCodeLine{210 \textcolor{comment}{    float * output;}}
+\DoxyCodeLine{211 \textcolor{comment}{    float * loss;}}
+\DoxyCodeLine{212 \textcolor{comment}{    float * squared;}}
+\DoxyCodeLine{213 \textcolor{comment}{    float * norms;}}
+\DoxyCodeLine{214 \textcolor{comment}{}}
+\DoxyCodeLine{215 \textcolor{comment}{    float * spatial\_mean;}}
+\DoxyCodeLine{216 \textcolor{comment}{    float * mean;}}
+\DoxyCodeLine{217 \textcolor{comment}{    float * variance;}}
+\DoxyCodeLine{218 \textcolor{comment}{}}
+\DoxyCodeLine{219 \textcolor{comment}{    float * mean\_delta;}}
+\DoxyCodeLine{220 \textcolor{comment}{    float * variance\_delta;}}
+\DoxyCodeLine{221 \textcolor{comment}{}}
+\DoxyCodeLine{222 \textcolor{comment}{    float * rolling\_mean;}}
+\DoxyCodeLine{223 \textcolor{comment}{    float * rolling\_variance;}}
+\DoxyCodeLine{224 \textcolor{comment}{}}
+\DoxyCodeLine{225 \textcolor{comment}{    float * x;}}
+\DoxyCodeLine{226 \textcolor{comment}{    float * x\_norm;}}
+\DoxyCodeLine{227 \textcolor{comment}{}}
+\DoxyCodeLine{228 \textcolor{comment}{    struct layer *input\_layer;}}
+\DoxyCodeLine{229 \textcolor{comment}{    struct layer *self\_layer;}}
+\DoxyCodeLine{230 \textcolor{comment}{    struct layer *output\_layer;}}
+\DoxyCodeLine{231 \textcolor{comment}{}}
+\DoxyCodeLine{232 \textcolor{comment}{    struct layer *input\_gate\_layer;}}
+\DoxyCodeLine{233 \textcolor{comment}{    struct layer *state\_gate\_layer;}}
+\DoxyCodeLine{234 \textcolor{comment}{    struct layer *input\_save\_layer;}}
+\DoxyCodeLine{235 \textcolor{comment}{    struct layer *state\_save\_layer;}}
+\DoxyCodeLine{236 \textcolor{comment}{    struct layer *input\_state\_layer;}}
+\DoxyCodeLine{237 \textcolor{comment}{    struct layer *state\_state\_layer;}}
+\DoxyCodeLine{238 \textcolor{comment}{}}
+\DoxyCodeLine{239 \textcolor{comment}{    struct layer *input\_z\_layer;}}
+\DoxyCodeLine{240 \textcolor{comment}{    struct layer *state\_z\_layer;}}
+\DoxyCodeLine{241 \textcolor{comment}{}}
+\DoxyCodeLine{242 \textcolor{comment}{    struct layer *input\_r\_layer;}}
+\DoxyCodeLine{243 \textcolor{comment}{    struct layer *state\_r\_layer;}}
+\DoxyCodeLine{244 \textcolor{comment}{}}
+\DoxyCodeLine{245 \textcolor{comment}{    struct layer *input\_h\_layer;}}
+\DoxyCodeLine{246 \textcolor{comment}{    struct layer *state\_h\_layer;}}
+\DoxyCodeLine{247 \textcolor{comment}{}}
+\DoxyCodeLine{248 \textcolor{comment}{    float *z\_cpu;}}
+\DoxyCodeLine{249 \textcolor{comment}{    float *r\_cpu;}}
+\DoxyCodeLine{250 \textcolor{comment}{    float *h\_cpu;}}
+\DoxyCodeLine{251 \textcolor{comment}{}}
+\DoxyCodeLine{252 \textcolor{comment}{    float *binary\_input;}}
+\DoxyCodeLine{253 \textcolor{comment}{}}
+\DoxyCodeLine{254 \textcolor{comment}{    size\_t workspace\_size;}}
+\DoxyCodeLine{255 \textcolor{comment}{}}
+\DoxyCodeLine{256 \textcolor{comment}{\#ifdef GPU}}
+\DoxyCodeLine{257 \textcolor{comment}{    float *z\_gpu;}}
+\DoxyCodeLine{258 \textcolor{comment}{    float *r\_gpu;}}
+\DoxyCodeLine{259 \textcolor{comment}{    float *h\_gpu;}}
+\DoxyCodeLine{260 \textcolor{comment}{}}
+\DoxyCodeLine{261 \textcolor{comment}{    int *indexes\_gpu;}}
+\DoxyCodeLine{262 \textcolor{comment}{    float * prev\_state\_gpu;}}
+\DoxyCodeLine{263 \textcolor{comment}{    float * forgot\_state\_gpu;}}
+\DoxyCodeLine{264 \textcolor{comment}{    float * forgot\_delta\_gpu;}}
+\DoxyCodeLine{265 \textcolor{comment}{    float * state\_gpu;}}
+\DoxyCodeLine{266 \textcolor{comment}{    float * state\_delta\_gpu;}}
+\DoxyCodeLine{267 \textcolor{comment}{    float * gate\_gpu;}}
+\DoxyCodeLine{268 \textcolor{comment}{    float * gate\_delta\_gpu;}}
+\DoxyCodeLine{269 \textcolor{comment}{    float * save\_gpu;}}
+\DoxyCodeLine{270 \textcolor{comment}{    float * save\_delta\_gpu;}}
+\DoxyCodeLine{271 \textcolor{comment}{    float * concat\_gpu;}}
+\DoxyCodeLine{272 \textcolor{comment}{    float * concat\_delta\_gpu;}}
+\DoxyCodeLine{273 \textcolor{comment}{}}
+\DoxyCodeLine{274 \textcolor{comment}{    // adam}}
+\DoxyCodeLine{275 \textcolor{comment}{    float *m\_gpu;}}
+\DoxyCodeLine{276 \textcolor{comment}{    float *v\_gpu;}}
+\DoxyCodeLine{277 \textcolor{comment}{    float *bias\_m\_gpu;}}
+\DoxyCodeLine{278 \textcolor{comment}{    float *scale\_m\_gpu;}}
+\DoxyCodeLine{279 \textcolor{comment}{    float *bias\_v\_gpu;}}
+\DoxyCodeLine{280 \textcolor{comment}{    float *scale\_v\_gpu;}}
+\DoxyCodeLine{281 \textcolor{comment}{}}
+\DoxyCodeLine{282 \textcolor{comment}{    float *binary\_input\_gpu;}}
+\DoxyCodeLine{283 \textcolor{comment}{    float *binary\_weights\_gpu;}}
+\DoxyCodeLine{284 \textcolor{comment}{}}
+\DoxyCodeLine{285 \textcolor{comment}{    float * mean\_gpu;}}
+\DoxyCodeLine{286 \textcolor{comment}{    float * variance\_gpu;}}
+\DoxyCodeLine{287 \textcolor{comment}{}}
+\DoxyCodeLine{288 \textcolor{comment}{    float * rolling\_mean\_gpu;}}
+\DoxyCodeLine{289 \textcolor{comment}{    float * rolling\_variance\_gpu;}}
+\DoxyCodeLine{290 \textcolor{comment}{}}
+\DoxyCodeLine{291 \textcolor{comment}{    float * variance\_delta\_gpu;}}
+\DoxyCodeLine{292 \textcolor{comment}{    float * mean\_delta\_gpu;}}
+\DoxyCodeLine{293 \textcolor{comment}{}}
+\DoxyCodeLine{294 \textcolor{comment}{    float * col\_image\_gpu;}}
+\DoxyCodeLine{295 \textcolor{comment}{}}
+\DoxyCodeLine{296 \textcolor{comment}{    float * x\_gpu;}}
+\DoxyCodeLine{297 \textcolor{comment}{    float * x\_norm\_gpu;}}
+\DoxyCodeLine{298 \textcolor{comment}{    float * weights\_gpu;}}
+\DoxyCodeLine{299 \textcolor{comment}{    float * weight\_updates\_gpu;}}
+\DoxyCodeLine{300 \textcolor{comment}{}}
+\DoxyCodeLine{301 \textcolor{comment}{    float * weights\_gpu16;}}
+\DoxyCodeLine{302 \textcolor{comment}{    float * weight\_updates\_gpu16;}}
+\DoxyCodeLine{303 \textcolor{comment}{}}
+\DoxyCodeLine{304 \textcolor{comment}{    float * biases\_gpu;}}
+\DoxyCodeLine{305 \textcolor{comment}{    float * bias\_updates\_gpu;}}
+\DoxyCodeLine{306 \textcolor{comment}{}}
+\DoxyCodeLine{307 \textcolor{comment}{    float * scales\_gpu;}}
+\DoxyCodeLine{308 \textcolor{comment}{    float * scale\_updates\_gpu;}}
+\DoxyCodeLine{309 \textcolor{comment}{}}
+\DoxyCodeLine{310 \textcolor{comment}{    float * output\_gpu;}}
+\DoxyCodeLine{311 \textcolor{comment}{    float * loss\_gpu;}}
+\DoxyCodeLine{312 \textcolor{comment}{    float * delta\_gpu;}}
+\DoxyCodeLine{313 \textcolor{comment}{    float * rand\_gpu;}}
+\DoxyCodeLine{314 \textcolor{comment}{    float * squared\_gpu;}}
+\DoxyCodeLine{315 \textcolor{comment}{    float * norms\_gpu;}}
+\DoxyCodeLine{316 \textcolor{comment}{    \#ifdef CUDNN}}
+\DoxyCodeLine{317 \textcolor{comment}{    cudnnTensorDescriptor\_t srcTensorDesc, dstTensorDesc;}}
+\DoxyCodeLine{318 \textcolor{comment}{    cudnnTensorDescriptor\_t srcTensorDesc16, dstTensorDesc16;}}
+\DoxyCodeLine{319 \textcolor{comment}{    cudnnTensorDescriptor\_t dsrcTensorDesc, ddstTensorDesc;}}
+\DoxyCodeLine{320 \textcolor{comment}{    cudnnTensorDescriptor\_t dsrcTensorDesc16, ddstTensorDesc16;}}
+\DoxyCodeLine{321 \textcolor{comment}{    cudnnTensorDescriptor\_t normTensorDesc, normDstTensorDesc, normDstTensorDescF16;}}
+\DoxyCodeLine{322 \textcolor{comment}{    cudnnFilterDescriptor\_t weightDesc, weightDesc16;}}
+\DoxyCodeLine{323 \textcolor{comment}{    cudnnFilterDescriptor\_t dweightDesc, dweightDesc16;}}
+\DoxyCodeLine{324 \textcolor{comment}{    cudnnConvolutionDescriptor\_t convDesc;}}
+\DoxyCodeLine{325 \textcolor{comment}{    cudnnConvolutionFwdAlgo\_t fw\_algo, fw\_algo16;}}
+\DoxyCodeLine{326 \textcolor{comment}{    cudnnConvolutionBwdDataAlgo\_t bd\_algo, bd\_algo16;}}
+\DoxyCodeLine{327 \textcolor{comment}{    cudnnConvolutionBwdFilterAlgo\_t bf\_algo, bf\_algo16;}}
+\DoxyCodeLine{328 \textcolor{comment}{    cudnnPoolingDescriptor\_t poolingDesc;}}
+\DoxyCodeLine{329 \textcolor{comment}{    \#endif  // CUDNN}}
+\DoxyCodeLine{330 \textcolor{comment}{\#endif  // GPU}}
+\DoxyCodeLine{331 \textcolor{comment}{\};}}
+\DoxyCodeLine{332 \textcolor{comment}{*/}}
+\DoxyCodeLine{333 \textcolor{comment}{//void free\_layer(layer);}}
+\DoxyCodeLine{334 }
+\DoxyCodeLine{335 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{336 \}}
+\DoxyCodeLine{337 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{338 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

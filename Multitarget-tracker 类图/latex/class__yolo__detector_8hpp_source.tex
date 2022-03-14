@@ -1,0 +1,151 @@
+\hypertarget{class__yolo__detector_8hpp_source}{}\doxysection{class\+\_\+yolo\+\_\+detector.\+hpp}
+\label{class__yolo__detector_8hpp_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/class\_yolo\_detector.hpp@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/class\_yolo\_detector.hpp}}
+\mbox{\hyperlink{class__yolo__detector_8hpp}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef CLASS\_YOLO\_DETECTOR\_HPP\_}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define CLASS\_YOLO\_DETECTOR\_HPP\_}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <opencv2/opencv.hpp>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{ds__image_8h}{ds\_image.h}}"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{trt__utils_8h}{trt\_utils.h}}"{}}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{yolo_8h}{yolo.h}}"{}}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{yolov2_8h}{yolov2.h}}"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{yolov3_8h}{yolov3.h}}"{}}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{yolov4_8h}{yolov4.h}}"{}}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{yolov5_8h}{yolov5.h}}"{}}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <stdio.h>}  \textcolor{comment}{/* defines FILENAME\_MAX */}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{class__detector_8h}{class\_detector.h}}"{}}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{class__timer_8hpp}{class\_timer.hpp}}"{}}}
+\DoxyCodeLine{20 \textcolor{keyword}{class }\mbox{\hyperlink{class_yolo_dectector}{YoloDectector}}}
+\DoxyCodeLine{21 \{}
+\DoxyCodeLine{22 \textcolor{keyword}{public}:}
+\DoxyCodeLine{23     \mbox{\hyperlink{class_yolo_dectector_aec977f12ed2760058d677bdd7b63485e}{YoloDectector}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{24     \mbox{\hyperlink{class_yolo_dectector_a78f7ae78123fcba1b403efbd3707cfdc}{\string~YoloDectector}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_yolo_dectector_a46f057552709e0179d073b035035da0d}{init}}(\textcolor{keyword}{const} \mbox{\hyperlink{structtensor__rt_1_1_config}{tensor\_rt::Config}} \&config)}
+\DoxyCodeLine{27     \{}
+\DoxyCodeLine{28         \mbox{\hyperlink{class_yolo_dectector_a20fd2d395a4e417af04c67c6a573d582}{\_config}} = config;}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30         this-\/>\mbox{\hyperlink{class_yolo_dectector_a861dcac5a405563109c51b5b44c0cff0}{set\_gpu\_id}}(\mbox{\hyperlink{class_yolo_dectector_a20fd2d395a4e417af04c67c6a573d582}{\_config}}.\mbox{\hyperlink{structtensor__rt_1_1_config_aed2f32b4b2944e36e1f25e42ed84a60c}{gpu\_id}});}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32         this-\/>\mbox{\hyperlink{class_yolo_dectector_a84944a70861e8d1355d282c4442f9eca}{parse\_config}}();}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34         this-\/>\mbox{\hyperlink{class_yolo_dectector_ad01b9928387a9cb6f8c8140221232ebe}{build\_net}}();}
+\DoxyCodeLine{35     \}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_yolo_dectector_a0f0d925cb2f9c792a8af20f631ccc724}{detect}}(\textcolor{keyword}{const} std::vector<cv::Mat>    \&vec\_image,}
+\DoxyCodeLine{38                 std::vector<tensor\_rt::BatchResult> \&vec\_batch\_result)}
+\DoxyCodeLine{39     \{}
+\DoxyCodeLine{40         std::vector<DsImage> vec\_ds\_images;}
+\DoxyCodeLine{41         vec\_batch\_result.clear();}
+\DoxyCodeLine{42         \textcolor{keywordflow}{if} (vec\_batch\_result.capacity() < vec\_image.size())}
+\DoxyCodeLine{43             vec\_batch\_result.reserve(vec\_image.size());}
+\DoxyCodeLine{44         \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto} \&img:vec\_image)}
+\DoxyCodeLine{45         \{}
+\DoxyCodeLine{46             vec\_ds\_images.emplace\_back(img, \mbox{\hyperlink{class_yolo_dectector_a10cf0983b79289070bc27eb3efc0464d}{\_vec\_net\_type}}[\mbox{\hyperlink{class_yolo_dectector_a20fd2d395a4e417af04c67c6a573d582}{\_config}}.\mbox{\hyperlink{structtensor__rt_1_1_config_a1e8c8f4fbe7480ea0252a5e14ab8e60f}{net\_type}}], \mbox{\hyperlink{class_yolo_dectector_a80ef279365b2eae845f7c05c58c1dd32}{\_p\_net}}-\/>getInputH(), \mbox{\hyperlink{class_yolo_dectector_a80ef279365b2eae845f7c05c58c1dd32}{\_p\_net}}-\/>getInputW());}
+\DoxyCodeLine{47         \}}
+\DoxyCodeLine{48         \mbox{\hyperlink{trt__utils_8cpp_aeb0f94d2500292926bc8416c9a904297}{blobFromDsImages}}(vec\_ds\_images, \mbox{\hyperlink{class_yolo_dectector_a3dccadb8cc5286f562adca079ef88ec2}{m\_blob}}, \mbox{\hyperlink{class_yolo_dectector_a80ef279365b2eae845f7c05c58c1dd32}{\_p\_net}}-\/>getInputH(),\mbox{\hyperlink{class_yolo_dectector_a80ef279365b2eae845f7c05c58c1dd32}{\_p\_net}}-\/>getInputW());}
+\DoxyCodeLine{49         \mbox{\hyperlink{class_yolo_dectector_a80ef279365b2eae845f7c05c58c1dd32}{\_p\_net}}-\/>doInference(\mbox{\hyperlink{class_yolo_dectector_a3dccadb8cc5286f562adca079ef88ec2}{m\_blob}}.data, \textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>}(vec\_ds\_images.size()));}
+\DoxyCodeLine{50         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < vec\_ds\_images.size(); ++i)}
+\DoxyCodeLine{51         \{}
+\DoxyCodeLine{52             \textcolor{keyword}{auto} curImage = vec\_ds\_images.at(i);}
+\DoxyCodeLine{53             \textcolor{keyword}{auto} binfo = \mbox{\hyperlink{class_yolo_dectector_a80ef279365b2eae845f7c05c58c1dd32}{\_p\_net}}-\/>decodeDetections(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(i), curImage.getImageHeight(), curImage.getImageWidth());}
+\DoxyCodeLine{54             \textcolor{keyword}{auto} remaining = (\mbox{\hyperlink{class_yolo_dectector_a80ef279365b2eae845f7c05c58c1dd32}{\_p\_net}}-\/>getNMSThresh() > 0) ? \mbox{\hyperlink{trt__utils_8cpp_a6a32da7bd6620d4ba5d17910fbd3fc3e}{nmsAllClasses}}(\mbox{\hyperlink{class_yolo_dectector_a80ef279365b2eae845f7c05c58c1dd32}{\_p\_net}}-\/>getNMSThresh(), binfo, \mbox{\hyperlink{class_yolo_dectector_a80ef279365b2eae845f7c05c58c1dd32}{\_p\_net}}-\/>getNumClasses(), \mbox{\hyperlink{class_yolo_dectector_a10cf0983b79289070bc27eb3efc0464d}{\_vec\_net\_type}}[\mbox{\hyperlink{class_yolo_dectector_a20fd2d395a4e417af04c67c6a573d582}{\_config}}.\mbox{\hyperlink{structtensor__rt_1_1_config_a1e8c8f4fbe7480ea0252a5e14ab8e60f}{net\_type}}]) : binfo;}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56             std::vector<tensor\_rt::Result> vec\_result;}
+\DoxyCodeLine{57             \textcolor{keywordflow}{if} (!remaining.empty())}
+\DoxyCodeLine{58             \{}
+\DoxyCodeLine{59                 vec\_result.reserve(remaining.size());}
+\DoxyCodeLine{60                 \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto} \&b : remaining)}
+\DoxyCodeLine{61                 \{}
+\DoxyCodeLine{62                     \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}} = cvRound(b.box.x1);}
+\DoxyCodeLine{63                     \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}} = cvRound(b.box.y1);}
+\DoxyCodeLine{64                     \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}} = cvRound(b.box.x2 -\/ b.box.x1);}
+\DoxyCodeLine{65                     \textcolor{keyword}{const} \textcolor{keywordtype}{int} h = cvRound(b.box.y2 -\/ b.box.y1);}
+\DoxyCodeLine{66                     vec\_result.emplace\_back(b.label, b.prob, cv::Rect(\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}, \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, h));}
+\DoxyCodeLine{67                 \}}
+\DoxyCodeLine{68             \}}
+\DoxyCodeLine{69             vec\_batch\_result.emplace\_back(vec\_result);}
+\DoxyCodeLine{70         \}}
+\DoxyCodeLine{71     \}}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73     cv::Size \mbox{\hyperlink{class_yolo_dectector_a413c881a93d5545146c0183fd9950ff1}{get\_input\_size}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{74 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{75         \textcolor{keywordflow}{return} cv::Size(\mbox{\hyperlink{class_yolo_dectector_a80ef279365b2eae845f7c05c58c1dd32}{\_p\_net}}-\/>getInputH(), \mbox{\hyperlink{class_yolo_dectector_a80ef279365b2eae845f7c05c58c1dd32}{\_p\_net}}-\/>getInputW());}
+\DoxyCodeLine{76     \}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 \textcolor{keyword}{private}:}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_yolo_dectector_a861dcac5a405563109c51b5b44c0cff0}{set\_gpu\_id}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int} \textcolor{keywordtype}{id} = 0)}
+\DoxyCodeLine{81     \{}
+\DoxyCodeLine{82         cudaError\_t status = cudaSetDevice(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{83         \textcolor{keywordflow}{if} (status != cudaSuccess)}
+\DoxyCodeLine{84         \{}
+\DoxyCodeLine{85             std::cout << \textcolor{stringliteral}{"{}gpu id :"{}} + std::to\_string(\textcolor{keywordtype}{id}) + \textcolor{stringliteral}{"{} not exist !"{}} << std::endl;}
+\DoxyCodeLine{86             assert(0);}
+\DoxyCodeLine{87         \}}
+\DoxyCodeLine{88     \}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_yolo_dectector_a84944a70861e8d1355d282c4442f9eca}{parse\_config}}()}
+\DoxyCodeLine{91     \{}
+\DoxyCodeLine{92         \mbox{\hyperlink{class_yolo_dectector_a525b1f9c9c067bd2ad10bec568840951}{\_yolo\_info}}.\mbox{\hyperlink{struct_network_info_ae1cf05bbcb5f6a3f31b4a88a04d94897}{networkType}} = \mbox{\hyperlink{class_yolo_dectector_a10cf0983b79289070bc27eb3efc0464d}{\_vec\_net\_type}}[\mbox{\hyperlink{class_yolo_dectector_a20fd2d395a4e417af04c67c6a573d582}{\_config}}.\mbox{\hyperlink{structtensor__rt_1_1_config_a1e8c8f4fbe7480ea0252a5e14ab8e60f}{net\_type}}];}
+\DoxyCodeLine{93         \mbox{\hyperlink{class_yolo_dectector_a525b1f9c9c067bd2ad10bec568840951}{\_yolo\_info}}.\mbox{\hyperlink{struct_network_info_a28c36433efc45f85ab203396ff5f750d}{configFilePath}} = \mbox{\hyperlink{class_yolo_dectector_a20fd2d395a4e417af04c67c6a573d582}{\_config}}.\mbox{\hyperlink{structtensor__rt_1_1_config_a695c6c5b8146c45eda8c9d13d81ab5c8}{file\_model\_cfg}};}
+\DoxyCodeLine{94         \mbox{\hyperlink{class_yolo_dectector_a525b1f9c9c067bd2ad10bec568840951}{\_yolo\_info}}.\mbox{\hyperlink{struct_network_info_a5c9353db5074740c03b0fa04d540fe1c}{wtsFilePath}} = \mbox{\hyperlink{class_yolo_dectector_a20fd2d395a4e417af04c67c6a573d582}{\_config}}.\mbox{\hyperlink{structtensor__rt_1_1_config_a80347587cb8f2e32c48dd6deba9d2613}{file\_model\_weights}};}
+\DoxyCodeLine{95         \mbox{\hyperlink{class_yolo_dectector_a525b1f9c9c067bd2ad10bec568840951}{\_yolo\_info}}.\mbox{\hyperlink{struct_network_info_a1c7a682b9f150bc85cc1bd713b3ccb3a}{precision}} = \mbox{\hyperlink{class_yolo_dectector_a3d7d8c7f74507a625fe4222de33f6033}{\_vec\_precision}}[\mbox{\hyperlink{class_yolo_dectector_a20fd2d395a4e417af04c67c6a573d582}{\_config}}.\mbox{\hyperlink{structtensor__rt_1_1_config_ab180f0538c4085588c105bf9dd937afe}{inference\_precison}}];}
+\DoxyCodeLine{96         \mbox{\hyperlink{class_yolo_dectector_a525b1f9c9c067bd2ad10bec568840951}{\_yolo\_info}}.\mbox{\hyperlink{struct_network_info_abd75345648d47f776b5d0d275a750af4}{deviceType}} = \textcolor{stringliteral}{"{}kGPU"{}};}
+\DoxyCodeLine{97         \textcolor{keyword}{auto} npos = \mbox{\hyperlink{class_yolo_dectector_a525b1f9c9c067bd2ad10bec568840951}{\_yolo\_info}}.\mbox{\hyperlink{struct_network_info_a5c9353db5074740c03b0fa04d540fe1c}{wtsFilePath}}.find(\textcolor{stringliteral}{"{}.weights"{}});}
+\DoxyCodeLine{98         assert(npos != std::string::npos}
+\DoxyCodeLine{99             \&\& \textcolor{stringliteral}{"{}wts file file not recognised. File needs to be of '.weights' format"{}});}
+\DoxyCodeLine{100         \mbox{\hyperlink{class_yolo_dectector_a525b1f9c9c067bd2ad10bec568840951}{\_yolo\_info}}.\mbox{\hyperlink{struct_network_info_a468e92d0cc2c6ead3ee0e2c9a4b30bea}{data\_path}} = \mbox{\hyperlink{class_yolo_dectector_a525b1f9c9c067bd2ad10bec568840951}{\_yolo\_info}}.\mbox{\hyperlink{struct_network_info_a5c9353db5074740c03b0fa04d540fe1c}{wtsFilePath}}.substr(0, npos);}
+\DoxyCodeLine{101         \mbox{\hyperlink{class_yolo_dectector_a525b1f9c9c067bd2ad10bec568840951}{\_yolo\_info}}.\mbox{\hyperlink{struct_network_info_a31b25a21cb30f5ef7f2d3dfc5e31ed05}{calibrationTablePath}} = \mbox{\hyperlink{class_yolo_dectector_a525b1f9c9c067bd2ad10bec568840951}{\_yolo\_info}}.\mbox{\hyperlink{struct_network_info_a468e92d0cc2c6ead3ee0e2c9a4b30bea}{data\_path}} + \textcolor{stringliteral}{"{}-\/calibration.table"{}};}
+\DoxyCodeLine{102         \mbox{\hyperlink{class_yolo_dectector_a525b1f9c9c067bd2ad10bec568840951}{\_yolo\_info}}.\mbox{\hyperlink{struct_network_info_aa05b436a449c9866895143d6c703cf4b}{inputBlobName}} = \textcolor{stringliteral}{"{}data"{}};}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104         \mbox{\hyperlink{class_yolo_dectector_a4bde52ee0853704f57f399b3538fac8f}{\_infer\_param}}.\mbox{\hyperlink{struct_infer_params_a855ab86b88558b9c963452709e06a3f0}{printPerfInfo}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{105         \mbox{\hyperlink{class_yolo_dectector_a4bde52ee0853704f57f399b3538fac8f}{\_infer\_param}}.\mbox{\hyperlink{struct_infer_params_a0c58236ce37c82ee7169cc66bf9ceda0}{printPredictionInfo}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{106         \mbox{\hyperlink{class_yolo_dectector_a4bde52ee0853704f57f399b3538fac8f}{\_infer\_param}}.\mbox{\hyperlink{struct_infer_params_af776d04e8407af354e4dad174de3b248}{calibImages}} = \mbox{\hyperlink{class_yolo_dectector_a20fd2d395a4e417af04c67c6a573d582}{\_config}}.\mbox{\hyperlink{structtensor__rt_1_1_config_a8d4233e4a48c88f40db4e8c144e5f360}{calibration\_image\_list\_file\_txt}};}
+\DoxyCodeLine{107         \mbox{\hyperlink{class_yolo_dectector_a4bde52ee0853704f57f399b3538fac8f}{\_infer\_param}}.\mbox{\hyperlink{struct_infer_params_a8ef7d81859fd28ce8f8cf5ad02754e40}{calibImagesPath}} = \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{108         \mbox{\hyperlink{class_yolo_dectector_a4bde52ee0853704f57f399b3538fac8f}{\_infer\_param}}.\mbox{\hyperlink{struct_infer_params_a0686eb90d92b04bacbcc5d0594f42852}{probThresh}} = \mbox{\hyperlink{class_yolo_dectector_a20fd2d395a4e417af04c67c6a573d582}{\_config}}.\mbox{\hyperlink{structtensor__rt_1_1_config_acd54fa9b8775862316f46ce16dc24b41}{detect\_thresh}};}
+\DoxyCodeLine{109         \mbox{\hyperlink{class_yolo_dectector_a4bde52ee0853704f57f399b3538fac8f}{\_infer\_param}}.\mbox{\hyperlink{struct_infer_params_a6db0a09bf4145b1414c3e17c8619394d}{nmsThresh}} = 0.5;}
+\DoxyCodeLine{110         \mbox{\hyperlink{class_yolo_dectector_a4bde52ee0853704f57f399b3538fac8f}{\_infer\_param}}.\mbox{\hyperlink{struct_infer_params_a6b6441501d6d900c8149cbf775bfd752}{batchSize}} = \mbox{\hyperlink{class_yolo_dectector_a20fd2d395a4e417af04c67c6a573d582}{\_config}}.\mbox{\hyperlink{structtensor__rt_1_1_config_a681aa0db414b1a1e8c503904d869b2e3}{batch\_size}};}
+\DoxyCodeLine{111     \}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_yolo_dectector_ad01b9928387a9cb6f8c8140221232ebe}{build\_net}}()}
+\DoxyCodeLine{114     \{}
+\DoxyCodeLine{115         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_yolo_dectector_a20fd2d395a4e417af04c67c6a573d582}{\_config}}.\mbox{\hyperlink{structtensor__rt_1_1_config_a1e8c8f4fbe7480ea0252a5e14ab8e60f}{net\_type}} == \mbox{\hyperlink{namespacetensor__rt_ab32fac74a8601d1d087b4a668903ca09affe69ec769c2bcc37e62f6f9829d504a}{tensor\_rt::YOLOV3}})}
+\DoxyCodeLine{116         \{}
+\DoxyCodeLine{117             \mbox{\hyperlink{class_yolo_dectector_a80ef279365b2eae845f7c05c58c1dd32}{\_p\_net}} = std::unique\_ptr<Yolo>\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_yolo_v3}{YoloV3}}(\mbox{\hyperlink{class_yolo_dectector_a525b1f9c9c067bd2ad10bec568840951}{\_yolo\_info}}, \mbox{\hyperlink{class_yolo_dectector_a4bde52ee0853704f57f399b3538fac8f}{\_infer\_param}}) \};}
+\DoxyCodeLine{118         \}}
+\DoxyCodeLine{119         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_yolo_dectector_a20fd2d395a4e417af04c67c6a573d582}{\_config}}.\mbox{\hyperlink{structtensor__rt_1_1_config_a1e8c8f4fbe7480ea0252a5e14ab8e60f}{net\_type}} == \mbox{\hyperlink{namespacetensor__rt_ab32fac74a8601d1d087b4a668903ca09a5a8ce5583fa3444d685a85589f1c4ce6}{tensor\_rt::YOLOV4}} || \mbox{\hyperlink{class_yolo_dectector_a20fd2d395a4e417af04c67c6a573d582}{\_config}}.\mbox{\hyperlink{structtensor__rt_1_1_config_a1e8c8f4fbe7480ea0252a5e14ab8e60f}{net\_type}} == \mbox{\hyperlink{namespacetensor__rt_ab32fac74a8601d1d087b4a668903ca09acce8e28a5d590955a382e6cf89771d5f}{tensor\_rt::YOLOV4\_TINY}})}
+\DoxyCodeLine{120         \{}
+\DoxyCodeLine{121             \mbox{\hyperlink{class_yolo_dectector_a80ef279365b2eae845f7c05c58c1dd32}{\_p\_net}} = std::unique\_ptr<Yolo>\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_yolo_v4}{YoloV4}}(\mbox{\hyperlink{class_yolo_dectector_a525b1f9c9c067bd2ad10bec568840951}{\_yolo\_info}},\mbox{\hyperlink{class_yolo_dectector_a4bde52ee0853704f57f399b3538fac8f}{\_infer\_param}}) \};}
+\DoxyCodeLine{122         \}}
+\DoxyCodeLine{123         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_yolo_dectector_a20fd2d395a4e417af04c67c6a573d582}{\_config}}.\mbox{\hyperlink{structtensor__rt_1_1_config_a1e8c8f4fbe7480ea0252a5e14ab8e60f}{net\_type}} == \mbox{\hyperlink{namespacetensor__rt_ab32fac74a8601d1d087b4a668903ca09a838f252367ec9d3ab28b54e6661e8389}{tensor\_rt::YOLOV5}})}
+\DoxyCodeLine{124         \{}
+\DoxyCodeLine{125             \mbox{\hyperlink{class_yolo_dectector_a80ef279365b2eae845f7c05c58c1dd32}{\_p\_net}} = std::unique\_ptr<Yolo>\{ \textcolor{keyword}{new} \mbox{\hyperlink{class_yolo_v5}{YoloV5}}(\mbox{\hyperlink{class_yolo_dectector_a525b1f9c9c067bd2ad10bec568840951}{\_yolo\_info}},\mbox{\hyperlink{class_yolo_dectector_a4bde52ee0853704f57f399b3538fac8f}{\_infer\_param}}) \};}
+\DoxyCodeLine{126         \}}
+\DoxyCodeLine{127         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{128         \{}
+\DoxyCodeLine{129             assert(\textcolor{keyword}{false} \&\& \textcolor{stringliteral}{"{}Unrecognised network\_type."{}});}
+\DoxyCodeLine{130         \}}
+\DoxyCodeLine{131     \}}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133 \textcolor{keyword}{private}:}
+\DoxyCodeLine{134     \mbox{\hyperlink{structtensor__rt_1_1_config}{tensor\_rt::Config}} \mbox{\hyperlink{class_yolo_dectector_a20fd2d395a4e417af04c67c6a573d582}{\_config}};}
+\DoxyCodeLine{135     \mbox{\hyperlink{struct_network_info}{NetworkInfo}} \mbox{\hyperlink{class_yolo_dectector_a525b1f9c9c067bd2ad10bec568840951}{\_yolo\_info}};}
+\DoxyCodeLine{136     \mbox{\hyperlink{struct_infer_params}{InferParams}} \mbox{\hyperlink{class_yolo_dectector_a4bde52ee0853704f57f399b3538fac8f}{\_infer\_param}};}
+\DoxyCodeLine{137     std::vector<std::string> \mbox{\hyperlink{class_yolo_dectector_a10cf0983b79289070bc27eb3efc0464d}{\_vec\_net\_type}}\{ \textcolor{stringliteral}{"{}yolov3"{}}, \textcolor{stringliteral}{"{}yolov4"{}}, \textcolor{stringliteral}{"{}yolov4-\/tiny"{}}, \textcolor{stringliteral}{"{}yolov5"{}} \};}
+\DoxyCodeLine{138     std::vector<std::string> \mbox{\hyperlink{class_yolo_dectector_a3d7d8c7f74507a625fe4222de33f6033}{\_vec\_precision}}\{ \textcolor{stringliteral}{"{}kINT8"{}},\textcolor{stringliteral}{"{}kHALF"{}},\textcolor{stringliteral}{"{}kFLOAT"{}} \};}
+\DoxyCodeLine{139     std::unique\_ptr<Yolo> \mbox{\hyperlink{class_yolo_dectector_a80ef279365b2eae845f7c05c58c1dd32}{\_p\_net}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{140     \mbox{\hyperlink{class_timer}{Timer}} \mbox{\hyperlink{class_yolo_dectector_a6c29da2166dbadc3fa456ea80ae1f80d}{\_m\_timer}};}
+\DoxyCodeLine{141     cv::Mat \mbox{\hyperlink{class_yolo_dectector_a3dccadb8cc5286f562adca079ef88ec2}{m\_blob}};}
+\DoxyCodeLine{142 \};}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

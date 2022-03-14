@@ -1,0 +1,70 @@
+\hypertarget{components_8h_source}{}\doxysection{components.\+h}
+\label{components_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/components.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/components.h}}
+\mbox{\hyperlink{components_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* This software is distributed under the GNU Lesser General Public License */}}
+\DoxyCodeLine{2 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{//   components.h}}
+\DoxyCodeLine{5 \textcolor{comment}{//}}
+\DoxyCodeLine{6 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{// \$Id: components.h,v 1.5 2003/04/03 11:44:42 raitner Exp \$}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#ifndef GTL\_COMPONENTS\_H}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define GTL\_COMPONENTS\_H}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{_g_t_l_8h}{GTL/GTL.h}}>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{dfs_8h}{GTL/dfs.h}}>}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <list>}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \mbox{\hyperlink{_g_t_l_8h_a2d9f24096ac60918452dd51f32b64aa9}{\_\_GTL\_BEGIN\_NAMESPACE}}}
+\DoxyCodeLine{21 \textcolor{keyword}{class }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{classcomponents}{components}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classdfs}{dfs}} }
+\DoxyCodeLine{22 \{}
+\DoxyCodeLine{23 \textcolor{keyword}{public}:}
+\DoxyCodeLine{29     \mbox{\hyperlink{classcomponents}{components}} ();}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{36     \textcolor{keyword}{virtual} \mbox{\hyperlink{classcomponents_ae64b0e7afb4ef6fea15e660cfd07ef5b}{\string~components}} () = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{50     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{classdfs_a70dfb7a0631d4561c1abc7ed6149bae8}{check}} (GTL::graph\& G);}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classdfs_affaffda8be8418d6dbf396c5b1d6b81a}{reset}} ();}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{57     \textcolor{keyword}{typedef} std::list<std::pair<nodes\_t, edges\_t> >\mbox{\hyperlink{classiterator}{::iterator}} \mbox{\hyperlink{classcomponents_a91aec387cef801e7ca898738c0f877e3}{component\_iterator}};}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{71     \mbox{\hyperlink{classcomponents_a91aec387cef801e7ca898738c0f877e3}{component\_iterator}} \mbox{\hyperlink{classcomponents_a8a645639044375cdaefabffda3ae70e0}{components\_begin}} ()}
+\DoxyCodeLine{72     \{ \textcolor{keywordflow}{return} comp.begin(); \}}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74 }
+\DoxyCodeLine{81     \mbox{\hyperlink{classcomponents_a91aec387cef801e7ca898738c0f877e3}{component\_iterator}} \mbox{\hyperlink{classcomponents_a8537c6e4c6a29a4ae05a937b5fda1fb9}{components\_end}} ()}
+\DoxyCodeLine{82     \{ \textcolor{keywordflow}{return} comp.end(); \}}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{89     \textcolor{keywordtype}{int} \mbox{\hyperlink{classcomponents_ad3206d2d050ed7719f7140ea3bee81f8}{number\_of\_components}} ()\textcolor{keyword}{ const}}
+\DoxyCodeLine{90 \textcolor{keyword}{    }\{\textcolor{keywordflow}{return} num\_of\_components; \}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{93     \textcolor{comment}{//   Handler used to extend dfs to biconnectivity}}
+\DoxyCodeLine{94     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{98 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classdfs_a878303546558916a427d0a3b8b95dc72}{before\_recursive\_call\_handler}} (GTL::graph\&, GTL::edge\&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\&);}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{103     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classdfs_a4f4f2d856b8a61cbe8a42e9ff223d945}{old\_adj\_node\_handler}} (GTL::graph\&, GTL::edge\&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\&);}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{108     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classdfs_a8e15e709d735d0002f3d7c6044b4e302}{new\_start\_handler}} (GTL::graph\&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\&);    }
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{116     \textcolor{keywordtype}{int} \mbox{\hyperlink{classcomponents_ad5a54d7313e23f8c6a2c6347e6ee70a0}{num\_of\_components}};}
+\DoxyCodeLine{120     std::list<std::pair<nodes\_t, edges\_t> > \mbox{\hyperlink{classcomponents_a99483a9e5f031e6e6e2e5b0c47c2979e}{comp}};}
+\DoxyCodeLine{124     \mbox{\hyperlink{classcomponents_a91aec387cef801e7ca898738c0f877e3}{component\_iterator}} \mbox{\hyperlink{classcomponents_ae88ffb062b1ea4931ecfaa53e871825f}{li}};}
+\DoxyCodeLine{125 \};}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127 \mbox{\hyperlink{_g_t_l_8h_a46af2b3ec266ac2f9d36fa7222358017}{\_\_GTL\_END\_NAMESPACE}}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GTL\_BICONNECTIVITY\_H}}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{132 \textcolor{comment}{//   end of file}}
+\DoxyCodeLine{133 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+
+\end{DoxyCode}

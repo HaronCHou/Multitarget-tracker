@@ -1,0 +1,295 @@
+\hypertarget{classobject}{}\doxysection{object类 参考}
+\label{classobject}\index{object@{object}}
+
+
+{\ttfamily \#include $<$pytypes.\+h$>$}
+
+
+
+类 object 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classobject__inherit__graph}
+\end{center}
+\end{figure}
+
+
+object 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{classobject__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structobject_1_1borrowed__t}{borrowed\+\_\+t}}
+\item 
+struct \mbox{\hyperlink{structobject_1_1stolen__t}{stolen\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classobject_a9ac91a751171ebf7e3af73720238818e}{object}} ()=default
+\item 
+\mbox{\hyperlink{classobject_af2b49798a85dc52371995578108d84e1}{PYBIND11\+\_\+\+DEPRECATED}} (\char`\"{}Use \mbox{\hyperlink{classobject_ac1ea1a4cbcf197d7c8096037633720d7}{reinterpret\+\_\+borrow}}$<$\mbox{\hyperlink{classobject}{object}}$>$() or \mbox{\hyperlink{classobject_ae1de2ab5a755c10582ac1e46071de5c5}{reinterpret\+\_\+steal}}$<$\mbox{\hyperlink{classobject}{object}}$>$()\char`\"{}) object(\mbox{\hyperlink{classhandle}{handle}} h
+\item 
+\mbox{\hyperlink{classobject_a6537d8aee1fc94555af84e5bb9ecad21}{object}} (const \mbox{\hyperlink{classobject}{object}} \&o)
+\begin{DoxyCompactList}\small\item\em Copy constructor; always increases the reference count \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classobject_a3fc437bccb86b745433164bc3a04a2a4}{object}} (\mbox{\hyperlink{classobject}{object}} \&\&other) noexcept
+\begin{DoxyCompactList}\small\item\em Move constructor; steals the object from {\ttfamily other} and preserves its reference count \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classobject_aecd824abdc96ff340acf4ea25a34d76d}{$\sim$object}} ()
+\begin{DoxyCompactList}\small\item\em Destructor; automatically calls {\ttfamily \mbox{\hyperlink{classhandle_a4bd9642229b0b331172c37b02aa73eda}{handle\+::dec\+\_\+ref()}}} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{classobject_a4ce66b1d44b37ae6b28e80228b075aae}{release}} ()
+\item 
+\mbox{\hyperlink{classobject}{object}} \& \mbox{\hyperlink{classobject_a600c71c7485ceee065a5b5e0b09ea7c6}{operator=}} (const \mbox{\hyperlink{classobject}{object}} \&other)
+\item 
+\mbox{\hyperlink{classobject}{object}} \& \mbox{\hyperlink{classobject_a8c46c1e3db8b47af31e158e92ef7ec02}{operator=}} (\mbox{\hyperlink{classobject}{object}} \&\&other) noexcept
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{classobject_acf93eb705d6539ef22e2c4a8eebc4c68}{cast}} () const \&
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{classobject_a213e60c515e4e3273967df63e06db4e3}{cast}} () \&\&
+\item 
+\mbox{\hyperlink{classobject_ad2db8259e6e585a4b61b9a9a9627b7f0}{object}} (\mbox{\hyperlink{classhandle}{handle}} h, \mbox{\hyperlink{structobject_1_1borrowed__t}{borrowed\+\_\+t}})
+\item 
+\mbox{\hyperlink{classobject_a8202a0f0f7fe12a68d8d5fb18e766b07}{object}} (\mbox{\hyperlink{classhandle}{handle}} h, \mbox{\hyperlink{structobject_1_1stolen__t}{stolen\+\_\+t}})
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{classobject_acf93eb705d6539ef22e2c4a8eebc4c68}{cast}} () const \&
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{classobject_a213e60c515e4e3273967df63e06db4e3}{cast}} () \&\&
+\item 
+template$<$$>$ void \mbox{\hyperlink{classobject_a4f5464fb468d2c0603780a7e3f4a2e80}{cast}} () const \&
+\item 
+template$<$$>$ void \mbox{\hyperlink{classobject_a7646c5ad0fba1cd9c20329807678627c}{cast}} () \&\&
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 属性}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classobject_a4ebda2f2d08435f4d70d822908d7e431}{is\+\_\+borrowed}}\+: \mbox{\hyperlink{classhandle}{handle}}(h) \{ if (is\+\_\+borrowed) \mbox{\hyperlink{classhandle_a1a13c72238d8df4d42c1656e446fbfcb}{inc\+\_\+ref}}()
+\end{DoxyCompactItemize}
+\doxysubsection*{友元}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{classobject_ac1ea1a4cbcf197d7c8096037633720d7}{reinterpret\+\_\+borrow}} (\mbox{\hyperlink{classhandle}{handle}})
+\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{classobject_ae1de2ab5a755c10582ac1e46071de5c5}{reinterpret\+\_\+steal}} (\mbox{\hyperlink{classhandle}{handle}})
+\end{DoxyCompactItemize}
+\doxysubsection*{额外继承的成员函数}
+
+
+\doxysubsection{详细描述}
+\textbackslash{}rst Holds a reference to a Python object (with reference counting)
+
+Like {\ttfamily handle}, the {\ttfamily object} class is a thin wrapper around an arbitrary Python object (i.\+e. a {\ttfamily Py\+Object $\ast$} in Python\textquotesingle{}s C API). In contrast to {\ttfamily handle}, it optionally increases the object\textquotesingle{}s reference count upon construction, and it always$\ast$ decreases the reference count when the {\ttfamily object} instance goes out of scope and is destructed. When using {\ttfamily object} instances consistently, it is much easier to get reference counting right at the first attempt. \textbackslash{}endrst 
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classobject_a9ac91a751171ebf7e3af73720238818e}\label{classobject_a9ac91a751171ebf7e3af73720238818e}} 
+\index{object@{object}!object@{object}}
+\index{object@{object}!object@{object}}
+\doxysubsubsection{\texorpdfstring{object()}{object()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily object\+::object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\Hypertarget{classobject_a6537d8aee1fc94555af84e5bb9ecad21}\label{classobject_a6537d8aee1fc94555af84e5bb9ecad21}} 
+\index{object@{object}!object@{object}}
+\index{object@{object}!object@{object}}
+\doxysubsubsection{\texorpdfstring{object()}{object()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily object\+::object (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classobject}{object}} \&}]{o }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy constructor; always increases the reference count 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=271pt]{classobject_a6537d8aee1fc94555af84e5bb9ecad21_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classobject_a3fc437bccb86b745433164bc3a04a2a4}\label{classobject_a3fc437bccb86b745433164bc3a04a2a4}} 
+\index{object@{object}!object@{object}}
+\index{object@{object}!object@{object}}
+\doxysubsubsection{\texorpdfstring{object()}{object()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily object\+::object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classobject}{object}} \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Move constructor; steals the object from {\ttfamily other} and preserves its reference count 
+
+\mbox{\Hypertarget{classobject_aecd824abdc96ff340acf4ea25a34d76d}\label{classobject_aecd824abdc96ff340acf4ea25a34d76d}} 
+\index{object@{object}!````~object@{$\sim$object}}
+\index{````~object@{$\sim$object}!object@{object}}
+\doxysubsubsection{\texorpdfstring{$\sim$object()}{~object()}}
+{\footnotesize\ttfamily object\+::$\sim$object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Destructor; automatically calls {\ttfamily \mbox{\hyperlink{classhandle_a4bd9642229b0b331172c37b02aa73eda}{handle\+::dec\+\_\+ref()}}} 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=280pt]{classobject_aecd824abdc96ff340acf4ea25a34d76d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classobject_ad2db8259e6e585a4b61b9a9a9627b7f0}\label{classobject_ad2db8259e6e585a4b61b9a9a9627b7f0}} 
+\index{object@{object}!object@{object}}
+\index{object@{object}!object@{object}}
+\doxysubsubsection{\texorpdfstring{object()}{object()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily object\+::object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhandle}{handle}}}]{h,  }\item[{\mbox{\hyperlink{structobject_1_1borrowed__t}{borrowed\+\_\+t}}}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=271pt]{classobject_ad2db8259e6e585a4b61b9a9a9627b7f0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classobject_a8202a0f0f7fe12a68d8d5fb18e766b07}\label{classobject_a8202a0f0f7fe12a68d8d5fb18e766b07}} 
+\index{object@{object}!object@{object}}
+\index{object@{object}!object@{object}}
+\doxysubsubsection{\texorpdfstring{object()}{object()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily object\+::object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhandle}{handle}}}]{h,  }\item[{\mbox{\hyperlink{structobject_1_1stolen__t}{stolen\+\_\+t}}}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classobject_a213e60c515e4e3273967df63e06db4e3}\label{classobject_a213e60c515e4e3273967df63e06db4e3}} 
+\index{object@{object}!cast@{cast}}
+\index{cast@{cast}!object@{object}}
+\doxysubsubsection{\texorpdfstring{cast()}{cast()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T object\+::cast (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) \&\&}
+
+\mbox{\Hypertarget{classobject_a7646c5ad0fba1cd9c20329807678627c}\label{classobject_a7646c5ad0fba1cd9c20329807678627c}} 
+\index{object@{object}!cast@{cast}}
+\index{cast@{cast}!object@{object}}
+\doxysubsubsection{\texorpdfstring{cast()}{cast()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily template$<$$>$ \\
+void object\+::cast (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) \&\&\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classobject_a213e60c515e4e3273967df63e06db4e3}\label{classobject_a213e60c515e4e3273967df63e06db4e3}} 
+\index{object@{object}!cast@{cast}}
+\index{cast@{cast}!object@{object}}
+\doxysubsubsection{\texorpdfstring{cast()}{cast()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T object\+::cast (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) \&\&}
+
+\mbox{\Hypertarget{classobject_acf93eb705d6539ef22e2c4a8eebc4c68}\label{classobject_acf93eb705d6539ef22e2c4a8eebc4c68}} 
+\index{object@{object}!cast@{cast}}
+\index{cast@{cast}!object@{object}}
+\doxysubsubsection{\texorpdfstring{cast()}{cast()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T object\+::cast (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const \&}
+
+\mbox{\Hypertarget{classobject_a4f5464fb468d2c0603780a7e3f4a2e80}\label{classobject_a4f5464fb468d2c0603780a7e3f4a2e80}} 
+\index{object@{object}!cast@{cast}}
+\index{cast@{cast}!object@{object}}
+\doxysubsubsection{\texorpdfstring{cast()}{cast()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily template$<$$>$ \\
+void object\+::cast (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const \&\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classobject_acf93eb705d6539ef22e2c4a8eebc4c68}\label{classobject_acf93eb705d6539ef22e2c4a8eebc4c68}} 
+\index{object@{object}!cast@{cast}}
+\index{cast@{cast}!object@{object}}
+\doxysubsubsection{\texorpdfstring{cast()}{cast()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T object\+::cast (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const \&}
+
+\mbox{\Hypertarget{classobject_a600c71c7485ceee065a5b5e0b09ea7c6}\label{classobject_a600c71c7485ceee065a5b5e0b09ea7c6}} 
+\index{object@{object}!operator=@{operator=}}
+\index{operator=@{operator=}!object@{object}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classobject}{object}} \& object\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classobject}{object}} \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=289pt]{classobject_a600c71c7485ceee065a5b5e0b09ea7c6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classobject_a8c46c1e3db8b47af31e158e92ef7ec02}\label{classobject_a8c46c1e3db8b47af31e158e92ef7ec02}} 
+\index{object@{object}!operator=@{operator=}}
+\index{operator=@{operator=}!object@{object}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classobject}{object}} \& object\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classobject}{object}} \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=289pt]{classobject_a8c46c1e3db8b47af31e158e92ef7ec02_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classobject_af2b49798a85dc52371995578108d84e1}\label{classobject_af2b49798a85dc52371995578108d84e1}} 
+\index{object@{object}!PYBIND11\_DEPRECATED@{PYBIND11\_DEPRECATED}}
+\index{PYBIND11\_DEPRECATED@{PYBIND11\_DEPRECATED}!object@{object}}
+\doxysubsubsection{\texorpdfstring{PYBIND11\_DEPRECATED()}{PYBIND11\_DEPRECATED()}}
+{\footnotesize\ttfamily object\+::\+PYBIND11\+\_\+\+DEPRECATED (\begin{DoxyParamCaption}\item[{\char`\"{}Use \mbox{\hyperlink{classobject_ac1ea1a4cbcf197d7c8096037633720d7}{reinterpret\+\_\+borrow}}$<$\mbox{\hyperlink{classobject}{object}}$>$() or \mbox{\hyperlink{classobject_ae1de2ab5a755c10582ac1e46071de5c5}{reinterpret\+\_\+steal}}$<$\mbox{\hyperlink{classobject}{object}}$>$()\char`\"{}}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classobject_a4ce66b1d44b37ae6b28e80228b075aae}\label{classobject_a4ce66b1d44b37ae6b28e80228b075aae}} 
+\index{object@{object}!release@{release}}
+\index{release@{release}!object@{object}}
+\doxysubsubsection{\texorpdfstring{release()}{release()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classhandle}{handle}} object\+::release (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\textbackslash{}rst Resets the internal pointer to {\ttfamily nullptr} without without decreasing the object\textquotesingle{}s reference count. The function returns a raw handle to the original Python object. \textbackslash{}endrst 函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=276pt]{classobject_a4ce66b1d44b37ae6b28e80228b075aae_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{友元及相关函数文档}
+\mbox{\Hypertarget{classobject_ac1ea1a4cbcf197d7c8096037633720d7}\label{classobject_ac1ea1a4cbcf197d7c8096037633720d7}} 
+\index{object@{object}!reinterpret\_borrow@{reinterpret\_borrow}}
+\index{reinterpret\_borrow@{reinterpret\_borrow}!object@{object}}
+\doxysubsubsection{\texorpdfstring{reinterpret\_borrow}{reinterpret\_borrow}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T reinterpret\+\_\+borrow (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhandle}{handle}}}]{h }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+\textbackslash{}rst Declare that a {\ttfamily handle} or {\ttfamily Py\+Object $\ast$} is a certain type and borrow the reference. The target type {\ttfamily T} must be {\ttfamily object} or one of its derived classes. The function doesn\textquotesingle{}t do any conversions or checks. It\textquotesingle{}s up to the user to make sure that the target type is correct.
+
+.. code-\/block\+:: cpp \begin{DoxyVerb}PyObject *p = PyList_GetItem(obj, index);
+py::object o = reinterpret_borrow<py::object>(p);
+\end{DoxyVerb}
+ or py\+::tuple t = reinterpret\+\_\+borrow$<$py\+::tuple$>$(p); // \texorpdfstring{$<$}{<}-- {\ttfamily p} must be already be a {\ttfamily tuple} \textbackslash{}endrst \mbox{\Hypertarget{classobject_ae1de2ab5a755c10582ac1e46071de5c5}\label{classobject_ae1de2ab5a755c10582ac1e46071de5c5}} 
+\index{object@{object}!reinterpret\_steal@{reinterpret\_steal}}
+\index{reinterpret\_steal@{reinterpret\_steal}!object@{object}}
+\doxysubsubsection{\texorpdfstring{reinterpret\_steal}{reinterpret\_steal}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T reinterpret\+\_\+steal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhandle}{handle}}}]{h }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+\textbackslash{}rst Like {\ttfamily reinterpret\+\_\+borrow}, but steals the reference.
+
+.. code-\/block\+:: cpp
+
+Py\+Object $\ast$p = Py\+Object\+\_\+\+Str(obj); py\+::str s = reinterpret\+\_\+steal$<$py\+::str$>$(p); // \texorpdfstring{$<$}{<}-- {\ttfamily p} must be already be a {\ttfamily str} \textbackslash{}endrst 
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classobject_a4ebda2f2d08435f4d70d822908d7e431}\label{classobject_a4ebda2f2d08435f4d70d822908d7e431}} 
+\index{object@{object}!is\_borrowed@{is\_borrowed}}
+\index{is\_borrowed@{is\_borrowed}!object@{object}}
+\doxysubsubsection{\texorpdfstring{is\_borrowed}{is\_borrowed}}
+{\footnotesize\ttfamily bool object\+::is\+\_\+borrowed}
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/\mbox{\hyperlink{pytypes_8h}{pytypes.\+h}}\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/\mbox{\hyperlink{cast_8h}{cast.\+h}}\end{DoxyCompactItemize}

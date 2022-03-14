@@ -1,0 +1,195 @@
+\hypertarget{nms_8h_source}{}\doxysection{nms.\+h}
+\label{nms_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/common/nms.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/common/nms.h}}
+\mbox{\hyperlink{nms_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <opencv2/opencv.hpp>}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <assert.h>}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{13 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{nms_8h_a172e28c9d820b35a79650a1337c6f80c}{nms}}(\textcolor{keyword}{const} std::vector<cv::Rect>\& srcRects,}
+\DoxyCodeLine{14                 std::vector<cv::Rect>\& resRects,}
+\DoxyCodeLine{15                 \textcolor{keywordtype}{float} thresh,}
+\DoxyCodeLine{16                 \textcolor{keywordtype}{int} neighbors = 0)}
+\DoxyCodeLine{17 \{}
+\DoxyCodeLine{18     resRects.clear();}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20     \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} size = srcRects.size();}
+\DoxyCodeLine{21     \textcolor{keywordflow}{if} (!size)}
+\DoxyCodeLine{22         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24     \textcolor{comment}{// Sort the bounding boxes by the bottom -\/ right y -\/ coordinate of the bounding box}}
+\DoxyCodeLine{25     std::multimap<int, size\_t> idxs;}
+\DoxyCodeLine{26     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < size; ++i)}
+\DoxyCodeLine{27     \{}
+\DoxyCodeLine{28         idxs.emplace(srcRects[i].br().\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}, i);}
+\DoxyCodeLine{29     \}}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31     \textcolor{comment}{// keep looping while some indexes still remain in the indexes list}}
+\DoxyCodeLine{32     \textcolor{keywordflow}{while} (idxs.size() > 0)}
+\DoxyCodeLine{33     \{}
+\DoxyCodeLine{34         \textcolor{comment}{// grab the last rectangle}}
+\DoxyCodeLine{35         \textcolor{keyword}{auto} lastElem = -\/-\/\mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{std::end}}(idxs);}
+\DoxyCodeLine{36         \textcolor{keyword}{const} cv::Rect\& rect1 = srcRects[lastElem-\/>second];}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38         \textcolor{keywordtype}{int} neigborsCount = 0;}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40         idxs.erase(lastElem);}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} pos = std::begin(idxs); pos != \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{std::end}}(idxs); )}
+\DoxyCodeLine{43         \{}
+\DoxyCodeLine{44             \textcolor{comment}{// grab the current rectangle}}
+\DoxyCodeLine{45             \textcolor{keyword}{const} cv::Rect\& rect2 = srcRects[pos-\/>second];}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47             \textcolor{keywordtype}{float} intArea = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}((rect1 \& rect2).area());}
+\DoxyCodeLine{48             \textcolor{keywordtype}{float} unionArea = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(rect1.area() + rect2.area() -\/ intArea);}
+\DoxyCodeLine{49             \textcolor{keywordtype}{float} \mbox{\hyperlink{box_8c_a49bbaf2c74dad0f7bbca22c9e41286ca}{overlap}} = intArea / unionArea;}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51             \textcolor{comment}{// if there is sufficient overlap, suppress the current bounding box}}
+\DoxyCodeLine{52             \textcolor{keywordflow}{if} (\mbox{\hyperlink{box_8c_a49bbaf2c74dad0f7bbca22c9e41286ca}{overlap}} > thresh)}
+\DoxyCodeLine{53             \{}
+\DoxyCodeLine{54                 pos = idxs.erase(pos);}
+\DoxyCodeLine{55                 ++neigborsCount;}
+\DoxyCodeLine{56             \}}
+\DoxyCodeLine{57             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{58             \{}
+\DoxyCodeLine{59                 ++pos;}
+\DoxyCodeLine{60             \}}
+\DoxyCodeLine{61         \}}
+\DoxyCodeLine{62         \textcolor{keywordflow}{if} (neigborsCount >= neighbors)}
+\DoxyCodeLine{63             resRects.push\_back(rect1);}
+\DoxyCodeLine{64     \}}
+\DoxyCodeLine{65 \}}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{76 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{nms_8h_a1b57c38833cf312a46f184cd1844295d}{nms2}}(\textcolor{keyword}{const} std::vector<cv::Rect>\& srcRects,}
+\DoxyCodeLine{77                  \textcolor{keyword}{const} std::vector<float>\& scores,}
+\DoxyCodeLine{78                  std::vector<cv::Rect>\& resRects,}
+\DoxyCodeLine{79                  \textcolor{keywordtype}{float} thresh,}
+\DoxyCodeLine{80                  \textcolor{keywordtype}{int} neighbors = 0,}
+\DoxyCodeLine{81                  \textcolor{keywordtype}{float} minScoresSum = 0.f)}
+\DoxyCodeLine{82 \{}
+\DoxyCodeLine{83     resRects.clear();}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85     \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} size = srcRects.size();}
+\DoxyCodeLine{86     \textcolor{keywordflow}{if} (!size)}
+\DoxyCodeLine{87         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89     assert(srcRects.size() == scores.size());}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91     \textcolor{comment}{// Sort the bounding boxes by the detection score}}
+\DoxyCodeLine{92     std::multimap<float, size\_t> idxs;}
+\DoxyCodeLine{93     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < size; ++i)}
+\DoxyCodeLine{94     \{}
+\DoxyCodeLine{95         idxs.emplace(scores[i], i);}
+\DoxyCodeLine{96     \}}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98     \textcolor{comment}{// keep looping while some indexes still remain in the indexes list}}
+\DoxyCodeLine{99     \textcolor{keywordflow}{while} (idxs.size() > 0)}
+\DoxyCodeLine{100     \{}
+\DoxyCodeLine{101         \textcolor{comment}{// grab the last rectangle}}
+\DoxyCodeLine{102         \textcolor{keyword}{auto} lastElem = -\/-\/\mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{std::end}}(idxs);}
+\DoxyCodeLine{103         \textcolor{keyword}{const} cv::Rect\& rect1 = srcRects[lastElem-\/>second];}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105         \textcolor{keywordtype}{int} neigborsCount = 0;}
+\DoxyCodeLine{106         \textcolor{keywordtype}{float} scoresSum = lastElem-\/>first;}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108         idxs.erase(lastElem);}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} pos = std::begin(idxs); pos != \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{std::end}}(idxs); )}
+\DoxyCodeLine{111         \{}
+\DoxyCodeLine{112             \textcolor{comment}{// grab the current rectangle}}
+\DoxyCodeLine{113             \textcolor{keyword}{const} cv::Rect\& rect2 = srcRects[pos-\/>second];}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115             \textcolor{keywordtype}{float} intArea = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}((rect1 \& rect2).area());}
+\DoxyCodeLine{116             \textcolor{keywordtype}{float} unionArea = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(rect1.area() + rect2.area() -\/ intArea);}
+\DoxyCodeLine{117             \textcolor{keywordtype}{float} \mbox{\hyperlink{box_8c_a49bbaf2c74dad0f7bbca22c9e41286ca}{overlap}} = intArea / unionArea;}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119             \textcolor{comment}{// if there is sufficient overlap, suppress the current bounding box}}
+\DoxyCodeLine{120             \textcolor{keywordflow}{if} (\mbox{\hyperlink{box_8c_a49bbaf2c74dad0f7bbca22c9e41286ca}{overlap}} > thresh)}
+\DoxyCodeLine{121             \{}
+\DoxyCodeLine{122                 scoresSum += pos-\/>first;}
+\DoxyCodeLine{123                 pos = idxs.erase(pos);}
+\DoxyCodeLine{124                 ++neigborsCount;}
+\DoxyCodeLine{125             \}}
+\DoxyCodeLine{126             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{127             \{}
+\DoxyCodeLine{128                 ++pos;}
+\DoxyCodeLine{129             \}}
+\DoxyCodeLine{130         \}}
+\DoxyCodeLine{131         \textcolor{keywordflow}{if} (neigborsCount >= neighbors \&\& scoresSum >= minScoresSum)}
+\DoxyCodeLine{132             resRects.push\_back(rect1);}
+\DoxyCodeLine{133     \}}
+\DoxyCodeLine{134 \}}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{136 }
+\DoxyCodeLine{145 \textcolor{keyword}{template}<\textcolor{keyword}{typename} OBJ, \textcolor{keyword}{typename} GET\_RECT\_FUNC, \textcolor{keyword}{typename} GET\_SCORE\_FUNC, \textcolor{keyword}{typename} GET\_TYPE\_FUNC, \textcolor{keyword}{typename} T>}
+\DoxyCodeLine{146 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{nms_8h_a6af379e62c775d51c88a0679588c4fd9}{nms3}}(\textcolor{keyword}{const} std::vector<OBJ>\& srcRects,}
+\DoxyCodeLine{147                  std::vector<OBJ>\& resRects,}
+\DoxyCodeLine{148                  T thresh,}
+\DoxyCodeLine{149                  GET\_RECT\_FUNC GetRect,}
+\DoxyCodeLine{150                  GET\_SCORE\_FUNC GetScore,}
+\DoxyCodeLine{151                  GET\_TYPE\_FUNC GetType,}
+\DoxyCodeLine{152                  \textcolor{keywordtype}{int} neighbors = 0,}
+\DoxyCodeLine{153                  T minScoresSum = 0)}
+\DoxyCodeLine{154 \{}
+\DoxyCodeLine{155     resRects.clear();}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157     \textcolor{keyword}{const} \textcolor{keywordtype}{size\_t} size = srcRects.size();}
+\DoxyCodeLine{158     \textcolor{keywordflow}{if} (!size)}
+\DoxyCodeLine{159         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161     \textcolor{comment}{// Sort the bounding boxes by the detection score}}
+\DoxyCodeLine{162     std::multimap<T, size\_t> idxs;}
+\DoxyCodeLine{163     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < size; ++i)}
+\DoxyCodeLine{164     \{}
+\DoxyCodeLine{165         idxs.emplace(GetScore(srcRects[i]), i);}
+\DoxyCodeLine{166     \}}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{168     \textcolor{comment}{// keep looping while some indexes still remain in the indexes list}}
+\DoxyCodeLine{169     \textcolor{keywordflow}{while} (idxs.size() > 0)}
+\DoxyCodeLine{170     \{}
+\DoxyCodeLine{171         \textcolor{comment}{// grab the last rectangle}}
+\DoxyCodeLine{172         \textcolor{keyword}{auto} lastElem = -\/-\/\mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{std::end}}(idxs);}
+\DoxyCodeLine{173         \textcolor{keywordtype}{size\_t} lastPos = lastElem-\/>second;}
+\DoxyCodeLine{174         \textcolor{keyword}{const} cv::Rect\& rect1 = GetRect(srcRects[lastPos]);}
+\DoxyCodeLine{175         \textcolor{keyword}{auto} type1 = GetType(srcRects[lastPos]);}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177         \textcolor{keywordtype}{int} neigborsCount = 0;}
+\DoxyCodeLine{178         T scoresSum = lastElem-\/>first;}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180         idxs.erase(lastElem);}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} pos = std::begin(idxs); pos != \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{std::end}}(idxs); )}
+\DoxyCodeLine{183         \{}
+\DoxyCodeLine{184             \textcolor{comment}{// grab the current rectangle}}
+\DoxyCodeLine{185             \textcolor{keyword}{auto} type2 = GetType(srcRects[pos-\/>second]);}
+\DoxyCodeLine{186             \textcolor{keywordflow}{if} (type1 == type2)}
+\DoxyCodeLine{187             \{}
+\DoxyCodeLine{188                 \textcolor{keyword}{const} cv::Rect\& rect2 = GetRect(srcRects[pos-\/>second]);}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{190                 \textcolor{keywordtype}{float} intArea = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}((rect1 \& rect2).area());}
+\DoxyCodeLine{191                 \textcolor{keywordtype}{float} unionArea = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(rect1.area() + rect2.area() -\/ intArea);}
+\DoxyCodeLine{192                 \textcolor{keywordtype}{float} \mbox{\hyperlink{box_8c_a49bbaf2c74dad0f7bbca22c9e41286ca}{overlap}} = intArea / unionArea;}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{194                 \textcolor{comment}{// if there is sufficient overlap, suppress the current bounding box}}
+\DoxyCodeLine{195                 \textcolor{keywordflow}{if} (\mbox{\hyperlink{box_8c_a49bbaf2c74dad0f7bbca22c9e41286ca}{overlap}} > thresh)}
+\DoxyCodeLine{196                 \{}
+\DoxyCodeLine{197                     scoresSum += pos-\/>first;}
+\DoxyCodeLine{198                     pos = idxs.erase(pos);}
+\DoxyCodeLine{199                     ++neigborsCount;}
+\DoxyCodeLine{200                 \}}
+\DoxyCodeLine{201                 \textcolor{keywordflow}{else}}
+\DoxyCodeLine{202                 \{}
+\DoxyCodeLine{203                     ++pos;}
+\DoxyCodeLine{204                 \}}
+\DoxyCodeLine{205             \}}
+\DoxyCodeLine{206             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{207             \{}
+\DoxyCodeLine{208                 ++pos;}
+\DoxyCodeLine{209             \}}
+\DoxyCodeLine{210         \}}
+\DoxyCodeLine{211         \textcolor{keywordflow}{if} (neigborsCount >= neighbors \&\& scoresSum >= minScoresSum)}
+\DoxyCodeLine{212             resRects.push\_back(srcRects[lastPos]);}
+\DoxyCodeLine{213     \}}
+\DoxyCodeLine{214 \}}
+
+\end{DoxyCode}

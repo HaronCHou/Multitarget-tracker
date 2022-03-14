@@ -1,0 +1,240 @@
+\hypertarget{class_frames_queue}{}\doxysection{Frames\+Queue类 参考}
+\label{class_frames_queue}\index{FramesQueue@{FramesQueue}}
+
+
+{\ttfamily \#include $<$Queue.\+h$>$}
+
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_frames_queue_accc3ace9fc535172b92a799c765390a7}{Frames\+Queue}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_frames_queue}{Frames\+Queue}} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_frames_queue_ac3f3594b6d93994e2284623bd6cee6ef}{Frames\+Queue}} (const \mbox{\hyperlink{class_frames_queue}{Frames\+Queue}} \&)=delete
+\item 
+\mbox{\hyperlink{class_frames_queue_a24ae5ffd3520c4150224d7090c44ec6b}{Frames\+Queue}} (\mbox{\hyperlink{class_frames_queue}{Frames\+Queue}} \&\&)=delete
+\item 
+\mbox{\hyperlink{class_frames_queue}{Frames\+Queue}} \& \mbox{\hyperlink{class_frames_queue_a71bd6a36d52025e37f1da4757355f979}{operator=}} (const \mbox{\hyperlink{class_frames_queue}{Frames\+Queue}} \&)=delete
+\item 
+\mbox{\hyperlink{class_frames_queue}{Frames\+Queue}} \& \mbox{\hyperlink{class_frames_queue_a691b6036a84b3bbde45f8928ceb9740b}{operator=}} (\mbox{\hyperlink{class_frames_queue}{Frames\+Queue}} \&\&)=delete
+\item 
+\mbox{\hyperlink{class_frames_queue_a966e2daf73b2d816c8a59dd0520f5a14}{$\sim$\+Frames\+Queue}} (void)=default
+\item 
+void \mbox{\hyperlink{class_frames_queue_a2ddb306c7b7baf9f00c01124b00acaf5}{Add\+New\+Frame}} (\mbox{\hyperlink{_queue_8h_a957665fdf28d8e1af49404b2d37b9c54}{frame\+\_\+ptr}} frame\+Info, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} max\+Queue\+Size)
+\begin{DoxyCompactList}\small\item\em Add\+New\+Frame \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_queue_8h_a957665fdf28d8e1af49404b2d37b9c54}{frame\+\_\+ptr}} \mbox{\hyperlink{class_frames_queue_a83ef5dce774de1fbec38dbd239312d30}{Get\+Last\+Undetected\+Frame}} ()
+\begin{DoxyCompactList}\small\item\em Get\+Last\+Undetected\+Frame \end{DoxyCompactList}\item 
+queue\+\_\+t\+::iterator \mbox{\hyperlink{class_frames_queue_a38efb0b2d1d449b3d9b218cbc867f012}{Search\+Untracked}} ()
+\begin{DoxyCompactList}\small\item\em Search\+Untracked \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_queue_8h_a957665fdf28d8e1af49404b2d37b9c54}{frame\+\_\+ptr}} \mbox{\hyperlink{class_frames_queue_a2de55ae38a8ea298035b41efc8910f95}{Get\+First\+Detected\+Frame}} ()
+\begin{DoxyCompactList}\small\item\em Get\+First\+Detected\+Frame \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_queue_8h_a957665fdf28d8e1af49404b2d37b9c54}{frame\+\_\+ptr}} \mbox{\hyperlink{class_frames_queue_a64f40482da7f0a7fe27c7e607726c84c}{Get\+First\+Processed\+Frame}} ()
+\begin{DoxyCompactList}\small\item\em Get\+First\+Processed\+Frame \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_frames_queue_a0220c0d42957749073f1621b89ff3dd3}{Signal}} (int64)
+\begin{DoxyCompactList}\small\item\em Signal \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_frames_queue_a606b27e4858add0246bc281af7350a9d}{Set\+Break}} (bool val)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 类型}
+\begin{DoxyCompactItemize}
+\item 
+typedef \mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$ \mbox{\hyperlink{_queue_8h_a957665fdf28d8e1af49404b2d37b9c54}{frame\+\_\+ptr}} $>$ \mbox{\hyperlink{class_frames_queue_a8da89ec2c65ebc099ff306df62f8f072}{queue\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_frames_queue_a8da89ec2c65ebc099ff306df62f8f072}{queue\+\_\+t}} \mbox{\hyperlink{class_frames_queue_ac5b7e35136924b0b130228f1d1fe92f3}{m\+\_\+que}}
+\item 
+\mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{std\+::mutex}} \mbox{\hyperlink{class_frames_queue_adc37bdc79736b407492814067eba8676}{m\+\_\+mutex}}
+\item 
+std\+::condition\+\_\+variable \mbox{\hyperlink{class_frames_queue_a7b0bf30a7ff2767bbee8cdaf32dd3ccc}{m\+\_\+cond}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{class_frames_queue_a581e23eb4e3b91492b386963d1a268ed}{m\+\_\+break}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+A threadsafe-\/queue with Frames 
+
+\doxysubsection{成员类型定义说明}
+\mbox{\Hypertarget{class_frames_queue_a8da89ec2c65ebc099ff306df62f8f072}\label{class_frames_queue_a8da89ec2c65ebc099ff306df62f8f072}} 
+\index{FramesQueue@{FramesQueue}!queue\_t@{queue\_t}}
+\index{queue\_t@{queue\_t}!FramesQueue@{FramesQueue}}
+\doxysubsubsection{\texorpdfstring{queue\_t}{queue\_t}}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$\mbox{\hyperlink{_queue_8h_a957665fdf28d8e1af49404b2d37b9c54}{frame\+\_\+ptr}}$>$ \mbox{\hyperlink{class_frames_queue_a8da89ec2c65ebc099ff306df62f8f072}{Frames\+Queue\+::queue\+\_\+t}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{class_frames_queue_accc3ace9fc535172b92a799c765390a7}\label{class_frames_queue_accc3ace9fc535172b92a799c765390a7}} 
+\index{FramesQueue@{FramesQueue}!FramesQueue@{FramesQueue}}
+\index{FramesQueue@{FramesQueue}!FramesQueue@{FramesQueue}}
+\doxysubsubsection{\texorpdfstring{FramesQueue()}{FramesQueue()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Frames\+Queue\+::\+Frames\+Queue (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\mbox{\hyperlink{class_frames_queue}{Frames\+Queue}} 
+
+\mbox{\Hypertarget{class_frames_queue_ac3f3594b6d93994e2284623bd6cee6ef}\label{class_frames_queue_ac3f3594b6d93994e2284623bd6cee6ef}} 
+\index{FramesQueue@{FramesQueue}!FramesQueue@{FramesQueue}}
+\index{FramesQueue@{FramesQueue}!FramesQueue@{FramesQueue}}
+\doxysubsubsection{\texorpdfstring{FramesQueue()}{FramesQueue()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Frames\+Queue\+::\+Frames\+Queue (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_frames_queue}{Frames\+Queue}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{class_frames_queue_a24ae5ffd3520c4150224d7090c44ec6b}\label{class_frames_queue_a24ae5ffd3520c4150224d7090c44ec6b}} 
+\index{FramesQueue@{FramesQueue}!FramesQueue@{FramesQueue}}
+\index{FramesQueue@{FramesQueue}!FramesQueue@{FramesQueue}}
+\doxysubsubsection{\texorpdfstring{FramesQueue()}{FramesQueue()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Frames\+Queue\+::\+Frames\+Queue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_frames_queue}{Frames\+Queue}} \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{class_frames_queue_a966e2daf73b2d816c8a59dd0520f5a14}\label{class_frames_queue_a966e2daf73b2d816c8a59dd0520f5a14}} 
+\index{FramesQueue@{FramesQueue}!````~FramesQueue@{$\sim$FramesQueue}}
+\index{````~FramesQueue@{$\sim$FramesQueue}!FramesQueue@{FramesQueue}}
+\doxysubsubsection{\texorpdfstring{$\sim$FramesQueue()}{~FramesQueue()}}
+{\footnotesize\ttfamily Frames\+Queue\+::$\sim$\+Frames\+Queue (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{class_frames_queue_a2ddb306c7b7baf9f00c01124b00acaf5}\label{class_frames_queue_a2ddb306c7b7baf9f00c01124b00acaf5}} 
+\index{FramesQueue@{FramesQueue}!AddNewFrame@{AddNewFrame}}
+\index{AddNewFrame@{AddNewFrame}!FramesQueue@{FramesQueue}}
+\doxysubsubsection{\texorpdfstring{AddNewFrame()}{AddNewFrame()}}
+{\footnotesize\ttfamily void Frames\+Queue\+::\+Add\+New\+Frame (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_queue_8h_a957665fdf28d8e1af49404b2d37b9c54}{frame\+\_\+ptr}}}]{frame\+Info,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{max\+Queue\+Size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add\+New\+Frame 
+
+
+\begin{DoxyParams}{参数}
+{\em frame\+Info} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_frames_queue_a2de55ae38a8ea298035b41efc8910f95}\label{class_frames_queue_a2de55ae38a8ea298035b41efc8910f95}} 
+\index{FramesQueue@{FramesQueue}!GetFirstDetectedFrame@{GetFirstDetectedFrame}}
+\index{GetFirstDetectedFrame@{GetFirstDetectedFrame}!FramesQueue@{FramesQueue}}
+\doxysubsubsection{\texorpdfstring{GetFirstDetectedFrame()}{GetFirstDetectedFrame()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_queue_8h_a957665fdf28d8e1af49404b2d37b9c54}{frame\+\_\+ptr}} Frames\+Queue\+::\+Get\+First\+Detected\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get\+First\+Detected\+Frame 
+
+\begin{DoxyReturn}{返回}
+
+\end{DoxyReturn}
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_frames_queue_a2de55ae38a8ea298035b41efc8910f95_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_frames_queue_a64f40482da7f0a7fe27c7e607726c84c}\label{class_frames_queue_a64f40482da7f0a7fe27c7e607726c84c}} 
+\index{FramesQueue@{FramesQueue}!GetFirstProcessedFrame@{GetFirstProcessedFrame}}
+\index{GetFirstProcessedFrame@{GetFirstProcessedFrame}!FramesQueue@{FramesQueue}}
+\doxysubsubsection{\texorpdfstring{GetFirstProcessedFrame()}{GetFirstProcessedFrame()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_queue_8h_a957665fdf28d8e1af49404b2d37b9c54}{frame\+\_\+ptr}} Frames\+Queue\+::\+Get\+First\+Processed\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get\+First\+Processed\+Frame 
+
+\begin{DoxyReturn}{返回}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_frames_queue_a83ef5dce774de1fbec38dbd239312d30}\label{class_frames_queue_a83ef5dce774de1fbec38dbd239312d30}} 
+\index{FramesQueue@{FramesQueue}!GetLastUndetectedFrame@{GetLastUndetectedFrame}}
+\index{GetLastUndetectedFrame@{GetLastUndetectedFrame}!FramesQueue@{FramesQueue}}
+\doxysubsubsection{\texorpdfstring{GetLastUndetectedFrame()}{GetLastUndetectedFrame()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_queue_8h_a957665fdf28d8e1af49404b2d37b9c54}{frame\+\_\+ptr}} Frames\+Queue\+::\+Get\+Last\+Undetected\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get\+Last\+Undetected\+Frame 
+
+\begin{DoxyReturn}{返回}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_frames_queue_a71bd6a36d52025e37f1da4757355f979}\label{class_frames_queue_a71bd6a36d52025e37f1da4757355f979}} 
+\index{FramesQueue@{FramesQueue}!operator=@{operator=}}
+\index{operator=@{operator=}!FramesQueue@{FramesQueue}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_frames_queue}{Frames\+Queue}} \& Frames\+Queue\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_frames_queue}{Frames\+Queue}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{class_frames_queue_a691b6036a84b3bbde45f8928ceb9740b}\label{class_frames_queue_a691b6036a84b3bbde45f8928ceb9740b}} 
+\index{FramesQueue@{FramesQueue}!operator=@{operator=}}
+\index{operator=@{operator=}!FramesQueue@{FramesQueue}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_frames_queue}{Frames\+Queue}} \& Frames\+Queue\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_frames_queue}{Frames\+Queue}} \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{class_frames_queue_a38efb0b2d1d449b3d9b218cbc867f012}\label{class_frames_queue_a38efb0b2d1d449b3d9b218cbc867f012}} 
+\index{FramesQueue@{FramesQueue}!SearchUntracked@{SearchUntracked}}
+\index{SearchUntracked@{SearchUntracked}!FramesQueue@{FramesQueue}}
+\doxysubsubsection{\texorpdfstring{SearchUntracked()}{SearchUntracked()}}
+{\footnotesize\ttfamily queue\+\_\+t\+::iterator Frames\+Queue\+::\+Search\+Untracked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Search\+Untracked 
+
+\begin{DoxyReturn}{返回}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_frames_queue_a606b27e4858add0246bc281af7350a9d}\label{class_frames_queue_a606b27e4858add0246bc281af7350a9d}} 
+\index{FramesQueue@{FramesQueue}!SetBreak@{SetBreak}}
+\index{SetBreak@{SetBreak}!FramesQueue@{FramesQueue}}
+\doxysubsubsection{\texorpdfstring{SetBreak()}{SetBreak()}}
+{\footnotesize\ttfamily void Frames\+Queue\+::\+Set\+Break (\begin{DoxyParamCaption}\item[{bool}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_frames_queue_a606b27e4858add0246bc281af7350a9d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_frames_queue_a0220c0d42957749073f1621b89ff3dd3}\label{class_frames_queue_a0220c0d42957749073f1621b89ff3dd3}} 
+\index{FramesQueue@{FramesQueue}!Signal@{Signal}}
+\index{Signal@{Signal}!FramesQueue@{FramesQueue}}
+\doxysubsubsection{\texorpdfstring{Signal()}{Signal()}}
+{\footnotesize\ttfamily void Frames\+Queue\+::\+Signal (\begin{DoxyParamCaption}\item[{int64}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Signal 
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{class_frames_queue_a581e23eb4e3b91492b386963d1a268ed}\label{class_frames_queue_a581e23eb4e3b91492b386963d1a268ed}} 
+\index{FramesQueue@{FramesQueue}!m\_break@{m\_break}}
+\index{m\_break@{m\_break}!FramesQueue@{FramesQueue}}
+\doxysubsubsection{\texorpdfstring{m\_break}{m\_break}}
+{\footnotesize\ttfamily std\+::atomic$<$bool$>$ Frames\+Queue\+::m\+\_\+break\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_frames_queue_a7b0bf30a7ff2767bbee8cdaf32dd3ccc}\label{class_frames_queue_a7b0bf30a7ff2767bbee8cdaf32dd3ccc}} 
+\index{FramesQueue@{FramesQueue}!m\_cond@{m\_cond}}
+\index{m\_cond@{m\_cond}!FramesQueue@{FramesQueue}}
+\doxysubsubsection{\texorpdfstring{m\_cond}{m\_cond}}
+{\footnotesize\ttfamily std\+::condition\+\_\+variable Frames\+Queue\+::m\+\_\+cond\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_frames_queue_adc37bdc79736b407492814067eba8676}\label{class_frames_queue_adc37bdc79736b407492814067eba8676}} 
+\index{FramesQueue@{FramesQueue}!m\_mutex@{m\_mutex}}
+\index{m\_mutex@{m\_mutex}!FramesQueue@{FramesQueue}}
+\doxysubsubsection{\texorpdfstring{m\_mutex}{m\_mutex}}
+{\footnotesize\ttfamily \mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{std\+::mutex}} Frames\+Queue\+::m\+\_\+mutex\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_frames_queue_ac5b7e35136924b0b130228f1d1fe92f3}\label{class_frames_queue_ac5b7e35136924b0b130228f1d1fe92f3}} 
+\index{FramesQueue@{FramesQueue}!m\_que@{m\_que}}
+\index{m\_que@{m\_que}!FramesQueue@{FramesQueue}}
+\doxysubsubsection{\texorpdfstring{m\_que}{m\_que}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_frames_queue_a8da89ec2c65ebc099ff306df62f8f072}{queue\+\_\+t}} Frames\+Queue\+::m\+\_\+que\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/async\+\_\+detector/\mbox{\hyperlink{_queue_8h}{Queue.\+h}}\end{DoxyCompactItemize}

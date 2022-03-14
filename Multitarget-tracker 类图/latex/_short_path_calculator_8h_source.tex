@@ -1,0 +1,58 @@
+\hypertarget{_short_path_calculator_8h_source}{}\doxysection{Short\+Path\+Calculator.\+h}
+\label{_short_path_calculator_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/ShortPathCalculator.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/ShortPathCalculator.h}}
+\mbox{\hyperlink{_short_path_calculator_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{defines_8h}{defines.h}}"{}}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_hungarian_alg_8h}{HungarianAlg/HungarianAlg.h}}"{}}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{8 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_s_p_settings}{SPSettings}}}
+\DoxyCodeLine{9 \{}
+\DoxyCodeLine{10     \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} \mbox{\hyperlink{struct_s_p_settings_ad573c443178ef0a557336523d8c97c9e}{m\_distThres}} = 0.8f;}
+\DoxyCodeLine{11     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{struct_s_p_settings_a982b07a4a63dac30affb8d0ed863956f}{m\_maxHistory}} = 10;}
+\DoxyCodeLine{12 \};}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{17 \textcolor{keyword}{class }\mbox{\hyperlink{class_short_path_calculator}{ShortPathCalculator}}}
+\DoxyCodeLine{18 \{}
+\DoxyCodeLine{19 \textcolor{keyword}{public}:}
+\DoxyCodeLine{20     \mbox{\hyperlink{class_short_path_calculator_ad4cc17f00025648dce2126375c837a39}{ShortPathCalculator}}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_s_p_settings}{SPSettings}}\& settings)}
+\DoxyCodeLine{21         : \mbox{\hyperlink{class_short_path_calculator_a191b6769d0b7b8ad4bce9db0a4392ad6}{m\_settings}}(settings)}
+\DoxyCodeLine{22     \{}
+\DoxyCodeLine{23     \}}
+\DoxyCodeLine{24     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_short_path_calculator_a252a19c127b4124359b1d3aebccbc373}{\string~ShortPathCalculator}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_short_path_calculator_a16bee018bafa5ba99142f501c6982eda}{Solve}}(\textcolor{keyword}{const} \mbox{\hyperlink{defines_8h_af6ab0ee8259a51215f62e8f96416d5bb}{distMatrix\_t}}\& costMatrix, \textcolor{keywordtype}{size\_t} N, \textcolor{keywordtype}{size\_t} M, \mbox{\hyperlink{defines_8h_ad7b9f569a9adbd958c668a36b6884ffd}{assignments\_t}}\& assignment, \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} maxCost) = 0;}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{29     \mbox{\hyperlink{struct_s_p_settings}{SPSettings}} \mbox{\hyperlink{class_short_path_calculator_a191b6769d0b7b8ad4bce9db0a4392ad6}{m\_settings}};}
+\DoxyCodeLine{30 \};}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{35 \textcolor{keyword}{class }\mbox{\hyperlink{class_s_p_hungrian}{SPHungrian}} final : \textcolor{keyword}{public} \mbox{\hyperlink{class_short_path_calculator}{ShortPathCalculator}}}
+\DoxyCodeLine{36 \{}
+\DoxyCodeLine{37 \textcolor{keyword}{public}:}
+\DoxyCodeLine{38     \mbox{\hyperlink{class_s_p_hungrian_a6bb1b5335b7be0d6f12cd56dd181d898}{SPHungrian}}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_s_p_settings}{SPSettings}}\& settings)}
+\DoxyCodeLine{39         : \mbox{\hyperlink{class_short_path_calculator}{ShortPathCalculator}}(settings)}
+\DoxyCodeLine{40     \{}
+\DoxyCodeLine{41     \}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_p_hungrian_a070bddb09b25642721b3548daee249e6}{Solve}}(\textcolor{keyword}{const} \mbox{\hyperlink{defines_8h_af6ab0ee8259a51215f62e8f96416d5bb}{distMatrix\_t}}\& costMatrix, \textcolor{keywordtype}{size\_t} N, \textcolor{keywordtype}{size\_t} M, \mbox{\hyperlink{defines_8h_ad7b9f569a9adbd958c668a36b6884ffd}{assignments\_t}}\& assignment, \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} \textcolor{comment}{/*maxCost*/})\textcolor{keyword}{ override}}
+\DoxyCodeLine{44 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{45         \mbox{\hyperlink{class_s_p_hungrian_a4f7f94236b7728a35d27dea7ecfe46e1}{m\_solver}}.\mbox{\hyperlink{class_assignment_problem_solver_a38198467ca647403c40be2c2bb47e177}{Solve}}(costMatrix, N, M, assignment, \mbox{\hyperlink{class_assignment_problem_solver_aec407eb73fed9d3ddb9467fde90a85e8a84f2334f61866dba64befa6910848d75}{AssignmentProblemSolver::optimal}});}
+\DoxyCodeLine{46     \}}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 \textcolor{keyword}{private}:}
+\DoxyCodeLine{49     \mbox{\hyperlink{class_assignment_problem_solver}{AssignmentProblemSolver}} \mbox{\hyperlink{class_s_p_hungrian_a4f7f94236b7728a35d27dea7ecfe46e1}{m\_solver}};}
+\DoxyCodeLine{50 \};}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{55 \textcolor{keyword}{class }\mbox{\hyperlink{class_s_p_bipart}{SPBipart}} final : \textcolor{keyword}{public} \mbox{\hyperlink{class_short_path_calculator}{ShortPathCalculator}}}
+\DoxyCodeLine{56 \{}
+\DoxyCodeLine{57 \textcolor{keyword}{public}:}
+\DoxyCodeLine{58     \mbox{\hyperlink{class_s_p_bipart_a26bff02420770899795cfcafd1efb9a5}{SPBipart}}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_s_p_settings}{SPSettings}}\& settings)}
+\DoxyCodeLine{59         : \mbox{\hyperlink{class_short_path_calculator}{ShortPathCalculator}}(settings)}
+\DoxyCodeLine{60     \{}
+\DoxyCodeLine{61     \}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_p_bipart_a621aae40657bb7d6cbc591d659eab3fa}{Solve}}(\textcolor{keyword}{const} \mbox{\hyperlink{defines_8h_af6ab0ee8259a51215f62e8f96416d5bb}{distMatrix\_t}}\& costMatrix, \textcolor{keywordtype}{size\_t} N, \textcolor{keywordtype}{size\_t} M, \mbox{\hyperlink{defines_8h_ad7b9f569a9adbd958c668a36b6884ffd}{assignments\_t}}\& assignment, \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} maxCost) \textcolor{keyword}{override};}
+\DoxyCodeLine{64 \};}
+
+\end{DoxyCode}

@@ -1,0 +1,311 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: D:/zhr_files/Multitarget-tracker-master/src/Tracker/graph/GTL/include/GTL/dfs.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">My Project
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_4c3458e0ccdb4c3720723c1caa1aaa1c.html">zhr_files</a></li><li class="navelem"><a class="el" href="dir_5a8d4bff745a16410b5074d3583a347e.html">Multitarget-tracker-master</a></li><li class="navelem"><a class="el" href="dir_46a27ab0460a6f8f8d12d2f44f38bf6b.html">src</a></li><li class="navelem"><a class="el" href="dir_49af9105677bf904e08b5b3082398310.html">Tracker</a></li><li class="navelem"><a class="el" href="dir_87284c152d3371e6094144b73a6f8795.html">graph</a></li><li class="navelem"><a class="el" href="dir_7b6594d99a601eace4ef3dd5f19e8e4e.html">GTL</a></li><li class="navelem"><a class="el" href="dir_5817f932378c35085430476a75d7fee1.html">include</a></li><li class="navelem"><a class="el" href="dir_64afc982368f096bd63542337c389cd0.html">GTL</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">dfs.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="dfs_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/* This software is distributed under the GNU Lesser General Public License */</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">//==========================================================================</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">//</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//   dfs.h</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">//</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">//==========================================================================</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">// $Id: dfs.h,v 1.25 2003/03/24 15:58:54 raitner Exp $</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#ifndef GTL_DFS_H</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#define GTL_DFS_H</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;<a class="code" href="_g_t_l_8h.html">GTL/GTL.h</a>&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;<a class="code" href="algorithm_8h.html">GTL/algorithm.h</a>&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><a class="code hl_define" href="_g_t_l_8h.html#a2d9f24096ac60918452dd51f32b64aa9">__GTL_BEGIN_NAMESPACE</a></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="classdfs.html">   88</a></span><span class="keyword">class </span><a class="code hl_define" href="_g_t_l_8h.html#a014cd1e9b3e67a78ae433eda95c8fd25">GTL_EXTERN</a> <a class="code hl_class" href="classdfs.html">dfs</a> : <span class="keyword">public</span> <a class="code hl_class" href="classalgorithm.html">algorithm</a> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>{</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <a class="code hl_class" href="classdfs.html">dfs</a> ();</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keyword">virtual</span> <a class="code hl_class" href="classdfs.html">~dfs</a> ();</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classalgorithm.html#a4baee48c513c5802975743152c33f34c">run</a> (GTL::graph&amp; G);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classalgorithm.html#a528100c0e54d446fab1e329a53935364">check</a> (GTL::graph&amp; G);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classalgorithm.html#a21aba63d066ae7897de6ca7d8425c408">reset</a> ();</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="comment">//---------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="comment">//   Parameters</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    <span class="comment">//---------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="classdfs.html#aad21fd0d3036350fd341f877d5747852">  129</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classdfs.html#aad21fd0d3036350fd341f877d5747852">start_node</a> (<span class="keyword">const</span> <a class="code hl_class" href="structnode.html">node</a>&amp; n) </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    { start = n; }</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="classdfs.html#a7688d8eaf1308438820fec2ffe21257c">  137</a></span>    <a class="code hl_class" href="structnode.html">node</a> <a class="code hl_function" href="classdfs.html#a7688d8eaf1308438820fec2ffe21257c">start_node</a> ()<span class="keyword"> const </span>{<span class="keywordflow">return</span> start;}</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno"><a class="line" href="classdfs.html#aa7c864a6f3a120720138b187b3ed95b5">  157</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classdfs.html#aa7c864a6f3a120720138b187b3ed95b5">scan_whole_graph</a> (<span class="keywordtype">bool</span> <a class="code hl_class" href="classset.html">set</a>) {whole_graph = <a class="code hl_class" href="classset.html">set</a>;}</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno"><a class="line" href="classdfs.html#a025ed2d6101a7b9f72578a52b484ef50">  166</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classdfs.html#a025ed2d6101a7b9f72578a52b484ef50">scan_whole_graph</a> ()<span class="keyword"> const </span>{<span class="keywordflow">return</span> whole_graph;}</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <span class="keywordtype">void</span> calc_comp_num (<span class="keywordtype">bool</span> <a class="code hl_class" href="classset.html">set</a>);</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno"><a class="line" href="classdfs.html#aba80ac24a78448f10b32473633cd2a5d">  182</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classdfs.html#aba80ac24a78448f10b32473633cd2a5d">calc_comp_num</a> ()<span class="keyword"> const </span>{<span class="keywordflow">return</span> comp_number != 0;}</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>    <span class="keywordtype">void</span> store_preds (<span class="keywordtype">bool</span> <a class="code hl_class" href="classset.html">set</a>);</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno"><a class="line" href="classdfs.html#ad0233128f2958d630102096aa6f3b9ef">  202</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classdfs.html#ad0233128f2958d630102096aa6f3b9ef">store_preds</a> ()<span class="keyword"> const </span>{<span class="keywordflow">return</span> preds != 0;}</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    </div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    <span class="keywordtype">void</span> store_non_tree_edges (<span class="keywordtype">bool</span> <a class="code hl_class" href="classset.html">set</a>);</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span> </div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno"><a class="line" href="classdfs.html#a6ac1f01ff594fbbc6e8d6b5bd03fc9ab">  223</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classdfs.html#a6ac1f01ff594fbbc6e8d6b5bd03fc9ab">store_non_tree_edges</a> ()<span class="keyword"> const </span>{<span class="keywordflow">return</span> back_edges != 0;}</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span> </div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    <span class="comment">//---------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="comment">//   Access </span></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    <span class="comment">//----------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span> </div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno"><a class="line" href="classdfs.html#a2948061eb1ea02f57614f9044c8e63cf">  235</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classdfs.html#a2948061eb1ea02f57614f9044c8e63cf">reached</a> (<span class="keyword">const</span> <a class="code hl_class" href="structnode.html">node</a>&amp; n)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span><span class="keyword">    </span>{<span class="keywordflow">return</span> dfs_number[n] != 0;}</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span> </div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno"><a class="line" href="classdfs.html#a315f16831a0bd333960e87e045cb37c8">  247</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classdfs.html#a315f16831a0bd333960e87e045cb37c8">dfs_num</a> (<span class="keyword">const</span> <a class="code hl_class" href="structnode.html">node</a>&amp; n)<span class="keyword"> const </span></div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span><span class="keyword">    </span>{<span class="keywordflow">return</span> dfs_number[n];}</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span> </div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno"><a class="line" href="classdfs.html#a014b90894a47fa5abb7f4e5030be2c3e">  259</a></span>    <span class="keywordtype">int</span> operator[] (<span class="keyword">const</span> <a class="code hl_class" href="structnode.html">node</a>&amp; n)<span class="keyword"> const </span></div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span><span class="keyword">    </span>{<span class="keywordflow">return</span> dfs_number[n];}</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno"><a class="line" href="classdfs.html#aceb066c806cb0beb5688b167a17387c7">  270</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classdfs.html#aceb066c806cb0beb5688b167a17387c7">comp_num</a> (<span class="keyword">const</span> <a class="code hl_class" href="structnode.html">node</a>&amp; n)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span><span class="keyword">    </span>{assert (comp_number); <span class="keywordflow">return</span> (*comp_number)[n];}</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span> </div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno"><a class="line" href="classdfs.html#a3012717ce541b3e56943e2c2c50efdf6">  283</a></span>    <a class="code hl_class" href="structnode.html">node</a> <a class="code hl_function" href="classdfs.html#a3012717ce541b3e56943e2c2c50efdf6">father</a> (<span class="keyword">const</span> <a class="code hl_class" href="structnode.html">node</a>&amp; n)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span><span class="keyword">    </span>{assert (preds); <span class="keywordflow">return</span> (*preds)[n];}</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span> </div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno"><a class="line" href="classdfs.html#accde8d5403404f6d22fe4756d4ffedd5">  289</a></span>    <span class="keyword">typedef</span> edges_t::const_iterator <a class="code hl_typedef" href="classdfs.html#accde8d5403404f6d22fe4756d4ffedd5">tree_edges_iterator</a>;</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span> </div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno"><a class="line" href="classdfs.html#afe193938a05b114870c19163731273c8">  300</a></span>    <a class="code hl_typedef" href="classdfs.html#accde8d5403404f6d22fe4756d4ffedd5">tree_edges_iterator</a> <a class="code hl_function" href="classdfs.html#afe193938a05b114870c19163731273c8">tree_edges_begin</a> ()<span class="keyword"> const </span></div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span><span class="keyword">    </span>{<span class="keywordflow">return</span> <a class="code hl_struct" href="structtree.html">tree</a>.begin();}</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno"><a class="line" href="classdfs.html#ad1b9f759569cb52ba7ee415862c79831">  308</a></span>    <a class="code hl_typedef" href="classdfs.html#accde8d5403404f6d22fe4756d4ffedd5">tree_edges_iterator</a> <a class="code hl_function" href="classdfs.html#ad1b9f759569cb52ba7ee415862c79831">tree_edges_end</a> ()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span><span class="keyword">    </span>{<span class="keywordflow">return</span> <a class="code hl_struct" href="structtree.html">tree</a>.end();}</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span> </div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno"><a class="line" href="classdfs.html#a15fe023a5a1f7ddda00f3d87110d9a32">  314</a></span>    <span class="keyword">typedef</span> nodes_t::const_iterator <a class="code hl_typedef" href="classdfs.html#a15fe023a5a1f7ddda00f3d87110d9a32">dfs_iterator</a>;</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span> </div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno"><a class="line" href="classdfs.html#ab06650dd8cbd5e76b0c73b71458ec5ec">  321</a></span>    <a class="code hl_typedef" href="classdfs.html#a15fe023a5a1f7ddda00f3d87110d9a32">dfs_iterator</a> <a class="code hl_function" href="classdfs.html#ab06650dd8cbd5e76b0c73b71458ec5ec">begin</a> ()<span class="keyword"> const </span></div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span><span class="keyword">    </span>{<span class="keywordflow">return</span> dfs_order.begin();}</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span> </div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno"><a class="line" href="classdfs.html#af847633fa642258d3522e8deb26aef37">  330</a></span>    <a class="code hl_typedef" href="classdfs.html#a15fe023a5a1f7ddda00f3d87110d9a32">dfs_iterator</a> <a class="code hl_function" href="classdfs.html#af847633fa642258d3522e8deb26aef37">end</a> ()<span class="keyword"> const </span></div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span><span class="keyword">    </span>{<span class="keywordflow">return</span> dfs_order.end();}</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span> </div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno"><a class="line" href="classdfs.html#a95e353f354d3b31daded0c4fe749171a">  336</a></span>    <span class="keyword">typedef</span> edges_t::const_iterator <a class="code hl_typedef" href="classdfs.html#a95e353f354d3b31daded0c4fe749171a">non_tree_edges_iterator</a>;</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span> </div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno"><a class="line" href="classdfs.html#a4efe5bb72d00305e6b226e67c2b2ef6e">  344</a></span>    <a class="code hl_typedef" href="classdfs.html#a95e353f354d3b31daded0c4fe749171a">non_tree_edges_iterator</a> <a class="code hl_function" href="classdfs.html#a4efe5bb72d00305e6b226e67c2b2ef6e">non_tree_edges_begin</a> ()<span class="keyword"> const </span></div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span><span class="keyword">    </span>{assert (back_edges);  <span class="keywordflow">return</span> back_edges-&gt;begin(); }</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span> </div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno"><a class="line" href="classdfs.html#ad9cd92a18bda23edca8ab3ac60a15ef4">  354</a></span>    <a class="code hl_typedef" href="classdfs.html#a95e353f354d3b31daded0c4fe749171a">non_tree_edges_iterator</a> <a class="code hl_function" href="classdfs.html#ad9cd92a18bda23edca8ab3ac60a15ef4">non_tree_edges_end</a> ()<span class="keyword"> const </span></div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span><span class="keyword">    </span>{assert (back_edges); <span class="keywordflow">return</span> back_edges-&gt;end(); }</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span> </div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno"><a class="line" href="classdfs.html#a1ea6e8eb2766ac95ac48a8523359065a">  360</a></span>    <span class="keyword">typedef</span> std::list&lt;dfs_iterator&gt;::const_iterator <a class="code hl_typedef" href="classdfs.html#a1ea6e8eb2766ac95ac48a8523359065a">roots_iterator</a>;</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span> </div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno"><a class="line" href="classdfs.html#af56fa2b736f0b924dba1257e18ba4b61">  389</a></span>    <a class="code hl_typedef" href="classdfs.html#a1ea6e8eb2766ac95ac48a8523359065a">roots_iterator</a> <a class="code hl_function" href="classdfs.html#af56fa2b736f0b924dba1257e18ba4b61">roots_begin</a> ()<span class="keyword"> const </span></div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span><span class="keyword">    </span>{<span class="keywordflow">return</span> roots.begin();}</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span> </div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno"><a class="line" href="classdfs.html#ae1a61d8c2d8d99059cab410f766ec73f">  398</a></span>    <a class="code hl_typedef" href="classdfs.html#a1ea6e8eb2766ac95ac48a8523359065a">roots_iterator</a> <a class="code hl_function" href="classdfs.html#ae1a61d8c2d8d99059cab410f766ec73f">roots_end</a> ()<span class="keyword"> const </span></div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span><span class="keyword">    </span>{<span class="keywordflow">return</span> roots.end();}</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span> </div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno"><a class="line" href="classdfs.html#ae8849a552721ad4af5d9a81c6da35822">  407</a></span>    <span class="keywordtype">int</span> <a class="code hl_function" href="classdfs.html#ae8849a552721ad4af5d9a81c6da35822">number_of_reached_nodes</a> ()<span class="keyword"> const</span></div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span><span class="keyword">    </span>{<span class="keywordflow">return</span> reached_nodes;}</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span> </div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span> </div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>    <span class="comment">//-----------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>    <span class="comment">//   Handler - for customization purposes</span></div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>    <span class="comment">//-----------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span> </div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno"><a class="line" href="classdfs.html#a72c9a4dd5e737b984fcc567a029cdbcb">  420</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classdfs.html#a72c9a4dd5e737b984fcc567a029cdbcb">init_handler</a> (GTL::graph&amp; <span class="comment">/*G*/</span>) {}</div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>    </div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno"><a class="line" href="classdfs.html#a7c75d91d7e64557d0df79d0f2c451b10">  427</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classdfs.html#a7c75d91d7e64557d0df79d0f2c451b10">end_handler</a> (GTL::graph&amp; <span class="comment">/*G*/</span>) {}</div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span> </div>
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno"><a class="line" href="classdfs.html#a0b7f107aca56a261e3d7a411e8068646">  436</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classdfs.html#a0b7f107aca56a261e3d7a411e8068646">entry_handler</a> (GTL::graph&amp; <span class="comment">/*G*/</span>, <a class="code hl_typedef" href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">GTL::node</a>&amp; <span class="comment">/*n*/</span>, <a class="code hl_typedef" href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">GTL::node</a>&amp; <span class="comment">/*f*/</span>) {}</div>
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span> </div>
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno"><a class="line" href="classdfs.html#a9bcd9492189dac3aff8ecd4b6e2c90f6">  446</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classdfs.html#a9bcd9492189dac3aff8ecd4b6e2c90f6">leave_handler</a> (GTL::graph&amp; <span class="comment">/*G*/</span>, <a class="code hl_typedef" href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">GTL::node</a>&amp; <span class="comment">/*n*/</span>, <a class="code hl_typedef" href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">GTL::node</a>&amp; <span class="comment">/*f*/</span>) {}</div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span> </div>
+<div class="line"><a id="l00456" name="l00456"></a><span class="lineno"><a class="line" href="classdfs.html#a878303546558916a427d0a3b8b95dc72">  456</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classdfs.html#a878303546558916a427d0a3b8b95dc72">before_recursive_call_handler</a> (GTL::graph&amp; <span class="comment">/*G*/</span>, GTL::edge&amp; <span class="comment">/*e*/</span>, <a class="code hl_typedef" href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">GTL::node</a>&amp; <span class="comment">/*n*/</span>) {}</div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>    </div>
+<div class="line"><a id="l00467" name="l00467"></a><span class="lineno"><a class="line" href="classdfs.html#ae6314aecf5c3239f8dd47b7df84a9cd8">  467</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classdfs.html#ae6314aecf5c3239f8dd47b7df84a9cd8">after_recursive_call_handler</a> (GTL::graph&amp; <span class="comment">/*G*/</span>, GTL::edge&amp; <span class="comment">/*e*/</span>, <a class="code hl_typedef" href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">GTL::node</a>&amp; <span class="comment">/*n*/</span>) {}</div>
+<div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span>    </div>
+<div class="line"><a id="l00478" name="l00478"></a><span class="lineno"><a class="line" href="classdfs.html#a4f4f2d856b8a61cbe8a42e9ff223d945">  478</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classdfs.html#a4f4f2d856b8a61cbe8a42e9ff223d945">old_adj_node_handler</a> (GTL::graph&amp; <span class="comment">/*G*/</span>, GTL::edge&amp; <span class="comment">/*e*/</span>, <a class="code hl_typedef" href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">GTL::node</a>&amp; <span class="comment">/*n*/</span>) {}</div>
+<div class="line"><a id="l00479" name="l00479"></a><span class="lineno">  479</span> </div>
+<div class="line"><a id="l00490" name="l00490"></a><span class="lineno"><a class="line" href="classdfs.html#a8e15e709d735d0002f3d7c6044b4e302">  490</a></span>    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classdfs.html#a8e15e709d735d0002f3d7c6044b4e302">new_start_handler</a> (GTL::graph&amp; <span class="comment">/*G*/</span>, <a class="code hl_typedef" href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">GTL::node</a>&amp; <span class="comment">/*n*/</span>) { };</div>
+<div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span> </div>
+<div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span> </div>
+<div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>    <span class="keywordtype">void</span> dfs_sub (GTL::graph&amp;, <a class="code hl_typedef" href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">GTL::node</a>&amp;, <a class="code hl_typedef" href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">GTL::node</a>&amp;);</div>
+<div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span> </div>
+<div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span><span class="keyword">protected</span>:    </div>
+<div class="line"><a id="l00500" name="l00500"></a><span class="lineno">  500</span> </div>
+<div class="line"><a id="l00501" name="l00501"></a><span class="lineno">  501</span>    <span class="comment">//----------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00502" name="l00502"></a><span class="lineno">  502</span>    <span class="comment">//   Data</span></div>
+<div class="line"><a id="l00503" name="l00503"></a><span class="lineno">  503</span>    <span class="comment">//----------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00504" name="l00504"></a><span class="lineno">  504</span> </div>
+<div class="line"><a id="l00508" name="l00508"></a><span class="lineno"><a class="line" href="classdfs.html#aedaf2b485ff83150b1de6c305922473b">  508</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classdfs.html#aedaf2b485ff83150b1de6c305922473b">act_dfs_num</a>;</div>
+<div class="line"><a id="l00512" name="l00512"></a><span class="lineno"><a class="line" href="classdfs.html#ab0251ac30adfd569e214a64db7f3a905">  512</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classdfs.html#ab0251ac30adfd569e214a64db7f3a905">act_comp_num</a>;</div>
+<div class="line"><a id="l00516" name="l00516"></a><span class="lineno"><a class="line" href="classdfs.html#aed496b618a937723bfec0b463e17e8d5">  516</a></span>    <a class="code hl_typedef" href="edge_8h.html#a8f9587479bda6cf612c103494b3858e3">edges_t</a> <a class="code hl_variable" href="classdfs.html#aed496b618a937723bfec0b463e17e8d5">tree</a>;</div>
+<div class="line"><a id="l00520" name="l00520"></a><span class="lineno"><a class="line" href="classdfs.html#af70a73ace68afd91ef944f984c9f28d5">  520</a></span>    <a class="code hl_typedef" href="edge_8h.html#a22ac17689106ba21a84e7bc54d1199d6">nodes_t</a> <a class="code hl_variable" href="classdfs.html#af70a73ace68afd91ef944f984c9f28d5">dfs_order</a>;</div>
+<div class="line"><a id="l00524" name="l00524"></a><span class="lineno"><a class="line" href="classdfs.html#a99727f2274d6af63daae4f0518f3adbe">  524</a></span>    <a class="code hl_class" href="classnode__map.html">node_map&lt;int&gt;</a> <a class="code hl_variable" href="classdfs.html#a99727f2274d6af63daae4f0518f3adbe">dfs_number</a>;</div>
+<div class="line"><a id="l00528" name="l00528"></a><span class="lineno"><a class="line" href="classdfs.html#acb11186a1a2a2a1f38cdc0674340ba37">  528</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="classdfs.html#acb11186a1a2a2a1f38cdc0674340ba37">reached_nodes</a>;</div>
+<div class="line"><a id="l00532" name="l00532"></a><span class="lineno"><a class="line" href="classdfs.html#afc18288747491be301d6d8d85d8f220b">  532</a></span>    <a class="code hl_class" href="classedge__map.html">edge_map&lt;int&gt;</a>* <a class="code hl_variable" href="classdfs.html#afc18288747491be301d6d8d85d8f220b">used</a>;</div>
+<div class="line"><a id="l00536" name="l00536"></a><span class="lineno"><a class="line" href="classdfs.html#a0bbd5cb8df26c891b74dadd84b46a06b">  536</a></span>    std::list&lt;dfs_iterator&gt; <a class="code hl_variable" href="classdfs.html#a0bbd5cb8df26c891b74dadd84b46a06b">roots</a>;</div>
+<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>    </div>
+<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span> </div>
+<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>    <span class="comment">//-----------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>    <span class="comment">// Optional </span></div>
+<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>    <span class="comment">//-----------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span>    </div>
+<div class="line"><a id="l00546" name="l00546"></a><span class="lineno"><a class="line" href="classdfs.html#a00db016ac7eab69045cae408008890c1">  546</a></span>    <a class="code hl_class" href="classnode__map.html">node_map&lt;int&gt;</a>* <a class="code hl_variable" href="classdfs.html#a00db016ac7eab69045cae408008890c1">comp_number</a>;</div>
+<div class="line"><a id="l00550" name="l00550"></a><span class="lineno"><a class="line" href="classdfs.html#a3fdeb5a211a1bc1753b2a637258c5355">  550</a></span>    <a class="code hl_class" href="classnode__map.html">node_map&lt;node&gt;</a>* <a class="code hl_variable" href="classdfs.html#a3fdeb5a211a1bc1753b2a637258c5355">preds</a>;</div>
+<div class="line"><a id="l00554" name="l00554"></a><span class="lineno"><a class="line" href="classdfs.html#a1dc18a7df8d6b238d5301c92fc7540fa">  554</a></span>    <a class="code hl_typedef" href="edge_8h.html#a8f9587479bda6cf612c103494b3858e3">edges_t</a>* <a class="code hl_variable" href="classdfs.html#a1dc18a7df8d6b238d5301c92fc7540fa">back_edges</a>;</div>
+<div class="line"><a id="l00558" name="l00558"></a><span class="lineno"><a class="line" href="classdfs.html#af677cfc31fe06a18dd3a3aae7f7d112b">  558</a></span>    <a class="code hl_class" href="structnode.html">node</a> <a class="code hl_variable" href="classdfs.html#af677cfc31fe06a18dd3a3aae7f7d112b">start</a>;</div>
+<div class="line"><a id="l00562" name="l00562"></a><span class="lineno"><a class="line" href="classdfs.html#ab8342c80ab208ef0e0d781f0769d0d95">  562</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="classdfs.html#ab8342c80ab208ef0e0d781f0769d0d95">whole_graph</a>;</div>
+<div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span>};</div>
+<div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span> </div>
+<div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span><a class="code hl_define" href="_g_t_l_8h.html#a46af2b3ec266ac2f9d36fa7222358017">__GTL_END_NAMESPACE</a></div>
+<div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span> </div>
+<div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span><span class="preprocessor">#endif </span><span class="comment">// GTL_DFS_H</span></div>
+<div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span> </div>
+<div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span><span class="comment">//--------------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span><span class="comment">//   end of file</span></div>
+<div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span><span class="comment">//--------------------------------------------------------------------------</span></div>
+<div class="ttc" id="a_g_t_l_8h_html"><div class="ttname"><a href="_g_t_l_8h.html">GTL.h</a></div></div>
+<div class="ttc" id="a_g_t_l_8h_html_a014cd1e9b3e67a78ae433eda95c8fd25"><div class="ttname"><a href="_g_t_l_8h.html#a014cd1e9b3e67a78ae433eda95c8fd25">GTL_EXTERN</a></div><div class="ttdeci">#define GTL_EXTERN</div><div class="ttdef"><b>Definition:</b> GTL.h:109</div></div>
+<div class="ttc" id="a_g_t_l_8h_html_a2d9f24096ac60918452dd51f32b64aa9"><div class="ttname"><a href="_g_t_l_8h.html#a2d9f24096ac60918452dd51f32b64aa9">__GTL_BEGIN_NAMESPACE</a></div><div class="ttdeci">#define __GTL_BEGIN_NAMESPACE</div><div class="ttdef"><b>Definition:</b> GTL.h:119</div></div>
+<div class="ttc" id="a_g_t_l_8h_html_a46af2b3ec266ac2f9d36fa7222358017"><div class="ttname"><a href="_g_t_l_8h.html#a46af2b3ec266ac2f9d36fa7222358017">__GTL_END_NAMESPACE</a></div><div class="ttdeci">#define __GTL_END_NAMESPACE</div><div class="ttdef"><b>Definition:</b> GTL.h:120</div></div>
+<div class="ttc" id="aalgorithm_8h_html"><div class="ttname"><a href="algorithm_8h.html">algorithm.h</a></div></div>
+<div class="ttc" id="aclassalgorithm_html"><div class="ttname"><a href="classalgorithm.html">algorithm</a></div><div class="ttdoc">Abstract baseclass for all algoritm-classes.</div><div class="ttdef"><b>Definition:</b> algorithm.h:23</div></div>
+<div class="ttc" id="aclassalgorithm_html_a21aba63d066ae7897de6ca7d8425c408"><div class="ttname"><a href="classalgorithm.html#a21aba63d066ae7897de6ca7d8425c408">algorithm::reset</a></div><div class="ttdeci">virtual void reset()=0</div><div class="ttdoc">Resets algorithm</div></div>
+<div class="ttc" id="aclassalgorithm_html_a4baee48c513c5802975743152c33f34c"><div class="ttname"><a href="classalgorithm.html#a4baee48c513c5802975743152c33f34c">algorithm::run</a></div><div class="ttdeci">virtual int run(GTL::graph &amp;g)=0</div><div class="ttdoc">Applies algorithm to graph g.</div></div>
+<div class="ttc" id="aclassalgorithm_html_a528100c0e54d446fab1e329a53935364"><div class="ttname"><a href="classalgorithm.html#a528100c0e54d446fab1e329a53935364">algorithm::check</a></div><div class="ttdeci">virtual int check(GTL::graph &amp;g)=0</div><div class="ttdoc">Checks whether all preconditions are satisfied.</div></div>
+<div class="ttc" id="aclassdfs_html"><div class="ttname"><a href="classdfs.html">dfs</a></div><div class="ttdoc">Depth-First-Search (DFS) algorithm</div><div class="ttdef"><b>Definition:</b> dfs.h:89</div></div>
+<div class="ttc" id="aclassdfs_html_a00db016ac7eab69045cae408008890c1"><div class="ttname"><a href="classdfs.html#a00db016ac7eab69045cae408008890c1">dfs::comp_number</a></div><div class="ttdeci">node_map&lt; int &gt; * comp_number</div><div class="ttdef"><b>Definition:</b> dfs.h:546</div></div>
+<div class="ttc" id="aclassdfs_html_a025ed2d6101a7b9f72578a52b484ef50"><div class="ttname"><a href="classdfs.html#a025ed2d6101a7b9f72578a52b484ef50">dfs::scan_whole_graph</a></div><div class="ttdeci">bool scan_whole_graph() const</div><div class="ttdoc">Returns true iff the whole graph will be scanned.</div><div class="ttdef"><b>Definition:</b> dfs.h:166</div></div>
+<div class="ttc" id="aclassdfs_html_a0b7f107aca56a261e3d7a411e8068646"><div class="ttname"><a href="classdfs.html#a0b7f107aca56a261e3d7a411e8068646">dfs::entry_handler</a></div><div class="ttdeci">virtual void entry_handler(GTL::graph &amp;, GTL::node &amp;, GTL::node &amp;)</div><div class="ttdoc">Handler called when touching node n.</div><div class="ttdef"><b>Definition:</b> dfs.h:436</div></div>
+<div class="ttc" id="aclassdfs_html_a0bbd5cb8df26c891b74dadd84b46a06b"><div class="ttname"><a href="classdfs.html#a0bbd5cb8df26c891b74dadd84b46a06b">dfs::roots</a></div><div class="ttdeci">std::list&lt; dfs_iterator &gt; roots</div><div class="ttdef"><b>Definition:</b> dfs.h:536</div></div>
+<div class="ttc" id="aclassdfs_html_a15fe023a5a1f7ddda00f3d87110d9a32"><div class="ttname"><a href="classdfs.html#a15fe023a5a1f7ddda00f3d87110d9a32">dfs::dfs_iterator</a></div><div class="ttdeci">nodes_t::const_iterator dfs_iterator</div><div class="ttdoc">Iterator for the (reached) nodes in DFS-order.</div><div class="ttdef"><b>Definition:</b> dfs.h:314</div></div>
+<div class="ttc" id="aclassdfs_html_a1dc18a7df8d6b238d5301c92fc7540fa"><div class="ttname"><a href="classdfs.html#a1dc18a7df8d6b238d5301c92fc7540fa">dfs::back_edges</a></div><div class="ttdeci">edges_t * back_edges</div><div class="ttdef"><b>Definition:</b> dfs.h:554</div></div>
+<div class="ttc" id="aclassdfs_html_a1ea6e8eb2766ac95ac48a8523359065a"><div class="ttname"><a href="classdfs.html#a1ea6e8eb2766ac95ac48a8523359065a">dfs::roots_iterator</a></div><div class="ttdeci">std::list&lt; dfs_iterator &gt;::const_iterator roots_iterator</div><div class="ttdoc">Iterator for the roots of the DFS-forest.</div><div class="ttdef"><b>Definition:</b> dfs.h:360</div></div>
+<div class="ttc" id="aclassdfs_html_a2948061eb1ea02f57614f9044c8e63cf"><div class="ttname"><a href="classdfs.html#a2948061eb1ea02f57614f9044c8e63cf">dfs::reached</a></div><div class="ttdeci">bool reached(const node &amp;n) const</div><div class="ttdoc">Checks whether node n was reached in last DFS.</div><div class="ttdef"><b>Definition:</b> dfs.h:235</div></div>
+<div class="ttc" id="aclassdfs_html_a3012717ce541b3e56943e2c2c50efdf6"><div class="ttname"><a href="classdfs.html#a3012717ce541b3e56943e2c2c50efdf6">dfs::father</a></div><div class="ttdeci">node father(const node &amp;n) const</div><div class="ttdoc">Returns father of node n in DFS-forest.</div><div class="ttdef"><b>Definition:</b> dfs.h:283</div></div>
+<div class="ttc" id="aclassdfs_html_a315f16831a0bd333960e87e045cb37c8"><div class="ttname"><a href="classdfs.html#a315f16831a0bd333960e87e045cb37c8">dfs::dfs_num</a></div><div class="ttdeci">int dfs_num(const node &amp;n) const</div><div class="ttdoc">DFS-Number of n.</div><div class="ttdef"><b>Definition:</b> dfs.h:247</div></div>
+<div class="ttc" id="aclassdfs_html_a3fdeb5a211a1bc1753b2a637258c5355"><div class="ttname"><a href="classdfs.html#a3fdeb5a211a1bc1753b2a637258c5355">dfs::preds</a></div><div class="ttdeci">node_map&lt; node &gt; * preds</div><div class="ttdef"><b>Definition:</b> dfs.h:550</div></div>
+<div class="ttc" id="aclassdfs_html_a4efe5bb72d00305e6b226e67c2b2ef6e"><div class="ttname"><a href="classdfs.html#a4efe5bb72d00305e6b226e67c2b2ef6e">dfs::non_tree_edges_begin</a></div><div class="ttdeci">non_tree_edges_iterator non_tree_edges_begin() const</div><div class="ttdoc">Iterate through all non-tree-edges (if enabled).</div><div class="ttdef"><b>Definition:</b> dfs.h:344</div></div>
+<div class="ttc" id="aclassdfs_html_a4f4f2d856b8a61cbe8a42e9ff223d945"><div class="ttname"><a href="classdfs.html#a4f4f2d856b8a61cbe8a42e9ff223d945">dfs::old_adj_node_handler</a></div><div class="ttdeci">virtual void old_adj_node_handler(GTL::graph &amp;, GTL::edge &amp;, GTL::node &amp;)</div><div class="ttdoc">Handler called when a already marked node n connected to the actual node by e is found during the sea...</div><div class="ttdef"><b>Definition:</b> dfs.h:478</div></div>
+<div class="ttc" id="aclassdfs_html_a6ac1f01ff594fbbc6e8d6b5bd03fc9ab"><div class="ttname"><a href="classdfs.html#a6ac1f01ff594fbbc6e8d6b5bd03fc9ab">dfs::store_non_tree_edges</a></div><div class="ttdeci">bool store_non_tree_edges() const</div><div class="ttdoc">Returns true iff the storing of non-tree-edges is enabled.</div><div class="ttdef"><b>Definition:</b> dfs.h:223</div></div>
+<div class="ttc" id="aclassdfs_html_a72c9a4dd5e737b984fcc567a029cdbcb"><div class="ttname"><a href="classdfs.html#a72c9a4dd5e737b984fcc567a029cdbcb">dfs::init_handler</a></div><div class="ttdeci">virtual void init_handler(GTL::graph &amp;)</div><div class="ttdoc">Handler called before the start of DFS.</div><div class="ttdef"><b>Definition:</b> dfs.h:420</div></div>
+<div class="ttc" id="aclassdfs_html_a7688d8eaf1308438820fec2ffe21257c"><div class="ttname"><a href="classdfs.html#a7688d8eaf1308438820fec2ffe21257c">dfs::start_node</a></div><div class="ttdeci">node start_node() const</div><div class="ttdoc">Returns start-node for DFS.</div><div class="ttdef"><b>Definition:</b> dfs.h:137</div></div>
+<div class="ttc" id="aclassdfs_html_a7c75d91d7e64557d0df79d0f2c451b10"><div class="ttname"><a href="classdfs.html#a7c75d91d7e64557d0df79d0f2c451b10">dfs::end_handler</a></div><div class="ttdeci">virtual void end_handler(GTL::graph &amp;)</div><div class="ttdoc">Handler called at the end of DFS.</div><div class="ttdef"><b>Definition:</b> dfs.h:427</div></div>
+<div class="ttc" id="aclassdfs_html_a878303546558916a427d0a3b8b95dc72"><div class="ttname"><a href="classdfs.html#a878303546558916a427d0a3b8b95dc72">dfs::before_recursive_call_handler</a></div><div class="ttdeci">virtual void before_recursive_call_handler(GTL::graph &amp;, GTL::edge &amp;, GTL::node &amp;)</div><div class="ttdoc">Handler called when a unused node n connected to the actual node by e is found.</div><div class="ttdef"><b>Definition:</b> dfs.h:456</div></div>
+<div class="ttc" id="aclassdfs_html_a8e15e709d735d0002f3d7c6044b4e302"><div class="ttname"><a href="classdfs.html#a8e15e709d735d0002f3d7c6044b4e302">dfs::new_start_handler</a></div><div class="ttdeci">virtual void new_start_handler(GTL::graph &amp;, GTL::node &amp;)</div><div class="ttdoc">Called when DFS is started with start-node n.</div><div class="ttdef"><b>Definition:</b> dfs.h:490</div></div>
+<div class="ttc" id="aclassdfs_html_a95e353f354d3b31daded0c4fe749171a"><div class="ttname"><a href="classdfs.html#a95e353f354d3b31daded0c4fe749171a">dfs::non_tree_edges_iterator</a></div><div class="ttdeci">edges_t::const_iterator non_tree_edges_iterator</div><div class="ttdoc">Iterator for the non-tree-edges</div><div class="ttdef"><b>Definition:</b> dfs.h:336</div></div>
+<div class="ttc" id="aclassdfs_html_a99727f2274d6af63daae4f0518f3adbe"><div class="ttname"><a href="classdfs.html#a99727f2274d6af63daae4f0518f3adbe">dfs::dfs_number</a></div><div class="ttdeci">node_map&lt; int &gt; dfs_number</div><div class="ttdef"><b>Definition:</b> dfs.h:524</div></div>
+<div class="ttc" id="aclassdfs_html_a9bcd9492189dac3aff8ecd4b6e2c90f6"><div class="ttname"><a href="classdfs.html#a9bcd9492189dac3aff8ecd4b6e2c90f6">dfs::leave_handler</a></div><div class="ttdeci">virtual void leave_handler(GTL::graph &amp;, GTL::node &amp;, GTL::node &amp;)</div><div class="ttdoc">Handler called after all the adjacent edges of n have been examined.</div><div class="ttdef"><b>Definition:</b> dfs.h:446</div></div>
+<div class="ttc" id="aclassdfs_html_aa7c864a6f3a120720138b187b3ed95b5"><div class="ttname"><a href="classdfs.html#aa7c864a6f3a120720138b187b3ed95b5">dfs::scan_whole_graph</a></div><div class="ttdeci">void scan_whole_graph(bool set)</div><div class="ttdoc">Enables or disables scanning of the whole graph.</div><div class="ttdef"><b>Definition:</b> dfs.h:157</div></div>
+<div class="ttc" id="aclassdfs_html_aad21fd0d3036350fd341f877d5747852"><div class="ttname"><a href="classdfs.html#aad21fd0d3036350fd341f877d5747852">dfs::start_node</a></div><div class="ttdeci">void start_node(const node &amp;n)</div><div class="ttdoc">Sets start-node for DFS.</div><div class="ttdef"><b>Definition:</b> dfs.h:129</div></div>
+<div class="ttc" id="aclassdfs_html_ab0251ac30adfd569e214a64db7f3a905"><div class="ttname"><a href="classdfs.html#ab0251ac30adfd569e214a64db7f3a905">dfs::act_comp_num</a></div><div class="ttdeci">int act_comp_num</div><div class="ttdef"><b>Definition:</b> dfs.h:512</div></div>
+<div class="ttc" id="aclassdfs_html_ab06650dd8cbd5e76b0c73b71458ec5ec"><div class="ttname"><a href="classdfs.html#ab06650dd8cbd5e76b0c73b71458ec5ec">dfs::begin</a></div><div class="ttdeci">dfs_iterator begin() const</div><div class="ttdoc">Iterate through all (reached) nodes in DFS-order.</div><div class="ttdef"><b>Definition:</b> dfs.h:321</div></div>
+<div class="ttc" id="aclassdfs_html_ab8342c80ab208ef0e0d781f0769d0d95"><div class="ttname"><a href="classdfs.html#ab8342c80ab208ef0e0d781f0769d0d95">dfs::whole_graph</a></div><div class="ttdeci">bool whole_graph</div><div class="ttdef"><b>Definition:</b> dfs.h:562</div></div>
+<div class="ttc" id="aclassdfs_html_aba80ac24a78448f10b32473633cd2a5d"><div class="ttname"><a href="classdfs.html#aba80ac24a78448f10b32473633cd2a5d">dfs::calc_comp_num</a></div><div class="ttdeci">bool calc_comp_num() const</div><div class="ttdoc">Returns true iff completion-numbers will be calculated.</div><div class="ttdef"><b>Definition:</b> dfs.h:182</div></div>
+<div class="ttc" id="aclassdfs_html_acb11186a1a2a2a1f38cdc0674340ba37"><div class="ttname"><a href="classdfs.html#acb11186a1a2a2a1f38cdc0674340ba37">dfs::reached_nodes</a></div><div class="ttdeci">int reached_nodes</div><div class="ttdef"><b>Definition:</b> dfs.h:528</div></div>
+<div class="ttc" id="aclassdfs_html_accde8d5403404f6d22fe4756d4ffedd5"><div class="ttname"><a href="classdfs.html#accde8d5403404f6d22fe4756d4ffedd5">dfs::tree_edges_iterator</a></div><div class="ttdeci">edges_t::const_iterator tree_edges_iterator</div><div class="ttdoc">Iterator for the tree edges of the DFS-tree.</div><div class="ttdef"><b>Definition:</b> dfs.h:289</div></div>
+<div class="ttc" id="aclassdfs_html_aceb066c806cb0beb5688b167a17387c7"><div class="ttname"><a href="classdfs.html#aceb066c806cb0beb5688b167a17387c7">dfs::comp_num</a></div><div class="ttdeci">int comp_num(const node &amp;n) const</div><div class="ttdoc">Completion-number of node n, if enabled in last run.</div><div class="ttdef"><b>Definition:</b> dfs.h:270</div></div>
+<div class="ttc" id="aclassdfs_html_ad0233128f2958d630102096aa6f3b9ef"><div class="ttname"><a href="classdfs.html#ad0233128f2958d630102096aa6f3b9ef">dfs::store_preds</a></div><div class="ttdeci">bool store_preds() const</div><div class="ttdoc">Returns true iff the storing of predecessors is enabled.</div><div class="ttdef"><b>Definition:</b> dfs.h:202</div></div>
+<div class="ttc" id="aclassdfs_html_ad1b9f759569cb52ba7ee415862c79831"><div class="ttname"><a href="classdfs.html#ad1b9f759569cb52ba7ee415862c79831">dfs::tree_edges_end</a></div><div class="ttdeci">tree_edges_iterator tree_edges_end() const</div><div class="ttdoc">End-iterator for iteration through all edges picked in last DFS.</div><div class="ttdef"><b>Definition:</b> dfs.h:308</div></div>
+<div class="ttc" id="aclassdfs_html_ad9cd92a18bda23edca8ab3ac60a15ef4"><div class="ttname"><a href="classdfs.html#ad9cd92a18bda23edca8ab3ac60a15ef4">dfs::non_tree_edges_end</a></div><div class="ttdeci">non_tree_edges_iterator non_tree_edges_end() const</div><div class="ttdoc">End-iterator for iteration through all non-tree-edges (if enabled).</div><div class="ttdef"><b>Definition:</b> dfs.h:354</div></div>
+<div class="ttc" id="aclassdfs_html_ae1a61d8c2d8d99059cab410f766ec73f"><div class="ttname"><a href="classdfs.html#ae1a61d8c2d8d99059cab410f766ec73f">dfs::roots_end</a></div><div class="ttdeci">roots_iterator roots_end() const</div><div class="ttdoc">Iterator pointing to the end of all roots.</div><div class="ttdef"><b>Definition:</b> dfs.h:398</div></div>
+<div class="ttc" id="aclassdfs_html_ae6314aecf5c3239f8dd47b7df84a9cd8"><div class="ttname"><a href="classdfs.html#ae6314aecf5c3239f8dd47b7df84a9cd8">dfs::after_recursive_call_handler</a></div><div class="ttdeci">virtual void after_recursive_call_handler(GTL::graph &amp;, GTL::edge &amp;, GTL::node &amp;)</div><div class="ttdoc">Handler called after the algorithm returns from the subtree starting at n connected to the actual nod...</div><div class="ttdef"><b>Definition:</b> dfs.h:467</div></div>
+<div class="ttc" id="aclassdfs_html_ae8849a552721ad4af5d9a81c6da35822"><div class="ttname"><a href="classdfs.html#ae8849a552721ad4af5d9a81c6da35822">dfs::number_of_reached_nodes</a></div><div class="ttdeci">int number_of_reached_nodes() const</div><div class="ttdoc">Number of nodes reached in last DFS.</div><div class="ttdef"><b>Definition:</b> dfs.h:407</div></div>
+<div class="ttc" id="aclassdfs_html_aed496b618a937723bfec0b463e17e8d5"><div class="ttname"><a href="classdfs.html#aed496b618a937723bfec0b463e17e8d5">dfs::tree</a></div><div class="ttdeci">edges_t tree</div><div class="ttdef"><b>Definition:</b> dfs.h:516</div></div>
+<div class="ttc" id="aclassdfs_html_aedaf2b485ff83150b1de6c305922473b"><div class="ttname"><a href="classdfs.html#aedaf2b485ff83150b1de6c305922473b">dfs::act_dfs_num</a></div><div class="ttdeci">int act_dfs_num</div><div class="ttdef"><b>Definition:</b> dfs.h:508</div></div>
+<div class="ttc" id="aclassdfs_html_af56fa2b736f0b924dba1257e18ba4b61"><div class="ttname"><a href="classdfs.html#af56fa2b736f0b924dba1257e18ba4b61">dfs::roots_begin</a></div><div class="ttdeci">roots_iterator roots_begin() const</div><div class="ttdoc">Iterator pointing towards the first root in the DFS-forest.</div><div class="ttdef"><b>Definition:</b> dfs.h:389</div></div>
+<div class="ttc" id="aclassdfs_html_af677cfc31fe06a18dd3a3aae7f7d112b"><div class="ttname"><a href="classdfs.html#af677cfc31fe06a18dd3a3aae7f7d112b">dfs::start</a></div><div class="ttdeci">node start</div><div class="ttdef"><b>Definition:</b> dfs.h:558</div></div>
+<div class="ttc" id="aclassdfs_html_af70a73ace68afd91ef944f984c9f28d5"><div class="ttname"><a href="classdfs.html#af70a73ace68afd91ef944f984c9f28d5">dfs::dfs_order</a></div><div class="ttdeci">nodes_t dfs_order</div><div class="ttdef"><b>Definition:</b> dfs.h:520</div></div>
+<div class="ttc" id="aclassdfs_html_af847633fa642258d3522e8deb26aef37"><div class="ttname"><a href="classdfs.html#af847633fa642258d3522e8deb26aef37">dfs::end</a></div><div class="ttdeci">dfs_iterator end() const</div><div class="ttdoc">End-Iterator for iteration through all (reached) nodes in DFS-order.</div><div class="ttdef"><b>Definition:</b> dfs.h:330</div></div>
+<div class="ttc" id="aclassdfs_html_afc18288747491be301d6d8d85d8f220b"><div class="ttname"><a href="classdfs.html#afc18288747491be301d6d8d85d8f220b">dfs::used</a></div><div class="ttdeci">edge_map&lt; int &gt; * used</div><div class="ttdef"><b>Definition:</b> dfs.h:532</div></div>
+<div class="ttc" id="aclassdfs_html_afe193938a05b114870c19163731273c8"><div class="ttname"><a href="classdfs.html#afe193938a05b114870c19163731273c8">dfs::tree_edges_begin</a></div><div class="ttdeci">tree_edges_iterator tree_edges_begin() const</div><div class="ttdoc">Iterate through all edges picked in last DFS.</div><div class="ttdef"><b>Definition:</b> dfs.h:300</div></div>
+<div class="ttc" id="aclassedge__map_html"><div class="ttname"><a href="classedge__map.html">edge_map&lt; int &gt;</a></div></div>
+<div class="ttc" id="aclassnode__map_html"><div class="ttname"><a href="classnode__map.html">node_map&lt; int &gt;</a></div></div>
+<div class="ttc" id="aclassset_html"><div class="ttname"><a href="classset.html">set</a></div><div class="ttdef"><b>Definition:</b> pytypes.h:1277</div></div>
+<div class="ttc" id="aedge_8h_html_a22ac17689106ba21a84e7bc54d1199d6"><div class="ttname"><a href="edge_8h.html#a22ac17689106ba21a84e7bc54d1199d6">nodes_t</a></div><div class="ttdeci">std::list&lt; node &gt; nodes_t</div><div class="ttdef"><b>Definition:</b> edge.h:24</div></div>
+<div class="ttc" id="aedge_8h_html_a8f9587479bda6cf612c103494b3858e3"><div class="ttname"><a href="edge_8h.html#a8f9587479bda6cf612c103494b3858e3">edges_t</a></div><div class="ttdeci">std::list&lt; edge &gt; edges_t</div><div class="ttdef"><b>Definition:</b> edge.h:141</div></div>
+<div class="ttc" id="alist_8h_html_af4aeda155dbe167f1c1cf38cb65bf324"><div class="ttname"><a href="list_8h.html#af4aeda155dbe167f1c1cf38cb65bf324">node</a></div><div class="ttdeci">struct node node</div><div class="ttdef"><b>Definition:</b> edge.h:133</div></div>
+<div class="ttc" id="astructnode_html"><div class="ttname"><a href="structnode.html">node</a></div><div class="ttdoc">A node in a graph</div><div class="ttdef"><b>Definition:</b> list.h:4</div></div>
+<div class="ttc" id="astructtree_html"><div class="ttname"><a href="structtree.html">tree</a></div><div class="ttdef"><b>Definition:</b> darknet.h:91</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>

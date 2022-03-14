@@ -1,0 +1,881 @@
+\hypertarget{class_l_d_e_s_tracker}{}\doxysection{LDESTracker类 参考}
+\label{class_l_d_e_s_tracker}\index{LDESTracker@{LDESTracker}}
+
+
+{\ttfamily \#include $<$ldes\+\_\+tracker.\+h$>$}
+
+
+
+类 LDESTracker 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=154pt]{class_l_d_e_s_tracker__inherit__graph}
+\end{center}
+\end{figure}
+
+
+LDESTracker 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=154pt]{class_l_d_e_s_tracker__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_l_d_e_s_tracker_aaba70db7f7b94254447ff9038f25f1fd}{LDESTracker}} ()
+\item 
+\mbox{\hyperlink{class_l_d_e_s_tracker_a7b59c838841fc6c21efbadb477525ebe}{$\sim$\+LDESTracker}} ()
+\item 
+void \mbox{\hyperlink{class_l_d_e_s_tracker_a8bff1f8193f9556a47ec42449e107c25}{Initialize}} (const cv\+::\+Mat \&im, cv\+::\+Rect region)
+\item 
+cv\+::\+Rotated\+Rect \mbox{\hyperlink{class_l_d_e_s_tracker_aeb6787e2111fe4e0adc66143d5dc3321}{Update}} (const cv\+::\+Mat \&im, float \&confidence)
+\item 
+void \mbox{\hyperlink{class_l_d_e_s_tracker_ace42ba92eabcd9bbcb185ff923b0e559}{Train}} (const cv\+::\+Mat \&, bool)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+cv\+::\+Rect \mbox{\hyperlink{class_l_d_e_s_tracker_afadb53b7bc415c573fdf1f0bfb3337a8}{test\+KCFTracker}} (const cv\+::\+Mat \&\mbox{\hyperlink{structimage}{image}}, cv\+::\+Rect \&rect, bool \mbox{\hyperlink{pybind11_8h_a144961765ca31801e21d87651871934c}{init}}=false)
+\item 
+cv\+::\+Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a96d1bbb9db58eb6bf2b4af10987807a8}{get\+Features}} (const cv\+::\+Mat \&\mbox{\hyperlink{class_l_d_e_s_tracker_a8da3e329a9c7bdaf50a2dc16cf72ec9b}{patch}}, cv\+::\+Mat \&han, int $\ast$sizes, bool inithann=false)
+\item 
+cv\+::\+Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a184fbf905ef9806d2e59e950dcf4c9ce}{get\+Pix\+Features}} (const cv\+::\+Mat \&\mbox{\hyperlink{class_l_d_e_s_tracker_a8da3e329a9c7bdaf50a2dc16cf72ec9b}{patch}}, int $\ast$size)
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_a9635d478fda23d5d469f3ebc332e7d97}{sub\+Pixel\+Peak}} (float left, float center, float right)
+\item 
+void \mbox{\hyperlink{class_l_d_e_s_tracker_aa514ef7af99c9cd096872f0fa6a63cb8}{weighted\+Peak}} (cv\+::\+Mat \&resmap, cv\+::\+Point2f \&peak, int pad=2)
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_a4e948ed63c15f3641114ffe49d80addc}{calc\+PSR}} ()
+\item 
+void \mbox{\hyperlink{class_l_d_e_s_tracker_ac9e74557bc5f22e75833fb7a5eae1db3}{update\+Model}} (const cv\+::\+Mat \&\mbox{\hyperlink{structimage}{image}}, int polish)
+\item 
+void \mbox{\hyperlink{class_l_d_e_s_tracker_af14e45023f747b275b6acdff7ad35d7a}{estimate\+Location}} (cv\+::\+Mat \&\mbox{\hyperlink{utils_8c_a3d99b005d0fb73033dce14d4a135d01f}{z}}, cv\+::\+Mat \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}})
+\item 
+void \mbox{\hyperlink{class_l_d_e_s_tracker_a89bbabe2f8cd3a6006947d3b41624b37}{estimate\+Scale}} (cv\+::\+Mat \&\mbox{\hyperlink{utils_8c_a3d99b005d0fb73033dce14d4a135d01f}{z}}, cv\+::\+Mat \&\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}})
+\item 
+void \mbox{\hyperlink{class_l_d_e_s_tracker_ab92d1883932a0cb37d7209b881859bbf}{train\+Location}} (cv\+::\+Mat \&\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, float train\+\_\+interp\+\_\+factor\+\_\+)
+\item 
+void \mbox{\hyperlink{class_l_d_e_s_tracker_a9b36cdc00e94b31b76b42f80bde51f3a}{train\+Scale}} (cv\+::\+Mat \&\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, float train\+\_\+interp\+\_\+factor\+\_\+)
+\item 
+void \mbox{\hyperlink{class_l_d_e_s_tracker_aa01da938d5114b7362959a2f35901843}{create\+Gaussian\+Peak}} (int sizey, int sizex)
+\item 
+void \mbox{\hyperlink{class_l_d_e_s_tracker_af99c0efb85c627bccd77dbcae5922f5d}{get\+Templates}} (const cv\+::\+Mat \&\mbox{\hyperlink{structimage}{image}})
+\item 
+void \mbox{\hyperlink{class_l_d_e_s_tracker_aad7aeec67c94957ba4c06bb0c12e8401}{get\+Sub\+Window}} (const cv\+::\+Mat \&\mbox{\hyperlink{structimage}{image}}, const char $\ast$type=\char`\"{}loc\char`\"{})
+\item 
+cv\+::\+Mat \mbox{\hyperlink{class_l_d_e_s_tracker_aaf5f190ce548258948b7d692633ea583}{pad\+Image}} (const cv\+::\+Mat \&\mbox{\hyperlink{structimage}{image}}, int \&x1, int \&y1, int \&x2, int \&y2)
+\item 
+cv\+::\+Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a31fd75624683205d2b9864c71ca03831}{crop\+Image}} (const cv\+::\+Mat \&\mbox{\hyperlink{structimage}{image}}, const cv\+::\+Point2i \&pos, int sz)
+\item 
+cv\+::\+Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a330de22cd3a9fe29a6546f728a1b385a}{crop\+Image\+Affine}} (const cv\+::\+Mat \&\mbox{\hyperlink{structimage}{image}}, const cv\+::\+Point2i \&pos, int win\+\_\+sz, float rot)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected 属性}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_a048a0ddf31374e81e8041d652992132f}{interp\+\_\+n}}
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_a19b1108728ed4b1fb10abd374a441c96}{interp\+\_\+factor}}
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_a43a6372eac8af2d77fdefced96f9fd81}{sigma}}
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_a8e9029fbd8e95a5ddbf668652db8aa0f}{lambda}}
+\item 
+int \mbox{\hyperlink{class_l_d_e_s_tracker_a7694b9173da3c7280f27e4b15e9511b1}{cell\+\_\+size}}
+\item 
+int \mbox{\hyperlink{class_l_d_e_s_tracker_acacebb23951c9faa837bf3c3f912e58d}{cell\+\_\+sizeQ}}
+\item 
+int \mbox{\hyperlink{class_l_d_e_s_tracker_abfb4c32e3b6cd77e2955384797a870ea}{cell\+\_\+size\+\_\+scale}}
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_af7749b5eb5298e402515db74a4d04f10}{padding}}
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_a0eb0f663e0d944cb074176d4bea0750b}{scale\+\_\+padding}}
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_a7454469a1b9f469e9911096c96027fca}{output\+\_\+sigma\+\_\+factor}}
+\item 
+int \mbox{\hyperlink{class_l_d_e_s_tracker_aa0ee58023a5aba24611b929a80957520}{template\+\_\+size}}
+\item 
+int \mbox{\hyperlink{class_l_d_e_s_tracker_a52173be29985758ce85223d6304bbcdd}{scale\+\_\+template\+\_\+size}}
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_a53bed0f62493ea734e9b1eac31413e42}{scale\+\_\+step}}
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_a629c3e2676856d2a14667d889475a80e}{scale\+\_\+weight}}
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_af6eda28dc5aa540048de279b8f540b84}{train\+\_\+interp\+\_\+factor}}
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_ae446a6357831e22264e6e87601390853}{interp\+\_\+factor\+\_\+scale}}
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_a09f7d88f11bf2169e04df1817104a639}{cscore}}
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_a650426f0319fa074c00ecf4d819d718a}{sscore}}
+\item 
+cv\+::\+Size \mbox{\hyperlink{class_l_d_e_s_tracker_aab61b7511c01d7b81cd6ee78932f0ee1}{target\+\_\+sz}}
+\item 
+cv\+::\+Size \mbox{\hyperlink{class_l_d_e_s_tracker_a70e5500af8f2ae3f855100481b872280}{target\+\_\+sz0}}
+\item 
+int \mbox{\hyperlink{class_l_d_e_s_tracker_a43f065706df64b14d058b7b162988d06}{window\+\_\+sz}}
+\item 
+int \mbox{\hyperlink{class_l_d_e_s_tracker_aabbfc0cce201fd049f7948b916390cee}{window\+\_\+sz0}}
+\item 
+int \mbox{\hyperlink{class_l_d_e_s_tracker_a2cd80969334198340c44e355db555a72}{scale\+\_\+sz}}
+\item 
+int \mbox{\hyperlink{class_l_d_e_s_tracker_a0ac26ebe27333ea43fd8dec6702b88f7}{scale\+\_\+sz0}}
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_a466c1ff3a9cd35a32adc4a94322a0b62}{scale\+\_\+base}}
+\item 
+cv\+::\+Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a7f1334e9df4096cafd88e1b2c29e5bd8}{hann}}
+\item 
+cv\+::\+Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a8da3e329a9c7bdaf50a2dc16cf72ec9b}{patch}}
+\item 
+cv\+::\+Mat \mbox{\hyperlink{class_l_d_e_s_tracker_aee739c2b02f01a55d57bfa537dc1bd52}{patchL}}
+\item 
+cv\+::\+Point2i \mbox{\hyperlink{class_l_d_e_s_tracker_a749642268fb92f9790e692ab9f5a6a12}{cur\+\_\+pos}}
+\item 
+cv\+::\+Rect \mbox{\hyperlink{class_l_d_e_s_tracker_a7fdc930c3c7c9eebbf53afdc5652d656}{cur\+\_\+roi}}
+\item 
+std\+::vector$<$ cv\+::\+Point2i $>$ \mbox{\hyperlink{class_l_d_e_s_tracker_a588c1899c5952a13ebb34961ddcb54c4}{rotated\+\_\+roi}}
+\item 
+int \mbox{\hyperlink{class_l_d_e_s_tracker_a5614d7a70c6f80ae0822cffb2d88696b}{im\+\_\+width}}
+\item 
+int \mbox{\hyperlink{class_l_d_e_s_tracker_a1fbeca27d9caf10b9bcea36c5bf9eb6f}{im\+\_\+height}}
+\item 
+const float \mbox{\hyperlink{class_l_d_e_s_tracker_aaa51a8c1b20dfece26369373d62d350d}{min\+\_\+area}} = 100 $\ast$ 100
+\item 
+const float \mbox{\hyperlink{class_l_d_e_s_tracker_a29e6c6c65a6bcd2f994048cc0f4b9101}{max\+\_\+area}} = 350 $\ast$ 350
+\item 
+cv\+::\+Rect \mbox{\hyperlink{class_l_d_e_s_tracker_abffdbd79fdb8d141fdcebde9404c81a5}{cur\+\_\+position}}
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_a4a1ecfbfa5e6367aafdf78e78a27f410}{cur\+\_\+rot\+\_\+degree}}
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_a1c2a2edb9d84aed7c2c80ca382a5f462}{cur\+\_\+scale}}
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_a2eea37ca8a378a7833c18a0050ddacfd}{\+\_\+scale}}
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_aa237c53e2a154802f29d6bd49cc988e4}{\+\_\+scale2}}
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_ac0f7aa5084156dbc490af9012a860f83}{delta\+\_\+rot}}
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_a925b7efda9b5132224ce983531ef49a2}{delta\+\_\+scale}}
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_abd27e9fd52141b7ec3ef96214a469a54}{mag}}
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_a6f7292450bdf4ea4c4a30c2e37029d0a}{conf}}
+\item 
+cv\+::\+Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a194ad82c71152b5f76ad92f4c327ba72}{resmap\+\_\+location}}
+\item 
+float \mbox{\hyperlink{class_l_d_e_s_tracker_a4bf49a3747e7f95f93438c1fd89e8b9f}{pv\+\_\+location}}
+\item 
+cv\+::\+Point2f \mbox{\hyperlink{class_l_d_e_s_tracker_ac0f331fa1a592fefa79db33727794c6f}{peak\+\_\+loc}}
+\item 
+cv\+::\+Mat \mbox{\hyperlink{class_l_d_e_s_tracker_abdc324cfed3a37c86281bbc1ea150b5a}{hog\+Features}}
+\item 
+cv\+::\+Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a4aac76a0558aba97952cf2f7584f5930}{\+\_\+alphaf}}
+\item 
+cv\+::\+Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a03997d29bd2b5fd742daac56656ffc12}{\+\_\+y}}
+\item 
+cv\+::\+Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a42257d4b37d1d75a9cc4f8eafb36c3de}{\+\_\+yf}}
+\item 
+cv\+::\+Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a7e47ee55f35f6e7bb42fd0c8bf32af74}{\+\_\+z}}
+\item 
+cv\+::\+Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a41b0d455fe97c6b53b9270fee4222006}{\+\_\+z\+\_\+srch}}
+\item 
+cv\+::\+Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a1226776af78fff71528dade3f4925287}{model\+Patch}}
+\item 
+cv\+::\+Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a1b5a4252c437ada5073b55efa248206d}{\+\_\+num}}
+\item 
+cv\+::\+Mat \mbox{\hyperlink{class_l_d_e_s_tracker_ac344ed54df2a9423957b3bf0821f5467}{\+\_\+den}}
+\item 
+cv\+::\+Mat \mbox{\hyperlink{class_l_d_e_s_tracker_a3e1356df43710556d40cd4b7e986bc0f}{\+\_\+lab\+Centroids}}
+\item 
+cv\+::\+Rect \mbox{\hyperlink{class_l_d_e_s_tracker_ac69c969cf1922c94c27a8b4f7d94df86}{\+\_\+roi}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_l_d_e_s_tracker_a1cf7672fecb23578d26419748d47ec6b}{size\+\_\+patch}} \mbox{[}3\mbox{]}
+\item 
+int \mbox{\hyperlink{class_l_d_e_s_tracker_a6222c5f83dc79d28f392fe762a3be2b3}{size\+\_\+scale}} \mbox{[}3\mbox{]}
+\item 
+int \mbox{\hyperlink{class_l_d_e_s_tracker_a8d28a2a47a3e46d66ea88c96db7c633b}{size\+\_\+search}} \mbox{[}3\mbox{]}
+\item 
+int \mbox{\hyperlink{class_l_d_e_s_tracker_ac53dabfc8bd8b0a877e9c909cbe5d9d4}{\+\_\+gaussian\+\_\+size}}
+\item 
+bool \mbox{\hyperlink{class_l_d_e_s_tracker_aa9a7f920b279e40fb41b48d1e79568bd}{\+\_\+hogfeatures}}
+\item 
+bool \mbox{\hyperlink{class_l_d_e_s_tracker_aeaca85cfc96c48bc9ea56fd3be7e8aa5}{\+\_\+labfeatures}}
+\item 
+bool \mbox{\hyperlink{class_l_d_e_s_tracker_a1df11e09b8e5df40984d5ded0870b38f}{\+\_\+rotation}}
+\item 
+bool \mbox{\hyperlink{class_l_d_e_s_tracker_a285bbcd6ee5f73cd6ea563e0afa50b6b}{\+\_\+scale\+\_\+hog}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{class_l_d_e_s_tracker_aaba70db7f7b94254447ff9038f25f1fd}\label{class_l_d_e_s_tracker_aaba70db7f7b94254447ff9038f25f1fd}} 
+\index{LDESTracker@{LDESTracker}!LDESTracker@{LDESTracker}}
+\index{LDESTracker@{LDESTracker}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{LDESTracker()}{LDESTracker()}}
+{\footnotesize\ttfamily LDESTracker\+::\+LDESTracker (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a7b59c838841fc6c21efbadb477525ebe}\label{class_l_d_e_s_tracker_a7b59c838841fc6c21efbadb477525ebe}} 
+\index{LDESTracker@{LDESTracker}!````~LDESTracker@{$\sim$LDESTracker}}
+\index{````~LDESTracker@{$\sim$LDESTracker}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{$\sim$LDESTracker()}{~LDESTracker()}}
+{\footnotesize\ttfamily LDESTracker\+::$\sim$\+LDESTracker (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a4e948ed63c15f3641114ffe49d80addc}\label{class_l_d_e_s_tracker_a4e948ed63c15f3641114ffe49d80addc}} 
+\index{LDESTracker@{LDESTracker}!calcPSR@{calcPSR}}
+\index{calcPSR@{calcPSR}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{calcPSR()}{calcPSR()}}
+{\footnotesize\ttfamily float LDESTracker\+::calc\+PSR (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_aa01da938d5114b7362959a2f35901843}\label{class_l_d_e_s_tracker_aa01da938d5114b7362959a2f35901843}} 
+\index{LDESTracker@{LDESTracker}!createGaussianPeak@{createGaussianPeak}}
+\index{createGaussianPeak@{createGaussianPeak}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{createGaussianPeak()}{createGaussianPeak()}}
+{\footnotesize\ttfamily void LDESTracker\+::create\+Gaussian\+Peak (\begin{DoxyParamCaption}\item[{int}]{sizey,  }\item[{int}]{sizex }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=316pt]{class_l_d_e_s_tracker_aa01da938d5114b7362959a2f35901843_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a31fd75624683205d2b9864c71ca03831}\label{class_l_d_e_s_tracker_a31fd75624683205d2b9864c71ca03831}} 
+\index{LDESTracker@{LDESTracker}!cropImage@{cropImage}}
+\index{cropImage@{cropImage}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{cropImage()}{cropImage()}}
+{\footnotesize\ttfamily cv\+::\+Mat LDESTracker\+::crop\+Image (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{image,  }\item[{const cv\+::\+Point2i \&}]{pos,  }\item[{int}]{sz }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_l_d_e_s_tracker_a31fd75624683205d2b9864c71ca03831_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a330de22cd3a9fe29a6546f728a1b385a}\label{class_l_d_e_s_tracker_a330de22cd3a9fe29a6546f728a1b385a}} 
+\index{LDESTracker@{LDESTracker}!cropImageAffine@{cropImageAffine}}
+\index{cropImageAffine@{cropImageAffine}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{cropImageAffine()}{cropImageAffine()}}
+{\footnotesize\ttfamily cv\+::\+Mat LDESTracker\+::crop\+Image\+Affine (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{image,  }\item[{const cv\+::\+Point2i \&}]{pos,  }\item[{int}]{win\+\_\+sz,  }\item[{float}]{rot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_l_d_e_s_tracker_a330de22cd3a9fe29a6546f728a1b385a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_l_d_e_s_tracker_af14e45023f747b275b6acdff7ad35d7a}\label{class_l_d_e_s_tracker_af14e45023f747b275b6acdff7ad35d7a}} 
+\index{LDESTracker@{LDESTracker}!estimateLocation@{estimateLocation}}
+\index{estimateLocation@{estimateLocation}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{estimateLocation()}{estimateLocation()}}
+{\footnotesize\ttfamily void LDESTracker\+::estimate\+Location (\begin{DoxyParamCaption}\item[{cv\+::\+Mat \&}]{z,  }\item[{cv\+::\+Mat}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_l_d_e_s_tracker_af14e45023f747b275b6acdff7ad35d7a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a89bbabe2f8cd3a6006947d3b41624b37}\label{class_l_d_e_s_tracker_a89bbabe2f8cd3a6006947d3b41624b37}} 
+\index{LDESTracker@{LDESTracker}!estimateScale@{estimateScale}}
+\index{estimateScale@{estimateScale}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{estimateScale()}{estimateScale()}}
+{\footnotesize\ttfamily void LDESTracker\+::estimate\+Scale (\begin{DoxyParamCaption}\item[{cv\+::\+Mat \&}]{z,  }\item[{cv\+::\+Mat \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_l_d_e_s_tracker_a89bbabe2f8cd3a6006947d3b41624b37_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a96d1bbb9db58eb6bf2b4af10987807a8}\label{class_l_d_e_s_tracker_a96d1bbb9db58eb6bf2b4af10987807a8}} 
+\index{LDESTracker@{LDESTracker}!getFeatures@{getFeatures}}
+\index{getFeatures@{getFeatures}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{getFeatures()}{getFeatures()}}
+{\footnotesize\ttfamily cv\+::\+Mat LDESTracker\+::get\+Features (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{patch,  }\item[{cv\+::\+Mat \&}]{han,  }\item[{int $\ast$}]{sizes,  }\item[{bool}]{inithann = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_l_d_e_s_tracker_a96d1bbb9db58eb6bf2b4af10987807a8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a184fbf905ef9806d2e59e950dcf4c9ce}\label{class_l_d_e_s_tracker_a184fbf905ef9806d2e59e950dcf4c9ce}} 
+\index{LDESTracker@{LDESTracker}!getPixFeatures@{getPixFeatures}}
+\index{getPixFeatures@{getPixFeatures}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{getPixFeatures()}{getPixFeatures()}}
+{\footnotesize\ttfamily cv\+::\+Mat LDESTracker\+::get\+Pix\+Features (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{patch,  }\item[{int $\ast$}]{size }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_l_d_e_s_tracker_a184fbf905ef9806d2e59e950dcf4c9ce_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_l_d_e_s_tracker_aad7aeec67c94957ba4c06bb0c12e8401}\label{class_l_d_e_s_tracker_aad7aeec67c94957ba4c06bb0c12e8401}} 
+\index{LDESTracker@{LDESTracker}!getSubWindow@{getSubWindow}}
+\index{getSubWindow@{getSubWindow}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{getSubWindow()}{getSubWindow()}}
+{\footnotesize\ttfamily void LDESTracker\+::get\+Sub\+Window (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{image,  }\item[{const char $\ast$}]{type = {\ttfamily \char`\"{}loc\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_l_d_e_s_tracker_aad7aeec67c94957ba4c06bb0c12e8401_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_l_d_e_s_tracker_af99c0efb85c627bccd77dbcae5922f5d}\label{class_l_d_e_s_tracker_af99c0efb85c627bccd77dbcae5922f5d}} 
+\index{LDESTracker@{LDESTracker}!getTemplates@{getTemplates}}
+\index{getTemplates@{getTemplates}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{getTemplates()}{getTemplates()}}
+{\footnotesize\ttfamily void LDESTracker\+::get\+Templates (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{image }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_l_d_e_s_tracker_af99c0efb85c627bccd77dbcae5922f5d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a8bff1f8193f9556a47ec42449e107c25}\label{class_l_d_e_s_tracker_a8bff1f8193f9556a47ec42449e107c25}} 
+\index{LDESTracker@{LDESTracker}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily void LDESTracker\+::\+Initialize (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{im,  }\item[{cv\+::\+Rect}]{region }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+实现了 \mbox{\hyperlink{class_v_o_t_tracker_a013f139e8189f60554eff390f179522e}{VOTTracker}}.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_l_d_e_s_tracker_a8bff1f8193f9556a47ec42449e107c25_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_l_d_e_s_tracker_aaf5f190ce548258948b7d692633ea583}\label{class_l_d_e_s_tracker_aaf5f190ce548258948b7d692633ea583}} 
+\index{LDESTracker@{LDESTracker}!padImage@{padImage}}
+\index{padImage@{padImage}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{padImage()}{padImage()}}
+{\footnotesize\ttfamily cv\+::\+Mat LDESTracker\+::pad\+Image (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{image,  }\item[{int \&}]{x1,  }\item[{int \&}]{y1,  }\item[{int \&}]{x2,  }\item[{int \&}]{y2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a9635d478fda23d5d469f3ebc332e7d97}\label{class_l_d_e_s_tracker_a9635d478fda23d5d469f3ebc332e7d97}} 
+\index{LDESTracker@{LDESTracker}!subPixelPeak@{subPixelPeak}}
+\index{subPixelPeak@{subPixelPeak}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{subPixelPeak()}{subPixelPeak()}}
+{\footnotesize\ttfamily float LDESTracker\+::sub\+Pixel\+Peak (\begin{DoxyParamCaption}\item[{float}]{left,  }\item[{float}]{center,  }\item[{float}]{right }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_afadb53b7bc415c573fdf1f0bfb3337a8}\label{class_l_d_e_s_tracker_afadb53b7bc415c573fdf1f0bfb3337a8}} 
+\index{LDESTracker@{LDESTracker}!testKCFTracker@{testKCFTracker}}
+\index{testKCFTracker@{testKCFTracker}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{testKCFTracker()}{testKCFTracker()}}
+{\footnotesize\ttfamily cv\+::\+Rect LDESTracker\+::test\+KCFTracker (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{image,  }\item[{cv\+::\+Rect \&}]{rect,  }\item[{bool}]{init = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_l_d_e_s_tracker_afadb53b7bc415c573fdf1f0bfb3337a8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_l_d_e_s_tracker_ace42ba92eabcd9bbcb185ff923b0e559}\label{class_l_d_e_s_tracker_ace42ba92eabcd9bbcb185ff923b0e559}} 
+\index{LDESTracker@{LDESTracker}!Train@{Train}}
+\index{Train@{Train}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{Train()}{Train()}}
+{\footnotesize\ttfamily void LDESTracker\+::\+Train (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{,  }\item[{bool}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+实现了 \mbox{\hyperlink{class_v_o_t_tracker_a457a782b1227ccd2d23a055adf34e30c}{VOTTracker}}.
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_ab92d1883932a0cb37d7209b881859bbf}\label{class_l_d_e_s_tracker_ab92d1883932a0cb37d7209b881859bbf}} 
+\index{LDESTracker@{LDESTracker}!trainLocation@{trainLocation}}
+\index{trainLocation@{trainLocation}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{trainLocation()}{trainLocation()}}
+{\footnotesize\ttfamily void LDESTracker\+::train\+Location (\begin{DoxyParamCaption}\item[{cv\+::\+Mat \&}]{x,  }\item[{float}]{train\+\_\+interp\+\_\+factor\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_l_d_e_s_tracker_ab92d1883932a0cb37d7209b881859bbf_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a9b36cdc00e94b31b76b42f80bde51f3a}\label{class_l_d_e_s_tracker_a9b36cdc00e94b31b76b42f80bde51f3a}} 
+\index{LDESTracker@{LDESTracker}!trainScale@{trainScale}}
+\index{trainScale@{trainScale}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{trainScale()}{trainScale()}}
+{\footnotesize\ttfamily void LDESTracker\+::train\+Scale (\begin{DoxyParamCaption}\item[{cv\+::\+Mat \&}]{x,  }\item[{float}]{train\+\_\+interp\+\_\+factor\+\_\+ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_aeb6787e2111fe4e0adc66143d5dc3321}\label{class_l_d_e_s_tracker_aeb6787e2111fe4e0adc66143d5dc3321}} 
+\index{LDESTracker@{LDESTracker}!Update@{Update}}
+\index{Update@{Update}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily cv\+::\+Rotated\+Rect LDESTracker\+::\+Update (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{im,  }\item[{float \&}]{confidence }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+实现了 \mbox{\hyperlink{class_v_o_t_tracker_aeefb7ffa34e9a44e641230357031479d}{VOTTracker}}.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_l_d_e_s_tracker_aeb6787e2111fe4e0adc66143d5dc3321_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_l_d_e_s_tracker_ac9e74557bc5f22e75833fb7a5eae1db3}\label{class_l_d_e_s_tracker_ac9e74557bc5f22e75833fb7a5eae1db3}} 
+\index{LDESTracker@{LDESTracker}!updateModel@{updateModel}}
+\index{updateModel@{updateModel}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{updateModel()}{updateModel()}}
+{\footnotesize\ttfamily void LDESTracker\+::update\+Model (\begin{DoxyParamCaption}\item[{const cv\+::\+Mat \&}]{image,  }\item[{int}]{polish }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_l_d_e_s_tracker_ac9e74557bc5f22e75833fb7a5eae1db3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_l_d_e_s_tracker_aa514ef7af99c9cd096872f0fa6a63cb8}\label{class_l_d_e_s_tracker_aa514ef7af99c9cd096872f0fa6a63cb8}} 
+\index{LDESTracker@{LDESTracker}!weightedPeak@{weightedPeak}}
+\index{weightedPeak@{weightedPeak}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{weightedPeak()}{weightedPeak()}}
+{\footnotesize\ttfamily void LDESTracker\+::weighted\+Peak (\begin{DoxyParamCaption}\item[{cv\+::\+Mat \&}]{resmap,  }\item[{cv\+::\+Point2f \&}]{peak,  }\item[{int}]{pad = {\ttfamily 2} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a4aac76a0558aba97952cf2f7584f5930}\label{class_l_d_e_s_tracker_a4aac76a0558aba97952cf2f7584f5930}} 
+\index{LDESTracker@{LDESTracker}!\_alphaf@{\_alphaf}}
+\index{\_alphaf@{\_alphaf}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{\_alphaf}{\_alphaf}}
+{\footnotesize\ttfamily cv\+::\+Mat LDESTracker\+::\+\_\+alphaf\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_ac344ed54df2a9423957b3bf0821f5467}\label{class_l_d_e_s_tracker_ac344ed54df2a9423957b3bf0821f5467}} 
+\index{LDESTracker@{LDESTracker}!\_den@{\_den}}
+\index{\_den@{\_den}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{\_den}{\_den}}
+{\footnotesize\ttfamily cv\+::\+Mat LDESTracker\+::\+\_\+den\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_ac53dabfc8bd8b0a877e9c909cbe5d9d4}\label{class_l_d_e_s_tracker_ac53dabfc8bd8b0a877e9c909cbe5d9d4}} 
+\index{LDESTracker@{LDESTracker}!\_gaussian\_size@{\_gaussian\_size}}
+\index{\_gaussian\_size@{\_gaussian\_size}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{\_gaussian\_size}{\_gaussian\_size}}
+{\footnotesize\ttfamily int LDESTracker\+::\+\_\+gaussian\+\_\+size\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_aa9a7f920b279e40fb41b48d1e79568bd}\label{class_l_d_e_s_tracker_aa9a7f920b279e40fb41b48d1e79568bd}} 
+\index{LDESTracker@{LDESTracker}!\_hogfeatures@{\_hogfeatures}}
+\index{\_hogfeatures@{\_hogfeatures}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{\_hogfeatures}{\_hogfeatures}}
+{\footnotesize\ttfamily bool LDESTracker\+::\+\_\+hogfeatures\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a3e1356df43710556d40cd4b7e986bc0f}\label{class_l_d_e_s_tracker_a3e1356df43710556d40cd4b7e986bc0f}} 
+\index{LDESTracker@{LDESTracker}!\_labCentroids@{\_labCentroids}}
+\index{\_labCentroids@{\_labCentroids}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{\_labCentroids}{\_labCentroids}}
+{\footnotesize\ttfamily cv\+::\+Mat LDESTracker\+::\+\_\+lab\+Centroids\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_aeaca85cfc96c48bc9ea56fd3be7e8aa5}\label{class_l_d_e_s_tracker_aeaca85cfc96c48bc9ea56fd3be7e8aa5}} 
+\index{LDESTracker@{LDESTracker}!\_labfeatures@{\_labfeatures}}
+\index{\_labfeatures@{\_labfeatures}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{\_labfeatures}{\_labfeatures}}
+{\footnotesize\ttfamily bool LDESTracker\+::\+\_\+labfeatures\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a1b5a4252c437ada5073b55efa248206d}\label{class_l_d_e_s_tracker_a1b5a4252c437ada5073b55efa248206d}} 
+\index{LDESTracker@{LDESTracker}!\_num@{\_num}}
+\index{\_num@{\_num}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{\_num}{\_num}}
+{\footnotesize\ttfamily cv\+::\+Mat LDESTracker\+::\+\_\+num\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_ac69c969cf1922c94c27a8b4f7d94df86}\label{class_l_d_e_s_tracker_ac69c969cf1922c94c27a8b4f7d94df86}} 
+\index{LDESTracker@{LDESTracker}!\_roi@{\_roi}}
+\index{\_roi@{\_roi}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{\_roi}{\_roi}}
+{\footnotesize\ttfamily cv\+::\+Rect LDESTracker\+::\+\_\+roi\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a1df11e09b8e5df40984d5ded0870b38f}\label{class_l_d_e_s_tracker_a1df11e09b8e5df40984d5ded0870b38f}} 
+\index{LDESTracker@{LDESTracker}!\_rotation@{\_rotation}}
+\index{\_rotation@{\_rotation}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{\_rotation}{\_rotation}}
+{\footnotesize\ttfamily bool LDESTracker\+::\+\_\+rotation\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a2eea37ca8a378a7833c18a0050ddacfd}\label{class_l_d_e_s_tracker_a2eea37ca8a378a7833c18a0050ddacfd}} 
+\index{LDESTracker@{LDESTracker}!\_scale@{\_scale}}
+\index{\_scale@{\_scale}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{\_scale}{\_scale}}
+{\footnotesize\ttfamily float LDESTracker\+::\+\_\+scale\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_aa237c53e2a154802f29d6bd49cc988e4}\label{class_l_d_e_s_tracker_aa237c53e2a154802f29d6bd49cc988e4}} 
+\index{LDESTracker@{LDESTracker}!\_scale2@{\_scale2}}
+\index{\_scale2@{\_scale2}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{\_scale2}{\_scale2}}
+{\footnotesize\ttfamily float LDESTracker\+::\+\_\+scale2\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a285bbcd6ee5f73cd6ea563e0afa50b6b}\label{class_l_d_e_s_tracker_a285bbcd6ee5f73cd6ea563e0afa50b6b}} 
+\index{LDESTracker@{LDESTracker}!\_scale\_hog@{\_scale\_hog}}
+\index{\_scale\_hog@{\_scale\_hog}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{\_scale\_hog}{\_scale\_hog}}
+{\footnotesize\ttfamily bool LDESTracker\+::\+\_\+scale\+\_\+hog\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a03997d29bd2b5fd742daac56656ffc12}\label{class_l_d_e_s_tracker_a03997d29bd2b5fd742daac56656ffc12}} 
+\index{LDESTracker@{LDESTracker}!\_y@{\_y}}
+\index{\_y@{\_y}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{\_y}{\_y}}
+{\footnotesize\ttfamily cv\+::\+Mat LDESTracker\+::\+\_\+y\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a42257d4b37d1d75a9cc4f8eafb36c3de}\label{class_l_d_e_s_tracker_a42257d4b37d1d75a9cc4f8eafb36c3de}} 
+\index{LDESTracker@{LDESTracker}!\_yf@{\_yf}}
+\index{\_yf@{\_yf}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{\_yf}{\_yf}}
+{\footnotesize\ttfamily cv\+::\+Mat LDESTracker\+::\+\_\+yf\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a7e47ee55f35f6e7bb42fd0c8bf32af74}\label{class_l_d_e_s_tracker_a7e47ee55f35f6e7bb42fd0c8bf32af74}} 
+\index{LDESTracker@{LDESTracker}!\_z@{\_z}}
+\index{\_z@{\_z}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{\_z}{\_z}}
+{\footnotesize\ttfamily cv\+::\+Mat LDESTracker\+::\+\_\+z\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a41b0d455fe97c6b53b9270fee4222006}\label{class_l_d_e_s_tracker_a41b0d455fe97c6b53b9270fee4222006}} 
+\index{LDESTracker@{LDESTracker}!\_z\_srch@{\_z\_srch}}
+\index{\_z\_srch@{\_z\_srch}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{\_z\_srch}{\_z\_srch}}
+{\footnotesize\ttfamily cv\+::\+Mat LDESTracker\+::\+\_\+z\+\_\+srch\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a7694b9173da3c7280f27e4b15e9511b1}\label{class_l_d_e_s_tracker_a7694b9173da3c7280f27e4b15e9511b1}} 
+\index{LDESTracker@{LDESTracker}!cell\_size@{cell\_size}}
+\index{cell\_size@{cell\_size}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{cell\_size}{cell\_size}}
+{\footnotesize\ttfamily int LDESTracker\+::cell\+\_\+size\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_abfb4c32e3b6cd77e2955384797a870ea}\label{class_l_d_e_s_tracker_abfb4c32e3b6cd77e2955384797a870ea}} 
+\index{LDESTracker@{LDESTracker}!cell\_size\_scale@{cell\_size\_scale}}
+\index{cell\_size\_scale@{cell\_size\_scale}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{cell\_size\_scale}{cell\_size\_scale}}
+{\footnotesize\ttfamily int LDESTracker\+::cell\+\_\+size\+\_\+scale\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_acacebb23951c9faa837bf3c3f912e58d}\label{class_l_d_e_s_tracker_acacebb23951c9faa837bf3c3f912e58d}} 
+\index{LDESTracker@{LDESTracker}!cell\_sizeQ@{cell\_sizeQ}}
+\index{cell\_sizeQ@{cell\_sizeQ}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{cell\_sizeQ}{cell\_sizeQ}}
+{\footnotesize\ttfamily int LDESTracker\+::cell\+\_\+sizeQ\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a6f7292450bdf4ea4c4a30c2e37029d0a}\label{class_l_d_e_s_tracker_a6f7292450bdf4ea4c4a30c2e37029d0a}} 
+\index{LDESTracker@{LDESTracker}!conf@{conf}}
+\index{conf@{conf}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{conf}{conf}}
+{\footnotesize\ttfamily float LDESTracker\+::conf\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a09f7d88f11bf2169e04df1817104a639}\label{class_l_d_e_s_tracker_a09f7d88f11bf2169e04df1817104a639}} 
+\index{LDESTracker@{LDESTracker}!cscore@{cscore}}
+\index{cscore@{cscore}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{cscore}{cscore}}
+{\footnotesize\ttfamily float LDESTracker\+::cscore\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a749642268fb92f9790e692ab9f5a6a12}\label{class_l_d_e_s_tracker_a749642268fb92f9790e692ab9f5a6a12}} 
+\index{LDESTracker@{LDESTracker}!cur\_pos@{cur\_pos}}
+\index{cur\_pos@{cur\_pos}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{cur\_pos}{cur\_pos}}
+{\footnotesize\ttfamily cv\+::\+Point2i LDESTracker\+::cur\+\_\+pos\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_abffdbd79fdb8d141fdcebde9404c81a5}\label{class_l_d_e_s_tracker_abffdbd79fdb8d141fdcebde9404c81a5}} 
+\index{LDESTracker@{LDESTracker}!cur\_position@{cur\_position}}
+\index{cur\_position@{cur\_position}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{cur\_position}{cur\_position}}
+{\footnotesize\ttfamily cv\+::\+Rect LDESTracker\+::cur\+\_\+position\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a7fdc930c3c7c9eebbf53afdc5652d656}\label{class_l_d_e_s_tracker_a7fdc930c3c7c9eebbf53afdc5652d656}} 
+\index{LDESTracker@{LDESTracker}!cur\_roi@{cur\_roi}}
+\index{cur\_roi@{cur\_roi}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{cur\_roi}{cur\_roi}}
+{\footnotesize\ttfamily cv\+::\+Rect LDESTracker\+::cur\+\_\+roi\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a4a1ecfbfa5e6367aafdf78e78a27f410}\label{class_l_d_e_s_tracker_a4a1ecfbfa5e6367aafdf78e78a27f410}} 
+\index{LDESTracker@{LDESTracker}!cur\_rot\_degree@{cur\_rot\_degree}}
+\index{cur\_rot\_degree@{cur\_rot\_degree}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{cur\_rot\_degree}{cur\_rot\_degree}}
+{\footnotesize\ttfamily float LDESTracker\+::cur\+\_\+rot\+\_\+degree\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a1c2a2edb9d84aed7c2c80ca382a5f462}\label{class_l_d_e_s_tracker_a1c2a2edb9d84aed7c2c80ca382a5f462}} 
+\index{LDESTracker@{LDESTracker}!cur\_scale@{cur\_scale}}
+\index{cur\_scale@{cur\_scale}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{cur\_scale}{cur\_scale}}
+{\footnotesize\ttfamily float LDESTracker\+::cur\+\_\+scale\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_ac0f7aa5084156dbc490af9012a860f83}\label{class_l_d_e_s_tracker_ac0f7aa5084156dbc490af9012a860f83}} 
+\index{LDESTracker@{LDESTracker}!delta\_rot@{delta\_rot}}
+\index{delta\_rot@{delta\_rot}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{delta\_rot}{delta\_rot}}
+{\footnotesize\ttfamily float LDESTracker\+::delta\+\_\+rot\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a925b7efda9b5132224ce983531ef49a2}\label{class_l_d_e_s_tracker_a925b7efda9b5132224ce983531ef49a2}} 
+\index{LDESTracker@{LDESTracker}!delta\_scale@{delta\_scale}}
+\index{delta\_scale@{delta\_scale}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{delta\_scale}{delta\_scale}}
+{\footnotesize\ttfamily float LDESTracker\+::delta\+\_\+scale\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a7f1334e9df4096cafd88e1b2c29e5bd8}\label{class_l_d_e_s_tracker_a7f1334e9df4096cafd88e1b2c29e5bd8}} 
+\index{LDESTracker@{LDESTracker}!hann@{hann}}
+\index{hann@{hann}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{hann}{hann}}
+{\footnotesize\ttfamily cv\+::\+Mat LDESTracker\+::hann\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_abdc324cfed3a37c86281bbc1ea150b5a}\label{class_l_d_e_s_tracker_abdc324cfed3a37c86281bbc1ea150b5a}} 
+\index{LDESTracker@{LDESTracker}!hogFeatures@{hogFeatures}}
+\index{hogFeatures@{hogFeatures}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{hogFeatures}{hogFeatures}}
+{\footnotesize\ttfamily cv\+::\+Mat LDESTracker\+::hog\+Features\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a1fbeca27d9caf10b9bcea36c5bf9eb6f}\label{class_l_d_e_s_tracker_a1fbeca27d9caf10b9bcea36c5bf9eb6f}} 
+\index{LDESTracker@{LDESTracker}!im\_height@{im\_height}}
+\index{im\_height@{im\_height}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{im\_height}{im\_height}}
+{\footnotesize\ttfamily int LDESTracker\+::im\+\_\+height\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a5614d7a70c6f80ae0822cffb2d88696b}\label{class_l_d_e_s_tracker_a5614d7a70c6f80ae0822cffb2d88696b}} 
+\index{LDESTracker@{LDESTracker}!im\_width@{im\_width}}
+\index{im\_width@{im\_width}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{im\_width}{im\_width}}
+{\footnotesize\ttfamily int LDESTracker\+::im\+\_\+width\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a19b1108728ed4b1fb10abd374a441c96}\label{class_l_d_e_s_tracker_a19b1108728ed4b1fb10abd374a441c96}} 
+\index{LDESTracker@{LDESTracker}!interp\_factor@{interp\_factor}}
+\index{interp\_factor@{interp\_factor}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{interp\_factor}{interp\_factor}}
+{\footnotesize\ttfamily float LDESTracker\+::interp\+\_\+factor\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_ae446a6357831e22264e6e87601390853}\label{class_l_d_e_s_tracker_ae446a6357831e22264e6e87601390853}} 
+\index{LDESTracker@{LDESTracker}!interp\_factor\_scale@{interp\_factor\_scale}}
+\index{interp\_factor\_scale@{interp\_factor\_scale}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{interp\_factor\_scale}{interp\_factor\_scale}}
+{\footnotesize\ttfamily float LDESTracker\+::interp\+\_\+factor\+\_\+scale\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a048a0ddf31374e81e8041d652992132f}\label{class_l_d_e_s_tracker_a048a0ddf31374e81e8041d652992132f}} 
+\index{LDESTracker@{LDESTracker}!interp\_n@{interp\_n}}
+\index{interp\_n@{interp\_n}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{interp\_n}{interp\_n}}
+{\footnotesize\ttfamily float LDESTracker\+::interp\+\_\+n\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a8e9029fbd8e95a5ddbf668652db8aa0f}\label{class_l_d_e_s_tracker_a8e9029fbd8e95a5ddbf668652db8aa0f}} 
+\index{LDESTracker@{LDESTracker}!lambda@{lambda}}
+\index{lambda@{lambda}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{lambda}{lambda}}
+{\footnotesize\ttfamily float LDESTracker\+::lambda\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_abd27e9fd52141b7ec3ef96214a469a54}\label{class_l_d_e_s_tracker_abd27e9fd52141b7ec3ef96214a469a54}} 
+\index{LDESTracker@{LDESTracker}!mag@{mag}}
+\index{mag@{mag}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{mag}{mag}}
+{\footnotesize\ttfamily float LDESTracker\+::mag\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a29e6c6c65a6bcd2f994048cc0f4b9101}\label{class_l_d_e_s_tracker_a29e6c6c65a6bcd2f994048cc0f4b9101}} 
+\index{LDESTracker@{LDESTracker}!max\_area@{max\_area}}
+\index{max\_area@{max\_area}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{max\_area}{max\_area}}
+{\footnotesize\ttfamily const float LDESTracker\+::max\+\_\+area = 350 $\ast$ 350\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_aaa51a8c1b20dfece26369373d62d350d}\label{class_l_d_e_s_tracker_aaa51a8c1b20dfece26369373d62d350d}} 
+\index{LDESTracker@{LDESTracker}!min\_area@{min\_area}}
+\index{min\_area@{min\_area}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{min\_area}{min\_area}}
+{\footnotesize\ttfamily const float LDESTracker\+::min\+\_\+area = 100 $\ast$ 100\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a1226776af78fff71528dade3f4925287}\label{class_l_d_e_s_tracker_a1226776af78fff71528dade3f4925287}} 
+\index{LDESTracker@{LDESTracker}!modelPatch@{modelPatch}}
+\index{modelPatch@{modelPatch}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{modelPatch}{modelPatch}}
+{\footnotesize\ttfamily cv\+::\+Mat LDESTracker\+::model\+Patch\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a7454469a1b9f469e9911096c96027fca}\label{class_l_d_e_s_tracker_a7454469a1b9f469e9911096c96027fca}} 
+\index{LDESTracker@{LDESTracker}!output\_sigma\_factor@{output\_sigma\_factor}}
+\index{output\_sigma\_factor@{output\_sigma\_factor}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{output\_sigma\_factor}{output\_sigma\_factor}}
+{\footnotesize\ttfamily float LDESTracker\+::output\+\_\+sigma\+\_\+factor\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_af7749b5eb5298e402515db74a4d04f10}\label{class_l_d_e_s_tracker_af7749b5eb5298e402515db74a4d04f10}} 
+\index{LDESTracker@{LDESTracker}!padding@{padding}}
+\index{padding@{padding}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{padding}{padding}}
+{\footnotesize\ttfamily float LDESTracker\+::padding\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a8da3e329a9c7bdaf50a2dc16cf72ec9b}\label{class_l_d_e_s_tracker_a8da3e329a9c7bdaf50a2dc16cf72ec9b}} 
+\index{LDESTracker@{LDESTracker}!patch@{patch}}
+\index{patch@{patch}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{patch}{patch}}
+{\footnotesize\ttfamily cv\+::\+Mat LDESTracker\+::patch\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_aee739c2b02f01a55d57bfa537dc1bd52}\label{class_l_d_e_s_tracker_aee739c2b02f01a55d57bfa537dc1bd52}} 
+\index{LDESTracker@{LDESTracker}!patchL@{patchL}}
+\index{patchL@{patchL}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{patchL}{patchL}}
+{\footnotesize\ttfamily cv\+::\+Mat LDESTracker\+::patchL\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_ac0f331fa1a592fefa79db33727794c6f}\label{class_l_d_e_s_tracker_ac0f331fa1a592fefa79db33727794c6f}} 
+\index{LDESTracker@{LDESTracker}!peak\_loc@{peak\_loc}}
+\index{peak\_loc@{peak\_loc}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{peak\_loc}{peak\_loc}}
+{\footnotesize\ttfamily cv\+::\+Point2f LDESTracker\+::peak\+\_\+loc\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a4bf49a3747e7f95f93438c1fd89e8b9f}\label{class_l_d_e_s_tracker_a4bf49a3747e7f95f93438c1fd89e8b9f}} 
+\index{LDESTracker@{LDESTracker}!pv\_location@{pv\_location}}
+\index{pv\_location@{pv\_location}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{pv\_location}{pv\_location}}
+{\footnotesize\ttfamily float LDESTracker\+::pv\+\_\+location\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a194ad82c71152b5f76ad92f4c327ba72}\label{class_l_d_e_s_tracker_a194ad82c71152b5f76ad92f4c327ba72}} 
+\index{LDESTracker@{LDESTracker}!resmap\_location@{resmap\_location}}
+\index{resmap\_location@{resmap\_location}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{resmap\_location}{resmap\_location}}
+{\footnotesize\ttfamily cv\+::\+Mat LDESTracker\+::resmap\+\_\+location\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a588c1899c5952a13ebb34961ddcb54c4}\label{class_l_d_e_s_tracker_a588c1899c5952a13ebb34961ddcb54c4}} 
+\index{LDESTracker@{LDESTracker}!rotated\_roi@{rotated\_roi}}
+\index{rotated\_roi@{rotated\_roi}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{rotated\_roi}{rotated\_roi}}
+{\footnotesize\ttfamily std\+::vector$<$cv\+::\+Point2i$>$ LDESTracker\+::rotated\+\_\+roi\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a466c1ff3a9cd35a32adc4a94322a0b62}\label{class_l_d_e_s_tracker_a466c1ff3a9cd35a32adc4a94322a0b62}} 
+\index{LDESTracker@{LDESTracker}!scale\_base@{scale\_base}}
+\index{scale\_base@{scale\_base}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{scale\_base}{scale\_base}}
+{\footnotesize\ttfamily float LDESTracker\+::scale\+\_\+base\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a0eb0f663e0d944cb074176d4bea0750b}\label{class_l_d_e_s_tracker_a0eb0f663e0d944cb074176d4bea0750b}} 
+\index{LDESTracker@{LDESTracker}!scale\_padding@{scale\_padding}}
+\index{scale\_padding@{scale\_padding}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{scale\_padding}{scale\_padding}}
+{\footnotesize\ttfamily float LDESTracker\+::scale\+\_\+padding\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a53bed0f62493ea734e9b1eac31413e42}\label{class_l_d_e_s_tracker_a53bed0f62493ea734e9b1eac31413e42}} 
+\index{LDESTracker@{LDESTracker}!scale\_step@{scale\_step}}
+\index{scale\_step@{scale\_step}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{scale\_step}{scale\_step}}
+{\footnotesize\ttfamily float LDESTracker\+::scale\+\_\+step\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a2cd80969334198340c44e355db555a72}\label{class_l_d_e_s_tracker_a2cd80969334198340c44e355db555a72}} 
+\index{LDESTracker@{LDESTracker}!scale\_sz@{scale\_sz}}
+\index{scale\_sz@{scale\_sz}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{scale\_sz}{scale\_sz}}
+{\footnotesize\ttfamily int LDESTracker\+::scale\+\_\+sz\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a0ac26ebe27333ea43fd8dec6702b88f7}\label{class_l_d_e_s_tracker_a0ac26ebe27333ea43fd8dec6702b88f7}} 
+\index{LDESTracker@{LDESTracker}!scale\_sz0@{scale\_sz0}}
+\index{scale\_sz0@{scale\_sz0}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{scale\_sz0}{scale\_sz0}}
+{\footnotesize\ttfamily int LDESTracker\+::scale\+\_\+sz0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a52173be29985758ce85223d6304bbcdd}\label{class_l_d_e_s_tracker_a52173be29985758ce85223d6304bbcdd}} 
+\index{LDESTracker@{LDESTracker}!scale\_template\_size@{scale\_template\_size}}
+\index{scale\_template\_size@{scale\_template\_size}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{scale\_template\_size}{scale\_template\_size}}
+{\footnotesize\ttfamily int LDESTracker\+::scale\+\_\+template\+\_\+size\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a629c3e2676856d2a14667d889475a80e}\label{class_l_d_e_s_tracker_a629c3e2676856d2a14667d889475a80e}} 
+\index{LDESTracker@{LDESTracker}!scale\_weight@{scale\_weight}}
+\index{scale\_weight@{scale\_weight}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{scale\_weight}{scale\_weight}}
+{\footnotesize\ttfamily float LDESTracker\+::scale\+\_\+weight\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a43a6372eac8af2d77fdefced96f9fd81}\label{class_l_d_e_s_tracker_a43a6372eac8af2d77fdefced96f9fd81}} 
+\index{LDESTracker@{LDESTracker}!sigma@{sigma}}
+\index{sigma@{sigma}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{sigma}{sigma}}
+{\footnotesize\ttfamily float LDESTracker\+::sigma\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a1cf7672fecb23578d26419748d47ec6b}\label{class_l_d_e_s_tracker_a1cf7672fecb23578d26419748d47ec6b}} 
+\index{LDESTracker@{LDESTracker}!size\_patch@{size\_patch}}
+\index{size\_patch@{size\_patch}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{size\_patch}{size\_patch}}
+{\footnotesize\ttfamily int LDESTracker\+::size\+\_\+patch\mbox{[}3\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a6222c5f83dc79d28f392fe762a3be2b3}\label{class_l_d_e_s_tracker_a6222c5f83dc79d28f392fe762a3be2b3}} 
+\index{LDESTracker@{LDESTracker}!size\_scale@{size\_scale}}
+\index{size\_scale@{size\_scale}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{size\_scale}{size\_scale}}
+{\footnotesize\ttfamily int LDESTracker\+::size\+\_\+scale\mbox{[}3\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a8d28a2a47a3e46d66ea88c96db7c633b}\label{class_l_d_e_s_tracker_a8d28a2a47a3e46d66ea88c96db7c633b}} 
+\index{LDESTracker@{LDESTracker}!size\_search@{size\_search}}
+\index{size\_search@{size\_search}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{size\_search}{size\_search}}
+{\footnotesize\ttfamily int LDESTracker\+::size\+\_\+search\mbox{[}3\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a650426f0319fa074c00ecf4d819d718a}\label{class_l_d_e_s_tracker_a650426f0319fa074c00ecf4d819d718a}} 
+\index{LDESTracker@{LDESTracker}!sscore@{sscore}}
+\index{sscore@{sscore}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{sscore}{sscore}}
+{\footnotesize\ttfamily float LDESTracker\+::sscore\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_aab61b7511c01d7b81cd6ee78932f0ee1}\label{class_l_d_e_s_tracker_aab61b7511c01d7b81cd6ee78932f0ee1}} 
+\index{LDESTracker@{LDESTracker}!target\_sz@{target\_sz}}
+\index{target\_sz@{target\_sz}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{target\_sz}{target\_sz}}
+{\footnotesize\ttfamily cv\+::\+Size LDESTracker\+::target\+\_\+sz\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a70e5500af8f2ae3f855100481b872280}\label{class_l_d_e_s_tracker_a70e5500af8f2ae3f855100481b872280}} 
+\index{LDESTracker@{LDESTracker}!target\_sz0@{target\_sz0}}
+\index{target\_sz0@{target\_sz0}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{target\_sz0}{target\_sz0}}
+{\footnotesize\ttfamily cv\+::\+Size LDESTracker\+::target\+\_\+sz0\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_aa0ee58023a5aba24611b929a80957520}\label{class_l_d_e_s_tracker_aa0ee58023a5aba24611b929a80957520}} 
+\index{LDESTracker@{LDESTracker}!template\_size@{template\_size}}
+\index{template\_size@{template\_size}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{template\_size}{template\_size}}
+{\footnotesize\ttfamily int LDESTracker\+::template\+\_\+size\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_af6eda28dc5aa540048de279b8f540b84}\label{class_l_d_e_s_tracker_af6eda28dc5aa540048de279b8f540b84}} 
+\index{LDESTracker@{LDESTracker}!train\_interp\_factor@{train\_interp\_factor}}
+\index{train\_interp\_factor@{train\_interp\_factor}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{train\_interp\_factor}{train\_interp\_factor}}
+{\footnotesize\ttfamily float LDESTracker\+::train\+\_\+interp\+\_\+factor\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_a43f065706df64b14d058b7b162988d06}\label{class_l_d_e_s_tracker_a43f065706df64b14d058b7b162988d06}} 
+\index{LDESTracker@{LDESTracker}!window\_sz@{window\_sz}}
+\index{window\_sz@{window\_sz}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{window\_sz}{window\_sz}}
+{\footnotesize\ttfamily int LDESTracker\+::window\+\_\+sz\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_l_d_e_s_tracker_aabbfc0cce201fd049f7948b916390cee}\label{class_l_d_e_s_tracker_aabbfc0cce201fd049f7948b916390cee}} 
+\index{LDESTracker@{LDESTracker}!window\_sz0@{window\_sz0}}
+\index{window\_sz0@{window\_sz0}!LDESTracker@{LDESTracker}}
+\doxysubsubsection{\texorpdfstring{window\_sz0}{window\_sz0}}
+{\footnotesize\ttfamily int LDESTracker\+::window\+\_\+sz0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Tracker/ldes/\mbox{\hyperlink{ldes__tracker_8h}{ldes\+\_\+tracker.\+h}}\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Tracker/ldes/\mbox{\hyperlink{ldes__tracker_8cpp}{ldes\+\_\+tracker.\+cpp}}\end{DoxyCompactItemize}

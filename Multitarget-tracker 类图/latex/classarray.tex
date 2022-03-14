@@ -1,0 +1,746 @@
+\hypertarget{classarray}{}\doxysection{array类 参考}
+\label{classarray}\index{array@{array}}
+
+
+{\ttfamily \#include $<$numpy.\+h$>$}
+
+
+
+类 array 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classarray__inherit__graph}
+\end{center}
+\end{figure}
+
+
+array 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{classarray__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 类型}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{classarray_ae8bcbba531ac94a007768363ecc186ebacaa99b2eea8427713331c18117d633d3}{c\+\_\+style}} = detail\+::npy\+\_\+api\+::NPY\+\_\+\+ARRAY\+\_\+\+C\+\_\+\+CONTIGUOUS\+\_\+
+, \mbox{\hyperlink{classarray_ae8bcbba531ac94a007768363ecc186eba184167ee839296f10d5c04c1480736bd}{f\+\_\+style}} = detail\+::npy\+\_\+api\+::NPY\+\_\+\+ARRAY\+\_\+\+F\+\_\+\+CONTIGUOUS\+\_\+
+, \mbox{\hyperlink{classarray_ae8bcbba531ac94a007768363ecc186eba2886e477a3f6090266168e82d389adc1}{forcecast}} = detail\+::npy\+\_\+api\+::NPY\+\_\+\+ARRAY\+\_\+\+FORCECAST\+\_\+
+ \}
+\item 
+using \mbox{\hyperlink{classarray_a3378d7821106645fa3a88c5222e127e0}{Shape\+Container}} = detail\+::any\+\_\+container$<$ \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} $>$
+\item 
+using \mbox{\hyperlink{classarray_a8ba4f30946f0bc69ec937160c9fb10e1}{Strides\+Container}} = detail\+::any\+\_\+container$<$ \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classarray_ac8a03ceadd605cd948be1aa66884b3a1}{array}} ()
+\item 
+\mbox{\hyperlink{classarray_a64167a4ca5cfd192b9957b6c2bf0b0d4}{array}} (const pybind11\+::dtype \&dt, \mbox{\hyperlink{classarray_a3378d7821106645fa3a88c5222e127e0}{Shape\+Container}} \mbox{\hyperlink{classarray_a67d6d0115fb7d616ffe28792da8a33f6}{shape}}, \mbox{\hyperlink{classarray_a8ba4f30946f0bc69ec937160c9fb10e1}{Strides\+Container}} \mbox{\hyperlink{classarray_a29e3cbc08a6c1f2e713ed1c00a91d9fc}{strides}}, const void $\ast$\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}=nullptr, \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structbase}{base}}=\mbox{\hyperlink{classhandle}{handle}}())
+\item 
+\mbox{\hyperlink{classarray_a07473e56f6f33ccb72eb184752dd3d5e}{array}} (const pybind11\+::dtype \&dt, \mbox{\hyperlink{classarray_a3378d7821106645fa3a88c5222e127e0}{Shape\+Container}} \mbox{\hyperlink{classarray_a67d6d0115fb7d616ffe28792da8a33f6}{shape}}, const void $\ast$\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}=nullptr, \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structbase}{base}}=\mbox{\hyperlink{classhandle}{handle}}())
+\item 
+{\footnotesize template$<$typename T , typename  = detail\+::enable\+\_\+if\+\_\+t$<$std\+::is\+\_\+integral$<$\+T$>$\+::value \&\& !std\+::is\+\_\+same$<$bool, T$>$\+::value$>$$>$ }\\\mbox{\hyperlink{classarray_ab1734d05a763ee406ea70f0fbebb3cf4}{array}} (const pybind11\+::dtype \&dt, T count, const void $\ast$\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}=nullptr, \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structbase}{base}}=\mbox{\hyperlink{classhandle}{handle}}())
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{classarray_af12d5d4757512f405a734ab2fe235f26}{array}} (\mbox{\hyperlink{classarray_a3378d7821106645fa3a88c5222e127e0}{Shape\+Container}} \mbox{\hyperlink{classarray_a67d6d0115fb7d616ffe28792da8a33f6}{shape}}, \mbox{\hyperlink{classarray_a8ba4f30946f0bc69ec937160c9fb10e1}{Strides\+Container}} \mbox{\hyperlink{classarray_a29e3cbc08a6c1f2e713ed1c00a91d9fc}{strides}}, const T $\ast$\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}, \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structbase}{base}}=\mbox{\hyperlink{classhandle}{handle}}())
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{classarray_a29a0ed58b37adec393508a4eeed4236f}{array}} (\mbox{\hyperlink{classarray_a3378d7821106645fa3a88c5222e127e0}{Shape\+Container}} \mbox{\hyperlink{classarray_a67d6d0115fb7d616ffe28792da8a33f6}{shape}}, const T $\ast$\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}, \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structbase}{base}}=\mbox{\hyperlink{classhandle}{handle}}())
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{classarray_a3fab95f1c066b62deaf8717fb3e99519}{array}} (\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} count, const T $\ast$\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}, \mbox{\hyperlink{classhandle}{handle}} \mbox{\hyperlink{structbase}{base}}=\mbox{\hyperlink{classhandle}{handle}}())
+\item 
+\mbox{\hyperlink{classarray_afadb342ccfd398c0498ae62277d2a1a9}{array}} (const \mbox{\hyperlink{structbuffer__info}{buffer\+\_\+info}} \&\mbox{\hyperlink{ndarray__converter_8cpp_a74d46cdd5cb355d922d75d4156cc1524}{info}})
+\item 
+pybind11\+::dtype \mbox{\hyperlink{classarray_a49535f32396582e415a61f3aac9c78b3}{dtype}} () const
+\begin{DoxyCompactList}\small\item\em Array descriptor (dtype) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} \mbox{\hyperlink{classarray_a34ae467d17d30b99913e27c755403fef}{size}} () const
+\begin{DoxyCompactList}\small\item\em Total number of elements \end{DoxyCompactList}\item 
+\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} \mbox{\hyperlink{classarray_acd6aa4dba1e1db26fcfd21a323b4d4fa}{itemsize}} () const
+\begin{DoxyCompactList}\small\item\em Byte size of a single element \end{DoxyCompactList}\item 
+\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} \mbox{\hyperlink{classarray_a0a2a16579bf2918347a8762c03f10137}{nbytes}} () const
+\begin{DoxyCompactList}\small\item\em Total number of bytes \end{DoxyCompactList}\item 
+\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} \mbox{\hyperlink{classarray_a184360492eac7224753f132d1a0a973e}{ndim}} () const
+\begin{DoxyCompactList}\small\item\em Number of dimensions \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classobject}{object}} \mbox{\hyperlink{classarray_a33a2f2933da6ca35a8ac82709df90038}{base}} () const
+\begin{DoxyCompactList}\small\item\em Base object \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} $\ast$ \mbox{\hyperlink{classarray_a67d6d0115fb7d616ffe28792da8a33f6}{shape}} () const
+\begin{DoxyCompactList}\small\item\em Dimensions of the array \end{DoxyCompactList}\item 
+\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} \mbox{\hyperlink{classarray_aceb118afe3a4eed2b3c9ec958505e414}{shape}} (\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} dim) const
+\begin{DoxyCompactList}\small\item\em Dimension along a given axis \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} $\ast$ \mbox{\hyperlink{classarray_a29e3cbc08a6c1f2e713ed1c00a91d9fc}{strides}} () const
+\begin{DoxyCompactList}\small\item\em Strides of the array \end{DoxyCompactList}\item 
+\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} \mbox{\hyperlink{classarray_afb8e09341f7884d6b34d454b2992c7ce}{strides}} (\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} dim) const
+\begin{DoxyCompactList}\small\item\em Stride along a given axis \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classarray_a38eb48c793621c12119ab7b64714955b}{flags}} () const
+\begin{DoxyCompactList}\small\item\em Return the Num\+Py array flags \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classarray_a9c19f81ca43feebd34b2c9dd5b38f1d9}{writeable}} () const
+\begin{DoxyCompactList}\small\item\em If set, the array is writeable (otherwise the buffer is read-\/only) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classarray_aa1ad8575ad6a6b900027c360a44e7ef0}{owndata}} () const
+\begin{DoxyCompactList}\small\item\em If set, the array owns the data (will be freed when the array is deleted) \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Ix$>$ }\\const void $\ast$ \mbox{\hyperlink{classarray_aebe2badb2bf647e24b079f30ff6df7b7}{data}} (Ix... index) const
+\item 
+{\footnotesize template$<$typename... Ix$>$ }\\void $\ast$ \mbox{\hyperlink{classarray_aa9e23dfb45abdcd696bad65937237166}{mutable\+\_\+data}} (Ix... index)
+\item 
+{\footnotesize template$<$typename... Ix$>$ }\\\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} \mbox{\hyperlink{classarray_a0063e6a1d118abb371f769377b5fee21}{offset\+\_\+at}} (Ix... index) const
+\item 
+\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} \mbox{\hyperlink{classarray_ada98138e241b891a543478dbe6494f17}{offset\+\_\+at}} () const
+\item 
+{\footnotesize template$<$typename... Ix$>$ }\\\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} \mbox{\hyperlink{classarray_a48d7b1bd08e0a5cf1ef27a6996421e73}{index\+\_\+at}} (Ix... index) const
+\item 
+{\footnotesize template$<$typename T , \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} Dims = -\/1$>$ }\\detail\+::unchecked\+\_\+mutable\+\_\+reference$<$ T, Dims $>$ \mbox{\hyperlink{classarray_aa0a5fdf51bd58d94bf9dcf08fd4dd52c}{mutable\+\_\+unchecked}} () \&
+\item 
+{\footnotesize template$<$typename T , \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} Dims = -\/1$>$ }\\detail\+::unchecked\+\_\+reference$<$ T, Dims $>$ \mbox{\hyperlink{classarray_a3c5b795b6ff9a83c3514d6c6a1309f8b}{unchecked}} () const \&
+\item 
+\mbox{\hyperlink{classarray}{array}} \mbox{\hyperlink{classarray_af0e9b034604a5306671cdb114855a972}{squeeze}} ()
+\begin{DoxyCompactList}\small\item\em Return a new view with all of the dimensions of length 1 removed \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classarray_a3e03dfffbf6c992364c052cf615db45b}{resize}} (\mbox{\hyperlink{classarray_a3378d7821106645fa3a88c5222e127e0}{Shape\+Container}} new\+\_\+shape, bool refcheck=true)
+\end{DoxyCompactItemize}
+\doxysubsection*{静态 Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classarray}{array}} \mbox{\hyperlink{classarray_a4b19125eed75474c00a93c829dba3a8b}{ensure}} (\mbox{\hyperlink{classhandle}{handle}} h, int Extra\+Flags=0)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classarray_a00dcb86f0bf1f925b23bd9ab028ffa13}{fail\+\_\+dim\+\_\+check}} (\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} dim, const std\+::string \&msg) const
+\item 
+{\footnotesize template$<$typename... Ix$>$ }\\\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} \mbox{\hyperlink{classarray_a336f1f7f56775fa328587645f2ab6e6f}{byte\+\_\+offset}} (Ix... index) const
+\item 
+void \mbox{\hyperlink{classarray_a967db5bead19594b8f4a95c29b8aa13a}{check\+\_\+writeable}} () const
+\item 
+{\footnotesize template$<$typename... Ix$>$ }\\void \mbox{\hyperlink{classarray_a1105041b04c18e91082ec096c0e53701}{check\+\_\+dimensions}} (Ix... index) const
+\item 
+void \mbox{\hyperlink{classarray_a7eb067f2de82290601537066e4cdfc70}{check\+\_\+dimensions\+\_\+impl}} (\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}}, const \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} $\ast$) const
+\item 
+{\footnotesize template$<$typename... Ix$>$ }\\void \mbox{\hyperlink{classarray_a368cacc4c65057b1a97fb53ec158f98f}{check\+\_\+dimensions\+\_\+impl}} (\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} axis, const \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} $\ast$\mbox{\hyperlink{classarray_a67d6d0115fb7d616ffe28792da8a33f6}{shape}}, \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} i, Ix... index) const
+\end{DoxyCompactItemize}
+\doxysubsection*{静态 Protected 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} $>$ \mbox{\hyperlink{classarray_a6fa05aa35c1e79d5b9894154dbd7f0a0}{c\+\_\+strides}} (const std\+::vector$<$ \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} $>$ \&\mbox{\hyperlink{classarray_a67d6d0115fb7d616ffe28792da8a33f6}{shape}}, \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} \mbox{\hyperlink{classarray_acd6aa4dba1e1db26fcfd21a323b4d4fa}{itemsize}})
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} $>$ \mbox{\hyperlink{classarray_ab40dfe925523a6b73da55353fba426ec}{f\+\_\+strides}} (const std\+::vector$<$ \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} $>$ \&\mbox{\hyperlink{classarray_a67d6d0115fb7d616ffe28792da8a33f6}{shape}}, \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} \mbox{\hyperlink{classarray_acd6aa4dba1e1db26fcfd21a323b4d4fa}{itemsize}})
+\item 
+static Py\+Object $\ast$ \mbox{\hyperlink{classarray_a0aa6d6979e8b2d420db747369180e70a}{raw\+\_\+array}} (Py\+Object $\ast$\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}, int Extra\+Flags=0)
+\begin{DoxyCompactList}\small\item\em Create array from any object -- always returns a new reference \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{友元}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename , typename $>$ }\\struct \mbox{\hyperlink{classarray_a2d7124af4924ef006d3b7bfd42b05085}{detail\+::npy\+\_\+format\+\_\+descriptor}}
+\end{DoxyCompactItemize}
+\doxysubsection*{额外继承的成员函数}
+
+
+\doxysubsection{成员类型定义说明}
+\mbox{\Hypertarget{classarray_a3378d7821106645fa3a88c5222e127e0}\label{classarray_a3378d7821106645fa3a88c5222e127e0}} 
+\index{array@{array}!ShapeContainer@{ShapeContainer}}
+\index{ShapeContainer@{ShapeContainer}!array@{array}}
+\doxysubsubsection{\texorpdfstring{ShapeContainer}{ShapeContainer}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classarray_a3378d7821106645fa3a88c5222e127e0}{array\+::\+Shape\+Container}} =  detail\+::any\+\_\+container$<$\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}}$>$}
+
+\mbox{\Hypertarget{classarray_a8ba4f30946f0bc69ec937160c9fb10e1}\label{classarray_a8ba4f30946f0bc69ec937160c9fb10e1}} 
+\index{array@{array}!StridesContainer@{StridesContainer}}
+\index{StridesContainer@{StridesContainer}!array@{array}}
+\doxysubsubsection{\texorpdfstring{StridesContainer}{StridesContainer}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classarray_a8ba4f30946f0bc69ec937160c9fb10e1}{array\+::\+Strides\+Container}} =  detail\+::any\+\_\+container$<$\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}}$>$}
+
+
+
+\doxysubsection{成员枚举类型说明}
+\mbox{\Hypertarget{classarray_ae8bcbba531ac94a007768363ecc186eb}\label{classarray_ae8bcbba531ac94a007768363ecc186eb}} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily anonymous enum}
+
+\begin{DoxyEnumFields}{枚举值}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{c\_style@{c\_style}!array@{array}}\index{array@{array}!c\_style@{c\_style}}}\mbox{\Hypertarget{classarray_ae8bcbba531ac94a007768363ecc186ebacaa99b2eea8427713331c18117d633d3}\label{classarray_ae8bcbba531ac94a007768363ecc186ebacaa99b2eea8427713331c18117d633d3}} 
+c\+\_\+style&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{f\_style@{f\_style}!array@{array}}\index{array@{array}!f\_style@{f\_style}}}\mbox{\Hypertarget{classarray_ae8bcbba531ac94a007768363ecc186eba184167ee839296f10d5c04c1480736bd}\label{classarray_ae8bcbba531ac94a007768363ecc186eba184167ee839296f10d5c04c1480736bd}} 
+f\+\_\+style&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{forcecast@{forcecast}!array@{array}}\index{array@{array}!forcecast@{forcecast}}}\mbox{\Hypertarget{classarray_ae8bcbba531ac94a007768363ecc186eba2886e477a3f6090266168e82d389adc1}\label{classarray_ae8bcbba531ac94a007768363ecc186eba2886e477a3f6090266168e82d389adc1}} 
+forcecast&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classarray_ac8a03ceadd605cd948be1aa66884b3a1}\label{classarray_ac8a03ceadd605cd948be1aa66884b3a1}} 
+\index{array@{array}!array@{array}}
+\index{array@{array}!array@{array}}
+\doxysubsubsection{\texorpdfstring{array()}{array()}\hspace{0.1cm}{\footnotesize\ttfamily [1/8]}}
+{\footnotesize\ttfamily array\+::array (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classarray_a64167a4ca5cfd192b9957b6c2bf0b0d4}\label{classarray_a64167a4ca5cfd192b9957b6c2bf0b0d4}} 
+\index{array@{array}!array@{array}}
+\index{array@{array}!array@{array}}
+\doxysubsubsection{\texorpdfstring{array()}{array()}\hspace{0.1cm}{\footnotesize\ttfamily [2/8]}}
+{\footnotesize\ttfamily array\+::array (\begin{DoxyParamCaption}\item[{const pybind11\+::dtype \&}]{dt,  }\item[{\mbox{\hyperlink{classarray_a3378d7821106645fa3a88c5222e127e0}{Shape\+Container}}}]{shape,  }\item[{\mbox{\hyperlink{classarray_a8ba4f30946f0bc69ec937160c9fb10e1}{Strides\+Container}}}]{strides,  }\item[{const void $\ast$}]{ptr = {\ttfamily nullptr},  }\item[{\mbox{\hyperlink{classhandle}{handle}}}]{base = {\ttfamily \mbox{\hyperlink{classhandle}{handle}}()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classarray_a64167a4ca5cfd192b9957b6c2bf0b0d4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_a07473e56f6f33ccb72eb184752dd3d5e}\label{classarray_a07473e56f6f33ccb72eb184752dd3d5e}} 
+\index{array@{array}!array@{array}}
+\index{array@{array}!array@{array}}
+\doxysubsubsection{\texorpdfstring{array()}{array()}\hspace{0.1cm}{\footnotesize\ttfamily [3/8]}}
+{\footnotesize\ttfamily array\+::array (\begin{DoxyParamCaption}\item[{const pybind11\+::dtype \&}]{dt,  }\item[{\mbox{\hyperlink{classarray_a3378d7821106645fa3a88c5222e127e0}{Shape\+Container}}}]{shape,  }\item[{const void $\ast$}]{ptr = {\ttfamily nullptr},  }\item[{\mbox{\hyperlink{classhandle}{handle}}}]{base = {\ttfamily \mbox{\hyperlink{classhandle}{handle}}()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classarray_ab1734d05a763ee406ea70f0fbebb3cf4}\label{classarray_ab1734d05a763ee406ea70f0fbebb3cf4}} 
+\index{array@{array}!array@{array}}
+\index{array@{array}!array@{array}}
+\doxysubsubsection{\texorpdfstring{array()}{array()}\hspace{0.1cm}{\footnotesize\ttfamily [4/8]}}
+{\footnotesize\ttfamily template$<$typename T , typename  = detail\+::enable\+\_\+if\+\_\+t$<$std\+::is\+\_\+integral$<$\+T$>$\+::value \&\& !std\+::is\+\_\+same$<$bool, T$>$\+::value$>$$>$ \\
+array\+::array (\begin{DoxyParamCaption}\item[{const pybind11\+::dtype \&}]{dt,  }\item[{T}]{count,  }\item[{const void $\ast$}]{ptr = {\ttfamily nullptr},  }\item[{\mbox{\hyperlink{classhandle}{handle}}}]{base = {\ttfamily \mbox{\hyperlink{classhandle}{handle}}()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classarray_af12d5d4757512f405a734ab2fe235f26}\label{classarray_af12d5d4757512f405a734ab2fe235f26}} 
+\index{array@{array}!array@{array}}
+\index{array@{array}!array@{array}}
+\doxysubsubsection{\texorpdfstring{array()}{array()}\hspace{0.1cm}{\footnotesize\ttfamily [5/8]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+array\+::array (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classarray_a3378d7821106645fa3a88c5222e127e0}{Shape\+Container}}}]{shape,  }\item[{\mbox{\hyperlink{classarray_a8ba4f30946f0bc69ec937160c9fb10e1}{Strides\+Container}}}]{strides,  }\item[{const T $\ast$}]{ptr,  }\item[{\mbox{\hyperlink{classhandle}{handle}}}]{base = {\ttfamily \mbox{\hyperlink{classhandle}{handle}}()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classarray_a29a0ed58b37adec393508a4eeed4236f}\label{classarray_a29a0ed58b37adec393508a4eeed4236f}} 
+\index{array@{array}!array@{array}}
+\index{array@{array}!array@{array}}
+\doxysubsubsection{\texorpdfstring{array()}{array()}\hspace{0.1cm}{\footnotesize\ttfamily [6/8]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+array\+::array (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classarray_a3378d7821106645fa3a88c5222e127e0}{Shape\+Container}}}]{shape,  }\item[{const T $\ast$}]{ptr,  }\item[{\mbox{\hyperlink{classhandle}{handle}}}]{base = {\ttfamily \mbox{\hyperlink{classhandle}{handle}}()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classarray_a3fab95f1c066b62deaf8717fb3e99519}\label{classarray_a3fab95f1c066b62deaf8717fb3e99519}} 
+\index{array@{array}!array@{array}}
+\index{array@{array}!array@{array}}
+\doxysubsubsection{\texorpdfstring{array()}{array()}\hspace{0.1cm}{\footnotesize\ttfamily [7/8]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+array\+::array (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}}}]{count,  }\item[{const T $\ast$}]{ptr,  }\item[{\mbox{\hyperlink{classhandle}{handle}}}]{base = {\ttfamily \mbox{\hyperlink{classhandle}{handle}}()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\mbox{\Hypertarget{classarray_afadb342ccfd398c0498ae62277d2a1a9}\label{classarray_afadb342ccfd398c0498ae62277d2a1a9}} 
+\index{array@{array}!array@{array}}
+\index{array@{array}!array@{array}}
+\doxysubsubsection{\texorpdfstring{array()}{array()}\hspace{0.1cm}{\footnotesize\ttfamily [8/8]}}
+{\footnotesize\ttfamily array\+::array (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structbuffer__info}{buffer\+\_\+info}} \&}]{info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classarray_a33a2f2933da6ca35a8ac82709df90038}\label{classarray_a33a2f2933da6ca35a8ac82709df90038}} 
+\index{array@{array}!base@{base}}
+\index{base@{base}!array@{array}}
+\doxysubsubsection{\texorpdfstring{base()}{base()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classobject}{object}} array\+::base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Base object 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=249pt]{classarray_a33a2f2933da6ca35a8ac82709df90038_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_a336f1f7f56775fa328587645f2ab6e6f}\label{classarray_a336f1f7f56775fa328587645f2ab6e6f}} 
+\index{array@{array}!byte\_offset@{byte\_offset}}
+\index{byte\_offset@{byte\_offset}!array@{array}}
+\doxysubsubsection{\texorpdfstring{byte\_offset()}{byte\_offset()}}
+{\footnotesize\ttfamily template$<$typename... Ix$>$ \\
+\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} array\+::byte\+\_\+offset (\begin{DoxyParamCaption}\item[{Ix...}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classarray_a336f1f7f56775fa328587645f2ab6e6f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_a6fa05aa35c1e79d5b9894154dbd7f0a0}\label{classarray_a6fa05aa35c1e79d5b9894154dbd7f0a0}} 
+\index{array@{array}!c\_strides@{c\_strides}}
+\index{c\_strides@{c\_strides}!array@{array}}
+\doxysubsubsection{\texorpdfstring{c\_strides()}{c\_strides()}}
+{\footnotesize\ttfamily static std\+::vector$<$ \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} $>$ array\+::c\+\_\+strides (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} $>$ \&}]{shape,  }\item[{\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}}}]{itemsize }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classarray_a6fa05aa35c1e79d5b9894154dbd7f0a0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_a1105041b04c18e91082ec096c0e53701}\label{classarray_a1105041b04c18e91082ec096c0e53701}} 
+\index{array@{array}!check\_dimensions@{check\_dimensions}}
+\index{check\_dimensions@{check\_dimensions}!array@{array}}
+\doxysubsubsection{\texorpdfstring{check\_dimensions()}{check\_dimensions()}}
+{\footnotesize\ttfamily template$<$typename... Ix$>$ \\
+void array\+::check\+\_\+dimensions (\begin{DoxyParamCaption}\item[{Ix...}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classarray_a1105041b04c18e91082ec096c0e53701_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_a368cacc4c65057b1a97fb53ec158f98f}\label{classarray_a368cacc4c65057b1a97fb53ec158f98f}} 
+\index{array@{array}!check\_dimensions\_impl@{check\_dimensions\_impl}}
+\index{check\_dimensions\_impl@{check\_dimensions\_impl}!array@{array}}
+\doxysubsubsection{\texorpdfstring{check\_dimensions\_impl()}{check\_dimensions\_impl()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename... Ix$>$ \\
+void array\+::check\+\_\+dimensions\+\_\+impl (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}}}]{axis,  }\item[{const \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} $\ast$}]{shape,  }\item[{\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}}}]{i,  }\item[{Ix...}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classarray_a368cacc4c65057b1a97fb53ec158f98f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_a7eb067f2de82290601537066e4cdfc70}\label{classarray_a7eb067f2de82290601537066e4cdfc70}} 
+\index{array@{array}!check\_dimensions\_impl@{check\_dimensions\_impl}}
+\index{check\_dimensions\_impl@{check\_dimensions\_impl}!array@{array}}
+\doxysubsubsection{\texorpdfstring{check\_dimensions\_impl()}{check\_dimensions\_impl()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void array\+::check\+\_\+dimensions\+\_\+impl (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}}}]{,  }\item[{const \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} $\ast$}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classarray_a967db5bead19594b8f4a95c29b8aa13a}\label{classarray_a967db5bead19594b8f4a95c29b8aa13a}} 
+\index{array@{array}!check\_writeable@{check\_writeable}}
+\index{check\_writeable@{check\_writeable}!array@{array}}
+\doxysubsubsection{\texorpdfstring{check\_writeable()}{check\_writeable()}}
+{\footnotesize\ttfamily void array\+::check\+\_\+writeable (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classarray_a967db5bead19594b8f4a95c29b8aa13a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_aebe2badb2bf647e24b079f30ff6df7b7}\label{classarray_aebe2badb2bf647e24b079f30ff6df7b7}} 
+\index{array@{array}!data@{data}}
+\index{data@{data}!array@{array}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}}
+{\footnotesize\ttfamily template$<$typename... Ix$>$ \\
+const void $\ast$ array\+::data (\begin{DoxyParamCaption}\item[{Ix...}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Pointer to the contained data. If index is not provided, points to the beginning of the buffer. May throw if the index would lead to out of bounds access. 函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=260pt]{classarray_aebe2badb2bf647e24b079f30ff6df7b7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_a49535f32396582e415a61f3aac9c78b3}\label{classarray_a49535f32396582e415a61f3aac9c78b3}} 
+\index{array@{array}!dtype@{dtype}}
+\index{dtype@{dtype}!array@{array}}
+\doxysubsubsection{\texorpdfstring{dtype()}{dtype()}}
+{\footnotesize\ttfamily pybind11\+::dtype array\+::dtype (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Array descriptor (dtype) 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=252pt]{classarray_a49535f32396582e415a61f3aac9c78b3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_a4b19125eed75474c00a93c829dba3a8b}\label{classarray_a4b19125eed75474c00a93c829dba3a8b}} 
+\index{array@{array}!ensure@{ensure}}
+\index{ensure@{ensure}!array@{array}}
+\doxysubsubsection{\texorpdfstring{ensure()}{ensure()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classarray}{array}} array\+::ensure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classhandle}{handle}}}]{h,  }\item[{int}]{Extra\+Flags = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Ensure that the argument is a Num\+Py array In case of an error, nullptr is returned and the Python error is cleared. 函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classarray_a4b19125eed75474c00a93c829dba3a8b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_ab40dfe925523a6b73da55353fba426ec}\label{classarray_ab40dfe925523a6b73da55353fba426ec}} 
+\index{array@{array}!f\_strides@{f\_strides}}
+\index{f\_strides@{f\_strides}!array@{array}}
+\doxysubsubsection{\texorpdfstring{f\_strides()}{f\_strides()}}
+{\footnotesize\ttfamily static std\+::vector$<$ \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} $>$ array\+::f\+\_\+strides (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} $>$ \&}]{shape,  }\item[{\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}}}]{itemsize }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classarray_ab40dfe925523a6b73da55353fba426ec_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_a00dcb86f0bf1f925b23bd9ab028ffa13}\label{classarray_a00dcb86f0bf1f925b23bd9ab028ffa13}} 
+\index{array@{array}!fail\_dim\_check@{fail\_dim\_check}}
+\index{fail\_dim\_check@{fail\_dim\_check}!array@{array}}
+\doxysubsubsection{\texorpdfstring{fail\_dim\_check()}{fail\_dim\_check()}}
+{\footnotesize\ttfamily void array\+::fail\+\_\+dim\+\_\+check (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}}}]{dim,  }\item[{const std\+::string \&}]{msg }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classarray_a00dcb86f0bf1f925b23bd9ab028ffa13_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_a38eb48c793621c12119ab7b64714955b}\label{classarray_a38eb48c793621c12119ab7b64714955b}} 
+\index{array@{array}!flags@{flags}}
+\index{flags@{flags}!array@{array}}
+\doxysubsubsection{\texorpdfstring{flags()}{flags()}}
+{\footnotesize\ttfamily int array\+::flags (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return the Num\+Py array flags 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=249pt]{classarray_a38eb48c793621c12119ab7b64714955b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_a48d7b1bd08e0a5cf1ef27a6996421e73}\label{classarray_a48d7b1bd08e0a5cf1ef27a6996421e73}} 
+\index{array@{array}!index\_at@{index\_at}}
+\index{index\_at@{index\_at}!array@{array}}
+\doxysubsubsection{\texorpdfstring{index\_at()}{index\_at()}}
+{\footnotesize\ttfamily template$<$typename... Ix$>$ \\
+\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} array\+::index\+\_\+at (\begin{DoxyParamCaption}\item[{Ix...}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Item count from beginning of the array to a given index (full or partial). May throw if the index would lead to out of bounds access. 函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classarray_a48d7b1bd08e0a5cf1ef27a6996421e73_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_acd6aa4dba1e1db26fcfd21a323b4d4fa}\label{classarray_acd6aa4dba1e1db26fcfd21a323b4d4fa}} 
+\index{array@{array}!itemsize@{itemsize}}
+\index{itemsize@{itemsize}!array@{array}}
+\doxysubsubsection{\texorpdfstring{itemsize()}{itemsize()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} array\+::itemsize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Byte size of a single element 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=313pt]{classarray_acd6aa4dba1e1db26fcfd21a323b4d4fa_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_aa9e23dfb45abdcd696bad65937237166}\label{classarray_aa9e23dfb45abdcd696bad65937237166}} 
+\index{array@{array}!mutable\_data@{mutable\_data}}
+\index{mutable\_data@{mutable\_data}!array@{array}}
+\doxysubsubsection{\texorpdfstring{mutable\_data()}{mutable\_data()}}
+{\footnotesize\ttfamily template$<$typename... Ix$>$ \\
+void $\ast$ array\+::mutable\+\_\+data (\begin{DoxyParamCaption}\item[{Ix...}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Mutable pointer to the contained data. If index is not provided, points to the beginning of the buffer. May throw if the index would lead to out of bounds access. May throw if the array is not writeable. 函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classarray_aa9e23dfb45abdcd696bad65937237166_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_aa0a5fdf51bd58d94bf9dcf08fd4dd52c}\label{classarray_aa0a5fdf51bd58d94bf9dcf08fd4dd52c}} 
+\index{array@{array}!mutable\_unchecked@{mutable\_unchecked}}
+\index{mutable\_unchecked@{mutable\_unchecked}!array@{array}}
+\doxysubsubsection{\texorpdfstring{mutable\_unchecked()}{mutable\_unchecked()}}
+{\footnotesize\ttfamily template$<$typename T , \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} Dims = -\/1$>$ \\
+detail\+::unchecked\+\_\+mutable\+\_\+reference$<$ T, Dims $>$ array\+::mutable\+\_\+unchecked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) \&\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns a proxy object that provides access to the array\textquotesingle{}s data without bounds or dimensionality checking. Will throw if the array is missing the {\ttfamily writeable} flag. Use with care\+: the array must not be destroyed or reshaped for the duration of the returned object, and the caller must take care not to access invalid dimensions or dimension indices. 函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classarray_aa0a5fdf51bd58d94bf9dcf08fd4dd52c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_a0a2a16579bf2918347a8762c03f10137}\label{classarray_a0a2a16579bf2918347a8762c03f10137}} 
+\index{array@{array}!nbytes@{nbytes}}
+\index{nbytes@{nbytes}!array@{array}}
+\doxysubsubsection{\texorpdfstring{nbytes()}{nbytes()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} array\+::nbytes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Total number of bytes 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classarray_a0a2a16579bf2918347a8762c03f10137_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_a184360492eac7224753f132d1a0a973e}\label{classarray_a184360492eac7224753f132d1a0a973e}} 
+\index{array@{array}!ndim@{ndim}}
+\index{ndim@{ndim}!array@{array}}
+\doxysubsubsection{\texorpdfstring{ndim()}{ndim()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} array\+::ndim (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Number of dimensions 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=249pt]{classarray_a184360492eac7224753f132d1a0a973e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_ada98138e241b891a543478dbe6494f17}\label{classarray_ada98138e241b891a543478dbe6494f17}} 
+\index{array@{array}!offset\_at@{offset\_at}}
+\index{offset\_at@{offset\_at}!array@{array}}
+\doxysubsubsection{\texorpdfstring{offset\_at()}{offset\_at()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} array\+::offset\+\_\+at (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classarray_a0063e6a1d118abb371f769377b5fee21}\label{classarray_a0063e6a1d118abb371f769377b5fee21}} 
+\index{array@{array}!offset\_at@{offset\_at}}
+\index{offset\_at@{offset\_at}!array@{array}}
+\doxysubsubsection{\texorpdfstring{offset\_at()}{offset\_at()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename... Ix$>$ \\
+\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} array\+::offset\+\_\+at (\begin{DoxyParamCaption}\item[{Ix...}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Byte offset from beginning of the array to a given index (full or partial). May throw if the index would lead to out of bounds access. 函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classarray_a0063e6a1d118abb371f769377b5fee21_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_aa1ad8575ad6a6b900027c360a44e7ef0}\label{classarray_aa1ad8575ad6a6b900027c360a44e7ef0}} 
+\index{array@{array}!owndata@{owndata}}
+\index{owndata@{owndata}!array@{array}}
+\doxysubsubsection{\texorpdfstring{owndata()}{owndata()}}
+{\footnotesize\ttfamily bool array\+::owndata (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+If set, the array owns the data (will be freed when the array is deleted) 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classarray_aa1ad8575ad6a6b900027c360a44e7ef0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_a0aa6d6979e8b2d420db747369180e70a}\label{classarray_a0aa6d6979e8b2d420db747369180e70a}} 
+\index{array@{array}!raw\_array@{raw\_array}}
+\index{raw\_array@{raw\_array}!array@{array}}
+\doxysubsubsection{\texorpdfstring{raw\_array()}{raw\_array()}}
+{\footnotesize\ttfamily static Py\+Object $\ast$ array\+::raw\+\_\+array (\begin{DoxyParamCaption}\item[{Py\+Object $\ast$}]{ptr,  }\item[{int}]{Extra\+Flags = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Create array from any object -- always returns a new reference 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{classarray_a0aa6d6979e8b2d420db747369180e70a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_a3e03dfffbf6c992364c052cf615db45b}\label{classarray_a3e03dfffbf6c992364c052cf615db45b}} 
+\index{array@{array}!resize@{resize}}
+\index{resize@{resize}!array@{array}}
+\doxysubsubsection{\texorpdfstring{resize()}{resize()}}
+{\footnotesize\ttfamily void array\+::resize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classarray_a3378d7821106645fa3a88c5222e127e0}{Shape\+Container}}}]{new\+\_\+shape,  }\item[{bool}]{refcheck = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Resize array to given shape If refcheck is true and more that one reference exist to this array then resize will succeed only if it makes a reshape, i.\+e. original size doesn\textquotesingle{}t change 函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=241pt]{classarray_a3e03dfffbf6c992364c052cf615db45b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_a67d6d0115fb7d616ffe28792da8a33f6}\label{classarray_a67d6d0115fb7d616ffe28792da8a33f6}} 
+\index{array@{array}!shape@{shape}}
+\index{shape@{shape}!array@{array}}
+\doxysubsubsection{\texorpdfstring{shape()}{shape()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} $\ast$ array\+::shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Dimensions of the array 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=255pt]{classarray_a67d6d0115fb7d616ffe28792da8a33f6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_aceb118afe3a4eed2b3c9ec958505e414}\label{classarray_aceb118afe3a4eed2b3c9ec958505e414}} 
+\index{array@{array}!shape@{shape}}
+\index{shape@{shape}!array@{array}}
+\doxysubsubsection{\texorpdfstring{shape()}{shape()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} array\+::shape (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}}}]{dim }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Dimension along a given axis 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classarray_aceb118afe3a4eed2b3c9ec958505e414_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_a34ae467d17d30b99913e27c755403fef}\label{classarray_a34ae467d17d30b99913e27c755403fef}} 
+\index{array@{array}!size@{size}}
+\index{size@{size}!array@{array}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} array\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Total number of elements 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classarray_a34ae467d17d30b99913e27c755403fef_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_af0e9b034604a5306671cdb114855a972}\label{classarray_af0e9b034604a5306671cdb114855a972}} 
+\index{array@{array}!squeeze@{squeeze}}
+\index{squeeze@{squeeze}!array@{array}}
+\doxysubsubsection{\texorpdfstring{squeeze()}{squeeze()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classarray}{array}} array\+::squeeze (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return a new view with all of the dimensions of length 1 removed 
+
+\mbox{\Hypertarget{classarray_a29e3cbc08a6c1f2e713ed1c00a91d9fc}\label{classarray_a29e3cbc08a6c1f2e713ed1c00a91d9fc}} 
+\index{array@{array}!strides@{strides}}
+\index{strides@{strides}!array@{array}}
+\doxysubsubsection{\texorpdfstring{strides()}{strides()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} $\ast$ array\+::strides (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Strides of the array 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{classarray_a29e3cbc08a6c1f2e713ed1c00a91d9fc_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_afb8e09341f7884d6b34d454b2992c7ce}\label{classarray_afb8e09341f7884d6b34d454b2992c7ce}} 
+\index{array@{array}!strides@{strides}}
+\index{strides@{strides}!array@{array}}
+\doxysubsubsection{\texorpdfstring{strides()}{strides()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} array\+::strides (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}}}]{dim }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Stride along a given axis 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classarray_afb8e09341f7884d6b34d454b2992c7ce_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_a3c5b795b6ff9a83c3514d6c6a1309f8b}\label{classarray_a3c5b795b6ff9a83c3514d6c6a1309f8b}} 
+\index{array@{array}!unchecked@{unchecked}}
+\index{unchecked@{unchecked}!array@{array}}
+\doxysubsubsection{\texorpdfstring{unchecked()}{unchecked()}}
+{\footnotesize\ttfamily template$<$typename T , \mbox{\hyperlink{detail_2common_8h_ac430d16fc097b3bf0a7469cfd09decda}{ssize\+\_\+t}} Dims = -\/1$>$ \\
+detail\+::unchecked\+\_\+reference$<$ T, Dims $>$ array\+::unchecked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const \&\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns a proxy object that provides const access to the array\textquotesingle{}s data without bounds or dimensionality checking. Unlike {\ttfamily \mbox{\hyperlink{classarray_aa0a5fdf51bd58d94bf9dcf08fd4dd52c}{mutable\+\_\+unchecked()}}}, this does not require that the underlying array have the {\ttfamily writable} flag. Use with care\+: the array must not be destroyed or reshaped for the duration of the returned object, and the caller must take care not to access invalid dimensions or dimension indices. 函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classarray_a3c5b795b6ff9a83c3514d6c6a1309f8b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classarray_a9c19f81ca43feebd34b2c9dd5b38f1d9}\label{classarray_a9c19f81ca43feebd34b2c9dd5b38f1d9}} 
+\index{array@{array}!writeable@{writeable}}
+\index{writeable@{writeable}!array@{array}}
+\doxysubsubsection{\texorpdfstring{writeable()}{writeable()}}
+{\footnotesize\ttfamily bool array\+::writeable (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+If set, the array is writeable (otherwise the buffer is read-\/only) 
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classarray_a9c19f81ca43feebd34b2c9dd5b38f1d9_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{友元及相关函数文档}
+\mbox{\Hypertarget{classarray_a2d7124af4924ef006d3b7bfd42b05085}\label{classarray_a2d7124af4924ef006d3b7bfd42b05085}} 
+\index{array@{array}!detail::npy\_format\_descriptor@{detail::npy\_format\_descriptor}}
+\index{detail::npy\_format\_descriptor@{detail::npy\_format\_descriptor}!array@{array}}
+\doxysubsubsection{\texorpdfstring{detail::npy\_format\_descriptor}{detail::npy\_format\_descriptor}}
+{\footnotesize\ttfamily template$<$typename , typename $>$ \\
+friend struct detail\+::npy\+\_\+format\+\_\+descriptor\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/\mbox{\hyperlink{numpy_8h}{numpy.\+h}}\end{DoxyCompactItemize}

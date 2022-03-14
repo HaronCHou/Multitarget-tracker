@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: D:/zhr_files/Multitarget-tracker-master/src/Detector/tensorrt_yolo/detect.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">My Project
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_4c3458e0ccdb4c3720723c1caa1aaa1c.html">zhr_files</a></li><li class="navelem"><a class="el" href="dir_5a8d4bff745a16410b5074d3583a347e.html">Multitarget-tracker-master</a></li><li class="navelem"><a class="el" href="dir_46a27ab0460a6f8f8d12d2f44f38bf6b.html">src</a></li><li class="navelem"><a class="el" href="dir_458a7b7bb24e4af0790226fff519699f.html">Detector</a></li><li class="navelem"><a class="el" href="dir_8e643222b94d12c04b910a1af0a73cce.html">tensorrt_yolo</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">detect.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="detect_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef _DETECT_H_</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define _DETECT_H_</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;NvInfer.h&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacenvinfer1.html">nvinfer1</a></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>{</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="namespacenvinfer1.html#a8455d49d12f876ef3c07a5df62bbe17c">   11</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacenvinfer1.html#a8455d49d12f876ef3c07a5df62bbe17c">write</a>(<span class="keywordtype">char</span>*&amp; <a class="code hl_class" href="classbuffer.html">buffer</a>, <span class="keyword">const</span> T&amp; val)</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    {</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>        *<span class="keyword">reinterpret_cast&lt;</span>T*<span class="keyword">&gt;</span>(<a class="code hl_class" href="classbuffer.html">buffer</a>) = val;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        <a class="code hl_class" href="classbuffer.html">buffer</a> += <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    }</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="namespacenvinfer1.html#aba564f1375831c7ba550dadc966101b6">   18</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespacenvinfer1.html#aba564f1375831c7ba550dadc966101b6">read</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>*&amp; <a class="code hl_class" href="classbuffer.html">buffer</a>, T&amp; val)</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        val = *<span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span>T*<span class="keyword">&gt;</span>(<a class="code hl_class" href="classbuffer.html">buffer</a>);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <a class="code hl_class" href="classbuffer.html">buffer</a> += <span class="keyword">sizeof</span>(T);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    }</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html">   24</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classnvinfer1_1_1_detect.html">Detect</a> :<span class="keyword">public</span> IPluginV2</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    {</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#ab3dea3a2297b510b2b304b67b4271d17">   27</a></span>        <a class="code hl_function" href="classnvinfer1_1_1_detect.html#ab3dea3a2297b510b2b304b67b4271d17">Detect</a>();</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#ad2299e732e17ed07decf937b6629bb42">   28</a></span>        <a class="code hl_function" href="classnvinfer1_1_1_detect.html#ad2299e732e17ed07decf937b6629bb42">Detect</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* <a class="code hl_struct" href="structdata.html">data</a>, <span class="keywordtype">size_t</span> length);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#a6c0a94e2e1cb3ec66b5921b32c6e50e6">   29</a></span>        <a class="code hl_function" href="classnvinfer1_1_1_detect.html#a6c0a94e2e1cb3ec66b5921b32c6e50e6">Detect</a>(<span class="keyword">const</span> uint32_t n_anchor_, <span class="keyword">const</span> uint32_t _n_classes_,</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>            <span class="keyword">const</span> uint32_t n_grid_h_, <span class="keyword">const</span> uint32_t n_grid_w_<span class="comment">/*,</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">            const uint32_t &amp;n_stride_h_, const uint32_t &amp;n_stride_w_*/</span>);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#aaf6d81bf08e1a363a31c33d5bb190d3c">   32</a></span>        <a class="code hl_function" href="classnvinfer1_1_1_detect.html#aaf6d81bf08e1a363a31c33d5bb190d3c">~Detect</a>();</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#aff8e94e8255822da3c5cf5ce89cae33f">   33</a></span>        <span class="keywordtype">int</span> <a class="code hl_function" href="classnvinfer1_1_1_detect.html#aff8e94e8255822da3c5cf5ce89cae33f">getNbOutputs</a>()const noexcept<span class="keyword"> override</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keyword">        </span>{</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        }</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#a7aa95f21971188f5195c72bf337ff040">   37</a></span>        Dims <a class="code hl_function" href="classnvinfer1_1_1_detect.html#a7aa95f21971188f5195c72bf337ff040">getOutputDimensions</a>(<span class="keywordtype">int</span> index, <span class="keyword">const</span> Dims* inputs, <span class="keywordtype">int</span> nbInputDims) <span class="keyword">noexcept</span>  <span class="keyword">override</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>            <span class="keywordflow">return</span> inputs[0];</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        }</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#a1da0113af1c46c9eba0a6b9652a60f5b">   41</a></span>        <span class="keywordtype">int</span> <a class="code hl_function" href="classnvinfer1_1_1_detect.html#a1da0113af1c46c9eba0a6b9652a60f5b">initialize</a>() noexcept<span class="keyword">  override</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keyword">        </span>{</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>            <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        }</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#ada2138bebaea19d3b5b7e2125b937a66">   45</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classnvinfer1_1_1_detect.html#ada2138bebaea19d3b5b7e2125b937a66">terminate</a>() noexcept<span class="keyword">  override</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keyword">        </span>{</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        }</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#aba69b2636caa86d3abb59c27f02d70a1">   48</a></span>        <span class="keywordtype">size_t</span> <a class="code hl_function" href="classnvinfer1_1_1_detect.html#aba69b2636caa86d3abb59c27f02d70a1">getWorkspaceSize</a>(<span class="keywordtype">int</span> maxBatchSize) <span class="keyword">const</span> <span class="keyword">noexcept</span>  <span class="keyword">override</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        {</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>            <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        }</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#a58f31333952c483b01f4ee6406aa7638">   52</a></span>        <span class="keywordtype">int</span> <a class="code hl_function" href="classnvinfer1_1_1_detect.html#a58f31333952c483b01f4ee6406aa7638">enqueue</a>(<span class="keywordtype">int</span> batchSize, <span class="keyword">const</span> <span class="keywordtype">void</span>* <span class="keyword">const</span>* inputs, <span class="keywordtype">void</span>** outputs, <span class="keywordtype">void</span>* workspace, cudaStream_t stream) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#a961f96279032379f570a2b24403dde91">   53</a></span>        <span class="keywordtype">int</span> <a class="code hl_function" href="classnvinfer1_1_1_detect.html#a961f96279032379f570a2b24403dde91">enqueue</a>(<span class="keywordtype">int</span> batchSize, <span class="keyword">const</span> <span class="keywordtype">void</span>* <span class="keyword">const</span>* inputs, <span class="keywordtype">void</span>* <span class="keyword">const</span>* outputs, <span class="keywordtype">void</span>* workspace, cudaStream_t stream) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#a06a41ffc2b3cdee3d05aad41791524f0">   55</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classnvinfer1_1_1_detect.html#a06a41ffc2b3cdee3d05aad41791524f0">supportsFormat</a>(DataType type, PluginFormat format) <span class="keyword">const</span> <span class="keyword">noexcept</span> <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#a350b6f913297c3e1daa5f034aa5c3077">   56</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classnvinfer1_1_1_detect.html#a350b6f913297c3e1daa5f034aa5c3077">configureWithFormat</a>(<span class="keyword">const</span> Dims* inputDims, <span class="keywordtype">int</span> nbInputs, <span class="keyword">const</span> Dims* outputDims, <span class="keywordtype">int</span> nbOutputs, DataType type, PluginFormat format, <span class="keywordtype">int</span> maxBatchSize) <span class="keyword">noexcept</span> <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#ad6f68f8c9827e808bccfe9074cfd57ba">   58</a></span>        <span class="keywordtype">size_t</span> <a class="code hl_function" href="classnvinfer1_1_1_detect.html#ad6f68f8c9827e808bccfe9074cfd57ba">getSerializationSize</a>() const noexcept  override;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#a79fa3a6eeb4176ef6946c0e353eef815">   59</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classnvinfer1_1_1_detect.html#a79fa3a6eeb4176ef6946c0e353eef815">serialize</a>(<span class="keywordtype">void</span>* <a class="code hl_class" href="classbuffer.html">buffer</a>) const noexcept  override;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#a1d97b32134efcd17772d5da841eb32b0">   60</a></span>        const <span class="keywordtype">char</span>* <a class="code hl_function" href="classnvinfer1_1_1_detect.html#a1d97b32134efcd17772d5da841eb32b0">getPluginType</a>() const noexcept<span class="keyword">  override</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">        </span>{</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            <span class="keywordflow">return</span> <span class="stringliteral">&quot;DETECT_TRT&quot;</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        }</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#a3e36ee8508d67ea0672d4044329084ab">   64</a></span>        <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="classnvinfer1_1_1_detect.html#a3e36ee8508d67ea0672d4044329084ab">getPluginVersion</a>() const noexcept<span class="keyword">  override</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keyword">        </span>{</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>            <span class="keywordflow">return</span> <span class="stringliteral">&quot;1.0&quot;</span>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        }</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#a347b4c8f0ff0365ca5a0b24150c6fbee">   68</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classnvinfer1_1_1_detect.html#a347b4c8f0ff0365ca5a0b24150c6fbee">destroy</a>() noexcept<span class="keyword">  override</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="keyword">        </span>{</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            <span class="keyword">delete</span> <span class="keyword">this</span>;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        }</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#ad4fa644d6c300352d8d5a010d3de1e04">   72</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classnvinfer1_1_1_detect.html#ad4fa644d6c300352d8d5a010d3de1e04">setPluginNamespace</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* pluginNamespace) <span class="keyword">noexcept</span>  <span class="keyword">override</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        {</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            <a class="code hl_variable" href="classnvinfer1_1_1_detect.html#a7d4144d55b63316e8d7598759f96bd70">_s_plugin_namespace</a> = pluginNamespace;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        }</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#ac7aa0b898321fe6a106a2660e0be923a">   76</a></span>        <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="classnvinfer1_1_1_detect.html#ac7aa0b898321fe6a106a2660e0be923a">getPluginNamespace</a>() const  noexcept<span class="keyword"> override</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="keyword">        </span>{</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            <span class="keywordflow">return</span> <a class="code hl_variable" href="classnvinfer1_1_1_detect.html#a7d4144d55b63316e8d7598759f96bd70">_s_plugin_namespace</a>.c_str();</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        }</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#ae91d839f7caf2742b7ce871ade324dca">   80</a></span>        DataType <a class="code hl_function" href="classnvinfer1_1_1_detect.html#ae91d839f7caf2742b7ce871ade324dca">getOutputDataType</a>(<span class="keywordtype">int</span> index, <span class="keyword">const</span> nvinfer1::DataType* inputTypes, <span class="keywordtype">int</span> nbInputs) <span class="keyword">const</span> <span class="keyword">noexcept</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            <span class="keywordflow">return</span> DataType::kFLOAT;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        }</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#a844a5398e2ba20377b81717841ba37de">   84</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classnvinfer1_1_1_detect.html#a844a5398e2ba20377b81717841ba37de">isOutputBroadcastAcrossBatch</a>(<span class="keywordtype">int</span> outputIndex, <span class="keyword">const</span> <span class="keywordtype">bool</span>* inputIsBroadcasted, <span class="keywordtype">int</span> nbInputs) <span class="keyword">const</span> <span class="keyword">noexcept</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        {</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        }</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#a054672bec18a40f603ddf4f7c55e7718">   88</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classnvinfer1_1_1_detect.html#a054672bec18a40f603ddf4f7c55e7718">canBroadcastInputAcrossBatch</a>(<span class="keywordtype">int</span> inputIndex) <span class="keyword">const</span> <span class="keyword">noexcept</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        }</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#a5158049e2178c1940d4ce294be253d5e">   92</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classnvinfer1_1_1_detect.html#a5158049e2178c1940d4ce294be253d5e">attachToContext</a>(</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            cudnnContext* cudnnContext, cublasContext* cublasContext, IGpuAllocator* gpuAllocator)</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        {}</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#a20e72196f4c9600ba99bafe6668d9d0c">   95</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classnvinfer1_1_1_detect.html#a20e72196f4c9600ba99bafe6668d9d0c">configurePlugin</a>(<span class="keyword">const</span> PluginTensorDesc* in, <span class="keywordtype">int</span> nbInput, <span class="keyword">const</span> PluginTensorDesc* out, <span class="keywordtype">int</span> nbOutput) ;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#ab46fe85f7ee8b861abbdc157c189653d">   96</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classnvinfer1_1_1_detect.html#ab46fe85f7ee8b861abbdc157c189653d">detachFromContext</a>()</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        {}</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#a09b047f3d9c4df8590be59c7c3f4af91">   98</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classnvinfer1_1_1_detect.html#a09b047f3d9c4df8590be59c7c3f4af91">supportsFormatCombination</a>(<span class="keywordtype">int</span> pos, <span class="keyword">const</span> PluginTensorDesc* inOut, <span class="keywordtype">int</span> nbInputs, <span class="keywordtype">int</span> nbOutputs) <span class="keyword">const</span> <span class="keyword">noexcept</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        {</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            <span class="keywordflow">return</span> inOut[pos].format == TensorFormat::kLINEAR &amp;&amp; inOut[pos].type == DataType::kFLOAT;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        }</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#a340904a2b9bbf011884b644eff056605">  102</a></span>        IPluginV2* <a class="code hl_function" href="classnvinfer1_1_1_detect.html#a340904a2b9bbf011884b644eff056605">clone</a>() const noexcept override;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    private:</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#aee5b0b6a9199afc8364b0d1b908b2d60">  105</a></span>        uint32_t <a class="code hl_variable" href="classnvinfer1_1_1_detect.html#aee5b0b6a9199afc8364b0d1b908b2d60">_n_anchor</a>;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#a1ec2fe95131917f21f95c85c9ca90f49">  106</a></span>        uint32_t <a class="code hl_variable" href="classnvinfer1_1_1_detect.html#a1ec2fe95131917f21f95c85c9ca90f49">_n_classes</a>;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#af9c2b0e49b0ff3ac960fb79cf8f4cb0a">  107</a></span>        uint32_t <a class="code hl_variable" href="classnvinfer1_1_1_detect.html#af9c2b0e49b0ff3ac960fb79cf8f4cb0a">_n_grid_h</a>;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#a7560bb4215ef999aebc66a6d72c5ed06">  108</a></span>        uint32_t <a class="code hl_variable" href="classnvinfer1_1_1_detect.html#a7560bb4215ef999aebc66a6d72c5ed06">_n_grid_w</a>;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        <span class="comment">//uint32_t _n_stride_h;</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="comment">//  uint32_t _n_stride_w;</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#acb38d18b5e1e2825bc3926241fd4efb9">  111</a></span>        uint64_t <a class="code hl_variable" href="classnvinfer1_1_1_detect.html#acb38d18b5e1e2825bc3926241fd4efb9">_n_output_size</a>;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect.html#a7d4144d55b63316e8d7598759f96bd70">  112</a></span>        <a class="code hl_namespace" href="namespacestd.html">std</a>::<span class="keywordtype">string</span> <a class="code hl_variable" href="classnvinfer1_1_1_detect.html#a7d4144d55b63316e8d7598759f96bd70">_s_plugin_namespace</a>;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    }; <span class="comment">//end detect</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect_plugin_creator.html">  115</a></span>    class <a class="code hl_class" href="classnvinfer1_1_1_detect_plugin_creator.html">DetectPluginCreator</a> : public IPluginCreator</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect_plugin_creator.html#ab29cf0135f396b4fcab7a816475a4075">  118</a></span>        <a class="code hl_function" href="classnvinfer1_1_1_detect_plugin_creator.html#ab29cf0135f396b4fcab7a816475a4075">DetectPluginCreator</a>();</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect_plugin_creator.html#a6d626504f38afad068e90dbfa8ca283d">  119</a></span>        <a class="code hl_function" href="classnvinfer1_1_1_detect_plugin_creator.html#a6d626504f38afad068e90dbfa8ca283d">~DetectPluginCreator</a>() <span class="keyword">override</span> = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect_plugin_creator.html#a2e9bdbf3ae7954f3084da63ad9bedfa4">  120</a></span>        <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="classnvinfer1_1_1_detect_plugin_creator.html#a2e9bdbf3ae7954f3084da63ad9bedfa4">getPluginName</a>()const noexcept  override;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect_plugin_creator.html#a20a18c7cd4cb20bd537ed733ecdec3ce">  121</a></span>        const <span class="keywordtype">char</span>* <a class="code hl_function" href="classnvinfer1_1_1_detect.html#a3e36ee8508d67ea0672d4044329084ab">getPluginVersion</a>() const  noexcept override;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect_plugin_creator.html#ad845f6a94e10eb04de534d220c44846a">  122</a></span>        const PluginFieldCollection* getFieldNames() noexcept  override;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect_plugin_creator.html#abf6b75854cadfff28c8bc7d62bccd2f1">  123</a></span>        IPluginV2* createPlugin(const <span class="keywordtype">char</span>* <a class="code hl_struct" href="structname.html">name</a>, const PluginFieldCollection* fc) noexcept  override;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect_plugin_creator.html#a2f4dabfd6cf58ef338efb1b3c45ebebf">  124</a></span>        IPluginV2* deserializePlugin(const <span class="keywordtype">char</span>* <a class="code hl_struct" href="structname.html">name</a>, const <span class="keywordtype">void</span>* serialData, <span class="keywordtype">size_t</span> serialLength) noexcept  override;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect_plugin_creator.html#adec3f79909c699e2c4ef047e79c53814">  125</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classnvinfer1_1_1_detect.html#ad4fa644d6c300352d8d5a010d3de1e04">setPluginNamespace</a>(const <span class="keywordtype">char</span>* libNamespace)  noexcept override;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect_plugin_creator.html#a186ee218ace411e13c45a71cb177105e">  126</a></span>        const <span class="keywordtype">char</span>* <a class="code hl_function" href="classnvinfer1_1_1_detect.html#ac7aa0b898321fe6a106a2660e0be923a">getPluginNamespace</a>() const noexcept  override;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    private:</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect_plugin_creator.html#a3fe9501d927c5402a6edb9692fb4e960">  128</a></span>        <a class="code hl_namespace" href="namespacestd.html">std</a>::<span class="keywordtype">string</span> _s_name_space;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect_plugin_creator.html#af17be21ec9d9134a39847dfa98acdfde">  129</a></span>        static PluginFieldCollection _fc;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno"><a class="line" href="classnvinfer1_1_1_detect_plugin_creator.html#ae596ac7d1aef611d04665fcb59b8e487">  130</a></span>        static <a class="code hl_namespace" href="namespacestd.html">std</a>::vector&lt;PluginField&gt; _vec_plugin_attributes;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    };<span class="comment">//end detect creator</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>}<span class="comment">//end namespace nvinfer1</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassbuffer_html"><div class="ttname"><a href="classbuffer.html">buffer</a></div><div class="ttdef"><b>Definition:</b> pytypes.h:1311</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html"><div class="ttname"><a href="classnvinfer1_1_1_detect.html">nvinfer1::Detect</a></div><div class="ttdef"><b>Definition:</b> detect.h:25</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_a054672bec18a40f603ddf4f7c55e7718"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#a054672bec18a40f603ddf4f7c55e7718">nvinfer1::Detect::canBroadcastInputAcrossBatch</a></div><div class="ttdeci">bool canBroadcastInputAcrossBatch(int inputIndex) const noexcept</div><div class="ttdef"><b>Definition:</b> detect.h:88</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_a06a41ffc2b3cdee3d05aad41791524f0"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#a06a41ffc2b3cdee3d05aad41791524f0">nvinfer1::Detect::supportsFormat</a></div><div class="ttdeci">bool supportsFormat(DataType type, PluginFormat format) const noexcept override</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_a09b047f3d9c4df8590be59c7c3f4af91"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#a09b047f3d9c4df8590be59c7c3f4af91">nvinfer1::Detect::supportsFormatCombination</a></div><div class="ttdeci">bool supportsFormatCombination(int pos, const PluginTensorDesc *inOut, int nbInputs, int nbOutputs) const noexcept</div><div class="ttdef"><b>Definition:</b> detect.h:98</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_a1d97b32134efcd17772d5da841eb32b0"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#a1d97b32134efcd17772d5da841eb32b0">nvinfer1::Detect::getPluginType</a></div><div class="ttdeci">const char * getPluginType() const noexcept override</div><div class="ttdef"><b>Definition:</b> detect.h:60</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_a1da0113af1c46c9eba0a6b9652a60f5b"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#a1da0113af1c46c9eba0a6b9652a60f5b">nvinfer1::Detect::initialize</a></div><div class="ttdeci">int initialize() noexcept override</div><div class="ttdef"><b>Definition:</b> detect.h:41</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_a1ec2fe95131917f21f95c85c9ca90f49"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#a1ec2fe95131917f21f95c85c9ca90f49">nvinfer1::Detect::_n_classes</a></div><div class="ttdeci">uint32_t _n_classes</div><div class="ttdef"><b>Definition:</b> detect.h:106</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_a20e72196f4c9600ba99bafe6668d9d0c"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#a20e72196f4c9600ba99bafe6668d9d0c">nvinfer1::Detect::configurePlugin</a></div><div class="ttdeci">void configurePlugin(const PluginTensorDesc *in, int nbInput, const PluginTensorDesc *out, int nbOutput)</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_a340904a2b9bbf011884b644eff056605"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#a340904a2b9bbf011884b644eff056605">nvinfer1::Detect::clone</a></div><div class="ttdeci">IPluginV2 * clone() const noexcept override</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_a347b4c8f0ff0365ca5a0b24150c6fbee"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#a347b4c8f0ff0365ca5a0b24150c6fbee">nvinfer1::Detect::destroy</a></div><div class="ttdeci">void destroy() noexcept override</div><div class="ttdef"><b>Definition:</b> detect.h:68</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_a350b6f913297c3e1daa5f034aa5c3077"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#a350b6f913297c3e1daa5f034aa5c3077">nvinfer1::Detect::configureWithFormat</a></div><div class="ttdeci">void configureWithFormat(const Dims *inputDims, int nbInputs, const Dims *outputDims, int nbOutputs, DataType type, PluginFormat format, int maxBatchSize) noexcept override</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_a3e36ee8508d67ea0672d4044329084ab"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#a3e36ee8508d67ea0672d4044329084ab">nvinfer1::Detect::getPluginVersion</a></div><div class="ttdeci">const char * getPluginVersion() const noexcept override</div><div class="ttdef"><b>Definition:</b> detect.h:64</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_a5158049e2178c1940d4ce294be253d5e"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#a5158049e2178c1940d4ce294be253d5e">nvinfer1::Detect::attachToContext</a></div><div class="ttdeci">void attachToContext(cudnnContext *cudnnContext, cublasContext *cublasContext, IGpuAllocator *gpuAllocator)</div><div class="ttdef"><b>Definition:</b> detect.h:92</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_a58f31333952c483b01f4ee6406aa7638"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#a58f31333952c483b01f4ee6406aa7638">nvinfer1::Detect::enqueue</a></div><div class="ttdeci">int enqueue(int batchSize, const void *const *inputs, void **outputs, void *workspace, cudaStream_t stream) noexcept</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_a6c0a94e2e1cb3ec66b5921b32c6e50e6"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#a6c0a94e2e1cb3ec66b5921b32c6e50e6">nvinfer1::Detect::Detect</a></div><div class="ttdeci">Detect(const uint32_t n_anchor_, const uint32_t _n_classes_, const uint32_t n_grid_h_, const uint32_t n_grid_w_)</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_a7560bb4215ef999aebc66a6d72c5ed06"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#a7560bb4215ef999aebc66a6d72c5ed06">nvinfer1::Detect::_n_grid_w</a></div><div class="ttdeci">uint32_t _n_grid_w</div><div class="ttdef"><b>Definition:</b> detect.h:108</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_a79fa3a6eeb4176ef6946c0e353eef815"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#a79fa3a6eeb4176ef6946c0e353eef815">nvinfer1::Detect::serialize</a></div><div class="ttdeci">void serialize(void *buffer) const noexcept override</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_a7aa95f21971188f5195c72bf337ff040"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#a7aa95f21971188f5195c72bf337ff040">nvinfer1::Detect::getOutputDimensions</a></div><div class="ttdeci">Dims getOutputDimensions(int index, const Dims *inputs, int nbInputDims) noexcept override</div><div class="ttdef"><b>Definition:</b> detect.h:37</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_a7d4144d55b63316e8d7598759f96bd70"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#a7d4144d55b63316e8d7598759f96bd70">nvinfer1::Detect::_s_plugin_namespace</a></div><div class="ttdeci">std::string _s_plugin_namespace</div><div class="ttdef"><b>Definition:</b> detect.h:112</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_a844a5398e2ba20377b81717841ba37de"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#a844a5398e2ba20377b81717841ba37de">nvinfer1::Detect::isOutputBroadcastAcrossBatch</a></div><div class="ttdeci">bool isOutputBroadcastAcrossBatch(int outputIndex, const bool *inputIsBroadcasted, int nbInputs) const noexcept</div><div class="ttdef"><b>Definition:</b> detect.h:84</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_a961f96279032379f570a2b24403dde91"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#a961f96279032379f570a2b24403dde91">nvinfer1::Detect::enqueue</a></div><div class="ttdeci">int enqueue(int batchSize, const void *const *inputs, void *const *outputs, void *workspace, cudaStream_t stream) noexcept</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_aaf6d81bf08e1a363a31c33d5bb190d3c"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#aaf6d81bf08e1a363a31c33d5bb190d3c">nvinfer1::Detect::~Detect</a></div><div class="ttdeci">~Detect()</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_ab3dea3a2297b510b2b304b67b4271d17"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#ab3dea3a2297b510b2b304b67b4271d17">nvinfer1::Detect::Detect</a></div><div class="ttdeci">Detect()</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_ab46fe85f7ee8b861abbdc157c189653d"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#ab46fe85f7ee8b861abbdc157c189653d">nvinfer1::Detect::detachFromContext</a></div><div class="ttdeci">void detachFromContext()</div><div class="ttdef"><b>Definition:</b> detect.h:96</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_aba69b2636caa86d3abb59c27f02d70a1"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#aba69b2636caa86d3abb59c27f02d70a1">nvinfer1::Detect::getWorkspaceSize</a></div><div class="ttdeci">size_t getWorkspaceSize(int maxBatchSize) const noexcept override</div><div class="ttdef"><b>Definition:</b> detect.h:48</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_ac7aa0b898321fe6a106a2660e0be923a"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#ac7aa0b898321fe6a106a2660e0be923a">nvinfer1::Detect::getPluginNamespace</a></div><div class="ttdeci">const char * getPluginNamespace() const noexcept override</div><div class="ttdef"><b>Definition:</b> detect.h:76</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_acb38d18b5e1e2825bc3926241fd4efb9"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#acb38d18b5e1e2825bc3926241fd4efb9">nvinfer1::Detect::_n_output_size</a></div><div class="ttdeci">uint64_t _n_output_size</div><div class="ttdef"><b>Definition:</b> detect.h:111</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_ad2299e732e17ed07decf937b6629bb42"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#ad2299e732e17ed07decf937b6629bb42">nvinfer1::Detect::Detect</a></div><div class="ttdeci">Detect(const void *data, size_t length)</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_ad4fa644d6c300352d8d5a010d3de1e04"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#ad4fa644d6c300352d8d5a010d3de1e04">nvinfer1::Detect::setPluginNamespace</a></div><div class="ttdeci">void setPluginNamespace(const char *pluginNamespace) noexcept override</div><div class="ttdef"><b>Definition:</b> detect.h:72</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_ad6f68f8c9827e808bccfe9074cfd57ba"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#ad6f68f8c9827e808bccfe9074cfd57ba">nvinfer1::Detect::getSerializationSize</a></div><div class="ttdeci">size_t getSerializationSize() const noexcept override</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_ada2138bebaea19d3b5b7e2125b937a66"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#ada2138bebaea19d3b5b7e2125b937a66">nvinfer1::Detect::terminate</a></div><div class="ttdeci">void terminate() noexcept override</div><div class="ttdef"><b>Definition:</b> detect.h:45</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_ae91d839f7caf2742b7ce871ade324dca"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#ae91d839f7caf2742b7ce871ade324dca">nvinfer1::Detect::getOutputDataType</a></div><div class="ttdeci">DataType getOutputDataType(int index, const nvinfer1::DataType *inputTypes, int nbInputs) const noexcept</div><div class="ttdef"><b>Definition:</b> detect.h:80</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_aee5b0b6a9199afc8364b0d1b908b2d60"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#aee5b0b6a9199afc8364b0d1b908b2d60">nvinfer1::Detect::_n_anchor</a></div><div class="ttdeci">uint32_t _n_anchor</div><div class="ttdef"><b>Definition:</b> detect.h:105</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_af9c2b0e49b0ff3ac960fb79cf8f4cb0a"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#af9c2b0e49b0ff3ac960fb79cf8f4cb0a">nvinfer1::Detect::_n_grid_h</a></div><div class="ttdeci">uint32_t _n_grid_h</div><div class="ttdef"><b>Definition:</b> detect.h:107</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_html_aff8e94e8255822da3c5cf5ce89cae33f"><div class="ttname"><a href="classnvinfer1_1_1_detect.html#aff8e94e8255822da3c5cf5ce89cae33f">nvinfer1::Detect::getNbOutputs</a></div><div class="ttdeci">int getNbOutputs() const noexcept override</div><div class="ttdef"><b>Definition:</b> detect.h:33</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_plugin_creator_html"><div class="ttname"><a href="classnvinfer1_1_1_detect_plugin_creator.html">nvinfer1::DetectPluginCreator</a></div><div class="ttdef"><b>Definition:</b> detect.h:116</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_plugin_creator_html_a2e9bdbf3ae7954f3084da63ad9bedfa4"><div class="ttname"><a href="classnvinfer1_1_1_detect_plugin_creator.html#a2e9bdbf3ae7954f3084da63ad9bedfa4">nvinfer1::DetectPluginCreator::getPluginName</a></div><div class="ttdeci">const char * getPluginName() const noexcept override</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_plugin_creator_html_a6d626504f38afad068e90dbfa8ca283d"><div class="ttname"><a href="classnvinfer1_1_1_detect_plugin_creator.html#a6d626504f38afad068e90dbfa8ca283d">nvinfer1::DetectPluginCreator::~DetectPluginCreator</a></div><div class="ttdeci">~DetectPluginCreator() override=default</div></div>
+<div class="ttc" id="aclassnvinfer1_1_1_detect_plugin_creator_html_ab29cf0135f396b4fcab7a816475a4075"><div class="ttname"><a href="classnvinfer1_1_1_detect_plugin_creator.html#ab29cf0135f396b4fcab7a816475a4075">nvinfer1::DetectPluginCreator::DetectPluginCreator</a></div><div class="ttdeci">DetectPluginCreator()</div></div>
+<div class="ttc" id="anamespacenvinfer1_html"><div class="ttname"><a href="namespacenvinfer1.html">nvinfer1</a></div><div class="ttdef"><b>Definition:</b> chunk.h:20</div></div>
+<div class="ttc" id="anamespacenvinfer1_html_a8455d49d12f876ef3c07a5df62bbe17c"><div class="ttname"><a href="namespacenvinfer1.html#a8455d49d12f876ef3c07a5df62bbe17c">nvinfer1::write</a></div><div class="ttdeci">void write(char *&amp;buffer, const T &amp;val)</div><div class="ttdef"><b>Definition:</b> detect.h:11</div></div>
+<div class="ttc" id="anamespacenvinfer1_html_aba564f1375831c7ba550dadc966101b6"><div class="ttname"><a href="namespacenvinfer1.html#aba564f1375831c7ba550dadc966101b6">nvinfer1::read</a></div><div class="ttdeci">void read(const char *&amp;buffer, T &amp;val)</div><div class="ttdef"><b>Definition:</b> detect.h:18</div></div>
+<div class="ttc" id="anamespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdef"><b>Definition:</b> defines.h:76</div></div>
+<div class="ttc" id="astructdata_html"><div class="ttname"><a href="structdata.html">data</a></div><div class="ttdef"><b>Definition:</b> darknet.h:928</div></div>
+<div class="ttc" id="astructname_html"><div class="ttname"><a href="structname.html">name</a></div><div class="ttdoc">Annotation for function names</div><div class="ttdef"><b>Definition:</b> attr.h:33</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>

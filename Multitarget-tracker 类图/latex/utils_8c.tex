@@ -1,0 +1,1127 @@
+\hypertarget{utils_8c}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/utils.c 文件参考}
+\label{utils_8c}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/utils.c@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/utils.c}}
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$float.\+h$>$}\newline
+{\ttfamily \#include $<$limits.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}darkunistd.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$sys/time.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+utils.\+c 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{utils_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{宏定义}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{utils_8c_a369266c24eacffb87046522897a570d5}{\+\_\+\+GNU\+\_\+\+SOURCE}}
+\item 
+\#define \mbox{\hyperlink{utils_8c_a525335710b53cb064ca56b936120431e}{\+\_\+\+USE\+\_\+\+MATH\+\_\+\+DEFINES}}
+\item 
+\#define \mbox{\hyperlink{utils_8c_a43f84fc8ecadf09fbdc6799dcbd396d2}{RS\+\_\+\+SCALE}}~(1.\+0 / (1.\+0 + RAND\+\_\+\+MAX))
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ \mbox{\hyperlink{utils_8c_a50dbd2e2a1de1a21c21acc92629e93b8}{xmalloc\+\_\+location}} (const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} size, const char $\ast$const filename, const char $\ast$const funcname, const int line)
+\item 
+void $\ast$ \mbox{\hyperlink{utils_8c_a9d1ad9325c67b2a4bfd6101a3b7de22a}{xcalloc\+\_\+location}} (const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} nmemb, const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} size, const char $\ast$const filename, const char $\ast$const funcname, const int line)
+\item 
+void $\ast$ \mbox{\hyperlink{utils_8c_a072bab1d0c031407b0906796e4479cf7}{xrealloc\+\_\+location}} (void $\ast$ptr, const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} size, const char $\ast$const filename, const char $\ast$const funcname, const int line)
+\item 
+double \mbox{\hyperlink{utils_8c_af89a5b997626c967e4716fd022aca7bb}{what\+\_\+time\+\_\+is\+\_\+it\+\_\+now}} ()
+\item 
+int $\ast$ \mbox{\hyperlink{utils_8c_a63b04160ff54880e7c809f629f458f7a}{read\+\_\+map}} (char $\ast$filename)
+\item 
+void \mbox{\hyperlink{utils_8c_a6d7f2250125f0cf3f16e5a7b7c1905a9}{sorta\+\_\+shuffle}} (void $\ast$arr, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} n, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} size, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} sections)
+\item 
+void \mbox{\hyperlink{utils_8c_a0ffcf3aef270870fe180405bc25cad50}{shuffle}} (void $\ast$arr, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} n, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} size)
+\item 
+void \mbox{\hyperlink{utils_8c_ae8f911d0e43e2013b752049d7fd8aa48}{del\+\_\+arg}} (int argc, char $\ast$$\ast$argv, int index)
+\item 
+int \mbox{\hyperlink{utils_8c_a845f7b956fcb9711346b8189e18d3846}{find\+\_\+arg}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]}, char $\ast$\mbox{\hyperlink{structarg}{arg}})
+\item 
+int \mbox{\hyperlink{utils_8c_a6c1259f0b709a2411c0375db749440a2}{find\+\_\+int\+\_\+arg}} (int argc, char $\ast$$\ast$argv, char $\ast$\mbox{\hyperlink{structarg}{arg}}, int def)
+\item 
+float \mbox{\hyperlink{utils_8c_af7e57f4e7e4fda1770fbeee64d9443b0}{find\+\_\+float\+\_\+arg}} (int argc, char $\ast$$\ast$argv, char $\ast$\mbox{\hyperlink{structarg}{arg}}, float def)
+\item 
+char $\ast$ \mbox{\hyperlink{utils_8c_ae4bb6e9d11a49c51cf77d820fd91eb07}{find\+\_\+char\+\_\+arg}} (int argc, char $\ast$$\ast$argv, char $\ast$\mbox{\hyperlink{structarg}{arg}}, char $\ast$def)
+\item 
+char $\ast$ \mbox{\hyperlink{utils_8c_a3f6136050e31d6f54440cc1045b8e165}{basecfg}} (char $\ast$cfgfile)
+\item 
+int \mbox{\hyperlink{utils_8c_a6fa5fdc3d22a596fd2d21f012e5ec2c7}{alphanum\+\_\+to\+\_\+int}} (char c)
+\item 
+char \mbox{\hyperlink{utils_8c_a88c02ede12c15131e71a2387a9ef226f}{int\+\_\+to\+\_\+alphanum}} (int i)
+\item 
+void \mbox{\hyperlink{utils_8c_a50faafc66cb2a46626f678e7c23b31a4}{pm}} (int M, int N, float $\ast$A)
+\item 
+void \mbox{\hyperlink{utils_8c_aa31d78a922513f37c4ceffb5ba8cd0fc}{find\+\_\+replace}} (const char $\ast$\mbox{\hyperlink{classstr}{str}}, char $\ast$orig, char $\ast$rep, char $\ast$output)
+\item 
+void \mbox{\hyperlink{utils_8c_a60ea663401e86ca2a60a29e76c716679}{trim}} (char $\ast$\mbox{\hyperlink{classstr}{str}})
+\item 
+void \mbox{\hyperlink{utils_8c_a589efc216c97ecee6c6a8291db8aa581}{find\+\_\+replace\+\_\+extension}} (char $\ast$\mbox{\hyperlink{classstr}{str}}, char $\ast$orig, char $\ast$rep, char $\ast$output)
+\item 
+void \mbox{\hyperlink{utils_8c_adcb0ea13878d05b567742fe07fc55194}{replace\+\_\+image\+\_\+to\+\_\+label}} (const char $\ast$input\+\_\+path, char $\ast$output\+\_\+path)
+\item 
+float \mbox{\hyperlink{utils_8c_a375f4de29b8973c3e1b63bf49a5eb00e}{sec}} (clock\+\_\+t clocks)
+\item 
+void \mbox{\hyperlink{utils_8c_aafc3b7bab809d8bc77b7353fd43f731b}{top\+\_\+k}} (float $\ast$a, int n, int k, int $\ast$index)
+\item 
+void \mbox{\hyperlink{utils_8c_a18c9530c3574f2eadefc8d6cddf4ccb6}{error}} (const char $\ast$const msg, const char $\ast$const filename, const char $\ast$const funcname, const int line)
+\item 
+const char $\ast$ \mbox{\hyperlink{utils_8c_a807f0138463b33f271883ece42241046}{size\+\_\+to\+\_\+\+IEC\+\_\+string}} (const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} size)
+\item 
+void \mbox{\hyperlink{utils_8c_a0a4dc8240d8949be7e2cafb209b053ab}{malloc\+\_\+error}} (const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} size, const char $\ast$const filename, const char $\ast$const funcname, const int line)
+\item 
+void \mbox{\hyperlink{utils_8c_a8b87fa071befb335a93ad91f7a413986}{calloc\+\_\+error}} (const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} size, const char $\ast$const filename, const char $\ast$const funcname, const int line)
+\item 
+void \mbox{\hyperlink{utils_8c_ac060c97bd0eab7270e3a507646ec1337}{realloc\+\_\+error}} (const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} size, const char $\ast$const filename, const char $\ast$const funcname, const int line)
+\item 
+void \mbox{\hyperlink{utils_8c_a841e9c07b05bfb9765ccb1b40c265b99}{file\+\_\+error}} (const char $\ast$const s)
+\item 
+\mbox{\hyperlink{structlist}{list}} $\ast$ \mbox{\hyperlink{utils_8c_a0a59255c6fd5fddbef99c85c0132bf62}{split\+\_\+str}} (char $\ast$s, char delim)
+\item 
+void \mbox{\hyperlink{utils_8c_a76299b86e144434260dcab80323ec9da}{strip}} (char $\ast$s)
+\item 
+void \mbox{\hyperlink{utils_8c_a2926b520ac617a9c97e31cd2810eba0c}{strip\+\_\+args}} (char $\ast$s)
+\item 
+void \mbox{\hyperlink{utils_8c_a377b25b3b6d110d34bea9a85d0305917}{strip\+\_\+char}} (char $\ast$s, char bad)
+\item 
+void \mbox{\hyperlink{utils_8c_a8d316e671a183c19ac7631287b29050a}{free\+\_\+ptrs}} (void $\ast$$\ast$ptrs, int n)
+\item 
+char $\ast$ \mbox{\hyperlink{utils_8c_a68966c4281f1bcbd7e30c94db429b0b9}{fgetl}} (FILE $\ast$fp)
+\item 
+int \mbox{\hyperlink{utils_8c_aeb107bc4d07f192c90ee37806b26a1d4}{read\+\_\+int}} (int fd)
+\item 
+void \mbox{\hyperlink{utils_8c_a71b198ba343751a3b889b92bfe9d5fd2}{write\+\_\+int}} (int fd, int n)
+\item 
+int \mbox{\hyperlink{utils_8c_afccdb26cd63a87476385c10ada582642}{read\+\_\+all\+\_\+fail}} (int fd, char $\ast$\mbox{\hyperlink{classbuffer}{buffer}}, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{classbytes}{bytes}})
+\item 
+int \mbox{\hyperlink{utils_8c_a1b877af1aab01bde49615e4ac0d45b27}{write\+\_\+all\+\_\+fail}} (int fd, char $\ast$\mbox{\hyperlink{classbuffer}{buffer}}, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{classbytes}{bytes}})
+\item 
+void \mbox{\hyperlink{utils_8c_ad4220decb86d761447a704e03423f160}{read\+\_\+all}} (int fd, char $\ast$\mbox{\hyperlink{classbuffer}{buffer}}, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{classbytes}{bytes}})
+\item 
+void \mbox{\hyperlink{utils_8c_ab256fc300495d1768adc2e8b7997a140}{write\+\_\+all}} (int fd, char $\ast$\mbox{\hyperlink{classbuffer}{buffer}}, \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{classbytes}{bytes}})
+\item 
+char $\ast$ \mbox{\hyperlink{utils_8c_a4cdbae9d1d9c0632c8b949c224dc52b5}{copy\+\_\+string}} (char $\ast$s)
+\item 
+\mbox{\hyperlink{structlist}{list}} $\ast$ \mbox{\hyperlink{utils_8c_ac1d7a44bc22c268044fb663f6fe394f0}{parse\+\_\+csv\+\_\+line}} (char $\ast$line)
+\item 
+int \mbox{\hyperlink{utils_8c_a55df64d8a7f8b49ad351188c9872f43e}{count\+\_\+fields}} (char $\ast$line)
+\item 
+float $\ast$ \mbox{\hyperlink{utils_8c_a2c255b13a6ce0e2eb4eb77946dffad2a}{parse\+\_\+fields}} (char $\ast$line, int n)
+\item 
+float \mbox{\hyperlink{utils_8c_abedfeccc4fae6ebb143af6a646658b35}{sum\+\_\+array}} (float $\ast$a, int n)
+\item 
+float \mbox{\hyperlink{utils_8c_a2098fae653a82f4bcc9c339229663285}{mean\+\_\+array}} (float $\ast$a, int n)
+\item 
+void \mbox{\hyperlink{utils_8c_a2b0ce94853a05e81d956416164450c5e}{mean\+\_\+arrays}} (float $\ast$$\ast$a, int n, int els, float $\ast$avg)
+\item 
+void \mbox{\hyperlink{utils_8c_ae211f70582950d61802e8ebc3ae0b665}{print\+\_\+statistics}} (float $\ast$a, int n)
+\item 
+float \mbox{\hyperlink{utils_8c_acb8ffd5403deb84ad16360ab0bf87cfa}{variance\+\_\+array}} (float $\ast$a, int n)
+\item 
+int \mbox{\hyperlink{utils_8c_a5402a85f04198ed74b0ac1172b673a14}{constrain\+\_\+int}} (int a, int \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{min}}, int \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}})
+\item 
+float \mbox{\hyperlink{utils_8c_acdd3cf194fe55404d95585fcf50a1b4c}{constrain}} (float \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{min}}, float \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}}, float a)
+\item 
+float \mbox{\hyperlink{utils_8c_ab103bec0ac7219b8766659a86555360d}{dist\+\_\+array}} (float $\ast$a, float $\ast$b, int n, int sub)
+\item 
+float \mbox{\hyperlink{utils_8c_aedf2898bb8258edd5db8da5f934a709e}{mse\+\_\+array}} (float $\ast$a, int n)
+\item 
+void \mbox{\hyperlink{utils_8c_af0d493fdef09c062d7c28c10401beed0}{normalize\+\_\+array}} (float $\ast$a, int n)
+\item 
+void \mbox{\hyperlink{utils_8c_a4c6ce94b4d4e13bf928eedbd5186e8fe}{translate\+\_\+array}} (float $\ast$a, int n, float s)
+\item 
+float \mbox{\hyperlink{utils_8c_ab29ce45fa5e3847d0125e2e7f2e2cb44}{mag\+\_\+array}} (float $\ast$a, int n)
+\item 
+float \mbox{\hyperlink{utils_8c_a043331e85fee1990cf22f186d1bf0892}{mag\+\_\+array\+\_\+skip}} (float $\ast$a, int n, int $\ast$indices\+\_\+to\+\_\+skip)
+\item 
+void \mbox{\hyperlink{utils_8c_a8fb2bfbc3ce8319adacd60978267cbb7}{scale\+\_\+array}} (float $\ast$a, int n, float s)
+\item 
+int \mbox{\hyperlink{utils_8c_a505834ece1ee5be76ac5763e397ed000}{sample\+\_\+array}} (float $\ast$a, int n)
+\item 
+int \mbox{\hyperlink{utils_8c_ac1c1fc84b3e9f8e1da0b7b4b46f07f86}{sample\+\_\+array\+\_\+custom}} (float $\ast$a, int n)
+\item 
+int \mbox{\hyperlink{utils_8c_a3ebf9ae027586c4c7d982ffc92bad3cf}{max\+\_\+index}} (float $\ast$a, int n)
+\item 
+int \mbox{\hyperlink{utils_8c_af8450e4c8bb6052a1a509c76a65b747d}{top\+\_\+max\+\_\+index}} (float $\ast$a, int n, int k)
+\item 
+int \mbox{\hyperlink{utils_8c_aa86516fcc6a1cb2cd90c69bafc8cad1f}{int\+\_\+index}} (int $\ast$a, int val, int n)
+\item 
+int \mbox{\hyperlink{utils_8c_ad3de83542e75e46f163db52544498f53}{rand\+\_\+int}} (int \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{min}}, int \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}})
+\item 
+float \mbox{\hyperlink{utils_8c_a5b5b0c77bb2f450bce70777573f7ca90}{rand\+\_\+normal}} ()
+\item 
+\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} \mbox{\hyperlink{utils_8c_a840c471f9da17532e230bccbc490b8c6}{rand\+\_\+size\+\_\+t}} ()
+\item 
+float \mbox{\hyperlink{utils_8c_a5492196e16ed2d16bae1df8483ef79ed}{rand\+\_\+uniform}} (float \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{min}}, float \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}})
+\item 
+float \mbox{\hyperlink{utils_8c_ae5e2a8baa8169333fae635a56852f4a8}{rand\+\_\+scale}} (float s)
+\item 
+float $\ast$$\ast$ \mbox{\hyperlink{utils_8c_a945de6ea7f55d641ac6ea0ea82c63d81}{one\+\_\+hot\+\_\+encode}} (float $\ast$a, int n, int k)
+\item 
+unsigned int \mbox{\hyperlink{utils_8c_a7277bdc5e17cec1912f481e6a113bf95}{random\+\_\+gen\+\_\+fast}} (void)
+\item 
+float \mbox{\hyperlink{utils_8c_a51d206c0bf5332e55209606c93da4774}{random\+\_\+float\+\_\+fast}} ()
+\item 
+int \mbox{\hyperlink{utils_8c_ae0cac674c3e9ade4811c88c82f92c858}{rand\+\_\+int\+\_\+fast}} (int \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{min}}, int \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}})
+\item 
+unsigned int \mbox{\hyperlink{utils_8c_a9550592017450eb947f81f675b67bfdc}{random\+\_\+gen}} ()
+\item 
+float \mbox{\hyperlink{utils_8c_a5ae57531895d1992301ac12a3ddb49c1}{random\+\_\+float}} ()
+\item 
+float \mbox{\hyperlink{utils_8c_a6d37719680670d57d47c363a6ca88f4a}{rand\+\_\+uniform\+\_\+strong}} (float \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{min}}, float \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}})
+\item 
+float \mbox{\hyperlink{utils_8c_a5a7e122c73c5705b3b92ee320622f26c}{rand\+\_\+precalc\+\_\+random}} (float \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{min}}, float \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}}, float random\+\_\+part)
+\item 
+double \mbox{\hyperlink{utils_8c_a52d959486d1bdfdffc1c5aaa4937ad5c}{double\+\_\+rand}} (void)
+\item 
+unsigned int \mbox{\hyperlink{utils_8c_aa454b4d31b753932e9bfbe1a3ff51b60}{uint\+\_\+rand}} (unsigned int less\+\_\+than)
+\item 
+int \mbox{\hyperlink{utils_8c_ad17512850938b51d41aede9ce86c015f}{check\+\_\+array\+\_\+is\+\_\+nan}} (float $\ast$arr, int size)
+\item 
+int \mbox{\hyperlink{utils_8c_a7a04d2a67d468c9594c9c11863bff4b9}{check\+\_\+array\+\_\+is\+\_\+inf}} (float $\ast$arr, int size)
+\item 
+int $\ast$ \mbox{\hyperlink{utils_8c_acf91c78e1faa528eb2e6054afa93c859}{random\+\_\+index\+\_\+order}} (int \mbox{\hyperlink{ldes_2fhog_8cpp_ac6afabdc09a49a433ee19d8a9486056d}{min}}, int \mbox{\hyperlink{ldes_2fhog_8cpp_affe776513b24d84b39af8ab0930fef7f}{max}})
+\item 
+int \mbox{\hyperlink{utils_8c_a12f164831d230a6c2ecc035539b13211}{max\+\_\+int\+\_\+index}} (int $\ast$a, int n)
+\item 
+\mbox{\hyperlink{structboxabs}{boxabs}} \mbox{\hyperlink{utils_8c_a498f8f3baa9f03fb10a795bbb72eb6fa}{box\+\_\+to\+\_\+boxabs}} (const \mbox{\hyperlink{structbox}{box}} $\ast$b, const int img\+\_\+w, const int img\+\_\+h, const int bounds\+\_\+check)
+\item 
+int \mbox{\hyperlink{utils_8c_aa946fc74bc6c238b636db6788e14c25d}{make\+\_\+directory}} (char $\ast$\mbox{\hyperlink{gml2nestedsql_8cpp_a10cdd7e2573589f34f8a03983f8cd8f8}{path}}, int mode)
+\item 
+unsigned long \mbox{\hyperlink{utils_8c_a70692d0d67ff6b964b5a1e7eb3d0dad5}{custom\+\_\+hash}} (char $\ast$\mbox{\hyperlink{classstr}{str}})
+\item 
+bool \mbox{\hyperlink{utils_8c_aaecada79a9a365890edd9a174719b83d}{is\+\_\+live\+\_\+stream}} (const char $\ast$\mbox{\hyperlink{gml2nestedsql_8cpp_a10cdd7e2573589f34f8a03983f8cd8f8}{path}})
+\end{DoxyCompactItemize}
+\doxysubsection*{变量}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned int \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}} = 123456789
+\item 
+static unsigned int \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}} = 362436069
+\item 
+static unsigned int \mbox{\hyperlink{utils_8c_a3d99b005d0fb73033dce14d4a135d01f}{z}} = 521288629
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{宏定义说明}
+\mbox{\Hypertarget{utils_8c_a369266c24eacffb87046522897a570d5}\label{utils_8c_a369266c24eacffb87046522897a570d5}} 
+\index{utils.c@{utils.c}!\_GNU\_SOURCE@{\_GNU\_SOURCE}}
+\index{\_GNU\_SOURCE@{\_GNU\_SOURCE}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{\_GNU\_SOURCE}{\_GNU\_SOURCE}}
+{\footnotesize\ttfamily \#define \+\_\+\+GNU\+\_\+\+SOURCE}
+
+\mbox{\Hypertarget{utils_8c_a525335710b53cb064ca56b936120431e}\label{utils_8c_a525335710b53cb064ca56b936120431e}} 
+\index{utils.c@{utils.c}!\_USE\_MATH\_DEFINES@{\_USE\_MATH\_DEFINES}}
+\index{\_USE\_MATH\_DEFINES@{\_USE\_MATH\_DEFINES}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{\_USE\_MATH\_DEFINES}{\_USE\_MATH\_DEFINES}}
+{\footnotesize\ttfamily \#define \+\_\+\+USE\+\_\+\+MATH\+\_\+\+DEFINES}
+
+\mbox{\Hypertarget{utils_8c_a43f84fc8ecadf09fbdc6799dcbd396d2}\label{utils_8c_a43f84fc8ecadf09fbdc6799dcbd396d2}} 
+\index{utils.c@{utils.c}!RS\_SCALE@{RS\_SCALE}}
+\index{RS\_SCALE@{RS\_SCALE}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{RS\_SCALE}{RS\_SCALE}}
+{\footnotesize\ttfamily \#define RS\+\_\+\+SCALE~(1.\+0 / (1.\+0 + RAND\+\_\+\+MAX))}
+
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{utils_8c_a6fa5fdc3d22a596fd2d21f012e5ec2c7}\label{utils_8c_a6fa5fdc3d22a596fd2d21f012e5ec2c7}} 
+\index{utils.c@{utils.c}!alphanum\_to\_int@{alphanum\_to\_int}}
+\index{alphanum\_to\_int@{alphanum\_to\_int}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{alphanum\_to\_int()}{alphanum\_to\_int()}}
+{\footnotesize\ttfamily int alphanum\+\_\+to\+\_\+int (\begin{DoxyParamCaption}\item[{char}]{c }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a3f6136050e31d6f54440cc1045b8e165}\label{utils_8c_a3f6136050e31d6f54440cc1045b8e165}} 
+\index{utils.c@{utils.c}!basecfg@{basecfg}}
+\index{basecfg@{basecfg}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{basecfg()}{basecfg()}}
+{\footnotesize\ttfamily char $\ast$ basecfg (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=307pt]{utils_8c_a3f6136050e31d6f54440cc1045b8e165_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a498f8f3baa9f03fb10a795bbb72eb6fa}\label{utils_8c_a498f8f3baa9f03fb10a795bbb72eb6fa}} 
+\index{utils.c@{utils.c}!box\_to\_boxabs@{box\_to\_boxabs}}
+\index{box\_to\_boxabs@{box\_to\_boxabs}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{box\_to\_boxabs()}{box\_to\_boxabs()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structboxabs}{boxabs}} box\+\_\+to\+\_\+boxabs (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structbox}{box}} $\ast$}]{b,  }\item[{const int}]{img\+\_\+w,  }\item[{const int}]{img\+\_\+h,  }\item[{const int}]{bounds\+\_\+check }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a8b87fa071befb335a93ad91f7a413986}\label{utils_8c_a8b87fa071befb335a93ad91f7a413986}} 
+\index{utils.c@{utils.c}!calloc\_error@{calloc\_error}}
+\index{calloc\_error@{calloc\_error}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{calloc\_error()}{calloc\_error()}}
+{\footnotesize\ttfamily void calloc\+\_\+error (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{size,  }\item[{const char $\ast$const}]{filename,  }\item[{const char $\ast$const}]{funcname,  }\item[{const int}]{line }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=281pt]{utils_8c_a8b87fa071befb335a93ad91f7a413986_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a7a04d2a67d468c9594c9c11863bff4b9}\label{utils_8c_a7a04d2a67d468c9594c9c11863bff4b9}} 
+\index{utils.c@{utils.c}!check\_array\_is\_inf@{check\_array\_is\_inf}}
+\index{check\_array\_is\_inf@{check\_array\_is\_inf}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{check\_array\_is\_inf()}{check\_array\_is\_inf()}}
+{\footnotesize\ttfamily int check\+\_\+array\+\_\+is\+\_\+inf (\begin{DoxyParamCaption}\item[{float $\ast$}]{arr,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_ad17512850938b51d41aede9ce86c015f}\label{utils_8c_ad17512850938b51d41aede9ce86c015f}} 
+\index{utils.c@{utils.c}!check\_array\_is\_nan@{check\_array\_is\_nan}}
+\index{check\_array\_is\_nan@{check\_array\_is\_nan}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{check\_array\_is\_nan()}{check\_array\_is\_nan()}}
+{\footnotesize\ttfamily int check\+\_\+array\+\_\+is\+\_\+nan (\begin{DoxyParamCaption}\item[{float $\ast$}]{arr,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_acdd3cf194fe55404d95585fcf50a1b4c}\label{utils_8c_acdd3cf194fe55404d95585fcf50a1b4c}} 
+\index{utils.c@{utils.c}!constrain@{constrain}}
+\index{constrain@{constrain}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{constrain()}{constrain()}}
+{\footnotesize\ttfamily float constrain (\begin{DoxyParamCaption}\item[{float}]{min,  }\item[{float}]{max,  }\item[{float}]{a }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a5402a85f04198ed74b0ac1172b673a14}\label{utils_8c_a5402a85f04198ed74b0ac1172b673a14}} 
+\index{utils.c@{utils.c}!constrain\_int@{constrain\_int}}
+\index{constrain\_int@{constrain\_int}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{constrain\_int()}{constrain\_int()}}
+{\footnotesize\ttfamily int constrain\+\_\+int (\begin{DoxyParamCaption}\item[{int}]{a,  }\item[{int}]{min,  }\item[{int}]{max }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a4cdbae9d1d9c0632c8b949c224dc52b5}\label{utils_8c_a4cdbae9d1d9c0632c8b949c224dc52b5}} 
+\index{utils.c@{utils.c}!copy\_string@{copy\_string}}
+\index{copy\_string@{copy\_string}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{copy\_string()}{copy\_string()}}
+{\footnotesize\ttfamily char $\ast$ copy\+\_\+string (\begin{DoxyParamCaption}\item[{char $\ast$}]{s }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=221pt]{utils_8c_a4cdbae9d1d9c0632c8b949c224dc52b5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a55df64d8a7f8b49ad351188c9872f43e}\label{utils_8c_a55df64d8a7f8b49ad351188c9872f43e}} 
+\index{utils.c@{utils.c}!count\_fields@{count\_fields}}
+\index{count\_fields@{count\_fields}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{count\_fields()}{count\_fields()}}
+{\footnotesize\ttfamily int count\+\_\+fields (\begin{DoxyParamCaption}\item[{char $\ast$}]{line }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a70692d0d67ff6b964b5a1e7eb3d0dad5}\label{utils_8c_a70692d0d67ff6b964b5a1e7eb3d0dad5}} 
+\index{utils.c@{utils.c}!custom\_hash@{custom\_hash}}
+\index{custom\_hash@{custom\_hash}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{custom\_hash()}{custom\_hash()}}
+{\footnotesize\ttfamily unsigned long custom\+\_\+hash (\begin{DoxyParamCaption}\item[{char $\ast$}]{str }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=327pt]{utils_8c_a70692d0d67ff6b964b5a1e7eb3d0dad5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_ae8f911d0e43e2013b752049d7fd8aa48}\label{utils_8c_ae8f911d0e43e2013b752049d7fd8aa48}} 
+\index{utils.c@{utils.c}!del\_arg@{del\_arg}}
+\index{del\_arg@{del\_arg}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{del\_arg()}{del\_arg()}}
+{\footnotesize\ttfamily void del\+\_\+arg (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv,  }\item[{int}]{index }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_ab103bec0ac7219b8766659a86555360d}\label{utils_8c_ab103bec0ac7219b8766659a86555360d}} 
+\index{utils.c@{utils.c}!dist\_array@{dist\_array}}
+\index{dist\_array@{dist\_array}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{dist\_array()}{dist\_array()}}
+{\footnotesize\ttfamily float dist\+\_\+array (\begin{DoxyParamCaption}\item[{float $\ast$}]{a,  }\item[{float $\ast$}]{b,  }\item[{int}]{n,  }\item[{int}]{sub }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a52d959486d1bdfdffc1c5aaa4937ad5c}\label{utils_8c_a52d959486d1bdfdffc1c5aaa4937ad5c}} 
+\index{utils.c@{utils.c}!double\_rand@{double\_rand}}
+\index{double\_rand@{double\_rand}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{double\_rand()}{double\_rand()}}
+{\footnotesize\ttfamily double double\+\_\+rand (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=239pt]{utils_8c_a52d959486d1bdfdffc1c5aaa4937ad5c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a18c9530c3574f2eadefc8d6cddf4ccb6}\label{utils_8c_a18c9530c3574f2eadefc8d6cddf4ccb6}} 
+\index{utils.c@{utils.c}!error@{error}}
+\index{error@{error}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{error()}{error()}}
+{\footnotesize\ttfamily void error (\begin{DoxyParamCaption}\item[{const char $\ast$const}]{msg,  }\item[{const char $\ast$const}]{filename,  }\item[{const char $\ast$const}]{funcname,  }\item[{const int}]{line }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a68966c4281f1bcbd7e30c94db429b0b9}\label{utils_8c_a68966c4281f1bcbd7e30c94db429b0b9}} 
+\index{utils.c@{utils.c}!fgetl@{fgetl}}
+\index{fgetl@{fgetl}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{fgetl()}{fgetl()}}
+{\footnotesize\ttfamily char $\ast$ fgetl (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{fp }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a841e9c07b05bfb9765ccb1b40c265b99}\label{utils_8c_a841e9c07b05bfb9765ccb1b40c265b99}} 
+\index{utils.c@{utils.c}!file\_error@{file\_error}}
+\index{file\_error@{file\_error}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{file\_error()}{file\_error()}}
+{\footnotesize\ttfamily void file\+\_\+error (\begin{DoxyParamCaption}\item[{const char $\ast$const}]{s }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a845f7b956fcb9711346b8189e18d3846}\label{utils_8c_a845f7b956fcb9711346b8189e18d3846}} 
+\index{utils.c@{utils.c}!find\_arg@{find\_arg}}
+\index{find\_arg@{find\_arg}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{find\_arg()}{find\_arg()}}
+{\footnotesize\ttfamily int find\+\_\+arg (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]},  }\item[{char $\ast$}]{arg }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{utils_8c_a845f7b956fcb9711346b8189e18d3846_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_ae4bb6e9d11a49c51cf77d820fd91eb07}\label{utils_8c_ae4bb6e9d11a49c51cf77d820fd91eb07}} 
+\index{utils.c@{utils.c}!find\_char\_arg@{find\_char\_arg}}
+\index{find\_char\_arg@{find\_char\_arg}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{find\_char\_arg()}{find\_char\_arg()}}
+{\footnotesize\ttfamily char $\ast$ find\+\_\+char\+\_\+arg (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv,  }\item[{char $\ast$}]{arg,  }\item[{char $\ast$}]{def }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=238pt]{utils_8c_ae4bb6e9d11a49c51cf77d820fd91eb07_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_af7e57f4e7e4fda1770fbeee64d9443b0}\label{utils_8c_af7e57f4e7e4fda1770fbeee64d9443b0}} 
+\index{utils.c@{utils.c}!find\_float\_arg@{find\_float\_arg}}
+\index{find\_float\_arg@{find\_float\_arg}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{find\_float\_arg()}{find\_float\_arg()}}
+{\footnotesize\ttfamily float find\+\_\+float\+\_\+arg (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv,  }\item[{char $\ast$}]{arg,  }\item[{float}]{def }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=238pt]{utils_8c_af7e57f4e7e4fda1770fbeee64d9443b0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a6c1259f0b709a2411c0375db749440a2}\label{utils_8c_a6c1259f0b709a2411c0375db749440a2}} 
+\index{utils.c@{utils.c}!find\_int\_arg@{find\_int\_arg}}
+\index{find\_int\_arg@{find\_int\_arg}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{find\_int\_arg()}{find\_int\_arg()}}
+{\footnotesize\ttfamily int find\+\_\+int\+\_\+arg (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv,  }\item[{char $\ast$}]{arg,  }\item[{int}]{def }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{utils_8c_a6c1259f0b709a2411c0375db749440a2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_aa31d78a922513f37c4ceffb5ba8cd0fc}\label{utils_8c_aa31d78a922513f37c4ceffb5ba8cd0fc}} 
+\index{utils.c@{utils.c}!find\_replace@{find\_replace}}
+\index{find\_replace@{find\_replace}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{find\_replace()}{find\_replace()}}
+{\footnotesize\ttfamily void find\+\_\+replace (\begin{DoxyParamCaption}\item[{const char $\ast$}]{str,  }\item[{char $\ast$}]{orig,  }\item[{char $\ast$}]{rep,  }\item[{char $\ast$}]{output }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a589efc216c97ecee6c6a8291db8aa581}\label{utils_8c_a589efc216c97ecee6c6a8291db8aa581}} 
+\index{utils.c@{utils.c}!find\_replace\_extension@{find\_replace\_extension}}
+\index{find\_replace\_extension@{find\_replace\_extension}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{find\_replace\_extension()}{find\_replace\_extension()}}
+{\footnotesize\ttfamily void find\+\_\+replace\+\_\+extension (\begin{DoxyParamCaption}\item[{char $\ast$}]{str,  }\item[{char $\ast$}]{orig,  }\item[{char $\ast$}]{rep,  }\item[{char $\ast$}]{output }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a8d316e671a183c19ac7631287b29050a}\label{utils_8c_a8d316e671a183c19ac7631287b29050a}} 
+\index{utils.c@{utils.c}!free\_ptrs@{free\_ptrs}}
+\index{free\_ptrs@{free\_ptrs}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{free\_ptrs()}{free\_ptrs()}}
+{\footnotesize\ttfamily void free\+\_\+ptrs (\begin{DoxyParamCaption}\item[{void $\ast$$\ast$}]{ptrs,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_aa86516fcc6a1cb2cd90c69bafc8cad1f}\label{utils_8c_aa86516fcc6a1cb2cd90c69bafc8cad1f}} 
+\index{utils.c@{utils.c}!int\_index@{int\_index}}
+\index{int\_index@{int\_index}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{int\_index()}{int\_index()}}
+{\footnotesize\ttfamily int int\+\_\+index (\begin{DoxyParamCaption}\item[{int $\ast$}]{a,  }\item[{int}]{val,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a88c02ede12c15131e71a2387a9ef226f}\label{utils_8c_a88c02ede12c15131e71a2387a9ef226f}} 
+\index{utils.c@{utils.c}!int\_to\_alphanum@{int\_to\_alphanum}}
+\index{int\_to\_alphanum@{int\_to\_alphanum}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{int\_to\_alphanum()}{int\_to\_alphanum()}}
+{\footnotesize\ttfamily char int\+\_\+to\+\_\+alphanum (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_aaecada79a9a365890edd9a174719b83d}\label{utils_8c_aaecada79a9a365890edd9a174719b83d}} 
+\index{utils.c@{utils.c}!is\_live\_stream@{is\_live\_stream}}
+\index{is\_live\_stream@{is\_live\_stream}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{is\_live\_stream()}{is\_live\_stream()}}
+{\footnotesize\ttfamily bool is\+\_\+live\+\_\+stream (\begin{DoxyParamCaption}\item[{const char $\ast$}]{path }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_ab29ce45fa5e3847d0125e2e7f2e2cb44}\label{utils_8c_ab29ce45fa5e3847d0125e2e7f2e2cb44}} 
+\index{utils.c@{utils.c}!mag\_array@{mag\_array}}
+\index{mag\_array@{mag\_array}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{mag\_array()}{mag\_array()}}
+{\footnotesize\ttfamily float mag\+\_\+array (\begin{DoxyParamCaption}\item[{float $\ast$}]{a,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a043331e85fee1990cf22f186d1bf0892}\label{utils_8c_a043331e85fee1990cf22f186d1bf0892}} 
+\index{utils.c@{utils.c}!mag\_array\_skip@{mag\_array\_skip}}
+\index{mag\_array\_skip@{mag\_array\_skip}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{mag\_array\_skip()}{mag\_array\_skip()}}
+{\footnotesize\ttfamily float mag\+\_\+array\+\_\+skip (\begin{DoxyParamCaption}\item[{float $\ast$}]{a,  }\item[{int}]{n,  }\item[{int $\ast$}]{indices\+\_\+to\+\_\+skip }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_aa946fc74bc6c238b636db6788e14c25d}\label{utils_8c_aa946fc74bc6c238b636db6788e14c25d}} 
+\index{utils.c@{utils.c}!make\_directory@{make\_directory}}
+\index{make\_directory@{make\_directory}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{make\_directory()}{make\_directory()}}
+{\footnotesize\ttfamily int make\+\_\+directory (\begin{DoxyParamCaption}\item[{char $\ast$}]{path,  }\item[{int}]{mode }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a0a4dc8240d8949be7e2cafb209b053ab}\label{utils_8c_a0a4dc8240d8949be7e2cafb209b053ab}} 
+\index{utils.c@{utils.c}!malloc\_error@{malloc\_error}}
+\index{malloc\_error@{malloc\_error}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{malloc\_error()}{malloc\_error()}}
+{\footnotesize\ttfamily void malloc\+\_\+error (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{size,  }\item[{const char $\ast$const}]{filename,  }\item[{const char $\ast$const}]{funcname,  }\item[{const int}]{line }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=284pt]{utils_8c_a0a4dc8240d8949be7e2cafb209b053ab_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a3ebf9ae027586c4c7d982ffc92bad3cf}\label{utils_8c_a3ebf9ae027586c4c7d982ffc92bad3cf}} 
+\index{utils.c@{utils.c}!max\_index@{max\_index}}
+\index{max\_index@{max\_index}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{max\_index()}{max\_index()}}
+{\footnotesize\ttfamily int max\+\_\+index (\begin{DoxyParamCaption}\item[{float $\ast$}]{a,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a12f164831d230a6c2ecc035539b13211}\label{utils_8c_a12f164831d230a6c2ecc035539b13211}} 
+\index{utils.c@{utils.c}!max\_int\_index@{max\_int\_index}}
+\index{max\_int\_index@{max\_int\_index}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{max\_int\_index()}{max\_int\_index()}}
+{\footnotesize\ttfamily int max\+\_\+int\+\_\+index (\begin{DoxyParamCaption}\item[{int $\ast$}]{a,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a2098fae653a82f4bcc9c339229663285}\label{utils_8c_a2098fae653a82f4bcc9c339229663285}} 
+\index{utils.c@{utils.c}!mean\_array@{mean\_array}}
+\index{mean\_array@{mean\_array}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{mean\_array()}{mean\_array()}}
+{\footnotesize\ttfamily float mean\+\_\+array (\begin{DoxyParamCaption}\item[{float $\ast$}]{a,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=246pt]{utils_8c_a2098fae653a82f4bcc9c339229663285_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a2b0ce94853a05e81d956416164450c5e}\label{utils_8c_a2b0ce94853a05e81d956416164450c5e}} 
+\index{utils.c@{utils.c}!mean\_arrays@{mean\_arrays}}
+\index{mean\_arrays@{mean\_arrays}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{mean\_arrays()}{mean\_arrays()}}
+{\footnotesize\ttfamily void mean\+\_\+arrays (\begin{DoxyParamCaption}\item[{float $\ast$$\ast$}]{a,  }\item[{int}]{n,  }\item[{int}]{els,  }\item[{float $\ast$}]{avg }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_aedf2898bb8258edd5db8da5f934a709e}\label{utils_8c_aedf2898bb8258edd5db8da5f934a709e}} 
+\index{utils.c@{utils.c}!mse\_array@{mse\_array}}
+\index{mse\_array@{mse\_array}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{mse\_array()}{mse\_array()}}
+{\footnotesize\ttfamily float mse\+\_\+array (\begin{DoxyParamCaption}\item[{float $\ast$}]{a,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_af0d493fdef09c062d7c28c10401beed0}\label{utils_8c_af0d493fdef09c062d7c28c10401beed0}} 
+\index{utils.c@{utils.c}!normalize\_array@{normalize\_array}}
+\index{normalize\_array@{normalize\_array}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{normalize\_array()}{normalize\_array()}}
+{\footnotesize\ttfamily void normalize\+\_\+array (\begin{DoxyParamCaption}\item[{float $\ast$}]{a,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{utils_8c_af0d493fdef09c062d7c28c10401beed0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a945de6ea7f55d641ac6ea0ea82c63d81}\label{utils_8c_a945de6ea7f55d641ac6ea0ea82c63d81}} 
+\index{utils.c@{utils.c}!one\_hot\_encode@{one\_hot\_encode}}
+\index{one\_hot\_encode@{one\_hot\_encode}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{one\_hot\_encode()}{one\_hot\_encode()}}
+{\footnotesize\ttfamily float $\ast$$\ast$ one\+\_\+hot\+\_\+encode (\begin{DoxyParamCaption}\item[{float $\ast$}]{a,  }\item[{int}]{n,  }\item[{int}]{k }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_ac1d7a44bc22c268044fb663f6fe394f0}\label{utils_8c_ac1d7a44bc22c268044fb663f6fe394f0}} 
+\index{utils.c@{utils.c}!parse\_csv\_line@{parse\_csv\_line}}
+\index{parse\_csv\_line@{parse\_csv\_line}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{parse\_csv\_line()}{parse\_csv\_line()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlist}{list}} $\ast$ parse\+\_\+csv\+\_\+line (\begin{DoxyParamCaption}\item[{char $\ast$}]{line }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=337pt]{utils_8c_ac1d7a44bc22c268044fb663f6fe394f0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a2c255b13a6ce0e2eb4eb77946dffad2a}\label{utils_8c_a2c255b13a6ce0e2eb4eb77946dffad2a}} 
+\index{utils.c@{utils.c}!parse\_fields@{parse\_fields}}
+\index{parse\_fields@{parse\_fields}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{parse\_fields()}{parse\_fields()}}
+{\footnotesize\ttfamily float $\ast$ parse\+\_\+fields (\begin{DoxyParamCaption}\item[{char $\ast$}]{line,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a50faafc66cb2a46626f678e7c23b31a4}\label{utils_8c_a50faafc66cb2a46626f678e7c23b31a4}} 
+\index{utils.c@{utils.c}!pm@{pm}}
+\index{pm@{pm}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{pm()}{pm()}}
+{\footnotesize\ttfamily void pm (\begin{DoxyParamCaption}\item[{int}]{M,  }\item[{int}]{N,  }\item[{float $\ast$}]{A }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_ae211f70582950d61802e8ebc3ae0b665}\label{utils_8c_ae211f70582950d61802e8ebc3ae0b665}} 
+\index{utils.c@{utils.c}!print\_statistics@{print\_statistics}}
+\index{print\_statistics@{print\_statistics}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{print\_statistics()}{print\_statistics()}}
+{\footnotesize\ttfamily void print\+\_\+statistics (\begin{DoxyParamCaption}\item[{float $\ast$}]{a,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{utils_8c_ae211f70582950d61802e8ebc3ae0b665_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_ad3de83542e75e46f163db52544498f53}\label{utils_8c_ad3de83542e75e46f163db52544498f53}} 
+\index{utils.c@{utils.c}!rand\_int@{rand\_int}}
+\index{rand\_int@{rand\_int}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{rand\_int()}{rand\_int()}}
+{\footnotesize\ttfamily int rand\+\_\+int (\begin{DoxyParamCaption}\item[{int}]{min,  }\item[{int}]{max }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{utils_8c_ad3de83542e75e46f163db52544498f53_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_ae0cac674c3e9ade4811c88c82f92c858}\label{utils_8c_ae0cac674c3e9ade4811c88c82f92c858}} 
+\index{utils.c@{utils.c}!rand\_int\_fast@{rand\_int\_fast}}
+\index{rand\_int\_fast@{rand\_int\_fast}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{rand\_int\_fast()}{rand\_int\_fast()}}
+{\footnotesize\ttfamily int rand\+\_\+int\+\_\+fast (\begin{DoxyParamCaption}\item[{int}]{min,  }\item[{int}]{max }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=279pt]{utils_8c_ae0cac674c3e9ade4811c88c82f92c858_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a5b5b0c77bb2f450bce70777573f7ca90}\label{utils_8c_a5b5b0c77bb2f450bce70777573f7ca90}} 
+\index{utils.c@{utils.c}!rand\_normal@{rand\_normal}}
+\index{rand\_normal@{rand\_normal}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{rand\_normal()}{rand\_normal()}}
+{\footnotesize\ttfamily float rand\+\_\+normal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{utils_8c_a5b5b0c77bb2f450bce70777573f7ca90_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a5a7e122c73c5705b3b92ee320622f26c}\label{utils_8c_a5a7e122c73c5705b3b92ee320622f26c}} 
+\index{utils.c@{utils.c}!rand\_precalc\_random@{rand\_precalc\_random}}
+\index{rand\_precalc\_random@{rand\_precalc\_random}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{rand\_precalc\_random()}{rand\_precalc\_random()}}
+{\footnotesize\ttfamily float rand\+\_\+precalc\+\_\+random (\begin{DoxyParamCaption}\item[{float}]{min,  }\item[{float}]{max,  }\item[{float}]{random\+\_\+part }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_ae5e2a8baa8169333fae635a56852f4a8}\label{utils_8c_ae5e2a8baa8169333fae635a56852f4a8}} 
+\index{utils.c@{utils.c}!rand\_scale@{rand\_scale}}
+\index{rand\_scale@{rand\_scale}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{rand\_scale()}{rand\_scale()}}
+{\footnotesize\ttfamily float rand\+\_\+scale (\begin{DoxyParamCaption}\item[{float}]{s }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{utils_8c_ae5e2a8baa8169333fae635a56852f4a8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a840c471f9da17532e230bccbc490b8c6}\label{utils_8c_a840c471f9da17532e230bccbc490b8c6}} 
+\index{utils.c@{utils.c}!rand\_size\_t@{rand\_size\_t}}
+\index{rand\_size\_t@{rand\_size\_t}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{rand\_size\_t()}{rand\_size\_t()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} rand\+\_\+size\+\_\+t (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=253pt]{utils_8c_a840c471f9da17532e230bccbc490b8c6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a5492196e16ed2d16bae1df8483ef79ed}\label{utils_8c_a5492196e16ed2d16bae1df8483ef79ed}} 
+\index{utils.c@{utils.c}!rand\_uniform@{rand\_uniform}}
+\index{rand\_uniform@{rand\_uniform}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{rand\_uniform()}{rand\_uniform()}}
+{\footnotesize\ttfamily float rand\+\_\+uniform (\begin{DoxyParamCaption}\item[{float}]{min,  }\item[{float}]{max }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a6d37719680670d57d47c363a6ca88f4a}\label{utils_8c_a6d37719680670d57d47c363a6ca88f4a}} 
+\index{utils.c@{utils.c}!rand\_uniform\_strong@{rand\_uniform\_strong}}
+\index{rand\_uniform\_strong@{rand\_uniform\_strong}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{rand\_uniform\_strong()}{rand\_uniform\_strong()}}
+{\footnotesize\ttfamily float rand\+\_\+uniform\+\_\+strong (\begin{DoxyParamCaption}\item[{float}]{min,  }\item[{float}]{max }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=292pt]{utils_8c_a6d37719680670d57d47c363a6ca88f4a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a5ae57531895d1992301ac12a3ddb49c1}\label{utils_8c_a5ae57531895d1992301ac12a3ddb49c1}} 
+\index{utils.c@{utils.c}!random\_float@{random\_float}}
+\index{random\_float@{random\_float}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{random\_float()}{random\_float()}}
+{\footnotesize\ttfamily float random\+\_\+float (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a51d206c0bf5332e55209606c93da4774}\label{utils_8c_a51d206c0bf5332e55209606c93da4774}} 
+\index{utils.c@{utils.c}!random\_float\_fast@{random\_float\_fast}}
+\index{random\_float\_fast@{random\_float\_fast}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{random\_float\_fast()}{random\_float\_fast()}}
+{\footnotesize\ttfamily float random\+\_\+float\+\_\+fast (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=300pt]{utils_8c_a51d206c0bf5332e55209606c93da4774_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a9550592017450eb947f81f675b67bfdc}\label{utils_8c_a9550592017450eb947f81f675b67bfdc}} 
+\index{utils.c@{utils.c}!random\_gen@{random\_gen}}
+\index{random\_gen@{random\_gen}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{random\_gen()}{random\_gen()}}
+{\footnotesize\ttfamily unsigned int random\+\_\+gen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a7277bdc5e17cec1912f481e6a113bf95}\label{utils_8c_a7277bdc5e17cec1912f481e6a113bf95}} 
+\index{utils.c@{utils.c}!random\_gen\_fast@{random\_gen\_fast}}
+\index{random\_gen\_fast@{random\_gen\_fast}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{random\_gen\_fast()}{random\_gen\_fast()}}
+{\footnotesize\ttfamily unsigned int random\+\_\+gen\+\_\+fast (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_acf91c78e1faa528eb2e6054afa93c859}\label{utils_8c_acf91c78e1faa528eb2e6054afa93c859}} 
+\index{utils.c@{utils.c}!random\_index\_order@{random\_index\_order}}
+\index{random\_index\_order@{random\_index\_order}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{random\_index\_order()}{random\_index\_order()}}
+{\footnotesize\ttfamily int $\ast$ random\+\_\+index\+\_\+order (\begin{DoxyParamCaption}\item[{int}]{min,  }\item[{int}]{max }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_ad4220decb86d761447a704e03423f160}\label{utils_8c_ad4220decb86d761447a704e03423f160}} 
+\index{utils.c@{utils.c}!read\_all@{read\_all}}
+\index{read\_all@{read\_all}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{read\_all()}{read\_all()}}
+{\footnotesize\ttfamily void read\+\_\+all (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{char $\ast$}]{buffer,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{bytes }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{utils_8c_ad4220decb86d761447a704e03423f160_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_afccdb26cd63a87476385c10ada582642}\label{utils_8c_afccdb26cd63a87476385c10ada582642}} 
+\index{utils.c@{utils.c}!read\_all\_fail@{read\_all\_fail}}
+\index{read\_all\_fail@{read\_all\_fail}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{read\_all\_fail()}{read\_all\_fail()}}
+{\footnotesize\ttfamily int read\+\_\+all\+\_\+fail (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{char $\ast$}]{buffer,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{bytes }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{utils_8c_afccdb26cd63a87476385c10ada582642_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_aeb107bc4d07f192c90ee37806b26a1d4}\label{utils_8c_aeb107bc4d07f192c90ee37806b26a1d4}} 
+\index{utils.c@{utils.c}!read\_int@{read\_int}}
+\index{read\_int@{read\_int}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{read\_int()}{read\_int()}}
+{\footnotesize\ttfamily int read\+\_\+int (\begin{DoxyParamCaption}\item[{int}]{fd }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=241pt]{utils_8c_aeb107bc4d07f192c90ee37806b26a1d4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a63b04160ff54880e7c809f629f458f7a}\label{utils_8c_a63b04160ff54880e7c809f629f458f7a}} 
+\index{utils.c@{utils.c}!read\_map@{read\_map}}
+\index{read\_map@{read\_map}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{read\_map()}{read\_map()}}
+{\footnotesize\ttfamily int $\ast$ read\+\_\+map (\begin{DoxyParamCaption}\item[{char $\ast$}]{filename }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=228pt]{utils_8c_a63b04160ff54880e7c809f629f458f7a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_ac060c97bd0eab7270e3a507646ec1337}\label{utils_8c_ac060c97bd0eab7270e3a507646ec1337}} 
+\index{utils.c@{utils.c}!realloc\_error@{realloc\_error}}
+\index{realloc\_error@{realloc\_error}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{realloc\_error()}{realloc\_error()}}
+{\footnotesize\ttfamily void realloc\+\_\+error (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{size,  }\item[{const char $\ast$const}]{filename,  }\item[{const char $\ast$const}]{funcname,  }\item[{const int}]{line }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=284pt]{utils_8c_ac060c97bd0eab7270e3a507646ec1337_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_adcb0ea13878d05b567742fe07fc55194}\label{utils_8c_adcb0ea13878d05b567742fe07fc55194}} 
+\index{utils.c@{utils.c}!replace\_image\_to\_label@{replace\_image\_to\_label}}
+\index{replace\_image\_to\_label@{replace\_image\_to\_label}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{replace\_image\_to\_label()}{replace\_image\_to\_label()}}
+{\footnotesize\ttfamily void replace\+\_\+image\+\_\+to\+\_\+label (\begin{DoxyParamCaption}\item[{const char $\ast$}]{input\+\_\+path,  }\item[{char $\ast$}]{output\+\_\+path }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{utils_8c_adcb0ea13878d05b567742fe07fc55194_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a505834ece1ee5be76ac5763e397ed000}\label{utils_8c_a505834ece1ee5be76ac5763e397ed000}} 
+\index{utils.c@{utils.c}!sample\_array@{sample\_array}}
+\index{sample\_array@{sample\_array}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{sample\_array()}{sample\_array()}}
+{\footnotesize\ttfamily int sample\+\_\+array (\begin{DoxyParamCaption}\item[{float $\ast$}]{a,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=263pt]{utils_8c_a505834ece1ee5be76ac5763e397ed000_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_ac1c1fc84b3e9f8e1da0b7b4b46f07f86}\label{utils_8c_ac1c1fc84b3e9f8e1da0b7b4b46f07f86}} 
+\index{utils.c@{utils.c}!sample\_array\_custom@{sample\_array\_custom}}
+\index{sample\_array\_custom@{sample\_array\_custom}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{sample\_array\_custom()}{sample\_array\_custom()}}
+{\footnotesize\ttfamily int sample\+\_\+array\+\_\+custom (\begin{DoxyParamCaption}\item[{float $\ast$}]{a,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{utils_8c_ac1c1fc84b3e9f8e1da0b7b4b46f07f86_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a8fb2bfbc3ce8319adacd60978267cbb7}\label{utils_8c_a8fb2bfbc3ce8319adacd60978267cbb7}} 
+\index{utils.c@{utils.c}!scale\_array@{scale\_array}}
+\index{scale\_array@{scale\_array}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{scale\_array()}{scale\_array()}}
+{\footnotesize\ttfamily void scale\+\_\+array (\begin{DoxyParamCaption}\item[{float $\ast$}]{a,  }\item[{int}]{n,  }\item[{float}]{s }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a375f4de29b8973c3e1b63bf49a5eb00e}\label{utils_8c_a375f4de29b8973c3e1b63bf49a5eb00e}} 
+\index{utils.c@{utils.c}!sec@{sec}}
+\index{sec@{sec}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{sec()}{sec()}}
+{\footnotesize\ttfamily float sec (\begin{DoxyParamCaption}\item[{clock\+\_\+t}]{clocks }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a0ffcf3aef270870fe180405bc25cad50}\label{utils_8c_a0ffcf3aef270870fe180405bc25cad50}} 
+\index{utils.c@{utils.c}!shuffle@{shuffle}}
+\index{shuffle@{shuffle}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{shuffle()}{shuffle()}}
+{\footnotesize\ttfamily void shuffle (\begin{DoxyParamCaption}\item[{void $\ast$}]{arr,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{n,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{size }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=230pt]{utils_8c_a0ffcf3aef270870fe180405bc25cad50_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a807f0138463b33f271883ece42241046}\label{utils_8c_a807f0138463b33f271883ece42241046}} 
+\index{utils.c@{utils.c}!size\_to\_IEC\_string@{size\_to\_IEC\_string}}
+\index{size\_to\_IEC\_string@{size\_to\_IEC\_string}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{size\_to\_IEC\_string()}{size\_to\_IEC\_string()}}
+{\footnotesize\ttfamily const char $\ast$ size\+\_\+to\+\_\+\+IEC\+\_\+string (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{size }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a6d7f2250125f0cf3f16e5a7b7c1905a9}\label{utils_8c_a6d7f2250125f0cf3f16e5a7b7c1905a9}} 
+\index{utils.c@{utils.c}!sorta\_shuffle@{sorta\_shuffle}}
+\index{sorta\_shuffle@{sorta\_shuffle}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{sorta\_shuffle()}{sorta\_shuffle()}}
+{\footnotesize\ttfamily void sorta\+\_\+shuffle (\begin{DoxyParamCaption}\item[{void $\ast$}]{arr,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{n,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{size,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{sections }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=337pt]{utils_8c_a6d7f2250125f0cf3f16e5a7b7c1905a9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a0a59255c6fd5fddbef99c85c0132bf62}\label{utils_8c_a0a59255c6fd5fddbef99c85c0132bf62}} 
+\index{utils.c@{utils.c}!split\_str@{split\_str}}
+\index{split\_str@{split\_str}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{split\_str()}{split\_str()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlist}{list}} $\ast$ split\+\_\+str (\begin{DoxyParamCaption}\item[{char $\ast$}]{s,  }\item[{char}]{delim }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=335pt]{utils_8c_a0a59255c6fd5fddbef99c85c0132bf62_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a76299b86e144434260dcab80323ec9da}\label{utils_8c_a76299b86e144434260dcab80323ec9da}} 
+\index{utils.c@{utils.c}!strip@{strip}}
+\index{strip@{strip}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{strip()}{strip()}}
+{\footnotesize\ttfamily void strip (\begin{DoxyParamCaption}\item[{char $\ast$}]{s }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=289pt]{utils_8c_a76299b86e144434260dcab80323ec9da_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a2926b520ac617a9c97e31cd2810eba0c}\label{utils_8c_a2926b520ac617a9c97e31cd2810eba0c}} 
+\index{utils.c@{utils.c}!strip\_args@{strip\_args}}
+\index{strip\_args@{strip\_args}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{strip\_args()}{strip\_args()}}
+{\footnotesize\ttfamily void strip\+\_\+args (\begin{DoxyParamCaption}\item[{char $\ast$}]{s }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=313pt]{utils_8c_a2926b520ac617a9c97e31cd2810eba0c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a377b25b3b6d110d34bea9a85d0305917}\label{utils_8c_a377b25b3b6d110d34bea9a85d0305917}} 
+\index{utils.c@{utils.c}!strip\_char@{strip\_char}}
+\index{strip\_char@{strip\_char}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{strip\_char()}{strip\_char()}}
+{\footnotesize\ttfamily void strip\+\_\+char (\begin{DoxyParamCaption}\item[{char $\ast$}]{s,  }\item[{char}]{bad }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=313pt]{utils_8c_a377b25b3b6d110d34bea9a85d0305917_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_abedfeccc4fae6ebb143af6a646658b35}\label{utils_8c_abedfeccc4fae6ebb143af6a646658b35}} 
+\index{utils.c@{utils.c}!sum\_array@{sum\_array}}
+\index{sum\_array@{sum\_array}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{sum\_array()}{sum\_array()}}
+{\footnotesize\ttfamily float sum\+\_\+array (\begin{DoxyParamCaption}\item[{float $\ast$}]{a,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_aafc3b7bab809d8bc77b7353fd43f731b}\label{utils_8c_aafc3b7bab809d8bc77b7353fd43f731b}} 
+\index{utils.c@{utils.c}!top\_k@{top\_k}}
+\index{top\_k@{top\_k}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{top\_k()}{top\_k()}}
+{\footnotesize\ttfamily void top\+\_\+k (\begin{DoxyParamCaption}\item[{float $\ast$}]{a,  }\item[{int}]{n,  }\item[{int}]{k,  }\item[{int $\ast$}]{index }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_af8450e4c8bb6052a1a509c76a65b747d}\label{utils_8c_af8450e4c8bb6052a1a509c76a65b747d}} 
+\index{utils.c@{utils.c}!top\_max\_index@{top\_max\_index}}
+\index{top\_max\_index@{top\_max\_index}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{top\_max\_index()}{top\_max\_index()}}
+{\footnotesize\ttfamily int top\+\_\+max\+\_\+index (\begin{DoxyParamCaption}\item[{float $\ast$}]{a,  }\item[{int}]{n,  }\item[{int}]{k }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{utils_8c_af8450e4c8bb6052a1a509c76a65b747d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a4c6ce94b4d4e13bf928eedbd5186e8fe}\label{utils_8c_a4c6ce94b4d4e13bf928eedbd5186e8fe}} 
+\index{utils.c@{utils.c}!translate\_array@{translate\_array}}
+\index{translate\_array@{translate\_array}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{translate\_array()}{translate\_array()}}
+{\footnotesize\ttfamily void translate\+\_\+array (\begin{DoxyParamCaption}\item[{float $\ast$}]{a,  }\item[{int}]{n,  }\item[{float}]{s }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_a60ea663401e86ca2a60a29e76c716679}\label{utils_8c_a60ea663401e86ca2a60a29e76c716679}} 
+\index{utils.c@{utils.c}!trim@{trim}}
+\index{trim@{trim}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{trim()}{trim()}}
+{\footnotesize\ttfamily void trim (\begin{DoxyParamCaption}\item[{char $\ast$}]{str }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_aa454b4d31b753932e9bfbe1a3ff51b60}\label{utils_8c_aa454b4d31b753932e9bfbe1a3ff51b60}} 
+\index{utils.c@{utils.c}!uint\_rand@{uint\_rand}}
+\index{uint\_rand@{uint\_rand}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{uint\_rand()}{uint\_rand()}}
+{\footnotesize\ttfamily unsigned int uint\+\_\+rand (\begin{DoxyParamCaption}\item[{unsigned int}]{less\+\_\+than }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=331pt]{utils_8c_aa454b4d31b753932e9bfbe1a3ff51b60_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_acb8ffd5403deb84ad16360ab0bf87cfa}\label{utils_8c_acb8ffd5403deb84ad16360ab0bf87cfa}} 
+\index{utils.c@{utils.c}!variance\_array@{variance\_array}}
+\index{variance\_array@{variance\_array}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{variance\_array()}{variance\_array()}}
+{\footnotesize\ttfamily float variance\+\_\+array (\begin{DoxyParamCaption}\item[{float $\ast$}]{a,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{utils_8c_acb8ffd5403deb84ad16360ab0bf87cfa_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_af89a5b997626c967e4716fd022aca7bb}\label{utils_8c_af89a5b997626c967e4716fd022aca7bb}} 
+\index{utils.c@{utils.c}!what\_time\_is\_it\_now@{what\_time\_is\_it\_now}}
+\index{what\_time\_is\_it\_now@{what\_time\_is\_it\_now}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{what\_time\_is\_it\_now()}{what\_time\_is\_it\_now()}}
+{\footnotesize\ttfamily double what\+\_\+time\+\_\+is\+\_\+it\+\_\+now (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{utils_8c_ab256fc300495d1768adc2e8b7997a140}\label{utils_8c_ab256fc300495d1768adc2e8b7997a140}} 
+\index{utils.c@{utils.c}!write\_all@{write\_all}}
+\index{write\_all@{write\_all}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{write\_all()}{write\_all()}}
+{\footnotesize\ttfamily void write\+\_\+all (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{char $\ast$}]{buffer,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{bytes }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{utils_8c_ab256fc300495d1768adc2e8b7997a140_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a1b877af1aab01bde49615e4ac0d45b27}\label{utils_8c_a1b877af1aab01bde49615e4ac0d45b27}} 
+\index{utils.c@{utils.c}!write\_all\_fail@{write\_all\_fail}}
+\index{write\_all\_fail@{write\_all\_fail}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{write\_all\_fail()}{write\_all\_fail()}}
+{\footnotesize\ttfamily int write\+\_\+all\+\_\+fail (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{char $\ast$}]{buffer,  }\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{bytes }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=260pt]{utils_8c_a1b877af1aab01bde49615e4ac0d45b27_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a71b198ba343751a3b889b92bfe9d5fd2}\label{utils_8c_a71b198ba343751a3b889b92bfe9d5fd2}} 
+\index{utils.c@{utils.c}!write\_int@{write\_int}}
+\index{write\_int@{write\_int}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{write\_int()}{write\_int()}}
+{\footnotesize\ttfamily void write\+\_\+int (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{utils_8c_a71b198ba343751a3b889b92bfe9d5fd2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a9d1ad9325c67b2a4bfd6101a3b7de22a}\label{utils_8c_a9d1ad9325c67b2a4bfd6101a3b7de22a}} 
+\index{utils.c@{utils.c}!xcalloc\_location@{xcalloc\_location}}
+\index{xcalloc\_location@{xcalloc\_location}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{xcalloc\_location()}{xcalloc\_location()}}
+{\footnotesize\ttfamily void $\ast$ xcalloc\+\_\+location (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{nmemb,  }\item[{const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{size,  }\item[{const char $\ast$const}]{filename,  }\item[{const char $\ast$const}]{funcname,  }\item[{const int}]{line }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{utils_8c_a9d1ad9325c67b2a4bfd6101a3b7de22a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a50dbd2e2a1de1a21c21acc92629e93b8}\label{utils_8c_a50dbd2e2a1de1a21c21acc92629e93b8}} 
+\index{utils.c@{utils.c}!xmalloc\_location@{xmalloc\_location}}
+\index{xmalloc\_location@{xmalloc\_location}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{xmalloc\_location()}{xmalloc\_location()}}
+{\footnotesize\ttfamily void $\ast$ xmalloc\+\_\+location (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{size,  }\item[{const char $\ast$const}]{filename,  }\item[{const char $\ast$const}]{funcname,  }\item[{const int}]{line }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{utils_8c_a50dbd2e2a1de1a21c21acc92629e93b8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{utils_8c_a072bab1d0c031407b0906796e4479cf7}\label{utils_8c_a072bab1d0c031407b0906796e4479cf7}} 
+\index{utils.c@{utils.c}!xrealloc\_location@{xrealloc\_location}}
+\index{xrealloc\_location@{xrealloc\_location}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{xrealloc\_location()}{xrealloc\_location()}}
+{\footnotesize\ttfamily void $\ast$ xrealloc\+\_\+location (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr,  }\item[{const \mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{size,  }\item[{const char $\ast$const}]{filename,  }\item[{const char $\ast$const}]{funcname,  }\item[{const int}]{line }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{utils_8c_a072bab1d0c031407b0906796e4479cf7_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{变量说明}
+\mbox{\Hypertarget{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}\label{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}} 
+\index{utils.c@{utils.c}!x@{x}}
+\index{x@{x}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily unsigned int x = 123456789\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{utils_8c_ac30de26db5f6d1c18c63913729adca7d}\label{utils_8c_ac30de26db5f6d1c18c63913729adca7d}} 
+\index{utils.c@{utils.c}!y@{y}}
+\index{y@{y}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily unsigned int y = 362436069\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{utils_8c_a3d99b005d0fb73033dce14d4a135d01f}\label{utils_8c_a3d99b005d0fb73033dce14d4a135d01f}} 
+\index{utils.c@{utils.c}!z@{z}}
+\index{z@{z}!utils.c@{utils.c}}
+\doxysubsubsection{\texorpdfstring{z}{z}}
+{\footnotesize\ttfamily unsigned int z = 521288629\hspace{0.3cm}{\ttfamily [static]}}
+

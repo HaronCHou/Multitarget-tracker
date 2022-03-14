@@ -1,0 +1,338 @@
+\hypertarget{init_8h_source}{}\doxysection{init.\+h}
+\label{init_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/detail/init.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/detail/init.h}}
+\mbox{\hyperlink{init_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{    pybind11/detail/init.h: init factory function implementation and support code.}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{    Copyright (c) 2017 Jason Rhinelander <jason@imaginary.ca>}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{    All rights reserved. Use of this source code is governed by a}}
+\DoxyCodeLine{7 \textcolor{comment}{    BSD-\/style license that can be found in the LICENSE file.}}
+\DoxyCodeLine{8 \textcolor{comment}{*/}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{class_8h}{class.h}}"{}}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+\DoxyCodeLine{15 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{keyword}{template} <>}
+\DoxyCodeLine{18 \textcolor{keyword}{class }\mbox{\hyperlink{classtype__caster}{type\_caster}}<\mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}}> \{}
+\DoxyCodeLine{19 \textcolor{keyword}{public}:}
+\DoxyCodeLine{20     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classtype__caster_3_01value__and__holder_01_4_a5b60eb7d7cd457c62e8ba6aacd4c97c2}{load}}(\mbox{\hyperlink{classhandle}{handle}} h, \textcolor{keywordtype}{bool}) \{}
+\DoxyCodeLine{21         \mbox{\hyperlink{classtype__caster__generic_a077b8d1e4af829443b2e41c3e5786f4d}{value}} = \textcolor{keyword}{reinterpret\_cast<}\mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}} *\textcolor{keyword}{>}(h.\mbox{\hyperlink{classhandle_aa58c40063166c7cedefdc4db2d6fa608}{ptr}}());}
+\DoxyCodeLine{22         \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{23     \}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25     \textcolor{keyword}{template} <\textcolor{keyword}{typename}> \textcolor{keyword}{using} \mbox{\hyperlink{structvalue__and__holder}{cast\_op\_type}} = \mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}} \&;}
+\DoxyCodeLine{26     \textcolor{keyword}{operator} \mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}} \&() \{ \textcolor{keywordflow}{return} *\mbox{\hyperlink{classtype__caster__generic_a077b8d1e4af829443b2e41c3e5786f4d}{value}}; \}}
+\DoxyCodeLine{27     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{structname}{name}} = \_<value\_and\_holder>();}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{keyword}{private}:}
+\DoxyCodeLine{30     \mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}} *\mbox{\hyperlink{classtype__caster__generic_a077b8d1e4af829443b2e41c3e5786f4d}{value}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{31 \};}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(initimpl)}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 inline \textcolor{keywordtype}{void} \mbox{\hyperlink{init_8h_ae79d6ac374406143f31d99493ba43029}{no\_nullptr}}(\textcolor{keywordtype}{void} *ptr) \{}
+\DoxyCodeLine{36     \textcolor{keywordflow}{if} (!ptr) \textcolor{keywordflow}{throw} type\_error(\textcolor{stringliteral}{"{}pybind11::init(): factory function returned nullptr"{}});}
+\DoxyCodeLine{37 \}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{comment}{// Implementing functions for all forms of py::init<...> and py::init(...)}}
+\DoxyCodeLine{40 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class> \textcolor{keyword}{using} \mbox{\hyperlink{init_8h_af6eccd866be4b17802d53bcb3d5f7488}{Cpp}} = \textcolor{keyword}{typename} Class::type;}
+\DoxyCodeLine{41 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class> \textcolor{keyword}{using} \mbox{\hyperlink{init_8h_a0c5fb3e293d36dd7d734678aa73baa61}{Alias}} = \textcolor{keyword}{typename} Class::type\_alias;}
+\DoxyCodeLine{42 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class> \textcolor{keyword}{using} \mbox{\hyperlink{init_8h_a03642f0522e589bc555aa5ee4928d077}{Holder}} = \textcolor{keyword}{typename} Class::holder\_type;}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class> \textcolor{keyword}{using} \mbox{\hyperlink{init_8h_affc1abbdb5bac8c406902401ffab044b}{is\_alias\_constructible}} = std::is\_constructible<Alias<Class>, \mbox{\hyperlink{init_8h_af6eccd866be4b17802d53bcb3d5f7488}{Cpp<Class>}} \&\&>;}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{comment}{// Takes a Cpp pointer and returns true if it actually is a polymorphic Alias instance.}}
+\DoxyCodeLine{47 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class, enable\_if\_t<Class::has\_alias, \textcolor{keywordtype}{int}> = 0>}
+\DoxyCodeLine{48 \textcolor{keywordtype}{bool} \mbox{\hyperlink{init_8h_aec356754da0d09f3dd962f5427383191}{is\_alias}}(\mbox{\hyperlink{init_8h_af6eccd866be4b17802d53bcb3d5f7488}{Cpp<Class>}} *ptr) \{}
+\DoxyCodeLine{49     \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{init_8h_a0c5fb3e293d36dd7d734678aa73baa61}{Alias<Class>}} *\textcolor{keyword}{>}(ptr) != \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{50 \}}
+\DoxyCodeLine{51 \textcolor{comment}{// Failing fallback version of the above for a no-\/alias class (always returns false)}}
+\DoxyCodeLine{52 \textcolor{keyword}{template} <\textcolor{keyword}{typename} \textcolor{comment}{/*Class*/}>}
+\DoxyCodeLine{53 \textcolor{keyword}{constexpr} \textcolor{keywordtype}{bool} \mbox{\hyperlink{init_8h_aec356754da0d09f3dd962f5427383191}{is\_alias}}(\textcolor{keywordtype}{void} *) \{ \textcolor{keywordflow}{return} \textcolor{keyword}{false}; \}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 \textcolor{comment}{// Constructs and returns a new object; if the given arguments don't map to a constructor, we fall}}
+\DoxyCodeLine{56 \textcolor{comment}{// back to brace aggregate initiailization so that for aggregate initialization can be used with}}
+\DoxyCodeLine{57 \textcolor{comment}{// py::init, e.g.  `py::init<int, int>` to initialize a `struct T \{ int a; int b; \}`.  For}}
+\DoxyCodeLine{58 \textcolor{comment}{// non-\/aggregate types, we need to use an ordinary T(...) constructor (invoking as `T\{...\}` usually}}
+\DoxyCodeLine{59 \textcolor{comment}{// works, but will not do the expected thing when `T` has an `initializer\_list<T>` constructor).}}
+\DoxyCodeLine{60 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class, \textcolor{keyword}{typename}... Args, \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{detail::enable\_if\_t}}<std::is\_constructible<Class, Args...>::value, \textcolor{keywordtype}{int}> = 0>}
+\DoxyCodeLine{61 \textcolor{keyword}{inline} Class *\mbox{\hyperlink{init_8h_abc11e9622432fd558160525b8a9e92ee}{construct\_or\_initialize}}(Args \&\&...\mbox{\hyperlink{classargs}{args}}) \{ \textcolor{keywordflow}{return} \textcolor{keyword}{new} Class(std::forward<Args>(\mbox{\hyperlink{classargs}{args}})...); \}}
+\DoxyCodeLine{62 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class, \textcolor{keyword}{typename}... Args, \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{detail::enable\_if\_t}}<!std::is\_constructible<Class, Args...>::value, \textcolor{keywordtype}{int}> = 0>}
+\DoxyCodeLine{63 \textcolor{keyword}{inline} Class *\mbox{\hyperlink{init_8h_abc11e9622432fd558160525b8a9e92ee}{construct\_or\_initialize}}(Args \&\&...\mbox{\hyperlink{classargs}{args}}) \{ \textcolor{keywordflow}{return} \textcolor{keyword}{new} Class\{std::forward<Args>(\mbox{\hyperlink{classargs}{args}})...\}; \}}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65 \textcolor{comment}{// Attempts to constructs an alias using a `Alias(Cpp \&\&)` constructor.  This allows types with}}
+\DoxyCodeLine{66 \textcolor{comment}{// an alias to provide only a single Cpp factory function as long as the Alias can be}}
+\DoxyCodeLine{67 \textcolor{comment}{// constructed from an rvalue reference of the base Cpp type.  This means that Alias classes}}
+\DoxyCodeLine{68 \textcolor{comment}{// can, when appropriate, simply define a `Alias(Cpp \&\&)` constructor rather than needing to}}
+\DoxyCodeLine{69 \textcolor{comment}{// inherit all the base class constructors.}}
+\DoxyCodeLine{70 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class>}
+\DoxyCodeLine{71 \textcolor{keywordtype}{void} \mbox{\hyperlink{init_8h_a2792161cf29fa3a5a911fd7af79a6fd4}{construct\_alias\_from\_cpp}}(std::true\_type \textcolor{comment}{/*is\_alias\_constructible*/},}
+\DoxyCodeLine{72                               \mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}} \&v\_h, \mbox{\hyperlink{init_8h_af6eccd866be4b17802d53bcb3d5f7488}{Cpp<Class>}} \&\&\mbox{\hyperlink{structbase}{base}}) \{}
+\DoxyCodeLine{73     v\_h.\mbox{\hyperlink{structvalue__and__holder_afa3bb73b76e74270c71ebcc4f8f82c33}{value\_ptr}}() = \textcolor{keyword}{new} \mbox{\hyperlink{init_8h_a0c5fb3e293d36dd7d734678aa73baa61}{Alias<Class>}}(std::move(\mbox{\hyperlink{structbase}{base}}));}
+\DoxyCodeLine{74 \}}
+\DoxyCodeLine{75 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class>}
+\DoxyCodeLine{76 [[noreturn]] \textcolor{keywordtype}{void} \mbox{\hyperlink{init_8h_a2792161cf29fa3a5a911fd7af79a6fd4}{construct\_alias\_from\_cpp}}(std::false\_type ,}
+\DoxyCodeLine{77                                            \mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}} \&, \mbox{\hyperlink{init_8h_af6eccd866be4b17802d53bcb3d5f7488}{Cpp<Class>}} \&\&) \{}
+\DoxyCodeLine{78     \textcolor{keywordflow}{throw} type\_error(\textcolor{stringliteral}{"{}pybind11::init(): unable to convert returned instance to required "{}}}
+\DoxyCodeLine{79                      \textcolor{stringliteral}{"{}alias class: no `Alias<Class>(Class \&\&)` constructor available"{}});}
+\DoxyCodeLine{80 \}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82 \textcolor{comment}{// Error-\/generating fallback for factories that don't match one of the below construction}}
+\DoxyCodeLine{83 \textcolor{comment}{// mechanisms.}}
+\DoxyCodeLine{84 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class>}
+\DoxyCodeLine{85 \textcolor{keywordtype}{void} \mbox{\hyperlink{init_8h_a0de8154dc15d86f84de34347056c14ec}{construct}}(...) \{}
+\DoxyCodeLine{86     \textcolor{keyword}{static\_assert}(!std::is\_same<Class, Class>::value \textcolor{comment}{/* always false */},}
+\DoxyCodeLine{87             \textcolor{stringliteral}{"{}pybind11::init(): init function must return a compatible pointer, "{}}}
+\DoxyCodeLine{88             \textcolor{stringliteral}{"{}holder, or value"{}});}
+\DoxyCodeLine{89 \}}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91 \textcolor{comment}{// Pointer return v1: the factory function returns a class pointer for a registered class.}}
+\DoxyCodeLine{92 \textcolor{comment}{// If we don't need an alias (because this class doesn't have one, or because the final type is}}
+\DoxyCodeLine{93 \textcolor{comment}{// inherited on the Python side) we can simply take over ownership.  Otherwise we need to try to}}
+\DoxyCodeLine{94 \textcolor{comment}{// construct an Alias from the returned base instance.}}
+\DoxyCodeLine{95 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class>}
+\DoxyCodeLine{96 \textcolor{keywordtype}{void} \mbox{\hyperlink{init_8h_a0de8154dc15d86f84de34347056c14ec}{construct}}(\mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}} \&v\_h, \mbox{\hyperlink{init_8h_af6eccd866be4b17802d53bcb3d5f7488}{Cpp<Class>}} *ptr, \textcolor{keywordtype}{bool} need\_alias) \{}
+\DoxyCodeLine{97     \mbox{\hyperlink{init_8h_ae79d6ac374406143f31d99493ba43029}{no\_nullptr}}(ptr);}
+\DoxyCodeLine{98     \textcolor{keywordflow}{if} (Class::has\_alias \&\& need\_alias \&\& !is\_alias<Class>(ptr)) \{}
+\DoxyCodeLine{99         \textcolor{comment}{// We're going to try to construct an alias by moving the cpp type.  Whether or not}}
+\DoxyCodeLine{100         \textcolor{comment}{// that succeeds, we still need to destroy the original cpp pointer (either the}}
+\DoxyCodeLine{101         \textcolor{comment}{// moved away leftover, if the alias construction works, or the value itself if we}}
+\DoxyCodeLine{102         \textcolor{comment}{// throw an error), but we can't just call `delete ptr`: it might have a special}}
+\DoxyCodeLine{103         \textcolor{comment}{// deleter, or might be shared\_from\_this.  So we construct a holder around it as if}}
+\DoxyCodeLine{104         \textcolor{comment}{// it was a normal instance, then steal the holder away into a local variable; thus}}
+\DoxyCodeLine{105         \textcolor{comment}{// the holder and destruction happens when we leave the C++ scope, and the holder}}
+\DoxyCodeLine{106         \textcolor{comment}{// class gets to handle the destruction however it likes.}}
+\DoxyCodeLine{107         v\_h.\mbox{\hyperlink{structvalue__and__holder_afa3bb73b76e74270c71ebcc4f8f82c33}{value\_ptr}}() = ptr;}
+\DoxyCodeLine{108         v\_h.\mbox{\hyperlink{structvalue__and__holder_afbbc363d7cd9af2276ec62c5afe3d11e}{set\_instance\_registered}}(\textcolor{keyword}{true}); \textcolor{comment}{// To prevent init\_instance from registering it}}
+\DoxyCodeLine{109         v\_h.\mbox{\hyperlink{structvalue__and__holder_a55c426843c6e3e164a600d55e4e70f67}{type}}-\/>init\_instance(v\_h.\mbox{\hyperlink{structvalue__and__holder_ae92c90379fcf439b23fa77f1d7d84253}{inst}}, \textcolor{keyword}{nullptr}); \textcolor{comment}{// Set up the holder}}
+\DoxyCodeLine{110         \mbox{\hyperlink{init_8h_a03642f0522e589bc555aa5ee4928d077}{Holder<Class>}} temp\_holder(std::move(v\_h.\mbox{\hyperlink{structvalue__and__holder_a31b6ffd49d2534c944a269db5e0d6ad1}{holder}}<\mbox{\hyperlink{init_8h_a03642f0522e589bc555aa5ee4928d077}{Holder<Class>}}>())); \textcolor{comment}{// Steal the holder}}
+\DoxyCodeLine{111         v\_h.\mbox{\hyperlink{structvalue__and__holder_a55c426843c6e3e164a600d55e4e70f67}{type}}-\/>dealloc(v\_h); \textcolor{comment}{// Destroys the moved-\/out holder remains, resets value ptr to null}}
+\DoxyCodeLine{112         v\_h.\mbox{\hyperlink{structvalue__and__holder_afbbc363d7cd9af2276ec62c5afe3d11e}{set\_instance\_registered}}(\textcolor{keyword}{false});}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114         construct\_alias\_from\_cpp<Class>(\mbox{\hyperlink{init_8h_affc1abbdb5bac8c406902401ffab044b}{is\_alias\_constructible<Class>}}\{\}, v\_h, std::move(*ptr));}
+\DoxyCodeLine{115     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{116         \textcolor{comment}{// Otherwise the type isn't inherited, so we don't need an Alias}}
+\DoxyCodeLine{117         v\_h.\mbox{\hyperlink{structvalue__and__holder_afa3bb73b76e74270c71ebcc4f8f82c33}{value\_ptr}}() = ptr;}
+\DoxyCodeLine{118     \}}
+\DoxyCodeLine{119 \}}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121 \textcolor{comment}{// Pointer return v2: a factory that always returns an alias instance ptr.  We simply take over}}
+\DoxyCodeLine{122 \textcolor{comment}{// ownership of the pointer.}}
+\DoxyCodeLine{123 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class, enable\_if\_t<Class::has\_alias, \textcolor{keywordtype}{int}> = 0>}
+\DoxyCodeLine{124 \textcolor{keywordtype}{void} \mbox{\hyperlink{init_8h_a0de8154dc15d86f84de34347056c14ec}{construct}}(\mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}} \&v\_h, \mbox{\hyperlink{init_8h_a0c5fb3e293d36dd7d734678aa73baa61}{Alias<Class>}} *alias\_ptr, \textcolor{keywordtype}{bool}) \{}
+\DoxyCodeLine{125     \mbox{\hyperlink{init_8h_ae79d6ac374406143f31d99493ba43029}{no\_nullptr}}(alias\_ptr);}
+\DoxyCodeLine{126     v\_h.\mbox{\hyperlink{structvalue__and__holder_afa3bb73b76e74270c71ebcc4f8f82c33}{value\_ptr}}() = \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{init_8h_af6eccd866be4b17802d53bcb3d5f7488}{Cpp<Class>}} *\textcolor{keyword}{>}(alias\_ptr);}
+\DoxyCodeLine{127 \}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129 \textcolor{comment}{// Holder return: copy its pointer, and move or copy the returned holder into the new instance's}}
+\DoxyCodeLine{130 \textcolor{comment}{// holder.  This also handles types like std::shared\_ptr<T> and std::unique\_ptr<T> where T is a}}
+\DoxyCodeLine{131 \textcolor{comment}{// derived type (through those holder's implicit conversion from derived class holder constructors).}}
+\DoxyCodeLine{132 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class>}
+\DoxyCodeLine{133 \textcolor{keywordtype}{void} \mbox{\hyperlink{init_8h_a0de8154dc15d86f84de34347056c14ec}{construct}}(\mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}} \&v\_h, \mbox{\hyperlink{init_8h_a03642f0522e589bc555aa5ee4928d077}{Holder<Class>}} holder, \textcolor{keywordtype}{bool} need\_alias) \{}
+\DoxyCodeLine{134     \textcolor{keyword}{auto} *ptr = \mbox{\hyperlink{structholder__helper}{holder\_helper<Holder<Class>}}>::get(holder);}
+\DoxyCodeLine{135     \textcolor{comment}{// If we need an alias, check that the held pointer is actually an alias instance}}
+\DoxyCodeLine{136     \textcolor{keywordflow}{if} (Class::has\_alias \&\& need\_alias \&\& !is\_alias<Class>(ptr))}
+\DoxyCodeLine{137         \textcolor{keywordflow}{throw} type\_error(\textcolor{stringliteral}{"{}pybind11::init(): construction failed: returned holder-\/wrapped instance "{}}}
+\DoxyCodeLine{138                          \textcolor{stringliteral}{"{}is not an alias instance"{}});}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140     v\_h.\mbox{\hyperlink{structvalue__and__holder_afa3bb73b76e74270c71ebcc4f8f82c33}{value\_ptr}}() = ptr;}
+\DoxyCodeLine{141     v\_h.\mbox{\hyperlink{structvalue__and__holder_a55c426843c6e3e164a600d55e4e70f67}{type}}-\/>init\_instance(v\_h.\mbox{\hyperlink{structvalue__and__holder_ae92c90379fcf439b23fa77f1d7d84253}{inst}}, \&holder);}
+\DoxyCodeLine{142 \}}
+\DoxyCodeLine{143 }
+\DoxyCodeLine{144 \textcolor{comment}{// return-\/by-\/value version 1: returning a cpp class by value.  If the class has an alias and an}}
+\DoxyCodeLine{145 \textcolor{comment}{// alias is required the alias must have an `Alias(Cpp \&\&)` constructor so that we can construct}}
+\DoxyCodeLine{146 \textcolor{comment}{// the alias from the base when needed (i.e. because of Python-\/side inheritance).  When we don't}}
+\DoxyCodeLine{147 \textcolor{comment}{// need it, we simply move-\/construct the cpp value into a new instance.}}
+\DoxyCodeLine{148 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class>}
+\DoxyCodeLine{149 \textcolor{keywordtype}{void} \mbox{\hyperlink{init_8h_a0de8154dc15d86f84de34347056c14ec}{construct}}(\mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}} \&v\_h, \mbox{\hyperlink{init_8h_af6eccd866be4b17802d53bcb3d5f7488}{Cpp<Class>}} \&\&result, \textcolor{keywordtype}{bool} need\_alias) \{}
+\DoxyCodeLine{150     \textcolor{keyword}{static\_assert}(std::is\_move\_constructible<Cpp<Class>>::value,}
+\DoxyCodeLine{151         \textcolor{stringliteral}{"{}pybind11::init() return-\/by-\/value factory function requires a movable class"{}});}
+\DoxyCodeLine{152     \textcolor{keywordflow}{if} (Class::has\_alias \&\& need\_alias)}
+\DoxyCodeLine{153         construct\_alias\_from\_cpp<Class>(\mbox{\hyperlink{init_8h_affc1abbdb5bac8c406902401ffab044b}{is\_alias\_constructible<Class>}}\{\}, v\_h, std::move(result));}
+\DoxyCodeLine{154     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{155         v\_h.\mbox{\hyperlink{structvalue__and__holder_afa3bb73b76e74270c71ebcc4f8f82c33}{value\_ptr}}() = \textcolor{keyword}{new} \mbox{\hyperlink{init_8h_af6eccd866be4b17802d53bcb3d5f7488}{Cpp<Class>}}(std::move(result));}
+\DoxyCodeLine{156 \}}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158 \textcolor{comment}{// return-\/by-\/value version 2: returning a value of the alias type itself.  We move-\/construct an}}
+\DoxyCodeLine{159 \textcolor{comment}{// Alias instance (even if no the python-\/side inheritance is involved).  The is intended for}}
+\DoxyCodeLine{160 \textcolor{comment}{// cases where Alias initialization is always desired.}}
+\DoxyCodeLine{161 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class>}
+\DoxyCodeLine{162 \textcolor{keywordtype}{void} \mbox{\hyperlink{init_8h_a0de8154dc15d86f84de34347056c14ec}{construct}}(\mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}} \&v\_h, \mbox{\hyperlink{init_8h_a0c5fb3e293d36dd7d734678aa73baa61}{Alias<Class>}} \&\&result, \textcolor{keywordtype}{bool}) \{}
+\DoxyCodeLine{163     \textcolor{keyword}{static\_assert}(std::is\_move\_constructible<Alias<Class>>::value,}
+\DoxyCodeLine{164         \textcolor{stringliteral}{"{}pybind11::init() return-\/by-\/alias-\/value factory function requires a movable alias class"{}});}
+\DoxyCodeLine{165     v\_h.\mbox{\hyperlink{structvalue__and__holder_afa3bb73b76e74270c71ebcc4f8f82c33}{value\_ptr}}() = \textcolor{keyword}{new} \mbox{\hyperlink{init_8h_a0c5fb3e293d36dd7d734678aa73baa61}{Alias<Class>}}(std::move(result));}
+\DoxyCodeLine{166 \}}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{168 \textcolor{comment}{// Implementing class for py::init<...>()}}
+\DoxyCodeLine{169 \textcolor{keyword}{template} <\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{170 \textcolor{keyword}{struct }\mbox{\hyperlink{structconstructor}{constructor}} \{}
+\DoxyCodeLine{171     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class, \textcolor{keyword}{typename}... Extra, \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t<!Class::has\_alias, int>}} = 0>}
+\DoxyCodeLine{172     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{structconstructor_a18005e4a1a32b55cbccf36071f3f62e8}{execute}}(Class \&cl, \textcolor{keyword}{const} Extra\&... extra) \{}
+\DoxyCodeLine{173         cl.def(\textcolor{stringliteral}{"{}\_\_init\_\_"{}}, [](\mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}} \&v\_h, Args... \mbox{\hyperlink{classargs}{args}}) \{}
+\DoxyCodeLine{174             v\_h.value\_ptr() = construct\_or\_initialize<Cpp<Class>>(std::forward<Args>(args)...);}
+\DoxyCodeLine{175         \}, \mbox{\hyperlink{structis__new__style__constructor}{is\_new\_style\_constructor}}(), extra...);}
+\DoxyCodeLine{176     \}}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{178     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class, \textcolor{keyword}{typename}... Extra,}
+\DoxyCodeLine{179               \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<Class::has\_alias \&\&}
+\DoxyCodeLine{180                           std::is\_constructible<Cpp<Class>, Args...>::value, \textcolor{keywordtype}{int}> = 0>}
+\DoxyCodeLine{181     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{structconstructor_a18005e4a1a32b55cbccf36071f3f62e8}{execute}}(Class \&cl, \textcolor{keyword}{const} Extra\&... extra) \{}
+\DoxyCodeLine{182         cl.def(\textcolor{stringliteral}{"{}\_\_init\_\_"{}}, [](\mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}} \&v\_h, Args... \mbox{\hyperlink{classargs}{args}}) \{}
+\DoxyCodeLine{183             if (Py\_TYPE(v\_h.inst) == v\_h.type-\/>type)}
+\DoxyCodeLine{184                 v\_h.value\_ptr() = construct\_or\_initialize<Cpp<Class>>(std::forward<Args>(args)...);}
+\DoxyCodeLine{185             else}
+\DoxyCodeLine{186                 v\_h.value\_ptr() = construct\_or\_initialize<Alias<Class>>(std::forward<Args>(args)...);}
+\DoxyCodeLine{187         \}, \mbox{\hyperlink{structis__new__style__constructor}{is\_new\_style\_constructor}}(), extra...);}
+\DoxyCodeLine{188     \}}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{190     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class, \textcolor{keyword}{typename}... Extra,}
+\DoxyCodeLine{191               \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<Class::has\_alias \&\&}
+\DoxyCodeLine{192                           !std::is\_constructible<Cpp<Class>, Args...>::value, \textcolor{keywordtype}{int}> = 0>}
+\DoxyCodeLine{193     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{structconstructor_a18005e4a1a32b55cbccf36071f3f62e8}{execute}}(Class \&cl, \textcolor{keyword}{const} Extra\&... extra) \{}
+\DoxyCodeLine{194         cl.def(\textcolor{stringliteral}{"{}\_\_init\_\_"{}}, [](\mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}} \&v\_h, Args... \mbox{\hyperlink{classargs}{args}}) \{}
+\DoxyCodeLine{195             v\_h.value\_ptr() = construct\_or\_initialize<Alias<Class>>(std::forward<Args>(args)...);}
+\DoxyCodeLine{196         \}, \mbox{\hyperlink{structis__new__style__constructor}{is\_new\_style\_constructor}}(), extra...);}
+\DoxyCodeLine{197     \}}
+\DoxyCodeLine{198 \};}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{200 \textcolor{comment}{// Implementing class for py::init\_alias<...>()}}
+\DoxyCodeLine{201 \textcolor{keyword}{template} <\textcolor{keyword}{typename}... Args> \textcolor{keyword}{struct }\mbox{\hyperlink{structalias__constructor}{alias\_constructor}} \{}
+\DoxyCodeLine{202     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class, \textcolor{keyword}{typename}... Extra,}
+\DoxyCodeLine{203               \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t<Class::has\_alias \&\& std::is\_constructible<Alias<Class>}}, Args...>::value, \textcolor{keywordtype}{int}> = 0>}
+\DoxyCodeLine{204     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{structalias__constructor_a9334fc959d7252491b1419bdcc266def}{execute}}(Class \&cl, \textcolor{keyword}{const} Extra\&... extra) \{}
+\DoxyCodeLine{205         cl.def(\textcolor{stringliteral}{"{}\_\_init\_\_"{}}, [](\mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}} \&v\_h, Args... \mbox{\hyperlink{classargs}{args}}) \{}
+\DoxyCodeLine{206             v\_h.value\_ptr() = construct\_or\_initialize<Alias<Class>>(std::forward<Args>(args)...);}
+\DoxyCodeLine{207         \}, \mbox{\hyperlink{structis__new__style__constructor}{is\_new\_style\_constructor}}(), extra...);}
+\DoxyCodeLine{208     \}}
+\DoxyCodeLine{209 \};}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{211 \textcolor{comment}{// Implementation class for py::init(Func) and py::init(Func, AliasFunc)}}
+\DoxyCodeLine{212 \textcolor{keyword}{template} <\textcolor{keyword}{typename} CFunc, \textcolor{keyword}{typename} AFunc = \mbox{\hyperlink{structvoid__type}{void\_type}} (*)(),}
+\DoxyCodeLine{213           \textcolor{keyword}{typename} = \mbox{\hyperlink{detail_2common_8h_a47a77879d0f77f38496dad6d78d88972}{function\_signature\_t<CFunc>}}, \textcolor{keyword}{typename} = \mbox{\hyperlink{detail_2common_8h_a47a77879d0f77f38496dad6d78d88972}{function\_signature\_t<AFunc>}}>}
+\DoxyCodeLine{214 \textcolor{keyword}{struct} \mbox{\hyperlink{structfactory}{factory}};}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216 \textcolor{comment}{// Specialization for py::init(Func)}}
+\DoxyCodeLine{217 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Func, \textcolor{keyword}{typename} Return, \textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{218 \textcolor{keyword}{struct }\mbox{\hyperlink{structfactory}{factory}}<Func, \mbox{\hyperlink{structvoid__type}{void\_type}} (*)(), Return(Args...)> \{}
+\DoxyCodeLine{219     \mbox{\hyperlink{detail_2common_8h_a3a08cea569e6926ac8d7d74dd7178b5f}{remove\_reference\_t<Func>}} \mbox{\hyperlink{structfactory_3_01_func_00_01void__type_07_5_08_07_08_00_01_return_07_args_8_8_8_08_4_a0189b962378d0f232a6d7495fe687e97}{class\_factory}};}
+\DoxyCodeLine{220 }
+\DoxyCodeLine{221     \mbox{\hyperlink{structfactory_3_01_func_00_01void__type_07_5_08_07_08_00_01_return_07_args_8_8_8_08_4_af53b06b3e6873e503aaf870abeb8c04a}{factory}}(Func \&\&\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}}) : class\_factory(\mbox{\hyperlink{namespacestd}{std}}::forward<Func>(\mbox{\hyperlink{rings_8cpp_a77369fc4d5326a16d2c603e032023528}{f}})) \{ \}}
+\DoxyCodeLine{222 }
+\DoxyCodeLine{223     \textcolor{comment}{// The given class either has no alias or has no separate alias factory;}}
+\DoxyCodeLine{224     \textcolor{comment}{// this always constructs the class itself.  If the class is registered with an alias}}
+\DoxyCodeLine{225     \textcolor{comment}{// type and an alias instance is needed (i.e. because the final type is a Python class}}
+\DoxyCodeLine{226     \textcolor{comment}{// inheriting from the C++ type) the returned value needs to either already be an alias}}
+\DoxyCodeLine{227     \textcolor{comment}{// instance, or the alias needs to be constructible from a `Class \&\&` argument.}}
+\DoxyCodeLine{228     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class, \textcolor{keyword}{typename}... Extra>}
+\DoxyCodeLine{229     \textcolor{keywordtype}{void} \mbox{\hyperlink{structfactory_3_01_func_00_01void__type_07_5_08_07_08_00_01_return_07_args_8_8_8_08_4_a044edcce660aca30e7fa2aff4c1ce4ba}{execute}}(Class \&cl, \textcolor{keyword}{const} Extra \&...extra) \&\& \{}
+\DoxyCodeLine{230 \textcolor{preprocessor}{        \#if defined(PYBIND11\_CPP14)}}
+\DoxyCodeLine{231         cl.def(\textcolor{stringliteral}{"{}\_\_init\_\_"{}}, [func = std::move(class\_factory)]}
+\DoxyCodeLine{232         \#\textcolor{keywordflow}{else}}
+\DoxyCodeLine{233         \textcolor{keyword}{auto} \&func = class\_factory;}
+\DoxyCodeLine{234         cl.def(\textcolor{stringliteral}{"{}\_\_init\_\_"{}}, [func]}
+\DoxyCodeLine{235         \#endif}
+\DoxyCodeLine{236         (\mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}} \&v\_h, Args... \mbox{\hyperlink{classargs}{args}}) \{}
+\DoxyCodeLine{237             construct<Class>(v\_h, func(std::forward<Args>(args)...),}
+\DoxyCodeLine{238                              Py\_TYPE(v\_h.inst) != v\_h.type-\/>type);}
+\DoxyCodeLine{239         \}, \mbox{\hyperlink{structis__new__style__constructor}{is\_new\_style\_constructor}}(), extra...);}
+\DoxyCodeLine{240     \}}
+\DoxyCodeLine{241 \};}
+\DoxyCodeLine{242 }
+\DoxyCodeLine{243 \textcolor{comment}{// Specialization for py::init(Func, AliasFunc)}}
+\DoxyCodeLine{244 \textcolor{keyword}{template} <\textcolor{keyword}{typename} CFunc, \textcolor{keyword}{typename} AFunc,}
+\DoxyCodeLine{245           \textcolor{keyword}{typename} CReturn, \textcolor{keyword}{typename}... CArgs, \textcolor{keyword}{typename} AReturn, \textcolor{keyword}{typename}... AArgs>}
+\DoxyCodeLine{246 \textcolor{keyword}{struct }\mbox{\hyperlink{structfactory}{factory}}<CFunc, AFunc, CReturn(CArgs...), AReturn(AArgs...)> \{}
+\DoxyCodeLine{247     \textcolor{keyword}{static\_assert}(\textcolor{keyword}{sizeof}...(CArgs) == \textcolor{keyword}{sizeof}...(AArgs),}
+\DoxyCodeLine{248                   \textcolor{stringliteral}{"{}pybind11::init(class\_factory, alias\_factory): class and alias factories "{}}}
+\DoxyCodeLine{249                   \textcolor{stringliteral}{"{}must have identical argument signatures"{}});}
+\DoxyCodeLine{250     \textcolor{keyword}{static\_assert}(\mbox{\hyperlink{detail_2common_8h_a4f440ffd11216b5a0aa72d2842546340}{all\_of<std::is\_same<CArgs, AArgs>}}...>::value,}
+\DoxyCodeLine{251                   \textcolor{stringliteral}{"{}pybind11::init(class\_factory, alias\_factory): class and alias factories "{}}}
+\DoxyCodeLine{252                   \textcolor{stringliteral}{"{}must have identical argument signatures"{}});}
+\DoxyCodeLine{253 }
+\DoxyCodeLine{254     \mbox{\hyperlink{detail_2common_8h_a3a08cea569e6926ac8d7d74dd7178b5f}{remove\_reference\_t<CFunc>}} \mbox{\hyperlink{structfactory_3_01_c_func_00_01_a_func_00_01_c_return_07_c_args_8_8_8_08_00_01_a_return_07_a_args_8_8_8_08_4_a1034d2e4f9cab5cac4ff96128f5e0399}{class\_factory}};}
+\DoxyCodeLine{255     \mbox{\hyperlink{detail_2common_8h_a3a08cea569e6926ac8d7d74dd7178b5f}{remove\_reference\_t<AFunc>}} \mbox{\hyperlink{structfactory_3_01_c_func_00_01_a_func_00_01_c_return_07_c_args_8_8_8_08_00_01_a_return_07_a_args_8_8_8_08_4_a0d8b35371ba301a36acaec41240a2def}{alias\_factory}};}
+\DoxyCodeLine{256 }
+\DoxyCodeLine{257     \mbox{\hyperlink{structfactory_3_01_c_func_00_01_a_func_00_01_c_return_07_c_args_8_8_8_08_00_01_a_return_07_a_args_8_8_8_08_4_a16b3bfa2fce30d8e6eaf70fa01303646}{factory}}(CFunc \&\&c, AFunc \&\&a)}
+\DoxyCodeLine{258         : class\_factory(\mbox{\hyperlink{namespacestd}{std}}::forward<CFunc>(c)), alias\_factory(\mbox{\hyperlink{namespacestd}{std}}::forward<AFunc>(a)) \{ \}}
+\DoxyCodeLine{259 }
+\DoxyCodeLine{260     \textcolor{comment}{// The class factory is called when the `self` type passed to `\_\_init\_\_` is the direct}}
+\DoxyCodeLine{261     \textcolor{comment}{// class (i.e. not inherited), the alias factory when `self` is a Python-\/side subtype.}}
+\DoxyCodeLine{262     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class, \textcolor{keyword}{typename}... Extra>}
+\DoxyCodeLine{263     \textcolor{keywordtype}{void} \mbox{\hyperlink{structfactory_3_01_c_func_00_01_a_func_00_01_c_return_07_c_args_8_8_8_08_00_01_a_return_07_a_args_8_8_8_08_4_abc2803b2d240ccb0886bf18ea5dbfadc}{execute}}(Class \&cl, \textcolor{keyword}{const} Extra\&... extra) \&\& \{}
+\DoxyCodeLine{264         \textcolor{keyword}{static\_assert}(Class::has\_alias, \textcolor{stringliteral}{"{}The two-\/argument version of `py::init()` can "{}}}
+\DoxyCodeLine{265                                         \textcolor{stringliteral}{"{}only be used if the class has an alias"{}});}
+\DoxyCodeLine{266 \textcolor{preprocessor}{        \#if defined(PYBIND11\_CPP14)}}
+\DoxyCodeLine{267         cl.def(\textcolor{stringliteral}{"{}\_\_init\_\_"{}}, [class\_func = std::move(class\_factory), alias\_func = std::move(alias\_factory)]}
+\DoxyCodeLine{268 \textcolor{preprocessor}{        \#else}}
+\DoxyCodeLine{269         \textcolor{keyword}{auto} \&class\_func = class\_factory;}
+\DoxyCodeLine{270         \textcolor{keyword}{auto} \&alias\_func = alias\_factory;}
+\DoxyCodeLine{271         cl.def(\textcolor{stringliteral}{"{}\_\_init\_\_"{}}, [class\_func, alias\_func]}
+\DoxyCodeLine{272         \#endif}
+\DoxyCodeLine{273         (\mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}} \&v\_h, CArgs... \mbox{\hyperlink{classargs}{args}}) \{}
+\DoxyCodeLine{274             if (Py\_TYPE(v\_h.inst) == v\_h.type-\/>type)}
+\DoxyCodeLine{275                 \textcolor{comment}{// If the instance type equals the registered type we don't have inheritance, so}}
+\DoxyCodeLine{276                 \textcolor{comment}{// don't need the alias and can construct using the class function:}}
+\DoxyCodeLine{277                 construct<Class>(v\_h, class\_func(std::forward<CArgs>(args)...), false);}
+\DoxyCodeLine{278             else}
+\DoxyCodeLine{279                 construct<Class>(v\_h, alias\_func(std::forward<CArgs>(args)...), true);}
+\DoxyCodeLine{280         \}, \mbox{\hyperlink{structis__new__style__constructor}{is\_new\_style\_constructor}}(), extra...);}
+\DoxyCodeLine{281     \}}
+\DoxyCodeLine{282 \};}
+\DoxyCodeLine{283 }
+\DoxyCodeLine{285 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class, \textcolor{keyword}{typename} T>}
+\DoxyCodeLine{286 \textcolor{keywordtype}{void} \mbox{\hyperlink{init_8h_a005bacb0e5e81128b884c04241ccdeb5}{setstate}}(\mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}} \&v\_h, T \&\&result, \textcolor{keywordtype}{bool} need\_alias) \{}
+\DoxyCodeLine{287     construct<Class>(v\_h, std::forward<T>(result), need\_alias);}
+\DoxyCodeLine{288 \}}
+\DoxyCodeLine{289 }
+\DoxyCodeLine{291 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class, \textcolor{keyword}{typename} T, \textcolor{keyword}{typename} O,}
+\DoxyCodeLine{292           \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t<std::is\_convertible<O, handle>::value}}, \textcolor{keywordtype}{int}> = 0>}
+\DoxyCodeLine{293 \textcolor{keywordtype}{void} \mbox{\hyperlink{init_8h_a005bacb0e5e81128b884c04241ccdeb5}{setstate}}(\mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}} \&v\_h, std::pair<T, O> \&\&result, \textcolor{keywordtype}{bool} need\_alias) \{}
+\DoxyCodeLine{294     construct<Class>(v\_h, std::move(result.first), need\_alias);}
+\DoxyCodeLine{295     \mbox{\hyperlink{group__python__builtins_ga786700afa0e3e4bd67530355c4c5dec9}{setattr}}((PyObject *) v\_h.\mbox{\hyperlink{structvalue__and__holder_ae92c90379fcf439b23fa77f1d7d84253}{inst}}, \textcolor{stringliteral}{"{}\_\_dict\_\_"{}}, result.second);}
+\DoxyCodeLine{296 \}}
+\DoxyCodeLine{297 }
+\DoxyCodeLine{299 \textcolor{keyword}{template} <\textcolor{keyword}{typename} \mbox{\hyperlink{namespacehttplib_aa56e9beb60c21e4769297249a0056adc}{Get}}, \textcolor{keyword}{typename} Set,}
+\DoxyCodeLine{300           \textcolor{keyword}{typename} = \mbox{\hyperlink{detail_2common_8h_a47a77879d0f77f38496dad6d78d88972}{function\_signature\_t<Get>}}, \textcolor{keyword}{typename} = \mbox{\hyperlink{detail_2common_8h_a47a77879d0f77f38496dad6d78d88972}{function\_signature\_t<Set>}}>}
+\DoxyCodeLine{301 \textcolor{keyword}{struct }\mbox{\hyperlink{structpickle__factory}{pickle\_factory}};}
+\DoxyCodeLine{302 }
+\DoxyCodeLine{303 \textcolor{keyword}{template} <\textcolor{keyword}{typename} \mbox{\hyperlink{namespacehttplib_aa56e9beb60c21e4769297249a0056adc}{Get}}, \textcolor{keyword}{typename} Set,}
+\DoxyCodeLine{304           \textcolor{keyword}{typename} RetState, \textcolor{keyword}{typename} Self, \textcolor{keyword}{typename} NewInstance, \textcolor{keyword}{typename} ArgState>}
+\DoxyCodeLine{305 \textcolor{keyword}{struct }\mbox{\hyperlink{structpickle__factory}{pickle\_factory}}<\mbox{\hyperlink{namespacehttplib_aa56e9beb60c21e4769297249a0056adc}{Get}}, Set, RetState(Self), NewInstance(ArgState)> \{}
+\DoxyCodeLine{306     \textcolor{keyword}{static\_assert}(std::is\_same<intrinsic\_t<RetState>, \mbox{\hyperlink{detail_2common_8h_a3e4beb3f4b7338384c98d70aa1ee9780}{intrinsic\_t<ArgState>}}>::value,}
+\DoxyCodeLine{307                   \textcolor{stringliteral}{"{}The type returned by `\_\_getstate\_\_` must be the same "{}}}
+\DoxyCodeLine{308                   \textcolor{stringliteral}{"{}as the argument accepted by `\_\_setstate\_\_`"{}});}
+\DoxyCodeLine{309 }
+\DoxyCodeLine{310     \mbox{\hyperlink{detail_2common_8h_a3a08cea569e6926ac8d7d74dd7178b5f}{remove\_reference\_t<Get>}} \mbox{\hyperlink{structpickle__factory_3_01_get_00_01_set_00_01_ret_state_07_self_08_00_01_new_instance_07_arg_state_08_4_a23424db78247af91a611fd9780590768}{get}};}
+\DoxyCodeLine{311     \mbox{\hyperlink{detail_2common_8h_a3a08cea569e6926ac8d7d74dd7178b5f}{remove\_reference\_t<Set>}} \mbox{\hyperlink{structpickle__factory_3_01_get_00_01_set_00_01_ret_state_07_self_08_00_01_new_instance_07_arg_state_08_4_a34878fc57eb8c8e44d430aec5e439e64}{set}};}
+\DoxyCodeLine{312 }
+\DoxyCodeLine{313     \mbox{\hyperlink{structpickle__factory_3_01_get_00_01_set_00_01_ret_state_07_self_08_00_01_new_instance_07_arg_state_08_4_a4e32bc9bb6b20b126a70e2714cdf95ce}{pickle\_factory}}(\mbox{\hyperlink{namespacehttplib_aa56e9beb60c21e4769297249a0056adc}{Get}} get, Set \mbox{\hyperlink{classset}{set}})}
+\DoxyCodeLine{314         : get(\mbox{\hyperlink{namespacestd}{std}}::forward<\mbox{\hyperlink{namespacehttplib_aa56e9beb60c21e4769297249a0056adc}{Get}}>(get)), \mbox{\hyperlink{classset}{set}}(\mbox{\hyperlink{namespacestd}{std}}::forward<Set>(\mbox{\hyperlink{classset}{set}})) \{ \}}
+\DoxyCodeLine{315 }
+\DoxyCodeLine{316     \textcolor{keyword}{template} <\textcolor{keyword}{typename} Class, \textcolor{keyword}{typename}... Extra>}
+\DoxyCodeLine{317     \textcolor{keywordtype}{void} \mbox{\hyperlink{structpickle__factory_3_01_get_00_01_set_00_01_ret_state_07_self_08_00_01_new_instance_07_arg_state_08_4_a29156bf29134dfe90eada70cd350265d}{execute}}(Class \&cl, \textcolor{keyword}{const} Extra \&...extra) \&\& \{}
+\DoxyCodeLine{318         cl.def(\textcolor{stringliteral}{"{}\_\_getstate\_\_"{}}, std::move(get));}
+\DoxyCodeLine{319 }
+\DoxyCodeLine{320 \textcolor{preprocessor}{\#if defined(PYBIND11\_CPP14)}}
+\DoxyCodeLine{321         cl.def(\textcolor{stringliteral}{"{}\_\_setstate\_\_"{}}, [func = std::move(\mbox{\hyperlink{classset}{set}})]}
+\DoxyCodeLine{322 \#\textcolor{keywordflow}{else}}
+\DoxyCodeLine{323         \textcolor{keyword}{auto} \&func = \mbox{\hyperlink{classset}{set}};}
+\DoxyCodeLine{324         cl.def(\textcolor{stringliteral}{"{}\_\_setstate\_\_"{}}, [func]}
+\DoxyCodeLine{325 \#endif}
+\DoxyCodeLine{326         (\mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}} \&v\_h, ArgState state) \{}
+\DoxyCodeLine{327             setstate<Class>(v\_h, func(std::forward<ArgState>(state)),}
+\DoxyCodeLine{328                             Py\_TYPE(v\_h.\mbox{\hyperlink{structvalue__and__holder_ae92c90379fcf439b23fa77f1d7d84253}{inst}}) != v\_h.\mbox{\hyperlink{structvalue__and__holder_a55c426843c6e3e164a600d55e4e70f67}{type}}-\/>type);}
+\DoxyCodeLine{329         \}, \mbox{\hyperlink{structis__new__style__constructor}{is\_new\_style\_constructor}}(), extra...);}
+\DoxyCodeLine{330     \}}
+\DoxyCodeLine{331 \};}
+\DoxyCodeLine{332 }
+\DoxyCodeLine{333 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(initimpl)}
+\DoxyCodeLine{334 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{335 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(\mbox{\hyperlink{namespacepybind11}{pybind11}})}
+
+\end{DoxyCode}

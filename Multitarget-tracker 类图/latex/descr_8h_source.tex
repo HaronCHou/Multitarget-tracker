@@ -1,0 +1,106 @@
+\hypertarget{descr_8h_source}{}\doxysection{descr.\+h}
+\label{descr_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/detail/descr.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/detail/descr.h}}
+\mbox{\hyperlink{descr_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{    pybind11/detail/descr.h: Helper type for concatenating type signatures at compile time}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{    Copyright (c) 2016 Wenzel Jakob <wenzel.jakob@epfl.ch>}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{    All rights reserved. Use of this source code is governed by a}}
+\DoxyCodeLine{7 \textcolor{comment}{    BSD-\/style license that can be found in the LICENSE file.}}
+\DoxyCodeLine{8 \textcolor{comment}{*/}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{detail_2common_8h}{common.h}}"{}}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+\DoxyCodeLine{15 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#if !defined(\_MSC\_VER)}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#  define PYBIND11\_DESCR\_CONSTEXPR static constexpr}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#  define PYBIND11\_DESCR\_CONSTEXPR const}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{comment}{/* Concatenate type signatures at compile time */}}
+\DoxyCodeLine{24 \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t} N, \textcolor{keyword}{typename}... Ts>}
+\DoxyCodeLine{25 \textcolor{keyword}{struct }\mbox{\hyperlink{structdescr}{descr}} \{}
+\DoxyCodeLine{26     \textcolor{keywordtype}{char} \mbox{\hyperlink{structdescr_a68a25e9d18ffb4238b84b35b2757f63d}{text}}[N + 1];}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28     \textcolor{keyword}{constexpr} \mbox{\hyperlink{structdescr_a0bc466eee765ce14e9146d914d326fb3}{descr}}() : \mbox{\hyperlink{structdescr_a68a25e9d18ffb4238b84b35b2757f63d}{text}}\{\textcolor{stringliteral}{'\(\backslash\)0'}\} \{ \}}
+\DoxyCodeLine{29     \textcolor{keyword}{constexpr} \mbox{\hyperlink{structdescr_ad61bf6ae3323c8a562a64b8cffe28f38}{descr}}(\textcolor{keywordtype}{char} \textcolor{keyword}{const} (\&s)[N+1]) : \mbox{\hyperlink{structdescr}{descr}}(s, \mbox{\hyperlink{detail_2common_8h_ab5e942a7ee11e93c8b5ed281c28261b2}{make\_index\_sequence}}<N>()) \{ \}}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31     \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t}... Is>}
+\DoxyCodeLine{32     \textcolor{keyword}{constexpr} \mbox{\hyperlink{structdescr_a1a50be3843503213c2d68a7ba41a3462}{descr}}(\textcolor{keywordtype}{char} \textcolor{keyword}{const} (\&s)[N+1], \mbox{\hyperlink{structindex__sequence}{index\_sequence<Is...>}}) : \mbox{\hyperlink{structdescr_a68a25e9d18ffb4238b84b35b2757f63d}{text}}\{s[Is]..., \textcolor{stringliteral}{'\(\backslash\)0'}\} \{ \}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34     \textcolor{keyword}{template} <\textcolor{keyword}{typename}... Chars>}
+\DoxyCodeLine{35     \textcolor{keyword}{constexpr} \mbox{\hyperlink{structdescr_aefea536f4cfdb5f7f0a62940e5c98739}{descr}}(\textcolor{keywordtype}{char} c, Chars... cs) : \mbox{\hyperlink{structdescr_a68a25e9d18ffb4238b84b35b2757f63d}{text}}\{c, static\_cast<char>(cs)..., \textcolor{stringliteral}{'\(\backslash\)0'}\} \{ \}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} std::array<\textcolor{keyword}{const} std::type\_info *, \textcolor{keyword}{sizeof}...(Ts) + 1> \mbox{\hyperlink{structdescr_a2f322d11b3e47029f3e5d43cee72abce}{types}}() \{}
+\DoxyCodeLine{38         \textcolor{keywordflow}{return} \{\{\&\textcolor{keyword}{typeid}(Ts)..., \textcolor{keyword}{nullptr}\}\};}
+\DoxyCodeLine{39     \}}
+\DoxyCodeLine{40 \};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t} N1, \textcolor{keywordtype}{size\_t} N2, \textcolor{keyword}{typename}... Ts1, \textcolor{keyword}{typename}... Ts2, \textcolor{keywordtype}{size\_t}... Is1, \textcolor{keywordtype}{size\_t}... Is2>}
+\DoxyCodeLine{43 \textcolor{keyword}{constexpr} \mbox{\hyperlink{structdescr}{descr}}<N1 + N2, Ts1..., Ts2...> \mbox{\hyperlink{descr_8h_a55ef1a1551a0e53c16fb08dff2f55797}{plus\_impl}}(\textcolor{keyword}{const} \mbox{\hyperlink{structdescr}{descr<N1, Ts1...>}} \&a, \textcolor{keyword}{const} \mbox{\hyperlink{structdescr}{descr<N2, Ts2...>}} \&b,}
+\DoxyCodeLine{44                                                    \mbox{\hyperlink{structindex__sequence}{index\_sequence<Is1...>}}, \mbox{\hyperlink{structindex__sequence}{index\_sequence<Is2...>}}) \{}
+\DoxyCodeLine{45     \textcolor{keywordflow}{return} \{a.\mbox{\hyperlink{structdescr_a68a25e9d18ffb4238b84b35b2757f63d}{text}}[Is1]..., b.\mbox{\hyperlink{structdescr_a68a25e9d18ffb4238b84b35b2757f63d}{text}}[Is2]...\};}
+\DoxyCodeLine{46 \}}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t} N1, \textcolor{keywordtype}{size\_t} N2, \textcolor{keyword}{typename}... Ts1, \textcolor{keyword}{typename}... Ts2>}
+\DoxyCodeLine{49 \textcolor{keyword}{constexpr} \mbox{\hyperlink{structdescr}{descr}}<N1 + N2, Ts1..., Ts2...> \mbox{\hyperlink{descr_8h_a6378af8b5062427298445359c6655507}{operator+}}(\textcolor{keyword}{const} \mbox{\hyperlink{structdescr}{descr<N1, Ts1...>}} \&a, \textcolor{keyword}{const} \mbox{\hyperlink{structdescr}{descr<N2, Ts2...>}} \&b) \{}
+\DoxyCodeLine{50     \textcolor{keywordflow}{return} \mbox{\hyperlink{descr_8h_a55ef1a1551a0e53c16fb08dff2f55797}{plus\_impl}}(a, b, \mbox{\hyperlink{detail_2common_8h_ab5e942a7ee11e93c8b5ed281c28261b2}{make\_index\_sequence<N1>}}(), \mbox{\hyperlink{detail_2common_8h_ab5e942a7ee11e93c8b5ed281c28261b2}{make\_index\_sequence<N2>}}());}
+\DoxyCodeLine{51 \}}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t} N>}
+\DoxyCodeLine{54 \textcolor{keyword}{constexpr} \mbox{\hyperlink{structdescr}{descr}}<N -\/ 1> \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{keywordtype}{char} \textcolor{keyword}{const}(\&text)[N]) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{structdescr}{descr}}<N -\/ 1>(text); \}}
+\DoxyCodeLine{55 \textcolor{keyword}{constexpr} \mbox{\hyperlink{structdescr}{descr<0>}} \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{keywordtype}{char} \textcolor{keyword}{const}(\&)[1]) \{ \textcolor{keywordflow}{return} \{\}; \}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t} Rem, \textcolor{keywordtype}{size\_t}... Digits> \textcolor{keyword}{struct }\mbox{\hyperlink{structint__to__str}{int\_to\_str}} : \mbox{\hyperlink{structint__to__str}{int\_to\_str}}<Rem/10, Rem\%10, Digits...> \{ \};}
+\DoxyCodeLine{58 \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t}...Digits> \textcolor{keyword}{struct }\mbox{\hyperlink{structint__to__str}{int\_to\_str}}<0, Digits...> \{}
+\DoxyCodeLine{59     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} digits = \mbox{\hyperlink{structdescr}{descr}}<\textcolor{keyword}{sizeof}...(Digits)>((\textcolor{charliteral}{'0'} + Digits)...);}
+\DoxyCodeLine{60 \};}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62 \textcolor{comment}{// Ternary description (like std::conditional)}}
+\DoxyCodeLine{63 \textcolor{keyword}{template} <\textcolor{keywordtype}{bool} B, \textcolor{keywordtype}{size\_t} N1, \textcolor{keywordtype}{size\_t} N2>}
+\DoxyCodeLine{64 \textcolor{keyword}{constexpr} \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<B, \mbox{\hyperlink{structdescr}{descr}}<N1 -\/ 1>> \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{keywordtype}{char} \textcolor{keyword}{const}(\&text1)[N1], \textcolor{keywordtype}{char} \textcolor{keyword}{const}(\&)[N2]) \{}
+\DoxyCodeLine{65     \textcolor{keywordflow}{return} \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(text1);}
+\DoxyCodeLine{66 \}}
+\DoxyCodeLine{67 \textcolor{keyword}{template} <\textcolor{keywordtype}{bool} B, \textcolor{keywordtype}{size\_t} N1, \textcolor{keywordtype}{size\_t} N2>}
+\DoxyCodeLine{68 \textcolor{keyword}{constexpr} \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t}}<!B, \mbox{\hyperlink{structdescr}{descr}}<N2 -\/ 1>> \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{keywordtype}{char} \textcolor{keyword}{const}(\&)[N1], \textcolor{keywordtype}{char} \textcolor{keyword}{const}(\&text2)[N2]) \{}
+\DoxyCodeLine{69     \textcolor{keywordflow}{return} \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(text2);}
+\DoxyCodeLine{70 \}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72 \textcolor{keyword}{template} <\textcolor{keywordtype}{bool} B, \textcolor{keyword}{typename} T1, \textcolor{keyword}{typename} T2>}
+\DoxyCodeLine{73 \textcolor{keyword}{constexpr} \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t<B, T1>}} \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{keyword}{const} T1 \&\mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}, \textcolor{keyword}{const} T2 \&) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}; \}}
+\DoxyCodeLine{74 \textcolor{keyword}{template} <\textcolor{keywordtype}{bool} B, \textcolor{keyword}{typename} T1, \textcolor{keyword}{typename} T2>}
+\DoxyCodeLine{75 \textcolor{keyword}{constexpr} \mbox{\hyperlink{detail_2common_8h_a012819c9e8b5e04872a271f50f8b8196}{enable\_if\_t<!B, T2>}} \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{keyword}{const} T1 \&, \textcolor{keyword}{const} T2 \&\mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}; \}}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t} Size> \textcolor{keyword}{auto} \textcolor{keyword}{constexpr} \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}() -\/> \textcolor{keyword}{decltype}(\mbox{\hyperlink{structint__to__str}{int\_to\_str}}<Size / 10, Size \% 10>::digits) \{}
+\DoxyCodeLine{78     \textcolor{keywordflow}{return} \mbox{\hyperlink{structint__to__str}{int\_to\_str}}<Size / 10, Size \% 10>::digits;}
+\DoxyCodeLine{79 \}}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81 \textcolor{keyword}{template} <\textcolor{keyword}{typename} Type> \textcolor{keyword}{constexpr} \mbox{\hyperlink{structdescr}{descr<1, Type>}} \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}() \{ \textcolor{keywordflow}{return} \{\textcolor{charliteral}{'\%'}\}; \}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83 \textcolor{keyword}{constexpr} \mbox{\hyperlink{structdescr}{descr<0>}} \mbox{\hyperlink{descr_8h_a8c0d3505d8fb5963c5e157eabdbd3c7f}{concat}}() \{ \textcolor{keywordflow}{return} \{\}; \}}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85 \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t} N, \textcolor{keyword}{typename}... Ts>}
+\DoxyCodeLine{86 \textcolor{keyword}{constexpr} \mbox{\hyperlink{structdescr}{descr}}<N, Ts...> \mbox{\hyperlink{descr_8h_a8c0d3505d8fb5963c5e157eabdbd3c7f}{concat}}(\textcolor{keyword}{const} \mbox{\hyperlink{structdescr}{descr<N, Ts...>}} \&\mbox{\hyperlink{structdescr}{descr}}) \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{structdescr}{descr}}; \}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88 \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t} N, \textcolor{keyword}{typename}... Ts, \textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{89 \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{descr_8h_a8c0d3505d8fb5963c5e157eabdbd3c7f}{concat}}(\textcolor{keyword}{const} \mbox{\hyperlink{structdescr}{descr<N, Ts...>}} \&\mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}, \textcolor{keyword}{const} Args \&...\mbox{\hyperlink{classargs}{args}})}
+\DoxyCodeLine{90     -\/> \textcolor{keyword}{decltype}(std::declval<\mbox{\hyperlink{structdescr}{descr}}<N + 2, Ts...>>() + \mbox{\hyperlink{descr_8h_a8c0d3505d8fb5963c5e157eabdbd3c7f}{concat}}(\mbox{\hyperlink{classargs}{args}}...)) \{}
+\DoxyCodeLine{91     \textcolor{keywordflow}{return} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}} + \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}, "{}}) + \mbox{\hyperlink{descr_8h_a8c0d3505d8fb5963c5e157eabdbd3c7f}{concat}}(\mbox{\hyperlink{classargs}{args}}...);}
+\DoxyCodeLine{92 \}}
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94 \textcolor{keyword}{template} <\textcolor{keywordtype}{size\_t} N, \textcolor{keyword}{typename}... Ts>}
+\DoxyCodeLine{95 \textcolor{keyword}{constexpr} \mbox{\hyperlink{structdescr}{descr}}<N + 2, Ts...> \mbox{\hyperlink{descr_8h_a7dd2c89703d270c38d112ed3a44dbb86}{type\_descr}}(\textcolor{keyword}{const} \mbox{\hyperlink{structdescr}{descr<N, Ts...>}} \&\mbox{\hyperlink{structdescr}{descr}}) \{}
+\DoxyCodeLine{96     \textcolor{keywordflow}{return} \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}\{"{}}) + \mbox{\hyperlink{structdescr}{descr}} + \mbox{\hyperlink{descr_8h_a213ce974eda8bd2f9f542dc6e3135355}{\_}}(\textcolor{stringliteral}{"{}\}"{}});}
+\DoxyCodeLine{97 \}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{100 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+
+\end{DoxyCode}

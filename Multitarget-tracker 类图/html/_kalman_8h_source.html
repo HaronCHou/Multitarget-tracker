@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: D:/zhr_files/Multitarget-tracker-master/src/Tracker/Kalman.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">My Project
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_4c3458e0ccdb4c3720723c1caa1aaa1c.html">zhr_files</a></li><li class="navelem"><a class="el" href="dir_5a8d4bff745a16410b5074d3583a347e.html">Multitarget-tracker-master</a></li><li class="navelem"><a class="el" href="dir_46a27ab0460a6f8f8d12d2f44f38bf6b.html">src</a></li><li class="navelem"><a class="el" href="dir_49af9105677bf904e08b5b3082398310.html">Tracker</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">Kalman.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_kalman_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;<a class="code" href="defines_8h.html">defines.h</a>&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;deque&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;opencv2/opencv.hpp&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#ifdef USE_OCV_UKF</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;opencv2/tracking.hpp&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;opencv2/tracking/kalman_filters.hpp&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="class_t_kalman_filter.html">   17</a></span><span class="keyword">class </span><a class="code hl_class" href="class_t_kalman_filter.html">TKalmanFilter</a></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>{</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_function" href="class_t_kalman_filter.html#a52b955d24816535d4e684eaaa5063888">TKalmanFilter</a>(<a class="code hl_enumeration" href="namespacetracking.html#a83f2c4d58ea2737f7d6296dce3eb722a">tracking::KalmanType</a> type, <span class="keywordtype">bool</span> useAcceleration, <a class="code hl_typedef" href="defines_8h.html#a7ce9c8817b42ab418e61756f579549ab">track_t</a> deltaTime, <a class="code hl_typedef" href="defines_8h.html#a7ce9c8817b42ab418e61756f579549ab">track_t</a> accelNoiseMag);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="class_t_kalman_filter.html#ad0232ba6dd604f7cb806102538cf5fe4">   21</a></span>    <a class="code hl_function" href="class_t_kalman_filter.html#ad0232ba6dd604f7cb806102538cf5fe4">~TKalmanFilter</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <a class="code hl_typedef" href="defines_8h.html#a8c42696da8f098b91374a8e8bb84b430">Point_t</a> <a class="code hl_function" href="class_t_kalman_filter.html#a103fb495ee14ff2be7a29053695ce7d1">GetPointPrediction</a>();</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <a class="code hl_typedef" href="defines_8h.html#a8c42696da8f098b91374a8e8bb84b430">Point_t</a> <a class="code hl_function" href="class_t_kalman_filter.html#a0c25b9a1a9676956aed0db44ad56696a">Update</a>(<a class="code hl_typedef" href="defines_8h.html#a8c42696da8f098b91374a8e8bb84b430">Point_t</a> <a class="code hl_variable" href="rings_8cpp.html#af69bbacaaf68a115b351c5d1e29c3cc8">pt</a>, <span class="keywordtype">bool</span> dataCorrect);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    cv::Rect <a class="code hl_function" href="class_t_kalman_filter.html#af112feed15a064055987a1faedf9673d">GetRectPrediction</a>();</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    cv::Rect <a class="code hl_function" href="class_t_kalman_filter.html#a0c25b9a1a9676956aed0db44ad56696a">Update</a>(cv::Rect rect, <span class="keywordtype">bool</span> dataCorrect);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    cv::Vec&lt;track_t, 2&gt; <a class="code hl_function" href="class_t_kalman_filter.html#a4162b8f75c9250f78080a426a0bfe972">GetVelocity</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_t_kalman_filter.html#adc9ff4a3662eb459857fb337e188869a">GetPtStateAndResCov</a>(cv::Mat&amp; covar, cv::Mat&amp; state) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="class_t_kalman_filter.html#ad3315672464cae356898f67bd231a4ec">   34</a></span>    cv::KalmanFilter <a class="code hl_variable" href="class_t_kalman_filter.html#ad3315672464cae356898f67bd231a4ec">m_linearKalman</a>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#ifdef USE_OCV_UKF</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#if (((CV_VERSION_MAJOR == 4) &amp;&amp; (CV_VERSION_MINOR &lt; 5)) || ((CV_VERSION_MAJOR == 4) &amp;&amp; (CV_VERSION_MINOR == 5) &amp;&amp; (CV_VERSION_REVISION &lt; 1)) || (CV_VERSION_MAJOR == 3))</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    cv::Ptr&lt;cv::tracking::UnscentedKalmanFilter&gt; m_uncsentedKalman;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    cv::Ptr&lt;cv::detail::tracking::UnscentedKalmanFilter&gt; m_uncsentedKalman;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="class_t_kalman_filter.html#a0dd802ac18ce482315223352ffd79986">   43</a></span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> <a class="code hl_variable" href="class_t_kalman_filter.html#a0dd802ac18ce482315223352ffd79986">MIN_INIT_VALS</a> = 4;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="class_t_kalman_filter.html#aa91a48f4b3d4440ca69de561940d2352">   44</a></span>    std::vector&lt;Point_t&gt; <a class="code hl_variable" href="class_t_kalman_filter.html#aa91a48f4b3d4440ca69de561940d2352">m_initialPoints</a>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="class_t_kalman_filter.html#a99b59326e73a8147b665ca10ddf41b65">   45</a></span>    std::vector&lt;cv::Rect&gt; <a class="code hl_variable" href="class_t_kalman_filter.html#a99b59326e73a8147b665ca10ddf41b65">m_initialRects</a>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="class_t_kalman_filter.html#aed4818c7aac455928ef02dd03f8bfe56">   47</a></span>    cv::Rect_&lt;track_t&gt; <a class="code hl_variable" href="class_t_kalman_filter.html#aed4818c7aac455928ef02dd03f8bfe56">m_lastRectResult</a>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="class_t_kalman_filter.html#a8e03a4e34d3f59c994a95ca0a5954a88">   48</a></span>    cv::Rect_&lt;track_t&gt; <a class="code hl_variable" href="class_t_kalman_filter.html#a8e03a4e34d3f59c994a95ca0a5954a88">m_lastRect</a>;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="class_t_kalman_filter.html#a91efb6a00cfae5df3e513ceba2239fa3">   49</a></span>    <a class="code hl_typedef" href="defines_8h.html#a8c42696da8f098b91374a8e8bb84b430">Point_t</a> <a class="code hl_variable" href="class_t_kalman_filter.html#a91efb6a00cfae5df3e513ceba2239fa3">m_lastPointResult</a>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="class_t_kalman_filter.html#a9f511e8885e5e89643fa6d59ea7bbd27">   50</a></span>    <a class="code hl_typedef" href="defines_8h.html#a7ce9c8817b42ab418e61756f579549ab">track_t</a> <a class="code hl_variable" href="class_t_kalman_filter.html#a9f511e8885e5e89643fa6d59ea7bbd27">m_accelNoiseMag</a> = 0.5f;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="class_t_kalman_filter.html#a7335e3bd7a695ebaf5eaa93c42e39eae">   51</a></span>    <a class="code hl_typedef" href="defines_8h.html#a7ce9c8817b42ab418e61756f579549ab">track_t</a> <a class="code hl_variable" href="class_t_kalman_filter.html#a7335e3bd7a695ebaf5eaa93c42e39eae">m_deltaTime</a> = 0.2f;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="class_t_kalman_filter.html#aaeee38d0ed5c08f257ff4b5b686a26f7">   52</a></span>    <a class="code hl_typedef" href="defines_8h.html#a7ce9c8817b42ab418e61756f579549ab">track_t</a> <a class="code hl_variable" href="class_t_kalman_filter.html#aaeee38d0ed5c08f257ff4b5b686a26f7">m_deltaTimeMin</a> = 0.2f;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="class_t_kalman_filter.html#a3f427d0adb203bce7cd521674828f170">   53</a></span>    <a class="code hl_typedef" href="defines_8h.html#a7ce9c8817b42ab418e61756f579549ab">track_t</a> <a class="code hl_variable" href="class_t_kalman_filter.html#a3f427d0adb203bce7cd521674828f170">m_deltaTimeMax</a> = 2 * 0.2f;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="class_t_kalman_filter.html#a8a5dbf9e4a803bb540994a424225f330">   54</a></span>    <a class="code hl_typedef" href="defines_8h.html#a7ce9c8817b42ab418e61756f579549ab">track_t</a> <a class="code hl_variable" href="class_t_kalman_filter.html#a8a5dbf9e4a803bb540994a424225f330">m_lastDist</a> = 0;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="class_t_kalman_filter.html#ae31fbddf137395ed860115c1d0bd3ff5">   55</a></span>    <a class="code hl_typedef" href="defines_8h.html#a7ce9c8817b42ab418e61756f579549ab">track_t</a> <a class="code hl_variable" href="class_t_kalman_filter.html#ae31fbddf137395ed860115c1d0bd3ff5">m_deltaStep</a> = 0;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="class_t_kalman_filter.html#ab4857da3b24001a0cadeab645388f1e8">   56</a></span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="class_t_kalman_filter.html#ab4857da3b24001a0cadeab645388f1e8">m_deltaStepsCount</a> = 20;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="class_t_kalman_filter.html#a00cabc6683f6cc848559515df46d7101">   57</a></span>    <a class="code hl_enumeration" href="namespacetracking.html#a83f2c4d58ea2737f7d6296dce3eb722a">tracking::KalmanType</a> <a class="code hl_variable" href="class_t_kalman_filter.html#a00cabc6683f6cc848559515df46d7101">m_type</a> = <a class="code hl_enumvalue" href="namespacetracking.html#a83f2c4d58ea2737f7d6296dce3eb722aa889eca583e371386c92e05814797a885">tracking::KalmanLinear</a>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="class_t_kalman_filter.html#a688c50115e6a1a9f994f4262364457c4">   58</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="class_t_kalman_filter.html#a688c50115e6a1a9f994f4262364457c4">m_useAcceleration</a> = <span class="keyword">false</span>; <span class="comment">// If set true then will be used motion model x(t) = x0 + v0 * t + a * t^2 / 2</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="class_t_kalman_filter.html#a5633e302e878261c8669816695f6a314">   59</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="class_t_kalman_filter.html#a5633e302e878261c8669816695f6a314">m_initialized</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="comment">// Constant velocity model</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_t_kalman_filter.html#a6b1bb8fb881f82ce0a766e6ea41f159c">CreateLinear</a>(<a class="code hl_typedef" href="defines_8h.html#a8c42696da8f098b91374a8e8bb84b430">Point_t</a> xy0, <a class="code hl_typedef" href="defines_8h.html#a8c42696da8f098b91374a8e8bb84b430">Point_t</a> xyv0);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_t_kalman_filter.html#a6b1bb8fb881f82ce0a766e6ea41f159c">CreateLinear</a>(cv::Rect_&lt;track_t&gt; rect0, <a class="code hl_typedef" href="defines_8h.html#a8c42696da8f098b91374a8e8bb84b430">Point_t</a> rectv0);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="comment">// Constant acceleration model</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="comment">// https://www.mathworks.com/help/driving/ug/linear-kalman-filters.html</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_t_kalman_filter.html#a4b7541e185a33de1af54f945b6514412">CreateLinearAcceleration</a>(<a class="code hl_typedef" href="defines_8h.html#a8c42696da8f098b91374a8e8bb84b430">Point_t</a> xy0, <a class="code hl_typedef" href="defines_8h.html#a8c42696da8f098b91374a8e8bb84b430">Point_t</a> xyv0);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_t_kalman_filter.html#a4b7541e185a33de1af54f945b6514412">CreateLinearAcceleration</a>(cv::Rect_&lt;track_t&gt; rect0, <a class="code hl_typedef" href="defines_8h.html#a8c42696da8f098b91374a8e8bb84b430">Point_t</a> rectv0);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="preprocessor">#ifdef USE_OCV_UKF</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordtype">void</span> CreateUnscented(<a class="code hl_typedef" href="defines_8h.html#a8c42696da8f098b91374a8e8bb84b430">Point_t</a> xy0, <a class="code hl_typedef" href="defines_8h.html#a8c42696da8f098b91374a8e8bb84b430">Point_t</a> xyv0);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordtype">void</span> CreateUnscented(cv::Rect_&lt;track_t&gt; rect0, <a class="code hl_typedef" href="defines_8h.html#a8c42696da8f098b91374a8e8bb84b430">Point_t</a> rectv0);</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordtype">void</span> CreateAugmentedUnscented(<a class="code hl_typedef" href="defines_8h.html#a8c42696da8f098b91374a8e8bb84b430">Point_t</a> xy0, <a class="code hl_typedef" href="defines_8h.html#a8c42696da8f098b91374a8e8bb84b430">Point_t</a> xyv0);</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordtype">void</span> CreateAugmentedUnscented(cv::Rect_&lt;track_t&gt; rect0, <a class="code hl_typedef" href="defines_8h.html#a8c42696da8f098b91374a8e8bb84b430">Point_t</a> rectv0);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>};</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment">//---------------------------------------------------------------------------</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment"></span><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="keyword">inline</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="_kalman_8h.html#a73c53554444754d40def3c6da833b646">   85</a></span>T <a class="code hl_function" href="_kalman_8h.html#a73c53554444754d40def3c6da833b646">sqr</a>(T val)</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>{</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordflow">return</span> val * val;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>}</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> CONT&gt;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="_kalman_8h.html#a956aedf9af504c89aa2ca585a168dc47">  101</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="_kalman_8h.html#a956aedf9af504c89aa2ca585a168dc47">get_lin_regress_params</a>(</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="keyword">const</span> CONT&amp; in_data,</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keywordtype">size_t</span> start_pos,</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <span class="keywordtype">size_t</span> in_data_size,</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        T&amp; kx, T&amp; bx, T&amp; ky, T&amp; by)</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>{</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    T m1(0.), m2(0.);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    T m3_x(0.), m4_x(0.);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    T m3_y(0.), m4_y(0.);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keyword">const</span> T el_count = <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(in_data_size - start_pos);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = start_pos; i &lt; in_data_size; ++i)</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    {</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        m1 += i;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        m2 += <a class="code hl_function" href="_kalman_8h.html#a73c53554444754d40def3c6da833b646">sqr</a>(i);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        m3_x += in_data[i].x;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        m4_x += i * in_data[i].x;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        m3_y += in_data[i].y;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        m4_y += i * in_data[i].y;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    }</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    T det_1 = 1 / (el_count * m2 - <a class="code hl_function" href="_kalman_8h.html#a73c53554444754d40def3c6da833b646">sqr</a>(m1));</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    m1 *= -1;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    kx = det_1 * (m1 * m3_x + el_count * m4_x);</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    bx = det_1 * (m2 * m3_x + m1 * m4_x);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    ky = det_1 * (m1 * m3_y + el_count * m4_y);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    by = det_1 * (m2 * m3_y + m1 * m4_y);</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>}</div>
+<div class="ttc" id="a_kalman_8h_html_a73c53554444754d40def3c6da833b646"><div class="ttname"><a href="_kalman_8h.html#a73c53554444754d40def3c6da833b646">sqr</a></div><div class="ttdeci">T sqr(T val)</div><div class="ttdoc">sqr</div><div class="ttdef"><b>Definition:</b> Kalman.h:85</div></div>
+<div class="ttc" id="a_kalman_8h_html_a956aedf9af504c89aa2ca585a168dc47"><div class="ttname"><a href="_kalman_8h.html#a956aedf9af504c89aa2ca585a168dc47">get_lin_regress_params</a></div><div class="ttdeci">void get_lin_regress_params(const CONT &amp;in_data, size_t start_pos, size_t in_data_size, T &amp;kx, T &amp;bx, T &amp;ky, T &amp;by)</div><div class="ttdoc">get_lin_regress_params</div><div class="ttdef"><b>Definition:</b> Kalman.h:101</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html"><div class="ttname"><a href="class_t_kalman_filter.html">TKalmanFilter</a></div><div class="ttdoc">The TKalmanFilter class http://www.morethantechnical.com/2011/06/17/simple-kalman-filter-for-tracking...</div><div class="ttdef"><b>Definition:</b> Kalman.h:18</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_a00cabc6683f6cc848559515df46d7101"><div class="ttname"><a href="class_t_kalman_filter.html#a00cabc6683f6cc848559515df46d7101">TKalmanFilter::m_type</a></div><div class="ttdeci">tracking::KalmanType m_type</div><div class="ttdef"><b>Definition:</b> Kalman.h:57</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_a0c25b9a1a9676956aed0db44ad56696a"><div class="ttname"><a href="class_t_kalman_filter.html#a0c25b9a1a9676956aed0db44ad56696a">TKalmanFilter::Update</a></div><div class="ttdeci">Point_t Update(Point_t pt, bool dataCorrect)</div><div class="ttdoc">TKalmanFilter::Update</div><div class="ttdef"><b>Definition:</b> Kalman.cpp:603</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_a0dd802ac18ce482315223352ffd79986"><div class="ttname"><a href="class_t_kalman_filter.html#a0dd802ac18ce482315223352ffd79986">TKalmanFilter::MIN_INIT_VALS</a></div><div class="ttdeci">static constexpr size_t MIN_INIT_VALS</div><div class="ttdef"><b>Definition:</b> Kalman.h:43</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_a103fb495ee14ff2be7a29053695ce7d1"><div class="ttname"><a href="class_t_kalman_filter.html#a103fb495ee14ff2be7a29053695ce7d1">TKalmanFilter::GetPointPrediction</a></div><div class="ttdeci">Point_t GetPointPrediction()</div><div class="ttdoc">TKalmanFilter::GetPointPrediction</div><div class="ttdef"><b>Definition:</b> Kalman.cpp:569</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_a3f427d0adb203bce7cd521674828f170"><div class="ttname"><a href="class_t_kalman_filter.html#a3f427d0adb203bce7cd521674828f170">TKalmanFilter::m_deltaTimeMax</a></div><div class="ttdeci">track_t m_deltaTimeMax</div><div class="ttdef"><b>Definition:</b> Kalman.h:53</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_a4162b8f75c9250f78080a426a0bfe972"><div class="ttname"><a href="class_t_kalman_filter.html#a4162b8f75c9250f78080a426a0bfe972">TKalmanFilter::GetVelocity</a></div><div class="ttdeci">cv::Vec&lt; track_t, 2 &gt; GetVelocity() const</div><div class="ttdoc">TKalmanFilter::GetVelocity</div><div class="ttdef"><b>Definition:</b> Kalman.cpp:919</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_a4b7541e185a33de1af54f945b6514412"><div class="ttname"><a href="class_t_kalman_filter.html#a4b7541e185a33de1af54f945b6514412">TKalmanFilter::CreateLinearAcceleration</a></div><div class="ttdeci">void CreateLinearAcceleration(Point_t xy0, Point_t xyv0)</div><div class="ttdoc">TKalmanFilter::CreateLinearAcceleration</div><div class="ttdef"><b>Definition:</b> Kalman.cpp:165</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_a52b955d24816535d4e684eaaa5063888"><div class="ttname"><a href="class_t_kalman_filter.html#a52b955d24816535d4e684eaaa5063888">TKalmanFilter::TKalmanFilter</a></div><div class="ttdeci">TKalmanFilter(tracking::KalmanType type, bool useAcceleration, track_t deltaTime, track_t accelNoiseMag)</div><div class="ttdoc">TKalmanFilter::TKalmanFilter</div><div class="ttdef"><b>Definition:</b> Kalman.cpp:20</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_a5633e302e878261c8669816695f6a314"><div class="ttname"><a href="class_t_kalman_filter.html#a5633e302e878261c8669816695f6a314">TKalmanFilter::m_initialized</a></div><div class="ttdeci">bool m_initialized</div><div class="ttdef"><b>Definition:</b> Kalman.h:59</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_a688c50115e6a1a9f994f4262364457c4"><div class="ttname"><a href="class_t_kalman_filter.html#a688c50115e6a1a9f994f4262364457c4">TKalmanFilter::m_useAcceleration</a></div><div class="ttdeci">bool m_useAcceleration</div><div class="ttdef"><b>Definition:</b> Kalman.h:58</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_a6b1bb8fb881f82ce0a766e6ea41f159c"><div class="ttname"><a href="class_t_kalman_filter.html#a6b1bb8fb881f82ce0a766e6ea41f159c">TKalmanFilter::CreateLinear</a></div><div class="ttdeci">void CreateLinear(Point_t xy0, Point_t xyv0)</div><div class="ttdoc">TKalmanFilter::CreateLinear</div><div class="ttdef"><b>Definition:</b> Kalman.cpp:42</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_a7335e3bd7a695ebaf5eaa93c42e39eae"><div class="ttname"><a href="class_t_kalman_filter.html#a7335e3bd7a695ebaf5eaa93c42e39eae">TKalmanFilter::m_deltaTime</a></div><div class="ttdeci">track_t m_deltaTime</div><div class="ttdef"><b>Definition:</b> Kalman.h:51</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_a8a5dbf9e4a803bb540994a424225f330"><div class="ttname"><a href="class_t_kalman_filter.html#a8a5dbf9e4a803bb540994a424225f330">TKalmanFilter::m_lastDist</a></div><div class="ttdeci">track_t m_lastDist</div><div class="ttdef"><b>Definition:</b> Kalman.h:54</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_a8e03a4e34d3f59c994a95ca0a5954a88"><div class="ttname"><a href="class_t_kalman_filter.html#a8e03a4e34d3f59c994a95ca0a5954a88">TKalmanFilter::m_lastRect</a></div><div class="ttdeci">cv::Rect_&lt; track_t &gt; m_lastRect</div><div class="ttdef"><b>Definition:</b> Kalman.h:48</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_a91efb6a00cfae5df3e513ceba2239fa3"><div class="ttname"><a href="class_t_kalman_filter.html#a91efb6a00cfae5df3e513ceba2239fa3">TKalmanFilter::m_lastPointResult</a></div><div class="ttdeci">Point_t m_lastPointResult</div><div class="ttdef"><b>Definition:</b> Kalman.h:49</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_a99b59326e73a8147b665ca10ddf41b65"><div class="ttname"><a href="class_t_kalman_filter.html#a99b59326e73a8147b665ca10ddf41b65">TKalmanFilter::m_initialRects</a></div><div class="ttdeci">std::vector&lt; cv::Rect &gt; m_initialRects</div><div class="ttdef"><b>Definition:</b> Kalman.h:45</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_a9f511e8885e5e89643fa6d59ea7bbd27"><div class="ttname"><a href="class_t_kalman_filter.html#a9f511e8885e5e89643fa6d59ea7bbd27">TKalmanFilter::m_accelNoiseMag</a></div><div class="ttdeci">track_t m_accelNoiseMag</div><div class="ttdef"><b>Definition:</b> Kalman.h:50</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_aa91a48f4b3d4440ca69de561940d2352"><div class="ttname"><a href="class_t_kalman_filter.html#aa91a48f4b3d4440ca69de561940d2352">TKalmanFilter::m_initialPoints</a></div><div class="ttdeci">std::vector&lt; Point_t &gt; m_initialPoints</div><div class="ttdef"><b>Definition:</b> Kalman.h:44</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_aaeee38d0ed5c08f257ff4b5b686a26f7"><div class="ttname"><a href="class_t_kalman_filter.html#aaeee38d0ed5c08f257ff4b5b686a26f7">TKalmanFilter::m_deltaTimeMin</a></div><div class="ttdeci">track_t m_deltaTimeMin</div><div class="ttdef"><b>Definition:</b> Kalman.h:52</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_ab4857da3b24001a0cadeab645388f1e8"><div class="ttname"><a href="class_t_kalman_filter.html#ab4857da3b24001a0cadeab645388f1e8">TKalmanFilter::m_deltaStepsCount</a></div><div class="ttdeci">static constexpr int m_deltaStepsCount</div><div class="ttdef"><b>Definition:</b> Kalman.h:56</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_ad0232ba6dd604f7cb806102538cf5fe4"><div class="ttname"><a href="class_t_kalman_filter.html#ad0232ba6dd604f7cb806102538cf5fe4">TKalmanFilter::~TKalmanFilter</a></div><div class="ttdeci">~TKalmanFilter()=default</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_ad3315672464cae356898f67bd231a4ec"><div class="ttname"><a href="class_t_kalman_filter.html#ad3315672464cae356898f67bd231a4ec">TKalmanFilter::m_linearKalman</a></div><div class="ttdeci">cv::KalmanFilter m_linearKalman</div><div class="ttdef"><b>Definition:</b> Kalman.h:34</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_adc9ff4a3662eb459857fb337e188869a"><div class="ttname"><a href="class_t_kalman_filter.html#adc9ff4a3662eb459857fb337e188869a">TKalmanFilter::GetPtStateAndResCov</a></div><div class="ttdeci">void GetPtStateAndResCov(cv::Mat &amp;covar, cv::Mat &amp;state) const</div><div class="ttdef"><b>Definition:</b> Kalman.cpp:959</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_ae31fbddf137395ed860115c1d0bd3ff5"><div class="ttname"><a href="class_t_kalman_filter.html#ae31fbddf137395ed860115c1d0bd3ff5">TKalmanFilter::m_deltaStep</a></div><div class="ttdeci">track_t m_deltaStep</div><div class="ttdef"><b>Definition:</b> Kalman.h:55</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_aed4818c7aac455928ef02dd03f8bfe56"><div class="ttname"><a href="class_t_kalman_filter.html#aed4818c7aac455928ef02dd03f8bfe56">TKalmanFilter::m_lastRectResult</a></div><div class="ttdeci">cv::Rect_&lt; track_t &gt; m_lastRectResult</div><div class="ttdef"><b>Definition:</b> Kalman.h:47</div></div>
+<div class="ttc" id="aclass_t_kalman_filter_html_af112feed15a064055987a1faedf9673d"><div class="ttname"><a href="class_t_kalman_filter.html#af112feed15a064055987a1faedf9673d">TKalmanFilter::GetRectPrediction</a></div><div class="ttdeci">cv::Rect GetRectPrediction()</div><div class="ttdoc">TKalmanFilter::GetRectPrediction</div><div class="ttdef"><b>Definition:</b> Kalman.cpp:726</div></div>
+<div class="ttc" id="adefines_8h_html"><div class="ttname"><a href="defines_8h.html">defines.h</a></div></div>
+<div class="ttc" id="adefines_8h_html_a7ce9c8817b42ab418e61756f579549ab"><div class="ttname"><a href="defines_8h.html#a7ce9c8817b42ab418e61756f579549ab">track_t</a></div><div class="ttdeci">float track_t</div><div class="ttdef"><b>Definition:</b> defines.h:12</div></div>
+<div class="ttc" id="adefines_8h_html_a8c42696da8f098b91374a8e8bb84b430"><div class="ttname"><a href="defines_8h.html#a8c42696da8f098b91374a8e8bb84b430">Point_t</a></div><div class="ttdeci">cv::Point_&lt; track_t &gt; Point_t</div><div class="ttdef"><b>Definition:</b> defines.h:13</div></div>
+<div class="ttc" id="anamespacetracking_html_a83f2c4d58ea2737f7d6296dce3eb722a"><div class="ttname"><a href="namespacetracking.html#a83f2c4d58ea2737f7d6296dce3eb722a">tracking::KalmanType</a></div><div class="ttdeci">KalmanType</div><div class="ttdoc">The KalmanType enum</div><div class="ttdef"><b>Definition:</b> defines.h:201</div></div>
+<div class="ttc" id="anamespacetracking_html_a83f2c4d58ea2737f7d6296dce3eb722aa889eca583e371386c92e05814797a885"><div class="ttname"><a href="namespacetracking.html#a83f2c4d58ea2737f7d6296dce3eb722aa889eca583e371386c92e05814797a885">tracking::KalmanLinear</a></div><div class="ttdeci">@ KalmanLinear</div><div class="ttdef"><b>Definition:</b> defines.h:202</div></div>
+<div class="ttc" id="arings_8cpp_html_af69bbacaaf68a115b351c5d1e29c3cc8"><div class="ttname"><a href="rings_8cpp.html#af69bbacaaf68a115b351c5d1e29c3cc8">pt</a></div><div class="ttdeci">node_map&lt; GPoint &gt; pt</div><div class="ttdef"><b>Definition:</b> rings.cpp:39</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>

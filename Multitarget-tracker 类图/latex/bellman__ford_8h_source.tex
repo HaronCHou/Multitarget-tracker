@@ -1,0 +1,85 @@
+\hypertarget{bellman__ford_8h_source}{}\doxysection{bellman\+\_\+ford.\+h}
+\label{bellman__ford_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/bellman\_ford.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/bellman\_ford.h}}
+\mbox{\hyperlink{bellman__ford_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* This software is distributed under the GNU Lesser General Public License */}}
+\DoxyCodeLine{2 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{//   bellman\_ford.h}}
+\DoxyCodeLine{5 \textcolor{comment}{//}}
+\DoxyCodeLine{6 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{// \$Id: bellman\_ford.h,v 1.5 2003/03/24 15:58:54 raitner Exp \$ }}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#ifndef GTL\_BELLMAN\_FORD\_H}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define GTL\_BELLMAN\_FORD\_H}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{_g_t_l_8h}{GTL/GTL.h}}>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{algorithm_8h}{GTL/algorithm.h}}>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{node__map_8h}{GTL/node\_map.h}}>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{edge__map_8h}{GTL/edge\_map.h}}>}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \mbox{\hyperlink{_g_t_l_8h_a2d9f24096ac60918452dd51f32b64aa9}{\_\_GTL\_BEGIN\_NAMESPACE}}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 }
+\DoxyCodeLine{33 \textcolor{keyword}{class }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{classbellman__ford}{bellman\_ford}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classalgorithm}{algorithm}} }
+\DoxyCodeLine{34 \{}
+\DoxyCodeLine{35 \textcolor{keyword}{public}:}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{40     \mbox{\hyperlink{classbellman__ford}{bellman\_ford}}();}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{45     \textcolor{keyword}{virtual} \mbox{\hyperlink{classbellman__ford}{\string~bellman\_ford}}();}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{58     \textcolor{keywordtype}{int} \mbox{\hyperlink{classalgorithm_a528100c0e54d446fab1e329a53935364}{check}} (GTL::graph\& G);}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60     \textcolor{keywordtype}{int} \mbox{\hyperlink{classalgorithm_a4baee48c513c5802975743152c33f34c}{run}} (GTL::graph\& G);}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{68     \textcolor{keywordtype}{void} \mbox{\hyperlink{classalgorithm_a21aba63d066ae7897de6ca7d8425c408}{reset}} ();}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{79     \textcolor{keywordtype}{void} \mbox{\hyperlink{classbellman__ford_a98cad540fd2d211c1ba44bb6fa8416f3}{source}} (\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n) \{s = n;\}    }
+\DoxyCodeLine{80 }
+\DoxyCodeLine{86     \mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classbellman__ford_a86e3fe7fe71d7569cc73e9e531d58539}{source}} ()\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} s;\}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{95     \textcolor{keywordtype}{void} \mbox{\hyperlink{classbellman__ford_a9e276cc9f30c2e608d320db4a08b2a74}{weights}} (\textcolor{keyword}{const} \mbox{\hyperlink{classedge__map}{edge\_map<double>}}\& weight) \{\mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}} = weight; vars\_set = \textcolor{keyword}{true}; \}}
+\DoxyCodeLine{96     }
+\DoxyCodeLine{107     \textcolor{keywordtype}{void} store\_preds (\textcolor{keywordtype}{bool} \mbox{\hyperlink{classset}{set}});}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{117     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classbellman__ford_a2ded0950bfaca6c3ee65a3617c1ccaa8}{store\_preds}} ()\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} preds != 0;\}}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{124     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classbellman__ford_a93f7c34ec9662690230ca7a9c31933cd}{reached}} (\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n)\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} !inf[n];\}}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{131     \textcolor{keywordtype}{double} \mbox{\hyperlink{classbellman__ford_a881e5b021e69aced997185208438f910}{distance}} (\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n)\textcolor{keyword}{ const }\{\textcolor{keywordflow}{return} \mbox{\hyperlink{namespacemkdoc_a85ae95dfe8536ee978dcacf1f5dcfe00}{d}}[n];\}}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{147     \mbox{\hyperlink{classedge}{edge}} \mbox{\hyperlink{classbellman__ford_a39f93b0b1e427cf26059fa6141c6f61c}{predecessor\_edge}} (\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n)\textcolor{keyword}{ const}}
+\DoxyCodeLine{148 \textcolor{keyword}{    }\{assert (preds); \textcolor{keywordflow}{return} (*preds)[n];\}}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{164     \mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classbellman__ford_a403e286ec8cbe3c30a7a729c5041155e}{predecessor\_node}} (\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n)\textcolor{keyword}{ const}}
+\DoxyCodeLine{165 \textcolor{keyword}{    }\{\mbox{\hyperlink{classedge}{edge}} e = predecessor\_edge(n); \textcolor{keywordflow}{return} e == \mbox{\hyperlink{classedge}{edge}}() ? \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{node}}() : e.\mbox{\hyperlink{classedge_a54b90cc414811028207edc18bbde7864}{opposite}}(n); \}}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{171     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classbellman__ford_af9cd8be38bb1504089997581d9aa4f64}{negative\_cycle}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{172 \textcolor{keyword}{    }\{\textcolor{keywordflow}{return} cycle;\}}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174 \textcolor{keyword}{private}:}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{176     }
+\DoxyCodeLine{182     \textcolor{keywordtype}{void} relax (\textcolor{keyword}{const} \mbox{\hyperlink{classedge}{edge}}\& e, \textcolor{keywordtype}{bool} dir);}
+\DoxyCodeLine{183 }
+\DoxyCodeLine{189     \mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classbellman__ford_a2d6ce715e65b26822c622b322811c3b0}{s}};}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{196     \mbox{\hyperlink{classedge__map}{edge\_map<double>}} \mbox{\hyperlink{classbellman__ford_ae05c9a40c2257f1e1f333b6a4f6fa656}{w}};}
+\DoxyCodeLine{197     }
+\DoxyCodeLine{203     \textcolor{keywordtype}{bool} vars\_set = \textcolor{keyword}{false}; }
+\DoxyCodeLine{204 }
+\DoxyCodeLine{210     \mbox{\hyperlink{classnode__map}{node\_map<double>}} \mbox{\hyperlink{classbellman__ford_a0e3b99854a3f998f8ef6cde6fb902040}{d}}; }
+\DoxyCodeLine{211 }
+\DoxyCodeLine{217     \mbox{\hyperlink{classnode__map}{node\_map<bool>}} \mbox{\hyperlink{classbellman__ford_a5c69a3ac59077a7a7e4b0484e5f85a32}{inf}};}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{224     \mbox{\hyperlink{classnode__map}{node\_map<edge>}}* \mbox{\hyperlink{classbellman__ford_a1ce37529c697ec5b89e8dc09204e4f59}{preds}};}
+\DoxyCodeLine{225 }
+\DoxyCodeLine{232     \textcolor{keywordtype}{bool} cycle = 0; }
+\DoxyCodeLine{233 \};}
+\DoxyCodeLine{234 }
+\DoxyCodeLine{235 \mbox{\hyperlink{_g_t_l_8h_a46af2b3ec266ac2f9d36fa7222358017}{\_\_GTL\_END\_NAMESPACE}}}
+\DoxyCodeLine{236 }
+\DoxyCodeLine{237 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GTL\_BELLMAN\_FORD\_H}}
+
+\end{DoxyCode}

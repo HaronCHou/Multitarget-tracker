@@ -1,0 +1,308 @@
+\hypertarget{yolo__layer_8c}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/yolo\+\_\+layer.c 文件参考}
+\label{yolo__layer_8c}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/yolo\_layer.c@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/yolo\_layer.c}}
+{\ttfamily \#include \char`\"{}yolo\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}activations.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}blas.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}box.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dark\+\_\+cuda.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+yolo\+\_\+layer.\+c 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{yolo__layer_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structtrain__yolo__args}{train\+\_\+yolo\+\_\+args}}
+\end{DoxyCompactItemize}
+\doxysubsection*{类型定义}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structtrain__yolo__args}{train\+\_\+yolo\+\_\+args}} \mbox{\hyperlink{yolo__layer_8c_a90e2921ae34303199a32faa73e9b1ed7}{train\+\_\+yolo\+\_\+args}}
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structlayer}{layer}} \mbox{\hyperlink{yolo__layer_8c_ab4d1ca33e13991c17af095d51b0ecfd7}{make\+\_\+yolo\+\_\+layer}} (int batch, int w, int h, int n, int total, int $\ast$mask, int classes, int max\+\_\+boxes)
+\item 
+void \mbox{\hyperlink{yolo__layer_8c_ac72f25cf986ba9f2caafeb03f65beb91}{resize\+\_\+yolo\+\_\+layer}} (\mbox{\hyperlink{structlayer}{layer}} $\ast$l, int w, int h)
+\item 
+\mbox{\hyperlink{structbox}{box}} \mbox{\hyperlink{yolo__layer_8c_a8a46be5d78cab0867e8a72451501f566}{get\+\_\+yolo\+\_\+box}} (float $\ast$\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, float $\ast$biases, int n, int index, int i, int j, int lw, int lh, int w, int h, int stride, int new\+\_\+coords)
+\item 
+static float \mbox{\hyperlink{yolo__layer_8c_a70ce2d14763e94b87557c0c9193cc0be}{fix\+\_\+nan\+\_\+inf}} (float val)
+\item 
+static float \mbox{\hyperlink{yolo__layer_8c_ab87f45e4f9f97a74104f3382b00c4156}{clip\+\_\+value}} (float val, const float max\+\_\+val)
+\item 
+\mbox{\hyperlink{structious}{ious}} \mbox{\hyperlink{yolo__layer_8c_af4298b4f7e5c1247de975b77e99f0ed8}{delta\+\_\+yolo\+\_\+box}} (\mbox{\hyperlink{structbox}{box}} truth, float $\ast$\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, float $\ast$biases, int n, int index, int i, int j, int lw, int lh, int w, int h, float $\ast$delta, float scale, int stride, float iou\+\_\+normalizer, \mbox{\hyperlink{darknet_8h_aab757338e5429453acc81f7bc21a3e92}{IOU\+\_\+\+LOSS}} iou\+\_\+loss, int accumulate, float max\+\_\+delta, int $\ast$rewritten\+\_\+bbox, int new\+\_\+coords)
+\item 
+void \mbox{\hyperlink{yolo__layer_8c_a0523507010c886fe38a835db92c27d7e}{averages\+\_\+yolo\+\_\+deltas}} (int class\+\_\+index, int box\+\_\+index, int stride, int classes, float $\ast$delta)
+\item 
+void \mbox{\hyperlink{yolo__layer_8c_a96d0ee96faeba06624b7dd8063535938}{delta\+\_\+yolo\+\_\+class}} (float $\ast$output, float $\ast$delta, int index, int class\+\_\+id, int classes, int stride, float $\ast$avg\+\_\+cat, int focal\+\_\+loss, float label\+\_\+smooth\+\_\+eps, float $\ast$classes\+\_\+multipliers, float cls\+\_\+normalizer)
+\item 
+int \mbox{\hyperlink{yolo__layer_8c_a5720632b53c36a1b983b46fbf518d148}{compare\+\_\+yolo\+\_\+class}} (float $\ast$output, int classes, int class\+\_\+index, int stride, float objectness, int class\+\_\+id, float conf\+\_\+thresh)
+\item 
+static int \mbox{\hyperlink{yolo__layer_8c_a698816f78a55ee099300248673408599}{entry\+\_\+index}} (\mbox{\hyperlink{structlayer}{layer}} l, int batch, int location, int entry)
+\item 
+void $\ast$ \mbox{\hyperlink{yolo__layer_8c_afecaf117e964644d48bbf321b376d486}{process\+\_\+batch}} (void $\ast$ptr)
+\item 
+void \mbox{\hyperlink{yolo__layer_8c_a4975180537eef39734117ddcee07495e}{forward\+\_\+yolo\+\_\+layer}} (const \mbox{\hyperlink{structlayer}{layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{yolo__layer_8c_a284deb06880d484a4b08ed92506a9dac}{backward\+\_\+yolo\+\_\+layer}} (const \mbox{\hyperlink{structlayer}{layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{yolo__layer_8c_a98c00686962251bc3076344e33e29465}{correct\+\_\+yolo\+\_\+boxes}} (\mbox{\hyperlink{structdetection}{detection}} $\ast$dets, int n, int w, int h, int netw, int neth, int relative, int letter)
+\item 
+int \mbox{\hyperlink{yolo__layer_8c_acc10677be24b962862599711817a1a2a}{yolo\+\_\+num\+\_\+detections}} (\mbox{\hyperlink{structlayer}{layer}} l, float thresh)
+\item 
+int \mbox{\hyperlink{yolo__layer_8c_ad4e93484eae7fc9ca72890fc2617966b}{yolo\+\_\+num\+\_\+detections\+\_\+batch}} (\mbox{\hyperlink{structlayer}{layer}} l, float thresh, int batch)
+\item 
+void \mbox{\hyperlink{yolo__layer_8c_ac3812bc1cfb39e98e39b34c7fdc6ad47}{avg\+\_\+flipped\+\_\+yolo}} (\mbox{\hyperlink{structlayer}{layer}} l)
+\item 
+int \mbox{\hyperlink{yolo__layer_8c_aca697f842b5ce5d41c1fb3aa28f21c9f}{get\+\_\+yolo\+\_\+detections}} (\mbox{\hyperlink{structlayer}{layer}} l, int w, int h, int netw, int neth, float thresh, int $\ast$map, int relative, \mbox{\hyperlink{structdetection}{detection}} $\ast$dets, int letter)
+\item 
+int \mbox{\hyperlink{yolo__layer_8c_a10d3d00cb6b1fcc01a051b46a9d1b412}{get\+\_\+yolo\+\_\+detections\+\_\+batch}} (\mbox{\hyperlink{structlayer}{layer}} l, int w, int h, int netw, int neth, float thresh, int $\ast$map, int relative, \mbox{\hyperlink{structdetection}{detection}} $\ast$dets, int letter, int batch)
+\end{DoxyCompactItemize}
+\doxysubsection*{变量}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{yolo__layer_8c_a5522024919a839fff7d996d9641d2a68}{check\+\_\+mistakes}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{类型定义说明}
+\mbox{\Hypertarget{yolo__layer_8c_a90e2921ae34303199a32faa73e9b1ed7}\label{yolo__layer_8c_a90e2921ae34303199a32faa73e9b1ed7}} 
+\index{yolo\_layer.c@{yolo\_layer.c}!train\_yolo\_args@{train\_yolo\_args}}
+\index{train\_yolo\_args@{train\_yolo\_args}!yolo\_layer.c@{yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{train\_yolo\_args}{train\_yolo\_args}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structtrain__yolo__args}{train\+\_\+yolo\+\_\+args}} \mbox{\hyperlink{structtrain__yolo__args}{train\+\_\+yolo\+\_\+args}}}
+
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{yolo__layer_8c_a0523507010c886fe38a835db92c27d7e}\label{yolo__layer_8c_a0523507010c886fe38a835db92c27d7e}} 
+\index{yolo\_layer.c@{yolo\_layer.c}!averages\_yolo\_deltas@{averages\_yolo\_deltas}}
+\index{averages\_yolo\_deltas@{averages\_yolo\_deltas}!yolo\_layer.c@{yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{averages\_yolo\_deltas()}{averages\_yolo\_deltas()}}
+{\footnotesize\ttfamily void averages\+\_\+yolo\+\_\+deltas (\begin{DoxyParamCaption}\item[{int}]{class\+\_\+index,  }\item[{int}]{box\+\_\+index,  }\item[{int}]{stride,  }\item[{int}]{classes,  }\item[{float $\ast$}]{delta }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{yolo__layer_8c_ac3812bc1cfb39e98e39b34c7fdc6ad47}\label{yolo__layer_8c_ac3812bc1cfb39e98e39b34c7fdc6ad47}} 
+\index{yolo\_layer.c@{yolo\_layer.c}!avg\_flipped\_yolo@{avg\_flipped\_yolo}}
+\index{avg\_flipped\_yolo@{avg\_flipped\_yolo}!yolo\_layer.c@{yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{avg\_flipped\_yolo()}{avg\_flipped\_yolo()}}
+{\footnotesize\ttfamily void avg\+\_\+flipped\+\_\+yolo (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{l }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{yolo__layer_8c_a284deb06880d484a4b08ed92506a9dac}\label{yolo__layer_8c_a284deb06880d484a4b08ed92506a9dac}} 
+\index{yolo\_layer.c@{yolo\_layer.c}!backward\_yolo\_layer@{backward\_yolo\_layer}}
+\index{backward\_yolo\_layer@{backward\_yolo\_layer}!yolo\_layer.c@{yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{backward\_yolo\_layer()}{backward\_yolo\_layer()}}
+{\footnotesize\ttfamily void backward\+\_\+yolo\+\_\+layer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=282pt]{yolo__layer_8c_a284deb06880d484a4b08ed92506a9dac_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{yolo__layer_8c_ab87f45e4f9f97a74104f3382b00c4156}\label{yolo__layer_8c_ab87f45e4f9f97a74104f3382b00c4156}} 
+\index{yolo\_layer.c@{yolo\_layer.c}!clip\_value@{clip\_value}}
+\index{clip\_value@{clip\_value}!yolo\_layer.c@{yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{clip\_value()}{clip\_value()}}
+{\footnotesize\ttfamily static float clip\+\_\+value (\begin{DoxyParamCaption}\item[{float}]{val,  }\item[{const float}]{max\+\_\+val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\Hypertarget{yolo__layer_8c_a5720632b53c36a1b983b46fbf518d148}\label{yolo__layer_8c_a5720632b53c36a1b983b46fbf518d148}} 
+\index{yolo\_layer.c@{yolo\_layer.c}!compare\_yolo\_class@{compare\_yolo\_class}}
+\index{compare\_yolo\_class@{compare\_yolo\_class}!yolo\_layer.c@{yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{compare\_yolo\_class()}{compare\_yolo\_class()}}
+{\footnotesize\ttfamily int compare\+\_\+yolo\+\_\+class (\begin{DoxyParamCaption}\item[{float $\ast$}]{output,  }\item[{int}]{classes,  }\item[{int}]{class\+\_\+index,  }\item[{int}]{stride,  }\item[{float}]{objectness,  }\item[{int}]{class\+\_\+id,  }\item[{float}]{conf\+\_\+thresh }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{yolo__layer_8c_a98c00686962251bc3076344e33e29465}\label{yolo__layer_8c_a98c00686962251bc3076344e33e29465}} 
+\index{yolo\_layer.c@{yolo\_layer.c}!correct\_yolo\_boxes@{correct\_yolo\_boxes}}
+\index{correct\_yolo\_boxes@{correct\_yolo\_boxes}!yolo\_layer.c@{yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{correct\_yolo\_boxes()}{correct\_yolo\_boxes()}}
+{\footnotesize\ttfamily void correct\+\_\+yolo\+\_\+boxes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{dets,  }\item[{int}]{n,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{int}]{netw,  }\item[{int}]{neth,  }\item[{int}]{relative,  }\item[{int}]{letter }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=279pt]{yolo__layer_8c_a98c00686962251bc3076344e33e29465_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{yolo__layer_8c_af4298b4f7e5c1247de975b77e99f0ed8}\label{yolo__layer_8c_af4298b4f7e5c1247de975b77e99f0ed8}} 
+\index{yolo\_layer.c@{yolo\_layer.c}!delta\_yolo\_box@{delta\_yolo\_box}}
+\index{delta\_yolo\_box@{delta\_yolo\_box}!yolo\_layer.c@{yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{delta\_yolo\_box()}{delta\_yolo\_box()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structious}{ious}} delta\+\_\+yolo\+\_\+box (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structbox}{box}}}]{truth,  }\item[{float $\ast$}]{x,  }\item[{float $\ast$}]{biases,  }\item[{int}]{n,  }\item[{int}]{index,  }\item[{int}]{i,  }\item[{int}]{j,  }\item[{int}]{lw,  }\item[{int}]{lh,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{float $\ast$}]{delta,  }\item[{float}]{scale,  }\item[{int}]{stride,  }\item[{float}]{iou\+\_\+normalizer,  }\item[{\mbox{\hyperlink{darknet_8h_aab757338e5429453acc81f7bc21a3e92}{IOU\+\_\+\+LOSS}}}]{iou\+\_\+loss,  }\item[{int}]{accumulate,  }\item[{float}]{max\+\_\+delta,  }\item[{int $\ast$}]{rewritten\+\_\+bbox,  }\item[{int}]{new\+\_\+coords }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{yolo__layer_8c_af4298b4f7e5c1247de975b77e99f0ed8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{yolo__layer_8c_a96d0ee96faeba06624b7dd8063535938}\label{yolo__layer_8c_a96d0ee96faeba06624b7dd8063535938}} 
+\index{yolo\_layer.c@{yolo\_layer.c}!delta\_yolo\_class@{delta\_yolo\_class}}
+\index{delta\_yolo\_class@{delta\_yolo\_class}!yolo\_layer.c@{yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{delta\_yolo\_class()}{delta\_yolo\_class()}}
+{\footnotesize\ttfamily void delta\+\_\+yolo\+\_\+class (\begin{DoxyParamCaption}\item[{float $\ast$}]{output,  }\item[{float $\ast$}]{delta,  }\item[{int}]{index,  }\item[{int}]{class\+\_\+id,  }\item[{int}]{classes,  }\item[{int}]{stride,  }\item[{float $\ast$}]{avg\+\_\+cat,  }\item[{int}]{focal\+\_\+loss,  }\item[{float}]{label\+\_\+smooth\+\_\+eps,  }\item[{float $\ast$}]{classes\+\_\+multipliers,  }\item[{float}]{cls\+\_\+normalizer }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{yolo__layer_8c_a698816f78a55ee099300248673408599}\label{yolo__layer_8c_a698816f78a55ee099300248673408599}} 
+\index{yolo\_layer.c@{yolo\_layer.c}!entry\_index@{entry\_index}}
+\index{entry\_index@{entry\_index}!yolo\_layer.c@{yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{entry\_index()}{entry\_index()}}
+{\footnotesize\ttfamily static int entry\+\_\+index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{int}]{batch,  }\item[{int}]{location,  }\item[{int}]{entry }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{yolo__layer_8c_a70ce2d14763e94b87557c0c9193cc0be}\label{yolo__layer_8c_a70ce2d14763e94b87557c0c9193cc0be}} 
+\index{yolo\_layer.c@{yolo\_layer.c}!fix\_nan\_inf@{fix\_nan\_inf}}
+\index{fix\_nan\_inf@{fix\_nan\_inf}!yolo\_layer.c@{yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{fix\_nan\_inf()}{fix\_nan\_inf()}}
+{\footnotesize\ttfamily static float fix\+\_\+nan\+\_\+inf (\begin{DoxyParamCaption}\item[{float}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\Hypertarget{yolo__layer_8c_a4975180537eef39734117ddcee07495e}\label{yolo__layer_8c_a4975180537eef39734117ddcee07495e}} 
+\index{yolo\_layer.c@{yolo\_layer.c}!forward\_yolo\_layer@{forward\_yolo\_layer}}
+\index{forward\_yolo\_layer@{forward\_yolo\_layer}!yolo\_layer.c@{yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{forward\_yolo\_layer()}{forward\_yolo\_layer()}}
+{\footnotesize\ttfamily void forward\+\_\+yolo\+\_\+layer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{yolo__layer_8c_a4975180537eef39734117ddcee07495e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{yolo__layer_8c_a8a46be5d78cab0867e8a72451501f566}\label{yolo__layer_8c_a8a46be5d78cab0867e8a72451501f566}} 
+\index{yolo\_layer.c@{yolo\_layer.c}!get\_yolo\_box@{get\_yolo\_box}}
+\index{get\_yolo\_box@{get\_yolo\_box}!yolo\_layer.c@{yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{get\_yolo\_box()}{get\_yolo\_box()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structbox}{box}} get\+\_\+yolo\+\_\+box (\begin{DoxyParamCaption}\item[{float $\ast$}]{x,  }\item[{float $\ast$}]{biases,  }\item[{int}]{n,  }\item[{int}]{index,  }\item[{int}]{i,  }\item[{int}]{j,  }\item[{int}]{lw,  }\item[{int}]{lh,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{int}]{stride,  }\item[{int}]{new\+\_\+coords }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=252pt]{yolo__layer_8c_a8a46be5d78cab0867e8a72451501f566_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{yolo__layer_8c_aca697f842b5ce5d41c1fb3aa28f21c9f}\label{yolo__layer_8c_aca697f842b5ce5d41c1fb3aa28f21c9f}} 
+\index{yolo\_layer.c@{yolo\_layer.c}!get\_yolo\_detections@{get\_yolo\_detections}}
+\index{get\_yolo\_detections@{get\_yolo\_detections}!yolo\_layer.c@{yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{get\_yolo\_detections()}{get\_yolo\_detections()}}
+{\footnotesize\ttfamily int get\+\_\+yolo\+\_\+detections (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{int}]{netw,  }\item[{int}]{neth,  }\item[{float}]{thresh,  }\item[{int $\ast$}]{map,  }\item[{int}]{relative,  }\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{dets,  }\item[{int}]{letter }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{yolo__layer_8c_aca697f842b5ce5d41c1fb3aa28f21c9f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{yolo__layer_8c_a10d3d00cb6b1fcc01a051b46a9d1b412}\label{yolo__layer_8c_a10d3d00cb6b1fcc01a051b46a9d1b412}} 
+\index{yolo\_layer.c@{yolo\_layer.c}!get\_yolo\_detections\_batch@{get\_yolo\_detections\_batch}}
+\index{get\_yolo\_detections\_batch@{get\_yolo\_detections\_batch}!yolo\_layer.c@{yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{get\_yolo\_detections\_batch()}{get\_yolo\_detections\_batch()}}
+{\footnotesize\ttfamily int get\+\_\+yolo\+\_\+detections\+\_\+batch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{int}]{netw,  }\item[{int}]{neth,  }\item[{float}]{thresh,  }\item[{int $\ast$}]{map,  }\item[{int}]{relative,  }\item[{\mbox{\hyperlink{structdetection}{detection}} $\ast$}]{dets,  }\item[{int}]{letter,  }\item[{int}]{batch }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{yolo__layer_8c_a10d3d00cb6b1fcc01a051b46a9d1b412_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{yolo__layer_8c_ab4d1ca33e13991c17af095d51b0ecfd7}\label{yolo__layer_8c_ab4d1ca33e13991c17af095d51b0ecfd7}} 
+\index{yolo\_layer.c@{yolo\_layer.c}!make\_yolo\_layer@{make\_yolo\_layer}}
+\index{make\_yolo\_layer@{make\_yolo\_layer}!yolo\_layer.c@{yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{make\_yolo\_layer()}{make\_yolo\_layer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlayer}{layer}} make\+\_\+yolo\+\_\+layer (\begin{DoxyParamCaption}\item[{int}]{batch,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{int}]{n,  }\item[{int}]{total,  }\item[{int $\ast$}]{mask,  }\item[{int}]{classes,  }\item[{int}]{max\+\_\+boxes }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{yolo__layer_8c_ab4d1ca33e13991c17af095d51b0ecfd7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{yolo__layer_8c_afecaf117e964644d48bbf321b376d486}\label{yolo__layer_8c_afecaf117e964644d48bbf321b376d486}} 
+\index{yolo\_layer.c@{yolo\_layer.c}!process\_batch@{process\_batch}}
+\index{process\_batch@{process\_batch}!yolo\_layer.c@{yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{process\_batch()}{process\_batch()}}
+{\footnotesize\ttfamily void $\ast$ process\+\_\+batch (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{yolo__layer_8c_afecaf117e964644d48bbf321b376d486_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{yolo__layer_8c_ac72f25cf986ba9f2caafeb03f65beb91}\label{yolo__layer_8c_ac72f25cf986ba9f2caafeb03f65beb91}} 
+\index{yolo\_layer.c@{yolo\_layer.c}!resize\_yolo\_layer@{resize\_yolo\_layer}}
+\index{resize\_yolo\_layer@{resize\_yolo\_layer}!yolo\_layer.c@{yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{resize\_yolo\_layer()}{resize\_yolo\_layer()}}
+{\footnotesize\ttfamily void resize\+\_\+yolo\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}} $\ast$}]{l,  }\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=270pt]{yolo__layer_8c_ac72f25cf986ba9f2caafeb03f65beb91_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{yolo__layer_8c_acc10677be24b962862599711817a1a2a}\label{yolo__layer_8c_acc10677be24b962862599711817a1a2a}} 
+\index{yolo\_layer.c@{yolo\_layer.c}!yolo\_num\_detections@{yolo\_num\_detections}}
+\index{yolo\_num\_detections@{yolo\_num\_detections}!yolo\_layer.c@{yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{yolo\_num\_detections()}{yolo\_num\_detections()}}
+{\footnotesize\ttfamily int yolo\+\_\+num\+\_\+detections (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{float}]{thresh }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=292pt]{yolo__layer_8c_acc10677be24b962862599711817a1a2a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{yolo__layer_8c_ad4e93484eae7fc9ca72890fc2617966b}\label{yolo__layer_8c_ad4e93484eae7fc9ca72890fc2617966b}} 
+\index{yolo\_layer.c@{yolo\_layer.c}!yolo\_num\_detections\_batch@{yolo\_num\_detections\_batch}}
+\index{yolo\_num\_detections\_batch@{yolo\_num\_detections\_batch}!yolo\_layer.c@{yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{yolo\_num\_detections\_batch()}{yolo\_num\_detections\_batch()}}
+{\footnotesize\ttfamily int yolo\+\_\+num\+\_\+detections\+\_\+batch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structlayer}{layer}}}]{l,  }\item[{float}]{thresh,  }\item[{int}]{batch }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=292pt]{yolo__layer_8c_ad4e93484eae7fc9ca72890fc2617966b_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{变量说明}
+\mbox{\Hypertarget{yolo__layer_8c_a5522024919a839fff7d996d9641d2a68}\label{yolo__layer_8c_a5522024919a839fff7d996d9641d2a68}} 
+\index{yolo\_layer.c@{yolo\_layer.c}!check\_mistakes@{check\_mistakes}}
+\index{check\_mistakes@{check\_mistakes}!yolo\_layer.c@{yolo\_layer.c}}
+\doxysubsubsection{\texorpdfstring{check\_mistakes}{check\_mistakes}}
+{\footnotesize\ttfamily int check\+\_\+mistakes\hspace{0.3cm}{\ttfamily [extern]}}
+

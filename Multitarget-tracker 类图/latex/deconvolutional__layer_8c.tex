@@ -1,0 +1,177 @@
+\hypertarget{deconvolutional__layer_8c}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/deconvolutional\+\_\+layer.c 文件参考}
+\label{deconvolutional__layer_8c}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/deconvolutional\_layer.c@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/deconvolutional\_layer.c}}
+{\ttfamily \#include \char`\"{}deconvolutional\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}convolutional\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}im2col.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}col2im.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}blas.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gemm.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+deconvolutional\+\_\+layer.\+c 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{deconvolutional__layer_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{deconvolutional__layer_8c_aafe531750af42cfd44d0b13cca8f2c0a}{deconvolutional\+\_\+out\+\_\+height}} (\mbox{\hyperlink{deconvolutional__layer_8h_a3104e42e8f435b8f02bcdb0de9bcf5db}{deconvolutional\+\_\+layer}} l)
+\item 
+int \mbox{\hyperlink{deconvolutional__layer_8c_a6dfc19090345826d92b8d13d8d68b1a8}{deconvolutional\+\_\+out\+\_\+width}} (\mbox{\hyperlink{deconvolutional__layer_8h_a3104e42e8f435b8f02bcdb0de9bcf5db}{deconvolutional\+\_\+layer}} l)
+\item 
+int \mbox{\hyperlink{deconvolutional__layer_8c_aa7aa253c8c1a6fdd0c49a147b6ffd5d8}{deconvolutional\+\_\+out\+\_\+size}} (\mbox{\hyperlink{deconvolutional__layer_8h_a3104e42e8f435b8f02bcdb0de9bcf5db}{deconvolutional\+\_\+layer}} l)
+\item 
+\mbox{\hyperlink{structimage}{image}} \mbox{\hyperlink{deconvolutional__layer_8c_a3ab85fcc7cf7440f4e44e5ab3babbe1f}{get\+\_\+deconvolutional\+\_\+image}} (\mbox{\hyperlink{deconvolutional__layer_8h_a3104e42e8f435b8f02bcdb0de9bcf5db}{deconvolutional\+\_\+layer}} l)
+\item 
+\mbox{\hyperlink{structimage}{image}} \mbox{\hyperlink{deconvolutional__layer_8c_a74f36b796d12f562c1eb256cdc0f7125}{get\+\_\+deconvolutional\+\_\+delta}} (\mbox{\hyperlink{deconvolutional__layer_8h_a3104e42e8f435b8f02bcdb0de9bcf5db}{deconvolutional\+\_\+layer}} l)
+\item 
+\mbox{\hyperlink{deconvolutional__layer_8h_a3104e42e8f435b8f02bcdb0de9bcf5db}{deconvolutional\+\_\+layer}} \mbox{\hyperlink{deconvolutional__layer_8c_a0aad244aa20ad39aedb04922acb5180b}{make\+\_\+deconvolutional\+\_\+layer}} (int batch, int h, int w, int c, int n, int size, int stride, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032}{ACTIVATION}} activation)
+\item 
+void \mbox{\hyperlink{deconvolutional__layer_8c_a5564843170b6a1fe89a7045b949e4061}{resize\+\_\+deconvolutional\+\_\+layer}} (\mbox{\hyperlink{deconvolutional__layer_8h_a3104e42e8f435b8f02bcdb0de9bcf5db}{deconvolutional\+\_\+layer}} $\ast$l, int h, int w)
+\item 
+void \mbox{\hyperlink{deconvolutional__layer_8c_a90b94f3cead6e1bcbe950122eb3f7d28}{forward\+\_\+deconvolutional\+\_\+layer}} (const \mbox{\hyperlink{deconvolutional__layer_8h_a3104e42e8f435b8f02bcdb0de9bcf5db}{deconvolutional\+\_\+layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{deconvolutional__layer_8c_a67693e3cb92f66cbeac99be48e471de9}{backward\+\_\+deconvolutional\+\_\+layer}} (\mbox{\hyperlink{deconvolutional__layer_8h_a3104e42e8f435b8f02bcdb0de9bcf5db}{deconvolutional\+\_\+layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{deconvolutional__layer_8c_a93ac8997a678df6c9ef960b09f00ed62}{update\+\_\+deconvolutional\+\_\+layer}} (\mbox{\hyperlink{deconvolutional__layer_8h_a3104e42e8f435b8f02bcdb0de9bcf5db}{deconvolutional\+\_\+layer}} l, int skip, float learning\+\_\+rate, float momentum, float decay)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{deconvolutional__layer_8c_a67693e3cb92f66cbeac99be48e471de9}\label{deconvolutional__layer_8c_a67693e3cb92f66cbeac99be48e471de9}} 
+\index{deconvolutional\_layer.c@{deconvolutional\_layer.c}!backward\_deconvolutional\_layer@{backward\_deconvolutional\_layer}}
+\index{backward\_deconvolutional\_layer@{backward\_deconvolutional\_layer}!deconvolutional\_layer.c@{deconvolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{backward\_deconvolutional\_layer()}{backward\_deconvolutional\_layer()}}
+{\footnotesize\ttfamily void backward\+\_\+deconvolutional\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{deconvolutional__layer_8h_a3104e42e8f435b8f02bcdb0de9bcf5db}{deconvolutional\+\_\+layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{deconvolutional__layer_8c_a67693e3cb92f66cbeac99be48e471de9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{deconvolutional__layer_8c_aafe531750af42cfd44d0b13cca8f2c0a}\label{deconvolutional__layer_8c_aafe531750af42cfd44d0b13cca8f2c0a}} 
+\index{deconvolutional\_layer.c@{deconvolutional\_layer.c}!deconvolutional\_out\_height@{deconvolutional\_out\_height}}
+\index{deconvolutional\_out\_height@{deconvolutional\_out\_height}!deconvolutional\_layer.c@{deconvolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{deconvolutional\_out\_height()}{deconvolutional\_out\_height()}}
+{\footnotesize\ttfamily int deconvolutional\+\_\+out\+\_\+height (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{deconvolutional__layer_8h_a3104e42e8f435b8f02bcdb0de9bcf5db}{deconvolutional\+\_\+layer}}}]{l }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{deconvolutional__layer_8c_aa7aa253c8c1a6fdd0c49a147b6ffd5d8}\label{deconvolutional__layer_8c_aa7aa253c8c1a6fdd0c49a147b6ffd5d8}} 
+\index{deconvolutional\_layer.c@{deconvolutional\_layer.c}!deconvolutional\_out\_size@{deconvolutional\_out\_size}}
+\index{deconvolutional\_out\_size@{deconvolutional\_out\_size}!deconvolutional\_layer.c@{deconvolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{deconvolutional\_out\_size()}{deconvolutional\_out\_size()}}
+{\footnotesize\ttfamily int deconvolutional\+\_\+out\+\_\+size (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{deconvolutional__layer_8h_a3104e42e8f435b8f02bcdb0de9bcf5db}{deconvolutional\+\_\+layer}}}]{l }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{deconvolutional__layer_8c_aa7aa253c8c1a6fdd0c49a147b6ffd5d8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{deconvolutional__layer_8c_a6dfc19090345826d92b8d13d8d68b1a8}\label{deconvolutional__layer_8c_a6dfc19090345826d92b8d13d8d68b1a8}} 
+\index{deconvolutional\_layer.c@{deconvolutional\_layer.c}!deconvolutional\_out\_width@{deconvolutional\_out\_width}}
+\index{deconvolutional\_out\_width@{deconvolutional\_out\_width}!deconvolutional\_layer.c@{deconvolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{deconvolutional\_out\_width()}{deconvolutional\_out\_width()}}
+{\footnotesize\ttfamily int deconvolutional\+\_\+out\+\_\+width (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{deconvolutional__layer_8h_a3104e42e8f435b8f02bcdb0de9bcf5db}{deconvolutional\+\_\+layer}}}]{l }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=279pt]{deconvolutional__layer_8c_a6dfc19090345826d92b8d13d8d68b1a8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{deconvolutional__layer_8c_a90b94f3cead6e1bcbe950122eb3f7d28}\label{deconvolutional__layer_8c_a90b94f3cead6e1bcbe950122eb3f7d28}} 
+\index{deconvolutional\_layer.c@{deconvolutional\_layer.c}!forward\_deconvolutional\_layer@{forward\_deconvolutional\_layer}}
+\index{forward\_deconvolutional\_layer@{forward\_deconvolutional\_layer}!deconvolutional\_layer.c@{deconvolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{forward\_deconvolutional\_layer()}{forward\_deconvolutional\_layer()}}
+{\footnotesize\ttfamily void forward\+\_\+deconvolutional\+\_\+layer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{deconvolutional__layer_8h_a3104e42e8f435b8f02bcdb0de9bcf5db}{deconvolutional\+\_\+layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{deconvolutional__layer_8c_a90b94f3cead6e1bcbe950122eb3f7d28_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{deconvolutional__layer_8c_a74f36b796d12f562c1eb256cdc0f7125}\label{deconvolutional__layer_8c_a74f36b796d12f562c1eb256cdc0f7125}} 
+\index{deconvolutional\_layer.c@{deconvolutional\_layer.c}!get\_deconvolutional\_delta@{get\_deconvolutional\_delta}}
+\index{get\_deconvolutional\_delta@{get\_deconvolutional\_delta}!deconvolutional\_layer.c@{deconvolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{get\_deconvolutional\_delta()}{get\_deconvolutional\_delta()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structimage}{image}} get\+\_\+deconvolutional\+\_\+delta (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{deconvolutional__layer_8h_a3104e42e8f435b8f02bcdb0de9bcf5db}{deconvolutional\+\_\+layer}}}]{l }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{deconvolutional__layer_8c_a74f36b796d12f562c1eb256cdc0f7125_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{deconvolutional__layer_8c_a3ab85fcc7cf7440f4e44e5ab3babbe1f}\label{deconvolutional__layer_8c_a3ab85fcc7cf7440f4e44e5ab3babbe1f}} 
+\index{deconvolutional\_layer.c@{deconvolutional\_layer.c}!get\_deconvolutional\_image@{get\_deconvolutional\_image}}
+\index{get\_deconvolutional\_image@{get\_deconvolutional\_image}!deconvolutional\_layer.c@{deconvolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{get\_deconvolutional\_image()}{get\_deconvolutional\_image()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structimage}{image}} get\+\_\+deconvolutional\+\_\+image (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{deconvolutional__layer_8h_a3104e42e8f435b8f02bcdb0de9bcf5db}{deconvolutional\+\_\+layer}}}]{l }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{deconvolutional__layer_8c_a3ab85fcc7cf7440f4e44e5ab3babbe1f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{deconvolutional__layer_8c_a0aad244aa20ad39aedb04922acb5180b}\label{deconvolutional__layer_8c_a0aad244aa20ad39aedb04922acb5180b}} 
+\index{deconvolutional\_layer.c@{deconvolutional\_layer.c}!make\_deconvolutional\_layer@{make\_deconvolutional\_layer}}
+\index{make\_deconvolutional\_layer@{make\_deconvolutional\_layer}!deconvolutional\_layer.c@{deconvolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{make\_deconvolutional\_layer()}{make\_deconvolutional\_layer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{deconvolutional__layer_8h_a3104e42e8f435b8f02bcdb0de9bcf5db}{deconvolutional\+\_\+layer}} make\+\_\+deconvolutional\+\_\+layer (\begin{DoxyParamCaption}\item[{int}]{batch,  }\item[{int}]{h,  }\item[{int}]{w,  }\item[{int}]{c,  }\item[{int}]{n,  }\item[{int}]{size,  }\item[{int}]{stride,  }\item[{\mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032}{ACTIVATION}}}]{activation }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{deconvolutional__layer_8c_a0aad244aa20ad39aedb04922acb5180b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{deconvolutional__layer_8c_a5564843170b6a1fe89a7045b949e4061}\label{deconvolutional__layer_8c_a5564843170b6a1fe89a7045b949e4061}} 
+\index{deconvolutional\_layer.c@{deconvolutional\_layer.c}!resize\_deconvolutional\_layer@{resize\_deconvolutional\_layer}}
+\index{resize\_deconvolutional\_layer@{resize\_deconvolutional\_layer}!deconvolutional\_layer.c@{deconvolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{resize\_deconvolutional\_layer()}{resize\_deconvolutional\_layer()}}
+{\footnotesize\ttfamily void resize\+\_\+deconvolutional\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{deconvolutional__layer_8h_a3104e42e8f435b8f02bcdb0de9bcf5db}{deconvolutional\+\_\+layer}} $\ast$}]{l,  }\item[{int}]{h,  }\item[{int}]{w }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{deconvolutional__layer_8c_a5564843170b6a1fe89a7045b949e4061_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{deconvolutional__layer_8c_a93ac8997a678df6c9ef960b09f00ed62}\label{deconvolutional__layer_8c_a93ac8997a678df6c9ef960b09f00ed62}} 
+\index{deconvolutional\_layer.c@{deconvolutional\_layer.c}!update\_deconvolutional\_layer@{update\_deconvolutional\_layer}}
+\index{update\_deconvolutional\_layer@{update\_deconvolutional\_layer}!deconvolutional\_layer.c@{deconvolutional\_layer.c}}
+\doxysubsubsection{\texorpdfstring{update\_deconvolutional\_layer()}{update\_deconvolutional\_layer()}}
+{\footnotesize\ttfamily void update\+\_\+deconvolutional\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{deconvolutional__layer_8h_a3104e42e8f435b8f02bcdb0de9bcf5db}{deconvolutional\+\_\+layer}}}]{l,  }\item[{int}]{skip,  }\item[{float}]{learning\+\_\+rate,  }\item[{float}]{momentum,  }\item[{float}]{decay }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=292pt]{deconvolutional__layer_8c_a93ac8997a678df6c9ef960b09f00ed62_cgraph}
+\end{center}
+\end{figure}

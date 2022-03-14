@@ -1,0 +1,559 @@
+\hypertarget{classmaxflow__sap}{}\doxysection{maxflow\+\_\+sap类 参考}
+\label{classmaxflow__sap}\index{maxflow\_sap@{maxflow\_sap}}
+
+
+Maximum flow algorithm with shortest augmenting paths  
+
+
+
+
+{\ttfamily \#include $<$maxflow\+\_\+sap.\+h$>$}
+
+
+
+类 maxflow\+\_\+sap 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=153pt]{classmaxflow__sap__inherit__graph}
+\end{center}
+\end{figure}
+
+
+maxflow\+\_\+sap 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmaxflow__sap__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmaxflow__sap_aa149130d8cf969f0b96aff72331bd48f}{maxflow\+\_\+sap}} ()
+\item 
+virtual \mbox{\hyperlink{classmaxflow__sap_ab49914afde43ffa0e5c3049cc063a8d2}{$\sim$maxflow\+\_\+sap}} ()
+\item 
+void \mbox{\hyperlink{classmaxflow__sap_ac50ba0330c169c7ce697947a76702e13}{set\+\_\+vars}} (const \mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$ double $>$ \&\mbox{\hyperlink{classmaxflow__sap_acfa95eef5ea5bf7814c4dabd3994bc63}{edge\+\_\+capacity}})
+\item 
+void \mbox{\hyperlink{classmaxflow__sap_a936f6afa25de80046c7bd69dc47fdfa9}{set\+\_\+vars}} (const \mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$ double $>$ \&\mbox{\hyperlink{classmaxflow__sap_acfa95eef5ea5bf7814c4dabd3994bc63}{edge\+\_\+capacity}}, const \mbox{\hyperlink{structnode}{node}} \&\mbox{\hyperlink{classmaxflow__sap_abd4266c76dbd73f7f719d3a4fba2655d}{net\+\_\+source}}, const \mbox{\hyperlink{structnode}{node}} \&\mbox{\hyperlink{classmaxflow__sap_a8d0e8f448ed29a1329a70c8f4f496c2c}{net\+\_\+target}})
+\item 
+virtual int \mbox{\hyperlink{classmaxflow__sap_a9b1fb1703553b50970faddc287428be3}{check}} (GTL\+::graph \&G)
+\item 
+int \mbox{\hyperlink{classmaxflow__sap_ade6574f54fe24dc0f9485d284a9fd491}{run}} (GTL\+::graph \&G)
+\item 
+double \mbox{\hyperlink{classmaxflow__sap_ae90889b16323a2af0ab13e04c87953a5}{get\+\_\+max\+\_\+flow}} (const \mbox{\hyperlink{classedge}{edge}} \&e) const
+\item 
+double \mbox{\hyperlink{classmaxflow__sap_a81251d546cbdabc837f24fc3caf9fe0d}{get\+\_\+max\+\_\+flow}} () const
+\item 
+double \mbox{\hyperlink{classmaxflow__sap_a634835664542d5d181e1b63b99dda36c}{get\+\_\+rem\+\_\+cap}} (const \mbox{\hyperlink{classedge}{edge}} \&e) const
+\item 
+virtual void \mbox{\hyperlink{classmaxflow__sap_a14574d2f9ce31a3cdeb0888e57fc0616}{reset}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected 类型}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \mbox{\hyperlink{classmaxflow__sap_ada2d8c57f85ee2d82009aafe52cc1a93a8438edbbdad4a54eea6615f442dcda37}{AP\+\_\+\+FOUND}} = 2
+, \mbox{\hyperlink{classmaxflow__sap_ada2d8c57f85ee2d82009aafe52cc1a93a73e7133865255ad10aebb463b1abb20f}{NO\+\_\+\+AP\+\_\+\+FOUND}} = 3
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classmaxflow__sap_a33cb0ab27d58309d433bc666ff992e9d}{create\+\_\+artif\+\_\+source\+\_\+target}} (GTL\+::graph \&G)
+\item 
+void \mbox{\hyperlink{classmaxflow__sap_a4504b071456d536371ff6d07055e800d}{prepare\+\_\+run}} (const \mbox{\hyperlink{classgraph}{graph}} \&G)
+\item 
+void \mbox{\hyperlink{classmaxflow__sap_ab9a8d9e4e32a8eb6390c0d2fb3cb9596}{comp\+\_\+dist\+\_\+labels}} (const \mbox{\hyperlink{classgraph}{graph}} \&G, std\+::vector$<$ int $>$ \&numb)
+\item 
+bool \mbox{\hyperlink{classmaxflow__sap_a4fdfe2e37832ed2e522b5c972aa1ba5f}{has\+\_\+an\+\_\+admissible\+\_\+arc}} (const \mbox{\hyperlink{structnode}{node}} cur\+\_\+node)
+\item 
+void \mbox{\hyperlink{classmaxflow__sap_a21a5fa474aaee3f7a3779dd0c965eca7}{advance}} (\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}} \&cur\+\_\+node, GTL\+::node\+\_\+map$<$ \mbox{\hyperlink{classedge}{edge}} $>$ \&last\+\_\+edge)
+\item 
+void \mbox{\hyperlink{classmaxflow__sap_a15b56407dc06886e8b85cd9b04498975}{augment}} (GTL\+::graph \&G, const \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ \mbox{\hyperlink{classedge}{edge}} $>$ \&last\+\_\+edge)
+\item 
+bool \mbox{\hyperlink{classmaxflow__sap_a88a24204f44031d2332493474ee18f95}{retreat}} (const int number\+\_\+of\+\_\+nodes, \mbox{\hyperlink{structnode}{node}} \&cur\+\_\+node, const \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ \mbox{\hyperlink{classedge}{edge}} $>$ \&last\+\_\+edge, std\+::vector$<$ int $>$ \&numb)
+\item 
+int \mbox{\hyperlink{classmaxflow__sap_a7cf86463129a569f41883fdad6869fce}{min\+\_\+neighbour\+\_\+label}} (const int number\+\_\+of\+\_\+nodes, const \mbox{\hyperlink{structnode}{node}} cur\+\_\+node) const
+\item 
+double \mbox{\hyperlink{classmaxflow__sap_abd2935db387f32891228291a52d6ad45}{free\+\_\+capacity}} (const \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ \mbox{\hyperlink{classedge}{edge}} $>$ \&last\+\_\+edge) const
+\item 
+void \mbox{\hyperlink{classmaxflow__sap_abc665e097e692e4ad39f1b8bcdda8266}{create\+\_\+back\+\_\+edge}} (GTL\+::graph \&G, const \mbox{\hyperlink{classedge}{edge}} \&org\+\_\+edge)
+\item 
+void \mbox{\hyperlink{classmaxflow__sap_ae5ff08e7b1c5fe5845a2ed584b04ca1b}{comp\+\_\+max\+\_\+flow}} (const \mbox{\hyperlink{classgraph}{graph}} \&G)
+\item 
+void \mbox{\hyperlink{classmaxflow__sap_a6d3f8c6da41defacdfcd0c88ffa627ff}{restore\+\_\+graph}} (GTL\+::graph \&G)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected 属性}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classmaxflow__sap_a5d19d178a861e252c84fc392e19bf0ae}{artif\+\_\+source\+\_\+target}} = false
+\item 
+bool \mbox{\hyperlink{classmaxflow__sap_aad7f764b9e9732b996f402ffadbf5b70}{set\+\_\+vars\+\_\+executed}} = false
+\item 
+double \mbox{\hyperlink{classmaxflow__sap_a77c650fd11632352a1228f2cbd38caf1}{max\+\_\+graph\+\_\+flow}} = 0.
+\item 
+\mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classmaxflow__sap_abd4266c76dbd73f7f719d3a4fba2655d}{net\+\_\+source}}
+\item 
+\mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classmaxflow__sap_a8d0e8f448ed29a1329a70c8f4f496c2c}{net\+\_\+target}}
+\item 
+\mbox{\hyperlink{edge_8h_a8f9587479bda6cf612c103494b3858e3}{edges\+\_\+t}} \mbox{\hyperlink{classmaxflow__sap_ac97c4038560f49eee2e781d12a64fdf5}{edges\+\_\+not\+\_\+org}}
+\item 
+\mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ int $>$ \mbox{\hyperlink{classmaxflow__sap_a14eef09823ae0ac69348c2b3a60e6ca3}{dist\+\_\+label}}
+\item 
+\mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$ bool $>$ \mbox{\hyperlink{classmaxflow__sap_ac445d8c2f7e2080e890a9cdf7413c372}{edge\+\_\+org}}
+\item 
+\mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$ bool $>$ \mbox{\hyperlink{classmaxflow__sap_a13f2b98efc2a4f62fab4ac391ca83a51}{back\+\_\+edge\+\_\+exists}}
+\item 
+\mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$ \mbox{\hyperlink{classedge}{edge}} $>$ \mbox{\hyperlink{classmaxflow__sap_a34793d0909089155a9957deed7c0e1b7}{back\+\_\+edge}}
+\item 
+\mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$ double $>$ \mbox{\hyperlink{classmaxflow__sap_acfa95eef5ea5bf7814c4dabd3994bc63}{edge\+\_\+capacity}}
+\item 
+\mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$ double $>$ \mbox{\hyperlink{classmaxflow__sap_a25820db833a98efc69fc3edb79fc49d3}{edge\+\_\+max\+\_\+flow}}
+\end{DoxyCompactItemize}
+\doxysubsection*{额外继承的成员函数}
+
+
+\doxysubsection{详细描述}
+Maximum flow algorithm with shortest augmenting paths 
+
+This class implements a maximum flow algorithm with shortest augmenting paths due to Ahuja and Orlin.
+
+In the case V is the set of vertices and E is the set of edges of the graph, the algorithm needs O($\vert$\+V$\vert$ $\ast$ $\vert$\+V$\vert$ $\ast$ $\vert$\+E$\vert$) time to proceed.
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classmaxflow__ff}{maxflow\+\_\+ff}} 
+
+\mbox{\hyperlink{classmaxflow__pp}{maxflow\+\_\+pp}} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{成员枚举类型说明}
+\mbox{\Hypertarget{classmaxflow__sap_ada2d8c57f85ee2d82009aafe52cc1a93}\label{classmaxflow__sap_ada2d8c57f85ee2d82009aafe52cc1a93}} 
+\doxysubsubsection{\texorpdfstring{anonymous enum}{anonymous enum}}
+{\footnotesize\ttfamily anonymous enum\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyEnumFields}{枚举值}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AP\_FOUND@{AP\_FOUND}!maxflow\_sap@{maxflow\_sap}}\index{maxflow\_sap@{maxflow\_sap}!AP\_FOUND@{AP\_FOUND}}}\mbox{\Hypertarget{classmaxflow__sap_ada2d8c57f85ee2d82009aafe52cc1a93a8438edbbdad4a54eea6615f442dcda37}\label{classmaxflow__sap_ada2d8c57f85ee2d82009aafe52cc1a93a8438edbbdad4a54eea6615f442dcda37}} 
+AP\+\_\+\+FOUND&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NO\_AP\_FOUND@{NO\_AP\_FOUND}!maxflow\_sap@{maxflow\_sap}}\index{maxflow\_sap@{maxflow\_sap}!NO\_AP\_FOUND@{NO\_AP\_FOUND}}}\mbox{\Hypertarget{classmaxflow__sap_ada2d8c57f85ee2d82009aafe52cc1a93a73e7133865255ad10aebb463b1abb20f}\label{classmaxflow__sap_ada2d8c57f85ee2d82009aafe52cc1a93a73e7133865255ad10aebb463b1abb20f}} 
+NO\+\_\+\+AP\+\_\+\+FOUND&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classmaxflow__sap_aa149130d8cf969f0b96aff72331bd48f}\label{classmaxflow__sap_aa149130d8cf969f0b96aff72331bd48f}} 
+\index{maxflow\_sap@{maxflow\_sap}!maxflow\_sap@{maxflow\_sap}}
+\index{maxflow\_sap@{maxflow\_sap}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{maxflow\_sap()}{maxflow\_sap()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_g_t_l_8h_a2d9f24096ac60918452dd51f32b64aa9}{\+\_\+\+\_\+\+GTL\+\_\+\+BEGIN\+\_\+\+NAMESPACE}} maxflow\+\_\+sap\+::maxflow\+\_\+sap (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Default constructor. Enables only the calculation of maximum flow.
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classalgorithm_ab79e1ddec2f2afdf4b36b10724db8b15}{algorithm\+::algorithm}} 
+\end{DoxySeeAlso}
+\mbox{\Hypertarget{classmaxflow__sap_ab49914afde43ffa0e5c3049cc063a8d2}\label{classmaxflow__sap_ab49914afde43ffa0e5c3049cc063a8d2}} 
+\index{maxflow\_sap@{maxflow\_sap}!````~maxflow\_sap@{$\sim$maxflow\_sap}}
+\index{````~maxflow\_sap@{$\sim$maxflow\_sap}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{$\sim$maxflow\_sap()}{~maxflow\_sap()}}
+{\footnotesize\ttfamily maxflow\+\_\+sap\+::$\sim$maxflow\+\_\+sap (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Destructor.
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classalgorithm_adca9b1e7fa3afd914519a9dbb44e9fd5}{algorithm\+::$\sim$algorithm}} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classmaxflow__sap_a21a5fa474aaee3f7a3779dd0c965eca7}\label{classmaxflow__sap_a21a5fa474aaee3f7a3779dd0c965eca7}} 
+\index{maxflow\_sap@{maxflow\_sap}!advance@{advance}}
+\index{advance@{advance}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{advance()}{advance()}}
+{\footnotesize\ttfamily void maxflow\+\_\+sap\+::advance (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL\+::node}} \&}]{cur\+\_\+node,  }\item[{GTL\+::node\+\_\+map$<$ \mbox{\hyperlink{classedge}{edge}} $>$ \&}]{last\+\_\+edge }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classmaxflow__sap_a15b56407dc06886e8b85cd9b04498975}\label{classmaxflow__sap_a15b56407dc06886e8b85cd9b04498975}} 
+\index{maxflow\_sap@{maxflow\_sap}!augment@{augment}}
+\index{augment@{augment}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{augment()}{augment()}}
+{\footnotesize\ttfamily void maxflow\+\_\+sap\+::augment (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{G,  }\item[{const \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ \mbox{\hyperlink{classedge}{edge}} $>$ \&}]{last\+\_\+edge }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmaxflow__sap_a15b56407dc06886e8b85cd9b04498975_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classmaxflow__sap_a9b1fb1703553b50970faddc287428be3}\label{classmaxflow__sap_a9b1fb1703553b50970faddc287428be3}} 
+\index{maxflow\_sap@{maxflow\_sap}!check@{check}}
+\index{check@{check}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{check()}{check()}}
+{\footnotesize\ttfamily int maxflow\+\_\+sap\+::check (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{G }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Checks whether following preconditions are satisfied\+: 
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{classmaxflow__sap_ac50ba0330c169c7ce697947a76702e13}{maxflow\+\_\+sap\+::set\+\_\+vars}} has been executed before. 
+\item only edge\+\_\+capacities \texorpdfstring{$>$}{>}= 0 are applied. 
+\item {\ttfamily G} is directed. 
+\item {\ttfamily G} is connected. 
+\item {\ttfamily G} has at least one edge and two nodes. 
+\item if not applied, start-\/nodes and end-\/nodes exists. 
+\item if applied, start-\/node is not the same node as end-\/node. 
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{参数}
+{\em G} & graph \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+{\ttfamily \mbox{\hyperlink{classalgorithm_a7ecf5c2bab575f8f2fae9e9e5093a6eaa5114c20e4a96a76b5de9f28bf15e282b}{algorithm\+::\+GTL\+\_\+\+OK}}} on success {\ttfamily \mbox{\hyperlink{classalgorithm_a7ecf5c2bab575f8f2fae9e9e5093a6eaa6fcf574690bbd6cf710837a169510dd7}{algorithm\+::\+GTL\+\_\+\+ERROR}}} otherwise 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classalgorithm_a528100c0e54d446fab1e329a53935364}{algorithm\+::check}} 
+\end{DoxySeeAlso}
+
+
+实现了 \mbox{\hyperlink{classalgorithm_a528100c0e54d446fab1e329a53935364}{algorithm}}.
+
+\mbox{\Hypertarget{classmaxflow__sap_ab9a8d9e4e32a8eb6390c0d2fb3cb9596}\label{classmaxflow__sap_ab9a8d9e4e32a8eb6390c0d2fb3cb9596}} 
+\index{maxflow\_sap@{maxflow\_sap}!comp\_dist\_labels@{comp\_dist\_labels}}
+\index{comp\_dist\_labels@{comp\_dist\_labels}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{comp\_dist\_labels()}{comp\_dist\_labels()}}
+{\footnotesize\ttfamily void maxflow\+\_\+sap\+::comp\+\_\+dist\+\_\+labels (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgraph}{graph}} \&}]{G,  }\item[{std\+::vector$<$ int $>$ \&}]{numb }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmaxflow__sap_ab9a8d9e4e32a8eb6390c0d2fb3cb9596_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classmaxflow__sap_ae5ff08e7b1c5fe5845a2ed584b04ca1b}\label{classmaxflow__sap_ae5ff08e7b1c5fe5845a2ed584b04ca1b}} 
+\index{maxflow\_sap@{maxflow\_sap}!comp\_max\_flow@{comp\_max\_flow}}
+\index{comp\_max\_flow@{comp\_max\_flow}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{comp\_max\_flow()}{comp\_max\_flow()}}
+{\footnotesize\ttfamily void maxflow\+\_\+sap\+::comp\+\_\+max\+\_\+flow (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgraph}{graph}} \&}]{G }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmaxflow__sap_ae5ff08e7b1c5fe5845a2ed584b04ca1b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classmaxflow__sap_a33cb0ab27d58309d433bc666ff992e9d}\label{classmaxflow__sap_a33cb0ab27d58309d433bc666ff992e9d}} 
+\index{maxflow\_sap@{maxflow\_sap}!create\_artif\_source\_target@{create\_artif\_source\_target}}
+\index{create\_artif\_source\_target@{create\_artif\_source\_target}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{create\_artif\_source\_target()}{create\_artif\_source\_target()}}
+{\footnotesize\ttfamily void maxflow\+\_\+sap\+::create\+\_\+artif\+\_\+source\+\_\+target (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{G }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=295pt]{classmaxflow__sap_a33cb0ab27d58309d433bc666ff992e9d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classmaxflow__sap_abc665e097e692e4ad39f1b8bcdda8266}\label{classmaxflow__sap_abc665e097e692e4ad39f1b8bcdda8266}} 
+\index{maxflow\_sap@{maxflow\_sap}!create\_back\_edge@{create\_back\_edge}}
+\index{create\_back\_edge@{create\_back\_edge}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{create\_back\_edge()}{create\_back\_edge()}}
+{\footnotesize\ttfamily void maxflow\+\_\+sap\+::create\+\_\+back\+\_\+edge (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{G,  }\item[{const \mbox{\hyperlink{classedge}{edge}} \&}]{org\+\_\+edge }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=295pt]{classmaxflow__sap_abc665e097e692e4ad39f1b8bcdda8266_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classmaxflow__sap_abd2935db387f32891228291a52d6ad45}\label{classmaxflow__sap_abd2935db387f32891228291a52d6ad45}} 
+\index{maxflow\_sap@{maxflow\_sap}!free\_capacity@{free\_capacity}}
+\index{free\_capacity@{free\_capacity}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{free\_capacity()}{free\_capacity()}}
+{\footnotesize\ttfamily double maxflow\+\_\+sap\+::free\+\_\+capacity (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ \mbox{\hyperlink{classedge}{edge}} $>$ \&}]{last\+\_\+edge }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classmaxflow__sap_a81251d546cbdabc837f24fc3caf9fe0d}\label{classmaxflow__sap_a81251d546cbdabc837f24fc3caf9fe0d}} 
+\index{maxflow\_sap@{maxflow\_sap}!get\_max\_flow@{get\_max\_flow}}
+\index{get\_max\_flow@{get\_max\_flow}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{get\_max\_flow()}{get\_max\_flow()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily double maxflow\+\_\+sap\+::get\+\_\+max\+\_\+flow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns the maximum flow of the whole graph G.
+
+\begin{DoxyReturn}{返回}
+maximum flow value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmaxflow__sap_ae90889b16323a2af0ab13e04c87953a5}\label{classmaxflow__sap_ae90889b16323a2af0ab13e04c87953a5}} 
+\index{maxflow\_sap@{maxflow\_sap}!get\_max\_flow@{get\_max\_flow}}
+\index{get\_max\_flow@{get\_max\_flow}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{get\_max\_flow()}{get\_max\_flow()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily double maxflow\+\_\+sap\+::get\+\_\+max\+\_\+flow (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classedge}{edge}} \&}]{e }\end{DoxyParamCaption}) const}
+
+Returns the maximum flow of an edge.
+
+
+\begin{DoxyParams}{参数}
+{\em e} & edge of a graph {\ttfamily G} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+maximum flow value 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmaxflow__sap_a634835664542d5d181e1b63b99dda36c}\label{classmaxflow__sap_a634835664542d5d181e1b63b99dda36c}} 
+\index{maxflow\_sap@{maxflow\_sap}!get\_rem\_cap@{get\_rem\_cap}}
+\index{get\_rem\_cap@{get\_rem\_cap}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{get\_rem\_cap()}{get\_rem\_cap()}}
+{\footnotesize\ttfamily double maxflow\+\_\+sap\+::get\+\_\+rem\+\_\+cap (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classedge}{edge}} \&}]{e }\end{DoxyParamCaption}) const}
+
+Returns the remaining free capacity of an edge.
+
+
+\begin{DoxyParams}{参数}
+{\em e} & edge of a graph {\ttfamily G} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+remaining capacity 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmaxflow__sap_a4fdfe2e37832ed2e522b5c972aa1ba5f}\label{classmaxflow__sap_a4fdfe2e37832ed2e522b5c972aa1ba5f}} 
+\index{maxflow\_sap@{maxflow\_sap}!has\_an\_admissible\_arc@{has\_an\_admissible\_arc}}
+\index{has\_an\_admissible\_arc@{has\_an\_admissible\_arc}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{has\_an\_admissible\_arc()}{has\_an\_admissible\_arc()}}
+{\footnotesize\ttfamily bool maxflow\+\_\+sap\+::has\+\_\+an\+\_\+admissible\+\_\+arc (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structnode}{node}}}]{cur\+\_\+node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=343pt]{classmaxflow__sap_a4fdfe2e37832ed2e522b5c972aa1ba5f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classmaxflow__sap_a7cf86463129a569f41883fdad6869fce}\label{classmaxflow__sap_a7cf86463129a569f41883fdad6869fce}} 
+\index{maxflow\_sap@{maxflow\_sap}!min\_neighbour\_label@{min\_neighbour\_label}}
+\index{min\_neighbour\_label@{min\_neighbour\_label}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{min\_neighbour\_label()}{min\_neighbour\_label()}}
+{\footnotesize\ttfamily int maxflow\+\_\+sap\+::min\+\_\+neighbour\+\_\+label (\begin{DoxyParamCaption}\item[{const int}]{number\+\_\+of\+\_\+nodes,  }\item[{const \mbox{\hyperlink{structnode}{node}}}]{cur\+\_\+node }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmaxflow__sap_a7cf86463129a569f41883fdad6869fce_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classmaxflow__sap_a4504b071456d536371ff6d07055e800d}\label{classmaxflow__sap_a4504b071456d536371ff6d07055e800d}} 
+\index{maxflow\_sap@{maxflow\_sap}!prepare\_run@{prepare\_run}}
+\index{prepare\_run@{prepare\_run}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{prepare\_run()}{prepare\_run()}}
+{\footnotesize\ttfamily void maxflow\+\_\+sap\+::prepare\+\_\+run (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classgraph}{graph}} \&}]{G }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=316pt]{classmaxflow__sap_a4504b071456d536371ff6d07055e800d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classmaxflow__sap_a14574d2f9ce31a3cdeb0888e57fc0616}\label{classmaxflow__sap_a14574d2f9ce31a3cdeb0888e57fc0616}} 
+\index{maxflow\_sap@{maxflow\_sap}!reset@{reset}}
+\index{reset@{reset}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void maxflow\+\_\+sap\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Resets maximum flow algorithm, i.\+e. prepares the algorithm to be applied to another graph.
+
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classalgorithm_a21aba63d066ae7897de6ca7d8425c408}{algorithm\+::reset}} 
+\end{DoxySeeAlso}
+
+
+实现了 \mbox{\hyperlink{classalgorithm_a21aba63d066ae7897de6ca7d8425c408}{algorithm}}.
+
+\mbox{\Hypertarget{classmaxflow__sap_a6d3f8c6da41defacdfcd0c88ffa627ff}\label{classmaxflow__sap_a6d3f8c6da41defacdfcd0c88ffa627ff}} 
+\index{maxflow\_sap@{maxflow\_sap}!restore\_graph@{restore\_graph}}
+\index{restore\_graph@{restore\_graph}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{restore\_graph()}{restore\_graph()}}
+{\footnotesize\ttfamily void maxflow\+\_\+sap\+::restore\+\_\+graph (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{G }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmaxflow__sap_a6d3f8c6da41defacdfcd0c88ffa627ff_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classmaxflow__sap_a88a24204f44031d2332493474ee18f95}\label{classmaxflow__sap_a88a24204f44031d2332493474ee18f95}} 
+\index{maxflow\_sap@{maxflow\_sap}!retreat@{retreat}}
+\index{retreat@{retreat}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{retreat()}{retreat()}}
+{\footnotesize\ttfamily bool maxflow\+\_\+sap\+::retreat (\begin{DoxyParamCaption}\item[{const int}]{number\+\_\+of\+\_\+nodes,  }\item[{\mbox{\hyperlink{structnode}{node}} \&}]{cur\+\_\+node,  }\item[{const \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$ \mbox{\hyperlink{classedge}{edge}} $>$ \&}]{last\+\_\+edge,  }\item[{std\+::vector$<$ int $>$ \&}]{numb }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmaxflow__sap_a88a24204f44031d2332493474ee18f95_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classmaxflow__sap_ade6574f54fe24dc0f9485d284a9fd491}\label{classmaxflow__sap_ade6574f54fe24dc0f9485d284a9fd491}} 
+\index{maxflow\_sap@{maxflow\_sap}!run@{run}}
+\index{run@{run}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily int maxflow\+\_\+sap\+::run (\begin{DoxyParamCaption}\item[{GTL\+::graph \&}]{G }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Computes maximum flow of graph {\ttfamily G}.
+
+
+\begin{DoxyParams}{参数}
+{\em G} & graph \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+{\ttfamily \mbox{\hyperlink{classalgorithm_a7ecf5c2bab575f8f2fae9e9e5093a6eaa5114c20e4a96a76b5de9f28bf15e282b}{algorithm\+::\+GTL\+\_\+\+OK}}} on success {\ttfamily \mbox{\hyperlink{classalgorithm_a7ecf5c2bab575f8f2fae9e9e5093a6eaa6fcf574690bbd6cf710837a169510dd7}{algorithm\+::\+GTL\+\_\+\+ERROR}}} otherwise 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{参见}
+\mbox{\hyperlink{classalgorithm_a4baee48c513c5802975743152c33f34c}{algorithm\+::run}} 
+\end{DoxySeeAlso}
+
+
+实现了 \mbox{\hyperlink{classalgorithm_a4baee48c513c5802975743152c33f34c}{algorithm}}.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmaxflow__sap_ade6574f54fe24dc0f9485d284a9fd491_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classmaxflow__sap_ac50ba0330c169c7ce697947a76702e13}\label{classmaxflow__sap_ac50ba0330c169c7ce697947a76702e13}} 
+\index{maxflow\_sap@{maxflow\_sap}!set\_vars@{set\_vars}}
+\index{set\_vars@{set\_vars}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{set\_vars()}{set\_vars()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void maxflow\+\_\+sap\+::set\+\_\+vars (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$ double $>$ \&}]{edge\+\_\+capacity }\end{DoxyParamCaption})}
+
+Sets capacity of every edge for maximum flow calculation where artificial start-\/node and end\+\_\+node will be computed automatically.
+
+
+\begin{DoxyParams}{参数}
+{\em edge\+\_\+capacity} & capacity of every edge \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classmaxflow__sap_a936f6afa25de80046c7bd69dc47fdfa9}\label{classmaxflow__sap_a936f6afa25de80046c7bd69dc47fdfa9}} 
+\index{maxflow\_sap@{maxflow\_sap}!set\_vars@{set\_vars}}
+\index{set\_vars@{set\_vars}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{set\_vars()}{set\_vars()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void maxflow\+\_\+sap\+::set\+\_\+vars (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$ double $>$ \&}]{edge\+\_\+capacity,  }\item[{const \mbox{\hyperlink{structnode}{node}} \&}]{net\+\_\+source,  }\item[{const \mbox{\hyperlink{structnode}{node}} \&}]{net\+\_\+target }\end{DoxyParamCaption})}
+
+Sets capacity of every edge for maximum flow calculation
+
+
+\begin{DoxyParams}{参数}
+{\em edge\+\_\+capacity} & capacity of every edge \\
+\hline
+{\em net\+\_\+source} & start-\/node \\
+\hline
+{\em net\+\_\+target} & end-\/node \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classmaxflow__sap_a5d19d178a861e252c84fc392e19bf0ae}\label{classmaxflow__sap_a5d19d178a861e252c84fc392e19bf0ae}} 
+\index{maxflow\_sap@{maxflow\_sap}!artif\_source\_target@{artif\_source\_target}}
+\index{artif\_source\_target@{artif\_source\_target}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{artif\_source\_target}{artif\_source\_target}}
+{\footnotesize\ttfamily bool maxflow\+\_\+sap\+::artif\+\_\+source\+\_\+target = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classmaxflow__sap_a34793d0909089155a9957deed7c0e1b7}\label{classmaxflow__sap_a34793d0909089155a9957deed7c0e1b7}} 
+\index{maxflow\_sap@{maxflow\_sap}!back\_edge@{back\_edge}}
+\index{back\_edge@{back\_edge}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{back\_edge}{back\_edge}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$\mbox{\hyperlink{classedge}{edge}}$>$ maxflow\+\_\+sap\+::back\+\_\+edge\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classmaxflow__sap_a13f2b98efc2a4f62fab4ac391ca83a51}\label{classmaxflow__sap_a13f2b98efc2a4f62fab4ac391ca83a51}} 
+\index{maxflow\_sap@{maxflow\_sap}!back\_edge\_exists@{back\_edge\_exists}}
+\index{back\_edge\_exists@{back\_edge\_exists}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{back\_edge\_exists}{back\_edge\_exists}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$bool$>$ maxflow\+\_\+sap\+::back\+\_\+edge\+\_\+exists\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classmaxflow__sap_a14eef09823ae0ac69348c2b3a60e6ca3}\label{classmaxflow__sap_a14eef09823ae0ac69348c2b3a60e6ca3}} 
+\index{maxflow\_sap@{maxflow\_sap}!dist\_label@{dist\_label}}
+\index{dist\_label@{dist\_label}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{dist\_label}{dist\_label}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classnode__map}{node\+\_\+map}}$<$int$>$ maxflow\+\_\+sap\+::dist\+\_\+label\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classmaxflow__sap_acfa95eef5ea5bf7814c4dabd3994bc63}\label{classmaxflow__sap_acfa95eef5ea5bf7814c4dabd3994bc63}} 
+\index{maxflow\_sap@{maxflow\_sap}!edge\_capacity@{edge\_capacity}}
+\index{edge\_capacity@{edge\_capacity}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{edge\_capacity}{edge\_capacity}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$double$>$ maxflow\+\_\+sap\+::edge\+\_\+capacity\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classmaxflow__sap_a25820db833a98efc69fc3edb79fc49d3}\label{classmaxflow__sap_a25820db833a98efc69fc3edb79fc49d3}} 
+\index{maxflow\_sap@{maxflow\_sap}!edge\_max\_flow@{edge\_max\_flow}}
+\index{edge\_max\_flow@{edge\_max\_flow}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{edge\_max\_flow}{edge\_max\_flow}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$double$>$ maxflow\+\_\+sap\+::edge\+\_\+max\+\_\+flow\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classmaxflow__sap_ac445d8c2f7e2080e890a9cdf7413c372}\label{classmaxflow__sap_ac445d8c2f7e2080e890a9cdf7413c372}} 
+\index{maxflow\_sap@{maxflow\_sap}!edge\_org@{edge\_org}}
+\index{edge\_org@{edge\_org}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{edge\_org}{edge\_org}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classedge__map}{edge\+\_\+map}}$<$bool$>$ maxflow\+\_\+sap\+::edge\+\_\+org\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classmaxflow__sap_ac97c4038560f49eee2e781d12a64fdf5}\label{classmaxflow__sap_ac97c4038560f49eee2e781d12a64fdf5}} 
+\index{maxflow\_sap@{maxflow\_sap}!edges\_not\_org@{edges\_not\_org}}
+\index{edges\_not\_org@{edges\_not\_org}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{edges\_not\_org}{edges\_not\_org}}
+{\footnotesize\ttfamily \mbox{\hyperlink{edge_8h_a8f9587479bda6cf612c103494b3858e3}{edges\+\_\+t}} maxflow\+\_\+sap\+::edges\+\_\+not\+\_\+org\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classmaxflow__sap_a77c650fd11632352a1228f2cbd38caf1}\label{classmaxflow__sap_a77c650fd11632352a1228f2cbd38caf1}} 
+\index{maxflow\_sap@{maxflow\_sap}!max\_graph\_flow@{max\_graph\_flow}}
+\index{max\_graph\_flow@{max\_graph\_flow}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{max\_graph\_flow}{max\_graph\_flow}}
+{\footnotesize\ttfamily double maxflow\+\_\+sap\+::max\+\_\+graph\+\_\+flow = 0.\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classmaxflow__sap_abd4266c76dbd73f7f719d3a4fba2655d}\label{classmaxflow__sap_abd4266c76dbd73f7f719d3a4fba2655d}} 
+\index{maxflow\_sap@{maxflow\_sap}!net\_source@{net\_source}}
+\index{net\_source@{net\_source}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{net\_source}{net\_source}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structnode}{node}} maxflow\+\_\+sap\+::net\+\_\+source\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classmaxflow__sap_a8d0e8f448ed29a1329a70c8f4f496c2c}\label{classmaxflow__sap_a8d0e8f448ed29a1329a70c8f4f496c2c}} 
+\index{maxflow\_sap@{maxflow\_sap}!net\_target@{net\_target}}
+\index{net\_target@{net\_target}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{net\_target}{net\_target}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structnode}{node}} maxflow\+\_\+sap\+::net\+\_\+target\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classmaxflow__sap_aad7f764b9e9732b996f402ffadbf5b70}\label{classmaxflow__sap_aad7f764b9e9732b996f402ffadbf5b70}} 
+\index{maxflow\_sap@{maxflow\_sap}!set\_vars\_executed@{set\_vars\_executed}}
+\index{set\_vars\_executed@{set\_vars\_executed}!maxflow\_sap@{maxflow\_sap}}
+\doxysubsubsection{\texorpdfstring{set\_vars\_executed}{set\_vars\_executed}}
+{\footnotesize\ttfamily bool maxflow\+\_\+sap\+::set\+\_\+vars\+\_\+executed = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Tracker/graph/\+GTL/include/\+GTL/\mbox{\hyperlink{maxflow__sap_8h}{maxflow\+\_\+sap.\+h}}\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Tracker/graph/\+GTL/src/\mbox{\hyperlink{maxflow__sap_8cpp}{maxflow\+\_\+sap.\+cpp}}\end{DoxyCompactItemize}

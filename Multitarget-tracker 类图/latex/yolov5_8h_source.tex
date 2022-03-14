@@ -1,0 +1,47 @@
+\hypertarget{yolov5_8h_source}{}\doxysection{yolov5.\+h}
+\label{yolov5_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/yolov5.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/yolov5.h}}
+\mbox{\hyperlink{yolov5_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef CLASS\_YOLOV5\_H\_}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define CLASS\_YOLOV5\_H\_}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{yolo_8h}{yolo.h}}"{}}}
+\DoxyCodeLine{4 \textcolor{keyword}{class }\mbox{\hyperlink{class_yolo_v5}{YoloV5}} :\textcolor{keyword}{public} \mbox{\hyperlink{class_yolo}{Yolo}}}
+\DoxyCodeLine{5 \{}
+\DoxyCodeLine{6 \textcolor{keyword}{public}:}
+\DoxyCodeLine{7     \mbox{\hyperlink{class_yolo_v5_af8eda954aff483761d8de3edc3edd215}{YoloV5}}(}
+\DoxyCodeLine{8         \textcolor{keyword}{const} \mbox{\hyperlink{struct_network_info}{NetworkInfo}} \&network\_info\_,}
+\DoxyCodeLine{9         \textcolor{keyword}{const} \mbox{\hyperlink{struct_infer_params}{InferParams}} \&infer\_params\_);}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11     \mbox{\hyperlink{struct_b_box}{BBox}} \mbox{\hyperlink{class_yolo_v5_ae4d03dd59071bb062eab733ff781b3cc}{convert\_bbox\_res}}(\textcolor{keyword}{const} \textcolor{keywordtype}{float}\& bx, \textcolor{keyword}{const} \textcolor{keywordtype}{float}\& by, \textcolor{keyword}{const} \textcolor{keywordtype}{float}\& bw, \textcolor{keyword}{const} \textcolor{keywordtype}{float}\& bh,}
+\DoxyCodeLine{12         \textcolor{keyword}{const} uint32\_t\& stride\_h\_, \textcolor{keyword}{const} uint32\_t\& stride\_w\_, \textcolor{keyword}{const} uint32\_t\& netW, \textcolor{keyword}{const} uint32\_t\& netH)}
+\DoxyCodeLine{13     \{}
+\DoxyCodeLine{14         \mbox{\hyperlink{struct_b_box}{BBox}} b;}
+\DoxyCodeLine{15         \textcolor{comment}{// Restore coordinates to network input resolution}}
+\DoxyCodeLine{16         \textcolor{keywordtype}{float} \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}} = bx * stride\_w\_;}
+\DoxyCodeLine{17         \textcolor{keywordtype}{float} \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}} = by * stride\_h\_;}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19         b.\mbox{\hyperlink{struct_b_box_ab063d1cc01f221b4992410e92ff51d60}{x1}} = \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}} -\/ bw / 2;}
+\DoxyCodeLine{20         b.\mbox{\hyperlink{struct_b_box_a4e5594907d923d49bc884cef23ebdf89}{x2}} = \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}} + bw / 2;}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22         b.\mbox{\hyperlink{struct_b_box_a136d3911912a9799c4ba568665daa2ed}{y1}} = \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}} -\/ bh / 2;}
+\DoxyCodeLine{23         b.\mbox{\hyperlink{struct_b_box_a09e4eb598909e4ccf5fa328370718993}{y2}} = \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}} + bh / 2;}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25         b.\mbox{\hyperlink{struct_b_box_ab063d1cc01f221b4992410e92ff51d60}{x1}} = \mbox{\hyperlink{trt__utils_8cpp_abfab750429265ecfdced0e67e7120325}{clamp}}(b.\mbox{\hyperlink{struct_b_box_ab063d1cc01f221b4992410e92ff51d60}{x1}}, 0, \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(netW));}
+\DoxyCodeLine{26         b.\mbox{\hyperlink{struct_b_box_a4e5594907d923d49bc884cef23ebdf89}{x2}} = \mbox{\hyperlink{trt__utils_8cpp_abfab750429265ecfdced0e67e7120325}{clamp}}(b.\mbox{\hyperlink{struct_b_box_a4e5594907d923d49bc884cef23ebdf89}{x2}}, 0, \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(netW));}
+\DoxyCodeLine{27         b.\mbox{\hyperlink{struct_b_box_a136d3911912a9799c4ba568665daa2ed}{y1}} = \mbox{\hyperlink{trt__utils_8cpp_abfab750429265ecfdced0e67e7120325}{clamp}}(b.\mbox{\hyperlink{struct_b_box_a136d3911912a9799c4ba568665daa2ed}{y1}}, 0, \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(netH));}
+\DoxyCodeLine{28         b.\mbox{\hyperlink{struct_b_box_a09e4eb598909e4ccf5fa328370718993}{y2}} = \mbox{\hyperlink{trt__utils_8cpp_abfab750429265ecfdced0e67e7120325}{clamp}}(b.\mbox{\hyperlink{struct_b_box_a09e4eb598909e4ccf5fa328370718993}{y2}}, 0, \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(netH));}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30         \textcolor{keywordflow}{return} b;}
+\DoxyCodeLine{31     \}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     }
+\DoxyCodeLine{34 \textcolor{keyword}{private}:}
+\DoxyCodeLine{35     std::vector<BBoxInfo> \mbox{\hyperlink{class_yolo_v5_a5c1e9111025b96dc5dc7f0c606db239f}{decodeTensor}}(\textcolor{keyword}{const} \textcolor{keywordtype}{int} imageIdx,}
+\DoxyCodeLine{36         \textcolor{keyword}{const} \textcolor{keywordtype}{int} imageH,}
+\DoxyCodeLine{37         \textcolor{keyword}{const} \textcolor{keywordtype}{int} imageW,}
+\DoxyCodeLine{38         \textcolor{keyword}{const} \mbox{\hyperlink{struct_tensor_info}{TensorInfo}}\& tensor) \textcolor{keyword}{override};}
+\DoxyCodeLine{39 \};}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

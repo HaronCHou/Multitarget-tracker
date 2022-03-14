@@ -1,0 +1,112 @@
+\hypertarget{local__layer_8c}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/local\+\_\+layer.c 文件参考}
+\label{local__layer_8c}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/local\_layer.c@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/local\_layer.c}}
+{\ttfamily \#include \char`\"{}local\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}im2col.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}col2im.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}blas.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}gemm.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+local\+\_\+layer.\+c 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{local__layer_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{local__layer_8c_a3eb8b3196c05bbc195e68dc8d42aa292}{local\+\_\+out\+\_\+height}} (\mbox{\hyperlink{local__layer_8h_a03ec842604ac51c9ba42c4c4790cb0d4}{local\+\_\+layer}} l)
+\item 
+int \mbox{\hyperlink{local__layer_8c_af17c05f872f034f52331e4983c10870d}{local\+\_\+out\+\_\+width}} (\mbox{\hyperlink{local__layer_8h_a03ec842604ac51c9ba42c4c4790cb0d4}{local\+\_\+layer}} l)
+\item 
+\mbox{\hyperlink{local__layer_8h_a03ec842604ac51c9ba42c4c4790cb0d4}{local\+\_\+layer}} \mbox{\hyperlink{local__layer_8c_ab5a3af6d66cf3b029c24de2e455713b2}{make\+\_\+local\+\_\+layer}} (int batch, int h, int w, int c, int n, int size, int stride, int pad, \mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032}{ACTIVATION}} activation)
+\item 
+void \mbox{\hyperlink{local__layer_8c_ab91303546c254374643371fc641f97c3}{forward\+\_\+local\+\_\+layer}} (const \mbox{\hyperlink{local__layer_8h_a03ec842604ac51c9ba42c4c4790cb0d4}{local\+\_\+layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{local__layer_8c_a2dd110c48aebee98ed1cdc9733880675}{backward\+\_\+local\+\_\+layer}} (\mbox{\hyperlink{local__layer_8h_a03ec842604ac51c9ba42c4c4790cb0d4}{local\+\_\+layer}} l, \mbox{\hyperlink{structnetwork__state}{network\+\_\+state}} state)
+\item 
+void \mbox{\hyperlink{local__layer_8c_a11e38964abcfe11dad5776dd31455430}{update\+\_\+local\+\_\+layer}} (\mbox{\hyperlink{local__layer_8h_a03ec842604ac51c9ba42c4c4790cb0d4}{local\+\_\+layer}} l, int batch, float learning\+\_\+rate, float momentum, float decay)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{local__layer_8c_a2dd110c48aebee98ed1cdc9733880675}\label{local__layer_8c_a2dd110c48aebee98ed1cdc9733880675}} 
+\index{local\_layer.c@{local\_layer.c}!backward\_local\_layer@{backward\_local\_layer}}
+\index{backward\_local\_layer@{backward\_local\_layer}!local\_layer.c@{local\_layer.c}}
+\doxysubsubsection{\texorpdfstring{backward\_local\_layer()}{backward\_local\_layer()}}
+{\footnotesize\ttfamily void backward\+\_\+local\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{local__layer_8h_a03ec842604ac51c9ba42c4c4790cb0d4}{local\+\_\+layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{local__layer_8c_a2dd110c48aebee98ed1cdc9733880675_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{local__layer_8c_ab91303546c254374643371fc641f97c3}\label{local__layer_8c_ab91303546c254374643371fc641f97c3}} 
+\index{local\_layer.c@{local\_layer.c}!forward\_local\_layer@{forward\_local\_layer}}
+\index{forward\_local\_layer@{forward\_local\_layer}!local\_layer.c@{local\_layer.c}}
+\doxysubsubsection{\texorpdfstring{forward\_local\_layer()}{forward\_local\_layer()}}
+{\footnotesize\ttfamily void forward\+\_\+local\+\_\+layer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{local__layer_8h_a03ec842604ac51c9ba42c4c4790cb0d4}{local\+\_\+layer}}}]{l,  }\item[{\mbox{\hyperlink{structnetwork__state}{network\+\_\+state}}}]{state }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{local__layer_8c_ab91303546c254374643371fc641f97c3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{local__layer_8c_a3eb8b3196c05bbc195e68dc8d42aa292}\label{local__layer_8c_a3eb8b3196c05bbc195e68dc8d42aa292}} 
+\index{local\_layer.c@{local\_layer.c}!local\_out\_height@{local\_out\_height}}
+\index{local\_out\_height@{local\_out\_height}!local\_layer.c@{local\_layer.c}}
+\doxysubsubsection{\texorpdfstring{local\_out\_height()}{local\_out\_height()}}
+{\footnotesize\ttfamily int local\+\_\+out\+\_\+height (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{local__layer_8h_a03ec842604ac51c9ba42c4c4790cb0d4}{local\+\_\+layer}}}]{l }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{local__layer_8c_af17c05f872f034f52331e4983c10870d}\label{local__layer_8c_af17c05f872f034f52331e4983c10870d}} 
+\index{local\_layer.c@{local\_layer.c}!local\_out\_width@{local\_out\_width}}
+\index{local\_out\_width@{local\_out\_width}!local\_layer.c@{local\_layer.c}}
+\doxysubsubsection{\texorpdfstring{local\_out\_width()}{local\_out\_width()}}
+{\footnotesize\ttfamily int local\+\_\+out\+\_\+width (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{local__layer_8h_a03ec842604ac51c9ba42c4c4790cb0d4}{local\+\_\+layer}}}]{l }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=261pt]{local__layer_8c_af17c05f872f034f52331e4983c10870d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{local__layer_8c_ab5a3af6d66cf3b029c24de2e455713b2}\label{local__layer_8c_ab5a3af6d66cf3b029c24de2e455713b2}} 
+\index{local\_layer.c@{local\_layer.c}!make\_local\_layer@{make\_local\_layer}}
+\index{make\_local\_layer@{make\_local\_layer}!local\_layer.c@{local\_layer.c}}
+\doxysubsubsection{\texorpdfstring{make\_local\_layer()}{make\_local\_layer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{local__layer_8h_a03ec842604ac51c9ba42c4c4790cb0d4}{local\+\_\+layer}} make\+\_\+local\+\_\+layer (\begin{DoxyParamCaption}\item[{int}]{batch,  }\item[{int}]{h,  }\item[{int}]{w,  }\item[{int}]{c,  }\item[{int}]{n,  }\item[{int}]{size,  }\item[{int}]{stride,  }\item[{int}]{pad,  }\item[{\mbox{\hyperlink{darknet_8h_aea09b678fab8ab931902378cbbd79032}{ACTIVATION}}}]{activation }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{local__layer_8c_ab5a3af6d66cf3b029c24de2e455713b2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{local__layer_8c_a11e38964abcfe11dad5776dd31455430}\label{local__layer_8c_a11e38964abcfe11dad5776dd31455430}} 
+\index{local\_layer.c@{local\_layer.c}!update\_local\_layer@{update\_local\_layer}}
+\index{update\_local\_layer@{update\_local\_layer}!local\_layer.c@{local\_layer.c}}
+\doxysubsubsection{\texorpdfstring{update\_local\_layer()}{update\_local\_layer()}}
+{\footnotesize\ttfamily void update\+\_\+local\+\_\+layer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{local__layer_8h_a03ec842604ac51c9ba42c4c4790cb0d4}{local\+\_\+layer}}}]{l,  }\item[{int}]{batch,  }\item[{float}]{learning\+\_\+rate,  }\item[{float}]{momentum,  }\item[{float}]{decay }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=273pt]{local__layer_8c_a11e38964abcfe11dad5776dd31455430_cgraph}
+\end{center}
+\end{figure}

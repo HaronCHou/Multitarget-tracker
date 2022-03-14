@@ -1,0 +1,329 @@
+\hypertarget{gport_8h_source}{}\doxysection{gport.\+h}
+\label{gport_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/gport.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/gport.h}}
+\mbox{\hyperlink{gport_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef GPORTH}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define GPORTH}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#ifdef \_\_BORLANDC\_\_}}
+\DoxyCodeLine{5     \textcolor{comment}{// Undefine \_\_MINMAX\_DEFINED so that min and max are correctly defined}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{    \#ifdef \_\_MINMAX\_DEFINED}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{        \#undef \_\_MINMAX\_DEFINED}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{9     \textcolor{comment}{// Ignore "{}Cannot create precompiled header: code in header"{} message}}
+\DoxyCodeLine{10     \textcolor{comment}{// generated when compiling string.cc}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{    \#pragma warn -\/pch}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#ifdef \_\_BORLANDC\_\_}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{    \#pragma warn .pch}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{gdefs_8h}{gdefs.h}}"{}}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{comment}{// System specific includes here}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#if GPORT\_WINDOWS}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#if GPORT\_MAC}}
+\DoxyCodeLine{30 \textcolor{comment}{//  \#include <Printing.h>}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{keyword}{enum} \mbox{\hyperlink{gport_8h_a595e501a3b83fde14c760260fbfb153f}{GPortDevice}} \{\mbox{\hyperlink{gport_8h_a595e501a3b83fde14c760260fbfb153fad37755da7807453aee0eac7ef1d26483}{devScreen}}, \mbox{\hyperlink{gport_8h_a595e501a3b83fde14c760260fbfb153fa221981970d19a1539d8837023f2b59e5}{devPrinter}}, \mbox{\hyperlink{gport_8h_a595e501a3b83fde14c760260fbfb153fa0a68e13b8c9705393b42a2fd9cb87d21}{devPicture}}, \mbox{\hyperlink{gport_8h_a595e501a3b83fde14c760260fbfb153fa226f93689e7449ef4b2dd3d0efcb0809}{devPostscript}}\};}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{comment}{/* Note that we always draw using the following coordinate system:}}
+\DoxyCodeLine{39 \textcolor{comment}{}}
+\DoxyCodeLine{40 \textcolor{comment}{(0,0)-\/-\/-\/-\/-\/-\/-\/-\/-\/>(+x,0)}}
+\DoxyCodeLine{41 \textcolor{comment}{  |}}
+\DoxyCodeLine{42 \textcolor{comment}{  |}}
+\DoxyCodeLine{43 \textcolor{comment}{  |}}
+\DoxyCodeLine{44 \textcolor{comment}{ \(\backslash\)/}}
+\DoxyCodeLine{45 \textcolor{comment}{(+y,0)}}
+\DoxyCodeLine{46 \textcolor{comment}{}}
+\DoxyCodeLine{47 \textcolor{comment}{ Hence the origin is the top left hand corner, and y goes down rather than up.}}
+\DoxyCodeLine{48 \textcolor{comment}{ This is typical for drawing to a window. Some systems have other coordinate}}
+\DoxyCodeLine{49 \textcolor{comment}{ systems (such as Postscript). We make the translation internally.}}
+\DoxyCodeLine{50 \textcolor{comment}{}}
+\DoxyCodeLine{51 \textcolor{comment}{*/}}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \textcolor{comment}{// A point}}
+\DoxyCodeLine{54 \textcolor{keyword}{class }\mbox{\hyperlink{class_g_point}{GPoint}}}
+\DoxyCodeLine{55 \{}
+\DoxyCodeLine{56 \textcolor{keyword}{public}:}
+\DoxyCodeLine{57     \mbox{\hyperlink{class_g_point_a8454b1fc2b2094d4cf5fd8d57a9114d9}{GPoint}} () \{ \mbox{\hyperlink{class_g_point_ad6f78b03b847082c2e2feb0a3612f0c5}{SetPoint}} (0, 0); \};}
+\DoxyCodeLine{58     \mbox{\hyperlink{class_g_point_a8198edcc7b38e155c8f1e117ca912fcb}{GPoint}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_g_point}{GPoint}} \&p) \{ \mbox{\hyperlink{class_g_point_a0a26572e08c37a5e7e6854ae8c7fee66}{X}} = p.\mbox{\hyperlink{class_g_point_a0a26572e08c37a5e7e6854ae8c7fee66}{X}}; \mbox{\hyperlink{class_g_point_aca224bb9b30fab3b59cd25a9261c1069}{Y}} = p.\mbox{\hyperlink{class_g_point_aca224bb9b30fab3b59cd25a9261c1069}{Y}}; \};}
+\DoxyCodeLine{59     \mbox{\hyperlink{class_g_point_a9344fd1bded86e274aad88fd85e0ee15}{GPoint}} (\textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}) \{ \mbox{\hyperlink{class_g_point_ad6f78b03b847082c2e2feb0a3612f0c5}{SetPoint}} (\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}); \};}
+\DoxyCodeLine{60     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_g_point_a1abafe0e52e3f7039bbe0c0acbb5a9a9}{GetX}} ()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_g_point_a0a26572e08c37a5e7e6854ae8c7fee66}{X}}; \};}
+\DoxyCodeLine{61     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_g_point_a0b40736448fc178ac2406875bd524a2c}{GetY}} ()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_g_point_aca224bb9b30fab3b59cd25a9261c1069}{Y}}; \};}
+\DoxyCodeLine{62     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_point_a8098fbfa3ada3a81e07313b2b4de1427}{Offset}} (\textcolor{keyword}{const} \textcolor{keywordtype}{int} xoff, \textcolor{keyword}{const} \textcolor{keywordtype}{int} yoff) \{ \mbox{\hyperlink{class_g_point_a0a26572e08c37a5e7e6854ae8c7fee66}{X}} += xoff; \mbox{\hyperlink{class_g_point_aca224bb9b30fab3b59cd25a9261c1069}{Y}} += yoff; \};}
+\DoxyCodeLine{63     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_point_ad6f78b03b847082c2e2feb0a3612f0c5}{SetPoint}} (\textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}) \{ \mbox{\hyperlink{class_g_point_a0a26572e08c37a5e7e6854ae8c7fee66}{X}} = \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}; \mbox{\hyperlink{class_g_point_aca224bb9b30fab3b59cd25a9261c1069}{Y}} = \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}; \};}
+\DoxyCodeLine{64     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_point_aa2e1b46333fea1d31b1db8eea7a4bbd6}{SetX}} (\textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}) \{ \mbox{\hyperlink{class_g_point_a0a26572e08c37a5e7e6854ae8c7fee66}{X}} = \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}; \};}
+\DoxyCodeLine{65     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_point_a20d2d7826baf36fe4b8f73b88d75cf7d}{SetY}} (\textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}) \{ \mbox{\hyperlink{class_g_point_aca224bb9b30fab3b59cd25a9261c1069}{Y}} = \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}; \};}
+\DoxyCodeLine{66     }
+\DoxyCodeLine{67     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_g_point_ae28ae2bca94c3b0906c3336c10545c94}{operator== }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_g_point}{GPoint}} \&p) \{ \textcolor{keywordflow}{return} (\textcolor{keywordtype}{int}) ( (\mbox{\hyperlink{class_g_point_a0a26572e08c37a5e7e6854ae8c7fee66}{X}} == p.\mbox{\hyperlink{class_g_point_a0a26572e08c37a5e7e6854ae8c7fee66}{X}}) \&\& ( \mbox{\hyperlink{class_g_point_aca224bb9b30fab3b59cd25a9261c1069}{Y}} == p.\mbox{\hyperlink{class_g_point_aca224bb9b30fab3b59cd25a9261c1069}{Y}})); \};}
+\DoxyCodeLine{68     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_g_point_a7294abba5e2a5a7caa75e3967e07cbb5}{operator!= }}(\textcolor{keyword}{const} \mbox{\hyperlink{class_g_point}{GPoint}} \&p) \{ \textcolor{keywordflow}{return} (\textcolor{keywordtype}{int}) ( (\mbox{\hyperlink{class_g_point_a0a26572e08c37a5e7e6854ae8c7fee66}{X}} != p.\mbox{\hyperlink{class_g_point_a0a26572e08c37a5e7e6854ae8c7fee66}{X}}) || ( \mbox{\hyperlink{class_g_point_aca224bb9b30fab3b59cd25a9261c1069}{Y}} != p.\mbox{\hyperlink{class_g_point_aca224bb9b30fab3b59cd25a9261c1069}{Y}})); \};}
+\DoxyCodeLine{69 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{70     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_g_point_a0a26572e08c37a5e7e6854ae8c7fee66}{X}};}
+\DoxyCodeLine{71     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_g_point_aca224bb9b30fab3b59cd25a9261c1069}{Y}};}
+\DoxyCodeLine{72 \};}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74 \textcolor{comment}{// A rectangle}}
+\DoxyCodeLine{75 \textcolor{keyword}{class }\mbox{\hyperlink{class_g_rect}{GRect}}}
+\DoxyCodeLine{76 \{}
+\DoxyCodeLine{77 \textcolor{keyword}{public}:}
+\DoxyCodeLine{78     \mbox{\hyperlink{class_g_rect_a66651711fd959d226869ba99a0a266c7}{GRect}} () \{ \mbox{\hyperlink{class_g_rect_ab848c49d0c6376f749a592042791b98b}{left}} = \mbox{\hyperlink{class_g_rect_af22c8a22a7d2fe0f139375e7eb171675}{top}} = \mbox{\hyperlink{class_g_rect_a361868c6c368e642abcaf3e4823b1e70}{right}} = \mbox{\hyperlink{class_g_rect_a767f1eb55f7e9880f58609406b2d6a66}{bottom}} = 0; \};}
+\DoxyCodeLine{79     \mbox{\hyperlink{class_g_rect_a56121bc9d4825b0f9200a78d29357b71}{GRect}} (\textcolor{keyword}{const} \textcolor{keywordtype}{int} l, \textcolor{keyword}{const} \textcolor{keywordtype}{int} t, \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}}, \textcolor{keyword}{const} \textcolor{keywordtype}{int} b) \{ \mbox{\hyperlink{class_g_rect_a1fd6fd632b6d3c068382766a0c18340f}{SetRect}} (l, t, \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}}, b); \};}
+\DoxyCodeLine{80     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int}  \mbox{\hyperlink{class_g_rect_a2095ad1d204b942a45bc8ed1546df937}{GetLeft}} ()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_g_rect_ab848c49d0c6376f749a592042791b98b}{left}}; \};}
+\DoxyCodeLine{81     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int}  \mbox{\hyperlink{class_g_rect_ac346895770ff4c98c672485a05819f55}{GetTop}} ()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_g_rect_af22c8a22a7d2fe0f139375e7eb171675}{top}}; \};}
+\DoxyCodeLine{82     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int}  \mbox{\hyperlink{class_g_rect_a3ba95d11e8a2760f1f7ba023dbfaf220}{GetRight}} ()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_g_rect_a361868c6c368e642abcaf3e4823b1e70}{right}}; \};}
+\DoxyCodeLine{83     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int}  \mbox{\hyperlink{class_g_rect_a7c08ca62e8fbad3cfa1724384ee4921d}{GetBottom}} ()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_g_rect_a767f1eb55f7e9880f58609406b2d6a66}{bottom}}; \};}
+\DoxyCodeLine{84     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int}  \mbox{\hyperlink{class_g_rect_af36a407452070f2e93a25dbafd3b4314}{GetWidth}} ()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_g_rect_a361868c6c368e642abcaf3e4823b1e70}{right}} -\/ \mbox{\hyperlink{class_g_rect_ab848c49d0c6376f749a592042791b98b}{left}}; \};}
+\DoxyCodeLine{85     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int}  \mbox{\hyperlink{class_g_rect_a8d2b0a2c06688c2dad74bd0789f57d73}{GetHeight}} ()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_g_rect_a767f1eb55f7e9880f58609406b2d6a66}{bottom}} -\/ \mbox{\hyperlink{class_g_rect_af22c8a22a7d2fe0f139375e7eb171675}{top}}; \};}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_rect_a3b9d11354aad699f297dbfa7eb8196aa}{Inset}} (\textcolor{keyword}{const} \textcolor{keywordtype}{int} dx, \textcolor{keyword}{const} \textcolor{keywordtype}{int} dy) \{ \mbox{\hyperlink{class_g_rect_ab848c49d0c6376f749a592042791b98b}{left}} += dx; \mbox{\hyperlink{class_g_rect_a361868c6c368e642abcaf3e4823b1e70}{right}} -\/= dx; \mbox{\hyperlink{class_g_rect_af22c8a22a7d2fe0f139375e7eb171675}{top}} += dy; \mbox{\hyperlink{class_g_rect_a767f1eb55f7e9880f58609406b2d6a66}{bottom}} -\/= dy; \};}
+\DoxyCodeLine{88     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_rect_a7774fac9cd2ec8bee54a442e7ca18ebc}{Offset}} (\textcolor{keyword}{const} \textcolor{keywordtype}{int} dx, \textcolor{keyword}{const} \textcolor{keywordtype}{int} dy) \{ \mbox{\hyperlink{class_g_rect_ab848c49d0c6376f749a592042791b98b}{left}} += dx; \mbox{\hyperlink{class_g_rect_a361868c6c368e642abcaf3e4823b1e70}{right}} += dx; \mbox{\hyperlink{class_g_rect_af22c8a22a7d2fe0f139375e7eb171675}{top}} += dy; \mbox{\hyperlink{class_g_rect_a767f1eb55f7e9880f58609406b2d6a66}{bottom}} += dy; \};}
+\DoxyCodeLine{89     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_g_rect_a49e5656acaa3f59acb7b0db70f455471}{PointInRect}} (\mbox{\hyperlink{class_g_point}{GPoint}} \&\mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}})}
+\DoxyCodeLine{90     \{}
+\DoxyCodeLine{91         \textcolor{keywordflow}{return} (((\mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}.GetX() >= \mbox{\hyperlink{class_g_rect_ab848c49d0c6376f749a592042791b98b}{left}}) \&\& (\mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}.GetX() <= \mbox{\hyperlink{class_g_rect_a361868c6c368e642abcaf3e4823b1e70}{right}})) \&\&}
+\DoxyCodeLine{92             ((\mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}.GetY() >= \mbox{\hyperlink{class_g_rect_af22c8a22a7d2fe0f139375e7eb171675}{top}}) \&\& (\mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}.GetY() <= \mbox{\hyperlink{class_g_rect_a767f1eb55f7e9880f58609406b2d6a66}{bottom}})));}
+\DoxyCodeLine{93     \}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_rect_af8fab889fb03811f8ba166abfe2b9c01}{SetLeft}} (\textcolor{keyword}{const} \textcolor{keywordtype}{int} l) \{\mbox{\hyperlink{class_g_rect_ab848c49d0c6376f749a592042791b98b}{left}} = l; \};}
+\DoxyCodeLine{96     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_rect_a87864ea06d8f6796b296fd73ac3d1a95}{SetTop}} (\textcolor{keyword}{const} \textcolor{keywordtype}{int} t) \{\mbox{\hyperlink{class_g_rect_af22c8a22a7d2fe0f139375e7eb171675}{top}} = t; \};}
+\DoxyCodeLine{97     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_rect_a2293c5054272c0aba84624edf82b5b3b}{SetRight}} (\textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}}) \{\mbox{\hyperlink{class_g_rect_a361868c6c368e642abcaf3e4823b1e70}{right}} = \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}}; \};}
+\DoxyCodeLine{98     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_rect_a2ee1b00b28013fc219b27510a402433d}{SetBottom}} (\textcolor{keyword}{const} \textcolor{keywordtype}{int} b) \{\mbox{\hyperlink{class_g_rect_a767f1eb55f7e9880f58609406b2d6a66}{bottom}} = b; \};}
+\DoxyCodeLine{99     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_rect_a1fd6fd632b6d3c068382766a0c18340f}{SetRect}} (\textcolor{keyword}{const} \textcolor{keywordtype}{int} l, \textcolor{keyword}{const} \textcolor{keywordtype}{int} t, \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}}, \textcolor{keyword}{const} \textcolor{keywordtype}{int} b)}
+\DoxyCodeLine{100         \{ \mbox{\hyperlink{class_g_rect_ab848c49d0c6376f749a592042791b98b}{left}} = l; \mbox{\hyperlink{class_g_rect_af22c8a22a7d2fe0f139375e7eb171675}{top}} = t; \mbox{\hyperlink{class_g_rect_a361868c6c368e642abcaf3e4823b1e70}{right}} = \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}}; \mbox{\hyperlink{class_g_rect_a767f1eb55f7e9880f58609406b2d6a66}{bottom}} = b; \};}
+\DoxyCodeLine{101     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_rect_a6adcf2d50d9aaeaf18c304dc3ece0280}{SetRectWH}} (\textcolor{keyword}{const} \textcolor{keywordtype}{int} l, \textcolor{keyword}{const} \textcolor{keywordtype}{int} t, \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}, \textcolor{keyword}{const} \textcolor{keywordtype}{int} h)}
+\DoxyCodeLine{102         \{ \mbox{\hyperlink{class_g_rect_ab848c49d0c6376f749a592042791b98b}{left}} = l; \mbox{\hyperlink{class_g_rect_af22c8a22a7d2fe0f139375e7eb171675}{top}} = t; \mbox{\hyperlink{class_g_rect_a361868c6c368e642abcaf3e4823b1e70}{right}} = l + \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}; \mbox{\hyperlink{class_g_rect_a767f1eb55f7e9880f58609406b2d6a66}{bottom}} = t + h; \};}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{105     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_g_rect_ab848c49d0c6376f749a592042791b98b}{left}}, \mbox{\hyperlink{class_g_rect_af22c8a22a7d2fe0f139375e7eb171675}{top}}, \mbox{\hyperlink{class_g_rect_a361868c6c368e642abcaf3e4823b1e70}{right}}, \mbox{\hyperlink{class_g_rect_a767f1eb55f7e9880f58609406b2d6a66}{bottom}};}
+\DoxyCodeLine{106 \};}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108 \textcolor{comment}{// Base class for system specific fonts}}
+\DoxyCodeLine{109 \textcolor{keyword}{class }\mbox{\hyperlink{class_g_base_font}{GBaseFont}}}
+\DoxyCodeLine{110 \{}
+\DoxyCodeLine{111 \textcolor{keyword}{public}:}
+\DoxyCodeLine{112     \mbox{\hyperlink{class_g_base_font_ae2afea9a892bb4d271f5fadb4566336b}{GBaseFont}} ();}
+\DoxyCodeLine{113     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_g_base_font_a74e9cd3f391bc35a9e5de0a4915ae0f0}{\string~GBaseFont}} () = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{114     \textcolor{keyword}{virtual} std::string \mbox{\hyperlink{class_g_base_font_a202a60eadc6436354527de8ccd4a983d}{GetName}} () \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_g_base_font_a81dc0a7c8b42df0a39e49cc304da7d06}{description}}; \};}
+\DoxyCodeLine{115     \textcolor{keyword}{virtual} std::string \mbox{\hyperlink{class_g_base_font_a223b6eee3ba7e714d5dbb763ee4e3f9a}{GetDescription}} () \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_g_base_font_a81dc0a7c8b42df0a39e49cc304da7d06}{description}}; \};}
+\DoxyCodeLine{116     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int}  \mbox{\hyperlink{class_g_base_font_a62e761a8a0c0f60f01d8a0d451640e69}{GetSize}} () \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_g_base_font_a3665d1d315cccd1d1487eed589a8da0f}{size}}; \};}
+\DoxyCodeLine{117     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_g_base_font_a22abd1f8dfcda6124ffedb8dc26bfcd3}{IsBold}} () \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_g_base_font_a710baf8db958e41f964cb8af600df4c7}{bold}}; \};}
+\DoxyCodeLine{118     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_g_base_font_aec31b5754f2be8ae2552b2bfd37a76d1}{IsItalic}} () \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_g_base_font_aeff487abd13b9a9110b18a89ad51975e}{italic}}; \};    }
+\DoxyCodeLine{119 \textcolor{keyword}{private}:}
+\DoxyCodeLine{120     std::string     \mbox{\hyperlink{class_g_base_font_a81dc0a7c8b42df0a39e49cc304da7d06}{description}};}
+\DoxyCodeLine{121     std::string     \mbox{\hyperlink{class_g_base_font_a09217b162b03d74c2ea2e65bec537c5b}{name}};}
+\DoxyCodeLine{122     \textcolor{keywordtype}{int}         \mbox{\hyperlink{class_g_base_font_a3665d1d315cccd1d1487eed589a8da0f}{size}};}
+\DoxyCodeLine{123     \textcolor{keywordtype}{bool}        \mbox{\hyperlink{class_g_base_font_a710baf8db958e41f964cb8af600df4c7}{bold}};}
+\DoxyCodeLine{124     \textcolor{keywordtype}{bool}        \mbox{\hyperlink{class_g_base_font_aeff487abd13b9a9110b18a89ad51975e}{italic}};}
+\DoxyCodeLine{125 \};}
+\DoxyCodeLine{126 \textcolor{keyword}{typedef} \mbox{\hyperlink{class_g_base_font}{GBaseFont}} *\mbox{\hyperlink{gport_8h_acc500612a267a6e7ae8e021ccef66fed}{GBaseFontPtr}};}
+\DoxyCodeLine{127 }
+\DoxyCodeLine{128 \textcolor{keyword}{typedef} \mbox{\hyperlink{class_g_base_font}{GBaseFont}} \mbox{\hyperlink{gport_8h_af629af400ef84f948ceedc36b274f5f4}{GFont}} ; \textcolor{comment}{// for now}}
+\DoxyCodeLine{129 \textcolor{keyword}{typedef} \mbox{\hyperlink{class_g_base_font}{GFont}} *\mbox{\hyperlink{gport_8h_ae9391a537bb778333ca6418b70b0db89}{GFontPtr}};}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133 \textcolor{comment}{// Windows needs the two handles for screen and printer fonts}}
+\DoxyCodeLine{134 \textcolor{comment}{// Mac just sets things}}
+\DoxyCodeLine{135 \textcolor{comment}{// Postscript writes to the postscript stream}}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{137 }
+\DoxyCodeLine{138 \textcolor{comment}{// Virtual class to encapsulate printing}}
+\DoxyCodeLine{139 \textcolor{keyword}{class }\mbox{\hyperlink{class_g_base_printer}{GBasePrinter}}}
+\DoxyCodeLine{140 \{}
+\DoxyCodeLine{141 \textcolor{keyword}{public}:}
+\DoxyCodeLine{142     \mbox{\hyperlink{class_g_base_printer_a25d25e14f66bdc105754221c7bb3e173}{GBasePrinter}} () = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{143     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_g_base_printer_a348cec82e64ca6a1dfd55c694be16410}{\string~GBasePrinter}} () = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{144     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_base_printer_a477d35154512e2c96971cf6bff8d3274}{PrinterSetup}} () = 0;}
+\DoxyCodeLine{145     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_base_printer_a09ba32c950923f9b69a704a61652de6a}{AbortPrinting}} () = 0;}
+\DoxyCodeLine{146     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_base_printer_a98944a13eee52ae3fdbced5c7a317da6}{EndDoc}} ();}
+\DoxyCodeLine{147     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_g_base_printer_a3572e5164e69c0abcdb304a8b5f7ef5e}{EndPage}} ();}
+\DoxyCodeLine{148     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_base_printer_ad8008bef5f9aeed47354dcf4497ce450}{GetPrintingRect}} (\mbox{\hyperlink{class_g_rect}{GRect}} \&\mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}}) = 0;}
+\DoxyCodeLine{149     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_base_printer_ab65d45881c40fbceca3c88b7b8f86800}{GetPhysicalPageRect}} (\mbox{\hyperlink{class_g_rect}{GRect}} \&\mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}}) = 0;}
+\DoxyCodeLine{150     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_g_base_printer_a5c49511be188949312141af0b797ceba}{StartPage}} () = 0;}
+\DoxyCodeLine{151     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_g_base_printer_ac0052d2a156a45547cb23781500424c3}{StartDoc}} (\textcolor{keywordtype}{char} *jobname) = 0; \textcolor{comment}{// "{}GBasePrinter"{}}}
+\DoxyCodeLine{152 \};}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154 \textcolor{comment}{// Windows  port VPort}}
+\DoxyCodeLine{155 \textcolor{comment}{// Mac port VPort}}
+\DoxyCodeLine{156 \textcolor{comment}{// Postscript -\/ just write to file}}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160 \textcolor{comment}{// Encapsulates the complete graphics system (screen drawing, picture files,}}
+\DoxyCodeLine{161 \textcolor{comment}{// printing, clipboard).}}
+\DoxyCodeLine{162 \textcolor{keyword}{class }\mbox{\hyperlink{class_g_base_port}{GBasePort}}}
+\DoxyCodeLine{163 \{}
+\DoxyCodeLine{164 \textcolor{keyword}{public}:}
+\DoxyCodeLine{165     \mbox{\hyperlink{class_g_base_port_a3e2865ab748fe810a11700b04a07c5e8}{GBasePort}} () = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{166     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_g_base_port_ae3f3f24b532f3b2e9980f27884f43c8c}{\string~GBasePort}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{167     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_base_port_af9375a9f4cd1bc94ac70eb71c437835a}{DrawArc}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_g_point}{GPoint}} \&\mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}, \textcolor{keyword}{const} \textcolor{keywordtype}{int} radius,}
+\DoxyCodeLine{168         \textcolor{keyword}{const} \textcolor{keywordtype}{double} startAngleDegrees, \textcolor{keyword}{const} \textcolor{keywordtype}{double} endAngleDegrees) = 0;}
+\DoxyCodeLine{169     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_base_port_a7dbdd13c9a8f60537e7915a7991ab0f0}{DrawCircle}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_g_point}{GPoint}} \&\mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}, \textcolor{keyword}{const} \textcolor{keywordtype}{int} radius) = 0;}
+\DoxyCodeLine{170     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_base_port_a9e19a5d97e629c3d19be31e1938504c1}{DrawLine}} (\textcolor{keyword}{const} \textcolor{keywordtype}{int} x1, \textcolor{keyword}{const} \textcolor{keywordtype}{int} y1, \textcolor{keyword}{const} \textcolor{keywordtype}{int} x2, \textcolor{keyword}{const} \textcolor{keywordtype}{int} y2) = 0;}
+\DoxyCodeLine{171     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_base_port_ad176b1ff88c4c0a29d51869b13a288d2}{DrawLinePts}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_g_point}{GPoint}} \&pt1, \textcolor{keyword}{const} \mbox{\hyperlink{class_g_point}{GPoint}} \&pt2)}
+\DoxyCodeLine{172         \{ \mbox{\hyperlink{class_g_base_port_a9e19a5d97e629c3d19be31e1938504c1}{DrawLine}} (pt1.\mbox{\hyperlink{class_g_point_a1abafe0e52e3f7039bbe0c0acbb5a9a9}{GetX}}(), pt1.\mbox{\hyperlink{class_g_point_a0b40736448fc178ac2406875bd524a2c}{GetY}}(), pt2.\mbox{\hyperlink{class_g_point_a1abafe0e52e3f7039bbe0c0acbb5a9a9}{GetX}}(), pt2.\mbox{\hyperlink{class_g_point_a0b40736448fc178ac2406875bd524a2c}{GetY}}()); \};}
+\DoxyCodeLine{173     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_base_port_a40b25399150458e4f41d4ed6b2f31f16}{DrawRect}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_g_rect}{GRect}} \&\mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}}) = 0;}
+\DoxyCodeLine{174     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_base_port_a9b947d2575b05f303520fbbe7fd9e350}{DrawText}} (\textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *s) = 0;}
+\DoxyCodeLine{175     }
+\DoxyCodeLine{176     \textcolor{comment}{// Display}}
+\DoxyCodeLine{177     \textcolor{keyword}{virtual} \mbox{\hyperlink{gport_8h_a595e501a3b83fde14c760260fbfb153f}{GPortDevice}} \mbox{\hyperlink{class_g_base_port_aeca5105700149693465fb5dbc43c9bbc}{GetCurrentDevice}} () \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_g_base_port_a14275a027c8665d5fa4941e148a1b46a}{Device}}; \};}
+\DoxyCodeLine{178     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_base_port_a2d6dd3aa5ad82b26ed614e139c2f6b8f}{GetDisplayRect}} (\mbox{\hyperlink{class_g_rect}{GRect}} \&\mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}}) \{ \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}} = \mbox{\hyperlink{class_g_base_port_ac0e1180ebadeed5d3c7d0291db1bdf29}{DisplayRect}}; \};}
+\DoxyCodeLine{179     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_base_port_a8ac5424f05a6b6b982e570aae0802087}{SetDisplayRect}} (\mbox{\hyperlink{class_g_rect}{GRect}} \&\mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}}) \{ \mbox{\hyperlink{class_g_base_port_ac0e1180ebadeed5d3c7d0291db1bdf29}{DisplayRect}} = \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}}; \};}
+\DoxyCodeLine{180     }
+\DoxyCodeLine{181     \textcolor{comment}{// Pen}}
+\DoxyCodeLine{182     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int}  \mbox{\hyperlink{class_g_base_port_aeebcbb21b90ae5614d43b0111133932e}{GetPenWidth}} () \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_g_base_port_a9a76c3a8af8d0e9f29035d02d8f038c1}{PenWidth}}; \};}
+\DoxyCodeLine{183     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_base_port_aa2fd1fbe050cfea5a21afb7d4cecaa61}{SetPenWidth}} (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}) \{ \mbox{\hyperlink{class_g_base_port_a9a76c3a8af8d0e9f29035d02d8f038c1}{PenWidth}} = \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}}; \};}
+\DoxyCodeLine{184     }
+\DoxyCodeLine{185     \textcolor{comment}{// Fonts}}
+\DoxyCodeLine{186     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_base_port_af297609a9f7ed9d29d77072037888f5e}{SetCurrentFont}} (\mbox{\hyperlink{class_g_base_font}{GBaseFont}} \&font) = 0;}
+\DoxyCodeLine{187     }
+\DoxyCodeLine{188     \textcolor{comment}{// Pictures}}
+\DoxyCodeLine{189     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_base_port_aad9e21ed63c4f04a508e30b7f100fba5}{StartPicture}} (\textcolor{keywordtype}{char} *pictFileName) = 0;}
+\DoxyCodeLine{190     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_base_port_ac14e5cf72682662f8ac24c57e98b1bfa}{EndPicture}} () = 0;}
+\DoxyCodeLine{191     }
+\DoxyCodeLine{192     \textcolor{comment}{// Groups}}
+\DoxyCodeLine{193     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_base_port_ac7aafbb728fe8b61dec2c3f163e2c894}{BeginGroup}} () = 0;}
+\DoxyCodeLine{194     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_base_port_aa5b444d85d6bf8c88bbddb58f7ce8bd4}{EndGroup}} () = 0;}
+\DoxyCodeLine{195     }
+\DoxyCodeLine{196     \textcolor{comment}{// Printing}}
+\DoxyCodeLine{197     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_base_port_af2e9e7d8adf001df68ab3e714dd4242e}{GetPrintingRect}} (\mbox{\hyperlink{class_g_rect}{GRect}} \&\mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}}) = 0;}
+\DoxyCodeLine{198     }
+\DoxyCodeLine{199     \textcolor{comment}{// Colour}}
+\DoxyCodeLine{200     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_base_port_af13ac2220d4ff90a160294c79d4a2c1b}{SetFillColorRGB}} (\textcolor{keywordtype}{int} \textcolor{comment}{/*r*/}, \textcolor{keywordtype}{int} \textcolor{comment}{/*g*/}, \textcolor{keywordtype}{int} \textcolor{comment}{/*b*/}) \{\};}
+\DoxyCodeLine{201     }
+\DoxyCodeLine{202     }
+\DoxyCodeLine{203 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{204     \textcolor{comment}{// list of fonts}}
+\DoxyCodeLine{205     \textcolor{comment}{// printer class}}
+\DoxyCodeLine{206     \textcolor{comment}{//pens}}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{208     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_g_base_port_a9a76c3a8af8d0e9f29035d02d8f038c1}{PenWidth}} = 1;}
+\DoxyCodeLine{209 }
+\DoxyCodeLine{210     \textcolor{comment}{// Device info}}
+\DoxyCodeLine{211     \mbox{\hyperlink{gport_8h_a595e501a3b83fde14c760260fbfb153f}{GPortDevice}} \mbox{\hyperlink{class_g_base_port_a14275a027c8665d5fa4941e148a1b46a}{Device}} = \mbox{\hyperlink{gport_8h_a595e501a3b83fde14c760260fbfb153fad37755da7807453aee0eac7ef1d26483}{devScreen}};}
+\DoxyCodeLine{212     \mbox{\hyperlink{class_g_rect}{GRect}}  \mbox{\hyperlink{class_g_base_port_ac0e1180ebadeed5d3c7d0291db1bdf29}{DisplayRect}};}
+\DoxyCodeLine{213 \};}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215 \textcolor{comment}{// Mac}}
+\DoxyCodeLine{216 \textcolor{comment}{// Win}}
+\DoxyCodeLine{217 \textcolor{comment}{// Postscript}}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219 \textcolor{keyword}{class }\mbox{\hyperlink{class_g_postscript_port}{GPostscriptPort}} final : \textcolor{keyword}{public} \mbox{\hyperlink{class_g_base_port}{GBasePort}}}
+\DoxyCodeLine{220 \{}
+\DoxyCodeLine{221 \textcolor{keyword}{public}:}
+\DoxyCodeLine{222     \mbox{\hyperlink{class_g_postscript_port_ad6dc52974d36561520b126452bd12e1f}{GPostscriptPort}} ();}
+\DoxyCodeLine{223     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_g_postscript_port_a8c23e75b77f0b58449596986766df62f}{\string~GPostscriptPort}} () = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{224     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_postscript_port_a9930f5d5cf8d6efb04af048a3ab72a3f}{DrawArc}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_g_point}{GPoint}} \&\mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}, \textcolor{keyword}{const} \textcolor{keywordtype}{int} radius,}
+\DoxyCodeLine{225             \textcolor{keyword}{const} \textcolor{keywordtype}{double} startAngleDegrees, \textcolor{keyword}{const} \textcolor{keywordtype}{double} endAngleDegrees);}
+\DoxyCodeLine{226     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_postscript_port_a859f59aeb691f0a9072aacc555417bb5}{DrawCircle}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_g_point}{GPoint}} \&\mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}, \textcolor{keyword}{const} \textcolor{keywordtype}{int} radius);}
+\DoxyCodeLine{227     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_postscript_port_a5f148a471c23fbf49397e17947c426e2}{DrawLine}} (\textcolor{keyword}{const} \textcolor{keywordtype}{int} x1, \textcolor{keyword}{const} \textcolor{keywordtype}{int} y1, \textcolor{keyword}{const} \textcolor{keywordtype}{int} x2, \textcolor{keyword}{const} \textcolor{keywordtype}{int} y2);}
+\DoxyCodeLine{228     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_postscript_port_a2d69a564e11b54ee7d7878ad83b45707}{DrawRect}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_g_rect}{GRect}} \&\mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}});}
+\DoxyCodeLine{229     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_postscript_port_abdd3978e13af04f5e6db9cf28cf861a8}{DrawText}} (\textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *text);}
+\DoxyCodeLine{230 }
+\DoxyCodeLine{231 }
+\DoxyCodeLine{232     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_postscript_port_a802ee0f5b503ec12b1400e4b20725419}{FillCircle}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_g_point}{GPoint}} \&\mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}, \textcolor{keyword}{const} \textcolor{keywordtype}{int} radius);}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{234 }
+\DoxyCodeLine{235     }
+\DoxyCodeLine{236     \textcolor{comment}{// Pen}}
+\DoxyCodeLine{237     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_postscript_port_a63e3cf185f620f9f24ec40f01dc3b02c}{SetPenWidth}} (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_abbfdeb9b425ae9b70088a3d288670867}{w}});}
+\DoxyCodeLine{238     }
+\DoxyCodeLine{239     }
+\DoxyCodeLine{240     \textcolor{comment}{// Fonts}}
+\DoxyCodeLine{241     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_postscript_port_a85705800844e412facdd5a08be9cf46b}{SetCurrentFont}} (\mbox{\hyperlink{class_g_base_font}{GBaseFont}} \&font);}
+\DoxyCodeLine{242     }
+\DoxyCodeLine{243     \textcolor{comment}{// Pictures}}
+\DoxyCodeLine{244     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_postscript_port_a4c9faebb953228964ca032e75ed40bcc}{StartPicture}} (\textcolor{keywordtype}{char} *pictFileName);}
+\DoxyCodeLine{245     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_postscript_port_afae4057295ef049fac22ce97eecb7d7f}{EndPicture}} ();}
+\DoxyCodeLine{246     }
+\DoxyCodeLine{247     \textcolor{comment}{// Groups}}
+\DoxyCodeLine{248     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_postscript_port_a3efa413a70790ed3e09e9f26c9aa6b2d}{BeginGroup}} () \{\};}
+\DoxyCodeLine{249     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_postscript_port_a1b78acf751c5a4c04f5942bb8bf4ed67}{EndGroup}} () \{\};}
+\DoxyCodeLine{250     }
+\DoxyCodeLine{251     \textcolor{comment}{// Printing}}
+\DoxyCodeLine{252     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_postscript_port_a02890465f3bd98983cfaa026448156f1}{GetPrintingRect}} (\mbox{\hyperlink{class_g_rect}{GRect}} \&\mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}});}
+\DoxyCodeLine{253     }
+\DoxyCodeLine{254     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_postscript_port_ad8157268c1db4307eca36108fdc1aa1e}{SetFillColorRGB}} (\textcolor{keywordtype}{int} \mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{rings_8cpp_aa9df5aa3976a89a96a5f1c7611d42938}{g}}, \textcolor{keywordtype}{int} b) }
+\DoxyCodeLine{255     \{ }
+\DoxyCodeLine{256         \mbox{\hyperlink{class_g_postscript_port_ab2a7d722f2cc8624ba2deccce41d287d}{fill\_r}} = (double)\mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}}/255.0; }
+\DoxyCodeLine{257         \mbox{\hyperlink{class_g_postscript_port_a50c6a0edf2edfb66f6a57b7cf847f2e2}{fill\_g}} = (double)\mbox{\hyperlink{rings_8cpp_aa9df5aa3976a89a96a5f1c7611d42938}{g}}/255.0; }
+\DoxyCodeLine{258         \mbox{\hyperlink{class_g_postscript_port_a60fd8f27f76db55846837e93ccf5f582}{fill\_b}} = (double)b/255.0; }
+\DoxyCodeLine{259     \};}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{261 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{262     std::ofstream       \mbox{\hyperlink{class_g_postscript_port_a0fb398f1c65b3ccb0efccd509f60d20d}{PostscriptStream}};}
+\DoxyCodeLine{263     std::string     \mbox{\hyperlink{class_g_postscript_port_adcdefa9db439190c69b85b171192e773}{DocumentFonts}};}
+\DoxyCodeLine{264     }
+\DoxyCodeLine{265     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_g_postscript_port_ab2a7d722f2cc8624ba2deccce41d287d}{fill\_r}}, \mbox{\hyperlink{class_g_postscript_port_a50c6a0edf2edfb66f6a57b7cf847f2e2}{fill\_g}}, \mbox{\hyperlink{class_g_postscript_port_a60fd8f27f76db55846837e93ccf5f582}{fill\_b}};}
+\DoxyCodeLine{266 \};}
+\DoxyCodeLine{267 }
+\DoxyCodeLine{268 \textcolor{keyword}{class }\mbox{\hyperlink{class_g_mac_port}{GMacPort}} final : \textcolor{keyword}{public} \mbox{\hyperlink{class_g_base_port}{GBasePort}}}
+\DoxyCodeLine{269 \{}
+\DoxyCodeLine{270 \textcolor{keyword}{public}:}
+\DoxyCodeLine{271     \textcolor{comment}{// Groups}}
+\DoxyCodeLine{272     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_mac_port_a66b95b91c1a03a8200994ed2b7be4d67}{BeginGroup}} ();}
+\DoxyCodeLine{273     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_g_mac_port_a0c29e4ce61f7c281f5cc9c04930db4fc}{EndGroup}} ();}
+\DoxyCodeLine{274 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{275 \};}
+\DoxyCodeLine{276 }
+\DoxyCodeLine{277 \textcolor{keyword}{class }\mbox{\hyperlink{class_s_v_g_port}{SVGPort}} final : \textcolor{keyword}{public} \mbox{\hyperlink{class_g_base_port}{GBasePort}}}
+\DoxyCodeLine{278 \{}
+\DoxyCodeLine{279 \textcolor{keyword}{public}:}
+\DoxyCodeLine{280     \mbox{\hyperlink{class_s_v_g_port_ae5600d35d7ba50be4395b575a8d61c79}{SVGPort}} ();}
+\DoxyCodeLine{281     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_v_g_port_aa849012cbcbb27a9db820cee968093c9}{DrawArc}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_g_point}{GPoint}} \&\textcolor{comment}{/*pt*/}, \textcolor{keyword}{const} \textcolor{keywordtype}{int} \textcolor{comment}{/*radius*/},}
+\DoxyCodeLine{282         \textcolor{keyword}{const} \textcolor{keywordtype}{double} \textcolor{comment}{/*startAngleDegrees*/}, \textcolor{keyword}{const} \textcolor{keywordtype}{double} \textcolor{comment}{/*endAngleDegrees*/}) \{\};}
+\DoxyCodeLine{283     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_v_g_port_a9aba350c03b01d93168882746b18ec07}{DrawCircle}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_g_point}{GPoint}} \&\mbox{\hyperlink{rings_8cpp_af69bbacaaf68a115b351c5d1e29c3cc8}{pt}}, \textcolor{keyword}{const} \textcolor{keywordtype}{int} radius);}
+\DoxyCodeLine{284     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_v_g_port_ab51984003b6e8f6170ef3fe4ba09b030}{DrawLine}} (\textcolor{keyword}{const} \textcolor{keywordtype}{int} x1, \textcolor{keyword}{const} \textcolor{keywordtype}{int} y1, \textcolor{keyword}{const} \textcolor{keywordtype}{int} x2, \textcolor{keyword}{const} \textcolor{keywordtype}{int} y2);}
+\DoxyCodeLine{285     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_v_g_port_a16219cfcb3520433a2c402c83b7ac47b}{DrawRect}} (\textcolor{keyword}{const} \mbox{\hyperlink{class_g_rect}{GRect}} \&\mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}});}
+\DoxyCodeLine{286     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_v_g_port_a94dc5a4fee82bacdd3160ea25827d7bb}{DrawText}} (\textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *text);}
+\DoxyCodeLine{287 }
+\DoxyCodeLine{288     \textcolor{comment}{// Pen}}
+\DoxyCodeLine{289     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_v_g_port_a3dbd4c8a9df41ccd1d05d362cec289a5}{SetPenWidth}} (\textcolor{keywordtype}{int} \textcolor{comment}{/*w*/}) \{\};}
+\DoxyCodeLine{290 }
+\DoxyCodeLine{291 }
+\DoxyCodeLine{292     \textcolor{comment}{// Fonts}}
+\DoxyCodeLine{293     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_v_g_port_ac9b98b54d4b9b1e519d2741f5e8be837}{SetCurrentFont}} (\mbox{\hyperlink{class_g_base_font}{GBaseFont}} \&font);}
+\DoxyCodeLine{294 }
+\DoxyCodeLine{295     \textcolor{comment}{// Pictures}}
+\DoxyCodeLine{296     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_v_g_port_a930228d552d729c5aeb0aa8fb731d303}{StartPicture}} (\textcolor{keywordtype}{char} *pictFileName);}
+\DoxyCodeLine{297     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_v_g_port_a564266843879b682d84b9aefad185662}{EndPicture}} ();}
+\DoxyCodeLine{298 }
+\DoxyCodeLine{299     \textcolor{comment}{// Groups}}
+\DoxyCodeLine{300     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_v_g_port_a75ba37175c0a1fb943e1fd34c1e23f01}{BeginGroup}} () \{\};}
+\DoxyCodeLine{301     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_v_g_port_a169f01fd03ef513e6d19df2ceb29234b}{EndGroup}} () \{\};}
+\DoxyCodeLine{302 }
+\DoxyCodeLine{303     \textcolor{comment}{// Printing}}
+\DoxyCodeLine{304     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_s_v_g_port_a8b8bcfc066089734819ba861dd5a0834}{GetPrintingRect}} (\mbox{\hyperlink{class_g_rect}{GRect}} \&\mbox{\hyperlink{namespacenvinfer1_ad3e635d1f15cdaca5d23251c775ef725}{r}});}
+\DoxyCodeLine{305 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{306     std::ofstream       \mbox{\hyperlink{class_s_v_g_port_ad3e240ca528cd784e138dce907d5d45a}{svgStream}};}
+\DoxyCodeLine{307     std::string     \mbox{\hyperlink{class_s_v_g_port_a84d591ffe687b48a18ef8dbfebe9bce4}{fontString}};}
+\DoxyCodeLine{308 \};}
+\DoxyCodeLine{309 }
+\DoxyCodeLine{310 }
+\DoxyCodeLine{311 \textcolor{preprocessor}{\#ifndef USE\_VC2}}
+\DoxyCodeLine{312 \textcolor{keyword}{extern} \mbox{\hyperlink{class_g_base_port}{GBasePort}} *\mbox{\hyperlink{gport_8h_aad8861600e282e5a840cbca868c4757e}{Port}}; \textcolor{comment}{// for now}}
+\DoxyCodeLine{313 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{314 }
+\DoxyCodeLine{315 \textcolor{preprocessor}{\#ifdef \_\_BORLANDC\_\_}}
+\DoxyCodeLine{316     \textcolor{comment}{// Redefine \_\_MINMAX\_DEFINED so Windows header files compile}}
+\DoxyCodeLine{317 \textcolor{preprocessor}{    \#ifndef \_\_MINMAX\_DEFINED}}
+\DoxyCodeLine{318 \textcolor{preprocessor}{            \#define \_\_MINMAX\_DEFINED}}
+\DoxyCodeLine{319 \textcolor{preprocessor}{    \#endif}}
+\DoxyCodeLine{320 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{321 }
+\DoxyCodeLine{322 }
+\DoxyCodeLine{323 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

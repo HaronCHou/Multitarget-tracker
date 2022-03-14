@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>My Project: D:/zhr_files/Multitarget-tracker-master/thirdparty/pybind11/include/pybind11/eval.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">My Project
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'搜索','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_4c3458e0ccdb4c3720723c1caa1aaa1c.html">zhr_files</a></li><li class="navelem"><a class="el" href="dir_5a8d4bff745a16410b5074d3583a347e.html">Multitarget-tracker-master</a></li><li class="navelem"><a class="el" href="dir_6c1304e0d9f7d9b35d7d08791be42ac0.html">thirdparty</a></li><li class="navelem"><a class="el" href="dir_81f0e7ca3228de21e772b4ba54a17b43.html">pybind11</a></li><li class="navelem"><a class="el" href="dir_4a60c827bb4543e56bc8f7af06f3e46e.html">include</a></li><li class="navelem"><a class="el" href="dir_8af4b752f124dfaef702ee3a10ee238c.html">pybind11</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">eval.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="eval_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">    pybind11/exec.h: Support for evaluating Python expressions and statements</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">    from strings and files</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"></span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">    Copyright (c) 2016 Klemens Morgenstern &lt;klemens.morgenstern@ed-chemnitz.de&gt; and</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">                       Wenzel Jakob &lt;wenzel.jakob@epfl.ch&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"></span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">    All rights reserved. Use of this source code is governed by a</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">    BSD-style license that can be found in the LICENSE file.</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">*/</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="pybind11_8h.html">pybind11.h</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><a class="code hl_define" href="detail_2common_8h.html#a577cd817cb71b655998cad4387cdaeba">NAMESPACE_BEGIN</a>(<a class="code hl_define" href="detail_2common_8h.html#a0d3c06cceaa89be29b71719a825444c6">PYBIND11_NAMESPACE</a>)</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="eval_8h.html#a6d50103ad6f0c6153036eb4de26b4402">   18</a></span>enum <a class="code hl_enumeration" href="eval_8h.html#a6d50103ad6f0c6153036eb4de26b4402">eval_mode</a> {</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="eval_8h.html#a6d50103ad6f0c6153036eb4de26b4402a13ee23259644f43a168398c6dad4ec5f">   20</a></span>    <a class="code hl_enumvalue" href="eval_8h.html#a6d50103ad6f0c6153036eb4de26b4402a13ee23259644f43a168398c6dad4ec5f">eval_expr</a>,</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="eval_8h.html#a6d50103ad6f0c6153036eb4de26b4402aa95d5b53ff5eb4c4b9ecdcfd5669e66a">   23</a></span>    <a class="code hl_enumvalue" href="eval_8h.html#a6d50103ad6f0c6153036eb4de26b4402aa95d5b53ff5eb4c4b9ecdcfd5669e66a">eval_single_statement</a>,</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <a class="code hl_enumvalue" href="eval_8h.html#a6d50103ad6f0c6153036eb4de26b4402a2d5a53dedbd3cbd8c72523a442eb4587">eval_statements</a></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="eval_8h.html#a6d50103ad6f0c6153036eb4de26b4402a2d5a53dedbd3cbd8c72523a442eb4587">   27</a></span>};</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">template</span> &lt;eval_mode mode = eval_expr&gt;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="eval_8h.html#a98d9870e362ca0f63c23d3eacfde02bf">   30</a></span><span class="keywordtype">object</span> <a class="code hl_function" href="eval_8h.html#a98d9870e362ca0f63c23d3eacfde02bf">eval</a>(<a class="code hl_class" href="classstr.html">str</a> expr, <span class="keywordtype">object</span> global = <a class="code hl_function" href="group__python__builtins.html#ga0be04c9e8c8a6833cabae628e2243b6c">globals</a>(), <span class="keywordtype">object</span> local = <span class="keywordtype">object</span>()) {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordflow">if</span> (!local)</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        local = global;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="comment">/* PyRun_String does not accept a PyObject / encoding specifier,</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">       this seems to be the only alternative */</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    std::string <a class="code hl_class" href="classbuffer.html">buffer</a> = <span class="stringliteral">&quot;# -*- coding: utf-8 -*-\n&quot;</span> + (std::string) expr;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">int</span> start;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordflow">switch</span> (mode) {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="eval_8h.html#a6d50103ad6f0c6153036eb4de26b4402a13ee23259644f43a168398c6dad4ec5f">eval_expr</a>:             start = Py_eval_input;   <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="eval_8h.html#a6d50103ad6f0c6153036eb4de26b4402aa95d5b53ff5eb4c4b9ecdcfd5669e66a">eval_single_statement</a>: start = Py_single_input; <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="eval_8h.html#a6d50103ad6f0c6153036eb4de26b4402a2d5a53dedbd3cbd8c72523a442eb4587">eval_statements</a>:       start = Py_file_input;   <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordflow">default</span>: <a class="code hl_function" href="detail_2common_8h.html#aeea9746c2787bab3a5a0c983ef965520">pybind11_fail</a>(<span class="stringliteral">&quot;invalid evaluation mode&quot;</span>);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    }</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    PyObject *result = PyRun_String(<a class="code hl_class" href="classbuffer.html">buffer</a>.c_str(), start, global.<a class="code hl_function" href="classhandle.html#aa58c40063166c7cedefdc4db2d6fa608">ptr</a>(), local.ptr());</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">if</span> (!result)</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        <span class="keywordflow">throw</span> <a class="code hl_class" href="classerror__already__set.html">error_already_set</a>();</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordflow">return</span> reinterpret_steal&lt;object&gt;(result);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>}</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="keyword">template</span> &lt;eval_mode mode = eval_expr, <span class="keywordtype">size_t</span> N&gt;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="eval_8h.html#a3b6eb7f016d217d0519d9b41ca972661">   53</a></span><span class="keywordtype">object</span> <a class="code hl_function" href="eval_8h.html#a98d9870e362ca0f63c23d3eacfde02bf">eval</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> (&amp;s)[N], <span class="keywordtype">object</span> global = <a class="code hl_function" href="group__python__builtins.html#ga0be04c9e8c8a6833cabae628e2243b6c">globals</a>(), <span class="keywordtype">object</span> local = <span class="keywordtype">object</span>()) {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="comment">/* Support raw string literals by removing common leading whitespace */</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keyword">auto</span> expr = (s[0] == <span class="charliteral">&#39;\n&#39;</span>) ? <a class="code hl_class" href="classstr.html">str</a>(<a class="code hl_function" href="classmodule.html#a40817edef0ded5727701534bcded9982">module::import</a>(<span class="stringliteral">&quot;textwrap&quot;</span>).attr(<span class="stringliteral">&quot;dedent&quot;</span>)(s))</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                               : <a class="code hl_class" href="classstr.html">str</a>(s);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordflow">return</span> eval&lt;mode&gt;(expr, global, local);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>}</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="eval_8h.html#aae9679de60fdf33114386f7c79e3ba0e">   60</a></span><span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="eval_8h.html#aae9679de60fdf33114386f7c79e3ba0e">exec</a>(<a class="code hl_class" href="classstr.html">str</a> expr, <span class="keywordtype">object</span> global = <a class="code hl_function" href="group__python__builtins.html#ga0be04c9e8c8a6833cabae628e2243b6c">globals</a>(), <span class="keywordtype">object</span> local = <span class="keywordtype">object</span>()) {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    eval&lt;eval_statements&gt;(expr, global, local);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>}</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="keyword">template</span> &lt;<span class="keywordtype">size_t</span> N&gt;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="eval_8h.html#a2dce85cf26d9e90f433aaf790d616489">   65</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="eval_8h.html#aae9679de60fdf33114386f7c79e3ba0e">exec</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> (&amp;s)[N], <span class="keywordtype">object</span> global = <a class="code hl_function" href="group__python__builtins.html#ga0be04c9e8c8a6833cabae628e2243b6c">globals</a>(), <span class="keywordtype">object</span> local = <span class="keywordtype">object</span>()) {</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    eval&lt;eval_statements&gt;(s, global, local);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>}</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="keyword">template</span> &lt;eval_mode mode = eval_statements&gt;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="eval_8h.html#af701b0ce2cc48fc0763a33374afcff5b">   70</a></span><span class="keywordtype">object</span> <a class="code hl_function" href="eval_8h.html#af701b0ce2cc48fc0763a33374afcff5b">eval_file</a>(<a class="code hl_class" href="classstr.html">str</a> fname, <span class="keywordtype">object</span> global = <a class="code hl_function" href="group__python__builtins.html#ga0be04c9e8c8a6833cabae628e2243b6c">globals</a>(), <span class="keywordtype">object</span> local = <span class="keywordtype">object</span>()) {</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordflow">if</span> (!local)</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        local = global;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keywordtype">int</span> start;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordflow">switch</span> (mode) {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="eval_8h.html#a6d50103ad6f0c6153036eb4de26b4402a13ee23259644f43a168398c6dad4ec5f">eval_expr</a>:             start = Py_eval_input;   <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="eval_8h.html#a6d50103ad6f0c6153036eb4de26b4402aa95d5b53ff5eb4c4b9ecdcfd5669e66a">eval_single_statement</a>: start = Py_single_input; <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keywordflow">case</span> <a class="code hl_enumvalue" href="eval_8h.html#a6d50103ad6f0c6153036eb4de26b4402a2d5a53dedbd3cbd8c72523a442eb4587">eval_statements</a>:       start = Py_file_input;   <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keywordflow">default</span>: <a class="code hl_function" href="detail_2common_8h.html#aeea9746c2787bab3a5a0c983ef965520">pybind11_fail</a>(<span class="stringliteral">&quot;invalid evaluation mode&quot;</span>);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    }</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keywordtype">int</span> closeFile = 1;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    std::string fname_str = (std::string) fname;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="preprocessor">#if PY_VERSION_HEX &gt;= 0x03040000</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    FILE *<a class="code hl_function" href="rings_8cpp.html#a77369fc4d5326a16d2c603e032023528">f</a> = _Py_fopen_obj(fname.<a class="code hl_function" href="classhandle.html#aa58c40063166c7cedefdc4db2d6fa608">ptr</a>(), <span class="stringliteral">&quot;r&quot;</span>);</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="preprocessor">#elif PY_VERSION_HEX &gt;= 0x03000000</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    FILE *<a class="code hl_function" href="rings_8cpp.html#a77369fc4d5326a16d2c603e032023528">f</a> = _Py_fopen(fname.<a class="code hl_function" href="classhandle.html#aa58c40063166c7cedefdc4db2d6fa608">ptr</a>(), <span class="stringliteral">&quot;r&quot;</span>);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="comment">/* No unicode support in open() :( */</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keyword">auto</span> fobj = reinterpret_steal&lt;object&gt;(PyFile_FromString(</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        <span class="keyword">const_cast&lt;</span><span class="keywordtype">char</span> *<span class="keyword">&gt;</span>(fname_str.c_str()),</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <span class="keyword">const_cast&lt;</span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(<span class="stringliteral">&quot;r&quot;</span>)));</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    FILE *<a class="code hl_function" href="rings_8cpp.html#a77369fc4d5326a16d2c603e032023528">f</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="keywordflow">if</span> (fobj)</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <a class="code hl_function" href="rings_8cpp.html#a77369fc4d5326a16d2c603e032023528">f</a> = PyFile_AsFile(fobj.ptr());</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    closeFile = 0;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordflow">if</span> (!<a class="code hl_function" href="rings_8cpp.html#a77369fc4d5326a16d2c603e032023528">f</a>) {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        PyErr_Clear();</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <a class="code hl_function" href="detail_2common_8h.html#aeea9746c2787bab3a5a0c983ef965520">pybind11_fail</a>(<span class="stringliteral">&quot;File \&quot;&quot;</span> + fname_str + <span class="stringliteral">&quot;\&quot; could not be opened!&quot;</span>);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    }</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="preprocessor">#if PY_VERSION_HEX &lt; 0x03000000 &amp;&amp; defined(PYPY_VERSION)</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    PyObject *result = PyRun_File(<a class="code hl_function" href="rings_8cpp.html#a77369fc4d5326a16d2c603e032023528">f</a>, fname_str.c_str(), start, global.ptr(),</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                                  local.ptr());</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    (void) closeFile;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    PyObject *result = PyRun_FileEx(<a class="code hl_function" href="rings_8cpp.html#a77369fc4d5326a16d2c603e032023528">f</a>, fname_str.c_str(), start, global.ptr(),</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                                    local.ptr(), closeFile);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordflow">if</span> (!result)</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <span class="keywordflow">throw</span> <a class="code hl_class" href="classerror__already__set.html">error_already_set</a>();</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keywordflow">return</span> reinterpret_steal&lt;object&gt;(result);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>}</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><a class="code hl_define" href="detail_2common_8h.html#a12bb24ea980ca8fb1f46b1992bc9c83a">NAMESPACE_END</a>(<a class="code hl_define" href="detail_2common_8h.html#a0d3c06cceaa89be29b71719a825444c6">PYBIND11_NAMESPACE</a>)</div>
+<div class="ttc" id="aclassbuffer_html"><div class="ttname"><a href="classbuffer.html">buffer</a></div><div class="ttdef"><b>Definition:</b> pytypes.h:1311</div></div>
+<div class="ttc" id="aclasserror__already__set_html"><div class="ttname"><a href="classerror__already__set.html">error_already_set</a></div><div class="ttdef"><b>Definition:</b> pytypes.h:322</div></div>
+<div class="ttc" id="aclasshandle_html_aa58c40063166c7cedefdc4db2d6fa608"><div class="ttname"><a href="classhandle.html#aa58c40063166c7cedefdc4db2d6fa608">handle::ptr</a></div><div class="ttdeci">PyObject * ptr() const</div><div class="ttdoc">Return the underlying PyObject * pointer</div><div class="ttdef"><b>Definition:</b> pytypes.h:182</div></div>
+<div class="ttc" id="aclassmodule_html_a40817edef0ded5727701534bcded9982"><div class="ttname"><a href="classmodule.html#a40817edef0ded5727701534bcded9982">module::import</a></div><div class="ttdeci">static module import(const char *name)</div><div class="ttdoc">Import and return a module or throws error_already_set.</div><div class="ttdef"><b>Definition:</b> pybind11.h:848</div></div>
+<div class="ttc" id="aclassstr_html"><div class="ttname"><a href="classstr.html">str</a></div><div class="ttdef"><b>Definition:</b> pytypes.h:888</div></div>
+<div class="ttc" id="adetail_2common_8h_html_a0d3c06cceaa89be29b71719a825444c6"><div class="ttname"><a href="detail_2common_8h.html#a0d3c06cceaa89be29b71719a825444c6">PYBIND11_NAMESPACE</a></div><div class="ttdeci">#define PYBIND11_NAMESPACE</div><div class="ttdef"><b>Definition:</b> common.h:26</div></div>
+<div class="ttc" id="adetail_2common_8h_html_a12bb24ea980ca8fb1f46b1992bc9c83a"><div class="ttname"><a href="detail_2common_8h.html#a12bb24ea980ca8fb1f46b1992bc9c83a">NAMESPACE_END</a></div><div class="ttdeci">#define NAMESPACE_END(name)</div><div class="ttdef"><b>Definition:</b> common.h:16</div></div>
+<div class="ttc" id="adetail_2common_8h_html_a577cd817cb71b655998cad4387cdaeba"><div class="ttname"><a href="detail_2common_8h.html#a577cd817cb71b655998cad4387cdaeba">NAMESPACE_BEGIN</a></div><div class="ttdeci">#define NAMESPACE_BEGIN(name)</div><div class="ttdef"><b>Definition:</b> common.h:13</div></div>
+<div class="ttc" id="adetail_2common_8h_html_aeea9746c2787bab3a5a0c983ef965520"><div class="ttname"><a href="detail_2common_8h.html#aeea9746c2787bab3a5a0c983ef965520">pybind11_fail</a></div><div class="ttdeci">PyExc_RuntimeError PYBIND11_NOINLINE void pybind11_fail(const char *reason)</div><div class="ttdoc">Used internally</div><div class="ttdef"><b>Definition:</b> common.h:692</div></div>
+<div class="ttc" id="aeval_8h_html_a6d50103ad6f0c6153036eb4de26b4402"><div class="ttname"><a href="eval_8h.html#a6d50103ad6f0c6153036eb4de26b4402">eval_mode</a></div><div class="ttdeci">eval_mode</div><div class="ttdef"><b>Definition:</b> eval.h:18</div></div>
+<div class="ttc" id="aeval_8h_html_a6d50103ad6f0c6153036eb4de26b4402a13ee23259644f43a168398c6dad4ec5f"><div class="ttname"><a href="eval_8h.html#a6d50103ad6f0c6153036eb4de26b4402a13ee23259644f43a168398c6dad4ec5f">eval_expr</a></div><div class="ttdeci">@ eval_expr</div><div class="ttdoc">Evaluate a string containing an isolated expression</div><div class="ttdef"><b>Definition:</b> eval.h:20</div></div>
+<div class="ttc" id="aeval_8h_html_a6d50103ad6f0c6153036eb4de26b4402a2d5a53dedbd3cbd8c72523a442eb4587"><div class="ttname"><a href="eval_8h.html#a6d50103ad6f0c6153036eb4de26b4402a2d5a53dedbd3cbd8c72523a442eb4587">eval_statements</a></div><div class="ttdeci">@ eval_statements</div><div class="ttdoc">Evaluate a string containing a sequence of statement. Returns none</div><div class="ttdef"><b>Definition:</b> eval.h:26</div></div>
+<div class="ttc" id="aeval_8h_html_a6d50103ad6f0c6153036eb4de26b4402aa95d5b53ff5eb4c4b9ecdcfd5669e66a"><div class="ttname"><a href="eval_8h.html#a6d50103ad6f0c6153036eb4de26b4402aa95d5b53ff5eb4c4b9ecdcfd5669e66a">eval_single_statement</a></div><div class="ttdeci">@ eval_single_statement</div><div class="ttdoc">Evaluate a string containing a single statement. Returns none</div><div class="ttdef"><b>Definition:</b> eval.h:23</div></div>
+<div class="ttc" id="aeval_8h_html_a98d9870e362ca0f63c23d3eacfde02bf"><div class="ttname"><a href="eval_8h.html#a98d9870e362ca0f63c23d3eacfde02bf">eval</a></div><div class="ttdeci">object eval(str expr, object global=globals(), object local=object())</div><div class="ttdef"><b>Definition:</b> eval.h:30</div></div>
+<div class="ttc" id="aeval_8h_html_aae9679de60fdf33114386f7c79e3ba0e"><div class="ttname"><a href="eval_8h.html#aae9679de60fdf33114386f7c79e3ba0e">exec</a></div><div class="ttdeci">void exec(str expr, object global=globals(), object local=object())</div><div class="ttdef"><b>Definition:</b> eval.h:60</div></div>
+<div class="ttc" id="aeval_8h_html_af701b0ce2cc48fc0763a33374afcff5b"><div class="ttname"><a href="eval_8h.html#af701b0ce2cc48fc0763a33374afcff5b">eval_file</a></div><div class="ttdeci">object eval_file(str fname, object global=globals(), object local=object())</div><div class="ttdef"><b>Definition:</b> eval.h:70</div></div>
+<div class="ttc" id="agroup__python__builtins_html_ga0be04c9e8c8a6833cabae628e2243b6c"><div class="ttname"><a href="group__python__builtins.html#ga0be04c9e8c8a6833cabae628e2243b6c">globals</a></div><div class="ttdeci">dict globals()</div><div class="ttdef"><b>Definition:</b> pybind11.h:880</div></div>
+<div class="ttc" id="apybind11_8h_html"><div class="ttname"><a href="pybind11_8h.html">pybind11.h</a></div></div>
+<div class="ttc" id="arings_8cpp_html_a77369fc4d5326a16d2c603e032023528"><div class="ttname"><a href="rings_8cpp.html#a77369fc4d5326a16d2c603e032023528">f</a></div><div class="ttdeci">double f(double &amp;R1, double &amp;R2, int n)</div><div class="ttdef"><b>Definition:</b> rings.cpp:85</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+制作者&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
+</small></address>
+</body>
+</html>

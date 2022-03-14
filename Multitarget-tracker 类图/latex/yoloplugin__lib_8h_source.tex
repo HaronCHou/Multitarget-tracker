@@ -1,0 +1,80 @@
+\hypertarget{yoloplugin__lib_8h_source}{}\doxysection{yoloplugin\+\_\+lib.\+h}
+\label{yoloplugin__lib_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/yoloplugin\_lib.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/yoloplugin\_lib.h}}
+\mbox{\hyperlink{yoloplugin__lib_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#ifndef \_\_YOLOPLUGIN\_LIB\_\_}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#define \_\_YOLOPLUGIN\_LIB\_\_}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{comment}{//\#include <glib.h>}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{calibrator_8h}{calibrator.h}}"{}}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{trt__utils_8h}{trt\_utils.h}}"{}}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{yolo_8h}{yolo.h}}"{}}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{comment}{//\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{35 \textcolor{comment}{//extern "{}C"{} \{}}
+\DoxyCodeLine{36 \textcolor{comment}{//\#endif}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#define MAX\_OBJECTS\_PER\_FRAME 32}}
+\DoxyCodeLine{39 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{struct_yolo_plugin_ctx}{YoloPluginCtx}} \mbox{\hyperlink{struct_yolo_plugin_ctx}{YoloPluginCtx}};}
+\DoxyCodeLine{40 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{struct_yolo_plugin_output}{YoloPluginOutput}} \mbox{\hyperlink{struct_yolo_plugin_output}{YoloPluginOutput}};}
+\DoxyCodeLine{41 \textcolor{comment}{// Init parameters structure as input, required for instantiating yoloplugin\_lib}}
+\DoxyCodeLine{42 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{43 \{}
+\DoxyCodeLine{44     \textcolor{comment}{// Width at which frame/object will be scaled}}
+\DoxyCodeLine{45     \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_yolo_plugin_init_params_a6617abf102188475d18cbf1f16b41c3e}{processingWidth}};}
+\DoxyCodeLine{46     \textcolor{comment}{// height at which frame/object will be scaled}}
+\DoxyCodeLine{47     \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_yolo_plugin_init_params_a108dbb60fc79e2533540c03ec0800740}{processingHeight}};}
+\DoxyCodeLine{48     \textcolor{comment}{// Flag to indicate whether operating on crops of full frame}}
+\DoxyCodeLine{49     \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_yolo_plugin_init_params_a181219fb88e022b4ec6cbb131cc918b9}{fullFrame}};}
+\DoxyCodeLine{50     \textcolor{comment}{// Plugin config file}}
+\DoxyCodeLine{51     std::string \mbox{\hyperlink{struct_yolo_plugin_init_params_a1f60bd74004ef06d51a6d743a511d546}{configFilePath}};}
+\DoxyCodeLine{52 \} \mbox{\hyperlink{struct_yolo_plugin_init_params}{YoloPluginInitParams}};}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_yolo_plugin_ctx}{YoloPluginCtx}}}
+\DoxyCodeLine{55 \{}
+\DoxyCodeLine{56     \mbox{\hyperlink{struct_yolo_plugin_init_params}{YoloPluginInitParams}} \mbox{\hyperlink{struct_yolo_plugin_ctx_a5683e753d208cf9954299434096e77c6}{initParams}};}
+\DoxyCodeLine{57     \mbox{\hyperlink{struct_network_info}{NetworkInfo}} \mbox{\hyperlink{struct_yolo_plugin_ctx_a9e3d08cbcafdb7a0f1536054886e3f1d}{networkInfo}};}
+\DoxyCodeLine{58     \mbox{\hyperlink{struct_infer_params}{InferParams}} \mbox{\hyperlink{struct_yolo_plugin_ctx_aaebaa05bd49b98c37d9353c5b3c8a5bc}{inferParams}};}
+\DoxyCodeLine{59     \mbox{\hyperlink{class_yolo}{Yolo}}* \mbox{\hyperlink{struct_yolo_plugin_ctx_aaa99ef52bc5f8065f674d590ebc141a6}{inferenceNetwork}};}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61     \textcolor{comment}{// perf vars}}
+\DoxyCodeLine{62     \textcolor{keywordtype}{double} \mbox{\hyperlink{struct_yolo_plugin_ctx_ae98880defd4ab976a166ce11b2f8ab3b}{inferTime}} = 0.0, \mbox{\hyperlink{struct_yolo_plugin_ctx_a4157b9a0f5275177c6f76f1b1472653f}{preTime}} = 0.0, \mbox{\hyperlink{struct_yolo_plugin_ctx_a31ed4bcdee3465e12ca91ab5a3f98dde}{postTime}} = 0.0;}
+\DoxyCodeLine{63     uint32\_t \mbox{\hyperlink{struct_yolo_plugin_ctx_a4c916f34012d477ab085e509afc1aa16}{batchSize}} = 0;}
+\DoxyCodeLine{64     uint64\_t \mbox{\hyperlink{struct_yolo_plugin_ctx_af5d43ab723c2b1bec8931e7daf96d200}{imageCount}} = 0;}
+\DoxyCodeLine{65 \};}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67 \textcolor{comment}{// Detected/Labelled object structure, stores bounding box info along with label}}
+\DoxyCodeLine{68 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{69 \{}
+\DoxyCodeLine{70     \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_yolo_plugin_object_a396f8387fa16ef69baf44ee953a81783}{left}};}
+\DoxyCodeLine{71     \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_yolo_plugin_object_ab51361375b525fb4498ef971ec3e17fc}{top}};}
+\DoxyCodeLine{72     \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_yolo_plugin_object_a38cb42e7faa5c0e96493ebe9d597ffc1}{width}};}
+\DoxyCodeLine{73     \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_yolo_plugin_object_aaa5d1287902f6b333dd528aa3191d0ea}{height}};}
+\DoxyCodeLine{74     \textcolor{keywordtype}{char} label[64];}
+\DoxyCodeLine{75 \} \mbox{\hyperlink{struct_yolo_plugin_object}{YoloPluginObject}};}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{comment}{// Output data returned after processing}}
+\DoxyCodeLine{78 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_yolo_plugin_output}{YoloPluginOutput}}}
+\DoxyCodeLine{79 \{}
+\DoxyCodeLine{80     \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_yolo_plugin_output_afae58f7aaa0422b088fc6a00faebb8e4}{numObjects}};}
+\DoxyCodeLine{81     \mbox{\hyperlink{struct_yolo_plugin_object}{YoloPluginObject}} \textcolor{keywordtype}{object}[\mbox{\hyperlink{yoloplugin__lib_8h_a20d6100d14c8337fde560318194dd88a}{MAX\_OBJECTS\_PER\_FRAME}}];}
+\DoxyCodeLine{82 \};}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84 \textcolor{comment}{// Initialize library context}}
+\DoxyCodeLine{85 \mbox{\hyperlink{struct_yolo_plugin_ctx}{YoloPluginCtx}}* \mbox{\hyperlink{yoloplugin__lib_8h_a42fec9d977510694fccadee7eab68b1a}{YoloPluginCtxInit}}(\mbox{\hyperlink{struct_yolo_plugin_init_params}{YoloPluginInitParams}}* initParams, \textcolor{keywordtype}{size\_t} batchSize);}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87 \textcolor{comment}{// Dequeue processed output}}
+\DoxyCodeLine{88 std::vector<YoloPluginOutput*> \mbox{\hyperlink{yoloplugin__lib_8h_a396b7ed05023a3265eb68d8fa38878c9}{YoloPluginProcess}}(\mbox{\hyperlink{struct_yolo_plugin_ctx}{YoloPluginCtx}}* ctx, std::vector<cv::Mat*>\& cvmats);}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90 \textcolor{comment}{// Deinitialize library context}}
+\DoxyCodeLine{91 \textcolor{keywordtype}{void} \mbox{\hyperlink{yoloplugin__lib_8h_a3b084a129159e47f7bd2d60fee36ef65}{YoloPluginCtxDeinit}}(\mbox{\hyperlink{struct_yolo_plugin_ctx}{YoloPluginCtx}}* ctx);}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93 \textcolor{comment}{//\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{94 \textcolor{comment}{//\}}}
+\DoxyCodeLine{95 \textcolor{comment}{//\#endif}}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

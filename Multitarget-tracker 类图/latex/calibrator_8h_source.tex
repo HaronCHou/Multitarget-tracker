@@ -1,0 +1,47 @@
+\hypertarget{calibrator_8h_source}{}\doxysection{calibrator.\+h}
+\label{calibrator_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/calibrator.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/calibrator.h}}
+\mbox{\hyperlink{calibrator_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#ifndef \_CALIBRATOR\_H\_}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#define \_CALIBRATOR\_H\_}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#include "{}NvInfer.h"{}}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{ds__image_8h}{ds\_image.h}}"{}}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{trt__utils_8h}{trt\_utils.h}}"{}}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{keyword}{class }\mbox{\hyperlink{class_int8_entropy_calibrator}{Int8EntropyCalibrator}} : \textcolor{keyword}{public} nvinfer1::IInt8EntropyCalibrator2}
+\DoxyCodeLine{33 \{}
+\DoxyCodeLine{34 \textcolor{keyword}{public}:}
+\DoxyCodeLine{35     \mbox{\hyperlink{class_int8_entropy_calibrator_ac5ec6427bf9b0f584461ce15e206c890}{Int8EntropyCalibrator}}(\textcolor{keyword}{const} uint32\_t\& batchSize, \textcolor{keyword}{const} std::string\& calibImages,}
+\DoxyCodeLine{36                           \textcolor{keyword}{const} std::string\& calibImagesPath, \textcolor{keyword}{const} std::string\& calibTableFilePath,}
+\DoxyCodeLine{37                           \textcolor{keyword}{const} uint64\_t\& inputSize, \textcolor{keyword}{const} uint32\_t\& inputH, \textcolor{keyword}{const} uint32\_t\& inputW,}
+\DoxyCodeLine{38                           \textcolor{keyword}{const} std::string\& inputBlobName, \textcolor{keyword}{const} std::string \&s\_net\_type\_);}
+\DoxyCodeLine{39     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_int8_entropy_calibrator_ae7e655f30233dd8ac87c0216cb816dcc}{\string~Int8EntropyCalibrator}}();}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_int8_entropy_calibrator_af1a3ce6f80ca9d6b8aeac3714dc74629}{getBatchSize}}() const noexcept\textcolor{keyword}{  override }\{ \textcolor{keywordflow}{return} \mbox{\hyperlink{class_int8_entropy_calibrator_aee7e8bedcf36530c633b93729d2c574b}{m\_BatchSize}}; \}}
+\DoxyCodeLine{42     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_int8_entropy_calibrator_ac2b358586257fcb56c72d87bb8645666}{getBatch}}(\textcolor{keywordtype}{void}* bindings[], \textcolor{keyword}{const} \textcolor{keywordtype}{char}* names[], \textcolor{keywordtype}{int} nbBindings) \textcolor{keyword}{noexcept}  \textcolor{keyword}{override};}
+\DoxyCodeLine{43     \textcolor{keyword}{const} \textcolor{keywordtype}{void}* \mbox{\hyperlink{class_int8_entropy_calibrator_afc7c17c1412ffb80c5e04f8c8ff9acf6}{readCalibrationCache}}(\textcolor{keywordtype}{size\_t}\& length) \textcolor{keyword}{noexcept}  \textcolor{keyword}{override};}
+\DoxyCodeLine{44     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_int8_entropy_calibrator_aec0f54c609536a27699fbb2de80ca52f}{writeCalibrationCache}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* cache, \textcolor{keywordtype}{size\_t} length) \textcolor{keyword}{noexcept}  \textcolor{keyword}{override};}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{keyword}{private}:}
+\DoxyCodeLine{47     \textcolor{keyword}{const} uint32\_t \mbox{\hyperlink{class_int8_entropy_calibrator_aee7e8bedcf36530c633b93729d2c574b}{m\_BatchSize}};}
+\DoxyCodeLine{48     \textcolor{keyword}{const} uint32\_t \mbox{\hyperlink{class_int8_entropy_calibrator_a91285af86210966205818abe502aa566}{m\_InputH}};}
+\DoxyCodeLine{49     \textcolor{keyword}{const} uint32\_t \mbox{\hyperlink{class_int8_entropy_calibrator_a8e2a740fce0023d3240e00b8a8e10883}{m\_InputW}};}
+\DoxyCodeLine{50     \textcolor{keyword}{const} uint64\_t \mbox{\hyperlink{class_int8_entropy_calibrator_a2ab291918b32754a452d826c4c81754d}{m\_InputSize}};}
+\DoxyCodeLine{51     \textcolor{keyword}{const} uint64\_t \mbox{\hyperlink{class_int8_entropy_calibrator_aa1ecee980f9c6473502c5f5f3793a6a7}{m\_InputCount}};}
+\DoxyCodeLine{52     \textcolor{keyword}{const} std::string \mbox{\hyperlink{class_int8_entropy_calibrator_a4b541386254c67d6609e455ec4fe751b}{m\_InputBlobName}};}
+\DoxyCodeLine{53     \textcolor{keyword}{const} std::string \mbox{\hyperlink{class_int8_entropy_calibrator_a9c1c36a4e0f9cb311a636e6e637c8781}{\_s\_net\_type}};}
+\DoxyCodeLine{54     \textcolor{keyword}{const} std::string \mbox{\hyperlink{class_int8_entropy_calibrator_add7ef9435e7fba45dd3b8b3d3ca090eb}{m\_CalibTableFilePath}}\{\textcolor{keyword}{nullptr}\};}
+\DoxyCodeLine{55     uint32\_t \mbox{\hyperlink{class_int8_entropy_calibrator_ade66550d0623e3a7cd8da2a71ba98cda}{m\_ImageIndex}};}
+\DoxyCodeLine{56     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_int8_entropy_calibrator_a5839cf2d558248e3f8f4ad2950006db4}{m\_ReadCache}}\{\textcolor{keyword}{true}\};}
+\DoxyCodeLine{57     \textcolor{keywordtype}{void}* \mbox{\hyperlink{class_int8_entropy_calibrator_ae03f926c33573b3ae81901c727573902}{m\_DeviceInput}}\{\textcolor{keyword}{nullptr}\};}
+\DoxyCodeLine{58     std::vector<std::string> \mbox{\hyperlink{class_int8_entropy_calibrator_a9c7a179fe0666b50ad1f2ea39de815f8}{m\_ImageList}};}
+\DoxyCodeLine{59     std::vector<char> \mbox{\hyperlink{class_int8_entropy_calibrator_a9d6b55a33146867976c4b7f77ab42ce8}{m\_CalibrationCache}};}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61     cv::Mat \mbox{\hyperlink{class_int8_entropy_calibrator_aeac79fedf41478b6dbb4cd2b7879cad6}{m\_blob}};}
+\DoxyCodeLine{62 \};}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

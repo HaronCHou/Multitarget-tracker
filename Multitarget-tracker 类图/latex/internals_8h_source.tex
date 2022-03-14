@@ -1,0 +1,332 @@
+\hypertarget{internals_8h_source}{}\doxysection{internals.\+h}
+\label{internals_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/detail/internals.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/thirdparty/pybind11/include/pybind11/detail/internals.h}}
+\mbox{\hyperlink{internals_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{    pybind11/detail/internals.h: Internal data structure and related functions}}
+\DoxyCodeLine{3 \textcolor{comment}{}}
+\DoxyCodeLine{4 \textcolor{comment}{    Copyright (c) 2017 Wenzel Jakob <wenzel.jakob@epfl.ch>}}
+\DoxyCodeLine{5 \textcolor{comment}{}}
+\DoxyCodeLine{6 \textcolor{comment}{    All rights reserved. Use of this source code is governed by a}}
+\DoxyCodeLine{7 \textcolor{comment}{    BSD-\/style license that can be found in the LICENSE file.}}
+\DoxyCodeLine{8 \textcolor{comment}{*/}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}../pytypes.h"{}}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+\DoxyCodeLine{15 \mbox{\hyperlink{detail_2common_8h_a577cd817cb71b655998cad4387cdaeba}{NAMESPACE\_BEGIN}}(detail)}
+\DoxyCodeLine{16 \textcolor{comment}{// Forward declarations}}
+\DoxyCodeLine{17 \textcolor{keyword}{inline} PyTypeObject *\mbox{\hyperlink{internals_8h_a7b0038e104523235e205b13488390b72}{make\_static\_property\_type}}();}
+\DoxyCodeLine{18 \textcolor{keyword}{inline} PyTypeObject *\mbox{\hyperlink{internals_8h_a208e43f161a9e5d055948fabe479dc04}{make\_default\_metaclass}}();}
+\DoxyCodeLine{19 \textcolor{keyword}{inline} PyObject *\mbox{\hyperlink{internals_8h_a22ea570ce07bc0565deaff837ebe4d7f}{make\_object\_base\_type}}(PyTypeObject *\mbox{\hyperlink{structmetaclass}{metaclass}});}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{comment}{// The old Python Thread Local Storage (TLS) API is deprecated in Python 3.7 in favor of the new}}
+\DoxyCodeLine{22 \textcolor{comment}{// Thread Specific Storage (TSS) API.}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#if PY\_VERSION\_HEX >= 0x03070000}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#    define PYBIND11\_TLS\_KEY\_INIT(var) Py\_tss\_t *var = nullptr}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#    define PYBIND11\_TLS\_GET\_VALUE(key) PyThread\_tss\_get((key))}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#    define PYBIND11\_TLS\_REPLACE\_VALUE(key, value) PyThread\_tss\_set((key), (value))}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#    define PYBIND11\_TLS\_DELETE\_VALUE(key) PyThread\_tss\_set((key), nullptr)}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#    define PYBIND11\_TLS\_FREE(key) PyThread\_tss\_free(key)}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{30     \textcolor{comment}{// Usually an int but a long on Cygwin64 with Python 3.x}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#    define PYBIND11\_TLS\_KEY\_INIT(var) decltype(PyThread\_create\_key()) var = 0}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#    define PYBIND11\_TLS\_GET\_VALUE(key) PyThread\_get\_key\_value((key))}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#    if PY\_MAJOR\_VERSION < 3}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#        define PYBIND11\_TLS\_DELETE\_VALUE(key)                               \(\backslash\)}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{             PyThread\_delete\_key\_value(key)}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#        define PYBIND11\_TLS\_REPLACE\_VALUE(key, value)                       \(\backslash\)}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{             do \{                                                            \(\backslash\)}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{                 PyThread\_delete\_key\_value((key));                           \(\backslash\)}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{                 PyThread\_set\_key\_value((key), (value));                     \(\backslash\)}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{             \} while (false)}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#    else}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#        define PYBIND11\_TLS\_DELETE\_VALUE(key)                               \(\backslash\)}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{             PyThread\_set\_key\_value((key), nullptr)}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#        define PYBIND11\_TLS\_REPLACE\_VALUE(key, value)                       \(\backslash\)}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{             PyThread\_set\_key\_value((key), (value))}}
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#    endif}}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#    define PYBIND11\_TLS\_FREE(key) (void)key}}
+\DoxyCodeLine{48 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{comment}{// Python loads modules by default with dlopen with the RTLD\_LOCAL flag; under libc++ and possibly}}
+\DoxyCodeLine{51 \textcolor{comment}{// other STLs, this means `typeid(A)` from one module won't equal `typeid(A)` from another module}}
+\DoxyCodeLine{52 \textcolor{comment}{// even when `A` is the same, non-\/hidden-\/visibility type (e.g. from a common include).  Under}}
+\DoxyCodeLine{53 \textcolor{comment}{// libstdc++, this doesn't happen: equality and the type\_index hash are based on the type name,}}
+\DoxyCodeLine{54 \textcolor{comment}{// which works.  If not under a known-\/good stl, provide our own name-\/based hash and equality}}
+\DoxyCodeLine{55 \textcolor{comment}{// functions that use the type name.}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#if defined(\_\_GLIBCXX\_\_)}}
+\DoxyCodeLine{57 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{internals_8h_af90d902fda8bf068ff26b9fda7e77727}{same\_type}}(\textcolor{keyword}{const} std::type\_info \&lhs, \textcolor{keyword}{const} std::type\_info \&rhs) \{ \textcolor{keywordflow}{return} lhs == rhs; \}}
+\DoxyCodeLine{58 \textcolor{keyword}{using} \mbox{\hyperlink{structtype__hash}{type\_hash}} = std::hash<std::type\_index>;}
+\DoxyCodeLine{59 \textcolor{keyword}{using} \mbox{\hyperlink{structtype__equal__to}{type\_equal\_to}} = std::equal\_to<std::type\_index>;}
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{61 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{internals_8h_af90d902fda8bf068ff26b9fda7e77727}{same\_type}}(\textcolor{keyword}{const} std::type\_info \&lhs, \textcolor{keyword}{const} std::type\_info \&rhs) \{}
+\DoxyCodeLine{62     \textcolor{keywordflow}{return} lhs.name() == rhs.name() || std::strcmp(lhs.name(), rhs.name()) == 0;}
+\DoxyCodeLine{63 \}}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65 \textcolor{keyword}{struct }\mbox{\hyperlink{structtype__hash}{type\_hash}} \{}
+\DoxyCodeLine{66     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structtype__hash_a21e6e3ef4e983727e91f4ef90d056173}{operator()}}(\textcolor{keyword}{const} std::type\_index \&t)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{67         \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{group__python__builtins_ga117a7eab72791313448c40a2f25f3582}{hash}} = 5381;}
+\DoxyCodeLine{68         \textcolor{keyword}{const} \textcolor{keywordtype}{char} *ptr = t.name();}
+\DoxyCodeLine{69         \textcolor{keywordflow}{while} (\textcolor{keyword}{auto} c = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}\textcolor{keyword}{>}(*ptr++))}
+\DoxyCodeLine{70             \mbox{\hyperlink{group__python__builtins_ga117a7eab72791313448c40a2f25f3582}{hash}} = (\mbox{\hyperlink{group__python__builtins_ga117a7eab72791313448c40a2f25f3582}{hash}} * 33) \string^ c;}
+\DoxyCodeLine{71         \textcolor{keywordflow}{return} \mbox{\hyperlink{group__python__builtins_ga117a7eab72791313448c40a2f25f3582}{hash}};}
+\DoxyCodeLine{72     \}}
+\DoxyCodeLine{73 \};}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75 \textcolor{keyword}{struct }\mbox{\hyperlink{structtype__equal__to}{type\_equal\_to}} \{}
+\DoxyCodeLine{76     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structtype__equal__to_acb022d369982d994b59bc6ad0755cf8f}{operator()}}(\textcolor{keyword}{const} std::type\_index \&lhs, \textcolor{keyword}{const} std::type\_index \&rhs)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{77         \textcolor{keywordflow}{return} lhs.name() == rhs.name() || std::strcmp(lhs.name(), rhs.name()) == 0;}
+\DoxyCodeLine{78     \}}
+\DoxyCodeLine{79 \};}
+\DoxyCodeLine{80 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82 \textcolor{keyword}{template} <\textcolor{keyword}{typename} value\_type>}
+\DoxyCodeLine{83 \textcolor{keyword}{using} \mbox{\hyperlink{internals_8h_a1452521ed22e2af29a7f00dfd4bacb0b}{type\_map}} = std::unordered\_map<std::type\_index, value\_type, type\_hash, type\_equal\_to>;}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85 \textcolor{keyword}{struct }\mbox{\hyperlink{structoverload__hash}{overload\_hash}} \{}
+\DoxyCodeLine{86     \textcolor{keyword}{inline} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structoverload__hash_ac9711c9d44c28533d8ead09c1513dc03}{operator()}}(\textcolor{keyword}{const} std::pair<const PyObject *, const char *>\& v)\textcolor{keyword}{ const }\{}
+\DoxyCodeLine{87         \textcolor{keywordtype}{size\_t} value = std::hash<const void *>()(v.first);}
+\DoxyCodeLine{88         value \string^= std::hash<const void *>()(v.second)  + 0x9e3779b9 + (value<<6) + (value>>2);}
+\DoxyCodeLine{89         \textcolor{keywordflow}{return} value;}
+\DoxyCodeLine{90     \}}
+\DoxyCodeLine{91 \};}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{96 \textcolor{keyword}{struct }\mbox{\hyperlink{structinternals}{internals}} \{}
+\DoxyCodeLine{97     \mbox{\hyperlink{internals_8h_a1452521ed22e2af29a7f00dfd4bacb0b}{type\_map<type\_info *>}} \mbox{\hyperlink{structinternals_a55c8874ee4ee135c2ed8b3f5a958e6a3}{registered\_types\_cpp}}; \textcolor{comment}{// std::type\_index -\/> pybind11's type information}}
+\DoxyCodeLine{98     std::unordered\_map<PyTypeObject *, std::vector<type\_info *>> \mbox{\hyperlink{structinternals_a6148bb4956e17d8a61f410cac7227d04}{registered\_types\_py}}; \textcolor{comment}{// PyTypeObject* -\/> base type\_info(s)}}
+\DoxyCodeLine{99     std::unordered\_multimap<const void *, instance*> \mbox{\hyperlink{structinternals_af0f521098c149429cd68e058fae16e06}{registered\_instances}}; \textcolor{comment}{// void * -\/> instance*}}
+\DoxyCodeLine{100     std::unordered\_set<std::pair<const PyObject *, const char *>, \mbox{\hyperlink{structoverload__hash}{overload\_hash}}> \mbox{\hyperlink{structinternals_a46a3096ec216e6229e944bbc6cff7b3d}{inactive\_overload\_cache}};}
+\DoxyCodeLine{101     \mbox{\hyperlink{internals_8h_a1452521ed22e2af29a7f00dfd4bacb0b}{type\_map}}<std::vector<bool (*)(PyObject *, \textcolor{keywordtype}{void} *\&)>> \mbox{\hyperlink{structinternals_acec753819721884fcd4a650dcdfa40d2}{direct\_conversions}};}
+\DoxyCodeLine{102     std::unordered\_map<const PyObject *, std::vector<PyObject *>> \mbox{\hyperlink{structinternals_a10f84966ff086d44cd078d139b3646d9}{patients}};}
+\DoxyCodeLine{103     std::forward\_list<void (*) (std::exception\_ptr)> \mbox{\hyperlink{structinternals_a77114b8520f529d44be95aa700a7cd29}{registered\_exception\_translators}};}
+\DoxyCodeLine{104     std::unordered\_map<std::string, void *> \mbox{\hyperlink{structinternals_ad52baba07c7497fa2797e7db740707f4}{shared\_data}}; \textcolor{comment}{// Custom data to be shared across extensions}}
+\DoxyCodeLine{105     std::vector<PyObject *> \mbox{\hyperlink{structinternals_a4584170bdf82fabe271d296055c75ff7}{loader\_patient\_stack}}; \textcolor{comment}{// Used by `loader\_life\_support`}}
+\DoxyCodeLine{106     std::forward\_list<std::string> \mbox{\hyperlink{structinternals_ad322abbf9d8c4915221324444ab33192}{static\_strings}}; \textcolor{comment}{// Stores the std::strings backing detail::c\_str()}}
+\DoxyCodeLine{107     PyTypeObject *\mbox{\hyperlink{structinternals_a6115d4d47cb0cf54c97b9f2b772054c8}{static\_property\_type}};}
+\DoxyCodeLine{108     PyTypeObject *\mbox{\hyperlink{structinternals_a661c7e4987fe016874efc57ae26873df}{default\_metaclass}};}
+\DoxyCodeLine{109     PyObject *\mbox{\hyperlink{structinternals_ad18c3a70ddfa0ec128e4f8013f81c6bd}{instance\_base}};}
+\DoxyCodeLine{110 \textcolor{preprocessor}{\#if defined(WITH\_THREAD)}}
+\DoxyCodeLine{111     \mbox{\hyperlink{internals_8h_a009bfe148775050b79be8e494afdb748}{PYBIND11\_TLS\_KEY\_INIT}}(tstate);}
+\DoxyCodeLine{112     PyInterpreterState *istate = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{113     \mbox{\hyperlink{structinternals}{\string~internals}}() \{}
+\DoxyCodeLine{114         \textcolor{comment}{// This destructor is called *after* Py\_Finalize() in finalize\_interpreter().}}
+\DoxyCodeLine{115         \textcolor{comment}{// That *SHOULD BE* fine. The following details what happens whe PyThread\_tss\_free is called.}}
+\DoxyCodeLine{116         \textcolor{comment}{// PYBIND11\_TLS\_FREE is PyThread\_tss\_free on python 3.7+. On older python, it does nothing.}}
+\DoxyCodeLine{117         \textcolor{comment}{// PyThread\_tss\_free calls PyThread\_tss\_delete and PyMem\_RawFree.}}
+\DoxyCodeLine{118         \textcolor{comment}{// PyThread\_tss\_delete just calls TlsFree (on Windows) or pthread\_key\_delete (on *NIX). Neither}}
+\DoxyCodeLine{119         \textcolor{comment}{// of those have anything to do with CPython internals.}}
+\DoxyCodeLine{120         \textcolor{comment}{// PyMem\_RawFree *requires* that the `tstate` be allocated with the CPython allocator.}}
+\DoxyCodeLine{121         \mbox{\hyperlink{internals_8h_a01b035d9904781efff51f0c0af0cfc8f}{PYBIND11\_TLS\_FREE}}(tstate);}
+\DoxyCodeLine{122     \}}
+\DoxyCodeLine{123 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{124 \};}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{128 \textcolor{keyword}{struct }\mbox{\hyperlink{structtype__info}{type\_info}} \{}
+\DoxyCodeLine{129     PyTypeObject *\mbox{\hyperlink{structtype__info_a9d303522ded86597dda91813722a39cc}{type}};}
+\DoxyCodeLine{130     \textcolor{keyword}{const} std::type\_info *\mbox{\hyperlink{structtype__info_ae4ae74c1d137f901f75c28e847e157e1}{cpptype}};}
+\DoxyCodeLine{131     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structtype__info_a5030f67ec35a633be08c1b2dc868975b}{type\_size}}, \mbox{\hyperlink{structtype__info_aacdceab2742cfbc06be7a1be1679ff34}{type\_align}}, \mbox{\hyperlink{structtype__info_a41c3d2416443b60665994a348e556cf8}{holder\_size\_in\_ptrs}};}
+\DoxyCodeLine{132     \textcolor{keywordtype}{void} *(*operator\_new)(\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\_t}});}
+\DoxyCodeLine{133     void (*\mbox{\hyperlink{structtype__info_a2670999c513361a3a569238f51ecc450}{init\_instance}})(\mbox{\hyperlink{structinstance}{instance}} *, \textcolor{keyword}{const} \textcolor{keywordtype}{void} *);}
+\DoxyCodeLine{134     void (*\mbox{\hyperlink{structtype__info_a79c1cb88eb2e8fdc60d7370eaf2ad0ea}{dealloc}})(\mbox{\hyperlink{structvalue__and__holder}{value\_and\_holder}} \&v\_h);}
+\DoxyCodeLine{135     std::vector<PyObject *(*)(PyObject *, PyTypeObject *)> \mbox{\hyperlink{structtype__info_aea372863c3f5dfb6d5625480373ce432}{implicit\_conversions}};}
+\DoxyCodeLine{136     std::vector<std::pair<\textcolor{keyword}{const} std::type\_info *, \textcolor{keywordtype}{void} *(*)(\textcolor{keywordtype}{void} *)>> \mbox{\hyperlink{structtype__info_ae87b2f5ab971392a547757b0cf0c173e}{implicit\_casts}};}
+\DoxyCodeLine{137     std::vector<bool (*)(PyObject *, \textcolor{keywordtype}{void} *\&)> *\mbox{\hyperlink{structtype__info_ad1ea3e4746ea66e67520e829541efd95}{direct\_conversions}};}
+\DoxyCodeLine{138     \mbox{\hyperlink{structbuffer__info}{buffer\_info}} *(*get\_buffer)(PyObject *, \textcolor{keywordtype}{void} *) = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{139     \textcolor{keywordtype}{void} *\mbox{\hyperlink{structtype__info_a610a9a58683d2cb70158fd084bd1f30b}{get\_buffer\_data}} = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{140     \textcolor{keywordtype}{void} *(*module\_local\_load)(PyObject *, \textcolor{keyword}{const} \mbox{\hyperlink{structtype__info}{type\_info}} *) = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{141     \textcolor{comment}{/* A simple type never occurs as a (direct or indirect) parent}}
+\DoxyCodeLine{142 \textcolor{comment}{     * of a class that makes use of multiple inheritance */}}
+\DoxyCodeLine{143     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structtype__info_a106e005c60fd65fbf01569e25b52fe50}{simple\_type}} : 1;}
+\DoxyCodeLine{144     \textcolor{comment}{/* True if there is no multiple inheritance in this type's inheritance tree */}}
+\DoxyCodeLine{145     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structtype__info_aaa5c825d7f12a1312174bd566e825199}{simple\_ancestors}} : 1;}
+\DoxyCodeLine{146     \textcolor{comment}{/* for base vs derived holder\_type checks */}}
+\DoxyCodeLine{147     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structtype__info_ac917cda35113f21ca3951c4d11f2aa71}{default\_holder}} : 1;}
+\DoxyCodeLine{148     \textcolor{comment}{/* true if this is a type registered with py::module\_local */}}
+\DoxyCodeLine{149     \textcolor{keywordtype}{bool} \mbox{\hyperlink{structtype__info_a800bae8b10c62683b4367268a37be661}{module\_local}} : 1;}
+\DoxyCodeLine{150 \};}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{153 \textcolor{preprocessor}{\#define PYBIND11\_INTERNALS\_VERSION 4}}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{156 \textcolor{preprocessor}{\#if defined(\_MSC\_VER) \&\& defined(\_DEBUG)}}
+\DoxyCodeLine{157 \textcolor{preprocessor}{\#   define PYBIND11\_BUILD\_TYPE "{}\_debug"{}}}
+\DoxyCodeLine{158 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{159 \textcolor{preprocessor}{\#   define PYBIND11\_BUILD\_TYPE "{}"{}}}
+\DoxyCodeLine{160 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{163 \textcolor{preprocessor}{\#if defined(\_MSC\_VER)}}
+\DoxyCodeLine{164 \textcolor{preprocessor}{\#   define PYBIND11\_COMPILER\_TYPE "{}\_msvc"{}}}
+\DoxyCodeLine{165 \textcolor{preprocessor}{\#elif defined(\_\_INTEL\_COMPILER)}}
+\DoxyCodeLine{166 \textcolor{preprocessor}{\#   define PYBIND11\_COMPILER\_TYPE "{}\_icc"{}}}
+\DoxyCodeLine{167 \textcolor{preprocessor}{\#elif defined(\_\_clang\_\_)}}
+\DoxyCodeLine{168 \textcolor{preprocessor}{\#   define PYBIND11\_COMPILER\_TYPE "{}\_clang"{}}}
+\DoxyCodeLine{169 \textcolor{preprocessor}{\#elif defined(\_\_PGI)}}
+\DoxyCodeLine{170 \textcolor{preprocessor}{\#   define PYBIND11\_COMPILER\_TYPE "{}\_pgi"{}}}
+\DoxyCodeLine{171 \textcolor{preprocessor}{\#elif defined(\_\_MINGW32\_\_)}}
+\DoxyCodeLine{172 \textcolor{preprocessor}{\#   define PYBIND11\_COMPILER\_TYPE "{}\_mingw"{}}}
+\DoxyCodeLine{173 \textcolor{preprocessor}{\#elif defined(\_\_CYGWIN\_\_)}}
+\DoxyCodeLine{174 \textcolor{preprocessor}{\#   define PYBIND11\_COMPILER\_TYPE "{}\_gcc\_cygwin"{}}}
+\DoxyCodeLine{175 \textcolor{preprocessor}{\#elif defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{176 \textcolor{preprocessor}{\#   define PYBIND11\_COMPILER\_TYPE "{}\_gcc"{}}}
+\DoxyCodeLine{177 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{178 \textcolor{preprocessor}{\#   define PYBIND11\_COMPILER\_TYPE "{}\_unknown"{}}}
+\DoxyCodeLine{179 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181 \textcolor{preprocessor}{\#if defined(\_LIBCPP\_VERSION)}}
+\DoxyCodeLine{182 \textcolor{preprocessor}{\#  define PYBIND11\_STDLIB "{}\_libcpp"{}}}
+\DoxyCodeLine{183 \textcolor{preprocessor}{\#elif defined(\_\_GLIBCXX\_\_) || defined(\_\_GLIBCPP\_\_)}}
+\DoxyCodeLine{184 \textcolor{preprocessor}{\#  define PYBIND11\_STDLIB "{}\_libstdcpp"{}}}
+\DoxyCodeLine{185 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{186 \textcolor{preprocessor}{\#  define PYBIND11\_STDLIB "{}"{}}}
+\DoxyCodeLine{187 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{190 \textcolor{preprocessor}{\#if defined(\_\_GXX\_ABI\_VERSION)}}
+\DoxyCodeLine{191 \textcolor{preprocessor}{\#  define PYBIND11\_BUILD\_ABI "{}\_cxxabi"{}} PYBIND11\_TOSTRING(\_\_GXX\_ABI\_VERSION)}
+\DoxyCodeLine{192 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{193 \textcolor{preprocessor}{\#  define PYBIND11\_BUILD\_ABI "{}"{}}}
+\DoxyCodeLine{194 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196 \textcolor{preprocessor}{\#if defined(WITH\_THREAD)}}
+\DoxyCodeLine{197 \textcolor{preprocessor}{\#  define PYBIND11\_INTERNALS\_KIND "{}"{}}}
+\DoxyCodeLine{198 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{199 \textcolor{preprocessor}{\#  define PYBIND11\_INTERNALS\_KIND "{}\_without\_thread"{}}}
+\DoxyCodeLine{200 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202 \textcolor{preprocessor}{\#define PYBIND11\_INTERNALS\_ID "{}\_\_pybind11\_internals\_v"{}} \(\backslash\)}
+\DoxyCodeLine{203     PYBIND11\_TOSTRING(PYBIND11\_INTERNALS\_VERSION) PYBIND11\_INTERNALS\_KIND PYBIND11\_COMPILER\_TYPE PYBIND11\_STDLIB PYBIND11\_BUILD\_ABI PYBIND11\_BUILD\_TYPE "{}\_\_"{}}
+\DoxyCodeLine{204 }
+\DoxyCodeLine{205 \textcolor{preprocessor}{\#define PYBIND11\_MODULE\_LOCAL\_ID "{}\_\_pybind11\_module\_local\_v"{}} \(\backslash\)}
+\DoxyCodeLine{206     PYBIND11\_TOSTRING(PYBIND11\_INTERNALS\_VERSION) PYBIND11\_INTERNALS\_KIND PYBIND11\_COMPILER\_TYPE PYBIND11\_STDLIB PYBIND11\_BUILD\_ABI PYBIND11\_BUILD\_TYPE "{}\_\_"{}}
+\DoxyCodeLine{207 }
+\DoxyCodeLine{210 \textcolor{keyword}{inline} \mbox{\hyperlink{structinternals}{internals}} **\&\mbox{\hyperlink{internals_8h_a1abbb5ac518b087af801c6a306924d06}{get\_internals\_pp}}() \{}
+\DoxyCodeLine{211     \textcolor{keyword}{static} \mbox{\hyperlink{structinternals}{internals}} **internals\_pp = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{212     \textcolor{keywordflow}{return} internals\_pp;}
+\DoxyCodeLine{213 \}}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{internals_8h_aab710766797199094667cee0bb3b6623}{translate\_exception}}(std::exception\_ptr p) \{}
+\DoxyCodeLine{216     \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{217         \textcolor{keywordflow}{if} (p) std::rethrow\_exception(p);}
+\DoxyCodeLine{218     \} \textcolor{keywordflow}{catch} (\mbox{\hyperlink{classerror__already__set}{error\_already\_set}} \&e)           \{ e.\mbox{\hyperlink{classerror__already__set_a751b231e5c796447d867cf30007a7fc0}{restore}}();                                    \textcolor{keywordflow}{return};}
+\DoxyCodeLine{219     \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \mbox{\hyperlink{classbuiltin__exception}{builtin\_exception}} \&e)     \{ e.set\_error();                                  \textcolor{keywordflow}{return};}
+\DoxyCodeLine{220     \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::bad\_alloc \&e)        \{ PyErr\_SetString(PyExc\_MemoryError,   e.what()); \textcolor{keywordflow}{return};}
+\DoxyCodeLine{221     \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::domain\_error \&e)     \{ PyErr\_SetString(PyExc\_ValueError,    e.what()); \textcolor{keywordflow}{return};}
+\DoxyCodeLine{222     \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::invalid\_argument \&e) \{ PyErr\_SetString(PyExc\_ValueError,    e.what()); \textcolor{keywordflow}{return};}
+\DoxyCodeLine{223     \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::length\_error \&e)     \{ PyErr\_SetString(PyExc\_ValueError,    e.what()); \textcolor{keywordflow}{return};}
+\DoxyCodeLine{224     \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::out\_of\_range \&e)     \{ PyErr\_SetString(PyExc\_IndexError,    e.what()); \textcolor{keywordflow}{return};}
+\DoxyCodeLine{225     \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::range\_error \&e)      \{ PyErr\_SetString(PyExc\_ValueError,    e.what()); \textcolor{keywordflow}{return};}
+\DoxyCodeLine{226     \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::overflow\_error \&e)   \{ PyErr\_SetString(PyExc\_OverflowError, e.what()); \textcolor{keywordflow}{return};}
+\DoxyCodeLine{227     \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} std::exception \&e)        \{ PyErr\_SetString(PyExc\_RuntimeError,  e.what()); \textcolor{keywordflow}{return};}
+\DoxyCodeLine{228     \} \textcolor{keywordflow}{catch} (...) \{}
+\DoxyCodeLine{229         PyErr\_SetString(PyExc\_RuntimeError, \textcolor{stringliteral}{"{}Caught an unknown exception!"{}});}
+\DoxyCodeLine{230         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{231     \}}
+\DoxyCodeLine{232 \}}
+\DoxyCodeLine{233 }
+\DoxyCodeLine{234 \textcolor{preprocessor}{\#if !defined(\_\_GLIBCXX\_\_)}}
+\DoxyCodeLine{235 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} \mbox{\hyperlink{internals_8h_a9a48a53855a575eaf70192282e8eefae}{translate\_local\_exception}}(std::exception\_ptr p) \{}
+\DoxyCodeLine{236     \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{237         \textcolor{keywordflow}{if} (p) std::rethrow\_exception(p);}
+\DoxyCodeLine{238     \} \textcolor{keywordflow}{catch} (\mbox{\hyperlink{classerror__already__set}{error\_already\_set}} \&e)       \{ e.\mbox{\hyperlink{classerror__already__set_a751b231e5c796447d867cf30007a7fc0}{restore}}();   \textcolor{keywordflow}{return};}
+\DoxyCodeLine{239     \} \textcolor{keywordflow}{catch} (\textcolor{keyword}{const} \mbox{\hyperlink{classbuiltin__exception}{builtin\_exception}} \&e) \{ e.set\_error(); \textcolor{keywordflow}{return};}
+\DoxyCodeLine{240     \}}
+\DoxyCodeLine{241 \}}
+\DoxyCodeLine{242 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{243 }
+\DoxyCodeLine{245 \mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\_NOINLINE}} \textcolor{keyword}{inline} \mbox{\hyperlink{structinternals}{internals}} \&\mbox{\hyperlink{internals_8h_a6c7959e5bcf56993e43c61758aa697ac}{get\_internals}}() \{}
+\DoxyCodeLine{246     \textcolor{keyword}{auto} **\&internals\_pp = \mbox{\hyperlink{internals_8h_a1abbb5ac518b087af801c6a306924d06}{get\_internals\_pp}}();}
+\DoxyCodeLine{247     \textcolor{keywordflow}{if} (internals\_pp \&\& *internals\_pp)}
+\DoxyCodeLine{248         \textcolor{keywordflow}{return} **internals\_pp;}
+\DoxyCodeLine{249 }
+\DoxyCodeLine{250     \textcolor{comment}{// Ensure that the GIL is held since we will need to make Python calls.}}
+\DoxyCodeLine{251     \textcolor{comment}{// Cannot use py::gil\_scoped\_acquire here since that constructor calls get\_internals.}}
+\DoxyCodeLine{252     \textcolor{keyword}{struct }gil\_scoped\_acquire\_local \{}
+\DoxyCodeLine{253         gil\_scoped\_acquire\_local() : state (PyGILState\_Ensure()) \{\}}
+\DoxyCodeLine{254         \string~gil\_scoped\_acquire\_local() \{ PyGILState\_Release(state); \}}
+\DoxyCodeLine{255         \textcolor{keyword}{const} PyGILState\_STATE state;}
+\DoxyCodeLine{256     \} gil;}
+\DoxyCodeLine{257 }
+\DoxyCodeLine{258     \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} *\textcolor{keywordtype}{id} = \mbox{\hyperlink{internals_8h_ad4044f737821eb5e0398e5f0139d621e}{PYBIND11\_INTERNALS\_ID}};}
+\DoxyCodeLine{259     \textcolor{keyword}{auto} builtins = \mbox{\hyperlink{classhandle}{handle}}(PyEval\_GetBuiltins());}
+\DoxyCodeLine{260     \textcolor{keywordflow}{if} (builtins.contains(\textcolor{keywordtype}{id}) \&\& isinstance<capsule>(builtins[\textcolor{keywordtype}{id}])) \{}
+\DoxyCodeLine{261         internals\_pp = \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{structinternals}{internals}} **\textcolor{keyword}{>}(\mbox{\hyperlink{classcapsule}{capsule}}(builtins[\textcolor{keywordtype}{id}]));}
+\DoxyCodeLine{262 }
+\DoxyCodeLine{263         \textcolor{comment}{// We loaded builtins through python's builtins, which means that our `error\_already\_set`}}
+\DoxyCodeLine{264         \textcolor{comment}{// and `builtin\_exception` may be different local classes than the ones set up in the}}
+\DoxyCodeLine{265         \textcolor{comment}{// initial exception translator, below, so add another for our local exception classes.}}
+\DoxyCodeLine{266         \textcolor{comment}{//}}
+\DoxyCodeLine{267         \textcolor{comment}{// libstdc++ doesn't require this (types there are identified only by name)}}
+\DoxyCodeLine{268 \textcolor{preprocessor}{\#if !defined(\_\_GLIBCXX\_\_)}}
+\DoxyCodeLine{269         (*internals\_pp)-\/>\mbox{\hyperlink{structinternals_a77114b8520f529d44be95aa700a7cd29}{registered\_exception\_translators}}.push\_front(\&\mbox{\hyperlink{internals_8h_a9a48a53855a575eaf70192282e8eefae}{translate\_local\_exception}});}
+\DoxyCodeLine{270 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{271     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{272         \textcolor{keywordflow}{if} (!internals\_pp) internals\_pp = \textcolor{keyword}{new} \mbox{\hyperlink{structinternals}{internals}}*();}
+\DoxyCodeLine{273         \textcolor{keyword}{auto} *\&internals\_ptr = *internals\_pp;}
+\DoxyCodeLine{274         internals\_ptr = \textcolor{keyword}{new} \mbox{\hyperlink{structinternals}{internals}}();}
+\DoxyCodeLine{275 \textcolor{preprocessor}{\#if defined(WITH\_THREAD)}}
+\DoxyCodeLine{276         PyEval\_InitThreads();}
+\DoxyCodeLine{277         PyThreadState *tstate = PyThreadState\_Get();}
+\DoxyCodeLine{278 \textcolor{preprocessor}{        \#if PY\_VERSION\_HEX >= 0x03070000}}
+\DoxyCodeLine{279             internals\_ptr-\/>tstate = PyThread\_tss\_alloc();}
+\DoxyCodeLine{280             \textcolor{keywordflow}{if} (!internals\_ptr-\/>tstate || PyThread\_tss\_create(internals\_ptr-\/>tstate))}
+\DoxyCodeLine{281                 \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}get\_internals: could not successfully initialize the TSS key!"{}});}
+\DoxyCodeLine{282             PyThread\_tss\_set(internals\_ptr-\/>tstate, tstate);}
+\DoxyCodeLine{283 \textcolor{preprocessor}{        \#else}}
+\DoxyCodeLine{284             internals\_ptr-\/>tstate = PyThread\_create\_key();}
+\DoxyCodeLine{285             \textcolor{keywordflow}{if} (internals\_ptr-\/>tstate == -\/1)}
+\DoxyCodeLine{286                 \mbox{\hyperlink{detail_2common_8h_aeea9746c2787bab3a5a0c983ef965520}{pybind11\_fail}}(\textcolor{stringliteral}{"{}get\_internals: could not successfully initialize the TLS key!"{}});}
+\DoxyCodeLine{287             PyThread\_set\_key\_value(internals\_ptr-\/>tstate, tstate);}
+\DoxyCodeLine{288 \textcolor{preprocessor}{        \#endif}}
+\DoxyCodeLine{289         internals\_ptr-\/>istate = tstate-\/>interp;}
+\DoxyCodeLine{290 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{291         builtins[id] = \mbox{\hyperlink{classcapsule}{capsule}}(internals\_pp);}
+\DoxyCodeLine{292         internals\_ptr-\/>\mbox{\hyperlink{structinternals_a77114b8520f529d44be95aa700a7cd29}{registered\_exception\_translators}}.push\_front(\&\mbox{\hyperlink{internals_8h_aab710766797199094667cee0bb3b6623}{translate\_exception}});}
+\DoxyCodeLine{293         internals\_ptr-\/>\mbox{\hyperlink{structinternals_a6115d4d47cb0cf54c97b9f2b772054c8}{static\_property\_type}} = \mbox{\hyperlink{internals_8h_a7b0038e104523235e205b13488390b72}{make\_static\_property\_type}}();}
+\DoxyCodeLine{294         internals\_ptr-\/>\mbox{\hyperlink{structinternals_a661c7e4987fe016874efc57ae26873df}{default\_metaclass}} = \mbox{\hyperlink{internals_8h_a208e43f161a9e5d055948fabe479dc04}{make\_default\_metaclass}}();}
+\DoxyCodeLine{295         internals\_ptr-\/>\mbox{\hyperlink{structinternals_ad18c3a70ddfa0ec128e4f8013f81c6bd}{instance\_base}} = \mbox{\hyperlink{internals_8h_a22ea570ce07bc0565deaff837ebe4d7f}{make\_object\_base\_type}}(internals\_ptr-\/>\mbox{\hyperlink{structinternals_a661c7e4987fe016874efc57ae26873df}{default\_metaclass}});}
+\DoxyCodeLine{296     \}}
+\DoxyCodeLine{297     \textcolor{keywordflow}{return} **internals\_pp;}
+\DoxyCodeLine{298 \}}
+\DoxyCodeLine{299 }
+\DoxyCodeLine{301 \textcolor{keyword}{inline} \mbox{\hyperlink{internals_8h_a1452521ed22e2af29a7f00dfd4bacb0b}{type\_map<type\_info *>}} \&\mbox{\hyperlink{internals_8h_a2cf7ebb13338f02b4c5ee103dcfdf417}{registered\_local\_types\_cpp}}() \{}
+\DoxyCodeLine{302     \textcolor{keyword}{static} \mbox{\hyperlink{internals_8h_a1452521ed22e2af29a7f00dfd4bacb0b}{type\_map<type\_info *>}} locals\{\};}
+\DoxyCodeLine{303     \textcolor{keywordflow}{return} locals;}
+\DoxyCodeLine{304 \}}
+\DoxyCodeLine{305 }
+\DoxyCodeLine{310 \textcolor{keyword}{template} <\textcolor{keyword}{typename}... Args>}
+\DoxyCodeLine{311 \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{internals_8h_ae139ca7042b502d77d304c4e0c744ec6}{c\_str}}(Args \&\&...\mbox{\hyperlink{classargs}{args}}) \{}
+\DoxyCodeLine{312     \textcolor{keyword}{auto} \&strings = \mbox{\hyperlink{internals_8h_a6c7959e5bcf56993e43c61758aa697ac}{get\_internals}}().\mbox{\hyperlink{structinternals_ad322abbf9d8c4915221324444ab33192}{static\_strings}};}
+\DoxyCodeLine{313     strings.emplace\_front(std::forward<Args>(\mbox{\hyperlink{classargs}{args}})...);}
+\DoxyCodeLine{314     \textcolor{keywordflow}{return} strings.front().c\_str();}
+\DoxyCodeLine{315 \}}
+\DoxyCodeLine{316 }
+\DoxyCodeLine{317 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(detail)}
+\DoxyCodeLine{318 }
+\DoxyCodeLine{319 }
+\DoxyCodeLine{322 inline \mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\_NOINLINE}} \textcolor{keywordtype}{void} *\mbox{\hyperlink{internals_8h_ae81a9482c6bd916af9b9645a866fdbc8}{get\_shared\_data}}(const \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string} \&\mbox{\hyperlink{structname}{name}}) \{}
+\DoxyCodeLine{323     \textcolor{keyword}{auto} \&\mbox{\hyperlink{structinternals}{internals}} = \mbox{\hyperlink{internals_8h_a6c7959e5bcf56993e43c61758aa697ac}{detail::get\_internals}}();}
+\DoxyCodeLine{324     \textcolor{keyword}{auto} it = \mbox{\hyperlink{structinternals}{internals}}.\mbox{\hyperlink{structinternals_ad52baba07c7497fa2797e7db740707f4}{shared\_data}}.find(\mbox{\hyperlink{structname}{name}});}
+\DoxyCodeLine{325     \textcolor{keywordflow}{return} it != \mbox{\hyperlink{structinternals}{internals}}.\mbox{\hyperlink{structinternals_ad52baba07c7497fa2797e7db740707f4}{shared\_data}}.end() ? it-\/>second : \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{326 \}}
+\DoxyCodeLine{327 }
+\DoxyCodeLine{329 \textcolor{keyword}{inline} \mbox{\hyperlink{detail_2common_8h_a1fb186b7494d5c576d902c0730ecbb71}{PYBIND11\_NOINLINE}} \textcolor{keywordtype}{void} *\mbox{\hyperlink{internals_8h_a9dbdf7559f9e06f3504114de35709820}{set\_shared\_data}}(\textcolor{keyword}{const} std::string \&\mbox{\hyperlink{structname}{name}}, \textcolor{keywordtype}{void} *\mbox{\hyperlink{structdata}{data}}) \{}
+\DoxyCodeLine{330     \mbox{\hyperlink{internals_8h_a6c7959e5bcf56993e43c61758aa697ac}{detail::get\_internals}}().\mbox{\hyperlink{structinternals_ad52baba07c7497fa2797e7db740707f4}{shared\_data}}[\mbox{\hyperlink{structname}{name}}] = \mbox{\hyperlink{darknet_8h_a493583f6fc164cf849745e01e4c04ab5}{data}};}
+\DoxyCodeLine{331     \textcolor{keywordflow}{return} \mbox{\hyperlink{darknet_8h_a493583f6fc164cf849745e01e4c04ab5}{data}};}
+\DoxyCodeLine{332 \}}
+\DoxyCodeLine{333 }
+\DoxyCodeLine{337 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{338 T \&\mbox{\hyperlink{internals_8h_a0fd724375f2ca7cf16036d2d4ff8dcd1}{get\_or\_create\_shared\_data}}(\textcolor{keyword}{const} std::string \&\mbox{\hyperlink{structname}{name}}) \{}
+\DoxyCodeLine{339     \textcolor{keyword}{auto} \&\mbox{\hyperlink{structinternals}{internals}} = \mbox{\hyperlink{internals_8h_a6c7959e5bcf56993e43c61758aa697ac}{detail::get\_internals}}();}
+\DoxyCodeLine{340     \textcolor{keyword}{auto} it = \mbox{\hyperlink{structinternals}{internals}}.\mbox{\hyperlink{structinternals_ad52baba07c7497fa2797e7db740707f4}{shared\_data}}.find(\mbox{\hyperlink{structname}{name}});}
+\DoxyCodeLine{341     T *ptr = (T *) (it != \mbox{\hyperlink{structinternals}{internals}}.\mbox{\hyperlink{structinternals_ad52baba07c7497fa2797e7db740707f4}{shared\_data}}.end() ? it-\/>second : \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{342     \textcolor{keywordflow}{if} (!ptr) \{}
+\DoxyCodeLine{343         ptr = \textcolor{keyword}{new} T();}
+\DoxyCodeLine{344         \mbox{\hyperlink{structinternals}{internals}}.\mbox{\hyperlink{structinternals_ad52baba07c7497fa2797e7db740707f4}{shared\_data}}[\mbox{\hyperlink{structname}{name}}] = ptr;}
+\DoxyCodeLine{345     \}}
+\DoxyCodeLine{346     \textcolor{keywordflow}{return} *ptr;}
+\DoxyCodeLine{347 \}}
+\DoxyCodeLine{348 }
+\DoxyCodeLine{349 \mbox{\hyperlink{detail_2common_8h_a12bb24ea980ca8fb1f46b1992bc9c83a}{NAMESPACE\_END}}(\mbox{\hyperlink{detail_2common_8h_a0d3c06cceaa89be29b71719a825444c6}{PYBIND11\_NAMESPACE}})}
+
+\end{DoxyCode}

@@ -1,0 +1,79 @@
+\hypertarget{_async_detector_8h_source}{}\doxysection{Async\+Detector.\+h}
+\label{_async_detector_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/async\_detector/AsyncDetector.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/async\_detector/AsyncDetector.h}}
+\mbox{\hyperlink{_async_detector_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <thread>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <mutex>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <atomic>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <condition\_variable>}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_base_detector_8h}{BaseDetector.h}}"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_ctracker_8h}{Ctracker.h}}"{}}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{20 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_frame_info}{FrameInfo}}}
+\DoxyCodeLine{21 \{}
+\DoxyCodeLine{22     cv::Mat \mbox{\hyperlink{struct_frame_info_ac6aa74ba76f4ce84b80256e51a48977a}{m\_frame}};}
+\DoxyCodeLine{23     cv::UMat \mbox{\hyperlink{struct_frame_info_ab3a6a925a778f3d350a69820a141b6a5}{m\_clFrame}};}
+\DoxyCodeLine{24     \mbox{\hyperlink{defines_8h_a01db0de56a20f4342820a093c5154536}{regions\_t}} \mbox{\hyperlink{struct_frame_info_a623b2b20e3b4c1f7713a557c9d11ce78}{m\_regions}};}
+\DoxyCodeLine{25     std::vector<TrackingObject> \mbox{\hyperlink{struct_frame_info_a0adc8cb4158c56da3593252825224a4c}{m\_tracks}};}
+\DoxyCodeLine{26     int64 \mbox{\hyperlink{struct_frame_info_a93060fcbec035fac7c828a947c15cc65}{m\_dt}} = 0;}
+\DoxyCodeLine{27     \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_frame_info_a46a7e857e74faab1c6695c44b8a16075}{m\_fps}} = 0;}
+\DoxyCodeLine{28     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{struct_frame_info_a2a0956a5eaf0e672326fa1727e741337}{m\_frameInd}} = 0;}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_frame_info_aeee132de46f4ce7f2f4a397d185bd1af}{StateNotProcessed}} = 0;}
+\DoxyCodeLine{31     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_frame_info_a164639445b356d66c94c73e863912efb}{StateInProcess}} = 1;}
+\DoxyCodeLine{32     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_frame_info_a48f403c1bb31b43ac90e2bae570b1376}{StateCompleted}} = 2;}
+\DoxyCodeLine{33     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_frame_info_a5637606d12611256d8036445da2ed0cd}{StateSkipped}} = 3;}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35     std::atomic<int> \mbox{\hyperlink{struct_frame_info_a5809912ff68887af4ab6d92be0b0d572}{m\_inDetector}}; \textcolor{comment}{// 0 -\/ not in Detector, 1 -\/ detector started processing, 2 -\/ objects was detected, 3 -\/ detector skip this frame}}
+\DoxyCodeLine{36     std::atomic<int> \mbox{\hyperlink{struct_frame_info_a4c9f70b2fc901278280c45067977205b}{m\_inTracker}};  \textcolor{comment}{// 0 -\/ not in Tracker, 1 -\/ tracker started processing, 2 -\/ objects was tracked}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38     \mbox{\hyperlink{struct_frame_info_af7e19585f941aac69456d06cbc5db698}{FrameInfo}}(\textcolor{keywordtype}{size\_t} frameInd)}
+\DoxyCodeLine{39         : \mbox{\hyperlink{struct_frame_info_a2a0956a5eaf0e672326fa1727e741337}{m\_frameInd}}(frameInd), \mbox{\hyperlink{struct_frame_info_a5809912ff68887af4ab6d92be0b0d572}{m\_inDetector}}(\mbox{\hyperlink{struct_frame_info_aeee132de46f4ce7f2f4a397d185bd1af}{StateNotProcessed}}), \mbox{\hyperlink{struct_frame_info_a4c9f70b2fc901278280c45067977205b}{m\_inTracker}}(\mbox{\hyperlink{struct_frame_info_aeee132de46f4ce7f2f4a397d185bd1af}{StateNotProcessed}})}
+\DoxyCodeLine{40     \{}
+\DoxyCodeLine{41     \}}
+\DoxyCodeLine{42 \};}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_queue_8h}{Queue.h}}"{}}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{51 \textcolor{keyword}{class }\mbox{\hyperlink{class_async_detector}{AsyncDetector}}}
+\DoxyCodeLine{52 \{}
+\DoxyCodeLine{53 \textcolor{keyword}{public}:}
+\DoxyCodeLine{54     \mbox{\hyperlink{class_async_detector_aeefe16e0dec16477a09200ae767e8a4f}{AsyncDetector}}(\textcolor{keyword}{const} cv::CommandLineParser\& parser);}
+\DoxyCodeLine{55     \mbox{\hyperlink{class_async_detector_a4255393f9f396e961b94eaa090cef8a2}{\string~AsyncDetector}}();}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_async_detector_a9cae905d01fde3a00d306a3045caa838}{Process}}();}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \textcolor{keyword}{private}:}
+\DoxyCodeLine{60     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_async_detector_a5918e98016e285b28b557972f20da229}{m\_showLogs}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{61     \textcolor{keywordtype}{float} \mbox{\hyperlink{class_async_detector_aea9b8ecf8590586a3c13bf7e0600e432}{m\_fps}} = 0;}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63     std::string \mbox{\hyperlink{class_async_detector_a309b08205159a5b046be973064496523}{m\_inFile}};}
+\DoxyCodeLine{64     std::string \mbox{\hyperlink{class_async_detector_aff67115a16c948dd1130dbdd04ffe080}{m\_outFile}};}
+\DoxyCodeLine{65     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_async_detector_a141e9036874e698994c48d9c29aee7b1}{m\_startFrame}} = 0;}
+\DoxyCodeLine{66     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_async_detector_a12bb9004f76d61474bb1f18c16f91817}{m\_endFrame}} = 0;}
+\DoxyCodeLine{67     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_async_detector_a6eab7730319a933c15eb6cc5877f3748}{m\_finishDelay}} = 0;}
+\DoxyCodeLine{68     std::vector<cv::Scalar> \mbox{\hyperlink{class_async_detector_a0f10acd0532e1f1343170d361a3f356e}{m\_colors}};}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     \mbox{\hyperlink{class_frames_queue}{FramesQueue}} \mbox{\hyperlink{class_async_detector_a7d25e3c72630934b0ea2e9eb9b784d5c}{m\_framesQue}};}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_async_detector_a1ef9bbcdf04962b6c116c8533a2fd45e}{DrawData}}(\mbox{\hyperlink{_queue_8h_a957665fdf28d8e1af49404b2d37b9c54}{frame\_ptr}} frameInfo, \textcolor{keywordtype}{int} framesCounter, \textcolor{keywordtype}{int} currTime);}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_async_detector_a12c901da94bad4466b0d0e1fda6469ab}{DrawTrack}}(cv::Mat frame, \textcolor{keyword}{const} \mbox{\hyperlink{struct_tracking_object}{TrackingObject}}\& track, \textcolor{keywordtype}{bool} drawTrajectory = \textcolor{keyword}{true});}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_async_detector_ae0ee2038d03105411ae97a33f8e8fb57}{CaptureThread}}(std::string fileName, \textcolor{keywordtype}{int} startFrame, \textcolor{keywordtype}{float}* fps, \mbox{\hyperlink{class_frames_queue}{FramesQueue}}* framesQue, \textcolor{keywordtype}{bool}* stopFlag);}
+\DoxyCodeLine{77     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_async_detector_ad85a082d1099dc4e5556bb4240eff72e}{DetectThread}}(\textcolor{keyword}{const} \mbox{\hyperlink{defines_8h_a9fcffa231cb8ff6a5fc4e2e2e71f3ead}{config\_t}}\& config, cv::Mat firstFrame, \mbox{\hyperlink{class_frames_queue}{FramesQueue}}* framesQue, \textcolor{keywordtype}{bool}* stopFlag);}
+\DoxyCodeLine{78     \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_async_detector_a4b60dc313a57dfcce2be0bbb9b8f32c7}{TrackingThread}}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_tracker_settings}{TrackerSettings}}\& settings, \mbox{\hyperlink{class_frames_queue}{FramesQueue}}* framesQue, \textcolor{keywordtype}{bool}* stopFlag);}
+\DoxyCodeLine{79 \};}
+
+\end{DoxyCode}

@@ -1,0 +1,150 @@
+\hypertarget{coco_8c}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/coco.c 文件参考}
+\label{coco_8c}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/coco.c@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/darknet/src/coco.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}network.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}detection\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cost\+\_\+layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}parser.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}box.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}demo.\+h\char`\"{}}\newline
+coco.\+c 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{coco_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{coco_8c_a7d54248e7cab4c15d780458837482861}{train\+\_\+coco}} (char $\ast$cfgfile, char $\ast$weightfile)
+\item 
+void \mbox{\hyperlink{coco_8c_a1cf85439fec9f01b0f709a87c3842f9f}{print\+\_\+cocos}} (FILE $\ast$fp, int image\+\_\+id, \mbox{\hyperlink{structbox}{box}} $\ast$boxes, float $\ast$$\ast$probs, int num\+\_\+boxes, int classes, int w, int h)
+\item 
+int \mbox{\hyperlink{coco_8c_ac4d2c9686699ff1feb998868f5f07757}{get\+\_\+coco\+\_\+image\+\_\+id}} (char $\ast$filename)
+\item 
+void \mbox{\hyperlink{coco_8c_ac7595c589698e072c1f587df1c9d083f}{validate\+\_\+coco}} (char $\ast$cfgfile, char $\ast$weightfile)
+\item 
+void \mbox{\hyperlink{coco_8c_a75e914b5963bbd97ca7ab9b2d61235e4}{validate\+\_\+coco\+\_\+recall}} (char $\ast$cfgfile, char $\ast$weightfile)
+\item 
+void \mbox{\hyperlink{coco_8c_a3750d7559afe9fbdcc98dfb5383275a7}{test\+\_\+coco}} (char $\ast$cfgfile, char $\ast$weightfile, char $\ast$filename, float thresh)
+\item 
+void \mbox{\hyperlink{coco_8c_a9a2e98f86cd2b185650f4ec039d38b03}{run\+\_\+coco}} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\doxysubsection*{变量}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \mbox{\hyperlink{coco_8c_a1da6305b8c6be56e3ec19a7ab02800c9}{coco\+\_\+classes}} \mbox{[}$\,$\mbox{]} = \{\char`\"{}person\char`\"{},\char`\"{}bicycle\char`\"{},\char`\"{}car\char`\"{},\char`\"{}motorcycle\char`\"{},\char`\"{}airplane\char`\"{},\char`\"{}bus\char`\"{},\char`\"{}train\char`\"{},\char`\"{}truck\char`\"{},\char`\"{}boat\char`\"{},\char`\"{}traffic light\char`\"{},\char`\"{}fire hydrant\char`\"{},\char`\"{}stop sign\char`\"{},\char`\"{}parking meter\char`\"{},\char`\"{}bench\char`\"{},\char`\"{}bird\char`\"{},\char`\"{}cat\char`\"{},\char`\"{}dog\char`\"{},\char`\"{}horse\char`\"{},\char`\"{}sheep\char`\"{},\char`\"{}cow\char`\"{},\char`\"{}elephant\char`\"{},\char`\"{}bear\char`\"{},\char`\"{}zebra\char`\"{},\char`\"{}giraffe\char`\"{},\char`\"{}backpack\char`\"{},\char`\"{}umbrella\char`\"{},\char`\"{}handbag\char`\"{},\char`\"{}tie\char`\"{},\char`\"{}suitcase\char`\"{},\char`\"{}frisbee\char`\"{},\char`\"{}skis\char`\"{},\char`\"{}snowboard\char`\"{},\char`\"{}sports ball\char`\"{},\char`\"{}kite\char`\"{},\char`\"{}baseball bat\char`\"{},\char`\"{}baseball glove\char`\"{},\char`\"{}skateboard\char`\"{},\char`\"{}surfboard\char`\"{},\char`\"{}tennis racket\char`\"{},\char`\"{}bottle\char`\"{},\char`\"{}wine glass\char`\"{},\char`\"{}cup\char`\"{},\char`\"{}fork\char`\"{},\char`\"{}knife\char`\"{},\char`\"{}spoon\char`\"{},\char`\"{}bowl\char`\"{},\char`\"{}banana\char`\"{},\char`\"{}apple\char`\"{},\char`\"{}sandwich\char`\"{},\char`\"{}orange\char`\"{},\char`\"{}broccoli\char`\"{},\char`\"{}carrot\char`\"{},\char`\"{}hot dog\char`\"{},\char`\"{}pizza\char`\"{},\char`\"{}donut\char`\"{},\char`\"{}cake\char`\"{},\char`\"{}chair\char`\"{},\char`\"{}couch\char`\"{},\char`\"{}potted plant\char`\"{},\char`\"{}bed\char`\"{},\char`\"{}dining table\char`\"{},\char`\"{}toilet\char`\"{},\char`\"{}tv\char`\"{},\char`\"{}laptop\char`\"{},\char`\"{}mouse\char`\"{},\char`\"{}remote\char`\"{},\char`\"{}keyboard\char`\"{},\char`\"{}cell phone\char`\"{},\char`\"{}microwave\char`\"{},\char`\"{}oven\char`\"{},\char`\"{}toaster\char`\"{},\char`\"{}sink\char`\"{},\char`\"{}refrigerator\char`\"{},\char`\"{}book\char`\"{},\char`\"{}clock\char`\"{},\char`\"{}vase\char`\"{},\char`\"{}scissors\char`\"{},\char`\"{}teddy bear\char`\"{},\char`\"{}hair drier\char`\"{},\char`\"{}toothbrush\char`\"{}\}
+\item 
+int \mbox{\hyperlink{coco_8c_a510b483a1df4daf892d602b2deedd78d}{coco\+\_\+ids}} \mbox{[}$\,$\mbox{]} = \{1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,20,21,22,23,24,25,27,28,31,32,33,34,35,36,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,67,70,72,73,74,75,76,77,78,79,80,81,82,84,85,86,87,88,89,90\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{coco_8c_ac4d2c9686699ff1feb998868f5f07757}\label{coco_8c_ac4d2c9686699ff1feb998868f5f07757}} 
+\index{coco.c@{coco.c}!get\_coco\_image\_id@{get\_coco\_image\_id}}
+\index{get\_coco\_image\_id@{get\_coco\_image\_id}!coco.c@{coco.c}}
+\doxysubsubsection{\texorpdfstring{get\_coco\_image\_id()}{get\_coco\_image\_id()}}
+{\footnotesize\ttfamily int get\+\_\+coco\+\_\+image\+\_\+id (\begin{DoxyParamCaption}\item[{char $\ast$}]{filename }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{coco_8c_a1cf85439fec9f01b0f709a87c3842f9f}\label{coco_8c_a1cf85439fec9f01b0f709a87c3842f9f}} 
+\index{coco.c@{coco.c}!print\_cocos@{print\_cocos}}
+\index{print\_cocos@{print\_cocos}!coco.c@{coco.c}}
+\doxysubsubsection{\texorpdfstring{print\_cocos()}{print\_cocos()}}
+{\footnotesize\ttfamily void print\+\_\+cocos (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{fp,  }\item[{int}]{image\+\_\+id,  }\item[{\mbox{\hyperlink{structbox}{box}} $\ast$}]{boxes,  }\item[{float $\ast$$\ast$}]{probs,  }\item[{int}]{num\+\_\+boxes,  }\item[{int}]{classes,  }\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=245pt]{coco_8c_a1cf85439fec9f01b0f709a87c3842f9f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{coco_8c_a9a2e98f86cd2b185650f4ec039d38b03}\label{coco_8c_a9a2e98f86cd2b185650f4ec039d38b03}} 
+\index{coco.c@{coco.c}!run\_coco@{run\_coco}}
+\index{run\_coco@{run\_coco}!coco.c@{coco.c}}
+\doxysubsubsection{\texorpdfstring{run\_coco()}{run\_coco()}}
+{\footnotesize\ttfamily void run\+\_\+coco (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{coco_8c_a9a2e98f86cd2b185650f4ec039d38b03_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{coco_8c_a3750d7559afe9fbdcc98dfb5383275a7}\label{coco_8c_a3750d7559afe9fbdcc98dfb5383275a7}} 
+\index{coco.c@{coco.c}!test\_coco@{test\_coco}}
+\index{test\_coco@{test\_coco}!coco.c@{coco.c}}
+\doxysubsubsection{\texorpdfstring{test\_coco()}{test\_coco()}}
+{\footnotesize\ttfamily void test\+\_\+coco (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile,  }\item[{char $\ast$}]{filename,  }\item[{float}]{thresh }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{coco_8c_a3750d7559afe9fbdcc98dfb5383275a7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{coco_8c_a7d54248e7cab4c15d780458837482861}\label{coco_8c_a7d54248e7cab4c15d780458837482861}} 
+\index{coco.c@{coco.c}!train\_coco@{train\_coco}}
+\index{train\_coco@{train\_coco}!coco.c@{coco.c}}
+\doxysubsubsection{\texorpdfstring{train\_coco()}{train\_coco()}}
+{\footnotesize\ttfamily void train\+\_\+coco (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{coco_8c_a7d54248e7cab4c15d780458837482861_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{coco_8c_ac7595c589698e072c1f587df1c9d083f}\label{coco_8c_ac7595c589698e072c1f587df1c9d083f}} 
+\index{coco.c@{coco.c}!validate\_coco@{validate\_coco}}
+\index{validate\_coco@{validate\_coco}!coco.c@{coco.c}}
+\doxysubsubsection{\texorpdfstring{validate\_coco()}{validate\_coco()}}
+{\footnotesize\ttfamily void validate\+\_\+coco (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{coco_8c_ac7595c589698e072c1f587df1c9d083f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{coco_8c_a75e914b5963bbd97ca7ab9b2d61235e4}\label{coco_8c_a75e914b5963bbd97ca7ab9b2d61235e4}} 
+\index{coco.c@{coco.c}!validate\_coco\_recall@{validate\_coco\_recall}}
+\index{validate\_coco\_recall@{validate\_coco\_recall}!coco.c@{coco.c}}
+\doxysubsubsection{\texorpdfstring{validate\_coco\_recall()}{validate\_coco\_recall()}}
+{\footnotesize\ttfamily void validate\+\_\+coco\+\_\+recall (\begin{DoxyParamCaption}\item[{char $\ast$}]{cfgfile,  }\item[{char $\ast$}]{weightfile }\end{DoxyParamCaption})}
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{coco_8c_a75e914b5963bbd97ca7ab9b2d61235e4_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{变量说明}
+\mbox{\Hypertarget{coco_8c_a1da6305b8c6be56e3ec19a7ab02800c9}\label{coco_8c_a1da6305b8c6be56e3ec19a7ab02800c9}} 
+\index{coco.c@{coco.c}!coco\_classes@{coco\_classes}}
+\index{coco\_classes@{coco\_classes}!coco.c@{coco.c}}
+\doxysubsubsection{\texorpdfstring{coco\_classes}{coco\_classes}}
+{\footnotesize\ttfamily char$\ast$ coco\+\_\+classes\mbox{[}$\,$\mbox{]} = \{\char`\"{}person\char`\"{},\char`\"{}bicycle\char`\"{},\char`\"{}car\char`\"{},\char`\"{}motorcycle\char`\"{},\char`\"{}airplane\char`\"{},\char`\"{}bus\char`\"{},\char`\"{}train\char`\"{},\char`\"{}truck\char`\"{},\char`\"{}boat\char`\"{},\char`\"{}traffic light\char`\"{},\char`\"{}fire hydrant\char`\"{},\char`\"{}stop sign\char`\"{},\char`\"{}parking meter\char`\"{},\char`\"{}bench\char`\"{},\char`\"{}bird\char`\"{},\char`\"{}cat\char`\"{},\char`\"{}dog\char`\"{},\char`\"{}horse\char`\"{},\char`\"{}sheep\char`\"{},\char`\"{}cow\char`\"{},\char`\"{}elephant\char`\"{},\char`\"{}bear\char`\"{},\char`\"{}zebra\char`\"{},\char`\"{}giraffe\char`\"{},\char`\"{}backpack\char`\"{},\char`\"{}umbrella\char`\"{},\char`\"{}handbag\char`\"{},\char`\"{}tie\char`\"{},\char`\"{}suitcase\char`\"{},\char`\"{}frisbee\char`\"{},\char`\"{}skis\char`\"{},\char`\"{}snowboard\char`\"{},\char`\"{}sports ball\char`\"{},\char`\"{}kite\char`\"{},\char`\"{}baseball bat\char`\"{},\char`\"{}baseball glove\char`\"{},\char`\"{}skateboard\char`\"{},\char`\"{}surfboard\char`\"{},\char`\"{}tennis racket\char`\"{},\char`\"{}bottle\char`\"{},\char`\"{}wine glass\char`\"{},\char`\"{}cup\char`\"{},\char`\"{}fork\char`\"{},\char`\"{}knife\char`\"{},\char`\"{}spoon\char`\"{},\char`\"{}bowl\char`\"{},\char`\"{}banana\char`\"{},\char`\"{}apple\char`\"{},\char`\"{}sandwich\char`\"{},\char`\"{}orange\char`\"{},\char`\"{}broccoli\char`\"{},\char`\"{}carrot\char`\"{},\char`\"{}hot dog\char`\"{},\char`\"{}pizza\char`\"{},\char`\"{}donut\char`\"{},\char`\"{}cake\char`\"{},\char`\"{}chair\char`\"{},\char`\"{}couch\char`\"{},\char`\"{}potted plant\char`\"{},\char`\"{}bed\char`\"{},\char`\"{}dining table\char`\"{},\char`\"{}toilet\char`\"{},\char`\"{}tv\char`\"{},\char`\"{}laptop\char`\"{},\char`\"{}mouse\char`\"{},\char`\"{}remote\char`\"{},\char`\"{}keyboard\char`\"{},\char`\"{}cell phone\char`\"{},\char`\"{}microwave\char`\"{},\char`\"{}oven\char`\"{},\char`\"{}toaster\char`\"{},\char`\"{}sink\char`\"{},\char`\"{}refrigerator\char`\"{},\char`\"{}book\char`\"{},\char`\"{}clock\char`\"{},\char`\"{}vase\char`\"{},\char`\"{}scissors\char`\"{},\char`\"{}teddy bear\char`\"{},\char`\"{}hair drier\char`\"{},\char`\"{}toothbrush\char`\"{}\}}
+
+\mbox{\Hypertarget{coco_8c_a510b483a1df4daf892d602b2deedd78d}\label{coco_8c_a510b483a1df4daf892d602b2deedd78d}} 
+\index{coco.c@{coco.c}!coco\_ids@{coco\_ids}}
+\index{coco\_ids@{coco\_ids}!coco.c@{coco.c}}
+\doxysubsubsection{\texorpdfstring{coco\_ids}{coco\_ids}}
+{\footnotesize\ttfamily int coco\+\_\+ids\mbox{[}$\,$\mbox{]} = \{1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,20,21,22,23,24,25,27,28,31,32,33,34,35,36,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,67,70,72,73,74,75,76,77,78,79,80,81,82,84,85,86,87,88,89,90\}}
+

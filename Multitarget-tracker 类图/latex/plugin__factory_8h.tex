@@ -1,0 +1,89 @@
+\hypertarget{plugin__factory_8h}{}\doxysection{D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/tensorrt\+\_\+yolo/plugin\+\_\+factory.h 文件参考}
+\label{plugin__factory_8h}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/plugin\_factory.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/plugin\_factory.h}}
+{\ttfamily \#include $<$cassert$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+{\ttfamily \#include $<$cudnn.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include \char`\"{}Nv\+Infer.\+h\char`\"{}}\newline
+plugin\+\_\+factory.\+h 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{plugin__factory_8h__incl}
+\end{center}
+\end{figure}
+此图展示该文件直接或间接的被哪些文件引用了\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{plugin__factory_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer}{nvinfer1\+::\+Yolo\+Layer}}
+\item 
+class \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_plugin_creator}{nvinfer1\+::\+Yolo\+Layer\+Plugin\+Creator}}
+\end{DoxyCompactItemize}
+\doxysubsection*{命名空间}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacenvinfer1}{nvinfer1}}
+\end{DoxyCompactItemize}
+\doxysubsection*{宏定义}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{plugin__factory_8h_a82aa7fdee16976219b7f8933cf4e13de}{NV\+\_\+\+CUDA\+\_\+\+CHECK}}(status)
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+cuda\+Error\+\_\+t \mbox{\hyperlink{plugin__factory_8h_a9473606718eea68531a6f5e65005f89b}{cuda\+Yolo\+Layer\+V3}} (const void $\ast$input, void $\ast$output, const uint32\+\_\+t \&batch\+Size, const uint32\+\_\+t \&n\+\_\+grid\+\_\+h\+\_\+, const uint32\+\_\+t \&n\+\_\+grid\+\_\+w\+\_\+, const uint32\+\_\+t \&num\+Output\+Classes, const uint32\+\_\+t \&num\+BBoxes, uint64\+\_\+t output\+Size, cuda\+Stream\+\_\+t stream)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{namespacenvinfer1_adb7e28fc142f6b26d9988688f9267dbb}{nvinfer1\+::wr}} (char $\ast$\&\mbox{\hyperlink{classbuffer}{buffer}}, const T \&val)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{namespacenvinfer1_affff5bb340299fdfe10dcff3ff9dffca}{nvinfer1\+::re}} (const char $\ast$\&\mbox{\hyperlink{classbuffer}{buffer}}, T \&val)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{宏定义说明}
+\mbox{\Hypertarget{plugin__factory_8h_a82aa7fdee16976219b7f8933cf4e13de}\label{plugin__factory_8h_a82aa7fdee16976219b7f8933cf4e13de}} 
+\index{plugin\_factory.h@{plugin\_factory.h}!NV\_CUDA\_CHECK@{NV\_CUDA\_CHECK}}
+\index{NV\_CUDA\_CHECK@{NV\_CUDA\_CHECK}!plugin\_factory.h@{plugin\_factory.h}}
+\doxysubsubsection{\texorpdfstring{NV\_CUDA\_CHECK}{NV\_CUDA\_CHECK}}
+{\footnotesize\ttfamily \#define NV\+\_\+\+CUDA\+\_\+\+CHECK(\begin{DoxyParamCaption}\item[{}]{status }\end{DoxyParamCaption})}
+
+{\bfseries 值\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \{                                                                                              \(\backslash\)}
+\DoxyCodeLine{        if (status != 0)                                                                           \(\backslash\)}
+\DoxyCodeLine{        \{                                                                                          \(\backslash\)}
+\DoxyCodeLine{            std::cout << \textcolor{stringliteral}{"{}Cuda failure: "{}} << cudaGetErrorString(status) << \textcolor{stringliteral}{"{} in file "{}} << \_\_FILE\_\_ \(\backslash\)}
+\DoxyCodeLine{                      << \textcolor{stringliteral}{"{} at line "{}} << \_\_LINE\_\_ << std::endl;                                     \(\backslash\)}
+\DoxyCodeLine{            abort();                                                                               \(\backslash\)}
+\DoxyCodeLine{        \}                                                                                          \(\backslash\)}
+\DoxyCodeLine{    \}}
+
+\end{DoxyCode}
+MIT License
+
+Copyright (c) 2018 NVIDIA CORPORATION. All rights reserved.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \char`\"{}\+Software\char`\"{}), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions\+:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED \char`\"{}\+AS IS\char`\"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{plugin__factory_8h_a9473606718eea68531a6f5e65005f89b}\label{plugin__factory_8h_a9473606718eea68531a6f5e65005f89b}} 
+\index{plugin\_factory.h@{plugin\_factory.h}!cudaYoloLayerV3@{cudaYoloLayerV3}}
+\index{cudaYoloLayerV3@{cudaYoloLayerV3}!plugin\_factory.h@{plugin\_factory.h}}
+\doxysubsubsection{\texorpdfstring{cudaYoloLayerV3()}{cudaYoloLayerV3()}}
+{\footnotesize\ttfamily cuda\+Error\+\_\+t cuda\+Yolo\+Layer\+V3 (\begin{DoxyParamCaption}\item[{const void $\ast$}]{input,  }\item[{void $\ast$}]{output,  }\item[{const uint32\+\_\+t \&}]{batch\+Size,  }\item[{const uint32\+\_\+t \&}]{n\+\_\+grid\+\_\+h\+\_\+,  }\item[{const uint32\+\_\+t \&}]{n\+\_\+grid\+\_\+w\+\_\+,  }\item[{const uint32\+\_\+t \&}]{num\+Output\+Classes,  }\item[{const uint32\+\_\+t \&}]{num\+BBoxes,  }\item[{uint64\+\_\+t}]{output\+Size,  }\item[{cuda\+Stream\+\_\+t}]{stream }\end{DoxyParamCaption})}
+

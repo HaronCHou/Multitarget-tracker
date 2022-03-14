@@ -1,0 +1,153 @@
+\hypertarget{classhttplib_1_1_thread_pool}{}\doxysection{httplib\+::Thread\+Pool类 参考}
+\label{classhttplib_1_1_thread_pool}\index{httplib::ThreadPool@{httplib::ThreadPool}}
+
+
+{\ttfamily \#include $<$httplib.\+h$>$}
+
+
+
+类 httplib\+::Thread\+Pool 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=178pt]{classhttplib_1_1_thread_pool__inherit__graph}
+\end{center}
+\end{figure}
+
+
+httplib\+::Thread\+Pool 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=178pt]{classhttplib_1_1_thread_pool__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structhttplib_1_1_thread_pool_1_1worker}{worker}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classhttplib_1_1_thread_pool_a322937261ee5818426a3f09caa8f37ec}{Thread\+Pool}} (\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}} n)
+\item 
+\mbox{\hyperlink{classhttplib_1_1_thread_pool_aac78a365c5d7910e7367a83d21369ed2}{Thread\+Pool}} (const \mbox{\hyperlink{classhttplib_1_1_thread_pool}{Thread\+Pool}} \&)=delete
+\item 
+\mbox{\hyperlink{classhttplib_1_1_thread_pool_ad0f2cf2a96d2b9bcad7183c467c84e50}{$\sim$\+Thread\+Pool}} () override=default
+\item 
+void \mbox{\hyperlink{classhttplib_1_1_thread_pool_a0a1653126f41111579d17adc245b3ad1}{enqueue}} (std\+::function$<$ void()$>$ fn) override
+\item 
+void \mbox{\hyperlink{classhttplib_1_1_thread_pool_a9884cbaef9ed5f92152b82d2c93340ea}{shutdown}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::thread $>$ \mbox{\hyperlink{classhttplib_1_1_thread_pool_ab387526d81649547c8cc80e8a2ed5262}{threads\+\_\+}}
+\item 
+\mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$ std\+::function$<$ void()$>$ $>$ \mbox{\hyperlink{classhttplib_1_1_thread_pool_a4d0f69e884aa51fb069949ab47cc3319}{jobs\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classhttplib_1_1_thread_pool_ad147150e368881c6c813434e9e509cff}{shutdown\+\_\+}}
+\item 
+std\+::condition\+\_\+variable \mbox{\hyperlink{classhttplib_1_1_thread_pool_a047e7cd75e07a81c51f1c9376d5dd42f}{cond\+\_\+}}
+\item 
+\mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{std\+::mutex}} \mbox{\hyperlink{classhttplib_1_1_thread_pool_af95720a7fe4254a7fca6b15451ed5d1e}{mutex\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsection*{友元}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{classhttplib_1_1_thread_pool_a145c4e203b787f9b561489eb2032edb3}{worker}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classhttplib_1_1_thread_pool_a322937261ee5818426a3f09caa8f37ec}\label{classhttplib_1_1_thread_pool_a322937261ee5818426a3f09caa8f37ec}} 
+\index{httplib::ThreadPool@{httplib::ThreadPool}!ThreadPool@{ThreadPool}}
+\index{ThreadPool@{ThreadPool}!httplib::ThreadPool@{httplib::ThreadPool}}
+\doxysubsubsection{\texorpdfstring{ThreadPool()}{ThreadPool()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily httplib\+::\+Thread\+Pool\+::\+Thread\+Pool (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{detail_2common_8h_a801d6a451a01953ef8cbae6feb6a3638}{size\+\_\+t}}}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\mbox{\Hypertarget{classhttplib_1_1_thread_pool_aac78a365c5d7910e7367a83d21369ed2}\label{classhttplib_1_1_thread_pool_aac78a365c5d7910e7367a83d21369ed2}} 
+\index{httplib::ThreadPool@{httplib::ThreadPool}!ThreadPool@{ThreadPool}}
+\index{ThreadPool@{ThreadPool}!httplib::ThreadPool@{httplib::ThreadPool}}
+\doxysubsubsection{\texorpdfstring{ThreadPool()}{ThreadPool()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily httplib\+::\+Thread\+Pool\+::\+Thread\+Pool (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classhttplib_1_1_thread_pool}{Thread\+Pool}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{classhttplib_1_1_thread_pool_ad0f2cf2a96d2b9bcad7183c467c84e50}\label{classhttplib_1_1_thread_pool_ad0f2cf2a96d2b9bcad7183c467c84e50}} 
+\index{httplib::ThreadPool@{httplib::ThreadPool}!````~ThreadPool@{$\sim$ThreadPool}}
+\index{````~ThreadPool@{$\sim$ThreadPool}!httplib::ThreadPool@{httplib::ThreadPool}}
+\doxysubsubsection{\texorpdfstring{$\sim$ThreadPool()}{~ThreadPool()}}
+{\footnotesize\ttfamily httplib\+::\+Thread\+Pool\+::$\sim$\+Thread\+Pool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classhttplib_1_1_thread_pool_a0a1653126f41111579d17adc245b3ad1}\label{classhttplib_1_1_thread_pool_a0a1653126f41111579d17adc245b3ad1}} 
+\index{httplib::ThreadPool@{httplib::ThreadPool}!enqueue@{enqueue}}
+\index{enqueue@{enqueue}!httplib::ThreadPool@{httplib::ThreadPool}}
+\doxysubsubsection{\texorpdfstring{enqueue()}{enqueue()}}
+{\footnotesize\ttfamily void httplib\+::\+Thread\+Pool\+::enqueue (\begin{DoxyParamCaption}\item[{std\+::function$<$ void()$>$}]{fn }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+实现了 \mbox{\hyperlink{classhttplib_1_1_task_queue_aa58eb792edcb3e4937e6846ccb6fe904}{httplib\+::\+Task\+Queue}}.
+
+\mbox{\Hypertarget{classhttplib_1_1_thread_pool_a9884cbaef9ed5f92152b82d2c93340ea}\label{classhttplib_1_1_thread_pool_a9884cbaef9ed5f92152b82d2c93340ea}} 
+\index{httplib::ThreadPool@{httplib::ThreadPool}!shutdown@{shutdown}}
+\index{shutdown@{shutdown}!httplib::ThreadPool@{httplib::ThreadPool}}
+\doxysubsubsection{\texorpdfstring{shutdown()}{shutdown()}}
+{\footnotesize\ttfamily void httplib\+::\+Thread\+Pool\+::shutdown (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+实现了 \mbox{\hyperlink{classhttplib_1_1_task_queue_ae9f356217bd1ed1797426001070b316d}{httplib\+::\+Task\+Queue}}.
+
+
+
+\doxysubsection{友元及相关函数文档}
+\mbox{\Hypertarget{classhttplib_1_1_thread_pool_a145c4e203b787f9b561489eb2032edb3}\label{classhttplib_1_1_thread_pool_a145c4e203b787f9b561489eb2032edb3}} 
+\index{httplib::ThreadPool@{httplib::ThreadPool}!worker@{worker}}
+\index{worker@{worker}!httplib::ThreadPool@{httplib::ThreadPool}}
+\doxysubsubsection{\texorpdfstring{worker}{worker}}
+{\footnotesize\ttfamily friend struct \mbox{\hyperlink{structhttplib_1_1_thread_pool_1_1worker}{worker}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classhttplib_1_1_thread_pool_a047e7cd75e07a81c51f1c9376d5dd42f}\label{classhttplib_1_1_thread_pool_a047e7cd75e07a81c51f1c9376d5dd42f}} 
+\index{httplib::ThreadPool@{httplib::ThreadPool}!cond\_@{cond\_}}
+\index{cond\_@{cond\_}!httplib::ThreadPool@{httplib::ThreadPool}}
+\doxysubsubsection{\texorpdfstring{cond\_}{cond\_}}
+{\footnotesize\ttfamily std\+::condition\+\_\+variable httplib\+::\+Thread\+Pool\+::cond\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classhttplib_1_1_thread_pool_a4d0f69e884aa51fb069949ab47cc3319}\label{classhttplib_1_1_thread_pool_a4d0f69e884aa51fb069949ab47cc3319}} 
+\index{httplib::ThreadPool@{httplib::ThreadPool}!jobs\_@{jobs\_}}
+\index{jobs\_@{jobs\_}!httplib::ThreadPool@{httplib::ThreadPool}}
+\doxysubsubsection{\texorpdfstring{jobs\_}{jobs\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{list_8h_aa295f649a192b2bcdc06effc2f71dde4}{std\+::list}}$<$std\+::function$<$void()$>$ $>$ httplib\+::\+Thread\+Pool\+::jobs\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classhttplib_1_1_thread_pool_af95720a7fe4254a7fca6b15451ed5d1e}\label{classhttplib_1_1_thread_pool_af95720a7fe4254a7fca6b15451ed5d1e}} 
+\index{httplib::ThreadPool@{httplib::ThreadPool}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!httplib::ThreadPool@{httplib::ThreadPool}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{data_8c_a4acff8232e4aec9cd5c6dc200ac55ef3}{std\+::mutex}} httplib\+::\+Thread\+Pool\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classhttplib_1_1_thread_pool_ad147150e368881c6c813434e9e509cff}\label{classhttplib_1_1_thread_pool_ad147150e368881c6c813434e9e509cff}} 
+\index{httplib::ThreadPool@{httplib::ThreadPool}!shutdown\_@{shutdown\_}}
+\index{shutdown\_@{shutdown\_}!httplib::ThreadPool@{httplib::ThreadPool}}
+\doxysubsubsection{\texorpdfstring{shutdown\_}{shutdown\_}}
+{\footnotesize\ttfamily bool httplib\+::\+Thread\+Pool\+::shutdown\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classhttplib_1_1_thread_pool_ab387526d81649547c8cc80e8a2ed5262}\label{classhttplib_1_1_thread_pool_ab387526d81649547c8cc80e8a2ed5262}} 
+\index{httplib::ThreadPool@{httplib::ThreadPool}!threads\_@{threads\_}}
+\index{threads\_@{threads\_}!httplib::ThreadPool@{httplib::ThreadPool}}
+\doxysubsubsection{\texorpdfstring{threads\_}{threads\_}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::thread$>$ httplib\+::\+Thread\+Pool\+::threads\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/zhr\+\_\+files/\+Multitarget-\/tracker-\/master/src/\+Detector/darknet/src/\mbox{\hyperlink{httplib_8h}{httplib.\+h}}\end{DoxyCompactItemize}

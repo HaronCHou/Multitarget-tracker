@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['ramp_0',['RAMP',['../darknet_8h.html#aea09b678fab8ab931902378cbbd79032a291e3bb43cd8449155161d1fa023348b',1,'darknet.h']]],
+  ['random_1',['RANDOM',['../darknet_8h.html#a9c2ce38711c59085616b738d2aa21184aa2b65445a3a16f164c5e811064d75726',1,'darknet.h']]],
+  ['reference_2',['reference',['../detail_2common_8h.html#adde72ab1fb0dd4b48a5232c349a53841ab8af13ea9c8fe890c9979a1fa8dbde22',1,'common.h']]],
+  ['reference_5finternal_3',['reference_internal',['../detail_2common_8h.html#adde72ab1fb0dd4b48a5232c349a53841aa39bc0596cb125c1605a78fbd287df7f',1,'common.h']]],
+  ['region_4',['REGION',['../darknet_8h.html#a5f7e99058765b058df158c099200b154a3bfda0bdc93e66e77b2242a9ce4cd804',1,'darknet.h']]],
+  ['region_5fdata_5',['REGION_DATA',['../darknet_8h.html#ac2ad7f431e3446fddcd9b6b9f93c4c14a65e122ba01bcce9d0ec2fb618f60f6e0',1,'darknet.h']]],
+  ['regression_5fdata_6',['REGRESSION_DATA',['../darknet_8h.html#ac2ad7f431e3446fddcd9b6b9f93c4c14a8412b05658ad561ef6817766e4e23aea',1,'darknet.h']]],
+  ['relie_7',['RELIE',['../darknet_8h.html#aea09b678fab8ab931902378cbbd79032a81581ff70b227e2f6841cbdd7c3155eb',1,'darknet.h']]],
+  ['relu_8',['RELU',['../darknet_8h.html#aea09b678fab8ab931902378cbbd79032a9b69aa04edddb5cade1fea783ef633a3',1,'darknet.h']]],
+  ['relu6_9',['RELU6',['../darknet_8h.html#aea09b678fab8ab931902378cbbd79032aada18f14cd0b475ce0f63612bf5b52dc',1,'darknet.h']]],
+  ['relu_5fnormalization_10',['RELU_NORMALIZATION',['../darknet_8h.html#a4e81c0088b04bf77fe4fb1b96456d8eea21ea9a11b41cc7238f15b4f9d37b7c4e',1,'darknet.h']]],
+  ['reorg_11',['REORG',['../darknet_8h.html#a5f7e99058765b058df158c099200b154ae36bcc3973387f0b5253ec83a21fb401',1,'darknet.h']]],
+  ['reorg_5fold_12',['REORG_OLD',['../darknet_8h.html#a5f7e99058765b058df158c099200b154a01cb22c6b8fd5e69302de3d13f7caefd',1,'darknet.h']]],
+  ['revleaky_13',['REVLEAKY',['../darknet_8h.html#aea09b678fab8ab931902378cbbd79032a6095910faa23671ab8bcd4b056050540',1,'darknet.h']]],
+  ['right_5fshift_14',['RIGHT_SHIFT',['../classratio__cut__partition.html#a8e2de20fc9f5cbe941aefa1c21c9b5caa94c4c2223116686ce19e42cf4ccbe511',1,'ratio_cut_partition']]],
+  ['rnn_15',['RNN',['../darknet_8h.html#a5f7e99058765b058df158c099200b154a55661cd8d595b42aaece780991f95da7',1,'darknet.h']]],
+  ['route_16',['ROUTE',['../darknet_8h.html#a5f7e99058765b058df158c099200b154a6530dd7e53049fcde9b27580cd9b8cdd',1,'darknet.h']]]
+];

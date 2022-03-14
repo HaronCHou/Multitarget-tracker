@@ -1,0 +1,192 @@
+\hypertarget{plugin__factory_8h_source}{}\doxysection{plugin\+\_\+factory.\+h}
+\label{plugin__factory_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/plugin\_factory.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/plugin\_factory.h}}
+\mbox{\hyperlink{plugin__factory_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#ifndef \_\_PLUGIN\_LAYER\_H\_\_}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#define \_\_PLUGIN\_LAYER\_H\_\_}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#include <cassert>}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#include <cstring>}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#include <cudnn.h>}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#include "{}NvInfer.h"{}}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#define NV\_CUDA\_CHECK(status)                                                                      \(\backslash\)}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{    \{                                                                                              \(\backslash\)}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{        if (status != 0)                                                                           \(\backslash\)}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{        \{                                                                                          \(\backslash\)}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{            std::cout << "{}Cuda failure: "{}} << cudaGetErrorString(status) << "{} in file "{} << \_\_FILE\_\_ \(\backslash\)}
+\DoxyCodeLine{42                       << "{} at line "{} << \_\_LINE\_\_ << std::endl;                                     \(\backslash\)}
+\DoxyCodeLine{43             abort();                                                                               \(\backslash\)}
+\DoxyCodeLine{44         \}                                                                                          \(\backslash\)}
+\DoxyCodeLine{45     \}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \textcolor{comment}{// Forward declaration of cuda kernels}}
+\DoxyCodeLine{48 cudaError\_t \mbox{\hyperlink{plugin__factory_8h_a9473606718eea68531a6f5e65005f89b}{cudaYoloLayerV3}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* input, \textcolor{keywordtype}{void}* output, \textcolor{keyword}{const} uint32\_t\& batchSize,}
+\DoxyCodeLine{49     \textcolor{keyword}{const} uint32\_t\& n\_grid\_h\_, \textcolor{keyword}{const} uint32\_t\& n\_grid\_w\_,}
+\DoxyCodeLine{50     \textcolor{keyword}{const} uint32\_t\& numOutputClasses, \textcolor{keyword}{const} uint32\_t\& numBBoxes,}
+\DoxyCodeLine{51     uint64\_t outputSize, cudaStream\_t stream);}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \textcolor{comment}{//class PluginFactory : public nvinfer1::IPluginFactory}}
+\DoxyCodeLine{54 \textcolor{comment}{//\{}}
+\DoxyCodeLine{55 \textcolor{comment}{//}}
+\DoxyCodeLine{56 \textcolor{comment}{//public:}}
+\DoxyCodeLine{57 \textcolor{comment}{//    PluginFactory();}}
+\DoxyCodeLine{58 \textcolor{comment}{//    nvinfer1::IPlugin* createPlugin(const char* layerName, const void* serialData,}}
+\DoxyCodeLine{59 \textcolor{comment}{//                                    size\_t serialLength);}}
+\DoxyCodeLine{60 \textcolor{comment}{//    bool isPlugin(const char* name);}}
+\DoxyCodeLine{61 \textcolor{comment}{//    void destroy();}}
+\DoxyCodeLine{62 \textcolor{comment}{//}}
+\DoxyCodeLine{63 \textcolor{comment}{//private:}}
+\DoxyCodeLine{64 \textcolor{comment}{//    static const int m\_MaxLeakyLayers = 72;}}
+\DoxyCodeLine{65 \textcolor{comment}{//    static const int m\_ReorgStride = 2;}}
+\DoxyCodeLine{66 \textcolor{comment}{//    static constexpr float m\_LeakyNegSlope = 0.1f;}}
+\DoxyCodeLine{67 \textcolor{comment}{//    static const int m\_NumBoxes = 5;}}
+\DoxyCodeLine{68 \textcolor{comment}{//    static const int m\_NumCoords = 4;}}
+\DoxyCodeLine{69 \textcolor{comment}{//    static const int m\_NumClasses = 80;}}
+\DoxyCodeLine{70 \textcolor{comment}{//    static const int m\_MaxYoloLayers = 3;}}
+\DoxyCodeLine{71 \textcolor{comment}{//    int m\_LeakyReLUCount = 0;}}
+\DoxyCodeLine{72 \textcolor{comment}{//    int m\_YoloLayerCount = 0;}}
+\DoxyCodeLine{73 \textcolor{comment}{//    nvinfer1::plugin::RegionParameters m\_RegionParameters\{m\_NumBoxes, m\_NumCoords, m\_NumClasses,}}
+\DoxyCodeLine{74 \textcolor{comment}{//                                                          nullptr\};}}
+\DoxyCodeLine{75 \textcolor{comment}{//}}
+\DoxyCodeLine{76 \textcolor{comment}{//    struct INvPluginDeleter}}
+\DoxyCodeLine{77 \textcolor{comment}{//    \{}}
+\DoxyCodeLine{78 \textcolor{comment}{//        void operator()(nvinfer1::plugin::INvPlugin* ptr)}}
+\DoxyCodeLine{79 \textcolor{comment}{//        \{}}
+\DoxyCodeLine{80 \textcolor{comment}{//            if (ptr)}}
+\DoxyCodeLine{81 \textcolor{comment}{//            \{}}
+\DoxyCodeLine{82 \textcolor{comment}{//                ptr-\/>destroy();}}
+\DoxyCodeLine{83 \textcolor{comment}{//            \}}}
+\DoxyCodeLine{84 \textcolor{comment}{//        \}}}
+\DoxyCodeLine{85 \textcolor{comment}{//    \};}}
+\DoxyCodeLine{86 \textcolor{comment}{//    struct IPluginDeleter}}
+\DoxyCodeLine{87 \textcolor{comment}{//    \{}}
+\DoxyCodeLine{88 \textcolor{comment}{//        void operator()(nvinfer1::IPlugin* ptr)}}
+\DoxyCodeLine{89 \textcolor{comment}{//        \{}}
+\DoxyCodeLine{90 \textcolor{comment}{//            if (ptr)}}
+\DoxyCodeLine{91 \textcolor{comment}{//            \{}}
+\DoxyCodeLine{92 \textcolor{comment}{//                ptr-\/>terminate();}}
+\DoxyCodeLine{93 \textcolor{comment}{//            \}}}
+\DoxyCodeLine{94 \textcolor{comment}{//        \}}}
+\DoxyCodeLine{95 \textcolor{comment}{//    \};}}
+\DoxyCodeLine{96 \textcolor{comment}{//    typedef std::unique\_ptr<nvinfer1::plugin::INvPlugin, INvPluginDeleter> unique\_ptr\_INvPlugin;}}
+\DoxyCodeLine{97 \textcolor{comment}{//    typedef std::unique\_ptr<nvinfer1::IPlugin, IPluginDeleter> unique\_ptr\_IPlugin;}}
+\DoxyCodeLine{98 \textcolor{comment}{//}}
+\DoxyCodeLine{99 \textcolor{comment}{//    unique\_ptr\_INvPlugin m\_ReorgLayer;}}
+\DoxyCodeLine{100 \textcolor{comment}{//    unique\_ptr\_INvPlugin m\_RegionLayer;}}
+\DoxyCodeLine{101 \textcolor{comment}{//    unique\_ptr\_INvPlugin m\_LeakyReLULayers[m\_MaxLeakyLayers];}}
+\DoxyCodeLine{102 \textcolor{comment}{//    unique\_ptr\_IPlugin m\_YoloLayers[m\_MaxYoloLayers];}}
+\DoxyCodeLine{103 \textcolor{comment}{//\};}}
+\DoxyCodeLine{104 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacenvinfer1}{nvinfer1}}}
+\DoxyCodeLine{105 \{}
+\DoxyCodeLine{106     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{107     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacenvinfer1_adb7e28fc142f6b26d9988688f9267dbb}{wr}}(\textcolor{keywordtype}{char}*\& \mbox{\hyperlink{classbuffer}{buffer}}, \textcolor{keyword}{const} T\& val)}
+\DoxyCodeLine{108     \{}
+\DoxyCodeLine{109         *\textcolor{keyword}{reinterpret\_cast<}T*\textcolor{keyword}{>}(\mbox{\hyperlink{classbuffer}{buffer}}) = val;}
+\DoxyCodeLine{110         \mbox{\hyperlink{classbuffer}{buffer}} += \textcolor{keyword}{sizeof}(T);}
+\DoxyCodeLine{111     \}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113     \textcolor{keyword}{template} <\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{114     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacenvinfer1_affff5bb340299fdfe10dcff3ff9dffca}{re}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char}*\& \mbox{\hyperlink{classbuffer}{buffer}}, T\& val)}
+\DoxyCodeLine{115     \{}
+\DoxyCodeLine{116         val = *\textcolor{keyword}{reinterpret\_cast<}\textcolor{keyword}{const }T*\textcolor{keyword}{>}(\mbox{\hyperlink{classbuffer}{buffer}});}
+\DoxyCodeLine{117         \mbox{\hyperlink{classbuffer}{buffer}} += \textcolor{keyword}{sizeof}(T);}
+\DoxyCodeLine{118     \}}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120     \textcolor{keyword}{class }\mbox{\hyperlink{classnvinfer1_1_1_yolo_layer}{YoloLayer}} : \textcolor{keyword}{public} IPluginV2}
+\DoxyCodeLine{121     \{}
+\DoxyCodeLine{122     \textcolor{keyword}{public}:}
+\DoxyCodeLine{123         \textcolor{keyword}{explicit} \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a336adf29bbebd31d9fe1b6b394e1fe6e}{YoloLayer}}();}
+\DoxyCodeLine{124         \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a336adf29bbebd31d9fe1b6b394e1fe6e}{YoloLayer}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}* \mbox{\hyperlink{structdata}{data}}, \textcolor{keywordtype}{size\_t} length);}
+\DoxyCodeLine{125         \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a336adf29bbebd31d9fe1b6b394e1fe6e}{YoloLayer}}(\textcolor{keyword}{const} uint32\_t\& numBoxes, \textcolor{keyword}{const} uint32\_t\& numClasses, \textcolor{keyword}{const} uint32\_t\& grid\_h\_, \textcolor{keyword}{const} uint32\_t \&grid\_w\_);}
+\DoxyCodeLine{126         \textcolor{keywordtype}{int} \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a0d8f6f42bb1412e2d7ae0bf00bffb8cc}{getNbOutputs}}() \textcolor{keyword}{const} \textcolor{keyword}{noexcept} \textcolor{keyword}{override};}
+\DoxyCodeLine{127         nvinfer1::Dims \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a0ea4d6511ce5daa60ed65bfd54c34dc9}{getOutputDimensions}}(\textcolor{keywordtype}{int} index, \textcolor{keyword}{const} nvinfer1::Dims* inputs,}
+\DoxyCodeLine{128             \textcolor{keywordtype}{int} nbInputDims)\textcolor{keyword}{noexcept} \textcolor{keyword}{override};}
+\DoxyCodeLine{129         \textcolor{comment}{/*void configure(const nvinfer1::Dims* inputDims, int nbInputs, const nvinfer1::Dims* outputDims,}}
+\DoxyCodeLine{130 \textcolor{comment}{                       int nbOutputs, int maxBatchSize)noexcept override;*/}}
+\DoxyCodeLine{131 }
+\DoxyCodeLine{132                        \textcolor{comment}{/*void configure(const nvinfer1::Dims* inputDims, int nbInputs,}}
+\DoxyCodeLine{133 \textcolor{comment}{                           const nvinfer1::Dims* outputDims, int nbOutputs, int maxBatchSize)noexcept override;*/}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135         \textcolor{keywordtype}{int} \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_ae6073c0a144c2d0d63aebacb09f473db}{initialize}}()\textcolor{keyword}{noexcept} \textcolor{keyword}{override};}
+\DoxyCodeLine{136         \textcolor{keywordtype}{void} \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a52e6bbcd6968b8e5aaaa8650e9dbdaf6}{terminate}}()\textcolor{keyword}{noexcept} \textcolor{keyword}{override};}
+\DoxyCodeLine{137         \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_ad9241538014e74c6f8c419c98741ff16}{getWorkspaceSize}}(\textcolor{keywordtype}{int} maxBatchSize) \textcolor{keyword}{const} \textcolor{keyword}{noexcept} \textcolor{keyword}{override};}
+\DoxyCodeLine{138         }
+\DoxyCodeLine{139         \textcolor{keywordtype}{int} \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a27a6f6f2dad0f6e298ec7a256825a692}{enqueue}}(\textcolor{keywordtype}{int} batchSize, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* \textcolor{keyword}{const}* inputs, \textcolor{keywordtype}{void}** outputs, \textcolor{keywordtype}{void}* workspace, cudaStream\_t stream) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{140         \textcolor{keywordtype}{int} \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a27a6f6f2dad0f6e298ec7a256825a692}{enqueue}}(\textcolor{keywordtype}{int} batchSize, \textcolor{keyword}{const} \textcolor{keywordtype}{void}* \textcolor{keyword}{const}* inputs, \textcolor{keywordtype}{void}* \textcolor{keyword}{const}* outputs, \textcolor{keywordtype}{void}* workspace, cudaStream\_t stream) \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{142         \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_aaf4c95a6e08061a0721c5e88dddf3a1d}{getSerializationSize}}() \textcolor{keyword}{const} \textcolor{keyword}{noexcept}  \textcolor{keyword}{override};}
+\DoxyCodeLine{143         \textcolor{keywordtype}{void} \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a0640ec928c336b8c852cadbacceff554}{serialize}}(\textcolor{keywordtype}{void}* \mbox{\hyperlink{classbuffer}{buffer}}) \textcolor{keyword}{const} \textcolor{keyword}{noexcept}  \textcolor{keyword}{override};}
+\DoxyCodeLine{144         }
+\DoxyCodeLine{145         \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a82d6f0f759ce68b765c661f6ae070f16}{getPluginType}}() const noexcept\textcolor{keyword}{  override}}
+\DoxyCodeLine{146 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{147             \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}YOLO\_TRT"{}};}
+\DoxyCodeLine{148         \}}
+\DoxyCodeLine{149         \textcolor{keywordtype}{bool} \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a7e559e4088a796e20c84eed8db359003}{supportsFormat}}(DataType type, PluginFormat format) \textcolor{keyword}{const} \textcolor{keyword}{noexcept} \textcolor{keyword}{override};}
+\DoxyCodeLine{150         \textcolor{keywordtype}{void} \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a572c4150106b44a372e489b32fd1a417}{configureWithFormat}}(\textcolor{keyword}{const} Dims* inputDims, \textcolor{keywordtype}{int} nbInputs, \textcolor{keyword}{const} Dims* outputDims, \textcolor{keywordtype}{int} nbOutputs, DataType type, PluginFormat format, \textcolor{keywordtype}{int} maxBatchSize) \textcolor{keyword}{noexcept} \textcolor{keyword}{override};}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{152         \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_aa24abe216e23a02a722343a3aa6572cc}{getPluginVersion}}() const noexcept\textcolor{keyword}{  override}}
+\DoxyCodeLine{153 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{154             \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}1.0"{}};}
+\DoxyCodeLine{155         \}}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157         \textcolor{keywordtype}{void} \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a8ab0954f91f3ef07012db2537847d297}{setPluginNamespace}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char}* pluginNamespace) \textcolor{keyword}{noexcept}  \textcolor{keyword}{override}}
+\DoxyCodeLine{158         \{}
+\DoxyCodeLine{159             \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a7c819999b570eed925263982d7303b2a}{\_s\_plugin\_namespace}} = pluginNamespace;}
+\DoxyCodeLine{160         \}}
+\DoxyCodeLine{161         \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a23d69057091cba3a2804b8e1b40f2e84}{getPluginNamespace}}() const  noexcept\textcolor{keyword}{ override}}
+\DoxyCodeLine{162 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{163             \textcolor{keywordflow}{return} \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a7c819999b570eed925263982d7303b2a}{\_s\_plugin\_namespace}}.c\_str();}
+\DoxyCodeLine{164         \}}
+\DoxyCodeLine{165         \textcolor{keywordtype}{void} \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a44d811adbeaf438d43e78d18e8888e25}{destroy}}() noexcept\textcolor{keyword}{  override}}
+\DoxyCodeLine{166 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{167             \textcolor{keyword}{delete} \textcolor{keyword}{this};}
+\DoxyCodeLine{168         \}}
+\DoxyCodeLine{169         IPluginV2* \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a31b0a8cff22326577d6d588e5fc47b59}{clone}}() const noexcept override;}
+\DoxyCodeLine{170     private:}
+\DoxyCodeLine{171     }
+\DoxyCodeLine{172         \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string} \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a7c819999b570eed925263982d7303b2a}{\_s\_plugin\_namespace}};}
+\DoxyCodeLine{173         uint32\_t \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a26aecb82db109acdf36abdf61722c87c}{m\_NumBoxes}};}
+\DoxyCodeLine{174         uint32\_t \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a25c64f177f02dfc3d67b603b061a954e}{m\_NumClasses}};}
+\DoxyCodeLine{175         uint32\_t \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a2ad9a2427e3f9b7c5650f2b7c1fc8c84}{m\_GridSize}};}
+\DoxyCodeLine{176         uint64\_t \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a223ad79ed11cf3a8572488966f72bdd8}{m\_OutputSize}};}
+\DoxyCodeLine{177         uint32\_t \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_ac34bc53f362dc4dca7547fbf8c79892c}{\_n\_grid\_h}};}
+\DoxyCodeLine{178         uint32\_t \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_ac5e2439d4b924f25dbdcb6be8f0e45df}{\_n\_grid\_w}};}
+\DoxyCodeLine{179     \};}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182 }
+\DoxyCodeLine{183     class \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_plugin_creator}{YoloLayerPluginCreator}} : public IPluginCreator}
+\DoxyCodeLine{184     \{}
+\DoxyCodeLine{185     \textcolor{keyword}{public}:}
+\DoxyCodeLine{186         \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_plugin_creator}{YoloLayerPluginCreator}}();}
+\DoxyCodeLine{187 }
+\DoxyCodeLine{188         \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_plugin_creator_a665ff8c6d3edfcb5ab4eb8de4c8286e5}{\string~YoloLayerPluginCreator}}() \textcolor{keyword}{override} = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{189 }
+\DoxyCodeLine{190         \textcolor{keyword}{const} \textcolor{keywordtype}{char}* getPluginName() const noexcept  override;}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192         const \textcolor{keywordtype}{char}* \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_aa24abe216e23a02a722343a3aa6572cc}{getPluginVersion}}() const  noexcept override;}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{194         const PluginFieldCollection* getFieldNames() noexcept  override;}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196         IPluginV2* createPlugin(const \textcolor{keywordtype}{char}* \mbox{\hyperlink{structname}{name}}, const PluginFieldCollection* fc)  noexcept override;}
+\DoxyCodeLine{197 }
+\DoxyCodeLine{198         IPluginV2* deserializePlugin(const \textcolor{keywordtype}{char}* \mbox{\hyperlink{structname}{name}}, const \textcolor{keywordtype}{void}* serialData, \textcolor{keywordtype}{size\_t} serialLength) noexcept  override;}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{200         \textcolor{keywordtype}{void} \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a8ab0954f91f3ef07012db2537847d297}{setPluginNamespace}}(const \textcolor{keywordtype}{char}* libNamespace) noexcept  override;}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{202         const \textcolor{keywordtype}{char}* \mbox{\hyperlink{classnvinfer1_1_1_yolo_layer_a23d69057091cba3a2804b8e1b40f2e84}{getPluginNamespace}}() const noexcept  override;}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204     private:}
+\DoxyCodeLine{205         \mbox{\hyperlink{namespacestd}{std}}::\textcolor{keywordtype}{string} mNamespace;}
+\DoxyCodeLine{206         static PluginFieldCollection mFC;}
+\DoxyCodeLine{207         static \mbox{\hyperlink{namespacestd}{std}}::vector<PluginField> mPluginAttributes;}
+\DoxyCodeLine{208     \};}
+\DoxyCodeLine{209 \}}
+\DoxyCodeLine{210 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// \_\_PLUGIN\_LAYER\_H\_\_}}
+
+\end{DoxyCode}

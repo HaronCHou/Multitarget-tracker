@@ -1,0 +1,43 @@
+\hypertarget{class__timer_8hpp_source}{}\doxysection{class\+\_\+timer.\+hpp}
+\label{class__timer_8hpp_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/class\_timer.hpp@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Detector/tensorrt\_yolo/class\_timer.hpp}}
+\mbox{\hyperlink{class__timer_8hpp}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{keyword}{class }\mbox{\hyperlink{class_timer}{Timer}}}
+\DoxyCodeLine{8 \{}
+\DoxyCodeLine{9 \textcolor{keyword}{public}:}
+\DoxyCodeLine{10     \mbox{\hyperlink{class_timer_a5f16e8da27d2a5a5242dead46de05d97}{Timer}}() : \mbox{\hyperlink{class_timer_a7c8f5e6cbb5b92faba2cedc5df6b3b54}{beg\_}}(\mbox{\hyperlink{class_timer_ab12b9ece3a32dae5e72f921a3cb6f15b}{clock\_}}::now())}
+\DoxyCodeLine{11     \{\}}
+\DoxyCodeLine{12     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_timer_a9020542d73357a4eef512eefaf57524b}{reset}}()}
+\DoxyCodeLine{13     \{}
+\DoxyCodeLine{14         \mbox{\hyperlink{class_timer_a7c8f5e6cbb5b92faba2cedc5df6b3b54}{beg\_}} = clock\_::now();}
+\DoxyCodeLine{15     \}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_timer_a6a89a613c2af9b0d1e5f7e4ba9e46c54}{elapsed}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{18 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{19         \textcolor{keywordflow}{return} std::chrono::duration\_cast<second\_>(clock\_::now() -\/ \mbox{\hyperlink{class_timer_a7c8f5e6cbb5b92faba2cedc5df6b3b54}{beg\_}}).count();}
+\DoxyCodeLine{20     \}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_timer_afb45a115984b9d5247b72fffc88b4cdd}{out}}(std::string message = \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{23     \{}
+\DoxyCodeLine{24         \textcolor{keywordtype}{double} t = \mbox{\hyperlink{class_timer_a6a89a613c2af9b0d1e5f7e4ba9e46c54}{elapsed}}();}
+\DoxyCodeLine{25         std::cout << message << \textcolor{stringliteral}{"{} elasped time:"{}} << t << \textcolor{stringliteral}{"{}ms"{}} << std::endl;}
+\DoxyCodeLine{26         \mbox{\hyperlink{class_timer_a9020542d73357a4eef512eefaf57524b}{reset}}();}
+\DoxyCodeLine{27     \}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29     \textcolor{keywordtype}{double} \mbox{\hyperlink{class_timer_a63193111065a2e0f5b5f6eed583854ab}{get\_duration}}()\textcolor{keyword}{const}}
+\DoxyCodeLine{30 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{31         \textcolor{keywordflow}{return} \mbox{\hyperlink{class_timer_a6a89a613c2af9b0d1e5f7e4ba9e46c54}{elapsed}}();}
+\DoxyCodeLine{32     \}}
+\DoxyCodeLine{33 \textcolor{keyword}{private}:}
+\DoxyCodeLine{34     \textcolor{keyword}{using} \mbox{\hyperlink{class_timer_ab12b9ece3a32dae5e72f921a3cb6f15b}{clock\_}} = std::chrono::high\_resolution\_clock;}
+\DoxyCodeLine{35     \textcolor{keyword}{using} \mbox{\hyperlink{class_timer_ab4e2c3b0ed9b331a9f32c93771eccd74}{second\_}} = std::chrono::duration<double, std::milli>;}
+\DoxyCodeLine{36     std::chrono::time\_point<clock\_> \mbox{\hyperlink{class_timer_a7c8f5e6cbb5b92faba2cedc5df6b3b54}{beg\_}};}
+\DoxyCodeLine{37 \};}
+
+\end{DoxyCode}

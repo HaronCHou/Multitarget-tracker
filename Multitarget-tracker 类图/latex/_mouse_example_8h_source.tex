@@ -1,0 +1,135 @@
+\hypertarget{_mouse_example_8h_source}{}\doxysection{Mouse\+Example.\+h}
+\label{_mouse_example_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/example/MouseExample.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/example/MouseExample.h}}
+\mbox{\hyperlink{_mouse_example_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_ctracker_8h}{Ctracker.h}}"{}}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{9 \textcolor{comment}{// Mouse callbacks}}
+\DoxyCodeLine{10 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{11 \textcolor{keywordtype}{void} \mbox{\hyperlink{_mouse_example_8h_a564d93e793093019106496f397f28483}{mv\_MouseCallback}}(\textcolor{keywordtype}{int} event, \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}}, \textcolor{keywordtype}{int} \textcolor{comment}{/*flags*/}, \textcolor{keywordtype}{void}* param)}
+\DoxyCodeLine{12 \{}
+\DoxyCodeLine{13     \textcolor{keywordflow}{if} (event == cv::EVENT\_MOUSEMOVE)}
+\DoxyCodeLine{14     \{}
+\DoxyCodeLine{15         cv::Point2f* p = (cv::Point2f*)param;}
+\DoxyCodeLine{16         \textcolor{keywordflow}{if} (p)}
+\DoxyCodeLine{17         \{}
+\DoxyCodeLine{18             p-\/>x = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\mbox{\hyperlink{utils_8c_a676e0da0ef83bbbdf42538e54b97506b}{x}});}
+\DoxyCodeLine{19             p-\/>y = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(\mbox{\hyperlink{utils_8c_ac30de26db5f6d1c18c63913729adca7d}{y}});}
+\DoxyCodeLine{20         \}}
+\DoxyCodeLine{21     \}}
+\DoxyCodeLine{22 \}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{25 \textcolor{keywordtype}{void} \mbox{\hyperlink{_mouse_example_8h_a010fc67e0e1f4693e517c2ac599b0d94}{MouseTracking}}(cv::CommandLineParser parser)}
+\DoxyCodeLine{26 \{}
+\DoxyCodeLine{27     std::string outFile = parser.get<std::string>(\textcolor{stringliteral}{"{}out"{}});}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29     cv::VideoWriter writer;}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31     \textcolor{keywordtype}{int} k = 0;}
+\DoxyCodeLine{32     std::vector<cv::Scalar> \mbox{\hyperlink{image_8c_a152d20c4917c0dd67a9b5694afcc4926}{colors}} = \{ cv::Scalar(255, 0, 0), cv::Scalar(0, 255, 0), cv::Scalar(0, 0, 255), cv::Scalar(255, 255, 0), cv::Scalar(0, 255, 255), cv::Scalar(255, 0, 255), cv::Scalar(255, 127, 255), cv::Scalar(127, 0, 255), cv::Scalar(127, 0, 127) \};}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#ifndef SILENT\_WORK}}
+\DoxyCodeLine{35     cv::namedWindow(\textcolor{stringliteral}{"{}Video"{}});}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38     cv::Mat frame = cv::Mat(800, 800, CV\_8UC3);}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40     \textcolor{keywordflow}{if} (!writer.isOpened())}
+\DoxyCodeLine{41     \{}
+\DoxyCodeLine{42         writer.open(outFile, cv::VideoWriter::fourcc(\textcolor{charliteral}{'P'}, \textcolor{charliteral}{'I'}, \textcolor{charliteral}{'M'}, \textcolor{charliteral}{'1'}), 20, frame.size(), \textcolor{keyword}{true});}
+\DoxyCodeLine{43     \}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45     \textcolor{comment}{// Set mouse callback}}
+\DoxyCodeLine{46     cv::Point2f pointXY;}
+\DoxyCodeLine{47     cv::setMouseCallback(\textcolor{stringliteral}{"{}Video"{}}, \mbox{\hyperlink{_mouse_example_8h_a564d93e793093019106496f397f28483}{mv\_MouseCallback}}, (\textcolor{keywordtype}{void}*)\&pointXY);}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     \mbox{\hyperlink{struct_tracker_settings}{TrackerSettings}} settings;}
+\DoxyCodeLine{50     settings.\mbox{\hyperlink{struct_tracker_settings_a55398bbe62fbb0efa36479e58aa11a9c}{SetDistance}}(\mbox{\hyperlink{namespacetracking_a55743c5e18b9b228c4ba2587260b2502a30176bdc0b4f965c6812767a2fa52e1e}{tracking::DistCenters}});}
+\DoxyCodeLine{51     settings.\mbox{\hyperlink{struct_tracker_settings_a3856a809067135c1c3f2d3c61fc4d6b7}{m\_kalmanType}} = \mbox{\hyperlink{namespacetracking_a83f2c4d58ea2737f7d6296dce3eb722aa889eca583e371386c92e05814797a885}{tracking::KalmanLinear}};}
+\DoxyCodeLine{52     settings.\mbox{\hyperlink{struct_tracker_settings_afd6c83aa8b0eaa4f131f45852a0b89e4}{m\_filterGoal}} = \mbox{\hyperlink{namespacetracking_a9b3e7d16c86cd8b781ab214e396b0ebfafac394783c1196957768400bc53ba491}{tracking::FilterCenter}};}
+\DoxyCodeLine{53     settings.\mbox{\hyperlink{struct_tracker_settings_a61a59f1c5bcc2ee76cef1b174d4bb8a4}{m\_lostTrackType}} = \mbox{\hyperlink{namespacetracking_a5377d69122ad915004ef68a518d22be3a3bd92892a83828375b9fce502732c491}{tracking::TrackNone}};}
+\DoxyCodeLine{54     settings.\mbox{\hyperlink{struct_tracker_settings_a94a05cbda5eeeac7fa1b64baf9c703f5}{m\_matchType}} = \mbox{\hyperlink{namespacetracking_a491e50c9261ab820965d871a217d4f13a8c97315e46df8c0716a9538655fc967d}{tracking::MatchHungrian}};}
+\DoxyCodeLine{55     settings.\mbox{\hyperlink{struct_tracker_settings_ae876ad4f3599a782cddb37e318430aaa}{m\_dt}} = 0.2f;}
+\DoxyCodeLine{56     settings.\mbox{\hyperlink{struct_tracker_settings_a9d4bcf1b68d5a13de8f9fea89f3b694f}{m\_accelNoiseMag}} = 0.5f;}
+\DoxyCodeLine{57     settings.\mbox{\hyperlink{struct_tracker_settings_a10e76ae03bd840f6c9180ce67faaa83c}{m\_distThres}} = 0.8f;}
+\DoxyCodeLine{58     settings.\mbox{\hyperlink{struct_tracker_settings_af6378fc73a53a7f68c1af6041ca36d6f}{m\_minAreaRadiusPix}} = frame.rows / 20.f;}
+\DoxyCodeLine{59     settings.\mbox{\hyperlink{struct_tracker_settings_a7825c3e88ee979fba2844c238fc51139}{m\_maximumAllowedSkippedFrames}} = 25;}
+\DoxyCodeLine{60     settings.\mbox{\hyperlink{struct_tracker_settings_abc7ce62dfe8de5ae33506aac41fddcac}{m\_maxTraceLength}} = 25;}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62     std::unique\_ptr<BaseTracker> tracker = \mbox{\hyperlink{class_base_tracker_aaa8767ac3b994419a481e0fabd408a8b}{BaseTracker::CreateTracker}}(settings);}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64     \mbox{\hyperlink{defines_8h_a7ce9c8817b42ab418e61756f579549ab}{track\_t}} alpha = 0;}
+\DoxyCodeLine{65     cv::RNG rng;}
+\DoxyCodeLine{66     \textcolor{keywordflow}{while} (k != 27)}
+\DoxyCodeLine{67     \{}
+\DoxyCodeLine{68         frame = cv::Scalar::all(0);}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70         \textcolor{comment}{// Noise addition (measurements/detections simulation )}}
+\DoxyCodeLine{71         \textcolor{keywordtype}{float} Xmeasured = pointXY.x + \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(rng.gaussian(2.0));}
+\DoxyCodeLine{72         \textcolor{keywordtype}{float} Ymeasured = pointXY.y + \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(rng.gaussian(2.0));}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74         \textcolor{comment}{// Append circulating around mouse cv::Points (frequently intersecting)}}
+\DoxyCodeLine{75         std::vector<Point\_t> pts;}
+\DoxyCodeLine{76         pts.emplace\_back(Xmeasured + 100.0f*sin(-\/alpha), Ymeasured + 100.0f*cos(-\/alpha));}
+\DoxyCodeLine{77         pts.emplace\_back(Xmeasured + 100.0f*sin(alpha), Ymeasured + 100.0f*cos(alpha));}
+\DoxyCodeLine{78         pts.emplace\_back(Xmeasured + 100.0f*sin(alpha / 2.0f), Ymeasured + 100.0f*cos(alpha / 2.0f));}
+\DoxyCodeLine{79         pts.emplace\_back(Xmeasured + 100.0f*sin(alpha / 3.0f), Ymeasured + 100.0f*cos(alpha / 1.0f));}
+\DoxyCodeLine{80         alpha += 0.05f;}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82         \mbox{\hyperlink{defines_8h_a01db0de56a20f4342820a093c5154536}{regions\_t}} regions;}
+\DoxyCodeLine{83         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} p : pts)}
+\DoxyCodeLine{84         \{}
+\DoxyCodeLine{85             regions.push\_back(\mbox{\hyperlink{class_c_region}{CRegion}}(cv::Rect(cvRound(p.x), cvRound(p.y), 1, 1)));}
+\DoxyCodeLine{86         \}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < pts.size(); i++)}
+\DoxyCodeLine{89         \{}
+\DoxyCodeLine{90 \textcolor{preprocessor}{\#if (CV\_VERSION\_MAJOR >= 4)}}
+\DoxyCodeLine{91             cv::circle(frame, pts[i], 3, cv::Scalar(0, 255, 0), 1, cv::LINE\_AA);}
+\DoxyCodeLine{92 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{93             cv::circle(frame, pts[i], 3, cv::Scalar(0, 255, 0), 1, CV\_AA);}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{95         \}}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97         tracker-\/>Update(regions, cv::UMat(), 100);}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99         std::vector<TrackingObject> tracks;}
+\DoxyCodeLine{100         tracker-\/>GetTracks(tracks);}
+\DoxyCodeLine{101         std::cout << tracks.size() << std::endl;}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < tracks.size(); i++)}
+\DoxyCodeLine{104         \{}
+\DoxyCodeLine{105             \textcolor{keyword}{const} \textcolor{keyword}{auto}\& track = tracks[i];}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107             \textcolor{keywordflow}{if} (track.m\_trace.size() > 1)}
+\DoxyCodeLine{108             \{}
+\DoxyCodeLine{109                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < track.m\_trace.size() -\/ 1; j++)}
+\DoxyCodeLine{110                 \{}
+\DoxyCodeLine{111 \textcolor{preprocessor}{\#if (CV\_VERSION\_MAJOR >= 4)}}
+\DoxyCodeLine{112                     cv::line(frame, track.m\_trace[j], track.m\_trace[j + 1], \mbox{\hyperlink{image_8c_a152d20c4917c0dd67a9b5694afcc4926}{colors}}[i \% \mbox{\hyperlink{image_8c_a152d20c4917c0dd67a9b5694afcc4926}{colors}}.size()], 2, cv::LINE\_AA);}
+\DoxyCodeLine{113 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{114                     cv::line(frame, track.m\_trace[j], track.m\_trace[j + 1], \mbox{\hyperlink{image_8c_a152d20c4917c0dd67a9b5694afcc4926}{colors}}[i \% \mbox{\hyperlink{image_8c_a152d20c4917c0dd67a9b5694afcc4926}{colors}}.size()], 2, CV\_AA);}
+\DoxyCodeLine{115 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{116                 \}}
+\DoxyCodeLine{117             \}}
+\DoxyCodeLine{118         \}}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120         \textcolor{keywordflow}{if} (writer.isOpened())}
+\DoxyCodeLine{121             writer << frame;}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123 \textcolor{preprocessor}{\#ifndef SILENT\_WORK}}
+\DoxyCodeLine{124         cv::imshow(\textcolor{stringliteral}{"{}Video"{}}, frame);}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126         k = cv::waitKey(10);}
+\DoxyCodeLine{127 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{128     \}}
+\DoxyCodeLine{129 \}}
+
+\end{DoxyCode}

@@ -1,0 +1,127 @@
+\hypertarget{biconnectivity_8h_source}{}\doxysection{biconnectivity.\+h}
+\label{biconnectivity_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/biconnectivity.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/biconnectivity.h}}
+\mbox{\hyperlink{biconnectivity_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* This software is distributed under the GNU Lesser General Public License */}}
+\DoxyCodeLine{2 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{//   biconnectivity.h}}
+\DoxyCodeLine{5 \textcolor{comment}{//}}
+\DoxyCodeLine{6 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{// \$Id: biconnectivity.h,v 1.18 2003/03/26 13:37:14 raitner Exp \$}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#ifndef GTL\_BICONNECTIVITY\_H}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define GTL\_BICONNECTIVITY\_H}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{_g_t_l_8h}{GTL/GTL.h}}>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{dfs_8h}{GTL/dfs.h}}>}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <list>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <stack>}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \mbox{\hyperlink{_g_t_l_8h_a2d9f24096ac60918452dd51f32b64aa9}{\_\_GTL\_BEGIN\_NAMESPACE}}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{36 \textcolor{keyword}{class }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{classbiconnectivity}{biconnectivity}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classdfs}{dfs}} }
+\DoxyCodeLine{37 \{}
+\DoxyCodeLine{38 \textcolor{keyword}{public}:}
+\DoxyCodeLine{44     \mbox{\hyperlink{classbiconnectivity}{biconnectivity}} ();}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{51     \textcolor{keyword}{virtual} \mbox{\hyperlink{classbiconnectivity_aac74ce4a6f5504495105e28734d5ab86}{\string~biconnectivity}} () = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{66     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{classdfs_a70dfb7a0631d4561c1abc7ed6149bae8}{check}} (GTL::graph\& G);}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classdfs_affaffda8be8418d6dbf396c5b1d6b81a}{reset}} ();}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{76     \textcolor{keywordtype}{int} \mbox{\hyperlink{classbiconnectivity_ab61a092bfc7cf9e9b27210d339186327}{low\_number}} (\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n)\textcolor{keyword}{ const }}
+\DoxyCodeLine{77 \textcolor{keyword}{    }\{\textcolor{keywordflow}{return} low\_num[n];\}}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{84     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classbiconnectivity_a50e7cee997b6d56ccbb9ae3fd039d9cd}{is\_biconnected}} ()\textcolor{keyword}{ const }}
+\DoxyCodeLine{85 \textcolor{keyword}{    }\{\textcolor{keywordflow}{return} num\_of\_components == 1;\}}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{93     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classbiconnectivity_a1234e7a70f50fd60c855529fe6fa4acb}{store\_components}} ()\textcolor{keyword}{ const}}
+\DoxyCodeLine{94 \textcolor{keyword}{    }\{ \textcolor{keywordflow}{return} store\_comp; \}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{106     \textcolor{keywordtype}{void} \mbox{\hyperlink{classbiconnectivity_ab7c9e256a4d7a4ffea33b20f014e1f69}{store\_components}} (\textcolor{keywordtype}{bool} \mbox{\hyperlink{classset}{set}}) }
+\DoxyCodeLine{107     \{ store\_comp  = \mbox{\hyperlink{classset}{set}}; \textcolor{keywordflow}{if} (\mbox{\hyperlink{classset}{set}}) \mbox{\hyperlink{classdfs_a025ed2d6101a7b9f72578a52b484ef50}{scan\_whole\_graph}} (\mbox{\hyperlink{classset}{set}}); \}}
+\DoxyCodeLine{108     }
+\DoxyCodeLine{120     \textcolor{keywordtype}{void} \mbox{\hyperlink{classbiconnectivity_a774fd08203a6d164605afc4cdc8b9201}{make\_biconnected}} (\textcolor{keywordtype}{bool} \mbox{\hyperlink{classset}{set}}) }
+\DoxyCodeLine{121     \{ add\_edges = \mbox{\hyperlink{classset}{set}}; \textcolor{keywordflow}{if} (\mbox{\hyperlink{classset}{set}}) \mbox{\hyperlink{classdfs_a025ed2d6101a7b9f72578a52b484ef50}{scan\_whole\_graph}} (\mbox{\hyperlink{classset}{set}}); \}}
+\DoxyCodeLine{122     }
+\DoxyCodeLine{130     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classbiconnectivity_a9ca9632a7fc398edb5b505dd0fe706c9}{make\_biconnected}} ()\textcolor{keyword}{ const }}
+\DoxyCodeLine{131 \textcolor{keyword}{    }\{ \textcolor{keywordflow}{return} add\_edges; \}}
+\DoxyCodeLine{132     }
+\DoxyCodeLine{139     edges\_t::iterator \mbox{\hyperlink{classbiconnectivity_a9560cdde8a90c12760b9930c494be410}{additional\_begin}}()}
+\DoxyCodeLine{140     \{ \textcolor{keywordflow}{return} additional.begin (); \}}
+\DoxyCodeLine{141 }
+\DoxyCodeLine{148     edges\_t::iterator \mbox{\hyperlink{classbiconnectivity_a801847685ebf2b5727743cd21401e88c}{additional\_end}}()}
+\DoxyCodeLine{149     \{ \textcolor{keywordflow}{return} additional.end (); \}}
+\DoxyCodeLine{150     }
+\DoxyCodeLine{154     \textcolor{keyword}{typedef} nodes\_t::iterator \mbox{\hyperlink{classbiconnectivity_ac9063160d59ab0ea4fa924a68395700b}{cutpoint\_iterator}};}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{165     \mbox{\hyperlink{classbiconnectivity_ac9063160d59ab0ea4fa924a68395700b}{cutpoint\_iterator}} \mbox{\hyperlink{classbiconnectivity_a473197552874aaf148e847838144eed7}{cut\_points\_begin}} () }
+\DoxyCodeLine{166     \{ \textcolor{keywordflow}{return} cut\_points.begin(); \}}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{174     \mbox{\hyperlink{classbiconnectivity_ac9063160d59ab0ea4fa924a68395700b}{cutpoint\_iterator}} \mbox{\hyperlink{classbiconnectivity_a78cb06c1d056b9519622a67a92e85b6e}{cut\_points\_end}} () }
+\DoxyCodeLine{175     \{ \textcolor{keywordflow}{return} cut\_points.end(); \}}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177 }
+\DoxyCodeLine{181     \textcolor{keyword}{typedef} std::list<std::pair<nodes\_t, edges\_t> >\mbox{\hyperlink{classiterator}{::iterator}} \mbox{\hyperlink{classbiconnectivity_abbecb73233a3e93c610f9d6fbeb6023e}{component\_iterator}};}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{196     \mbox{\hyperlink{classbiconnectivity_abbecb73233a3e93c610f9d6fbeb6023e}{component\_iterator}} \mbox{\hyperlink{classbiconnectivity_ac0b7253533edc3f1412f771cb35bf04a}{components\_begin}} ()}
+\DoxyCodeLine{197     \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classcomponents}{components}}.\mbox{\hyperlink{classdfs_ab06650dd8cbd5e76b0c73b71458ec5ec}{begin}}(); \}}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199 }
+\DoxyCodeLine{206     \mbox{\hyperlink{classbiconnectivity_abbecb73233a3e93c610f9d6fbeb6023e}{component\_iterator}} \mbox{\hyperlink{classbiconnectivity_a0bd1c70975e664174e591efd64f8dc71}{components\_end}} ()}
+\DoxyCodeLine{207     \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classcomponents}{components}}.\mbox{\hyperlink{classdfs_af847633fa642258d3522e8deb26aef37}{end}}(); \}}
+\DoxyCodeLine{208 }
+\DoxyCodeLine{214     \textcolor{keywordtype}{int} \mbox{\hyperlink{classbiconnectivity_ad77634a59ac6a08fae43c1c38540d5f0}{number\_of\_components}} ()\textcolor{keyword}{ const}}
+\DoxyCodeLine{215 \textcolor{keyword}{    }\{\textcolor{keywordflow}{return} num\_of\_components; \}}
+\DoxyCodeLine{216 }
+\DoxyCodeLine{217     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{218     \textcolor{comment}{//   Handler used to extend dfs to biconnectivity}}
+\DoxyCodeLine{219     \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{223 \textcolor{comment}{}    \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classdfs_a72c9a4dd5e737b984fcc567a029cdbcb}{init\_handler}} (GTL::graph\&);}
+\DoxyCodeLine{224 }
+\DoxyCodeLine{228     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classdfs_a0b7f107aca56a261e3d7a411e8068646}{entry\_handler}} (GTL::graph\&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\&);}
+\DoxyCodeLine{229 }
+\DoxyCodeLine{233     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classdfs_a878303546558916a427d0a3b8b95dc72}{before\_recursive\_call\_handler}} (GTL::graph\&, GTL::edge\&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\&);}
+\DoxyCodeLine{234 }
+\DoxyCodeLine{238     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classdfs_ae6314aecf5c3239f8dd47b7df84a9cd8}{after\_recursive\_call\_handler}} (GTL::graph\&, GTL::edge\&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\&);}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{243     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classdfs_a4f4f2d856b8a61cbe8a42e9ff223d945}{old\_adj\_node\_handler}} (GTL::graph\&, GTL::edge\&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\&);}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{248     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classdfs_a8e15e709d735d0002f3d7c6044b4e302}{new\_start\_handler}} (GTL::graph\&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\&);    }
+\DoxyCodeLine{249 }
+\DoxyCodeLine{253     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classdfs_a9bcd9492189dac3aff8ecd4b6e2c90f6}{leave\_handler}} (GTL::graph\&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\&, \mbox{\hyperlink{list_8h_af4aeda155dbe167f1c1cf38cb65bf324}{GTL::node}}\&);    }
+\DoxyCodeLine{254 }
+\DoxyCodeLine{258     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classdfs_a7c75d91d7e64557d0df79d0f2c451b10}{end\_handler}} (GTL::graph\&);    }
+\DoxyCodeLine{259 }
+\DoxyCodeLine{260 }
+\DoxyCodeLine{261 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{265     \mbox{\hyperlink{edge_8h_a8f9587479bda6cf612c103494b3858e3}{edges\_t}} \mbox{\hyperlink{classbiconnectivity_ad6b936f8450b97a34c93c7c2196571a1}{self\_loops}};}
+\DoxyCodeLine{266 }
+\DoxyCodeLine{270     \mbox{\hyperlink{classnode__map}{node\_map<component\_iterator>}} \mbox{\hyperlink{classbiconnectivity_a487da69817fa89ab3d1523ad9846ae8e}{in\_component}};}
+\DoxyCodeLine{271 }
+\DoxyCodeLine{275     \mbox{\hyperlink{classnode__map}{node\_map<int>}} \mbox{\hyperlink{classbiconnectivity_ac5817e2122477ed591ef229c081745f3}{low\_num}};}
+\DoxyCodeLine{279     \textcolor{keywordtype}{int} \mbox{\hyperlink{classbiconnectivity_a89fbd540b8a61aad150020be657ddfb7}{num\_of\_components}};}
+\DoxyCodeLine{283     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classbiconnectivity_a989307b07f4a976649bd7551173bd564}{store\_comp}};}
+\DoxyCodeLine{287     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classbiconnectivity_a70c1310b4ba83dbe10594f3a33f94763}{add\_edges}};}
+\DoxyCodeLine{291     \mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classbiconnectivity_a6f2e474efeb8ccb023d9b84385798193}{last}};}
+\DoxyCodeLine{295     std::stack<node> \mbox{\hyperlink{classbiconnectivity_a1223b0d8a833eb6299e82290b3e8ac8f}{node\_stack}};}
+\DoxyCodeLine{299     std::stack<edge> \mbox{\hyperlink{classbiconnectivity_a524ba263fc35d13aab5078ebfe8f5307}{edge\_stack}};}
+\DoxyCodeLine{303     std::list<std::pair<nodes\_t, edges\_t> > \mbox{\hyperlink{classbiconnectivity_a5ac244b6442c1ce5b74b5d9c445f8b48}{components}};}
+\DoxyCodeLine{307     \mbox{\hyperlink{edge_8h_a22ac17689106ba21a84e7bc54d1199d6}{nodes\_t}} \mbox{\hyperlink{classbiconnectivity_a776f4f2d5654ef6836aeb34690fdadc5}{cut\_points}};}
+\DoxyCodeLine{311     \mbox{\hyperlink{classnode__map}{node\_map<int>}} \mbox{\hyperlink{classbiconnectivity_a67756de28954d13df615d8f2a93b22da}{cut\_count}};}
+\DoxyCodeLine{315     \mbox{\hyperlink{edge_8h_a8f9587479bda6cf612c103494b3858e3}{edges\_t}} \mbox{\hyperlink{classbiconnectivity_ad5393f67b9526964db540fc63745318f}{additional}};}
+\DoxyCodeLine{319     \mbox{\hyperlink{classnode__map}{node\_map<node>}} \mbox{\hyperlink{classbiconnectivity_a3292c5b6bf3b91947509a380cf779706}{first\_child}};}
+\DoxyCodeLine{320 \};}
+\DoxyCodeLine{321 }
+\DoxyCodeLine{322 \mbox{\hyperlink{_g_t_l_8h_a46af2b3ec266ac2f9d36fa7222358017}{\_\_GTL\_END\_NAMESPACE}}}
+\DoxyCodeLine{323 }
+\DoxyCodeLine{324 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GTL\_BICONNECTIVITY\_H}}
+\DoxyCodeLine{325 }
+\DoxyCodeLine{326 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{327 \textcolor{comment}{//   end of file}}
+\DoxyCodeLine{328 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+
+\end{DoxyCode}

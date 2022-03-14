@@ -1,0 +1,112 @@
+\hypertarget{bid__dijkstra_8h_source}{}\doxysection{bid\+\_\+dijkstra.\+h}
+\label{bid__dijkstra_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/bid\_dijkstra.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/src/Tracker/graph/GTL/include/GTL/bid\_dijkstra.h}}
+\mbox{\hyperlink{bid__dijkstra_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* This software is distributed under the GNU Lesser General Public License */}}
+\DoxyCodeLine{2 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{//   bid\_dijkstra.h}}
+\DoxyCodeLine{5 \textcolor{comment}{//}}
+\DoxyCodeLine{6 \textcolor{comment}{//==========================================================================}}
+\DoxyCodeLine{7 \textcolor{comment}{// \$Id: bid\_dijkstra.h,v 1.3 2003/03/24 15:58:54 raitner Exp \$}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#ifndef GTL\_BID\_DIJKSTRA\_H}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define GTL\_BID\_DIJKSTRA\_H}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{_g_t_l_8h}{GTL/GTL.h}}>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{graph_8h}{GTL/graph.h}}>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{node__map_8h}{GTL/node\_map.h}}>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{edge__map_8h}{GTL/edge\_map.h}}>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{algorithm_8h}{GTL/algorithm.h}}>}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \mbox{\hyperlink{_g_t_l_8h_a2d9f24096ac60918452dd51f32b64aa9}{\_\_GTL\_BEGIN\_NAMESPACE}}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{36 \textcolor{keyword}{class }\mbox{\hyperlink{_g_t_l_8h_a014cd1e9b3e67a78ae433eda95c8fd25}{GTL\_EXTERN}} \mbox{\hyperlink{classbid__dijkstra}{bid\_dijkstra}} final : \textcolor{keyword}{public} \mbox{\hyperlink{classalgorithm}{algorithm}}}
+\DoxyCodeLine{37 \{}
+\DoxyCodeLine{38 \textcolor{keyword}{public}:}
+\DoxyCodeLine{42     \textcolor{keyword}{typedef} nodes\_t::const\_iterator \mbox{\hyperlink{classbid__dijkstra_a47d15051149b03179778a1553635b9d3}{shortest\_path\_node\_iterator}};}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{47     \textcolor{keyword}{typedef} edges\_t::const\_iterator \mbox{\hyperlink{classbid__dijkstra_a12c551a4f2fea9d38d2b6488278e3a09}{shortest\_path\_edge\_iterator}};}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{52     \textcolor{keyword}{enum} \mbox{\hyperlink{classbid__dijkstra_a8b7dcccc9fab2ec5edc8da01029c09d5}{node\_color}} \{white, grey, black\};}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{61     \mbox{\hyperlink{classbid__dijkstra}{bid\_dijkstra}}();}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{68     \textcolor{keyword}{virtual} \mbox{\hyperlink{classbid__dijkstra}{\string~bid\_dijkstra}}();}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{78     \textcolor{keywordtype}{void} source\_target(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& s, \textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& t);}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{87     \textcolor{keywordtype}{void} weights(\textcolor{keyword}{const} \mbox{\hyperlink{classedge__map}{edge\_map<double>}}\& weight);}
+\DoxyCodeLine{88     }
+\DoxyCodeLine{100     \textcolor{keywordtype}{void} store\_path(\textcolor{keywordtype}{bool} \mbox{\hyperlink{classset}{set}});}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{120     \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{classalgorithm_a528100c0e54d446fab1e329a53935364}{check}}(GTL::graph\& G);}
+\DoxyCodeLine{121         }
+\DoxyCodeLine{136     \textcolor{keywordtype}{int} \mbox{\hyperlink{classalgorithm_a4baee48c513c5802975743152c33f34c}{run}}(GTL::graph\& G);}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{143     \mbox{\hyperlink{structnode}{node}} source() \textcolor{keyword}{const};}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{150     \mbox{\hyperlink{structnode}{node}} target() \textcolor{keyword}{const};}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{159     \textcolor{keywordtype}{bool} store\_path() \textcolor{keyword}{const};}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{166     \textcolor{keywordtype}{bool} reached() \textcolor{keyword}{const};}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{174     \textcolor{keywordtype}{double} distance() \textcolor{keyword}{const};}
+\DoxyCodeLine{175 }
+\DoxyCodeLine{187     shortest\_path\_node\_iterator shortest\_path\_nodes\_begin();}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{200     shortest\_path\_node\_iterator shortest\_path\_nodes\_end();}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{213     shortest\_path\_edge\_iterator shortest\_path\_edges\_begin();}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{226     shortest\_path\_edge\_iterator shortest\_path\_edges\_end();}
+\DoxyCodeLine{227 }
+\DoxyCodeLine{238     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classalgorithm_a21aba63d066ae7897de6ca7d8425c408}{reset}}();}
+\DoxyCodeLine{239 \textcolor{keyword}{private}:}
+\DoxyCodeLine{246     \mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classbid__dijkstra_a118e2ebd0d08ffc991c2bc578f8284a4}{s}};}
+\DoxyCodeLine{247 }
+\DoxyCodeLine{254     \mbox{\hyperlink{structnode}{node}} \mbox{\hyperlink{classbid__dijkstra_a9370a71076d7807d1f3963e6dad9897e}{t}};}
+\DoxyCodeLine{255 }
+\DoxyCodeLine{262     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classbid__dijkstra_a7636f90a27d14c9eb4b115e8dad05464}{weights\_set}};}
+\DoxyCodeLine{263 }
+\DoxyCodeLine{270     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classbid__dijkstra_aa7b329f69600fffae2753f87501dab9d}{path\_set}};}
+\DoxyCodeLine{271 }
+\DoxyCodeLine{278     \mbox{\hyperlink{classedge__map}{edge\_map<double>}} \mbox{\hyperlink{classbid__dijkstra_a477c4f7ce631df84c832cb7d517cd243}{weight}};}
+\DoxyCodeLine{279 }
+\DoxyCodeLine{285     \textcolor{keywordtype}{double} \mbox{\hyperlink{classbid__dijkstra_a10224bf2b56cb3fe20cef83592ecdc13}{dist}};}
+\DoxyCodeLine{286 }
+\DoxyCodeLine{292     \textcolor{keywordtype}{bool} \mbox{\hyperlink{classbid__dijkstra_a4714ec557ae9199e88e0242f9c6c2393}{reached\_t}};}
+\DoxyCodeLine{293 }
+\DoxyCodeLine{299     \mbox{\hyperlink{classnode__map}{node\_map<edge>}} \mbox{\hyperlink{classbid__dijkstra_a930f24f8d17953eccfa0e8765587b0ea}{pred}};}
+\DoxyCodeLine{300 }
+\DoxyCodeLine{306     \mbox{\hyperlink{classnode__map}{node\_map<edge>}} \mbox{\hyperlink{classbid__dijkstra_a7379d185faf9af3820b8292676f9d88a}{succ}};}
+\DoxyCodeLine{307 }
+\DoxyCodeLine{313     \mbox{\hyperlink{classnode__map}{node\_map<int>}} \mbox{\hyperlink{classbid__dijkstra_a1b3684b69db38c8eaf9d4fbb056bc392}{source\_mark}};}
+\DoxyCodeLine{314 }
+\DoxyCodeLine{320     \mbox{\hyperlink{classnode__map}{node\_map<int>}} \mbox{\hyperlink{classbid__dijkstra_a72bc13758ebe2f752cd15f018c5ba64e}{target\_mark}};}
+\DoxyCodeLine{321 }
+\DoxyCodeLine{327     \mbox{\hyperlink{classnode__map}{node\_map<double>}} \mbox{\hyperlink{classbid__dijkstra_a19dc6c350617f0fa5769e5c70781d658}{source\_dist}};}
+\DoxyCodeLine{328 }
+\DoxyCodeLine{334     \mbox{\hyperlink{classnode__map}{node\_map<double>}} \mbox{\hyperlink{classbid__dijkstra_a7a46fe8fe075d798eaca14b37aa15c0d}{target\_dist}};}
+\DoxyCodeLine{335 }
+\DoxyCodeLine{345     \mbox{\hyperlink{edge_8h_a22ac17689106ba21a84e7bc54d1199d6}{nodes\_t}} \mbox{\hyperlink{classbid__dijkstra_a70041b0a90fb840e141126fe7a6119db}{shortest\_path\_node\_list}};}
+\DoxyCodeLine{346 }
+\DoxyCodeLine{356     \mbox{\hyperlink{edge_8h_a8f9587479bda6cf612c103494b3858e3}{edges\_t}} \mbox{\hyperlink{classbid__dijkstra_a4b7bdbc4d016748b40ca925cf1e6f778}{shortest\_path\_edge\_list}};}
+\DoxyCodeLine{357 }
+\DoxyCodeLine{362     \textcolor{keywordtype}{void} reset\_algorithm();}
+\DoxyCodeLine{363     }
+\DoxyCodeLine{368     \textcolor{keywordtype}{void} \mbox{\hyperlink{yolo__v2__class_8cpp_adcf7f587fe7c5bfdcbe67ffa797763be}{init}}(GTL::graph\& G);}
+\DoxyCodeLine{369 }
+\DoxyCodeLine{378     \textcolor{keywordtype}{void} fill\_node\_edge\_lists(\textcolor{keyword}{const} \mbox{\hyperlink{structnode}{node}}\& n);}
+\DoxyCodeLine{379 \};}
+\DoxyCodeLine{380 }
+\DoxyCodeLine{381 \mbox{\hyperlink{_g_t_l_8h_a46af2b3ec266ac2f9d36fa7222358017}{\_\_GTL\_END\_NAMESPACE}}}
+\DoxyCodeLine{382 }
+\DoxyCodeLine{383 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GTL\_BID\_DIJKSTRA\_H}}
+\DoxyCodeLine{384 }
+\DoxyCodeLine{385 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{386 \textcolor{comment}{//   end of file}}
+\DoxyCodeLine{387 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+
+\end{DoxyCode}

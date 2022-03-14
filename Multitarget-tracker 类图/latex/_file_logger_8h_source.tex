@@ -1,0 +1,160 @@
+\hypertarget{_file_logger_8h_source}{}\doxysection{File\+Logger.\+h}
+\label{_file_logger_8h_source}\index{D:/zhr\_files/Multitarget-\/tracker-\/master/example/FileLogger.h@{D:/zhr\_files/Multitarget-\/tracker-\/master/example/FileLogger.h}}
+\mbox{\hyperlink{_file_logger_8h}{浏览该文件的文档.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <unordered\_set>}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <opencv2/opencv.hpp>}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{object__types_8h}{object\_types.h}}"{}}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{13 \textcolor{keyword}{class }\mbox{\hyperlink{class_results_log}{ResultsLog}}}
+\DoxyCodeLine{14 \{}
+\DoxyCodeLine{15 \textcolor{keyword}{public}:}
+\DoxyCodeLine{17     \mbox{\hyperlink{class_results_log_ae85a726d8429fb15a4b5435d2df8d845}{ResultsLog}}(\textcolor{keyword}{const} std::string\& fileName, \textcolor{keywordtype}{int} writeEachNFrame)}
+\DoxyCodeLine{18         : \mbox{\hyperlink{class_results_log_ab2a12f8353b2494d637d22d46fc32ffc}{m\_fileName}}(fileName), \mbox{\hyperlink{class_results_log_aed7a5381efb230272257dedc6e63a9f2}{m\_writeEachNFrame}}(writeEachNFrame)}
+\DoxyCodeLine{19     \{}
+\DoxyCodeLine{20     \}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{23     \mbox{\hyperlink{class_results_log_afd2c98bf1c6ded00708ca74b626d2aaf}{\string~ResultsLog}}()}
+\DoxyCodeLine{24     \{}
+\DoxyCodeLine{25         \mbox{\hyperlink{class_results_log_a655bd63e36c633a942366c7775a42edb}{WriteAll}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{26     \}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{29     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_results_log_a852154e533e16637eec30139f89a1c51}{Open}}()}
+\DoxyCodeLine{30     \{}
+\DoxyCodeLine{31         \mbox{\hyperlink{class_results_log_af93d684d91d6eb72e9da46673b89d219}{m\_resCSV}}.close();}
+\DoxyCodeLine{32         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_results_log_ab2a12f8353b2494d637d22d46fc32ffc}{m\_fileName}}.size() > 5)}
+\DoxyCodeLine{33         \{}
+\DoxyCodeLine{34             \mbox{\hyperlink{class_results_log_af93d684d91d6eb72e9da46673b89d219}{m\_resCSV}}.open(\mbox{\hyperlink{class_results_log_ab2a12f8353b2494d637d22d46fc32ffc}{m\_fileName}});}
+\DoxyCodeLine{35             \textcolor{keywordflow}{return} \mbox{\hyperlink{class_results_log_af93d684d91d6eb72e9da46673b89d219}{m\_resCSV}}.is\_open();}
+\DoxyCodeLine{36         \}}
+\DoxyCodeLine{37         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{38     \}}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{41     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_results_log_a8c582e51e629c54c9885bcc3ce42901a}{AddTrack}}(\textcolor{keywordtype}{int} framesCounter, \mbox{\hyperlink{class_track_i_d}{track\_id\_t}} trackID, \textcolor{keyword}{const} cv::Rect\& brect, \mbox{\hyperlink{object__types_8h_aef073148585075f745f149202b5ccc90}{objtype\_t}} type, \textcolor{keywordtype}{float} confidence)}
+\DoxyCodeLine{42     \{}
+\DoxyCodeLine{43         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_results_log_af93d684d91d6eb72e9da46673b89d219}{m\_resCSV}}.is\_open())}
+\DoxyCodeLine{44         \{}
+\DoxyCodeLine{45             \textcolor{keyword}{auto} frame = \mbox{\hyperlink{class_results_log_aac6b0a0cbb28546abe7f2b1cfda2a28e}{m\_frames}}.find(framesCounter);}
+\DoxyCodeLine{46             \textcolor{keywordflow}{if} (frame == \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{std::end}}(\mbox{\hyperlink{class_results_log_aac6b0a0cbb28546abe7f2b1cfda2a28e}{m\_frames}}))}
+\DoxyCodeLine{47             \{}
+\DoxyCodeLine{48                 \mbox{\hyperlink{struct_results_log_1_1_detects_on_frame}{DetectsOnFrame}} tmpFrame;}
+\DoxyCodeLine{49                 tmpFrame.\mbox{\hyperlink{struct_results_log_1_1_detects_on_frame_a38a93cde0857434406b498fede9907a3}{m\_detects}}.emplace\_back(trackID, brect, type, confidence);}
+\DoxyCodeLine{50                 \mbox{\hyperlink{class_results_log_aac6b0a0cbb28546abe7f2b1cfda2a28e}{m\_frames}}.emplace(framesCounter, tmpFrame);}
+\DoxyCodeLine{51             \}}
+\DoxyCodeLine{52             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{53             \{}
+\DoxyCodeLine{54                 frame-\/>second.m\_detects.emplace\_back(trackID, brect, type, confidence);}
+\DoxyCodeLine{55             \}}
+\DoxyCodeLine{56             \textcolor{keywordflow}{return} \textcolor{keyword}{true};}
+\DoxyCodeLine{57         \}}
+\DoxyCodeLine{58         \textcolor{keywordflow}{return} \textcolor{keyword}{false};}
+\DoxyCodeLine{59     \}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{62     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_results_log_a212e63d7b6827f5ee11fd62bdd5df091}{AddRobustTrack}}(\mbox{\hyperlink{class_track_i_d}{track\_id\_t}} trackID)}
+\DoxyCodeLine{63     \{}
+\DoxyCodeLine{64         \mbox{\hyperlink{class_results_log_af3ec0cead5c29ea60e10921f3c9fee34}{m\_robustIDs}}.insert(trackID);}
+\DoxyCodeLine{65     \}}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{68     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_results_log_a59d3d875e8c60318cdd82537e862f5dd}{Flush}}()}
+\DoxyCodeLine{69     \{}
+\DoxyCodeLine{70         \mbox{\hyperlink{class_results_log_a655bd63e36c633a942366c7775a42edb}{WriteAll}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{71         \mbox{\hyperlink{class_results_log_aac6b0a0cbb28546abe7f2b1cfda2a28e}{m\_frames}}.clear();}
+\DoxyCodeLine{72     \}}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74 \textcolor{keyword}{private}:}
+\DoxyCodeLine{75     std::string \mbox{\hyperlink{class_results_log_ab2a12f8353b2494d637d22d46fc32ffc}{m\_fileName}};}
+\DoxyCodeLine{76     std::ofstream \mbox{\hyperlink{class_results_log_af93d684d91d6eb72e9da46673b89d219}{m\_resCSV}};}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{79     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_results_log_1_1_detection}{Detection}}}
+\DoxyCodeLine{80     \{}
+\DoxyCodeLine{81         cv::Rect \mbox{\hyperlink{struct_results_log_1_1_detection_aabf59462001184793dc4063776fab71b}{m\_rect}};}
+\DoxyCodeLine{82         \mbox{\hyperlink{object__types_8h_aef073148585075f745f149202b5ccc90}{objtype\_t}} \mbox{\hyperlink{struct_results_log_1_1_detection_a6881344bbdc5fd5e570cdbadca1e9ee7}{m\_type}};}
+\DoxyCodeLine{83         \textcolor{keywordtype}{float} \mbox{\hyperlink{struct_results_log_1_1_detection_afa3811119ff4c89fb7d6d457986116cf}{m\_conf}} = 0.f;}
+\DoxyCodeLine{84         \mbox{\hyperlink{class_track_i_d}{track\_id\_t}} \mbox{\hyperlink{struct_results_log_1_1_detection_ae4d269c4d98db99b1514011023e459b3}{m\_trackID}} = 0;}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86         \mbox{\hyperlink{struct_results_log_1_1_detection_a5a9d50544c9343f2d350b780894b678e}{Detection}}(\mbox{\hyperlink{class_track_i_d}{track\_id\_t}} trackID, \textcolor{keyword}{const} cv::Rect\& brect, \mbox{\hyperlink{object__types_8h_aef073148585075f745f149202b5ccc90}{objtype\_t}} type, \textcolor{keywordtype}{float} confidence)}
+\DoxyCodeLine{87         \{}
+\DoxyCodeLine{88             \mbox{\hyperlink{struct_results_log_1_1_detection_a6881344bbdc5fd5e570cdbadca1e9ee7}{m\_type}} = type;}
+\DoxyCodeLine{89             \mbox{\hyperlink{struct_results_log_1_1_detection_aabf59462001184793dc4063776fab71b}{m\_rect}} = brect;}
+\DoxyCodeLine{90             \mbox{\hyperlink{struct_results_log_1_1_detection_afa3811119ff4c89fb7d6d457986116cf}{m\_conf}} = confidence;}
+\DoxyCodeLine{91             \mbox{\hyperlink{struct_results_log_1_1_detection_ae4d269c4d98db99b1514011023e459b3}{m\_trackID}} = trackID;}
+\DoxyCodeLine{92         \}}
+\DoxyCodeLine{93     \};}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{96     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_results_log_1_1_detects_on_frame}{DetectsOnFrame}}}
+\DoxyCodeLine{97     \{}
+\DoxyCodeLine{98         std::vector<Detection> \mbox{\hyperlink{struct_results_log_1_1_detects_on_frame_a38a93cde0857434406b498fede9907a3}{m\_detects}};}
+\DoxyCodeLine{99     \};}
+\DoxyCodeLine{100     std::map<int, DetectsOnFrame> \mbox{\hyperlink{class_results_log_aac6b0a0cbb28546abe7f2b1cfda2a28e}{m\_frames}};}
+\DoxyCodeLine{101     std::unordered\_set<track\_id\_t> \mbox{\hyperlink{class_results_log_af3ec0cead5c29ea60e10921f3c9fee34}{m\_robustIDs}};}
+\DoxyCodeLine{102     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_results_log_aed7a5381efb230272257dedc6e63a9f2}{m\_writeEachNFrame}} = 1;}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{105     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_results_log_a655bd63e36c633a942366c7775a42edb}{WriteAll}}(\textcolor{keywordtype}{bool} byFrames)}
+\DoxyCodeLine{106     \{}
+\DoxyCodeLine{107         \textcolor{keywordflow}{if} (byFrames)}
+\DoxyCodeLine{108         \{}
+\DoxyCodeLine{109 \textcolor{preprocessor}{\#if 1}}
+\DoxyCodeLine{110             \textcolor{keywordtype}{char} delim = \textcolor{charliteral}{','};}
+\DoxyCodeLine{111             \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& frame : \mbox{\hyperlink{class_results_log_aac6b0a0cbb28546abe7f2b1cfda2a28e}{m\_frames}})}
+\DoxyCodeLine{112             \{}
+\DoxyCodeLine{113                 \textcolor{keywordflow}{if} (frame.first \% \mbox{\hyperlink{class_results_log_aed7a5381efb230272257dedc6e63a9f2}{m\_writeEachNFrame}} == 0)}
+\DoxyCodeLine{114                 \{}
+\DoxyCodeLine{115                     \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& detect : frame.second.m\_detects)}
+\DoxyCodeLine{116                     \{}
+\DoxyCodeLine{117                         \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_results_log_af3ec0cead5c29ea60e10921f3c9fee34}{m\_robustIDs}}.find(detect.m\_trackID) != \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{std::end}}(\mbox{\hyperlink{class_results_log_af3ec0cead5c29ea60e10921f3c9fee34}{m\_robustIDs}}))}
+\DoxyCodeLine{118                         \{}
+\DoxyCodeLine{119                             \mbox{\hyperlink{class_results_log_af93d684d91d6eb72e9da46673b89d219}{m\_resCSV}} << frame.first << delim << \mbox{\hyperlink{class_type_converter_a2b5e9b43ad14b5783ccc3df42e882063}{TypeConverter::Type2Str}}(detect.m\_type) << delim << detect.m\_rect.x << delim << detect.m\_rect.y << delim <<}
+\DoxyCodeLine{120                                 detect.m\_rect.width << delim << detect.m\_rect.height << delim <<}
+\DoxyCodeLine{121                                 detect.m\_conf << delim << std::endl;}
+\DoxyCodeLine{122                         \}}
+\DoxyCodeLine{123                     \}}
+\DoxyCodeLine{124                 \}}
+\DoxyCodeLine{125             \}}
+\DoxyCodeLine{126 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{127             \textcolor{keywordtype}{char} delim = \textcolor{charliteral}{'  '};}
+\DoxyCodeLine{128             \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& frame : \mbox{\hyperlink{class_results_log_aac6b0a0cbb28546abe7f2b1cfda2a28e}{m\_frames}})}
+\DoxyCodeLine{129             \{}
+\DoxyCodeLine{130                 \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& detect : frame.second.m\_detects)}
+\DoxyCodeLine{131                 \{}
+\DoxyCodeLine{132                     \textcolor{keywordflow}{if} (\mbox{\hyperlink{class_results_log_af3ec0cead5c29ea60e10921f3c9fee34}{m\_robustIDs}}.find(detect.m\_trackID) != \mbox{\hyperlink{namespacelibsize_a5957fc1e6f6b0ee7cd77e1e062369d35}{std::end}}(\mbox{\hyperlink{class_results_log_af3ec0cead5c29ea60e10921f3c9fee34}{m\_robustIDs}}))}
+\DoxyCodeLine{133                     \{}
+\DoxyCodeLine{134                         \mbox{\hyperlink{class_results_log_af93d684d91d6eb72e9da46673b89d219}{m\_resCSV}} << frame.first << delim << \mbox{\hyperlink{class_type_converter_a2b5e9b43ad14b5783ccc3df42e882063}{TypeConverter::Type2Str}}(detect.m\_type) << delim << detect.m\_rect.x << delim << detect.m\_rect.y << delim <<}
+\DoxyCodeLine{135                             (detect.m\_rect.x + detect.m\_rect.width) << delim << (detect.m\_rect.y + detect.m\_rect.height) << delim <<}
+\DoxyCodeLine{136                             detect.m\_conf << delim << detect.m\_trackID << std::endl;}
+\DoxyCodeLine{137                     \}}
+\DoxyCodeLine{138                 \}}
+\DoxyCodeLine{139             \}}
+\DoxyCodeLine{140 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{141         \}}
+\DoxyCodeLine{142         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{143         \{}
+\DoxyCodeLine{144             \textcolor{keywordtype}{char} delim = \textcolor{charliteral}{','};}
+\DoxyCodeLine{145             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \textcolor{keywordtype}{id} : \mbox{\hyperlink{class_results_log_af3ec0cead5c29ea60e10921f3c9fee34}{m\_robustIDs}})}
+\DoxyCodeLine{146             \{}
+\DoxyCodeLine{147                 \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& frame : \mbox{\hyperlink{class_results_log_aac6b0a0cbb28546abe7f2b1cfda2a28e}{m\_frames}})}
+\DoxyCodeLine{148                 \{}
+\DoxyCodeLine{149                     \textcolor{keywordflow}{if} (frame.first \% \mbox{\hyperlink{class_results_log_aed7a5381efb230272257dedc6e63a9f2}{m\_writeEachNFrame}} == 0)}
+\DoxyCodeLine{150                     \{}
+\DoxyCodeLine{151                         \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \textcolor{keyword}{auto}\& detect : frame.second.m\_detects)}
+\DoxyCodeLine{152                         \{}
+\DoxyCodeLine{153                             \textcolor{keywordflow}{if} (detect.m\_trackID == \textcolor{keywordtype}{id})}
+\DoxyCodeLine{154                             \{}
+\DoxyCodeLine{155                                 \mbox{\hyperlink{class_results_log_af93d684d91d6eb72e9da46673b89d219}{m\_resCSV}} << frame.first << delim << \textcolor{keywordtype}{id}.ID2Str() << delim << detect.m\_rect.x << delim << detect.m\_rect.y << delim <<}
+\DoxyCodeLine{156                                     detect.m\_rect.width << delim << detect.m\_rect.height << delim <<}
+\DoxyCodeLine{157                                     detect.m\_conf << \textcolor{stringliteral}{"{},-\/1,-\/1,-\/1,"{}} << std::endl;}
+\DoxyCodeLine{158                                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{159                             \}}
+\DoxyCodeLine{160                         \}}
+\DoxyCodeLine{161                     \}}
+\DoxyCodeLine{162                 \}}
+\DoxyCodeLine{163             \}}
+\DoxyCodeLine{164         \}}
+\DoxyCodeLine{165     \}}
+\DoxyCodeLine{166 \};}
+
+\end{DoxyCode}
