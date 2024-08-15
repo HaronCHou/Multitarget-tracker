@@ -1,32 +1,18 @@
-# Multitarget-tracker
+[![Status](https://github.com/Nuzhny007/Multitarget-tracker/actions/workflows/cmake.yml/badge.svg?branch=master)](https://github.com/Nuzhny007/Multitarget-tracker/actions?query=workflow%3Abuild-Ubuntu)
+[![CodeQL](https://github.com/Smorodov/Multitarget-tracker/workflows/CodeQL/badge.svg?branch=master)](https://github.com/Smorodov/Multitarget-tracker/actions?query=workflow%3ACodeQL)
 
-Multiple Object Tracker, Based on  Hungarian algorithm + Kalman filter.
+# Last changes
 
-master is orig fork from  Smorodov/Multitarget-tracker
+* TensorRT 8 for YOLO detectors
 
-* YOLOv8-obb detector worked with TensorRT! Export pretrained Pytorch models [here (ultralytics/ultralytics)](https://github.com/ultralytics/ultralytics) to onnx format and run Multitarget-tracker with -e=6 example
-* YOLOv10 detector worked with TensorRT! Export pretrained Pytorch models [here (THU-MIG/yolov10)](https://github.com/THU-MIG/yolov10) to onnx format and run Multitarget-tracker with -e=6 example
-* YOLOv9 detector worked with TensorRT! Export pretrained Pytorch models [here (WongKinYiu/yolov9)](https://github.com/WongKinYiu/yolov9) to onnx format and run Multitarget-tracker with -e=6 example
-* YOLOv8 instance segmentation models worked with TensorRT! Export pretrained Pytorch models [here (ultralytics/ultralytics)](https://github.com/ultralytics/ultralytics) to onnx format and run Multitarget-tracker with -e=6 example
-* Re-identification model osnet_x0_25_msmt17 from [mikel-brostrom/yolo_tracking](https://github.com/mikel-brostrom/yolo_tracking)
+* Re-identification embeddings for persons and vehicles from OpenVINO correctly works!
 
 # New videos!
 
-* YOLOv8-obb detection with rotated boxes (DOTA v1.0 trained)
-
-[![YOLOv8-obb detection:](https://img.youtube.com/vi/1e6ur57Fhzs/0.jpg)](https://youtu.be/1e6ur57Fhzs)
-
-* YOLOv7 instance segmentation
-
-[![YOLOv7 instance segmentation:](https://img.youtube.com/vi/gZxuYyFz1dU/0.jpg)](https://youtu.be/gZxuYyFz1dU)
-
-* Very fast and small objects tracking [Thnx Scianand](https://github.com/Smorodov/Multitarget-tracker/issues/367)
-
-[![Fast and small motion:](https://img.youtube.com/vi/PalIIAfgX88/0.jpg)](https://youtu.be/PalIIAfgX88)
-
-* Vehicles speed calculation with YOLO v4
+* Vehicles speed calculation with YOLO v4 (Thanks [Sam Blake for great idea!](https://medium.com/hal24k-techblog/how-to-track-objects-in-the-real-world-with-tensorflow-sort-and-opencv-a64d9564ccb1))
 
 [![Vehicles speed:](https://img.youtube.com/vi/qOHYvDwpsO0/0.jpg)](https://youtu.be/qOHYvDwpsO0)
+
 
 * First step to ADAS with YOLO v4
 
@@ -81,7 +67,6 @@ With this option the tracking can work match slower but more accuracy.
 #### 5. Pipeline
 
 5.1. Syncronous [pipeline - SyncProcess](https://github.com/Smorodov/Multitarget-tracker/blob/master/example/VideoExample.h):
-
 - get frame from capture device;
 - decoding;
 - objects detection (1);
@@ -91,14 +76,12 @@ With this option the tracking can work match slower but more accuracy.
 This pipeline is good if all algorithms are fast and works faster than time between two frames (40 ms for device with 25 fps). Or it can be used if we have only 1 core for all (no parallelization).
 
 5.2. Pipeline with [2 threads - AsyncProcess](https://github.com/Smorodov/Multitarget-tracker/blob/master/example/VideoExample.h):
-
 - 1th thread takes frame t and makes capture, decoding and objects detection;
 - 2th thread takes frame t-1, results from first thread and makes tracking and results presentation (this is the Main read).
 
 So we have a latency on 1 frame but on two free CPU cores we can increase performance on 2 times.
 
 5.3. Fully [acynchronous pipeline](https://github.com/Smorodov/Multitarget-tracker/tree/master/async_detector) can be used if the objects detector works with low fps and we have a free 2 CPU cores. In this case we use 4 threads:
-
 - 1th main thread is not busy and used for GUI and result presentation;
 - 2th thread makes capture and decoding, puts frames in threadsafe queue;
 - 3th thread is used for objects detection on the newest frame from the queue;
@@ -127,13 +110,11 @@ Also you can read [Wiki in Russian](https://github.com/Smorodov/Multitarget-trac
 [![Simple Abandoned detector:](https://img.youtube.com/vi/fpkHRsFzspA/0.jpg)](https://www.youtube.com/watch?v=fpkHRsFzspA)
 
 #### Tested Platforms
-
 1. Ubuntu Linux 18.04 with x86 processors
 2. Ubuntu Linux 18.04 with Nvidia Jetson Nano (YOLO + darknet on GPU works!)
 3. Windows 10 (x64 and x32 builds)
 
 #### Build
-
 1. Download project sources
 2. Install CMake
 3. Install OpenCV (https://github.com/opencv/opencv) and OpenCV contrib (https://github.com/opencv/opencv_contrib) repositories
@@ -147,7 +128,7 @@ Also you can read [Wiki in Russian](https://github.com/Smorodov/Multitarget-trac
 
 **Full build:**
 
-    git clone https://github.com/Smorodov/Multitarget-tracker.git
+           git clone https://github.com/Smorodov/Multitarget-tracker.git
            cd Multitarget-tracker
            mkdir build
            cd build
@@ -156,16 +137,17 @@ Also you can read [Wiki in Russian](https://github.com/Smorodov/Multitarget-trac
 
 How to run cmake on Windows for Visual Studio 15 2017 Win64: [example](https://github.com/Smorodov/Multitarget-tracker/blob/master/data/cmake_vs2017.bat). You need to add directory with cmake.exe to PATH and change build params in cmake.bat
 
+
 **Usage:**
 
-    Usage:
-             ./MultitargetTracker`<path to movie file>` [--example]=<number of example 0..7> [--start_frame]=`<start a video from this position>` [--end_frame]=`<play a video to this position>` [--end_delay]=`<delay in milliseconds after video ending>` [--out]=`<name of result video file>` [--show_logs]=`<show logs>` [--gpu]=`<use OpenCL>` [--async]=`<async pipeline>` [--res]=`<csv log file>` [--settings]=`<ini file>` [--batch_size=`<number of frames>`]
+           Usage:
+             ./MultitargetTracker <path to movie file> [--example]=<number of example 0..7> [--start_frame]=<start a video from this position> [--end_frame]=<play a video to this position> [--end_delay]=<delay in milliseconds after video ending> [--out]=<name of result video file> [--show_logs]=<show logs> [--gpu]=<use OpenCL> [--async]=<async pipeline> [--res]=<csv log file> [--settings]=<ini file> [--batch_size=<number of frames>]
              ./MultitargetTracker ../data/atrium.avi -e=1 -o=../data/atrium_motion.avi
            Press:
            * 'm' key for change mode: play|pause. When video is paused you can press any key for get next frame.
            * Press Esc to exit from video
 
-    Params:
+           Params:
            1. Movie file, for example ../data/atrium.avi
            2. [Optional] Number of example: 0 - MouseTracking, 1 - MotionDetector, 2 - FaceDetector, 3 - PedestrianDetector, 4 - OpenCV dnn objects detector, 5 - Yolo Darknet detector, 6 - YOLO TensorRT Detector, Cars counting
               -e=0 or --example=1
@@ -198,14 +180,11 @@ Build MTTracking in the usual way, and choose an installation prefix where the l
 (see [CMake Documentation](https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html) for the defaults).
 
 In the `build` directory run
-
 ```
 $ cmake --install .
 ```
-
 This will generate the CMake files needed to find the MTTracking package with libraries and include files for
 your project. E.g.
-
 ```
 MTTrackingConfig.cmake
 MTTrackingConfigVersion.cmake
@@ -213,7 +192,6 @@ MTTrackingTargets.cmake
 ```
 
 In your CMake project, do the following:
-
 ```
     find_package(MTTracking REQUIRED)
     target_include_directories(MyProjectTarget PUBLIC ${MTTracking_INCLUDE_DIR})
@@ -221,13 +199,11 @@ In your CMake project, do the following:
 ```
 
 You may need to provide CMake with the location to find the above `.cmake` files, e.g.
-
 ```
 $ cmake -DMTTracking_DIR=<location_of_cmake_files> ..
 ```
 
 If CMake succeeds at finding the package, you can use MTTracking in your project e.g.
-
 ```
 #include <mtracking/Ctracker.h>
 //...
@@ -238,11 +214,9 @@ If CMake succeeds at finding the package, you can use MTTracking in your project
     m_tracker = BaseTracker::CreateTracker(settings);
 //...
 ```
-
 And so on.
 
 #### Thirdparty libraries
-
 * OpenCV (and contrib): https://github.com/opencv/opencv and https://github.com/opencv/opencv_contrib
 * Vibe: https://github.com/BelBES/VIBE
 * SuBSENSE and LOBSTER: https://github.com/ethereon/subsense
@@ -254,21 +228,16 @@ And so on.
 * YOLO v3 models: https://pjreddie.com/darknet/yolo/
 * Darknet inference and YOLO v4 models: https://github.com/AlexeyAB/darknet
 * NVidia TensorRT inference and YOLO v5 models: https://github.com/enazoe/yolo-tensorrt
-* YOLOv6 models: https://github.com/meituan/YOLOv6/releases
-* YOLOv7 models: https://github.com/WongKinYiu/yolov7
 * GOTURN models: https://github.com/opencv/opencv_extra/tree/c4219d5eb3105ed8e634278fad312a1a8d2c182d/testdata/tracking
 * DAT tracker: https://github.com/foolwood/DAT
 * STAPLE tracker: https://github.com/xuduo35/STAPLE
 * LDES tracker: https://github.com/yfji/LDESCpp
 * Ini file parser: https://github.com/benhoyt/inih
-* Circular Code from Lior Kogan
 
 #### License
-
 Apache 2.0: [LICENSE text](https://github.com/Smorodov/Multitarget-tracker/blob/master/LICENSE)
 
 #### Project cititations
-
 1. Jeroen PROVOOST "Camera gebaseerde analysevan de verkeersstromen aaneen kruispunt", 2014 ( https://iiw.kuleuven.be/onderzoek/eavise/mastertheses/provoost.pdf )
 2. Roberto Ciano, Dimitrij Klesev "Autonome Roboterschwarme in geschlossenen Raumen", 2015 ( https://www.hs-furtwangen.de/fileadmin/user_upload/fak_IN/Dokumente/Forschung_InformatikJournal/informatikJournal_2016.pdf#page=18 )
 3. Wenda Qin, Tian Zhang, Junhe Chen "Traffic Monitoring By Video: Vehicles Tracking and Vehicle Data Analysing", 2016 ( http://cs-people.bu.edu/wdqin/FinalProject/CS585%20FinalProjectReport.html )
@@ -278,7 +247,6 @@ Apache 2.0: [LICENSE text](https://github.com/Smorodov/Multitarget-tracker/blob/
 7. Omid Noorshams "Automated systems to assess weights and activity in grouphoused mice", 2017 ( https://pdfs.semanticscholar.org/e5ff/f04b4200c149fb39d56f171ba7056ab798d3.pdf )
 8. RADEK VOPÁLENSKÝ "DETECTION,TRACKING AND CLASSIFICATION OF VEHICLES", 2018 ( https://www.vutbr.cz/www_base/zav_prace_soubor_verejne.php?file_id=181063 )
 9. Márk Rátosi, Gyula Simon "Real-Time Localization and Tracking  using Visible Light Communication", 2018 ( https://ieeexplore.ieee.org/abstract/document/8533800 )
-10. Thi Nha Ngo, Kung-Chin Wu, En-Cheng Yang, Ta-Te Lin "A real-time imaging system for multiple honey bee tracking and activity monitoring", 2019 ( https://www.sciencedirect.com/science/article/pii/S0168169919301498 )
+10. Thi Nha Ngo, Kung-Chin Wu, En-Cheng Yang, Ta-Te Lin "Areal-time imaging system for multiple honey bee tracking and activity monitoring", 2019 ( https://www.sciencedirect.com/science/article/pii/S0168169919301498 )
 11. Tiago Miguel, Rodrigues de Almeida "Multi-Camera and Multi-Algorithm Architecture for VisualPerception onboard the ATLASCAR2", 2019 ( http://lars.mec.ua.pt/public/LAR%20Projects/Vision/2019_TiagoAlmeida/Thesis_Tiago_AlmeidaVF_26Jul2019.pdf )
 12. ROS, http://docs.ros.org/lunar/api/costmap_converter/html/Ctracker_8cpp_source.html
-13. Sangeeth Kochanthara, Yanja Dajsuren, Loek Cleophas, Mark van den Brand "Painting the Landscape of Automotive Software in GitHub", 2022 ( https://arxiv.org/abs/2203.08936 )
