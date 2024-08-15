@@ -43,12 +43,15 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 find_package(CUDNN REQUIRED)
 find_package(TensorRT REQUIRED)
 
+# set(TensorRT_INCLUDE_DIRS "/home/dl-a4500/zhr/videopipe/TensorRT-8.5.1.7/include")
+# set(TensorRT_LIBRARIES "/home/dl-a4500/zhr/videopipe/TensorRT-8.5.1.7/lib")
 message("TensorRT major version: " ${TensorRT_VERSION_MAJOR})
 
 include_directories(${OpenCV_INCLUDE_DIRS})
 include_directories(${CUDA_INCLUDE_DIRS})
 include_directories(${CUDNN_INCLUDE_DIR})
 include_directories(${TensorRT_INCLUDE_DIRS})
+# include_directories("/home/dl-a4500/zhr/videopipe/TensorRT-8.5.1.7/include")
 
 file(GLOB TENSORRT_SOURCE_FILES *.cpp common/*.cpp)
 file(GLOB TENSORRT_HEADER_FILES *.h* common/*.h*)
@@ -75,13 +78,21 @@ set(TENSORRT_LIBS
     ${CUDNN_LIBRARY}
     # ${LIB_PTHREAD}
     ${TensorRT_LIBRARIES}
+    # "/home/dl-a4500/zhr/videopipe/TensorRT-8.5.1.7/lib"
 )
+
+message("TRT include:" ${TensorRT_INCLUDE_DIRS})
+message("TRT lib:" ${TensorRT_LIBRARY})
 
 if (CMAKE_COMPILER_IS_GNUCXX)
     set(TENSORRT_LIBS ${TENSORRT_LIBS} stdc++fs nvinfer_plugin nvonnxparser)
 endif(CMAKE_COMPILER_IS_GNUCXX)
 
-target_link_libraries(${libname_rt} ${TENSORRT_LIBS})
+set(TRT1 "/home/dl-a4500/zhr/videopipe/TensorRT-8.5.1.7/lib/libnvinfer.so")
+set(TRT2 "/home/dl-a4500/zhr/videopipe/TensorRT-8.5.1.7/lib/libnvinfer_plugin.so")
+set(TRT3 "/home/dl-a4500/zhr/videopipe/TensorRT-8.5.1.7/lib/libnvonnxparser.so")
+target_link_libraries(${libname_rt} ${TRT1} ${TRT2} ${TRT3})
+# target_link_libraries(${libname_rt} ${TENSORRT_LIBS})
 
 install(TARGETS ${libname_rt}
         EXPORT MTTrackingExports

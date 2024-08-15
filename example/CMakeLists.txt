@@ -1,6 +1,7 @@
 cmake_minimum_required (VERSION 3.5)
 
 project(MultitargetTracker)
+set(CMAKE_BUILD_TYPE "Debug")
 
 set(SOURCES main.cpp
             VideoExample.cpp)

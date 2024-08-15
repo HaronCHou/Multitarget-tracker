@@ -3,6 +3,7 @@
 
 ```
 cmake . .. -DUSE_OCV_BGFG=ON -DUSE_OCV_KCF=ON -DUSE_OCV_UKF=ON -DBUILD_YOLO_LIB=ON -DBUILD_YOLO_TENSORRT=ON -DBUILD_ASYNC_DETECTOR=ON -DBUILD_CARS_COUNTING=ON
+make -j
 ```
 
 * 找不到TensorRT库的解决办法，我没有安装，是离线包；因为版本太多了，要切换。
@@ -10,7 +11,7 @@ cmake . .. -DUSE_OCV_BGFG=ON -DUSE_OCV_KCF=ON -DUSE_OCV_UKF=ON -DBUILD_YOLO_LIB=
 
   * 修改Tensorrt库的查找路径：
   * set(TensorRT_ROOT "/home/dl-a4500/zhr/videopipe/TensorRT-8.5.1.7" )
-
+* 找不到lib库，不在环境变量里面，怎么弄？
 
 -- The C compiler identification is GNU 9.4.0
 -- The CXX compiler identification is GNU 9.4.0

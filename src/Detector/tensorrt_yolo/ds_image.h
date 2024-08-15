@@ -54,7 +54,7 @@ private:
     int m_YOffset = 0;
     float m_ScalingFactor = 0.0f;
     std::string m_ImagePath;
-    cv::RNG m_RNG { cv::RNG(unsigned(std::time(0))) };
+    cv::RNG m_RNG = cv::RNG(unsigned(std::time(0)));
     std::string m_ImageName;
     std::vector<BBoxInfo> m_Bboxes;
 

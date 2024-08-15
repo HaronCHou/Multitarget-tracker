@@ -33,7 +33,7 @@ const char* keys =
     "{ sl show_logs     |1                   | Show Trackers logs | }"
     "{ g gpu            |0                   | Use OpenCL acceleration | }"
     "{ a async          |1                   | Use 2 theads for processing pipeline | }"
-    "{ r log_res        |                    | Path to the csv file with tracking result | }"
+    "{ r log_res        |1                   | Path to the csv file with tracking result | }"
     "{ cvat_res         |                    | Path to the xml file in cvat format with tracking result | }"
     "{ s settings       |                    | Path to the ini file with tracking settings | }"
     "{ bs batch_size    |1                   | Batch size - frames count for processing | }"
@@ -56,7 +56,9 @@ int main(int argc, char** argv)
     std::cout << (cv::ocl::useOpenCL() ? "OpenCL is enabled" : "OpenCL not used") << std::endl;
 
     int exampleNum = parser.get<int>("example");
+    exampleNum = 1;
     int asyncPipeline = parser.get<int>("async");
+    asyncPipeline = 0;
 
 	std::unique_ptr<VideoExample> detector;
 
