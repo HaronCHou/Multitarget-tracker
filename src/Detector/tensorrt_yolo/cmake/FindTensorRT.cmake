@@ -19,14 +19,18 @@
 #
 set(_TensorRT_SEARCHES)
 
+set(TensorRT_ROOT "/home/dl-a4500/zhr/videopipe/TensorRT-8.5.1.7" )
+
 if(TensorRT_ROOT)
   set(_TensorRT_SEARCH_ROOT PATHS ${TensorRT_ROOT} NO_DEFAULT_PATH)
+  # set(_TensorRT_SEARCH_ROOT PATHS ${TensorRT_ROOT} "/home/dl-a4500/zhr/videopipe/TensorRT-8.5.1.7")
   list(APPEND _TensorRT_SEARCHES _TensorRT_SEARCH_ROOT)
 endif()
 
 # appends some common paths
 set(_TensorRT_SEARCH_NORMAL
-  PATHS "/usr"
+  PATHS "/usr" # /home/dl-a4500/zhr/videopipe/TensorRT-8.0.3.4.cuda11.3.cudnn8.2
+  # PATHS "/home/dl-a4500/zhr/videopipe/TensorRT-8.5.1.7" 
 )
 list(APPEND _TensorRT_SEARCHES _TensorRT_SEARCH_NORMAL)
 
